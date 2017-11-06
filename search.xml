@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title><![CDATA[test2]]></title>
+      <url>/2017/11/06/test2/</url>
+      <content type="html"><![CDATA[<p>test2</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[test]]></title>
       <url>/2017/11/06/test/</url>
       <content type="html"><![CDATA[<p>Hexo</p>
