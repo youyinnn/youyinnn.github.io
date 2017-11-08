@@ -3,8 +3,8 @@
   
     
     <entry>
-      <title><![CDATA[中文测试]]></title>
-      <url>/post/48b37900.html</url>
+      <title><![CDATA[中文测试之诗]]></title>
+      <url>/post/7e113b03.html</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>吃饭</p>
 <p>睡觉</p>
 <p>学习</p>
@@ -13,6 +13,12 @@
 <a id="more"></a>
 ]]></content>
       
+        <categories>
+            
+            <category> 未分类 </category>
+            
+        </categories>
+        
         
     </entry>
     
