@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="The pudding knight">
 <meta property="og:description" content="1996 母语粤语 会弹Bass JavaEE Developer 双非软工 GitHub  :  https://github.com/youyinnn">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T02:25:48.890Z">
+<meta property="og:updated_time" content="2017-11-08T06:41:26.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About Me">
 <meta name="twitter:description" content="1996 母语粤语 会弹Bass JavaEE Developer 双非软工 GitHub  :  https://github.com/youyinnn">
@@ -190,12 +190,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            关于
+            分类
           </a>
         </li>
       
@@ -210,22 +210,32 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言">
+          <a href="/messages/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />
+            
+            留言
           </a>
         </li>
       
@@ -330,17 +340,6 @@
 
 
           
-  
-         
-           <div onclick="ShowGitment()" id="gitment-display-button">显示 Gitment 评论</div>
-           <div id="gitment-container" style="display:none"></div>
-         
-
-
-  
-
-
-
 
         </div>
         
@@ -419,25 +418,25 @@
                 <span class="links-of-author-item">
                   <a href="https://github.com/youyinnn" target="_blank" title="GitHub">
                     
-                      <i class="fa fa-fw fa-github"></i></a>
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="mailto:youyinnn@foxmail.com" target="_blank" title="E-Mail">
                     
-                      <i class="fa fa-fw fa-envelope"></i></a>
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://instagram.com/youyinnn" target="_blank" title="Instagram">
                     
-                      <i class="fa fa-fw fa-instagram"></i></a>
+                      <i class="fa fa-fw fa-instagram"></i>Instagram</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://www.zhihu.com/people/youyinnn/activities" target="_blank" title="ZhiHu">
                     
-                      <i class="fa fa-fw fa-check"></i></a>
+                      <i class="fa fa-fw fa-check"></i>ZhiHu</a>
                 </span>
               
             
@@ -659,19 +658,15 @@
    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
    
        <script type="text/javascript">
-           function ShowGitment(){
-               document.getElementById("gitment-display-button").style.display = "none";
-               document.getElementById("gitment-container").style.display = "block";
-               var gitment = new Gitment({
-                   id: document.location.href,
-                   owner: 'youyinnn',
-                   repo: 'youyinnn.github.io',
-                   oauth: {
-                       client_id: '890ef13704c744878bac',
-                       client_secret: '9b2dbaabc116ea7f93c54ccaa91f8ffc8068ff2f',
-                   }});
-               gitment.render('gitment-container');
-           }
+           var gitment = new Gitment({
+              id: document.location.href,
+               owner: 'youyinnn',
+               repo: 'youyinnn.github.io',
+               oauth: {
+                   client_id: '890ef13704c744878bac',
+                   client_secret: '9b2dbaabc116ea7f93c54ccaa91f8ffc8068ff2f',
+               }});
+           gitment.render('gitment-container');
        </script>
    
 
