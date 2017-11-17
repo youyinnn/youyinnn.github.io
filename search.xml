@@ -18,12 +18,16 @@
 <h3 id="运行HelloWorld"><a href="#运行HelloWorld" class="headerlink" title="运行HelloWorld"></a>运行HelloWorld</h3><p>运行上面的代码之后会出现如下的log<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">13</span>:<span class="number">34</span>:<span class="number">41</span>.<span class="number">070</span> [main] ERROR mylog - error level</div><div class="line"><span class="number">13</span>:<span class="number">34</span>:<span class="number">41</span>.<span class="number">072</span> [main] FATAL mylog - fatal level</div></pre></td></tr></table></figure></p>
 <p>你会很奇怪，为什么我们写了这么多log，却只出现两行log信息，我们去看看我们的配置文件：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">status</span>=<span class="string">"OFF"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 这里定义了一个appenders --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">appenders</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- appenders里面配置了一个Console --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">"Console"</span> <span class="attr">target</span>=<span class="string">"SYSTEM_OUT"</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!-- 这是输出格式 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">appenders</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 然后就是定义loggers --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">loggers</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 这是根logger 是所有自定义logger的父logger --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"error"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">root</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">loggers</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>首先先解释一下单词含义（my style~）：</p>
+<p>首先看我们的Java代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);</div></pre></td></tr></table></figure>
+<p>这一行是获取我们在配置文件中配置好的root logger，然后使用这个logger去打印了6条日志。</p>
+<p>然后解释一下单词含义（my style~）：</p>
 <blockquote>
 <p>Appender：<br><em>n.</em> 附着器,输出目的地,输出源；</p>
 </blockquote>
-<p>然后Console我们知道是控制台，所以很明显就是，我们配置了一个以控制台作为输出源的输出源；并将这个输出源命名为<code>Console</code>，然后配置了这个控制台输出源的输出Pattern。</p>
-<p>然后我们在<code>loggers</code>里面配置了一个logger：<code>root</code>，这个节点代表所有logger的根logger，然后log级别定为<code>error</code>，意思是<strong>只输出error级别以下包括error的日志信息</strong>。到这里我们就知道，为什么会只打印两条log了，打印的两条log分别是：error级别以及fatal级别的log。</p>
+<p>它的子元素Console，代表的是控制台，所以很明显就是，我们配置了一个以控制台作为输出源的输出源；并将这个输出源命名为<code>Console</code>，然后配置了这个控制台输出源的输出Pattern。</p>
+<p>然后我们在<code>loggers</code>里面配置了一个logger：<code>root</code>，这个节点代表所有logger的根logger，然后log级别定为<code>error</code>，意思是<strong>只输出error级别以下包括error的日志信息</strong>。</p>
+<p>那么error以下是哪些信息？</p>
 <blockquote>
 <hr>
 <p>log4j规定了默认的几个级别：<code>trace &lt; debug &lt; info &lt; warn &lt; error &lt; fatal</code>等。这里要说明一下：</p>
@@ -50,6 +54,10 @@
 </ul>
 <hr>
 </blockquote>
+<p>到这里我们就知道，为什么会只打印两条log了，打印的两条log分别是：error级别以及fatal级别的log。</p>
+<hr>
+<p><em>参考：<a href="http://www.cnblogs.com/leo-lsw/p/log4j2tutorial.html" target="_blank" rel="external">http://www.cnblogs.com/leo-lsw/p/log4j2tutorial.html</a></em></p>
+<p><em>参考：<a href="https://my.oschina.net/xianggao/blog/523401" target="_blank" rel="external">https://my.oschina.net/xianggao/blog/523401</a></em></p>
 ]]></content>
       
         <categories>
