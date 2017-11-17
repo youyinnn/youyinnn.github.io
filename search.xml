@@ -3,6 +3,100 @@
   
     
     <entry>
+      <title><![CDATA[RegExp_2_metacharacters]]></title>
+      <url>/post/591f5cd1.html</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>Metacharacters：元字符</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="二、元字符的解释"><a href="#二、元字符的解释" class="headerlink" title="二、元字符的解释"></a>二、元字符的解释</h3><p>完整的正则表达式由两种字符组成：</p>
+<ul>
+<li>特殊字符，即<code>元字符</code>，它们一般具有特殊的含义，并不匹配字面字符。</li>
+<li>文字，即普通<code>文本字符</code>，匹配的就是字面字符。</li>
+</ul>
+<h4 id="行的起始和结束"><a href="#行的起始和结束" class="headerlink" title="行的起始和结束"></a>行的起始和结束</h4><blockquote>
+<p><code>^</code> 脱字符号，在检查一行文本的时候，<code>^</code>代表一行的开始。</p>
+<p><code>$</code> 美元符号，在检查一行文本的时候，<code>$</code>代表一行的结束。</p>
+</blockquote>
+<ul>
+<li><code>^cat</code> ：表示匹配以cat开头的行，如categories</li>
+<li><code>cat\$</code> ：表示匹配以\$结尾的行，如aaaacat</li>
+</ul>
+<p>我们以更机械的方式去解读第一个例子：<code>^cat</code> 匹配的是以c作为一行的第一个字符，紧接着c后面是a，a后面紧接着t的文本。</p>
+<p>这两个符号的特殊之处就在于，它们匹配的只是位置，而不是特定的文本。</p>
+<h4 id="字符组"><a href="#字符组" class="headerlink" title="字符组"></a>字符组</h4><h5 id="匹配若干字符之一"><a href="#匹配若干字符之一" class="headerlink" title="匹配若干字符之一"></a>匹配若干字符之一</h5><p>这里需要引入一个概念：正则表达式结构体（construct）<code>[...]</code>。它允许使用者列出在某处期望匹配的字符的候选值，通常也被称为字符组。</p>
+<p>比如当我们不确定是要匹配grey还是gray的时候，我们可以这样写<code>gr[ae]y</code>，它想表达的意思是：匹配一段文本，它是先有一个g，g后是一个r，r后可以是a或者e其中之一，然后就是一个y。</p>
+<p>在<code>gr[ae]y</code>中，<code>g</code>或者<code>r</code>、<code>y</code>这样的表达式，它们被解释为：g后面紧跟着、r后面紧跟着这样的“接下来（and then）”的含义，而在<code>[ae]</code>中，里面的字符被解释为：这个结构体的位置被替换为a或者是e。</p>
+<p>我们还有可能遇到的场景是，<code>[123456789]</code>甚至是26个字母全用上的情况，这个时候我们可以使用<strong>字符组元字符</strong><code>-</code>（连接符）来表示一个范围，比如<code>[1-9]</code>和<code>[123456789]</code>是完全相等的。同时还支持多重范围比如<code>[a-h1-6F-I]</code>和<code>[abcdefg123456FGHI]</code>等效。</p>
+<p>还可以在字符组里面使用普通文本[_.!?]可以匹配下划线或者点或者感叹号或者问号。</p>
+<p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。</strong></p>
+<h5 id="排除型字符组"><a href="#排除型字符组" class="headerlink" title="排除型字符组"></a>排除型字符组</h5><p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
+<p>你可能已经注意到了，<code>^</code>脱字符在组内和组外的含义的不一样的，由此我们了解到，<strong>元字符会根据环境的不同而改变它所要表达的含义。</strong></p>
+]]></content>
+      
+        <categories>
+            
+            <category> note </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> learning </tag>
+            
+            <tag> RegExp </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RegExp_1_overview]]></title>
+      <url>/post/8f39708b.html</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
+<!-- more -->
+<p><em>第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后他给我打开了在线的JDK-1.6的API，找到了里面介绍正则表达式的页，然后还百度了一篇正则表达式的教程给我看（对，就是那个通篇斜杠写反的那盘），然后我就头皮发麻了。</em></p>
+<p><em>在之后无论是正式学习还是运用到实际当中，我的处理都是：百度——ctrl+c——ctrl+v，然后下次碰到另一个字符串处理问题的时候还是这样做，毫无意义，甚至还不能完全匹配我的应用场景。然后这次的工程中心项目，我负责写前端，对输入框需要用到字符串过滤的需求，就这么简单的一个功能我都实现不了，感觉非常丢人，我不想再复制粘贴了，所以开始以blog的形式记录我学习<code>regular-expression</code>的过程。</em></p>
+<p><strong>所有笔记的学习都基于：《Mastering Regular Expression(Third Edition)》——Jeffrey E. F. Friedl一书的中文版</strong></p>
+<hr>
+<h3 id="一、释义与场景"><a href="#一、释义与场景" class="headerlink" title="一、释义与场景"></a>一、释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
+<p>Regular：</p>
+<blockquote>
+<p><em>adj.</em> 定期的；有规律的；合格的；整齐的；普通的</p>
+<p><em>n.</em> 常客；正式队员；中坚分子</p>
+<p><em>adv.</em> 定期地；经常地</p>
+</blockquote>
+<p>Expression：</p>
+<blockquote>
+<p><em>n.</em> 表现，表示，表达；表情，脸色，态度，强调，声调；式，符号；语句，措辞，说法</p>
+</blockquote>
+<p>毫无疑问，在编程领域里面<code>Regular Expression</code>的含义肯定不会是“整齐的脸色”或者“中坚分子措辞”这样的翻译了，从字面意义上去翻译的话应该是“有规律的表达式”，因为起码听上去像个数学公式，和计算机有点关联- -。这可比“正则表达式”这样的翻译明了多了，但是后者更有逼格一点。</p>
+<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>搞清楚公式的定义，那么接下来我们就可以开始解题了:smile:。</p>
+<p>我们为什么会用到正则表达式？需求源于我们需要在一大段不规则的文本中找出是否含有符合我们规律的表达式的句子，这就叫做使用正则表达式去匹配我们的文本。比如一般editor所具有的find功能，就是一种文本匹配功能。</p>
+<p>但是在我们写程序的过程种，你的程序代码是不可能给一个find按钮给你去匹配文本的，而且你可能会需要更复杂的文本匹配功能，比如说“匹配所有xxx-xxxxxxxxxxx这种格式的手机号码”这样的精准匹配就需要你构建表述清晰的正则表达式去完成匹配功能。</p>
+<p>一旦你精准的find到你想要匹配的子文本之后，你想干嘛都行，提取、删除、替换、添加等等。这就是正则表达式的应用场景。</p>
+<hr>
+]]></content>
+      
+        <categories>
+            
+            <category> 学习笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> learning </tag>
+            
+            <tag> RegExp </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[5 Useful Tips For A Better Commit Message]]></title>
       <url>/post/ce7091ac.html</url>
       <content type="html"><![CDATA[<p>You’re already writing decent commit messages. Let’s see if we can level you up to awesome. Other developers, especially you-in-two-weeks and you-from-next-year, will thank you for your forethought and verbosity when they run git blame to see why that conditional is there.</p>
