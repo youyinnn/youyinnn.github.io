@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。  第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后">
+<meta name="description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
 <meta name="keywords" content="learning,RegExp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RegExp_1_overview">
 <meta property="og:url" content="https://youyinnn.github.io/post/8f39708b.html">
 <meta property="og:site_name" content="The pudding knight">
-<meta property="og:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。  第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后">
+<meta property="og:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-16T16:03:51.727Z">
+<meta property="og:updated_time" content="2017-11-16T16:16:04.587Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RegExp_1_overview">
-<meta name="twitter:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。  第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后">
+<meta name="twitter:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
 
 
 
@@ -375,8 +375,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/note/" itemprop="url" rel="index">
+                    <span itemprop="name">note</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/booknote/" itemprop="url" rel="index">
+                    <span itemprop="name">booknote</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/booknote/《Mastering-Regular-Expression-Third-Edition-》/" itemprop="url" rel="index">
+                    <span itemprop="name">《Mastering Regular Expression(Third Edition)》</span>
                   </a>
                 </span>
 
@@ -417,14 +439,13 @@
       
 
       
-        <a id="more"></a>
-<p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
-<!-- more -->
+        <p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
+<a id="more"></a>
 <p><em>第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后他给我打开了在线的JDK-1.6的API，找到了里面介绍正则表达式的页，然后还百度了一篇正则表达式的教程给我看（对，就是那个通篇斜杠写反的那盘），然后我就头皮发麻了。</em></p>
 <p><em>在之后无论是正式学习还是运用到实际当中，我的处理都是：百度——ctrl+c——ctrl+v，然后下次碰到另一个字符串处理问题的时候还是这样做，毫无意义，甚至还不能完全匹配我的应用场景。然后这次的工程中心项目，我负责写前端，对输入框需要用到字符串过滤的需求，就这么简单的一个功能我都实现不了，感觉非常丢人，我不想再复制粘贴了，所以开始以blog的形式记录我学习<code>regular-expression</code>的过程。</em></p>
 <p><strong>所有笔记的学习都基于：《Mastering Regular Expression(Third Edition)》——Jeffrey E. F. Friedl一书的中文版</strong></p>
 <hr>
-<h3 id="一、释义与场景"><a href="#一、释义与场景" class="headerlink" title="一、释义与场景"></a>一、释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
+<h3 id="释义与场景"><a href="#释义与场景" class="headerlink" title="释义与场景"></a>释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
 <p>Regular：</p>
 <blockquote>
 <p><em>adj.</em> 定期的；有规律的；合格的；整齐的；普通的</p>
@@ -583,7 +604,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -677,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、释义与场景"><span class="nav-number">1.</span> <span class="nav-text">一、释义与场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#释义"><span class="nav-number">1.1.</span> <span class="nav-text">释义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景"><span class="nav-number">1.2.</span> <span class="nav-text">场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#释义与场景"><span class="nav-number">1.</span> <span class="nav-text">释义与场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#释义"><span class="nav-number">1.1.</span> <span class="nav-text">释义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景"><span class="nav-number">1.2.</span> <span class="nav-text">场景</span></a></li></ol></li></ol></div>
             
 
           </div>

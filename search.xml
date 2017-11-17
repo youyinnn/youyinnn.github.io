@@ -8,7 +8,7 @@
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>Metacharacters：元字符</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="二、元字符的解释"><a href="#二、元字符的解释" class="headerlink" title="二、元字符的解释"></a>二、元字符的解释</h3><p>完整的正则表达式由两种字符组成：</p>
+<h3 id="元字符的解释"><a href="#元字符的解释" class="headerlink" title="元字符的解释"></a>元字符的解释</h3><p>完整的正则表达式由两种字符组成：</p>
 <ul>
 <li>特殊字符，即<code>元字符</code>，它们一般具有特殊的含义，并不匹配字面字符。</li>
 <li>文字，即普通<code>文本字符</code>，匹配的就是字面字符。</li>
@@ -31,11 +31,16 @@
 <p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。</strong></p>
 <h5 id="排除型字符组"><a href="#排除型字符组" class="headerlink" title="排除型字符组"></a>排除型字符组</h5><p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
 <p>你可能已经注意到了，<code>^</code>脱字符在组内和组外的含义的不一样的，由此我们了解到，<strong>元字符会根据环境的不同而改变它所要表达的含义。</strong></p>
+<h5 id="点号匹配任意字符"><a href="#点号匹配任意字符" class="headerlink" title="点号匹配任意字符"></a>点号匹配任意字符</h5><p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。</p>
 ]]></content>
       
         <categories>
             
             <category> note </category>
+            
+            <category> booknote </category>
+            
+            <category> 《Mastering Regular Expression(Third Edition)》 </category>
             
         </categories>
         
@@ -53,14 +58,13 @@
     <entry>
       <title><![CDATA[RegExp_1_overview]]></title>
       <url>/post/8f39708b.html</url>
-      <content type="html"><![CDATA[<a id="more"></a>
-<p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
-<!-- more -->
+      <content type="html"><![CDATA[<p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
+<a id="more"></a>
 <p><em>第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后他给我打开了在线的JDK-1.6的API，找到了里面介绍正则表达式的页，然后还百度了一篇正则表达式的教程给我看（对，就是那个通篇斜杠写反的那盘），然后我就头皮发麻了。</em></p>
 <p><em>在之后无论是正式学习还是运用到实际当中，我的处理都是：百度——ctrl+c——ctrl+v，然后下次碰到另一个字符串处理问题的时候还是这样做，毫无意义，甚至还不能完全匹配我的应用场景。然后这次的工程中心项目，我负责写前端，对输入框需要用到字符串过滤的需求，就这么简单的一个功能我都实现不了，感觉非常丢人，我不想再复制粘贴了，所以开始以blog的形式记录我学习<code>regular-expression</code>的过程。</em></p>
 <p><strong>所有笔记的学习都基于：《Mastering Regular Expression(Third Edition)》——Jeffrey E. F. Friedl一书的中文版</strong></p>
 <hr>
-<h3 id="一、释义与场景"><a href="#一、释义与场景" class="headerlink" title="一、释义与场景"></a>一、释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
+<h3 id="释义与场景"><a href="#释义与场景" class="headerlink" title="释义与场景"></a>释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
 <p>Regular：</p>
 <blockquote>
 <p><em>adj.</em> 定期的；有规律的；合格的；整齐的；普通的</p>
@@ -81,7 +85,11 @@
       
         <categories>
             
-            <category> 学习笔记 </category>
+            <category> note </category>
+            
+            <category> booknote </category>
+            
+            <category> 《Mastering Regular Expression(Third Edition)》 </category>
             
         </categories>
         

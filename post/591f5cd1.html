@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="The pudding knight">
 <meta property="og:description" content="Metacharacters：元字符">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-16T16:06:01.557Z">
+<meta property="og:updated_time" content="2017-11-16T16:16:03.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RegExp_2_metacharacters">
 <meta name="twitter:description" content="Metacharacters：元字符">
@@ -382,6 +382,28 @@
 
                 
                 
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/booknote/" itemprop="url" rel="index">
+                    <span itemprop="name">booknote</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/booknote/《Mastering-Regular-Expression-Third-Edition-》/" itemprop="url" rel="index">
+                    <span itemprop="name">《Mastering Regular Expression(Third Edition)》</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -420,7 +442,7 @@
         <blockquote class="blockquote-center"><p>Metacharacters：元字符</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="二、元字符的解释"><a href="#二、元字符的解释" class="headerlink" title="二、元字符的解释"></a>二、元字符的解释</h3><p>完整的正则表达式由两种字符组成：</p>
+<h3 id="元字符的解释"><a href="#元字符的解释" class="headerlink" title="元字符的解释"></a>元字符的解释</h3><p>完整的正则表达式由两种字符组成：</p>
 <ul>
 <li>特殊字符，即<code>元字符</code>，它们一般具有特殊的含义，并不匹配字面字符。</li>
 <li>文字，即普通<code>文本字符</code>，匹配的就是字面字符。</li>
@@ -443,6 +465,7 @@
 <p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。</strong></p>
 <h5 id="排除型字符组"><a href="#排除型字符组" class="headerlink" title="排除型字符组"></a>排除型字符组</h5><p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
 <p>你可能已经注意到了，<code>^</code>脱字符在组内和组外的含义的不一样的，由此我们了解到，<strong>元字符会根据环境的不同而改变它所要表达的含义。</strong></p>
+<h5 id="点号匹配任意字符"><a href="#点号匹配任意字符" class="headerlink" title="点号匹配任意字符"></a>点号匹配任意字符</h5><p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。</p>
 
       
     </div>
@@ -581,7 +604,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -675,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、元字符的解释"><span class="nav-number">1.</span> <span class="nav-text">二、元字符的解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行的起始和结束"><span class="nav-number">1.1.</span> <span class="nav-text">行的起始和结束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符组"><span class="nav-number">1.2.</span> <span class="nav-text">字符组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#匹配若干字符之一"><span class="nav-number">1.2.1.</span> <span class="nav-text">匹配若干字符之一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排除型字符组"><span class="nav-number">1.2.2.</span> <span class="nav-text">排除型字符组</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符的解释"><span class="nav-number">1.</span> <span class="nav-text">元字符的解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行的起始和结束"><span class="nav-number">1.1.</span> <span class="nav-text">行的起始和结束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符组"><span class="nav-number">1.2.</span> <span class="nav-text">字符组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#匹配若干字符之一"><span class="nav-number">1.2.1.</span> <span class="nav-text">匹配若干字符之一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排除型字符组"><span class="nav-number">1.2.2.</span> <span class="nav-text">排除型字符组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#点号匹配任意字符"><span class="nav-number">1.2.3.</span> <span class="nav-text">点号匹配任意字符</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
