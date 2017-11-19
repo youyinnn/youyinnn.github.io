@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="The pudding knight">
 <meta property="og:description" content="Lo4j2是啥就不解释了，之前无论是使用log4j还是log4j2，同样只是简单的各种百度然后复制粘贴没有系统的总结一下，今天把一个小小的Ajax的测试程序放服务器上面都不知道怎么查错，然后想写一下log来看看哪错了吧，发现还是不会独立配置log4j，于是想总结一波。基本的思路是总结官方文档和官方推荐的中文文档，尽量简洁表达出原理以及应用。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-17T08:29:50.617Z">
+<meta property="og:updated_time" content="2017-11-17T08:40:39.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log4j2_HelloWorld">
 <meta name="twitter:description" content="Lo4j2是啥就不解释了，之前无论是使用log4j还是log4j2，同样只是简单的各种百度然后复制粘贴没有系统的总结一下，今天把一个小小的Ajax的测试程序放服务器上面都不知道怎么查错，然后想写一下log来看看哪错了吧，发现还是不会独立配置log4j，于是想总结一波。基本的思路是总结官方文档和官方推荐的中文文档，尽量简洁表达出原理以及应用。">
@@ -449,7 +449,7 @@
 <p>Appender：<br><em>n.</em> 附着器,输出目的地,输出源；</p>
 </blockquote>
 <p>它的子元素Console，代表的是控制台，所以很明显就是，我们配置了一个以控制台作为输出源的输出源；并将这个输出源命名为<code>Console</code>，然后配置了这个控制台输出源的输出Pattern。</p>
-<p>然后我们在<code>loggers</code>里面配置了一个logger：<code>root</code>，这个节点代表所有logger的根logger，然后log级别定为<code>error</code>，意思是<strong>只输出error级别以下包括error的日志信息</strong>。</p>
+<p>然后我们在<code>loggers</code>里面配置了一个logger：<code>root</code>，这个节点代表所有logger的根logger，然后log级别定为<code>error</code>，意思是<strong>只输出error级别以下包括error的日志信息</strong>，之后这个根log的输出源引用的是<code>name</code>值为<code>Console</code>的Appender，也即我们配置的唯一一个Appender。</p>
 <p>那么error以下是哪些信息？</p>
 <blockquote>
 <hr>
@@ -522,6 +522,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/7e4ab26f.html" rel="prev" title="Log4j2_Appenders">
+                Log4j2_Appenders <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -608,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
