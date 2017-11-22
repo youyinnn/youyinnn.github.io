@@ -3,6 +3,84 @@
   
     
     <entry>
+      <title><![CDATA[Electron_一个HelloWorld]]></title>
+      <url>/post/99e8346.html</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>惊！仅用前端技术就可以打造跨平台桌面应用！</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><hr>
+<p>基本就算官网<a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">快速入门</a>的照搬</p>
+<p>但是官网的快速入门文档我觉得还是有点对菜鸟不友好，整个Electron文档，居然没教怎么安装！</p>
+<p>它只说是npm安装，但是没说具体安装哪一个！！这太不友好了！</p>
+<p>关键我一开始进的是Electron中文网！并没有原官网的<code>博客</code>模块，百度一下之后找到<a href="https://electronjs.org/blog/npm-install-electron" target="_blank" rel="external">此文</a>，里面提到怎么安装electron。</p>
+<p>所以我们可以正式开始了！</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
+<p>我觉得玩什么东西，安装才是第一步！</p>
+<p>环境准备：node.js以及它的大管家npm是必须的，git就不用说了。</p>
+<p>然后以下命令进行全局安装（就全局，不要怂）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install electron --save-dev -g</div></pre></td></tr></table></figure>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><hr>
+<h4 id="主进程"><a href="#主进程" class="headerlink" title="主进程"></a>主进程</h4><blockquote>
+<p>在 <code>Electron</code> 里，运行 <code>package.json</code> 里 <code>main</code> 脚本的进程被称为主进程。在主进程运行的脚本可以以创建 web 页面的形式展示 GUI。</p>
+</blockquote>
+<h4 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h4><blockquote>
+<p>由于 <code>Electron</code> 使用 <code>Chromium</code> 来展示页面，所以 <code>Chromium</code> 的多进程结构也被充分利用。每个 <code>Electron</code> 的页面都在运行着自己的进程，这样的进程我们称之为渲染进程。</p>
+<p>在一般浏览器中，网页通常会在沙盒环境下运行，并且不允许访问原生资源。然而，<code>Electron</code> 用户拥有在网页中调用 <code>Node.js</code> 的 <code>APIs</code> 的能力，可以与底层操作系统直接交互。</p>
+</blockquote>
+<h4 id="主进程与渲染进程的区别"><a href="#主进程与渲染进程的区别" class="headerlink" title="主进程与渲染进程的区别"></a>主进程与渲染进程的区别</h4><blockquote>
+<p>主进程使用 <code>BrowserWindow</code> 实例创建页面。每个 <code>BrowserWindow</code> 实例都在自己的渲染进程里运行页面。当一个 <code>BrowserWindow</code> 实例被销毁后，相应的渲染进程也会被终止。</p>
+<p>主进程管理所有页面和与之对应的渲染进程。每个渲染进程都是相互独立的，并且只关心他们自己的页面。</p>
+<p>由于在页面里管理原生 <code>GUI</code> 资源是非常危险而且容易造成资源泄露，所以在页面调用 <code>GUI</code> 相关的 <code>APIs</code> 是不被允许的。如果你想在网页里使用 <code>GUI</code> 操作，其对应的渲染进程必须与主进程进行通讯，请求主进程进行相关的 <code>GUI</code> 操作。</p>
+<p>在 <code>Electron</code>，我们提供几种方法用于主进程和渲染进程之间的通讯。像 <code>ipcRenderer</code> 和 <code>ipcMain</code> 模块用于发送消息， <code>remote</code> 模块用于 <code>RPC</code> 方式通讯。这些内容都可以在一个 FAQ 中查看 <a href="https://electron.org.cn/doc/faq.html#how-to-share-data-between-web-pages" target="_blank" rel="external">how to share data between web pages</a>。</p>
+</blockquote>
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><hr>
+<p>大体上，一个<code>Electron</code>应用的目录结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">your-app/</div><div class="line">├── package.json</div><div class="line">├── main.js</div><div class="line">└── index.html</div></pre></td></tr></table></figure></p>
+<p><code>package.json</code>的格式和Node完全一致，而且被main字段声明的脚本文件是你的应用的启动脚本，它运行在主进程上。你应用里的<code>package.json</code>看起来应该：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>    : <span class="string">"your-app"</span>,</div><div class="line">  <span class="attr">"version"</span> : <span class="string">"0.1.0"</span>,</div><div class="line">  <span class="attr">"main"</span>    : <span class="string">"main.js"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>注意：如果 main 字段没有在 package.json 声明，Electron会优先加载 index.js。</strong></p>
+<p><code>main.js</code> 应该用于创建窗口和处理系统事件，一个典型的例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 保持一个对于 window 对象的全局引用，如果你不这样做，</span></div><div class="line"><span class="comment">// 当 JavaScript 对象被垃圾回收， window 会被自动地关闭</span></div><div class="line"><span class="keyword">let</span> win</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 创建浏览器窗口。</span></div><div class="line">  win = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;)</div><div class="line"></div><div class="line">  <span class="comment">// 加载应用的 index.html。</span></div><div class="line">  win.loadURL(url.format(&#123;</div><div class="line">    pathname: path.join(__dirname, <span class="string">'index.html'</span>),</div><div class="line">    protocol: <span class="string">'file:'</span>,</div><div class="line">    slashes: <span class="literal">true</span></div><div class="line">  &#125;))</div><div class="line"></div><div class="line">  <span class="comment">// 打开开发者工具。</span></div><div class="line">  win.webContents.openDevTools()</div><div class="line"></div><div class="line">  <span class="comment">// 当 window 被关闭，这个事件会被触发。</span></div><div class="line">  win.on(<span class="string">'closed'</span>, () =&gt; &#123;</div><div class="line">    <span class="comment">// 取消引用 window 对象，如果你的应用支持多窗口的话，</span></div><div class="line">    <span class="comment">// 通常会把多个 window 对象存放在一个数组里面，</span></div><div class="line">    <span class="comment">// 与此同时，你应该删除相应的元素。</span></div><div class="line">    win = <span class="literal">null</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Electron 会在初始化后并准备</span></div><div class="line"><span class="comment">// 创建浏览器窗口时，调用这个函数。</span></div><div class="line"><span class="comment">// 部分 API 在 ready 事件触发后才能使用。</span></div><div class="line">app.on(<span class="string">'ready'</span>, createWindow)</div><div class="line"></div><div class="line"><span class="comment">// 当全部窗口关闭时退出。</span></div><div class="line">app.on(<span class="string">'window-all-closed'</span>, () =&gt; &#123;</div><div class="line">  <span class="comment">// 在 macOS 上，除非用户用 Cmd + Q 确定地退出，</span></div><div class="line">  <span class="comment">// 否则绝大部分应用及其菜单栏会保持激活。</span></div><div class="line">  <span class="keyword">if</span> (process.platform !== <span class="string">'darwin'</span>) &#123;</div><div class="line">    app.quit()</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.on(<span class="string">'activate'</span>, () =&gt; &#123;</div><div class="line">  <span class="comment">// 在这文件，你可以续写应用剩下主进程代码。</span></div><div class="line">  <span class="comment">// 也可以拆分成几个文件，然后用 require 导入。</span></div><div class="line">  <span class="keyword">if</span> (win === <span class="literal">null</span>) &#123;</div><div class="line">    createWindow()</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 在这文件，你可以续写应用剩下主进程代码。</span></div><div class="line"><span class="comment">// 也可以拆分成几个文件，然后用 require 导入。</span></div></pre></td></tr></table></figure></p>
+<p>最后，你想展示的 <code>index.html</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    We are using node <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.node)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>,</div><div class="line">    Chrome <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.chrome)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>,</div><div class="line">    and Electron <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.electron)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>.</div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Run-HelloWorld"><a href="#Run-HelloWorld" class="headerlink" title="Run HelloWorld"></a>Run HelloWorld</h3><hr>
+<p>一旦你创建了最初的 <code>main.js</code>， <code>index.html</code> 和<code>package.json</code> 这几个文件，你可能会想尝试在本地运行并测试，看看是不是和期望的那样正常运行。</p>
+<p>安装文档说明，运行electron应用的方式有两种：</p>
+<ul>
+<li>npm安装electron</li>
+<li>直接使用二进制文件运行</li>
+</ul>
+<p>如果你没有nodejs环境，你可以考虑使用二进制文件运行应用。</p>
+<p>使用模块去运行electron应用的命令是这样的：</p>
+<p><em>electron 是一个 npm 模块，包含所使用的 Electron 预编译版本。 如果你已经用 npm 全局安装了它，你只需要按照如下方式直接运行你的应用：</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">electron .</div></pre></td></tr></table></figure>
+<p>下面是我自己的演示：</p>
+<ul>
+<li><p>目录结构：<br><img src="http://image.youyinnn.cn/302c77ea7393fa19e487b69fc98ec917.png" alt="electron1"></p>
+</li>
+<li><p>运行：<br><img src="http://image.youyinnn.cn/e003ac2bb2e4383b892641cba60ba100.png" alt="electron2"></p>
+</li>
+<li><p>界面：<br><img src="http://image.youyinnn.cn/7617fb5337cfd6d0e19a74b1a7968cc9.png" alt="electron3"></p>
+</li>
+</ul>
+<hr>
+<p>这样Electron的HelloWorld的体验已经完成了！前端变桌面应用的感觉巨奇妙！超级期待后面的学习！</p>
+]]></content>
+      
+        <categories>
+            
+            <category> note </category>
+            
+            <category> electron </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> helloworld </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Log4j2_Appenders]]></title>
       <url>/post/7e4ab26f.html</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>上篇介绍了使用Log4j2之前的准备工作和简单介绍了一个HelloWorld</p>
