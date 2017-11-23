@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="helloworld," />
+  <meta name="keywords" content="electron,helloworld," />
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="惊！仅用前端技术就可以打造跨平台桌面应用！">
-<meta name="keywords" content="helloworld">
+<meta name="keywords" content="electron,helloworld">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Electron_一个HelloWorld">
 <meta property="og:url" content="https://youyinnn.top/post/99e8346.html">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://image.youyinnn.cn/302c77ea7393fa19e487b69fc98ec917.png">
 <meta property="og:image" content="http://image.youyinnn.cn/e003ac2bb2e4383b892641cba60ba100.png">
 <meta property="og:image" content="http://image.youyinnn.cn/7617fb5337cfd6d0e19a74b1a7968cc9.png">
-<meta property="og:updated_time" content="2017-11-22T14:38:49.588Z">
+<meta property="og:updated_time" content="2017-11-23T05:02:55.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Electron_一个HelloWorld">
 <meta name="twitter:description" content="惊！仅用前端技术就可以打造跨平台桌面应用！">
@@ -393,14 +393,27 @@
 </blockquote>
 <a id="more"></a>
 <h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><hr>
-<p>基本就算官网<a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">快速入门</a>的照搬</p>
-<p>但是官网的快速入门文档我觉得还是有点对菜鸟不友好，整个Electron文档，居然没教怎么安装！</p>
+<p>简单介绍一下什么是Electron：</p>
+<blockquote>
+<p>如果你只会前端技术，如果你想打造一个桌面应用，如果你不想学C#、Swing之类的技术，那么Electron绝对是你的不二之选。</p>
+<p>它的本质就是提供一个轻巧的chrome内核（其实也有131M），把你的项目包在里面运行，等于是你项目的专属浏览器！</p>
+<p>为什么想要使用这门技术，首先非常有趣，其次我只是个半吊子的前端选手，写项目完全不存在浏览器兼容性考虑这回事（我觉得兼容考虑就是前端开发届的一大毒瘤之一），我写的项目全部基于Chrome的V8，IE什么的傻逼浏览器我是不会去管的。因此你如果想要使用我的项目，要么使用Chrome，要么使用我项目打包成的桌面应用咯- -</p>
+</blockquote>
+<p>然后这篇基本就算官网<a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">快速入门</a>的照搬</p>
+<p>我开始上的是中文网，它的快速入门文档我觉得还是有点对菜鸟不友好，整个文档，居然没教怎么安装！</p>
 <p>它只说是npm安装，但是没说具体安装哪一个！！这太不友好了！</p>
-<p>关键我一开始进的是Electron中文网！并没有原官网的<code>博客</code>模块，百度一下之后找到<a href="https://electronjs.org/blog/npm-install-electron" target="_blank" rel="external">此文</a>，里面提到怎么安装electron。</p>
+<p>关键Electron中文网并没有原官网的<code>博客</code>模块！！百度一下之后找到<a href="https://electronjs.org/blog/npm-install-electron" target="_blank" rel="external">此文</a>，里面提到怎么安装electron。</p>
+<p>在这里提醒一下：</p>
+<p><strong>千万不要</strong>使用Electron中文网：<a href="https://electron.org.cn/" target="_blank" rel="external">https://electron.org.cn/</a></p>
+<p><strong>千万要</strong>使用原官网：<a href="https://electronjs.org/" target="_blank" rel="external">https://electronjs.org/</a></p>
+<p>原官网也支持中文！中文网的内容有缺失！</p>
 <p>所以我们可以正式开始了！</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
+<p>贴一个Electron的github项目地址：<a href="https://github.com/electron/electron" target="_blank" rel="external">https://github.com/electron/electron</a> ，里面有安装说明。</p>
 <p>我觉得玩什么东西，安装才是第一步！</p>
-<p>环境准备：node.js以及它的大管家npm是必须的，git就不用说了。</p>
+<blockquote>
+<p>环境准备：node.js以及npm是必须的，git就不用说了。</p>
+</blockquote>
 <p>然后以下命令进行全局安装（就全局，不要怂）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install electron --save-dev -g</div></pre></td></tr></table></figure>
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><hr>
@@ -427,7 +440,7 @@
 <p>一旦你创建了最初的 <code>main.js</code>， <code>index.html</code> 和<code>package.json</code> 这几个文件，你可能会想尝试在本地运行并测试，看看是不是和期望的那样正常运行。</p>
 <p>安装文档说明，运行electron应用的方式有两种：</p>
 <ul>
-<li>npm安装electron</li>
+<li>npm安装electron模块 使用模块运行</li>
 <li>直接使用二进制文件运行</li>
 </ul>
 <p>如果你没有nodejs环境，你可以考虑使用二进制文件运行应用。</p>
@@ -444,6 +457,7 @@
 </li>
 </ul>
 <hr>
+<p>然后官网里还给了一个quickstar项目，那个项目没必要跑了，内容基本和上面的HelloWorld是一样的。</p>
 <p>这样Electron的HelloWorld的体验已经完成了！前端变桌面应用的感觉巨奇妙！超级期待后面的学习！</p>
 
       
@@ -461,6 +475,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/electron/" rel="tag"># electron</a>
           
             <a href="/tags/helloworld/" rel="tag"># helloworld</a>
           
@@ -484,6 +500,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/e9787e5f.html" rel="prev" title="Electron_打包你的HelloWorld为exe">
+                Electron_打包你的HelloWorld为exe <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -592,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

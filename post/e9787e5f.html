@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="learning,RegExp," />
+  <meta name="keywords" content="electron,helloworld," />
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
-<meta name="keywords" content="learning,RegExp">
+<meta name="description" content="exe什么的 看着就忍不住双击">
+<meta name="keywords" content="electron,helloworld">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RegExp_1_overview">
-<meta property="og:url" content="https://youyinnn.top/post/8f39708b.html">
+<meta property="og:title" content="Electron_打包你的HelloWorld为exe">
+<meta property="og:url" content="https://youyinnn.top/post/e9787e5f.html">
 <meta property="og:site_name" content="The pudding knight">
-<meta property="og:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
+<meta property="og:description" content="exe什么的 看着就忍不住双击">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-19T15:24:56.362Z">
+<meta property="og:image" content="http://image.youyinnn.cn/ba4fa76eb64909e4d4959799cf130547.png">
+<meta property="og:image" content="http://image.youyinnn.cn/6420ae86e552fa8e6e1b0f7282f28ca4.png">
+<meta property="og:updated_time" content="2017-11-23T08:11:22.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RegExp_1_overview">
-<meta name="twitter:description" content="引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。">
+<meta name="twitter:title" content="Electron_打包你的HelloWorld为exe">
+<meta name="twitter:description" content="exe什么的 看着就忍不住双击">
+<meta name="twitter:image" content="http://image.youyinnn.cn/ba4fa76eb64909e4d4959799cf130547.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://youyinnn.top/post/8f39708b.html"/>
+  <link rel="canonical" href="https://youyinnn.top/post/e9787e5f.html"/>
 
 
 
 
 
-  <title>RegExp_1_overview | The pudding knight</title>
+  <title>Electron_打包你的HelloWorld为exe | The pudding knight</title>
   
 
 
@@ -285,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://youyinnn.top/post/8f39708b.html">
+    <link itemprop="mainEntityOfPage" href="https://youyinnn.top/post/e9787e5f.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="youyinnn">
@@ -302,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RegExp_1_overview</h1>
+          <h1 class="post-title" itemprop="name headline">Electron_打包你的HelloWorld为exe</h1>
         
 
         <div class="post-meta">
@@ -314,8 +317,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-17T00:00:56+08:00">
-                2017-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-23T13:02:21+08:00">
+                2017-11-23
               </time>
             
 
@@ -348,19 +351,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/note/booknote/" itemprop="url" rel="index">
-                    <span itemprop="name">booknote</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/note/booknote/《Mastering-Regular-Expression-Third-Edition-》/" itemprop="url" rel="index">
-                    <span itemprop="name">《Mastering Regular Expression(Third Edition)》</span>
+                  <a href="/categories/note/electron/" itemprop="url" rel="index">
+                    <span itemprop="name">electron</span>
                   </a>
                 </span>
 
@@ -396,29 +388,46 @@
       
 
       
-        <p><em>引言：接触计算机编程以来，无数次碰到过这个名词“正则表达式”，刚开始肯定是不懂，但是听到“表达式”三个字就发现事情并不简单。</em></p>
+        <blockquote class="blockquote-center"><p>exe什么的 看着就忍不住双击</p>
+</blockquote>
 <a id="more"></a>
-<p><em>第一次接触到它还是在我进NTJ2EE的招新机试的时候，机试题有一道题：“有一个字符串，其中包含中文字符、英文字符和数字字符，请统计和打印出各个字符的个数。”，当时只会用取字符对照ascii的方法来做这道题，然后正好学长看了我的做法，他说还有种东西叫做“正则表达式”，然后他给我打开了在线的JDK-1.6的API，找到了里面介绍正则表达式的页，然后还百度了一篇正则表达式的教程给我看（对，就是那个通篇斜杠写反的那盘），然后我就头皮发麻了。</em></p>
-<p><em>在之后无论是正式学习还是运用到实际当中，我的处理都是：百度——ctrl+c——ctrl+v，然后下次碰到另一个字符串处理问题的时候还是这样做，毫无意义，甚至还不能完全匹配我的应用场景。然后这次的工程中心项目，我负责写前端，对输入框需要用到字符串过滤的需求，就这么简单的一个功能我都实现不了，感觉非常丢人，我不想再复制粘贴了，所以开始以blog的形式记录我学习<code>regular-expression</code>的过程。</em></p>
-<p><strong>所有笔记的学习都基于：《Mastering Regular Expression(Third Edition)》——Jeffrey E. F. Friedl一书的中文版</strong></p>
+<h3 id="安装准备工具"><a href="#安装准备工具" class="headerlink" title="安装准备工具"></a>安装准备工具</h3><hr>
+<p>首先介绍一下Electron打包应用的方式：</p>
+<ul>
+<li><p>打包成asar分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging" target="_blank" rel="external">详情见</a>。</p>
+</li>
+<li><p>重构官网提供的二进制release，这种方式也比较麻烦。</p>
+</li>
+<li><p>通过打包工具：</p>
+<ul>
+<li><a href="https://github.com/electron-userland/electron-forge" target="_blank" rel="external">electron-forge</a></li>
+<li><a href="https://github.com/electron-userland/electron-builder" target="_blank" rel="external">electron-builder</a></li>
+<li><a href="https://github.com/electron-userland/electron-packager" target="_blank" rel="external">electron-packager</a></li>
+</ul>
+</li>
+<li><p>重编译源码二进制文件…</p>
+</li>
+</ul>
+<p>这里我们选择傻瓜式的使用打包工具来生成包，其中前两种工具比较复杂，所以我选择地三种：<a href="https://github.com/electron-userland/electron-packager" target="_blank" rel="external">electron-packager</a></p>
+<p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm insatll electron-packager -g</div></pre></td></tr></table></figure>
+<p>对还是全局安装 不要怂。</p>
+<h3 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h3><hr>
+<p>要打包你的项目，你只需要运行下面格式的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">electron-packager &lt;sourcedir&gt; &lt;appname&gt; --platform=&lt;platform&gt; --arch=&lt;arch&gt; [optional flags...]</div></pre></td></tr></table></figure></p>
+<p>里面的参数含义我们可以通过<a href="https://github.com/electron-userland/electron-packager/blob/master/usage.txt" target="_blank" rel="external">txt</a>进行简单的参考，或者在<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md" target="_blank" rel="external">md</a>进行深入研究。</p>
+<p>推荐是看md的比较清晰一点</p>
+<p>在上篇中，我们构造的helloworld的目录结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">your-app/</div><div class="line">├── package.json</div><div class="line">├── main.js</div><div class="line">└── index.html</div></pre></td></tr></table></figure></p>
+<p>在我们的演示中，我们运行的是这样的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">electron-packager . helloworldappname --out outputdir --electronVersion 1.7.9</div></pre></td></tr></table></figure></p>
+<p>我们在项目目录根目录下运行了这个命令，所以第一个<code>.</code>代表的<code>&lt;sourcedir&gt;</code>是本目录，然后我们指定了<code>&lt;appname&gt;</code>为<code>helloworldappname</code>，然后我们指定了<code>--out</code>表示打包输出的目录，最后指定了我们使用的electron的版本号。</p>
+<p>我没有指定<code>--platform</code>和<code>--arch</code>是因为这俩在默认的情况下是选取本机参数，比如我是win32x64。</p>
+<p>但是每次打包都要写这巨长的命令，确实有点麻烦，我们可以使用npm的<code>run-script</code>功能去快速的执行写好的命令：</p>
+<p>npm<code>run-script</code>是默认运行当前目录下<code>package.json</code>文件中script定义好的命令，具体的应用自己去学npm相关知识，我在项目的<code>package.json</code>文件中写好：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"helloworld"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</div><div class="line">  <span class="attr">"main"</span>: <span class="string">"main.js"</span>,</div><div class="line">  <span class="attr">"scripts"</span>:&#123;</div><div class="line">    <span class="attr">"start"</span> : <span class="string">"electron ."</span>,</div><div class="line">    <span class="attr">"pk"</span>: <span class="string">"electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在根目录下运行命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run-script pk</div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> npm run-script pk</span></div><div class="line"></div><div class="line"><span class="meta">&gt;</span><span class="bash"> helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld</span></div><div class="line"><span class="meta">&gt;</span><span class="bash"> electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9</span></div><div class="line"></div><div class="line">Packaging app for platform win32 x64 using electron v1.7.9</div><div class="line">Wrote new app to outputdir\helloworldappname-win32-x64</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"></span></div></pre></td></tr></table></figure></p>
+<p>然后项目目录下会生成：<br><img src="http://image.youyinnn.cn/ba4fa76eb64909e4d4959799cf130547.png" alt="electronpk"></p>
+<p>运行exe：<br><img src="http://image.youyinnn.cn/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
 <hr>
-<h3 id="释义与场景"><a href="#释义与场景" class="headerlink" title="释义与场景"></a>释义与场景</h3><h4 id="释义"><a href="#释义" class="headerlink" title="释义"></a>释义</h4><p>首先我们来看看<code>Regular Expression</code>这两个单词</p>
-<p>Regular：</p>
-<blockquote>
-<p><em>adj.</em> 定期的；有规律的；合格的；整齐的；普通的</p>
-<p><em>n.</em> 常客；正式队员；中坚分子</p>
-<p><em>adv.</em> 定期地；经常地</p>
-</blockquote>
-<p>Expression：</p>
-<blockquote>
-<p><em>n.</em> 表现，表示，表达；表情，脸色，态度，强调，声调；式，符号；语句，措辞，说法</p>
-</blockquote>
-<p>毫无疑问，在编程领域里面<code>Regular Expression</code>的含义肯定不会是“整齐的脸色”或者“中坚分子措辞”这样的翻译了，从字面意义上去翻译的话应该是“有规律的表达式”，因为起码听上去像个数学公式，和计算机有点关联- -。这可比“正则表达式”这样的翻译明了多了，但是后者更有逼格一点。</p>
-<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>搞清楚公式的定义，那么接下来我们就可以开始解题了:smile:。</p>
-<p>我们为什么会用到正则表达式？需求源于我们需要在一大段不规则的文本中找出是否含有符合我们规律的表达式的句子，这就叫做使用正则表达式去匹配我们的文本。比如一般editor所具有的find功能，就是一种文本匹配功能。</p>
-<p>但是在我们写程序的过程中，你的程序代码是不可能给一个find按钮给你去匹配文本的，而且你可能会需要更复杂的文本匹配功能，比如说“匹配所有xxx-xxxxxxxxxxx这种格式的手机号码”这样的精准匹配就需要你构建表述清晰的正则表达式去完成匹配功能。</p>
-<p>一旦你精准的find到你想要匹配的子文本之后，你想干嘛都行，提取、删除、替换、添加等等。这就是正则表达式的应用场景。</p>
-<hr>
+<p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
 
       
     </div>
@@ -436,9 +445,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/learning/" rel="tag"># learning</a>
+            <a href="/tags/electron/" rel="tag"># electron</a>
           
-            <a href="/tags/RegExp/" rel="tag"># RegExp</a>
+            <a href="/tags/helloworld/" rel="tag"># helloworld</a>
           
         </div>
       
@@ -451,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/ce7091ac.html" rel="next" title="5 Useful Tips For A Better Commit Message">
-                <i class="fa fa-chevron-left"></i> 5 Useful Tips For A Better Commit Message
+              <a href="/post/99e8346.html" rel="next" title="Electron_一个HelloWorld">
+                <i class="fa fa-chevron-left"></i> Electron_一个HelloWorld
               </a>
             
           </div>
@@ -460,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/591f5cd1.html" rel="prev" title="RegExp_2_metacharacters">
-                RegExp_2_metacharacters <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -655,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#释义与场景"><span class="nav-number">1.</span> <span class="nav-text">释义与场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#释义"><span class="nav-number">1.1.</span> <span class="nav-text">释义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景"><span class="nav-number">1.2.</span> <span class="nav-text">场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装准备工具"><span class="nav-number">1.</span> <span class="nav-text">安装准备工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用工具"><span class="nav-number">2.</span> <span class="nav-text">使用工具</span></a></li></ol></div>
             
 
           </div>

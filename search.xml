@@ -3,20 +3,97 @@
   
     
     <entry>
+      <title><![CDATA[Electron_打包你的HelloWorld为exe]]></title>
+      <url>/post/e9787e5f.html</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>exe什么的 看着就忍不住双击</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="安装准备工具"><a href="#安装准备工具" class="headerlink" title="安装准备工具"></a>安装准备工具</h3><hr>
+<p>首先介绍一下Electron打包应用的方式：</p>
+<ul>
+<li><p>打包成asar分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging" target="_blank" rel="external">详情见</a>。</p>
+</li>
+<li><p>重构官网提供的二进制release，这种方式也比较麻烦。</p>
+</li>
+<li><p>通过打包工具：</p>
+<ul>
+<li><a href="https://github.com/electron-userland/electron-forge" target="_blank" rel="external">electron-forge</a></li>
+<li><a href="https://github.com/electron-userland/electron-builder" target="_blank" rel="external">electron-builder</a></li>
+<li><a href="https://github.com/electron-userland/electron-packager" target="_blank" rel="external">electron-packager</a></li>
+</ul>
+</li>
+<li><p>重编译源码二进制文件…</p>
+</li>
+</ul>
+<p>这里我们选择傻瓜式的使用打包工具来生成包，其中前两种工具比较复杂，所以我选择地三种：<a href="https://github.com/electron-userland/electron-packager" target="_blank" rel="external">electron-packager</a></p>
+<p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm insatll electron-packager -g</div></pre></td></tr></table></figure>
+<p>对还是全局安装 不要怂。</p>
+<h3 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h3><hr>
+<p>要打包你的项目，你只需要运行下面格式的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">electron-packager &lt;sourcedir&gt; &lt;appname&gt; --platform=&lt;platform&gt; --arch=&lt;arch&gt; [optional flags...]</div></pre></td></tr></table></figure></p>
+<p>里面的参数含义我们可以通过<a href="https://github.com/electron-userland/electron-packager/blob/master/usage.txt" target="_blank" rel="external">txt</a>进行简单的参考，或者在<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md" target="_blank" rel="external">md</a>进行深入研究。</p>
+<p>推荐是看md的比较清晰一点</p>
+<p>在上篇中，我们构造的helloworld的目录结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">your-app/</div><div class="line">├── package.json</div><div class="line">├── main.js</div><div class="line">└── index.html</div></pre></td></tr></table></figure></p>
+<p>在我们的演示中，我们运行的是这样的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">electron-packager . helloworldappname --out outputdir --electronVersion 1.7.9</div></pre></td></tr></table></figure></p>
+<p>我们在项目目录根目录下运行了这个命令，所以第一个<code>.</code>代表的<code>&lt;sourcedir&gt;</code>是本目录，然后我们指定了<code>&lt;appname&gt;</code>为<code>helloworldappname</code>，然后我们指定了<code>--out</code>表示打包输出的目录，最后指定了我们使用的electron的版本号。</p>
+<p>我没有指定<code>--platform</code>和<code>--arch</code>是因为这俩在默认的情况下是选取本机参数，比如我是win32x64。</p>
+<p>但是每次打包都要写这巨长的命令，确实有点麻烦，我们可以使用npm的<code>run-script</code>功能去快速的执行写好的命令：</p>
+<p>npm<code>run-script</code>是默认运行当前目录下<code>package.json</code>文件中script定义好的命令，具体的应用自己去学npm相关知识，我在项目的<code>package.json</code>文件中写好：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"helloworld"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</div><div class="line">  <span class="attr">"main"</span>: <span class="string">"main.js"</span>,</div><div class="line">  <span class="attr">"scripts"</span>:&#123;</div><div class="line">    <span class="attr">"start"</span> : <span class="string">"electron ."</span>,</div><div class="line">    <span class="attr">"pk"</span>: <span class="string">"electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在根目录下运行命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run-script pk</div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> npm run-script pk</span></div><div class="line"></div><div class="line"><span class="meta">&gt;</span><span class="bash"> helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld</span></div><div class="line"><span class="meta">&gt;</span><span class="bash"> electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9</span></div><div class="line"></div><div class="line">Packaging app for platform win32 x64 using electron v1.7.9</div><div class="line">Wrote new app to outputdir\helloworldappname-win32-x64</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"></span></div></pre></td></tr></table></figure></p>
+<p>然后项目目录下会生成：<br><img src="http://image.youyinnn.cn/ba4fa76eb64909e4d4959799cf130547.png" alt="electronpk"></p>
+<p>运行exe：<br><img src="http://image.youyinnn.cn/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
+<hr>
+<p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> note </category>
+            
+            <category> electron </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> electron </tag>
+            
+            <tag> helloworld </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Electron_一个HelloWorld]]></title>
       <url>/post/99e8346.html</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>惊！仅用前端技术就可以打造跨平台桌面应用！</p>
 </blockquote>
 <a id="more"></a>
 <h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><hr>
-<p>基本就算官网<a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">快速入门</a>的照搬</p>
-<p>但是官网的快速入门文档我觉得还是有点对菜鸟不友好，整个Electron文档，居然没教怎么安装！</p>
+<p>简单介绍一下什么是Electron：</p>
+<blockquote>
+<p>如果你只会前端技术，如果你想打造一个桌面应用，如果你不想学C#、Swing之类的技术，那么Electron绝对是你的不二之选。</p>
+<p>它的本质就是提供一个轻巧的chrome内核（其实也有131M），把你的项目包在里面运行，等于是你项目的专属浏览器！</p>
+<p>为什么想要使用这门技术，首先非常有趣，其次我只是个半吊子的前端选手，写项目完全不存在浏览器兼容性考虑这回事（我觉得兼容考虑就是前端开发届的一大毒瘤之一），我写的项目全部基于Chrome的V8，IE什么的傻逼浏览器我是不会去管的。因此你如果想要使用我的项目，要么使用Chrome，要么使用我项目打包成的桌面应用咯- -</p>
+</blockquote>
+<p>然后这篇基本就算官网<a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">快速入门</a>的照搬</p>
+<p>我开始上的是中文网，它的快速入门文档我觉得还是有点对菜鸟不友好，整个文档，居然没教怎么安装！</p>
 <p>它只说是npm安装，但是没说具体安装哪一个！！这太不友好了！</p>
-<p>关键我一开始进的是Electron中文网！并没有原官网的<code>博客</code>模块，百度一下之后找到<a href="https://electronjs.org/blog/npm-install-electron" target="_blank" rel="external">此文</a>，里面提到怎么安装electron。</p>
+<p>关键Electron中文网并没有原官网的<code>博客</code>模块！！百度一下之后找到<a href="https://electronjs.org/blog/npm-install-electron" target="_blank" rel="external">此文</a>，里面提到怎么安装electron。</p>
+<p>在这里提醒一下：</p>
+<p><strong>千万不要</strong>使用Electron中文网：<a href="https://electron.org.cn/" target="_blank" rel="external">https://electron.org.cn/</a></p>
+<p><strong>千万要</strong>使用原官网：<a href="https://electronjs.org/" target="_blank" rel="external">https://electronjs.org/</a></p>
+<p>原官网也支持中文！中文网的内容有缺失！</p>
 <p>所以我们可以正式开始了！</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
+<p>贴一个Electron的github项目地址：<a href="https://github.com/electron/electron" target="_blank" rel="external">https://github.com/electron/electron</a> ，里面有安装说明。</p>
 <p>我觉得玩什么东西，安装才是第一步！</p>
-<p>环境准备：node.js以及它的大管家npm是必须的，git就不用说了。</p>
+<blockquote>
+<p>环境准备：node.js以及npm是必须的，git就不用说了。</p>
+</blockquote>
 <p>然后以下命令进行全局安装（就全局，不要怂）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install electron --save-dev -g</div></pre></td></tr></table></figure>
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><hr>
@@ -43,7 +120,7 @@
 <p>一旦你创建了最初的 <code>main.js</code>， <code>index.html</code> 和<code>package.json</code> 这几个文件，你可能会想尝试在本地运行并测试，看看是不是和期望的那样正常运行。</p>
 <p>安装文档说明，运行electron应用的方式有两种：</p>
 <ul>
-<li>npm安装electron</li>
+<li>npm安装electron模块 使用模块运行</li>
 <li>直接使用二进制文件运行</li>
 </ul>
 <p>如果你没有nodejs环境，你可以考虑使用二进制文件运行应用。</p>
@@ -60,6 +137,7 @@
 </li>
 </ul>
 <hr>
+<p>然后官网里还给了一个quickstar项目，那个项目没必要跑了，内容基本和上面的HelloWorld是一样的。</p>
 <p>这样Electron的HelloWorld的体验已经完成了！前端变桌面应用的感觉巨奇妙！超级期待后面的学习！</p>
 ]]></content>
       
@@ -73,6 +151,8 @@
         
         
         <tags>
+            
+            <tag> electron </tag>
             
             <tag> helloworld </tag>
             
