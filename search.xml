@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Electron_打包你的HelloWorld为exe]]></title>
       <url>/post/e9787e5f.html</url>
-      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>exe什么的 看着就忍不住双击</p>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>EXE什么的，看着就忍不要双击它！</p>
 </blockquote>
 <a id="more"></a>
 <h3 id="安装准备工具"><a href="#安装准备工具" class="headerlink" title="安装准备工具"></a>安装准备工具</h3><hr>
@@ -45,6 +45,7 @@
 <p>运行exe：<br><img src="http://image.youyinnn.cn/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
 <hr>
 <p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
+<p><em>参考：<a href="https://electronjs.org/docs/tutorial/application-distribution" target="_blank" rel="external">https://electronjs.org/docs/tutorial/application-distribution</a></em><br><em>参考：<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md" target="_blank" rel="external">https://github.com/electron-userland/electron-packager/blob/master/docs/api.md</a></em><br><em>参考：<a href="http://blog.csdn.net/a1170201028/article/details/59108126" target="_blank" rel="external">http://blog.csdn.net/a1170201028/article/details/59108126</a></em></p>
 ]]></content>
       
         <categories>
