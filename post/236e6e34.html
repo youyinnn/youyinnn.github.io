@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="tips,github,git," />
 
 
 
@@ -81,13 +81,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="The pudding knight">
-<meta property="og:url" content="https://youyinnn.top/tags/git-commit/index.html">
+<meta name="description" content="其实必要的时候使用git commit -m &amp;quot;xxxxx&amp;quot;也木有关系 但你也别每条都这样写">
+<meta name="keywords" content="tips,github,git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我认为的规范的GitCommit">
+<meta property="og:url" content="https://youyinnn.top/post/236e6e34.html">
 <meta property="og:site_name" content="The pudding knight">
+<meta property="og:description" content="其实必要的时候使用git commit -m &amp;quot;xxxxx&amp;quot;也木有关系 但你也别每条都这样写">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-11-30T04:43:43.391Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The pudding knight">
+<meta name="twitter:title" content="我认为的规范的GitCommit">
+<meta name="twitter:description" content="其实必要的时候使用git commit -m &amp;quot;xxxxx&amp;quot;也木有关系 但你也别每条都这样写">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://youyinnn.top/tags/git-commit/"/>
+  <link rel="canonical" href="https://youyinnn.top/post/236e6e34.html"/>
 
 
 
 
 
-  <title>Tag: git-commit | The pudding knight</title>
+  <title>我认为的规范的GitCommit | The pudding knight</title>
   
 
 
@@ -142,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -266,54 +271,246 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>git-commit<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://youyinnn.top/post/236e6e34.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="youyinnn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The pudding knight">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/post/ce7091ac.html" itemprop="url">
-              
-                <span itemprop="name">5 Useful Tips For A Better Commit Message</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">我认为的规范的GitCommit</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-15T16:59:00+08:00"
-              content="2017-11-15" >
-          11-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T18:30:01+08:00">
+                2017-11-29
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/thinking/" itemprop="url" rel="index">
+                    <span itemprop="name">thinking</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系</p>
+<p>但你也别每条都这样写</p>
+<a id="more"></a>
+<p>好久没更博了，最近一直在疯狂的推<a href="https://github.com/DomBro96/dataimport" target="_blank" rel="external">数据快速导入</a>的项目，退的使用在使用git做一些fix和optimize等工作，经常会进行版本回退和msg查阅，看看我昨天晚上到底干了些什么。</p>
+<p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
+<p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html" target="_blank" rel="external">5 Useful Tips For A Better Commit Message</a></p>
+<p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
+<ol>
+<li><p>第一行使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code> </code>分隔，提示符规定如下（持续补充）：</p>
+<p> 业务型：</p>
+<ul>
+<li>功能：<blockquote>
+<p><code>FEATCPL</code>：Feature Completed：新功能完成<br><code>DELFEAT</code>：Deleted Feature：删除功能<br><code>RNFEAT</code>：Renamed Feature：重命名功能<br><code>MGFEAT</code>：Merged Feature：合并功能<br><code>IMPFEAT</code>：Improved Feature：优化功能（通常是增加新的模块来辅助这个Feature</p>
+</blockquote>
+</li>
+<li><p>模块：</p>
+<blockquote>
+<p><code>ADDMODU</code>：Added Module：增加新模块<br><code>DELMODU</code>：Deleted Module：删除模块<br><code>RNMODU</code>：Renamed Module：重命名模块<br><code>MGMODU</code>：Merged Module：合并模块<br><code>IMPMODU</code>：Improved Module：优化模块（通常是优化代码或者方法</p>
+</blockquote>
+<p>事务型：</p>
+</li>
+<li>版本：<blockquote>
+<p><code>RELEASE</code>：发布一个版本</p>
+</blockquote>
+</li>
+<li>代码：<blockquote>
+<p><code>OPTCODE</code>：Optimized Code：优化代码（通常是优化一小段代码的逻辑<br><code>TOFUNC</code>：Repeated Code Snippet Up To Function：提取方法以代码重用<br><code>AFUNC</code>：Added Function：增加方法<br><code>DELFUNC</code>：Deleted Function：删除方法<br><code>MFUNC</code>：Moved Funtion：移动方法<br><code>RNFUNC</code>：Renamed Function：重命名方法<br><code>OPTFUNC</code>：Optimized Function：优化方法（和OPTCODE相似</p>
+</blockquote>
+</li>
+<li>问题：<blockquote>
+<p><code>FIX</code>：Fixed Bug：修复BUG<br><code>RPBUG</code>：Report Bug：通报发现一个BUG并且待解决</p>
+</blockquote>
+</li>
+<li><p>其他：</p>
+<blockquote>
+<p><code>MODCONF</code>：Modified Config：修改配置（可以是修改配置文件也可以是修改用于配置的硬代码<br><code>MODDEP</code>：Modified Dependence：更改依赖<br><code>TODO</code>：Added Todo List：添加todo列表</p>
+</blockquote>
+<p>操作型：</p>
+</li>
+<li>仓库操作：<blockquote>
+<p><code>INIT</code>：Inited Repository：初始化仓库<br><code>AREADME</code>：Added README File：增加readme文件<br><code>AMREADME</code>：Amended README File：修正readme文件<br><code>SUPREADME</code>：Supplemented README File：补充readme文件<br><code>AIGNORE</code>：Added Ignore File：增加Ignore文件<br><code>MODIGNORE</code>：Modified Ignore File：修改Ignore文件</p>
+</blockquote>
+</li>
+<li>文件操作：<blockquote>
+<p><code>MFILE</code>：Moved File：移动文件<br><code>CFILE</code>：Created File：创建文件<br><code>RMFILE</code>：Removed File：移除文件<br><code>RNFILE</code>：Renamed File：重命名文件</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX</div></pre></td></tr></table></figure></p>
+<p>这表示我当次commit完成了：</p>
+<blockquote>
+<p><em>我在完成一个新功能的同时还发现了一个BUG顺便封装了之前写的重复的代码为函数提高了代码重用率最后修复了之前发现的一些BUG！</em></p>
+</blockquote>
+<ol>
+<li><p>第二行得是一个空行</p>
+</li>
+<li><p>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+<ul>
+<li>以工作标识符加冒号占一行。</li>
+<li>如有当前工作有多个要点，必须有序得分条说明。</li>
+<li>每条说明文字必须要指明改动源与改动目的。</li>
+<li>当commit多个文件时，涉及代码改动的每条说明文字的最后一个字符必须以一个tab键进行制表空格；然后写上<code>//fileName.fileSuffix</code>来表明当前这条改动的工作是在哪个文件上进行的；如有必要，可在文件名后面加上<code>(12-67)</code>表明改动的行段；如涉及多个文件，则文件之间以空格分隔。</li>
+<li>每个工作说明完之后必须空一行，最后一个工作除外。</li>
+<li>全英文标点符号，即使有中文说明；说明行末不加任何标点符号，即使是英文句号。</li>
+<li>FIX后面必须加上对应RPBUG的版本号，然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
+</ul>
+</li>
+</ol>
+<p>比如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div></pre></td></tr></table></figure></p>
+<hr>
+<p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX</div><div class="line"></div><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div><div class="line"></div><div class="line">REBUG:</div><div class="line"><span class="number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="number">39</span>)</div><div class="line"></div><div class="line">TOFUNC:</div><div class="line"><span class="number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="number">46</span>-<span class="number">68</span>) LoginService.java(<span class="number">35</span>-<span class="number">57</span>)</div><div class="line"></div><div class="line">FIX：</div><div class="line"><span class="number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java</div></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag"># tips</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/e9787e5f.html" rel="next" title="Electron_打包你的HelloWorld为exe">
+                <i class="fa fa-chevron-left"></i> Electron_打包你的HelloWorld为exe
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -321,6 +518,16 @@
 
 
           
+  
+         
+           <div id="gitment-container"></div>
+         
+
+
+  
+
+
+
 
         </div>
         
@@ -361,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -372,7 +579,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -576,6 +783,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
