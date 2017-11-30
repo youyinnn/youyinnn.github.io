@@ -3,10 +3,9 @@
   
     
     <entry>
-      <title><![CDATA[我认为的规范的GitCommit]]></title>
+      <title><![CDATA[我认为的规范的git commit msg]]></title>
       <url>/post/236e6e34.html</url>
-      <content type="html"><![CDATA[<p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系</p>
-<p>但你也别每条都这样写</p>
+      <content type="html"><![CDATA[<p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系 但你也别每条都这样写</p>
 <a id="more"></a>
 <p>好久没更博了，最近一直在疯狂的推<a href="https://github.com/DomBro96/dataimport" target="_blank" rel="external">数据快速导入</a>的项目，退的使用在使用git做一些fix和optimize等工作，经常会进行版本回退和msg查阅，看看我昨天晚上到底干了些什么。</p>
 <p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
