@@ -49,36 +49,38 @@
 </blockquote>
 </li>
 <li>文件操作：<blockquote>
-<p><code>MFILE</code>：Moved File：移动文件<br><code>CFILE</code>：Created File：创建文件<br><code>RMFILE</code>：Removed File：移除文件<br><code>RNFILE</code>：Renamed File：重命名文件</p>
+<p><code>MFILE</code>：Moved File：移动文件<br><code>CFILE</code>：Created File：创建文件<br><code>RMFILE</code>：Removed File：移除文件<br><code>RNFILE</code>：Renamed File：重命名文件<br><code>CGSTRUCT</code>：Changed Project Structure：变更项目结构</p>
 </blockquote>
 </li>
 </ul>
 </li>
 </ol>
-<p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX</div></pre></td></tr></table></figure></p>
+<p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX MODIGNORE</div></pre></td></tr></table></figure></p>
 <p>这表示我当次commit完成了：</p>
 <blockquote>
 <p><em>我在完成一个新功能的同时还发现了一个BUG顺便封装了之前写的重复的代码为函数提高了代码重用率最后修复了之前发现的一些BUG！</em></p>
 </blockquote>
 <ol>
-<li><p>第二行得是一个空行</p>
-</li>
-<li><p>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
-<ul>
+<li>第二行得是一个空行</li>
+</ol>
+<p><br></p>
+<ol>
+<li>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：<ul>
 <li>以工作标识符加冒号占一行。</li>
 <li>如有当前工作有多个要点，必须有序得分条说明。</li>
 <li>每条说明文字必须要指明改动源与改动目的。</li>
 <li>当commit多个文件时，涉及代码改动的每条说明文字的最后一个字符必须以一个tab键进行制表空格；然后写上<code>//fileName.fileSuffix</code>来表明当前这条改动的工作是在哪个文件上进行的；如有必要，可在文件名后面加上<code>(12-67)</code>表明改动的行段；如涉及多个文件，则文件之间以空格分隔。</li>
 <li>每个工作说明完之后必须空一行，最后一个工作除外。</li>
 <li>全英文标点符号，即使有中文说明；说明行末不加任何标点符号，即使是英文句号。</li>
-<li>FIX后面必须加上对应RPBUG的版本号，然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
+<li>FIX后面必须加上对应<code>RPBUG</code>的版本号（如果是以前的commit中report的BUG的话，如果是当次commit发现的BUG可以不用写版本号，并且可以不写<code>RPBUG</code>标识符），然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
+<li>如果是一些可以忽略说明的工作，则可以直接在标识符后面加上<code>*</code>，表示忽略说明（如<code>MODIGNORE</code>标识符）。</li>
 </ul>
 </li>
 </ol>
 <p>比如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div></pre></td></tr></table></figure></p>
 <hr>
 <p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX</div><div class="line"></div><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div><div class="line"></div><div class="line">REBUG:</div><div class="line"><span class="number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="number">39</span>)</div><div class="line"></div><div class="line">TOFUNC:</div><div class="line"><span class="number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="number">46</span>-<span class="number">68</span>) LoginService.java(<span class="number">35</span>-<span class="number">57</span>)</div><div class="line"></div><div class="line">FIX：</div><div class="line"><span class="number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX MODIGNORE</div><div class="line"></div><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div><div class="line"></div><div class="line">REBUG:</div><div class="line"><span class="number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="number">39</span>)</div><div class="line"></div><div class="line">TOFUNC:</div><div class="line"><span class="number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="number">46</span>-<span class="number">68</span>) LoginService.java(<span class="number">35</span>-<span class="number">57</span>)</div><div class="line"></div><div class="line">FIX：</div><div class="line"><span class="number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java</div><div class="line"></div><div class="line">MODIGNORE:*</div></pre></td></tr></table></figure>
 ]]></content>
       
         <categories>
