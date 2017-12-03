@@ -31,7 +31,7 @@
 </blockquote>
 </li>
 <li>代码：<blockquote>
-<p><code>OPTCODE</code>：Optimized Code：优化代码（通常是优化一小段代码的逻辑<br><code>TOFUNC</code>：Repeated Code Snippet Up To Function：提取方法以代码重用<br><code>AFUNC</code>：Added Function：增加方法<br><code>DELFUNC</code>：Deleted Function：删除方法<br><code>MFUNC</code>：Moved Funtion：移动方法<br><code>RNFUNC</code>：Renamed Function：重命名方法<br><code>OPTFUNC</code>：Optimized Function：优化方法（和OPTCODE相似</p>
+<p><code>OPTCODE</code>：Optimized Code：优化代码（通常是优化一小段代码的逻辑<br><code>TOFUNC</code>：Repeated Code Snippet Up To Function：提取方法以代码重用<br><code>AFUNC</code>：Added Function：增加方法<br><code>DELFUNC</code>：Deleted Function：删除方法<br><code>MFUNC</code>：Moved Funtion：移动方法<br><code>RNFUNC</code>：Renamed Function：重命名方法<br><code>OPTFUNC</code>：Optimized Function：优化方法（和OPTCODE相似<br><code>CGCONT</code>：Changed Content：修改内容（一般不是BUG而是内容不符合业务或者逻辑要求</p>
 </blockquote>
 </li>
 <li>问题：<blockquote>
@@ -61,11 +61,10 @@
 <p><em>我在完成一个新功能的同时还发现了一个BUG顺便封装了之前写的重复的代码为函数提高了代码重用率最后修复了之前发现的一些BUG！</em></p>
 </blockquote>
 <ol>
-<li>第二行得是一个空行</li>
-</ol>
-<p><br></p>
-<ol>
-<li>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：<ul>
+<li><p>第二行得是一个空行</p>
+</li>
+<li><p>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+<ul>
 <li>以工作标识符加冒号占一行。</li>
 <li>如有当前工作有多个要点，必须有序得分条说明。</li>
 <li>每条说明文字必须要指明改动源与改动目的。</li>
