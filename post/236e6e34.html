@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="The pudding knight">
 <meta property="og:description" content="其实必要的时候使用git commit -m &amp;quot;xxxxx&amp;quot;也木有关系 但你也别每条都这样写">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-03T03:20:53.590Z">
+<meta property="og:updated_time" content="2017-12-03T09:23:12.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我认为的规范的git commit msg">
 <meta name="twitter:description" content="其实必要的时候使用git commit -m &amp;quot;xxxxx&amp;quot;也木有关系 但你也别每条都这样写">
@@ -381,20 +381,23 @@
 <p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
 <p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html" target="_blank" rel="external">5 Useful Tips For A Better Commit Message</a></p>
 <p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
-<ol>
-<li><p>第一行使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code> </code>分隔，提示符规定如下（持续补充）：</p>
-<p> 业务型：</p>
+<h3 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h3><p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code> </code>分隔，提示符规定如下（持续补充）：</p>
 <ul>
+<li>业务型：<ul>
 <li>功能：<blockquote>
 <p><code>FEATCPL</code>：Feature Completed：新功能完成<br><code>DELFEAT</code>：Deleted Feature：删除功能<br><code>RNFEAT</code>：Renamed Feature：重命名功能<br><code>MGFEAT</code>：Merged Feature：合并功能<br><code>IMPFEAT</code>：Improved Feature：改进功能（通常是增加新的模块来辅助这个Feature</p>
 </blockquote>
 </li>
-<li><p>模块：</p>
-<blockquote>
+<li>模块：<blockquote>
 <p><code>ADDMODU</code>：Added Module：增加新模块<br><code>DELMODU</code>：Deleted Module：删除模块<br><code>RNMODU</code>：Renamed Module：重命名模块<br><code>MGMODU</code>：Merged Module：合并模块<br><code>IMPMODU</code>：Improved Module：改进模块（通常是优化代码或者方法</p>
 </blockquote>
-<p>事务型：</p>
 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>事务型：<ul>
 <li>版本：<blockquote>
 <p><code>RELEASE</code>：发布一个版本</p>
 </blockquote>
@@ -407,12 +410,16 @@
 <p><code>FIX</code>：Fixed Bug：修复BUG<br><code>RPBUG</code>：Report Bug：通报发现一个BUG并且待解决</p>
 </blockquote>
 </li>
-<li><p>其他：</p>
-<blockquote>
+<li>其他：<blockquote>
 <p><code>MODCONF</code>：Modified Config：修改配置（可以是修改配置文件也可以是修改用于配置的硬代码<br><code>MODDEP</code>：Modified Dependence：更改依赖<br><code>TODO</code>：Added Todo List：添加todo列表</p>
 </blockquote>
-<p>操作型：</p>
 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>操作型：<ul>
 <li>仓库操作：<blockquote>
 <p><code>INIT</code>：Inited Repository：初始化仓库<br><code>AREADME</code>：Added README File：增加readme文件<br><code>AMREADME</code>：Amended README File：修正readme文件<br><code>SUPREADME</code>：Supplemented README File：补充readme文件<br><code>AIGNORE</code>：Added Ignore File：增加Ignore文件<br><code>MODIGNORE</code>：Modified Ignore File：修改Ignore文件</p>
 </blockquote>
@@ -423,16 +430,14 @@
 </li>
 </ul>
 </li>
-</ol>
+</ul>
 <p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX MODIGNORE</div></pre></td></tr></table></figure></p>
 <p>这表示我当次commit完成了：</p>
 <blockquote>
 <p><em>我在完成一个新功能的同时还发现了一个BUG顺便封装了之前写的重复的代码为函数提高了代码重用率最后修复了之前发现的一些BUG！</em></p>
 </blockquote>
-<ol>
-<li><p>第二行得是一个空行</p>
-</li>
-<li><p>第三行开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+<h3 id="第二行"><a href="#第二行" class="headerlink" title="第二行"></a>第二行</h3><p>得是一个空行</p>
+<h3 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h3><p>开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
 <ul>
 <li>以工作标识符加冒号占一行。</li>
 <li>如有当前工作有多个要点，必须有序得分条说明。</li>
@@ -443,8 +448,6 @@
 <li>FIX后面必须加上对应<code>RPBUG</code>的版本号（如果是以前的commit中report的BUG的话，如果是当次commit发现的BUG可以不用写版本号，并且可以不写<code>RPBUG</code>标识符），然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
 <li>如果是一些可以忽略说明的工作，则可以直接在标识符后面加上<code>*</code>，表示忽略说明（如<code>MODIGNORE</code>标识符）。</li>
 </ul>
-</li>
-</ol>
 <p>比如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div></pre></td></tr></table></figure></p>
 <hr>
 <p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
@@ -549,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -668,6 +680,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一行"><span class="nav-number">1.</span> <span class="nav-text">第一行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二行"><span class="nav-number">2.</span> <span class="nav-text">第二行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三行"><span class="nav-number">3.</span> <span class="nav-text">第三行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
