@@ -287,6 +287,7 @@
 </ul>
 <p>还有一些属性包括：缓冲流的设置、文件在linux系统下的组、用户、权限等。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">"MyFile"</span> <span class="attr">fileName</span>=<span class="string">"logs/app.log"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">PatternLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Pattern</span>&gt;</span>%d %p %c&#123;1.&#125; [%t] %m%n<span class="tag">&lt;/<span class="name">Pattern</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">PatternLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">File</span>&gt;</span></div></pre></td></tr></table></figure>
+<hr>
 ]]></content>
       
         <categories>
@@ -294,6 +295,8 @@
             <category> note </category>
             
             <category> toolslearning </category>
+            
+            <category> log4j2 </category>
             
         </categories>
         
@@ -371,6 +374,8 @@
             <category> note </category>
             
             <category> toolslearning </category>
+            
+            <category> log4j2 </category>
             
         </categories>
         
