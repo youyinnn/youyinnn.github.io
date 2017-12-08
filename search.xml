@@ -3,6 +3,65 @@
   
     
     <entry>
+      <title><![CDATA[Log4j2_Layouts]]></title>
+      <url>/post/1ae8a038.html</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>Layout：定制你的输出模式</p>
+</blockquote>
+<a id="more"></a>
+<p><a href="https://logging.apache.org/log4j/2.x/manual/layouts.html" target="_blank" rel="external">Layouts</a>里提到了许多种Layout方式，我最常用的是PatternLayout。</p>
+<h3 id="Pattern-Layout-模式输出"><a href="#Pattern-Layout-模式输出" class="headerlink" title="Pattern Layout 模式输出"></a>Pattern Layout 模式输出</h3><p>是一种通过pattern字符串来配置的灵活的输出方式。</p>
+<p>属性：</p>
+<ul>
+<li>charset：string：所使用的字符集</li>
+<li>pattern：string：定制你的输出模式</li>
+<li>header：string：这是一个可选项，它会包含在每个log文件的开头</li>
+<li>footer：string：这是一个可选项….</li>
+</ul>
+<h4 id="Patterns"><a href="#Patterns" class="headerlink" title="Patterns"></a>Patterns</h4><h5 id="Class模式"><a href="#Class模式" class="headerlink" title="Class模式"></a>Class模式</h5><p><code>c{precision} &amp; logger{precision}</code></p>
+<p>用例：</p>
+<p><img src="http://image.youyinnn.cn/0c7bcdb7e018e47007e1f94164a2b626.png" alt="class pattern"></p>
+<h5 id="Date模式"><a href="#Date模式" class="headerlink" title="Date模式"></a>Date模式</h5><p><code>d{pattern} &amp; date{pattern}</code></p>
+<p>用例：</p>
+<p><img src="http://image.youyinnn.cn/782b42701d03650c07a92766558d225f.png" alt="date pattern"></p>
+<h4 id="Highlight模式"><a href="#Highlight模式" class="headerlink" title="Highlight模式"></a>Highlight模式</h4><p><code>highlight{pattern}{style}</code></p>
+<p>根据log级别，在输出结果中添加ANSI颜色（windows下看原生日志文件会乱码）。</p>
+<p><img src="http://image.youyinnn.cn/43ae856e280857dbecbfd8773a8b5440.png" alt="colors"></p>
+<p>示例：<br><img src="http://image.youyinnn.cn/fe3618ad65fffb43a93363ba1e350475.png" alt="colors exp"></p>
+<h4 id="style模式"><a href="#style模式" class="headerlink" title="style模式"></a>style模式</h4><p><code>style{pattern}{ANSI style}</code></p>
+<p>使用ANSI来定制你的输出语句（windows下看原生日志文件会乱码）。</p>
+<p>ANSI style值：</p>
+<p><img src="http://image.youyinnn.cn/3021a525f35b80dc0642b58c86cf67a0.png" alt="ansi style 1"><br><img src="http://image.youyinnn.cn/061c508fe2b0716c7ce1ba41487d398b.png" alt="ansi style 2"></p>
+<h4 id="Line模式"><a href="#Line模式" class="headerlink" title="Line模式"></a>Line模式</h4><p><code>%L</code>：输出报出issue的logger的行数<br><code>%l</code>：输出更详细的行数信息</p>
+<h4 id="Message信息模式"><a href="#Message信息模式" class="headerlink" title="Message信息模式"></a>Message信息模式</h4><p><code>%msg</code>：输出logger的信息</p>
+<h4 id="Method模式"><a href="#Method模式" class="headerlink" title="Method模式"></a>Method模式</h4><p><code>%M</code>：输出logger所在的方法</p>
+<h4 id="n模式"><a href="#n模式" class="headerlink" title="n模式"></a>n模式</h4><p><code>%n</code>：输出系统支持的行分隔符，比如<code>\n</code>或者<code>\r\n</code></p>
+<h4 id="N模式"><a href="#N模式" class="headerlink" title="N模式"></a>N模式</h4><p><code>%N</code>：输出<code>System.nanoTime()</code></p>
+<h4 id="pid模式"><a href="#pid模式" class="headerlink" title="pid模式"></a>pid模式</h4><p><code>%pid</code>：输出程序的pid</p>
+<h4 id="level模式"><a href="#level模式" class="headerlink" title="level模式"></a>level模式</h4><p><code>p|level{level=label, level=label, ...}</code>：指定每个级别的别名<br><code>p|level{lowerCase=true|false}</code>：指定级别是否小写</p>
+]]></content>
+      
+        <categories>
+            
+            <category> note </category>
+            
+            <category> toolslearning </category>
+            
+            <category> log4j2 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> log4j2 </tag>
+            
+            <tag> learning </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[我认为的规范的git commit msg]]></title>
       <url>/post/236e6e34.html</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系 但你也别每条都这样写</p>
@@ -142,7 +201,7 @@
 <p>但是每次打包都要写这巨长的命令，确实有点麻烦，我们可以使用npm的<code>run-script</code>功能去快速的执行写好的命令：</p>
 <p>npm<code>run-script</code>是默认运行当前目录下<code>package.json</code>文件中script定义好的命令，具体的应用自己去学npm相关知识，我在项目的<code>package.json</code>文件中写好：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"helloworld"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</div><div class="line">  <span class="attr">"main"</span>: <span class="string">"main.js"</span>,</div><div class="line">  <span class="attr">"scripts"</span>:&#123;</div><div class="line">    <span class="attr">"start"</span> : <span class="string">"electron ."</span>,</div><div class="line">    <span class="attr">"pk"</span>: <span class="string">"electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>然后在根目录下运行命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run-script pk</div></pre></td></tr></table></figure></p>
-<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> npm run-script pk</span></div><div class="line"></div><div class="line"><span class="meta">&gt;</span><span class="bash"> helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld</span></div><div class="line"><span class="meta">&gt;</span><span class="bash"> electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9</span></div><div class="line"></div><div class="line">Packaging app for platform win32 x64 using electron v1.7.9</div><div class="line">Wrote new app to outputdir\helloworldappname-win32-x64</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"> ll</span></div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span><span class="bash"></span></div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span> ll</div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span> npm run-script pk</div><div class="line"></div><div class="line"><span class="meta">&gt;</span> helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld</div><div class="line"><span class="meta">&gt;</span> electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9</div><div class="line"></div><div class="line">Packaging app for platform win32 x64 using electron v1.7.9</div><div class="line">Wrote new app to outputdir\helloworldappname-win32-x64</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span> ll</div><div class="line">total 6</div><div class="line">-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html</div><div class="line">-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js</div><div class="line">drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/</div><div class="line">-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json</div><div class="line"></div><div class="line">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld</div><div class="line"><span class="meta">$</span></div></pre></td></tr></table></figure></p>
 <p>然后项目目录下会生成：<br><img src="http://image.youyinnn.cn/ba4fa76eb64909e4d4959799cf130547.png" alt="electronpk"></p>
 <p>运行exe：<br><img src="http://image.youyinnn.cn/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
 <hr>
