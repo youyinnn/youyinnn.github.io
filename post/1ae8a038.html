@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://image.youyinnn.cn/fe3618ad65fffb43a93363ba1e350475.png">
 <meta property="og:image" content="http://image.youyinnn.cn/3021a525f35b80dc0642b58c86cf67a0.png">
 <meta property="og:image" content="http://image.youyinnn.cn/061c508fe2b0716c7ce1ba41487d398b.png">
-<meta property="og:updated_time" content="2017-12-08T10:35:04.120Z">
+<meta property="og:updated_time" content="2017-12-08T10:48:16.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log4j2_Layouts">
 <meta name="twitter:description" content="Layout：定制你的输出模式">
@@ -417,18 +417,19 @@
 </ul>
 <h4 id="Patterns"><a href="#Patterns" class="headerlink" title="Patterns"></a>Patterns</h4><h5 id="Class模式"><a href="#Class模式" class="headerlink" title="Class模式"></a>Class模式</h5><p><code>c{precision} &amp; logger{precision}</code></p>
 <p>用例：</p>
-<p><img src="http://image.youyinnn.cn/0c7bcdb7e018e47007e1f94164a2b626.png" alt="class pattern"></p>
+<p><img src="http://image.youyinnn.cn/0c7bcdb7e018e47007e1f94164a2b626.png" class="full-image"></p>
 <h5 id="Date模式"><a href="#Date模式" class="headerlink" title="Date模式"></a>Date模式</h5><p><code>d{pattern} &amp; date{pattern}</code></p>
 <p>用例：</p>
-<p><img src="http://image.youyinnn.cn/782b42701d03650c07a92766558d225f.png" alt="date pattern"></p>
+<p><img src="http://image.youyinnn.cn/782b42701d03650c07a92766558d225f.png" class="full-image"></p>
 <h4 id="Highlight模式"><a href="#Highlight模式" class="headerlink" title="Highlight模式"></a>Highlight模式</h4><p><code>highlight{pattern}{style}</code></p>
 <p>根据log级别，在输出结果中添加ANSI颜色（windows下看原生日志文件会乱码）。</p>
-<p><img src="http://image.youyinnn.cn/43ae856e280857dbecbfd8773a8b5440.png" alt="colors"></p>
-<p>示例：<br><img src="http://image.youyinnn.cn/fe3618ad65fffb43a93363ba1e350475.png" alt="colors exp"></p>
+<p><img src="http://image.youyinnn.cn/43ae856e280857dbecbfd8773a8b5440.png" class="full-image"></p>
+<p>示例：</p>
+<p><img src="http://image.youyinnn.cn/fe3618ad65fffb43a93363ba1e350475.png" class="full-image"></p>
 <h4 id="style模式"><a href="#style模式" class="headerlink" title="style模式"></a>style模式</h4><p><code>style{pattern}{ANSI style}</code></p>
 <p>使用ANSI来定制你的输出语句（windows下看原生日志文件会乱码）。</p>
 <p>ANSI style值：</p>
-<p><img src="http://image.youyinnn.cn/3021a525f35b80dc0642b58c86cf67a0.png" alt="ansi style 1"><br><img src="http://image.youyinnn.cn/061c508fe2b0716c7ce1ba41487d398b.png" alt="ansi style 2"></p>
+<p><img src="http://image.youyinnn.cn/3021a525f35b80dc0642b58c86cf67a0.png" class="full-image"><br><img src="http://image.youyinnn.cn/061c508fe2b0716c7ce1ba41487d398b.png" class="full-image"></p>
 <h4 id="Line模式"><a href="#Line模式" class="headerlink" title="Line模式"></a>Line模式</h4><p><code>%L</code>：输出报出issue的logger的行数<br><code>%l</code>：输出更详细的行数信息</p>
 <h4 id="Message信息模式"><a href="#Message信息模式" class="headerlink" title="Message信息模式"></a>Message信息模式</h4><p><code>%msg</code>：输出logger的信息</p>
 <h4 id="Method模式"><a href="#Method模式" class="headerlink" title="Method模式"></a>Method模式</h4><p><code>%M</code>：输出logger所在的方法</p>
