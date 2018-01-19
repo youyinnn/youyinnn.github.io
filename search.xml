@@ -757,56 +757,44 @@
 <p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html" target="_blank" rel="external">5 Useful Tips For A Better Commit Message</a></p>
 <p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
 <h3 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h3><p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code> </code>分隔，提示符规定如下（持续补充）：</p>
+<p>我把一次工作的标识符分“动作”、“对象”两部分描述：</p>
 <ul>
-<li>业务型：<ul>
-<li>功能：<blockquote>
-<p><code>FEATCPL</code>：Feature Completed：新功能完成<br><code>DELFEAT</code>：Deleted Feature：删除功能<br><code>RNFEAT</code>：Renamed Feature：重命名功能<br><code>MGFEAT</code>：Merged Feature：合并功能<br><code>IMPFEAT</code>：Improved Feature：改进功能（通常是增加新的模块来辅助这个Feature<br><code>CGFEAT</code>：Changed Feature：修改功能（通常是业务需求发生变化</p>
+<li><p>可能的动作前缀有：</p>
+<ul>
+<li><p>基本操作前缀：</p>
+<blockquote>
+<p><code>ADD</code>：Add 增加<br><code>DEL</code>：Delete 删除<br><code>IMP</code>：Improve 改进<br><code>MG</code>：Merge 合并<br><code>MOD</code>：Modifie 修改<br><code>CPL</code>：Complete 完成</p>
 </blockquote>
 </li>
-<li>模块：<blockquote>
-<p><code>ADDMODU</code>：Added Module：增加新模块<br><code>DELMODU</code>：Deleted Module：删除模块<br><code>RNMODU</code>：Renamed Module：重命名模块<br><code>MGMODU</code>：Merged Module：合并模块<br><code>IMPMODU</code>：Improved Module：改进模块（通常是优化代码或者方法<br><code>CGMODU</code>：Changed Module：修改模块（通常是修改实现方式</p>
+<li><p>其他操作前缀：</p>
+<blockquote>
+<p><code>RN</code>：Rename 重命名<br><code>MOV</code>：Move 移动<br><code>CRE</code>：Create 创造<br><code>AMD</code>：Amend 修正<br><code>SUP</code>：Supplement 补充<br><code>RM</code>：Remove 移除</p>
+</blockquote>
+</li>
+<li><p>独立动作：</p>
+<blockquote>
+<p><code>INIT</code>：Initialized Repository 初始化仓库<br><code>RELEASE</code>：Release a Version 发布一个版本<br><code>TODO</code>：Todo List 增加TODO<br><code>TOFUNC</code>：提取重复代码为方法增加代码重用<br><code>FIXBUG</code>：Fix Bug 修复BUG<br><code>RPBUG</code>：Report Bug 通报BUG</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>可能的对象有：</p>
+<ul>
+<li><p>业务之内的对象：</p>
+<blockquote>
+<p><code>FEAT</code>：Feature 某个功能<br><code>MODU</code>：Module 某个模块<br><code>FUNC</code>：Function 某个函数<br><code>CODE</code>：Code 某段代码<br><code>CONT</code>：Content 某种内容</p>
+</blockquote>
+</li>
+<li><p>业务之外的对象：</p>
+<blockquote>
+<p><code>CONF</code>：Config 配置文件<br><code>DEP</code>：Dependences 依赖配置<br><code>README</code>：Readme文件<br><code>IGNORE</code>：gitignore文件<br><code>FILE</code>：File<br><code>STRUCT</code>：Project Structure 项目结构</p>
 </blockquote>
 </li>
 </ul>
 </li>
 </ul>
 <hr>
-<ul>
-<li>事务型：<ul>
-<li>版本：<blockquote>
-<p><code>RELEASE</code>：发布一个版本</p>
-</blockquote>
-</li>
-<li>代码：<blockquote>
-<p><code>OPTCODE</code>：Optimized Code：优化代码（通常是优化一小段代码的逻辑<br><code>TOFUNC</code>：Repeated Code Snippet Up To Function：提取方法以代码重用<br><code>AFUNC</code>：Added Function：增加方法<br><code>DELFUNC</code>：Deleted Function：删除方法<br><code>MFUNC</code>：Moved Funtion：移动方法<br><code>RNFUNC</code>：Renamed Function：重命名方法<br><code>OPTFUNC</code>：Optimized Function：优化方法（和OPTCODE相似<br><code>CGFUNC</code>：Changed Function：修改方法（修改实现方式<br><code>CGCONT</code>：Changed Content：修改内容（一般不是BUG而是内容不符合业务或者逻辑要求</p>
-</blockquote>
-</li>
-<li>问题：<blockquote>
-<p><code>FIX</code>：Fixed Bug：修复BUG<br><code>RPBUG</code>：Report Bug：通报发现一个BUG并且待解决</p>
-</blockquote>
-</li>
-<li>其他：<blockquote>
-<p><code>MODCONF</code>：Modified Config：修改配置（可以是修改配置文件也可以是修改用于配置的硬代码<br><code>MODDEP</code>：Modified Dependence：更改依赖<br><code>TODO</code>：Added Todo List：添加todo列表</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>操作型：<ul>
-<li>仓库操作：<blockquote>
-<p><code>INIT</code>：Inited Repository：初始化仓库<br><code>AREADME</code>：Added README File：增加readme文件<br><code>AMREADME</code>：Amended README File：修正readme文件<br><code>SUPREADME</code>：Supplemented README File：补充readme文件<br><code>AIGNORE</code>：Added Ignore File：增加Ignore文件<br><code>MODIGNORE</code>：Modified Ignore File：修改Ignore文件</p>
-</blockquote>
-</li>
-<li>文件操作：<blockquote>
-<p><code>MFILE</code>：Moved File：移动文件<br><code>CFILE</code>：Created File：创建文件<br><code>RMFILE</code>：Removed File：移除文件<br><code>RNFILE</code>：Renamed File：重命名文件<br><code>CGSTRUCT</code>：Changed Project Structure：变更项目结构</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX MODIGNORE</div></pre></td></tr></table></figure></p>
+<p>所以我commit的第一行会是这样的：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE</div></pre></td></tr></table></figure></p>
 <p>这表示我当次commit完成了：</p>
 <blockquote>
 <p><em>我在完成一个<code>新功能</code>的同时还<code>发现了一个BUG</code>顺便<code>封装了之前写的重复的代码为函数</code>提高了代码重用率接着<code>修复了之前发现的一些BUG</code>最后还<code>修改了一下Ingore文件</code>！</em></p>
@@ -826,7 +814,7 @@
 <p>比如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div></pre></td></tr></table></figure></p>
 <hr>
 <p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">FEATCPL RPBUG TOFUNC FIX MODIGNORE</div><div class="line"></div><div class="line">FEATCPL:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div><div class="line"></div><div class="line">REBUG:</div><div class="line"><span class="number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="number">39</span>)</div><div class="line"></div><div class="line">TOFUNC:</div><div class="line"><span class="number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="number">46</span>-<span class="number">68</span>) LoginService.java(<span class="number">35</span>-<span class="number">57</span>)</div><div class="line"></div><div class="line">FIX：</div><div class="line"><span class="number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java</div><div class="line"></div><div class="line">MODIGNORE:*</div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE</div><div class="line"></div><div class="line">CPLFEAT:</div><div class="line"><span class="number">1</span>.初步完成了用户登陆功能 //LoginService.java</div><div class="line"><span class="number">2</span>.初步完成了用户注册功能 //SignupService.java</div><div class="line"></div><div class="line">REBUG:</div><div class="line"><span class="number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="number">39</span>)</div><div class="line"></div><div class="line">TOFUNC:</div><div class="line"><span class="number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="number">46</span>-<span class="number">68</span>) LoginService.java(<span class="number">35</span>-<span class="number">57</span>)</div><div class="line"></div><div class="line">FIXBUG：</div><div class="line"><span class="number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java</div><div class="line"></div><div class="line">MODIGNORE:*</div></pre></td></tr></table></figure>
 ]]></content>
       
         <categories>
