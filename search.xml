@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[CentOS7下安装Pillow并使用osm-bundler生成图点模型]]></title>
       <url>/post/2f341c62.html</url>
-      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>前言：之前留下的17大创项目总得做点什么，马上就要结题了，我们做的AR留影需要将用户照下来的照片生成点云然后合成模型。由此Peelson[link:gayhub]找到了使用PIL+osm-bundler的解决方案。</p>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>前言：之前留下的17大创项目总得做点什么，马上就要结题了，我们做的AR留影需要将用户照下来的照片生成点云然后合成模型。由此Escnqh[link:gayhub]找到了使用PIL+osm-bundler的解决方案。</p>
 </blockquote>
 <a id="more"></a>
 <h3 id="Python-Photogrammetry-ToolKit（PPT）"><a href="#Python-Photogrammetry-ToolKit（PPT）" class="headerlink" title="Python Photogrammetry ToolKit（PPT）"></a>Python Photogrammetry ToolKit（PPT）</h3><p>这玩意是意大利的一个团队开发的一个Python图像处理工具包，正是这个工具包提供的osm-bundler加上PIL构成了一套解决方案。</p>
@@ -69,7 +69,7 @@
 <p>会安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@VM_16_214_centos linux]<span class="comment"># yum install lapack</span></div><div class="line">Loaded plugins: fastestmirror, langpacks</div><div class="line">Repository epel is listed more than once <span class="keyword">in</span> the configuration</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line">Package lapack-3.4.2-8.el7.x86_64 already installed and latest version</div><div class="line">Nothing to <span class="keyword">do</span></div><div class="line">[root@VM_16_214_centos linux]<span class="comment">#</span></div></pre></td></tr></table></figure></p>
 <p>它提供了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/usr/lib64/liblapack.so.3</div><div class="line">/usr/lib64/liblapack.so.3.4</div><div class="line">/usr/lib64/liblapack.so.3.4.2</div><div class="line">/usr/lib64/liblapacke.so.3</div><div class="line">/usr/lib64/liblapacke.so.3.4</div><div class="line">/usr/lib64/liblapacke.so.3.4.2</div></pre></td></tr></table></figure>
-<p>然后安装liblapack3gf，这里巨坑的是，liblapack3gf只有Debian系统有，连rpm都没有，开始是想把de<br>文件转成rpm文件的，后来Peelson输入了一行玄学指令：</p>
+<p>然后安装liblapack3gf，这里巨坑的是，liblapack3gf只有Debian系统有，连rpm都没有，开始是想把de<br>文件转成rpm文件的，后来Escnqh输入了一行玄学指令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln -s /usr/lib64/liblapack.so.3 /usr/lib64/liblapack.so.3gf</div></pre></td></tr></table></figure>
 <p>直接用liblapack.so.3伪装成liblapack.so.3gf（- -）…</p>
 <p>最后liblapack-dev我反正没安装，后面好像也能跑出模型- -</p>
