@@ -83,7 +83,7 @@
             
             <category> project </category>
             
-            <category> 18y-CollagesStudent-Creative-Project </category>
+            <category> 17y-CollagesStudent-Creative-Project </category>
             
         </categories>
         
@@ -884,7 +884,7 @@
 <ul>
 <li><p>业务之内的对象：</p>
 <blockquote>
-<p><code>FEAT</code>：Feature 某个功能<br><code>MODU</code>：Module 某个模块<br><code>FUNC</code>：Function 某个函数<br><code>CODE</code>：Code 某段代码<br><code>CONT</code>：Content 某种内容</p>
+<p><code>FEAT</code>：Feature 某个功能<br><code>MODU</code>：Module 某个模块<br><code>FUNC</code>：Function 某个函数<br><code>CODE</code>：Code 某段代码<br><code>CONT</code>：Content 某种内容<br><code>ANNO</code>：Annotation 某些注释</p>
 </blockquote>
 </li>
 <li><p>业务之外的对象：</p>
