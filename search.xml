@@ -875,7 +875,7 @@
 </li>
 <li><p>独立动作：</p>
 <blockquote>
-<p><code>INIT</code>：Initialized Repository 初始化仓库<br><code>RELEASE</code>：Release a Version 发布一个版本<br><code>TODO</code>：Todo List 增加TODO<br><code>TOFUNC</code>：提取重复代码为方法增加代码重用<br><code>FIXBUG</code>：Fix Bug 修复BUG<br><code>RPBUG</code>：Report Bug 通报BUG</p>
+<p><code>INIT</code>：Initialized Repository 初始化仓库<br><code>RELEASE</code>：Release a Version 发布一个版本<br><code>TODO</code>：Todo List 增加TODO<br><code>TOFUNC</code>：提取重复代码为方法增加代码重用<br><code>FIXBUG</code>：Fix Bug 修复BUG<br><code>RPBUG</code>：Report Bug 通报BUG<br><code>SAYING</code>：Saying 有话要说</p>
 </blockquote>
 </li>
 </ul>
