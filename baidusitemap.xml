@@ -4,32 +4,8 @@
 
     
   <url>
-    <loc>https://youyinnn.top/post/236e6e34.html</loc>
-    <lastmod>2018-01-25T16:21:11.478Z</lastmod>
-    <data>
-        <display>
-        <title>我认为的规范的git commit msg[置顶]</title>
-        <pubTime>2017-11-29T10:30:01.000Z</pubTime>
-        
-        <tag>tips</tag>
-         
-        <tag>github</tag>
-         
-        <tag>git</tag>
-         
-         
-           
-             
-              <breadCrumb title="thinking" url="https://youyinnn.top/categories/thinking/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://youyinnn.top/post/2f341c62.html</loc>
-    <lastmod>2018-01-24T03:42:51.253Z</lastmod>
+    <lastmod>2018-01-27T13:29:35.982Z</lastmod>
     <data>
         <display>
         <title>CentOS7下安装Pillow并使用osm-bundler生成图点模型</title>
@@ -55,6 +31,30 @@
           
              
               <breadCrumb title="17y-CollagesStudent-Creative-Project" url="https://youyinnn.top/categories/note/project/17y-CollagesStudent-Creative-Project/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://youyinnn.top/post/236e6e34.html</loc>
+    <lastmod>2018-01-27T13:28:14.799Z</lastmod>
+    <data>
+        <display>
+        <title>我认为的规范的git commit msg[置顶]</title>
+        <pubTime>2017-11-29T10:30:01.000Z</pubTime>
+        
+        <tag>tips</tag>
+         
+        <tag>github</tag>
+         
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="thinking" url="https://youyinnn.top/categories/thinking/"/>
           
         </display>
     </data>
