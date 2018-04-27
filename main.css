@@ -1,0 +1,38 @@
+#topbar{
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  top: 0%;
+  background-color: #24292e;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.ah{
+  color: aliceblue;
+}
+
+.ah:hover{
+  color: rgb(166, 171, 175);
+}
+
+.ah:active{
+  color: rgb(166, 171, 175);
+}
+
+#reader{
+  padding: 1rem;
+}
+
+#notice{
+  text-align: center;
+}
+
+.hide{
+  opacity: 0;
+  display: none;
+}
+
+.show{
+  opacity: 1;
+}

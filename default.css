@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;
+  transition: all .3s;
+}
+body {
+  overflow: hidden;
+  /* 
+        开启硬件加速 解决动画卡顿 
+        但是会影响部分部件的缩放
+    */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/*
+      通过after伪类选中box1的后面
+      而且这样不会在页面中添加多余的div
+      几乎没有副作用 只是IE6不支持
+    */
+
+.clearfix::after {
+  /*添加空白内容*/
+  content: "";
+  /*转换为块元素*/
+  display: block;
+  /*清除浮动*/
+  clear: both;
+}
+
+/* 禁止选中并且兼容 */
+
+*.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
