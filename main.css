@@ -1,3 +1,22 @@
+#topbar {
+  position: relative;
+  height: 3rem;
+  width: 100%;
+  top: 0%;
+  background-color: #24292e;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+#docpanel{
+  position: relative;
+  margin: 0 auto;
+  top: 2rem;
+  width: 90%;
+  height: 42rem;
+  background-color: #24292ecc;
+}
+
 .ah{
   color: aliceblue;
 }
