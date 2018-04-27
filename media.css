@@ -1,0 +1,23 @@
+@media screen and (max-width: 1500px) {
+  #topbar {
+    position: relative;
+    width: 100%;
+    height: 3rem;
+    top: 0%;
+    background-color: #24292e;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  #topbar {
+    position: relative;
+    width: 100%;
+    height: 6rem;
+    top: 0%;
+    background-color: #24292e;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+}
