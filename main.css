@@ -14,7 +14,42 @@
   top: 2rem;
   width: 90%;
   height: 42rem;
+  overflow: auto;
+  border: black 1px solid;
+}
+
+.post{
+  text-align: center;
+  color: aliceblue;
+  margin: 0.5rem 0;
   background-color: #24292ecc;
+  border-radius: 1rem;
+}
+
+.post:hover{
+  background-color: #3e444bcc;
+}
+
+.post:active{
+  transform: translateY(0.3rem);
+}
+
+.posttitle{
+  text-align: center;
+}
+
+.posttitle div{
+  font-size: 1.3rem;
+}
+
+.post span{
+  margin: 0 0.5rem;
+}
+
+.postline{
+  margin: 0 auto;
+  border: 0.046rem aliceblue solid;
+  width: 80%;
 }
 
 .ah{
@@ -23,6 +58,7 @@
 
 .ah:hover{
   color: rgb(166, 171, 175);
+  transform: translateY(10px);
 }
 
 .ah:active{

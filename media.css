@@ -5,4 +5,7 @@
   #docpanel{
     height: 30rem;
   }
+  .post span{
+    display: inline-block;
+  }
 }
