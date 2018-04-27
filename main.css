@@ -19,23 +19,22 @@
 }
 
 .post{
+  background-color: #24292e;
   text-align: center;
   color: aliceblue;
   margin: 0.5rem 0;
-  background-color: #24292ecc;
   border-radius: 1rem;
 }
 
 .post:hover{
-  background-color: #3e444bcc;
+  background-color: #3e444b;
 }
-
 .post:active{
-  transform: translateY(0.3rem);
+  transform: translateY(0.2rem);
 }
 
 .posttitle{
-  text-align: center;
+
 }
 
 .posttitle div{
@@ -58,7 +57,6 @@
 
 .ah:hover{
   color: rgb(166, 171, 175);
-  transform: translateY(10px);
 }
 
 .ah:active{
