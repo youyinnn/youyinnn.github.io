@@ -1,0 +1,100 @@
+#topbar {
+  position: relative;
+  height: 3rem;
+  width: 100%;
+  top: 0%;
+  background-color: #24292e;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+#docpanel{
+  position: relative;
+  margin: 0 auto;
+  height: 43rem;
+  overflow: auto;
+}
+
+.post{
+  text-align: center;
+  color: rgb(83, 87, 90);
+  margin: 4rem auto;
+  border-radius: 1rem;
+  transition: all .6s ease-in-out;
+}
+
+.posttitle{
+  text-decoration: none;
+  transition: all .2s;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+.posttitle:active{
+  transform: translateY(0.2rem);
+}
+
+.center-to-head{
+  position:relative;
+}
+.center-to-head::after{
+  left: 50%;
+  content:'';
+  display:block;
+  /*开始时候下划线的宽度为100%*/
+  width:30%;
+  height:2px;
+  position:absolute;
+  background: rgb(83, 87, 90);
+  transition:all 0.4s ease-in-out;
+  /*通过transform的缩放scale来让初始时x轴为0*/
+  transform: scale3d(0,1,1) translateX(-50%);
+  /*将坐标原点移到元素的中间，以原点为中心进行缩放*/
+  transform-origin:50% 0;
+}
+.center-to-head:hover::after{
+  /*鼠标经过时还原到正常比例*/
+  transform:scale3d(1,1,1) translateX(-50%);
+}
+
+.post span{
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.postline{
+  margin: 0 auto;
+  border: 0.046rem aliceblue solid;
+  width: 80%;
+}
+
+.ah{
+  color: aliceblue;
+}
+
+.ah:hover{
+  color: rgb(166, 171, 175);
+}
+
+.ah:active{
+  color: rgb(166, 171, 175);
+}
+
+#reader{
+  padding: 1rem;
+}
+
+#notice{
+  text-align: center;
+}
+
+.hide{
+  opacity: 0;
+}
+
+.show{
+  opacity: 1;
+}
+
+.remove{
+  display: none;
+}

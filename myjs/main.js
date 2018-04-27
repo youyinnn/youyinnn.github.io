@@ -1,0 +1,1 @@
+var mainpanel = $('#docpanel')[0]
