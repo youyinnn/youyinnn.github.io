@@ -86,6 +86,6 @@ function get_post(number, func) {
 }
 
 function oauth_app() {
-  let url = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri
+  let url = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&scope=public_repo'
   sendget(url)
 }
