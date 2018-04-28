@@ -20,16 +20,18 @@ $(function () {
           removeClass(md, 'hide')
           addClass(md, 'show')
           let text = re.body
-          $('#md')[0].innerHTML = text
+          // text = text.replace(/\r\n/g, '\\r\\n')
+          text = text.replace(/"/g, '\\"')
+          text = text.replace(/'/g, '\'')
           editormd.markdownToHTML("md", {
-            htmlDecode: "style,script,iframe", // you can filter tags decode
-            emoji: true,
+            markdown: text,
+            htmlDecode: "style,script,iframe|on",
+            tocm: true, // Using [TOCM]
+            tocContainer: "#sidetoc",
             taskList: true,
-            tex: true, // 默认不解析
-            flowChart: true, // 默认不解析
-            sequenceDiagram: true, // 默认不解析
+            readOnly: true,
+            codeFold: true,
           });
-
         })
       }
     }

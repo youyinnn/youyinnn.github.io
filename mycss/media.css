@@ -7,5 +7,9 @@
   }
   #md{
     top:6rem;
+    width: 100%;
+  }
+  #sidetoc{
+    display: none;
   }
 }
