@@ -5,7 +5,7 @@ var about_label = 'yabout'
 var friend_link_label = 'yfirendlink'
 var script_label = 'yscript'
 var url = 'https://api.github.com'
-var oauth_token = '2465de3334d0c5e4e66a76043190fd57d4b016a3.333999'
+var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var all
 
 function getset(url) {
@@ -15,7 +15,7 @@ function getset(url) {
     'method': 'GET',
     'url': url,
     'headers': {
-      'Authorization': 'Bearer ' + oauth_token.split('.')[0],
+      'Authorization': 'Bearer ' + base64decode(oauth_token_base64)
     },
     'processData': false,
     'contentType': false,
@@ -30,7 +30,7 @@ function postset(url, form) {
     'method': 'POST',
     'url': url,
     'headers': {
-      'Authorization': 'Bearer ' + oauth_token.split('.')[0],
+      'Authorization': 'Bearer ' + base64decode(oauth_token_base64)
     },
     'mimeType': 'multipart/form-data',
     'data': form,
