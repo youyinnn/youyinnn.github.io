@@ -23,7 +23,6 @@
   right: 0;
   transition: all .5s;
   overflow: auto;
-  z-index: 15;
 }
 #md{
   position: absolute;
@@ -103,10 +102,12 @@
 
 .hide{
   opacity: 0;
+  z-index: 0;
 }
 
 .show{
   opacity: 1;
+  z-index: 100;
 }
 
 .remove{

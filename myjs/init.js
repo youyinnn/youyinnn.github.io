@@ -19,6 +19,9 @@ $(function () {
           let md = $('#md')[0]
           removeClass(md, 'hide')
           addClass(md, 'show')
+          let sidetoc = $('#sidetoc')[0]
+          removeClass(sidetoc, 'hide')
+          addClass(sidetoc, 'show')
           let text = re.body
           // text = text.replace(/\r\n/g, '\\r\\n')
           text = text.replace(/"/g, '\\"')
