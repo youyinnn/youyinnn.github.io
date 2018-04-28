@@ -23,7 +23,13 @@ $(function () {
           removeClass(sidetoc, 'hide')
           addClass(sidetoc, 'show')
           let text = re.body
-          // text = text.replace(/\r\n/g, '\\r\\n')
+          if (text.substring(0, 3) === '---') {
+            let endindex = text.indexOf('---', 3)+3
+            let hexo_metadata = text.substring(0, endindex)
+            console.log(hexo_metadata)
+            showhexometadata(hexo_metadata)
+            text = text.substring(endindex, text.length)
+          }
           text = text.replace(/"/g, '\\"')
           text = text.replace(/'/g, '\'')
           editormd.markdownToHTML("md", {

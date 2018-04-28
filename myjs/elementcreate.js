@@ -28,3 +28,7 @@ function createpostcard(item) {
     location = location.href + '?post=25'
   })
 }
+
+function showhexometadata(hexometadata) {
+  
+}
