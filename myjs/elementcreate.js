@@ -25,7 +25,7 @@ function createpostcard(item) {
   appendC(post, posttime)
   appendC($('#docpanel')[0], post)
   $(posttitle).bind('click', function () {
-    location = location.href + '?post=25'
+    location = location.href + '?post=' + posttitle.number
   })
 }
 
