@@ -28,6 +28,7 @@
   transition: all .2s;
   font-weight: 500;
   font-size: 1.3rem;
+  display: inline-block;
 }
 .posttitle:active{
   transform: translateY(0.2rem);
