@@ -11,8 +11,14 @@
 #docpanel{
   position: relative;
   margin: 0 auto;
-  height: 43rem;
+  height: 46rem;
   overflow: auto;
+}
+
+#md{
+  position: absolute;
+  top:3rem;
+  padding: 1rem 2rem;
 }
 
 .post{
@@ -60,12 +66,7 @@
 .post span{
   margin: 0 0.5rem;
   font-size: 0.9rem;
-}
-
-.postline{
-  margin: 0 auto;
-  border: 0.046rem aliceblue solid;
-  width: 80%;
+  display: inline-block;
 }
 
 .ah{
