@@ -92,3 +92,7 @@ function get_about() {
     render_md(re.items[0].body)
   })
 }
+
+function get_friendlinked() {
+  
+}

@@ -5,4 +5,7 @@ $(function () {
   $('#aboutbut').bind('click', function () {
     location = '/' + '?panel=about'
   })
+  $('#friendlinkbut').bind('click', function () {
+    location = '/' + '?panel=friendlinked'
+  })
 })

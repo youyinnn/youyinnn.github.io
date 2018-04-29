@@ -1,4 +1,7 @@
 $(function () {
+  // let body = $('body')[0]
+  // body.style.height = getWindowH() + 'px'
+  // body.style.width = getClientW() + 'px'
   let search = location.search
   if (search === '') {
     get_posts()
@@ -14,6 +17,8 @@ $(function () {
       })
     } else if (key === 'panel' && value === 'about') {
       get_about()
+    } else if (key === 'panel' && value === 'friendlinked') {
+      get_friendlinked()
     }
   }
 })
