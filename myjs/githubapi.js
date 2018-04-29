@@ -2,7 +2,7 @@ var user = 'youyinnn'
 var blog_repo = user + '.github.io'
 var post_label = 'ypost'
 var about_label = 'yabout'
-var friend_linked_label = 'yfirendlinked'
+var friend_linked_label = 'yfriendlinked'
 var script_label = 'yscript'
 var todo_label = 'ytodo'
 var url = 'https://api.github.com'
@@ -17,7 +17,7 @@ function getset(url) {
     'method': 'GET',
     'url': url,
     'headers': {
-      'Authorization': 'Bearer ' + oauth_token
+      'Authorization': 'Bearer ' + oauth_token,
     },
     'processData': false,
     'contentType': false,
@@ -32,7 +32,7 @@ function postset(url, form) {
     'method': 'POST',
     'url': url,
     'headers': {
-      'Authorization': 'Bearer ' + oauth_token
+      'Authorization': 'Bearer ' + oauth_token,
     },
     'mimeType': 'multipart/form-data',
     'data': form,
@@ -69,7 +69,6 @@ function get_posts() {
     for (let i = 0; i < re.items.length; ++i) {
       createpostcard(re.items[i], i)
     }
-    let docpanel = $('#docpanel')[0]
     let posts = $('.post')
     for (let i = 0; i < posts.length; ++i) {
       let post = posts[i]
@@ -78,7 +77,7 @@ function get_posts() {
     }
     removeClass(docpanel, 'hide')
     addClass(docpanel, 'show')
-    pagehandler(posts[0], $('#docpanel')[0], posts.length)
+    pagehandler(posts[0], docpanel, posts.length)
     hideloading()
   })
 }
@@ -96,5 +95,9 @@ function get_about() {
 }
 
 function get_friendlinked() {
-  
+  search_issues_by_label(friend_linked_label, function (re) {
+    render_md(re.items[0].body)
+    hidesidetoc()
+    hideloading()
+  })
 }

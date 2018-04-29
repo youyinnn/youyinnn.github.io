@@ -1,6 +1,8 @@
 var docpanel = $('#docpanel')[0]
 var md = $('#md')[0]
 var toc = $('#sidetoc')[0]
+var loading = $('#loading')[0]
+var homepage = $('#homepage')[0]
 
 $(function () {
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
@@ -10,7 +12,6 @@ $(function () {
   let search = location.search
   if (search === '') {
     hideloading()
-    let homepage = $('#homepage')[0]
     removeClass(homepage, 'remove')
     addClass(homepage, 'show')
   } else {

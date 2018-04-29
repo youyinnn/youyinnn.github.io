@@ -23,7 +23,7 @@ function createpostcard(item) {
   appendC(posttime, sp3)
   appendC(posttime, sp4)
   appendC(post, posttime)
-  appendC($('#docpanel')[0], post)
+  appendC(docpanel, post)
   $(posttitle).bind('click', function () {
     location = '/' + '?panel=post&number=' + posttitle.number
   })
@@ -40,12 +40,12 @@ function showhexometadata(hexometadata) {
   appendC($(metadatapanel)[0], metadatapanelhead)
   metadatapanelbody.innerHTML += hexometadata
   appendC($(metadatapanel)[0], metadatapanelbody)
-  appendC($('#md')[0], metadatapanel)
+  appendC(md, metadatapanel)
 }
 
 function showsaying(saying) {
   let sayingpanel = document.createElement('div')
   addClass(sayingpanel, 'saying')
   sayingpanel.innerHTML = saying
-  appendC($('#md')[0], sayingpanel)
+  appendC(md, sayingpanel)
 }

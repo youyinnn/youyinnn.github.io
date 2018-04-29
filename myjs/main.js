@@ -9,12 +9,10 @@ $(function () {
 })
 
 function render_md(text) {
-  let md = $('#md')[0]
   removeClass(md, 'hide')
   addClass(md, 'show')
-  let sidetoc = $('#sidetoc')[0]
-  removeClass(sidetoc, 'hide')
-  addClass(sidetoc, 'show')
+  removeClass(toc, 'hide')
+  addClass(toc, 'show')
   if (text.substring(0, 3) === '---') {
     let endindex = text.indexOf('---', 3) + 3
     let hexo_metadata = text.substring(4, endindex - 3)
@@ -56,14 +54,18 @@ function pagehandler(item, box, itemslength) {
 }
 
 function hideloading() {
-  let loading = $('#loading')[0]
   removeClass(loading, 'show')
   addClass(loading, 'hide')
   addClass(loading, 'remove')
 }
 
 function showloading() {
-  let loading = $('#loading')[0]
   removeClass(loading, 'remove')
   addClass(loading, 'show')
+}
+
+function hidesidetoc() {
+  let sidetoc = toc
+  addClass(sidetoc, 'remove')
+  addClass(md, 'w-100')
 }
