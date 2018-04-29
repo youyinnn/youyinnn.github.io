@@ -49,3 +49,9 @@ function showsaying(saying) {
   sayingpanel.innerHTML = saying
   appendC(md, sayingpanel)
 }
+
+function friendcard(friend) {
+  let friendmsg = friend.substring(2,friend.length - 1).split('-')
+  let htmltext = '<div class="friendcard card"><div class="card-header bg-dark" style="color:white;">' + friendmsg[0] + '</div><div class="card-body"><blockquote class="blockquote mb-0"><p>' + friendmsg[1] + '</p></blockquote></div></div>'
+  return htmltext
+}

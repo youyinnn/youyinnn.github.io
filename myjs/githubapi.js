@@ -5,7 +5,7 @@ var about_label = 'yabout'
 var friend_linked_label = 'yfriendlinked'
 var script_label = 'yscript'
 var todo_label = 'ytodo'
-var url = 'https://api.github.com'
+var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
 var all
@@ -60,7 +60,7 @@ function sendpost(url, form, func) {
 }
 
 function search_issues_by_label(label, func) {
-  let url = window.url + '/search/issues?q=+state:open+author:' + user + '+label:' + label
+  let url = api_url + '/search/issues?q=+state:open+author:' + user + '+label:' + label
   sendget(url, func)
 }
 
@@ -83,7 +83,7 @@ function get_posts() {
 }
 
 function get_post(number, func) {
-  let url = window.url + '/repos/' + user + '/' + blog_repo + '/issues/' + number
+  let url = api_url + '/repos/' + user + '/' + blog_repo + '/issues/' + number
   sendget(url, func)
 }
 
@@ -96,7 +96,16 @@ function get_about() {
 
 function get_friendlinked() {
   search_issues_by_label(friend_linked_label, function (re) {
-    render_md(re.items[0].body)
+    let text = re.items[0].body
+    let s = text.indexOf('@[', 0)
+    let e = text.indexOf(']', s);
+    while (s !== -1) {
+      let friend = text.substring(s, e + 1)
+      text = text.replace(/@\[.*-http.*\]/, friendcard(friend))
+      s = text.indexOf('@[', 0)
+      e = text.indexOf(']', s);
+    }
+    render_md(text)
     hidesidetoc()
     hideloading()
   })

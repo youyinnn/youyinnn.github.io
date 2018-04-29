@@ -25,4 +25,8 @@
   #loading{
     padding: 125px 0;
   }
+  .friendcard{
+    margin: 0 auto;
+    width: 22rem;
+  }
 }
