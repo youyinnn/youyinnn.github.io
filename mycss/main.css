@@ -11,13 +11,11 @@
 #docpanel{
   position: relative;
   margin: 0 auto;
-  height: 45rem;
   overflow: auto;
 }
 
 #sidetoc {
   position: fixed;
-  height: 45rem;
   width: 25%;
   top: 3rem;
   right: 0;
@@ -29,7 +27,6 @@
   position: absolute;
   top: 3rem;
   padding: 1rem 2rem;
-  height: 45rem;
   width: 75%;
   transition: none;
 }

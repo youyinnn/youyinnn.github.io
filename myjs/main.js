@@ -54,3 +54,10 @@ function pagehandler(item, box, itemslength) {
   pageload = parseInt(postpanelheight / (postheight))
   totalpages = Math.round(itemslength / pageload)
 }
+
+function hideloading() {
+  let loading = $('#loading')[0]
+  removeClass(loading, 'show')
+  addClass(loading, 'hide')
+  addClass(loading, 'remove')
+}

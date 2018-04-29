@@ -79,6 +79,7 @@ function get_posts() {
     removeClass(docpanel, 'hide')
     addClass(docpanel, 'show')
     pagehandler(posts[0], $('#docpanel')[0], posts.length)
+    hideloading()
   })
 }
 
