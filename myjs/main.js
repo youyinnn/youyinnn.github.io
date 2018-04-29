@@ -3,7 +3,6 @@ var nowerpage = 1
 var totalpages
 var postpanelheight
 var postheight
-var mainpanel = $('#docpanel')[0]
 
 $(function () {
 
