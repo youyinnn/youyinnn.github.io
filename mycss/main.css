@@ -17,12 +17,13 @@
 
 #sidetoc {
   position: fixed;
-  height: 47rem;
+  height: 45rem;
   width: 25%;
   top: 3rem;
   right: 0;
   overflow: auto;
   transition: none;
+  border-left: 0.1rem #ccc dashed;
 }
 #md{
   position: absolute;
@@ -132,4 +133,15 @@
 
 .metadatabody{
   padding: 0.5rem 1.5rem;
+}
+
+.saying{
+  margin: 1rem 0;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 2px black solid;
+}
+
+.saying:hover{
+  border-radius: 2rem; 
 }

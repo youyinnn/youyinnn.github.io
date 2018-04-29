@@ -2,7 +2,7 @@ $(function () {
   $('#homebut').bind('click', function () {
     location = '/'
   })
-  $('#scriptbut').bind('click', function () {
-
+  $('#aboutbut').bind('click', function () {
+    location = '/' + '?panel=about'
   })
 })

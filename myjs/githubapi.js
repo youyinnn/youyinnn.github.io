@@ -4,6 +4,7 @@ var post_label = 'ypost'
 var about_label = 'yabout'
 var friend_link_label = 'yfirendlink'
 var script_label = 'yscript'
+var todo_label = 'ytodo'
 var url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
@@ -88,6 +89,6 @@ function get_post(number, func) {
 
 function get_about() {
   search_issues_by_label(about_label, function (re) {
-    console.log(re)
+    render_md(re.items[0].body)
   })
 }
