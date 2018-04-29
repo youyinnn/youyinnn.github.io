@@ -10,6 +10,9 @@ $(function () {
   let search = location.search
   if (search === '') {
     hideloading()
+    let homepage = $('#homepage')[0]
+    removeClass(homepage, 'remove')
+    addClass(homepage, 'show')
   } else {
     showloading()
     let params = location.search.substring(1).split('&')

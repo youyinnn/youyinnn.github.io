@@ -142,3 +142,20 @@
 .saying:hover{
   border-radius: 2rem; 
 }
+
+#homepage{
+  position: absolute;
+  background-color: #212529;
+  width: 100%;
+  height: 48rem;
+  text-align: center;
+  line-height: 47rem;
+  color:  #f8f9fa;
+  font-size: 4rem;
+  transition: all .2s;
+}
+
+#homepage:hover {
+  color: white;
+  font-size: 4.1rem;
+}

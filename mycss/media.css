@@ -12,4 +12,17 @@
   #sidetoc{
     display: none;
   }
+  #homepage{
+    height: 28rem;
+    line-height: 27rem;
+    font-size: 2rem;
+  }
+  #homepage:hover{
+    height: 28rem;
+    line-height: 27rem;
+    font-size: 2.1rem;
+  }
+  #loading{
+    padding: 125px 0;
+  }
 }
