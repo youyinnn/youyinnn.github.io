@@ -91,6 +91,7 @@ function get_post(number, func) {
 function get_about() {
   search_issues_by_label(about_label, function (re) {
     render_md(re.items[0].body)
+    hideloading()
   })
 }
 

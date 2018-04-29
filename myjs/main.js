@@ -61,3 +61,9 @@ function hideloading() {
   addClass(loading, 'hide')
   addClass(loading, 'remove')
 }
+
+function showloading() {
+  let loading = $('#loading')[0]
+  removeClass(loading, 'remove')
+  addClass(loading, 'show')
+}

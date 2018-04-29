@@ -9,13 +9,16 @@ $(function () {
   toc.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
   let search = location.search
   if (search === '') {
-    get_posts()
+    hideloading()
   } else {
+    showloading()
     let params = location.search.substring(1).split('&')
     let kv = params[0].split('=')
     let key = kv[0]
     let value = kv[1]
-    if (key === 'panel' && value === 'post') {
+    if (key === 'panel' && value === 'posts') {
+      get_posts()
+    } else if (key === 'panel' && value === 'post') {
       get_post(params[1].split('=')[1], function (re) {
         let text = re.body
         render_md(text)
