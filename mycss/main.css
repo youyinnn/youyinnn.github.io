@@ -156,7 +156,11 @@
   font-weight: 200;
 }
 
-#homepage:hover {
+#slogan{
+  
+}
+
+#slogan:hover {
   color: white;
   font-size: 4.1rem;
 }
