@@ -30,6 +30,12 @@ $(function () {
             showhexometadata(hexo_metadata)
             text = text.substring(endindex, text.length)
           }
+          let cq = text.match(/{%.*cq.*%}/gm)
+          if (cq.length !== 0) {
+            let saying = text.substring(text.indexOf(cq[0]), text.indexOf(cq[1]) + cq[1].length)
+            text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
+            console.log(saying)
+          }
           render_md(text)
         })
       }
