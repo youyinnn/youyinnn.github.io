@@ -20,7 +20,6 @@
   top: 3rem;
   right: 0;
   overflow: auto;
-  transition: none;
   border-left: 0.1rem #ccc dashed;
 }
 #md{
@@ -28,7 +27,6 @@
   top: 3rem;
   padding: 1rem 2rem;
   width: 75%;
-  transition: none;
 }
 
 .post{
@@ -154,10 +152,6 @@
   font-size: 4rem;
   transition: all .2s;
   font-weight: 200;
-}
-
-#slogan{
-  
 }
 
 #slogan:hover {
