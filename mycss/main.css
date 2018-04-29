@@ -11,7 +11,7 @@
 #docpanel{
   position: relative;
   margin: 0 auto;
-  height: 46rem;
+  height: 45rem;
   overflow: auto;
 }
 
@@ -21,15 +21,16 @@
   width: 25%;
   top: 3rem;
   right: 0;
-  transition: all .5s;
   overflow: auto;
+  transition: none;
 }
 #md{
   position: absolute;
   top: 3rem;
   padding: 1rem 2rem;
-  height: 47rem;
+  height: 45rem;
   width: 75%;
+  transition: none;
 }
 
 .post{
@@ -112,4 +113,23 @@
 
 .remove{
   display: none;
+}
+
+.metadata{
+  background-color: rgb(83, 87, 90);
+  color:aliceblue;
+  border-radius: 1rem;
+}
+
+.metadatahead{
+  background-color: rgb(212, 214, 216);
+  color: #24292e;
+  border-radius: 0.8rem 0.8rem 0 0;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.metadatabody{
+  padding: 0.5rem 1.5rem;
 }

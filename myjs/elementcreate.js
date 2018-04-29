@@ -30,5 +30,15 @@ function createpostcard(item) {
 }
 
 function showhexometadata(hexometadata) {
-  
+  let metadatapanel = document.createElement('div')
+  let metadatapanelhead = document.createElement('div')
+  let metadatapanelbody = document.createElement('div')
+  addClass(metadatapanel, 'metadata')
+  addClass(metadatapanelhead, 'metadatahead')
+  addClass(metadatapanelbody, 'metadatabody')
+  metadatapanelhead.innerHTML = 'Hexo metadata'
+  appendC($(metadatapanel)[0], metadatapanelhead)
+  metadatapanelbody.innerHTML += hexometadata
+  appendC($(metadatapanel)[0], metadatapanelbody)
+  appendC($('#md')[0], metadatapanel)
 }

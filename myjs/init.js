@@ -25,30 +25,38 @@ $(function () {
           let text = re.body
           if (text.substring(0, 3) === '---') {
             let endindex = text.indexOf('---', 3)+3
-            let hexo_metadata = text.substring(0, endindex)
-            console.log(hexo_metadata)
+            let hexo_metadata = text.substring(4, endindex - 3)
+            hexo_metadata = hexo_metadata.replace(/\r\n/gm, '</br>')
             showhexometadata(hexo_metadata)
             text = text.substring(endindex, text.length)
           }
-          text = text.replace(/"/g, '\\"')
-          text = text.replace(/'/g, '\'')
-          editormd.markdownToHTML("md", {
-            markdown: text,
-            htmlDecode: "style,script,iframe|on",
-            tocm: true, // Using [TOCM]
-            tocContainer: "#sidetoc",
-            taskList: true,
-            readOnly: true,
-            codeFold: true,
-          });
+          render_md(text)
         })
       }
     }
   }
 })
 
+function render_md(text) {
+  text = text.replace(/"/g, '\\"')
+  text = text.replace(/'/g, '\'')
+  editormd.markdownToHTML("md", {
+    markdown: text,
+    htmlDecode: "style,script,iframe|on",
+    tocm: true, // Using [TOCM]
+    tocContainer: "#sidetoc",
+    taskList: true,
+    readOnly: true,
+    codeFold: true,
+  });
+  let as = $('#md a')
+  for(let i = 0; i < as.length; i++) {
+    as[i].target = '_blank'
+  }
+}
+
 function postspage(pageto) {
-  $('#posts')[0].style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
+  $('#docpanel')[0].style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
 function pagehandler(item, box, itemslength) {

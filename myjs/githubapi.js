@@ -58,13 +58,13 @@ function sendpost(url, form, func) {
   })
 }
 
-function list_issue_by_label(label, func) {
+function search_issues_by_label(label, func) {
   let url = window.url + '/search/issues?q=+state:open+author:' + user + '+label:' + label
   sendget(url, func)
 }
 
 function get_posts() {
-  list_issue_by_label('gitment', function (re) {
+  search_issues_by_label(post_label, function (re) {
     for (let i = 0; i < re.items.length; ++i) {
       createpostcard(re.items[i], i)
     }
@@ -84,4 +84,10 @@ function get_posts() {
 function get_post(number, func) {
   let url = window.url + '/repos/' + user + '/' + blog_repo + '/issues/' + number
   sendget(url, func)
+}
+
+function get_about() {
+  search_issues_by_label(about_label, function (re) {
+    console.log(re)
+  })
 }
