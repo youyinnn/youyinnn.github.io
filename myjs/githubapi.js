@@ -44,6 +44,7 @@ function postset(url, form) {
 
 
 function sendget(url, func) {
+  console.log('send get :' + url)
   $.ajax(getset(url)).done(function (response) {
     if (func !== undefined) {
       func(response)
@@ -52,6 +53,7 @@ function sendget(url, func) {
 }
 
 function sendpost(url, form, func) {
+  console.log('send post :' + url)
   $.ajax(postset(url, form)).done(function (response) {
     if (func !== undefined) {
       func(response)
