@@ -10,8 +10,8 @@ var scriptcount
 $(function () {
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
   docpanel.style.height = parseInt(getWindowH()) - parseInt(topbarh) + 'px'
-  md.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
-  toc.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
+  // md.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
+  // toc.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
   let search = location.search
   if (search === '') {
     hideloading()

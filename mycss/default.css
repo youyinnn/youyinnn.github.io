@@ -4,7 +4,7 @@
   transition: all .3s;
 }
 body {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* 
         开启硬件加速 解决动画卡顿 
         但是会影响部分部件的缩放
