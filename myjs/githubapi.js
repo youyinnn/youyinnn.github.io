@@ -119,10 +119,10 @@ function get_friendlinked() {
   })
 }
 
-function get_issues_comments(number, func) {
+function get_issues_comments(number, issuesbody, func) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
   sendget(url, function (re) {
-    func(re)
+    func(issuesbody, re)
     hidesidetoc()
     hideloading()
   })
@@ -130,12 +130,12 @@ function get_issues_comments(number, func) {
 
 function get_todo() {
   search_issues_by_label(todo_label, function (re) {
-    get_issues_comments(re.items[0].number, createtodo)
+    get_issues_comments(re.items[0].number, re.items[0].body, createtodo)
   })
 }
 
 function get_script() {
   search_issues_by_label(script_label, function (re) {
-    get_issues_comments(re.items[0].number, createscript)
+    get_issues_comments(re.items[0].number, re.items[0].body, createscript)
   })
 }

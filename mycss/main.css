@@ -203,3 +203,7 @@
 .searchshow:hover{
   opacity: 1;
 }
+
+.issuesbody{
+  background-color: #24292e;
+}

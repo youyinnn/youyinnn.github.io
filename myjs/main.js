@@ -79,10 +79,16 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
+  let keywords = text.split(',')
+  let regex = ''
+  for (let i = 0; i < keywords.length - 1; i++) {
+    regex += keywords[i] + '.*'
+  }
+  regex += keywords[keywords.length - 1]
   for (let i = 0; i < scriptcount; i++) {
     let script = $('#script-' + i)
     let scripttext = script[0].innerText
-    if (scripttext.indexOf(text, 0) !== -1) {
+    if (scripttext.search(new RegExp(regex, 'g')) !== -1) {
       scrolltoelement(script[0].id)
       break
     }

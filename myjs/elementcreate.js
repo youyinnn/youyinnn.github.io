@@ -84,13 +84,13 @@ function friendcard(friend) {
   return htmltext
 }
 
-function createtodo(re) {
+function createtodo(issuesbody, re) {
   removeClass(md, 'hide')
   let todohead = document.createElement('div')
   todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
-  addClass(todohead, 'todohead')
+  addClass(todohead, 'todohead unselectable')
   appendC(md, todohead)
-  let fulltext = ''
+  let fulltext = '\r\n' + issuesbody + '\r\n'
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
@@ -99,21 +99,22 @@ function createtodo(re) {
   render_md(fulltext)
 }
 
-function createscript(re) {
+function createscript(issuesbody, re) {
   removeClass(scriptsearcher, 'hide')
   addClass(scriptsearcher, 'searchshow')
   md.style.paddingBottom = '5rem'
   removeClass(md, 'hide')
   let scripthead = document.createElement('div')
   scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
-  addClass(scripthead, 'todohead')
+  addClass(scripthead, 'todohead unselectable')
   appendC(md, scripthead)
-  let fulltext = ''
+  let fulltext = '\r\n' + issuesbody + '\r\n'
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
     fulltext += '<div class="card" id="script-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
+  console.log(fulltext)
   scriptcount = re.length
   render_md(fulltext)
 }
