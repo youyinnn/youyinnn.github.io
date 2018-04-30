@@ -10,9 +10,9 @@ var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA
 var oauth_token = base64decode(oauth_token_base64)
 var all
 
-function getset(url) {
+function getset(url, asyn) {
   let basegetset = {
-    'async': true,
+    'async': asyn === undefined ? true : asyn,
     'crossDomain': true,
     'method': 'GET',
     'url': url,
@@ -25,9 +25,9 @@ function getset(url) {
   return basegetset
 }
 
-function postset(url, form) {
+function postset(url, form, asyn) {
   let basepostset = {
-    'async': true,
+    'async': asyn === undefined ? true : asyn,
     'crossDomain': true,
     'method': 'POST',
     'url': url,
@@ -43,33 +43,33 @@ function postset(url, form) {
 }
 
 
-function sendget(url, func) {
+function sendget(url, func, asyn) {
   console.log('send get :' + url)
-  $.ajax(getset(url)).done(function (response) {
+  $.ajax(getset(url, asyn)).done(function (response) {
     if (func !== undefined) {
       func(response)
     }
   })
 }
 
-function sendpost(url, form, func) {
+function sendpost(url, form, func, asyn) {
   console.log('send post :' + url)
-  $.ajax(postset(url, form)).done(function (response) {
+  $.ajax(postset(url, form, asyn)).done(function (response) {
     if (func !== undefined) {
       func(response)
     }
   })
 }
 
-function search_issues_by_label(label, func) {
+function search_issues_by_label(label, func, asyn) {
   let url = api_url + '/search/issues?q=+state:open+author:' + username + '+label:' + label
-  sendget(url, func)
+  sendget(url, func, asyn)
 }
 
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
     for (let i = 0; i < re.items.length; ++i) {
-      createpostcard(re.items[i], i)
+      createpostcard(re.items[i])
     }
     let posts = $('.post')
     for (let i = 0; i < posts.length; ++i) {
@@ -87,31 +87,7 @@ function get_posts() {
 function get_post(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
   sendget(url, function (re) {
-    let title = re.title
-    let post = document.createElement('div')
-    let posttitle = document.createElement('div')
-    let posttime = document.createElement('div')
-    let sp1 = document.createElement('span')
-    let sp2 = document.createElement('span')
-    let sp3 = document.createElement('span')
-    let sp4 = document.createElement('span')
-    addClass(post, 'post onepost')
-    addClass(posttitle, 'posttitle')
-    addClass(posttime, 'posttime')
-    addClass(sp1, 'font-weight-bold')
-    addClass(sp3, 'font-weight-bold')
-    sp1.innerHTML = 'PostTime:'
-    sp2.innerHTML = re.created_at
-    sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = re.updated_at
-    posttitle.innerHTML = title
-    appendC(posttime, sp1)
-    appendC(posttime, sp2)
-    appendC(posttime, sp3)
-    appendC(posttime, sp4)
-    appendC(post, posttitle)
-    appendC(post, posttime)
-    appendC($('#md')[0], post)
+    createposthead(re)
     let text = re.body
     render_md(text)
   })
@@ -143,13 +119,15 @@ function get_friendlinked() {
 
 function get_issues_comments(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
+  sendget(url, function (re) {
+    console.log(re)
+    hidesidetoc()
+    hideloading()
+  })
 }
 
 function get_todo() {
   search_issues_by_label(todo_label, function (re) {
-    console.log(re)
-
-    hidesidetoc()
-    hideloading()
-  })
+    get_issues_comments(re.items[0].number)
+  }, false)
 }
