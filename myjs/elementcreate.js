@@ -83,3 +83,20 @@ function friendcard(friend) {
   let htmltext = '<div class="friendcard card"><div class="card-header bg-dark" style="color:white;">' + friendmsg[0] + '</div><div class="card-body"><blockquote class="blockquote mb-0"><p>' + friendmsg[1] + '</p></blockquote></div></div>'
   return htmltext
 }
+
+function createtodo(re) {
+  console.log(re)
+  let md = $('#md')[0]
+  removeClass(md, 'hide')
+  let todohead = document.createElement('div')
+  todohead.innerHTML = 'Todo List'
+  addClass(todohead, 'todohead')
+  appendC(md, todohead)
+  let fulltext = ''
+  for (let i = 0 ; i < re.length ; ++i) {
+    let head = re[i].created_at
+    let text = re[i].body
+    fulltext += '<div class="card"><div class="card-header">Created at: ' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
+  }
+  render_md(fulltext)
+}

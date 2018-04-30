@@ -120,7 +120,7 @@ function get_friendlinked() {
 function get_issues_comments(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
   sendget(url, function (re) {
-    console.log(re)
+    createtodo(re)
     hidesidetoc()
     hideloading()
   })
