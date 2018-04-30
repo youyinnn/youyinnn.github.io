@@ -102,7 +102,7 @@ function createtodo(issuesbody, re) {
 function createscript(issuesbody, re) {
   removeClass(scriptsearcher, 'hide')
   addClass(scriptsearcher, 'searchshow')
-  md.style.paddingBottom = '5rem'
+  md.style.paddingBottom = '3rem'
   removeClass(md, 'hide')
   let scripthead = document.createElement('div')
   scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'

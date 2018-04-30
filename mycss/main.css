@@ -219,8 +219,8 @@
   left: 0;
   right: 0;
   width: 50%;
-  bottom: 4%;
-  z-index: 100;
+  bottom: 1rem;
+  z-index: 999;
 }
 
 .searchshow {
