@@ -3,6 +3,8 @@ var md = $('#md')[0]
 var toc = $('#sidetoc')[0]
 var loading = $('#loading')[0]
 var homepage = $('#homepage')[0]
+var scriptsearcher = $('#scriptsearcher')[0]
+var scriptcount
 
 $(function () {
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]

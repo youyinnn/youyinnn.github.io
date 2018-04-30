@@ -94,12 +94,14 @@ function createtodo(re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
+    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
   }
   render_md(fulltext)
 }
 
 function createscript(re) {
+  removeClass(scriptsearcher, 'hide')
+  addClass(scriptsearcher, 'searchshow')
   md.style.paddingBottom = '5rem'
   removeClass(md, 'hide')
   let scripthead = document.createElement('div')
@@ -110,7 +112,8 @@ function createscript(re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
+    fulltext += '<div class="card" id="script-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
+  scriptcount = re.length
   render_md(fulltext)
 }

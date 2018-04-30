@@ -22,7 +22,7 @@ function render_md(text) {
   }
   let cq = text.match(/{%.*cq.*%}/gm)
   if (cq) {
-    let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2 , text.indexOf(cq[1]))
+    let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
     saying = saying.replace(/\r\n/gm, '</br>')
     text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
     showsaying(saying)
@@ -32,7 +32,7 @@ function render_md(text) {
     if (emojistart === -1) break
     let emojiend = text.indexOf(':', emojistart + 1)
     let emoji = text.substring(emojistart, emojiend + 1)
-    text = text.replace(emoji , '<i class="em-svg em-' + emoji.substring(1, emoji.length -1) + '"></i>')
+    text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
   }
   editormd.markdownToHTML('md', {
     markdown: text,
@@ -45,7 +45,7 @@ function render_md(text) {
     codeFold: true,
   });
   let as = $('#md a')
-  for(let i = 0; i < as.length; i++) {
+  for (let i = 0; i < as.length; i++) {
     as[i].target = '_blank'
   }
 }
@@ -79,5 +79,22 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
+  for (let i = 0; i < scriptcount; i++) {
+    let script = $('#script-' + i)
+    let scripttext = script[0].innerText
+    if (scripttext.indexOf(text, 0) !== -1) {
+      scrolltoelement(script[0].id)
+      break
+    }
+  }
+}
 
+function scrolltoelement(elementid) {
+  if ($('#' + elementid)[0].oset === undefined) {
+    $('#' + elementid)[0].oset = $('#' + elementid).offset().top
+  }
+  console.log($('#' + elementid)[0].oset)
+  $('#md').animate({
+    scrollTop: $('#' + elementid)[0].oset
+  }, 500);
 }

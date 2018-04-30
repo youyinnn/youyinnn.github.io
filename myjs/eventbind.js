@@ -17,4 +17,7 @@ $(function () {
   $('#aboutbut').bind('click', function () {
     location = '/' + '?panel=about'
   })
+  $('#searchbut').bind('click', function () {
+    searchscript($('#searchtext')[0].value)
+  })
 })
