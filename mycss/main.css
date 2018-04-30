@@ -22,13 +22,33 @@
   transition: none;
 }
 
-#block{
+#block {
   height: 3rem;
   background-color: #24292e;
+  color: aliceblue;
+  line-height: 3rem;
+  text-align: center;
 }
 
-#sidetoc{
-  border-left: 0.1rem #ccc dashed;  
+#percent {
+  height: 3rem;
+  background-color: #24292e;
+  width: 50%;
+  float: left;
+}
+
+#topbut {
+  height: 3rem;
+  width: 50%;
+  float: right;
+}
+
+#topbut:hover{
+  background-color: #3c4247;
+}
+
+#sidetoc {
+  border-left: 0.1rem #ccc dashed;
 }
 
 #md {
@@ -100,11 +120,11 @@
   color: aliceblue;
 }
 
-.ah:hover{
+.ah:hover {
   color: rgb(166, 171, 175);
 }
 
-.ah:active{
+.ah:active {
   color: rgb(166, 171, 175);
 }
 
@@ -203,19 +223,19 @@
   z-index: 100;
 }
 
-.searchshow{
+.searchshow {
   opacity: 0.3;
 }
 
-.searchshow:hover{
+.searchshow:hover {
   opacity: 1;
 }
 
-.issuesbody{
+.issuesbody {
   background-color: #24292e;
 }
 
-#gohub{
+#gohub {
   padding: 0 0.5rem;
   text-align: center;
   position: fixed;

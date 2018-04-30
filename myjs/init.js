@@ -6,13 +6,15 @@ var loading = $('#loading')[0]
 var homepage = $('#homepage')[0]
 var scriptsearcher = $('#scriptsearcher')[0]
 var gohub = $('#gohub')[0]
+var percent = $('#percent')[0]
+var topbut = $('#topbut')[0]
 var scriptcount
 
 $(function () {
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
   docpanel.style.height = parseInt(getWindowH()) - parseInt(topbarh) + 'px'
   // md.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
-  toc.style.height = parseInt(getWindowH()) + 'px'
+  toc.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
   let search = location.search
   if (search === '') {
     hideloading()

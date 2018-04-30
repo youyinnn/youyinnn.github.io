@@ -23,4 +23,20 @@ $(function () {
   $('#searchtext').bind('keyup', 'return', function () {
     searchscript(this.value)
   })
+  $(window).scroll(function () {
+    var scrollTo = $(window).scrollTop(),
+    docHeight = $(document).height(),
+    windowHeight = $(window).height();
+    scrollPercent = (parseInt((scrollTo / (docHeight-windowHeight))  * 100)) + ' %';
+    if (scrollPercent === '0 %') {
+      percent.innerText = ''
+    } else {
+      percent.innerText = scrollPercent
+    }
+  })
+  $('#topbut').bind('click', function () {
+    $('html,body').animate({
+      scrollTop: 0
+    }, 300);
+  })
 })
