@@ -11,8 +11,8 @@ $(function () {
 function render_md(text) {
   removeClass(md, 'hide')
   addClass(md, 'show')
-  removeClass(toc, 'hide')
-  addClass(toc, 'show')
+  removeClass(sidetoccontainer, 'hide')
+  addClass(sidetoccontainer, 'show')
   if (text.substring(0, 3) === '---') {
     let endindex = text.indexOf('---', 3) + 3
     let hexo_metadata = text.substring(4, endindex - 3)
@@ -73,8 +73,7 @@ function showloading() {
 }
 
 function hidesidetoc() {
-  let sidetoc = toc
-  addClass(sidetoc, 'remove')
+  addClass(sidetoccontainer, 'remove')
   addClass(md, 'w-100')
 }
 
@@ -99,7 +98,7 @@ function scrolltoelement(elementid) {
   if ($('#' + elementid)[0].oset === undefined) {
     $('#' + elementid)[0].oset = $('#' + elementid).offset().top
   }
-  $('#md').animate({
+  $('html,body').animate({
     scrollTop: $('#' + elementid)[0].oset
   }, 500);
 }

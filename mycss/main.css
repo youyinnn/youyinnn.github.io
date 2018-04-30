@@ -14,14 +14,21 @@
   overflow: auto;
 }
 
-#sidetoc {
+#sidetoccontainer {
   position: fixed;
   width: 25%;
-  top: 3rem;
-  right: 0;
-  overflow: auto;
-  border-left: 0.1rem #ccc dashed;
+  top: 0;
+  right: 1px;
   transition: none;
+}
+
+#block{
+  height: 3rem;
+  background-color: #24292e;
+}
+
+#sidetoc{
+  border-left: 0.1rem #ccc dashed;  
 }
 
 #md {
