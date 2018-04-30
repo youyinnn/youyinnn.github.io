@@ -54,7 +54,7 @@ function createposthead(re) {
   appendC(posttime, sp4)
   appendC(post, posttitle)
   appendC(post, posttime)
-  appendC($('#md')[0], post)
+  appendC(md, post)
 }
 
 function showhexometadata(hexometadata) {
@@ -79,23 +79,38 @@ function showsaying(saying) {
 }
 
 function friendcard(friend) {
-  let friendmsg = friend.substring(2,friend.length - 1).split('-')
+  let friendmsg = friend.substring(2, friend.length - 1).split('-')
   let htmltext = '<div class="friendcard card"><div class="card-header bg-dark" style="color:white;">' + friendmsg[0] + '</div><div class="card-body"><blockquote class="blockquote mb-0"><p>' + friendmsg[1] + '</p></blockquote></div></div>'
   return htmltext
 }
 
 function createtodo(re) {
-  let md = $('#md')[0]
   removeClass(md, 'hide')
   let todohead = document.createElement('div')
   todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
   addClass(todohead, 'todohead')
   appendC(md, todohead)
   let fulltext = ''
-  for (let i = 0 ; i < re.length ; ++i) {
+  for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
     fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
+  }
+  render_md(fulltext)
+}
+
+function createscript(re) {
+  md.style.paddingBottom = '5rem'
+  removeClass(md, 'hide')
+  let scripthead = document.createElement('div')
+  scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
+  addClass(scripthead, 'todohead')
+  appendC(md, scripthead)
+  let fulltext = ''
+  for (let i = 0; i < re.length; ++i) {
+    let head = re[i].created_at
+    let text = re[i].body
+    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
   render_md(fulltext)
 }

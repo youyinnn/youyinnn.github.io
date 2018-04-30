@@ -30,6 +30,8 @@ $(function () {
       get_friendlinked()
     } else if (key === 'panel' && value === 'todo') {
       get_todo()
+    } else if (key === 'panel' && value === 'script') {
+      get_script()
     }
   }
 })

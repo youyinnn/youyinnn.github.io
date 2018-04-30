@@ -37,9 +37,6 @@ function render_md(text) {
   editormd.markdownToHTML('md', {
     markdown: text,
     lib: './lib/',
-    theme: 'dark',
-    previewTheme : 'github',
-    editorTheme : 'pastel-on-dark',
     htmlDecode: 'style,script,iframe|on',
     tocm: true, // Using [TOCM]
     tocContainer: '#sidetoc',
@@ -54,7 +51,7 @@ function render_md(text) {
 }
 
 function postspage(pageto) {
-  $('#docpanel')[0].style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
+  docpanel.style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
 function pagehandler(item, box, itemslength) {
@@ -79,4 +76,8 @@ function hidesidetoc() {
   let sidetoc = toc
   addClass(sidetoc, 'remove')
   addClass(md, 'w-100')
+}
+
+function searchscript(text) {
+
 }
