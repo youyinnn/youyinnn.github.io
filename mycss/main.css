@@ -77,6 +77,12 @@
   display: inline-block;
 }
 
+.onepost{
+  padding: 0 0 1rem 0;
+  margin: 0;
+  border-bottom: 0.1rem #ccc dashed;
+}
+
 .ah{
   color: aliceblue;
 }
@@ -115,7 +121,7 @@
   background-color: rgb(83, 87, 90);
   color:aliceblue;
   border-radius: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
 }
 
 .metadatahead{
