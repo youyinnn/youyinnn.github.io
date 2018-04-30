@@ -140,6 +140,7 @@
 }
 
 .saying{
+  text-align: center;
   margin: 1rem 0;
   padding: 2rem 1rem;
   background-color: #f8f9fa;

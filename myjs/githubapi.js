@@ -131,5 +131,5 @@ function get_issues_comments(number) {
 function get_todo() {
   search_issues_by_label(todo_label, function (re) {
     get_issues_comments(re.items[0].number)
-  }, false)
+  })
 }

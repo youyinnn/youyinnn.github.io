@@ -85,18 +85,17 @@ function friendcard(friend) {
 }
 
 function createtodo(re) {
-  console.log(re)
   let md = $('#md')[0]
   removeClass(md, 'hide')
   let todohead = document.createElement('div')
-  todohead.innerHTML = '<i class="em-svg em-baby_chick"></i>Todo List'
+  todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
   addClass(todohead, 'todohead')
   appendC(md, todohead)
   let fulltext = ''
   for (let i = 0 ; i < re.length ; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card"><div class="card-header">Created at: ' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
+    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
   }
   render_md(fulltext)
 }
