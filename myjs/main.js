@@ -103,3 +103,8 @@ function scrolltoelement(elementid) {
     scrollTop: $('#' + elementid)[0].oset
   }, 500);
 }
+
+function setgohub(text, href) {
+  gohub.innerText = text
+  gohub.href = href
+}

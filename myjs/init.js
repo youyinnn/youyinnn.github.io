@@ -4,6 +4,7 @@ var toc = $('#sidetoc')[0]
 var loading = $('#loading')[0]
 var homepage = $('#homepage')[0]
 var scriptsearcher = $('#scriptsearcher')[0]
+var gohub = $('#gohub')[0]
 var scriptcount
 
 $(function () {
@@ -16,6 +17,7 @@ $(function () {
     hideloading()
     removeClass(homepage, 'remove')
     addClass(homepage, 'show')
+    setgohub('follow me', 'https://github.com/' + username)
   } else {
     showloading()
     let params = location.search.substring(1).split('&')

@@ -93,11 +93,11 @@
   color: aliceblue;
 }
 
-.ah:hover {
+.ah:hover{
   color: rgb(166, 171, 175);
 }
 
-.ah:active {
+.ah:active{
   color: rgb(166, 171, 175);
 }
 
@@ -206,4 +206,27 @@
 
 .issuesbody{
   background-color: #24292e;
+}
+
+#gohub{
+  padding: 0 0.5rem;
+  text-align: center;
+  position: fixed;
+  right: 3rem;
+  bottom: 1rem;
+  height: 2rem;
+  z-index: 999;
+  background-color: #24292e;
+  line-height: 2rem;
+  color: aliceblue;
+}
+
+#gohub:hover {
+  border-radius: 0.7rem;
+  color: rgb(166, 171, 175);
+}
+
+#gohub:active {
+  color: rgb(166, 171, 175);
+  transform: translateY(0.1rem);
 }
