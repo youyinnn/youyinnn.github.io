@@ -18,6 +18,7 @@ $(function () {
   let search = location.search
   if (search === '') {
     hideloading()
+    hidesidetoc()    
     removeClass(homepage, 'remove')
     addClass(homepage, 'show')
     setgohub('My hub', 'https://github.com/' + username)

@@ -1,9 +1,9 @@
 @media screen and (max-width: 536px) {
-  #topbar {
-    height: 6rem;
+  #sidetoccontainer{
+    display: none;
   }
-  #docpanel{
-    height: 30rem;
+  #topbar{
+    height: 6rem;
   }
   #md{
     top:6rem;
@@ -13,12 +13,10 @@
     display: none;
   }
   #homepage{
-    height: 29rem;
     line-height: 27rem;
     font-size: 2rem;
   }
   #slogan:hover{
-    height: 28rem;
     line-height: 27rem;
     font-size: 2.1rem;
   }
@@ -31,9 +29,11 @@
   }
   #scriptsearcher{
     bottom: 0rem;
-    opacity: 1;
     width: 80%;
     margin: 0;
+  }
+  .searchshow {
+    opacity: 1;
   }
   button , input{
     border-radius: 0 !important;
