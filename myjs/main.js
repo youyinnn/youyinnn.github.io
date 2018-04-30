@@ -99,7 +99,6 @@ function scrolltoelement(elementid) {
   if ($('#' + elementid)[0].oset === undefined) {
     $('#' + elementid)[0].oset = $('#' + elementid).offset().top
   }
-  console.log($('#' + elementid)[0].oset)
   $('#md').animate({
     scrollTop: $('#' + elementid)[0].oset
   }, 500);

@@ -114,7 +114,6 @@ function createscript(issuesbody, re) {
     let text = re[i].body
     fulltext += '<div class="card" id="script-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
-  console.log(fulltext)
   scriptcount = re.length
   render_md(fulltext)
 }

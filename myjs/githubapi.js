@@ -18,7 +18,8 @@ function getset(url, asyn) {
     'url': url,
     'headers': {
       'Authorization': 'Bearer ' + oauth_token,
-      'Accept': 'application/vnd.github.v3+json'
+      'Accept': 'application/vnd.github.v3+json',
+      'Accept': 'application/vnd.github.symmetra-preview+json',
     },
     'processData': false,
     'contentType': false,
@@ -34,7 +35,8 @@ function postset(url, form, asyn) {
     'url': url,
     'headers': {
       'Authorization': 'Bearer ' + oauth_token,
-      'Accept': 'application/vnd.github.v3+json'
+      'Accept': 'application/vnd.github.v3+json',
+      'Accept': 'application/vnd.github.symmetra-preview+json',
     },
     'mimeType': 'multipart/form-data',
     'data': form,
@@ -45,33 +47,33 @@ function postset(url, form, asyn) {
 }
 
 
-function sendget(url, func, asyn) {
+function sendget(url, func) {
   console.log('send get :' + url)
-  $.ajax(getset(url, asyn)).done(function (response) {
+  $.ajax(getset(url)).done(function (response) {
     if (func !== undefined) {
       func(response)
     }
   })
 }
 
-function sendpost(url, form, func, asyn) {
+function sendpost(url, form, func) {
   console.log('send post :' + url)
-  $.ajax(postset(url, form, asyn)).done(function (response) {
+  $.ajax(postset(url, form)).done(function (response) {
     if (func !== undefined) {
       func(response)
     }
   })
 }
 
-function search_issues_by_label(label, func, asyn) {
-  let url = api_url + '/search/issues?q=+state:open+author:' + username + '+label:' + label
-  sendget(url, func, asyn)
+function search_issues_by_label(label, func) {
+  let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label
+  sendget(url, func)
 }
 
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
-    for (let i = 0; i < re.items.length; ++i) {
-      createpostcard(re.items[i])
+    for (let i = 0; i < re.length; ++i) {
+      createpostcard(re[i])
     }
     let posts = $('.post')
     for (let i = 0; i < posts.length; ++i) {
@@ -97,14 +99,14 @@ function get_post(number) {
 
 function get_about() {
   search_issues_by_label(about_label, function (re) {
-    render_md(re.items[0].body)
+    render_md(re[0].body)
     hideloading()
   })
 }
 
 function get_friendlinked() {
   search_issues_by_label(friend_linked_label, function (re) {
-    let text = re.items[0].body
+    let text = re[0].body
     let s = text.indexOf('@[', 0)
     let e = text.indexOf(']', s);
     while (s !== -1) {
@@ -130,12 +132,12 @@ function get_issues_comments(number, issuesbody, func) {
 
 function get_todo() {
   search_issues_by_label(todo_label, function (re) {
-    get_issues_comments(re.items[0].number, re.items[0].body, createtodo)
+    get_issues_comments(re[0].number, re[0].body, createtodo)
   })
 }
 
 function get_script() {
   search_issues_by_label(script_label, function (re) {
-    get_issues_comments(re.items[0].number, re.items[0].body, createscript)
+    get_issues_comments(re[0].number, re[0].body, createscript)
   })
 }

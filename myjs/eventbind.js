@@ -20,4 +20,7 @@ $(function () {
   $('#searchbut').bind('click', function () {
     searchscript($('#searchtext')[0].value)
   })
+  $('#searchtext').bind('keyup', 'return', function () {
+    searchscript(this.value)
+  })
 })
