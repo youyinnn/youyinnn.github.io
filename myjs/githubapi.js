@@ -18,6 +18,7 @@ function getset(url, asyn) {
     'url': url,
     'headers': {
       'Authorization': 'Bearer ' + oauth_token,
+      'Accept': 'application/vnd.github.v3+json'
     },
     'processData': false,
     'contentType': false,
@@ -33,6 +34,7 @@ function postset(url, form, asyn) {
     'url': url,
     'headers': {
       'Authorization': 'Bearer ' + oauth_token,
+      'Accept': 'application/vnd.github.v3+json'
     },
     'mimeType': 'multipart/form-data',
     'data': form,

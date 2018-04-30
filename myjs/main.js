@@ -27,11 +27,22 @@ function render_md(text) {
     text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
     showsaying(saying)
   }
-  editormd.markdownToHTML("md", {
+  while (true) {
+    let emojistart = text.search(/:[A-z|-]+[0-9]?:/g)
+    if (emojistart === -1) break
+    let emojiend = text.indexOf(':', emojistart + 1)
+    let emoji = text.substring(emojistart, emojiend + 1)
+    text = text.replace(emoji , '<i class="em em-' + emoji.substring(1, emoji.length -1) + '"></i>')
+  }
+  editormd.markdownToHTML('md', {
     markdown: text,
-    htmlDecode: "style,script,iframe|on",
+    lib: './lib/',
+    theme: 'dark',
+    previewTheme : 'github',
+    editorTheme : 'pastel-on-dark',
+    htmlDecode: 'style,script,iframe|on',
     tocm: true, // Using [TOCM]
-    tocContainer: "#sidetoc",
+    tocContainer: '#sidetoc',
     taskList: true,
     readOnly: true,
     codeFold: true,
