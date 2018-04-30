@@ -5,10 +5,16 @@ $(function () {
   $('#postsbut').bind('click', function () {
     location = '/' + '?panel=posts'
   })
-  $('#aboutbut').bind('click', function () {
-    location = '/' + '?panel=about'
+  $('#scriptbut').bind('click', function () {
+    location = '/' + '?panel=script'
+  })
+  $('#todobut').bind('click', function () {
+    location = '/' + '?panel=todo'
   })
   $('#friendlinkbut').bind('click', function () {
     location = '/' + '?panel=friendlinked'
+  })
+  $('#aboutbut').bind('click', function () {
+    location = '/' + '?panel=about'
   })
 })

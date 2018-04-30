@@ -1,5 +1,5 @@
-var user = 'youyinnn'
-var blog_repo = user + '.github.io'
+var username = 'youyinnn'
+var blog_repo = username + '.github.io'
 var post_label = 'ypost'
 var about_label = 'yabout'
 var friend_linked_label = 'yfriendlinked'
@@ -62,7 +62,7 @@ function sendpost(url, form, func) {
 }
 
 function search_issues_by_label(label, func) {
-  let url = api_url + '/search/issues?q=+state:open+author:' + user + '+label:' + label
+  let url = api_url + '/search/issues?q=+state:open+author:' + username + '+label:' + label
   sendget(url, func)
 }
 
@@ -84,9 +84,37 @@ function get_posts() {
   })
 }
 
-function get_post(number, func) {
-  let url = api_url + '/repos/' + user + '/' + blog_repo + '/issues/' + number
-  sendget(url, func)
+function get_post(number) {
+  let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
+  sendget(url, function (re) {
+    let title = re.title
+    let post = document.createElement('div')
+    let posttitle = document.createElement('div')
+    let posttime = document.createElement('div')
+    let sp1 = document.createElement('span')
+    let sp2 = document.createElement('span')
+    let sp3 = document.createElement('span')
+    let sp4 = document.createElement('span')
+    addClass(post, 'post onepost')
+    addClass(posttitle, 'posttitle')
+    addClass(posttime, 'posttime')
+    addClass(sp1, 'font-weight-bold')
+    addClass(sp3, 'font-weight-bold')
+    sp1.innerHTML = 'PostTime:'
+    sp2.innerHTML = re.created_at
+    sp3.innerHTML = 'LastModTime:'
+    sp4.innerHTML = re.updated_at
+    posttitle.innerHTML = title
+    appendC(posttime, sp1)
+    appendC(posttime, sp2)
+    appendC(posttime, sp3)
+    appendC(posttime, sp4)
+    appendC(post, posttitle)
+    appendC(post, posttime)
+    appendC($('#md')[0], post)
+    let text = re.body
+    render_md(text)
+  })
 }
 
 function get_about() {
@@ -108,6 +136,19 @@ function get_friendlinked() {
       e = text.indexOf(']', s);
     }
     render_md(text)
+    hidesidetoc()
+    hideloading()
+  })
+}
+
+function get_issues_comments(number) {
+  let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
+}
+
+function get_todo() {
+  search_issues_by_label(todo_label, function (re) {
+    console.log(re)
+
     hidesidetoc()
     hideloading()
   })
