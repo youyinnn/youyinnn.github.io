@@ -72,7 +72,7 @@ function search_issues_by_label(label, func) {
 
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
-    setgohub('go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')     
+    setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')     
     for (let i = 0; i < re.length; ++i) {
       createpostcard(re[i])
     }
@@ -92,7 +92,7 @@ function get_posts() {
 function get_post(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
   sendget(url, function (re) {
-    setgohub('go hub', re.html_url) 
+    setgohub('Go hub', re.html_url) 
     createposthead(re)
     let text = re.body
     render_md(text)
@@ -101,7 +101,7 @@ function get_post(number) {
 
 function get_about() {
   search_issues_by_label(about_label, function (re) {
-    setgohub('go hub', re[0].html_url)
+    setgohub('Go hub', re[0].html_url)
     render_md(re[0].body)
     hideloading()
   })
@@ -109,7 +109,7 @@ function get_about() {
 
 function get_friendlinked() {
   search_issues_by_label(friend_linked_label, function (re) {
-    setgohub('go hub', re[0].html_url)    
+    setgohub('Go hub', re[0].html_url)    
     let text = re[0].body
     let s = text.indexOf('@[', 0)
     let e = text.indexOf(']', s);
@@ -128,7 +128,7 @@ function get_friendlinked() {
 function get_issues_comments(number, issuesbody, func) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
   sendget(url, function (re) {
-    setgohub('go hub', re[0].html_url)    
+    setgohub('Go hub', re[0].html_url)    
     func(issuesbody, re)
     hidesidetoc()
     hideloading()

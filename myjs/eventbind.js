@@ -23,6 +23,9 @@ $(function () {
   $('#searchtext').bind('keyup', 'return', function () {
     searchscript(this.value)
   })
+  $('#searchtext').bind('keyup', 'esc', function () {
+    this.value = ''
+  })
   $(window).scroll(function () {
     var scrollTo = $(window).scrollTop(),
     docHeight = $(document).height(),
@@ -34,7 +37,7 @@ $(function () {
       percent.innerText = scrollPercent
     }
   })
-  $('#topbut').bind('click', function () {
+  $('#topbut, #topbut2').bind('click', function () {
     $('html,body').animate({
       scrollTop: 0
     }, 300);

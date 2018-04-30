@@ -29,4 +29,26 @@
     margin: 0 auto;
     width: 18rem;
   }
+  #scriptsearcher{
+    bottom: 0rem;
+    opacity: 1;
+    width: 80%;
+    margin: 0;
+  }
+  button , input{
+    border-radius: 0 !important;
+  }
+  button{
+    padding: 0.3rem !important;
+  }
+  #gohub{
+    right: 0;
+    bottom: 0;
+    width: 20%;
+    height: 2.39rem;
+    line-height: 2.39rem;
+  }
+  #gohub:hover{
+    border-radius: 0;
+  }
 }

@@ -20,7 +20,7 @@ $(function () {
     hideloading()
     removeClass(homepage, 'remove')
     addClass(homepage, 'show')
-    setgohub('follow me', 'https://github.com/' + username)
+    setgohub('My hub', 'https://github.com/' + username)
   } else {
     showloading()
     let params = location.search.substring(1).split('&')
