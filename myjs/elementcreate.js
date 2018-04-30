@@ -89,7 +89,7 @@ function createtodo(re) {
   let md = $('#md')[0]
   removeClass(md, 'hide')
   let todohead = document.createElement('div')
-  todohead.innerHTML = 'Todo List'
+  todohead.innerHTML = '<i class="em-svg em-baby_chick"></i>Todo List'
   addClass(todohead, 'todohead')
   appendC(md, todohead)
   let fulltext = ''

@@ -32,7 +32,7 @@ function render_md(text) {
     if (emojistart === -1) break
     let emojiend = text.indexOf(':', emojistart + 1)
     let emoji = text.substring(emojistart, emojiend + 1)
-    text = text.replace(emoji , '<i class="em em-' + emoji.substring(1, emoji.length -1) + '"></i>')
+    text = text.replace(emoji , '<i class="em-svg em-' + emoji.substring(1, emoji.length -1) + '"></i>')
   }
   editormd.markdownToHTML('md', {
     markdown: text,
