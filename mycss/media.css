@@ -3,8 +3,8 @@
 */
 @media screen and (max-height: 375px) {
   #homepage {
-    height: 20rem;
-    line-height: 20rem;
+    height: 20.4rem;
+    line-height: 20.4rem;
     font-size: 3rem;
   }
   #loading{
@@ -15,11 +15,14 @@
 /* 
   iphone7/X 竖屏
 */
-@media screen and (max-height: 812px) and (max-width: 375px){
+@media screen and (max-height: 812px) and (max-width: 559px){
   #homepage {
-    height: 35rem;
+    top: 6rem;
     line-height: 20rem;
     font-size: 2rem;
+  }
+  #slogan:hover{
+    font-size: inherit
   }
   #loading{
     padding: 8rem 0;
@@ -77,6 +80,32 @@
   }
   #md {
     width: 100%;
+  }
+}
+/* 
+  针对homepage
+*/
+@media screen and (max-width: 565px) {
+  #homepage {
+    font-size: 3rem;
+  }
+  #md {
+    top: 6rem;
+  }
+  #topbar{
+    height: 6rem;
+  }
+}
+/* 
+  针对topbar
+*/
+@media screen and (max-width: 538px) {
+  #homepage {
+    top: 6rem;
+    font-size: 2rem;
+  }
+  #topbar{
+    height: 6rem;
   }
 }
 
