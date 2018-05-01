@@ -40,6 +40,9 @@ $(function () {
       get_todo()
     } else if (key === 'panel' && value === 'script') {
       get_script()
+    } else {
+      alert('No such page.')
+      location = '/'
     }
   }
 })
