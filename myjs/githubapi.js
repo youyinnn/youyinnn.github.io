@@ -23,6 +23,11 @@ function getset(url, asyn) {
     },
     'processData': false,
     'contentType': false,
+    'error': function (eve) {
+      console.log(eve)
+      alert('error on some thing~\r\n' + 'status:' + eve.status + '\r\nresponseText: ' + eve.responseText)
+      location = '/'
+    }
   }
   return basegetset
 }
@@ -42,6 +47,11 @@ function postset(url, form, asyn) {
     'data': form,
     'processData': false,
     'contentType': false,
+    'error': function (eve) {
+      console.log(eve)
+      alert('error on some thing~\r\n' + 'status:' + eve.status + '\r\nresponseText: ' + eve.responseText)
+      location = '/'
+    }
   }
   return basepostset
 }
