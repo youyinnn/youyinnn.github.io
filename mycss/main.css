@@ -229,7 +229,7 @@
 }
 
 .searchshow:hover {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .issuesbody {
@@ -257,4 +257,14 @@
 #gohub:active {
   color: rgb(166, 171, 175);
   transform: translateY(0.1rem);
+}
+
+.getnothing{
+  animation: getnothing 1s;
+}
+
+@keyframes getnothing{
+  50% {
+    background-color: rgba(192, 85, 85, 0.705);
+  }
 }

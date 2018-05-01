@@ -50,7 +50,7 @@
     margin: 0;
   }
   .searchshow {
-    opacity: 1;
+    opacity: 1 !important;
   }
   button,
   input {

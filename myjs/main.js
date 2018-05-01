@@ -3,6 +3,7 @@ var nowerpage = 1
 var totalpages
 var postpanelheight
 var postheight
+var searchone = 0
 
 $(function () {
 
@@ -77,20 +78,40 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
+  text = text.split('-i,')
+  let i = false
+  if (text.length > 1) {
+    i = true
+    text = text[1]
+  } else {
+    text = text[0]
+  }
+  text = text.replace(/ /g, '')
   let keywords = text.split(',')
   let regex = ''
   for (let i = 0; i < keywords.length - 1; i++) {
     regex += keywords[i] + '.*'
   }
   regex += keywords[keywords.length - 1]
-  for (let i = 0; i < scriptcount; i++) {
+  if (i) {
+    regex = new RegExp(regex, 'gi')
+  } else {
+    regex = new RegExp(regex, 'g')
+  }
+  for (let i = searchone; i < scriptcount; i++) {
     let script = $('#script-' + i)
     let scripttext = script[0].innerText
-    if (scripttext.search(new RegExp(regex, 'g')) !== -1) {
+    if (scripttext.search(regex) !== -1) {
+      searchone = i + 1
       scrolltoelement(script[0].id)
-      break
+      return
     }
   }
+  $('#searchtext').addClass('getnothing')
+  setTimeout(function () {
+    $('#searchtext').removeClass('getnothing')
+  }, 1100)
+  searchone = 0
 }
 
 function scrolltoelement(elementid) {

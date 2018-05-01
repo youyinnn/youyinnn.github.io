@@ -28,15 +28,22 @@ $(function () {
   })
   $(window).scroll(function () {
     var scrollTo = $(window).scrollTop(),
-    docHeight = $(document).height(),
-    windowHeight = $(window).height();
-    scrollPercent = (parseInt((scrollTo / (docHeight-windowHeight))  * 100)) + ' %';
-      percent.innerText = scrollPercent
-    
+      docHeight = $(document).height(),
+      windowHeight = $(window).height();
+    scrollPercent = (parseInt((scrollTo / (docHeight - windowHeight)) * 100)) + ' %';
+    percent.innerText = scrollPercent
+
   })
   $('#topbut, #topbut2').bind('click', function () {
     $('html,body').animate({
       scrollTop: 0
     }, 300);
+    searchone = 0
+  })
+  $('#searchtext').focus(function () {
+    $('#scriptsearcher')[0].style.opacity = '1'
+  })
+  $('#searchtext').blur(function () {
+    $('#scriptsearcher')[0].style.opacity = '0.3'
   })
 })
