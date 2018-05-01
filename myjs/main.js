@@ -64,7 +64,6 @@ function pagehandler(item, box, itemslength) {
 function hideloading() {
   removeClass(loading, 'show')
   addClass(loading, 'hide')
-  addClass(loading, 'remove')
 }
 
 function showloading() {

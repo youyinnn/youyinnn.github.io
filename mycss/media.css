@@ -1,33 +1,47 @@
-@media screen and (max-width: 536px) {
-  #sidetoccontainer{
-    display: none;
-  }
-  #topbar{
-    height: 6rem;
-  }
-  #md{
-    top:6rem;
-    width: 100%;
-  }
-  #sidetoc{
-    display: none;
-  }
-  #homepage{
-    line-height: 27rem;
-    font-size: 2rem;
-  }
-  #slogan:hover{
-    line-height: 27rem;
-    font-size: 2.1rem;
+/* 
+  iphone7 横屏
+*/
+@media screen and (max-height: 375px) {
+  #homepage {
+    height: 20rem;
+    line-height: 20rem;
+    font-size: 3rem;
   }
   #loading{
-    padding: 125px 0;
+    padding: 6rem 0;
   }
-  .friendcard{
+}
+
+/* 
+  iphone7/X 竖屏
+*/
+@media screen and (max-height: 812px) and (max-width: 375px){
+  #homepage {
+    height: 35rem;
+    line-height: 20rem;
+    font-size: 2rem;
+  }
+  #loading{
+    padding: 8rem 0;
+  }
+  #sidetoccontainer {
+    display: none;
+  }
+  #topbar {
+    height: 6rem;
+  }
+  #md {
+    top: 6rem;
+    width: 100%;
+  }
+  #sidetoc {
+    display: none;
+  }
+  .friendcard {
     margin: 0 auto;
     width: 18rem;
   }
-  #scriptsearcher{
+  #scriptsearcher {
     bottom: 0rem;
     width: 80%;
     margin: 0;
@@ -35,20 +49,43 @@
   .searchshow {
     opacity: 1;
   }
-  button , input{
+  button,
+  input {
     border-radius: 0 !important;
   }
-  button{
+  button {
     padding: 0.3rem !important;
   }
-  #gohub{
+  #gohub {
     right: 0;
     bottom: 0;
     width: 20%;
     height: 2.39rem;
     line-height: 2.39rem;
   }
-  #gohub:hover{
+  #gohub:hover {
     border-radius: 0;
+  }
+}
+
+/* 
+  针对阅读器
+*/
+@media screen and (max-width: 730px) {
+  #sidetoccontainer {
+    display: none;
+  }
+  #md {
+    width: 100%;
+  }
+}
+
+/* 
+  针对iphone5 等320宽
+*/
+@media screen and (max-width: 320px) {
+  .friendcard {
+    margin: 0 auto;
+    width: 15rem;
   }
 }

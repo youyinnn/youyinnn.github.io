@@ -110,7 +110,8 @@
 
 #loading{
   position: absolute;
-  padding: 250px 0;
+  z-index: 999;
+  padding: 15rem 0;
   margin: auto;
   left: 0;
   right: 0;

@@ -31,11 +31,8 @@ $(function () {
     docHeight = $(document).height(),
     windowHeight = $(window).height();
     scrollPercent = (parseInt((scrollTo / (docHeight-windowHeight))  * 100)) + ' %';
-    if (scrollPercent === '0 %') {
-      percent.innerText = ''
-    } else {
       percent.innerText = scrollPercent
-    }
+    
   })
   $('#topbut, #topbut2').bind('click', function () {
     $('html,body').animate({

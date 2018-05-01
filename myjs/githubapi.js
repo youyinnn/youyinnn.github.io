@@ -95,6 +95,7 @@ function get_post(number) {
     setgohub('Go hub', re.html_url) 
     createposthead(re)
     let text = re.body
+    hideloading()
     render_md(text)
   })
 }
