@@ -79,9 +79,9 @@ function hidesidetoc() {
 
 function searchscript(text) {
   text = text.split('-i,')
-  let i = false
+  let i = true
   if (text.length > 1) {
-    i = true
+    i = false
     text = text[1]
   } else {
     text = text[0]
