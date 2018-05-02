@@ -78,6 +78,12 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
+  if (text === '#l' || text === '#last') {
+    $('html,body').animate({
+      scrollTop: $('#search-' + (scriptcount - 1)).offset().top
+    }, 300);
+    return
+  }
   if (text.search(/#[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?/g) !== -1) {
     let searchid = '#search-' + text.split('#')[1]
     let search = $(searchid)
