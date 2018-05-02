@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    .blank{
+      width: 200px;
+      height: 30px;
+      overflow: hidden;
+      margin: auto;
+      /*border: 1px solid #000;*/
+    }
+    .bmenu {
+      margin: 0px auto;
+      width: 180px;
+      /*border: 1px red solid;*/
+      /* 块元素高度默认被子元素撑开 */
+      display: block;
+      position: relative;
+    }
+    .btitle {
+      color: white;
+      font-family: Microsoft YaHei;
+      text-align: center;
+      line-height: 28px;
+      height: 28px;
+      width: 190px;
+      margin: 1px auto 1px;
+      border: 1px black solid;
+      background-color: rgb(60, 66, 115);
+    }
+    .btitle:hover {
+      background-color: rgba(60, 66, 115, 0.8);
+    }
+    .btitle:active {
+      background-color: rgba(46, 50, 87, 1);
+    }
+    .item{
+      display: block;
+      font-family: Microsoft YaHei;
+      background-color: rgb(1, 135, 238);
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      height: 23px;
+      margin: 2px auto;
+    }
+    .item:hover{
+      background-color: rgb(70, 158, 226);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="blank" id="blank1">
+    <div class="btitle" id="bt1">
+      门户网址
+    </div>
+    <div class="bmenu" id="bm1">
+      <a href="#" class="item">百度</a>
+      <a href="#" class="item">腾讯</a>
+      <a href="#" class="item">谷歌</a>
+      <a href="#" class="item">网易</a>
+    </div>
+  </div>
+  <div class="blank" id="blank2">
+    <div class="btitle" id="bt2">
+      学习站
+    </div>
+    <div class="bmenu" id="bm2">
+      <a href="#" class="item">尚硅谷</a>
+      <a href="#" class="item">黑马</a>
+      <a href="#" class="item">传智播客</a>
+      <a href="#" class="item">妙味学堂</a>
+      <a href="#" class="item">极客学院</a>
+      <a href="#" class="item">阿里云课堂</a>
+    </div>
+  </div>
+  <div class="blank" id="blank3">
+    <div class="btitle" id="bt3">
+      社区
+    </div>
+    <div class="bmenu" id="bm3">
+      <a href="#" class="item">JFinal社区</a>
+      <a href="#" class="item">开源中国</a>
+      <a href="#" class="item">Atom中国</a>
+    </div>
+  </div>
+  <div class="blank" id="blank4">
+    <div class="btitle" id="bt4">
+      资源站
+    </div>
+    <div class="bmenu" id="bm4">
+      <a href="#" class="item">Panda图标</a>
+      <a href="#" class="item">阿里图标库</a>
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="./tool.js"></script>
+  <script type="text/javascript" src="./二级菜单.js"></script>
+  <script type="text/javascript">
+    /*  global bind BTitleFunction */
+    var bt1 = document.getElementById('bt1')
+    var bt2 = document.getElementById('bt2')
+    var bt3 = document.getElementById('bt3')
+    var bt4 = document.getElementById('bt4')
+
+    bind(bt1, 'click', new BTitleFunction(bt1).collapse)
+    bind(bt2, 'click', new BTitleFunction(bt2).collapse)
+    bind(bt3, 'click', new BTitleFunction(bt3).collapse)
+    bind(bt4, 'click', new BTitleFunction(bt4).collapse)
+
+
+  </script>
+</body>
+
+</html>

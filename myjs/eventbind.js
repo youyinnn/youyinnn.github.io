@@ -14,6 +14,9 @@ $(function () {
   $('#friendlinkbut').bind('click', function () {
     location = '/' + '?panel=friendlinked'
   })
+  $('#egg').bind('click', function () {
+    location = '/' + '?xixi=haha'
+  })
   $('#aboutbut').bind('click', function () {
     location = '/' + '?panel=about'
   })

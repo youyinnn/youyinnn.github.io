@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      #box1{
+        margin-top: 20px;
+        width: 100px;
+        height: 100px;
+        background-color: rgb(112, 173, 165);
+        position: relative;
+        left: 0px;
+      }
+
+      #bor{
+        width: 0;
+        height: 139px;
+        border-left: 1px black solid;
+        position: absolute;
+        left: 500px;
+        top: 0;
+      }
+
+      button{
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" id="btn1">走</button>
+    <button type="button" id="btn2">回</button>
+    <button type="button" id="btn3">得到x</button>
+    <div id="box1">
+    </div>
+    <hr>
+    <div id="bor">
+
+    </div>
+
+    <script src="./tool.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      /* global getStyle : true */
+      var box1 = document.getElementById('box1')
+      var btn1 = document.getElementById('btn1')
+      var btn2 = document.getElementById('btn2')
+      var btn3 = document.getElementById('btn3')
+      var timer
+      var x
+
+      // NOTE: 这是真正的匀加速直线运动的展示
+      /*
+        但是限制比较多 非常受初速度和加速度以及总位移的限制
+        实现的逻辑也比较复杂
+      */
+      btn1.onclick = function () {
+        clearTimeout(timer)
+        var startx = Number(getStyle(box1, 'left').split('px')[0])
+        var v0 = 24.5
+        var a = 0.6
+        var t = 1
+        timer = setTimeout(function start () {
+          t++
+          x = v0 * t - (a * Math.pow(t, 2)) * 0.5
+          x = startx + x
+          if (x > 500) {
+            x = 500
+          }
+          box1.style.left = x + 'px'
+          timer = setTimeout(start, 10)
+          if (x === 500) {
+            clearTimeout(timer)
+          }
+        }, 1)
+      }
+
+      btn2.onclick = function () {
+        x = Number(getStyle(box1, 'left').split('px')[0])
+        clearTimeout(timer)
+        timer = setTimeout(function b () {
+          clearTimeout(timer)
+          x--
+          if (x < 0) {
+            x = 0
+          }
+          box1.style.left = x + 'px'
+          timer = setTimeout(b, 1)
+          if (x === 0) {
+            clearTimeout(timer)
+          }
+        }, 1)
+      }
+
+      btn3.onclick = function () {
+        console.log(getStyle(box1, 'left').split('px')[0])
+      }
+    </script>
+  </body>
+</html>

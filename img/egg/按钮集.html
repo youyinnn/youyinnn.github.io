@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      /* 禁止选中并且兼容 */
+      *.unselectable{
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      a{
+        text-decoration: none;
+      }
+      .butcoll{
+        margin: 0 auto;
+        width: 500px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        box-shadow: 0px 3px 7px .8px rgba(17,16,16,.58);
+        perspective: 500px;
+        transform-style: preserve-3d;
+      }
+      .row{
+        transform-style: preserve-3d;
+        margin: 10px;
+        height: 40px;
+        border-bottom: 1px solid #000;
+      }
+      #bt1{
+        padding: 0px 5px;
+        display: inline-block;
+        font-family: Microsoft YaHei Light;
+        line-height: 30px;
+        text-align: center;
+        color: white;
+        height: 30px;
+        background-color: rgb(79,199,236);
+        border-radius: 10px;
+        box-shadow: 0px 4px 0px 0px rgb(59,148,176);
+        transition: all .4s;
+      }
+      #bt1:hover{
+        background-color: rgb(48,134,161);
+      }
+      #bt1:active{
+        transform: translateY(2px);
+      }
+
+      #bt2{
+        padding: 0px 5px;
+        display: inline-block;
+        font-family: Microsoft YaHei Light;
+        line-height: 30px;
+        text-align: center;
+        color: white;
+        height: 30px;
+        background-color: rgb(79,199,236);
+        border-radius: 10px;
+        transition: all .82s;
+        backface-visibility: hidden;
+      }
+      #bt2:hover{
+        background-color: rgb(48,134,161);
+      }
+      #bt2:active{
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="butcoll">
+      <div class="row">
+        <a href="javascript:;" id="bt1" class="unselectable">Button1</a>
+        <a href="javascript:;" id="bt2" class="unselectable">Button1</a>
+      </div>
+    </div>
+  </body>
+</html>

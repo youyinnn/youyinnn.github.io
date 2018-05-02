@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        /* 给舞台开启视点 */
+        perspective: 800px;
+      }
+      /* 禁止选中并且兼容 */
+      *.unselectable{
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .clearfix::after,
+      .clearfix::before{
+        content: "";
+        /* table和block效果一样 */
+        display: table;
+        /* clear不影响display:table */
+        clear: both;
+      }
+      .a{
+        width: 100px;
+        height: 100px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        margin: 0 auto;
+      }
+      span{
+        display: block;
+        padding: 40% 10%;
+      }
+      .cardbox{
+        transform-style: preserve-3d;
+        position: relative;
+        margin: 20px auto;
+        width: 280px;
+        height: 290px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+      }
+      .cardmsga{
+        font-family: Microsoft YaHei Light;
+        background-color: rgb(196,196,196);
+        position: relative;
+        top: -294px;
+        width: 280px;
+        height: 290px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transition: all .35s;
+        opacity: 0;
+      }
+      .cardbox:hover .cardmsga{
+        opacity: 1;
+        transform: translate(10px, 10px);
+      }
+
+      .cardmsgb{
+        font-family: Microsoft YaHei Light;
+        background-color: rgb(196,196,196);
+        position: relative;
+        top: 200px;
+        width: 280px;
+        height: 90px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transition: all .2s;
+      }
+      .cardb{
+        position: relative;
+        top: -90px;
+        transition: all .4s;
+      }
+      .cardbox:hover .cardb{
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transform: translateY(-85px);
+      }
+      .but{
+        display: block;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+        width: 80px;
+        height: 30px;
+        background-color: rgba(60,156,167,.82);
+        border-radius: 20px;
+        box-shadow: 0px 2px 0px 1px rgba(107,143,139,.71);
+        margin: 30px auto;
+        transition: all .01s;
+        cursor: pointer;
+      }
+      .but:hover{
+        background-color: rgba(57,133,142,1);
+      }
+      .but:active{
+        margin: 32px auto;
+      }
+
+      .cardmsgc{
+        font-family: Microsoft YaHei Light;
+        background-color: rgb(196,196,196);
+        position: relative;
+        top: -294px;
+        width: 280px;
+        height: 290px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transition: all .2s;
+        transform: scale(0.8, 0.8);
+        opacity: 0;
+      }
+      .cardbox:hover .cardmsgc{
+        transform: scale(1, 1);
+        opacity: .8;
+      }
+
+      .cardmsgd{
+        font-family: Microsoft YaHei Light;
+        background-color: rgb(196,196,196);
+        position: relative;
+        width: 280px;
+        height: 290px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transform: translateX(100px);
+        transition: all .4s;
+        opacity: 0;
+      }
+      .cardbox:hover .cardmsgd{
+        transform: translateX(0px);
+        opacity: 1;
+      }
+      .cardd{
+        position: absolute;
+        transition: all .2s;
+      }
+      .cardbox:hover .cardd{
+        opacity: 0.0;
+        transform: scale(0.8, 0.8) rotateY(5deg);
+      }
+
+      .cardmsge{
+        font-family: Microsoft YaHei Light;
+        background-color: rgb(196,196,196);
+        position: relative;
+        top: -295px;
+        width: 280px;
+        height: 290px;
+        box-shadow: 0px 3px 7px 1px rgba(36,44,46,.74);
+        transition: all .4s;
+        transform: scale(0.7, 0.7);
+        opacity: 0;
+      }
+      .cardbox:hover .cardmsge{
+        transform: scale(1, 1);
+        opacity: 1;
+      }
+      .carde{
+        transition: all .4s;
+      }
+      .cardbox:hover .carde{
+        transform: scale(1.2, 1.2);
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cardbox">
+      <img src="./card2.jpg" class="carda">
+      <div class="cardmsga">
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          我们一路奋战,不是为了能改变世界,而是为了不让世界改变我们。
+        </span>
+      </div>
+    </div>
+
+    <div class="cardbox unselectable">
+      <div class="cardmsgb clearfix">
+        <a type="button" class="but">HIT ME</a>
+      </div>
+      <img src="./card2.jpg" class="cardb">
+    </div>
+
+    <div class="cardbox">
+      <img src="./card2.jpg" class="cardc">
+      <div class="cardmsgc">
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          我们一路奋战,不是为了能改变世界,而是为了不让世界改变我们。
+        </span>
+      </div>
+    </div>
+
+    <div class="cardbox" style="overflow: hidden; background-color:rgba(51,62,82,.79);">
+      <img src="./card2.jpg" class="cardd">
+      <div class="cardmsgd">
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          我们一路奋战,不是为了能改变世界,而是为了不让世界改变我们。
+        </span>
+      </div>
+    </div>
+
+    <div class="cardbox">
+      <img src="./card2.jpg" class="carde">
+      <div class="cardmsge">
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          我们一路奋战,不是为了能改变世界,而是为了不让世界改变我们。
+        </span>
+      </div>
+    </div>
+
+    <div class="a"></div>
+  </body>
+</html>

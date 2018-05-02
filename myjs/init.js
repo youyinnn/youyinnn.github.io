@@ -40,6 +40,8 @@ $(function () {
       get_todo()
     } else if (key === 'panel' && value === 'script') {
       get_script()
+    } else if (key === 'xixi' && value === 'haha') {
+      get_egg()
     } else {
       alert('No such page.')
       location = '/'

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    #show {
+      border: 1px black solid;
+      width: 200px;
+      text-align: center;
+      margin: 50px auto 10px;
+    }
+
+    button {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="show">
+    <p id="count" style="line-height:10px;">1</p>
+    <hr>
+    <button type="button" id="start">开始</button>
+    <button type="button" id="stop">停止</button>
+  </div>
+
+  <script type="text/javascript">
+    /*
+      代码里面的部分应该是先数秒再执行第一次
+      setInterval()定时调用
+      参数1：回调函数
+      参数2：间隔时间（毫秒）
+
+      返回值 是一个数字 是定时器的序号标识
+      */
+    /*
+      clearInterval(num)
+      关闭定时器 传入定时间的序号
+    */
+    var i = 2;
+    var conut = document.getElementById('count');
+    var start = document.getElementById('start');
+    var stop  = document.getElementById('stop');
+    var timer ;
+
+    /*
+      这样就会出现问题 点一次按钮就会加一个timer定时器
+      这样所有定时器加起来的效果就会变快
+    */
+    start.onclick = function(){
+      // 为了防止定时器叠加 在开启之前做关闭
+      clearInterval(timer);
+      timer = setInterval(function() {
+        count.innerHTML = i;
+        ++i;
+      }, 10);
+    }
+
+    stop.onclick = function(){
+      clearInterval(timer);
+    }
+
+  </script>
+</body>
+
+</html>

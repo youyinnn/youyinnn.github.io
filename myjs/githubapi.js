@@ -12,7 +12,8 @@ var all
 
 function getset(url, asyn) {
   let basegetset = {
-    'async': asyn === undefined ? true : asyn,
+    'timeout': 5000,
+    'async': true,
     'crossDomain': true,
     'method': 'GET',
     'url': url,
@@ -24,8 +25,11 @@ function getset(url, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      console.log(eve)
-      alert('error on some thing~\r\n' + 'status:' + eve.status + '\r\nresponseText: ' + eve.responseText)
+      alert('error on some thing~\r\n' + 'status:' + eve.status +
+        '\r\nresponseText: ' + eve.responseText +
+        '\r\nstatusText: ' + eve.statusText +
+        '\r\nwill return to the home page')
+      eve.abort()
       location = '/'
     }
   }
@@ -34,7 +38,8 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
   let basepostset = {
-    'async': asyn === undefined ? true : asyn,
+    'timeout': 5000,
+    'async': true,
     'crossDomain': true,
     'method': 'POST',
     'url': url,
@@ -48,8 +53,11 @@ function postset(url, form, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      console.log(eve)
-      alert('error on some thing~\r\n' + 'status:' + eve.status + '\r\nresponseText: ' + eve.responseText)
+      alert('error on some thing~\r\n' + 'status:' + eve.status +
+        '\r\nresponseText: ' + eve.responseText +
+        '\r\nstatusText: ' + eve.statusText +
+        '\r\nwill return to the home page')
+      eve.abort()
       location = '/'
     }
   }
@@ -82,7 +90,7 @@ function search_issues_by_label(label, func) {
 
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
-    setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')     
+    setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
     for (let i = 0; i < re.length; ++i) {
       createpostcard(re[i])
     }
@@ -102,7 +110,7 @@ function get_posts() {
 function get_post(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
   sendget(url, function (re) {
-    setgohub('Go hub', re.html_url) 
+    setgohub('Go hub', re.html_url)
     createposthead(re)
     let text = re.body
     hideloading()
@@ -120,7 +128,7 @@ function get_about() {
 
 function get_friendlinked() {
   search_issues_by_label(friend_linked_label, function (re) {
-    setgohub('Go hub', re[0].html_url)    
+    setgohub('Go hub', re[0].html_url)
     let text = re[0].body
     let s = text.indexOf('@[', 0)
     let e = text.indexOf(']', s);
@@ -139,7 +147,6 @@ function get_friendlinked() {
 function get_issues_comments(number, issuesbody, func) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
   sendget(url, function (re) {
-    setgohub('Go hub', re[0].html_url)    
     func(issuesbody, re)
     hidesidetoc()
     hideloading()
@@ -148,12 +155,22 @@ function get_issues_comments(number, issuesbody, func) {
 
 function get_todo() {
   search_issues_by_label(todo_label, function (re) {
+    setgohub('Go hub', re[0].html_url)
     get_issues_comments(re[0].number, re[0].body, createtodo)
   })
 }
 
 function get_script() {
   search_issues_by_label(script_label, function (re) {
+    setgohub('Go hub', re[0].html_url)
     get_issues_comments(re[0].number, re[0].body, createscript)
+  })
+}
+
+function get_egg() {
+  let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yegg&state=closed'
+  sendget(url, function (re) {
+    setgohub('Go hub', re[0].html_url)
+    get_issues_comments(re[0].number, re[0].body, createegg)
   })
 }
