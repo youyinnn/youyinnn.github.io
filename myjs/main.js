@@ -80,7 +80,7 @@ function hidesidetoc() {
 function searchscript(text) {
   if (text === '#l' || text === '#last') {
     $('html,body').animate({
-      scrollTop: $('#search-' + (scriptcount - 1)).offset().top
+      scrollTop: $('#search-' + (searchcount - 1)).offset().top
     }, 300);
     return
   }
@@ -114,20 +114,26 @@ function searchscript(text) {
     } else {
       regex = new RegExp(regex, 'g')
     }
-    for (let i = searchone; i < scriptcount; i++) {
+    for (let i = searchone; i < searchcount; i++) {
       let search = $('#search-' + i)
       let scripttext = search[0].innerText
       if (scripttext.search(regex) !== -1) {
         searchone = i + 1
         scrolltoelement(search[0].id)
+        searchbut.innerText = 'Get #' + i
+        setTimeout(function () {
+          searchbut.innerText = 'Search'
+        }, 1000, 'swing')
         return
       }
     }
   }
   $('#searchtext').addClass('getnothing')
+  searchbut.innerText = 'No get'
   setTimeout(function () {
+    searchbut.innerText = 'Search'
     $('#searchtext').removeClass('getnothing')
-  }, 1000)
+  }, 1000, 'swing')
   searchone = 0
 }
 
@@ -137,7 +143,7 @@ function scrolltoelement(elementid) {
   }
   $('html,body').animate({
     scrollTop: $('#' + elementid)[0].oset
-  }, 500);
+  }, 600, 'swing');
 }
 
 function setgohub(text, href) {

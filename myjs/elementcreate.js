@@ -85,7 +85,6 @@ function friendcard(friend) {
 }
 
 function createtodo(issuesbody, re) {
-  removeClass(md, 'hide')
   let todohead = document.createElement('div')
   todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
   addClass(todohead, 'todohead unselectable')
@@ -94,16 +93,12 @@ function createtodo(issuesbody, re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card"><div class="card-header"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
+    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
   }
-  render_md(fulltext)
+  searchshowandrendermd(fulltext, re.length)
 }
 
 function createscript(issuesbody, re) {
-  removeClass(scriptsearcher, 'hide')
-  addClass(scriptsearcher, 'searchshow')
-  md.style.paddingBottom = '3rem'
-  removeClass(md, 'hide')
   let scripthead = document.createElement('div')
   scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
   addClass(scripthead, 'todohead unselectable')
@@ -114,15 +109,10 @@ function createscript(issuesbody, re) {
     let text = re[i].body
     fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
-  scriptcount = re.length
-  render_md(fulltext)
+  searchshowandrendermd(fulltext, re.length)
 }
 
 function createegg(issuesbody, re) {
-  removeClass(scriptsearcher, 'hide')
-  addClass(scriptsearcher, 'searchshow')
-  md.style.paddingBottom = '3rem'
-  removeClass(md, 'hide')
   let egghead = document.createElement('div')
   egghead.innerHTML = '<i class="em-svg em-clown_face"></i> E GGgG gGGG Gggg ggGG'
   addClass(egghead, 'todohead unselectable')
@@ -133,6 +123,14 @@ function createegg(issuesbody, re) {
     let text = re[i].body
     fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
-  scriptcount = re.length
+  searchshowandrendermd(fulltext, re.length)
+}
+
+function searchshowandrendermd(fulltext, relength) {
+  removeClass(scriptsearcher, 'hide')
+  addClass(scriptsearcher, 'searchshow')
+  md.style.paddingBottom = '3rem'
+  removeClass(md, 'hide')
+  searchcount = relength
   render_md(fulltext)
 }

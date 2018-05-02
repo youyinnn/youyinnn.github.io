@@ -207,7 +207,6 @@
 }
 
 .todohead {
-  height: 4rem;
   line-height: 4rem;
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -265,6 +264,10 @@
 
 @keyframes getnothing{
   50% {
-    background-color: rgba(192, 85, 85, 0.705);
+    background-color: rgb(211, 61, 61);
   }
+}
+
+#searchbut{
+  width: 5rem;
 }
