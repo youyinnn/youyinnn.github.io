@@ -112,13 +112,16 @@ function createscript(issuesbody, re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card" id="script-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
+    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
   scriptcount = re.length
   render_md(fulltext)
 }
 
 function createegg(issuesbody, re) {
+  removeClass(scriptsearcher, 'hide')
+  addClass(scriptsearcher, 'searchshow')
+  md.style.paddingBottom = '3rem'
   removeClass(md, 'hide')
   let egghead = document.createElement('div')
   egghead.innerHTML = '<i class="em-svg em-clown_face"></i> E GGgG gGGG Gggg ggGG'
@@ -128,7 +131,8 @@ function createegg(issuesbody, re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card" id="egg-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
+    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
   }
+  scriptcount = re.length
   render_md(fulltext)
 }

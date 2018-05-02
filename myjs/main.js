@@ -78,39 +78,50 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
-  text = text.split('-i,')
-  let i = true
-  if (text.length > 1) {
-    i = false
-    text = text[1]
-  } else {
-    text = text[0]
-  }
-  text = text.replace(/ /g, '')
-  let keywords = text.split(',')
-  let regex = ''
-  for (let i = 0; i < keywords.length - 1; i++) {
-    regex += keywords[i] + '.*'
-  }
-  regex += keywords[keywords.length - 1]
-  if (i) {
-    regex = new RegExp(regex, 'gi')
-  } else {
-    regex = new RegExp(regex, 'g')
-  }
-  for (let i = searchone; i < scriptcount; i++) {
-    let script = $('#script-' + i)
-    let scripttext = script[0].innerText
-    if (scripttext.search(regex) !== -1) {
-      searchone = i + 1
-      scrolltoelement(script[0].id)
+  if (text.search(/#[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?/g) !== -1) {
+    let searchid = '#search-' + text.split('#')[1]
+    let search = $(searchid)
+    if (search[0] !== undefined){
+      $('html,body').animate({
+        scrollTop: search.offset().top
+      }, 300);
       return
+    }
+  } else {
+    text = text.split('-i,')
+    let i = true
+    if (text.length > 1) {
+      i = false
+      text = text[1]
+    } else {
+      text = text[0]
+    }
+    text = text.replace(/ /g, '')
+    let keywords = text.split(',')
+    let regex = ''
+    for (let i = 0; i < keywords.length - 1; i++) {
+      regex += keywords[i] + '.*'
+    }
+    regex += keywords[keywords.length - 1]
+    if (i) {
+      regex = new RegExp(regex, 'gi')
+    } else {
+      regex = new RegExp(regex, 'g')
+    }
+    for (let i = searchone; i < scriptcount; i++) {
+      let search = $('#search-' + i)
+      let scripttext = search[0].innerText
+      if (scripttext.search(regex) !== -1) {
+        searchone = i + 1
+        scrolltoelement(search[0].id)
+        return
+      }
     }
   }
   $('#searchtext').addClass('getnothing')
   setTimeout(function () {
     $('#searchtext').removeClass('getnothing')
-  }, 1100)
+  }, 1000)
   searchone = 0
 }
 
