@@ -25,12 +25,14 @@ function getset(url, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      alert('error on some thing~\r\n' + 'status:' + eve.status +
-        '\r\nresponseText: ' + eve.responseText +
-        '\r\nstatusText: ' + eve.statusText +
-        '\r\nwill return to the home page')
-      eve.abort()
-      location = '/'
+      if (eve.status !== 0 && eve.statusText !== 'error') {
+        alert('error on some thing~\r\n' + 'status:' + eve.status +
+          '\r\nresponseText: ' + eve.responseText +
+          '\r\nstatusText: ' + eve.statusText +
+          '\r\nwill return to the home page')
+        eve.abort()
+        location = '/'
+      }
     }
   }
   return basegetset
@@ -53,12 +55,14 @@ function postset(url, form, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      alert('error on some thing~\r\n' + 'status:' + eve.status +
-        '\r\nresponseText: ' + eve.responseText +
-        '\r\nstatusText: ' + eve.statusText +
-        '\r\nwill return to the home page')
-      eve.abort()
-      location = '/'
+      if (eve.status !== 0 && eve.statusText !== 'error') {
+        alert('error on some thing~\r\n' + 'status:' + eve.status +
+          '\r\nresponseText: ' + eve.responseText +
+          '\r\nstatusText: ' + eve.statusText +
+          '\r\nwill return to the home page')
+        eve.abort()
+        location = '/'
+      }
     }
   }
   return basepostset
