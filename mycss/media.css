@@ -89,7 +89,7 @@
 /* 
   针对homepage
 */
-@media screen and (max-width: 565px) {
+@media screen and (max-width: 558px) {
   #homepage {
     font-size: 3rem;
   }

@@ -120,7 +120,7 @@ function get_post(number) {
       text += '<div id="commentline"></div> \r\n\r\n'
       text += '## Post comments\r\n'
       if (re.length === 0) {
-        text += '<div id="nocomment">No one has commented yet</div>'
+        text += '<div id="nocomment">No one has commented here yet</div>'
       } else {
         for (let i = 0; i < re.length; i++) {
           text += createpostcomment(i, re[i])
