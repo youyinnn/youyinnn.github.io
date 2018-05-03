@@ -126,7 +126,6 @@ function get_post(number) {
           text += createpostcomment(i, re[i])
         }
       }
-      console.log(text)
       hideloading()
       render_md(text)
     })

@@ -54,3 +54,13 @@ body {
 .egg:active{
   transform: translateY(3px);
 }
+
+.editormd-html-preview code,
+.editormd-preview-container code {
+  border: none !important;
+}
+
+.editormd-html-preview pre.prettyprint,
+.editormd-preview-container pre.prettyprint {
+  border: none !important;
+}
