@@ -35,8 +35,9 @@
       <li class="breadcrumb-item">
         <a id="todobut" href="javaScript:void(0)" class="ah">-todo</a>
       </li>
-      <li class="breadcrumb-item">
-        <a id="friendlinkbut" href="javaScript:void(0)" class="ah">-friendlinked</a>
+      <li class="breadcrumb-item dropdown">
+        <a href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friendlinked</a>
+        <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut"></div>
       </li>
       <li class="breadcrumb-item">
         <a id="aboutbut" href="javaScript:void(0)" class="ah">-about</a>
@@ -71,20 +72,20 @@
         </div>
       </div>
       
-      <div id="docpanel" class="unselectable hide">
+      <div id="docpanel" class="unselectable myhide">
       </div>
       
-      <div id="sidetoccontainer" class="hide">
+      <div id="sidetoccontainer" class="myhide">
         <div id="block">
           <div id="percent">0%</div>
           <div id="topbut">Go top</div>
         </div>
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
       </div>
-  <div id="md" class="hide">
+  <div id="md" class="myhide">
     
   </div>
-  <div id="scriptsearcher" class="hide input-group">
+  <div id="scriptsearcher" class="myhide input-group">
     <input id="searchtext" type="text" class="form-control" placeholder="keywords">
     <div class="input-group-append">
       <button id="searchbut" class="btn btn-dark" type="button">Search</button>
@@ -96,7 +97,7 @@
   
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.hotkeys.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
   
   <script src="js/hightlight-site-pack.js"></script>  
   

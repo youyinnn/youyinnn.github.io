@@ -6,7 +6,7 @@ function createpostcard(item) {
   let sp2 = document.createElement('span')
   let sp3 = document.createElement('span')
   let sp4 = document.createElement('span')
-  addClass(post, 'post hide')
+  addClass(post, 'post myhide')
   addClass(posttitle, 'posttitle center-to-head')
   addClass(posttime, 'posttime')
   addClass(sp1, 'font-weight-bold')
@@ -78,12 +78,6 @@ function showsaying(saying) {
   appendC(md, sayingpanel)
 }
 
-function friendcard(friend) {
-  let friendmsg = friend.substring(2, friend.length - 1).split('-')
-  let htmltext = '<div class="friendcard card"><div class="card-header bg-dark" style="color:white;">' + friendmsg[0] + '</div><div class="card-body"><blockquote class="blockquote mb-0"><p>' + friendmsg[1] + '</p></blockquote></div></div>'
-  return htmltext
-}
-
 function createtodo(issuesbody, re) {
   let todohead = document.createElement('div')
   todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
@@ -127,10 +121,10 @@ function createegg(issuesbody, re) {
 }
 
 function searchshowandrendermd(fulltext, relength) {
-  removeClass(scriptsearcher, 'hide')
+  removeClass(scriptsearcher, 'myhide')
   addClass(scriptsearcher, 'searchshow')
   md.style.paddingBottom = '3rem'
-  removeClass(md, 'hide')
+  removeClass(md, 'myhide')
   searchcount = relength
   render_md(fulltext)
 }

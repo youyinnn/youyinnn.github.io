@@ -99,10 +99,10 @@ function get_posts() {
     let posts = $('.post')
     for (let i = 0; i < posts.length; ++i) {
       let post = posts[i]
-      removeClass(post, 'hide')
+      removeClass(post, 'myhide')
       addClass(post, 'show')
     }
-    removeClass(docpanel, 'hide')
+    removeClass(docpanel, 'myhide')
     addClass(docpanel, 'show')
     pagehandler(posts[0], docpanel, posts.length)
     hideloading()
@@ -141,21 +141,45 @@ function get_about() {
 }
 
 function get_friendlinked() {
-  search_issues_by_label(friend_linked_label, function (re) {
-    setgohub('Go hub', re[0].html_url)
-    let text = re[0].body
-    let s = text.indexOf('@[', 0)
-    let e = text.indexOf(']', s);
-    while (s !== -1) {
-      let friend = text.substring(s, e + 1)
-      text = text.replace(/@\[.*-http.*\]/, friendcard(friend))
-      s = text.indexOf('@[', 0)
-      e = text.indexOf(']', s);
+  if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label
+    let basegetset = {
+      'timeout': 3000,
+      'async': true,
+      'url': url,
+      'crossDomain': true,
+      'method': 'GET',
+      'url': url,
+      'headers': {
+        'Authorization': 'Bearer ' + oauth_token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Accept': 'application/vnd.github.symmetra-preview+json',
+      },
+      'processData': false,
+      'contentType': false,
+      'error': function (eve) {
+        fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
+      }
     }
-    render_md(text)
-    hidesidetoc()
-    hideloading()
-  })
+    console.log('send get :' + url)
+    $.ajax(basegetset).done(function (re) {
+      fldd.innerHTML = ''
+      let text = re[0].body
+      let arr = text.split(',')
+      for (let i = 0; i < arr.length; i++) {
+        let msg = arr[i]
+        if (msg !== '') {
+          let sp = msg.split('-')
+          let ditem = document.createElement('a')
+          addClass(ditem, 'dropdown-item')
+          ditem.href = sp[1]
+          ditem.target = '_blank'
+          ditem.innerText = sp[0].replace(/\r\n/g, '')
+          appendC(fldd, ditem)
+        }
+      }
+    })
+  }
 }
 
 function get_issues_comments(number, issuesbody, func) {

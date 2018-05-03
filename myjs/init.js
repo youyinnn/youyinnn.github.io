@@ -9,9 +9,11 @@ var gohub = $('#gohub')[0]
 var percent = $('#percent')[0]
 var topbut = $('#topbut')[0]
 var searchbut = $('#searchbut')[0]
+var fldd = $('#fldd')[0]
 var searchcount
 
 $(function () {
+  get_friendlinked()
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
   // docpanel.style.height = parseInt(getWindowH()) - parseInt(topbarh) + 'px'
   // md.style.height = parseInt(getWindowH()) - parseInt(topbarh) - 1 + 'px'
@@ -21,7 +23,7 @@ $(function () {
     hideloading()
     hidesidetoc()    
     removeClass(homepage, 'remove')
-    addClass(homepage, 'show')
+    addClass(homepage, 'myshow')
     setgohub('My hub', 'https://github.com/' + username)
   } else {
     showloading()
@@ -35,8 +37,6 @@ $(function () {
       get_post(params[1].split('=')[1])
     } else if (key === 'panel' && value === 'about') {
       get_about()
-    } else if (key === 'panel' && value === 'friendlinked') {
-      get_friendlinked()
     } else if (key === 'panel' && value === 'todo') {
       get_todo()
     } else if (key === 'panel' && value === 'script') {

@@ -11,9 +11,6 @@ $(function () {
   $('#todobut').bind('click', function () {
     location = '/' + '?panel=todo'
   })
-  $('#friendlinkbut').bind('click', function () {
-    location = '/' + '?panel=friendlinked'
-  })
   $('#egg').bind('click', function () {
     location = '/' + '?xixi=haha'
   })

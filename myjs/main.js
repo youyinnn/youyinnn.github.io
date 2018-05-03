@@ -10,10 +10,10 @@ $(function () {
 })
 
 function render_md(text) {
-  removeClass(md, 'hide')
-  addClass(md, 'show')
-  removeClass(sidetoccontainer, 'hide')
-  addClass(sidetoccontainer, 'show')
+  removeClass(md, 'myhide')
+  addClass(md, 'myshow')
+  removeClass(sidetoccontainer, 'myhide')
+  addClass(sidetoccontainer, 'myshow')
   if (text.substring(0, 3) === '---') {
     let endindex = text.indexOf('---', 3) + 3
     let hexo_metadata = text.substring(4, endindex - 3)
@@ -66,13 +66,13 @@ function pagehandler(item, box, itemslength) {
 }
 
 function hideloading() {
-  removeClass(loading, 'show')
-  addClass(loading, 'hide')
+  removeClass(loading, 'myshow')
+  addClass(loading, 'myhide')
 }
 
 function showloading() {
   removeClass(loading, 'remove')
-  addClass(loading, 'show')
+  addClass(loading, 'myshow')
 }
 
 function hidesidetoc() {
