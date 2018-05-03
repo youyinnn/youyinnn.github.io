@@ -117,7 +117,7 @@ function get_post(number) {
     let text = re.body
     let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
     sendget(url2, function (re) {
-      text += '<div id="commentline"></div> \r\n\r\n'
+      text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
       text += '## Post comments\r\n'
       if (re.length === 0) {
         text += '<div id="nocomment">No one has commented here yet</div>'
