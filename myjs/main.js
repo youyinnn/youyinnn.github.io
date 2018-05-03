@@ -51,7 +51,6 @@ function render_md(text) {
   }
   $('pre, pre code').each(function (i, block) {
     hljs.highlightBlock(block);
-    hljs.lineNumbersBlock(block);
   });
 }
 
