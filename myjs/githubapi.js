@@ -25,13 +25,14 @@ function getset(url, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      if (eve.status !== 0 && eve.statusText !== 'error') {
+      console.log(eve)
+      if (eve.status === 0 && eve.statusText !== 'error') {
         alert('error on some thing~\r\n' + 'status:' + eve.status +
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
-        eve.abort()
-        location = '/'
+        // eve.abort()
+        // location.reload()
       }
     }
   }
@@ -60,8 +61,8 @@ function postset(url, form, asyn) {
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
-        eve.abort()
-        location = '/'
+        // eve.abort()
+        // location.reload()
       }
     }
   }
@@ -119,10 +120,14 @@ function get_post(number) {
     let text = re.body
     let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
     sendget(url2, function (re) {
-      text = text + '- - -\r\n'
-      text = text + '### Comments\r\n'
-      for (let i = 0; i < re.length ; i++) {
-        text += createpostcomment(i, re[i])
+      text += '<div id="commentline"></div> \r\n\r\n'
+      text += '## Post comments\r\n'
+      if (re.length === 0) {
+        text += '<div id="nocomment">No one has commented yet</div>'
+      } else {
+        for (let i = 0; i < re.length ; i++) {
+          text += createpostcomment(i, re[i])
+        }
       }
       hideloading()
       render_md(text)

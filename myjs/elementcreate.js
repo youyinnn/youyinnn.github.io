@@ -107,7 +107,7 @@ function createscript(issuesbody, re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
+    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
   }
   searchshowandrendermd(fulltext, re.length)
 }
@@ -121,7 +121,7 @@ function createegg(issuesbody, re) {
   for (let i = 0; i < re.length; ++i) {
     let head = re[i].created_at
     let text = re[i].body
-    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + ('\r\n' + text + '\r\n') + '</p></div></div><br>'
+    fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> Created at: </span>' + head + '</div><div class="card-body"><p class="card-text">' + text + '</p></div></div><br>'
   }
   searchshowandrendermd(fulltext, re.length)
 }
@@ -136,6 +136,6 @@ function searchshowandrendermd(fulltext, relength) {
 }
 
 function createpostcomment(i, comment) {
-  let commentCard = '<div class="card" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> at: </span>' + comment.created_at + '</div><div class="card-body"><p class="card-text">' + (comment.body) + '</p></div></div><br>'
+  let commentCard = '<div class="card" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> at: </span>' + comment.created_at + '</div><div class="card-body"><p class="card-text">' + comment.body + '</p></div></div><br>'
   return commentCard
 }

@@ -69,6 +69,10 @@
   #gohub:hover {
     border-radius: 0;
   }
+  #nocomment{
+    font-size: 1rem !important;
+    line-height: 3rem !important;
+  }
 }
 
 /* 

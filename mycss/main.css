@@ -42,7 +42,7 @@
   float: right;
 }
 
-#topbut:hover{
+#topbut:hover {
   background-color: #3c4247;
 }
 
@@ -175,6 +175,8 @@
   padding: 2rem 1rem;
   background-color: #f8f9fa;
   border-bottom: 2px black solid;
+  font-size: 1rem;
+  font-style: italic;
 }
 
 .saying:hover {
@@ -258,16 +260,29 @@
   transform: translateY(0.1rem);
 }
 
-.getnothing{
+.getnothing {
   animation: getnothing 1s;
 }
 
-@keyframes getnothing{
+@keyframes getnothing {
   50% {
     background-color: rgb(211, 61, 61);
   }
 }
 
-#searchbut{
+#searchbut {
   width: 5rem;
+}
+
+#commentline {
+  margin-top: 3rem;
+  border: 2px #3c4247 dashed;
+  width: 100%;
+}
+
+#nocomment {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 5rem;
 }
