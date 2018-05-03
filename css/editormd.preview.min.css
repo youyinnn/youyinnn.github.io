@@ -2728,7 +2728,7 @@ li.L8 {
 .markdown-body table,
 .markdown-body ul {
   margin-top: 0;
-  /* margin-bottom: 16px */
+  margin-bottom: 16px;
 }
 
 .markdown-body ol,
