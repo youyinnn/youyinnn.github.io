@@ -29,7 +29,7 @@ function render_md(text) {
     showsaying(saying)
   }
   while (true) {
-    let emojistart = text.search(/:[A-z|-]+[0-9]?:/g)
+    let emojistart = text.search(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
     if (emojistart === -1) break
     let emojiend = text.indexOf(':', emojistart + 1)
     let emoji = text.substring(emojistart, emojiend + 1)
@@ -37,13 +37,13 @@ function render_md(text) {
   }
   editormd.markdownToHTML('md', {
     markdown: text,
-    lib: './lib/',
-    htmlDecode: 'style,script,iframe|on,meta',
+    htmlDecode: 'style,script,iframe',
     tocm: true, // Using [TOCM]
     tocContainer: '#sidetoc',
-    taskList: true,
-    readOnly: true,
-    codeFold: true,
+    taskList        : true,
+    tex             : true,  // 默认不解析
+    flowChart       : true,  // 默认不解析
+    sequenceDiagram : true,  // 默认不解析
   });
   let as = $('#md a')
   for (let i = 0; i < as.length; i++) {
@@ -87,7 +87,7 @@ function searchscript(text) {
   if (text.search(/#[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?/g) !== -1) {
     let searchid = '#search-' + text.split('#')[1]
     let search = $(searchid)
-    if (search[0] !== undefined){
+    if (search[0] !== undefined) {
       $('html,body').animate({
         scrollTop: search.offset().top
       }, 300);

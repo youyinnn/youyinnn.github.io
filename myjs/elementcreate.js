@@ -137,6 +137,5 @@ function searchshowandrendermd(fulltext, relength) {
 
 function createpostcomment(i, comment) {
   let commentCard = '<div class="card" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> at: </span>' + comment.created_at + '</div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
-  console.log(commentCard)
   return commentCard
 }
