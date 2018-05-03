@@ -25,14 +25,12 @@ function getset(url, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      console.log(eve)
       if (eve.status === 0 && eve.statusText !== 'error') {
         alert('error on some thing~\r\n' + 'status:' + eve.status +
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
-        // eve.abort()
-        // location.reload()
+        location.reload()
       }
     }
   }
@@ -56,13 +54,12 @@ function postset(url, form, asyn) {
     'processData': false,
     'contentType': false,
     'error': function (eve) {
-      if (eve.status !== 0 && eve.statusText !== 'error') {
+      if (eve.status === 0 && eve.statusText !== 'error') {
         alert('error on some thing~\r\n' + 'status:' + eve.status +
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
-        // eve.abort()
-        // location.reload()
+        location.reload()
       }
     }
   }
@@ -125,10 +122,11 @@ function get_post(number) {
       if (re.length === 0) {
         text += '<div id="nocomment">No one has commented yet</div>'
       } else {
-        for (let i = 0; i < re.length ; i++) {
+        for (let i = 0; i < re.length; i++) {
           text += createpostcomment(i, re[i])
         }
       }
+      console.log(text)
       hideloading()
       render_md(text)
     })

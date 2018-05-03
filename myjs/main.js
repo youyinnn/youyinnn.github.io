@@ -38,7 +38,7 @@ function render_md(text) {
   editormd.markdownToHTML('md', {
     markdown: text,
     lib: './lib/',
-    htmlDecode: 'style,script,iframe|on',
+    htmlDecode: 'style,script,iframe|on,meta',
     tocm: true, // Using [TOCM]
     tocContainer: '#sidetoc',
     taskList: true,
