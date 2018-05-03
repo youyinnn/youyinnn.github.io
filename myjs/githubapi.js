@@ -117,8 +117,16 @@ function get_post(number) {
     setgohub('Go hub', re.html_url)
     createposthead(re)
     let text = re.body
-    hideloading()
-    render_md(text)
+    let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
+    sendget(url2, function (re) {
+      text = text + '- - -\r\n'
+      text = text + '### Comments\r\n'
+      for (let i = 0; i < re.length ; i++) {
+        text += createpostcomment(i, re[i])
+      }
+      hideloading()
+      render_md(text)
+    })
   })
 }
 

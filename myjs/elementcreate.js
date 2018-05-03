@@ -134,3 +134,8 @@ function searchshowandrendermd(fulltext, relength) {
   searchcount = relength
   render_md(fulltext)
 }
+
+function createpostcomment(i, comment) {
+  let commentCard = '<div class="card" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;">Comment <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> by <a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> created at: </span>' + comment.created_at + '</div><div class="card-body"><p class="card-text">' + (comment.body) + '</p></div></div><br>'
+  return commentCard
+}
