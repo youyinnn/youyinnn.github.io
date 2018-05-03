@@ -16,6 +16,33 @@ body {
   display: inline;
 }
 
+pre {
+  border-radius: 0.5rem !important;
+}
+
+/* for block of numbers */
+td.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #CCC;
+  vertical-align: top;
+  padding: 0 12px 0 5px;
+
+  /* your custom style here */
+}
+
+/* for block of code */
+td.hljs-ln-code {
+  padding-left: 10px;
+}
+
 /*
       通过after伪类选中box1的后面
       而且这样不会在页面中添加多余的div
@@ -53,14 +80,4 @@ body {
 
 .egg:active{
   transform: translateY(3px);
-}
-
-.editormd-html-preview code,
-.editormd-preview-container code {
-  border: none !important;
-}
-
-.editormd-html-preview pre.prettyprint,
-.editormd-preview-container pre.prettyprint {
-  border: none !important;
 }

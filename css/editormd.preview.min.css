@@ -2518,8 +2518,8 @@ li.L8 {
   padding: 0
 }
 
-.markdown-body td,
-.markdown-body th {
+.markdown-body > td,
+.markdown-body > th {
   padding: 0
 }
 
@@ -2728,7 +2728,7 @@ li.L8 {
 .markdown-body table,
 .markdown-body ul {
   margin-top: 0;
-  margin-bottom: 16px
+  /* margin-bottom: 16px */
 }
 
 .markdown-body ol,
@@ -2793,18 +2793,18 @@ li.L8 {
   font-weight: 700
 }
 
-.markdown-body table td,
-.markdown-body table th {
+.markdown-body > table td,
+.markdown-body > table th {
   padding: 6px 13px;
   border: 1px solid #ddd
 }
 
-.markdown-body table tr {
+.markdown-body > table tr {
   background-color: #fff;
   border-top: 1px solid #ccc
 }
 
-.markdown-body table tr:nth-child(2n) {
+.markdown-body > table tr:nth-child(2n) {
   background-color: #f8f8f8
 }
 
@@ -2846,8 +2846,8 @@ li.L8 {
 .markdown-body pre {
   padding: 16px;
   overflow: auto;
-  font-size: 85%;
-  background-color: #f7f7f7;
+  font-size: 98%;
+  /* background-color: #f7f7f7; */
   border-radius: 3px
 }
 
@@ -3057,7 +3057,7 @@ li.L8 {
 
 .editormd-html-preview code,
 .editormd-preview-container code {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   background: #f6f6f6;
   padding: 3px;
   border-radius: 3px;
@@ -3067,7 +3067,7 @@ li.L8 {
 .editormd-html-preview pre,
 .editormd-preview-container pre {
   border: 1px solid #ddd;
-  background: #f6f6f6;
+  /* background: #f6f6f6; */
   padding: 10px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3090,8 +3090,8 @@ li.L8 {
   font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace
 }
 
-.editormd-html-preview table thead tr,
-.editormd-preview-container table thead tr {
+.editormd-html-preview > table thead tr,
+.editormd-preview-container > table thead tr {
   background-color: #F8F8F8
 }
 

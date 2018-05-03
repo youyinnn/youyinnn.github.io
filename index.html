@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="mycss/default.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/editormd.preview.min.css" />
+  <link rel="stylesheet" href="css/styles/atom-one-dark.css"/>
   <link rel="shortcut icon" href="img/favicon-48.ico" />
   <link rel="bookmark" href="img/favicon-48.ico" />
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -18,70 +19,70 @@
 </head>
 
 <body>
-
+  
   <ol id="topbar" class="breadcrumb unselectable">
     <p style="color:rgb(169, 235, 255); padding-right: 1rem;">
       <button id="egg" class="egg em-svg em-closed_book"></button> : ></p>
-    <li class="breadcrumb-item">
-      <a id="homebut" href="javaScript:void(0)" class="ah">-home</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a id="postsbut" href="javaScript:void(0)" class="ah">-posts</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a id="scriptbut" href="javaScript:void(0)" class="ah">-script</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a id="todobut" href="javaScript:void(0)" class="ah">-todo</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a id="friendlinkbut" href="javaScript:void(0)" class="ah">-friendlinked</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a id="aboutbut" href="javaScript:void(0)" class="ah">-about</a>
-    </li>
-  </ol>
-
-  <div id="homepage" class="remove unselectable">
-    <span id="slogan">
-      <i class="em-svg em-closed_book"></i>Notice Everything</span>
-  </div>
-
-  <div id="loading" class="remove">
-    <div class="spinner">
-      <div class="spinner-container container1">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
+      <li class="breadcrumb-item">
+        <a id="homebut" href="javaScript:void(0)" class="ah">-home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a id="postsbut" href="javaScript:void(0)" class="ah">-posts</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a id="scriptbut" href="javaScript:void(0)" class="ah">-script</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a id="todobut" href="javaScript:void(0)" class="ah">-todo</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a id="friendlinkbut" href="javaScript:void(0)" class="ah">-friendlinked</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a id="aboutbut" href="javaScript:void(0)" class="ah">-about</a>
+      </li>
+    </ol>
+    
+    <div id="homepage" class="remove unselectable">
+      <span id="slogan">
+        <i class="em-svg em-closed_book"></i>Notice Everything</span>
       </div>
-      <div class="spinner-container container2">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
+      
+      <div id="loading" class="remove">
+        <div class="spinner">
+          <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+        </div>
       </div>
-      <div class="spinner-container container3">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
+      
+      <div id="docpanel" class="unselectable hide">
       </div>
-    </div>
-  </div>
-
-  <div id="docpanel" class="unselectable hide">
-  </div>
-
-  <div id="sidetoccontainer" class="hide">
-    <div id="block">
-      <div id="percent">0%</div>
-      <div id="topbut">Go top</div>
-    </div>
-    <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
-  </div>
+      
+      <div id="sidetoccontainer" class="hide">
+        <div id="block">
+          <div id="percent">0%</div>
+          <div id="topbut">Go top</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+      </div>
   <div id="md" class="hide">
-
+    
   </div>
   <div id="scriptsearcher" class="hide input-group">
     <input id="searchtext" type="text" class="form-control" placeholder="keywords">
@@ -90,13 +91,16 @@
       <button id="topbut2" class="btn btn-dark" type="button">Go top</button>
     </div>
   </div>
-
+  
   <a id="gohub" href="#" target="_blank">unuse</a>
-
+  
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.hotkeys.js"></script>
   <script src="js/bootstrap.min.js"></script>
-
+  
+  <script src="js/hightlight-site-pack.js"></script>  
+  <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.3.0/dist/highlightjs-line-numbers.min.js"></script>
+  
   <script src="./lib/marked.min.js"></script>
   <script src="./lib/raphael.min.js"></script>
   <script src="./lib/underscore.min.js"></script>
@@ -104,7 +108,7 @@
   <script src="./lib/flowchart.min.js"></script>
   <script src="./lib/jquery.flowchart.min.js"></script>
   <script src="js/editormd.min.js"></script>
-
+  
   <script src="myjs/init.js"></script>
   <script src="myjs/eventbind.js"></script>
   <script src="myjs/tool.js"></script>

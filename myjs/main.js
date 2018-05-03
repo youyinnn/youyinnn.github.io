@@ -40,15 +40,19 @@ function render_md(text) {
     htmlDecode: 'style,script,iframe',
     tocm: true, // Using [TOCM]
     tocContainer: '#sidetoc',
-    taskList        : true,
-    tex             : true,  // 默认不解析
-    flowChart       : true,  // 默认不解析
-    sequenceDiagram : true,  // 默认不解析
+    taskList: true,
+    tex: true, // 默认不解析
+    flowChart: true, // 默认不解析
+    sequenceDiagram: true, // 默认不解析
   });
   let as = $('#md a')
   for (let i = 0; i < as.length; i++) {
     as[i].target = '_blank'
   }
+  $('pre, pre code').each(function (i, block) {
+    hljs.highlightBlock(block);
+    hljs.lineNumbersBlock(block);
+  });
 }
 
 function postspage(pageto) {
