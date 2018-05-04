@@ -8,11 +8,15 @@ var todo_label = 'ytodo'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
-var all
+var fast_get_timeout = 600
+var slow_get_timeout = 3000
+var fast_post_timeout = 1200
+var slow_post_timeout = 5000
+var timeline = 20
 
 function getset(url, asyn) {
   let basegetset = {
-    'timeout': 5000,
+    'timeout': dayjs().hour() > timeline ? slow_get_timeout : fast_get_timeout,
     'async': true,
     'crossDomain': true,
     'method': 'GET',
@@ -39,7 +43,7 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
   let basepostset = {
-    'timeout': 5000,
+    'timeout': dayjs().hour() > timeline ? slow_post_timeout : fast_post_timeout,
     'async': true,
     'crossDomain': true,
     'method': 'POST',
