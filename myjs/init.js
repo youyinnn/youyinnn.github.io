@@ -13,6 +13,7 @@ var fldd = $('#fldd')[0]
 var searchcount
 
 $(function () {
+  settimeout()
   get_friendlinked()
   let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
   // docpanel.style.height = parseInt(getWindowH()) - parseInt(topbarh) + 'px'

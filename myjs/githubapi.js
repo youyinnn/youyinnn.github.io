@@ -8,15 +8,19 @@ var todo_label = 'ytodo'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
-var fast_get_timeout = 600
-var slow_get_timeout = 3000
-var fast_post_timeout = 1200
-var slow_post_timeout = 5000
-var timeline = 20
+var get_timeout
+var post_timeout
+
+function settimeout() {
+  let nowhour = dayjs().hour()
+  get_timeout = (nowhour >= 19 || nowhour <= 6)  ? 2000 : 600
+  post_timeout = (nowhour >= 19 || nowhour <= 6)  ? 3400 : 1200
+  console.log('timeout is [get:' + get_timeout + '], [post:' + post_timeout + ']')
+}
 
 function getset(url, asyn) {
   let basegetset = {
-    'timeout': dayjs().hour() > timeline ? slow_get_timeout : fast_get_timeout,
+    'timeout': get_timeout,
     'async': true,
     'crossDomain': true,
     'method': 'GET',
@@ -43,7 +47,7 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
   let basepostset = {
-    'timeout': dayjs().hour() > timeline ? slow_post_timeout : fast_post_timeout,
+    'timeout': post_timeout,
     'async': true,
     'crossDomain': true,
     'method': 'POST',
