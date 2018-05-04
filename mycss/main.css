@@ -199,11 +199,6 @@
   bottom: 0;
 }
 
-#slogan:hover {
-  color: white;
-  font-size: 4.1rem;
-}
-
 .friendcard {
   margin: 0 auto;
   width: 30rem;
@@ -288,6 +283,24 @@
   line-height: 5rem;
 }
 
-.dropdown-item{
+.dropdown-item {
   z-index: none;
+}
+
+#showmore {
+  position: absolute;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.2rem;
+  width: 100%;
+  top: 26rem;
+  transition: all .2s;
+}
+#showmore:hover {
+  font-size: 1.3rem;
+  color: white;
+}
+
+#showmore:active{
+  transform: translateY(4px);
 }

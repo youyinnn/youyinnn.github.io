@@ -14,7 +14,7 @@ $(function () {
   $('#egg').bind('click', function () {
     location = '/' + '?xixi=haha'
   })
-  $('#aboutbut').bind('click', function () {
+  $('#showmore').bind('click', function () {
     location = '/' + '?panel=about'
   })
   $('#searchbut').bind('click', function () {
