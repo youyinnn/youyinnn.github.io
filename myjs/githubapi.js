@@ -13,8 +13,8 @@ var post_timeout
 
 function settimeout() {
   let nowhour = dayjs().hour()
-  get_timeout = (nowhour >= 19 || nowhour <= 6)  ? 2000 : 600
-  post_timeout = (nowhour >= 19 || nowhour <= 6)  ? 3400 : 1200
+  get_timeout = (nowhour >= 19 || nowhour <= 6)  ? 3500 : 1500
+  post_timeout = (nowhour >= 19 || nowhour <= 6)  ? 7000 : 3500
   console.log('timeout is [get:' + get_timeout + '], [post:' + post_timeout + ']')
 }
 
