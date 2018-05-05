@@ -81,12 +81,12 @@ function hideloading() {
 }
 
 function showloading() {
-  removeClass(loading, 'remove')
+  removeClass(loading, 'myhide')
   addClass(loading, 'myshow')
 }
 
 function hidesidetoc() {
-  addClass(sidetoccontainer, 'remove')
+  addClass(sidetoccontainer, 'myhide')
   addClass(md, 'w-100')
 }
 
