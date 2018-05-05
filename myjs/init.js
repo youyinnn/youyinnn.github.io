@@ -33,16 +33,22 @@ $(function () {
     let key = kv[0]
     let value = kv[1]
     if (key === 'panel' && value === 'posts') {
+      changepagetitle('posts | youyinnn')
       get_posts()
     } else if (key === 'panel' && value === 'post') {
+      changepagetitle('post | youyinnn')
       get_post(params[1].split('=')[1])
     } else if (key === 'panel' && value === 'about') {
+      changepagetitle('about | youyinnn')
       get_about()
     } else if (key === 'panel' && value === 'todo') {
+      changepagetitle('todo | youyinnn')
       get_todo()
     } else if (key === 'panel' && value === 'script') {
+      changepagetitle('script | youyinnn')
       get_script()
     } else if (key === 'xixi' && value === 'haha') {
+      changepagetitle('egg | youyinnn')
       get_egg()
     } else {
       alert('No such page.')

@@ -8,19 +8,17 @@ var todo_label = 'ytodo'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
-var get_timeout
-var post_timeout
+var timeout
 
 function settimeout() {
   let nowhour = dayjs().hour()
-  get_timeout = (nowhour >= 19 || nowhour <= 6)  ? 3500 : 1500
-  post_timeout = (nowhour >= 19 || nowhour <= 6)  ? 7000 : 3500
-  console.log('timeout is [get:' + get_timeout + '], [post:' + post_timeout + ']')
+  timeout = (nowhour >= 19 || nowhour <= 6)  ? 5000 : 2500
+  console.log('timeout is [' + timeout + ']')
 }
 
 function getset(url, asyn) {
   let basegetset = {
-    'timeout': get_timeout,
+    'timeout': timeout,
     'async': true,
     'crossDomain': true,
     'method': 'GET',
@@ -34,7 +32,7 @@ function getset(url, asyn) {
     'contentType': false,
     'error': function (eve) {
       if (eve.status === 0 && eve.statusText !== 'error') {
-        alert('error on some thing~\r\n' + 'status:' + eve.status +
+        alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
@@ -47,7 +45,7 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
   let basepostset = {
-    'timeout': post_timeout,
+    'timeout': timeout,
     'async': true,
     'crossDomain': true,
     'method': 'POST',
@@ -63,7 +61,7 @@ function postset(url, form, asyn) {
     'contentType': false,
     'error': function (eve) {
       if (eve.status === 0 && eve.statusText !== 'error') {
-        alert('error on some thing~\r\n' + 'status:' + eve.status +
+        alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')

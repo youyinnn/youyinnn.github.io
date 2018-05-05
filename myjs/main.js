@@ -153,3 +153,7 @@ function setgohub(text, href) {
   gohub.innerText = text
   gohub.href = href
 }
+
+function changepagetitle(text) {
+  $('title')[0].innerText = text
+}
