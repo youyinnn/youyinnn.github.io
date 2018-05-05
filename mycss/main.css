@@ -50,6 +50,16 @@
   border-left: 0.1rem #ccc dashed;
 }
 
+#sidetoc a{
+  transition: all .2s;
+  color: #24292e;
+  text-decoration: none;
+}
+
+#sidetoc a:hover{
+  background-color: #9e9e9e;
+}
+
 #md {
   position: absolute;
   top: 3rem;
@@ -280,7 +290,11 @@
   text-align: center;
   font-weight: bold;
   font-size: 1.4rem;
-  line-height: 5rem;
+  line-height: 2.5rem;
+}
+
+#nocomment > a{
+  font-size: 1rem;
 }
 
 .dropdown-item {
@@ -304,3 +318,4 @@
 #showmore:active{
   transform: translateY(4px);
 }
+

@@ -118,7 +118,8 @@ function get_posts() {
 function get_post(number) {
   let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
   sendget(url, function (re) {
-    setgohub('Go hub', re.html_url)
+    let page = re.html_url
+    setgohub('Go hub', page)
     createposthead(re)
     let text = re.body
     let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
@@ -126,7 +127,7 @@ function get_post(number) {
       text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
       text += '## Post comments\r\n'
       if (re.length === 0) {
-        text += '<div id="nocomment">No one has commented here yet</div>'
+        text += '<div id="nocomment">No one has commented here yet \r\n <a href="' + page + '">Add comment</a></div>'
       } else {
         for (let i = 0; i < re.length; i++) {
           text += createpostcomment(i, re[i])
@@ -134,6 +135,17 @@ function get_post(number) {
       }
       hideloading()
       render_md(text)
+      if (re.length !== 0) {
+        let addcomment = document.createElement('div')
+        let a = document.createElement('a')
+        addcomment.id = 'nocomment'
+        addcomment.style.transform = 'translateY(-16px)'
+        a.href = page
+        a.target = '_blank'
+        a.innerText = 'Add comment'
+        appendC(addcomment, a)
+        appendC(md, addcomment)
+      }
     })
   })
 }
