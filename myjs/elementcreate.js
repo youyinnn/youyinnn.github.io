@@ -1,4 +1,4 @@
-function createpostcard(item) {
+function createpostcard(item, pagebelong) {
   let post = document.createElement('div')
   let posttitle = document.createElement('div')
   let posttime = document.createElement('div')
@@ -6,7 +6,7 @@ function createpostcard(item) {
   let sp2 = document.createElement('span')
   let sp3 = document.createElement('span')
   let sp4 = document.createElement('span')
-  addClass(post, 'post myhide')
+  addClass(post, 'post')
   addClass(posttitle, 'posttitle center-to-head')
   addClass(posttime, 'posttime')
   addClass(sp1, 'font-weight-bold')
@@ -23,7 +23,7 @@ function createpostcard(item) {
   appendC(posttime, sp3)
   appendC(posttime, sp4)
   appendC(post, posttime)
-  appendC(docpanel, post)
+  appendC($('#pagebox-' + pagebelong)[0], post)
   $(posttitle).bind('click', function () {
     location = '/' + '?panel=post&number=' + posttitle.number
   })

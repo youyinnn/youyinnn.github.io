@@ -1,14 +1,5 @@
-var pageload
-var nowerpage = 1
-var totalpages
-var postpanelheight
-var postheight
 var searchone = 0
 var searchtext
-
-$(function () {
-
-})
 
 function render_md(text) {
   removeClass(md, 'myhide')
@@ -59,11 +50,29 @@ function postspage(pageto) {
   docpanel.style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
-function pagehandler(item, box, itemslength) {
-  postheight = item.clientHeight + 48
-  postpanelheight = box.clientHeight
-  pageload = parseInt(postpanelheight / (postheight))
-  totalpages = Math.round(itemslength / pageload)
+function pagehandler(totalPages) {
+  $(docpanel).twbsPagination({
+    totalPages: totalPages,
+    hideOnlyOnePage: true,
+    prev: '<',
+    next: '>',
+    first: 'F',
+    last: 'L',
+    loop: true,
+    visiblePages: 3,
+    onPageClick: function (event, page) {
+      for (let i = 1; i <= totalPages; i++) {
+        let pagebox = $('#pagebox-' + i)[0]
+        if (i === page) {
+          removeClass(pagebox, 'myhide')
+          addClass(pagebox, 'myshow')
+        } else {
+          addClass(pagebox, 'myhide')
+          removeClass(pagebox, 'myshow')
+        }
+      }
+    }
+  });
 }
 
 function hideloading() {

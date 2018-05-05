@@ -99,18 +99,22 @@ function search_issues_by_label(label, func) {
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-    for (let i = 0; i < re.length; ++i) {
-      createpostcard(re[i])
+    let totalpages = Math.ceil(re.length / 5)
+    let pagesboxs = new Array(totalpages)
+    for (let i = 0; i < totalpages; i++) {
+      let pagebox = document.createElement('div')
+      addClass(pagebox, 'pagebox')
+      pagebox.id = 'pagebox-' + (i + 1)
+      appendC(docpanel, pagebox)
+      pagesboxs[i] = pagebox
     }
-    let posts = $('.post')
-    for (let i = 0; i < posts.length; ++i) {
-      let post = posts[i]
-      removeClass(post, 'myhide')
-      addClass(post, 'show')
+    console.log(pagesboxs)
+    for (let i = 0; i < re.length; ++i) {
+      createpostcard(re[i], Math.ceil((i + 1) / 5))
     }
     removeClass(docpanel, 'myhide')
-    addClass(docpanel, 'show')
-    pagehandler(posts[0], docpanel, posts.length)
+    addClass(docpanel, 'myshow')
+    pagehandler(totalpages)
     hideloading()
   })
 }

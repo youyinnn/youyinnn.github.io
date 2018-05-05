@@ -59,7 +59,7 @@ function addClass(obj, cn) {
   */
 function removeClass(obj, cn) {
   var rgx = new RegExp(' *' + cn + ' *')
-  obj.className = obj.className.replace(rgx, '')
+  obj.className = obj.className.replace(rgx, ' ')
 }
 /*
   为元素改变类样式 有就移除 没有就增加
