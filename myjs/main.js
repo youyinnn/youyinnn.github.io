@@ -4,6 +4,7 @@ var totalpages
 var postpanelheight
 var postheight
 var searchone = 0
+var searchtext
 
 $(function () {
 
@@ -81,6 +82,10 @@ function hidesidetoc() {
 }
 
 function searchscript(text) {
+  if (searchtext !== text) {
+    searchone = 0
+  }
+  searchtext = text
   if (text === '#l' || text === '#last') {
     $('html,body').animate({
       scrollTop: $('#search-' + (searchcount - 1)).offset().top
@@ -98,29 +103,30 @@ function searchscript(text) {
     }
   } else {
     text = text.split('-i,')
-    let i = true
+    let isi = true
     if (text.length > 1) {
-      i = false
+      isi = false
       text = text[1]
     } else {
       text = text[0]
     }
     text = text.replace(/ /g, '')
     let keywords = text.split(',')
-    let regex = ''
-    for (let i = 0; i < keywords.length - 1; i++) {
-      regex += keywords[i] + '.*'
-    }
-    regex += keywords[keywords.length - 1]
-    if (i) {
-      regex = new RegExp(regex, 'gi')
-    } else {
-      regex = new RegExp(regex, 'g')
+    for (let i = 0; i < keywords.length; i++) {
+      if (isi) {
+        keywords[i] = new RegExp(keywords[i], 'gi')
+      } else {
+        keywords[i] = new RegExp(keywords[i], 'g')
+      }
     }
     for (let i = searchone; i < searchcount; i++) {
       let search = $('#search-' + i)
       let scripttext = search[0].innerText
-      if (scripttext.search(regex) !== -1) {
+      let get = true
+      for (let j = 0; j < keywords.length; j++) {
+        get = scripttext.search(keywords[j]) === -1 ? get && false : get && true
+      }
+      if (get) {
         searchone = i + 1
         scrolltoelement(search[0].id)
         searchbut.innerText = 'Get #' + i

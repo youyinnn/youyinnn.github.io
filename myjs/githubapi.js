@@ -12,7 +12,7 @@ var timeout
 
 function settimeout() {
   let nowhour = dayjs().hour()
-  timeout = (nowhour >= 19 || nowhour <= 6)  ? 5000 : 2500
+  timeout = (nowhour >= 19 || nowhour <= 6)  ? 10000 : 5000
   console.log('timeout is [' + timeout + ']')
 }
 
