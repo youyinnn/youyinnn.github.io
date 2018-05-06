@@ -8,8 +8,8 @@ function render_md(text) {
   addClass(sidetoccontainer, 'myshow')
   if (text.substring(0, 3) === '---') {
     let endindex = text.indexOf('---', 3) + 3
-    let hexo_metadata = text.substring(4, endindex - 3)
-    hexo_metadata = hexo_metadata.replace(/\r\n/gm, '</br>')
+    let hexo_metadata = gethexofrontmatter(text)
+    hexo_metadata = yaml.load(hexo_metadata.replace(/\r\n/gm, '\n'))
     showhexometadata(hexo_metadata)
     text = text.substring(endindex, text.length)
   }
@@ -171,4 +171,11 @@ function setgohub(text, href) {
 
 function changepagetitle(text) {
   $('title')[0].innerText = text
+}
+
+function gethexofrontmatter(text) {
+  let endindex = text.indexOf('---', 3) + 3
+  let hexo_metadata = text.substring(4, endindex - 3)
+  console.log(hexo_metadata)
+  return hexo_metadata
 }

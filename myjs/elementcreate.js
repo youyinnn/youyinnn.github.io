@@ -64,10 +64,33 @@ function showhexometadata(hexometadata) {
   addClass(metadatapanel, 'metadata')
   addClass(metadatapanelhead, 'metadatahead')
   addClass(metadatapanelbody, 'metadatabody')
-  metadatapanelhead.innerHTML = 'Hexo metadata'
+  metadatapanelhead.innerHTML = 'Hexo Front-matter'
   appendC($(metadatapanel)[0], metadatapanelhead)
-  metadatapanelbody.innerHTML += hexometadata
   appendC($(metadatapanel)[0], metadatapanelbody)
+  if (hexometadata.title !== undefined) {
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Title:</span> ' + hexometadata.title + '<br>'
+  }
+  if (hexometadata.date !== undefined) {
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + hexometadata.date + '<br>'
+  }
+  if (hexometadata.updated !== undefined) {
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + hexometadata.updated + '<br>'
+  }
+  if (hexometadata.comments !== undefined) {
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Comments:</span> ' + hexometadata.comments + '<br>'
+  }
+  if (hexometadata.categories !== undefined) {
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Categories:</span><br>'
+    for (let i = 0 ; i < hexometadata.categories.length ; i++) {
+      metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-info">' + hexometadata.categories[i] + '</span><br>'
+    }
+  }
+  if (hexometadata.tags !== undefined) {    
+    metadatapanelbody.innerHTML += '<span class="badge badge-light">Tags:</span><br>'
+    for (let i = 0 ; i < hexometadata.tags.length ; i++) {
+      metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-info">' + hexometadata.tags[i] + '</span><br>'
+    }
+  }
   appendC(md, metadatapanel)
 }
 
