@@ -47,7 +47,7 @@ function bindev(obj, eventStr, callback) {
     参数1：元素
     参数2：类名
 */
-function addClass(obj, cn) {
+function myaddclass(obj, cn) {
   if (!hasClass(obj, cn)) {
     obj.className += ' ' + cn
   }
@@ -57,7 +57,7 @@ function addClass(obj, cn) {
       参数1：元素
       参数2：类名
   */
-function removeClass(obj, cn) {
+function myremoveclass(obj, cn) {
   var rgx = new RegExp(' *' + cn + ' *')
   obj.className = obj.className.replace(rgx, ' ')
 }
@@ -68,9 +68,9 @@ function removeClass(obj, cn) {
 */
 function changeClass(obj, cn) {
   if (hasClass(obj, cn)) {
-    removeClass(obj, cn)
+    myremoveclass(obj, cn)
   } else {
-    addClass(obj, cn)
+    myaddclass(obj, cn)
   }
 }
 /*
@@ -101,23 +101,23 @@ function removeLastC(parent) {
   parent.removeChild(parent.lastChild)
 }
 
-// function strMapToObj(strMap) {
-//   let obj = Object.create(null)
-//   for (let [k, v] of strMap) {
-//     // We don’t escape the key '__proto__'
-//     // which can cause problems on older engines
-//     obj[k] = v
-//   }
-//   return obj
-// }
+function strMapToObj(strMap) {
+  let obj = Object.create(null)
+  for (let [k, v] of strMap) {
+    // We don’t escape the key '__proto__'
+    // which can cause problems on older engines
+    obj[k] = v
+  }
+  return obj
+}
 
-// function objToStrMap(obj) {
-//   let strMap = new Map()
-//   for (let k of Object.keys(obj)) {
-//     strMap.set(k, obj[k])
-//   }
-//   return strMap
-// }
+function objToStrMap(obj) {
+  let strMap = new Map()
+  for (let k of Object.keys(obj)) {
+    strMap.set(k, obj[k])
+  }
+  return strMap
+}
 
 function strMapToJson(strMap) {
   return JSON.stringify(strMapToObj(strMap))
@@ -283,4 +283,7 @@ function utf8to16(str) {
     }
   }
   return out;
+}
+function c(elementlabel) {
+  return document.createElement(elementlabel)
 }

@@ -1,16 +1,16 @@
 function createpostcard(item, pagebelong) {
-  let post = document.createElement('div')
-  let posttitle = document.createElement('div')
-  let posttime = document.createElement('div')
-  let sp1 = document.createElement('span')
-  let sp2 = document.createElement('span')
-  let sp3 = document.createElement('span')
-  let sp4 = document.createElement('span')
-  addClass(post, 'post')
-  addClass(posttitle, 'posttitle center-to-head')
-  addClass(posttime, 'posttime')
-  addClass(sp1, 'font-weight-bold')
-  addClass(sp3, 'font-weight-bold')
+  let post = c('div')
+  let posttitle = c('div')
+  let posttime = c('div')
+  let sp1 = c('span')
+  let sp2 = c('span')
+  let sp3 = c('span')
+  let sp4 = c('span')
+  myaddclass(post, 'post')
+  myaddclass(posttitle, 'posttitle center-to-head')
+  myaddclass(posttime, 'posttime')
+  myaddclass(sp1, 'font-weight-bold')
+  myaddclass(sp3, 'font-weight-bold')
   posttitle.innerHTML = item.title
   posttitle.number = item.number
   sp1.innerHTML = 'PostTime:'
@@ -31,18 +31,18 @@ function createpostcard(item, pagebelong) {
 
 function createposthead(re) {
   let title = re.title
-  let post = document.createElement('div')
-  let posttitle = document.createElement('div')
-  let posttime = document.createElement('div')
-  let sp1 = document.createElement('span')
-  let sp2 = document.createElement('span')
-  let sp3 = document.createElement('span')
-  let sp4 = document.createElement('span')
-  addClass(post, 'post onepost')
-  addClass(posttitle, 'posttitle')
-  addClass(posttime, 'posttime')
-  addClass(sp1, 'font-weight-bold')
-  addClass(sp3, 'font-weight-bold')
+  let post = c('div')
+  let posttitle = c('div')
+  let posttime = c('div')
+  let sp1 = c('span')
+  let sp2 = c('span')
+  let sp3 = c('span')
+  let sp4 = c('span')
+  myaddclass(post, 'post onepost')
+  myaddclass(posttitle, 'posttitle')
+  myaddclass(posttime, 'posttime')
+  myaddclass(sp1, 'font-weight-bold')
+  myaddclass(sp3, 'font-weight-bold')
   sp1.innerHTML = 'PostTime:'
   sp2.innerHTML = re.created_at
   sp3.innerHTML = 'LastModTime:'
@@ -58,12 +58,12 @@ function createposthead(re) {
 }
 
 function showhexometadata(hexometadata) {
-  let metadatapanel = document.createElement('div')
-  let metadatapanelhead = document.createElement('div')
-  let metadatapanelbody = document.createElement('div')
-  addClass(metadatapanel, 'metadata')
-  addClass(metadatapanelhead, 'metadatahead')
-  addClass(metadatapanelbody, 'metadatabody')
+  let metadatapanel = c('div')
+  let metadatapanelhead = c('div')
+  let metadatapanelbody = c('div')
+  myaddclass(metadatapanel, 'metadata')
+  myaddclass(metadatapanelhead, 'metadatahead')
+  myaddclass(metadatapanelbody, 'metadatabody')
   metadatapanelhead.innerHTML = 'Hexo Front-matter'
   appendC($(metadatapanel)[0], metadatapanelhead)
   appendC($(metadatapanel)[0], metadatapanelbody)
@@ -95,16 +95,16 @@ function showhexometadata(hexometadata) {
 }
 
 function showsaying(saying) {
-  let sayingpanel = document.createElement('div')
-  addClass(sayingpanel, 'saying')
+  let sayingpanel = c('div')
+  myaddclass(sayingpanel, 'saying')
   sayingpanel.innerHTML = saying
   appendC(md, sayingpanel)
 }
 
 function createtodo(issuesbody, re) {
-  let todohead = document.createElement('div')
+  let todohead = c('div')
   todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
-  addClass(todohead, 'todohead unselectable')
+  myaddclass(todohead, 'todohead unselectable')
   appendC(md, todohead)
   let fulltext = '\r\n' + issuesbody + '\r\n'
   for (let i = 0; i < re.length; ++i) {
@@ -116,9 +116,9 @@ function createtodo(issuesbody, re) {
 }
 
 function createscript(issuesbody, re) {
-  let scripthead = document.createElement('div')
+  let scripthead = c('div')
   scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
-  addClass(scripthead, 'todohead unselectable')
+  myaddclass(scripthead, 'todohead unselectable')
   appendC(md, scripthead)
   let fulltext = '\r\n' + issuesbody + '\r\n'
   for (let i = 0; i < re.length; ++i) {
@@ -130,9 +130,9 @@ function createscript(issuesbody, re) {
 }
 
 function createegg(issuesbody, re) {
-  let egghead = document.createElement('div')
+  let egghead = c('div')
   egghead.innerHTML = '<i class="em-svg em-clown_face"></i> E GGgG gGGG Gggg ggGG'
-  addClass(egghead, 'todohead unselectable')
+  myaddclass(egghead, 'todohead unselectable')
   appendC(md, egghead)
   let fulltext = '\r\n' + issuesbody + '\r\n'
   for (let i = 0; i < re.length; ++i) {
@@ -144,10 +144,10 @@ function createegg(issuesbody, re) {
 }
 
 function searchshowandrendermd(fulltext, relength) {
-  removeClass(scriptsearcher, 'myhide')
-  addClass(scriptsearcher, 'searchshow')
+  myremoveclass(scriptsearcher, 'myhide')
+  myaddclass(scriptsearcher, 'searchshow')
   md.style.paddingBottom = '3rem'
-  removeClass(md, 'myhide')
+  myremoveclass(md, 'myhide')
   searchcount = relength
   render_md(fulltext)
 }

@@ -72,6 +72,27 @@
   </div>
 
   <div id="docpanel" class="unselectable myhide">
+    <div id="postsearch" class="input-group">
+      <input id="postsearchtext" type="text" class="form-control" placeholder="keywords">
+      <div class="input-group-append">
+        <button id="cleanbut" class="btn btn-dark" type="button">cls</button>
+        <button id="categories" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#all_cates" aria-expanded="false"
+          aria-controls="all_cates">cates</button>
+        <button id="tags" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#all_tags" aria-expanded="false"
+          aria-controls="all_tags">tags</button>
+        <button id="postsearchbut" class="btn btn-dark" type="button">sch</button>
+      </div>
+      <div class="collapse tgs" id="all_cates">
+        <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:
+        </span>
+        <br>
+      </div>
+      <div class="collapse tgs" id="all_tags">
+        <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:
+        </span>
+        <br>
+      </div>
+    </div>
   </div>
 
   <div id="sidetoccontainer" class="myhide">
@@ -97,10 +118,9 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.hotkeys.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/dayjs"></script>
-
+  
+  <script src="js/dayjs.min.js"></script>
   <script src="js/hightlight-site-pack.js"></script>
-  <script src="js/jquery.twbsPagination.min.js"></script>
   <script src="js/yaml.min.js"></script>
 
   <script src="./lib/marked.min.js"></script>

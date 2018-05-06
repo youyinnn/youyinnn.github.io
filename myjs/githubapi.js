@@ -12,7 +12,7 @@ var timeout
 
 function settimeout() {
   let nowhour = dayjs().hour()
-  timeout = (nowhour >= 19 || nowhour <= 6)  ? 10000 : 5000
+  timeout = (nowhour >= 19 || nowhour <= 6) ? 10000 : 5000
   console.log('timeout is [' + timeout + ']')
 }
 
@@ -99,22 +99,82 @@ function search_issues_by_label(label, func) {
 function get_posts() {
   search_issues_by_label(post_label, function (re) {
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-    let totalpages = Math.ceil(re.length / 5)
-    let pagesboxs = new Array(totalpages)
-    for (let i = 0; i < totalpages; i++) {
-      let pagebox = document.createElement('div')
-      addClass(pagebox, 'pagebox')
-      pagebox.id = 'pagebox-' + (i + 1)
-      appendC(docpanel, pagebox)
-      pagesboxs[i] = pagebox
-    }
-    console.log(pagesboxs)
+    rstopaging(re)
     for (let i = 0; i < re.length; ++i) {
-      createpostcard(re[i], Math.ceil((i + 1) / 5))
+      postscachehandle(re[i])
     }
-    removeClass(docpanel, 'myhide')
-    addClass(docpanel, 'myshow')
-    pagehandler(totalpages)
+    let stgts = $('.stgt')
+    let stgcs = $('.stgc')
+    for (let i = 0; i < stgcs.length; i++) {
+      $(stgcs[i]).bind('click', function (event) {
+        filter_posts_cache = new Array()
+        if (hasClass(this, 'btn-light')) {
+          for (let j = 0; j < stgcs.length; j++) {
+            stgcs[j].disabled = true
+          }
+          for (let j = 0; j < stgts.length; j++) {
+            stgts[j].disabled = true
+          }
+          myremoveclass(this, 'btn-light')
+          this.disabled = false
+          myaddclass(this, 'btn-success')
+          for (let k = 0; k < posts_cache.length; k++) {
+            for (let l = 0; l < posts_cache[k].cates.length; l++) {
+              if (posts_cache[k].cates[l] === this.innerText) {
+                filter_posts_cache.push(posts_cache[k])
+              }
+            }
+          }
+        } else {
+          for (let j = 0; j < stgcs.length; j++) {
+            stgcs[j].disabled = false
+          }
+          for (let j = 0; j < stgts.length; j++) {
+            stgts[j].disabled = false
+          }
+          myremoveclass(this, 'btn-success')
+          myaddclass(this, 'btn-light')
+        }
+        filter()
+      })
+    }
+    for (let i = 0; i < stgts.length; i++) {
+      $(stgts[i]).bind('click', function (event) {
+        filter_posts_cache = new Array()
+        if (hasClass(this, 'btn-light')) {
+          for (let j = 0; j < stgts.length; j++) {
+            stgts[j].disabled = true
+          }
+          for (let j = 0; j < stgcs.length; j++) {
+            stgcs[j].disabled = true
+          }
+          myremoveclass(this, 'btn-light')
+          this.disabled = false          
+          myaddclass(this, 'btn-info')
+          for (let k = 0; k < posts_cache.length; k++) {
+            if (posts_cache[k].tags !== undefined) {
+              for (let l = 0; l < posts_cache[k].tags.length; l++) {
+                if (posts_cache[k].tags[l] === this.innerText) {
+                  filter_posts_cache.push(posts_cache[k])
+                }
+              }
+            }
+          }
+        } else {
+          for (let j = 0; j < stgts.length; j++) {
+            stgts[j].disabled = false
+          }
+          for (let j = 0; j < stgcs.length; j++) {
+            stgcs[j].disabled = false
+          }
+          myremoveclass(this, 'btn-info')
+          myaddclass(this, 'btn-light')
+        }
+        filter()
+      })
+    }
+    myremoveclass(docpanel, 'myhide')
+    myaddclass(docpanel, 'myshow')
     hideloading()
   })
 }
@@ -140,8 +200,8 @@ function get_post(number) {
       hideloading()
       render_md(text)
       if (re.length !== 0) {
-        let addcomment = document.createElement('div')
-        let a = document.createElement('a')
+        let addcomment = c('div')
+        let a = c('a')
         addcomment.id = 'nocomment'
         addcomment.style.transform = 'translateY(-16px)'
         a.href = page
@@ -192,8 +252,8 @@ function get_friendlinked() {
         let msg = arr[i]
         if (msg !== '') {
           let sp = msg.split('-')
-          let ditem = document.createElement('a')
-          addClass(ditem, 'dropdown-item')
+          let ditem = c('a')
+          myaddclass(ditem, 'dropdown-item')
           ditem.href = sp[1]
           ditem.target = '_blank'
           ditem.innerText = sp[0].replace(/\r\n/g, '')

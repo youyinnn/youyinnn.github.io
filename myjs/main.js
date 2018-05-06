@@ -1,11 +1,13 @@
 var searchone = 0
 var searchtext
+var totalpages
+var nowpage = 1
 
 function render_md(text) {
-  removeClass(md, 'myhide')
-  addClass(md, 'myshow')
-  removeClass(sidetoccontainer, 'myhide')
-  addClass(sidetoccontainer, 'myshow')
+  myremoveclass(md, 'myhide')
+  myaddclass(md, 'myshow')
+  myremoveclass(sidetoccontainer, 'myhide')
+  myaddclass(sidetoccontainer, 'myshow')
   if (text.substring(0, 3) === '---') {
     let endindex = text.indexOf('---', 3) + 3
     let hexo_metadata = gethexofrontmatter(text)
@@ -50,44 +52,19 @@ function postspage(pageto) {
   docpanel.style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
-function pagehandler(totalPages) {
-  $(docpanel).twbsPagination({
-    totalPages: totalPages,
-    hideOnlyOnePage: true,
-    prev: '<',
-    next: '>',
-    first: 'F',
-    last: 'L',
-    loop: true,
-    visiblePages: 3,
-    onPageClick: function (event, page) {
-      for (let i = 1; i <= totalPages; i++) {
-        let pagebox = $('#pagebox-' + i)[0]
-        if (i === page) {
-          removeClass(pagebox, 'myhide')
-          addClass(pagebox, 'myshow')
-        } else {
-          addClass(pagebox, 'myhide')
-          removeClass(pagebox, 'myshow')
-        }
-      }
-    }
-  });
-}
-
 function hideloading() {
-  removeClass(loading, 'myshow')
-  addClass(loading, 'myhide')
+  myremoveclass(loading, 'myshow')
+  myaddclass(loading, 'myhide')
 }
 
 function showloading() {
-  removeClass(loading, 'myhide')
-  addClass(loading, 'myshow')
+  myremoveclass(loading, 'myhide')
+  myaddclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
-  addClass(sidetoccontainer, 'myhide')
-  addClass(md, 'w-100')
+  myaddclass(sidetoccontainer, 'myhide')
+  myaddclass(md, 'w-100')
 }
 
 function searchscript(text) {
@@ -146,11 +123,11 @@ function searchscript(text) {
       }
     }
   }
-  $('#searchtext').addClass('getnothing')
+  $('#searchtext').myaddclass('getnothing')
   searchbut.innerText = 'No get'
   setTimeout(function () {
     searchbut.innerText = 'Search'
-    $('#searchtext').removeClass('getnothing')
+    $('#searchtext').myremoveclass('getnothing')
   }, 1000, 'swing')
   searchone = 0
 }
@@ -174,8 +151,244 @@ function changepagetitle(text) {
 }
 
 function gethexofrontmatter(text) {
-  let endindex = text.indexOf('---', 3) + 3
-  let hexo_metadata = text.substring(4, endindex - 3)
-  console.log(hexo_metadata)
-  return hexo_metadata
+  if (text.substring(0, 3) === '---') {
+    let endindex = text.indexOf('---', 3) + 3
+    let hexo_metadata = text.substring(4, endindex - 3)
+    return hexo_metadata
+  }
+}
+
+function searchpost(text) {
+  if (text !== '') {
+    $('.pagebox').remove()
+    $('.pagination').remove()
+    if (filter_posts_cache.length === 0) {
+      for (let i = 0; i < posts_cache.length; i++) {
+        if (posts_cache[i].title.concat(posts_cache[i].body).search(new RegExp(text), 'gi') !== -1) {
+          postsearchrs.push(posts_cache[i])
+        }
+      }
+    } else {
+      for (let i = 0; i < filter_posts_cache.length; i++) {
+        if (filter_posts_cache[i].title.concat(filter_posts_cache[i].body).search(new RegExp(text), 'gi') !== -1) {
+          postsearchrs.push(filter_posts_cache[i])
+        }
+      }
+    }
+    rstopaging(postsearchrs)
+    postsearchrs = new Array()
+  } else {
+    cleansearch()
+  }
+}
+
+function postscachehandle(post) {
+  let postcache = new Object()
+  let hexofrontmatter = gethexofrontmatter(post.body)
+  if (hexofrontmatter !== undefined) {
+    hexofrontmatter = yaml.load(hexofrontmatter.replace(/\r\n/gm, '\n'))
+    postcache.title = hexofrontmatter.title
+    postcache.tags = hexofrontmatter.tags
+    postcache.cates = hexofrontmatter.categories
+  } else {
+    postcache.title = post.title
+    postcache.cates = ['unclassified']
+  }
+  postcache.body = post.body
+  postcache.created_at = post.created_at
+  postcache.updated_at = post.updated_at
+  postcache.number = post.number
+  if (postcache.tags !== undefined) {
+    for (let i = 0; i < postcache.tags.length; i++) {
+      let haved = false
+      for (let j = 0; j < all_tags.length; j++) {
+        if (all_tags[j] === postcache.tags[i]) {
+          haved = true
+        }
+      }
+      if (!haved) {
+        all_tags.push(postcache.tags[i])
+        tags.innerHTML += '<button class="stgt btn btn-light">' + postcache.tags[i] + '</button>'
+      }
+    }
+  }
+  for (let i = 0; i < postcache.cates.length; i++) {
+    let haved = false
+    for (let j = 0; j < all_cates.length; j++) {
+      if (all_cates[j] === postcache.cates[i]) {
+        haved = true
+      }
+    }
+    if (!haved) {
+      all_cates.push(postcache.cates[i])
+      cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.cates[i] + '</button>'
+    }
+  }
+  posts_cache.push(postcache)
+}
+
+function filter() {
+  nowpage = 1
+  $('.pagebox').remove()
+  $('.pagination').remove()
+  if (filter_posts_cache.length === 0) {
+    rstopaging(posts_cache)
+  } else {
+    rstopaging(filter_posts_cache)
+  }
+  postsearchrs = new Array()
+}
+
+function rstopaging(posts) {
+  let totalpages = Math.ceil(posts.length / 5)
+  let pagesboxs = new Array(totalpages)
+  for (let i = 0; i < totalpages; i++) {
+    let pagebox = c('div')
+    myaddclass(pagebox, 'pagebox')
+    pagebox.id = 'pagebox-' + (i + 1)
+    appendC(docpanel, pagebox)
+    pagesboxs[i] = pagebox
+  }
+  for (let i = 0; i < posts.length; ++i) {
+    createpostcard(posts[i], Math.ceil((i + 1) / 5))
+  }
+  window.totalpages = totalpages
+  pagination()
+}
+
+function pagination() {
+  nowpage = 1
+  let pbs = $('.pagebox')
+  for (let i = 1; i < pbs.length; i++) {
+    myaddclass(pbs[i], 'myhide')
+  }
+  let pn = c('ul')
+  myaddclass(pn, 'pagination')
+
+  let first = c('li')
+  first.id = 'fpg'
+  myaddclass(first, 'page-item')
+  let firstl = c('a')
+  myaddclass(firstl, 'page-link')
+  firstl.href = 'javaScript:void(0)'
+  firstl.innerText = 'F'
+  appendC(first, firstl)
+  appendC(pn, first)
+  $(first).bind('click', function (ev) {
+    if (totalpages !== 0 && nowpage !== 1) {
+      myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
+      myremoveclass($('#pagebox-' + 1)[0], 'myhide')
+      myremoveclass($('#pg-' + nowpage)[0], 'active')
+      myaddclass($('#pg-' + 1)[0], 'active')
+      nowpage = 1
+    }
+  })
+
+  let pre = c('li')
+  pre.id = 'ppg'
+  myaddclass(pre, 'page-item')
+  myaddclass(pre, 'page-item')
+  let prel = c('a')
+  myaddclass(prel, 'page-link')
+  prel.href = 'javaScript:void(0)'
+  prel.innerText = '<'
+  appendC(pre, prel)
+  appendC(pn, pre)
+  $(pre).bind('click', function (ev) {
+    if (totalpages !== 0 && nowpage !== 1) {
+      myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
+      myremoveclass($('#pagebox-' + (nowpage - 1))[0], 'myhide')
+      myremoveclass($('#pg-' + nowpage)[0], 'active')
+      myaddclass($('#pg-' + (nowpage - 1))[0], 'active')
+      nowpage--
+    }
+  })
+
+  for (let i = 0; i < pbs.length; i++) {
+    let pg = c('li')
+    pg.id = 'pg-' + (i + 1)
+    myaddclass(pg, 'page-item')
+    let pgl = c('a')
+    myaddclass(pgl, 'page-link')
+    pgl.href = 'javaScript:void(0)'
+    pgl.innerHTML = i + 1
+    if (i === 0) {
+      myaddclass(pg, 'active')
+    }
+    appendC(pg, pgl)
+    appendC(pn, pg)
+    $(pg).bind('click', function (ev) {
+      let clickpg = parseInt(this.innerText)
+      if (totalpages !== 0 && clickpg !== nowpage) {
+        myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
+        myremoveclass($('#pagebox-' + clickpg)[0], 'myhide')
+        myremoveclass($('#pg-' + nowpage)[0], 'active')
+        myaddclass($('#pg-' + clickpg)[0], 'active')
+        nowpage = clickpg
+      }
+    })
+  }
+
+  let next = c('li')
+  next.id = 'npg'
+  myaddclass(next, 'page-item')
+  let nextl = c('a')
+  myaddclass(nextl, 'page-link')
+  nextl.href = 'javaScript:void(0)'
+  nextl.innerText = '>'
+  appendC(next, nextl)
+  appendC(pn, next)
+  $(next).bind('click', function (ev) {
+    if (totalpages !== 0 && nowpage !== totalpages) {
+      myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
+      myremoveclass($('#pagebox-' + (nowpage + 1))[0], 'myhide')
+      myremoveclass($('#pg-' + nowpage)[0], 'active')
+      myaddclass($('#pg-' + (nowpage + 1))[0], 'active')
+      nowpage++
+    }
+  })
+
+  let last = c('li')
+  last.id = 'lpg'
+  myaddclass(last, 'page-item')
+  let lastl = c('a')
+  myaddclass(lastl, 'page-link')
+  lastl.href = 'javaScript:void(0)'
+  lastl.innerText = 'L'
+  appendC(last, lastl)
+  appendC(pn, last)
+  $(last).bind('click', function (ev) {
+    if (totalpages !== 0 && nowpage !== totalpages) {
+      myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
+      myremoveclass($('#pagebox-' + totalpages)[0], 'myhide')
+      myremoveclass($('#pg-' + nowpage)[0], 'active')
+      myaddclass($('#pg-' + totalpages)[0], 'active')
+      nowpage = totalpages
+    }
+  })
+  appendC(docpanel, pn)
+}
+
+function cleansearch() {
+  $('.pagebox').remove()
+  $('.pagination').remove()
+  rstopaging(posts_cache)
+  postsearchrs = new Array()
+  filter_posts_cache = new Array()
+  let stgts = $('.stgt')
+  let stgcs = $('.stgc')
+  for (let j = 0; j < stgcs.length; j++) {
+    if (stgcs[j].disabled === false) {
+      myremoveclass(stgcs[j], 'btn-success')
+      myaddclass(stgcs[j], 'btn-light')
+    }
+    stgcs[j].disabled = false
+  }
+  for (let j = 0; j < stgts.length; j++) {
+    if (stgts[j].disabled === false) {
+      myremoveclass(stgts[j], 'btn-info')
+      myaddclass(stgts[j], 'btn-light')
+    }
+    stgts[j].disabled = false
+  }
 }

@@ -20,11 +20,24 @@ $(function () {
   $('#searchbut').bind('click', function () {
     searchscript($('#searchtext')[0].value)
   })
+  $('#postsearchbut').bind('click', function () {
+    searchpost($('#postsearchtext')[0].value)
+  })
+  $('#cleanbut').bind('click', function () {
+    cleansearch()
+  })
   $('#searchtext').bind('keyup', 'return', function () {
     searchscript(this.value)
   })
+  $('#postsearchtext').bind('keyup', 'return', function () {
+    searchpost(this.value)
+  })
   $('#searchtext').bind('keyup', 'esc', function () {
     this.value = ''
+  })
+  $('#postsearchtext').bind('keyup', 'esc', function () {
+    this.value = ''
+    cleansearch()
   })
   $(window).scroll(function () {
     var scrollTo = $(window).scrollTop(),

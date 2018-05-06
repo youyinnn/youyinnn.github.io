@@ -10,6 +10,13 @@ var percent = $('#percent')[0]
 var topbut = $('#topbut')[0]
 var searchbut = $('#searchbut')[0]
 var fldd = $('#fldd')[0]
+var posts_cache = new Array()
+var filter_posts_cache = new Array()
+var tags = $('#all_tags')[0]
+var cates = $('#all_cates')[0]
+var all_tags = new Array()
+var all_cates = new Array()
+var postsearchrs = new Array()
 var searchcount
 
 $(function () {
@@ -23,8 +30,8 @@ $(function () {
   if (search === '') {
     hideloading()
     hidesidetoc()    
-    removeClass(homepage, 'remove')
-    addClass(homepage, 'myshow')
+    myremoveclass(homepage, 'remove')
+    myaddclass(homepage, 'myshow')
     setgohub('My hub', 'https://github.com/' + username)
   } else {
     showloading()
