@@ -36,6 +36,7 @@ function getset(url, asyn) {
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
+        eve.abort()
         location.reload()
       }
     }
@@ -65,6 +66,7 @@ function postset(url, form, asyn) {
           '\r\nresponseText: ' + eve.responseText +
           '\r\nstatusText: ' + eve.statusText +
           '\r\nwill return to the home page')
+        eve.abort()
         location.reload()
       }
     }
@@ -149,7 +151,7 @@ function get_posts() {
             stgcs[j].disabled = true
           }
           myremoveclass(this, 'btn-light')
-          this.disabled = false          
+          this.disabled = false
           myaddclass(this, 'btn-info')
           for (let k = 0; k < posts_cache.length; k++) {
             if (posts_cache[k].tags !== undefined) {

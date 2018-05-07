@@ -276,9 +276,14 @@ function pagination() {
   appendC(pn, first)
   $(first).bind('click', function (ev) {
     if (totalpages !== 0 && nowpage !== 1) {
+      if (totalpages > 3) {
+        $('#pg-1 > a')[0].innerText = 1
+        $('#pg-2 > a')[0].innerText = 2
+        $('#pg-3 > a')[0].innerText = 3
+      }
       myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
       myremoveclass($('#pagebox-' + 1)[0], 'myhide')
-      myremoveclass($('#pg-' + nowpage)[0], 'active')
+      myremoveclass($('.active')[0], 'active')
       myaddclass($('#pg-' + 1)[0], 'active')
       nowpage = 1
     }
@@ -296,15 +301,26 @@ function pagination() {
   appendC(pn, pre)
   $(pre).bind('click', function (ev) {
     if (totalpages !== 0 && nowpage !== 1) {
+      if ($('#pg-1').hasClass('active')) {
+        $('#pg-1 > a')[0].innerText = parseInt($('#pg-1 > a')[0].innerText) - 1
+        $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) - 1
+        $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) - 1
+      }
       myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
       myremoveclass($('#pagebox-' + (nowpage - 1))[0], 'myhide')
-      myremoveclass($('#pg-' + nowpage)[0], 'active')
-      myaddclass($('#pg-' + (nowpage - 1))[0], 'active')
+      if ($('#pg-3').hasClass('active')) {
+        $('#pg-3').removeClass('active')
+        $('#pg-2').addClass('active')
+      } else if ($('#pg-2').hasClass('active')) {
+        $('#pg-2').removeClass('active')
+        $('#pg-1').addClass('active')
+      }
       nowpage--
     }
   })
 
   for (let i = 0; i < pbs.length; i++) {
+    if (i > 2) break
     let pg = c('li')
     pg.id = 'pg-' + (i + 1)
     myaddclass(pg, 'page-item')
@@ -319,11 +335,11 @@ function pagination() {
     appendC(pn, pg)
     $(pg).bind('click', function (ev) {
       let clickpg = parseInt(this.innerText)
-      if (totalpages !== 0 && clickpg !== nowpage) {
+      if (clickpg !== nowpage) {
         myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
         myremoveclass($('#pagebox-' + clickpg)[0], 'myhide')
-        myremoveclass($('#pg-' + nowpage)[0], 'active')
-        myaddclass($('#pg-' + clickpg)[0], 'active')
+        myremoveclass($('.active')[0], 'active')
+        myaddclass($('#pg-' + this.id.split('-')[1])[0], 'active')
         nowpage = clickpg
       }
     })
@@ -340,10 +356,16 @@ function pagination() {
   appendC(pn, next)
   $(next).bind('click', function (ev) {
     if (totalpages !== 0 && nowpage !== totalpages) {
+      if ($('#pg-3').hasClass('active')) {
+        $('#pg-1 > a')[0].innerText = parseInt($('#pg-1 > a')[0].innerText) + 1
+        $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) + 1
+        $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) + 1
+      } else {
+        myremoveclass($('.active')[0], 'active')
+        myaddclass($('#pg-' + (nowpage + 1))[0], 'active')
+      }
       myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
       myremoveclass($('#pagebox-' + (nowpage + 1))[0], 'myhide')
-      myremoveclass($('#pg-' + nowpage)[0], 'active')
-      myaddclass($('#pg-' + (nowpage + 1))[0], 'active')
       nowpage++
     }
   })
@@ -361,8 +383,15 @@ function pagination() {
     if (totalpages !== 0 && nowpage !== totalpages) {
       myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
       myremoveclass($('#pagebox-' + totalpages)[0], 'myhide')
-      myremoveclass($('#pg-' + nowpage)[0], 'active')
-      myaddclass($('#pg-' + totalpages)[0], 'active')
+      myremoveclass($('.active')[0], 'active')
+      if (totalpages > 3) {
+        myaddclass($('#pg-3')[0], 'active')
+        $('#pg-1 > a')[0].innerText = totalpages - 2
+        $('#pg-2 > a')[0].innerText = totalpages - 1
+        $('#pg-3 > a')[0].innerText = totalpages
+      } else {
+        myaddclass($('#pg-2')[0], 'active')
+      }
       nowpage = totalpages
     }
   })
