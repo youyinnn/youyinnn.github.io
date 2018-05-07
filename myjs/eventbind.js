@@ -39,6 +39,16 @@ $(function () {
     this.value = ''
     cleansearch()
   })
+  $('#categories').bind('click', function () {
+    if ($('#all_tags').hasClass('show')) {
+      $('#tags').click()
+    }
+  })
+  $('#tags').bind('click', function () {
+    if ($('#all_cates').hasClass('show')) {
+      $('#categories').click()
+    }
+  })
   $(window).scroll(function () {
     var scrollTo = $(window).scrollTop(),
       docHeight = $(document).height(),

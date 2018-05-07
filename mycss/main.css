@@ -352,20 +352,27 @@
 }
 
 .tgs {
-  background-color: white;
+  position: absolute !important;
+  z-index: 300;
+  width: 100%;
+  background-color: #e9ecef;
   padding: 0 1rem;
-  border-bottom: #474f57 1px dashed;
+  border-bottom: #474f57 2px dashed;
 }
 
 .stgt {
-  margin: 6px 6px;
+  margin: 6px;
 }
 
 .stgc {
-  margin: 6px 6px;
+  margin: 6px;
 }
 
 .pagination {
   position: fixed;
   bottom: 1rem;
+}
+
+.myblur{
+  filter: blur(2px);
 }
