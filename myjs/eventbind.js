@@ -40,13 +40,35 @@ $(function () {
     cleansearch()
   })
   $('#categories').bind('click', function () {
-    if ($('#all_tags').hasClass('show')) {
-      $('#tags').click()
+    if ($('#all_cates').hasClass('myhide')) {
+      $('.pagebox').addClass('myblur')
+      $('.pagination').addClass('myblur')
+      $('#gohub').addClass('myblur')
+      $('#topbar').addClass('myblur')
+      $('#all_cates').removeClass('myhide')
+      $('#all_tags').addClass('myhide')
+    } else {
+      $('#all_cates').addClass('myhide')
+      $('.pagebox').removeClass('myblur')
+      $('.pagination').removeClass('myblur')
+      $('#gohub').removeClass('myblur')
+      $('#topbar').removeClass('myblur')
     }
   })
   $('#tags').bind('click', function () {
-    if ($('#all_cates').hasClass('show')) {
-      $('#categories').click()
+    if ($('#all_tags').hasClass('myhide')) {
+      $('.pagebox').addClass('myblur')
+      $('.pagination').addClass('myblur')
+      $('#gohub').addClass('myblur')
+      $('#topbar').addClass('myblur')
+      $('#all_tags').removeClass('myhide')
+      $('#all_cates').addClass('myhide')
+    } else {
+      $('#all_tags').addClass('myhide')
+      $('.pagebox').removeClass('myblur')
+      $('.pagination').removeClass('myblur')
+      $('#gohub').removeClass('myblur')
+      $('#topbar').removeClass('myblur')
     }
   })
   $(window).scroll(function () {
