@@ -11,8 +11,9 @@ body {
         开启硬件加速 解决动画卡顿 
         但是会影响部分部件的缩放
     */
-  transform: translate3d(0, 0, 0);
+  /* transform: translate3d(0, 0, 0); */
   backface-visibility: hidden;
+  transform-style: preserve-3d;
   perspective: 1000;
   display: inline;
 }
