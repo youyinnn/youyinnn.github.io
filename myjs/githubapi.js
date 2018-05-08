@@ -131,9 +131,9 @@ function get_posts() {
                     for (let j = 0; j < stgts.length; j++) {
                         stgts[j].disabled = true
                     }
-                    myremoveclass(this, 'btn-light')
+                    rmclass(this, 'btn-light')
                     this.disabled = false
-                    myaddclass(this, 'btn-success')
+                    adclass(this, 'btn-success')
                     for (let k = 0; k < posts_cache.length; k++) {
                         for (let l = 0; l < posts_cache[k].cates.length; l++) {
                             if (posts_cache[k].cates[l] === this.innerText) {
@@ -148,8 +148,8 @@ function get_posts() {
                     for (let j = 0; j < stgts.length; j++) {
                         stgts[j].disabled = false
                     }
-                    myremoveclass(this, 'btn-success')
-                    myaddclass(this, 'btn-light')
+                    rmclass(this, 'btn-success')
+                    adclass(this, 'btn-light')
                 }
                 filter()
             })
@@ -164,9 +164,9 @@ function get_posts() {
                     for (let j = 0; j < stgcs.length; j++) {
                         stgcs[j].disabled = true
                     }
-                    myremoveclass(this, 'btn-light')
+                    rmclass(this, 'btn-light')
                     this.disabled = false
-                    myaddclass(this, 'btn-info')
+                    adclass(this, 'btn-info')
                     for (let k = 0; k < posts_cache.length; k++) {
                         if (posts_cache[k].tags !== undefined) {
                             for (let l = 0; l < posts_cache[k].tags.length; l++) {
@@ -183,14 +183,14 @@ function get_posts() {
                     for (let j = 0; j < stgcs.length; j++) {
                         stgcs[j].disabled = false
                     }
-                    myremoveclass(this, 'btn-info')
-                    myaddclass(this, 'btn-light')
+                    rmclass(this, 'btn-info')
+                    adclass(this, 'btn-light')
                 }
                 filter()
             })
         }
-        myremoveclass(docpanel, 'myhide')
-        myaddclass(docpanel, 'myshow')
+        rmclass(docpanel, 'myhide')
+        adclass(docpanel, 'myshow')
         hideloading()
     })
 }
@@ -223,8 +223,8 @@ function get_post(number) {
                 a.href = page
                 a.target = '_blank'
                 a.innerText = 'Add comment'
-                appendC(addcomment, a)
-                appendC(md, addcomment)
+                appendc(addcomment, a)
+                appendc(md, addcomment)
             }
         })
     })
@@ -269,11 +269,11 @@ function get_friendlinked() {
                 if (msg !== '') {
                     let sp = msg.split('-')
                     let ditem = c('a')
-                    myaddclass(ditem, 'dropdown-item')
+                    adclass(ditem, 'dropdown-item')
                     ditem.href = sp[1]
                     ditem.target = '_blank'
                     ditem.innerText = sp[0].replace(/\r\n/g, '')
-                    appendC(fldd, ditem)
+                    appendc(fldd, ditem)
                 }
             }
         })

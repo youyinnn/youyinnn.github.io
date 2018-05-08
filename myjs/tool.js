@@ -47,7 +47,7 @@ function bindev(obj, eventStr, callback) {
     参数1：元素
     参数2：类名
 */
-function myaddclass(obj, cn) {
+function adclass(obj, cn) {
     if (!hasClass(obj, cn)) {
         obj.className += ' ' + cn
     }
@@ -57,7 +57,7 @@ function myaddclass(obj, cn) {
       参数1：元素
       参数2：类名
   */
-function myremoveclass(obj, cn) {
+function rmclass(obj, cn) {
     var rgx = new RegExp(' *' + cn + ' *')
     obj.className = obj.className.replace(rgx, ' ')
 }
@@ -68,9 +68,9 @@ function myremoveclass(obj, cn) {
 */
 function changeClass(obj, cn) {
     if (hasClass(obj, cn)) {
-        myremoveclass(obj, cn)
+        rmclass(obj, cn)
     } else {
-        myaddclass(obj, cn)
+        adclass(obj, cn)
     }
 }
 /*
@@ -93,7 +93,7 @@ function getFinalStyle(obj, attr) {
     return finalStyle[attr]
 }
 
-function appendC(parent, child) {
+function appendc(parent, child) {
     parent.appendChild(child)
 }
 

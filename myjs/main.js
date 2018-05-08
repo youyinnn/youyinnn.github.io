@@ -4,10 +4,10 @@ var totalpages
 var nowpage = 1
 
 function render_md(text) {
-    myremoveclass(md, 'myhide')
-    myaddclass(md, 'myshow')
-    myremoveclass(sidetoccontainer, 'myhide')
-    myaddclass(sidetoccontainer, 'myshow')
+    rmclass(md, 'myhide')
+    adclass(md, 'myshow')
+    rmclass(sidetoccontainer, 'myhide')
+    adclass(sidetoccontainer, 'myshow')
     if (text.substring(0, 3) === '---') {
         let endindex = text.indexOf('---', 3) + 3
         let hexo_metadata = gethexofrontmatter(text)
@@ -53,18 +53,18 @@ function postspage(pageto) {
 }
 
 function hideloading() {
-    myremoveclass(loading, 'myshow')
-    myaddclass(loading, 'myhide')
+    rmclass(loading, 'myshow')
+    adclass(loading, 'myhide')
 }
 
 function showloading() {
-    myremoveclass(loading, 'myhide')
-    myaddclass(loading, 'myshow')
+    rmclass(loading, 'myhide')
+    adclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
-    myaddclass(sidetoccontainer, 'myhide')
-    myaddclass(md, 'w-100')
+    adclass(sidetoccontainer, 'myhide')
+    adclass(md, 'w-100')
 }
 
 function searchscript(text) {
@@ -123,11 +123,11 @@ function searchscript(text) {
             }
         }
     }
-    $('#searchtext').myaddclass('getnothing')
+    $('#searchtext').adclass('getnothing')
     searchbut.innerText = 'No get'
     setTimeout(function() {
         searchbut.innerText = 'Search'
-        $('#searchtext').myremoveclass('getnothing')
+        $('#searchtext').rmclass('getnothing')
     }, 1000, 'swing')
     searchone = 0
 }
@@ -244,9 +244,9 @@ function rstopaging(posts) {
     let pagesboxs = new Array(totalpages)
     for (let i = 0; i < totalpages; i++) {
         let pagebox = c('div')
-        myaddclass(pagebox, 'pagebox')
+        adclass(pagebox, 'pagebox')
         pagebox.id = 'pagebox-' + (i + 1)
-        appendC(docpanel, pagebox)
+        appendc(docpanel, pagebox)
         pagesboxs[i] = pagebox
     }
     for (let i = 0; i < posts.length; ++i) {
@@ -260,20 +260,20 @@ function pagination() {
     nowpage = 1
     let pbs = $('.pagebox')
     for (let i = 1; i < pbs.length; i++) {
-        myaddclass(pbs[i], 'myhide')
+        adclass(pbs[i], 'myhide')
     }
     let pn = c('ul')
-    myaddclass(pn, 'pagination')
+    adclass(pn, 'pagination')
 
     let first = c('li')
     first.id = 'fpg'
-    myaddclass(first, 'page-item')
+    adclass(first, 'page-item')
     let firstl = c('a')
-    myaddclass(firstl, 'page-link')
+    adclass(firstl, 'page-link')
     firstl.href = 'javaScript:void(0)'
     firstl.innerText = 'F'
-    appendC(first, firstl)
-    appendC(pn, first)
+    appendc(first, firstl)
+    appendc(pn, first)
     $(first).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== 1) {
             if (totalpages > 3) {
@@ -281,24 +281,24 @@ function pagination() {
                 $('#pg-2 > a')[0].innerText = 2
                 $('#pg-3 > a')[0].innerText = 3
             }
-            myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
-            myremoveclass($('#pagebox-' + 1)[0], 'myhide')
-            myremoveclass($('.active')[0], 'active')
-            myaddclass($('#pg-' + 1)[0], 'active')
+            adclass($('#pagebox-' + nowpage)[0], 'myhide')
+            rmclass($('#pagebox-' + 1)[0], 'myhide')
+            rmclass($('.active')[0], 'active')
+            adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
         }
     })
 
     let pre = c('li')
     pre.id = 'ppg'
-    myaddclass(pre, 'page-item')
-    myaddclass(pre, 'page-item')
+    adclass(pre, 'page-item')
+    adclass(pre, 'page-item')
     let prel = c('a')
-    myaddclass(prel, 'page-link')
+    adclass(prel, 'page-link')
     prel.href = 'javaScript:void(0)'
     prel.innerText = '<'
-    appendC(pre, prel)
-    appendC(pn, pre)
+    appendc(pre, prel)
+    appendc(pn, pre)
     $(pre).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== 1) {
             if ($('#pg-1').hasClass('active')) {
@@ -306,8 +306,8 @@ function pagination() {
                 $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) - 1
                 $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) - 1
             }
-            myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
-            myremoveclass($('#pagebox-' + (nowpage - 1))[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'myhide')
+            rmclass($('#pagebox-' + (nowpage - 1))[0], 'myhide')
             if ($('#pg-3').hasClass('active')) {
                 $('#pg-3').removeClass('active')
                 $('#pg-2').addClass('active')
@@ -323,23 +323,23 @@ function pagination() {
         if (i > 2) break
         let pg = c('li')
         pg.id = 'pg-' + (i + 1)
-        myaddclass(pg, 'page-item')
+        adclass(pg, 'page-item')
         let pgl = c('a')
-        myaddclass(pgl, 'page-link')
+        adclass(pgl, 'page-link')
         pgl.href = 'javaScript:void(0)'
         pgl.innerHTML = i + 1
         if (i === 0) {
-            myaddclass(pg, 'active')
+            adclass(pg, 'active')
         }
-        appendC(pg, pgl)
-        appendC(pn, pg)
+        appendc(pg, pgl)
+        appendc(pn, pg)
         $(pg).bind('click', function(ev) {
             let clickpg = parseInt(this.innerText)
             if (clickpg !== nowpage) {
-                myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
-                myremoveclass($('#pagebox-' + clickpg)[0], 'myhide')
-                myremoveclass($('.active')[0], 'active')
-                myaddclass($('#pg-' + this.id.split('-')[1])[0], 'active')
+                adclass($('#pagebox-' + nowpage)[0], 'myhide')
+                rmclass($('#pagebox-' + clickpg)[0], 'myhide')
+                rmclass($('.active')[0], 'active')
+                adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
             }
         })
@@ -347,13 +347,13 @@ function pagination() {
 
     let next = c('li')
     next.id = 'npg'
-    myaddclass(next, 'page-item')
+    adclass(next, 'page-item')
     let nextl = c('a')
-    myaddclass(nextl, 'page-link')
+    adclass(nextl, 'page-link')
     nextl.href = 'javaScript:void(0)'
     nextl.innerText = '>'
-    appendC(next, nextl)
-    appendC(pn, next)
+    appendc(next, nextl)
+    appendc(pn, next)
     $(next).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== totalpages) {
             if ($('#pg-3').hasClass('active')) {
@@ -361,41 +361,41 @@ function pagination() {
                 $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) + 1
                 $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) + 1
             } else {
-                myremoveclass($('.active')[0], 'active')
-                myaddclass($('#pg-' + (nowpage + 1))[0], 'active')
+                rmclass($('.active')[0], 'active')
+                adclass($('#pg-' + (nowpage + 1))[0], 'active')
             }
-            myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
-            myremoveclass($('#pagebox-' + (nowpage + 1))[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'myhide')
+            rmclass($('#pagebox-' + (nowpage + 1))[0], 'myhide')
             nowpage++
         }
     })
 
     let last = c('li')
     last.id = 'lpg'
-    myaddclass(last, 'page-item')
+    adclass(last, 'page-item')
     let lastl = c('a')
-    myaddclass(lastl, 'page-link')
+    adclass(lastl, 'page-link')
     lastl.href = 'javaScript:void(0)'
     lastl.innerText = 'L'
-    appendC(last, lastl)
-    appendC(pn, last)
+    appendc(last, lastl)
+    appendc(pn, last)
     $(last).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== totalpages) {
-            myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
-            myremoveclass($('#pagebox-' + totalpages)[0], 'myhide')
-            myremoveclass($('.active')[0], 'active')
+            adclass($('#pagebox-' + nowpage)[0], 'myhide')
+            rmclass($('#pagebox-' + totalpages)[0], 'myhide')
+            rmclass($('.active')[0], 'active')
             if (totalpages >= 3) {
-                myaddclass($('#pg-3')[0], 'active')
+                adclass($('#pg-3')[0], 'active')
                 $('#pg-1 > a')[0].innerText = totalpages - 2
                 $('#pg-2 > a')[0].innerText = totalpages - 1
                 $('#pg-3 > a')[0].innerText = totalpages
             } else {
-                myaddclass($('#pg-2')[0], 'active')
+                adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
         }
     })
-    appendC(docpanel, pn)
+    appendc(docpanel, pn)
 }
 
 function cleansearch() {
@@ -408,15 +408,15 @@ function cleansearch() {
     let stgcs = $('.stgc')
     for (let j = 0; j < stgcs.length; j++) {
         if (stgcs[j].disabled === false) {
-            myremoveclass(stgcs[j], 'btn-success')
-            myaddclass(stgcs[j], 'btn-light')
+            rmclass(stgcs[j], 'btn-success')
+            adclass(stgcs[j], 'btn-light')
         }
         stgcs[j].disabled = false
     }
     for (let j = 0; j < stgts.length; j++) {
         if (stgts[j].disabled === false) {
-            myremoveclass(stgts[j], 'btn-info')
-            myaddclass(stgts[j], 'btn-light')
+            rmclass(stgts[j], 'btn-info')
+            adclass(stgts[j], 'btn-light')
         }
         stgts[j].disabled = false
     }

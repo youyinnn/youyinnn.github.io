@@ -30,8 +30,8 @@ $(function() {
     if (search === '') {
         hideloading()
         hidesidetoc()
-        myremoveclass(homepage, 'remove')
-        myaddclass(homepage, 'myshow')
+        rmclass(homepage, 'remove')
+        adclass(homepage, 'myshow')
         setgohub('My hub', 'https://github.com/' + username)
     } else {
         showloading()

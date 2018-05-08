@@ -6,24 +6,24 @@ function createpostcard(item, pagebelong) {
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
-    myaddclass(post, 'post')
-    myaddclass(posttitle, 'posttitle center-to-head')
-    myaddclass(posttime, 'posttime')
-    myaddclass(sp1, 'font-weight-bold')
-    myaddclass(sp3, 'font-weight-bold')
+    adclass(post, 'post')
+    adclass(posttitle, 'posttitle center-to-head')
+    adclass(posttime, 'posttime')
+    adclass(sp1, 'font-weight-bold')
+    adclass(sp3, 'font-weight-bold')
     posttitle.innerHTML = item.title
     posttitle.number = item.number
     sp1.innerHTML = 'PostTime:'
     sp2.innerHTML = item.created_at
     sp3.innerHTML = 'LastModTime:'
     sp4.innerHTML = item.updated_at
-    appendC(post, posttitle)
-    appendC(posttime, sp1)
-    appendC(posttime, sp2)
-    appendC(posttime, sp3)
-    appendC(posttime, sp4)
-    appendC(post, posttime)
-    appendC($('#pagebox-' + pagebelong)[0], post)
+    appendc(post, posttitle)
+    appendc(posttime, sp1)
+    appendc(posttime, sp2)
+    appendc(posttime, sp3)
+    appendc(posttime, sp4)
+    appendc(post, posttime)
+    appendc($('#pagebox-' + pagebelong)[0], post)
     $(posttitle).bind('click', function() {
         location = '/' + '?panel=post&number=' + posttitle.number
     })
@@ -38,35 +38,35 @@ function createposthead(re) {
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
-    myaddclass(post, 'post onepost')
-    myaddclass(posttitle, 'posttitle')
-    myaddclass(posttime, 'posttime')
-    myaddclass(sp1, 'font-weight-bold')
-    myaddclass(sp3, 'font-weight-bold')
+    adclass(post, 'post onepost')
+    adclass(posttitle, 'posttitle')
+    adclass(posttime, 'posttime')
+    adclass(sp1, 'font-weight-bold')
+    adclass(sp3, 'font-weight-bold')
     sp1.innerHTML = 'PostTime:'
     sp2.innerHTML = re.created_at
     sp3.innerHTML = 'LastModTime:'
     sp4.innerHTML = re.updated_at
     posttitle.innerHTML = title
-    appendC(posttime, sp1)
-    appendC(posttime, sp2)
-    appendC(posttime, sp3)
-    appendC(posttime, sp4)
-    appendC(post, posttitle)
-    appendC(post, posttime)
-    appendC(md, post)
+    appendc(posttime, sp1)
+    appendc(posttime, sp2)
+    appendc(posttime, sp3)
+    appendc(posttime, sp4)
+    appendc(post, posttitle)
+    appendc(post, posttime)
+    appendc(md, post)
 }
 
 function showhexometadata(hexometadata) {
     let metadatapanel = c('div')
     let metadatapanelhead = c('div')
     let metadatapanelbody = c('div')
-    myaddclass(metadatapanel, 'metadata')
-    myaddclass(metadatapanelhead, 'metadatahead')
-    myaddclass(metadatapanelbody, 'metadatabody')
+    adclass(metadatapanel, 'metadata')
+    adclass(metadatapanelhead, 'metadatahead')
+    adclass(metadatapanelbody, 'metadatabody')
     metadatapanelhead.innerHTML = 'Hexo Front-matter'
-    appendC($(metadatapanel)[0], metadatapanelhead)
-    appendC($(metadatapanel)[0], metadatapanelbody)
+    appendc($(metadatapanel)[0], metadatapanelhead)
+    appendc($(metadatapanel)[0], metadatapanelbody)
     if (hexometadata.title !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Title:</span> ' + hexometadata.title + '<br>'
     }
@@ -91,21 +91,21 @@ function showhexometadata(hexometadata) {
             metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-info">' + hexometadata.tags[i] + '</span><br>'
         }
     }
-    appendC(md, metadatapanel)
+    appendc(md, metadatapanel)
 }
 
 function showsaying(saying) {
     let sayingpanel = c('div')
-    myaddclass(sayingpanel, 'saying')
+    adclass(sayingpanel, 'saying')
     sayingpanel.innerHTML = saying
-    appendC(md, sayingpanel)
+    appendc(md, sayingpanel)
 }
 
 function createtodo(issuesbody, re) {
     let todohead = c('div')
     todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
-    myaddclass(todohead, 'todohead unselectable')
-    appendC(md, todohead)
+    adclass(todohead, 'todohead unselectable')
+    appendc(md, todohead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
@@ -118,8 +118,8 @@ function createtodo(issuesbody, re) {
 function createscript(issuesbody, re) {
     let scripthead = c('div')
     scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
-    myaddclass(scripthead, 'todohead unselectable')
-    appendC(md, scripthead)
+    adclass(scripthead, 'todohead unselectable')
+    appendc(md, scripthead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
@@ -132,8 +132,8 @@ function createscript(issuesbody, re) {
 function createegg(issuesbody, re) {
     let egghead = c('div')
     egghead.innerHTML = '<i class="em-svg em-clown_face"></i> E GGgG gGGG Gggg ggGG'
-    myaddclass(egghead, 'todohead unselectable')
-    appendC(md, egghead)
+    adclass(egghead, 'todohead unselectable')
+    appendc(md, egghead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
@@ -144,10 +144,10 @@ function createegg(issuesbody, re) {
 }
 
 function searchshowandrendermd(fulltext, relength) {
-    myremoveclass(scriptsearcher, 'myhide')
-    myaddclass(scriptsearcher, 'searchshow')
+    rmclass(scriptsearcher, 'myhide')
+    adclass(scriptsearcher, 'searchshow')
     md.style.paddingBottom = '3rem'
-    myremoveclass(md, 'myhide')
+    rmclass(md, 'myhide')
     searchcount = relength
     render_md(fulltext)
 }
