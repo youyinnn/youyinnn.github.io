@@ -63,7 +63,7 @@ $(function() {
         percent.innerText = scrollPercent
 
     })
-    $('#topbut, #topbut2').bind('click', function() {
+    $('#topbut, #topbut2, #movetitle').bind('click', function() {
         $('html,body').animate({
             scrollTop: 0
         }, 300);

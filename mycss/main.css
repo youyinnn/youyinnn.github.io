@@ -1,5 +1,6 @@
 #topbar {
-  position: relative;
+  position: absolute;
+  z-index: 202;
   height: 3rem;
   width: 100%;
   top: 0%;
@@ -23,6 +24,7 @@
   top: 0;
   right: 1px;
   transition: none;
+  z-index: 220 !important;
 }
 
 #block {
@@ -65,7 +67,7 @@
 }
 
 #md {
-  position: absolute;
+  position: relative;
   top: 3rem;
   padding: 1rem 2rem;
   width: 75%;
@@ -133,6 +135,10 @@
   margin-bottom: 1rem;
 }
 
+.onepost > .posttitle:active {
+  transform: none !important;
+}
+
 .ah {
   color: aliceblue;
 }
@@ -161,7 +167,7 @@
 
 .myshow {
   opacity: 1;
-  z-index: 100 !important;
+  z-index: 201 !important;
 }
 
 .remove {
@@ -383,19 +389,40 @@
 }
 
 /* placeholder居中 */
-#postsearchtext:-moz-placeholder
-{
+
+#postsearchtext:-moz-placeholder {
   text-align: center;
 }
-#postsearchtext::-moz-placeholder
-{
+
+#postsearchtext::-moz-placeholder {
   text-align: center;
 }
-#postsearchtext:-ms-input-placeholder
-{
+
+#postsearchtext:-ms-input-placeholder {
   text-align: center;
 }
-#postsearchtext::-webkit-input-placeholder
-{
-    text-align: center;
+
+#postsearchtext::-webkit-input-placeholder {
+  text-align: center;
+}
+
+#movetitle {
+  text-align: center;
+  line-height: 3;
+  font-size: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 199 !important;
+  height: 3rem;
+  background-color: #24292e;
+  color: white;
+  width: 75%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#movetitle:hover {
+  background-color: #3f464d;
 }

@@ -55,13 +55,15 @@ function createposthead(re) {
     appendc(post, posttitle)
     appendc(post, posttime)
     appendc(md, post)
+    setmovetitle(title)
+    showmovetitle()
 }
 
 function showhexometadata(hexometadata) {
     let metadatapanel = c('div')
     let metadatapanelhead = c('div')
     let metadatapanelbody = c('div')
-    adclass(metadatapanel, 'metadata')
+    adclass(metadatapanel, 'metadata ')
     adclass(metadatapanelhead, 'metadatahead')
     adclass(metadatapanelbody, 'metadatabody')
     metadatapanelhead.innerHTML = 'Hexo Front-matter'

@@ -421,3 +421,11 @@ function cleansearch() {
         stgts[j].disabled = false
     }
 }
+
+function setmovetitle(title) {
+    movetitle.innerText = '「' + title + '」'
+}
+
+function showmovetitle() {
+    rmclass(movetitle, 'myhide')
+}
