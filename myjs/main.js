@@ -123,11 +123,11 @@ function searchscript(text) {
             }
         }
     }
-    $('#searchtext').adclass('getnothing')
+    $('#searchtext').addClass('getnothing')
     searchbut.innerText = 'No get'
     setTimeout(function() {
         searchbut.innerText = 'Search'
-        $('#searchtext').rmclass('getnothing')
+        $('#searchtext').removeClass('getnothing')
     }, 1000, 'swing')
     searchone = 0
 }
