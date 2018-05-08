@@ -83,7 +83,7 @@
 .posttitle {
   width: 80%;
   word-wrap: break-word;
-  word-break:break-all;
+  word-break: break-all;
   text-decoration: none;
   transition: all .2s;
   font-weight: 500;
@@ -377,7 +377,7 @@
   bottom: 1rem;
 }
 
-.myblur{
+.myblur {
   -webkit-filter: blur(2px);
   filter: blur(2px);
 }

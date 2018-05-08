@@ -54,10 +54,10 @@ pre {
   border: none;
 }
 
-.egg:focus{
+.egg:focus {
   outline: none;
 }
 
-.egg:active{
+.egg:active {
   transform: translateY(3px);
 }
