@@ -119,6 +119,7 @@ function get_posts() {
         for (let i = 0; i < re.length; ++i) {
             postscachehandle(re[i])
         }
+        $('#postsearchtext')[0].placeholder = 'posts:' + re.length + ',tags:' + all_tags.length + ',cates:' + all_cates.length
         let stgts = $('.stgt')
         let stgcs = $('.stgc')
         for (let i = 0; i < stgcs.length; i++) {

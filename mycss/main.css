@@ -381,3 +381,21 @@
   -webkit-filter: blur(2px);
   filter: blur(2px);
 }
+
+/* placeholder居中 */
+#postsearchtext:-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext:-ms-input-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-webkit-input-placeholder
+{
+    text-align: center;
+}
