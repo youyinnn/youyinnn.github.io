@@ -384,7 +384,7 @@ function pagination() {
             myaddclass($('#pagebox-' + nowpage)[0], 'myhide')
             myremoveclass($('#pagebox-' + totalpages)[0], 'myhide')
             myremoveclass($('.active')[0], 'active')
-            if (totalpages > 3) {
+            if (totalpages >= 3) {
                 myaddclass($('#pg-3')[0], 'active')
                 $('#pg-1 > a')[0].innerText = totalpages - 2
                 $('#pg-2 > a')[0].innerText = totalpages - 1
