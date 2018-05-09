@@ -20,10 +20,12 @@
 
 #sidetoccontainer {
   position: fixed;
-  top: 0;
   right: 0;
   z-index: 220;
   background-color: white;
+  margin: auto;
+  bottom: 0;
+  top: 0;
 }
 
 #block {
@@ -433,10 +435,12 @@
 }
 
 .tochide {
+  opacity: 0;
   width: 0% !important;
 }
 
 .tocshow {
+  opacity: 1;
   width: 25%;
   z-index: 203 !important;
 }

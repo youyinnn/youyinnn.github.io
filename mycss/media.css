@@ -1,7 +1,7 @@
 /* 
   iphone7 横屏
 */
-@media screen and (max-height: 375px) {
+@media screen and (max-height: 376px) {
   #homepage {
     height: 20.6rem;
     line-height: 18.4rem;

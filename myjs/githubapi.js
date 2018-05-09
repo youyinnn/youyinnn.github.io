@@ -208,6 +208,7 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            $('#toc').removeClass('myhide')
             showsidetoc()
             if (re.length !== 0) {
                 let addcomment = c('div')
@@ -227,8 +228,8 @@ function get_post(number) {
 function get_about() {
     search_issues_by_label(about_label, function(re) {
         setgohub('Go hub', re[0].html_url)
-        
         render_md(re[0].body)
+        $('#toc').removeClass('myhide')
         hideloading()
     })
 }
@@ -289,6 +290,7 @@ function get_script() {
     search_issues_by_label(script_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createscript)
+        $('#toc').removeClass('myhide')
     })
 }
 

@@ -23,7 +23,6 @@ $(function() {
     settimeout()
     get_friendlinked()
     let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
-    toccontainer.style.height = parseInt(getWindowH())  + 'px'
     let search = location.search
     if (search === '') {
         hideloading()

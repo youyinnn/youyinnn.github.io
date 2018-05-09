@@ -19,6 +19,7 @@ body {
         但是会影响部分部件的缩放
     */
   /* transform: translate3d(0, 0, 0); */
+  transform: translate(0,0);
   backface-visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1000;

@@ -37,7 +37,6 @@ function render_md(text) {
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
     });
-    $('#toc').removeClass('myhide')
     let as = $('#md a')
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
