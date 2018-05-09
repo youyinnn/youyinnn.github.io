@@ -432,30 +432,8 @@
   text-align: center;
 }
 
-#movetitle {
-  text-align: center;
-  line-height: 3;
-  font-size: 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 199 !important;
-  height: 3rem;
-  background-color: var(--ymain-color);
-  color: aliceblue;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-#movetitle:hover {
-  background-color: var(--yminor-color);
-}
-
 .tochide {
   width: 0% !important;
-  /* z-index: 0 !important; */
 }
 
 .tocshow {
