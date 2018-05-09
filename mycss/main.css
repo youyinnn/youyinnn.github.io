@@ -4,7 +4,7 @@
   height: 3rem;
   width: 100%;
   top: 0%;
-  background-color: #24292e;
+  background-color: var(--ymain-color);
   border-radius: 0;
   margin-bottom: 0;
 }
@@ -14,22 +14,21 @@
   margin: 0 auto;
   left: 0;
   right: 0;
-  top: 2.8rem;
+  top: 3rem;
   bottom: 0;
 }
 
 #sidetoccontainer {
   position: fixed;
-  width: 25%;
   top: 0;
-  right: 1px;
-  transition: none;
-  z-index: 220 !important;
+  right: 0;
+  z-index: 220;
+  background-color: white;
 }
 
 #block {
   height: 3rem;
-  background-color: #24292e;
+  background-color: var(--ymain-color);
   color: aliceblue;
   line-height: 3rem;
   text-align: center;
@@ -37,28 +36,26 @@
 
 #percent {
   height: 3rem;
-  background-color: #24292e;
-  width: 50%;
+  background-color: var(--ymain-color);
+  width: 100%;
   float: left;
 }
 
-#topbut {
-  height: 3rem;
-  width: 50%;
-  float: right;
-}
-
-#topbut:hover {
-  background-color: #3c4247;
+#percent:hover {
+  background-color: var(--yminor-color);
 }
 
 #sidetoc {
-  border-left: 0.1rem #ccc dashed;
+  border-left: 0.1rem var(--ydashed-color) dashed;
+  position: absolute;
+  margin: auto;
+  top: 3rem;
+  bottom: 0;
 }
 
 #sidetoc a {
   transition: all .2s;
-  color: #24292e;
+  color: var(--ymain-color);
   text-decoration: none;
 }
 
@@ -71,7 +68,7 @@
   top: 3rem;
   padding: 1rem 2rem;
   width: 75%;
-  transition: none;
+  transition: width .5s;
 }
 
 .post {
@@ -131,11 +128,11 @@
 .onepost {
   padding: 0 0 1rem 0;
   margin: 0;
-  border-bottom: 0.1rem #ccc dashed;
+  border-bottom: 0.1rem var(--ydashed-color) dashed;;
   margin-bottom: 1rem;
 }
 
-.onepost > .posttitle:active {
+.onepost>.posttitle:active {
   transform: none !important;
 }
 
@@ -176,14 +173,14 @@
 
 .metadata {
   background-color: #dee2e6;
-  color: #000000;
+  color: var(--ymain-color);
   border-radius: 1rem;
   margin: 1rem 0 2rem 0;
 }
 
 .metadatahead {
-  background-color: rgb(212, 214, 216);
-  color: #24292e;
+  background-color: var(--ydashed-color);
+  color: var(--ymain-color);
   border-radius: 0.8rem 0.8rem 0 0;
   padding: 0.5rem 1rem;
   font-weight: bold;
@@ -234,7 +231,7 @@
   line-height: 4rem;
   font-size: 2rem;
   margin-bottom: 1rem;
-  border-bottom: 0.1rem #ccc dashed;
+  border-bottom: 0.1rem var(--ydashed-color) dashed;;
 }
 
 #scriptsearcher {
@@ -256,7 +253,7 @@
 }
 
 .issuesbody {
-  background-color: #24292e;
+  background-color: var(--ymain-color);
 }
 
 #gohub {
@@ -267,7 +264,7 @@
   bottom: 1rem;
   height: 2rem;
   z-index: 999;
-  background-color: #24292e;
+  background-color: var(--ymain-color);
   line-height: 2rem;
   color: aliceblue;
 }
@@ -298,7 +295,7 @@
 
 #commentline {
   margin-top: 3rem;
-  border: 2px #3c4247 dashed;
+  border: 2px var(--yminor-color) dashed;
   width: 100%;
 }
 
@@ -368,6 +365,7 @@
   padding: 0 1rem;
   border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);
+  overflow: hidden;
 }
 
 .stgt {
@@ -415,14 +413,29 @@
   left: 0;
   z-index: 199 !important;
   height: 3rem;
-  background-color: #24292e;
+  background-color: var(--ymain-color);
   color: aliceblue;
-  width: 75%;
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 #movetitle:hover {
-  background-color: #3f464d;
+  background-color: var(--yminor-color);
+}
+
+.tochide {
+  width: 0% !important;
+  z-index: 0 !important;
+}
+
+.tocshow {
+  width: 25%;
+  z-index: 203 !important;
+}
+
+#loadingslogan{
+  margin-top: 2rem;
+  text-align: center;
 }

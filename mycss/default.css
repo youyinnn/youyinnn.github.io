@@ -1,3 +1,10 @@
+:root{
+  --ymain-color: #24292e;
+  --yminor-color: #3c4247;
+  --ydashed-color: #ccc;
+}
+
+
 * {
   margin: 0;
   padding: 0;

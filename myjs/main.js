@@ -6,8 +6,6 @@ var nowpage = 1
 function render_md(text) {
     rmclass(md, 'myhide')
     adclass(md, 'myshow')
-    rmclass(sidetoccontainer, 'myhide')
-    adclass(sidetoccontainer, 'myshow')
     if (text.substring(0, 3) === '---') {
         let endindex = text.indexOf('---', 3) + 3
         let hexo_metadata = gethexofrontmatter(text)
@@ -63,8 +61,19 @@ function showloading() {
 }
 
 function hidesidetoc() {
-    adclass(sidetoccontainer, 'myhide')
+    adclass(sidetoccontainer, 'tochide')
+    rmclass(sidetoccontainer, 'tocshow')
     adclass(md, 'w-100')
+    movetitle.style.width = '100%'
+    scriptsearcher.style.left = '0%'
+}
+
+function showsidetoc() {
+    rmclass(sidetoccontainer, 'tochide')
+    adclass(sidetoccontainer, 'tocshow')
+    rmclass(md, 'w-100')
+    movetitle.style.width = '75%'
+    scriptsearcher.style.left = '-23%'
 }
 
 function searchscript(text) {

@@ -12,25 +12,23 @@ var timeout
 
 function settimeout() {
     let nowhour = dayjs().hour()
-    timeout = (nowhour >= 19 || nowhour <= 6) ? 10000 : 5000
+    timeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 10000
     console.log('timeout is [' + timeout + ']')
 }
 
 function getset(url, asyn) {
     let basegetset = {
-        // 'timeout': timeout,
+        'timeout': timeout,
         'async': true,
         'crossDomain': true,
         'method': 'GET',
         'url': url,
         'headers': {
             'Authorization': 'Bearer ' + oauth_token,
-            'Accept': 'application/vnd.github.v3+json',
-            'Accept': 'application/vnd.github.symmetra-preview+json',
         },
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
-                alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
+                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
                     '\r\nresponseText: ' + eve.responseText +
                     '\r\nstatusText: ' + eve.statusText +
                     '\r\nwill return to the home page')
@@ -44,21 +42,19 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
     let basepostset = {
-        // 'timeout': timeout,
+        'timeout': timeout,
         'async': true,
         'crossDomain': true,
         'method': 'POST',
         'url': url,
         'headers': {
             'Authorization': 'Bearer ' + oauth_token,
-            'Accept': 'application/vnd.github.v3+json',
-            'Accept': 'application/vnd.github.symmetra-preview+json',
         },
         'mimeType': 'multipart/form-data',
         'data': form,
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
-                alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
+                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
                     '\r\nresponseText: ' + eve.responseText +
                     '\r\nstatusText: ' + eve.statusText +
                     '\r\nwill return to the home page')
@@ -115,7 +111,7 @@ function get_posts() {
         for (let i = 0; i < re.length; ++i) {
             postscachehandle(re[i])
         }
-        $('#postsearchtext')[0].placeholder = 'posts:' + re.length + ',tags:' + all_tags.length + ',cates:' + all_cates.length
+        $('#postsearchtext')[0].placeholder = 'ps:' + re.length + ',ts:' + all_tags.length + ',cs:' + all_cates.length
         let stgts = $('.stgt')
         let stgcs = $('.stgc')
         for (let i = 0; i < stgcs.length; i++) {
@@ -212,6 +208,7 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            showsidetoc()
             if (re.length !== 0) {
                 let addcomment = c('div')
                 let a = c('a')
@@ -230,6 +227,8 @@ function get_post(number) {
 function get_about() {
     search_issues_by_label(about_label, function(re) {
         setgohub('Go hub', re[0].html_url)
+        setmovetitle('About Me')
+        showmovetitle()
         render_md(re[0].body)
         hideloading()
     })
@@ -246,8 +245,6 @@ function get_friendlinked() {
             'method': 'GET',
             'headers': {
                 'Authorization': 'Bearer ' + oauth_token,
-                'Accept': 'application/vnd.github.v3+json',
-                'Accept': 'application/vnd.github.symmetra-preview+json',
             },
             'error': function(eve) {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
@@ -278,7 +275,6 @@ function get_issues_comments(number, issuesbody, func) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
     sendget(url, function(re) {
         func(issuesbody, re)
-        hidesidetoc()
         hideloading()
     })
 }
@@ -294,6 +290,8 @@ function get_script() {
     search_issues_by_label(script_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createscript)
+        setmovetitle('Script Base')
+        showmovetitle()
     })
 }
 

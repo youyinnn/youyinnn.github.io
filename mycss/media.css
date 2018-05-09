@@ -8,11 +8,31 @@
     font-size: 3rem;
   }
   #loading{
-    padding: 6rem 0;
+    padding: 7rem 0 0 0;
   }
   #showmore{
     top: 12rem;
     font-size: 1rem;
+  }
+  #sidetoccontainer {
+    top: 3rem !important;
+    z-index: 203 !important;
+    border-bottom: 0.5rem var(--ydashed-color) solid;    
+  }
+  #scriptsearcher{
+    left: 0% !important;
+  }
+  #sidetoc{
+    border-left: none;
+    bottom: 2rem;
+  }
+  .tocshow{
+    width: 50%;
+    opacity: 1;
+  }
+  .tochide{
+    width: 0%;
+    opacity: 0;
   }
 }
 
@@ -26,10 +46,24 @@
     font-size: 2rem;
   }
   #loading{
-    padding: 16rem 0;
+    padding: 14rem 0 0 0;
   }
   #sidetoccontainer {
-    display: none;
+    top: 3rem !important;
+    z-index: 203 !important;
+    border-bottom: 0.5rem var(--ydashed-color) solid;    
+  }
+  #sidetoc{
+    border-left: none;
+    bottom: 5rem;
+  }
+  .tocshow{
+    width: 100% !important;
+    opacity: 1;
+  }
+  .tochide{
+    width: 0% !important;
+    opacity: 0;
   }
   #topbar {
     height: 6rem;
@@ -37,9 +71,6 @@
   #md {
     top: 6rem;
     width: 100%;
-  }
-  #sidetoc {
-    display: none;
   }
   .friendcard {
     margin: 0 auto;
@@ -49,6 +80,7 @@
     bottom: 0rem;
     width: 80%;
     margin: 0;
+    left: 0% !important;
   }
   .searchshow {
     opacity: 1 !important;
@@ -92,14 +124,11 @@
   针对阅读器
 */
 @media screen and (max-width: 690px) {
-  #sidetoccontainer {
-    display: none;
-  }
   #md {
     width: 100%;
   }
   #movetitle{
-    width: 100%;
+    width: 100% !important;
   }
 }
 /* 

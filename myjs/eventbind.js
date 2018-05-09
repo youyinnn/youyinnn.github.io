@@ -26,6 +26,13 @@ $(function() {
     $('#cleanbut').bind('click', function() {
         cleansearch()
     })
+    $('#movetitle').bind('click', function() {
+        if ($('#sidetoccontainer').hasClass('tochide')) {
+            showsidetoc()
+        } else {
+            hidesidetoc()
+        }
+    })
     $('#searchtext').bind('keyup', 'return', function() {
         searchscript(this.value)
     })
@@ -63,7 +70,7 @@ $(function() {
         percent.innerText = scrollPercent
 
     })
-    $('#topbut, #topbut2, #movetitle').bind('click', function() {
+    $('#percent').bind('click', function() {
         $('html,body').animate({
             scrollTop: 0
         }, 300);
