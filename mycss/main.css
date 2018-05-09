@@ -154,11 +154,11 @@
 }
 
 .ah:hover {
-  color: rgb(166, 171, 175);
+  color: var(--yminor-color);
 }
 
 .ah:active {
-  color: rgb(166, 171, 175);
+  color: var(--yminor-color);
 }
 
 #reader {
@@ -297,11 +297,11 @@
 }
 
 #gohub:hover {
-  background-color: rgb(166, 171, 175);
+  background-color: var(--yminor-color);
 }
 
 #toc:hover {
-  background-color: rgb(166, 171, 175);
+  background-color: var(--yminor-color);
 }
 
 #toc:active {

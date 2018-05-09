@@ -31,6 +31,29 @@
   #percent{
     width: 50%;
   }
+  #gohub:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
+  }
+  
+  #gohub:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
+  }
+  #percent:hover {
+    background-color: var(--ymain-color);
+  }
+  #percent:active {
+    background-color: var(--yminor-color);
+  }
 }
 
 /* 
@@ -66,10 +89,6 @@
   #md {
     top: 6rem;
     width: 100%;
-  }
-  .friendcard {
-    margin: 0 auto;
-    width: 18rem;
   }
   #scriptsearcher {
     bottom: 0rem;
@@ -115,6 +134,29 @@
   }
   #percent{
     width: 100%;
+  }
+  #gohub:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
+  }
+  
+  #gohub:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
+  }
+  #percent:hover {
+    background-color: var(--ymain-color);
+  }
+  #percent:active {
+    background-color: var(--yminor-color);
   }
 }
 
@@ -164,8 +206,21 @@
   针对iphone5 等320宽
 */
 @media screen and (max-width: 320px) {
-  .friendcard {
-    margin: 0 auto;
-    width: 15rem;
+  #gohub:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:hover {
+    background-color: var(--ymain-color);
+  }
+  
+  #toc:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
+  }
+  
+  #gohub:active {
+    transform: translateY(0.5rem);
+    background-color: var(--yminor-color);
   }
 }
