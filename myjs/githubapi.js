@@ -227,8 +227,7 @@ function get_post(number) {
 function get_about() {
     search_issues_by_label(about_label, function(re) {
         setgohub('Go hub', re[0].html_url)
-        setmovetitle('About Me')
-        showmovetitle()
+        
         render_md(re[0].body)
         hideloading()
     })
@@ -290,8 +289,6 @@ function get_script() {
     search_issues_by_label(script_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createscript)
-        setmovetitle('Script Base')
-        showmovetitle()
     })
 }
 

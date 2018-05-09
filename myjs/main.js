@@ -63,16 +63,12 @@ function showloading() {
 function hidesidetoc() {
     adclass(sidetoccontainer, 'tochide')
     rmclass(sidetoccontainer, 'tocshow')
-    adclass(md, 'w-100')
-    movetitle.style.width = '100%'
     scriptsearcher.style.left = '0%'
 }
 
 function showsidetoc() {
     rmclass(sidetoccontainer, 'tochide')
     adclass(sidetoccontainer, 'tocshow')
-    rmclass(md, 'w-100')
-    movetitle.style.width = '75%'
     scriptsearcher.style.left = '-23%'
 }
 
@@ -429,12 +425,4 @@ function cleansearch() {
         }
         stgts[j].disabled = false
     }
-}
-
-function setmovetitle(title) {
-    movetitle.innerText = '「' + title + '」'
-}
-
-function showmovetitle() {
-    rmclass(movetitle, 'myhide')
 }

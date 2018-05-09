@@ -26,7 +26,7 @@ $(function() {
     $('#cleanbut').bind('click', function() {
         cleansearch()
     })
-    $('#movetitle').bind('click', function() {
+    $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {
             showsidetoc()
         } else {

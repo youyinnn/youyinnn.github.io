@@ -67,8 +67,16 @@
   position: relative;
   top: 3rem;
   padding: 1rem 2rem;
-  width: 75%;
+  width: 100%;
   transition: width .5s;
+}
+
+#hold{
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 500px;
+  top: -500px;
 }
 
 .post {
@@ -256,27 +264,47 @@
   background-color: var(--ymain-color);
 }
 
-#gohub {
-  padding: 0 0.5rem;
-  text-align: center;
+#bbt{
   position: fixed;
   right: 3rem;
   bottom: 1rem;
-  height: 2rem;
   z-index: 999;
-  background-color: var(--ymain-color);
   line-height: 2rem;
+  height: 2rem;
+}
+
+#gohub{
+  background-color: var(--ymain-color);
+  padding: 0 0.5rem;
+  display: inline-block;
   color: aliceblue;
+  text-align: center;
+  text-decoration: none;
+}
+
+#toc{
+  text-decoration: none;
+  background-color: var(--ymain-color);
+  padding: 0 0.5rem;
+  display: inline-block;
+  color: aliceblue;
+  text-align: center;
 }
 
 #gohub:hover {
-  border-radius: 0.7rem;
-  color: rgb(166, 171, 175);
+  background-color: rgb(166, 171, 175);
+}
+
+#toc:hover {
+  background-color: rgb(166, 171, 175);
+}
+
+#toc:active {
+  transform: translateY(0.5rem);
 }
 
 #gohub:active {
-  color: rgb(166, 171, 175);
-  transform: translateY(0.1rem);
+  transform: translateY(0.5rem);
 }
 
 .getnothing {
@@ -427,7 +455,7 @@
 
 .tochide {
   width: 0% !important;
-  z-index: 0 !important;
+  /* z-index: 0 !important; */
 }
 
 .tocshow {

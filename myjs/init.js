@@ -18,7 +18,6 @@ var all_tags = new Array()
 var all_cates = new Array()
 var postsearchrs = new Array()
 var searchcount
-var movetitle = $('#movetitle')[0]
 
 $(function() {
     settimeout()

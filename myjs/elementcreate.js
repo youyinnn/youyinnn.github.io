@@ -55,8 +55,6 @@ function createposthead(re) {
     appendc(post, posttitle)
     appendc(post, posttime)
     appendc(md, post)
-    setmovetitle(title)
-    showmovetitle()
 }
 
 function showhexometadata(hexometadata) {
