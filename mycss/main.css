@@ -65,7 +65,7 @@
 }
 
 #sidetoc a:hover {
-  background-color: #9e9e9e;
+  background-color: var(--yfont-minor-color);
 }
 
 #md {
@@ -154,11 +154,11 @@
 }
 
 .ah:hover {
-  color: var(--yminor-color);
+  color: var(--yfont-minor-color);
 }
 
 .ah:active {
-  color: var(--yminor-color);
+  color: var(--yfont-minor-color);
 }
 
 #reader {
@@ -222,11 +222,11 @@
 
 #homepage {
   position: absolute;
-  background-color: #212529;
+  background-color: var(--yfunction-color);
   width: 100%;
   text-align: center;
   line-height: 43rem;
-  color: #9e9e9e;
+  color: var(--yfont-minor-color);
   font-size: 4rem;
   transition: all .2s;
   font-weight: 200;
@@ -383,7 +383,7 @@
 
 #postsearch {
   width: 100%;
-  background-color: #212529;
+  background-color: var(--yfunction-color);
 }
 
 #postsearchtext {
