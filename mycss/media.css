@@ -19,11 +19,7 @@
     z-index: 203 !important;
     border-bottom: 0.5rem var(--ydashed-color) solid;    
   }
-  #scriptsearcher{
-    left: 0% !important;
-  }
   #sidetoc{
-    border-left: none;
     bottom: 2rem;
   }
   .tocshow{
