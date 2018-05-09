@@ -18,7 +18,7 @@ function settimeout() {
 
 function getset(url, asyn) {
     let basegetset = {
-        'timeout': timeout,
+        // 'timeout': timeout,
         'async': true,
         'crossDomain': true,
         'method': 'GET',
@@ -28,8 +28,6 @@ function getset(url, asyn) {
             'Accept': 'application/vnd.github.v3+json',
             'Accept': 'application/vnd.github.symmetra-preview+json',
         },
-        'processData': false,
-        'contentType': false,
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
                 alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
@@ -46,7 +44,7 @@ function getset(url, asyn) {
 
 function postset(url, form, asyn) {
     let basepostset = {
-        'timeout': timeout,
+        // 'timeout': timeout,
         'async': true,
         'crossDomain': true,
         'method': 'POST',
@@ -58,8 +56,6 @@ function postset(url, form, asyn) {
         },
         'mimeType': 'multipart/form-data',
         'data': form,
-        'processData': false,
-        'contentType': false,
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
                 alert('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
@@ -243,19 +239,16 @@ function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
         let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime()
         let basegetset = {
-            'timeout': 3000,
+            // 'timeout': 3000,
             'async': true,
             'url': url,
             'crossDomain': true,
             'method': 'GET',
-            'url': url,
             'headers': {
                 'Authorization': 'Bearer ' + oauth_token,
                 'Accept': 'application/vnd.github.v3+json',
                 'Accept': 'application/vnd.github.symmetra-preview+json',
             },
-            'processData': false,
-            'contentType': false,
             'error': function(eve) {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
             }
