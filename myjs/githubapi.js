@@ -184,6 +184,7 @@ function get_posts() {
         }
         rmclass(docpanel, 'myhide')
         adclass(docpanel, 'myshow')
+        showbbt()        
         hideloading()
     })
 }
@@ -208,6 +209,7 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            showbbt()
             $('#toc').removeClass('myhide')
             showsidetoc()
             if (re.length !== 0) {
@@ -229,6 +231,7 @@ function get_about() {
     search_issues_by_label(about_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         render_md(re[0].body)
+        showbbt()
         $('#toc').removeClass('myhide')
         hideloading()
     })
@@ -276,6 +279,7 @@ function get_issues_comments(number, issuesbody, func) {
     sendget(url, function(re) {
         func(issuesbody, re)
         hideloading()
+        showbbt()
     })
 }
 

@@ -15,7 +15,7 @@
     font-size: 1rem;
   }
   #sidetoccontainer {
-    z-index: 203 !important;
+    z-index: 501 !important;
   }
   .tocshow{
     width: 50%;
@@ -27,6 +27,9 @@
   }
   #bbt{
     right: 1rem;
+  }
+  #percent{
+    width: 50%;
   }
 }
 
@@ -109,6 +112,9 @@
     bottom: 0;
     left: 0;
     transform: none;
+  }
+  #percent{
+    width: 100%;
   }
 }
 

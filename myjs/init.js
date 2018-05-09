@@ -40,27 +40,21 @@ $(function() {
         if (key === 'panel' && value === 'posts') {
             changepagetitle('posts | youyinnn')
             get_posts()
-            showbbt()
         } else if (key === 'panel' && value === 'post') {
             changepagetitle('post | youyinnn')
             get_post(params[1].split('=')[1])
-            showbbt()
         } else if (key === 'panel' && value === 'about') {
             changepagetitle('about | youyinnn')
             get_about()
-            showbbt()
         } else if (key === 'panel' && value === 'todo') {
             changepagetitle('todo | youyinnn')
             get_todo()
-            showbbt()
         } else if (key === 'panel' && value === 'script') {
             changepagetitle('script | youyinnn')
             get_script()
-            showbbt()
         } else if (key === 'xixi' && value === 'haha') {
             changepagetitle('egg | youyinnn')
             get_egg()
-            showbbt()
         } else {
             alert('No such page.')
             location = '/'

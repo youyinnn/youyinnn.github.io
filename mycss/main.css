@@ -26,6 +26,7 @@
   margin: auto;
   bottom: 0;
   top: 0;
+  overflow: auto;
 }
 
 #block {
@@ -37,10 +38,12 @@
 }
 
 #percent {
-  height: 3rem;
-  background-color: var(--ymain-color);
-  width: 100%;
-  float: left;
+  position: fixed;
+    height: 3rem;
+    background-color: var(--ymain-color);
+    width: 25%;
+    float: left;
+    z-index: 999;
 }
 
 #percent:hover {
@@ -251,7 +254,7 @@
   right: 0;
   width: 50%;
   bottom: 1rem;
-  z-index: 999;
+  z-index: 500;
 }
 
 .searchshow {
