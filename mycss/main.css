@@ -182,7 +182,7 @@
 }
 
 .metadata {
-  background-color: #dee2e6;
+  background-color: #ebebeb;
   color: var(--ymain-color);
   border-radius: 1rem;
   margin: 1rem 0 2rem 0;
@@ -271,8 +271,8 @@
   right: 3rem;
   bottom: 1rem;
   z-index: 999;
-  line-height: 2rem;
-  height: 2rem;
+  line-height: 2.375rem;
+  height: 2.375rem;
 }
 
 #gohub{
@@ -391,7 +391,7 @@
   position: absolute !important;
   z-index: 300;
   width: 100%;
-  background-color: #e9ecef;
+  background-color: #ebebeb;
   padding: 0 1rem;
   border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);

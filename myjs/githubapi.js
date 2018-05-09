@@ -100,7 +100,7 @@ function sendpost(url, form, func) {
 }
 
 function search_issues_by_label(label, func) {
-    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
     sendget(url, func)
 }
 
@@ -195,7 +195,7 @@ function get_post(number) {
         setgohub('Go hub', page)
         createposthead(re)
         let text = re.body
-        let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
+        let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(url2, function(re) {
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
@@ -238,7 +238,7 @@ function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
         let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime()
         let basegetset = {
-            // 'timeout': 3000,
+            // 'timeout': 3001,
             'async': true,
             'url': url,
             'crossDomain': true,
@@ -272,7 +272,7 @@ function get_friendlinked() {
 }
 
 function get_issues_comments(number, issuesbody, func) {
-    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments'
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
     sendget(url, function(re) {
         func(issuesbody, re)
         hideloading()
