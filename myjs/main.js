@@ -64,20 +64,20 @@ function hidesidetoc() {
     adclass(sidetoccontainer, 'tochide')
     rmclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '0%'
-    $('body')[0].style.overflow = ''
-    // if (getClientW() < 700) {
-    //     md.style.filter = ''
-    // }
+    // $('body')[0].style.overflow = ''
+    if (getClientW() < 700) {
+        md.style.filter = ''
+    }
 }
 
 function showsidetoc() {
     rmclass(sidetoccontainer, 'tochide')
     adclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '-23%'
-    $('body')[0].style.overflow = 'hidden'
-    // if (getClientW() < 700) {
-    //     md.style.filter = 'blur(2px)'
-    // }
+    // $('body')[0].style.overflow = 'hidden'
+    if (getClientW() < 700) {
+        md.style.filter = 'blur(2px)'
+    }
 }
 
 function searchscript(text) {
