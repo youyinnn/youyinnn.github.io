@@ -7,7 +7,7 @@ var script_label = 'yscript'
 var todo_label = 'ytodo'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
-var oauth_token = 'Bearer ' + base64decode(oauth_token_base64)
+var oauth_token = base64decode(oauth_token_base64)
 var timeout
 
 function settimeout() {
@@ -23,9 +23,6 @@ function getset(url) {
         'crossDomain': true,
         'method': 'GET',
         'url': url,
-        'headers': {
-            'Authorization': oauth_token,
-        },
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
                 console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
@@ -47,9 +44,6 @@ function postset(url, form) {
         'crossDomain': true,
         'method': 'POST',
         'url': url,
-        'headers': {
-            'Authorization': oauth_token,
-        },
         'mimeType': 'multipart/form-data',
         'data': form,
         'error': function(eve) {
@@ -71,9 +65,9 @@ function sendget(url, func) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime()
+        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
     } else {
-        url += '?flash=' + (new Date()).getTime()
+        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
     }
     console.log('send get :' + url)
     $.ajax(getset(url)).done(function(response) {
@@ -87,9 +81,9 @@ function sendpost(url, form, func) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime()
+        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
     } else {
-        url += '?flash=' + (new Date()).getTime()
+        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
     }
     console.log('send post :' + url)
     $.ajax(postset(url, form)).done(function(response) {
@@ -239,16 +233,13 @@ function get_about() {
 
 function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime()
+        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime()  + '&access_token=' + oauth_token 
         let basegetset = {
-            // 'timeout': 3001,
+            'timeout': timeout,
             'async': true,
             'url': url,
             'crossDomain': true,
             'method': 'GET',
-            'headers': {
-                'Authorization': oauth_token,
-            },
             'error': function(eve) {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
             }
