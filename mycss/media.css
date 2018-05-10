@@ -92,7 +92,7 @@
   }
   #scriptsearcher {
     bottom: 0rem;
-    width: 69%;
+    width: 70%;
     margin: 0;
     left: 0% !important;
   }
@@ -109,9 +109,12 @@
   #bbt {
     right: 0;
     bottom: 0;
-    width: 31%;
+    width: 30%;
     height: 2.375rem;
     line-height: 2.375rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   #bbt:hover {
     border-radius: 0;

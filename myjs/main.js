@@ -64,7 +64,7 @@ function hidesidetoc() {
     adclass(sidetoccontainer, 'tochide')
     rmclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '0%'
-    $('body')[0].style.overflow = ''
+    $('body')[0].style.overflowY = ''
     if (getClientW() < 700) {
         md.style.filter = ''
     }
@@ -74,7 +74,7 @@ function showsidetoc() {
     rmclass(sidetoccontainer, 'tochide')
     adclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '-23%'
-    $('body')[0].style.overflow = 'hidden'
+    $('body')[0].style.overflowY = 'hidden'
     if (getClientW() < 700) {
         md.style.filter = 'blur(2px)'
     }
