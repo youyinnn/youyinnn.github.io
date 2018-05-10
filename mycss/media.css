@@ -54,6 +54,9 @@
   #percent:active {
     background-color: var(--yminor-color);
   }
+  .pagination{
+    bottom: 1rem;
+  }
 }
 
 /* 
@@ -128,11 +131,10 @@
   }
   .pagination{
     background-color: white;
-    left: 0;
+    left: -3rem;
     right: 0;
     width: 80%;
     bottom: 0;
-    left: 0;
     transform: none;
   }
   #percent{
