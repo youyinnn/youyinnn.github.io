@@ -7,7 +7,7 @@ var script_label = 'yscript'
 var todo_label = 'ytodo'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
-var oauth_token = base64decode(oauth_token_base64)
+var oauth_token = 'Bearer ' + base64decode(oauth_token_base64)
 var timeout
 
 function settimeout() {
@@ -16,7 +16,7 @@ function settimeout() {
     console.log('timeout is [' + timeout + ']')
 }
 
-function getset(url, asyn) {
+function getset(url) {
     let basegetset = {
         'timeout': timeout,
         'async': true,
@@ -24,7 +24,7 @@ function getset(url, asyn) {
         'method': 'GET',
         'url': url,
         'headers': {
-            'Authorization': 'Bearer ' + oauth_token,
+            'Authorization': oauth_token,
         },
         'error': function(eve) {
             if (eve.status === 0 && eve.statusText !== 'error') {
@@ -40,7 +40,7 @@ function getset(url, asyn) {
     return basegetset
 }
 
-function postset(url, form, asyn) {
+function postset(url, form) {
     let basepostset = {
         'timeout': timeout,
         'async': true,
@@ -48,7 +48,7 @@ function postset(url, form, asyn) {
         'method': 'POST',
         'url': url,
         'headers': {
-            'Authorization': 'Bearer ' + oauth_token,
+            'Authorization': oauth_token,
         },
         'mimeType': 'multipart/form-data',
         'data': form,
@@ -247,7 +247,7 @@ function get_friendlinked() {
             'crossDomain': true,
             'method': 'GET',
             'headers': {
-                'Authorization': 'Bearer ' + oauth_token,
+                'Authorization': oauth_token,
             },
             'error': function(eve) {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
