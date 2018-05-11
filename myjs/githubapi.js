@@ -211,9 +211,9 @@ function get_post(number) {
                     if (hasClass(this, 'imglg')) {
                         rmclass(this, 'imglg')
                         this.style.transform = ''
-                        this.title = '点击还原'
-                    } else {
                         this.title = '点击放大'
+                    } else {
+                        this.title = '点击还原'
                         adclass(this, 'imglg')
                         let w = getClientW(0.9)
                         this.style.transform = 'scale(' + (w / this.width) + ')'
