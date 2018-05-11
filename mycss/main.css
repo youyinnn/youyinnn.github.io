@@ -463,5 +463,24 @@
 }
 
 .imglg{
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   border: var(--yminor-color) 0.1rem dashed  !important;
+  opacity: 0;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.curtain{
+  position: fixed;
+  z-index: 988;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
