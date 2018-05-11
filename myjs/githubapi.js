@@ -205,15 +205,15 @@ function get_post(number) {
             render_md(text)
             adclass(md, 'post')
             let postimgs = $('.post img')
-            postimgs.attr('title','点击放大')
+            postimgs.attr('title','click to focus')
             postimgs.bind('click', function() {
                 if (getClientW() > 700 && getClientH() > 700) {
                     if (hasClass(this, 'imglg')) {
                         rmclass(this, 'imglg')
                         this.style.transform = ''
-                        this.title = '点击放大'
+                        this.title = 'click to focus'
                     } else {
-                        this.title = '点击还原'
+                        this.title = 'click to reduction'
                         adclass(this, 'imglg')
                         let w = getClientW(0.9)
                         this.style.transform = 'scale(' + (w / this.width) + ')'
