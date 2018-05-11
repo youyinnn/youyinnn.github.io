@@ -1,12 +1,12 @@
 function createpostcard(item, pagebelong) {
-    let post = c('div')
+    let postcard = c('div')
     let posttitle = c('div')
     let posttime = c('div')
     let sp1 = c('span')
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
-    adclass(post, 'post')
+    adclass(postcard, 'postcard')
     adclass(posttitle, 'posttitle center-to-head')
     adclass(posttime, 'posttime')
     adclass(sp1, 'font-weight-bold')
@@ -17,13 +17,13 @@ function createpostcard(item, pagebelong) {
     sp2.innerHTML = dayjs(item.created_at).format('YYYY MM-DD HH:mm:ss (Z)')
     sp3.innerHTML = 'LastModTime:'
     sp4.innerHTML = dayjs(item.updated_at).format('YYYY MM-DD HH:mm:ss (Z)')
-    appendc(post, posttitle)
+    appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(posttime, sp2)
     appendc(posttime, sp3)
     appendc(posttime, sp4)
-    appendc(post, posttime)
-    appendc($('#pagebox-' + pagebelong)[0], post)
+    appendc(postcard, posttime)
+    appendc($('#pagebox-' + pagebelong)[0], postcard)
     $(posttitle).bind('click', function() {
         location = '/' + '?panel=post&number=' + posttitle.number
     })
@@ -31,14 +31,14 @@ function createpostcard(item, pagebelong) {
 
 function createposthead(re) {
     let title = re.title
-    let post = c('div')
+    let postcard = c('div')
     let posttitle = c('div')
     let posttime = c('div')
     let sp1 = c('span')
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
-    adclass(post, 'post onepost')
+    adclass(postcard, 'postcard onepost')
     adclass(posttitle, 'posttitle')
     adclass(posttime, 'posttime')
     adclass(sp1, 'font-weight-bold')
@@ -52,9 +52,9 @@ function createposthead(re) {
     appendc(posttime, sp2)
     appendc(posttime, sp3)
     appendc(posttime, sp4)
-    appendc(post, posttitle)
-    appendc(post, posttime)
-    appendc(md, post)
+    appendc(postcard, posttitle)
+    appendc(postcard, posttime)
+    appendc(md, postcard)
 }
 
 function showhexometadata(hexometadata) {

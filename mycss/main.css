@@ -71,7 +71,7 @@
 #md {
   position: relative;
   top: 3rem;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   width: 100%;
   transition: none;
 }
@@ -84,12 +84,26 @@
   top: -500px;
 }
 
-.post {
+.postcard {
   text-align: center;
   color: rgb(83, 87, 90);
   margin: 3.5rem auto;
   border-radius: 1rem;
   transition: all .6s ease-in-out;
+}
+
+.post img{
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.post img:hover{
+  cursor: pointer;
+}
+.post img:active{
+  cursor: pointer;
 }
 
 .posttitle {
@@ -446,4 +460,8 @@
 #loadingslogan{
   margin-top: 2rem;
   text-align: center;
+}
+
+.imglg{
+  border: var(--yminor-color) 0.1rem dashed  !important;
 }

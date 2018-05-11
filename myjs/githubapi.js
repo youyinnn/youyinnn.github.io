@@ -65,9 +65,9 @@ function sendget(url, func) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
+        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     } else {
-        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
+        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     }
     console.log('send get :' + url)
     $.ajax(getset(url)).done(function(response) {
@@ -81,9 +81,9 @@ function sendpost(url, form, func) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
+        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     } else {
-        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token 
+        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     }
     console.log('send post :' + url)
     $.ajax(postset(url, form)).done(function(response) {
@@ -178,7 +178,7 @@ function get_posts() {
         }
         rmclass(docpanel, 'myhide')
         adclass(docpanel, 'myshow')
-        showbbt()        
+        showbbt()
         hideloading()
     })
 }
@@ -203,6 +203,23 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            adclass(md, 'post')
+            let postimgs = $('.post img')
+            postimgs.attr('title','点击放大')
+            postimgs.bind('click', function() {
+                if (getClientW() > 700 && getClientH() > 700) {
+                    if (hasClass(this, 'imglg')) {
+                        rmclass(this, 'imglg')
+                        this.style.transform = ''
+                        this.title = '点击还原'
+                    } else {
+                        this.title = '点击放大'
+                        adclass(this, 'imglg')
+                        let w = getClientW(0.9)
+                        this.style.transform = 'scale(' + (w / this.width) + ')'
+                    }
+                }
+            })
             showbbt()
             $('#toc').removeClass('myhide')
             showsidetoc()
@@ -233,7 +250,7 @@ function get_about() {
 
 function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime()  + '&access_token=' + oauth_token 
+        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
         let basegetset = {
             'timeout': timeout,
             'async': true,
