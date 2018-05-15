@@ -106,12 +106,13 @@ function createtodo(issuesbody, re) {
     todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
     adclass(todohead, 'todohead unselectable')
     appendc(md, todohead)
-    let fulltext = '\r\n' + issuesbody + '\r\n'
+    let fulltext = issuesbody + '<div class="con">'
     for (let i = re.length - 1; i >= 0; --i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="todo-card" id="search-' + (re.length - i - 1) + '"><div class="todo-head"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss') + '</div><div class="todo-body"><p class="todo-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="card todo-card" id="search-' + (re.length - i - 1) + '"><div class="card-header todo-head"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span> <p style="margin:0; text-align: right">' + dayjs(head).format('YYYY MM-DD HH:mm:ss') + ' </p></div><div class="card-body todo-body"> <p class="card-text todo-text"> ' + text + ' </p> </div></div>'
     }
+    fulltext += '</div>'
     searchshowandrendermd(fulltext, re.length)
 }
 

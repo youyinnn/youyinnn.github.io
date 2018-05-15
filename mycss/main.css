@@ -39,11 +39,11 @@
 
 #percent {
   position: fixed;
-    height: 3rem;
-    background-color: var(--ymain-color);
-    width: 25%;
-    float: left;
-    z-index: 999;
+  height: 3rem;
+  background-color: var(--ymain-color);
+  width: 25%;
+  float: left;
+  z-index: 999;
 }
 
 #percent:hover {
@@ -76,7 +76,7 @@
   transition: none;
 }
 
-#hold{
+#hold {
   position: absolute;
   display: block;
   width: 100px;
@@ -92,17 +92,18 @@
   transition: all .6s ease-in-out;
 }
 
-.post img{
+.post img {
   display: block;
   margin: auto;
   left: 0;
   right: 0;
 }
 
-.post img:hover{
+.post img:hover {
   cursor: pointer;
 }
-.post img:active{
+
+.post img:active {
   cursor: pointer;
 }
 
@@ -155,7 +156,8 @@
 .onepost {
   padding: 0 0 1rem 0;
   margin: 0;
-  border-bottom: 0.1rem var(--ydashed-color) dashed;;
+  border-bottom: 0.1rem var(--ydashed-color) dashed;
+  ;
   margin-bottom: 1rem;
 }
 
@@ -258,7 +260,8 @@
   line-height: 4rem;
   font-size: 2rem;
   margin-bottom: 1rem;
-  border-bottom: 0.1rem var(--ydashed-color) dashed;;
+  border-bottom: 0.1rem var(--ydashed-color) dashed;
+  ;
 }
 
 #scriptsearcher {
@@ -283,7 +286,7 @@
   background-color: var(--ymain-color);
 }
 
-#bbt{
+#bbt {
   position: fixed;
   right: 3rem;
   bottom: 1rem;
@@ -292,7 +295,7 @@
   height: 2.375rem;
 }
 
-#gohub{
+#gohub {
   background-color: var(--ymain-color);
   padding: 0 0.5rem;
   display: inline-block;
@@ -301,7 +304,7 @@
   text-decoration: none;
 }
 
-#toc{
+#toc {
   text-decoration: none;
   background-color: var(--ymain-color);
   padding: 0 0.5rem;
@@ -457,25 +460,25 @@
   z-index: 203 !important;
 }
 
-#loadingslogan{
+#loadingslogan {
   margin-top: 2rem;
   text-align: center;
 }
 
-.imglg{
+.imglg {
   position: fixed;
   margin: auto;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  border: var(--yminor-color) 0.1rem dashed  !important;
+  border: var(--yminor-color) 0.1rem dashed !important;
   opacity: 0;
   z-index: 999;
   cursor: pointer;
 }
 
-.curtain{
+.curtain {
   position: fixed;
   z-index: 988;
   margin: auto;
@@ -485,19 +488,32 @@
   left: 0;
 }
 
-.todo-head{
-  border-radius: 0 10rem 10rem 0;
-  padding: 0.1rem 1rem;
-  background-color: var(--ymain-color);
-  color: aliceblue;
-  display: inline-block;
+.con {
+  column-count: 3;
 }
 
-.todo-body{
-  text-align: right;
-  padding: 0 1rem;
+.todo-card {
+  float: left;
+  width: 100%;
+  margin: 0.5rem 0.2rem;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+  word-wrap: break-word; 
+  word-break: normal; 
+  border: 1px solid #000;
 }
 
-.todo-text{
-  text-align: right;
+.todo-head {
+  width: 100%;
+  padding: 0.3rem 1rem !important;
+}
+
+.todo-body {
+  width: 100%;
+  padding: 0.3rem 1rem !important;
+}
+
+.todo-text {
+  width: 100%;
 }

@@ -2,6 +2,9 @@
   iphone7 横屏
 */
 @media screen and (max-height: 376px) {
+  .con {
+    column-count: 2;
+  }
   #homepage {
     height: 20.6rem;
     line-height: 18.4rem;
@@ -63,6 +66,9 @@
   iphone7/X 竖屏
 */
 @media screen and (max-height: 812px) and (max-width: 515px){
+  .con {
+    column-count: 1;
+  }
   #homepage {
     top: 6rem;
     line-height: 20rem;
