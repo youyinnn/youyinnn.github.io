@@ -107,10 +107,10 @@ function createtodo(issuesbody, re) {
     adclass(todohead, 'todohead unselectable')
     appendc(md, todohead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
-    for (let i = 0; i < re.length; ++i) {
+    for (let i = re.length - 1; i >= 0; --i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss (Z)') + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="todo-card" id="search-' + (re.length - i - 1) + '"><div class="todo-head"><span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss') + '</div><div class="todo-body"><p class="todo-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
     searchshowandrendermd(fulltext, re.length)
 }

@@ -484,3 +484,20 @@
   right: 0;
   left: 0;
 }
+
+.todo-head{
+  border-radius: 0 10rem 10rem 0;
+  padding: 0.1rem 1rem;
+  background-color: var(--ymain-color);
+  color: aliceblue;
+  display: inline-block;
+}
+
+.todo-body{
+  text-align: right;
+  padding: 0 1rem;
+}
+
+.todo-text{
+  text-align: right;
+}
