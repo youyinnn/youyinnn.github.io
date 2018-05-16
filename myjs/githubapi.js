@@ -287,6 +287,7 @@ function get_friendlinked() {
             }
         }
         console.log('send get :' + url)
+        console.log('send get :' + url)
         $.ajax(basegetset).done(function(re) {
             fldd.innerHTML = ''
             let text = re[0].body
