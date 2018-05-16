@@ -1,7 +1,7 @@
 /* 
   iphone7 横屏
 */
-@media screen and (max-height: 376px) {
+@media screen and (max-height: 375px) {
   .con {
     column-count: 1;
   }
