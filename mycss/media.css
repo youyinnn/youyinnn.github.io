@@ -3,7 +3,7 @@
 */
 @media screen and (max-height: 376px) {
   .con {
-    column-count: 2;
+    column-count: 1;
   }
   #homepage {
     height: 20.6rem;
