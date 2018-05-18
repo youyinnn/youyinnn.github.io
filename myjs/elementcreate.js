@@ -4,24 +4,16 @@ function createpostcard(item, pagebelong) {
     let posttime = c('div')
     let sp1 = c('span')
     let sp2 = c('span')
-    let sp3 = c('span')
-    let sp4 = c('span')
-    adclass(postcard, 'postcard')
-    adclass(posttitle, 'posttitle center-to-head')
+    adclass(postcard, 'postcard center-to-head')
+    adclass(posttitle, 'posttitle font-weight-bold')
     adclass(posttime, 'posttime')
-    adclass(sp1, 'font-weight-bold')
-    adclass(sp3, 'font-weight-bold')
     posttitle.innerHTML = item.title
     posttitle.number = item.number
-    sp1.innerHTML = 'PostTime:'
+    sp1.innerHTML = '# '
     sp2.innerHTML = dayjs(item.created_at).format('YYYY MM-DD HH:mm:ss (Z)')
-    sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = dayjs(item.updated_at).format('YYYY MM-DD HH:mm:ss (Z)')
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(posttime, sp2)
-    appendc(posttime, sp3)
-    appendc(posttime, sp4)
     appendc(postcard, posttime)
     appendc($('#pagebox-' + pagebelong)[0], postcard)
     $(posttitle).bind('click', function() {

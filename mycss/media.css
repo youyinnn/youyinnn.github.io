@@ -69,6 +69,9 @@
   .con {
     column-count: 1;
   }
+  .postcard{ 
+    width: 95%;
+  }
   #homepage {
     top: 6rem;
     line-height: 20rem;
@@ -143,7 +146,7 @@
   }
   .pagination{
     background-color: white;
-    left: -3rem;
+    left: -1rem;
     right: 0;
     width: 80%;
     bottom: 0;

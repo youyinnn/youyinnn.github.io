@@ -251,7 +251,7 @@ function filter() {
 }
 
 function rstopaging(posts) {
-    let totalpages = Math.ceil(posts.length / 5)
+    let totalpages = Math.ceil(posts.length / 10)
     let pagesboxs = new Array(totalpages)
     for (let i = 0; i < totalpages; i++) {
         let pagebox = c('div')
@@ -261,7 +261,7 @@ function rstopaging(posts) {
         pagesboxs[i] = pagebox
     }
     for (let i = 0; i < posts.length; ++i) {
-        createpostcard(posts[i], Math.ceil((i + 1) / 5))
+        createpostcard(posts[i], Math.ceil((i + 1) / 10))
     }
     window.totalpages = totalpages
     pagination()

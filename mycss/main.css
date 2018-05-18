@@ -85,11 +85,12 @@
 }
 
 .postcard {
+  width: 60%;
   text-align: center;
   color: rgb(83, 87, 90);
-  margin: 3.5rem auto;
+  margin: 0.9rem auto; 
   border-radius: 1rem;
-  transition: all .6s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .post img {
@@ -114,8 +115,12 @@
   text-decoration: none;
   transition: all .2s;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1rem;
   display: inline-block;
+}
+
+.posttime{
+  font-size: 0.8rem;
 }
 
 .posttitle:active {
@@ -154,11 +159,15 @@
 }
 
 .onepost {
+  width: 100%;
   padding: 0 0 1rem 0;
-  margin: 0;
   border-bottom: 0.1rem var(--ydashed-color) dashed;
-  ;
   margin-bottom: 1rem;
+}
+
+.onepost>.posttitle {
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .onepost>.posttitle:active {
@@ -389,7 +398,7 @@
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  bottom: 2rem;
+  bottom: 1rem;
   z-index: 999;
 }
 
