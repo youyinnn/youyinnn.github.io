@@ -72,6 +72,12 @@
   .postcard{ 
     width: 95%;
   }
+  .posttitle{
+    width: 80%;
+  }
+  .pagebox{
+    padding-bottom: 3rem;
+  }
   #homepage {
     top: 6rem;
     line-height: 20rem;

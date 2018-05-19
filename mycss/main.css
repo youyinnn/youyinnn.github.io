@@ -19,6 +19,7 @@
 }
 
 #sidetoccontainer {
+  width: 25%;
   position: fixed;
   right: 0;
   z-index: 220;
@@ -38,10 +39,9 @@
 }
 
 #percent {
-  position: fixed;
   height: 3rem;
   background-color: var(--ymain-color);
-  width: 25%;
+  width: 100%;
   float: left;
   z-index: 999;
 }
@@ -89,8 +89,18 @@
   text-align: center;
   color: rgb(83, 87, 90);
   margin: 0.9rem auto; 
-  border-radius: 1rem;
-  transition: all .2s ease-in-out;
+  border-radius: 2rem;
+  transition: all .3s ease-in-out;
+}
+
+.postcard:hover {
+  cursor: pointer;
+  border-right: var(--ydashed-color) .7rem solid;
+  border-left: var(--ydashed-color) .7rem solid;
+}
+
+.postcard:active {
+  transform: translateY(0.3rem);
 }
 
 .post img {
@@ -109,7 +119,7 @@
 }
 
 .posttitle {
-  width: 80%;
+  width: 100%;
   word-wrap: break-word;
   word-break: break-all;
   text-decoration: none;
@@ -121,10 +131,6 @@
 
 .posttime{
   font-size: 0.8rem;
-}
-
-.posttitle:active {
-  transform: translateY(0.2rem);
 }
 
 .center-to-head {
@@ -460,12 +466,11 @@
 
 .tochide {
   opacity: 0;
-  width: 0% !important;
+  transform: translateX(100%);
 }
 
 .tocshow {
   opacity: 1;
-  width: 25%;
   z-index: 203 !important;
 }
 
