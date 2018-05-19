@@ -93,13 +93,13 @@
   transition: all .3s ease-in-out;
 }
 
-.postcard:hover {
+.pagebox .postcard:hover {
   cursor: pointer;
   border-right: var(--ydashed-color) .7rem solid;
   border-left: var(--ydashed-color) .7rem solid;
 }
 
-.postcard:active {
+.pagebox .postcard:active {
   transform: translateY(0.3rem);
 }
 
