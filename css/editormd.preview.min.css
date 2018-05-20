@@ -2728,7 +2728,7 @@ li.L8 {
 .markdown-body table,
 .markdown-body ul {
   margin-top: 0;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .markdown-body ol,
@@ -3031,7 +3031,7 @@ li.L8 {
   color: #666;
   border-left: 4px solid #ddd;
   padding-left: 20px;
-  margin-left: 0;
+  margin: 1rem 0;
   font-size: 14px;
   font-style: italic
 }

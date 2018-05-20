@@ -42,7 +42,8 @@ function render_md(text) {
         as[i].target = '_blank'
     }
     $('pre, pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
+        hljs.highlightBlock(block)
+        hljs.lineNumbersBlock(block)
     });
 }
 

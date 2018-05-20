@@ -250,3 +250,9 @@
     background-color: var(--yminor-color);
   }
 }
+
+@media screen and (max-width: 1440px) {
+  #md{
+    width: 90%;
+  }
+}
