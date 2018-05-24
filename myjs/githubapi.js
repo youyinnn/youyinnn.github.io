@@ -279,12 +279,23 @@ function get_resume() {
         if (re.length === 0) {
             no_label(resume_label)
         } else {
+            $('[data-toggle="tooltip"]').tooltip()
             setgohub('Go hub', re[0].html_url)
             render_md(re[0].body)
             adclass(md, 'resume')
             hidetopbar()
             showbbt()
             $('#toc').removeClass('myhide')
+            setTimeout(() => {
+                $('#toc').tooltip('show')
+                $('#gohub').tooltip('show')
+                $('#hb').tooltip('show')
+            }, 1000);
+            setTimeout(() => {
+                $('#toc').tooltip('hide')
+                $('#gohub').tooltip('hide')
+                $('#hb').tooltip('hide')
+            }, 5000);
         }
         hideloading()
     })
