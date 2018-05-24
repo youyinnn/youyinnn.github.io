@@ -42,22 +42,22 @@ $(function() {
         let kv = params[0].split('=')
         let key = kv[0]
         let value = kv[1]
-        if (key === 'panel' && value === 'posts') {
+        if (key === 'to' && value === 'posts') {
             changepagetitle('posts | youyinnn')
             get_posts()
-        } else if (key === 'panel' && value === 'post') {
+        } else if (key === 'to' && value === 'post') {
             changepagetitle('post | youyinnn')
             get_post(params[1].split('=')[1])
-        } else if (key === 'panel' && value === 'about') {
+        } else if (key === 'to' && value === 'about') {
             changepagetitle('about | youyinnn')
             get_about()
-        } else if (key === 'panel' && value === 'todo') {
+        } else if (key === 'to' && value === 'todo') {
             changepagetitle('todo | youyinnn')
             get_todo()
-        } else if (key === 'panel' && value === 'script') {
+        } else if (key === 'to' && value === 'script') {
             changepagetitle('script | youyinnn')
             get_script()
-        } else if (key === 'panel' && value === 'resume') {
+        } else if (key === 'to' && value === 'resume') {
             changepagetitle('resume | youyinnn')
             get_resume()
         } else if (key === 'xixi' && value === 'haha') {

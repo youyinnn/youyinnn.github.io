@@ -3,22 +3,22 @@ $(function() {
         location = '/'
     })
     $('#postsbut').bind('click', function() {
-        location = '/' + '?panel=posts'
+        location = '/' + '?to=posts'
     })
     $('#scriptbut').bind('click', function() {
-        location = '/' + '?panel=script'
+        location = '/' + '?to=script'
     })
     $('#todobut').bind('click', function() {
-        location = '/' + '?panel=todo'
+        location = '/' + '?to=todo'
     })
     $('#resumebut').bind('click', function() {
-        location = '/' + '?panel=resume'
+        location = '/' + '?to=resume'
     })
     $('#egg').bind('click', function() {
         location = '/' + '?xixi=haha'
     })
     $('#showmore').bind('click', function() {
-        location = '/' + '?panel=about'
+        location = '/' + '?to=about'
     })
     $('#searchbut').bind('click', function() {
         searchscript($('#searchtext')[0].value)

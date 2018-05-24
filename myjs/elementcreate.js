@@ -17,7 +17,7 @@ function createpostcard(item, pagebelong) {
     appendc(postcard, posttime)
     appendc($('#pagebox-' + pagebelong)[0], postcard)
     $(postcard).bind('click', function() {
-        location = '/' + '?panel=post&number=' + posttitle.number
+        location = '/' + '?to=post&number=' + posttitle.number
     })
 }
 
