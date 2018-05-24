@@ -21,6 +21,10 @@ var postsearchrs = new Array()
 var searchcount
 
 $(function() {
+    if(!!window.ActiveXObject || "ActiveXObject" in window) {
+        alert('不支持ie浏览器, 请使用edge或者chrome打开!')
+        return
+    }
     settimeout()
     get_friendlinked()
     let topbarh = getFinalStyle(topbar, 'height').split('px')[0]
