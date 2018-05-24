@@ -640,3 +640,11 @@
 .hidetopbar > #hb:active{
   transform: rotateZ(180deg) translateX(-.9rem);
 }
+
+.resume{
+  font-size: 1.25rem !important;
+}
+
+.resume blockquote > p {
+  font-size: 1rem;
+}

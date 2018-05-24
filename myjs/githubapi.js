@@ -281,6 +281,7 @@ function get_resume() {
         } else {
             setgohub('Go hub', re[0].html_url)
             render_md(re[0].body)
+            adclass(md, 'resume')
             hidetopbar()
             showbbt()
             $('#toc').removeClass('myhide')
