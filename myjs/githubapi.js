@@ -5,6 +5,7 @@ var about_label = 'yabout'
 var friend_linked_label = 'yfriendlinked'
 var script_label = 'yscript'
 var todo_label = 'ytodo'
+var resume_label = 'yresume'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = base64decode(oauth_token_base64)
@@ -203,6 +204,7 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            hidetopbar()
             adclass(md, 'post')
             let postimgs = $('.post img')
             postimgs.attr('title', 'click to focus')
@@ -247,7 +249,6 @@ function get_post(number) {
             })
             showbbt()
             $('#toc').removeClass('myhide')
-            showsidetoc()
             if (re.length !== 0) {
                 let addcomment = c('div')
                 let a = c('a')
@@ -269,6 +270,21 @@ function get_about() {
         render_md(re[0].body)
         showbbt()
         $('#toc').removeClass('myhide')
+        hideloading()
+    })
+}
+
+function get_resume() {
+    search_issues_by_label(resume_label, function(re) {
+        if (re.length === 0) {
+            no_label(resume_label)
+        } else {
+            setgohub('Go hub', re[0].html_url)
+            render_md(re[0].body)
+            hidetopbar()
+            showbbt()
+            $('#toc').removeClass('myhide')
+        }
         hideloading()
     })
 }

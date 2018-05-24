@@ -10,6 +10,7 @@ var percent = $('#percent')[0]
 var topbut = $('#topbut')[0]
 var searchbut = $('#searchbut')[0]
 var fldd = $('#fldd')[0]
+var topbar = $('#topbar')[0]
 var posts_cache = new Array()
 var filter_posts_cache = new Array()
 var tags = $('#all_tags')[0]
@@ -22,7 +23,7 @@ var searchcount
 $(function() {
     settimeout()
     get_friendlinked()
-    let topbarh = getFinalStyle($('#topbar')[0], 'height').split('px')[0]
+    let topbarh = getFinalStyle(topbar, 'height').split('px')[0]
     let search = location.search
     if (search === '') {
         hideloading()
@@ -52,6 +53,9 @@ $(function() {
         } else if (key === 'panel' && value === 'script') {
             changepagetitle('script | youyinnn')
             get_script()
+        } else if (key === 'panel' && value === 'resume') {
+            changepagetitle('resume | youyinnn')
+            get_resume()
         } else if (key === 'xixi' && value === 'haha') {
             changepagetitle('egg | youyinnn')
             get_egg()

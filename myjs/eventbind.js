@@ -11,6 +11,9 @@ $(function() {
     $('#todobut').bind('click', function() {
         location = '/' + '?panel=todo'
     })
+    $('#resumebut').bind('click', function() {
+        location = '/' + '?panel=resume'
+    })
     $('#egg').bind('click', function() {
         location = '/' + '?xixi=haha'
     })
@@ -25,6 +28,9 @@ $(function() {
     })
     $('#cleanbut').bind('click', function() {
         cleansearch()
+    })
+    $('#hb').bind('click', function() {
+        cgtopbut()
     })
     $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {

@@ -60,12 +60,29 @@
   .pagination{
     bottom: 1rem;
   }
+  #nolabel{
+    font-size: 1.5rem;
+    margin-top: 9rem;
+  }
+  #md{
+    padding: 0.5rem 1rem;
+  }
+  #hb{
+    display: none;
+  }
 }
 
 /* 
   iphone7/X 竖屏
 */
 @media screen and (max-height: 812px) and (max-width: 515px){
+  #hb{
+    display: none;
+  }
+  #nolabel{
+    font-size: 1rem;
+    margin-top: 11rem;
+  }
   .con {
     column-count: 1;
   }
@@ -105,12 +122,7 @@
     height: 6rem;
   }
   #md {
-    top: 6rem;
-    width: 100%;
-    padding: 0.5rem 1rem;
-  }
-  #md {
-    top: 6rem;
+    transform: translateY(6rem);
     width: 100%;
     padding: 0.5rem 1rem;
   }
@@ -204,9 +216,6 @@
   #homepage {
     font-size: 3rem;
   }
-  #md {
-    top: 6rem;
-  }
   #topbar{
     height: 6rem;
   }
@@ -214,7 +223,7 @@
 /* 
   针对topbar
 */
-@media screen and (max-width: 515px) {
+@media screen and (max-width: 565px) {
   #homepage {
     top: 6rem;
     font-size: 2rem;
@@ -225,6 +234,9 @@
   #showmore{
     top: 13rem;
     font-size: 1rem;
+  }
+  #hb{
+    display: none;
   }
 }
 
@@ -248,6 +260,9 @@
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
+  }
+  #hb{
+    display: none;
   }
 }
 

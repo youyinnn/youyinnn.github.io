@@ -437,3 +437,37 @@ function cleansearch() {
 function showbbt() {
     $('#bbt').removeClass('myhide')
 }
+
+function no_label(label) {
+    rmclass(docpanel, 'myhide')
+    adclass(docpanel, 'myshow')
+    docpanel.innerHTML = '<div id="nolabel"><i class="em-svg em-warning"></i><span>No label on repo\'s issues : [' + label + '].</span></div>'
+}
+
+function showtopbar() {
+
+}
+
+function hidetopbar() {
+    if (getClientW() > 620) {
+        adclass(topbar, 'hidetopbar')
+        adclass(md, 'panelup')
+    }
+}
+
+function showtopbar() {
+    if (getClientW() > 620) {
+        rmclass(topbar, 'hidetopbar')
+        rmclass(md, 'panelup')
+    }
+}
+
+function cgtopbut() {
+    if (hasClass(md, 'myshow')) {
+        if (hasClass(topbar, 'hidetopbar')) {
+            showtopbar()
+        } else {
+            hidetopbar()
+        }
+    }
+}

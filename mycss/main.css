@@ -7,6 +7,7 @@
   background-color: var(--ymain-color);
   border-radius: 0;
   margin-bottom: 0;
+  transition: all 1s;
 }
 
 #docpanel {
@@ -129,10 +130,10 @@
 
 #md {
   position: relative;
-  top: 3rem;
+  transform: translateY(3rem);
   padding: 2rem 2rem;
   width: 75%;
-  transition: none;
+  transition: transform 1.5s;
   margin: auto;
 }
 
@@ -589,4 +590,53 @@
 
 .todo-text {
   width: 100%;
+}
+
+#nolabel {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20rem;
+  font-size: 2rem;
+}
+
+.hidetopbar{
+  background-color: white !important;
+  width: 3rem !important;
+}
+
+.hidetopbar p, 
+.hidetopbar li {
+  transform: translateX(-100rem);
+}
+
+.panelup{
+  transform: translateY(0rem) !important;
+}
+
+#hb{
+  border-style: solid;
+  border-width:  0 0 3rem 3rem;
+  border-color: transparent transparent rgb(50, 57, 63) transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+#hb:hover{
+  border-color: transparent transparent rgb(79, 84, 90) transparent;
+}
+
+#hb:active{
+  transform: translateY(.9rem);
+}
+
+.hidetopbar > #hb{
+  transform: rotateZ(180deg);
+}
+
+.hidetopbar > #hb:active{
+  transform: rotateZ(180deg) translateX(-.9rem);
 }
