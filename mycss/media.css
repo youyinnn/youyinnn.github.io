@@ -18,6 +18,7 @@
     font-size: 1rem;
   }
   #sidetoccontainer {
+    width: 50%;
     z-index: 501 !important;
   }
   .tocshow{
@@ -30,9 +31,6 @@
   }
   #bbt{
     right: 1rem;
-  }
-  #percent{
-    width: 50%;
   }
   #gohub:hover {
     background-color: var(--ymain-color);
@@ -65,7 +63,7 @@
     margin-top: 9rem;
   }
   #md{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
   }
   #hb{
     display: none;
