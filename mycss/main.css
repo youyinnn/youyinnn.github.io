@@ -616,7 +616,7 @@
 #hb{
   border-style: solid;
   border-width:  0 0 3rem 3rem;
-  border-color: transparent transparent rgb(50, 57, 63) transparent;
+  border-color: transparent transparent rgb(63, 71, 78) transparent;
   position: absolute;
   top: 0;
   right: 0;
@@ -626,7 +626,7 @@
 }
 
 #hb:hover{
-  border-color: transparent transparent rgb(79, 84, 90) transparent;
+  border-color: transparent transparent rgb(100, 106, 114) transparent;
 }
 
 #hb:active{

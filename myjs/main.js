@@ -449,14 +449,14 @@ function showtopbar() {
 }
 
 function hidetopbar() {
-    if (getClientW() > 620) {
+    if (getClientW() > 700) {
         adclass(topbar, 'hidetopbar')
         adclass(md, 'panelup')
     }
 }
 
 function showtopbar() {
-    if (getClientW() > 620) {
+    if (getClientW() > 700) {
         rmclass(topbar, 'hidetopbar')
         rmclass(md, 'panelup')
     }

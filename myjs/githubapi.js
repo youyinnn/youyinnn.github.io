@@ -286,16 +286,18 @@ function get_resume() {
             hidetopbar()
             showbbt()
             $('#toc').removeClass('myhide')
-            setTimeout(() => {
-                $('#toc').tooltip('show')
-                $('#gohub').tooltip('show')
-                $('#hb').tooltip('show')
-            }, 1000);
-            setTimeout(() => {
-                $('#toc').tooltip('hide')
-                $('#gohub').tooltip('hide')
-                $('#hb').tooltip('hide')
-            }, 5000);
+            if (getClientW() > 700) {
+                setTimeout(() => {
+                    $('#toc').tooltip('show')
+                    $('#gohub').tooltip('show')
+                    $('#hb').tooltip('show')
+                }, 1000);
+                setTimeout(() => {
+                    $('#toc').tooltip('hide')
+                    $('#gohub').tooltip('hide')
+                    $('#hb').tooltip('hide')
+                }, 5000);
+            }
         }
         hideloading()
     })

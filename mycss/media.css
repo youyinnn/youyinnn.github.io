@@ -68,12 +68,26 @@
   #hb{
     display: none;
   }
+  .resume{
+    font-size: 14px !important;
+  }
+  
+  .resume blockquote > p {
+    font-size: 14px !important;
+  }
 }
 
 /* 
   iphone7/X 竖屏
 */
 @media screen and (max-height: 812px) and (max-width: 515px){
+  .resume{
+    font-size: 14px !important;
+  }
+  
+  .resume blockquote > p {
+    font-size: 14px !important;
+  }
   #hb{
     display: none;
   }
