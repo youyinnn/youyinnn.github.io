@@ -27,6 +27,24 @@ function render_md(text) {
         let emoji = text.substring(emojistart, emojiend + 1)
         text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
     }
+    while (true) {
+        let cobstart = text.search(/<cob.*\/>/g)
+        if (cobstart === -1) break
+        let cobend = text.indexOf('>', cobstart + 1)
+        let cob = text.substring(cobstart, cobend + 1)
+        let cobtg = cob.substring(cob.indexOf('"', 0) + 1, cob.indexOf('"', cob.indexOf('"', 0) + 1))
+        text = text.replace(cob, '<span class="collbut" tg="#' + cobtg + '">点击展开</span>')
+    }
+    while (true) {
+        let costart = text.search(/<co .*>/g)
+        if (costart === -1) break
+        let coend = text.indexOf('>', costart + 1)
+        let co = text.substring(costart, coend + 1)
+        let newco = co.replace('co', 'div class="mycoll"')
+        text = text.replace(co, newco)
+        text = text.replace('</co>', '</div><hr>')
+    }
+    text = text.replace('<acob/>', '<span id="acob">全部展开</span>')
     editormd.markdownToHTML('md', {
         markdown: text,
         htmlDecode: 'style,script,iframe',
@@ -45,6 +63,9 @@ function render_md(text) {
         hljs.highlightBlock(block)
         hljs.lineNumbersBlock(block)
     });
+    $('.reference-link').each(function() {
+        this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
+    })
 }
 
 function postspage(pageto) {
@@ -444,10 +465,6 @@ function no_label(label) {
     docpanel.innerHTML = '<div id="nolabel"><i class="em-svg em-warning"></i><span>No label on repo\'s issues : [' + label + '].</span></div>'
 }
 
-function showtopbar() {
-
-}
-
 function hidetopbar() {
     if (getClientW() > 700) {
         adclass(topbar, 'hidetopbar')
@@ -474,6 +491,31 @@ function cgtopbut() {
 
 function setcoll() {
     let collbuts = $('.collbut')
+    $('#acob').bind('click', function() {
+        if ($('#toc').hasClass('myhide')) {
+            this.innerText = '全部隐藏'
+            $('#toc').removeClass('myhide')
+            setTimeout(() => {
+                $('#toc').tooltip('show')
+            }, 600);
+            setTimeout(() => {
+                $('#toc').tooltip('hide')
+            }, 3000);
+            collbuts.each(function() {
+                if (this.innerText === '点击展开') {
+                    this.click()
+                }
+            })
+        } else {
+            this.innerHTML = '全部展开'
+            $('#toc').addClass('myhide')
+            collbuts.each(function() {
+                if (this.innerText === '点击隐藏') {
+                    this.click()
+                }
+            })
+        }
+    })
     for (let i = 0; i < collbuts.length; ++i) {
         let tg = $(collbuts[i].getAttribute('tg'))[0]
         tg.setAttribute('h', getStyle(tg, 'height'))
@@ -482,12 +524,14 @@ function setcoll() {
             let h
             if (getStyle(tg, 'height') === '0px') {
                 h = tg.getAttribute('h')
+                collbuts[i].innerText = '点击隐藏'
             } else {
                 h = '0px'
+                collbuts[i].innerText = '点击展开'
             }
             $('#' + tg.id).animate({
                 height: h
-            }, 'slow');
+            }, 800);
         })
     }
 }

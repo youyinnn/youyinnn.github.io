@@ -286,18 +286,15 @@ function get_resume() {
             setcoll()
             hidetopbar()
             showbbt()
-            $('#toc').removeClass('myhide')
             if (getClientW() > 700) {
                 setTimeout(() => {
-                    $('#toc').tooltip('show')
                     $('#gohub').tooltip('show')
                     $('#hb').tooltip('show')
                 }, 1000);
                 setTimeout(() => {
-                    $('#toc').tooltip('hide')
                     $('#gohub').tooltip('hide')
                     $('#hb').tooltip('hide')
-                }, 5000);
+                }, 3500);
             }
         }
         hideloading()

@@ -667,6 +667,24 @@
   transform: translateY(.9rem);
 }
 
+#acob {
+  float: right;
+  font-size: 1rem;
+  padding: .3rem .5rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: rgb(63, 71, 78);
+  color: white;
+  border-radius: .6rem;
+  font-weight: 400;
+}
+#acob:hover {
+  background-color: rgb(100, 106, 114);
+}
+#acob:active {
+  transform: translateY(.9rem);
+}
+
 .mycoll{
   overflow: hidden;
   transition: none !important;
