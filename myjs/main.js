@@ -471,3 +471,23 @@ function cgtopbut() {
         }
     }
 }
+
+function setcoll() {
+    let collbuts = $('.collbut')
+    for (let i = 0; i < collbuts.length; ++i) {
+        let tg = $(collbuts[i].getAttribute('tg'))[0]
+        tg.setAttribute('h', getStyle(tg, 'height'))
+        tg.style.height = '0px'
+        bindev(collbuts[i], 'click', function() {
+            let h
+            if (getStyle(tg, 'height') === '0px') {
+                h = tg.getAttribute('h')
+            } else {
+                h = '0px'
+            }
+            $('#' + tg.id).animate({
+                height: h
+            }, 'slow');
+        })
+    }
+}

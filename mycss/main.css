@@ -599,23 +599,23 @@
   font-size: 2rem;
 }
 
-.hidetopbar{
+.hidetopbar {
   background-color: white !important;
   width: 3rem !important;
 }
 
-.hidetopbar p, 
+.hidetopbar p,
 .hidetopbar li {
   transform: translateX(-100rem);
 }
 
-.panelup{
+.panelup {
   transform: translateY(0rem) !important;
 }
 
-#hb{
+#hb {
   border-style: solid;
-  border-width:  0 0 3rem 3rem;
+  border-width: 0 0 3rem 3rem;
   border-color: transparent transparent rgb(63, 71, 78) transparent;
   position: absolute;
   top: 0;
@@ -625,26 +625,49 @@
   cursor: pointer;
 }
 
-#hb:hover{
+#hb:hover {
   border-color: transparent transparent rgb(100, 106, 114) transparent;
 }
 
-#hb:active{
+#hb:active {
   transform: translateY(.9rem);
 }
 
-.hidetopbar > #hb{
+.hidetopbar>#hb {
   transform: rotateZ(180deg);
 }
 
-.hidetopbar > #hb:active{
+.hidetopbar>#hb:active {
   transform: rotateZ(180deg) translateX(-.9rem);
 }
 
-.resume{
+.resume {
   font-size: 1.25rem !important;
 }
 
-.resume blockquote > p {
+.resume blockquote>p {
   font-size: 1rem;
+}
+
+.collbut {
+  float: right;
+  font-size: 1rem;
+  padding: .3rem .5rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: rgb(63, 71, 78);
+  color: white;
+  border-radius: .6rem;
+  font-weight: 400;
+}
+.collbut:hover {
+  background-color: rgb(100, 106, 114);
+}
+.collbut:active {
+  transform: translateY(.9rem);
+}
+
+.mycoll{
+  overflow: hidden;
+  transition: none !important;
 }
