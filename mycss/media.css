@@ -1,6 +1,7 @@
 /* 
   iphone7 横屏
 */
+
 @media screen and (max-height: 375px) {
   .con {
     column-count: 1;
@@ -10,10 +11,10 @@
     line-height: 18.4rem;
     font-size: 3rem;
   }
-  #loading{
+  #loading {
     padding: 7rem 0 0 0;
   }
-  #showmore{
+  #showmore {
     top: 12rem;
     font-size: 1rem;
   }
@@ -21,30 +22,27 @@
     width: 50%;
     z-index: 501 !important;
   }
-  .tocshow{
+  .tocshow {
     width: 50%;
     opacity: 1;
   }
-  .tochide{
+  .tochide {
     width: 0%;
     opacity: 0;
   }
-  #bbt{
+  #bbt {
     right: 1rem;
   }
   #gohub:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
-  
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
@@ -55,24 +53,23 @@
   #percent:active {
     background-color: var(--yminor-color);
   }
-  .pagination{
+  .pagination {
     bottom: 1rem;
   }
-  #nolabel{
+  #nolabel {
     font-size: 1.5rem;
     margin-top: 9rem;
   }
-  #md{
+  #md {
     padding: 0.5rem 1.5rem;
   }
-  #hb{
+  #hb {
     display: none;
   }
-  .resume{
+  .resume {
     font-size: 14px !important;
   }
-  
-  .resume blockquote > p {
+  .resume blockquote>p {
     font-size: 14px !important;
   }
 }
@@ -80,31 +77,31 @@
 /* 
   iphone7/X 竖屏
 */
-@media screen and (max-height: 812px) and (max-width: 515px){
-  .resume{
+
+@media screen and (max-height: 812px) and (max-width: 515px) {
+  .resume {
     font-size: 14px !important;
   }
-  
-  .resume blockquote > p {
+  .resume blockquote>p {
     font-size: 14px !important;
   }
-  #hb{
+  #hb {
     display: none;
   }
-  #nolabel{
+  #nolabel {
     font-size: 1rem;
     margin-top: 11rem;
   }
   .con {
     column-count: 1;
   }
-  .postcard{ 
+  .postcard {
     width: 95%;
   }
-  .posttitle{
+  .posttitle {
     width: 80%;
   }
-  .pagebox{
+  .pagebox {
     padding-bottom: 3rem;
   }
   #homepage {
@@ -112,21 +109,24 @@
     line-height: 20rem;
     font-size: 2rem;
   }
-  #loading{
+  #loading {
     padding: 14rem 0 0 0;
   }
   #sidetoccontainer {
     z-index: 203 !important;
   }
-  #sidetoc{
+  #sidetoc {
     border-left: none;
     bottom: 2.35rem;
   }
-  .tocshow{
+  #sidetoc ul {
+    margin-bottom: 0;
+  }
+  .tocshow {
     width: 100% !important;
     opacity: 1;
   }
-  .tochide{
+  .tochide {
     width: 0% !important;
     opacity: 0;
   }
@@ -167,14 +167,14 @@
   #bbt:hover {
     border-radius: 0;
   }
-  #nocomment{
+  #nocomment {
     font-size: 1rem !important;
     line-height: 2.2rem !important;
   }
-  #docpanel{
+  #docpanel {
     top: 6rem;
   }
-  .pagination{
+  .pagination {
     background-color: white;
     left: -1rem;
     right: 0;
@@ -182,22 +182,19 @@
     bottom: 0;
     transform: none;
   }
-  #percent{
+  #percent {
     width: 100%;
   }
   #gohub:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
-  
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
@@ -213,41 +210,46 @@
 /* 
   针对阅读器
 */
+
 @media screen and (max-width: 690px) {
   #md {
     width: 100% !important;
   }
-  #movetitle{
+  #movetitle {
     width: 100% !important;
   }
 }
+
 /* 
   针对homepage
 */
+
 @media screen and (max-width: 515px) {
   #homepage {
     font-size: 3rem;
   }
-  #topbar{
+  #topbar {
     height: 6rem;
   }
 }
+
 /* 
   针对topbar
 */
+
 @media screen and (max-width: 565px) {
   #homepage {
     top: 6rem;
     font-size: 2rem;
   }
-  #topbar{
+  #topbar {
     height: 6rem;
   }
-  #showmore{
+  #showmore {
     top: 13rem;
     font-size: 1rem;
   }
-  #hb{
+  #hb {
     display: none;
   }
 }
@@ -255,31 +257,29 @@
 /* 
   针对iphone5 等320宽
 */
+
 @media screen and (max-width: 320px) {
   #gohub:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:hover {
     background-color: var(--ymain-color);
   }
-  
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
-  
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
-  #hb{
+  #hb {
     display: none;
   }
 }
 
 @media screen and (max-width: 1440px) {
-  #md{
+  #md {
     width: 90%;
   }
 }
