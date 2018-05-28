@@ -275,11 +275,14 @@ function filter() {
 function rstopaging(posts) {
     let totalpages = Math.ceil(posts.length / 11)
     let pagesboxs = new Array(totalpages)
+    let pageboxbox = c('div')
+    pageboxbox.id = 'pgboxbox'
+    appendc(docpanel, pageboxbox)
     for (let i = 0; i < totalpages; i++) {
         let pagebox = c('div')
         adclass(pagebox, 'pagebox')
         pagebox.id = 'pagebox-' + (i + 1)
-        appendc(docpanel, pagebox)
+        appendc(pageboxbox, pagebox)
         pagesboxs[i] = pagebox
     }
     for (let i = 0; i < posts.length; ++i) {
@@ -428,6 +431,7 @@ function pagination() {
             nowpage = totalpages
         }
     })
+    $('#pgboxbox')[0].style.height = getStyle($('#pagebox-1')[0], 'height')
     appendc(docpanel, pn)
 }
 

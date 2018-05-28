@@ -460,11 +460,10 @@
 
 .pagination {
   margin: auto;
-  position: fixed;
+  position: absolute;
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  bottom: 1rem;
   z-index: 999;
 }
 
