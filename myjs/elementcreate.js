@@ -36,10 +36,10 @@ function createposthead(re) {
     adclass(sp1, 'font-weight-bold')
     adclass(sp3, 'font-weight-bold')
     sp1.innerHTML = 'PostTime:'
-    sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss (Z)')
+    sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss')
     sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss (Z)')
-    posttitle.innerHTML = title
+    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss')
+    posttitle.innerHTML = title + '<span id="busuanzi_container_page_pv"> | 阅读<span id="busuanzi_value_page_pv"></span></span>'
     appendc(posttime, sp1)
     appendc(posttime, sp2)
     appendc(posttime, sp3)
