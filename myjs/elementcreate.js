@@ -39,7 +39,7 @@ function createposthead(re) {
     sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss')
     sp3.innerHTML = 'LastModTime:'
     sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss')
-    posttitle.innerHTML = title + '<span id="busuanzi_container_page_pv"> | 阅读<span id="busuanzi_value_page_pv"></span></span>'
+    posttitle.innerHTML = title
     appendc(posttime, sp1)
     appendc(posttime, sp2)
     appendc(posttime, sp3)

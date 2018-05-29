@@ -659,9 +659,11 @@
   border-radius: .6rem;
   font-weight: 400;
 }
+
 .collbut:hover {
   background-color: rgb(100, 106, 114);
 }
+
 .collbut:active {
   transform: translateY(.9rem);
 }
@@ -677,18 +679,31 @@
   border-radius: .6rem;
   font-weight: 400;
 }
+
 #acob:hover {
   background-color: rgb(100, 106, 114);
 }
+
 #acob:active {
   transform: translateY(.9rem);
 }
 
-.mycoll{
+.mycoll {
   overflow: hidden;
   transition: none !important;
 }
 
-.muv{
+.muv {
   color: aliceblue;
+}
+
+.mpgv {
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
+}
+.mpgvresume {
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
 }

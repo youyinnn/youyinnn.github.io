@@ -296,6 +296,7 @@ function get_resume() {
                     $('#hb').tooltip('hide')
                 }, 3500);
             }
+            $('#busuanzi_container_page_pv').addClass('mpgvresume')
         }
         hideloading()
     })
