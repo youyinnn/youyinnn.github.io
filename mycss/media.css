@@ -55,6 +55,7 @@
   }
   .pagination {
     bottom: 1rem;
+    position: fixed;    
   }
   #nolabel {
     font-size: 1.5rem;
@@ -175,6 +176,7 @@
     top: 6rem;
   }
   .pagination {
+    position: fixed;
     background-color: white;
     left: -1rem;
     right: 0;
