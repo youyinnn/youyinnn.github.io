@@ -227,6 +227,7 @@ function postscachehandle(post) {
         postcache.title = post.title
         postcache.cates = ['unclassified']
     }
+    console.log(hexofrontmatter)
     postcache.body = post.body
     postcache.created_at = post.created_at
     postcache.updated_at = post.updated_at
@@ -262,7 +263,7 @@ function postscachehandle(post) {
 
 function filter() {
     nowpage = 1
-    $('.pagebox').remove()
+    $('#pgboxbox').remove()    
     $('.pagination').remove()
     if (filter_posts_cache.length === 0) {
         rstopaging(posts_cache)
@@ -436,7 +437,7 @@ function pagination() {
 }
 
 function cleansearch() {
-    $('.pagebox').remove()
+    $('#pgboxbox').remove()
     $('.pagination').remove()
     rstopaging(posts_cache)
     postsearchrs = new Array()

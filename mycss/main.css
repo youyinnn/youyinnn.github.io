@@ -464,7 +464,6 @@
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  z-index: 999;
 }
 
 .pagebox {
