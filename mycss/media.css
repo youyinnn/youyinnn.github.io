@@ -73,6 +73,9 @@
   .resume blockquote>p {
     font-size: 14px !important;
   }
+  .pagebox{
+    margin-bottom: 3.5rem;
+  }
 }
 
 /* 
