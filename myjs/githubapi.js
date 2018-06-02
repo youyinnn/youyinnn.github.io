@@ -205,48 +205,6 @@ function get_post(number) {
             hideloading()
             render_md(text)
             hidetopbar()
-            adclass(md, 'post')
-            let postimgs = $('.post img')
-            postimgs.attr('title', 'click to focus')
-            postimgs.bind('click', function() {
-                if (getClientW() > 700 && getClientH() > 700) {
-                    let w = getClientW()
-                    let thisw = this.width
-                    let lg
-                    let pc = thisw / w
-                    if (pc > 0 && pc < 0.3) {
-                        lg = 2
-                    } else if (pc > 0.3 && pc < 0.5) {
-                        lg = 1.65
-                    } else if (pc > 0.5 && pc < 0.7) {
-                        lg = 1.3
-                    } else if (pc > 0.7) {
-                        return
-                    }
-                    $('#md').attr('style', 'filter:blur(2px);')
-                    let img = c('img')
-                    let curtain = c('div')
-                    curtain.style.height = getClientH() + 'px'
-                    curtain.style.width = getClientW() + 'px'
-                    adclass(curtain, 'curtain')
-                    img.src = this.src
-                    img.title = 'click to reduction'
-                    img.style.transform = 'scale(' + lg + ')'
-                    adclass(img, 'imglg')
-                    appendc(curtain, img)
-                    appendc($('body')[0], curtain)
-                    setTimeout(() => {
-                        img.style.opacity = 1
-                    }, 100);
-                    $(curtain).bind('click', function() {
-                        img.style.opacity = 0
-                        setTimeout(() => {
-                            $('.curtain').remove()
-                            $('#md').attr('style', '')
-                        }, 300);
-                    })
-                }
-            })
             showbbt()
             $('#toc').removeClass('myhide')
             if (re.length !== 0) {

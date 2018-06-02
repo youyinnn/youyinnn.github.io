@@ -701,8 +701,21 @@
   right: 3rem;
   top: 3rem;
 }
+
 .mpgvresume {
   position: absolute;
   right: 3rem;
   top: 1rem;
+}
+
+.gifbtn {
+  display: block !important;
+  margin: auto;
+  left: 0;
+  right: 0;
+  transition: all .3s !important;
+}
+
+.gifbtn:active{
+  transform: translateY(7px);
 }

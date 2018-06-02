@@ -20,30 +20,39 @@ function render_md(text) {
         text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
         showsaying(saying)
     }
-    while (true) {
-        let emojistart = text.search(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
-        if (emojistart === -1) break
-        let emojiend = text.indexOf(':', emojistart + 1)
-        let emoji = text.substring(emojistart, emojiend + 1)
-        text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
+    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
+    if (emojis !== null) {
+        emojis.forEach(emoji => {
+            text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
+        });
     }
-    while (true) {
-        let cobstart = text.search(/<cob.*\/>/g)
-        if (cobstart === -1) break
-        let cobend = text.indexOf('>', cobstart + 1)
-        let cob = text.substring(cobstart, cobend + 1)
-        let cobtg = cob.substring(cob.indexOf('"', 0) + 1, cob.indexOf('"', cob.indexOf('"', 0) + 1))
-        text = text.replace(cob, '<span class="collbut" tg="#' + cobtg + '">点击展开</span>')
+    let cobs = text.match(/<cob.*\/>/g)
+    if (cobs !== null) {
+        cobs.forEach(cob => {
+            let cobtg = cob.substring(cob.indexOf('"', 0) + 1, cob.indexOf('"', cob.indexOf('"', 0) + 1))
+            text = text.replace(cob, '<span class="collbut" tg="#' + cobtg + '">点击展开</span>')
+        });
     }
-    while (true) {
-        let costart = text.search(/<co .*>/g)
-        if (costart === -1) break
-        let coend = text.indexOf('>', costart + 1)
-        let co = text.substring(costart, coend + 1)
-        let newco = co.replace('co', 'div class="mycoll"')
-        text = text.replace(co, newco)
-        text = text.replace('</co>', '</div><hr>')
+    let cos = text.match(/<co .*>/g)
+    if (cos !== null) {
+        cos.forEach(co => {
+            let newco = co.replace('co', 'div class="mycoll"')
+            text = text.replace(co, newco)
+            text = text.replace('</co>', '</div><hr>')
+        });
     }
+    let gifs = text.match(/!\[.*\]\(.*.gif\)/g)
+    if (gifs !== null) {
+        gifs.forEach(gif => {
+            let gifalt = gif.match(/\[.*\]/g)
+            gifalt = gifalt[0].substring(1, gifalt[0].length - 1);
+            let giflk = gif.match(/\(.*\)/g)
+            giflk = giflk[0].substring(1, giflk[0].length - 1);
+            let gifbut = '<button class="gifbtn stgt btn btn-dark" lk="' + giflk + '">点击查看' + gifalt + '.gif</button>'
+            text = text.replace(gif, gifbut)
+        });
+    }
+
     text = text.replace('<acob/>', '<span id="acob">全部展开</span>')
     editormd.markdownToHTML('md', {
         markdown: text,
@@ -66,6 +75,15 @@ function render_md(text) {
     $('.reference-link').each(function() {
         this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
     })
+    $('.gifbtn').each(function() {
+        bindev(this, 'click', function() {
+            $(this).after('<img src="' + this.getAttribute('lk') + '"></img>')
+            setimg()
+            $(this).remove()
+        })
+    })
+    adclass(md, 'post')
+    setimg()
 }
 
 function postspage(pageto) {
@@ -227,7 +245,6 @@ function postscachehandle(post) {
         postcache.title = post.title
         postcache.cates = ['unclassified']
     }
-    console.log(hexofrontmatter)
     postcache.body = post.body
     postcache.created_at = post.created_at
     postcache.updated_at = post.updated_at
@@ -263,7 +280,7 @@ function postscachehandle(post) {
 
 function filter() {
     nowpage = 1
-    $('#pgboxbox').remove()    
+    $('#pgboxbox').remove()
     $('.pagination').remove()
     if (filter_posts_cache.length === 0) {
         rstopaging(posts_cache)
@@ -539,4 +556,48 @@ function setcoll() {
             }, 800);
         })
     }
+}
+
+function setimg() {
+    let postimgs = $('.post img')
+    postimgs.attr('title', 'click to focus')
+    postimgs.bind('click', function() {
+        if (getClientW() > 700 && getClientH() > 700) {
+            let w = getClientW()
+            let thisw = this.width
+            let lg
+            let pc = thisw / w
+            if (pc > 0 && pc < 0.3) {
+                lg = 2
+            } else if (pc > 0.3 && pc < 0.5) {
+                lg = 1.65
+            } else if (pc > 0.5 && pc < 0.7) {
+                lg = 1.3
+            } else if (pc > 0.7) {
+                return
+            }
+            $('#md').attr('style', 'filter:blur(2px);')
+            let img = c('img')
+            let curtain = c('div')
+            curtain.style.height = getClientH() + 'px'
+            curtain.style.width = getClientW() + 'px'
+            adclass(curtain, 'curtain')
+            img.src = this.src
+            img.title = 'click to reduction'
+            img.style.transform = 'scale(' + lg + ')'
+            adclass(img, 'imglg')
+            appendc(curtain, img)
+            appendc($('body')[0], curtain)
+            setTimeout(() => {
+                img.style.opacity = 1
+            }, 100);
+            $(curtain).bind('click', function() {
+                img.style.opacity = 0
+                setTimeout(() => {
+                    $('.curtain').remove()
+                    $('#md').attr('style', '')
+                }, 300);
+            })
+        }
+    })
 }
