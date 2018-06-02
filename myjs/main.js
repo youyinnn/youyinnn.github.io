@@ -48,7 +48,7 @@ function render_md(text) {
             gifalt = gifalt[0].substring(1, gifalt[0].length - 1);
             let giflk = gif.match(/\(.*\)/g)
             giflk = giflk[0].substring(1, giflk[0].length - 1);
-            let gifbut = '<button class="gifbtn stgt btn btn-dark" lk="' + giflk + '">点击查看' + gifalt + '.gif</button>'
+            let gifbut = '<button class="gifbtn stgt btn btn-dark" show="no" lk="' + giflk + '">查看或隐藏' + gifalt + '.gif</button>'
             text = text.replace(gif, gifbut)
         });
     }
@@ -77,9 +77,14 @@ function render_md(text) {
     })
     $('.gifbtn').each(function() {
         bindev(this, 'click', function() {
-            $(this).after('<img src="' + this.getAttribute('lk') + '"></img>')
-            setimg()
-            $(this).remove()
+            let noshow = this.getAttribute('show') === 'no'
+            if (noshow) {
+                $(this).after('<img id="' + this.innerText.substring(0, this.innerText.length - 4) + '" src="' + this.getAttribute('lk') + '"></img>')
+                this.setAttribute('show', 'yes')
+            } else {
+                $('#' + this.innerText.substring(0, this.innerText.length - 4)).remove()
+                this.setAttribute('show', 'no')
+            }
         })
     })
     adclass(md, 'post')

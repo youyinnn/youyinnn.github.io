@@ -710,7 +710,7 @@
 
 .gifbtn {
   display: block !important;
-  margin: auto;
+  margin: 1rem auto;
   left: 0;
   right: 0;
   transition: all .3s !important;
