@@ -218,6 +218,9 @@ function get_post(number) {
                 appendc(addcomment, a)
                 appendc(md, addcomment)
             }
+            if (!postcomment) {
+                $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
+            }
         })
     })
 }

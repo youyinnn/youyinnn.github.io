@@ -18,6 +18,7 @@ var cates = $('#all_cates')[0]
 var all_tags = new Array()
 var all_cates = new Array()
 var postsearchrs = new Array()
+var postcomment = false
 var searchcount
 
 $(function() {
