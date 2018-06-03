@@ -137,7 +137,7 @@ function getClientW(zoom) {
 }
 
 function getClientH(zoom) {
-    let h = document.documentElement.clientWidth
+    let h = document.documentElement.clientHeight
     if (zoom === null || zoom === undefined) {
         return h
     } else {

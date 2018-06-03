@@ -570,17 +570,17 @@ function setimg() {
     postimgs.bind('click', function() {
         if (getClientW() > 700 && getClientH() > 700) {
             let w = getClientW()
-            let thisw = this.width
-            let lg
-            let pc = thisw / w
-            if (pc > 0 && pc < 0.3) {
-                lg = 2
-            } else if (pc > 0.3 && pc < 0.5) {
-                lg = 1.65
-            } else if (pc > 0.5 && pc < 0.7) {
-                lg = 1.3
-            } else if (pc > 0.7) {
+            let h = getClientH()
+            let fixw = w * 0.85
+            let fixh = h * 0.85
+            let imgw = this.naturalWidth
+            let imgh = this.naturalHeight
+            let lg = fixh / imgh
+            if (imgh > h * 2) {
                 return
+            } 
+            if (imgw * lg > fixw) {
+                lg = fixw / imgw
             }
             $('#md').attr('style', 'filter:blur(2px);')
             let img = c('img')
@@ -590,7 +590,12 @@ function setimg() {
             adclass(curtain, 'curtain')
             img.src = this.src
             img.title = 'click to reduction'
-            img.style.transform = 'scale(' + lg + ')'
+            if (imgw > w) {
+                img.style.transform = 'scale(0.5) translateX(-100%)'
+                img.style.left = '50%'
+            } else {
+                img.style.transform = 'scale(' + lg + ')'
+            }
             adclass(img, 'imglg')
             appendc(curtain, img)
             appendc($('body')[0], curtain)
