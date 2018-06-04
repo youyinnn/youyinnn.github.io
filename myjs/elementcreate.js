@@ -10,7 +10,7 @@ function createpostcard(item, pagebelong) {
     posttitle.innerHTML = item.title
     posttitle.number = item.number
     sp1.innerHTML = '# '
-    sp2.innerHTML = dayjs(item.created_at).format('YYYY MM-DD HH:mm:ss (Z)')
+    sp2.innerHTML = dayjs(item.created_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(item.created_at))
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(posttime, sp2)
@@ -36,9 +36,9 @@ function createposthead(re) {
     adclass(sp1, 'font-weight-bold')
     adclass(sp3, 'font-weight-bold')
     sp1.innerHTML = 'PostTime:'
-    sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss')
+    sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.created_at))
     sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss')
+    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.created_at))
     posttitle.innerHTML = title
     appendc(posttime, sp1)
     appendc(posttime, sp2)
@@ -63,10 +63,10 @@ function showhexometadata(hexometadata) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Title:</span> ' + hexometadata.title + '<br>'
     }
     if (hexometadata.date !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).format('YYYY MM-DD HH:mm:ss (Z)') + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8)) + '<br>'
     }
     if (hexometadata.updated !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).format('YYYY MM-DD HH:mm:ss (Z)') + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8)) + '<br>'
     }
     if (hexometadata.comments !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Comments:</span> ' + hexometadata.comments + '<br>'
@@ -116,7 +116,7 @@ function createscript(issuesbody, re) {
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss (Z)') + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss ') + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
     searchshowandrendermd(fulltext, re.length)
 }
@@ -130,7 +130,7 @@ function createegg(issuesbody, re) {
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss (Z)') + '</div><div class="card-body"> <p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('YYYY MM-DD HH:mm:ss ') + '</div><div class="card-body"> <p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
     searchshowandrendermd(fulltext, re.length)
 }

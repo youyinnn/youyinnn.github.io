@@ -294,6 +294,9 @@
 }
 
 .metadatabody {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
   font-size: 1rem;
   line-height: 2rem;
   padding: 0.5rem 1rem;
@@ -301,8 +304,7 @@
 
 .saying {
   text-align: center;
-  margin: 1rem 0;
-  padding: 2rem 1rem;
+  padding: .5rem 1rem;
   background-color: #f8f9fa;
   border-bottom: 2px black solid;
   font-size: 1rem;
