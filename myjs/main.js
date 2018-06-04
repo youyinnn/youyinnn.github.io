@@ -591,11 +591,9 @@ function setimg() {
             img.src = this.src
             img.title = 'click to reduction'
             if (imgw > w) {
-                img.style.transform = 'scale(0.5) translateX(-100%)'
-                img.style.left = '50%'
-            } else {
-                img.style.transform = 'scale(' + lg + ')'
+                img.style.width = '100%'
             }
+            img.style.transform = 'scale(' + lg + ')'
             adclass(img, 'imglg')
             appendc(curtain, img)
             appendc($('body')[0], curtain)
