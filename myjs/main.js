@@ -15,17 +15,17 @@ function render_md(text) {
         text = text.substring(endindex, text.length)
     }
     let cq = text.match(/{%.*cq.*%}/gm)
-    if (cq) {
-        let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
-        saying = saying.replace(/\r\n/gm, '</br>')
-        text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
-        showsaying(saying)
-    }
     let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
     if (emojis !== null) {
         emojis.forEach(emoji => {
             text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
         });
+    }
+    if (cq) {
+        let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
+        saying = saying.replace(/\r\n/gm, '</br>')
+        text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
+        showsaying(saying)
     }
     let cobs = text.match(/<cob.*\/>/g)
     if (cobs !== null) {
