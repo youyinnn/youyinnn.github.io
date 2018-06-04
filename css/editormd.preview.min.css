@@ -2786,7 +2786,8 @@ li.L8 {
   width: 100%;
   overflow: auto;
   word-break: normal;
-  word-break: keep-all
+  word-break: keep-all;
+  margin-bottom: 16px;
 }
 
 .markdown-body table th {
