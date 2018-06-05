@@ -217,7 +217,7 @@ function gethexofrontmatter(text) {
 
 function searchpost(text) {
     if (text !== '') {
-        $('.pagebox').remove()
+        $('#pgboxbox').remove()
         $('.pagination').remove()
         if (filter_posts_cache.length === 0) {
             for (let i = 0; i < posts_cache.length; i++) {
