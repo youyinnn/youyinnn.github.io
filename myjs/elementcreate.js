@@ -38,7 +38,7 @@ function createposthead(re) {
     sp1.innerHTML = 'PostTime:'
     sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.created_at))
     sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.created_at))
+    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.updated_at))
     posttitle.innerHTML = title
     appendc(posttime, sp1)
     appendc(posttime, sp2)

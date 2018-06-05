@@ -612,7 +612,7 @@ function setimg() {
 }
 
 function daybefore(pastdayjs) {
-    let now = dayjs()
+    let now = dayjs().set('hour', 0).set('minute', 0).set('second', 0)
     let before =  now.diff(pastdayjs)
     before /= 3600000
     if (before < 24) {
@@ -622,7 +622,6 @@ function daybefore(pastdayjs) {
             return ' | <x style="color:#46bbcd;">今天</x>'
         }
     }
-    if (before > 24 && before < 48) return ' | <x style="color:#46bbcd;">昨天</x>'
-    if (before > 48 && before < 72) return ' | <x style="color:#46bbcd;">前天</x>'
+    if (before > 24 && before < 48) return ' | <x style="color:#46bbcd;">前天</x>'
     return ' | <x style="color:#46bbcd;">' + Math.ceil(before / 24) + '天前</x>'
 }
