@@ -723,3 +723,16 @@
 .gifbtn:active{
   transform: translateY(7px);
 }
+
+.parrow h1 a:before,
+.parrow h2 a:before,
+.parrow h3 a:before,
+.parrow h4 a:before,
+.parrow h5 a:before,
+.parrow h6 a:before {
+  position: absolute;  
+  color: var(--ymain-color);
+  content: '>';
+  left: -1.8rem;
+  font-weight: bold;
+}
