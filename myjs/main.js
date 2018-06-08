@@ -88,6 +88,12 @@ function render_md(text) {
             }
         })
     })
+    var $root = $('html, body')
+    $('.markdown-toc a').click(function() {
+        $root.animate({
+            scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top
+        }, 600)
+    })
     adclass(md, 'post')
     setimg()
 }
@@ -578,7 +584,7 @@ function setimg() {
             let lg = fixh / imgh
             if (imgh > h * 2) {
                 return
-            } 
+            }
             if (imgw * lg > fixw) {
                 lg = fixw / imgw
             }
@@ -613,7 +619,7 @@ function setimg() {
 
 function daybefore(pastdayjs) {
     let now = dayjs().set('hour', 0).set('minute', 0).set('second', 0)
-    let before =  now.diff(pastdayjs)
+    let before = now.diff(pastdayjs)
     before /= 3600000
     if (before < 24) {
         if (before > now.hour()) {
