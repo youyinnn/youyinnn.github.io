@@ -90,9 +90,21 @@ function render_md(text) {
     })
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
-        $root.animate({
-            scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15
-        }, 600)
+        if ($(md).hasClass('panelup')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15
+            }, 600)
+        }
+        if (getStyle(topbar, 'height') === '48px' && !hasClass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15 - 48
+            }, 600)
+        }
+        if (getStyle(topbar, 'height') === '96px' && !hasClass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15 - 96
+            }, 600)
+        }
     })
     adclass(md, 'post')
     setimg()
@@ -652,5 +664,4 @@ function setarrow() {
             }
         }
     })
-    console.log(arrows)
 }

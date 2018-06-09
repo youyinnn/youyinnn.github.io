@@ -739,6 +739,10 @@
   transform: scale(1.6);
 }
 
+.showarrow{
+  margin-left: 1.2rem;
+}
+
 .showarrow a:before {
-  left: -1.7rem !important;
+  left: -1.5rem !important;
 }
