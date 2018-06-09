@@ -205,6 +205,7 @@ function get_post(number) {
             hideloading()
             render_md(text)
             adclass(md, 'parrow')
+            setarrow()
             hidetopbar()
             showbbt()
             $('#toc').removeClass('myhide')

@@ -733,6 +733,12 @@
   position: absolute;  
   color: var(--ymain-color);
   content: '>';
-  left: -1.8rem;
+  left: -4rem;
   font-weight: bold;
+  transition: all .4s;
+  transform: scale(1.6);
+}
+
+.showarrow a:before {
+  left: -1.7rem !important;
 }

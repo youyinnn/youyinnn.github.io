@@ -91,7 +91,7 @@ function render_md(text) {
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
         $root.animate({
-            scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top
+            scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15
         }, 600)
     })
     adclass(md, 'post')
@@ -630,4 +630,27 @@ function daybefore(pastdayjs) {
     }
     if (before > 24 && before < 48) return ' | <x style="color:#46bbcd;">前天</x>'
     return ' | <x style="color:#46bbcd;">' + Math.ceil(before / 24) + '天前</x>'
+}
+
+function setarrow() {
+    let arrows = $('.parrow h1, .parrow h2, .parrow h6, .parrow h3, .parrow h4, .parrow h5')
+    $(window).scroll(function() {
+        let stop = window.scrollY + 14
+        let sbotton = (window.scrollY + getClientH(0.4))
+        for (let i = 0; i < arrows.length; i++) {
+            let ofs = arrows[i].offsetTop
+            if (ofs >= stop && ofs <= sbotton) {
+                if (arrows[i].inscreen === undefined || arrows[i].inscreen === false) {
+                    arrows[i].inscreen = true
+                    adclass(arrows[i], 'showarrow')
+                }
+            } else {
+                if (arrows[i].inscreen === true) {
+                    arrows[i].inscreen = false
+                    rmclass(arrows[i], 'showarrow')
+                }
+            }
+        }
+    })
+    console.log(arrows)
 }
