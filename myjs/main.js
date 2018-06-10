@@ -92,17 +92,17 @@ function render_md(text) {
     $('.markdown-toc a').click(function() {
         if ($(md).hasClass('panelup')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
             }, 600)
         }
         if (getStyle(topbar, 'height') === '48px' && !hasClass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15 - 48
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
             }, 600)
         }
         if (getStyle(topbar, 'height') === '96px' && !hasClass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length) + '"]').offset().top - 15 - 96
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
             }, 600)
         }
     })
