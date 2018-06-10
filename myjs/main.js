@@ -106,6 +106,8 @@ function render_md(text) {
             }, 600)
         }
     })
+    $('.postcard.onepost').animateCss('flipInX')
+    $('.metadata').animateCss('flipInX')
     adclass(md, 'post')
     setimg()
 }

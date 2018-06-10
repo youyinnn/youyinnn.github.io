@@ -7,7 +7,7 @@
   background-color: var(--ymain-color);
   border-radius: 0;
   margin-bottom: 0;
-  transition: all 1s;
+  transition: all 1.2s;
 }
 
 #docpanel {
@@ -443,18 +443,21 @@
 }
 
 #showmore {
+  cursor: pointer;
   position: absolute;
   height: 3rem;
   line-height: 3rem;
   font-size: 1.2rem;
-  width: 100%;
+  width: 23rem;
   top: 26rem;
-  transition: all .2s;
+  transition: all .4s;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 #showmore:hover {
-  font-size: 1.3rem;
-  color: white;
+  transform: translateX(1rem);
 }
 
 #showmore:active {
