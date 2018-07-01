@@ -8,7 +8,7 @@ var todo_label = 'ytodo'
 var resume_label = 'yresume'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
-var oauth_token = base64decode(oauth_token_base64)
+var oauth_token = b64.decode(oauth_token_base64)
 var timeout
 
 function settimeout() {
@@ -113,12 +113,8 @@ function get_posts() {
             $(stgcs[i]).bind('click', function(event) {
                 filter_posts_cache = new Array()
                 if (hasClass(this, 'btn-light')) {
-                    for (let j = 0; j < stgcs.length; j++) {
-                        stgcs[j].disabled = true
-                    }
-                    for (let j = 0; j < stgts.length; j++) {
-                        stgts[j].disabled = true
-                    }
+                    stgts.attr('disabled', true)
+                    stgcs.attr('disabled', true)
                     rmclass(this, 'btn-light')
                     this.disabled = false
                     adclass(this, 'btn-success')
@@ -130,12 +126,8 @@ function get_posts() {
                         }
                     }
                 } else {
-                    for (let j = 0; j < stgcs.length; j++) {
-                        stgcs[j].disabled = false
-                    }
-                    for (let j = 0; j < stgts.length; j++) {
-                        stgts[j].disabled = false
-                    }
+                    stgts.attr('disabled', false)
+                    stgcs.attr('disabled', false)
                     rmclass(this, 'btn-success')
                     adclass(this, 'btn-light')
                 }
@@ -146,12 +138,9 @@ function get_posts() {
             $(stgts[i]).bind('click', function(event) {
                 filter_posts_cache = new Array()
                 if (hasClass(this, 'btn-light')) {
-                    for (let j = 0; j < stgts.length; j++) {
-                        stgts[j].disabled = true
-                    }
-                    for (let j = 0; j < stgcs.length; j++) {
-                        stgcs[j].disabled = true
-                    }
+                    stgts.attr('disabled', true)
+                    stgcs.attr('disabled', true)
+                    $('.treenode a').addClass('adisable')
                     rmclass(this, 'btn-light')
                     this.disabled = false
                     adclass(this, 'btn-info')
@@ -165,12 +154,9 @@ function get_posts() {
                         }
                     }
                 } else {
-                    for (let j = 0; j < stgts.length; j++) {
-                        stgts[j].disabled = false
-                    }
-                    for (let j = 0; j < stgcs.length; j++) {
-                        stgcs[j].disabled = false
-                    }
+                    stgts.attr('disabled', false)
+                    stgcs.attr('disabled', false)
+                    $('.treenode a').removeClass('adisable')
                     rmclass(this, 'btn-info')
                     adclass(this, 'btn-light')
                 }
@@ -179,6 +165,8 @@ function get_posts() {
         }
         rmclass(docpanel, 'myhide')
         adclass(docpanel, 'myshow')
+        rmclass(cates_tree_panel, 'myhide')
+        adclass(cates_tree_panel, 'myshow')
         showbbt()
         hideloading()
     })

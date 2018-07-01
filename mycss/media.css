@@ -83,6 +83,15 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  #cates_tree_panel{
+    display: none;
+  }
+  #categories{
+    display: inherit;
+  }
+  #docpanel{
+    width: 100%;
+  }
   .resume {
     font-size: 14px !important;
   }

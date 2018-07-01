@@ -271,6 +271,50 @@ function postscachehandle(post) {
         postcache.title = post.title
         postcache.cates = ['unclassified']
     }
+    for (let i = 0; i < postcache.cates.length; i++) {
+        let cate = b64.encode(postcache.cates[i])
+        cate = cate.replace(/[@#=+-]/gm, '')
+        if ($('#' + cate + '_treenode').length === 0) {
+            let node = c('li')
+            node.id = cate + '_treenode'
+            adclass(node, 'treenode')
+            let noa = c('a')
+            noa.href = 'javascript:void(0)'
+            noa.target = '_blank'
+            noa.innerText = postcache.cates[i]
+            $(noa).bind('click', function(event) {
+                if (!hasClass(this, 'adisable')) {
+                    filter_posts_cache = new Array()
+                    if (!this.asel) {
+                        this.asel = true
+                        $('#cates_tree a').addClass('adisable')
+                        rmclass(this, 'adisable')
+                        for (let k = 0; k < posts_cache.length; k++) {
+                            for (let l = 0; l < posts_cache[k].cates.length; l++) {
+                                if (posts_cache[k].cates[l] === this.innerText) {
+                                    filter_posts_cache.push(posts_cache[k])
+                                }
+                            }
+                        }
+                        $('.stgt').attr('disabled', true)
+                    } else {
+                        this.asel = false
+                        $('.stgt').attr('disabled', false)
+                        $('#cates_tree a').removeClass('adisable')
+                    }
+                    filter()
+                }
+            })
+            appendc(node, noa)
+            if (i === 0) {
+                appendc(cates_tree, node)
+            } else {
+                let parentnodeid = b64.encode(postcache.cates[i - 1])
+                parentnodeid = parentnodeid.replace(/[@#=+-]/gm, '')
+                appendc($('#' + parentnodeid + '_treenode')[0], node)
+            }
+        }
+    }
     postcache.body = post.body
     postcache.created_at = post.created_at
     postcache.updated_at = post.updated_at
@@ -306,21 +350,26 @@ function postscachehandle(post) {
 
 function filter() {
     nowpage = 1
-    $('#pgboxbox').remove()
-    $('.pagination').remove()
-    if (filter_posts_cache.length === 0) {
-        rstopaging(posts_cache)
-    } else {
-        rstopaging(filter_posts_cache)
-    }
-    postsearchrs = new Array()
+    $('#pgboxbox').addClass('myhide')
+    $('.pagination').addClass('myhide')
+    setTimeout(() => {
+        $('#pgboxbox').remove()
+        $('.pagination').remove()
+        if (filter_posts_cache.length === 0) {
+            rstopaging(posts_cache)
+        } else {
+            rstopaging(filter_posts_cache)
+        }
+        postsearchrs = new Array()
+    }, 100);
 }
 
 function rstopaging(posts) {
-    let totalpages = Math.ceil(posts.length / 11)
+    let totalpages = Math.ceil(posts.length / perpageitem)
     let pagesboxs = new Array(totalpages)
     let pageboxbox = c('div')
     pageboxbox.id = 'pgboxbox'
+    adclass(pageboxbox, 'myhide')
     appendc(docpanel, pageboxbox)
     for (let i = 0; i < totalpages; i++) {
         let pagebox = c('div')
@@ -330,9 +379,12 @@ function rstopaging(posts) {
         pagesboxs[i] = pagebox
     }
     for (let i = 0; i < posts.length; ++i) {
-        createpostcard(posts[i], Math.ceil((i + 1) / 11))
+        createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
     }
     window.totalpages = totalpages
+    setTimeout(() => {
+        rmclass(pageboxbox, 'myhide')
+    }, 100);
     pagination()
 }
 
@@ -344,6 +396,7 @@ function pagination() {
     }
     let pn = c('ul')
     adclass(pn, 'pagination')
+    adclass(pn, 'myhide')
 
     let first = c('li')
     first.id = 'fpg'
@@ -477,6 +530,9 @@ function pagination() {
     })
     $('#pgboxbox')[0].style.height = getStyle($('#pagebox-1')[0], 'height')
     appendc(docpanel, pn)
+    setTimeout(() => {
+        rmclass(pn, 'myhide')        
+    }, 100);
 }
 
 function cleansearch() {

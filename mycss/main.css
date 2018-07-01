@@ -10,13 +10,66 @@
   transition: all 1.2s;
 }
 
+#cates_tree_panel {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  top: 3rem;
+  bottom: 0;
+  width: 30%;
+  background-color: #efefef;
+  overflow: auto;
+}
+
+#cates_tree {
+  padding: 1rem 1rem 0;
+}
+
+#cates_tree_head {
+  height: 38px;
+  background-color: #343a40;
+  line-height: 38px;
+  text-align: center;
+  color: white;
+}
+
+.treenode {
+  padding: 2.5px;
+}
+
+.treenode>li {
+  margin-left: 1rem;
+}
+
+.treenode a {
+  color: #000;
+  word-break: break-all;
+}
+
+.treenode a:hover {
+  color: rgb(54, 54, 54);
+}
+
+.adisable{
+  cursor: default;
+  color: rgb(187, 187, 187) !important;
+}
+
+.adisable:hover {
+  text-decoration: none !important;
+}
+
+#categories{
+  display: none;
+}
+
 #docpanel {
   position: absolute;
   margin: 0 auto;
-  left: 0;
   right: 0;
   top: 3rem;
   bottom: 0;
+  width: 70%;
 }
 
 #sidetoccontainer {
@@ -296,7 +349,7 @@
 .metadatabody {
   overflow: hidden;
   white-space: nowrap;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   font-size: 1rem;
   line-height: 2rem;
   padding: 0.5rem 1rem;
@@ -723,7 +776,7 @@
   transition: all .3s !important;
 }
 
-.gifbtn:active{
+.gifbtn:active {
   transform: translateY(7px);
 }
 
@@ -733,7 +786,7 @@
 .parrow h4 a:before,
 .parrow h5 a:before,
 .parrow h6 a:before {
-  position: absolute;  
+  position: absolute;
   color: var(--ymain-color);
   content: '>';
   left: -4rem;
@@ -742,7 +795,7 @@
   transform: scale(1.6);
 }
 
-.showarrow{
+.showarrow {
   margin-left: 1.2rem;
 }
 

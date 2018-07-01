@@ -18,6 +18,9 @@ var cates = $('#all_cates')[0]
 var all_tags = new Array()
 var all_cates = new Array()
 var postsearchrs = new Array()
+var cates_tree_panel = $('#cates_tree_panel')[0]
+var cates_tree = $('#cates_tree')[0]
+var perpageitem = 10
 var postcomment = false
 var searchcount
 
