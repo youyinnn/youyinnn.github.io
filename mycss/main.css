@@ -544,10 +544,11 @@
   z-index: 300;
   width: 100%;
   background-color: #ebebeb;
-  padding: 0 1rem;
+  padding: 1rem;
   border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);
-  overflow: hidden;
+  overflow-x: auto;
+  height: 10rem;
 }
 
 .stgt {

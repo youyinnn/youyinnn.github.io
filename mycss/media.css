@@ -3,16 +3,19 @@
 */
 
 @media screen and (max-height: 375px) {
+  .postcard{
+    width: 24rem;
+  }
   .con {
     column-count: 1;
   }
   #homepage {
-    height: 20.6rem;
+    top: 0;
     line-height: 18.4rem;
     font-size: 3rem;
   }
   #loading {
-    padding: 7rem 0 0 0;
+    padding: 5.1rem 0 0 0;
   }
   #showmore {
     top: 12rem;
@@ -55,7 +58,8 @@
   }
   .pagination {
     bottom: 1rem;
-    position: fixed;    
+    position: fixed;
+    right: 6rem;  
   }
   #nolabel {
     font-size: 1.5rem;
@@ -170,7 +174,6 @@
   #bbt {
     right: 0;
     bottom: 0;
-    width: 30%;
     height: 2.375rem;
     line-height: 2.375rem;
     overflow: hidden;

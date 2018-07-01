@@ -597,6 +597,7 @@ function setcoll() {
     let collbuts = $('.collbut')
     $('#acob').bind('click', function() {
         if ($('#toc').hasClass('myhide')) {
+            $('#toc')[0].style.display = 'inline-block'
             this.innerText = '全部隐藏'
             $('#toc').removeClass('myhide')
             setTimeout(() => {
@@ -613,6 +614,7 @@ function setcoll() {
         } else {
             this.innerHTML = '全部展开'
             $('#toc').addClass('myhide')
+            $('#toc')[0].style.display = 'none'
             collbuts.each(function() {
                 if (this.innerText === '点击隐藏') {
                     this.click()

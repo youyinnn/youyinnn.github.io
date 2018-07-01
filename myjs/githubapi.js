@@ -196,6 +196,7 @@ function get_post(number) {
             setarrow()
             hidetopbar()
             showbbt()
+            $('#toc')[0].style.display = 'inline-block'
             $('#toc').removeClass('myhide')
             if (re.length !== 0) {
                 let addcomment = c('div')
@@ -220,6 +221,7 @@ function get_about() {
         setgohub('Go hub', re[0].html_url)
         render_md(re[0].body)
         showbbt()
+        $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
         hideloading()
     })
@@ -307,6 +309,7 @@ function get_script() {
     search_issues_by_label(script_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createscript)
+        $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
     })
 }
