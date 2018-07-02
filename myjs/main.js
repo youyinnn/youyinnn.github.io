@@ -329,7 +329,7 @@ function postsmetadatahandle(postmetadata) {
     }
     for (let i = 0; i < postcache.categories.length; i++) {
         let haved = false
-        for (let j = 0; j < categories.length; j++) {
+        for (let j = 0; j < all_cates.length; j++) {
             if (all_cates[j] === postcache.categories[i]) {
                 haved = true
             }
