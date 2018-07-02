@@ -50,7 +50,6 @@ $(function() {
     })
     $('#postsearchtext').bind('keyup', 'esc', function() {
         this.value = ''
-        cleansearch()
     })
     $('#categories').bind('click', function() {
         if ($('#all_cates').hasClass('myhide')) {

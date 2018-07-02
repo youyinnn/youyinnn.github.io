@@ -237,8 +237,6 @@ function gethexofrontmatter(text) {
 
 function searchpost(text) {
     if (text !== '') {
-        $('#pgboxbox').remove()
-        $('.pagination').remove()
         if (filter_posts_cache.length === 0) {
             for (let i = 0; i < posts_cache.length; i++) {
                 if (posts_cache[i].title.concat(posts_cache[i].body).search(new RegExp(text), 'gi') !== -1) {
@@ -252,8 +250,18 @@ function searchpost(text) {
                 }
             }
         }
-        rstopaging(postsearchrs)
-        postsearchrs = new Array()
+        if (postsearchrs.length === 0) {
+            $('#postsearchtext').addClass('getnothing')
+            searchbut.innerText = 'No get'
+            setTimeout(function() {
+                $('#postsearchtext').removeClass('getnothing')
+            }, 1000, 'swing')
+        } else {
+            $('#pgboxbox').remove()
+            $('.pagination').remove()
+            rstopaging(postsearchrs)
+            postsearchrs = new Array()
+        }
     } else {
         cleansearch()
     }
