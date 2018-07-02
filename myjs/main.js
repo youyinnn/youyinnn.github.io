@@ -239,13 +239,13 @@ function searchpost(text) {
     if (text !== '') {
         if (filter_posts_cache.length === 0) {
             for (let i = 0; i < posts_cache.length; i++) {
-                if (posts_cache[i].title.concat(posts_cache[i].body).search(new RegExp(text), 'gi') !== -1) {
+                if (posts_cache[i].title.search(new RegExp(text), 'gi') !== -1) {
                     postsearchrs.push(posts_cache[i])
                 }
             }
         } else {
             for (let i = 0; i < filter_posts_cache.length; i++) {
-                if (filter_posts_cache[i].title.concat(filter_posts_cache[i].body).search(new RegExp(text), 'gi') !== -1) {
+                if (filter_posts_cache[i].title.search(new RegExp(text), 'gi') !== -1) {
                     postsearchrs.push(filter_posts_cache[i])
                 }
             }
@@ -267,18 +267,8 @@ function searchpost(text) {
     }
 }
 
-function postscachehandle(post) {
-    let postcache = new Object()
-    let hexofrontmatter = gethexofrontmatter(post.body)
-    if (hexofrontmatter !== undefined) {
-        hexofrontmatter = yaml.load(hexofrontmatter.replace(/\r\n/gm, '\n'))
-        postcache.title = hexofrontmatter.title
-        postcache.tags = hexofrontmatter.tags
-        postcache.cates = hexofrontmatter.categories
-    } else {
-        postcache.title = post.title
-        postcache.cates = ['unclassified']
-    }
+function postsmetadatahandle(postmetadata) {
+    let postcache = postmetadata
     for (let i = 0; i < postcache.cates.length; i++) {
         let cate = b64.encode(postcache.cates[i])
         cate = cate.replace(/[@#=+-]/gm, '')
@@ -323,10 +313,6 @@ function postscachehandle(post) {
             }
         }
     }
-    postcache.body = post.body
-    postcache.created_at = post.created_at
-    postcache.updated_at = post.updated_at
-    postcache.number = post.number
     if (postcache.tags !== undefined) {
         for (let i = 0; i < postcache.tags.length; i++) {
             let haved = false
@@ -353,7 +339,6 @@ function postscachehandle(post) {
             cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.cates[i] + '</button>'
         }
     }
-    posts_cache.push(postcache)
 }
 
 function filter() {
@@ -732,4 +717,8 @@ function setarrow() {
             }
         }
     })
+}
+
+function syncatestoconfig() {
+    console.log(yaml.dump(posts_cache))
 }

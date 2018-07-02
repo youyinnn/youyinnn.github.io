@@ -13,7 +13,7 @@ var timeout
 
 function settimeout() {
     let nowhour = dayjs().hour()
-    timeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 10000
+    timeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 100000
     console.log('timeout is [' + timeout + ']')
 }
 
@@ -61,24 +61,29 @@ function postset(url, form) {
     return basepostset
 }
 
-
-function sendget(url, func) {
-    let urls = url.split('/')
-    let params = urls[urls.length - 1]
-    if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
-    } else {
-        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
-    }
-    console.log('send get :' + url)
-    $.ajax(getset(url)).done(function(response) {
-        if (func !== undefined) {
-            func(response)
+function patchset(url, data) {
+    let basepatchset = {
+        'timeout': timeout,
+        'async': true,
+        'crossDomain': true,
+        'method': 'PATCH',
+        'url': url,
+        'data': data,
+        'error': function(eve) {
+            if (eve.status === 0 && eve.statusText !== 'error') {
+                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
+                    '\r\nresponseText: ' + eve.responseText +
+                    '\r\nstatusText: ' + eve.statusText +
+                    '\r\nwill return to the home page')
+                eve.abort()
+                location.reload()
+            }
         }
-    })
+    }
+    return basepatchset
 }
 
-function sendpost(url, form, func) {
+function urlhandle(url) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
@@ -87,7 +92,27 @@ function sendpost(url, form, func) {
         url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     }
     console.log('send post :' + url)
-    $.ajax(postset(url, form)).done(function(response) {
+    return url
+}
+
+function sendget(url, func) {
+    $.ajax(getset(urlhandle(url))).done(function(response) {
+        if (func !== undefined) {
+            func(response)
+        }
+    })
+}
+
+function sendpost(url, form, func) {
+    $.ajax(postset(urlhandle(url), form)).done(function(response) {
+        if (func !== undefined) {
+            func(response)
+        }
+    })
+}
+
+function sendpatch(url, data, func) {
+    $.ajax(patchset(urlhandle(url), form)).done(function(response) {
         if (func !== undefined) {
             func(response)
         }
@@ -100,75 +125,79 @@ function search_issues_by_label(label, func) {
 }
 
 function get_posts() {
-    search_issues_by_label(post_label, function(re) {
-        setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-        rstopaging(re)
-        for (let i = 0; i < re.length; ++i) {
-            postscachehandle(re[i])
-        }
-        $('#postsearchtext')[0].placeholder = 'ps:' + re.length + ',ts:' + all_tags.length + ',cs:' + all_cates.length
-        let stgts = $('.stgt')
-        let stgcs = $('.stgc')
-        for (let i = 0; i < stgcs.length; i++) {
-            $(stgcs[i]).bind('click', function(event) {
-                filter_posts_cache = new Array()
-                if (hasClass(this, 'btn-light')) {
-                    stgts.attr('disabled', true)
-                    stgcs.attr('disabled', true)
-                    rmclass(this, 'btn-light')
-                    this.disabled = false
-                    adclass(this, 'btn-success')
-                    for (let k = 0; k < posts_cache.length; k++) {
-                        for (let l = 0; l < posts_cache[k].cates.length; l++) {
-                            if (posts_cache[k].cates[l] === this.innerText) {
-                                filter_posts_cache.push(posts_cache[k])
-                            }
-                        }
-                    }
-                } else {
-                    stgts.attr('disabled', false)
-                    stgcs.attr('disabled', false)
-                    rmclass(this, 'btn-success')
-                    adclass(this, 'btn-light')
-                }
-                filter()
-            })
-        }
-        for (let i = 0; i < stgts.length; i++) {
-            $(stgts[i]).bind('click', function(event) {
-                filter_posts_cache = new Array()
-                if (hasClass(this, 'btn-light')) {
-                    stgts.attr('disabled', true)
-                    stgcs.attr('disabled', true)
-                    $('.treenode a').addClass('adisable')
-                    rmclass(this, 'btn-light')
-                    this.disabled = false
-                    adclass(this, 'btn-info')
-                    for (let k = 0; k < posts_cache.length; k++) {
-                        if (posts_cache[k].tags !== undefined) {
-                            for (let l = 0; l < posts_cache[k].tags.length; l++) {
-                                if (posts_cache[k].tags[l] === this.innerText) {
+    let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
+    setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
+    sendget(url, function(re) {
+        get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+            posts_cache = yaml.load(re[0].body)
+            for (let i = 0; i < posts_cache.length; i++) {
+                postsmetadatahandle(posts_cache[i])
+            }
+            $('#postsearchtext')[0].placeholder = 'ps:' + posts_cache.length + ',ts:' + all_tags.length + ',cs:' + all_cates.length
+            rstopaging(posts_cache)
+            let stgts = $('.stgt')
+            let stgcs = $('.stgc')
+            for (let i = 0; i < stgcs.length; i++) {
+                $(stgcs[i]).bind('click', function(event) {
+                    filter_posts_cache = new Array()
+                    if (hasClass(this, 'btn-light')) {
+                        stgts.attr('disabled', true)
+                        stgcs.attr('disabled', true)
+                        rmclass(this, 'btn-light')
+                        this.disabled = false
+                        adclass(this, 'btn-success')
+                        for (let k = 0; k < posts_cache.length; k++) {
+                            for (let l = 0; l < posts_cache[k].cates.length; l++) {
+                                if (posts_cache[k].cates[l] === this.innerText) {
                                     filter_posts_cache.push(posts_cache[k])
                                 }
                             }
                         }
+                    } else {
+                        stgts.attr('disabled', false)
+                        stgcs.attr('disabled', false)
+                        rmclass(this, 'btn-success')
+                        adclass(this, 'btn-light')
                     }
-                } else {
-                    stgts.attr('disabled', false)
-                    stgcs.attr('disabled', false)
-                    $('.treenode a').removeClass('adisable')
-                    rmclass(this, 'btn-info')
-                    adclass(this, 'btn-light')
-                }
-                filter()
-            })
-        }
-        rmclass(docpanel, 'myhide')
-        adclass(docpanel, 'myshow')
-        rmclass(cates_tree_panel, 'myhide')
-        adclass(cates_tree_panel, 'myshow')
-        showbbt()
-        hideloading()
+                    filter()
+                })
+            }
+            for (let i = 0; i < stgts.length; i++) {
+                $(stgts[i]).bind('click', function(event) {
+                    filter_posts_cache = new Array()
+                    if (hasClass(this, 'btn-light')) {
+                        stgts.attr('disabled', true)
+                        stgcs.attr('disabled', true)
+                        $('.treenode a').addClass('adisable')
+                        rmclass(this, 'btn-light')
+                        this.disabled = false
+                        adclass(this, 'btn-info')
+                        for (let k = 0; k < posts_cache.length; k++) {
+                            if (posts_cache[k].tags !== undefined) {
+                                for (let l = 0; l < posts_cache[k].tags.length; l++) {
+                                    if (posts_cache[k].tags[l] === this.innerText) {
+                                        filter_posts_cache.push(posts_cache[k])
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        stgts.attr('disabled', false)
+                        stgcs.attr('disabled', false)
+                        $('.treenode a').removeClass('adisable')
+                        rmclass(this, 'btn-info')
+                        adclass(this, 'btn-light')
+                    }
+                    filter()
+                })
+            }
+            rmclass(docpanel, 'myhide')
+            adclass(docpanel, 'myshow')
+            rmclass(cates_tree_panel, 'myhide')
+            adclass(cates_tree_panel, 'myshow')
+            showbbt()
+            hideloading()
+        })
     })
 }
 

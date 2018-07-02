@@ -32,6 +32,9 @@ $(function() {
     $('#hb').bind('click', function() {
         cgtopbut()
     })
+    $('#cates_tree_head').bind('click', function() {
+        syncatestoconfig()
+    })
     $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {
             showsidetoc()
