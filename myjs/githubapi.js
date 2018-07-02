@@ -388,6 +388,8 @@ function syncatesToconfig() {
                 }
                 metadata = yaml.load(metadata)
                 metadata.number = rei.number
+                metadata.created_at = rei.created_at
+                metadata.updated_at = rei.updated_at
                 newmsg.push(metadata)
             }
             newmsg = yaml.dump(newmsg)
