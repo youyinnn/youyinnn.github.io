@@ -269,8 +269,8 @@ function searchpost(text) {
 
 function postsmetadatahandle(postmetadata) {
     let postcache = postmetadata
-    for (let i = 0; i < postcache.cates.length; i++) {
-        let cate = b64.encode(postcache.cates[i])
+    for (let i = 0; i < postcache.categories.length; i++) {
+        let cate = b64.encode(postcache.categories[i])
         cate = cate.replace(/[@#=+-]/gm, '')
         if ($('#' + cate + '_treenode').length === 0) {
             let node = c('li')
@@ -279,7 +279,7 @@ function postsmetadatahandle(postmetadata) {
             let noa = c('a')
             noa.href = 'javascript:void(0)'
             noa.target = '_blank'
-            noa.innerText = postcache.cates[i]
+            noa.innerText = postcache.categories[i]
             $(noa).bind('click', function(event) {
                 if (!hasClass(this, 'adisable')) {
                     filter_posts_cache = new Array()
@@ -288,8 +288,8 @@ function postsmetadatahandle(postmetadata) {
                         $('#cates_tree a').addClass('adisable')
                         rmclass(this, 'adisable')
                         for (let k = 0; k < posts_cache.length; k++) {
-                            for (let l = 0; l < posts_cache[k].cates.length; l++) {
-                                if (posts_cache[k].cates[l] === this.innerText) {
+                            for (let l = 0; l < posts_cache[k].categories.length; l++) {
+                                if (posts_cache[k].categories[l] === this.innerText) {
                                     filter_posts_cache.push(posts_cache[k])
                                 }
                             }
@@ -307,7 +307,7 @@ function postsmetadatahandle(postmetadata) {
             if (i === 0) {
                 appendc(cates_tree, node)
             } else {
-                let parentnodeid = b64.encode(postcache.cates[i - 1])
+                let parentnodeid = b64.encode(postcache.categories[i - 1])
                 parentnodeid = parentnodeid.replace(/[@#=+-]/gm, '')
                 appendc($('#' + parentnodeid + '_treenode')[0], node)
             }
@@ -327,16 +327,16 @@ function postsmetadatahandle(postmetadata) {
             }
         }
     }
-    for (let i = 0; i < postcache.cates.length; i++) {
+    for (let i = 0; i < postcache.categories.length; i++) {
         let haved = false
-        for (let j = 0; j < all_cates.length; j++) {
-            if (all_cates[j] === postcache.cates[i]) {
+        for (let j = 0; j < categories.length; j++) {
+            if (all_cates[j] === postcache.categories[i]) {
                 haved = true
             }
         }
         if (!haved) {
-            all_cates.push(postcache.cates[i])
-            cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.cates[i] + '</button>'
+            all_cates.push(postcache.categories[i])
+            cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
         }
     }
 }
@@ -717,8 +717,4 @@ function setarrow() {
             }
         }
     })
-}
-
-function syncatestoconfig() {
-    console.log(yaml.dump(posts_cache))
 }

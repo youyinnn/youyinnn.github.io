@@ -33,7 +33,7 @@ $(function() {
         cgtopbut()
     })
     $('#cates_tree_head').bind('click', function() {
-        syncatestoconfig()
+        syncatesToconfig()
     })
     $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {

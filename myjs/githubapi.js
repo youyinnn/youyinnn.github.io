@@ -9,15 +9,17 @@ var resume_label = 'yresume'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = b64.decode(oauth_token_base64)
-var timeout
+var defaulttimeout
 
 function settimeout() {
     let nowhour = dayjs().hour()
-    timeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 100000
-    console.log('timeout is [' + timeout + ']')
+    defaulttimeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 10000
 }
 
-function getset(url) {
+function getset(url, timeout) {
+    if (timeout === undefined) {
+        timeout = defaulttimeout
+    }
     let basegetset = {
         'timeout': timeout,
         'async': true,
@@ -38,7 +40,10 @@ function getset(url) {
     return basegetset
 }
 
-function postset(url, form) {
+function postset(url, form, timeout) {
+    if (timeout === undefined) {
+        timeout = defaulttimeout
+    }
     let basepostset = {
         'timeout': timeout,
         'async': true,
@@ -61,7 +66,10 @@ function postset(url, form) {
     return basepostset
 }
 
-function patchset(url, data) {
+function patchset(url, data, timeout) {
+    if (timeout === undefined) {
+        timeout = defaulttimeout
+    }
     let basepatchset = {
         'timeout': timeout,
         'async': true,
@@ -70,14 +78,7 @@ function patchset(url, data) {
         'url': url,
         'data': data,
         'error': function(eve) {
-            if (eve.status === 0 && eve.statusText !== 'error') {
-                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
-                    '\r\nresponseText: ' + eve.responseText +
-                    '\r\nstatusText: ' + eve.statusText +
-                    '\r\nwill return to the home page')
-                eve.abort()
-                location.reload()
-            }
+            console.log('timeout')
         }
     }
     return basepatchset
@@ -95,33 +96,33 @@ function urlhandle(url) {
     return url
 }
 
-function sendget(url, func) {
-    $.ajax(getset(urlhandle(url))).done(function(response) {
+function sendget(url, func, timeout) {
+    $.ajax(getset(urlhandle(url), timeout)).done(function(response) {
         if (func !== undefined) {
             func(response)
         }
     })
 }
 
-function sendpost(url, form, func) {
-    $.ajax(postset(urlhandle(url), form)).done(function(response) {
+function sendpost(url, form, func, timeout) {
+    $.ajax(postset(urlhandle(url), form, timeout)).done(function(response) {
         if (func !== undefined) {
             func(response)
         }
     })
 }
 
-function sendpatch(url, data, func) {
-    $.ajax(patchset(urlhandle(url), form)).done(function(response) {
+function sendpatch(url, data, func, timeout) {
+    $.ajax(patchset(urlhandle(url), data)).done(function(response) {
         if (func !== undefined) {
             func(response)
         }
     })
 }
 
-function search_issues_by_label(label, func) {
+function search_issues_by_label(label, func, timeout) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
-    sendget(url, func)
+    sendget(url, func, timeout)
 }
 
 function get_posts() {
@@ -288,7 +289,7 @@ function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
         let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
         let basegetset = {
-            'timeout': timeout,
+            'timeout': defaulttimeout,
             'async': true,
             'url': url,
             'crossDomain': true,
@@ -318,13 +319,13 @@ function get_friendlinked() {
     }
 }
 
-function get_issues_comments(number, issuesbody, func) {
+function get_issues_comments(number, issuesbody, func, timeout) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
     sendget(url, function(re) {
         func(issuesbody, re)
         hideloading()
         showbbt()
-    })
+    }, timeout)
 }
 
 function get_todo() {
@@ -349,4 +350,40 @@ function get_egg() {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createegg)
     })
+}
+
+function syncatesToconfig() {
+    $('#cates_tree_head').css('background-color', '#828f9c')
+    $('#cates_tree_head')[0].innerText = 'Sync started..'
+    search_issues_by_label(post_label, function(re) {
+        let newmsg = new Array()
+        for(let i = 0; i < re.length ; i++) {
+            let rei = re[i]
+            let metadata = gethexofrontmatter(rei.body)
+            if (metadata === undefined) {
+                metadata = new Object()
+                metadata.title = rei.title
+                metadata.categories = new Array()
+                metadata.categories.push('unclassfied')
+                metadata.comments = true
+                metadata.date = rei.created_at
+                metadata = yaml.dump(metadata)
+            }
+            metadata = yaml.load(metadata)
+            metadata.number = rei.number
+            newmsg.push(metadata)
+        }
+        newmsg = yaml.dump(newmsg)
+        let text = '{ "body":' + JSON.stringify(newmsg) + '}'
+        let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
+        sendget(url, function(re) {
+            get_issues_comments(re[0].number, re[0].body, function (issuesbody, re) {
+                let id = re[0].id
+                url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + id
+                sendpatch(url, text, function (re) {
+                    console.log(re)
+                })
+            })
+        })
+    }, 30 * 1000)
 }
