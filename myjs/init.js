@@ -22,6 +22,7 @@ var cates_tree_panel = $('#cates_tree_panel')[0]
 var cates_tree = $('#cates_tree')[0]
 var perpageitem = 10
 var postcomment = false
+var postsync = false
 var searchcount
 
 $(function() {

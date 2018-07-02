@@ -32,16 +32,11 @@
   text-align: center;
   color: white;
   cursor: pointer;
-  transition: all 5s;
+  transition: background-color 2s;
 }
 
 #cates_tree_head:hover{
   background-color: #464d53;
-}
-
-#cates_tree_head:active{
-  background-color: #343a40;
-  line-height: 41px;
 }
 
 .treenode {

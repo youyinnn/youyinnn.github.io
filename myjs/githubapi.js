@@ -353,37 +353,72 @@ function get_egg() {
 }
 
 function syncatesToconfig() {
-    $('#cates_tree_head').css('background-color', '#828f9c')
-    $('#cates_tree_head')[0].innerText = 'Sync started..'
-    search_issues_by_label(post_label, function(re) {
-        let newmsg = new Array()
-        for(let i = 0; i < re.length ; i++) {
-            let rei = re[i]
-            let metadata = gethexofrontmatter(rei.body)
-            if (metadata === undefined) {
-                metadata = new Object()
-                metadata.title = rei.title
-                metadata.categories = new Array()
-                metadata.categories.push('unclassfied')
-                metadata.comments = true
-                metadata.date = rei.created_at
-                metadata = yaml.dump(metadata)
+    if (!postsync) {
+        $('#cates_tree_head').css('background-color', '#828f9c')
+        $('#cates_tree_head').css('color', '#343a40')
+        $('#cates_tree_head')[0].innerText = 'Sync started.'
+        setTimeout(() => {
+            $('#cates_tree_head')[0].innerText += '.'
+        }, 1300);
+        setTimeout(() => {
+            $('#cates_tree_head')[0].innerText += '.'
+        }, 2200);
+        search_issues_by_label(post_label, function(re) {
+            $('#cates_tree_head').css('background-color', 'rgb(179, 188, 187)')
+            $('#cates_tree_head').css('color', '#828f9c')
+            $('#cates_tree_head')[0].innerText = 'Fetching.'
+            setTimeout(() => {
+                $('#cates_tree_head')[0].innerText += '.'
+            }, 1060);
+            setTimeout(() => {
+                $('#cates_tree_head')[0].innerText += '.'
+            }, 2100);
+            let newmsg = new Array()
+            for (let i = 0; i < re.length; i++) {
+                let rei = re[i]
+                let metadata = gethexofrontmatter(rei.body)
+                if (metadata === undefined) {
+                    metadata = new Object()
+                    metadata.title = rei.title
+                    metadata.categories = new Array()
+                    metadata.categories.push('unclassfied')
+                    metadata.comments = true
+                    metadata.date = rei.created_at
+                    metadata = yaml.dump(metadata)
+                }
+                metadata = yaml.load(metadata)
+                metadata.number = rei.number
+                newmsg.push(metadata)
             }
-            metadata = yaml.load(metadata)
-            metadata.number = rei.number
-            newmsg.push(metadata)
-        }
-        newmsg = yaml.dump(newmsg)
-        let text = '{ "body":' + JSON.stringify(newmsg) + '}'
-        let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
-        sendget(url, function(re) {
-            get_issues_comments(re[0].number, re[0].body, function (issuesbody, re) {
-                let id = re[0].id
-                url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + id
-                sendpatch(url, text, function (re) {
-                    console.log(re)
+            newmsg = yaml.dump(newmsg)
+            let text = '{ "body":' + JSON.stringify(newmsg) + '}'
+            let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
+            sendget(url, function(re) {
+                $('#cates_tree_head').css('background-color', 'rgb(87, 101, 100)')
+                $('#cates_tree_head').css('color', 'rgb(179, 188, 187)')
+                $('#cates_tree_head')[0].innerText = 'Syncing.'
+                setTimeout(() => {
+                    $('#cates_tree_head')[0].innerText += '.'
+                }, 1050);
+                setTimeout(() => {
+                    $('#cates_tree_head')[0].innerText += '.'
+                }, 2080);
+                get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+                    let id = re[0].id
+                    url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + id
+                    sendpatch(url, text, function(re) {
+                        $('#cates_tree_head').css('background-color', '#343a40')
+                        $('#cates_tree_head').css('color', 'white')
+                        $('#cates_tree_head')[0].innerText = 'done!'
+                        setTimeout(() => {
+                            $('#cates_tree_head')[0].innerText = 'Click refresh the page.'
+                        }, 2000);
+                        postsync = true
+                    })
                 })
             })
-        })
-    }, 30 * 1000)
+        }, 30 * 1000)
+    } else {
+        location.reload()
+    }
 }
