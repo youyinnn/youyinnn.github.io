@@ -718,3 +718,7 @@ function setarrow() {
         }
     })
 }
+
+function showps(ps) {
+    console.log(ps)
+}

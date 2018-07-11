@@ -126,7 +126,7 @@ function search_issues_by_label(label, func, timeout) {
 }
 
 function get_posts() {
-    let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
     sendget(url, function(re) {
         get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
@@ -243,6 +243,22 @@ function get_post(number) {
                 $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
         })
+        let psname = yaml.load(gethexofrontmatter(re.body)).series
+        if (psname !== undefined) {
+            let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
+            sendget(url3, function (re) {
+                get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+                    let ses = yaml.load(re[1].body)
+                    let ps
+                    for (let i = 0; i < ses.length ; i++) {
+                         if (ses[i].se === psname) {
+                             ps = ses[i].ps
+                             showps(ps)
+                         }
+                    }
+                }, 100 * 1000)
+            })
+        }
     })
 }
 
