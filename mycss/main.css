@@ -31,12 +31,7 @@
   line-height: 38px;
   text-align: center;
   color: white;
-  cursor: pointer;
   transition: background-color 2s;
-}
-
-#cates_tree_head:hover{
-  background-color: #464d53;
 }
 
 .treenode {

@@ -413,7 +413,7 @@ function syncatesToconfig() {
                         $('#cates_tree_head').css('color', 'white')
                         $('#cates_tree_head')[0].innerText = 'done!'
                         setTimeout(() => {
-                            $('#cates_tree_head')[0].innerText = 'Click refresh the page.'
+                            $('#cates_tree_head')[0].innerText = 'Refresh the page.'
                         }, 2000);
                         postsync = true
                     })

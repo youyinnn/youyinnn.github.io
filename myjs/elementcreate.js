@@ -3,17 +3,14 @@ function createpostcard(item, pagebelong) {
     let posttitle = c('div')
     let posttime = c('div')
     let sp1 = c('span')
-    let sp2 = c('span')
     adclass(postcard, 'postcard center-to-head')
     adclass(posttitle, 'posttitle font-weight-bold')
     adclass(posttime, 'posttime')
     posttitle.innerHTML = item.title
     posttitle.number = item.number
-    sp1.innerHTML = '# '
-    sp2.innerHTML = dayjs(item.created_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(item.created_at))
+    sp1.innerHTML = '# 发布 ' + daybefore(dayjs(item.created_at)) + ' | 更新' +  daybefore(dayjs(item.updated_at))
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
-    appendc(posttime, sp2)
     appendc(postcard, posttime)
     appendc($('#pagebox-' + pagebelong)[0], postcard)
     $(postcard).bind('click', function() {

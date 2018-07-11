@@ -688,13 +688,13 @@ function daybefore(pastdayjs) {
     before /= 3600000
     if (before < 24) {
         if (before > now.hour()) {
-            return ' | <x style="color:#46bbcd;">昨天</x>'
+            return ' <x style="color:#46bbcd;">昨天</x>'
         } else {
-            return ' | <x style="color:#46bbcd;">今天</x>'
+            return ' <x style="color:#46bbcd;">今天</x>'
         }
     }
-    if (before > 24 && before < 48) return ' | <x style="color:#46bbcd;">前天</x>'
-    return ' | <x style="color:#46bbcd;">' + Math.ceil(before / 24) + '天前</x>'
+    if (before > 24 && before < 48) return ' <x style="color:#46bbcd;">前天</x>'
+    return ' <x style="color:#46bbcd;">' + Math.ceil(before / 24) + '天前</x>'
 }
 
 function setarrow() {

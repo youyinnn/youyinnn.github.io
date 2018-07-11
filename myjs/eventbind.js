@@ -32,9 +32,6 @@ $(function() {
     $('#hb').bind('click', function() {
         cgtopbut()
     })
-    $('#cates_tree_head').bind('click', function() {
-        syncatesToconfig()
-    })
     $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {
             showsidetoc()
@@ -53,6 +50,9 @@ $(function() {
     })
     $('#postsearchtext').bind('keyup', 'esc', function() {
         this.value = ''
+    })
+    $(window).bind('keyup', 'alt+s', function() {
+        syncatesToconfig()
     })
     $('#categories').bind('click', function() {
         if ($('#all_cates').hasClass('myhide')) {
