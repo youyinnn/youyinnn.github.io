@@ -393,6 +393,27 @@ function syncatesToconfig() {
                 newmsg.push(metadata)
             }
             newmsg = yaml.dump(newmsg)
+            let yamlobj = yaml.load(newmsg)
+            let series = new Array()
+            for (let i = 0 ; i < yamlobj.length ; i++) {
+                let pseriesname = yamlobj[i].series
+                if (pseriesname !== undefined) {
+                    let pseries
+                    for (let j = 0; j < series.length ; j++) {
+                        if (series[j].se === pseriesname)
+                            pseries = series[j].ps
+                    }
+                    if (pseries === undefined) {
+                        let item = new Object()
+                        item.se = pseriesname
+                        item.ps = pseries = new Array()
+                        series.push(item)
+                    }
+                    let ss = yamlobj[i].title + '===' + yamlobj[i].number
+                    pseries.push(ss)
+                }
+            }
+            series = yaml.dump(series)
             let text = '{ "body":' + JSON.stringify(newmsg) + '}'
             let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
             sendget(url, function(re) {
@@ -406,16 +427,21 @@ function syncatesToconfig() {
                     $('#cates_tree_head')[0].innerText += '.'
                 }, 2080);
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-                    let id = re[0].id
-                    url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + id
+                    let posttreecommentid = re[0].id
+                    let seriestreecommentid = re[1].id
+                    url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + posttreecommentid
                     sendpatch(url, text, function(re) {
-                        $('#cates_tree_head').css('background-color', '#343a40')
-                        $('#cates_tree_head').css('color', 'white')
-                        $('#cates_tree_head')[0].innerText = 'done!'
-                        setTimeout(() => {
-                            $('#cates_tree_head')[0].innerText = 'Refresh the page.'
-                        }, 2000);
-                        postsync = true
+                        url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + seriestreecommentid
+                        text = '{ "body":' + JSON.stringify(series) + '}'
+                        sendpatch(url, text, function(re) {
+                            $('#cates_tree_head').css('background-color', '#343a40')
+                            $('#cates_tree_head').css('color', 'white')
+                            $('#cates_tree_head')[0].innerText = 'done!'
+                            setTimeout(() => {
+                                $('#cates_tree_head')[0].innerText = 'Refresh the page.'
+                            }, 2000);
+                            postsync = true
+                        })
                     })
                 })
             })
