@@ -847,17 +847,22 @@
   text-align: center;
   position: fixed;
   margin: auto;
-  left: -250px;
+  left: 36px;
   top: 0;
   bottom: 0;
   background-color: #1d2124;
   z-index: 888;
   height: 130px;
   overflow: auto;
+  transform: scaleX(0);
+  transform-origin: 0 100% 0;
+  transform-style: preserve-3d;
+  opacity: 0;
 }
 
 .seboxshow{
-  left: 36px !important;
+  opacity: 1 !important;
+  transform: scaleX(1) !important;
 }
 
 #seriesbox a{
