@@ -16,72 +16,15 @@ function settimeout() {
     defaulttimeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 10000
 }
 
-function getset(url, timeout) {
-    if (timeout === undefined) {
-        timeout = defaulttimeout
+function timeoutfunc(eve) {
+    if (eve.status === 0 && eve.statusText !== 'error') {
+        console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
+            '\r\nresponseText: ' + eve.responseText +
+            '\r\nstatusText: ' + eve.statusText +
+            '\r\nwill return to the home page')
+        eve.abort()
+        location.reload()
     }
-    let basegetset = {
-        'timeout': timeout,
-        'async': true,
-        'crossDomain': true,
-        'method': 'GET',
-        'url': url,
-        'error': function(eve) {
-            if (eve.status === 0 && eve.statusText !== 'error') {
-                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
-                    '\r\nresponseText: ' + eve.responseText +
-                    '\r\nstatusText: ' + eve.statusText +
-                    '\r\nwill return to the home page')
-                eve.abort()
-                location.reload()
-            }
-        }
-    }
-    return basegetset
-}
-
-function postset(url, form, timeout) {
-    if (timeout === undefined) {
-        timeout = defaulttimeout
-    }
-    let basepostset = {
-        'timeout': timeout,
-        'async': true,
-        'crossDomain': true,
-        'method': 'POST',
-        'url': url,
-        'mimeType': 'multipart/form-data',
-        'data': form,
-        'error': function(eve) {
-            if (eve.status === 0 && eve.statusText !== 'error') {
-                console.log('Maybe it\'s timeout because of github api!\r\n' + 'status:' + eve.status +
-                    '\r\nresponseText: ' + eve.responseText +
-                    '\r\nstatusText: ' + eve.statusText +
-                    '\r\nwill return to the home page')
-                eve.abort()
-                location.reload()
-            }
-        }
-    }
-    return basepostset
-}
-
-function patchset(url, data, timeout) {
-    if (timeout === undefined) {
-        timeout = defaulttimeout
-    }
-    let basepatchset = {
-        'timeout': timeout,
-        'async': true,
-        'crossDomain': true,
-        'method': 'PATCH',
-        'url': url,
-        'data': data,
-        'error': function(eve) {
-            console.log('timeout')
-        }
-    }
-    return basepatchset
 }
 
 function urlhandle(url) {
@@ -96,39 +39,15 @@ function urlhandle(url) {
     return url
 }
 
-function sendget(url, func, timeout) {
-    $.ajax(getset(urlhandle(url), timeout)).done(function(response) {
-        if (func !== undefined) {
-            func(response)
-        }
-    })
-}
-
-function sendpost(url, form, func, timeout) {
-    $.ajax(postset(urlhandle(url), form, timeout)).done(function(response) {
-        if (func !== undefined) {
-            func(response)
-        }
-    })
-}
-
-function sendpatch(url, data, func, timeout) {
-    $.ajax(patchset(urlhandle(url), data)).done(function(response) {
-        if (func !== undefined) {
-            func(response)
-        }
-    })
-}
-
 function search_issues_by_label(label, func, timeout) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
-    sendget(url, func, timeout)
+    sendget(urlhandle(url), func, timeoutfunc, timeout)
 }
 
 function get_posts() {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-    sendget(url, function(re) {
+    sendget(urlhandle(url), function(re) {
         get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
             posts_cache = yaml.load(re[0].body)
             for (let i = 0; i < posts_cache.length; i++) {
@@ -199,18 +118,18 @@ function get_posts() {
             showbbt()
             hideloading()
         })
-    })
+    }, timeoutfunc)
 }
 
 function get_post(number) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
-    sendget(url, function(re) {
+    sendget(urlhandle(url), function(re) {
         let page = re.html_url
         setgohub('Go hub', page)
         createposthead(re)
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
-        sendget(url2, function(re) {
+        sendget(urlhandle(url2), function(re) {
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -242,11 +161,11 @@ function get_post(number) {
             if (!postcomment) {
                 $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
-        })
+        }, timeoutfunc)
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {
             let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
-            sendget(url3, function (re) {
+            sendget(urlhandle(url3), function (re) {
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
                     let ses = yaml.load(re[1].body)
                     let ps
@@ -257,9 +176,9 @@ function get_post(number) {
                          }
                     }
                 }, 100 * 1000)
-            })
+            }, timeoutfunc)
         }
-    })
+    }, timeoutfunc)
 }
 
 function get_about() {
@@ -337,11 +256,11 @@ function get_friendlinked() {
 
 function get_issues_comments(number, issuesbody, func, timeout) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
-    sendget(url, function(re) {
+    sendget(urlhandle(url), function(re) {
         func(issuesbody, re)
         hideloading()
         showbbt()
-    }, timeout)
+    }, timeoutfunc, timeout)
 }
 
 function get_todo() {
@@ -362,10 +281,10 @@ function get_script() {
 
 function get_egg() {
     let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yegg&state=closed'
-    sendget(url, function(re) {
+    sendget(urlhandle(url), function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createegg)
-    })
+    }, timeoutfunc)
 }
 
 function syncatesToconfig() {
@@ -432,7 +351,7 @@ function syncatesToconfig() {
             series = yaml.dump(series)
             let text = '{ "body":' + JSON.stringify(newmsg) + '}'
             let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
-            sendget(url, function(re) {
+            sendget(urlhandle(url), function(re) {
                 $('#cates_tree_head').css('background-color', 'rgb(87, 101, 100)')
                 $('#cates_tree_head').css('color', 'rgb(179, 188, 187)')
                 $('#cates_tree_head')[0].innerText = 'Syncing.'
@@ -446,10 +365,10 @@ function syncatesToconfig() {
                     let posttreecommentid = re[0].id
                     let seriestreecommentid = re[1].id
                     url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + posttreecommentid
-                    sendpatch(url, text, function(re) {
+                    sendpatch(urlhandle(url), text, function(re) {
                         url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + seriestreecommentid
                         text = '{ "body":' + JSON.stringify(series) + '}'
-                        sendpatch(url, text, function(re) {
+                        sendpatch(urlhandle(url), text, function(re) {
                             $('#cates_tree_head').css('background-color', '#343a40')
                             $('#cates_tree_head').css('color', 'white')
                             $('#cates_tree_head')[0].innerText = 'done!'
@@ -460,7 +379,7 @@ function syncatesToconfig() {
                         })
                     })
                 })
-            })
+            }, timeoutfunc)
         }, 30 * 1000)
     } else {
         location.reload()

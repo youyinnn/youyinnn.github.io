@@ -4,7 +4,7 @@
     参数1：元素
     参数2：样式名
 */
-function getStyle(obj, styleName) {
+function getstyle(obj, styleName) {
     var cs = obj.currentStyle
     if (cs === undefined) {
         return getComputedStyle(obj, null)[styleName]
@@ -66,7 +66,7 @@ function rmclass(obj, cn) {
     参数1：元素
     参数2：类名
 */
-function changeClass(obj, cn) {
+function cgclass(obj, cn) {
     if (hasClass(obj, cn)) {
         rmclass(obj, cn)
     } else {
@@ -86,7 +86,7 @@ function hasClass(obj, cn) {
 /*
     获取元素的最终样式 也就是显示在浏览器上的样式
 */
-function getFinalStyle(obj, attr) {
+function getfinalstyle(obj, attr) {
     var finalStyle = obj.currentStyle ? obj.currentStyle :
         document.defaultView.getComputedStyle(obj, null)
 
@@ -97,7 +97,7 @@ function appendc(parent, child) {
     parent.appendChild(child)
 }
 
-function removeLastC(parent) {
+function rmlastc(parent) {
     parent.removeChild(parent.lastChild)
 }
 
@@ -278,4 +278,85 @@ function base64() {
         }  
         return string;  
     }  
+}
+
+function defgetset(url, timeout) {
+    if (timeout === undefined) {
+        timeout = window.defaulttimeout === undefined ? 3000 : window.defaulttimeout
+    }
+    let basegetset = {
+        'timeout': timeout,
+        'async': true,
+        'crossDomain': true,
+        'method': 'GET',
+        'url': url
+    }
+    return basegetset
+}
+
+function sendget(url, ohyes, ohno, timeout) {
+    $.ajax(defgetset(url, timeout)).done(function(response) {
+        if (ohyes !== undefined) {
+            ohyes(response)
+        }
+    }).fail(function (xhr, textstatus, errorthrown) {
+        if (ohno !== undefined) {
+            ohno(xhr, textstatus, errorthrown)
+        }
+    })
+}
+
+function defpostset(url, form, timeout) {
+    if (timeout === undefined) {
+        timeout = window.defaulttimeout === undefined ? 3000 : window.defaulttimeout
+    }
+    let basepostset = {
+        'timeout': timeout,
+        'async': true,
+        'crossDomain': true,
+        'method': 'POST',
+        'url': url,
+        'mimeType': 'multipart/form-data',
+        'data': form
+    }
+    return basepostset
+}
+
+function sendpost(url, form, ohyes, ohno, timeout) {
+    $.ajax(defpostset(url, form, timeout)).done(function(response) {
+        if (ohyes !== undefined) {
+            ohyes(response)
+        }
+    }).fail(function (xhr, textstatus, errorthrown) {
+        if (ohno !== undefined) {
+            ohno(xhr, textstatus, errorthrown)
+        }
+    })
+}
+
+function defpatchset(url, data, timeout) {
+    if (timeout === undefined) {
+        timeout = defaulttimeout
+    }
+    let basepatchset = {
+        'timeout': timeout,
+        'async': true,
+        'crossDomain': true,
+        'method': 'PATCH',
+        'url': url,
+        'data': data
+    }
+    return basepatchset
+}
+
+function sendpatch(url, data, ohyes, ohno, timeout) {
+    $.ajax(defpatchset(url, data, timeout)).done(function(response) {
+        if (ohyes !== undefined) {
+            ohyes(response)
+        }
+    }).fail(function (xhr, textstatus, errorthrown) {
+        if (ohno !== undefined) {
+            ohno(xhr, textstatus, errorthrown)
+        }
+    })
 }

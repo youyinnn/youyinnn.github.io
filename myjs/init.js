@@ -32,7 +32,7 @@ $(function() {
     }
     settimeout()
     get_friendlinked()
-    let topbarh = getFinalStyle(topbar, 'height').split('px')[0]
+    let topbarh = getfinalstyle(topbar, 'height').split('px')[0]
     let search = location.search
     if (search === '') {
         $('#topbar').animateCss('flipInX')

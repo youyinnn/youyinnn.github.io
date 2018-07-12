@@ -95,12 +95,12 @@ function render_md(text) {
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
             }, 600)
         }
-        if (getStyle(topbar, 'height') === '48px' && !hasClass(topbar, 'hidetopbar')) {
+        if (getstyle(topbar, 'height') === '48px' && !hasClass(topbar, 'hidetopbar')) {
             $root.animate({
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
             }, 600)
         }
-        if (getStyle(topbar, 'height') === '96px' && !hasClass(topbar, 'hidetopbar')) {
+        if (getstyle(topbar, 'height') === '96px' && !hasClass(topbar, 'hidetopbar')) {
             $root.animate({
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
             }, 600)
@@ -521,7 +521,7 @@ function pagination() {
             nowpage = totalpages
         }
     })
-    $('#pgboxbox')[0].style.height = getStyle($('#pagebox-1')[0], 'height')
+    $('#pgboxbox')[0].style.height = getstyle($('#pagebox-1')[0], 'height')
     appendc(docpanel, pn)
     setTimeout(() => {
         rmclass(pn, 'myhide')        
@@ -617,11 +617,11 @@ function setcoll() {
     })
     for (let i = 0; i < collbuts.length; ++i) {
         let tg = $(collbuts[i].getAttribute('tg'))[0]
-        tg.setAttribute('h', getStyle(tg, 'height'))
+        tg.setAttribute('h', getstyle(tg, 'height'))
         tg.style.height = '0px'
         bindev(collbuts[i], 'click', function() {
             let h
-            if (getStyle(tg, 'height') === '0px') {
+            if (getstyle(tg, 'height') === '0px') {
                 h = tg.getAttribute('h')
                 collbuts[i].innerText = '点击隐藏'
             } else {
