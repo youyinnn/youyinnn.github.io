@@ -804,3 +804,76 @@
 .showarrow a:before {
   left: -1.5rem !important;
 }
+
+#series{
+  text-align: center;
+  position: fixed;
+  margin: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 130px;
+  width: 35px;
+  line-height: 32px;
+  word-wrap: break-word;
+  background-color: var(--ymain-color);
+  color: white;
+  z-index: 999;
+  transform: translateX(-43px);
+  cursor: pointer;
+}
+
+#series:hover{
+  background-color: var(--yminor-color);
+}
+
+#series:active{
+  background-color: var(--ymain-color);
+}
+
+.seriesshow{
+  transform: translateX(0px) !important;
+}
+
+#series button{
+  border-radius: 0;
+}
+
+#series span{
+  display: block;
+}
+
+#seriesbox{
+  text-align: center;
+  position: fixed;
+  margin: auto;
+  left: -250px;
+  top: 0;
+  bottom: 0;
+  background-color: #1d2124;
+  z-index: 888;
+  height: 130px;
+  overflow: auto;
+}
+
+.seboxshow{
+  left: 36px !important;
+}
+
+#seriesbox a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  background-color: var(--ymain-color);
+  padding: 4px 8px;
+  border-bottom: 1px solid;
+}
+
+#seriesbox a:hover{
+  background-color: var(--yminor-color);
+}
+
+.adis{
+  background-color: rgb(72, 192, 72) !important;
+  cursor: default;
+}

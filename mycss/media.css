@@ -80,6 +80,30 @@
   .pagebox{
     margin-bottom: 3.5rem;
   }
+  #series{
+    top: initial;
+    width: initial;
+    height: initial;
+    padding: 0 .5rem;
+    bottom: 1rem;
+    left: 1rem;
+    transform: scale(0);
+  }
+  .seriesshow{
+    transform: scale(1) !important;
+  }
+  #series span{
+    display: inline;
+    line-height: 2.375rem;
+  }
+  #seriesbox{
+    margin: initial !important;
+    top: 3rem !important;
+    bottom: initial !important;
+  }
+  .seboxshow{
+    left: 0 !important;
+  }
 }
 
 /* 
@@ -87,6 +111,28 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  #series{
+    top: initial;
+    width: initial;
+    height: initial;
+    padding: 0 .5rem;
+    transform: scale(0);
+  }
+  .seriesshow{
+    transform: scale(1) !important;
+  }
+  #series span{
+    display: inline;
+    line-height: 2.375rem;
+  }
+  #seriesbox{
+    margin: initial !important;
+    top: 6rem !important;
+    bottom: initial !important;
+  }
+  .seboxshow{
+    left: 0 !important;
+  }
   #cates_tree_panel{
     display: none;
   }

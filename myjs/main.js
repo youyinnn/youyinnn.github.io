@@ -719,6 +719,27 @@ function setarrow() {
     })
 }
 
-function showps(ps) {
-    console.log(ps)
+function showseries(ps) {
+    let sb = $('#seriesbox')
+    let nownumber = location.href.split('number=')[1].split('#')[0]
+    for(let i = 0 ; i < ps.length ; i++) {
+        let sa = c('a')
+        let it = ps[i].split('===')
+        if (it[1] === nownumber) {
+            adclass(sa, 'adis')
+        } else {
+            sa.href = 'https://' + blog_repo + '/?to=post&number=' + it[1]
+            sa.target = '_blank'
+        }
+        sa.innerText = it[0]
+        appendc(sb[0], sa)
+    }
+    $('#series').addClass('seriesshow')
+    $('#series').bind('click', function(){
+        if (!hasClass(sb[0], 'seboxshow')) {
+            adclass(sb[0], 'seboxshow')
+        } else {
+            rmclass(sb[0], 'seboxshow')
+        }
+    })
 }

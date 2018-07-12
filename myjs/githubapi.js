@@ -253,7 +253,7 @@ function get_post(number) {
                     for (let i = 0; i < ses.length ; i++) {
                          if (ses[i].se === psname) {
                              ps = ses[i].ps
-                             showps(ps)
+                             showseries(ps)
                          }
                     }
                 }, 100 * 1000)
