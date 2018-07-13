@@ -8,7 +8,7 @@ var todo_label = 'ytodo'
 var resume_label = 'yresume'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
-var oauth_token = b64.decode(oauth_token_base64)
+var oauth_token = Base64.decode(oauth_token_base64)
 var defaulttimeout
 
 function settimeout() {

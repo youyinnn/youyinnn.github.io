@@ -270,7 +270,7 @@ function searchpost(text) {
 function postsmetadatahandle(postmetadata) {
     let postcache = postmetadata
     for (let i = 0; i < postcache.categories.length; i++) {
-        let cate = b64.encode(postcache.categories[i])
+        let cate = Base64.encode(postcache.categories[i])
         cate = cate.replace(/[@#=+-]/gm, '')
         if ($('#' + cate + '_treenode').length === 0) {
             let node = c('li')
@@ -307,7 +307,7 @@ function postsmetadatahandle(postmetadata) {
             if (i === 0) {
                 appendc(cates_tree, node)
             } else {
-                let parentnodeid = b64.encode(postcache.categories[i - 1])
+                let parentnodeid = Base64.encode(postcache.categories[i - 1])
                 parentnodeid = parentnodeid.replace(/[@#=+-]/gm, '')
                 appendc($('#' + parentnodeid + '_treenode')[0], node)
             }
