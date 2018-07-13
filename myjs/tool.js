@@ -196,7 +196,7 @@ function c(elementlabel) {
 ), function(global) {
     'use strict';
     // existing version for noConflict()
-    var _Base64 = global.Base64;
+    var _Base64 = global.b64;
     var version = "2.4.6";
     // if node.js, we use Buffer
     var buffer;
@@ -260,11 +260,11 @@ function c(elementlabel) {
         buffer.from && Uint8Array && buffer.from !== Uint8Array.from
         ? function (u) {
             return (u.constructor === buffer.constructor ? u : buffer.from(u))
-                .toString('base64')
+                .toString('b64')
         }
         :  function (u) {
             return (u.constructor === buffer.constructor ? u : new  buffer(u))
-                .toString('base64')
+                .toString('b64')
         }
         : function (u) { return btoa(utob(u)) }
     ;
@@ -332,11 +332,11 @@ function c(elementlabel) {
         buffer.from && Uint8Array && buffer.from !== Uint8Array.from
         ? function(a) {
             return (a.constructor === buffer.constructor
-                    ? a : buffer.from(a, 'base64')).toString();
+                    ? a : buffer.from(a, 'b64')).toString();
         }
         : function(a) {
             return (a.constructor === buffer.constructor
-                    ? a : new buffer(a, 'base64')).toString();
+                    ? a : new buffer(a, 'b64')).toString();
         }
         : function(a) { return btou(atob(a)) };
     var decode = function(a){
@@ -346,12 +346,12 @@ function c(elementlabel) {
         );
     };
     var noConflict = function() {
-        var Base64 = global.Base64;
-        global.Base64 = _Base64;
-        return Base64;
+        var b64 = global.b64;
+        global.b64 = _Base64;
+        return b64;
     };
-    // export Base64
-    global.Base64 = {
+    // export b64
+    global.b64 = {
         VERSION: version,
         atob: atob,
         btoa: btoa,
@@ -364,12 +364,12 @@ function c(elementlabel) {
         decode: decode,
         noConflict: noConflict
     };
-    // if ES5 is available, make Base64.extendString() available
+    // if ES5 is available, make b64.extendString() available
     if (typeof Object.defineProperty === 'function') {
         var noEnum = function(v){
             return {value:v,enumerable:false,writable:true,configurable:true};
         };
-        global.Base64.extendString = function () {
+        global.b64.extendString = function () {
             Object.defineProperty(
                 String.prototype, 'fromBase64', noEnum(function () {
                     return decode(this)
@@ -385,22 +385,22 @@ function c(elementlabel) {
         };
     }
     //
-    // export Base64 to the namespace
+    // export b64 to the namespace
     //
     if (global['Meteor']) { // Meteor.js
-        Base64 = global.Base64;
+        b64 = global.b64;
     }
     // module.exports and AMD are mutually exclusive.
     // module.exports has precedence.
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports.Base64 = global.Base64;
+        module.exports.b64 = global.b64;
     }
     else if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define([], function(){ return global.Base64 });
+        define([], function(){ return global.b64 });
     }
     // that's it!
-    return {Base64: global.Base64}
+    return {b64: global.b64}
 }));
 
 
