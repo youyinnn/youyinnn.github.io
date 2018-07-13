@@ -52,7 +52,7 @@ function bind (obj, eventStr, callback) {
     参数2：类名
 */
 function addClass (obj, cn) {
-  if (!hasClass(obj, cn)) { obj.className += ' ' + cn }
+  if (!hasclass(obj, cn)) { obj.className += ' ' + cn }
 }
 /*
     为元素移除类样式
@@ -70,14 +70,14 @@ function removeClass (obj, cn) {
     参数2：类名
 */
 function changeClass (obj, cn) {
-  if (hasClass(obj, cn)) { removeClass(obj, cn) } else { addClass(obj, cn) }
+  if (hasclass(obj, cn)) { removeClass(obj, cn) } else { addClass(obj, cn) }
 }
 /*
     查询元素是否有类样式
       参数1：元素
       参数2：类名
   */
-function hasClass (obj, cn) {
+function hasclass (obj, cn) {
   var rgx = new RegExp('\\b' + cn + '\\b')
   return rgx.test(obj.className)
 }

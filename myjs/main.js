@@ -95,12 +95,12 @@ function render_md(text) {
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
             }, 600)
         }
-        if (getstyle(topbar, 'height') === '48px' && !hasClass(topbar, 'hidetopbar')) {
+        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
             }, 600)
         }
-        if (getstyle(topbar, 'height') === '96px' && !hasClass(topbar, 'hidetopbar')) {
+        if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
             }, 600)
@@ -130,7 +130,7 @@ function hidesidetoc() {
     adclass(sidetoccontainer, 'tochide')
     rmclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '0%'
-    if (getClientW() < 700) {
+    if (getclientw() < 700) {
         md.style.filter = ''
     }
 }
@@ -139,7 +139,7 @@ function showsidetoc() {
     rmclass(sidetoccontainer, 'tochide')
     adclass(sidetoccontainer, 'tocshow')
     scriptsearcher.style.left = '-23%'
-    if (getClientW() < 700) {
+    if (getclientw() < 700) {
         md.style.filter = 'blur(2px)'
     }
 }
@@ -151,7 +151,7 @@ function searchscript(text) {
     searchtext = text
     if (text === '#l' || text === '#last') {
         $('html,body').animate({
-            scrollTop: $('#search-' + (searchcount - 1)).offset().top
+            scrollTop: $('#search-' + (searchcount - 1)).offset().top - 52
         }, 300);
         return
     }
@@ -160,7 +160,7 @@ function searchscript(text) {
         let search = $(searchid)
         if (search[0] !== undefined) {
             $('html,body').animate({
-                scrollTop: search.offset().top
+                scrollTop: search.offset().top - 52
             }, 300);
             return
         }
@@ -281,7 +281,7 @@ function postsmetadatahandle(postmetadata) {
             noa.target = '_blank'
             noa.innerText = postcache.categories[i]
             $(noa).bind('click', function(event) {
-                if (!hasClass(this, 'adisable')) {
+                if (!hasclass(this, 'adisable')) {
                     filter_posts_cache = new Array()
                     if (!this.asel) {
                         this.asel = true
@@ -563,22 +563,22 @@ function no_label(label) {
 }
 
 function hidetopbar() {
-    if (getClientW() > 700) {
+    if (getclientw() > 700) {
         adclass(topbar, 'hidetopbar')
         adclass(md, 'panelup')
     }
 }
 
 function showtopbar() {
-    if (getClientW() > 700) {
+    if (getclientw() > 700) {
         rmclass(topbar, 'hidetopbar')
         rmclass(md, 'panelup')
     }
 }
 
 function cgtopbut() {
-    if (hasClass(md, 'myshow')) {
-        if (hasClass(topbar, 'hidetopbar')) {
+    if (hasclass(md, 'myshow')) {
+        if (hasclass(topbar, 'hidetopbar')) {
             showtopbar()
         } else {
             hidetopbar()
@@ -639,9 +639,9 @@ function setimg() {
     let postimgs = $('.post img')
     postimgs.attr('title', 'click to focus')
     postimgs.bind('click', function() {
-        if (getClientW() > 700 && getClientH() > 700) {
-            let w = getClientW()
-            let h = getClientH()
+        if (getclientw() > 700 && getclienth() > 700) {
+            let w = getclientw()
+            let h = getclienth()
             let fixw = w * 0.85
             let fixh = h * 0.85
             let imgw = this.naturalWidth
@@ -656,8 +656,8 @@ function setimg() {
             $('#md').attr('style', 'filter:blur(2px);')
             let img = c('img')
             let curtain = c('div')
-            curtain.style.height = getClientH() + 'px'
-            curtain.style.width = getClientW() + 'px'
+            curtain.style.height = getclienth() + 'px'
+            curtain.style.width = getclientw() + 'px'
             adclass(curtain, 'curtain')
             img.src = this.src
             img.title = 'click to reduction'
@@ -701,7 +701,7 @@ function setarrow() {
     let arrows = $('.parrow h1, .parrow h2, .parrow h6, .parrow h3, .parrow h4, .parrow h5')
     $(window).scroll(function() {
         let stop = window.scrollY + 14
-        let sbotton = (window.scrollY + getClientH(0.4))
+        let sbotton = (window.scrollY + getclienth(0.4))
         for (let i = 0; i < arrows.length; i++) {
             let ofs = arrows[i].offsetTop
             if (ofs >= stop && ofs <= sbotton) {
@@ -736,7 +736,7 @@ function showseries(ps) {
     }
     $('#series').addClass('seriesshow')
     $('#series').bind('click', function(){
-        if (!hasClass(sb[0], 'seboxshow')) {
+        if (!hasclass(sb[0], 'seboxshow')) {
             adclass(sb[0], 'seboxshow')
         } else {
             rmclass(sb[0], 'seboxshow')

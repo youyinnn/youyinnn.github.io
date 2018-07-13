@@ -48,7 +48,7 @@ function bindev(obj, eventStr, callback) {
     参数2：类名
 */
 function adclass(obj, cn) {
-    if (!hasClass(obj, cn)) {
+    if (!hasclass(obj, cn)) {
         obj.className += ' ' + cn
     }
 }
@@ -67,7 +67,7 @@ function rmclass(obj, cn) {
     参数2：类名
 */
 function cgclass(obj, cn) {
-    if (hasClass(obj, cn)) {
+    if (hasclass(obj, cn)) {
         rmclass(obj, cn)
     } else {
         adclass(obj, cn)
@@ -78,7 +78,7 @@ function cgclass(obj, cn) {
       参数1：元素
       参数2：类名
   */
-function hasClass(obj, cn) {
+function hasclass(obj, cn) {
     var rgx = new RegExp('\\b' + cn + '\\b')
     return rgx.test(obj.className)
 }
@@ -101,7 +101,7 @@ function rmlastc(parent) {
     parent.removeChild(parent.lastChild)
 }
 
-function strMapToObj(strMap) {
+function strmaptoobj(strMap) {
     let obj = Object.create(null)
     for (let [k, v] of strMap) {
         // We don’t escape the key '__proto__'
@@ -111,7 +111,7 @@ function strMapToObj(strMap) {
     return obj
 }
 
-function objToStrMap(obj) {
+function objtostrmap(obj) {
     let strMap = new Map()
     for (let k of Object.keys(obj)) {
         strMap.set(k, obj[k])
@@ -119,15 +119,15 @@ function objToStrMap(obj) {
     return strMap
 }
 
-function strMapToJson(strMap) {
-    return JSON.stringify(strMapToObj(strMap))
+function strmaptojson(strMap) {
+    return JSON.stringify(strmaptoobj(strMap))
 }
 
-function jsonToStrMap(jsonStr) {
-    return objToStrMap(JSON.parse(jsonStr))
+function jsontostrmap(jsonStr) {
+    return objtostrmap(JSON.parse(jsonStr))
 }
 
-function getClientW(zoom) {
+function getclientw(zoom) {
     let w = document.documentElement.clientWidth
     if (zoom === null || zoom === undefined) {
         return w
@@ -136,7 +136,7 @@ function getClientW(zoom) {
     }
 }
 
-function getClientH(zoom) {
+function getclienth(zoom) {
     let h = document.documentElement.clientHeight
     if (zoom === null || zoom === undefined) {
         return h
@@ -145,7 +145,7 @@ function getClientH(zoom) {
     }
 }
 
-function getWindowH(zoom) {
+function getwindowh(zoom) {
     let h = window.innerHeight
     if (zoom === null || zoom === undefined) {
         return h
@@ -154,7 +154,7 @@ function getWindowH(zoom) {
     }
 }
 
-function getWindowW(zoom) {
+function getwindoww(zoom) {
     let w = window.innerWidth
     if (zoom === null || zoom === undefined) {
         return w
@@ -163,7 +163,7 @@ function getWindowW(zoom) {
     }
 }
 
-function RandomNumBoth(Min, Max) {
+function randomnumboth(Min, Max) {
     var Range = Max - Min;
     var Rand = Math.random();
     var num = Min + Math.round(Rand * Range); //四舍五入

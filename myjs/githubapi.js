@@ -60,7 +60,7 @@ function get_posts() {
             for (let i = 0; i < stgcs.length; i++) {
                 $(stgcs[i]).bind('click', function(event) {
                     filter_posts_cache = new Array()
-                    if (hasClass(this, 'btn-light')) {
+                    if (hasclass(this, 'btn-light')) {
                         stgts.attr('disabled', true)
                         stgcs.attr('disabled', true)
                         rmclass(this, 'btn-light')
@@ -85,7 +85,7 @@ function get_posts() {
             for (let i = 0; i < stgts.length; i++) {
                 $(stgts[i]).bind('click', function(event) {
                     filter_posts_cache = new Array()
-                    if (hasClass(this, 'btn-light')) {
+                    if (hasclass(this, 'btn-light')) {
                         stgts.attr('disabled', true)
                         stgcs.attr('disabled', true)
                         $('.treenode a').addClass('adisable')
@@ -204,7 +204,7 @@ function get_resume() {
             setcoll()
             hidetopbar()
             showbbt()
-            if (getClientW() > 700) {
+            if (getclientw() > 700) {
                 setTimeout(() => {
                     $('#gohub').tooltip('show')
                     $('#hb').tooltip('show')
