@@ -71,13 +71,13 @@ function showhexometadata(hexometadata) {
     if (hexometadata.categories !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Categories:</span><br>'
         for (let i = 0; i < hexometadata.categories.length; i++) {
-            metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-info">' + hexometadata.categories[i] + '</span><br>'
+            metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-dark">' + hexometadata.categories[i] + '</span><br>'
         }
     }
     if (hexometadata.tags !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Tags:</span><br>'
         for (let i = 0; i < hexometadata.tags.length; i++) {
-            metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-info">' + hexometadata.tags[i] + '</span><br>'
+            metadatapanelbody.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<span class="badge badge-dark">' + hexometadata.tags[i] + '</span><br>'
         }
     }
     appendc(md, metadatapanel)

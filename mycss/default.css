@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   transition: all .5s;
-  font-family: 微软雅黑 !important;
+  /* font-family: 微软雅黑 !important; */
 }
 
 body {
@@ -81,10 +81,10 @@ td.hljs-ln-numbers {
   -ms-user-select: none !important;
   user-select: none !important;
   text-align: center !important;
-  border-right: 1px solid #CCC !important;
   padding-right: 10px !important;
   /* your custom style here */
-  color: #212529 !important;
+  color: #66686b !important;
+  font-family: Roboto Mono, Source Sans Pro, Monaco, courier, monospace !important;
 }
 
 /* for block of code */
@@ -99,4 +99,18 @@ td.hljs-ln-code {
 
 .hljs-ln span {
   margin: 0 !important;
+}
+
+.editormd-html-preview blockquote, 
+.editormd-preview-container blockquote{
+  padding-left: initial !important;
+  padding: 13px !important;
+  border-left-color: #66c77d !important;
+  background-color: ghostwhite;
+}
+
+.myshow.post .card,
+.myshow.post .card-head,
+.myshow.post .card-body{
+  border-radius: initial !important;
 }
