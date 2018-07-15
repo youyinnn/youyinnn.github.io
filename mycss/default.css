@@ -104,7 +104,8 @@ td.hljs-ln-code {
 .editormd-html-preview blockquote, 
 .editormd-preview-container blockquote{
   padding-left: initial !important;
-  padding: 13px !important;
+  padding: 20px !important;
+  font-size: 15px !important;
   border-left-color: #66c77d !important;
   background-color: ghostwhite;
 }
