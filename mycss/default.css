@@ -115,3 +115,7 @@ td.hljs-ln-code {
 .myshow.post .card-body{
   border-radius: initial !important;
 }
+
+.md{
+  overflow: hidden;
+}
