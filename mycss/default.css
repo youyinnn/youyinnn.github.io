@@ -6,6 +6,25 @@
   --yfont-minor-color: #9e9e9e;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(216, 221, 228, 0.3);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #76808e;
+}
+
+*::-webkit-scrollbar-thumb:window-inactive {
+  background: #d8dde4;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,11 +39,11 @@ body {
         但是会影响部分部件的缩放
     */
   /* transform: translate3d(0, 0, 0); */
-  transform: translate(0, 0);
+  /* transform: translate(0, 0); */
   backface-visibility: hidden;
-  transform-style: preserve-3d;
-  perspective: 1000;
-  display: inline;
+  /* transform-style: preserve-3d;
+  perspective: 1000; */
+  /* display: inline; */
 }
 
 pre {
@@ -93,7 +112,7 @@ td.hljs-ln-code {
   padding-left: 10px !important;
 }
 
-.hljs-ln > tbody > tr:last-child {
+.hljs-ln>tbody>tr:last-child {
   display: none;
 }
 
@@ -101,8 +120,8 @@ td.hljs-ln-code {
   margin: 0 !important;
 }
 
-.editormd-html-preview blockquote, 
-.editormd-preview-container blockquote{
+.editormd-html-preview blockquote,
+.editormd-preview-container blockquote {
   padding-left: initial !important;
   padding: 20px !important;
   font-size: 15px !important;
@@ -112,10 +131,10 @@ td.hljs-ln-code {
 
 .myshow.post .card,
 .myshow.post .card-head,
-.myshow.post .card-body{
+.myshow.post .card-body {
   border-radius: initial !important;
 }
 
-.md{
+.md {
   overflow: hidden;
 }

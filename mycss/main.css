@@ -816,7 +816,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  height: 130px;
+  height: 132px;
   width: 35px;
   line-height: 32px;
   word-wrap: break-word;
@@ -856,7 +856,7 @@
   bottom: 0;
   background-color: #1d2124;
   z-index: 888;
-  height: 130px;
+  height: 132px;
   overflow: auto;
   transform: scaleX(0);
   transform-origin: 0 100% 0;
