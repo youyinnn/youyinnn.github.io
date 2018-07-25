@@ -875,7 +875,7 @@
   text-decoration: none;
   background-color: var(--ymain-color);
   padding: 4px 8px;
-  border-bottom: 1px solid;
+  height: 25%;
 }
 
 #seriesbox a:hover{
