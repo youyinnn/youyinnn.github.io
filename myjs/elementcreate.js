@@ -85,7 +85,7 @@ function showhexometadata(hexometadata) {
 
 function showsaying(saying) {
     let sayingpanel = c('div')
-    adclass(sayingpanel, 'saying')
+    adclass(sayingpanel, 'saying mb-4')
     sayingpanel.innerHTML = saying
     appendc(md, sayingpanel)
 }
