@@ -141,6 +141,7 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
+            $('body').css('background-color', '#e5e5e5')
             adclass(md, 'parrow')
             setarrow()
             hidetopbar()
@@ -165,15 +166,15 @@ function get_post(number) {
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {
             let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
-            sendget(urlhandle(url3), function (re) {
+            sendget(urlhandle(url3), function(re) {
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
                     let ses = yaml.load(re[1].body)
                     let ps
-                    for (let i = 0; i < ses.length ; i++) {
-                         if (ses[i].se === psname) {
-                             ps = ses[i].ps
-                             showseries(ps)
-                         }
+                    for (let i = 0; i < ses.length; i++) {
+                        if (ses[i].se === psname) {
+                            ps = ses[i].ps
+                            showseries(ps)
+                        }
                     }
                 }, 100 * 1000)
             }, timeoutfunc)
@@ -330,11 +331,11 @@ function syncatesToconfig() {
             newmsg = yaml.dump(newmsg)
             let yamlobj = yaml.load(newmsg)
             let series = new Array()
-            for (let i = 0 ; i < yamlobj.length ; i++) {
+            for (let i = 0; i < yamlobj.length; i++) {
                 let pseriesname = yamlobj[i].series
                 if (pseriesname !== undefined) {
                     let pseries
-                    for (let j = 0; j < series.length ; j++) {
+                    for (let j = 0; j < series.length; j++) {
                         if (series[j].se === pseriesname)
                             pseries = series[j].ps
                     }

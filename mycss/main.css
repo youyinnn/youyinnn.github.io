@@ -190,6 +190,7 @@
   transition: transform 1.5s;
   margin: auto;
   font-size: 16px;
+  box-shadow: 7px 0px 29px -6px #777;
 }
 
 #hold {
@@ -664,7 +665,7 @@
 }
 
 .hidetopbar {
-  background-color: white !important;
+  background-color: #e5e5e5 !important;
   width: 3rem !important;
 }
 
