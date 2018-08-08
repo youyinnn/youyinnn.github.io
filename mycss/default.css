@@ -6,6 +6,19 @@
   --yfont-minor-color: #9e9e9e;
 }
 
+*::selection {
+  background: #6c757d;
+  color: #f8f8f8;
+}
+*::-moz-selection {
+  background: #6c757d;
+  color: #f8f8f8;
+}
+*::-webkit-selection {
+  background: #6c757d;
+  color: #f8f8f8;
+}
+
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
