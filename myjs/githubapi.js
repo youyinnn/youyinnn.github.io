@@ -141,7 +141,6 @@ function get_post(number) {
             }
             hideloading()
             render_md(text)
-            $('body').css('background-color', '#e5e5e5')
             adclass(md, 'parrow')
             setarrow()
             hidetopbar()

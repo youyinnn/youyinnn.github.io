@@ -665,7 +665,7 @@
 }
 
 .hidetopbar {
-  background-color: #e5e5e5 !important;
+  background-color: #fff !important;
   width: 3rem !important;
 }
 
@@ -886,4 +886,17 @@
 .adis{
   background-color: #6c757d !important;
   cursor: default;
+}
+
+.card-header:first-child {
+  border-radius: initial !important;
+}
+
+.card-header {
+  padding: .2rem 1rem !important;
+  font-size: 13px !important;
+}
+
+.card-body {
+  padding: 0 .8rem !important;
 }
