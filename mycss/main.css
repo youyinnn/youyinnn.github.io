@@ -529,6 +529,7 @@
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
+  bottom: 1rem;
 }
 
 .pagebox {
