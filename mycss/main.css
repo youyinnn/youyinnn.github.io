@@ -125,11 +125,11 @@
 #sidetoc a {
   position: relative;
   display: block;
-  padding: 0.4em 0.4em 0.4em 2.2em;
+  padding: 0.4em 0.4em 0.4em 2.5em;
   /*for ie6/7*/
   *padding: 0.4em;
   margin: 0.5em 0;
-  background: #ddd;
+  /* background: #ddd; */
   /*CSS3属性*/
   text-decoration: none;
   transition: all 0.3s ease-out;
@@ -154,7 +154,6 @@
   background: var(--ymain-color);
   width: 2.2em;
   line-height: 2em;
-  border: 0.2em solid #fff;
   text-align: center;
   font-weight: bold;
   transition: all 0.3s ease-out;
@@ -723,7 +722,6 @@
   user-select: none;
   background-color: rgb(63, 71, 78);
   color: white;
-  border-radius: .6rem;
   font-weight: 400;
 }
 
@@ -743,7 +741,6 @@
   user-select: none;
   background-color: rgb(63, 71, 78);
   color: white;
-  border-radius: .6rem;
   font-weight: 400;
 }
 
