@@ -53,7 +53,16 @@ function render_md(text) {
             text = text.replace(gif, gifbut)
         });
     }
-
+    let katexmds = text.match(/\$\$.*\$\$/g)
+    if (katexmds !== null) {
+        katexmds.forEach(ktmd => {
+            let kt =  ktmd.replace(/\$\$/gm, '')
+            let kthtml = katex.renderToString(kt, {
+                throwOnError: false
+            })
+            text = text.replace(ktmd, kthtml)
+        })
+    }
     text = text.replace('<acob/>', '<span id="acob">全部展开</span>')
     editormd.markdownToHTML('md', {
         markdown: text,
@@ -61,7 +70,7 @@ function render_md(text) {
         tocm: true, // Using [TOCM]
         tocContainer: '#sidetoc',
         taskList: true,
-        tex: true, // 默认不解析
+        // tex: true, // 默认不解析
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
     });
@@ -108,6 +117,7 @@ function render_md(text) {
     })
     $('.postcard.onepost').animateCss('flipInX')
     $('.metadata').animateCss('flipInX')
+    $('.katex').parent().addClass('katexp')
     adclass(md, 'post')
     setimg()
 }

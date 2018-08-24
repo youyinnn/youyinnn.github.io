@@ -274,11 +274,11 @@
   transform: scale3d(1, 1, 1) translateX(-50%);
 }
 
-.post span {
+/* .post span {
   margin: 0 1px;
   font-size: 0.9rem;
   display: inline-block;
-}
+} */
 
 .onepost {
   width: 100%;
@@ -515,7 +515,7 @@
 }
 
 #showmore:hover {
-  transform: translateX(1rem);
+  font-size: 1.23rem;
 }
 
 #showmore:active {
@@ -798,6 +798,7 @@
   font-weight: bold;
   transition: all .4s;
   transform: scale(1.6);
+  opacity: 0;
 }
 
 .showarrow {
@@ -805,7 +806,8 @@
 }
 
 .showarrow a:before {
-  left: -1.5rem !important;
+  opacity: 1 !important;
+  left: -1.8rem !important;
 }
 
 #series{
@@ -897,4 +899,16 @@
 
 .card-body {
   padding: 0 .8rem !important;
+}
+
+.katexp{
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: .5rem;
+  font-size: 15px;
+  border-right: 4px solid #80caff;
+}
+
+.katexp:hover{
+  box-shadow: 0px 5px 10px -2px #777;
 }
