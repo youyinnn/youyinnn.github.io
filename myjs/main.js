@@ -18,7 +18,7 @@ function render_md(text) {
     let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
     if (emojis !== null) {
         emojis.forEach(emoji => {
-            text = text.replace(emoji, '<i class="em-svg em-' + emoji.substring(1, emoji.length - 1) + '"></i>')
+            text = text.replace(emoji, window.emoji.replace_colons(emoji))
         });
     }
     if (cq) {
