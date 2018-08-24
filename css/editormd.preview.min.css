@@ -2588,7 +2588,7 @@ li.L8 {
 }
 
 .markdown-body pre {
-  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font: 14px Consolas, "Liberation Mono", Menlo, Courier, monospace;
   word-wrap: normal
 }
 
@@ -2850,7 +2850,7 @@ li.L8 {
 .markdown-body pre {
   padding: 16px;
   overflow: auto;
-  font-size: 98%;
+  /* font-size: 98%; */
   /* background-color: #f7f7f7; */
   border-radius: 3px
 }

@@ -51,7 +51,7 @@
   color: rgb(54, 54, 54);
 }
 
-.adisable{
+.adisable {
   cursor: default;
   color: rgb(187, 187, 187) !important;
 }
@@ -60,7 +60,7 @@
   text-decoration: none !important;
 }
 
-#categories{
+#categories {
   display: none;
 }
 
@@ -288,8 +288,11 @@
 }
 
 .onepost>.posttitle {
-  font-size: 1.3rem;
-  font-weight: bold;
+  /* font-size: 1.3rem;
+  font-weight: bold; */
+  font-size: 2.3rem;
+  font-weight: 100;
+  padding: 1rem;
 }
 
 .onepost>.posttitle:active {
@@ -810,7 +813,7 @@
   left: -1.8rem !important;
 }
 
-#series{
+#series {
   text-align: center;
   position: fixed;
   margin: auto;
@@ -828,27 +831,27 @@
   cursor: pointer;
 }
 
-#series:hover{
+#series:hover {
   background-color: var(--yminor-color);
 }
 
-#series:active{
+#series:active {
   background-color: var(--ymain-color);
 }
 
-.seriesshow{
+.seriesshow {
   transform: translateX(0px) !important;
 }
 
-#series button{
+#series button {
   border-radius: 0;
 }
 
-#series span{
+#series span {
   display: block;
 }
 
-#seriesbox{
+#seriesbox {
   text-align: center;
   position: fixed;
   margin: auto;
@@ -865,12 +868,12 @@
   opacity: 0;
 }
 
-.seboxshow{
+.seboxshow {
   opacity: 1 !important;
   transform: scaleX(1) !important;
 }
 
-#seriesbox a{
+#seriesbox a {
   display: block;
   color: white;
   text-decoration: none;
@@ -879,11 +882,11 @@
   height: 25%;
 }
 
-#seriesbox a:hover{
+#seriesbox a:hover {
   background-color: var(--yminor-color);
 }
 
-.adis{
+.adis {
   background-color: #6c757d !important;
   cursor: default;
 }
@@ -901,7 +904,7 @@
   padding: 0 .8rem !important;
 }
 
-.katexp{
+.katexp {
   text-align: center;
   background-color: #f8f9fa;
   padding: .5rem;
@@ -909,6 +912,6 @@
   border-right: 4px solid #80caff;
 }
 
-.katexp:hover{
+.katexp:hover {
   box-shadow: 0px 5px 10px -2px #777;
 }

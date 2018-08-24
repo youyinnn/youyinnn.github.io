@@ -30,12 +30,12 @@ function createposthead(re) {
     adclass(postcard, 'postcard onepost')
     adclass(posttitle, 'posttitle')
     adclass(posttime, 'posttime')
-    adclass(sp1, 'font-weight-bold')
-    adclass(sp3, 'font-weight-bold')
-    sp1.innerHTML = 'PostTime:'
-    sp2.innerHTML = dayjs(re.created_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.created_at))
-    sp3.innerHTML = 'LastModTime:'
-    sp4.innerHTML = dayjs(re.updated_at).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(re.updated_at))
+    adclass(sp1, 'font-weight-bold mr-2')
+    adclass(sp3, 'font-weight-bold mr-2')
+    sp1.innerHTML = 'Post:'
+    sp2.innerHTML = dayjs(re.created_at).format('MMM,DD YYYY') + daybefore(dayjs(re.created_at))
+    sp3.innerHTML = '<br>Mod:'
+    sp4.innerHTML = dayjs(re.updated_at).format('MMM,DD YYYY') + daybefore(dayjs(re.updated_at))
     posttitle.innerHTML = title
     appendc(posttime, sp1)
     appendc(posttime, sp2)
@@ -60,10 +60,10 @@ function showhexometadata(hexometadata) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Title:</span> ' + hexometadata.title + '<br>'
     }
     if (hexometadata.date !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8)) + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8).format('MMM,DD YYYY') + daybefore(dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8)) + '<br>'
     }
     if (hexometadata.updated !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8).format('YYYY MM-DD HH:mm:ss') + daybefore(dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8)) + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8).format('MMM,DD YYYY') + daybefore(dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8)) + '<br>'
     }
     if (hexometadata.comments !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Comments:</span> ' + hexometadata.comments + '<br>'
@@ -142,6 +142,6 @@ function searchshowandrendermd(fulltext, relength) {
 }
 
 function createpostcomment(i, comment) {
-    let commentCard = '<div class="card" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('YYYY MM-DD HH:mm:ss') + '</div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
+    let commentCard = '<div class="" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + '</div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
     return commentCard
 }

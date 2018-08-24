@@ -7,15 +7,15 @@
 }
 
 *::selection {
-  background: #6c757d;
+  background: #555;
   color: #f8f8f8;
 }
 *::-moz-selection {
-  background: #6c757d;
+  background: #555;
   color: #f8f8f8;
 }
 *::-webkit-selection {
-  background: #6c757d;
+  background: #555;
   color: #f8f8f8;
 }
 
@@ -115,6 +115,7 @@ td.hljs-ln-numbers {
   /* your custom style here */
   color: #66686b !important;
   font-family: Roboto Mono, Source Sans Pro, Monaco, courier, monospace !important;
+  width: 20px;
 }
 
 /* for block of code */
@@ -148,4 +149,20 @@ td.hljs-ln-code {
 
 .md {
   overflow: hidden;
+}
+
+.badge{
+  border-radius: initial !important;
+}
+
+x{
+  padding: 0 .5rem;
+}
+
+.markdown-body table{
+  display: table !important;
+}
+
+.hljs-ln{
+  display: block !important;
 }

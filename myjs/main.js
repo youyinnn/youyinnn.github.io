@@ -118,6 +118,14 @@ function render_md(text) {
     $('.postcard.onepost').animateCss('flipInX')
     $('.metadata').animateCss('flipInX')
     $('.katex').parent().addClass('katexp')
+    $('thead').each(function () {
+        let trs = $(this).next().find('tr')
+        let trl = $(trs[0]).find('td').length
+        let lasttr = $(trs[trs.length - 1])
+        if (lasttr.find('td').length !== trl) {
+            lasttr.append(c('td'))
+        }
+    })
     adclass(md, 'post')
     setimg()
 }
