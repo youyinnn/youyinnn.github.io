@@ -158,11 +158,3 @@ td.hljs-ln-code {
 x{
   padding: 0 .5rem;
 }
-
-.markdown-body table{
-  display: table !important;
-}
-
-.hljs-ln{
-  display: block !important;
-}

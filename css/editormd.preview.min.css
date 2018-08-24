@@ -2782,7 +2782,7 @@ li.L8 {
 .markdown-body table {
   border-collapse: collapse;
   border-spacing: 0;
-  display: block;
+  display: table;
   width: 100%;
   overflow: auto;
   word-break: normal;

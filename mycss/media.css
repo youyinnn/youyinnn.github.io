@@ -3,6 +3,9 @@
 */
 
 @media screen and (max-height: 375px) {
+  .markdown-body table {
+    display: block !important;
+  }
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
@@ -114,6 +117,9 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  .markdown-body table {
+    display: block !important;
+  }
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
@@ -331,6 +337,9 @@
 */
 
 @media screen and (max-width: 320px) {
+  .markdown-body table {
+    display: block !important;
+  }
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
