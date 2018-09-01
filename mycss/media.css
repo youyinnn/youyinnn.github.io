@@ -34,12 +34,7 @@
     z-index: 501 !important;
   }
   .tocshow {
-    width: 50%;
     opacity: 1;
-  }
-  .tochide {
-    width: 0%;
-    opacity: 0;
   }
   #bbt {
     right: 1rem;
@@ -191,6 +186,7 @@
     padding: 14rem 0 0 0;
   }
   #sidetoccontainer {
+    width: 100%;
     z-index: 203 !important;
   }
   #sidetoc {
@@ -199,14 +195,6 @@
   }
   #sidetoc ul {
     margin-bottom: 0;
-  }
-  .tocshow {
-    width: 100% !important;
-    opacity: 1;
-  }
-  .tochide {
-    width: 0% !important;
-    opacity: 0;
   }
   #topbar {
     height: 6rem;
@@ -247,6 +235,7 @@
   #nocomment {
     font-size: 1rem !important;
     line-height: 2.2rem !important;
+    margin-bottom: 2rem !important;
   }
   #docpanel {
     top: 6rem;
