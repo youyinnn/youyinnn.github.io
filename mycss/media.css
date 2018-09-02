@@ -3,6 +3,10 @@
 */
 
 @media screen and (max-height: 375px) {
+  /* #hacknical_hide,
+  #showhacknical{
+    display: none !important;
+  } */
   .markdown-body table {
     display: block !important;
   }
@@ -116,6 +120,10 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  /* #hacknical_hide,
+  #showhacknical{
+    display: none !important;
+  } */
   .markdown-body table {
     display: block !important;
   }
@@ -334,6 +342,10 @@
 */
 
 @media screen and (max-width: 320px) {
+  /* #hacknical_hide,
+  #showhacknical{
+    display: none !important;
+  } */
   .markdown-body table {
     display: block !important;
   }

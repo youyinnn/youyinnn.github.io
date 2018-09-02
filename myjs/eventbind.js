@@ -21,12 +21,16 @@ $(function() {
         location = '/' + '?to=about'
     })
     $('#showhacknical').bind('click', function() {
-        $('#hacknical_github_analysis').removeClass('hacknical_hide')
+        if (window.navigator.userAgent.toLowerCase().indexOf('iphone') > -1) {
+            // $('#hacknical_github_analysis').attr('scrolling', 'no')
+        }
+        $('#hacknical_github_analysis').attr('src', 'https://hacknical.com/youyinnn/github?locale=zh')
+        $('#ifwrapper').removeClass('hacknical_hide')
         $('#gohub').text('Hide HackNical')
         let oldhref = $('#gohub').attr('href')
         $('#gohub').attr('href', 'javascript:void(0);')
         $('#gohub').click(function () {
-            $('#hacknical_github_analysis').addClass('hacknical_hide')
+            $('#ifwrapper').addClass('hacknical_hide')
             $('#gohub').text('My Hub')
             setTimeout(function () {
                 $('#gohub').attr('href', oldhref)
