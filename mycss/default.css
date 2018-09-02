@@ -54,7 +54,7 @@ body {
   backface-visibility: hidden;
   /* transform-style: preserve-3d;
   perspective: 1000; */
-  /* display: inline; */
+  display: inline;
 }
 
 pre {
