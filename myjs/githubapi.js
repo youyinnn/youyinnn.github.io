@@ -205,11 +205,11 @@ function get_resume() {
             hidetopbar()
             showbbt()
             if (getclientw() > 700) {
-                setTimeout(() => {
+                setTimeout(function () {
                     $('#gohub').tooltip('show')
                     $('#hb').tooltip('show')
                 }, 1000);
-                setTimeout(() => {
+                setTimeout(function () {
                     $('#gohub').tooltip('hide')
                     $('#hb').tooltip('hide')
                 }, 3500);
@@ -292,20 +292,20 @@ function syncatesToconfig() {
         $('#cates_tree_head').css('background-color', '#828f9c')
         $('#cates_tree_head').css('color', '#343a40')
         $('#cates_tree_head')[0].innerText = 'Sync started.'
-        setTimeout(() => {
+        setTimeout(function () {
             $('#cates_tree_head')[0].innerText += '.'
         }, 1300);
-        setTimeout(() => {
+        setTimeout(function () {
             $('#cates_tree_head')[0].innerText += '.'
         }, 2200);
         search_issues_by_label(post_label, function(re) {
             $('#cates_tree_head').css('background-color', 'rgb(179, 188, 187)')
             $('#cates_tree_head').css('color', '#828f9c')
             $('#cates_tree_head')[0].innerText = 'Fetching.'
-            setTimeout(() => {
+            setTimeout(function () {
                 $('#cates_tree_head')[0].innerText += '.'
             }, 1060);
-            setTimeout(() => {
+            setTimeout(function () {
                 $('#cates_tree_head')[0].innerText += '.'
             }, 2100);
             let newmsg = new Array()
@@ -355,10 +355,10 @@ function syncatesToconfig() {
                 $('#cates_tree_head').css('background-color', 'rgb(87, 101, 100)')
                 $('#cates_tree_head').css('color', 'rgb(179, 188, 187)')
                 $('#cates_tree_head')[0].innerText = 'Syncing.'
-                setTimeout(() => {
+                setTimeout(function () {
                     $('#cates_tree_head')[0].innerText += '.'
                 }, 1050);
-                setTimeout(() => {
+                setTimeout(function () {
                     $('#cates_tree_head')[0].innerText += '.'
                 }, 2080);
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
@@ -372,7 +372,7 @@ function syncatesToconfig() {
                             $('#cates_tree_head').css('background-color', '#343a40')
                             $('#cates_tree_head').css('color', 'white')
                             $('#cates_tree_head')[0].innerText = 'done!'
-                            setTimeout(() => {
+                            setTimeout(function () {
                                 $('#cates_tree_head')[0].innerText = 'Refresh the page.'
                             }, 2000);
                             postsync = true

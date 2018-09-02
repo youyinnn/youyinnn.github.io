@@ -29,6 +29,10 @@
     top: 12rem;
     font-size: 1rem;
   }
+  #showhacknical {
+    top: 14rem;
+    font-size: 1rem;
+  }
   #sidetoccontainer {
     width: 50%;
     z-index: 501 !important;
@@ -314,6 +318,10 @@
   }
   #showmore {
     top: 13rem;
+    font-size: 1rem;
+  }
+  #showhacknical {
+    top: 15rem;
     font-size: 1rem;
   }
   #hb {

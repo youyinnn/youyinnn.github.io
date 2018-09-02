@@ -1,3 +1,34 @@
+#hacknical_github_analysis{
+  width: 98%;
+  height: 98%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  position: absolute;
+  z-index: 998;
+}
+
+#showhacknical{
+  cursor: pointer;
+  position: absolute;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.2rem;
+  width: 23rem;
+  top: 27rem;
+  transition: all .4s;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.hacknical_hide{
+  opacity: 0;
+  z-index: -1 !important;
+}
+
 #topbar {
   position: fixed;
   z-index: 202;
@@ -434,6 +465,10 @@
   height: 2.375rem;
 }
 
+#bbt a{
+  float: left;
+}
+
 #gohub {
   background-color: var(--ymain-color);
   padding: 0 0.5rem;
@@ -510,18 +545,20 @@
   line-height: 3rem;
   font-size: 1.2rem;
   width: 23rem;
-  top: 26rem;
+  top: 25rem;
   transition: all .4s;
   margin: auto;
   left: 0;
   right: 0;
 }
 
-#showmore:hover {
+#showmore:hover,
+#showhacknical:hover {
   font-size: 1.23rem;
 }
 
-#showmore:active {
+#showmore:active,
+#showhacknical:active {
   transform: translateY(4px);
 }
 

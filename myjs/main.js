@@ -363,7 +363,7 @@ function filter() {
     nowpage = 1
     $('#pgboxbox').addClass('myhide')
     $('.pagination').addClass('myhide')
-    setTimeout(() => {
+    setTimeout(function () {
         $('#pgboxbox').remove()
         $('.pagination').remove()
         if (filter_posts_cache.length === 0) {
@@ -393,7 +393,7 @@ function rstopaging(posts) {
         createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
     }
     window.totalpages = totalpages
-    setTimeout(() => {
+    setTimeout(function () {
         rmclass(pageboxbox, 'myhide')
     }, 100);
     pagination()
@@ -541,7 +541,7 @@ function pagination() {
     })
     $('#pgboxbox')[0].style.height = getstyle($('#pagebox-1')[0], 'height')
     appendc(docpanel, pn)
-    setTimeout(() => {
+    setTimeout(function () {
         rmclass(pn, 'myhide')        
     }, 100);
 }
@@ -611,10 +611,10 @@ function setcoll() {
             $('#toc')[0].style.display = 'inline-block'
             this.innerText = '全部隐藏'
             $('#toc').removeClass('myhide')
-            setTimeout(() => {
+            setTimeout(function () {
                 $('#toc').tooltip('show')
             }, 600);
-            setTimeout(() => {
+            setTimeout(function () {
                 $('#toc').tooltip('hide')
             }, 3000);
             collbuts.each(function() {
@@ -686,12 +686,12 @@ function setimg() {
             adclass(img, 'imglg')
             appendc(curtain, img)
             appendc($('body')[0], curtain)
-            setTimeout(() => {
+            setTimeout(function () {
                 img.style.opacity = 1
             }, 100);
             $(curtain).bind('click', function() {
                 img.style.opacity = 0
-                setTimeout(() => {
+                setTimeout(function () {
                     $('.curtain').remove()
                     $('#md').attr('style', '')
                 }, 300);

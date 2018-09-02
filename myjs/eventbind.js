@@ -20,6 +20,19 @@ $(function() {
     $('#showmore').bind('click', function() {
         location = '/' + '?to=about'
     })
+    $('#showhacknical').bind('click', function() {
+        $('#hacknical_github_analysis').removeClass('hacknical_hide')
+        $('#gohub').text('Hide HackNical')
+        let oldhref = $('#gohub').attr('href')
+        $('#gohub').attr('href', 'javascript:void(0);')
+        $('#gohub').click(function () {
+            $('#hacknical_github_analysis').addClass('hacknical_hide')
+            $('#gohub').text('My Hub')
+            setTimeout(function () {
+                $('#gohub').attr('href', oldhref)
+            }, 100);
+        })
+    })
     $('#searchbut').bind('click', function() {
         searchscript($('#searchtext')[0].value)
     })
