@@ -412,12 +412,6 @@
   z-index: -1 !important;
 }
 
-html,
-body {
-  width: 100% !important;
-  height: 100% !important;
-}
-
 #ifwrapper {
   z-index: 998;
   overflow: hidden;

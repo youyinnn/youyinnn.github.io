@@ -21,15 +21,17 @@ $(function() {
         location = '/' + '?to=about'
     })
     $('#showhacknical').bind('click', function() {
-        $('#hacknical_github_analysis').attr('src', 'https://hacknical.com/youyinnn/github?locale=zh')
+        if ($('#hacknical_github_analysis').attr('src') === undefined) {
+            $('#hacknical_github_analysis').attr('src', 'https://hacknical.com/youyinnn/github?locale=zh')
+        }
         $('#ifwrapper').removeClass('hacknical_hide')
         $('#gohub').text('Hide HackNical')
         let oldhref = $('#gohub').attr('href')
         $('#gohub').attr('href', 'javascript:void(0);')
-        $('#gohub').click(function () {
+        $('#gohub').click(function() {
             $('#ifwrapper').addClass('hacknical_hide')
             $('#gohub').text('My Hub')
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#gohub').attr('href', oldhref)
             }, 100);
         })
@@ -50,6 +52,13 @@ $(function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {
             showsidetoc()
         } else {
+            hidesidetoc()
+        }
+    })
+    $('*').bind('click', function() {
+        if (this.id === 'toc' || this.id === 'sidetoc') {
+            return false
+        } else if (!$('#sidetoccontainer').hasClass('tochide')) {
             hidesidetoc()
         }
     })

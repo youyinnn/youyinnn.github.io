@@ -20,8 +20,7 @@
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -43,7 +42,7 @@
   /* font-family: 微软雅黑 !important; */
 }
 
-body {
+body, html {
   /* overflow: hidden; */
   /* 
         开启硬件加速 解决动画卡顿 
@@ -54,7 +53,6 @@ body {
   backface-visibility: hidden;
   /* transform-style: preserve-3d;
   perspective: 1000; */
-  display: inline;
 }
 
 pre {

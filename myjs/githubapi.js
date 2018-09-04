@@ -127,6 +127,7 @@ function get_post(number) {
         let page = re.html_url
         setgohub('Go hub', page)
         createposthead(re)
+        changepagetitle(re.title)
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
