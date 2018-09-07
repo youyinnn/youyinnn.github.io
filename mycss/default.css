@@ -39,7 +39,11 @@
   margin: 0;
   padding: 0;
   transition: all .5s;
-  /* font-family: 微软雅黑 !important; */
+  /* font-family: 'trebuchet MS', 'Microsoft YaHei' !important; */
+}
+
+.new_font{
+  font-family: 'trebuchet MS', 'Microsoft YaHei' !important;
 }
 
 body, html {
