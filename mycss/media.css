@@ -3,95 +3,121 @@
 */
 
 @media screen and (max-height: 375px) {
+
   #ifwrapper,
-  #showhacknical{
+  #showhacknical {
     display: none !important;
   }
+
   .markdown-body table {
     display: block !important;
   }
+
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;
   }
-  .postcard{
+
+  .postcard {
     width: 24rem;
   }
+
   .con {
     column-count: 1;
   }
+
   #homepage {
     top: 0;
     line-height: 18.4rem;
     font-size: 3rem;
   }
+
   #loading {
     padding: 5.1rem 0 0 0;
   }
+
   #showmore {
     top: 12rem;
     font-size: 1rem;
   }
+
   #showhacknical {
     top: 14rem;
     font-size: 1rem;
   }
+
   #sidetoccontainer {
     width: 50%;
     z-index: 501 !important;
   }
+
   .tocshow {
     opacity: 1;
   }
+
   #bbt {
     right: 1rem;
   }
+
   #gohub:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #percent:hover {
     background-color: var(--ymain-color);
   }
+
   #percent:active {
     background-color: var(--yminor-color);
   }
+
   .pagination {
     bottom: 1rem;
     position: fixed;
-    right: 6rem;  
+    right: 6rem;
   }
+
   #nolabel {
     font-size: 1.5rem;
     margin-top: 9rem;
   }
+
   #md {
     padding: 0.5rem 1.5rem;
   }
+
   #hb {
     display: none;
   }
+
   .resume {
     font-size: 14px !important;
   }
+
   .resume blockquote>p {
     font-size: 14px !important;
   }
-  .pagebox{
+
+  .pagebox {
     margin-bottom: 3.5rem;
   }
-  #series{
+
+  #series {
     top: initial;
     width: initial;
     height: initial;
@@ -100,14 +126,17 @@
     left: 1rem;
     transform: scale(0);
   }
-  .seriesshow{
+
+  .seriesshow {
     transform: scale(1) !important;
   }
-  #series span{
+
+  #series span {
     display: inline;
     line-height: 2.375rem;
   }
-  #seriesbox{
+
+  #seriesbox {
     margin: initial !important;
     top: 3rem !important;
     bottom: initial !important;
@@ -120,33 +149,40 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+
   #ifwrapper,
-  #showhacknical{
+  #showhacknical {
     display: none !important;
   }
+
   .markdown-body table {
     display: block !important;
   }
+
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;
   }
-  #series{
+
+  #series {
     top: initial;
     width: initial;
     height: initial;
     padding: 0 .5rem;
     transform: scale(0);
   }
-  .seriesshow{
+
+  .seriesshow {
     transform: scale(1) !important;
   }
-  #series span{
+
+  #series span {
     display: inline;
     line-height: 2.375rem;
   }
-  #seriesbox{
+
+  #seriesbox {
     margin: initial !important;
     top: 6rem !important;
     bottom: initial !important;
@@ -155,83 +191,104 @@
     height: 40%;
     word-break: break-all;
   }
-  #cates_tree_panel{
+
+  #cates_tree_panel {
     display: none;
   }
-  #categories{
+
+  #categories {
     display: inherit;
   }
-  #docpanel{
+
+  #docpanel {
     width: 100%;
   }
+
   .resume {
     font-size: 14px !important;
   }
+
   .resume blockquote>p {
     font-size: 14px !important;
   }
+
   #hb {
     display: none;
   }
+
   #nolabel {
     font-size: 1rem;
     margin-top: 11rem;
   }
+
   .con {
     column-count: 1;
   }
+
   .postcard {
     width: 95%;
+    margin: 1rem auto 0;
+    padding: 10px;
   }
+
   .posttitle {
     width: 80%;
   }
-  .pagebox {
-    padding-bottom: 3rem;
-  }
+
   #homepage {
     top: 6rem;
     line-height: 20rem;
     font-size: 2rem;
   }
+
   #loading {
     padding: 14rem 0 0 0;
   }
+
   #sidetoccontainer {
     width: 100%;
     z-index: 203 !important;
   }
+
   #sidetoc {
     border-left: none;
     bottom: 2.35rem;
   }
+
   #sidetoc ul {
     margin-bottom: 0;
   }
+
   #topbar {
     height: 6rem;
   }
+
   #md {
     transform: translateY(6rem);
     width: 100%;
     padding: 0.5rem 1rem;
   }
+
   #scriptsearcher {
     bottom: 0rem;
     width: 67%;
     margin: 0;
     left: 0% !important;
   }
+
   .searchshow {
     opacity: 1 !important;
   }
+
   button,
   input {
     border-radius: 0 !important;
   }
+
   button {
     padding: 0.3rem !important;
   }
+
   #bbt {
     right: 0;
     bottom: 0;
@@ -241,46 +298,65 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
   #bbt:hover {
     border-radius: 0;
   }
+
   #nocomment {
     font-size: 1rem !important;
     line-height: 2.2rem !important;
     margin-bottom: 2rem !important;
   }
+
   #docpanel {
     top: 6rem;
   }
+
   .pagination {
     position: fixed;
-    background-color: white;
-    left: -1rem;
+    left: 0rem;
     right: 0;
-    width: 80%;
     bottom: 0;
     transform: none;
+    top: inherit !important;
+    margin: inherit;
+    z-index: 300;
   }
+
+  .postshortmsg {
+    height: 0;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin-bottom: 10px;
+  }
+
   #percent {
     width: 100%;
   }
+
   #gohub:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #percent:hover {
     background-color: var(--ymain-color);
   }
+
   #percent:active {
     background-color: var(--yminor-color);
   }
@@ -294,6 +370,7 @@
   #md {
     width: 100% !important;
   }
+
   #movetitle {
     width: 100% !important;
   }
@@ -307,6 +384,7 @@
   #homepage {
     font-size: 3rem;
   }
+
   #topbar {
     height: 6rem;
   }
@@ -321,17 +399,21 @@
     top: 6rem;
     font-size: 2rem;
   }
+
   #topbar {
     height: 6rem;
   }
+
   #showmore {
     top: 13rem;
     font-size: 1rem;
   }
+
   #showhacknical {
     top: 15rem;
     font-size: 1rem;
   }
+
   #hb {
     display: none;
   }
@@ -342,32 +424,40 @@
 */
 
 @media screen and (max-width: 320px) {
+
   #ifwrapper,
-  #showhacknical{
+  #showhacknical {
     display: none !important;
   }
+
   .markdown-body table {
     display: block !important;
   }
+
   .onepost>.posttitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;
   }
+
   #gohub:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:hover {
     background-color: var(--ymain-color);
   }
+
   #toc:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #gohub:active {
     transform: translateY(0.5rem);
     background-color: var(--yminor-color);
   }
+
   #hb {
     display: none;
   }

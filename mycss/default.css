@@ -59,6 +59,10 @@ body, html {
   perspective: 1000; */
 }
 
+html{
+  overflow-y: scroll;
+}
+
 pre {
   border: none !important;
   background-color: #f6f8fa !important;

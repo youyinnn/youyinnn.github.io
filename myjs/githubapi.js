@@ -326,6 +326,25 @@ function syncatesToconfig() {
                 metadata.number = rei.number
                 metadata.created_at = rei.created_at
                 metadata.updated_at = rei.updated_at
+                let body = getdocwithnohexofrontmatter(rei.body)
+                let short = body.split(/\r\n/, 20)
+                while (short[0] === '\r\n') {
+                    short.shift()
+                }
+                let shortcontant = ''
+                let codeparecount = 0
+                for (let j = 0; j < short.length; j++) {
+                    if (short[j].search('```') === 0) {
+                        codeparecount++
+                    }
+                    shortcontant += short[j]
+                    shortcontant += '\r\n'
+                }
+                if (codeparecount % 2 !== 0) {
+                    shortcontant += '```'
+                    shortcontant += '\r\n'
+                }
+                metadata.short_contant = shortcontant
                 newmsg.push(metadata)
             }
             newmsg = yaml.dump(newmsg)

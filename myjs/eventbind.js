@@ -94,7 +94,7 @@ $(function() {
         }
     })
     $(window).scroll(function() {
-        var scrollTo = $(window).scrollTop(),
+        let scrollTo = $(window).scrollTop(),
             docHeight = $(document).height(),
             windowHeight = $(window).height();
         scrollPercent = (parseInt((scrollTo / (docHeight - windowHeight)) * 100)) + ' %';
@@ -102,9 +102,7 @@ $(function() {
 
     })
     $('#percent').bind('click', function() {
-        $('html,body').animate({
-            scrollTop: 0
-        }, 300);
+        scrollToTop(500)
         searchone = 0
     })
     $('#searchtext').focus(function() {

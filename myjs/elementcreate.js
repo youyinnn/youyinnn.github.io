@@ -3,31 +3,83 @@ function createpostcard(item, pagebelong) {
     let posttitle = c('div')
     let posttime = c('div')
     let sp1 = c('span')
-    adclass(postcard, 'postcard center-to-head')
-    adclass(posttitle, 'posttitle font-weight-bold')
-    adclass(posttime, 'posttime')
+    let postshortmsg = c('div')
+    let postmore = c('a')
+    adclass(postcard, 'postcard')
+    adclass(posttitle, 'postcardtitle font-weight-bold')
+    adclass(posttime, 'postcardtime')
+    adclass(postshortmsg, 'postshortmsg')
+    adclass(postmore, 'postmore')
     posttitle.innerHTML = item.title
     posttitle.number = item.number
-    sp1.innerHTML = '# 发布 ' + daybefore(dayjs(item.created_at)) + ' | 更新' +  daybefore(dayjs(item.updated_at))
+    postcard.id = 'post_' + item.number
+    postshortmsg.id = 'post_short_msg_' + item.number
+    postmore.innerHTML = 'MORE_'
+    postmore.href = '/' + '?to=post&number=' + posttitle.number
+    sp1.innerHTML = '# 发布于 ' + daybefore(dayjs(item.created_at)) + ' | 更新于' + daybefore(dayjs(item.updated_at))
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(postcard, posttime)
+    appendc(postcard, postshortmsg)
+    appendc(postcard, postmore)
     appendc($('#pagebox-' + pagebelong)[0], postcard)
-    $(postcard).bind('click', function() {
-        location = '/' + '?to=post&number=' + posttitle.number
+    let text = item.short_contant
+    let cq = text.match(/{%.*cq.*%}/gm)
+    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
+    if (emojis !== null) {
+        emojis.forEach(emoji => {
+            text = text.replace(emoji, window.emoji.replace_colons(emoji))
+        });
+    }
+    if (cq) {
+        let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
+        saying = saying.replace(/\r\n/gm, '</br>')
+        text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
+        showsaying(postshortmsg, saying)
+    }
+    let gifs = text.match(/!\[.*\]\(.*.gif\)/g)
+    if (gifs !== null) {
+        gifs.forEach(gif => {
+            let gifalt = gif.match(/\[.*\]/g)
+            gifalt = gifalt[0].substring(1, gifalt[0].length - 1);
+            let giflk = gif.match(/\(.*\)/g)
+            giflk = giflk[0].substring(1, giflk[0].length - 1);
+            let gifbut = '<button class="gifbtn stgt btn btn-dark" show="no" lk="' + giflk + '">查看或隐藏' + gifalt + '.gif</button>'
+            text = text.replace(gif, gifbut)
+        });
+    }
+    let katexmds = text.match(/\$\$.*\$\$/g)
+    if (katexmds !== null) {
+        katexmds.forEach(ktmd => {
+            let kt =  ktmd.replace(/\$\$/gm, '')
+            let kthtml = katex.renderToString(kt, {
+                throwOnError: false
+            })
+            text = text.replace(ktmd, kthtml)
+        })
+    }
+    editormd.markdownToHTML(postshortmsg.id, {
+        markdown : text,
+        htmlDecode: 'style,script,iframe',
+        tocm: true, // Using [TOCM]
+        tocContainer: '#sidetoc',
+        taskList: true,
+        // tex: true, // 默认不解析
+        flowChart: true, // 默认不解析
+        sequenceDiagram: true, // 默认不解析
     })
 }
 
 function createposthead(re) {
     let title = re.title
-    let postcard = c('div')
+    let posthead = c('div')
     let posttitle = c('div')
     let posttime = c('div')
     let sp1 = c('span')
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
-    adclass(postcard, 'postcard onepost')
+    adclass(posthead, 'posthead onepost')
     adclass(posttitle, 'posttitle')
     adclass(posttime, 'posttime')
     adclass(sp1, 'font-weight-bold mr-2')
@@ -41,9 +93,9 @@ function createposthead(re) {
     appendc(posttime, sp2)
     appendc(posttime, sp3)
     appendc(posttime, sp4)
-    appendc(postcard, posttitle)
-    appendc(postcard, posttime)
-    appendc(md, postcard)
+    appendc(posthead, posttitle)
+    appendc(posthead, posttime)
+    appendc(md, posthead)
 }
 
 function showhexometadata(hexometadata) {
@@ -83,11 +135,11 @@ function showhexometadata(hexometadata) {
     appendc(md, metadatapanel)
 }
 
-function showsaying(saying) {
+function showsaying(addto, saying) {
     let sayingpanel = c('div')
     adclass(sayingpanel, 'saying mb-4')
     sayingpanel.innerHTML = saying
-    appendc(md, sayingpanel)
+    appendc(addto, sayingpanel)
 }
 
 function createtodo(issuesbody, re) {
@@ -113,7 +165,7 @@ function createscript(issuesbody, re) {
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY')  + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
     searchshowandrendermd(fulltext, re.length)
 }
@@ -142,6 +194,6 @@ function searchshowandrendermd(fulltext, relength) {
 }
 
 function createpostcomment(i, comment) {
-    let commentCard = '<div class="" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + '</div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
+    let commentCard = '<div class="" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + ' ' + (comment.author_association === 'NONE' ? '' : (' <span class="badge badge-light">' + comment.author_association + '</span>')) + ' </div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
     return commentCard
 }

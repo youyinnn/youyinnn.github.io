@@ -25,7 +25,7 @@ function render_md(text) {
         let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
         saying = saying.replace(/\r\n/gm, '</br>')
         text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
-        showsaying(saying)
+        showsaying(md, saying)
     }
     let cobs = text.match(/<cob.*\/>/g)
     if (cobs !== null) {
@@ -81,7 +81,7 @@ function render_md(text) {
     $('pre, pre code').each(function(i, block) {
         hljs.highlightBlock(block)
         hljs.lineNumbersBlock(block)
-    });
+    })
     $('.reference-link').each(function() {
         this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
     })
@@ -253,6 +253,16 @@ function gethexofrontmatter(text) {
     }
 }
 
+function getdocwithnohexofrontmatter(text) {
+    if (text.substring(0, 3) === '---') {
+        let endindex = text.indexOf('---', 3) + 3
+        let body = text.substring(endindex, text.length)
+        return body
+    } else {
+        return text
+    }
+}
+
 function searchpost(text) {
     if (text !== '') {
         if (filter_posts_cache.length === 0) {
@@ -361,7 +371,7 @@ function postsmetadatahandle(postmetadata) {
 
 function filter() {
     nowpage = 1
-    $('#pgboxbox').addClass('myhide')
+    $('#pgboxbox').addClass('pageboxhide')
     $('.pagination').addClass('myhide')
     setTimeout(function () {
         $('#pgboxbox').remove()
@@ -392,6 +402,29 @@ function rstopaging(posts) {
     for (let i = 0; i < posts.length; ++i) {
         createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
     }
+    let as = $('.postshortmsg a')
+    for (let i = 0; i < as.length; i++) {
+        as[i].target = '_blank'
+    }
+    $('pre, pre code').each(function(i, block) {
+        hljs.highlightBlock(block)
+        hljs.lineNumbersBlock(block)
+    })
+    $('.reference-link').each(function() {
+        this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
+    })
+    $('.gifbtn').each(function() {
+        bindev(this, 'click', function() {
+            let noshow = this.getAttribute('show') === 'no'
+            if (noshow) {
+                $(this).after('<img id="' + this.innerText.substring(0, this.innerText.length - 4) + '" src="' + this.getAttribute('lk') + '"></img>')
+                this.setAttribute('show', 'yes')
+            } else {
+                $('#' + this.innerText.substring(0, this.innerText.length - 4)).remove()
+                this.setAttribute('show', 'no')
+            }
+        })
+    })
     window.totalpages = totalpages
     setTimeout(function () {
         rmclass(pageboxbox, 'myhide')
@@ -399,11 +432,17 @@ function rstopaging(posts) {
     pagination()
 }
 
+function scrollToTop(interval) {
+    $('html,body').animate({
+        scrollTop: 0
+    }, interval);
+}
+
 function pagination() {
     nowpage = 1
     let pbs = $('.pagebox')
     for (let i = 1; i < pbs.length; i++) {
-        adclass(pbs[i], 'myhide')
+        adclass(pbs[i], 'pageboxhide')
     }
     let pn = c('ul')
     adclass(pn, 'pagination')
@@ -425,11 +464,12 @@ function pagination() {
                 $('#pg-2 > a')[0].innerText = 2
                 $('#pg-3 > a')[0].innerText = 3
             }
-            adclass($('#pagebox-' + nowpage)[0], 'myhide')
-            rmclass($('#pagebox-' + 1)[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
+            rmclass($('#pagebox-' + 1)[0], 'pageboxhide')
             rmclass($('.active')[0], 'active')
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
+            scrollToTop(400)
         }
     })
 
@@ -450,8 +490,8 @@ function pagination() {
                 $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) - 1
                 $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) - 1
             }
-            adclass($('#pagebox-' + nowpage)[0], 'myhide')
-            rmclass($('#pagebox-' + (nowpage - 1))[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
+            rmclass($('#pagebox-' + (nowpage - 1))[0], 'pageboxhide')
             if ($('#pg-3').hasClass('active')) {
                 $('#pg-3').removeClass('active')
                 $('#pg-2').addClass('active')
@@ -460,6 +500,7 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
+            scrollToTop(400)
         }
     })
 
@@ -480,11 +521,12 @@ function pagination() {
         $(pg).bind('click', function(ev) {
             let clickpg = parseInt(this.innerText)
             if (clickpg !== nowpage) {
-                adclass($('#pagebox-' + nowpage)[0], 'myhide')
-                rmclass($('#pagebox-' + clickpg)[0], 'myhide')
+                adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
+                rmclass($('#pagebox-' + clickpg)[0], 'pageboxhide')
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
+                scrollToTop(400)
             }
         })
     }
@@ -508,9 +550,10 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + (nowpage + 1))[0], 'active')
             }
-            adclass($('#pagebox-' + nowpage)[0], 'myhide')
-            rmclass($('#pagebox-' + (nowpage + 1))[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
+            rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
+            scrollToTop(400)
         }
     })
 
@@ -525,8 +568,8 @@ function pagination() {
     appendc(pn, last)
     $(last).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== totalpages) {
-            adclass($('#pagebox-' + nowpage)[0], 'myhide')
-            rmclass($('#pagebox-' + totalpages)[0], 'myhide')
+            adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
+            rmclass($('#pagebox-' + totalpages)[0], 'pageboxhide')
             rmclass($('.active')[0], 'active')
             if (totalpages >= 3) {
                 adclass($('#pg-3')[0], 'active')
@@ -537,13 +580,14 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
+            scrollToTop(400)
         }
     })
-    $('#pgboxbox')[0].style.height = getstyle($('#pagebox-1')[0], 'height')
-    appendc(docpanel, pn)
+    appendc($('#pgboxbox')[0], pn)
+    $('.pagination')[0].style.top = getstyle($('#pagebox-1')[0], 'height')
     setTimeout(function () {
         rmclass(pn, 'myhide')        
-    }, 100);
+    }, 100)
 }
 
 function cleansearch() {

@@ -214,23 +214,75 @@
   top: -500px;
 }
 
-.postcard {
-  width: 30rem;
+.posthead {
   text-align: center;
   color: rgb(83, 87, 90);
   margin: 0.9rem auto;
-  /* border-radius: 2rem; */
   transition: all .3s ease-in-out;
 }
 
-.pagebox .postcard:hover {
-  cursor: pointer;
-  border-right: var(--ydashed-color) .7rem solid;
-  border-left: var(--ydashed-color) .7rem solid;
+.postcard {
+  width: 80%;
+  color: rgb(83, 87, 90);
+  margin: 1.4rem auto;
+  transition: all .1s ease-in-out;
+  padding: 0 20px 20px;
+  background-color: whitesmoke;
+  box-shadow: 0px 5px 20px -2px var(--ydashed-color);
+  text-align: right;
 }
 
-.pagebox .postcard:active {
-  transform: translateY(0.3rem);
+.postcardtitle {
+  padding: 5px 0;
+  font-size: 18px;
+  word-break: break-word;
+}
+
+.postcardtime {
+  padding: 5px 0;
+  font-size: 12px;
+  border-bottom: solid rgb(83, 87, 90);
+}
+
+.postshortmsg {
+  height: 24rem;
+  overflow: hidden !important;
+  padding: 10px !important;
+  margin-bottom: 10px;
+}
+
+.postmore{
+  background-color: var(--ymain-color);
+  padding: 0 0.5rem;
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  width: 4rem;
+}
+
+.postmore:hover{
+  width: 5rem;
+  color: aliceblue;
+  text-align: center;
+  text-decoration: none;
+}
+
+#pgboxbox {
+  position: absolute;
+  width: 100%;
+}
+
+.pagebox {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  /* background-color: #f5f5f5; */
+}
+
+.pageboxhide {
+  opacity: 0;
+  z-index: 10 !important;
 }
 
 .post img {
@@ -572,17 +624,11 @@
 }
 
 .pagination {
-  margin: auto;
   position: absolute;
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  bottom: 1rem;
-}
-
-.pagebox {
-  position: absolute;
-  width: 100%;
+  margin: 2rem auto;
 }
 
 #postsearch {
