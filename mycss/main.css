@@ -204,6 +204,7 @@
   margin: auto;
   font-size: 16px;
   box-shadow: 7px 0px 29px -6px #777;
+  display: table;
 }
 
 #hold {
@@ -1055,7 +1056,7 @@
 }
 
 #png_box{
-  width: 70%;
+  width: 90%;
   margin: auto;
   padding: 1rem;
   height: 100%;

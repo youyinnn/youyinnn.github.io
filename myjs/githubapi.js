@@ -132,7 +132,7 @@ function get_post(number) {
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
             text += '\r\n\r\n<div class="copyrightbox"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
-            // text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button><button id="md2png" class="btn btn-dark">2 png(Alpha)</button></div>\r\n\r\n'
+            text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button><button id="md2png" class="btn btn-dark">2 png<span class="ml-2 badge badge-danger" data-toggle="tooltip" data-placement="top" data-original-title="canvas渲染画布长度有限 如果是长文章就会丢失后部分内容">Limited ?</span/></button></div>\r\n\r\n'
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -167,6 +167,7 @@ function get_post(number) {
             $('#md2png').click(function() {
                 md2png()
             })
+            $('[data-toggle="tooltip"]').tooltip()
         }, timeoutfunc)
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {

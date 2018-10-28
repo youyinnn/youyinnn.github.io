@@ -809,8 +809,9 @@ function showseries(ps) {
     })
 }
 
+var colorcount = 0
 function addrandomcoloronbackground(element) {
-    let random = Math.floor(Math.random() * (6) + 1)
+    let random = (colorcount++) % 6
     $(element).css('background-color', 'var(--random-color-' + random + ')')
 }
 
@@ -820,18 +821,10 @@ function md2png() {
         let opts = {
             async: false,
             useCORS: true, 
-            imageTimeout: 0,
-            allowTaint: true
+            allowTaint: true,
+            logging: false
         }
         html2canvas( $('#md')[0], opts).then(function(canvas) {
-            let context = canvas.getContext('2d')
-
-            context.mozImageSmoothingEnabled = false
-            context.webkitImageSmoothingEnabled = false
-            context.msImageSmoothingEnabled = false
-            context.imageSmoothingEnabled = false
-            // let img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height)
-            // document.body.appendChild(canvas)
             $('#png_box').html(canvas)
             $('#share_png_panel').removeClass('myhide')
             popmsg('done!')
