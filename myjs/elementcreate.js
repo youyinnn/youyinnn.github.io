@@ -5,11 +5,16 @@ function createpostcard(item, pagebelong) {
     let sp1 = c('span')
     let postshortmsg = c('div')
     let postmore = c('a')
+    let tagsandcates = c('div')
+    let tagsbox = c('div')
+    let catestag = c('span')
     adclass(postcard, 'postcard')
     adclass(posttitle, 'postcardtitle font-weight-bold')
     adclass(posttime, 'postcardtime')
+    adclass(tagsandcates, 'postcardtime')
     adclass(postshortmsg, 'postshortmsg')
     adclass(postmore, 'postmore')
+    tagsbox.style.marginTop = '5px'
     posttitle.innerHTML = item.title
     posttitle.number = item.number
     postcard.id = 'post_' + item.number
@@ -17,9 +22,36 @@ function createpostcard(item, pagebelong) {
     postmore.innerHTML = 'MORE_'
     postmore.href = '/' + '?to=post&number=' + posttitle.number
     sp1.innerHTML = '# 发布于 ' + daybefore(dayjs(item.created_at)) + ' | 更新于' + daybefore(dayjs(item.updated_at))
+    let catestaghtml = ''
+    let content = ''
+    if (item.categories !== undefined && item.categories.length !== 0) {
+        for (let i = 0; i < item.categories.length; i++) {
+            content += item.categories[i]
+            content += '-'
+        }
+        content = content.substring(0, content.length - 1)
+    } else {
+        content = 'nothing here'
+    }
+    catestaghtml = 'Categories: <span class="badge badge-dark">' + content + '</span>'
+    catestag.innerHTML = catestaghtml
+    let tagsboxhtml = ''
+    content = ''
+    if (item.tags !== undefined && item.tags.length !== 0) {
+        for (let i = 0; i < item.tags.length; i++) {
+            content += '<span class="badge tags">' + item.tags[i] + '</span>&nbsp;'
+        }
+    } else {
+        content = 'nothing here'
+    }
+    tagsboxhtml = 'Tags: ' + content
+    tagsbox.innerHTML = tagsboxhtml
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(postcard, posttime)
+    appendc(tagsandcates, catestag)
+    appendc(tagsandcates, tagsbox)
+    appendc(postcard, tagsandcates)
     appendc(postcard, postshortmsg)
     appendc(postcard, postmore)
     appendc($('#pagebox-' + pagebelong)[0], postcard)
@@ -51,7 +83,7 @@ function createpostcard(item, pagebelong) {
     let katexmds = text.match(/\$\$.*\$\$/g)
     if (katexmds !== null) {
         katexmds.forEach(ktmd => {
-            let kt =  ktmd.replace(/\$\$/gm, '')
+            let kt = ktmd.replace(/\$\$/gm, '')
             let kthtml = katex.renderToString(kt, {
                 throwOnError: false
             })
@@ -59,7 +91,7 @@ function createpostcard(item, pagebelong) {
         })
     }
     editormd.markdownToHTML(postshortmsg.id, {
-        markdown : text,
+        markdown: text,
         htmlDecode: 'style,script,iframe',
         tocm: true, // Using [TOCM]
         tocContainer: '#sidetoc',

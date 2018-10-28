@@ -131,6 +131,8 @@ function get_post(number) {
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
+            text += '\r\n\r\n<div class="copyrightbox"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
+            text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button><button id="md2png" class="btn btn-dark">2 png(Alpha)</button></div>\r\n\r\n'
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -162,6 +164,9 @@ function get_post(number) {
             if (!postcomment) {
                 $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
+            $('#md2png').click(function() {
+                md2png()
+            })
         }, timeoutfunc)
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {
@@ -206,11 +211,11 @@ function get_resume() {
             hidetopbar()
             showbbt()
             if (getclientw() > 700) {
-                setTimeout(function () {
+                setTimeout(function() {
                     $('#gohub').tooltip('show')
                     $('#hb').tooltip('show')
                 }, 1000);
-                setTimeout(function () {
+                setTimeout(function() {
                     $('#gohub').tooltip('hide')
                     $('#hb').tooltip('hide')
                 }, 3500);
@@ -293,20 +298,20 @@ function syncatesToconfig() {
         $('#cates_tree_head').css('background-color', '#828f9c')
         $('#cates_tree_head').css('color', '#343a40')
         $('#cates_tree_head')[0].innerText = 'Sync started.'
-        setTimeout(function () {
+        setTimeout(function() {
             $('#cates_tree_head')[0].innerText += '.'
         }, 1300);
-        setTimeout(function () {
+        setTimeout(function() {
             $('#cates_tree_head')[0].innerText += '.'
         }, 2200);
         search_issues_by_label(post_label, function(re) {
             $('#cates_tree_head').css('background-color', 'rgb(179, 188, 187)')
             $('#cates_tree_head').css('color', '#828f9c')
             $('#cates_tree_head')[0].innerText = 'Fetching.'
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#cates_tree_head')[0].innerText += '.'
             }, 1060);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#cates_tree_head')[0].innerText += '.'
             }, 2100);
             let newmsg = new Array()
@@ -375,10 +380,10 @@ function syncatesToconfig() {
                 $('#cates_tree_head').css('background-color', 'rgb(87, 101, 100)')
                 $('#cates_tree_head').css('color', 'rgb(179, 188, 187)')
                 $('#cates_tree_head')[0].innerText = 'Syncing.'
-                setTimeout(function () {
+                setTimeout(function() {
                     $('#cates_tree_head')[0].innerText += '.'
                 }, 1050);
-                setTimeout(function () {
+                setTimeout(function() {
                     $('#cates_tree_head')[0].innerText += '.'
                 }, 2080);
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
@@ -392,7 +397,7 @@ function syncatesToconfig() {
                             $('#cates_tree_head').css('background-color', '#343a40')
                             $('#cates_tree_head').css('color', 'white')
                             $('#cates_tree_head')[0].innerText = 'done!'
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 $('#cates_tree_head')[0].innerText = 'Refresh the page.'
                             }, 2000);
                             postsync = true

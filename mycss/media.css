@@ -149,7 +149,12 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
-
+  .copyrightbox {
+    padding: .6rem;
+    background-color: #ff00000f;
+    border-left: solid #c01f1f 2px;
+    font-size: 12px;
+  }
   #ifwrapper,
   #showhacknical {
     display: none !important;

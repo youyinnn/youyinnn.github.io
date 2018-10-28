@@ -56,7 +56,7 @@ function render_md(text) {
     let katexmds = text.match(/\$\$.*\$\$/g)
     if (katexmds !== null) {
         katexmds.forEach(ktmd => {
-            let kt =  ktmd.replace(/\$\$/gm, '')
+            let kt = ktmd.replace(/\$\$/gm, '')
             let kthtml = katex.renderToString(kt, {
                 throwOnError: false
             })
@@ -118,7 +118,7 @@ function render_md(text) {
     $('.postcard.onepost').animateCss('flipInX')
     $('.metadata').animateCss('flipInX')
     $('.katex').parent().addClass('katexp')
-    $('thead').each(function () {
+    $('thead').each(function() {
         let trs = $(this).next().find('tr')
         let trl = $(trs[0]).find('td').length
         let lasttr = $(trs[trs.length - 1])
@@ -373,7 +373,7 @@ function filter() {
     nowpage = 1
     $('#pgboxbox').addClass('pageboxhide')
     $('.pagination').addClass('myhide')
-    setTimeout(function () {
+    setTimeout(function() {
         $('#pgboxbox').remove()
         $('.pagination').remove()
         if (filter_posts_cache.length === 0) {
@@ -402,6 +402,9 @@ function rstopaging(posts) {
     for (let i = 0; i < posts.length; ++i) {
         createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
     }
+    $('.tags').each(function() {
+        addrandomcoloronbackground(this)
+    })
     let as = $('.postshortmsg a')
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
@@ -426,7 +429,7 @@ function rstopaging(posts) {
         })
     })
     window.totalpages = totalpages
-    setTimeout(function () {
+    setTimeout(function() {
         rmclass(pageboxbox, 'myhide')
     }, 100);
     pagination()
@@ -585,8 +588,8 @@ function pagination() {
     })
     appendc($('#pgboxbox')[0], pn)
     $('.pagination')[0].style.top = getstyle($('#pagebox-1')[0], 'height')
-    setTimeout(function () {
-        rmclass(pn, 'myhide')        
+    setTimeout(function() {
+        rmclass(pn, 'myhide')
     }, 100)
 }
 
@@ -655,10 +658,10 @@ function setcoll() {
             $('#toc')[0].style.display = 'inline-block'
             this.innerText = '全部隐藏'
             $('#toc').removeClass('myhide')
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#toc').tooltip('show')
             }, 600);
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#toc').tooltip('hide')
             }, 3000);
             collbuts.each(function() {
@@ -730,12 +733,12 @@ function setimg() {
             adclass(img, 'imglg')
             appendc(curtain, img)
             appendc($('body')[0], curtain)
-            setTimeout(function () {
+            setTimeout(function() {
                 img.style.opacity = 1
             }, 100);
             $(curtain).bind('click', function() {
                 img.style.opacity = 0
-                setTimeout(function () {
+                setTimeout(function() {
                     $('.curtain').remove()
                     $('#md').attr('style', '')
                 }, 300);
@@ -784,7 +787,7 @@ function setarrow() {
 function showseries(ps) {
     let sb = $('#seriesbox')
     let nownumber = location.href.split('number=')[1].split('#')[0]
-    for(let i = 0 ; i < ps.length ; i++) {
+    for (let i = 0; i < ps.length; i++) {
         let sa = c('a')
         let it = ps[i].split('===')
         if (it[1] === nownumber) {
@@ -797,11 +800,41 @@ function showseries(ps) {
         appendc(sb[0], sa)
     }
     $('#series').addClass('seriesshow')
-    $('#series').bind('click', function(){
+    $('#series').bind('click', function() {
         if (!hasclass(sb[0], 'seboxshow')) {
             adclass(sb[0], 'seboxshow')
         } else {
             rmclass(sb[0], 'seboxshow')
         }
     })
+}
+
+function addrandomcoloronbackground(element) {
+    let random = Math.floor(Math.random() * (6) + 1)
+    $(element).css('background-color', 'var(--random-color-' + random + ')')
+}
+
+function md2png() {
+    popmsg('processing...')
+    setTimeout(function() {
+        let opts = {
+            async: false,
+            useCORS: true, 
+            imageTimeout: 0,
+            allowTaint: true
+        }
+        html2canvas( $('#md')[0], opts).then(function(canvas) {
+            let context = canvas.getContext('2d')
+
+            context.mozImageSmoothingEnabled = false
+            context.webkitImageSmoothingEnabled = false
+            context.msImageSmoothingEnabled = false
+            context.imageSmoothingEnabled = false
+            // let img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height)
+            // document.body.appendChild(canvas)
+            $('#png_box').html(canvas)
+            $('#share_png_panel').removeClass('myhide')
+            popmsg('done!')
+        })
+    }, 500);
 }
