@@ -204,7 +204,10 @@
   margin: auto;
   font-size: 16px;
   box-shadow: 7px 0px 29px -6px #777;
-  display: table;
+}
+
+#md table{
+  display: block;
 }
 
 #hold {
