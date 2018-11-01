@@ -274,6 +274,7 @@
     transform: translateY(6rem);
     width: 100%;
     padding: 0.5rem 1rem;
+    font-size: 14px;
   }
 
   #scriptsearcher {
@@ -372,6 +373,7 @@
 @media screen and (max-width: 690px) {
   #md {
     width: 100% !important;
+    font-size: 14px;
   }
 
   #movetitle {

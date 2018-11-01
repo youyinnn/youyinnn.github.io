@@ -470,6 +470,7 @@ function pagination() {
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
             scrollToTop(400)
+            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
 
@@ -501,6 +502,7 @@ function pagination() {
             }
             nowpage--
             scrollToTop(400)
+            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
 
@@ -527,6 +529,7 @@ function pagination() {
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
                 scrollToTop(400)
+                $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
             }
         })
     }
@@ -554,6 +557,7 @@ function pagination() {
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
             scrollToTop(400)
+            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
 
@@ -581,10 +585,11 @@ function pagination() {
             }
             nowpage = totalpages
             scrollToTop(400)
+            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
     appendc($('#pgboxbox')[0], pn)
-    $('.pagination')[0].style.top = getstyle($('#pagebox-1')[0], 'height')
+    $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
@@ -811,11 +816,11 @@ function md2png() {
     setTimeout(function() {
         let opts = {
             async: false,
-            useCORS: true, 
+            useCORS: true,
             allowTaint: true,
             logging: false
         }
-        html2canvas( $('#md')[0], opts).then(function(canvas) {
+        html2canvas($('#md')[0], opts).then(function(canvas) {
             $('#png_box').html(canvas)
             $('#share_png_panel').removeClass('myhide')
             popmsg('done!')
