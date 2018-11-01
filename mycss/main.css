@@ -30,7 +30,7 @@
   left: 0;
   top: 3rem;
   bottom: 0;
-  width: 30%;
+  width: 20rem;
   background-color: #f8f9fa80;
   overflow: auto;
 }
@@ -82,9 +82,9 @@
   position: absolute;
   margin: 0 auto;
   right: 0;
+  left: 20rem;
   top: 3rem;
   bottom: 0;
-  width: 70%;
 }
 
 #sidetoccontainer {
@@ -226,7 +226,7 @@
 }
 
 .postcard {
-  width: 80%;
+  width: 88%;
   color: rgb(83, 87, 90);
   margin: 1.4rem auto;
   transition: all .1s ease-in-out;
@@ -612,7 +612,6 @@
 }
 
 #nocomment {
-  text-align: center;
   font-weight: bold;
   font-size: 1.4rem;
   line-height: 2.5rem;

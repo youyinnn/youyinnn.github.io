@@ -402,9 +402,6 @@ function rstopaging(posts) {
     for (let i = 0; i < posts.length; ++i) {
         createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
     }
-    $('.tags').each(function() {
-        addrandomcoloronbackground(this)
-    })
     let as = $('.postshortmsg a')
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
@@ -807,12 +804,6 @@ function showseries(ps) {
             rmclass(sb[0], 'seboxshow')
         }
     })
-}
-
-var colorcount = 0
-function addrandomcoloronbackground(element) {
-    let random = (colorcount++) % 6
-    $(element).css('background-color', 'var(--random-color-' + random + ')')
 }
 
 function md2png() {

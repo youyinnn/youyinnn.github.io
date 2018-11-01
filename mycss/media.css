@@ -207,6 +207,8 @@
 
   #docpanel {
     width: 100%;
+    left: 0;
+    top: 6rem;
   }
 
   .resume {
@@ -312,10 +314,6 @@
     font-size: 1rem !important;
     line-height: 2.2rem !important;
     margin-bottom: 2rem !important;
-  }
-
-  #docpanel {
-    top: 6rem;
   }
 
   .pagination {

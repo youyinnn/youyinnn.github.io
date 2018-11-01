@@ -33,13 +33,13 @@ function createpostcard(item, pagebelong) {
     } else {
         content = 'nothing here'
     }
-    catestaghtml = 'Categories: <span class="badge badge-dark">' + content + '</span>'
+    catestaghtml = 'Categories: <span class="badge badge-dark" style="font-size: 100%;">' + content + '</span>'
     catestag.innerHTML = catestaghtml
     let tagsboxhtml = ''
     content = ''
     if (item.tags !== undefined && item.tags.length !== 0) {
         for (let i = 0; i < item.tags.length; i++) {
-            content += '<span class="badge tags">' + item.tags[i] + '</span>&nbsp;'
+            content += '<span class="badge badge-dark" style="font-size: 100%;">' + item.tags[i] + '</span>&nbsp;'
         }
     } else {
         content = 'nothing here'

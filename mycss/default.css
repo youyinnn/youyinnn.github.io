@@ -4,14 +4,6 @@
   --yfunction-color: #212529;
   --ydashed-color: #ccc;
   --yfont-minor-color: #9e9e9e;
-
-  --random-color-0:#30ff1d;
-  --random-color-1:#ff3434;
-  --random-color-2:#66ff7a;
-  --random-color-3:#48f3ff;
-  --random-color-4:#fcff39;
-  --random-color-5:#6c6ffd;
-  --random-color-6:#db4dff;
 }
 
 *::selection {
