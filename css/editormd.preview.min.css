@@ -2745,7 +2745,8 @@ li.L8 {
 }
 
 .markdown-body li>p {
-  margin-top: 16px
+  margin-top: 3px;
+  margin-bottom: 8px;
 }
 
 .markdown-body dl {

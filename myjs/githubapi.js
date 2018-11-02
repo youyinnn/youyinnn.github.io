@@ -167,7 +167,7 @@ function get_post(number) {
             $('#md2png').click(function() {
                 md2png()
             })
-            $('[data-toggle="tooltip"]').tooltip()
+            $('.ml-2.badge.badge-danger').tooltip()
         }, timeoutfunc)
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {
