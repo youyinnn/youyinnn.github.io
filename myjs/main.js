@@ -469,7 +469,7 @@ function pagination() {
             rmclass($('.active')[0], 'active')
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
-            scrollToTop(400)
+            scrollToTop(800)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
@@ -501,7 +501,7 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            scrollToTop(400)
+            scrollToTop(800)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
@@ -528,7 +528,7 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                scrollToTop(400)
+                scrollToTop(800)
                 $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
             }
         })
@@ -556,7 +556,7 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            scrollToTop(400)
+            scrollToTop(800)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
@@ -584,7 +584,7 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            scrollToTop(400)
+            scrollToTop(800)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })

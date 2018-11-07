@@ -102,7 +102,7 @@ $(function() {
 
     })
     $('#percent').bind('click', function() {
-        scrollToTop(500)
+        scrollToTop(800)
         searchone = 0
     })
     $('#searchtext').focus(function() {

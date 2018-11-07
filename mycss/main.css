@@ -395,8 +395,8 @@
 
 .myhide {
   opacity: 0;
-  z-index: 0 !important;
-  transform: scale(0);
+  z-index: -1 !important;
+  /* transform: scale(0); */
 }
 
 .myshow {
@@ -657,7 +657,7 @@
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  margin: 2rem auto;
+  margin: 0 auto 2rem;
 }
 
 #postsearch {
