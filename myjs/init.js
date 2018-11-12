@@ -39,10 +39,9 @@ $(function() {
     get_friendlinked()
     let search = location.search
     if (search === '') {
-        $('#topbar').animateCss('flipInX')
         hideloading()
         hidesidetoc()
-        rmclass(homepage, 'remove')
+        rmclass(homepage, 'myhide')
         adclass(homepage, 'myshow')
         setgohub('My hub', 'https://github.com/' + username)
         showbbt()
@@ -81,9 +80,6 @@ $(function() {
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
     })
-    $('#showmore').animateCss('flipInX')
-    $('#showhacknical').animateCss('flipInX')
-    $('#wolf-logo').animateCss('flipInX')
 })
 
 $.fn.extend({
