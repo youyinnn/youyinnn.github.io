@@ -21,6 +21,9 @@ function createpostcard(item, pagebelong) {
     postshortmsg.id = 'post_short_msg_' + item.number
     postmore.innerHTML = 'MORE_'
     postmore.href = '/' + '?to=post&number=' + posttitle.number
+    $(posttitle).click(function () {
+        location = '/' + '?to=post&number=' + posttitle.number
+    })
     sp1.innerHTML = '# 发布于 ' + daybefore(dayjs(item.created_at)) + ' | 更新于' + daybefore(dayjs(item.updated_at))
     let catestaghtml = ''
     let content = ''

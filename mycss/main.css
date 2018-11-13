@@ -242,6 +242,9 @@
   font-size: 18px;
   word-break: break-word;
   text-align: left;
+  user-select: none;
+  cursor: pointer;
+  display: table;
 }
 
 .postcardtime {

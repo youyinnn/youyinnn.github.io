@@ -149,6 +149,9 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  .postmore{
+    display: none;
+  }
   .copyrightbox {
     padding: .6rem;
     background-color: #ff00000f;
@@ -193,7 +196,6 @@
     bottom: initial !important;
     left: initial !important;
     width: 100%;
-    height: 40%;
     word-break: break-all;
   }
 
