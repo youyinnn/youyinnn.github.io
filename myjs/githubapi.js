@@ -67,8 +67,8 @@ function get_posts() {
                         this.disabled = false
                         adclass(this, 'btn-success')
                         for (let k = 0; k < posts_cache.length; k++) {
-                            for (let l = 0; l < posts_cache[k].cates.length; l++) {
-                                if (posts_cache[k].cates[l] === this.innerText) {
+                            for (let l = 0; l < posts_cache[k].categories.length; l++) {
+                                if (posts_cache[k].categories[l] === this.innerText) {
                                     filter_posts_cache.push(posts_cache[k])
                                 }
                             }
@@ -142,8 +142,9 @@ function get_post(number) {
                     text += createpostcomment(i, re[i])
                 }
             }
-            hideloading()
             render_md(text)
+            hideloading()
+            $(md).animateCss('fadeIn')
             adclass(md, 'parrow')
             setarrow()
             hidetopbar()
@@ -196,6 +197,7 @@ function get_about() {
         $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
         hideloading()
+        $(md).animateCss('fadeIn')
     })
 }
 
@@ -224,6 +226,7 @@ function get_resume() {
             $('#busuanzi_container_page_pv').addClass('mpgvresume')
         }
         hideloading()
+        $(md).animateCss('fadeIn')
     })
 }
 
@@ -266,6 +269,7 @@ function get_issues_comments(number, issuesbody, func, timeout) {
     sendget(urlhandle(url), function(re) {
         func(issuesbody, re)
         hideloading()
+        $(md).animateCss('fadeIn')
         showbbt()
     }, timeoutfunc, timeout)
 }

@@ -33,13 +33,13 @@ function createpostcard(item, pagebelong) {
     } else {
         content = 'nothing here'
     }
-    catestaghtml = 'Categories: <span class="badge badge-dark" style="font-size: 100%;">' + content + '</span>'
+    catestaghtml = 'Categories: <span class="badge badge-dark" style="font-size: 100%;max-width: 100%;">' + content + '</span>'
     catestag.innerHTML = catestaghtml
     let tagsboxhtml = ''
     content = ''
     if (item.tags !== undefined && item.tags.length !== 0) {
         for (let i = 0; i < item.tags.length; i++) {
-            content += '<span class="badge badge-dark" style="font-size: 100%;">' + item.tags[i] + '</span>&nbsp;'
+            content += '<span class="badge badge-dark" style="font-size: 100%;max-width: 100%;">' + item.tags[i] + '</span>&nbsp;'
         }
     } else {
         content = 'nothing here'
@@ -176,7 +176,7 @@ function showsaying(addto, saying) {
 
 function createtodo(issuesbody, re) {
     let todohead = c('div')
-    todohead.innerHTML = '<i class="em-svg em-card_index"></i>Todo List'
+    todohead.innerHTML = '<i class="em-svg em-card_index"></i>  Todo List'
     adclass(todohead, 'todohead unselectable')
     appendc(md, todohead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
@@ -190,7 +190,7 @@ function createtodo(issuesbody, re) {
 
 function createscript(issuesbody, re) {
     let scripthead = c('div')
-    scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>Script Base'
+    scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>  Script Base'
     adclass(scripthead, 'todohead unselectable')
     appendc(md, scripthead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
@@ -204,7 +204,7 @@ function createscript(issuesbody, re) {
 
 function createegg(issuesbody, re) {
     let egghead = c('div')
-    egghead.innerHTML = '<i class="em-svg em-clown_face"></i> E GGgG gGGG Gggg ggGG'
+    egghead.innerHTML = '<i class="em-svg em-clown_face"></i>  E GGgG gGGG Gggg ggGG'
     adclass(egghead, 'todohead unselectable')
     appendc(md, egghead)
     let fulltext = '\r\n' + issuesbody + '\r\n'
