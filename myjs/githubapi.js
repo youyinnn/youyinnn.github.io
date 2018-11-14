@@ -337,7 +337,7 @@ function syncatesToconfig() {
                 metadata.created_at = rei.created_at
                 metadata.updated_at = rei.updated_at
                 let body = getdocwithnohexofrontmatter(rei.body)
-                let short = body.split(/\r\n/, 40)
+                let short = body.split(/\r\n/, 30)
                 while (short[0] === '\r\n') {
                     short.shift()
                 }
