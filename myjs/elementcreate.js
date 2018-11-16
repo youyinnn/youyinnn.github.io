@@ -188,6 +188,7 @@ function createtodo(issuesbody, re) {
         let text = re[i].body
         fulltext += '<div class="card todo-card" id="search-' + (re.length - i - 1) + '"> <div class="card-header todo-head"> <span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span> <p style="margin:0; text-align: right">' + dayjs(head).format('MMM,DD YYYY') + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + ' </p> </div> <div class="card-body todo-body"> <p class="card-text todo-text">\r\n' + text + '\r\n</p> </div> </div><br>'
     }
+    $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)
 }
 
@@ -202,6 +203,7 @@ function createscript(issuesbody, re) {
         let text = re[i].body
         fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
+    $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)
 }
 
@@ -216,6 +218,7 @@ function createegg(issuesbody, re) {
         let text = re[i].body
         fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + '</div><div class="card-body"> <p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
+    $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)
 }
 

@@ -6,6 +6,7 @@ var friend_linked_label = 'yfriendlinked'
 var script_label = 'yscript'
 var todo_label = 'ytodo'
 var resume_label = 'yresume'
+var egg_label = 'yegg'
 var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = b64.decode(oauth_token_base64)
@@ -39,12 +40,10 @@ function urlhandle(url) {
     return url
 }
 
-function search_issues_by_label(label, func, timeout) {
-    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
-    sendget(urlhandle(url), func, timeoutfunc, timeout)
-}
 
 function get_posts() {
+    $('#pgboxbox').remove()
+    $('.treenode').remove()
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
     sendget(urlhandle(url), function(re) {
@@ -190,19 +189,20 @@ function get_post(number) {
 }
 
 function get_about() {
-    search_issues_by_label(about_label, function(re) {
+    get_issues_by_label(about_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         render_md(re[0].body)
+        $(md).animateCss('fadeIn')
         showbbt()
         $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
         hideloading()
         $(md).animateCss('fadeIn')
-    })
+    }, true)
 }
 
 function get_resume() {
-    search_issues_by_label(resume_label, function(re) {
+    get_issues_by_label(resume_label, function(re) {
         if (re.length === 0) {
             no_label(resume_label)
         } else {
@@ -224,15 +224,17 @@ function get_resume() {
                 }, 3500);
             }
             $('#busuanzi_container_page_pv').addClass('mpgvresume')
+            $(md).animateCss('fadeIn')
         }
         hideloading()
         $(md).animateCss('fadeIn')
-    })
+    }, true)
 }
 
 function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
+
+        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token + '&state=closed'
         let basegetset = {
             'timeout': defaulttimeout,
             'async': true,
@@ -269,55 +271,57 @@ function get_issues_comments(number, issuesbody, func, timeout) {
     sendget(urlhandle(url), function(re) {
         func(issuesbody, re)
         hideloading()
-        $(md).animateCss('fadeIn')
         showbbt()
     }, timeoutfunc, timeout)
 }
 
 function get_todo() {
-    search_issues_by_label(todo_label, function(re) {
+    get_issues_by_label(todo_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createtodo)
-    })
+    }, true)
 }
 
 function get_script() {
-    search_issues_by_label(script_label, function(re) {
+    get_issues_by_label(script_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createscript)
         $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
-    })
+    }, true)
 }
 
 function get_egg() {
-    let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yegg&state=closed'
-    sendget(urlhandle(url), function(re) {
+    get_issues_by_label(egg_label, function (re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createegg)
-    }, timeoutfunc)
+    }, true)
+}
+
+function get_issues_by_label(label, func, closed, timeout) {
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
+    if (closed !== undefined && closed) {
+        url += '&state=closed'
+    }
+    sendget(urlhandle(url), func, timeoutfunc, timeout)
 }
 
 function syncatesToconfig() {
     if (!postsync) {
-        $('#cates_tree_head').css('background-color', '#828f9c')
-        $('#cates_tree_head').css('color', '#343a40')
-        $('#cates_tree_head')[0].innerText = 'Sync started.'
+        popmsg('Sync started.', 30000)
         setTimeout(function() {
-            $('#cates_tree_head')[0].innerText += '.'
+            popmsg('Sync started..', 30000)
         }, 1300);
         setTimeout(function() {
-            $('#cates_tree_head')[0].innerText += '.'
+            popmsg('Sync started...', 30000)
         }, 2200);
-        search_issues_by_label(post_label, function(re) {
-            $('#cates_tree_head').css('background-color', 'rgb(179, 188, 187)')
-            $('#cates_tree_head').css('color', '#828f9c')
-            $('#cates_tree_head')[0].innerText = 'Fetching.'
+        get_issues_by_label(post_label, function(re) {
+            popmsg('Fetching.')
             setTimeout(function() {
-                $('#cates_tree_head')[0].innerText += '.'
+                popmsg('Fetching..', 30000)
             }, 1060);
             setTimeout(function() {
-                $('#cates_tree_head')[0].innerText += '.'
+                popmsg('Fetching...', 30000)
             }, 2100);
             let newmsg = new Array()
             for (let i = 0; i < re.length; i++) {
@@ -375,21 +379,19 @@ function syncatesToconfig() {
                         series.push(item)
                     }
                     let ss = yamlobj[i].title + '===' + yamlobj[i].number
-                    pseries.push(ss)
+                    pseries.unshift(ss)
                 }
             }
-            series = yaml.dump(series)
+            series = yaml.dump(series.reverse())
             let text = '{ "body":' + JSON.stringify(newmsg) + '}'
             let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
             sendget(urlhandle(url), function(re) {
-                $('#cates_tree_head').css('background-color', 'rgb(87, 101, 100)')
-                $('#cates_tree_head').css('color', 'rgb(179, 188, 187)')
-                $('#cates_tree_head')[0].innerText = 'Syncing.'
+                popmsg('Syncing.')
                 setTimeout(function() {
-                    $('#cates_tree_head')[0].innerText += '.'
+                    popmsg('Syncing..', 30000)
                 }, 1050);
                 setTimeout(function() {
-                    $('#cates_tree_head')[0].innerText += '.'
+                    popmsg('Syncing...', 30000)
                 }, 2080);
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
                     let posttreecommentid = re[0].id
@@ -399,18 +401,18 @@ function syncatesToconfig() {
                         url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + seriestreecommentid
                         text = '{ "body":' + JSON.stringify(series) + '}'
                         sendpatch(urlhandle(url), text, function(re) {
-                            $('#cates_tree_head').css('background-color', '#343a40')
-                            $('#cates_tree_head').css('color', 'white')
-                            $('#cates_tree_head')[0].innerText = 'done!'
-                            setTimeout(function() {
-                                $('#cates_tree_head')[0].innerText = 'Refresh the page.'
-                            }, 2000);
+                            popmsg('Done!', 2000)
+                            if (location.href.endsWith('to=posts')) {
+                                setTimeout(function() {
+                                    get_posts()
+                                }, 2000);
+                            }
                             postsync = true
                         })
                     })
                 })
             }, timeoutfunc)
-        }, 30 * 1000)
+        }, false, 30 * 1000)
     } else {
         location.reload()
     }
