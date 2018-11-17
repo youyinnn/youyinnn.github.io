@@ -31,12 +31,19 @@
   top: 3rem;
   bottom: 0;
   width: 20rem;
-  background-color: #f8f9fa80;
-  overflow: auto;
+  background-color: whitesmoke;
+  padding: .5rem;
 }
 
 #cates_tree {
   padding: .1rem 1rem 0;
+  width: 18rem;
+  margin: auto;
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  height: 70%;
+  overflow: auto;
+  border-radius: 0 0 .25rem .25rem;
 }
 
 #cates_tree_head {
@@ -46,6 +53,10 @@
   text-align: center;
   color: white;
   transition: background-color 2s;
+  width: 18rem;
+  margin: auto;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  border-radius: .25rem .25rem 0 0;
 }
 
 .treenode {
@@ -80,11 +91,12 @@
 
 #docpanel {
   position: absolute;
-  margin: 0 auto;
   right: 0;
   left: 20rem;
   top: 3rem;
   bottom: 0;
+  padding: .5rem;
+  background-color: whitesmoke;
 }
 
 #sidetoccontainer {
@@ -206,7 +218,7 @@
   box-shadow: 7px 0px 29px -6px #777;
 }
 
-#md table{
+#md table {
   display: block;
 }
 
@@ -227,13 +239,13 @@
 
 .postcard {
   overflow: hidden;
-  width: 88%;
+  width: 90%;
   color: rgb(83, 87, 90);
-  margin: 1.4rem auto;
+  margin: 1rem auto;
   transition: all .1s ease-in-out;
   padding: 0 20px 20px;
-  background-color: whitesmoke;
-  box-shadow: 0px 5px 20px -2px var(--ydashed-color);
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   text-align: right;
 }
 
@@ -281,15 +293,14 @@
 }
 
 #pgboxbox {
-  position: absolute;
-  width: 100%;
+  position: relative;
 }
 
 .pagebox {
   z-index: 100;
-  position: absolute;
+  position: relative;
   width: 100%;
-  margin-bottom: 3rem;
+  background-color: whitesmoke;
 }
 
 .pageboxhide {
@@ -583,7 +594,7 @@
 
 @keyframes getnothing {
   50% {
-    background-color: rgb(211, 61, 61);
+    background-color: rgba(248, 166, 166, 0.781);
   }
 }
 
@@ -597,22 +608,22 @@
   width: 100%;
 }
 
-#postshare button{
+#postshare button {
   border-radius: 0;
   padding: 5px;
   font-size: 12px;
 }
 
-#sharetag{
-  font-weight:bold;
+#sharetag {
+  font-weight: bold;
   cursor: default;
 }
 
-#sharetag:focus{
+#sharetag:focus {
   box-shadow: inherit;
 }
 
-#postshare{
+#postshare {
   right: 2rem;
   position: absolute;
 }
@@ -661,28 +672,28 @@
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
-  margin: 0 auto 2rem;
+  margin: 1rem auto;
 }
 
 #postsearch {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   width: 100%;
-  background-color: var(--yfunction-color);
+  border-radius: 0.25rem;
 }
 
-#postsearchtext {
-  border-radius: 0;
-}
 
 .tgs {
   position: absolute !important;
   z-index: 300;
-  width: 100%;
-  background-color: #ebebeb;
+  background-color: white;
   padding: 1rem;
   border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);
   overflow-x: auto;
   height: 10rem;
+  margin: 0 .5rem;
+  left: 0;
+  right: 0;
 }
 
 .stgt {
@@ -1040,14 +1051,14 @@
   box-shadow: 0px 5px 10px -2px #777;
 }
 
-.copyrightbox{
+.copyrightbox {
   padding: 1.5rem;
   background-color: #ff00000f;
   border-left: solid #c01f1f 4px;
   margin-bottom: 1rem;
 }
 
-#share_png_panel{
+#share_png_panel {
   position: fixed;
   width: 100%;
   text-align: center;
@@ -1057,14 +1068,14 @@
   z-index: 1000;
 }
 
-#share_png_panel canvas{
+#share_png_panel canvas {
   width: 100% !important;
   height: initial !important;
   padding: 10px;
   border: dashed #999;
 }
 
-#png_box{
+#png_box {
   width: 90%;
   margin: auto;
   padding: 1rem;
@@ -1076,7 +1087,7 @@
   right: 0;
 }
 
-#share_curtain{
+#share_curtain {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1084,7 +1095,7 @@
   z-index: 100;
 }
 
-#share_png_paned_close{
+#share_png_paned_close {
   position: absolute;
   right: 1rem;
   top: 1rem;

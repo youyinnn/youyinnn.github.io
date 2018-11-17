@@ -265,13 +265,13 @@ function searchpost(text) {
     if (text !== '') {
         if (filter_posts_cache.length === 0) {
             for (let i = 0; i < posts_cache.length; i++) {
-                if (posts_cache[i].title.search(new RegExp(text), 'gi') !== -1) {
+                if (posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
                     postsearchrs.push(posts_cache[i])
                 }
             }
         } else {
             for (let i = 0; i < filter_posts_cache.length; i++) {
-                if (filter_posts_cache[i].title.search(new RegExp(text), 'gi') !== -1) {
+                if (filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
                     postsearchrs.push(filter_posts_cache[i])
                 }
             }
@@ -291,6 +291,7 @@ function searchpost(text) {
     } else {
         cleansearch()
     }
+    $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
 }
 
 function postsmetadatahandle(postmetadata) {
@@ -443,51 +444,50 @@ function pagination() {
         adclass(pbs[i], 'pageboxhide')
     }
     let pn = c('ul')
-    adclass(pn, 'pagination')
+    adclass(pn, 'pagination unselectable')
     adclass(pn, 'myhide')
 
     let first = c('li')
     first.id = 'fpg'
     adclass(first, 'page-item')
-    let firstl = c('a')
+    let firstl = c('div')
     adclass(firstl, 'page-link')
-    firstl.href = 'javaScript:void(0)'
     firstl.innerText = 'F'
     appendc(first, firstl)
     appendc(pn, first)
     $(first).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== 1) {
             if (totalpages > 3) {
-                $('#pg-1 > a')[0].innerText = 1
-                $('#pg-2 > a')[0].innerText = 2
-                $('#pg-3 > a')[0].innerText = 3
+                $('#pg-1 > div')[0].innerText = 1
+                $('#pg-2 > div')[0].innerText = 2
+                $('#pg-3 > div')[0].innerText = 3
             }
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + 1)[0], 'pageboxhide')
             rmclass($('.active')[0], 'active')
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
-            scrollToTop(800)
+            scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
+        $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
     })
 
     let pre = c('li')
     pre.id = 'ppg'
     adclass(pre, 'page-item')
     adclass(pre, 'page-item')
-    let prel = c('a')
+    let prel = c('div')
     adclass(prel, 'page-link')
-    prel.href = 'javaScript:void(0)'
     prel.innerText = '<'
     appendc(pre, prel)
     appendc(pn, pre)
     $(pre).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== 1) {
             if ($('#pg-1').hasClass('active')) {
-                $('#pg-1 > a')[0].innerText = parseInt($('#pg-1 > a')[0].innerText) - 1
-                $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) - 1
-                $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) - 1
+                $('#pg-1 > div')[0].innerText = parseInt($('#pg-1 > div')[0].innerText) - 1
+                $('#pg-2 > div')[0].innerText = parseInt($('#pg-2 > div')[0].innerText) - 1
+                $('#pg-3 > div')[0].innerText = parseInt($('#pg-3 > div')[0].innerText) - 1
             }
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage - 1))[0], 'pageboxhide')
@@ -499,7 +499,8 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            scrollToTop(800)
+            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
@@ -509,9 +510,8 @@ function pagination() {
         let pg = c('li')
         pg.id = 'pg-' + (i + 1)
         adclass(pg, 'page-item')
-        let pgl = c('a')
+        let pgl = c('div')
         adclass(pgl, 'page-link')
-        pgl.href = 'javaScript:void(0)'
         pgl.innerHTML = i + 1
         if (i === 0) {
             adclass(pg, 'active')
@@ -526,7 +526,8 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                scrollToTop(800)
+                $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+                scrollToTop(0)
                 $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
             }
         })
@@ -535,18 +536,17 @@ function pagination() {
     let next = c('li')
     next.id = 'npg'
     adclass(next, 'page-item')
-    let nextl = c('a')
+    let nextl = c('div')
     adclass(nextl, 'page-link')
-    nextl.href = 'javaScript:void(0)'
     nextl.innerText = '>'
     appendc(next, nextl)
     appendc(pn, next)
     $(next).bind('click', function(ev) {
         if (totalpages !== 0 && nowpage !== totalpages) {
             if ($('#pg-3').hasClass('active')) {
-                $('#pg-1 > a')[0].innerText = parseInt($('#pg-1 > a')[0].innerText) + 1
-                $('#pg-2 > a')[0].innerText = parseInt($('#pg-2 > a')[0].innerText) + 1
-                $('#pg-3 > a')[0].innerText = parseInt($('#pg-3 > a')[0].innerText) + 1
+                $('#pg-1 > div')[0].innerText = parseInt($('#pg-1 > div')[0].innerText) + 1
+                $('#pg-2 > div')[0].innerText = parseInt($('#pg-2 > div')[0].innerText) + 1
+                $('#pg-3 > div')[0].innerText = parseInt($('#pg-3 > div')[0].innerText) + 1
             } else {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + (nowpage + 1))[0], 'active')
@@ -554,7 +554,8 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            scrollToTop(800)
+            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })
@@ -562,9 +563,8 @@ function pagination() {
     let last = c('li')
     last.id = 'lpg'
     adclass(last, 'page-item')
-    let lastl = c('a')
+    let lastl = c('div')
     adclass(lastl, 'page-link')
-    lastl.href = 'javaScript:void(0)'
     lastl.innerText = 'L'
     appendc(last, lastl)
     appendc(pn, last)
@@ -575,14 +575,15 @@ function pagination() {
             rmclass($('.active')[0], 'active')
             if (totalpages >= 3) {
                 adclass($('#pg-3')[0], 'active')
-                $('#pg-1 > a')[0].innerText = totalpages - 2
-                $('#pg-2 > a')[0].innerText = totalpages - 1
-                $('#pg-3 > a')[0].innerText = totalpages
+                $('#pg-1 > div')[0].innerText = totalpages - 2
+                $('#pg-2 > div')[0].innerText = totalpages - 1
+                $('#pg-3 > div')[0].innerText = totalpages
             } else {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            scrollToTop(800)
+            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
     })

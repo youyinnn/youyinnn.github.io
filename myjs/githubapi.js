@@ -115,6 +115,7 @@ function get_posts() {
             rmclass(cates_tree_panel, 'myhide')
             adclass(cates_tree_panel, 'myshow')
             showbbt()
+            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
             hideloading()
         })
     }, timeoutfunc)
