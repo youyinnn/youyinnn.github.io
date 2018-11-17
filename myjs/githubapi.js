@@ -130,8 +130,10 @@ function get_post(number) {
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
-            text += '\r\n\r\n<div class="copyrightbox"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
-            text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button><button id="md2png" class="btn btn-dark">2 png<span class="ml-2 badge badge-danger" data-toggle="tooltip" data-placement="top" data-original-title="canvas的渲染画布长度有限 如果是长文章就会丢失后部分内容">Limited ?</span/></button></div>\r\n\r\n'
+            let copytext
+            text += '\r\n\r\n<div class="copyrightbox" style="padding: 1.5rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
+            copytext = text
+            text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\r\n\r\n'
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -164,10 +166,24 @@ function get_post(number) {
             if (!postcomment) {
                 $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
-            $('#md2png').click(function() {
-                md2png()
+            let tomdinnerHTML = '2 md'
+            createsharebtn(tomdinnerHTML, function (btn) {
+                $(btn)[0].setAttribute('data-clipboard-text', copytext)
+                new ClipboardJS(btn).on('success', function(e) {
+                    popmsg('Copy markdown text successed.')
+                    e.clearSelection();
+                }).on('error', function(e) {
+                    popmsg('Copy markdown text failed.')
+                    e.clearSelection();
+                })
             })
-            $('.ml-2.badge.badge-danger').tooltip()
+            let topnginnerHTML = '2 png<span class="ml-2 badge badge-danger" data-toggle="tooltip" data-placement="top" data-original-title="canvas的渲染画布长度有限 如果是长文章就会丢失后部分内容">Limited ?</span/>'
+            createsharebtn(topnginnerHTML, function (btn) {
+                $(btn).click(function() {
+                    md2png()
+                })
+                $('.ml-2.badge.badge-danger').tooltip()
+            })
         }, timeoutfunc)
         let psname = yaml.load(gethexofrontmatter(re.body)).series
         if (psname !== undefined) {

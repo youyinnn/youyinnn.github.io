@@ -235,3 +235,12 @@ function createpostcomment(i, comment) {
     let commentCard = '<div class="" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + ' ' + (comment.author_association === 'NONE' ? '' : (' <span class="badge badge-light">' + comment.author_association + '</span>')) + ' </div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
     return commentCard
 }
+
+function createsharebtn(btinnerHTML, func) {
+    let ps = $('#postshare')[0]
+    let btn = c('button')
+    adclass(btn, 'btn btn-dark ml-1')
+    btn.innerHTML = btinnerHTML
+    appendc(ps, btn)
+    func(btn)
+}
