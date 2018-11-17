@@ -230,7 +230,7 @@ function scrolltoelement(elementid) {
         $('#' + elementid)[0].oset = $('#' + elementid).offset().top
     }
     $('html,body').animate({
-        scrollTop: $('#' + elementid)[0].oset
+        scrollTop: $('#' + elementid)[0].oset - 52
     }, 600, 'swing');
 }
 
@@ -291,7 +291,6 @@ function searchpost(text) {
     } else {
         cleansearch()
     }
-    $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
 }
 
 function postsmetadatahandle(postmetadata) {
@@ -592,14 +591,19 @@ function pagination() {
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
+    $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
 }
 
 function cleansearch() {
     $('#pgboxbox').remove()
     $('.pagination').remove()
-    rstopaging(posts_cache)
+    if (filter_posts_cache.length !== 0) {
+        rstopaging(filter_posts_cache)
+    } else {
+        rstopaging(posts_cache)
+        filter_posts_cache = new Array()
+    }
     postsearchrs = new Array()
-    filter_posts_cache = new Array()
     let stgts = $('.stgt')
     let stgcs = $('.stgc')
     for (let j = 0; j < stgcs.length; j++) {
