@@ -331,10 +331,7 @@
   }
 
   .postshortmsg {
-    height: 0;
-    overflow: hidden !important;
-    padding: 0 !important;
-    margin-bottom: 10px;
+    display: none;
   }
 
   #percent {

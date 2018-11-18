@@ -171,3 +171,7 @@ x{
   transition: all .2s;
   background-color: #48b3d41c;
 }
+
+.tooltip-inner{
+  max-width: 500px !important;
+}

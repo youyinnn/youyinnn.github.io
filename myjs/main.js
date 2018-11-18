@@ -602,24 +602,24 @@ function cleansearch() {
     } else {
         rstopaging(posts_cache)
         filter_posts_cache = new Array()
+        let stgts = $('.stgt')
+        let stgcs = $('.stgc')
+        for (let j = 0; j < stgcs.length; j++) {
+            if (stgcs[j].disabled === false) {
+                rmclass(stgcs[j], 'btn-success')
+                adclass(stgcs[j], 'btn-light')
+            }
+            stgcs[j].disabled = false
+        }
+        for (let j = 0; j < stgts.length; j++) {
+            if (stgts[j].disabled === false) {
+                rmclass(stgts[j], 'btn-info')
+                adclass(stgts[j], 'btn-light')
+            }
+            stgts[j].disabled = false
+        }
     }
     postsearchrs = new Array()
-    let stgts = $('.stgt')
-    let stgcs = $('.stgc')
-    for (let j = 0; j < stgcs.length; j++) {
-        if (stgcs[j].disabled === false) {
-            rmclass(stgcs[j], 'btn-success')
-            adclass(stgcs[j], 'btn-light')
-        }
-        stgcs[j].disabled = false
-    }
-    for (let j = 0; j < stgts.length; j++) {
-        if (stgts[j].disabled === false) {
-            rmclass(stgts[j], 'btn-info')
-            adclass(stgts[j], 'btn-light')
-        }
-        stgts[j].disabled = false
-    }
 }
 
 function showbbt() {

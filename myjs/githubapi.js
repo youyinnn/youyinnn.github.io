@@ -11,6 +11,7 @@ var api_url = 'https://api.github.com'
 var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
 var oauth_token = b64.decode(oauth_token_base64)
 var defaulttimeout
+var shortmsgline = 25
 
 function settimeout() {
     let nowhour = dayjs().hour()
@@ -135,6 +136,7 @@ function get_post(number) {
             text += '\r\n\r\n<div class="copyrightbox" style="padding: 1.5rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
             copytext = text
             text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\r\n\r\n'
+            text += '\r\n\r\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark" data-toggle="tooltip" data-placement="right" data-original-title="" data-trigger="manual">Privous</button><button id="nextpostbtn" class="btn btn-dark" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="" data-trigger="manual">Next</button></div> \r\n\r\n'
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -168,7 +170,7 @@ function get_post(number) {
                 $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
             let tomdinnerHTML = '2 md'
-            createsharebtn(tomdinnerHTML, function (btn) {
+            createsharebtn(tomdinnerHTML, function(btn) {
                 $(btn)[0].setAttribute('data-clipboard-text', copytext)
                 new ClipboardJS(btn).on('success', function(e) {
                     popmsg('Copy markdown text successed.')
@@ -179,18 +181,18 @@ function get_post(number) {
                 })
             })
             let topnginnerHTML = '2 png<span class="ml-2 badge badge-danger" data-toggle="tooltip" data-placement="top" data-original-title="canvas的渲染画布长度有限 如果是长文章就会丢失后部分内容">Limited ?</span/>'
-            createsharebtn(topnginnerHTML, function (btn) {
+            createsharebtn(topnginnerHTML, function(btn) {
                 $(btn).click(function() {
                     md2png()
                 })
                 $('.ml-2.badge.badge-danger').tooltip()
             })
         }, timeoutfunc)
+        let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
         let psname = yaml.load(gethexofrontmatter(re.body)).series
-        if (psname !== undefined) {
-            let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
-            sendget(urlhandle(url3), function(re) {
-                get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+        sendget(urlhandle(url3), function(re) {
+            get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+                if (psname !== undefined) {
                     let ses = yaml.load(re[1].body)
                     let ps
                     for (let i = 0; i < ses.length; i++) {
@@ -199,9 +201,43 @@ function get_post(number) {
                             showseries(ps)
                         }
                     }
-                }, 100 * 1000)
-            }, timeoutfunc)
-        }
+                }
+                let postorder = re[2].body.split('>--<')
+                let preindex
+                let nextindex
+                postorder.find(function (issuesnumber, nowindex) {
+                    if (issuesnumber === document.title + '<=>' + number) {
+                        preindex = nowindex - 1
+                        nextindex = nowindex + 1
+                        return true
+                    }
+                })
+                let prearr = postorder[preindex].split('<=>')
+                let nextarr = postorder[nextindex].split('<=>')
+                let pretitle = prearr[0]
+                let prenumber = prearr[1]
+                let nexttitle = nextarr[0]
+                let nextnumber = nextarr[1]
+                $('#prepostbtn').attr('data-original-title', pretitle)
+                $('#prepostbtn').tooltip('show')
+                $('#nextpostbtn').attr('data-original-title', nexttitle)
+                $('#nextpostbtn').tooltip('show')
+                $('#prepostbtn').click(function() {
+                    if (preindex === -1) {
+                        barmsg('This is the first post.')
+                    } else {
+                        location = '/' + '?to=post&number=' + prenumber
+                    }
+                })
+                $('#nextpostbtn').click(function() {
+                    if (nextindex === postorder.length) {
+                        barmsg('This is the last post.')
+                    } else {
+                        location = '/' + '?to=post&number=' + nextnumber
+                    }
+                })
+            }, 100 * 1000)
+        }, timeoutfunc)
     }, timeoutfunc)
 }
 
@@ -309,7 +345,7 @@ function get_script() {
 }
 
 function get_egg() {
-    get_issues_by_label(egg_label, function (re) {
+    get_issues_by_label(egg_label, function(re) {
         setgohub('Go hub', re[0].html_url)
         get_issues_comments(re[0].number, re[0].body, createegg)
     }, true)
@@ -341,8 +377,10 @@ function syncatesToconfig() {
                 popmsg('Fetching...', 30000)
             }, 2100);
             let newmsg = new Array()
+            let postorder = new Array()
             for (let i = 0; i < re.length; i++) {
                 let rei = re[i]
+                postorder.push(rei.title + '<=>' + rei.number)
                 let metadata = gethexofrontmatter(rei.body)
                 if (metadata === undefined) {
                     metadata = new Object()
@@ -358,7 +396,7 @@ function syncatesToconfig() {
                 metadata.created_at = rei.created_at
                 metadata.updated_at = rei.updated_at
                 let body = getdocwithnohexofrontmatter(rei.body)
-                let short = body.split(/\r\n/, 30)
+                let short = body.split(/\r\n/, shortmsgline)
                 while (short[0] === '\r\n') {
                     short.shift()
                 }
@@ -413,18 +451,26 @@ function syncatesToconfig() {
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
                     let posttreecommentid = re[0].id
                     let seriestreecommentid = re[1].id
+                    let postordercommentid = re[2].id
                     url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + posttreecommentid
+                    popmsg('Updating post tree...', 30000)
                     sendpatch(urlhandle(url), text, function(re) {
                         url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + seriestreecommentid
                         text = '{ "body":' + JSON.stringify(series) + '}'
+                        popmsg('Updating post series tree...', 30000)
                         sendpatch(urlhandle(url), text, function(re) {
-                            popmsg('Done!', 2000)
-                            if (location.href.endsWith('to=posts')) {
-                                setTimeout(function() {
-                                    get_posts()
-                                }, 2000);
-                            }
-                            postsync = true
+                            url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + postordercommentid
+                            text = '{ "body":' + JSON.stringify(postorder.join('>--<')) + '}'
+                            popmsg('Updating post order...', 30000)
+                            sendpatch(urlhandle(url), text, function(re) {
+                                popmsg('Done!', 2000)
+                                if (location.href.endsWith('to=posts')) {
+                                    setTimeout(function() {
+                                        get_posts()
+                                    }, 2000);
+                                }
+                                postsync = true
+                            })
                         })
                     })
                 })

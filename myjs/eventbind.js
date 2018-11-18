@@ -77,6 +77,11 @@ $(function() {
     $(window).bind('keyup', 'alt+s', function() {
         syncatesToconfig()
     })
+    $(window).bind('keyup', 'alt+p', function() {
+        if (location.href.search(/\?to=post&/) !== -1) {
+            md2png()
+        }
+    })
     $('#categories').bind('click', function() {
         if ($('#all_cates').hasClass('myhide')) {
             $('#all_cates').removeClass('myhide')

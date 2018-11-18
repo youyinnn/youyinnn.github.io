@@ -40,7 +40,7 @@
   width: 18rem;
   margin: auto;
   background-color: white;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   height: 70%;
   overflow: auto;
   border-radius: 0 0 .25rem .25rem;
@@ -55,7 +55,7 @@
   transition: background-color 2s;
   width: 18rem;
   margin: auto;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   border-radius: .25rem .25rem 0 0;
 }
 
@@ -245,7 +245,7 @@
   transition: all .1s ease-in-out;
   padding: 0 20px 20px;
   background-color: white;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   text-align: right;
 }
 
@@ -677,7 +677,7 @@
 }
 
 #postsearch {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   width: 100%;
   border-radius: 0.25rem;
 }
@@ -690,7 +690,8 @@
   padding: 1rem;
   border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);
-  overflow-x: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 10rem;
   margin: 0 .5rem;
   left: 0;
@@ -1101,5 +1102,16 @@
   right: 1rem;
   top: 1rem;
   z-index: 200;
+  border-radius: 0;
+}
+
+#movebtn {
+  position: relative;
+  top: 2.5rem;
+}
+
+#movebtn button{
+  line-height: 1rem;
+  height: 2rem;
   border-radius: 0;
 }
