@@ -305,27 +305,7 @@ function postsmetadatahandle(postmetadata) {
             let noa = c('div')
             noa.innerText = postcache.categories[i]
             $(noa).bind('click', function(event) {
-                if (!hasclass(this, 'adisable')) {
-                    filter_posts_cache = new Array()
-                    if (!this.asel) {
-                        this.asel = true
-                        $('#cates_tree div').addClass('adisable')
-                        rmclass(this, 'adisable')
-                        for (let k = 0; k < posts_cache.length; k++) {
-                            for (let l = 0; l < posts_cache[k].categories.length; l++) {
-                                if (posts_cache[k].categories[l] === this.innerText) {
-                                    filter_posts_cache.push(posts_cache[k])
-                                }
-                            }
-                        }
-                        $('.stgt').attr('disabled', true)
-                    } else {
-                        this.asel = false
-                        $('.stgt').attr('disabled', false)
-                        $('#cates_tree div').removeClass('adisable')
-                    }
-                    filter()
-                }
+                catetreenodeclick(this, true, true)
             })
             appendc(node, noa)
             // root category add on cates_tree directly
@@ -347,7 +327,7 @@ function postsmetadatahandle(postmetadata) {
         }
         if (!haved) {
             all_cates.push(postcache.categories[i])
-            cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
+            cates.innerHTML += '<button id="' + b64.encode(postcache.categories[i], true) + '_catetag" class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
         }
     }
     // handle tags panel
@@ -381,6 +361,76 @@ function appendliwithorder(parentelement, newchildelement) {
         }
     }
     $(parentelement).append(newchildelement)
+}
+
+function catetagclick(catetag, isfilter, clicknode) {
+    let stgcs = $('.stgc')
+    let stgts = $('.stgt')
+    if (hasclass(catetag, 'btn-light')) {
+        filter_posts_cache = new Array()
+        stgts.attr('disabled', true)
+        stgcs.attr('disabled', true)
+        rmclass(catetag, 'btn-light')
+        catetag.disabled = false
+        adclass(catetag, 'btn-success')
+        for (let k = 0; k < posts_cache.length; k++) {
+            for (let l = 0; l < posts_cache[k].categories.length; l++) {
+                if (posts_cache[k].categories[l] === catetag.innerText) {
+                    filter_posts_cache.push(posts_cache[k])
+                }
+            }
+        }
+    } else {
+        stgts.attr('disabled', false)
+        stgcs.attr('disabled', false)
+        rmclass(catetag, 'btn-success')
+        adclass(catetag, 'btn-light')
+    }
+    if (isfilter) {
+        filter()
+    }
+    if (clicknode) {
+        catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
+    }
+    scrollToTop(0)
+}
+
+function catetreenodeclick(catenode, isfilter, clicktag) {
+    if (!hasclass(catenode, 'adisable')) {
+        filter_posts_cache = new Array()
+        if (!catenode.asel) {
+            catenode.asel = true
+            $('#cates_tree div').addClass('adisable')
+            rmclass(catenode, 'adisable')
+            for (let k = 0; k < posts_cache.length; k++) {
+                for (let l = 0; l < posts_cache[k].categories.length; l++) {
+                    if (posts_cache[k].categories[l] === catenode.innerText) {
+                        filter_posts_cache.push(posts_cache[k])
+                    }
+                }
+            }
+            $('.stgt').attr('disabled', true)
+        } else {
+            catenode.asel = false
+            $('.stgt').attr('disabled', false)
+            $('#cates_tree div').removeClass('adisable')
+        }
+        if (isfilter) {
+            filter()
+        }
+        if (clicktag) {
+            catetagclick($('#' + b64.encode(catenode.innerText, true) + '_catetag')[0], false, false)
+        }
+    }
+    scrollToTop(0)
+}
+
+function setheightfordocpanel() {
+    let pbh = parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140
+    if (pbh < window.getclienth() - $(topbar)[0].clientHeight) {
+        pbh = window.getclienth() - $(topbar)[0].clientHeight
+    }
+    $(docpanel).css('height', pbh)
 }
 
 function filter() {
@@ -485,7 +535,7 @@ function pagination() {
             scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
-        $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+        setheightfordocpanel()
     })
 
     let pre = c('li')
@@ -514,7 +564,7 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
@@ -541,7 +591,7 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+                setheightfordocpanel()
                 scrollToTop(0)
                 $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
             }
@@ -569,7 +619,7 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
@@ -597,7 +647,7 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
         }
@@ -607,7 +657,7 @@ function pagination() {
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
-    $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+    setheightfordocpanel()
 }
 
 function cleansearch() {

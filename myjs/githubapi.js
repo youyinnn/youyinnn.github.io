@@ -59,27 +59,7 @@ function get_posts() {
             let stgcs = $('.stgc')
             for (let i = 0; i < stgcs.length; i++) {
                 $(stgcs[i]).bind('click', function(event) {
-                    filter_posts_cache = new Array()
-                    if (hasclass(this, 'btn-light')) {
-                        stgts.attr('disabled', true)
-                        stgcs.attr('disabled', true)
-                        rmclass(this, 'btn-light')
-                        this.disabled = false
-                        adclass(this, 'btn-success')
-                        for (let k = 0; k < posts_cache.length; k++) {
-                            for (let l = 0; l < posts_cache[k].categories.length; l++) {
-                                if (posts_cache[k].categories[l] === this.innerText) {
-                                    filter_posts_cache.push(posts_cache[k])
-                                }
-                            }
-                        }
-                    } else {
-                        stgts.attr('disabled', false)
-                        stgcs.attr('disabled', false)
-                        rmclass(this, 'btn-success')
-                        adclass(this, 'btn-light')
-                    }
-                    filter()
+                    catetagclick(this, true, true)
                 })
             }
             for (let i = 0; i < stgts.length; i++) {
@@ -116,7 +96,7 @@ function get_posts() {
             rmclass(cates_tree_panel, 'myhide')
             adclass(cates_tree_panel, 'myshow')
             showbbt()
-            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+            setheightfordocpanel()
             hideloading()
         })
     }, timeoutfunc)
@@ -136,7 +116,7 @@ function get_post(number) {
             text += '\r\n\r\n<div class="copyrightbox" style="padding: 1.5rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
             copytext = text
             text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\r\n\r\n'
-            text += '\r\n\r\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark" data-toggle="tooltip" data-placement="right" data-original-title="" data-trigger="manual">Privous</button><button id="nextpostbtn" class="btn btn-dark" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="" data-trigger="manual">Next</button></div> \r\n\r\n'
+            text += '\r\n\r\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" data-trigger="manual">Privous</button><button id="nextpostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="" data-trigger="manual">Next</button></div> \r\n\r\n'
             text += '\r\n\r\n<div id="commentline"></div> \r\n\r\n'
             text += '## Post comments\r\n'
             if (re.length === 0) {
@@ -214,9 +194,10 @@ function get_post(number) {
                 })
 
                 if (preindex === -1) {
-                    $('#prepostbtn').remove('btn-dark')
+                    $('#prepostbtn').removeClass('btn-dark')
                     $('#prepostbtn').addClass('btn-secondary disabled')
                 } else {
+                    $('#prepostbtn').removeClass('disabled')
                     let prearr = postorder[preindex].split('<=>')
                     let pretitle = prearr[0]
                     let prenumber = prearr[1]
@@ -227,9 +208,10 @@ function get_post(number) {
                     })
                 }
                 if (nextindex === postorder.length) {
-                    $('#nextpostbtn').remove('btn-dark')
+                    $('#nextpostbtn').removeClass('btn-dark')
                     $('#nextpostbtn').addClass('btn-secondary disabled')
                 } else {
+                    $('#nextpostbtn').removeClass('disabled')
                     let nextarr = postorder[nextindex].split('<=>')
                     let nexttitle = nextarr[0]
                     let nextnumber = nextarr[1]

@@ -85,7 +85,7 @@
 }
 
 #categories {
-  display: none;
+  /* display: none; */
 }
 
 #docpanel {
@@ -685,9 +685,8 @@
 .tgs {
   position: absolute !important;
   z-index: 300;
-  background-color: white;
+  background-color: #343a40;
   padding: 1rem;
-  border-bottom: #474f57 2px dashed;
   transform: translateY(0rem);
   overflow-x: hidden;
   overflow-y: auto;
@@ -695,6 +694,7 @@
   margin: 0 .5rem;
   left: 0;
   right: 0;
+  color: white;
 }
 
 .stgt {
