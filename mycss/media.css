@@ -149,6 +149,9 @@
 */
 
 @media screen and (max-height: 812px) and (max-width: 515px) {
+  .tooltip{
+    display: none !important;
+  }
   .postmore{
     display: none;
   }
