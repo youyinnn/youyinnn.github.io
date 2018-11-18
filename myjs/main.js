@@ -296,22 +296,20 @@ function searchpost(text) {
 function postsmetadatahandle(postmetadata) {
     let postcache = postmetadata
     for (let i = 0; i < postcache.categories.length; i++) {
-        let cate = b64.encode(postcache.categories[i])
-        cate = cate.replace(/[@#=+-]/gm, '')
+        // handle cates_tree
+        let cate = b64.encode(postcache.categories[i], true)
         if ($('#' + cate + '_treenode').length === 0) {
             let node = c('li')
             node.id = cate + '_treenode'
             adclass(node, 'treenode')
-            let noa = c('a')
-            noa.href = 'javascript:void(0)'
-            noa.target = '_blank'
+            let noa = c('div')
             noa.innerText = postcache.categories[i]
             $(noa).bind('click', function(event) {
                 if (!hasclass(this, 'adisable')) {
                     filter_posts_cache = new Array()
                     if (!this.asel) {
                         this.asel = true
-                        $('#cates_tree a').addClass('adisable')
+                        $('#cates_tree div').addClass('adisable')
                         rmclass(this, 'adisable')
                         for (let k = 0; k < posts_cache.length; k++) {
                             for (let l = 0; l < posts_cache[k].categories.length; l++) {
@@ -324,21 +322,35 @@ function postsmetadatahandle(postmetadata) {
                     } else {
                         this.asel = false
                         $('.stgt').attr('disabled', false)
-                        $('#cates_tree a').removeClass('adisable')
+                        $('#cates_tree div').removeClass('adisable')
                     }
                     filter()
                 }
             })
             appendc(node, noa)
+            // root category add on cates_tree directly
             if (i === 0) {
-                appendc(cates_tree, node)
+                appendliwithorder(cates_tree, node)
             } else {
-                let parentnodeid = b64.encode(postcache.categories[i - 1])
-                parentnodeid = parentnodeid.replace(/[@#=+-]/gm, '')
-                appendc($('#' + parentnodeid + '_treenode')[0], node)
+                // if not find parent root element and add child element
+                let parentnodeid = b64.encode(postcache.categories[i - 1], true)
+                appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
             }
         }
+
+        // handle cates panel
+        let haved = false
+        for (let j = 0; j < all_cates.length; j++) {
+            if (all_cates[j] === postcache.categories[i]) {
+                haved = true
+            }
+        }
+        if (!haved) {
+            all_cates.push(postcache.categories[i])
+            cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
+        }
     }
+    // handle tags panel
     if (postcache.tags !== undefined) {
         for (let i = 0; i < postcache.tags.length; i++) {
             let haved = false
@@ -353,18 +365,22 @@ function postsmetadatahandle(postmetadata) {
             }
         }
     }
-    for (let i = 0; i < postcache.categories.length; i++) {
-        let haved = false
-        for (let j = 0; j < all_cates.length; j++) {
-            if (all_cates[j] === postcache.categories[i]) {
-                haved = true
+}
+
+// set order by string natural order for categories panel
+function appendliwithorder(parentelement, newchildelement) {
+    let cns = parentelement.childNodes
+    let newchildcatename = b64.decode(newchildelement.id.split('_')[0])
+    for (let i = 0; i < cns.length; i++) {
+        if (cns[i].tagName === 'LI') {
+            let brothercatename = b64.decode(cns[i].id.split('_')[0])
+            if (brothercatename > newchildcatename) {
+                $(cns[i]).before(newchildelement)
+                return
             }
         }
-        if (!haved) {
-            all_cates.push(postcache.categories[i])
-            cates.innerHTML += '<button class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
-        }
     }
+    $(parentelement).append(newchildelement)
 }
 
 function filter() {

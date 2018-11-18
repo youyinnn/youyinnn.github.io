@@ -67,22 +67,21 @@
   margin-left: 1rem;
 }
 
-.treenode a {
+.treenode div {
+  display: inline;
   color: #000;
   word-break: break-all;
+  transition: all .2s;
+  cursor: pointer;
 }
 
-.treenode a:hover {
-  color: rgb(54, 54, 54);
+.treenode div:hover {
+  text-decoration-line: underline;
 }
 
 .adisable {
   cursor: default;
   color: rgb(187, 187, 187) !important;
-}
-
-.adisable:hover {
-  text-decoration: none !important;
 }
 
 #categories {

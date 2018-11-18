@@ -80,6 +80,12 @@ $(function() {
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
     })
+    $(window).resize(function() {
+        if (location.href.endsWith('?to=posts')) {
+            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+            $(docpanel).css('height', parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140)
+        }
+    });
 })
 
 $.fn.extend({
