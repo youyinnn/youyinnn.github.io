@@ -80,8 +80,9 @@
 }
 
 .adisable {
-  cursor: default;
+  cursor: not-allowed !important;
   color: rgb(187, 187, 187) !important;
+  text-decoration-line: none !important;
 }
 
 #categories {

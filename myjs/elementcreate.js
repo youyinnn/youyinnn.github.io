@@ -24,7 +24,7 @@ function createpostcard(item, pagebelong) {
     $(posttitle).click(function () {
         location = '/' + '?to=post&number=' + posttitle.number
     })
-    sp1.innerHTML = '# 发布于 ' + daybefore(dayjs(item.created_at)) + ' | 更新于' + daybefore(dayjs(item.updated_at))
+    sp1.innerHTML = '# 创于 ' + daybefore(dayjs(item.date)) + ' | 发于 ' + daybefore(dayjs(item.created_at)) + ' | 更于' + daybefore(dayjs(item.updated_at))
     let catestaghtml = ''
     let content = ''
     if (item.categories !== undefined && item.categories.length !== 0) {

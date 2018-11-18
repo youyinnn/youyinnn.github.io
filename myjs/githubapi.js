@@ -68,7 +68,7 @@ function get_posts() {
                     if (hasclass(this, 'btn-light')) {
                         stgts.attr('disabled', true)
                         stgcs.attr('disabled', true)
-                        $('.treenode a').addClass('adisable')
+                        $('.treenode div').addClass('adisable')
                         rmclass(this, 'btn-light')
                         this.disabled = false
                         adclass(this, 'btn-info')
@@ -84,7 +84,7 @@ function get_posts() {
                     } else {
                         stgts.attr('disabled', false)
                         stgcs.attr('disabled', false)
-                        $('.treenode a').removeClass('adisable')
+                        $('.treenode div').removeClass('adisable')
                         rmclass(this, 'btn-info')
                         adclass(this, 'btn-light')
                     }
@@ -113,7 +113,7 @@ function get_post(number) {
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
             let copytext
-            text += '\r\n\r\n<div class="copyrightbox" style="padding: 1.5rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
+            text += '\r\n\r\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
             copytext = text
             text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\r\n\r\n'
             text += '\r\n\r\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" data-trigger="manual">Privous</button><button id="nextpostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="" data-trigger="manual">Next</button></div> \r\n\r\n'
