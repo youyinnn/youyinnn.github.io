@@ -205,37 +205,40 @@ function get_post(number) {
                 let postorder = re[2].body.split('>--<')
                 let preindex
                 let nextindex
-                postorder.find(function (issuesnumber, nowindex) {
-                    if (issuesnumber === document.title + '<=>' + number) {
+                postorder.find(function(now, nowindex) {
+                    if (now === document.title + '<=>' + number) {
                         preindex = nowindex - 1
                         nextindex = nowindex + 1
                         return true
                     }
                 })
-                let prearr = postorder[preindex].split('<=>')
-                let nextarr = postorder[nextindex].split('<=>')
-                let pretitle = prearr[0]
-                let prenumber = prearr[1]
-                let nexttitle = nextarr[0]
-                let nextnumber = nextarr[1]
-                $('#prepostbtn').attr('data-original-title', pretitle)
-                $('#prepostbtn').tooltip('show')
-                $('#nextpostbtn').attr('data-original-title', nexttitle)
-                $('#nextpostbtn').tooltip('show')
-                $('#prepostbtn').click(function() {
-                    if (preindex === -1) {
-                        barmsg('This is the first post.')
-                    } else {
+
+                if (preindex === -1) {
+                    $('#prepostbtn').remove('btn-dark')
+                    $('#prepostbtn').addClass('btn-secondary disabled')
+                } else {
+                    let prearr = postorder[preindex].split('<=>')
+                    let pretitle = prearr[0]
+                    let prenumber = prearr[1]
+                    $('#prepostbtn').attr('data-original-title', pretitle)
+                    $('#prepostbtn').tooltip('show')
+                    $('#prepostbtn').click(function() {
                         location = '/' + '?to=post&number=' + prenumber
-                    }
-                })
-                $('#nextpostbtn').click(function() {
-                    if (nextindex === postorder.length) {
-                        barmsg('This is the last post.')
-                    } else {
+                    })
+                }
+                if (nextindex === postorder.length) {
+                    $('#nextpostbtn').remove('btn-dark')
+                    $('#nextpostbtn').addClass('btn-secondary disabled')
+                } else {
+                    let nextarr = postorder[nextindex].split('<=>')
+                    let nexttitle = nextarr[0]
+                    let nextnumber = nextarr[1]
+                    $('#nextpostbtn').attr('data-original-title', nexttitle)
+                    $('#nextpostbtn').tooltip('show')
+                    $('#nextpostbtn').click(function() {
                         location = '/' + '?to=post&number=' + nextnumber
-                    }
-                })
+                    })
+                }
             }, 100 * 1000)
         }, timeoutfunc)
     }, timeoutfunc)
