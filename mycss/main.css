@@ -309,7 +309,8 @@
   display: none;
 }
 
-.post img {
+.post img,
+.postshortmsg img {
   display: block;
   margin: auto;
   left: 0;
