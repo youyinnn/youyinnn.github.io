@@ -296,7 +296,7 @@ function searchpost(text) {
 function postsmetadatahandle(postmetadata) {
     let postcache = postmetadata
     for (let i = 0; i < postcache.categories.length; i++) {
-        // handle cates_tree
+        // handle cates_tree_body
         let cate = b64.encode(postcache.categories[i], true)
         if ($('#' + cate + '_treenode').length === 0) {
             let node = c('li')
@@ -308,9 +308,9 @@ function postsmetadatahandle(postmetadata) {
                 catetreenodeclick(this, true, true)
             })
             appendc(node, noa)
-            // root category add on cates_tree directly
+            // root category add on cates_tree_body directly
             if (i === 0) {
-                appendliwithorder(cates_tree, node)
+                appendliwithorder(cates_tree_body, node)
             } else {
                 // if not find parent root element and add child element
                 let parentnodeid = b64.encode(postcache.categories[i - 1], true)
@@ -400,7 +400,7 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
         filter_posts_cache = new Array()
         if (!catenode.asel) {
             catenode.asel = true
-            $('#cates_tree div').addClass('adisable')
+            $('#cates_tree_body div').addClass('adisable')
             rmclass(catenode, 'adisable')
             for (let k = 0; k < posts_cache.length; k++) {
                 for (let l = 0; l < posts_cache[k].categories.length; l++) {
@@ -413,7 +413,7 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
         } else {
             catenode.asel = false
             $('.stgt').attr('disabled', false)
-            $('#cates_tree div').removeClass('adisable')
+            $('#cates_tree_body div').removeClass('adisable')
         }
         if (isfilter) {
             filter()
@@ -830,7 +830,11 @@ function daybefore(pastdayjs) {
         }
     }
     if (before > 24 && before < 48) return ' <x style="color:#46bbcd;">前天</x>'
-    return ' <x style="color:#46bbcd;">' + Math.ceil(before / 24) + '天前</x>'
+    return Math.ceil(before / 24)
+}
+
+function postcarddate(pastdayjs) {
+    return ' <x style="color:#46bbcd;">' + daybefore(pastdayjs) + '天前</x>'
 }
 
 function setarrow() {

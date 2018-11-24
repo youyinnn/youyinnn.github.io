@@ -110,13 +110,38 @@
 
     </div>
 
-    <div id="cates_tree_panel" class="unselectable myhide new_font">
-        <div id="cates_tree_head">Categories</div>
-        <div id="cates_tree"></div>
+    <div id="posts_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Posts categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog statistic</div>
+        <table id="blog_statistic_body">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total post:</td>
+                    <td style="text-align:left" id="stat_post_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div id="docpanel" class="myhide new_font">
         <div id="postsearch" class="input-group">
-            <input id="postsearchtext" type="text" class="form-control" autocomplete="off">
+            <input id="postsearchtext" type="text" class="form-control" autocomplete="off" placeholder="search from title">
             <div class="input-group-append">
                 <button id="cleanbut" class="btn btn-dark" type="button">cls</button>
                 <button id="categories" class="btn btn-dark" type="button">cates</button>

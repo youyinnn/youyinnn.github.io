@@ -26,7 +26,7 @@ function createpostcard(item, pagebelong) {
     $(posttitle).click(function () {
         location = '/' + '?to=post&number=' + posttitle.number
     })
-    sp1.innerHTML = '# 创于 ' + daybefore(dayjs(item.date)) + ' | 发于 ' + daybefore(dayjs(item.created_at)) + ' | 更于' + daybefore(dayjs(item.updated_at))
+    sp1.innerHTML = '# 创于 ' + postcarddate(dayjs(item.date)) + ' | 发于 ' + postcarddate(dayjs(item.created_at)) + ' | 更于' + postcarddate(dayjs(item.updated_at))
     let catestaghtml = ''
     let content = ''
     if (item.categories !== undefined && item.categories.length !== 0) {
@@ -128,9 +128,9 @@ function createposthead(re) {
     adclass(sp5, 'font-weight-bold mr-2')
     adclass(sp6, 'mdcharlength')
     sp1.innerHTML = 'Post:'
-    sp2.innerHTML = dayjs(re.created_at).format('MMM,DD YYYY') + daybefore(dayjs(re.created_at))
+    sp2.innerHTML = dayjs(re.created_at).format('MMM,DD YYYY') + postcarddate(dayjs(re.created_at))
     sp3.innerHTML = '<br>Mod:'
-    sp4.innerHTML = dayjs(re.updated_at).format('MMM,DD YYYY') + daybefore(dayjs(re.updated_at))
+    sp4.innerHTML = dayjs(re.updated_at).format('MMM,DD YYYY') + postcarddate(dayjs(re.updated_at))
     sp5.innerHTML = '<br>Chars:'
     posttitle.innerHTML = title
     appendc(posttime, sp1)
@@ -158,10 +158,10 @@ function showhexometadata(hexometadata) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Title:</span> ' + hexometadata.title + '<br>'
     }
     if (hexometadata.date !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8).format('MMM,DD YYYY') + daybefore(dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8)) + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Date:</span> ' + dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8).format('MMM,DD YYYY') + postcarddate(dayjs(hexometadata.date).set('hour', dayjs(hexometadata.date).hour() - 8)) + '<br>'
     }
     if (hexometadata.updated !== undefined) {
-        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8).format('MMM,DD YYYY') + daybefore(dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8)) + '<br>'
+        metadatapanelbody.innerHTML += '<span class="badge badge-light">Updated:</span> ' + dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8).format('MMM,DD YYYY') + postcarddate(dayjs(hexometadata.updated).set('hour', dayjs(hexometadata.updated).hour() - 8)) + '<br>'
     }
     if (hexometadata.comments !== undefined) {
         metadatapanelbody.innerHTML += '<span class="badge badge-light">Comments:</span> ' + hexometadata.comments + '<br>'
@@ -197,7 +197,7 @@ function createtodo(issuesbody, re) {
     for (let i = re.length - 1; i >= 0; --i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card todo-card" id="search-' + (re.length - i - 1) + '"> <div class="card-header todo-head"> <span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span> <p style="margin:0; text-align: right">' + dayjs(head).format('MMM,DD YYYY') + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + ' </p> </div> <div class="card-body todo-body"> <p class="card-text todo-text">\r\n' + text + '\r\n</p> </div> </div><br>'
+        fulltext += '<div class="card todo-card" id="search-' + (re.length - i - 1) + '"> <div class="card-header todo-head"> <span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span> <p style="margin:0; text-align: right">' + dayjs(head).format('MMM,DD YYYY') + postcarddate(dayjs(head).set('hour', dayjs(head).hour() - 8)) + ' </p> </div> <div class="card-body todo-body"> <p class="card-text todo-text">\r\n' + text + '\r\n</p> </div> </div><br>'
     }
     $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)
@@ -212,7 +212,7 @@ function createscript(issuesbody, re) {
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + daybefore(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
+        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + postcarddate(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body"><p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
     }
     $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)

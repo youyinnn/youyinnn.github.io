@@ -49,11 +49,18 @@ function get_posts() {
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
     sendget(urlhandle(url), function(re) {
         get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+            let site_birthday = '2017-11-5'
+            $('#stat_running').html('<x style="color:#494b78;">' + daybefore(dayjs(site_birthday)) + '</x> days')
+            let totalchars = 0
             posts_cache = yaml.load(re[0].body)
             for (let i = 0; i < posts_cache.length; i++) {
+                totalchars += posts_cache[i].char_count
                 postsmetadatahandle(posts_cache[i])
             }
-            $('#postsearchtext')[0].placeholder = 'ps:' + posts_cache.length + ',ts:' + all_tags.length + ',cs:' + all_cates.length
+            $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
+            $('#stat_post_count').html('<x style="color:#494b78;">' + (posts_cache.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> post')
+            $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cate')
+            $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tag')
             rstopaging(posts_cache)
             let stgts = $('.stgt')
             let stgcs = $('.stgc')
@@ -93,8 +100,8 @@ function get_posts() {
             }
             rmclass(docpanel, 'myhide')
             adclass(docpanel, 'myshow')
-            rmclass(cates_tree_panel, 'myhide')
-            adclass(cates_tree_panel, 'myshow')
+            rmclass(posts_side_panel, 'myhide')
+            adclass(posts_side_panel, 'myshow')
             showbbt()
             setheightfordocpanel()
             hideloading()
