@@ -112,7 +112,7 @@ function get_post(number) {
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
-            let copytext
+            let charlength = text.length
             text += '\r\n\r\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin-bottom: 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\r\n\r\n'
             copytext = text
             text += '\r\n\r\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\r\n\r\n'
@@ -127,6 +127,7 @@ function get_post(number) {
                 }
             }
             render_md(text)
+            $('.mdcharlength').text(charlength + ' c')
             hideloading()
             $(md).animateCss('fadeIn')
             adclass(md, 'parrow')
@@ -377,6 +378,7 @@ function syncatesToconfig() {
                     metadata = yaml.dump(metadata)
                 }
                 metadata = yaml.load(metadata)
+                metadata.char_count = rei.body.length
                 metadata.number = rei.number
                 metadata.created_at = rei.created_at
                 metadata.updated_at = rei.updated_at

@@ -7,6 +7,7 @@ function createpostcard(item, pagebelong) {
     let postmore = c('a')
     let tagsandcates = c('div')
     let tagsbox = c('div')
+    let charsbox = c('div')
     let catestag = c('span')
     adclass(postcard, 'postcard')
     adclass(posttitle, 'postcardtitle font-weight-bold')
@@ -15,6 +16,7 @@ function createpostcard(item, pagebelong) {
     adclass(postshortmsg, 'postshortmsg')
     adclass(postmore, 'postmore')
     tagsbox.style.marginTop = '5px'
+    charsbox.style.marginTop = '5px'
     posttitle.innerHTML = item.title
     posttitle.number = item.number
     postcard.id = 'post_' + item.number
@@ -49,11 +51,13 @@ function createpostcard(item, pagebelong) {
     }
     tagsboxhtml = 'Tags: ' + content
     tagsbox.innerHTML = tagsboxhtml
+    charsbox.innerHTML = 'Chars: ' + item.char_count + ' c'
     appendc(postcard, posttitle)
     appendc(posttime, sp1)
     appendc(postcard, posttime)
     appendc(tagsandcates, catestag)
     appendc(tagsandcates, tagsbox)
+    appendc(tagsandcates, charsbox)
     appendc(postcard, tagsandcates)
     appendc(postcard, postshortmsg)
     appendc(postcard, postmore)
@@ -114,20 +118,27 @@ function createposthead(re) {
     let sp2 = c('span')
     let sp3 = c('span')
     let sp4 = c('span')
+    let sp5 = c('span')
+    let sp6 = c('span')
     adclass(posthead, 'posthead onepost')
     adclass(posttitle, 'posttitle')
     adclass(posttime, 'posttime')
     adclass(sp1, 'font-weight-bold mr-2')
     adclass(sp3, 'font-weight-bold mr-2')
+    adclass(sp5, 'font-weight-bold mr-2')
+    adclass(sp6, 'mdcharlength')
     sp1.innerHTML = 'Post:'
     sp2.innerHTML = dayjs(re.created_at).format('MMM,DD YYYY') + daybefore(dayjs(re.created_at))
     sp3.innerHTML = '<br>Mod:'
     sp4.innerHTML = dayjs(re.updated_at).format('MMM,DD YYYY') + daybefore(dayjs(re.updated_at))
+    sp5.innerHTML = '<br>Chars:'
     posttitle.innerHTML = title
     appendc(posttime, sp1)
     appendc(posttime, sp2)
     appendc(posttime, sp3)
     appendc(posttime, sp4)
+    appendc(posttime, sp5)
+    appendc(posttime, sp6)
     appendc(posthead, posttitle)
     appendc(posthead, posttime)
     appendc(md, posthead)
