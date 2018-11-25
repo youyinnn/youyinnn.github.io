@@ -179,3 +179,7 @@ x{
 .btn.disabled, .btn:disabled {
   cursor: not-allowed;
 }
+
+.tooltip{
+  z-index: 202 !important;
+}
