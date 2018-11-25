@@ -294,12 +294,13 @@
 
 .postmore {
   background-color: var(--ymain-color);
-  padding: 0 0.5rem;
+  padding: 0 .5rem;
   display: inline-block;
   color: white;
   text-align: center;
   text-decoration: none;
   width: 4rem;
+  margin-bottom: .5rem
 }
 
 .postmore:hover {
