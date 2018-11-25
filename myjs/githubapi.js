@@ -58,9 +58,9 @@ function get_posts() {
                 postsmetadatahandle(posts_cache[i])
             }
             $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
-            $('#stat_post_count').html('<x style="color:#494b78;">' + (posts_cache.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> post')
-            $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cate')
-            $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tag')
+            $('#stat_post_count').html('<x style="color:#494b78;">' + (posts_cache.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
+            $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
+            $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
             rstopaging(posts_cache)
             let stgts = $('.stgt')
             let stgcs = $('.stgc')
