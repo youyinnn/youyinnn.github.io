@@ -45,6 +45,7 @@ function urlhandle(url) {
 function get_posts() {
     $('#pgboxbox').remove()
     $('.treenode').remove()
+    $('#blog_statistic_body').addClass('myhide')
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
     sendget(urlhandle(url), function(re) {
@@ -105,6 +106,7 @@ function get_posts() {
             showbbt()
             setheightfordocpanel()
             hideloading()
+            $('#blog_statistic_body').removeClass('myhide')
         })
     }, timeoutfunc)
 }
