@@ -834,7 +834,13 @@ function daybefore(pastdayjs) {
 }
 
 function postcarddate(pastdayjs) {
-    return ' <x style="color:#46bbcd;">' + daybefore(pastdayjs) + '天前</x>'
+    let daybeforers = daybefore(pastdayjs)
+    let daynumber = parseInt(daybeforers)
+    if (Number.isNaN(daynumber)) {
+        return daybeforers
+    } else {
+        return ' <x style="color:#46bbcd;">' + daynumber + '天前</x>'
+    }
 }
 
 function setarrow() {
