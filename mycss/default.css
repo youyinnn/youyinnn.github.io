@@ -183,3 +183,7 @@ x{
 .tooltip{
   z-index: 202 !important;
 }
+
+.dropdown-item{
+  transition: all .2s;
+}

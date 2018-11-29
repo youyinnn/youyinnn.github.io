@@ -410,6 +410,7 @@
 .ah {
   cursor: pointer;
   color: aliceblue;
+  transition: all .2s;
 }
 
 .ah:hover {
@@ -1136,4 +1137,15 @@
   height: 1.5rem;
   border-radius: 0;
   font-size: 14px;
+}
+
+.asciicast{
+  margin: auto !important;
+  left: 0;
+  right: 0;
+  width: inherit;
+}
+
+body.iframe .powered{
+  text-align: left !important;
 }
