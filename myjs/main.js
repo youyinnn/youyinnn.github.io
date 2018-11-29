@@ -66,7 +66,7 @@ function render_md(text) {
     text = text.replace('<acob/>', '<span id="acob">全部展开</span>')
     editormd.markdownToHTML('md', {
         markdown: text,
-        htmlDecode: 'style,script,iframe',
+        htmlDecode: 'style,script',
         tocm: true, // Using [TOCM]
         tocContainer: '#sidetoc',
         taskList: true,
