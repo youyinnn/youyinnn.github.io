@@ -82,8 +82,10 @@ $(function() {
     })
     $(window).resize(function() {
         if (location.href.endsWith('?to=posts')) {
-            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
-            setheightfordocpanel()
+            setTimeout(function() {
+                setheightfordocpanel()
+                $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            }, 250);
         }
     });
 })
