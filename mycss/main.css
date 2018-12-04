@@ -114,6 +114,7 @@
   bottom: 0;
   padding: .5rem;
   background-color: whitesmoke;
+  transition: all .2s;
 }
 
 #sidetoccontainer {

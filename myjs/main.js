@@ -10,7 +10,7 @@ function render_md(text) {
         let endindex = text.indexOf('---', 3) + 3
         let hexo_metadata = gethexofrontmatter(text)
         hexo_metadata = yaml.load(hexo_metadata.replace(/\r\n/gm, '\n'))
-        window.postcomment = hexo_metadata.comments
+        window.postcomment = hexo_metadata.comments === undefined ? true : hexo_metadata.comments
         showhexometadata(hexo_metadata)
         text = text.substring(endindex, text.length)
     }
