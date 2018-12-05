@@ -293,11 +293,6 @@
     opacity: 1 !important;
   }
 
-  button,
-  input {
-    border-radius: 0 !important;
-  }
-
   button {
     padding: 0.3rem !important;
   }
