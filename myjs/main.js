@@ -165,22 +165,25 @@ function searchscript(text) {
         searchone = 0
     }
     searchtext = text
+    // for last flag
     if (text === '#l' || text === '#last') {
         $('html,body').animate({
             scrollTop: $('#search-' + (searchcount - 1)).offset().top - 52
-        }, 300);
+        }, 600);
         return
     }
+    // for number flag
     if (text.search(/#[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?/g) !== -1) {
         let searchid = '#search-' + text.split('#')[1]
         let search = $(searchid)
         if (search[0] !== undefined) {
             $('html,body').animate({
                 scrollTop: search.offset().top - 52
-            }, 300);
+            }, 600);
             return
         }
     } else {
+        // search context
         text = text.split('-i,')
         let isi = true
         if (text.length > 1) {
@@ -207,11 +210,14 @@ function searchscript(text) {
             }
             if (get) {
                 searchone = i + 1
-                scrolltoelement(search[0].id)
+                $('html,body').animate({
+                    scrollTop: $('#' + search[0].id).offset().top - 52
+                }, 600, 'swing');
                 searchbut.innerText = 'Get #' + i
-                setTimeout(function() {
+                clearTimeout(window.scc)
+                window.scc = setTimeout(function() {
                     searchbut.innerText = 'Search'
-                }, 1000, 'swing')
+                }, 1500, 'swing')
                 return
             }
         }
@@ -223,15 +229,6 @@ function searchscript(text) {
         $('#searchtext').removeClass('getnothing')
     }, 1000, 'swing')
     searchone = 0
-}
-
-function scrolltoelement(elementid) {
-    if ($('#' + elementid)[0].oset === undefined) {
-        $('#' + elementid)[0].oset = $('#' + elementid).offset().top
-    }
-    $('html,body').animate({
-        scrollTop: $('#' + elementid)[0].oset - 52
-    }, 600, 'swing');
 }
 
 function setgohub(text, href) {
@@ -431,6 +428,7 @@ function setheightfordocpanel() {
         pbh = window.getclienth() - $(topbar)[0].clientHeight
     }
     $(docpanel).css('height', pbh)
+    $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
 }
 
 function filter() {

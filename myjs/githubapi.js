@@ -104,9 +104,11 @@ function get_posts() {
             rmclass(posts_side_panel, 'myhide')
             adclass(posts_side_panel, 'myshow')
             showbbt()
-            setheightfordocpanel()
-            hideloading()
             $('#blog_statistic_body').removeClass('myhide')
+            hideloading()
+            setTimeout(() => {
+                setheightfordocpanel()
+            }, 100);
         })
     }, timeoutfunc)
 }

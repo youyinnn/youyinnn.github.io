@@ -84,7 +84,6 @@ $(function() {
         if (location.href.endsWith('?to=posts')) {
             setTimeout(function() {
                 setheightfordocpanel()
-                $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             }, 250);
         }
     });
