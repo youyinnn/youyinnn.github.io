@@ -431,20 +431,37 @@ function setheightfordocpanel() {
     $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
 }
 
-function filter() {
+function filter(latest) {
     nowpage = 1
     $('#pgboxbox').addClass('pageboxhide')
     $('.pagination').addClass('myhide')
     setTimeout(function() {
         $('#pgboxbox').remove()
         $('.pagination').remove()
+        let pc
         if (filter_posts_cache.length === 0) {
-            rstopaging(posts_cache)
+            pc = posts_cache
         } else {
-            rstopaging(filter_posts_cache)
+            pc = filter_posts_cache
         }
+        if (latest === true) {
+            pc = pc.sort(sortpostbyupdatedate)
+        } else {
+            pc = pc.sort(sortpostbycreatedate)
+        }
+        rstopaging(pc)
         postsearchrs = new Array()
     }, 100);
+}
+
+function sortpostbyupdatedate(a, b) {
+    return a.updated_at > b.updated_at ? -1 :
+             a.updated_at === b.updated_at ? 0 : 1
+}
+
+function sortpostbycreatedate(a, b) {
+    return a.created_at > b.created_at ? -1 :
+             a.created_at === b.created_at ? 0 : 1
 }
 
 function rstopaging(posts) {

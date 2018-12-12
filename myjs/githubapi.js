@@ -37,7 +37,7 @@ function urlhandle(url) {
     } else {
         url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     }
-    console.log('send post :' + url)
+    // console.log('send post :' + url)
     return url
 }
 
@@ -62,7 +62,7 @@ function get_posts() {
             $('#stat_post_count').html('<x style="color:#494b78;">' + (posts_cache.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
             $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
             $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
-            rstopaging(posts_cache)
+            rstopaging(posts_cache.sort(sortpostbyupdatedate))
             let stgts = $('.stgt')
             let stgcs = $('.stgc')
             for (let i = 0; i < stgcs.length; i++) {
@@ -295,7 +295,7 @@ function get_friendlinked() {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
             }
         }
-        console.log('send get :' + url)
+        // console.log('send get :' + url)
         $.ajax(basegetset).done(function(re) {
             fldd.innerHTML = ''
             let text = re[0].body

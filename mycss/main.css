@@ -72,7 +72,7 @@
   margin-bottom: .5rem;
 }
 
-#blog_statistic_body td{
+#blog_statistic_body td {
   padding: .2rem .7rem;
 }
 
@@ -1132,20 +1132,36 @@
   top: 2.5rem;
 }
 
-#movebtn button{
+#movebtn button {
   line-height: .6rem;
   height: 1.5rem;
   border-radius: 0;
   font-size: 14px;
 }
 
-.asciicast{
+.asciicast {
   margin: auto !important;
   left: 0;
   right: 0;
   width: inherit;
 }
 
-body.iframe .powered{
+body.iframe .powered {
   text-align: left !important;
+}
+
+.postorderbtn {
+  position: absolute;
+  right: .6rem;
+  z-index: 290;
+  display: inline-block;
+  margin: 1rem 0 0;
+  width: 19px;
+  background-color: whitesmoke;
+}
+
+.postorderbtn button {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
+  padding: .1rem;
+  width: 20px;
 }

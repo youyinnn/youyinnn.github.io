@@ -2619,7 +2619,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .btn.disabled,
 .btn:disabled {
-  opacity: .65
+  opacity: .65;
+  transition: all .2s;
 }
 
 .btn:not(:disabled):not(.disabled) {
