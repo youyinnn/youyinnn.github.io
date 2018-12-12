@@ -119,4 +119,14 @@ $(function() {
     $('#share_png_paned_close').bind('click', function() {
         $('#share_png_panel').addClass('myhide')
     })
+    $('#corder').bind('click', function() {
+        $('#corder').attr('disabled', '')
+        $('#norder').removeAttr('disabled')
+        filter()
+    })
+    $('#norder').bind('click', function() {
+        $('#norder').attr('disabled', '')
+        $('#corder').removeAttr('disabled')
+        filter(true)
+    })
 })

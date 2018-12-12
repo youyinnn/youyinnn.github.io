@@ -57,7 +57,7 @@
             <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
         </li>
 
-        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="点击以显示/隐藏TopBar">
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
 
         </div>
     </ol>
@@ -143,10 +143,10 @@
         <div id="postsearch" class="input-group">
             <input id="postsearchtext" type="text" class="form-control" autocomplete="off" placeholder="search from title">
             <div class="input-group-append">
-                <button id="cleanbut" class="btn btn-dark" type="button">cls</button>
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
                 <button id="categories" class="btn btn-dark" type="button">cates</button>
-                <button id="tags" class="btn btn-dark" type="button">tags</button>
-                <button id="postsearchbut" class="btn btn-dark" type="button">sch</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="postsearchbut" class="btn btn-dark" type="button" title="search">sch</button>
             </div>
         </div>
         <div class="tgs myhide" id="all_cates">
@@ -157,11 +157,15 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
+        <div class="postorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created">c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" disabled>n</button>
+        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
         <div id="block">
-            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="点击回到顶部">0%</div>
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
         </div>
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
@@ -176,8 +180,8 @@
     </div>
 
     <div id="bbt" class="myhide new_font">
-        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="点击以显示/隐藏Toc">Toc</a>
-        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击去往Github页面">unuse</a>
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
     </div>
 
     <div id="share_png_panel" class="myhide">
