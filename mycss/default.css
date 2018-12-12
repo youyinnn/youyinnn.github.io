@@ -169,7 +169,7 @@ x{
 .markdown-body a:active, .markdown-body a:hover {
   text-decoration: none !important;
   transition: all .2s;
-  background-color: #48b3d41c;
+  background-color: #48d47d1c;
 }
 
 .tooltip-inner{
