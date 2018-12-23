@@ -233,7 +233,7 @@
   transition: transform 1.5s;
   margin: auto;
   font-size: 16px;
-  box-shadow: 7px 0px 29px -6px #777;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
 }
 
 #md table {
@@ -827,7 +827,7 @@
 }
 
 .hidetopbar {
-  background-color: #fff !important;
+  background-color: whitesmoke !important;
   width: 3rem !important;
 }
 

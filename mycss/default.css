@@ -57,6 +57,7 @@ body, html {
   backface-visibility: hidden;
   /* transform-style: preserve-3d;
   perspective: 1000; */
+  background-color: whitesmoke !important;
 }
 
 html{
