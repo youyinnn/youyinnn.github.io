@@ -108,7 +108,7 @@ function get_posts() {
             hideloading()
             setTimeout(() => {
                 setheightfordocpanel()
-            }, 100);
+            }, 250);
         })
     }, timeoutfunc)
 }
