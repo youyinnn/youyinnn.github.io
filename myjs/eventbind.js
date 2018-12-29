@@ -122,11 +122,13 @@ $(function() {
     $('#corder').bind('click', function() {
         $('#corder').attr('disabled', '')
         $('#norder').removeAttr('disabled')
-        filter(false)
+        postsod = false
+        filter()
     })
     $('#norder').bind('click', function() {
         $('#norder').attr('disabled', '')
         $('#corder').removeAttr('disabled')
-        filter(true)
+        postsod = true
+        filter()
     })
 })

@@ -384,7 +384,7 @@ function catetagclick(catetag, isfilter, clicknode) {
         adclass(catetag, 'btn-light')
     }
     if (isfilter) {
-        filter(true)
+        filter()
     }
     if (clicknode) {
         catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
@@ -413,7 +413,7 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
             $('#cates_tree_body div').removeClass('adisable')
         }
         if (isfilter) {
-            filter(true)
+            filter()
         }
         if (clicktag) {
             catetagclick($('#' + b64.encode(catenode.innerText, true) + '_catetag')[0], false, false)
@@ -431,7 +431,7 @@ function setheightfordocpanel() {
     $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
 }
 
-function filter(latest) {
+function filter() {
     nowpage = 1
     $('#pgboxbox').addClass('pageboxhide')
     $('.pagination').addClass('myhide')
@@ -444,7 +444,7 @@ function filter(latest) {
         } else {
             pc = filter_posts_cache
         }
-        if (latest === true) {
+        if (postsod) {
             pc = pc.sort(sortpostbyupdatedate)
         } else {
             pc = pc.sort(sortpostbycreatedate)
