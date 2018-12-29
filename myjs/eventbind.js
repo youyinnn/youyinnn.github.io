@@ -122,7 +122,7 @@ $(function() {
     $('#corder').bind('click', function() {
         $('#corder').attr('disabled', '')
         $('#norder').removeAttr('disabled')
-        filter()
+        filter(false)
     })
     $('#norder').bind('click', function() {
         $('#norder').attr('disabled', '')
