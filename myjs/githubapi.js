@@ -96,7 +96,7 @@ function get_posts() {
                         rmclass(this, 'btn-info')
                         adclass(this, 'btn-light')
                     }
-                    filter()
+                    filter(true)
                 })
             }
             rmclass(docpanel, 'myhide')

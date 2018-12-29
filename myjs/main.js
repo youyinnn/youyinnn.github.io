@@ -384,7 +384,7 @@ function catetagclick(catetag, isfilter, clicknode) {
         adclass(catetag, 'btn-light')
     }
     if (isfilter) {
-        filter()
+        filter(true)
     }
     if (clicknode) {
         catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
@@ -413,7 +413,7 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
             $('#cates_tree_body div').removeClass('adisable')
         }
         if (isfilter) {
-            filter()
+            filter(true)
         }
         if (clicktag) {
             catetagclick($('#' + b64.encode(catenode.innerText, true) + '_catetag')[0], false, false)
