@@ -55,12 +55,12 @@ function get_posts() {
         let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
         sendget(urlhandle(url), function(re) {
             get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-                posts_cache = yaml.load(re[0].body)
-                localStorage.setItem('pcbl', JSON.stringify(posts_cache))
+                newpc = yaml.load(re[0].body)
+                localStorage.setItem('pcbl', JSON.stringify(newpc))
                 localStorage.setItem('pcbl_timeout',
                     new Date(new Date().getTime() + pcbl_timeout_period).getTime())
                     
-                handlemetadata(posts_cache)
+                handlemetadata(newpc)
             })
         }, timeoutfunc)
     } else {
@@ -74,10 +74,8 @@ function get_posts() {
             return
         } else {
             hideloading()
-            setTimeout(function() {
-                handlemetadata(JSON.parse(pcbl))
-                showbbt()
-            }, 200);
+            handlemetadata(JSON.parse(pcbl))
+            showbbt()
         }
     }
 }
