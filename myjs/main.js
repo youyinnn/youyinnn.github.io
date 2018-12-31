@@ -277,7 +277,9 @@ function searchpost(text) {
     // post_cache bodys on localStorage
     let pcbl = localStorage.getItem('pcbl')
     // check post_cache bodys
-    if (pcbl === null) {
+    if (pcbl === null || 
+        JSON.parse(pcbl)[0].body === null ||
+        JSON.parse(pcbl)[0].body === undefined) {
         // new client
         popmsg('No cache, fetching and it might take 5-8 seconds...', 10000)
         get_all_posts(function(re) {
@@ -1020,6 +1022,7 @@ function handlemetadata(metadata) {
         totalchars += metadata[i].char_count
         metadata[i].body = null
         postsmetadatahandle(metadata[i])
+        // push for page posts to load the data
         posts_cache.push(metadata[i])
     }
     $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
