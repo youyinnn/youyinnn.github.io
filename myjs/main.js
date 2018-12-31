@@ -456,12 +456,12 @@ function filter() {
 
 function sortpostbyupdatedate(a, b) {
     return a.updated_at > b.updated_at ? -1 :
-             a.updated_at === b.updated_at ? 0 : 1
+        a.updated_at === b.updated_at ? 0 : 1
 }
 
 function sortpostbycreatedate(a, b) {
     return a.created_at > b.created_at ? -1 :
-             a.created_at === b.created_at ? 0 : 1
+        a.created_at === b.created_at ? 0 : 1
 }
 
 function rstopaging(posts) {
