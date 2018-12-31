@@ -46,71 +46,40 @@ function get_posts() {
     $('#pgboxbox').remove()
     $('.treenode').remove()
     $('#blog_statistic_body').addClass('myhide')
-    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
+    // from localStorage
+    let pcbl = localStorage.getItem('pcbl')
+    let pcbl_timeout = localStorage.getItem('pcbl_timeout')
     setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-    sendget(urlhandle(url), function(re) {
-        get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-            let site_birthday = '2017-11-5'
-            $('#stat_running').html('<x style="color:#494b78;">' + daybefore(dayjs(site_birthday)) + '</x> days')
-            let totalchars = 0
-            posts_cache = yaml.load(re[0].body)
-            for (let i = 0; i < posts_cache.length; i++) {
-                totalchars += posts_cache[i].char_count
-                postsmetadatahandle(posts_cache[i])
-            }
-            $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
-            $('#stat_post_count').html('<x style="color:#494b78;">' + (posts_cache.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
-            $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
-            $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
-            rstopaging(posts_cache.sort(sortpostbyupdatedate))
-            let stgts = $('.stgt')
-            let stgcs = $('.stgc')
-            for (let i = 0; i < stgcs.length; i++) {
-                $(stgcs[i]).bind('click', function(event) {
-                    catetagclick(this, true, true)
-                })
-            }
-            for (let i = 0; i < stgts.length; i++) {
-                $(stgts[i]).bind('click', function(event) {
-                    filter_posts_cache = new Array()
-                    if (hasclass(this, 'btn-light')) {
-                        stgts.attr('disabled', true)
-                        stgcs.attr('disabled', true)
-                        $('.treenode div').addClass('adisable')
-                        rmclass(this, 'btn-light')
-                        this.disabled = false
-                        adclass(this, 'btn-info')
-                        for (let k = 0; k < posts_cache.length; k++) {
-                            if (posts_cache[k].tags !== undefined) {
-                                for (let l = 0; l < posts_cache[k].tags.length; l++) {
-                                    if (posts_cache[k].tags[l] === this.innerText) {
-                                        filter_posts_cache.push(posts_cache[k])
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        stgts.attr('disabled', false)
-                        stgcs.attr('disabled', false)
-                        $('.treenode div').removeClass('adisable')
-                        rmclass(this, 'btn-info')
-                        adclass(this, 'btn-light')
-                    }
-                    filter()
-                })
-            }
-            rmclass(docpanel, 'myhide')
-            adclass(docpanel, 'myshow')
-            rmclass(posts_side_panel, 'myhide')
-            adclass(posts_side_panel, 'myshow')
-            showbbt()
-            $('#blog_statistic_body').removeClass('myhide')
+    if (pcbl === null && pcbl_timeout === null) {
+        // request
+        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
+        sendget(urlhandle(url), function(re) {
+            get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+                posts_cache = yaml.load(re[0].body)
+                localStorage.setItem('pcbl', JSON.stringify(posts_cache))
+                localStorage.setItem('pcbl_timeout',
+                    new Date(new Date().getTime() + pcbl_timeout_period).getTime())
+                    
+                handlemetadata(posts_cache)
+            })
+        }, timeoutfunc)
+    } else {
+        let pcbl_timeout = parseInt(localStorage.getItem('pcbl_timeout'))
+        let now = new Date().getTime()
+        // timeout
+        if (now > pcbl_timeout) {
+            localStorage.removeItem('pcbl')
+            localStorage.removeItem('pcbl_timeout')
+            get_posts()
+            return
+        } else {
             hideloading()
-            setTimeout(() => {
-                setheightfordocpanel()
-            }, 250);
-        })
-    }, timeoutfunc)
+            setTimeout(function() {
+                handlemetadata(JSON.parse(pcbl))
+                showbbt()
+            }, 200);
+        }
+    }
 }
 
 function get_post(number) {
@@ -373,52 +342,21 @@ function syncatesToconfig() {
             setTimeout(function() {
                 popmsg('Fetching...', 30000)
             }, 2100);
-            let newmsg = new Array()
+            let newpostmetadata = new Array()
+            let series = new Array()
             let postorder = new Array()
+            let pcbl = new Array()
             for (let i = 0; i < re.length; i++) {
                 let rei = re[i]
+                // order
                 postorder.push(rei.title + '<=>' + rei.number)
-                let metadata = gethexofrontmatter(rei.body)
-                if (metadata === undefined) {
-                    metadata = new Object()
-                    metadata.title = rei.title
-                    metadata.categories = new Array()
-                    metadata.categories.push('unclassfied')
-                    metadata.comments = true
-                    metadata.date = rei.created_at
-                    metadata = yaml.dump(metadata)
-                }
-                metadata = yaml.load(metadata)
-                metadata.char_count = rei.body.length
-                metadata.number = rei.number
-                metadata.created_at = rei.created_at
-                metadata.updated_at = rei.updated_at
-                let body = getdocwithnohexofrontmatter(rei.body)
-                let short = body.split(/\n/, shortmsgline)
-                while (short[0] === '\n') {
-                    short.shift()
-                }
-                let shortcontant = ''
-                let codeparecount = 0
-                for (let j = 0; j < short.length; j++) {
-                    if (short[j].search('```') === 0) {
-                        codeparecount++
-                    }
-                    shortcontant += short[j]
-                    shortcontant += '\n'
-                }
-                if (codeparecount % 2 !== 0) {
-                    shortcontant += '```'
-                    shortcontant += '\n'
-                }
-                metadata.short_contant = shortcontant
-                newmsg.push(metadata)
-            }
-            newmsg = yaml.dump(newmsg)
-            let yamlobj = yaml.load(newmsg)
-            let series = new Array()
-            for (let i = 0; i < yamlobj.length; i++) {
-                let pseriesname = yamlobj[i].series
+                // metadata
+                let metadata = syncreihandle2metadata(rei)
+                newpostmetadata.push(metadata)
+                // metadata finish
+
+                // series
+                let pseriesname = metadata.series
                 if (pseriesname !== undefined) {
                     let pseries
                     for (let j = 0; j < series.length; j++) {
@@ -431,12 +369,27 @@ function syncatesToconfig() {
                         item.ps = pseries = new Array()
                         series.push(item)
                     }
-                    let ss = yamlobj[i].title + '===' + yamlobj[i].number
+                    let ss = metadata.title + '===' + metadata.number
                     pseries.unshift(ss)
                 }
+
+                // post_cache bodys on localStorage
+                let mtcopy = syncreihandle2metadata(rei)
+                mtcopy.body = getbodyfrommdtext(rei.body)
+                pcbl.push(mtcopy)
             }
+
+            // dump obj to yaml
             series = yaml.dump(series.reverse())
-            let text = '{ "body":' + JSON.stringify(newmsg) + '}'
+            newpostmetadata = yaml.dump(newpostmetadata)
+
+            // store post_cache
+            localStorage.setItem('pcbl', JSON.stringify(pcbl))
+            localStorage.setItem('pcbl_timeout',
+                new Date(new Date().getTime() + pcbl_timeout_period).getTime())
+
+            // sync data
+            let text = '{ "body":' + JSON.stringify(newpostmetadata) + '}'
             let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
             sendget(urlhandle(url), function(re) {
                 popmsg('Syncing.')
@@ -477,4 +430,10 @@ function syncatesToconfig() {
     } else {
         location.reload()
     }
+}
+
+function get_all_posts(handle) {
+    get_issues_by_label(post_label, function(re) {
+        handle(re)
+    })
 }

@@ -114,7 +114,7 @@ $(function() {
         $('#scriptsearcher')[0].style.opacity = '1'
     })
     $('#searchtext').blur(function() {
-        $('#scriptsearcher')[0].style.opacity = '0.3'
+        $('#scriptsearcher')[0].style.opacity = '0.6'
     })
     $('#share_png_paned_close').bind('click', function() {
         $('#share_png_panel').addClass('myhide')
