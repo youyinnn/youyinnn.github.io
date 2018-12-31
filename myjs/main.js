@@ -248,6 +248,19 @@ function gethexofrontmatter(text) {
     }
 }
 
+function getbodyfrommdtext(mdtext) {
+    if (mdtext.substring(0, 3) === '---') {
+        let endindex = mdtext.indexOf('---', 3) + 3
+        let body = mdtext.substring(endindex, mdtext.length)
+        return body
+    }
+    return mdtext
+}
+
+function collectbodyfromhubrequest() {
+
+}
+
 function getdocwithnohexofrontmatter(text) {
     if (text.substring(0, 3) === '---') {
         let endindex = text.indexOf('---', 3) + 3
@@ -258,24 +271,63 @@ function getdocwithnohexofrontmatter(text) {
     }
 }
 
+var pcbl_timeout_period = 24 * 60 * 60 * 1000
+
 function searchpost(text) {
+    // post_cache bodys on localStorage
+    let pcbl = localStorage.getItem('pcbl')
+    // check post_cache bodys
+    if (pcbl === null) {
+        // new client
+        popmsg('No cache, fetching and it might take 5-8 seconds...', 10000)
+        get_all_posts(function(re) {
+            popmsg('Cache fetched')
+            for (let i = 0; i < re.length; i++) {
+                rei = re[i]
+                posts_cache[i].body = getbodyfrommdtext(rei.body)
+            }
+            localStorage.setItem('pcbl', JSON.stringify(posts_cache))
+            localStorage.setItem('pcbl_timeout',
+                new Date(new Date().getTime() + pcbl_timeout_period).getTime())
+            searchpost(text)
+        })
+        return
+    } else {
+        // visited client
+        let pcbl_timeout = parseInt(localStorage.getItem('pcbl_timeout'))
+        let now = new Date().getTime()
+        if (now > pcbl_timeout) {
+            popmsg('Cache overdue')
+            setTimeout(function() {
+                localStorage.removeItem('pcbl')
+                localStorage.removeItem('pcbl_timeout')
+                searchpost(text)
+            }, 1500);
+            return
+        } else {
+            posts_cache = JSON.parse(pcbl)
+        }
+    }
+
+    // search
     if (text !== '') {
         if (filter_posts_cache.length === 0) {
             for (let i = 0; i < posts_cache.length; i++) {
-                if (posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
+                if (posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1 ||
+                    posts_cache[i].body.search(new RegExp(text, 'ig')) !== -1) {
                     postsearchrs.push(posts_cache[i])
                 }
             }
         } else {
             for (let i = 0; i < filter_posts_cache.length; i++) {
-                if (filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
+                if (filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1 ||
+                    filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
                     postsearchrs.push(filter_posts_cache[i])
                 }
             }
         }
         if (postsearchrs.length === 0) {
             $('#postsearchtext').addClass('getnothing')
-            searchbut.innerText = 'No get'
             setTimeout(function() {
                 $('#postsearchtext').removeClass('getnothing')
             }, 1000, 'swing')
@@ -920,4 +972,103 @@ function md2png() {
             popmsg('done!')
         })
     }, 500);
+}
+
+function syncreihandle2metadata(rei) {
+    let metadata = gethexofrontmatter(rei.body)
+    if (metadata === undefined) {
+        metadata = new Object()
+        metadata.title = rei.title
+        metadata.categories = new Array()
+        metadata.categories.push('unclassfied')
+        metadata.comments = true
+        metadata.date = rei.created_at
+        metadata = yaml.dump(metadata)
+    }
+    metadata = yaml.load(metadata)
+    metadata.char_count = rei.body.length
+    metadata.number = rei.number
+    metadata.created_at = rei.created_at
+    metadata.updated_at = rei.updated_at
+    let body = getdocwithnohexofrontmatter(rei.body)
+    let short = body.split(/\n/, shortmsgline)
+    while (short[0] === '\n') {
+        short.shift()
+    }
+    let shortcontant = ''
+    let codeparecount = 0
+    for (let j = 0; j < short.length; j++) {
+        if (short[j].search('```') === 0) {
+            codeparecount++
+        }
+        shortcontant += short[j]
+        shortcontant += '\n'
+    }
+    if (codeparecount % 2 !== 0) {
+        shortcontant += '```'
+        shortcontant += '\n'
+    }
+    metadata.short_contant = shortcontant
+    return metadata
+}
+
+function handlemetadata(metadata) {
+    let site_birthday = '2017-11-5'
+    $('#stat_running').html('<x style="color:#494b78;">' + daybefore(dayjs(site_birthday)) + '</x> days')
+    let totalchars = 0
+    for (let i = 0; i < metadata.length; i++) {
+        totalchars += metadata[i].char_count
+        metadata[i].body = null
+        postsmetadatahandle(metadata[i])
+        posts_cache.push(metadata[i])
+    }
+    $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
+    $('#stat_post_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
+    $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
+    $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
+    rstopaging(metadata.sort(sortpostbyupdatedate))
+    let stgts = $('.stgt')
+    let stgcs = $('.stgc')
+    for (let i = 0; i < stgcs.length; i++) {
+        $(stgcs[i]).bind('click', function(event) {
+            catetagclick(this, true, true)
+        })
+    }
+    for (let i = 0; i < stgts.length; i++) {
+        $(stgts[i]).bind('click', function(event) {
+            filter_posts_cache = new Array()
+            if (hasclass(this, 'btn-light')) {
+                stgts.attr('disabled', true)
+                stgcs.attr('disabled', true)
+                $('.treenode div').addClass('adisable')
+                rmclass(this, 'btn-light')
+                this.disabled = false
+                adclass(this, 'btn-info')
+                for (let k = 0; k < metadata.length; k++) {
+                    if (metadata[k].tags !== undefined) {
+                        for (let l = 0; l < metadata[k].tags.length; l++) {
+                            if (metadata[k].tags[l] === this.innerText) {
+                                filter_posts_cache.push(metadata[k])
+                            }
+                        }
+                    }
+                }
+            } else {
+                stgts.attr('disabled', false)
+                stgcs.attr('disabled', false)
+                $('.treenode div').removeClass('adisable')
+                rmclass(this, 'btn-info')
+                adclass(this, 'btn-light')
+            }
+            filter()
+        })
+    }
+    rmclass(docpanel, 'myhide')
+    adclass(docpanel, 'myshow')
+    rmclass(posts_side_panel, 'myhide')
+    adclass(posts_side_panel, 'myshow')
+    $('#blog_statistic_body').removeClass('myhide')
+    setTimeout(function() {
+        setheightfordocpanel()
+    }, 250);
 }
