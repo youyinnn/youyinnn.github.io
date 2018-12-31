@@ -132,10 +132,6 @@ td.hljs-ln-code {
   padding-left: 10px !important;
 }
 
-.hljs-ln>tbody>tr:last-child {
-  display: none;
-}
-
 .hljs-ln span {
   margin: 0 !important;
 }
