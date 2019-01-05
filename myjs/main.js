@@ -1075,3 +1075,56 @@ function handlemetadata(metadata) {
         setheightfordocpanel()
     }, 250);
 }
+
+function seriesorderhandle(number, psname, sbody, obody) {
+    if (psname !== undefined) {
+        let ses = yaml.load(sbody)
+        let ps
+        for (let i = 0; i < ses.length; i++) {
+            if (ses[i].se === psname) {
+                ps = ses[i].ps
+                showseries(ps)
+                break
+            }
+        }
+    }
+    let postorder = obody.split('>--<')
+    let preindex
+    let nextindex
+    postorder.find(function(now, nowindex) {
+        if (now === document.title + '<=>' + number) {
+            preindex = nowindex - 1
+            nextindex = nowindex + 1
+            return true
+        }
+    })
+
+    if (preindex === -1) {
+        $('#prepostbtn').removeClass('btn-dark')
+        $('#prepostbtn').addClass('btn-secondary disabled')
+    } else {
+        $('#prepostbtn').removeClass('disabled')
+        let prearr = postorder[preindex].split('<=>')
+        let pretitle = prearr[0]
+        let prenumber = prearr[1]
+        $('#prepostbtn').attr('data-original-title', pretitle)
+        $('#prepostbtn').tooltip('show')
+        $('#prepostbtn').click(function() {
+            location = '/' + '?to=post&number=' + prenumber
+        })
+    }
+    if (nextindex === postorder.length) {
+        $('#nextpostbtn').removeClass('btn-dark')
+        $('#nextpostbtn').addClass('btn-secondary disabled')
+    } else {
+        $('#nextpostbtn').removeClass('disabled')
+        let nextarr = postorder[nextindex].split('<=>')
+        let nexttitle = nextarr[0]
+        let nextnumber = nextarr[1]
+        $('#nextpostbtn').attr('data-original-title', nexttitle)
+        $('#nextpostbtn').tooltip('show')
+        $('#nextpostbtn').click(function() {
+            location = '/' + '?to=post&number=' + nextnumber
+        })
+    }
+}

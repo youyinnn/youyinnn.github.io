@@ -59,7 +59,8 @@ function get_posts() {
                 localStorage.setItem('pcbl', JSON.stringify(newpc))
                 localStorage.setItem('pcbl_timeout',
                     new Date(new Date().getTime() + pcbl_timeout_period).getTime())
-                    
+                localStorage.setItem('pseries', re[1].body)
+                localStorage.setItem('pod', re[2].body)
                 handlemetadata(newpc)
             })
         }, timeoutfunc)
@@ -70,6 +71,8 @@ function get_posts() {
         if (now > pcbl_timeout) {
             localStorage.removeItem('pcbl')
             localStorage.removeItem('pcbl_timeout')
+            localStorage.removeItem('pseries')
+            localStorage.removeItem('pod')
             get_posts()
             return
         } else {
@@ -149,59 +152,19 @@ function get_post(number) {
         }, timeoutfunc)
         let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
         let psname = yaml.load(gethexofrontmatter(re.body)).series
-        sendget(urlhandle(url3), function(re) {
-            get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-                if (psname !== undefined) {
-                    let ses = yaml.load(re[1].body)
-                    let ps
-                    for (let i = 0; i < ses.length; i++) {
-                        if (ses[i].se === psname) {
-                            ps = ses[i].ps
-                            showseries(ps)
-                        }
-                    }
-                }
-                let postorder = re[2].body.split('>--<')
-                let preindex
-                let nextindex
-                postorder.find(function(now, nowindex) {
-                    if (now === document.title + '<=>' + number) {
-                        preindex = nowindex - 1
-                        nextindex = nowindex + 1
-                        return true
-                    }
-                })
-
-                if (preindex === -1) {
-                    $('#prepostbtn').removeClass('btn-dark')
-                    $('#prepostbtn').addClass('btn-secondary disabled')
-                } else {
-                    $('#prepostbtn').removeClass('disabled')
-                    let prearr = postorder[preindex].split('<=>')
-                    let pretitle = prearr[0]
-                    let prenumber = prearr[1]
-                    $('#prepostbtn').attr('data-original-title', pretitle)
-                    $('#prepostbtn').tooltip('show')
-                    $('#prepostbtn').click(function() {
-                        location = '/' + '?to=post&number=' + prenumber
-                    })
-                }
-                if (nextindex === postorder.length) {
-                    $('#nextpostbtn').removeClass('btn-dark')
-                    $('#nextpostbtn').addClass('btn-secondary disabled')
-                } else {
-                    $('#nextpostbtn').removeClass('disabled')
-                    let nextarr = postorder[nextindex].split('<=>')
-                    let nexttitle = nextarr[0]
-                    let nextnumber = nextarr[1]
-                    $('#nextpostbtn').attr('data-original-title', nexttitle)
-                    $('#nextpostbtn').tooltip('show')
-                    $('#nextpostbtn').click(function() {
-                        location = '/' + '?to=post&number=' + nextnumber
-                    })
-                }
-            }, 100 * 1000)
-        }, timeoutfunc)
+        let pseries = localStorage.getItem('pseries')
+        let pod = localStorage.getItem('pod')
+        if (pseries !== null && pod !== null) {
+            setTimeout(function() {
+                seriesorderhandle(number, psname, pseries, pod)
+            }, 1500);
+        } else {
+            sendget(urlhandle(url3), function(re) {
+                get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
+                    seriesorderhandle(number, psname, re[1].body, re[2].body)
+                }, 100 * 1000)
+            }, timeoutfunc)
+        }
     }, timeoutfunc)
 }
 
@@ -385,6 +348,8 @@ function syncatesToconfig() {
             localStorage.setItem('pcbl', JSON.stringify(pcbl))
             localStorage.setItem('pcbl_timeout',
                 new Date(new Date().getTime() + pcbl_timeout_period).getTime())
+            localStorage.setItem('pseries', JSON.stringify(series))
+            localStorage.setItem('pod', JSON.stringify(postorder))
 
             // sync data
             let text = '{ "body":' + JSON.stringify(newpostmetadata) + '}'
