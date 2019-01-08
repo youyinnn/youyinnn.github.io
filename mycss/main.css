@@ -118,7 +118,7 @@
 }
 
 #sidetoccontainer {
-  width: 25%;
+  width: 20rem;
   position: fixed;
   right: 0;
   z-index: 220;

@@ -348,8 +348,8 @@ function syncatesToconfig() {
             localStorage.setItem('pcbl', JSON.stringify(pcbl))
             localStorage.setItem('pcbl_timeout',
                 new Date(new Date().getTime() + pcbl_timeout_period).getTime())
-            localStorage.setItem('pseries', JSON.stringify(series))
-            localStorage.setItem('pod', JSON.stringify(postorder))
+            localStorage.setItem('pseries', series)
+            localStorage.setItem('pod', postorder.join('>--<'))
 
             // sync data
             let text = '{ "body":' + JSON.stringify(newpostmetadata) + '}'
