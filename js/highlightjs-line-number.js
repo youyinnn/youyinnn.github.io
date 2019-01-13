@@ -58,10 +58,10 @@
 
     function a(n) {
         var e = n.className;
-        if (/hljs-/.test(e)) {
-            for (var t = c(n.innerHTML), r = 0, l = ""; r < t.length; r++) l += h('<span class="{0}">{1}</span>\n', [e, t[r]]);
-            n.innerHTML = l.trim()
-        }
+        // if (/hljs-/.test(e)) {
+        //     for (var t = c(n.innerHTML), r = 0, l = ""; r < t.length; r++) l += h('<span class="{0}">{1}</span>\n', [e, t[r]]);
+        //     n.innerHTML = l.trim()
+        // }
     }
 
     function c(n) {
