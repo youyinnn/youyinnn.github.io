@@ -275,6 +275,8 @@
   user-select: none;
   cursor: pointer;
   display: table;
+  color: var(--main-color);
+  text-decoration: none !important;
 }
 
 .postcardtime {

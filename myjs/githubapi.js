@@ -97,7 +97,7 @@ function get_post(number) {
             text += '\n\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\n\n'
             copytext = text
             text += '\n\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\n\n'
-            text += '\n\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" data-trigger="manual">Privous</button><button id="nextpostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="" data-trigger="manual">Next</button></div> \n\n'
+            text += '\n\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Privous</button><button id="nextpostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Next</button></div> \n\n'
             text += '\n\n<div id="commentline"></div> \n\n'
             text += '## Post comments\n'
             if (re.length === 0) {
@@ -213,7 +213,6 @@ function get_resume() {
 
 function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-
         let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token + '&state=closed'
         let basegetset = {
             'timeout': defaulttimeout,

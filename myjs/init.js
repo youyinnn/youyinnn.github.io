@@ -87,7 +87,8 @@ $(function() {
                 setheightfordocpanel()
             }, 250);
         }
-    });
+    })
+    $('[data-toggle="tooltip"]').tooltip()
 })
 
 $.fn.extend({

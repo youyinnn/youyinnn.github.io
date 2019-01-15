@@ -1,6 +1,6 @@
 function createpostcard(item, pagebelong) {
     let postcard = c('div')
-    let posttitle = c('div')
+    let posttitle = c('a')
     let posttime = c('div')
     let sp1 = c('span')
     let postshortmsg = c('div')
@@ -19,6 +19,7 @@ function createpostcard(item, pagebelong) {
     charsbox.style.marginTop = '5px'
     posttitle.innerHTML = item.title
     posttitle.number = item.number
+    posttitle.href = '/' + '?to=post&number=' + posttitle.number
     postcard.id = 'post_' + item.number
     postshortmsg.id = 'post_short_msg_' + item.number
     postmore.innerHTML = 'MORE_'
