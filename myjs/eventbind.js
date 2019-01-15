@@ -46,7 +46,13 @@ $(function() {
         cleansearch()
     })
     $('#hb').bind('click', function() {
+        $('#prepostbtn').tooltip('hide')
+        $('#nextpostbtn').tooltip('hide')
         cgtopbut()
+        setTimeout(function() {
+            $('#prepostbtn').tooltip('show')
+            $('#nextpostbtn').tooltip('show')
+        }, 1200);
     })
     $('#toc').bind('click', function() {
         if ($('#sidetoccontainer').hasClass('tochide')) {
@@ -122,12 +128,14 @@ $(function() {
     $('#corder').bind('click', function() {
         $('#corder').attr('disabled', '')
         $('#norder').removeAttr('disabled')
+        $(this).tooltip('hide')
         postsod = false
         filter()
     })
     $('#norder').bind('click', function() {
         $('#norder').attr('disabled', '')
         $('#corder').removeAttr('disabled')
+        $(this).tooltip('hide')
         postsod = true
         filter()
     })
