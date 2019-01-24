@@ -287,6 +287,12 @@ function get_issues_by_label(label, func, closed, timeout) {
 
 function syncatesToconfig() {
     if (!postsync) {
+        // clear
+        localStorage.clear()
+        postsearchrs = new Array()
+        posts_cache = new Array()
+        filter_posts_cache = new Array()
+
         popmsg('Sync started.', 30000)
         setTimeout(function() {
             popmsg('Sync started..', 30000)

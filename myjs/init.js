@@ -23,7 +23,7 @@ var cates_tree_body = $('#cates_tree_body')[0]
 var perpageitem = 10
 var postcomment = false
 var postsync = false
-var postsod = true
+var postsod = false
 var searchcount
 
 var emoji = new EmojiConvertor()

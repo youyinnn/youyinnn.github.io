@@ -1029,7 +1029,7 @@ function handlemetadata(metadata) {
     $('#stat_post_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
     $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
     $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
-    rstopaging(metadata.sort(sortpostbyupdatedate))
+    rstopaging(metadata.sort(sortpostbycreatedate))
     let stgts = $('.stgt')
     let stgcs = $('.stgc')
     for (let i = 0; i < stgcs.length; i++) {
