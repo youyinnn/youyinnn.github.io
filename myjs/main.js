@@ -273,72 +273,40 @@ function getdocwithnohexofrontmatter(text) {
 
 var pcbl_timeout_period = 24 * 60 * 60 * 1000
 
-function searchpost(text) {
-    // post_cache bodys on localStorage
-    let pcbl = localStorage.getItem('pcbl')
-    // check post_cache bodys
-    if (pcbl === null || 
-        JSON.parse(pcbl)[0].body === null ||
-        JSON.parse(pcbl)[0].body === undefined) {
-        // new client
-        popmsg('No cache, fetching and it might take 5-8 seconds...', 10000)
-        get_all_posts(function(re) {
-            popmsg('Cache fetched')
-            for (let i = 0; i < re.length; i++) {
-                rei = re[i]
-                posts_cache[i].body = getbodyfrommdtext(rei.body)
-            }
-            localStorage.setItem('pcbl', JSON.stringify(posts_cache))
-            localStorage.setItem('pcbl_timeout',
-                new Date(new Date().getTime() + pcbl_timeout_period).getTime())
-            searchpost(text)
-        })
-        return
-    } else {
-        // visited client
-        let pcbl_timeout = parseInt(localStorage.getItem('pcbl_timeout'))
-        let now = new Date().getTime()
-        if (now > pcbl_timeout) {
-            popmsg('Cache overdue')
-            setTimeout(function() {
-                localStorage.removeItem('pcbl')
-                localStorage.removeItem('pcbl_timeout')
-                searchpost(text)
-            }, 1500);
-            return
-        } else {
-            posts_cache = JSON.parse(pcbl)
-        }
-    }
-
+function searchpost(text) {    
     // search
     if (text !== '') {
-        if (filter_posts_cache.length === 0) {
-            for (let i = 0; i < posts_cache.length; i++) {
-                if (posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1 ||
-                    posts_cache[i].body.search(new RegExp(text, 'ig')) !== -1) {
-                    postsearchrs.push(posts_cache[i])
+        let rs = new Set()
+        index.search(text, function(err, context) {
+            for (let i = 0; i < context.hits.length; i++) {
+                rs.add(context.hits[i].number)
+            }
+            // handle rs
+            if (filter_posts_cache.length === 0) {
+                for (let i = 0; i < posts_cache.length; i++) {
+                    if (rs.has(posts_cache[i].number)) {
+                        postsearchrs.push(posts_cache[i])
+                    }
+                }
+            } else {
+                for (let i = 0; i < filter_posts_cache.length; i++) {
+                    if (rs.has(filter_posts_cache[i].number)) {
+                        postsearchrs.push(filter_posts_cache[i])
+                    }
                 }
             }
-        } else {
-            for (let i = 0; i < filter_posts_cache.length; i++) {
-                if (filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1 ||
-                    filter_posts_cache[i].title.search(new RegExp(text, 'ig')) !== -1) {
-                    postsearchrs.push(filter_posts_cache[i])
-                }
+            if (postsearchrs.length === 0) {
+                $('#postsearchtext').addClass('getnothing')
+                setTimeout(function() {
+                    $('#postsearchtext').removeClass('getnothing')
+                }, 1000, 'swing')
+            } else {
+                $('#pgboxbox').remove()
+                $('.pagination').remove()
+                rstopaging(postsearchrs)
+                postsearchrs = new Array()
             }
-        }
-        if (postsearchrs.length === 0) {
-            $('#postsearchtext').addClass('getnothing')
-            setTimeout(function() {
-                $('#postsearchtext').removeClass('getnothing')
-            }, 1000, 'swing')
-        } else {
-            $('#pgboxbox').remove()
-            $('.pagination').remove()
-            rstopaging(postsearchrs)
-            postsearchrs = new Array()
-        }
+        })
     } else {
         cleansearch()
     }
