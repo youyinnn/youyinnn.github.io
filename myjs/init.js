@@ -31,6 +31,8 @@ emoji.init_env()
 emoji.replace_mode = 'unified'
 emoji.allow_native = true
 
+var index
+
 $(function() {
     if (!!window.ActiveXObject || "ActiveXObject" in window) {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
@@ -55,6 +57,8 @@ $(function() {
         if (key === 'to' && value === 'posts') {
             changepagetitle('posts | youyinnn')
             get_posts()
+            let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
+            index = client.initIndex('blog');
         } else if (key === 'to' && value === 'post') {
             changepagetitle('post | youyinnn')
             get_post(params[1].split('=')[1])
