@@ -45,7 +45,7 @@ function createpostcard(item, pagebelong) {
     content = ''
     if (item.tags !== undefined && item.tags.length !== 0) {
         for (let i = 0; i < item.tags.length; i++) {
-            content += '<span class="badge badge-dark" style="font-size: 100%;max-width: 100%;">' + item.tags[i] + '</span>&nbsp;'
+            content += '<span class="badge badge-dark bdgonpostcard" style="font-size: 100%;max-width: 100%;">' + item.tags[i] + '</span>&nbsp;'
         }
     } else {
         content = 'nothing here'
