@@ -44,7 +44,7 @@ $(function() {
         '?to=posts',
         '?to=script',
         '?to=todo',
-        '?to=resume'
+        '?to=resume',
     ]
     quicklink({
         priority: true,
