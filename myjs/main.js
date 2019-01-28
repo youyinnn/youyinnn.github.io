@@ -570,7 +570,7 @@ function pagination() {
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
             scrollToTop(0)
-            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
         setheightfordocpanel()
     })
@@ -603,7 +603,7 @@ function pagination() {
             nowpage--
             setheightfordocpanel()
             scrollToTop(0)
-            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
     })
 
@@ -630,7 +630,7 @@ function pagination() {
                 nowpage = clickpg
                 setheightfordocpanel()
                 scrollToTop(0)
-                $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+                $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             }
         })
     }
@@ -658,7 +658,7 @@ function pagination() {
             nowpage++
             setheightfordocpanel()
             scrollToTop(0)
-            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
     })
 
@@ -686,11 +686,11 @@ function pagination() {
             nowpage = totalpages
             setheightfordocpanel()
             scrollToTop(0)
-            $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
     })
     appendc($('#pgboxbox')[0], pn)
-    $('.pagination')[0].style.top = getstyle($('#pagebox-' + nowpage)[0], 'height')
+    $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)

@@ -85,11 +85,11 @@ $(function() {
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
     })
+    var clear
     $(window).resize(function() {
         if (location.href.endsWith('?to=posts')) {
-            setTimeout(function() {
-                setheightfordocpanel()
-            }, 250);
+            clearTimeout(clear)
+            setheightfordocpanel()
         }
     })
     $('[data-toggle="tooltip"]').tooltip()
