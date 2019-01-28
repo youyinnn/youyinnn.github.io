@@ -32,6 +32,26 @@ emoji.replace_mode = 'unified'
 emoji.allow_native = true
 
 var index
+var origins = [
+    '127.0.0.1',
+    'https://api.github.com/',
+    'https://youyinnn.github.io',
+]
+
+$(function() {
+    const main_urls = [
+        '?to=about',
+        '?to=posts',
+        '?to=script',
+        '?to=todo',
+        '?to=resume'
+    ]
+    quicklink({
+        priority: true,
+        origins: origins,
+        urls: main_urls
+    })
+})
 
 $(function() {
     if (!!window.ActiveXObject || "ActiveXObject" in window) {
