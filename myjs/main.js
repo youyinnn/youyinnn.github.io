@@ -276,6 +276,7 @@ var pcbl_timeout_period = 24 * 60 * 60 * 1000
 function searchpost(text) {    
     // search
     if (text !== '') {
+        text = text.replace(/\s/gm, '')
         let rs = new Set()
         index.search(text, function(err, context) {
             for (let i = 0; i < context.hits.length; i++) {
