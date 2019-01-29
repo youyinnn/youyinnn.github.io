@@ -47,10 +47,6 @@
   /* font-family: 'trebuchet MS', 'Microsoft YaHei' !important; */
 }
 
-.new_font {
-  font-family: 'trebuchet MS', 'Microsoft YaHei' !important;
-}
-
 body,
 html {
   /* overflow: hidden; */
@@ -145,7 +141,7 @@ td.hljs-ln-code {
 .editormd-html-preview blockquote,
 .editormd-preview-container blockquote {
   padding-left: initial !important;
-  padding: 20px !important;
+  padding: 10px !important;
   font-size: 15px !important;
   border-left-color: #66c77d !important;
   background-color: ghostwhite;
@@ -191,4 +187,22 @@ x {
 
 .dropdown-item {
   transition: all .2s;
+}
+
+.markdown-body p, {
+  margin: 0.8em 0;
+  line-height: 1.6rem;
+  word-spacing: .05rem;
+}
+
+.markdown-body ol li,
+.markdown-body ul li {
+  margin: .5rem 0;
+}
+
+#md,
+.markdown-body,
+.new_font {
+  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
 }
