@@ -962,16 +962,26 @@ function syncreihandle2metadata(rei) {
     metadata.created_at = rei.created_at
     metadata.updated_at = rei.updated_at
     let body = getdocwithnohexofrontmatter(rei.body)
-    let short = body.split(/\n/, shortmsgline)
+    let short = new Array()
+    body = body.split(/\n/)
+    for (let i = 0; i < shortmsgline; i++){
+        short.push(body[i])
+    }
     while (short[0] === '\n') {
         short.shift()
     }
     let shortcontant = ''
     let codeparecount = 0
+    let startpreindex = -1
+    let endpreindex = -1
     for (let j = 0; j < short.length; j++) {
         if (short[j].search('```') === 0) {
             codeparecount++
         }
+        let presi = short[j].search('<pre')
+        let preei = short[j].search('</pre')
+        startpreindex = presi !== -1 ? presi : startpreindex
+        endpreindex = preei !== -1 ? preei : endpreindex
         shortcontant += short[j]
         shortcontant += '\n'
     }
@@ -979,6 +989,19 @@ function syncreihandle2metadata(rei) {
         shortcontant += '```'
         shortcontant += '\n'
     }
+    if (startpreindex !== -1 && endpreindex < startpreindex ) {
+        for(let i = shortmsgline; endpreindex < startpreindex; i++) {
+            if (i == 35) {
+                shortcontant += '</pre>'
+                shortcontant += '\n'
+                break
+            }
+            endpreindex = body[i].search('</pre')
+            shortcontant += body[j]
+            shortcontant += '\n'
+        }
+    }
+    if (startpreIndex !== )
     metadata.short_contant = shortcontant.replace(/!\[.*\]\(.*\)/gm, '')
     return metadata
 }
