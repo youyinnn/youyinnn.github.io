@@ -979,7 +979,7 @@ function syncreihandle2metadata(rei) {
         shortcontant += '```'
         shortcontant += '\n'
     }
-    metadata.short_contant = shortcontant
+    metadata.short_contant = shortcontant.replace(/!\[.*\]\(.*\)/gm, '')
     return metadata
 }
 
