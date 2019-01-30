@@ -22,7 +22,7 @@ function createpostcard(item, pagebelong) {
     posttitle.href = '/' + '?to=post&number=' + posttitle.number
     postcard.id = 'post_' + item.number
     postshortmsg.id = 'post_short_msg_' + item.number
-    postmore.innerHTML = 'MORE_'
+    postmore.innerHTML = 'more'
     postmore.href = '/' + '?to=post&number=' + posttitle.number
     $(posttitle).click(function () {
         location = '/' + '?to=post&number=' + posttitle.number
