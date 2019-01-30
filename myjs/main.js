@@ -446,12 +446,14 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
 }
 
 function setheightfordocpanel() {
-    let pbh = parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140
-    if (pbh < window.getclienth() - $(topbar)[0].clientHeight) {
-        pbh = window.getclienth() - $(topbar)[0].clientHeight
+    if ($('.pagebox').length !== 0) {
+        let pbh = parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140
+        if (pbh < window.getclienth() - $(topbar)[0].clientHeight) {
+            pbh = window.getclienth() - $(topbar)[0].clientHeight
+        }
+        $(docpanel).css('height', pbh)
+        $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
     }
-    $(docpanel).css('height', pbh)
-    $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
 }
 
 function filter() {
