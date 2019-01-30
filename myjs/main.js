@@ -1001,7 +1001,6 @@ function syncreihandle2metadata(rei) {
             shortcontant += '\n'
         }
     }
-    if (startpreIndex !== )
     metadata.short_contant = shortcontant.replace(/!\[.*\]\(.*\)/gm, '')
     return metadata
 }
