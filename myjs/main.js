@@ -997,7 +997,7 @@ function syncreihandle2metadata(rei) {
                 break
             }
             endpreindex = body[i].search('</pre')
-            shortcontant += body[j]
+            shortcontant += body[i]
             shortcontant += '\n'
         }
     }
