@@ -109,7 +109,9 @@ $(function() {
     $(window).resize(function() {
         if (location.href.endsWith('?to=posts')) {
             clearTimeout(clear)
-            setheightfordocpanel()
+            clear = setTimeout(function() {
+                setheightfordocpanel()
+            }, 200);
         }
     })
     $('[data-toggle="tooltip"]').tooltip()

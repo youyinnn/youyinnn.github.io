@@ -349,6 +349,8 @@ function syncatesToconfig() {
             series = yaml.dump(series.reverse())
             newpostmetadata = yaml.dump(newpostmetadata)
 
+            console.log(newpostmetatata)
+            return
             // store post_cache
             localStorage.setItem('pcbl', JSON.stringify(pcbl))
             localStorage.setItem('pcbl_timeout',
