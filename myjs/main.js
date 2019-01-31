@@ -1121,3 +1121,10 @@ function seriesorderhandle(number, psname, sbody, obody) {
         })
     }
 }
+
+function setcleancachedbtncolor(set) {
+    setTimeout(function() {
+        $('#cleancache').removeClass('btn-dark')
+        $('#cleancache').addClass('btn-' + set)
+    }, 500);
+}

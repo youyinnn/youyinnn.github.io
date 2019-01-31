@@ -139,4 +139,12 @@ $(function() {
         postsod = true
         filter()
     })
+    $('#cleancache').bind('click', function() {
+        $(this).tooltip('hide')
+        localStorage.removeItem('pcbl')
+        localStorage.removeItem('pcbl_timeout')
+        localStorage.removeItem('pseries')
+        localStorage.removeItem('pod')
+        get_posts()
+    })
 })
