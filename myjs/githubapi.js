@@ -94,7 +94,7 @@ function get_post(number) {
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
             let charlength = text.length
-            text += '\n\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: http://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\n\n'
+            text += '\n\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: https://youyinnn.github.io/?to=post&number=' + number + '<hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[https://github.com/youyinnn].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\n\n'
             copytext = text
             text += '\n\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\n\n'
             text += '\n\n<div id="movebtn"><button id="prepostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Privous</button><button id="nextpostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Next</button></div> \n\n'
@@ -288,7 +288,10 @@ function get_issues_by_label(label, func, closed, timeout) {
 function syncatesToconfig() {
     if (!postsync) {
         // clear
-        localStorage.clear()
+        localStorage.removeItem('pcbl')
+        localStorage.removeItem('pcbl_timeout')
+        localStorage.removeItem('pseries')
+        localStorage.removeItem('pod')
         postsearchrs = new Array()
         posts_cache = new Array()
         filter_posts_cache = new Array()
