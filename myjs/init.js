@@ -79,17 +79,7 @@ $(function() {
             get_posts()
             let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
             index = client.initIndex('blog');
-            let pcbl_timeout = parseInt(localStorage.pcbl_timeout)
-            let flash = dayjs(pcbl_timeout).diff(dayjs()) / 3600000
-            if (flash > 22 && flash < 24) {
-                setcleancachedbtncolor('success')
-            } else if (flash > 16 && flash < 22) {
-                setcleancachedbtncolor('info')
-            } else if (flash > 10 && flash < 16) {
-                setcleancachedbtncolor('warning')
-            } else {
-                setcleancachedbtncolor('danger')
-            }
+            checkcache()
         } else if (key === 'to' && value === 'post') {
             changepagetitle('post | youyinnn')
             get_post(params[1].split('=')[1])
