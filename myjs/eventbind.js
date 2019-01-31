@@ -146,5 +146,6 @@ $(function() {
         localStorage.removeItem('pseries')
         localStorage.removeItem('pod')
         get_posts()
+        checkcache()
     })
 })
