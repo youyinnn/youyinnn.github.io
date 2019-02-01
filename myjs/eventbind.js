@@ -146,6 +146,8 @@ $(function() {
         localStorage.removeItem('pseries')
         localStorage.removeItem('pod')
         get_posts()
+    })
+    $('#cleancache').bind('mouseenter', function() {
         checkcache()
     })
 })

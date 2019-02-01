@@ -62,6 +62,7 @@ function get_posts() {
                 localStorage.setItem('pseries', re[1].body)
                 localStorage.setItem('pod', re[2].body)
                 handlemetadata(newpc)
+                checkcache()
             })
         }, timeoutfunc)
     } else {
