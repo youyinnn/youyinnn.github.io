@@ -273,7 +273,7 @@ function getdocwithnohexofrontmatter(text) {
 
 var pcbl_timeout_period = 24 * 60 * 60 * 1000
 
-function searchpost(text) {    
+function searchpost(text) {
     // search
     if (text !== '') {
         text = text.replace(/\s/gm, '')
@@ -966,7 +966,7 @@ function syncreihandle2metadata(rei) {
     let body = getdocwithnohexofrontmatter(rei.body)
     let short = new Array()
     body = body.split(/\n/)
-    for (let i = 0; i < shortmsgline; i++){
+    for (let i = 0; i < shortmsgline; i++) {
         short.push(body[i])
     }
     while (short[0] === '\n') {
@@ -991,8 +991,8 @@ function syncreihandle2metadata(rei) {
         shortcontant += '```'
         shortcontant += '\n'
     }
-    if (startpreindex !== -1 && endpreindex < startpreindex ) {
-        for(let i = shortmsgline; endpreindex < startpreindex; i++) {
+    if (startpreindex !== -1 && endpreindex < startpreindex) {
+        for (let i = shortmsgline; endpreindex < startpreindex; i++) {
             if (i == 35) {
                 shortcontant += '</pre>'
                 shortcontant += '\n'
@@ -1130,15 +1130,20 @@ function setcleancachedbtncolor(set) {
 }
 
 function checkcache() {
-    let pcbl_timeout = parseInt(localStorage.pcbl_timeout)
-    let flash = dayjs(pcbl_timeout).diff(dayjs()) / 3600000
-    if (flash > 22 && flash < 24) {
-        setcleancachedbtncolor('success')
-    } else if (flash > 16 && flash < 22) {
-        setcleancachedbtncolor('info')
-    } else if (flash > 10 && flash < 16) {
-        setcleancachedbtncolor('warning')
+    let pcbl_timeout = localStorage.getItem('pcbl_timeout')
+    if (pcbl_timeout === null && pcbl_timeout === undefined) {
+        setcleancachedbtncolor('dark')
     } else {
-        setcleancachedbtncolor('danger')
+        let pcbl_timeout_int = parseInt(pcbl_timeout)
+        let flash = dayjs(pcbl_timeout_int).diff(dayjs()) / 3600000
+        if (flash > 22 && flash < 24) {
+            setcleancachedbtncolor('success')
+        } else if (flash > 16 && flash < 22) {
+            setcleancachedbtncolor('info')
+        } else if (flash > 10 && flash < 16) {
+            setcleancachedbtncolor('warning')
+        } else {
+            setcleancachedbtncolor('danger')
+        }
     }
 }

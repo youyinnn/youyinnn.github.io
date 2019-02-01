@@ -845,23 +845,24 @@ function inputWrong(inputva) {
     $('.fa-times[input-va=' + inputva + ']').css('opacity', 1)
 }
 
-function getTimePeriod(ms) {
+function getTimePeriod(ms, en) {
     let s = 1000
     let m = 60 * s
     let h = 60 * m
+    en = en === undefined ? false : true
     if (ms < s) {
         if (ms === 0) return ''
-        return ms + '毫秒'
+        return ms + (en === true ? 'ms' : '毫秒')
     } else if (ms > s && ms < m) {
-        return parseInt(ms / s) + '秒'
+        return parseInt(ms / s) + (en === true ? 's' : '秒')
     } else if (ms > m && ms < h) {
         let min = parseInt(ms / m)
-        let sec = getTimePeriod(ms - (min * m))
-        return (min) + '分' + sec
+        let sec = getTimePeriod(ms - (min * m), en)
+        return (min) + (en === true ? 'm' : '分') + sec
     } else {
         let hour = parseInt(ms / h)
-        let min = getTimePeriod(ms - (hour * h))
-        return hour + '小时' + min
+        let min = getTimePeriod(ms - (hour * h), en)
+        return hour + (en === true ? 'h' : '小时') + min
     }
 }
 
