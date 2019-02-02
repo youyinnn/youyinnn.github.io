@@ -1125,7 +1125,7 @@ function seriesorderhandle(number, psname, sbody, obody) {
 function setcleancachedbtncolor(set) {
     setTimeout(function() {
         $('#cleancache').removeClass()
-        $('#cleancache').addClass('btn btn-' + set)
+        $('#cleancache').addClass('mt-2 btn btn-' + set)
     }, 500);
 }
 

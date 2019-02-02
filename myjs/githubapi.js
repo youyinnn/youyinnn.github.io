@@ -80,6 +80,7 @@ function get_posts() {
             hideloading()
             handlemetadata(JSON.parse(pcbl))
             showbbt()
+            checkcache()
         }
     }
 }
