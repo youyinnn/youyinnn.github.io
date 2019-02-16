@@ -116,6 +116,19 @@ $(function() {
         }
     })
     $('[data-toggle="tooltip"]').tooltip()
+
+    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    let observer = new MutationObserver(function(mutationList) {
+        setTimeout(function() {
+            setheightfordocpanel()
+        }, 250);
+    })
+    let article = $('#docpanel')[0]
+    let options = {
+        'attributes': true,
+        'attributeOldValue': true
+    };
+    observer.observe(article, options);
 })
 
 $.fn.extend({
