@@ -1066,7 +1066,7 @@ function handlemetadata(metadata) {
     $('#blog_statistic_body').removeClass('myhide')
     setTimeout(function() {
         setheightfordocpanel()
-    }, 250);
+    }, 250)
 }
 
 function seriesorderhandle(number, psname, sbody, obody) {
