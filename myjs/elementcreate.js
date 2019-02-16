@@ -245,7 +245,7 @@ function searchshowandrendermd(fulltext, relength) {
 }
 
 function createpostcomment(i, comment) {
-    let commentCard = '<div class="" id="comment-' + i + '"><div class="card-header text-white bg-dark"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + ' ' + (comment.author_association === 'NONE' ? '' : (' <span class="badge badge-light">' + comment.author_association + '</span>')) + ' </div><div class="card-body"><p class="card-text">\r\n\r\n' + (comment.body) + '</p></div></div><br>'
+    let commentCard = '<div class="comment" id="comment-' + i + '"><div class="card-header text-white bg-dark" style="border-radius: .25rem .25rem 0 0;"><span style="font-weight:bold;"><a target="_blank" href=" ' + comment.user.html_url + ' ">' + comment.user.login + '</a> commented <a href=" ' + comment.html_url + '" target="_blank">#' + i + '</a> @ : </span>' + dayjs(comment.created_at).format('MMM,DD YYYY') + ' ' + (comment.author_association === 'NONE' ? '' : (' <span class="align-text-top badge badge-light ml-1">' + comment.author_association + '</span>')) + ' </div><div class="card-body"><p class="card-text">' + (comment.body) + '</p></div></div><br>'
     return commentCard
 }
 
