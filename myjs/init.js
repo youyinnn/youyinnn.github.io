@@ -117,6 +117,7 @@ $(function() {
     })
     $('[data-toggle="tooltip"]').tooltip()
 
+    // observer for docpanel height & pagationbox top fix
     let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
     let observer = new MutationObserver(function(mutationList) {
         setTimeout(function() {
@@ -129,6 +130,13 @@ $(function() {
         'attributeOldValue': true
     };
     observer.observe(article, options);
+
+    // remove null content code block
+    $('code').each(function() {
+        if (this.innerText.replace(/\s/, '') === '') {
+            $(this).remove()
+        }
+    })
 })
 
 $.fn.extend({
