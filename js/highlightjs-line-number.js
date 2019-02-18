@@ -31,7 +31,7 @@
                 s(n), n.innerHTML = o(n.innerHTML, t)
                 // bug fix
                 if ($(n).find('tbody>tr:last-child')[0] !== undefined &&
-                    $(n).find('tbody>tr:last-child')[0].innerText === '') {
+                    $(n).find('tbody>tr:last-child')[0].innerText.replace(/\s/, '') === '') {
                     $(n).find('tbody>tr:last-child').remove()
                 }
             })
