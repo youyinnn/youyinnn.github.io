@@ -38,7 +38,12 @@
   }
 
   #showmore {
-    top: 12rem;
+    top: 11rem;
+    font-size: 1rem;
+  }
+
+  #toposts {
+    top: 13rem;
     font-size: 1rem;
   }
 
@@ -408,6 +413,11 @@
 
   #showmore {
     top: 13rem;
+    font-size: 1rem;
+  }
+
+  #toposts {
+    top: 15rem;
     font-size: 1rem;
   }
 

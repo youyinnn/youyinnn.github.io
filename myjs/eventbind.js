@@ -20,6 +20,9 @@ $(function() {
     $('#showmore').bind('click', function() {
         location = '/' + '?to=about'
     })
+    $('#toposts').bind('click', function() {
+        location = '/' + '?to=posts'
+    })
     $('#showhacknical').bind('click', function() {
         if ($('#hacknical_github_analysis').attr('src') === undefined) {
             $('#hacknical_github_analysis').attr('src', 'https://hacknical.com/youyinnn/github?locale=zh')
