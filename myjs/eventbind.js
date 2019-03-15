@@ -143,12 +143,18 @@ $(function() {
         filter()
     })
     $('#cleancache').bind('click', function() {
-        $(this).tooltip('hide')
-        localStorage.removeItem('pcbl')
-        localStorage.removeItem('pcbl_timeout')
-        localStorage.removeItem('pseries')
-        localStorage.removeItem('pod')
-        get_posts()
+        clearTimeout(cachedcleaner)
+        if (!cachedcleanerLock) {
+            cachedcleanerLock = true
+            cachedcleaner = setTimeout(() => {
+                $(this).tooltip('hide')
+                localStorage.removeItem('pcbl')
+                localStorage.removeItem('pcbl_timeout')
+                localStorage.removeItem('pseries')
+                localStorage.removeItem('pod')
+                get_posts()
+            }, 200);
+        }
     })
     $('#cleancache').bind('mouseenter', function() {
         checkcache()

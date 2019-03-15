@@ -63,6 +63,7 @@ function get_posts() {
                 localStorage.setItem('pod', re[2].body)
                 handlemetadata(newpc)
                 checkcache()
+                cachedcleanerLock = false
             })
         }, timeoutfunc)
     } else {
