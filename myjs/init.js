@@ -25,6 +25,8 @@ var postcomment = false
 var postsync = false
 var postsod = false
 var searchcount
+var cachedcleaner
+var cachedcleanerLock = false
 
 var emoji = new EmojiConvertor()
 emoji.init_env()
