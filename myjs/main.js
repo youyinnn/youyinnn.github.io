@@ -1014,6 +1014,11 @@ function handlemetadata(metadata) {
     for (let i = 0; i < metadata.length; i++) {
         totalchars += metadata[i].char_count
         metadata[i].body = null
+        if (metadata[i].tags !== undefined) {
+            for (let j = 0; j < metadata[i].tags.length; j++) {
+                metadata[i].tags[j] = metadata[i].tags[j].toLowerCase()
+            }
+        }
         postsmetadatahandle(metadata[i])
         // push for page posts to load the data
         posts_cache.push(metadata[i])
