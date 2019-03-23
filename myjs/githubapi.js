@@ -116,6 +116,7 @@ function get_post(number) {
             $(md).animateCss('fadeIn')
             adclass(md, 'parrow')
             setarrow()
+            jumpToAnchor()
             hidetopbar()
             showbbt()
             $('#toc')[0].style.display = 'inline-block'

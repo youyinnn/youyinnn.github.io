@@ -114,6 +114,7 @@ function render_md(text) {
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
             }, 600)
         }
+        location.href = '#' + encodeURI($(this)[0].innerText.substring(0, $(this)[0].innerText.length))
     })
     $('.katex').parent().addClass('katexp')
     $('thead').each(function() {
@@ -885,6 +886,28 @@ function postcarddate(pastdayjs) {
 
 function setarrow() {
     let arrows = $('.parrow h1, .parrow h2, .parrow h6, .parrow h3, .parrow h4, .parrow h5')
+    arrows.addClass('panchor')
+    arrows.addClass('unselectable')
+    arrows.each(function(e, i) {
+        let link = c('div')
+        link.innerText = '+'
+        adclass(link, 'panchorlink')
+        appendc(i, link)
+        let url = location.origin + '/' + location.search + '#' + encodeURI($(i)[0].innerText.substring(0, $(i)[0].innerText.length - 1))
+        $(i)[0].setAttribute('data-clipboard-text', url)
+        new ClipboardJS(this).on('success', function(e) {
+            popmsg('Copy link successed.')
+            e.clearSelection();
+        }).on('error', function(e) {
+            popmsg('Copy link failed.')
+            e.clearSelection();
+        })
+    })
+    arrows.mouseover(function () {
+        $(this).find('.panchorlink').css('opacity', '1')
+    }).mouseout(function (){  
+        $(this).find('.panchorlink').css('opacity', '0')
+    })
     $(window).scroll(function() {
         let stop = window.scrollY + 14
         let sbotton = (window.scrollY + getclienth(0.4))
@@ -1151,4 +1174,11 @@ function checkcache() {
             setcleancachedbtncolor('danger')
         }
     }
+}
+
+function jumpToAnchor() {
+    let hash = '[href="' + decodeURI(location.hash) + '"]'
+    setTimeout(function() {
+        $('.markdown-toc').find(hash).click()
+    }, 1000);
 }

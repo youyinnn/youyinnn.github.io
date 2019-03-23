@@ -65,10 +65,16 @@ $(function() {
         }
     })
     $('*').bind('click', function() {
-        if (this.id === 'toc' || this.id === 'sidetoc') {
+        if (this.id === 'toc' 
+        || this.id === 'sidetoc' 
+        || this.id === 'series') {
             return false
-        } else if (!$('#sidetoccontainer').hasClass('tochide')) {
+        }
+        if (!$('#sidetoccontainer').hasClass('tochide')) {
             hidesidetoc()
+        }
+        if ($('#seriesbox').hasClass('seboxshow')) {
+            $('#series').click()
         }
     })
     $('#searchtext').bind('keyup', 'return', function() {
