@@ -149,17 +149,22 @@ $(function() {
         filter()
     })
     $('#cleancache').bind('click', function() {
-        clearTimeout(cachedcleaner)
-        if (!cachedcleanerLock) {
-            cachedcleanerLock = true
-            cachedcleaner = setTimeout(() => {
-                $(this).tooltip('hide')
-                localStorage.removeItem('pcbl')
-                localStorage.removeItem('pcbl_timeout')
-                localStorage.removeItem('pseries')
-                localStorage.removeItem('pod')
-                get_posts()
-            }, 200);
+        if ($('.stgt.btn.btn-info').length == 1 || $('.adisable').length > 0) {
+            popmsg('Please remove the filter from cate or tags first.', 5000)
+        } else {
+            clearTimeout(cachedcleaner)
+            if (!cachedcleanerLock) {
+                cachedcleanerLock = true
+                cachedcleaner = setTimeout(() => {
+                    $(this).tooltip('hide')
+                    localStorage.removeItem('pcbl')
+                    localStorage.removeItem('pcbl_timeout')
+                    localStorage.removeItem('pseries')
+                    localStorage.removeItem('pod')
+                    posts_cache = new Array()
+                    get_posts()
+                }, 200);
+            }
         }
     })
     $('#cleancache').bind('mouseenter', function() {
