@@ -45,6 +45,9 @@ function urlhandle(url) {
 function get_posts() {
     $('#pgboxbox').remove()
     $('.treenode').remove()
+    $('.stgt.btn').remove()
+    all_cates = new Array()
+    all_tags = new Array()
     $('#blog_statistic_body').addClass('myhide')
     // from localStorage
     let pcbl = localStorage.getItem('pcbl')

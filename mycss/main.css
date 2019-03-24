@@ -708,7 +708,7 @@
 }
 
 .pagination {
-  z-index: 1000;
+  z-index: 200;
   position: absolute;
   left: 50%;
   text-align: center;
