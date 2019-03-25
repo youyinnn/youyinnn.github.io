@@ -1124,30 +1124,30 @@ function seriesorderhandle(number, psname, sbody, obody) {
     })
 
     if (preindex === -1) {
-        $('#prepostbtn').removeClass('btn-dark')
-        $('#prepostbtn').addClass('btn-secondary disabled')
-    } else {
-        $('#prepostbtn').removeClass('disabled')
-        let prearr = postorder[preindex].split('<=>')
-        let pretitle = prearr[0]
-        let prenumber = prearr[1]
-        $('#prepostbtn').attr('data-original-title', pretitle)
-        $('#prepostbtn').tooltip('show')
-        $('#prepostbtn').click(function() {
-            location = '/' + '?to=post&number=' + prenumber
-        })
-    }
-    if (nextindex === postorder.length) {
         $('#nextpostbtn').removeClass('btn-dark')
         $('#nextpostbtn').addClass('btn-secondary disabled')
     } else {
         $('#nextpostbtn').removeClass('disabled')
+        let prearr = postorder[preindex].split('<=>')
+        let pretitle = prearr[0]
+        let prenumber = prearr[1]
+        $('#nextpostbtn').attr('data-original-title', pretitle)
+        $('#nextpostbtn').tooltip('show')
+        $('#nextpostbtn').click(function() {
+            location = '/' + '?to=post&number=' + prenumber
+        })
+    }
+    if (nextindex === postorder.length) {
+        $('#prepostbtn').removeClass('btn-dark')
+        $('#prepostbtn').addClass('btn-secondary disabled')
+    } else {
+        $('#prepostbtn').removeClass('disabled')
         let nextarr = postorder[nextindex].split('<=>')
         let nexttitle = nextarr[0]
         let nextnumber = nextarr[1]
-        $('#nextpostbtn').attr('data-original-title', nexttitle)
-        $('#nextpostbtn').tooltip('show')
-        $('#nextpostbtn').click(function() {
+        $('#prepostbtn').attr('data-original-title', nexttitle)
+        $('#prepostbtn').tooltip('show')
+        $('#prepostbtn').click(function() {
             location = '/' + '?to=post&number=' + nextnumber
         })
     }
