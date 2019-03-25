@@ -72,10 +72,13 @@ function createpostcard(item, pagebelong) {
         });
     }
     if (cq) {
-        let saying = text.substring(text.indexOf(cq[0]) + cq[0].length + 2, text.indexOf(cq[1]))
-        saying = saying.replace(/\r\n/gm, '</br>')
-        text = text.substring(text.indexOf(cq[1]) + cq[1].length, text.length)
-        showsaying(postshortmsg, saying)
+        for (let i = 0; i < cq.length; i += 2) {
+            let cqindex = text.search(cq[i]);
+            let endcqindex = text.search(cq[i + 1]);
+            let saying = text.substring(cqindex, endcqindex + 11)
+            let newsaying = '<div class="saying mb-4">' + text.substring(cqindex + cq[i].length + 2, endcqindex).replace(/\r\n|\r|\n/gm, '') + '</div>'
+            text = text.replace(saying, newsaying)
+        }
     }
     let gifs = text.match(/!\[.*\]\(.*.gif\)/g)
     if (gifs !== null) {
@@ -180,13 +183,6 @@ function showhexometadata(hexometadata) {
         }
     }
     appendc(md, metadatapanel)
-}
-
-function showsaying(addto, saying) {
-    let sayingpanel = c('div')
-    adclass(sayingpanel, 'saying mb-4')
-    sayingpanel.innerHTML = saying
-    appendc(addto, sayingpanel)
 }
 
 function createtodo(issuesbody, re) {
