@@ -49,12 +49,12 @@ $(function() {
         cleansearch()
     })
     $('#hb').bind('click', function() {
-        $('#prepostbtn').tooltip('hide')
         $('#nextpostbtn').tooltip('hide')
+        $('#prepostbtn').tooltip('hide')
         cgtopbut()
         setTimeout(function() {
-            $('#prepostbtn').tooltip('show')
             $('#nextpostbtn').tooltip('show')
+            $('#prepostbtn').tooltip('show')
         }, 1200);
     })
     $('#toc').bind('click', function() {
