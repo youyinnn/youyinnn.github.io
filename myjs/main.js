@@ -117,7 +117,6 @@ function render_md(text) {
                 scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
             }, 600)
         }
-        location.href = '#' + encodeURI($(this)[0].innerText.substring(0, $(this)[0].innerText.length))
     })
     $('.katex').parent().addClass('katexp')
     $('thead').each(function() {
@@ -888,6 +887,7 @@ function postcarddate(pastdayjs) {
 }
 
 function setarrow() {
+    adclass(md, 'parrow')
     let arrows = $('.parrow h1, .parrow h2, .parrow h6, .parrow h3, .parrow h4, .parrow h5')
     arrows.addClass('panchor')
     arrows.addClass('unselectable')
@@ -896,7 +896,7 @@ function setarrow() {
         link.innerText = '+'
         adclass(link, 'panchorlink')
         appendc(i, link)
-        let url = location.origin + '/' + location.search + '#' + encodeURI($(i)[0].innerText.substring(0, $(i)[0].innerText.length - 1))
+        let url = location.origin + '/' + location.search + '#' + encodeURI($(i).find('a')[0].name)
         $(i)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(e) {
             popmsg('Copy link successed.')
@@ -1182,6 +1182,7 @@ function checkcache() {
 function jumpToAnchor() {
     let hash = '[href="' + decodeURI(location.hash) + '"]'
     setTimeout(function() {
+        console.log(hash)
         $('.markdown-toc').find(hash).click()
     }, 1000);
 }

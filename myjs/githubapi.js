@@ -113,12 +113,22 @@ function get_post(number) {
                     text += createpostcomment(i, re[i])
                 }
             }
+            // render the md text
             render_md(text)
+
+            // set mdcharlength
             $('.mdcharlength').text(charlength + ' c')
+
+            // hide loading animation
             hideloading()
+
+            // fade in the md panel
             $(md).animateCss('fadeIn')
-            adclass(md, 'parrow')
+
+            // set parrow
             setarrow()
+
+            // jump to anchro according to the url's hash
             jumpToAnchor()
             hidetopbar()
             showbbt()
