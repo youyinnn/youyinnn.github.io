@@ -318,39 +318,41 @@ function searchpost(text) {
 
 function postsmetadatahandle(postmetadata) {
     let postcache = postmetadata
-    for (let i = 0; i < postcache.categories.length; i++) {
-        // handle cates_tree_body
-        let cate = b64.encode(postcache.categories[i], true)
-        if ($('#' + cate + '_treenode').length === 0) {
-            let node = c('li')
-            node.id = cate + '_treenode'
-            adclass(node, 'treenode')
-            let noa = c('div')
-            noa.innerText = postcache.categories[i]
-            $(noa).bind('click', function(event) {
-                catetreenodeclick(this, true, true)
-            })
-            appendc(node, noa)
-            // root category add on cates_tree_body directly
-            if (i === 0) {
-                appendliwithorder(cates_tree_body, node)
-            } else {
-                // if not find parent root element and add child element
-                let parentnodeid = b64.encode(postcache.categories[i - 1], true)
-                appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
+    if (postcache.categories !== undefined) {
+        for (let i = 0; i < postcache.categories.length; i++) {
+            // handle cates_tree_body
+            let cate = b64.encode(postcache.categories[i], true)
+            if ($('#' + cate + '_treenode').length === 0) {
+                let node = c('li')
+                node.id = cate + '_treenode'
+                adclass(node, 'treenode')
+                let noa = c('div')
+                noa.innerText = postcache.categories[i]
+                $(noa).bind('click', function(event) {
+                    catetreenodeclick(this, true, true)
+                })
+                appendc(node, noa)
+                // root category add on cates_tree_body directly
+                if (i === 0) {
+                    appendliwithorder(cates_tree_body, node)
+                } else {
+                    // if not find parent root element and add child element
+                    let parentnodeid = b64.encode(postcache.categories[i - 1], true)
+                    appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
+                }
             }
-        }
-
-        // handle cates panel
-        let haved = false
-        for (let j = 0; j < all_cates.length; j++) {
-            if (all_cates[j] === postcache.categories[i]) {
-                haved = true
+    
+            // handle cates panel
+            let haved = false
+            for (let j = 0; j < all_cates.length; j++) {
+                if (all_cates[j] === postcache.categories[i]) {
+                    haved = true
+                }
             }
-        }
-        if (!haved) {
-            all_cates.push(postcache.categories[i])
-            cates.innerHTML += '<button id="' + b64.encode(postcache.categories[i], true) + '_catetag" class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
+            if (!haved) {
+                all_cates.push(postcache.categories[i])
+                cates.innerHTML += '<button id="' + b64.encode(postcache.categories[i], true) + '_catetag" class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
+            }
         }
     }
     // handle tags panel
