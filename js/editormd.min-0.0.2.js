@@ -1343,6 +1343,7 @@
           f = u ? escape(e).replace(/\%/g, "") : e.toLowerCase().replace(/[^\w]+/g, "-");
         
         i.push(d);
+        // youyinnn
         let ii = i.slice(0)
         let pp
         for (let ss = ii.length - 1; ss >= 0; ss--) {
@@ -1356,6 +1357,7 @@
         }
         var g = "<h" + t + ' id="h' + t + "-" + this.options.headerPrefix + f + '">';
         e = e.replace(new RegExp('<i.*></i>|<span.*/span>', 'gm') , '')
+        pp = pp.replace(new RegExp('<i.*></i>|<span.*/span>', 'gm') , '')
         return g += '<a name="' + pp  + '-' + e + '" class="reference-link"></a>', g += '<span class="header-link octicon octicon-link"></span>', g += this.atLink(a ? this.emoji(n) : this.emoji(e)), g += "</h" + t + ">"
       }, l.pageBreak = function (e) {
         return w.test(e) && a.pageBreak && (e = '<hr style="page-break-after:always;" class="page-break editormd-page-break" />'), e
@@ -1388,6 +1390,7 @@
         var c = e[s].text, h = e[s].level;
         c = c.replace(new RegExp('<i.*></i>|<span.*/span>', 'gm') , '')
         
+        // youyinnn
         let p
         for (let ss = s; ss >= 0; ss--) {
           if (e[ss].level < h) {
@@ -1398,6 +1401,7 @@
         if (p === undefined) {
           p = '_root'
         }
+        p = p.replace(new RegExp('<i.*></i>|<span.*/span>', 'gm') , '')
         o > h || (r += h > n ? "" : n > h ? new Array(n - h + 2).join("</ul></li>") : "</ul></li>", r += '<li><a class="toc-level-' + h + '" href="#' + p + '-' + c + '" level="' + h + '">' + c + "</a><ul>", n = h)
       }
       var d = t.find(".markdown-toc");
