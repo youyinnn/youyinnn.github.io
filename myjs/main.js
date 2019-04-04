@@ -351,7 +351,6 @@ function postsmetadatahandle(postmetadata) {
             }
             if (!haved) {
                 all_cates.push(postcache.categories[i])
-                cates.innerHTML += '<button id="' + b64.encode(postcache.categories[i], true) + '_catetag" class="stgc btn btn-light">' + postcache.categories[i] + '</button>'
             }
         }
     }
@@ -366,7 +365,6 @@ function postsmetadatahandle(postmetadata) {
             }
             if (!haved) {
                 all_tags.push(postcache.tags[i])
-                tags.innerHTML += '<button class="stgt btn btn-light">' + postcache.tags[i] + '</button>'
             }
         }
     }
@@ -1050,6 +1048,16 @@ function handlemetadata(metadata) {
         postsmetadatahandle(metadata[i])
         // push for page posts to load the data
         posts_cache.push(metadata[i])
+    }
+    // display tags btn
+    all_tags.sort()
+    for (let i = 0; i < all_tags.length; i++) {
+        tags.innerHTML += '<button class="stgt btn btn-light">' + all_tags[i] + '</button>'
+    }
+    // display cats btn
+    all_cates.sort()
+    for (let i = 0; i < all_cates.length; i++) {
+        cates.innerHTML += '<button id="' + b64.encode(all_cates[i], true) + '_catetag" class="stgc btn btn-light">' + all_cates[i] + '</button>'
     }
     $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
     $('#stat_post_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
