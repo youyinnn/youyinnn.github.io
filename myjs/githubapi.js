@@ -294,8 +294,8 @@ function get_egg() {
     }, true)
 }
 
-function get_issues_by_label(label, func, closed, timeout) {
-    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=9999'
+function get_issues_by_label(label, func, closed, timeout, page) {
+    let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + label + '&per_page=100&page=' + (page === undefined ? 1 : page)
     if (closed !== undefined && closed) {
         url += '&state=closed'
     }
@@ -320,20 +320,34 @@ function syncatesToconfig() {
         setTimeout(function() {
             popmsg('Sync started...', 30000)
         }, 2200);
-        get_issues_by_label(post_label, function(re) {
-            popmsg('Fetching.')
-            setTimeout(function() {
-                popmsg('Fetching..', 30000)
-            }, 1060);
-            setTimeout(function() {
-                popmsg('Fetching...', 30000)
-            }, 2100);
+
+        get_all_posts(1, [])
+
+    } else {
+        location.reload()
+    }
+}
+
+var allpost
+
+function get_all_posts(page, all) {
+    popmsg('Fetching.')
+    setTimeout(function() {
+        popmsg('Fetching..', 30000)
+    }, 1060);
+    setTimeout(function() {
+        popmsg('Fetching...', 30000)
+    }, 2100);
+    get_issues_by_label(post_label, function(re, textStatus, jqXHR) {
+        if (jqXHR.getResponseHeader('link').split(';')[2] !== ' rel="last"') {
+            // the last page
+            allpost = all.concat(re)
             let newpostmetadata = new Array()
             let series = new Array()
             let postorder = new Array()
             let pcbl = new Array()
-            for (let i = 0; i < re.length; i++) {
-                let rei = re[i]
+            for (let i = 0; i < allpost.length; i++) {
+                let rei = allpost[i]
                 // order
                 postorder.push(rei.title + '<=>' + rei.number)
                 // metadata
@@ -414,14 +428,8 @@ function syncatesToconfig() {
                     })
                 })
             }, timeoutfunc)
-        }, false, 30 * 1000)
-    } else {
-        location.reload()
-    }
-}
-
-function get_all_posts(handle) {
-    get_issues_by_label(post_label, function(re) {
-        handle(re)
-    })
+        } else {
+            get_all_posts(++page, all.concat(re))
+        }
+    }, false, 30 * 10000, page)
 }
