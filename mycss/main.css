@@ -484,6 +484,8 @@
   margin: auto;
   top: 3rem;
   bottom: 0;
+  background: url(https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/wp.jpg);
+  background-size: cover;
 }
 
 #hacknical_github_analysis {
