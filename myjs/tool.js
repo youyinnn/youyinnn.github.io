@@ -446,9 +446,9 @@ function sendget(url, ohyes, ohno, timeout) {
 }
 
 function sendget(set, ohyes, ohno) {
-    $.ajax(set).done(function(response) {
+    $.ajax(set).done(function(resp, textStatus, jqXHR) {
         if (ohyes !== undefined) {
-            ohyes(response)
+            ohyes(resp, textStatus, jqXHR)
         }
     }).fail(function(xhr, textstatus, errorthrown) {
         if (ohno !== undefined) {
