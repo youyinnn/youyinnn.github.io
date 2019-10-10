@@ -29,9 +29,14 @@ $(function() {
         }
         $('#ifwrapper').removeClass('hacknical_hide')
         $('#gohub').text('Hide HackNical')
+        $('#gohub').tooltip('disable')
+        $('#gohub').click((e) => {e.preventDefault()})
         let oldhref = $('#gohub').attr('href')
         $('#gohub').attr('href', 'javascript:void(0);')
         $('#gohub').click(function() {
+            $('#gohub').tooltip('enable')
+            $('#gohub').unbind('click')
+            $('#gohub').attr('target', '_blank')
             $('#ifwrapper').addClass('hacknical_hide')
             $('#gohub').text('My Hub')
             setTimeout(function() {
