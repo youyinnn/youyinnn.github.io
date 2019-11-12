@@ -209,11 +209,10 @@ function createscript(issuesbody, re) {
     for (let i = 0; i < re.length; ++i) {
         let head = re[i].created_at
         let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Script <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + postcarddate(dayjs(head).set('hour', dayjs(head).hour() - 8)) + '</div><div class="card-body">\r\n' + text + '\r\n</div></div><br>'
+        fulltext += `<div class="card" id="search-${i}"><div class="card-header"><span style="font-weight:bold;">Script <a href="${re[i].html_url}" target="_blank">#${i}</a> created at: </span>${dayjs(head).format('MMM,DD YYYY') + postcarddate(dayjs(head).set('hour', dayjs(head).hour() - 8))}</div><div class="card-body">${'\r\n\r\n' + text + '\r\n\r\n'}</div></div><br>`
     }
     $(md).animateCss('fadeIn')
     searchshowandrendermd(fulltext, re.length)
-    $('.card-body')
 }
 
 function createegg(issuesbody, re) {

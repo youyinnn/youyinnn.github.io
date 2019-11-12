@@ -1222,3 +1222,12 @@ body.iframe .powered {
     border-radius: .25rem !important;
 }
 
+summary:hover {
+  background-color: #dee2e6;
+}
+summary:focus {
+  outline: none !important;
+}
+summary {
+  margin-bottom: 1rem;
+}
