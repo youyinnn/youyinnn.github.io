@@ -111,6 +111,12 @@ function createpostcard(item, pagebelong) {
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
     })
+    let pres = $('pre')
+    for (p of pres) {
+        if (p.innerText === '') {
+            $(p).remove()
+        }
+    }
 }
 
 function createposthead(re) {
