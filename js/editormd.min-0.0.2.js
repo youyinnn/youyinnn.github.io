@@ -1526,7 +1526,6 @@
           smartLists: !0,
           smartypants: !0
         };
-      l = new String(l);
       var u = marked(l, d);
       u = t.filterHTMLTags(u, a.htmlDecode), a.markdownSourceCode ? s.text(l) : s.remove(), n.addClass("markdown-body " + this.classPrefix + "html-preview").append(u);
       var f = "" !== a.tocContainer ? e(a.tocContainer) : n;

@@ -127,7 +127,6 @@ function render_md(text) {
             lasttr.append(c('td'))
         }
     })
-    adclass(md, 'post')
     setimg()
 }
 
