@@ -8,7 +8,7 @@ var todo_label = 'ytodo'
 var resume_label = 'yresume'
 var egg_label = 'yegg'
 var api_url = 'https://api.github.com'
-var oauth_token_base64 = 'YTVmZTQzMTNiZGRkMzA5Y2M5YjdiMjUwYmY2NWRhODk0NTkwYzBiOA=='
+var oauth_token_base64 = 'OGZhZTVhOWFhODYxNWY1OWZhNDMxOTJlNDMwZDQxN2JhNDVmZDU1Yg=='
 var oauth_token = b64.decode(oauth_token_base64)
 var defaulttimeout
 var shortmsgline = 25
