@@ -13,13 +13,13 @@
     display: block !important;
   }
 
-  .onepost>.posttitle {
+  .onearticle>.articletitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;
   }
 
-  .postcard {
+  .articlecard {
     width: 24rem;
   }
 
@@ -42,7 +42,7 @@
     font-size: 1rem;
   }
 
-  #toposts {
+  #toarticles {
     top: 13rem;
     font-size: 1rem;
   }
@@ -157,7 +157,7 @@
   .tooltip{
     display: none !important;
   }
-  .postmore{
+  .articlemore{
     display: none;
   }
   .copyrightbox {
@@ -175,7 +175,7 @@
     display: block !important;
   }
 
-  .onepost>.posttitle {
+  .onearticle>.articletitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;
@@ -207,7 +207,7 @@
     word-break: break-all;
   }
 
-  #posts_side_panel {
+  #articles_side_panel {
     display: none;
   }
 
@@ -242,13 +242,13 @@
     column-count: 1;
   }
 
-  .postcard {
+  .articlecard {
     width: 95%;
     margin: 1rem auto 0;
     padding: 10px;
   }
 
-  .posttitle {
+  .articletitle {
     width: 80%;
   }
 
@@ -333,7 +333,7 @@
     z-index: 300;
   }
 
-  .postshortmsg {
+  .articleshortmsg {
     display: none;
   }
 
@@ -416,7 +416,7 @@
     font-size: 1rem;
   }
 
-  #toposts {
+  #toarticles {
     top: 15rem;
     font-size: 1rem;
   }
@@ -446,7 +446,7 @@
     display: block !important;
   }
 
-  .onepost>.posttitle {
+  .onearticle>.articletitle {
     font-size: 1.3rem;
     font-weight: 100;
     padding: initial !important;

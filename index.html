@@ -37,10 +37,10 @@
             <spen id="homebut" href="javaScript:void(0)" class="ah">-about</spen>
         </li>
         <li class="breadcrumb-item">
-            <spen id="postsbut" href="javaScript:void(0)" class="ah">-posts</spen>
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
         </li>
         <li class="breadcrumb-item">
-            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-script</spen>
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
         </li>
         <li class="breadcrumb-item">
             <spen id="todobut" href="javaScript:void(0)" class="ah">-todo</spen>
@@ -64,7 +64,7 @@
         </span>
         <div id="showmore"> &gt; About Me & This Blog</div>
         <div id="showhacknical"> &gt; My Github Analysis</div>
-        <div id="toposts"> &gt; My Tech Posts</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
         <div id="ifwrapper" class="hacknical_hide">
             <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
         </div>
@@ -107,8 +107,8 @@
 
     </div>
 
-    <div id="posts_side_panel" class="unselectable myhide new_font">
-        <div id="cates_tree_head">Posts Categories</div>
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
         <div id="cates_tree_body"></div>
         <div id="blog_statistic_head">Blog Statistic</div>
         <table id="blog_statistic_body" class="myhide">
@@ -118,8 +118,8 @@
                     <td style="text-align:left" id="stat_running"></td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">Total post:</td>
-                    <td style="text-align:left" id="stat_post_count"></td>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
                 </tr>
                 <tr>
                     <td style="text-align:right">Char count:</td>
@@ -137,13 +137,13 @@
         </table>
     </div>
     <div id="docpanel" class="myhide new_font">
-        <div id="postsearch" class="input-group">
-            <input id="postsearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
             <div class="input-group-append">
                 <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
                 <button id="categories" class="btn btn-dark" type="button">cates</button>
                 <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
-                <button id="postsearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
             </div>
         </div>
         <div class="tgs myhide" id="all_cates">
@@ -154,7 +154,7 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="postorderbtn">
+        <div class="articleorderbtn">
             <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
             <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
             <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>

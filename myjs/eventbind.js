@@ -2,8 +2,8 @@ $(function() {
     $('#homebut').bind('click', function() {
         location = '/'
     })
-    $('#postsbut').bind('click', function() {
-        location = '/' + '?to=posts'
+    $('#articlesbut').bind('click', function() {
+        location = '/' + '?to=articles'
     })
     $('#scriptbut').bind('click', function() {
         location = '/' + '?to=script'
@@ -20,8 +20,8 @@ $(function() {
     $('#showmore').bind('click', function() {
         location = '/' + '?to=about'
     })
-    $('#toposts').bind('click', function() {
-        location = '/' + '?to=posts'
+    $('#toarticles').bind('click', function() {
+        location = '/' + '?to=articles'
     })
     $('#showhacknical').bind('click', function() {
         if ($('#hacknical_github_analysis').attr('src') === undefined) {
@@ -47,19 +47,19 @@ $(function() {
     $('#searchbut').bind('click', function() {
         searchscript($('#searchtext')[0].value)
     })
-    $('#postsearchbut').bind('click', function() {
-        searchpost($('#postsearchtext')[0].value)
+    $('#articlesearchbut').bind('click', function() {
+        searcharticle($('#articlesearchtext')[0].value)
     })
     $('#cleanbut').bind('click', function() {
         cleansearch()
     })
     $('#hb').bind('click', function() {
-        $('#nextpostbtn').tooltip('hide')
-        $('#prepostbtn').tooltip('hide')
+        $('#nextarticlebtn').tooltip('hide')
+        $('#prearticlebtn').tooltip('hide')
         cgtopbut()
         setTimeout(function() {
-            $('#nextpostbtn').tooltip('show')
-            $('#prepostbtn').tooltip('show')
+            $('#nextarticlebtn').tooltip('show')
+            $('#prearticlebtn').tooltip('show')
         }, 1200);
     })
     $('#toc').bind('click', function() {
@@ -85,20 +85,20 @@ $(function() {
     $('#searchtext').bind('keyup', 'return', function() {
         searchscript(this.value)
     })
-    $('#postsearchtext').bind('keyup', 'return', function() {
-        searchpost(this.value)
+    $('#articlesearchtext').bind('keyup', 'return', function() {
+        searcharticle(this.value)
     })
     $('#searchtext').bind('keyup', 'esc', function() {
         this.value = ''
     })
-    $('#postsearchtext').bind('keyup', 'esc', function() {
+    $('#articlesearchtext').bind('keyup', 'esc', function() {
         this.value = ''
     })
     $(window).bind('keyup', 'alt+s', function() {
         syncatesToconfig()
     })
     $(window).bind('keyup', 'alt+p', function() {
-        if (location.href.search(/\?to=post&/) !== -1) {
+        if (location.href.search(/\?to=article&/) !== -1) {
             md2png()
         }
     })
@@ -143,14 +143,14 @@ $(function() {
         $('#corder').attr('disabled', '')
         $('#norder').removeAttr('disabled')
         $(this).tooltip('hide')
-        postsod = false
+        articlesod = false
         filter()
     })
     $('#norder').bind('click', function() {
         $('#norder').attr('disabled', '')
         $('#corder').removeAttr('disabled')
         $(this).tooltip('hide')
-        postsod = true
+        articlesod = true
         filter()
     })
     $('#cleancache').bind('click', function() {
@@ -166,8 +166,8 @@ $(function() {
                     localStorage.removeItem('pcbl_timeout')
                     localStorage.removeItem('pseries')
                     localStorage.removeItem('pod')
-                    posts_cache = new Array()
-                    get_posts()
+                    articles_cache = new Array()
+                    get_articles()
                 }, 200);
             }
         }

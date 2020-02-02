@@ -1,6 +1,6 @@
 var username = 'youyinnn'
 var blog_repo = username + '.github.io'
-var post_label = 'ypost'
+var article_label = 'yarticle'
 var about_label = 'yabout'
 var friend_linked_label = 'yfriendlinked'
 var script_label = 'yscript'
@@ -37,12 +37,12 @@ function urlhandle(url) {
     } else {
         url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
     }
-    // console.log('send post :' + url)
+    // console.log('send article :' + url)
     return url
 }
 
 
-function get_posts() {
+function get_articles() {
     $('#pgboxbox').remove()
     $('.treenode').remove()
     $('.stgt.btn').remove()
@@ -78,7 +78,7 @@ function get_posts() {
             localStorage.removeItem('pcbl_timeout')
             localStorage.removeItem('pseries')
             localStorage.removeItem('pod')
-            get_posts()
+            get_articles()
             return
         } else {
             hideloading()
@@ -89,28 +89,28 @@ function get_posts() {
     }
 }
 
-function get_post(number) {
+function get_article(number) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
     sendget(urlhandle(url), function(re) {
         let page = re.html_url
         setgohub('Go hub', page)
-        createposthead(re)
+        createarticlehead(re)
         changepagetitle(re.title)
         let text = re.body
         let url2 = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number + '/comments' + '?per_page=9999'
         sendget(urlhandle(url2), function(re) {
             let charlength = text.length
-            text += '\n\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/?to=post&number=' + number + '</a><hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[<a href="javascript:void(0);">https://github.com/youyinnn</a>].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\n\n'
+            text += '\n\n<div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;"><span style="font-weight:bold;font-size:18px;">Copyright Notices:</span><br>Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/?to=article&number=' + number + '</a><hr>1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[<a href="javascript:void(0);">https://github.com/youyinnn</a>].<br>2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.</div>\n\n'
             copytext = text
-            text += '\n\n<div id="postshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\n\n'
-            text += '\n\n<div id="movebtn"><button id="nextpostbtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Next</button><button id="prepostbtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button></div> \n\n'
+            text += '\n\n<div id="articleshare"><button id="sharetag" class="btn">Share:&nbsp;&nbsp;</button></div>\n\n'
+            text += '\n\n<div id="movebtn"><button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Next</button><button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button></div> \n\n'
             text += '\n\n<div id="commentline"></div> \n\n'
-            text += '## Post comments\n'
+            text += '## Article comments\n'
             if (re.length === 0) {
                 text += '<div id="nocomment">No one has commented here yet \n <a href="' + page + '">Add comment</a></div>'
             } else {
                 for (let i = 0; i < re.length; i++) {
-                    text += createpostcomment(i, re[i])
+                    text += createarticlecomment(i, re[i])
                 }
             }
             // render the md text
@@ -145,8 +145,8 @@ function get_post(number) {
                 appendc(addcomment, a)
                 appendc(md, addcomment)
             }
-            if (!postcomment) {
-                $('#nocomment')[0].innerHTML = 'Can\'t comment on this post <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
+            if (!articlecomment) {
+                $('#nocomment')[0].innerHTML = 'Can\'t comment on this article <br><a href="https://github.com/' + username + '" target="_blank">contact me</a>'
             }
             let tomdinnerHTML = '2 md'
             createsharebtn(tomdinnerHTML, function(btn) {
@@ -303,15 +303,15 @@ function get_issues_by_label(label, func, closed, timeout, page) {
 }
 
 function syncatesToconfig() {
-    if (!postsync) {
+    if (!articlesync) {
         // clear
         localStorage.removeItem('pcbl')
         localStorage.removeItem('pcbl_timeout')
         localStorage.removeItem('pseries')
         localStorage.removeItem('pod')
-        postsearchrs = new Array()
-        posts_cache = new Array()
-        filter_posts_cache = new Array()
+        articlesearchrs = new Array()
+        articles_cache = new Array()
+        filter_articles_cache = new Array()
 
         popmsg('Sync started.', 30000)
         setTimeout(function() {
@@ -321,16 +321,16 @@ function syncatesToconfig() {
             popmsg('Sync started...', 30000)
         }, 2200);
 
-        get_all_posts(1, [])
+        get_all_articles(1, [])
 
     } else {
         location.reload()
     }
 }
 
-var allpost
+var allarticle
 
-function get_all_posts(page, all) {
+function get_all_articles(page, all) {
     popmsg('Fetching.')
     setTimeout(function() {
         popmsg('Fetching..', 30000)
@@ -338,21 +338,21 @@ function get_all_posts(page, all) {
     setTimeout(function() {
         popmsg('Fetching...', 30000)
     }, 2100);
-    get_issues_by_label(post_label, function(re, textStatus, jqXHR) {
+    get_issues_by_label(article_label, function(re, textStatus, jqXHR) {
         if (jqXHR.getResponseHeader('link').split(';')[2] !== ' rel="last"') {
             // the last page
-            allpost = all.concat(re)
-            let newpostmetadata = new Array()
+            allarticle = all.concat(re)
+            let newarticlemetadata = new Array()
             let series = new Array()
-            let postorder = new Array()
+            let articleorder = new Array()
             let pcbl = new Array()
-            for (let i = 0; i < allpost.length; i++) {
-                let rei = allpost[i]
+            for (let i = 0; i < allarticle.length; i++) {
+                let rei = allarticle[i]
                 // order
-                postorder.push(rei.title + '<=>' + rei.number)
+                articleorder.push(rei.title + '<=>' + rei.number)
                 // metadata
                 let metadata = syncreihandle2metadata(rei)
-                newpostmetadata.push(metadata)
+                newarticlemetadata.push(metadata)
                 // metadata finish
 
                 // series
@@ -373,7 +373,7 @@ function get_all_posts(page, all) {
                     pseries.unshift(ss)
                 }
 
-                // post_cache bodys on localStorage
+                // article_cache bodys on localStorage
                 let mtcopy = syncreihandle2metadata(rei)
                 mtcopy.body = getbodyfrommdtext(rei.body)
                 pcbl.push(mtcopy)
@@ -381,17 +381,17 @@ function get_all_posts(page, all) {
 
             // dump obj to yaml
             series = yaml.dump(series.reverse())
-            newpostmetadata = yaml.dump(newpostmetadata)
+            newarticlemetadata = yaml.dump(newarticlemetadata)
 
-            // store post_cache
+            // store article_cache
             localStorage.setItem('pcbl', JSON.stringify(pcbl))
             localStorage.setItem('pcbl_timeout',
                 new Date(new Date().getTime() + pcbl_timeout_period).getTime())
             localStorage.setItem('pseries', series)
-            localStorage.setItem('pod', postorder.join('>--<'))
+            localStorage.setItem('pod', articleorder.join('>--<'))
 
             // sync data
-            let text = '{ "body":' + JSON.stringify(newpostmetadata) + '}'
+            let text = '{ "body":' + JSON.stringify(newarticlemetadata) + '}'
             let url = api_url + '/repos/youyinnn/youyinnn.github.io/issues?labels=yconf&state=closed'
             sendget(urlhandle(url), function(re) {
                 popmsg('Syncing.')
@@ -402,34 +402,34 @@ function get_all_posts(page, all) {
                     popmsg('Syncing...', 30000)
                 }, 2080);
                 get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-                    let posttreecommentid = re[0].id
+                    let articletreecommentid = re[0].id
                     let seriestreecommentid = re[1].id
-                    let postordercommentid = re[2].id
-                    url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + posttreecommentid
-                    popmsg('Updating post tree...', 30000)
+                    let articleordercommentid = re[2].id
+                    url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + articletreecommentid
+                    popmsg('Updating article tree...', 30000)
                     sendpatch(urlhandle(url), text, function(re) {
                         url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + seriestreecommentid
                         text = '{ "body":' + JSON.stringify(series) + '}'
-                        popmsg('Updating post series tree...', 30000)
+                        popmsg('Updating article series tree...', 30000)
                         sendpatch(urlhandle(url), text, function(re) {
-                            url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + postordercommentid
-                            text = '{ "body":' + JSON.stringify(postorder.join('>--<')) + '}'
-                            popmsg('Updating post order...', 30000)
+                            url = api_url + '/repos/youyinnn/youyinnn.github.io/issues/comments/' + articleordercommentid
+                            text = '{ "body":' + JSON.stringify(articleorder.join('>--<')) + '}'
+                            popmsg('Updating article order...', 30000)
                             sendpatch(urlhandle(url), text, function(re) {
                                 popmsg('Done!', 2000)
-                                if (location.href.endsWith('to=posts')) {
+                                if (location.href.endsWith('to=articles')) {
                                     setTimeout(function() {
-                                        get_posts()
+                                        get_articles()
                                     }, 2000);
                                 }
-                                postsync = true
+                                articlesync = true
                             })
                         })
                     })
                 })
             }, timeoutfunc)
         } else {
-            get_all_posts(++page, all.concat(re))
+            get_all_articles(++page, all.concat(re))
         }
     }, false, 30 * 10000, page)
 }
