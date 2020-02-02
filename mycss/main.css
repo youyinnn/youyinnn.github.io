@@ -10,7 +10,7 @@
   transition: all 1.2s;
 }
 
-#posts_side_panel {
+#articles_side_panel {
   position: fixed;
   margin: 0 auto;
   left: 0;
@@ -236,14 +236,14 @@
   top: -500px;
 }
 
-.posthead {
+.articlehead {
   text-align: center;
   color: rgb(83, 87, 90);
   margin: 0.9rem auto;
   transition: all .3s ease-in-out;
 }
 
-.postcard {
+.articlecard {
   overflow: hidden;
   width: 90%;
   color: rgb(83, 87, 90);
@@ -255,7 +255,7 @@
   text-align: right;
 }
 
-.postcardtitle {
+.articlecardtitle {
   padding: 5px 0;
   font-size: 18px;
   word-break: break-word;
@@ -267,14 +267,14 @@
   text-decoration: none !important;
 }
 
-.postcardtime {
+.articlecardtime {
   padding: 5px 0;
   font-size: 12px;
   text-align: left;
   overflow: hidden;
 }
 
-.postshortmsg {
+.articleshortmsg {
   overflow: hidden !important;
   padding: 10px !important;
   margin-bottom: 10px;
@@ -282,7 +282,7 @@
   margin-top: 5px;
 }
 
-.postmore {
+.articlemore {
   background-color: var(--ymain-color);
   padding: 0 .5rem;
   display: inline-block;
@@ -293,7 +293,7 @@
   margin-bottom: .5rem
 }
 
-.postmore:hover {
+.articlemore:hover {
   width: 5rem;
   color: aliceblue;
   text-align: center;
@@ -317,23 +317,23 @@
   display: none;
 }
 
-.post img,
-.postshortmsg img {
+.article img,
+.articleshortmsg img {
   display: block;
   margin: auto;
   left: 0;
   right: 0;
 }
 
-.post img:hover {
+.article img:hover {
   cursor: pointer;
 }
 
-.post img:active {
+.article img:active {
   cursor: pointer;
 }
 
-.posttitle {
+.articletitle {
   width: 100%;
   word-wrap: break-word;
   word-break: break-all;
@@ -344,7 +344,7 @@
   display: inline-block;
 }
 
-.posttime {
+.articletime {
   font-size: 0.8rem;
 }
 
@@ -373,19 +373,19 @@
   transform: scale3d(1, 1, 1) translateX(-50%);
 }
 
-/* .post span {
+/* .article span {
   margin: 0 1px;
   font-size: 0.9rem;
   display: inline-block;
 } */
-.onepost {
+.onearticle {
   width: 100%;
   padding: 0 0 1rem 0;
   border-bottom: 0.1rem var(--ydashed-color) dashed;
   margin-bottom: 1rem;
 }
 
-.onepost>.posttitle {
+.onearticle>.articletitle {
   /* font-size: 1.3rem;
   font-weight: bold; */
   font-size: 2.3rem;
@@ -393,7 +393,7 @@
   padding: 1rem;
 }
 
-.onepost>.posttitle:active {
+.onearticle>.articletitle:active {
   transform: none !important;
 }
 
@@ -625,7 +625,7 @@
   width: 100%;
 }
 
-#postshare button {
+#articleshare button {
   border-radius: 0;
   padding: 5px;
   font-size: 12px;
@@ -640,7 +640,7 @@
   box-shadow: inherit;
 }
 
-#postshare {
+#articleshare {
   right: 2rem;
   position: absolute;
 }
@@ -687,7 +687,7 @@
   right: 0;
 }
 
-#toposts {
+#toarticles {
   cursor: pointer;
   position: absolute;
   height: 3rem;
@@ -702,13 +702,13 @@
 }
 
 #showmore:hover,
-#toposts:hover,
+#toarticles:hover,
 #showhacknical:hover {
   background-color: #dc35d90a;
 }
 
 #showmore:active,
-#toposts:active,
+#toarticles:active,
 #showhacknical:active {
   transform: translateY(4px);
 }
@@ -722,7 +722,7 @@
   margin: 1rem auto;
 }
 
-#postsearch {
+#articlesearch {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   width: 100%;
   border-radius: 0.25rem;
@@ -761,19 +761,19 @@
 }
 
 /* placeholder居中 */
-#postsearchtext:-moz-placeholder {
+#articlesearchtext:-moz-placeholder {
   text-align: center;
 }
 
-#postsearchtext::-moz-placeholder {
+#articlesearchtext::-moz-placeholder {
   text-align: center;
 }
 
-#postsearchtext:-ms-input-placeholder {
+#articlesearchtext:-ms-input-placeholder {
   text-align: center;
 }
 
-#postsearchtext::-webkit-input-placeholder {
+#articlesearchtext::-webkit-input-placeholder {
   text-align: center;
 }
 
@@ -1201,7 +1201,7 @@ body.iframe .powered {
   text-align: left !important;
 }
 
-.postorderbtn {
+.articleorderbtn {
   position: absolute;
   right: .6rem;
   z-index: 290;
@@ -1211,13 +1211,13 @@ body.iframe .powered {
   background-color: whitesmoke;
 }
 
-.postorderbtn button {
+.articleorderbtn button {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   padding: .1rem;
   width: 20px;
 }
 
-.bdgonpostcard {
+.bdgonarticlecard {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
     border-radius: .25rem !important;
 }

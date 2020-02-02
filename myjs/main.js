@@ -10,7 +10,7 @@ function render_md(text) {
         let endindex = text.indexOf('---', 3) + 3
         let hexo_metadata = gethexofrontmatter(text)
         hexo_metadata = yaml.load(hexo_metadata.replace(/\r\n/gm, '\n'))
-        window.postcomment = hexo_metadata.comments === undefined ? true : hexo_metadata.comments
+        window.articlecomment = hexo_metadata.comments === undefined ? true : hexo_metadata.comments
         showhexometadata(hexo_metadata)
         text = text.substring(endindex, text.length)
     }
@@ -77,7 +77,7 @@ function render_md(text) {
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
     });
-    $('#md').addClass('post')
+    $('#md').addClass('article')
     let as = $('#md a')
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
@@ -131,8 +131,8 @@ function render_md(text) {
     setimg()
 }
 
-function postspage(pageto) {
-    docpanel.style.cssText = 'transform: translateY(-' + ((postpanelheight - 48) * (pageto - 1)) + 'px);'
+function articlespage(pageto) {
+    docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
 function hideloading() {
@@ -276,7 +276,7 @@ function getdocwithnohexofrontmatter(text) {
 
 var pcbl_timeout_period = 24 * 60 * 60 * 1000
 
-function searchpost(text) {
+function searcharticle(text) {
     // search
     if (text !== '') {
         text = text.replace(/\s/gm, '')
@@ -286,29 +286,29 @@ function searchpost(text) {
                 rs.add(context.hits[i].number)
             }
             // handle rs
-            if (filter_posts_cache.length === 0) {
-                for (let i = 0; i < posts_cache.length; i++) {
-                    if (rs.has(posts_cache[i].number)) {
-                        postsearchrs.push(posts_cache[i])
+            if (filter_articles_cache.length === 0) {
+                for (let i = 0; i < articles_cache.length; i++) {
+                    if (rs.has(articles_cache[i].number)) {
+                        articlesearchrs.push(articles_cache[i])
                     }
                 }
             } else {
-                for (let i = 0; i < filter_posts_cache.length; i++) {
-                    if (rs.has(filter_posts_cache[i].number)) {
-                        postsearchrs.push(filter_posts_cache[i])
+                for (let i = 0; i < filter_articles_cache.length; i++) {
+                    if (rs.has(filter_articles_cache[i].number)) {
+                        articlesearchrs.push(filter_articles_cache[i])
                     }
                 }
             }
-            if (postsearchrs.length === 0) {
-                $('#postsearchtext').addClass('getnothing')
+            if (articlesearchrs.length === 0) {
+                $('#articlesearchtext').addClass('getnothing')
                 setTimeout(function() {
-                    $('#postsearchtext').removeClass('getnothing')
+                    $('#articlesearchtext').removeClass('getnothing')
                 }, 1000, 'swing')
             } else {
                 $('#pgboxbox').remove()
                 $('.pagination').remove()
-                rstopaging(postsearchrs)
-                postsearchrs = new Array()
+                rstopaging(articlesearchrs)
+                articlesearchrs = new Array()
             }
         })
     } else {
@@ -316,18 +316,18 @@ function searchpost(text) {
     }
 }
 
-function postsmetadatahandle(postmetadata) {
-    let postcache = postmetadata
-    if (postcache.categories !== undefined) {
-        for (let i = 0; i < postcache.categories.length; i++) {
+function articlesmetadatahandle(articlemetadata) {
+    let articlecache = articlemetadata
+    if (articlecache.categories !== undefined) {
+        for (let i = 0; i < articlecache.categories.length; i++) {
             // handle cates_tree_body
-            let cate = b64.encode(postcache.categories[i], true)
+            let cate = b64.encode(articlecache.categories[i], true)
             if ($('#' + cate + '_treenode').length === 0) {
                 let node = c('li')
                 node.id = cate + '_treenode'
                 adclass(node, 'treenode')
                 let noa = c('div')
-                noa.innerText = postcache.categories[i]
+                noa.innerText = articlecache.categories[i]
                 $(noa).bind('click', function(event) {
                     catetreenodeclick(this, true, true)
                 })
@@ -337,7 +337,7 @@ function postsmetadatahandle(postmetadata) {
                     appendliwithorder(cates_tree_body, node)
                 } else {
                     // if not find parent root element and add child element
-                    let parentnodeid = b64.encode(postcache.categories[i - 1], true)
+                    let parentnodeid = b64.encode(articlecache.categories[i - 1], true)
                     appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
                 }
             }
@@ -345,26 +345,26 @@ function postsmetadatahandle(postmetadata) {
             // handle cates panel
             let haved = false
             for (let j = 0; j < all_cates.length; j++) {
-                if (all_cates[j] === postcache.categories[i]) {
+                if (all_cates[j] === articlecache.categories[i]) {
                     haved = true
                 }
             }
             if (!haved) {
-                all_cates.push(postcache.categories[i])
+                all_cates.push(articlecache.categories[i])
             }
         }
     }
     // handle tags panel
-    if (postcache.tags !== undefined) {
-        for (let i = 0; i < postcache.tags.length; i++) {
+    if (articlecache.tags !== undefined) {
+        for (let i = 0; i < articlecache.tags.length; i++) {
             let haved = false
             for (let j = 0; j < all_tags.length; j++) {
-                if (all_tags[j] === postcache.tags[i]) {
+                if (all_tags[j] === articlecache.tags[i]) {
                     haved = true
                 }
             }
             if (!haved) {
-                all_tags.push(postcache.tags[i])
+                all_tags.push(articlecache.tags[i])
             }
         }
     }
@@ -390,16 +390,16 @@ function catetagclick(catetag, isfilter, clicknode) {
     let stgcs = $('.stgc')
     let stgts = $('.stgt')
     if (hasclass(catetag, 'btn-light')) {
-        filter_posts_cache = new Array()
+        filter_articles_cache = new Array()
         stgts.attr('disabled', true)
         stgcs.attr('disabled', true)
         rmclass(catetag, 'btn-light')
         catetag.disabled = false
         adclass(catetag, 'btn-success')
-        for (let k = 0; k < posts_cache.length; k++) {
-            for (let l = 0; l < posts_cache[k].categories.length; l++) {
-                if (posts_cache[k].categories[l] === catetag.innerText) {
-                    filter_posts_cache.push(posts_cache[k])
+        for (let k = 0; k < articles_cache.length; k++) {
+            for (let l = 0; l < articles_cache[k].categories.length; l++) {
+                if (articles_cache[k].categories[l] === catetag.innerText) {
+                    filter_articles_cache.push(articles_cache[k])
                 }
             }
         }
@@ -420,15 +420,15 @@ function catetagclick(catetag, isfilter, clicknode) {
 
 function catetreenodeclick(catenode, isfilter, clicktag) {
     if (!hasclass(catenode, 'adisable')) {
-        filter_posts_cache = new Array()
+        filter_articles_cache = new Array()
         if (!catenode.asel) {
             catenode.asel = true
             $('#cates_tree_body div').addClass('adisable')
             rmclass(catenode, 'adisable')
-            for (let k = 0; k < posts_cache.length; k++) {
-                for (let l = 0; l < posts_cache[k].categories.length; l++) {
-                    if (posts_cache[k].categories[l] === catenode.innerText) {
-                        filter_posts_cache.push(posts_cache[k])
+            for (let k = 0; k < articles_cache.length; k++) {
+                for (let l = 0; l < articles_cache[k].categories.length; l++) {
+                    if (articles_cache[k].categories[l] === catenode.innerText) {
+                        filter_articles_cache.push(articles_cache[k])
                     }
                 }
             }
@@ -467,33 +467,33 @@ function filter() {
         $('#pgboxbox').remove()
         $('.pagination').remove()
         let pc
-        if (filter_posts_cache.length === 0) {
-            pc = posts_cache
+        if (filter_articles_cache.length === 0) {
+            pc = articles_cache
         } else {
-            pc = filter_posts_cache
+            pc = filter_articles_cache
         }
-        if (postsod) {
-            pc = pc.sort(sortpostbyupdatedate)
+        if (articlesod) {
+            pc = pc.sort(sortarticlebyupdatedate)
         } else {
-            pc = pc.sort(sortpostbycreatedate)
+            pc = pc.sort(sortarticlebycreatedate)
         }
         rstopaging(pc)
-        postsearchrs = new Array()
+        articlesearchrs = new Array()
     }, 100);
 }
 
-function sortpostbyupdatedate(a, b) {
+function sortarticlebyupdatedate(a, b) {
     return a.updated_at > b.updated_at ? -1 :
         a.updated_at === b.updated_at ? 0 : 1
 }
 
-function sortpostbycreatedate(a, b) {
+function sortarticlebycreatedate(a, b) {
     return a.created_at > b.created_at ? -1 :
         a.created_at === b.created_at ? 0 : 1
 }
 
-function rstopaging(posts) {
-    let totalpages = Math.ceil(posts.length / perpageitem)
+function rstopaging(articles) {
+    let totalpages = Math.ceil(articles.length / perpageitem)
     let pagesboxs = new Array(totalpages)
     let pageboxbox = c('div')
     pageboxbox.id = 'pgboxbox'
@@ -506,10 +506,10 @@ function rstopaging(posts) {
         appendc(pageboxbox, pagebox)
         pagesboxs[i] = pagebox
     }
-    for (let i = 0; i < posts.length; ++i) {
-        createpostcard(posts[i], Math.ceil((i + 1) / perpageitem))
+    for (let i = 0; i < articles.length; ++i) {
+        createarticlecard(articles[i], Math.ceil((i + 1) / perpageitem))
     }
-    let as = $('.postshortmsg a')
+    let as = $('.articleshortmsg a')
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
     }
@@ -706,11 +706,11 @@ function pagination() {
 function cleansearch() {
     $('#pgboxbox').remove()
     $('.pagination').remove()
-    if (filter_posts_cache.length !== 0) {
-        rstopaging(filter_posts_cache)
+    if (filter_articles_cache.length !== 0) {
+        rstopaging(filter_articles_cache)
     } else {
-        rstopaging(posts_cache)
-        filter_posts_cache = new Array()
+        rstopaging(articles_cache)
+        filter_articles_cache = new Array()
         let stgts = $('.stgt')
         let stgcs = $('.stgc')
         for (let j = 0; j < stgcs.length; j++) {
@@ -728,7 +728,7 @@ function cleansearch() {
             stgts[j].disabled = false
         }
     }
-    postsearchrs = new Array()
+    articlesearchrs = new Array()
 }
 
 function showbbt() {
@@ -815,9 +815,9 @@ function setcoll() {
 }
 
 function setimg() {
-    let postimgs = $('.post img')
-    postimgs.attr('title', 'click to focus')
-    postimgs.bind('click', function() {
+    let articleimgs = $('.article img')
+    articleimgs.attr('title', 'click to focus')
+    articleimgs.bind('click', function() {
         if (getclientw() > 700 && getclienth() > 700) {
             let w = getclientw()
             let h = getclienth()
@@ -876,7 +876,7 @@ function daybefore(pastdayjs) {
     return Math.ceil(before / 24)
 }
 
-function postcarddate(pastdayjs) {
+function articlecarddate(pastdayjs) {
     let daybeforers = daybefore(pastdayjs)
     let daynumber = parseInt(daybeforers)
     if (Number.isNaN(daynumber)) {
@@ -940,7 +940,7 @@ function showseries(ps) {
         if (it[1] === nownumber) {
             adclass(sa, 'adis')
         } else {
-            sa.href = 'https://' + blog_repo + '/?to=post&number=' + it[1]
+            sa.href = 'https://' + blog_repo + '/?to=article&number=' + it[1]
             sa.target = '_blank'
         }
         sa.innerText = it[0]
@@ -1045,9 +1045,9 @@ function handlemetadata(metadata) {
                 metadata[i].tags[j] = metadata[i].tags[j].toLowerCase()
             }
         }
-        postsmetadatahandle(metadata[i])
-        // push for page posts to load the data
-        posts_cache.push(metadata[i])
+        articlesmetadatahandle(metadata[i])
+        // push for page articles to load the data
+        articles_cache.push(metadata[i])
     }
     // display tags btn
     all_tags.sort()
@@ -1060,10 +1060,10 @@ function handlemetadata(metadata) {
         cates.innerHTML += '<button id="' + b64.encode(all_cates[i], true) + '_catetag" class="stgc btn btn-light">' + all_cates[i] + '</button>'
     }
     $('#stat_typein').html('<x style="color:#494b78;">' + (totalchars || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> chars')
-    $('#stat_post_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> posts')
+    $('#stat_article_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> articles')
     $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
     $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
-    rstopaging(metadata.sort(sortpostbycreatedate))
+    rstopaging(metadata.sort(sortarticlebycreatedate))
     let stgts = $('.stgt')
     let stgcs = $('.stgc')
     for (let i = 0; i < stgcs.length; i++) {
@@ -1073,7 +1073,7 @@ function handlemetadata(metadata) {
     }
     for (let i = 0; i < stgts.length; i++) {
         $(stgts[i]).bind('click', function(event) {
-            filter_posts_cache = new Array()
+            filter_articles_cache = new Array()
             if (hasclass(this, 'btn-light')) {
                 stgts.attr('disabled', true)
                 stgcs.attr('disabled', true)
@@ -1085,7 +1085,7 @@ function handlemetadata(metadata) {
                     if (metadata[k].tags !== undefined) {
                         for (let l = 0; l < metadata[k].tags.length; l++) {
                             if (metadata[k].tags[l] === this.innerText) {
-                                filter_posts_cache.push(metadata[k])
+                                filter_articles_cache.push(metadata[k])
                             }
                         }
                     }
@@ -1102,8 +1102,8 @@ function handlemetadata(metadata) {
     }
     rmclass(docpanel, 'myhide')
     adclass(docpanel, 'myshow')
-    rmclass(posts_side_panel, 'myhide')
-    adclass(posts_side_panel, 'myshow')
+    rmclass(articles_side_panel, 'myhide')
+    adclass(articles_side_panel, 'myshow')
     $('#blog_statistic_body').removeClass('myhide')
     setTimeout(function() {
         setheightfordocpanel()
@@ -1122,10 +1122,10 @@ function seriesorderhandle(number, psname, sbody, obody) {
             }
         }
     }
-    let postorder = obody.split('>--<')
+    let articleorder = obody.split('>--<')
     let preindex
     let nextindex
-    postorder.find(function(now, nowindex) {
+    articleorder.find(function(now, nowindex) {
         if (now === document.title + '<=>' + number) {
             preindex = nowindex - 1
             nextindex = nowindex + 1
@@ -1134,31 +1134,31 @@ function seriesorderhandle(number, psname, sbody, obody) {
     })
 
     if (preindex === -1) {
-        $('#nextpostbtn').removeClass('btn-dark')
-        $('#nextpostbtn').addClass('btn-secondary disabled')
+        $('#nextarticlebtn').removeClass('btn-dark')
+        $('#nextarticlebtn').addClass('btn-secondary disabled')
     } else {
-        $('#nextpostbtn').removeClass('disabled')
-        let prearr = postorder[preindex].split('<=>')
+        $('#nextarticlebtn').removeClass('disabled')
+        let prearr = articleorder[preindex].split('<=>')
         let pretitle = prearr[0]
         let prenumber = prearr[1]
-        $('#nextpostbtn').attr('data-original-title', pretitle)
-        $('#nextpostbtn').tooltip('show')
-        $('#nextpostbtn').click(function() {
-            location = '/' + '?to=post&number=' + prenumber
+        $('#nextarticlebtn').attr('data-original-title', pretitle)
+        $('#nextarticlebtn').tooltip('show')
+        $('#nextarticlebtn').click(function() {
+            location = '/' + '?to=article&number=' + prenumber
         })
     }
-    if (nextindex === postorder.length) {
-        $('#prepostbtn').removeClass('btn-dark')
-        $('#prepostbtn').addClass('btn-secondary disabled')
+    if (nextindex === articleorder.length) {
+        $('#prearticlebtn').removeClass('btn-dark')
+        $('#prearticlebtn').addClass('btn-secondary disabled')
     } else {
-        $('#prepostbtn').removeClass('disabled')
-        let nextarr = postorder[nextindex].split('<=>')
+        $('#prearticlebtn').removeClass('disabled')
+        let nextarr = articleorder[nextindex].split('<=>')
         let nexttitle = nextarr[0]
         let nextnumber = nextarr[1]
-        $('#prepostbtn').attr('data-original-title', nexttitle)
-        $('#prepostbtn').tooltip('show')
-        $('#prepostbtn').click(function() {
-            location = '/' + '?to=post&number=' + nextnumber
+        $('#prearticlebtn').attr('data-original-title', nexttitle)
+        $('#prearticlebtn').tooltip('show')
+        $('#prearticlebtn').click(function() {
+            location = '/' + '?to=article&number=' + nextnumber
         })
     }
 }

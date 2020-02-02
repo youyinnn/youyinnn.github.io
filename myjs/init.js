@@ -11,19 +11,19 @@ var topbut = $('#topbut')[0]
 var searchbut = $('#searchbut')[0]
 var fldd = $('#fldd')[0]
 var topbar = $('#topbar')[0]
-var posts_cache = new Array()
-var filter_posts_cache = new Array()
+var articles_cache = new Array()
+var filter_articles_cache = new Array()
 var tags = $('#all_tags')[0]
 var cates = $('#all_cates')[0]
 var all_tags = new Array()
 var all_cates = new Array()
-var postsearchrs = new Array()
-var posts_side_panel = $('#posts_side_panel')[0]
+var articlesearchrs = new Array()
+var articles_side_panel = $('#articles_side_panel')[0]
 var cates_tree_body = $('#cates_tree_body')[0]
 var perpageitem = 10
-var postcomment = false
-var postsync = false
-var postsod = false
+var articlecomment = false
+var articlesync = false
+var articlesod = false
 var searchcount
 var cachedcleaner
 var cachedcleanerLock = false
@@ -43,7 +43,7 @@ var origins = [
 $(function() {
     const main_urls = [
         '?to=about',
-        '?to=posts',
+        '?to=articles',
         '?to=script',
         '?to=todo',
         '?to=resume',
@@ -76,15 +76,15 @@ $(function() {
         let kv = params[0].split('=')
         let key = kv[0]
         let value = kv[1]
-        if (key === 'to' && value === 'posts') {
-            changepagetitle('posts | youyinnn')
-            get_posts()
+        if (key === 'to' && value === 'articles') {
+            changepagetitle('articles | youyinnn')
+            get_articles()
             let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
             index = client.initIndex('blog');
             checkcache()
-        } else if (key === 'to' && value === 'post') {
-            changepagetitle('post | youyinnn')
-            get_post(params[1].split('=')[1])
+        } else if (key === 'to' && value === 'article') {
+            changepagetitle('article | youyinnn')
+            get_article(params[1].split('=')[1])
         } else if (key === 'to' && value === 'about') {
             changepagetitle('about | youyinnn')
             get_about()
@@ -110,7 +110,7 @@ $(function() {
     })
     var clear
     $(window).resize(function() {
-        if (location.href.endsWith('?to=posts')) {
+        if (location.href.endsWith('?to=articles')) {
             clearTimeout(clear)
             clear = setTimeout(function() {
                 setheightfordocpanel()

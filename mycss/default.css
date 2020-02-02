@@ -152,9 +152,9 @@ td.hljs-ln-code {
   background-color: ghostwhite;
 }
 
-.myshow.post .card,
-.myshow.post .card-head,
-.myshow.post .card-body {
+.myshow.article .card,
+.myshow.article .card-head,
+.myshow.article .card-body {
   border-radius: initial !important;
 }
 
