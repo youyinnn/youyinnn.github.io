@@ -1066,7 +1066,8 @@
   background-color: #1d2124;
   z-index: 888;
   height: 132px;
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   transform: scaleX(0);
   transform-origin: 0 100% 0;
   transform-style: preserve-3d;
