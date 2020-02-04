@@ -33,12 +33,17 @@ function urlhandle(url) {
     let urls = url.split('/')
     let params = urls[urls.length - 1]
     if (params.search(/\?/gm, 'gi') !== -1) {
-        url += '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
+        url += '&flash=' + (new Date()).getTime()
     } else {
-        url += '?flash=' + (new Date()).getTime() + '&access_token=' + oauth_token
+        url += '?flash=' + (new Date()).getTime()
     }
     // console.log('send article :' + url)
-    return url
+    return {
+        url: url,
+        headers: {
+            "Authorization": `token ${oauth_token}`
+        }
+    }
 }
 
 
@@ -230,7 +235,7 @@ function get_resume() {
 
 function get_friendlinked() {
     if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&access_token=' + oauth_token + '&state=closed'
+        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&state=closed'
         let basegetset = {
             'timeout': defaulttimeout,
             'async': true,
@@ -239,6 +244,9 @@ function get_friendlinked() {
             'method': 'GET',
             'error': function(eve) {
                 fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
+            },
+            'headers': {
+                "Authorization": `token ${oauth_token}`
             }
         }
         // console.log('send get :' + url)
