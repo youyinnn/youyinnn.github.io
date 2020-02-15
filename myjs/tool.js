@@ -527,29 +527,26 @@ function sendurlencodedpost(url, data, ohyes, ohno, timeout) {
     })
 }
 
-function defpatchset(url, data, timeout) {
+function defpatchset(set, data, timeout) {
     if (timeout === undefined) {
         timeout = defaulttimeout
     }
-    let basepatchset = {
-        'timeout': timeout,
-        'async': true,
-        'crossDomain': true,
-        'method': 'PATCH',
-        'url': url,
-        'data': data
-    }
-    return basepatchset
+    set.timeout = timeout
+    set.async = true
+    set.crossDomain = true
+    set.method = 'PATCH'
+    set.data = data
+    return set
 }
 
-function sendpatch(url, data, ohyes, ohno, timeout) {
-    $.ajax(defpatchset(url, data, timeout)).done(function(response) {
+function sendpatch(set, data, ohyes, ohno, timeout) {
+    $.ajax(defpatchset(set, data, timeout)).done(function(response) {
         if (ohyes !== undefined) {
             ohyes(response)
         }
     }).fail(function(xhr, textstatus, errorthrown) {
         if (ohno !== undefined) {
-            ohno(xhr, textstatus, errorthrown, url)
+            ohno(xhr, textstatus, errorthrown, set)
         }
     })
 }
