@@ -245,9 +245,9 @@
 
 .articlecard {
   overflow: hidden;
-  width: 90%;
+  width: 95%;
   color: rgb(83, 87, 90);
-  margin: 1rem auto;
+  margin: 1rem 0;
   transition: all .1s ease-in-out;
   padding: 5px 20px;
   background-color: white;
@@ -855,7 +855,8 @@
 
 .hidetopbar {
   background-color: whitesmoke !important;
-  width: 3rem !important;
+  height: 0 !important;
+  padding: 0 !important;
 }
 
 .hidetopbar p,
@@ -877,6 +878,7 @@
   width: 0;
   height: 0;
   cursor: pointer;
+  transform: rotateZ(270deg);
 }
 
 #hb:hover {
@@ -884,15 +886,7 @@
 }
 
 #hb:active {
-  transform: translateY(.9rem);
-}
-
-.hidetopbar>#hb {
-  transform: rotateZ(180deg);
-}
-
-.hidetopbar>#hb:active {
-  transform: rotateZ(180deg) translateX(-.9rem);
+  transform: rotateZ(270deg) translateY(.9rem);
 }
 
 .resume {
