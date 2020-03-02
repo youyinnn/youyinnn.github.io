@@ -1192,7 +1192,6 @@ function checkcache() {
 function jumpToAnchor() {
     let hash = '[href="' + decodeURI(location.hash) + '"]'
     setTimeout(function() {
-        console.log(hash)
         $('.markdown-toc').find(hash).click()
     }, 1000);
 }
