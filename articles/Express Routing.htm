@@ -1,0 +1,245 @@
+<hr>
+<p>title: Express Routing
+categories:</p>
+<ul>
+<li>note</li>
+<li>nodejs
+tags:</li>
+<li>express</li>
+<li>nodejs
+series: express
+date: 2019-10-03 13:38:00</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>翻译自官方文档</p>
+<p>{% endcq %}</p>
+<h2 id="routing">Routing</h2>
+<p><strong>Routing（路由）</strong>指的是一个应用服务器的endpoints（URLs）怎么去响应客户端的请求。</p>
+<p>你可以通过使用Express的<code>app</code>对象中和HTTP请求名称对应的方法去定义应用的路由行为；比如，<code>app.get()</code>方法用于处理GET请求或者使用<code>app.post()</code>方法去处理POST请求。完整的方法列表可以参考<a href="http://www.expressjs.com.cn/en/4x/api.html#app.METHOD">app.METHOD</a>。你还可以使用<a href="http://www.expressjs.com.cn/en/4x/api.html#app.all">app.all()</a> 去处理所有的HTTP方法，也可以使用<a href="http://www.expressjs.com.cn/en/4x/api.html#app.use">app.use()</a> 去指定特定的回调方法 （参考<a href="http://www.expressjs.com.cn/en/guide/using-middleware.html">Using middleware</a> ）。</p>
+<p>这些路由方法指定一个回调方法（有时候又称为Handler方法）在Web应用收到对特定路由（endpoints）发出特定方式的请求的时候被调用。换句话说，应用程序能够监听所有请求，如果监听到请求的路由路径和请求方式有与之相配的路由方法，那么就调用该回调方法。</p>
+<p>事实上，路由方法可以有多个回调函数作为参数，当设计这样的路由处理的时候，提供一个<code>next</code>方法作为参数到回调函数中是很有必要的，调用<code>next()</code>在回调方法体内来传递到下一个回调方法中。</p>
+<p>下面这段代码展示了一个最基本的路由：</p>
+<pre><code class="language-javascript">var express = require(&#39;express&#39;)
+var app = express()
+
+// respond with &quot;hello world&quot; when a GET request is made to the homepage
+app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;hello world&#39;)
+})</code></pre>
+<h3 id="route-methods">Route methods</h3>
+<p>一个路由方法是从一个HTTP方法中获取的，并且它附着于<code>express</code>类的实例上。</p>
+<p>下面这段代码展示了GET路由和POST路由：</p>
+<pre><code class="language-javascript">// GET method route
+app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;GET request to the homepage&#39;)
+})
+
+// POST method route
+app.post(&#39;/&#39;, function (req, res) {
+  res.send(&#39;POST request to the homepage&#39;)
+})</code></pre>
+<p>Express支持所有HTTP请求。</p>
+<p>还有一个特殊的 路由方法，<code>app.all()</code>用于加载中间件方法到所有的HTTP请求方法上。比如下面的例子会将回调方法应用到以任何方式请求到路径“/secret”上的请求：</p>
+<pre><code class="language-javascript">app.all(&#39;/secret&#39;, function (req, res, next) {
+  console.log(&#39;Accessing the secret section ...&#39;)
+  next() // pass control to the next handler
+})</code></pre>
+<h3 id="route-paths">Route paths</h3>
+<p>路由路径和请求方法的组合共同定义了究竟是请求到哪一个回调逻辑中。路由路径可以是字符串，字符串pattern，或者是正则表达式。</p>
+<p>字符 <code>?</code>, <code>+</code>, <code>*</code>, and <code>()</code>可以用于正则表达式， 连字符(<code>-</code>) 和点(<code>.</code>) 用于字符串表示的路径。</p>
+<p>如果你需要在路径中使用美元符号，你需要用<code>([</code>和<code>])</code>括起来，比如要处理“<code>/data/$book</code>”，应该写为 “<code>/data/([\$])book</code>”。</p>
+<p>Express使用<a href="https://www.npmjs.com/package/path-to-regexp">path-to-regexp</a>来匹配路由路径。<a href="http://forbeslindesay.github.io/express-route-tester/">Express Route Tester</a>是一个用于测试Express路由的工具，虽然它不支持模式匹配。</p>
+<p>查询字符串不属于路由路径的一部分，下面是一些基本的例子：</p>
+<p>Here are some examples of route paths based on strings.</p>
+<p>This route path will match requests to the root route, <code>/</code>.</p>
+<pre><code class="language-javascript">app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;root&#39;)
+})</code></pre>
+<p>This route path will match requests to <code>/about</code>.</p>
+<pre><code class="language-javascript">app.get(&#39;/about&#39;, function (req, res) {
+  res.send(&#39;about&#39;)
+})</code></pre>
+<p>This route path will match requests to <code>/random.text</code>.</p>
+<pre><code class="language-javascript">app.get(&#39;/random.text&#39;, function (req, res) {
+  res.send(&#39;random.text&#39;)
+})</code></pre>
+<p>Here are some examples of route paths based on string patterns.</p>
+<p>This route path will match <code>acd</code> and <code>abcd</code>.</p>
+<pre><code class="language-javascript">app.get(&#39;/ab?cd&#39;, function (req, res) {
+  res.send(&#39;ab?cd&#39;)
+})</code></pre>
+<p>This route path will match <code>abcd</code>, <code>abbcd</code>, <code>abbbcd</code>, and so on.</p>
+<pre><code class="language-javascript">app.get(&#39;/ab+cd&#39;, function (req, res) {
+  res.send(&#39;ab+cd&#39;)
+})</code></pre>
+<p>This route path will match <code>abcd</code>, <code>abxcd</code>, <code>abRANDOMcd</code>, <code>ab123cd</code>, and so on.</p>
+<pre><code class="language-javascript">app.get(&#39;/ab*cd&#39;, function (req, res) {
+  res.send(&#39;ab*cd&#39;)
+})</code></pre>
+<p>This route path will match <code>/abe</code> and <code>/abcde</code>.</p>
+<pre><code class="language-javascript">app.get(&#39;/ab(cd)?e&#39;, function (req, res) {
+  res.send(&#39;ab(cd)?e&#39;)
+})</code></pre>
+<p>Examples of route paths based on regular expressions:</p>
+<p>This route path will match anything with an “a” in it.</p>
+<pre><code class="language-javascript">app.get(/a/, function (req, res) {
+  res.send(&#39;/a/&#39;)
+})</code></pre>
+<p>This route path will match <code>butterfly</code> and <code>dragonfly</code>, but not <code>butterflyman</code>, <code>dragonflyman</code>, and so on.</p>
+<pre><code class="language-javascript">app.get(/.*fly$/, function (req, res) {
+  res.send(&#39;/.*fly$/&#39;)
+})</code></pre>
+<h3 id="route-parameters">Route parameters</h3>
+<p>路由参数是被命名了的URL片段，用于捕捉URL中特定位置的值。被捕捉到的值会被移植到<code>req.params</code>对象上，以键值对的形式存储它们的值。</p>
+<pre><code>Route path: /users/:userId/books/:bookId
+Request URL: http://localhost:3000/users/34/books/8989
+req.params: { &quot;userId&quot;: &quot;34&quot;, &quot;bookId&quot;: &quot;8989&quot; }</code></pre><p>要定义带路由参数的路由，仅需像下面这样做：</p>
+<pre><code class="language-javascript">app.get(&#39;/users/:userId/books/:bookId&#39;, function (req, res) {
+  res.send(req.params)
+})</code></pre>
+<p>路由参数必须只能由大小写和数字组成，连字符和点可以正常使用，不受路由参数的影响：</p>
+<pre><code>Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { &quot;from&quot;: &quot;LAX&quot;, &quot;to&quot;: &quot;SFO&quot; }
+Route path: /plantae/:genus.:species
+Request URL: http://localhost:3000/plantae/Prunus.persica
+req.params: { &quot;genus&quot;: &quot;Prunus&quot;, &quot;species&quot;: &quot;persica&quot; }</code></pre><p>为了更好地控制路由参数，你可以使用正则表达式去定位参数，将表达式用<code>()</code>括起来就可以了：</p>
+<pre><code>Route path: /user/:userId(\d+)
+Request URL: http://localhost:3000/user/42
+req.params: {&quot;userId&quot;: &quot;42&quot;}</code></pre><p>Because the regular expression is usually part of a literal string, be sure to escape any <code>\</code> characters with an additional backslash, for example <code>\\d+</code>.</p>
+<p>In Express 4.x, <a href="https://github.com/expressjs/express/issues/2495">the <code>*</code> character in regular expressions is not interpreted in the usual way</a>. As a workaround, use <code>{0,}</code> instead of <code>*</code>. This will likely be fixed in Express 5.</p>
+<h3 id="route-handlers">Route handlers</h3>
+<p>你能够提供多个像中间件一样处理请求的回调函数。唯一是例外就是这些回调函数会涉及到<code>next(&#39;route&#39;)</code>来传递到剩余的回调方法中。你能够使用这个机制去传递一些前置条件到路由中。</p>
+<p>多个路由处理器能够构成到一个方法当中，一组方法数组，或者两者的结合都行，就像下面的例子一样：</p>
+<p>一个单一的方法作为处理：</p>
+<pre><code class="language-javascript">app.get(&#39;/example/a&#39;, function (req, res) {
+  res.send(&#39;Hello from A!&#39;)
+})</code></pre>
+<p>多个回调方法，注意要调用<code>next()</code>方法：</p>
+<pre><code class="language-javascript">app.get(&#39;/example/b&#39;, function (req, res, next) {
+  console.log(&#39;the response will be sent by the next function ...&#39;)
+  next()
+}, function (req, res) {
+  res.send(&#39;Hello from B!&#39;)
+})</code></pre>
+<p>回调方法的数组：</p>
+<pre><code class="language-javascript">var cb0 = function (req, res, next) {
+  console.log(&#39;CB0&#39;)
+  next()
+}
+
+var cb1 = function (req, res, next) {
+  console.log(&#39;CB1&#39;)
+  next()
+}
+
+var cb2 = function (req, res) {
+  res.send(&#39;Hello from C!&#39;)
+}
+
+app.get(&#39;/example/c&#39;, [cb0, cb1, cb2])</code></pre>
+<p>两者之间的结合：</p>
+<pre><code class="language-javascript">var cb0 = function (req, res, next) {
+  console.log(&#39;CB0&#39;)
+  next()
+}
+
+var cb1 = function (req, res, next) {
+  console.log(&#39;CB1&#39;)
+  next()
+}
+
+app.get(&#39;/example/d&#39;, [cb0, cb1], function (req, res, next) {
+  console.log(&#39;the response will be sent by the next function ...&#39;)
+  next()
+}, function (req, res) {
+  res.send(&#39;Hello from D!&#39;)
+})</code></pre>
+<h3 id="response-methods">Response methods</h3>
+<p>response对象的方法都在下表中，可以发送响应到客户端并且终止请求响应周期。如果不调用下列的方法，请求就会被一直挂起</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.download">res.download()</a></td>
+<td>Prompt a file to be downloaded.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.end">res.end()</a></td>
+<td>End the response process.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.json">res.json()</a></td>
+<td>Send a JSON response.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.jsonp">res.jsonp()</a></td>
+<td>Send a JSON response with JSONP support.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.redirect">res.redirect()</a></td>
+<td>Redirect a request.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.render">res.render()</a></td>
+<td>Render a view template.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.send">res.send()</a></td>
+<td>Send a response of various types.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.sendFile">res.sendFile()</a></td>
+<td>Send a file as an octet stream.</td>
+</tr>
+<tr>
+<td><a href="http://www.expressjs.com.cn/en/4x/api.html#res.sendStatus">res.sendStatus()</a></td>
+<td>Set the response status code and send its string representation as the response body.</td>
+</tr>
+</tbody></table>
+<h3 id="approute">app.route()</h3>
+<p>你能够通过使用<code>app.route()</code>方法为路由路径创建一个链式的路由。因为路径是指定到一个单一地点的，创建模块化的路由实际上对于简化代码很有帮助，更多信息请参考：<a href="http://www.expressjs.com.cn/en/4x/api.html#router">Router() documentation</a>。</p>
+<pre><code class="language-javascript">app.route(&#39;/book&#39;)
+  .get(function (req, res) {
+    res.send(&#39;Get a random book&#39;)
+  })
+  .post(function (req, res) {
+    res.send(&#39;Add a book&#39;)
+  })
+  .put(function (req, res) {
+    res.send(&#39;Update the book&#39;)
+  })</code></pre>
+<h3 id="expressrouter">express.Router</h3>
+<p>使用 <code>express.Router</code>类来创建模块化，可挂载的路由处理器。一个<code>Router</code>实例是一个完整的中间件和路由系统，因此它也被称为“mini-app”。</p>
+<p>下面的例子创建了一个路由器作为模块，并加载了中间件功能，定义了一些路由然后挂载这个路由器到主程序的一个路径上面。</p>
+<p>创建一个作路由用的文件 <code>birds.js</code> ：</p>
+<pre><code class="language-javascript">var express = require(&#39;express&#39;)
+var router = express.Router()
+
+// middleware that is specific to this router
+router.use(function timeLog (req, res, next) {
+  console.log(&#39;Time: &#39;, Date.now())
+  next()
+})
+// define the home page route
+router.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;Birds home page&#39;)
+})
+// define the about route
+router.get(&#39;/about&#39;, function (req, res) {
+  res.send(&#39;About birds&#39;)
+})
+
+module.exports = router</code></pre>
+<p>挂载路由器模块到app：</p>
+<pre><code class="language-javascript">var birds = require(&#39;./birds&#39;)
+
+// ...
+
+app.use(&#39;/birds&#39;, birds)</code></pre>
+<p>现在程序能够处理<code>/birds</code> 和 <code>/birds/about</code>路由，同时也能够调用中间件方法<code>timeLog</code>。</p>

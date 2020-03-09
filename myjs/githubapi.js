@@ -234,39 +234,14 @@ function get_resume() {
 }
 
 function get_friendlinked() {
-    if (fldd.innerText === 'Fail to get link, retry.' || fldd.innerText === '') {
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=' + friend_linked_label + '&flash=' + (new Date()).getTime() + '&state=closed'
-        let basegetset = {
-            'timeout': defaulttimeout,
-            'async': true,
-            'url': url,
-            'crossDomain': true,
-            'method': 'GET',
-            'error': function(eve) {
-                fldd.innerHTML = '<a class=" dropdown-item" href="javaScript:get_friendlinked();">Fail to get link, retry.</a>'
-            },
-            'headers': {
-                "Authorization": `token ${oauth_token}`
-            }
-        }
-        // console.log('send get :' + url)
-        $.ajax(basegetset).done(function(re) {
-            fldd.innerHTML = ''
-            let text = re[0].body
-            let arr = text.split(',')
-            for (let i = 0; i < arr.length; i++) {
-                let msg = arr[i]
-                if (msg !== '') {
-                    let sp = msg.split('-')
-                    let ditem = c('a')
-                    adclass(ditem, 'dropdown-item')
-                    ditem.href = sp[1]
-                    ditem.target = '_blank'
-                    ditem.innerText = sp[0].replace(/\n|\r\n/g, '')
-                    appendc(fldd, ditem)
-                }
-            }
-        })
+    let keys = Object.keys(friendslink)
+    for (key of keys) {
+        let ditem = c('a')
+        adclass(ditem, 'dropdown-item')
+        ditem.href = friendslink[key]
+        ditem.target = '_blank'
+        ditem.innerText = key.replace(/\n|\r\n/g, '')
+        appendc(fldd, ditem)
     }
 }
 

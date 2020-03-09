@@ -1,0 +1,1602 @@
+<h2 id="java相关">Java相关</h2>
+<h3 id="java8系列文章">Java8系列文章</h3>
+<details>
+  <summary>show</summary> 
+
+<p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
+</details>
+
+<h3 id="牛客-httpservletrequest-getparameter">牛客 HttpServletRequest. getParameter</h3>
+<details>
+  <summary>show</summary> 
+
+<p><img src="https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png" alt="image"></p>
+<blockquote>
+<p> 编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1</p>
+</blockquote>
+</details>
+
+
+<h3 id="java-spliterator">Java Spliterator</h3>
+<details>
+  <summary>show</summary> 
+
+<p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a>
+参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
+</details>
+
+<h3 id="牛客-integer的拆箱装箱">牛客 Integer的拆箱装箱</h3>
+<details>
+  <summary>show</summary> 
+
+<p><img src="https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png" alt="image"></p>
+<ul>
+<li>基本数据类型和包装类==比较的时候, 基本数据类型会拆箱, 所以是值比较</li>
+<li>valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用</details>
+
+</li>
+</ul>
+<h3 id="牛客-getdeclaredmethods的范围">牛客 getDeclaredMethods()的范围</h3>
+<details>
+  <summary>show</summary> 
+
+<p><img src="https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png" alt="image"></p>
+<p>Doc:</p>
+<blockquote>
+<p>public Method[] getDeclaredMethods()</p>
+<p>Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, </p>
+<p>including public, protected, default (package) access, and private methods, <strong>but excluding inherited methods</strong>.</p>
+</blockquote>
+</details>
+
+<h3 id="牛客-sleep和wait">牛客 sleep()和wait()</h3>
+<details>
+  <summary>show</summary> 
+
+<p><img src="https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png" alt="image"></p>
+<p><strong>Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行</strong></p>
+<h5 id="共同点-：">共同点 ：</h5>
+<ol>
+<li>他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 </li>
+<li>wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException
+如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
+需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 </li>
+</ol>
+<h5 id="不同点-：">不同点 ：</h5>
+<ol>
+<li><p>每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 </p>
+</li>
+<li><p>wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用</p>
+</li>
+<li><p>sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常 </p>
+</li>
+<li><p>sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。</p>
+</li>
+<li><p>wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。</p>
+</details>
+
+</li>
+</ol>
+<h3 id="java-static方法中的变量是否存在线程安全问题">Java static方法中的变量是否存在线程安全问题</h3>
+<details>
+  <summary>show</summary> 
+我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
+
+<p>那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。</p>
+<p>因为，在多线程中使用同一个静态方法时，每个线程使用各自的实例字段(instance field)的副本，而共享一个静态字段(static field)。所以说，如果该静态方法不去操作一个静态成员，只在方法内部使用实例字段(instance field)，不会引起安全性问题。但是，如果该静态方法操作了一个静态字段，则需要静态方法中采用互斥访问的方式进行安全处理。</p>
+<pre><code class="language-java">public class Test
+{
+   public static String hello(String str)
+   {
+       String tmp = &quot;&quot;;
+       tmp = tmp + str;
+       return tmp;
+   }
+}</code></pre>
+<p>hello方法会不会有多线程安全问题呢？没有！</p>
+<blockquote>
+<p>静态方法如果没有使用静态变量，则没有线程安全问题。</p>
+<p>为什么呢？因为静态方法内声明的变量，每个线程调用时，都会新创建一份，而不会共用一个存储单元。比如这里的tmp,每个线程都会创建自己的一份，因此不会有线程安全问题。</p>
+<p>注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！</p>
+</blockquote>
+</details>
+
+<h3 id="java多线程参考">Java多线程参考</h3>
+<details>
+  <summary>show</summary> 
+
+<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a>
+<a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a>
+<a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
+</details>
+
+<h3 id="java字符串压缩">Java字符串压缩</h3>
+<details>
+  <summary>show</summary> 
+
+<pre><code class="language-java">public class StringCompress {
+    public static final byte[] compress(String paramString) {
+        if (paramString == null)
+            return null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        ZipOutputStream zipOutputStream = null;
+        byte[] arrayOfByte;
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
+            zipOutputStream.putNextEntry(new ZipEntry(&quot;0&quot;));
+            zipOutputStream.write(paramString.getBytes());
+            zipOutputStream.closeEntry();
+            arrayOfByte = byteArrayOutputStream.toByteArray();
+        } catch (IOException localIOException5) {
+            arrayOfByte = null;
+        } finally {
+            if (zipOutputStream != null)
+                try {
+                    zipOutputStream.close();
+                } catch (IOException localIOException6) {
+            }
+            if (byteArrayOutputStream != null)
+                try {
+                    byteArrayOutputStream.close();
+                } catch (IOException localIOException7) {
+            }
+        }
+        return arrayOfByte;
+    }
+
+    @SuppressWarnings(&quot;unused&quot;)
+    public static final String decompress(byte[] paramArrayOfByte) {
+        if (paramArrayOfByte == null)
+            return null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        ByteArrayInputStream byteArrayInputStream = null;
+        ZipInputStream zipInputStream = null;
+        String str;
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            byteArrayInputStream = new ByteArrayInputStream(paramArrayOfByte);
+            zipInputStream = new ZipInputStream(byteArrayInputStream);
+            ZipEntry localZipEntry = zipInputStream.getNextEntry();
+            byte[] arrayOfByte = new byte[1024];
+            int i = -1;
+            while ((i = zipInputStream.read(arrayOfByte)) != -1)
+                byteArrayOutputStream.write(arrayOfByte, 0, i);
+            str = byteArrayOutputStream.toString();
+        } catch (IOException localIOException7) {
+            str = null;
+        } finally {
+            if (zipInputStream != null)
+                try {
+                    zipInputStream.close();
+                } catch (IOException localIOException8) {
+                }
+            if (byteArrayInputStream != null)
+                try {
+                    byteArrayInputStream.close();
+                } catch (IOException localIOException9) {
+                }
+            if (byteArrayOutputStream != null)
+                try {
+                    byteArrayOutputStream.close();
+                } catch (IOException localIOException10) {
+            }
+        }
+        return str;
+    }
+}</code></pre>
+<p>参考：<a href="https://blog.csdn.net/isea533/article/details/8199848">https://blog.csdn.net/isea533/article/details/8199848</a></p>
+</details>
+
+<h3 id="servlet和cgi的区别">Servlet和CGI的区别</h3>
+<details>
+  <summary>show</summary> 
+1. 定义：
+
+<p>CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。</p>
+<ol start="2">
+<li>功能：</li>
+</ol>
+<p>绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。</p>
+<ol start="3">
+<li>运行环境：</li>
+</ol>
+<p>CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。</p>
+<ol start="4">
+<li>CGI处理步骤：</li>
+</ol>
+<p>　　⑴通过Internet把用户请求送到服务器。</p>
+<p>　　⑵服务器接收用户请求并交给CGI程序处理。</p>
+<p>　　⑶CGI程序把处理结果传送给服务器。</p>
+<p>　　⑷服务器把结果送回到用户。</p>
+<p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
+<p>工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。</p>
+<p>Java Servlet与CGI (Common Gateway Interface 公共网关接口)的比较:</p>
+<p>　　与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
+<p>　　在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。</p>
+<p>　　在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。</p>
+<p>　　* 方便 　</p>
+<p>　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。</p>
+<p>　　* 功能强大</p>
+<p>　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。</p>
+<p>　　* 可移植性好</p>
+<p>Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。</p>
+<p>转自：<a href="https://www.cnblogs.com/MuyouSome/p/3938203.html">https://www.cnblogs.com/MuyouSome/p/3938203.html</a></p>
+</details>
+
+<h3 id="java-hashmap好文">Java HashMap好文</h3>
+<details>
+  <summary>show</summary> 
+
+<p>源码解析：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/xrq730/p/5030920.html">https://www.cnblogs.com/xrq730/p/5030920.html</a></li>
+<li><a href="http://www.importnew.com/20386.html">http://www.importnew.com/20386.html</a></li>
+</ul>
+<p>面试总结：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/lchzls/p/6714474.html">https://www.cnblogs.com/lchzls/p/6714474.html</a></li>
+<li><a href="https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=mobile_qq&amp;iid=5056005857&amp;utm_medium=toutiao_ios">https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=mobile_qq&amp;iid=5056005857&amp;utm_medium=toutiao_ios</a></li>
+<li><a href="https://blog.csdn.net/u012512634/article/details/72735183">https://blog.csdn.net/u012512634/article/details/72735183</a></details>
+
+</li>
+</ul>
+<h3 id="fastjson-转时间">fastjson 转时间</h3>
+<details>
+  <summary>show</summary> 
+
+<p>在field上加注解，比如转ISO格式的时间</p>
+<pre><code class="language-java">@JSONField(format=&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss&#39;Z&#39;&quot;)</code></pre>
+</details>
+
+<h3 id="sunmiscunsafe">sun.misc.Unsafe</h3>
+<details>
+  <summary>show</summary> 
+
+<ul>
+<li><a href="http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/">http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/</a></li>
+<li><a href="https://blog.csdn.net/anLA_/article/details/78631026">https://blog.csdn.net/anLA_/article/details/78631026</a></li>
+<li><a href="https://blog.csdn.net/lvbaolin123/article/details/80527598">https://blog.csdn.net/lvbaolin123/article/details/80527598</a></details>
+
+</li>
+</ul>
+<h3 id="java-string-pool">Java String pool</h3>
+<details>
+  <summary>show</summary> 
+
+<p><a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">Where does Java&#39;s String constant pool live, the heap or the stack?</a></p>
+</details>
+
+<h3 id="java-静态内部类和非静态内部类">Java 静态内部类和非静态内部类</h3>
+<details>
+  <summary>show</summary> 
+
+<p><a href="https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones">Why prefer non-static inner classes over static ones?</a></p>
+</details>
+
+<h3 id="bridge-method">bridge method</h3>
+<details>
+  <summary>show</summary> 
+
+<ul>
+<li><a href="https://cn.aliyun.com/jiaocheng/330720.html">https://cn.aliyun.com/jiaocheng/330720.html</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods">https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods</a></li>
+<li><a href="https://www.cnblogs.com/zsg88/p/7588929.html">https://www.cnblogs.com/zsg88/p/7588929.html</a></li>
+<li><a href="https://www.jianshu.com/p/250030ea9b28">https://www.jianshu.com/p/250030ea9b28</a></details>
+
+</li>
+</ul>
+<h3 id="finally--return">finally &amp; return</h3>
+<details>
+  <summary>show</summary> 
+
+<ul>
+<li><a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></details>
+
+</li>
+</ul>
+<h2 id="js代码相关">JS代码相关</h2>
+<h3 id="js-获取元素样式">JS 获取元素样式</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-javascript">/*
+  此方法兼容IE
+  获取元素的样式：
+    参数1：元素
+    参数2：样式名
+*/
+function getStyle(obj, styleName) {
+  var cs = obj.currentStyle
+  if (cs === undefined) {
+    return getComputedStyle(obj, null)[styleName]
+  } else {
+    return cs[styleName]
+  }
+}</code></pre>
+</details>
+
+<h3 id="js-事件绑定兼容">JS 事件绑定兼容</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-javascript">/*
+  事件绑定兼容
+  首先要注意：
+    addEventListener() 方法中的this是我们绑定的事件
+    attachedEvent() 方法中的this是window
+
+  参数：
+    1、obj 要绑定的对象
+    2、eventStr 绑定事件 (不要on)
+    3、callback 回调函数
+*/
+function bindev(obj, eventStr, callback) {
+  if (obj.addEventListener) {
+    // 兼容大部分浏览器
+    obj.addEventListener(eventStr, callback, false)
+  } else {
+    /*
+      this是谁由调用方式决定
+      由于attachEvent()的默认this是window
+      为了统一this
+      我们可以用下面的方式来指定this
+      callback.apply(obj);
+    */
+    // IE
+    obj.attachEvent(&#39;on&#39; + eventStr, function () {
+      callback.apply(obj)
+    })
+  }
+}</code></pre>
+</details>
+
+<h3 id="js-滚动动画">JS 滚动动画</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-javascript">/*
+  md的滚动条
+  去到id为elementid的元素位置
+  速度是 500
+*/
+$(&#39;#md&#39;).animate({
+  scrollTop: $(&#39;#elementid&#39;).offset().top
+}, 500);</code></pre>
+</details>
+
+<h3 id="js-滚动动画改进">JS 滚动动画改进</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-javascript">/*
+  防止到了位置之后再滚动到该元素 而offset改变
+*/
+function scrolltoelement(elementid) {
+  if ($(&#39;#&#39; + elementid)[0].oset === undefined) {
+    $(&#39;#&#39; + elementid)[0].oset = $(&#39;#&#39; + elementid).offset().top
+  }
+  $(&#39;#md&#39;).animate({
+    scrollTop: $(&#39;#&#39; + elementid)[0].oset
+  }, 500);
+}</code></pre>
+</details>
+
+<h3 id="js-检测页面滚动代码">JS 检测页面滚动代码</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-JavaScript">$(window).scroll(function () {
+  var scrollTo = $(window).scrollTop(),
+  docHeight = $(document).height(),
+  windowHeight = $(window).height();
+  scrollPercent = (scrollTo / (docHeight-windowHeight)) * 100;
+  percent.innerText = scrollPercent
+})</code></pre>
+</details>
+
+<h3 id="js-小数">JS 小数</h3>
+<details>
+  <summary>show</summary>
+
+
+<ol>
+<li><p>丢弃小数部分,保留整数部分 <code>parseInt(7/2)</code> </p>
+</li>
+<li><p>向上取整,有小数就整数部分加1 <code>Math.ceil(7/2)</code></p>
+</li>
+<li><p>四舍五入 <code>Math.round(7/2)</code></p>
+</li>
+<li><p>向下取整 <code>Math.floor(7/2)</code></p>
+</li>
+<li><p>四舍五入 保留位数：</p>
+<pre><code class="language-javascript">var num =2.446242342;
+num = num.toFixed(2); // 输出结果为 2.45</code></pre>
+</details>
+
+</li>
+</ol>
+<h3 id="js-css-动态添加动画效果">JS CSS 动态添加动画效果</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-javascript">  $(&#39;#searchtext&#39;).addClass(&#39;getnothing&#39;)
+  setTimeout(function () {
+    $(&#39;#searchtext&#39;).removeClass(&#39;getnothing&#39;)
+  }, 1100)</code></pre>
+<pre><code class="language-css">.getnothing{
+  animation: getnothing 1s;
+}
+
+@keyframes getnothing{
+  50% {
+    background-color: rgba(247, 117, 117, 0.534);
+  }
+}</code></pre>
+</details>
+
+<h3 id="js-控制聚焦失焦事件">JS 控制聚焦/失焦事件</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-js">  $(&#39;#searchtext&#39;).focus(function () {
+    $(&#39;#scriptsearcher&#39;)[0].style.opacity = &#39;1&#39;
+  })
+  $(&#39;#searchtext&#39;).blur(function () {
+    $(&#39;#scriptsearcher&#39;)[0].style.opacity = &#39;0.3&#39;
+  })</code></pre>
+</details>
+
+<h3 id="ajax设置请求超时">AJAX设置请求超时</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-js">var ajaxTimeoutTest = $.ajax({
+　　url:&#39;&#39;,  //请求的URL
+　　timeout : 1000, //超时时间设置，单位毫秒
+　　type : &#39;get&#39;,  //请求方式，get或post
+　　data :{},  //请求所传参数，json格式
+　　dataType:&#39;json&#39;,//返回的数据格式
+　　success:function(data){ //请求成功的回调函数
+　　　　alert(&quot;成功&quot;);
+　　},
+　　complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+　　　　if(status==&#39;timeout&#39;){//超时,status还有success,error等值的情况
+ 　　　　　 ajaxTimeoutTest.abort();
+　　　　　  alert(&quot;超时&quot;);
+　　　　}
+　　}
+});</code></pre>
+<p>函数写在complete中，因为无论success还是error，complete函数都会执行。</p>
+</details>
+
+<h3 id="async"><a href="https://github.com/caolan/async">Async</a></h3>
+<details>
+  <summary>show</summary>
+
+
+<blockquote>
+<p>JS Ajax JQ 同步请求库</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000005789740">来源</a></p>
+<p><a href="https://blog.csdn.net/marujunyy/article/details/8695205">中文文档</a></p>
+</details>
+
+<h3 id="js-刷新页面">JS 刷新页面</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="手动-reload">手动 reload</h4>
+<pre><code class="language-js">location.reload();</code></pre>
+<h4 id="自动定时刷新">自动定时刷新</h4>
+<p>页面自动刷新：把如下代码加入<head>区域中</p>
+<pre><code class="language-js">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&gt;</code></pre>
+</details>
+
+<h3 id="js获取图片原始尺寸">JS获取图片原始尺寸</h3>
+<details>
+  <summary>show</summary>
+
+
+<p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
+<pre><code class="language-javascript">   let imgw = this.naturalWidth
+   let imgh = this.naturalHeight</code></pre>
+</details>
+
+<h3 id="jquery的高级选择器">JQuery的高级选择器</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-javascript">jQuery.parent(expr)           //找父元素
+jQuery.parents(expr)          //找到所有祖先元素，不限于父元素
+jQuery.children(expr)        //查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙
+jQuery.contents()            //查找下面的所有内容，包括节点和文本。
+jQuery.prev()                //查找上一个兄弟节点，不是所有的兄弟节点
+jQuery.prevAll()             //查找所有之前的兄弟节点
+jQuery.next()                //查找下一个兄弟节点，不是所有的兄弟节点
+jQuery.nextAll()             //查找所有之后的兄弟节点
+jQuery.siblings()            //查找兄弟节点，不分前后
+jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.filter(expr)是从初始的
+                               jQuery对象集合中筛选出一部分，而jQuery.find()的返回结果，不会有初始集中
+                               筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
+                               $(&quot;p&quot;).find(&quot;span&quot;)是从元素开始找，等于$(&quot;p span&quot;) */</code></pre>
+</details>
+
+<h3 id="js取消事件冒泡">js取消事件冒泡</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-javascript">$(&quot;form&quot;).bind(&quot;submit&quot;, function() { 
+　　　　return false;
+　　 }
+)</code></pre>
+<p><a href="https://www.cnblogs.com/wangking/p/6113024.html#">https://www.cnblogs.com/wangking/p/6113024.html#</a></p>
+</details>
+
+<h3 id="js判断字符串中是否含有emoji表情">JS判断字符串中是否含有Emoji表情</h3>
+<details>
+  <summary>show</summary>
+
+<p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
+原因如下：</p>
+<blockquote>
+<p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
+引自：<a href="https://blog.csdn.net/wang704987562/article/details/54093979">https://blog.csdn.net/wang704987562/article/details/54093979</a></p>
+</blockquote>
+<p>JS判断：</p>
+<pre><code class="language-javascript">function isEmojiCharacter(substring) {  
+    for ( var i = 0; i &lt; substring.length; i++) {  
+        var hs = substring.charCodeAt(i);  
+        if (0xd800 &lt;= hs &amp;&amp; hs &lt;= 0xdbff) {  
+            if (substring.length &gt; 1) {  
+                var ls = substring.charCodeAt(i + 1);  
+                var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;  
+                if (0x1d000 &lt;= uc &amp;&amp; uc &lt;= 0x1f77f) {  
+                    return true;  
+                }  
+            }  
+        } else if (substring.length &gt; 1) {  
+            var ls = substring.charCodeAt(i + 1);  
+            if (ls == 0x20e3) {  
+                return true;  
+            }  
+        } else {  
+            if (0x2100 &lt;= hs &amp;&amp; hs &lt;= 0x27ff) {  
+                return true;  
+            } else if (0x2B05 &lt;= hs &amp;&amp; hs &lt;= 0x2b07) {  
+                return true;  
+            } else if (0x2934 &lt;= hs &amp;&amp; hs &lt;= 0x2935) {  
+                return true;  
+            } else if (0x3297 &lt;= hs &amp;&amp; hs &lt;= 0x3299) {  
+                return true;  
+            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030  
+                    || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b  
+                    || hs == 0x2b50) {  
+                return true;  
+            }  
+        }  
+    }  
+}</code></pre>
+<p>引自： <a href="https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1">https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1</a></p>
+</details>
+
+<h3 id="javascript使用字符串作为函数调用语句去调用">Javascript使用字符串作为函数调用语句去调用</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-javascript">function func_abc(){
+  alert(&#39;a&#39;);
+}
+var str = &quot;func_abc&quot;;
+eval(str+&quot;()&quot;);//执行func_abc()函数</code></pre>
+<p>引自：<a href="https://blog.csdn.net/qq_26222859/article/details/75285784">https://blog.csdn.net/qq_26222859/article/details/75285784</a></p>
+</details>
+
+<h3 id="js-数组排序">JS 数组排序</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-javascript">var arr = [23, 9, 4, 78, 3];
+var compare = function (x, y) {//比较函数
+    if (x &lt; y) {
+        return -1;
+    } else if (x &gt; y) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+console.log(arr.sort(compare));    </code></pre>
+</details>
+
+<h3 id="js-判断浏览器类型">JS 判断浏览器类型</h3>
+<details>
+  <summary>show</summary>
+
+<p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
+<pre><code class="language-javascript">var userAgent = navigator.userAgent;
+var isOpera = userAgent.indexOf(&quot;Opera&quot;) &gt; -1;
+
+function ievertion() {
+    var isIE = userAgent.indexOf(&quot;compatible&quot;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;MSIE&quot;) &gt; -1; //判断是否IE&lt;11浏览器  
+    var isEdge = userAgent.indexOf(&quot;Edge&quot;) &gt; -1 &amp;&amp; !isIE; //判断是否IE的Edge浏览器  
+    var isIE11 = userAgent.indexOf(&#39;Trident&#39;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;rv:11.0&quot;) &gt; -1;
+    if (isIE) {
+        var reIE = new RegExp(&quot;MSIE (\\d+\\.\\d+);&quot;);
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp[&quot;$1&quot;]);
+        if (fIEVersion == 7) {
+            return 7;
+        } else if (fIEVersion == 8) {
+            return 8;
+        } else if (fIEVersion == 9) {
+            return 9;
+        } else if (fIEVersion == 10) {
+            return 10;
+        } else {
+            return 6; //IE版本&lt;=7
+        }
+    } else if (isEdge) {
+        return &#39;edge&#39;; //edge
+    } else if (isIE11) {
+        return 11; //IE11  
+    } else {
+        return -1; //不是ie浏览器
+    }
+}
+
+function isSafari() {
+    return userAgent.indexOf(&quot;Safari&quot;) &gt; -1
+}
+
+function isFF() {
+    return userAgent.indexOf(&quot;Firefox&quot;) &gt; -1
+}
+
+function isChrome() {
+    return userAgent.indexOf(&quot;Chrome&quot;) &gt; -1
+}</code></pre>
+</details>
+
+<h3 id="javascript-解除xhr获取header的限制">JavaScript 解除xhr获取header的限制</h3>
+<details>
+  <summary>show</summary>
+
+
+<p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<p>需要后端的配合</p>
+</details>
+
+<h3 id="js锚点跳转动画">JS锚点跳转动画</h3>
+<details>
+  <summary>show</summary>
+
+
+<p>一般我们的锚点都长这样</p>
+<pre><code class="language-html">&lt;a name=&quot;xxx&quot; class=&quot;reference-link&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;</code></pre>
+<p>因此我们就根据name去索引锚点</p>
+<pre><code class="language-javascript">    var $root = $(&#39;html, body&#39;)
+    $(&#39;.markdown-toc a&#39;).click(function() {
+        $root.animate({
+            scrollTop: $(&#39;[name=&quot;xxx&quot;]&#39;).offset().top
+        }, 600)
+    })</code></pre>
+</details>
+
+<h3 id="js-监听元素任何变化">JS 监听元素任何变化</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a>
+<a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
+<pre><code class="language-javascript">let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+let observer = new MutationObserver(function(mutationList) {
+    setTimeout(function() {
+        // handle change
+    }, 250);
+})
+let article = $(&#39;#docpanel&#39;)[0]
+let options = {
+    &#39;attributes&#39;: true,
+    &#39;attributeOldValue&#39;: true
+};
+observer.observe(article, options);</code></pre>
+</details>
+
+<h3 id="jquery-ui-拖拽">JQuery UI 拖拽</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
+</details>
+
+<h3 id="jquery-gif播放暂停-js-gif库">JQuery GIF播放/暂停 JS-GIF库</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a>
+<a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
+</details>
+
+<h2 id="css相关">CSS相关</h2>
+<h3 id="css-media设备适配样式设置">CSS media设备适配样式设置</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-css">/* 
+  针对iphone5 等320px的宽做出调整
+*/
+@media screen and (max-width: 320px){
+  .friendcard {
+    margin: 0 auto;
+    width: 15rem;
+  }
+}</code></pre>
+</details>
+
+<h3 id="css-动画库animatecss">CSS 动画库animate.css</h3>
+<details>
+  <summary>show</summary>
+
+<p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
+</details>
+
+<h3 id="css-去除按钮选中蓝色边框">CSS 去除按钮选中蓝色边框</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-css">.className {
+  border: none;
+}
+
+.className:focus{
+  outline: none;
+}</code></pre>
+<p><a href="https://blog.csdn.net/qq_26222859/article/details/51516011">参考</a></p>
+</details>
+
+<h3 id="css-元素失焦虚化滤镜">CSS 元素失焦/虚化滤镜</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-css">#idname{
+   filter : blur(2px);
+}</code></pre>
+</details>
+
+
+<h3 id="css-文字换行">CSS 文字换行</h3>
+<details>
+  <summary>show</summary>
+
+<p>强制不换行</p>
+<pre><code class="language-css">div{
+    white-space:nowrap;
+}</code></pre>
+<p>自动换行</p>
+<pre><code class="language-css">div{ 
+    word-wrap: break-word; 
+    word-break: normal; 
+}</code></pre>
+<p>强制英文单词断行</p>
+<pre><code class="language-css">div{
+    word-break:break-all;
+}</code></pre>
+</details>
+
+<h3 id="css-placeholder居位设置">CSS placeholder居位设置</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-css">/* placeholder居中 */
+#postsearchtext:-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext:-ms-input-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-webkit-input-placeholder
+{
+    text-align: center;
+}</code></pre>
+</details>
+
+<h3 id="css-文字超过元素长度显示省略号">CSS 文字超过元素长度显示省略号</h3>
+<details>
+  <summary>show</summary>
+
+
+<pre><code class="language-css">div{
+  width: 75%;
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+}</code></pre>
+</details>
+
+<h3 id="css-变量设置和获取">CSS 变量设置和获取</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="设置">设置</h4>
+<pre><code class="language-css">:root{
+  --main-color: #4d4e53;
+  --main-bg: rgb(255, 255, 255);
+  --logo-border-color: rebeccapurple;
+
+  --header-height: 68px;
+  --content-padding: 10px 20px;
+
+  --base-line-height: 1.428571429;
+  --transition-duration: .35s;
+  --external-link: &quot;external link&quot;;
+  --margin-top: calc(2vh + 20px);
+}</code></pre>
+<h4 id="引用">引用</h4>
+<pre><code class="language-css">a {
+  color: var(--foo);
+  text-decoration-color: var(--bar);
+}</code></pre>
+<p>参考 : <a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></p>
+</details>
+
+<h3 id="css-元素垂直水平居中的骚操作">CSS 元素垂直/水平居中的骚操作</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;</p>
+</blockquote>
+<pre><code class="language-css">#sidetoccontainer {
+  position: (不知道);
+  margin: auto;
+  bottom: 0;
+  top: 0;
+}</code></pre>
+<p>如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上</p>
+<pre><code class="language-css">#father {
+   transform:translate(0,0)
+}</code></pre>
+<p>参考自知乎 : <a href="https://www.zhihu.com/question/24822927">https://www.zhihu.com/question/24822927</a></p>
+</details>
+
+<h3 id="css3-瀑布布局">CSS3 瀑布布局</h3>
+<details>
+  <summary>show</summary>
+
+<p>三列瀑布</p>
+<pre><code class="language-css">.con {
+  column-count: 3;
+}
+
+.todo-card {
+  float: left;
+  width: 100%;
+}</code></pre>
+</details>
+
+<h3 id="css-将div画成直角三角形">CSS 将DIV画成直角三角形</h3>
+<details>
+  <summary>show</summary>
+
+<p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
+</details>
+
+<h3 id="css自定义滚动条样式">CSS自定义滚动条样式</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
+<p>特效是不会无故无效的，检查一下是不是开了inline</p>
+<p>下面这个是coding的滚动条样式：</p>
+<pre><code class="language-css">  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; }
+  *::-webkit-scrollbar-track {
+    background-color: rgba(216, 221, 228, 0.3);
+    border-radius: 10px; }
+  *::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #76808e; }
+  *::-webkit-scrollbar-thumb:window-inactive {
+    background: #d8dde4; }</code></pre>
+</details>
+
+<h3 id="css-inline-block-垂直居中">CSS inline-block 垂直居中</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
+<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html">https://www.cnblogs.com/hutuzhu/p/4450850.html</a></p>
+</details>
+
+<h2 id="js工具框架相关">JS工具/框架相关</h2>
+<h3 id="react-native">React Native</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>可以做桌面应用</p>
+</blockquote>
+<p>网址: <a href="https://proton-native.js.org/#/">https://proton-native.js.org/#/</a></p>
+</details>
+
+<h3 id="layui">Layui</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>给后端用的前端框架</p>
+</blockquote>
+<p><a href="http://www.layui.com">官网</a></p>
+</details>
+
+<h3 id="wangeditor-轻量级前端富文本编辑器">wangEditor 轻量级前端富文本编辑器</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png" alt="image"></p>
+<p><a href="http://www.wangeditor.com/">官网</a></p>
+</details>
+
+<h3 id="katex-最快的数学公式渲染库">KaTeX 最快的数学公式渲染库</h3>
+<details>
+  <summary>show</summary>
+
+<p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
+<p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png" alt="image"></p>
+</details>
+
+<h3 id="jquery-日期选择控件">JQuery 日期选择控件</h3>
+<details>
+  <summary>show</summary>
+
+<p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
+</details>
+
+<h3 id="js-数据可视化">JS 数据可视化</h3>
+<details>
+  <summary>show</summary>
+
+<p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
+<a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
+</details>
+
+<h3 id="windows下调试ios网页设备">windows下调试iOS网页设备</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
+</details>
+
+<h2 id="杂文问题乱说黑科技技巧">杂文/问题/乱说/黑科技/技巧</h2>
+<h3 id="关于-github-oauth-app">关于 github oauth app</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png" alt="image"></p>
+<p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
+</details>
+
+<h3 id="代码高亮的的坑">代码高亮的的坑</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>editor.md的preview页 + highlight.js</p>
+</blockquote>
+<h4 id="1-highlightjs-的坑">1. highlight.js 的坑</h4>
+<h5 id="highlightjs无效问题">highlight.js无效问题</h5>
+<blockquote>
+<p><strong>hub主页上的highlight.js文件是用不了的!!!</strong>
+解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
+</blockquote>
+<h5 id="始终只能渲染code而无法渲染pre的问题">始终只能渲染code而无法渲染pre的问题</h5>
+<blockquote>
+<p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong>
+解决: 把pre也一起选中就好了</p>
+</blockquote>
+<pre><code class="language-js">  $(&#39;pre, pre code&#39;).each(function(i, block) {
+    hljs.highlightBlock(block);
+  });</code></pre>
+<h4 id="2-editor的默认md-code渲染和highlightjs渲染冲突问题">2. editor的默认md code渲染和highlight.js渲染冲突问题</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png" alt="image"></p>
+<p>如图用的atom-one-dark, 但是背景还是白色的...</p>
+<h5 id="1-editor渲染禁用">1. editor渲染禁用</h5>
+<ol>
+<li>首先不引用lib下的prettify.min.js文件</li>
+<li>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png" alt="image">
+修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
+<h5 id="2-css覆盖">2. css覆盖</h5>
+<p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
+<p>注释一部分editormd.preview.css:</p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png" alt="image"></p>
+<p>我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.</p>
+<h4 id="结果">结果</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png" alt="image"></p>
+</details>
+
+<h3 id="cmd相关">cmd相关</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="教程">教程</h4>
+<ul>
+<li>扫盲：<a href="https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/">https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/</a></li>
+<li>常用cmd：<a href="https://blog.csdn.net/hanzheng260561728/article/details/51558990">https://blog.csdn.net/hanzheng260561728/article/details/51558990</a></li>
+</ul>
+<h4 id="微软开放命令行文档">微软开放命令行文档</h4>
+<blockquote>
+<p> cmd文档/doc文档/command line</p>
+</blockquote>
+<p><a href="http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf">link</a></p>
+</details>
+
+<h3 id="关于-ci">关于 CI</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="示意图">示意图</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png" alt="image"></p>
+<blockquote>
+<p>文章 <a href="https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/">The Product Managers’ Guide to Continuous Delivery and DevOps</a></p>
+<p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
+</blockquote>
+</details>
+
+<h3 id="github-api-response-条数pagination限制">GitHub API response 条数pagination限制</h3>
+<details>
+  <summary>show</summary>
+
+<p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png" alt="image"></p>
+<p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
+<p>我现在的blog所有的comments请求都是9999</p>
+</details>
+
+<h3 id="一顿操作-nodejs安装">一顿操作 node.js安装</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="安装nvm">安装nvm</h4>
+<ol>
+<li>首先去 <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载最新的release版本 然后安装即可</li>
+</ol>
+<h4 id="使用mvn安装nodejs的多版本">使用mvn安装nodejs的多版本</h4>
+<pre><code class="language-bash">$ nvm install 0.10
+$ nvm install 4
+$ nvm install 6
+$ nvm install 8</code></pre>
+<h4 id="安装全局npm">安装全局npm</h4>
+<p>可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入</p>
+<pre><code class="language-bash">mvn use 8</code></pre>
+<p>比如上面先use了8版本的node</p>
+<p>然后再安装全局npm, 不然你找不到npm的环境</p>
+<hr>
+<p>Linux下安装nvm</p>
+<p>看得懂就行啦：<a href="https://github.com/creationix/nvm#git-install">https://github.com/creationix/nvm#git-install</a></p>
+<p>参考: 
+<a href="https://i5ting.github.io/How-to-learn-node-correctly/#10302">https://i5ting.github.io/How-to-learn-node-correctly/#10302</a>
+<a href="https://blog.csdn.net/jingtian678/article/details/78422760">https://blog.csdn.net/jingtian678/article/details/78422760</a></p>
+<h3 id="regex-匹配换行符匹配尾部空格">Regex 匹配换行符/匹配尾部空格</h3>
+<pre><code class="language-regex">([\s\S]*)</code></pre>
+<pre><code class="language-regex">\s*$</code></pre>
+</details>
+
+<h3 id="对iocdi的理解">对IoC/DI的理解</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="iocinverse--of-control">Ioc—Inverse  of Control</h4>
+<p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
+<p>深入分析一下：</p>
+<ul>
+<li>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；<strong>谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</strong></li>
+<li>为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？<strong>因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</strong></li>
+</ul>
+<p><strong>举例说明</strong></p>
+<p>“常规的是，我们程序员<strong>手动new</strong>来给程序的<strong>Service对象</strong>提供所<strong>依赖的DAO对象</strong>，而现在是程序通过IoC容器自己提供<strong>DAO对象</strong>给<strong>Service对象</strong>。”</p>
+<h4 id="didependency-injection">DI—Dependency Injection</h4>
+<p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
+<p><strong>依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。</strong>通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 </p>
+<p>深入分析一下：</p>
+<ul>
+<li>谁依赖于谁：当然是<strong>应用程序依赖于IoC容器</strong>；</li>
+<li>为什么需要依赖：<strong>应用程序需要IoC容器来提供对象需要的外部资源</strong>；</li>
+<li>谁注入谁：很明显是<strong>IoC容器注入应用程序某个对象，应用程序依赖的对象</strong>；</li>
+<li>注入了什么：就是<strong>注入某个对象所需要的外部资源（包括对象、资源、常量数据）</strong>。</li>
+</ul>
+<p><strong>举例说明</strong></p>
+<p>“<strong>Service对象</strong>依赖于<strong>DAO对象</strong>，IoC容器通过<strong>注解和反射机制</strong>来<strong>注入（Injected）</strong>用户在配置文件中配置好的DAO对象到<strong>Service对象</strong>的对应属性中。”</p>
+<h4 id="两者关系">两者关系</h4>
+<p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
+<p>我的理解是：<strong>IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现</strong>。</p>
+<p><a href="https://blog.csdn.net/qq_22654611/article/details/52606960">参考</a></p>
+</details>
+
+<h3 id="对于游戏来说-怎么选择tcp和udp">对于游戏来说 怎么选择TCP和UDP?</h3>
+<details>
+  <summary>show</summary>
+
+<ul>
+<li><p>如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。</p>
+</li>
+<li><p>如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。</p>
+</li>
+<li><p>如果客户端和服务器都可以独立发包，而且无法忍受延迟（比如：大多数的多人动作类游戏，一些MMO类游戏），那么使用UDP吧。</p>
+</li>
+</ul>
+<p>转自: <a href="http://blog.jobbole.com/64638/">http://blog.jobbole.com/64638/</a></p>
+</details>
+
+<h3 id="oop三大特性">OOP三大特性</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="封装优点：">封装优点：</h4>
+<ul>
+<li><strong>安全：</strong> 只能通过规定的方法访问数据 </li>
+<li><strong>隐藏细节：</strong> 隐藏类的实例细节，方便修改和实现</li>
+</ul>
+<h4 id="继承优点：">继承优点：</h4>
+<ul>
+<li><strong>代码复用</strong></li>
+</ul>
+<h4 id="多态主要表现：">多态主要表现：</h4>
+<ul>
+<li><p><strong>引用多态</strong>　　　</p>
+<ul>
+<li>父类的引用可以指向本类的对象；</li>
+<li>父类的引用可以指向子类的对象；</li>
+</ul>
+</li>
+<li><p><strong>方法多态</strong></p>
+<p>根据上述创建的两个对象：本类对象和子类对象，同样都是父类的引用，当我们指向不同的对象时，它们调用的方法也是多态的。</p>
+<ul>
+<li><p>创建本类对象时，调用的方法为本类方法；</p>
+</li>
+<li><p>创建子类对象时，调用的方法为子类重写的方法或者继承的方法；</p>
+</li>
+</ul>
+<p><strong>注意： 继承是多态的基础。</strong></p>
+</li>
+</ul>
+<p>参考: <a href="https://www.cnblogs.com/hysum/p/7100874.html#_label1">https://www.cnblogs.com/hysum/p/7100874.html#_label1</a></p>
+</details>
+
+<h3 id="bitmap">BitMap</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a>
+<a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a>
+<a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a>
+编程珠玑</p>
+</details>
+
+<h3 id="mysql用户管理">MySQL用户管理</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a>
+<a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
+</details>
+
+<h3 id="在windows的右键菜单上增加新建自定义类型文件的选项">在Windows的右键菜单上增加新建自定义类型文件的选项</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png" alt="image"></p>
+<p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
+</details>
+
+<h3 id="关于引用奥森图标一类的i标签失效的问题">关于引用奥森图标一类的i标签失效的问题</h3>
+<details>
+  <summary>show</summary>
+
+<p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
+<p>因为......</p>
+<p>千万要想想是不是全局font-family的问题！！！</p>
+</details>
+
+<h3 id="git做用户的全局配置的文件夹在哪？">git做用户的全局配置的文件夹在哪？</h3>
+<details>
+  <summary>show</summary>
+
+<p>放在你家</p>
+<p><img src="https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png" alt="image"></p>
+<p>如图可以配置别名</p>
+</details>
+
+<h3 id="贪心算法和动态规划的区别">贪心算法和动态规划的区别</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。</p>
+<p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 </p>
+<p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 </p>
+</blockquote>
+<p>引自：<a href="https://www.cnblogs.com/codeskiller/p/6477181.html">https://www.cnblogs.com/codeskiller/p/6477181.html</a></p>
+</details>
+
+<h3 id="三种静态查找算法：顺序、二分折半、索引分块查找">三种静态查找算法：顺序、二分/折半、索引/分块查找</h3>
+<details>
+  <summary>show</summary>
+
+<p>文章：<a href="https://blog.csdn.net/u011489043/article/details/78683856">https://blog.csdn.net/u011489043/article/details/78683856</a></p>
+</details>
+
+<h3 id="mysql自己更新自己">MySQL自己更新自己</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
+<p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
+</details>
+
+<h3 id="算法：并查集">算法：并查集</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a>
+<a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
+</details>
+
+<h3 id="正则表达式-密码强度">正则表达式 密码强度</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/cexm/p/7737538.html">https://www.cnblogs.com/cexm/p/7737538.html</a></p>
+</details>
+
+<h3 id="文件头魔数-判断文件类型">文件头魔数 判断文件类型</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
+<p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt
+而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
+<p>魔数列表参考如下：
+<a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
+</details>
+
+<h3 id="xss攻击和java处理xss">xss攻击和Java处理xss</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a>
+<a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
+<p>Java的html解析器
+<a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
+<p>前端xss处理：
+<a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
+</details>
+
+<h3 id="微服务集群分布式">微服务/集群/分布式</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="微服务好文">微服务好文</h4>
+<p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
+<h4 id="集群和分布式">集群和分布式</h4>
+<blockquote>
+<p>小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群</p>
+<p>作者：张鹏飞
+链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a>
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<p>参考：
+<a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a>
+<a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a>
+<a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
+</details>
+
+<h3 id="什么是为什么要tracing？opentracing的入门铺垫">什么是/为什么要Tracing？Opentracing的入门铺垫</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png" alt="image"></p>
+<p>好文：<a href="https://yq.aliyun.com/articles/514488">https://yq.aliyun.com/articles/514488</a></p>
+<h4 id="这个gitbook爆炸推【opentracing的中文文档翻译】：">这个Gitbook爆炸推【Opentracing的中文文档翻译】：</h4>
+<p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
+<p>Tutorials:</p>
+<p><a href="https://github.com/yurishkuro/opentracing-tutorial/tree/master/java">https://github.com/yurishkuro/opentracing-tutorial/tree/master/java</a></p>
+</details>
+
+<h3 id="什么是为什么要devops？">什么是/为什么要DevOps？</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png" alt="image"></p>
+<p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
+</details>
+
+<h3 id="spring生命周期详解好文">Spring生命周期详解好文</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a>
+<a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a>
+<a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
+</details>
+
+<h3 id="html2canvas-页面输出为canvas">html2canvas 页面输出为canvas</h3>
+<details>
+  <summary>show</summary>
+
+<p>超级棒的插件：
+教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a>
+hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
+<h4 id="生成的canvas没有图片的坑：">生成的canvas没有图片的坑：</h4>
+<p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
+开启html2canvas的useCORS配置项。即作如下设置： </p>
+<pre><code class="language-javascript">var opts = {useCORS: true};
+html2canvas(element, opts);</code></pre>
+</details>
+
+<h3 id="k8s">k8s</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="好文">好文</h4>
+<ul>
+<li>概念：<a href="http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345">http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345</a></li>
+<li>简要介绍：<a href="http://www.dockone.io/article/8328">http://www.dockone.io/article/8328</a></li>
+<li>10分钟核心概念了解：<a href="http://www.dockone.io/article/932">http://www.dockone.io/article/932</a></li>
+</ul>
+<h4 id="中文文档">中文文档</h4>
+<ul>
+<li>设计理念（概念介绍）：<a href="http://docs.kubernetes.org.cn/249.html">http://docs.kubernetes.org.cn/249.html</a></li>
+</ul>
+<h4 id="配置">配置</h4>
+<ul>
+<li>k8s的Dashboard：<a href="http://blog.51cto.com/ylw6006/2113542">http://blog.51cto.com/ylw6006/2113542</a></li>
+<li>yaml：<ul>
+<li>sample: <a href="https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/">https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/</a></li>
+<li>offical reference: <a href="https://kubernetes.io/docs/reference/">https://kubernetes.io/docs/reference/</a> see the api</li>
+</ul>
+</li>
+</ul>
+</details>
+
+<h3 id="docker">docker</h3>
+<details>
+  <summary>show</summary>
+
+<p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
+</details>
+
+<h3 id="shell">Shell</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="expect-让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）">expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）</h4>
+<ul>
+<li><a href="https://www.jianshu.com/p/70556b1ce932">https://www.jianshu.com/p/70556b1ce932</a></li>
+<li><a href="https://www.cnblogs.com/lzrabbit/p/4298794.html">https://www.cnblogs.com/lzrabbit/p/4298794.html</a></li>
+<li><a href="https://www.jellythink.com/archives/373">https://www.jellythink.com/archives/373</a></li>
+</ul>
+<h4 id="set-设置你shell脚本的运行配置">set 设置你shell脚本的运行配置</h4>
+<ul>
+<li><a href="https://www.cnblogs.com/liduanjun/p/3536996.html">https://www.cnblogs.com/liduanjun/p/3536996.html</a></li>
+</ul>
+<h4 id="read-在shell里面读取新的字符">read 在shell里面读取新的字符</h4>
+<ul>
+<li><a href="http://www.runoob.com/linux/linux-comm-read.html">http://www.runoob.com/linux/linux-comm-read.html</a></li>
+</ul>
+<h4 id="wc-计算字数">wc 计算字数</h4>
+<ul>
+<li><a href="http://www.runoob.com/linux/linux-comm-wc.html">http://www.runoob.com/linux/linux-comm-wc.html</a></li>
+</ul>
+<h4 id="cut-字符串切割">cut 字符串切割</h4>
+<ul>
+<li><a href="https://www.jb51.net/article/41872.htm">https://www.jb51.net/article/41872.htm</a></li>
+</ul>
+<h4 id="shell脚本sudo外部输入密码">shell脚本sudo外部输入密码</h4>
+<ul>
+<li><a href="https://blog.csdn.net/qq_23587541/article/details/82841489">https://blog.csdn.net/qq_23587541/article/details/82841489</a></li>
+</ul>
+<h4 id="和sh执行脚本的区别：">./和sh执行脚本的区别：</h4>
+<ul>
+<li><code>./</code>需要执行权限，使用脚本文件中第一行<code>#!</code>指定的shell（解释器）来执行命令（譬如常见的/bin/bash），不指定系统会调用默认shell程序</li>
+<li><code>sh</code>不需要执行权限，是使用<code>sh</code>这个shell执行命令，是个软链接，它可能是一个任意的shell，通常默认是<code>bash shel</code>，用type命令可以查看</li>
+</ul>
+<h4 id="nohup使用详解">nohup使用详解</h4>
+<ul>
+<li><a href="https://www.cnblogs.com/jinxiao-pu/p/9131057.html">https://www.cnblogs.com/jinxiao-pu/p/9131057.html</a></li>
+</ul>
+<h3 id="linux">Linux</h3>
+<h4 id="工具">工具</h4>
+<ul>
+<li>fzf：<a href="https://www.colabug.com/4062481.html">https://www.colabug.com/4062481.html</a></li>
+</ul>
+<h4 id="设置-1">设置</h4>
+<ul>
+<li>修改终端提示符：<a href="https://www.cnblogs.com/xiaofeiIDO/p/8037331.html">https://www.cnblogs.com/xiaofeiIDO/p/8037331.html</a></li>
+<li>环境变量：<a href="https://www.cnblogs.com/haore147/p/3633116.html">https://www.cnblogs.com/haore147/p/3633116.html</a></li>
+</ul>
+<h4 id="命令">命令</h4>
+<ul>
+<li>命令大全：<a href="http://man.linuxde.net/">http://man.linuxde.net/</a></li>
+<li>一些巨棒的命令替代：<a href="https://linux.cn/article-10171-1.html">https://linux.cn/article-10171-1.html</a></li>
+</ul>
+<h4 id="centos">CentOS</h4>
+<h5 id="yum详解">yum详解</h5>
+<ul>
+<li><a href="http://www.cnblogs.com/vathe/p/6736094.html">http://www.cnblogs.com/vathe/p/6736094.html</a></li>
+</ul>
+<h4 id="ubuntu">Ubuntu</h4>
+<h5 id="apt-get详解">apt-get详解</h5>
+<ul>
+<li><a href="https://blog.csdn.net/sinat_31206523/article/details/78138822">https://blog.csdn.net/sinat_31206523/article/details/78138822</a></li>
+<li><a href="https://blog.csdn.net/yessharing/article/details/55806090">https://blog.csdn.net/yessharing/article/details/55806090</a></details>
+
+</li>
+</ul>
+<h3 id="chrome插件开发">chrome插件开发</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83">https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83</a></p>
+</details>
+
+<h3 id="grpc--protobuf--swagger">gRPC &amp; protobuf &amp; Swagger</h3>
+<details>
+  <summary>show</summary>
+
+<ul>
+<li><a href="https://segmentfault.com/a/1190000013513469">Grpc+Grpc Gateway实践三 Swagger了解一下</a></li>
+<li><a href="https://www.cnblogs.com/luoxn28/p/5303517.html">google protobuf安装与使用</a></li>
+<li><a href="https://github.com/protocolbuffers/protobuf">protobuf</a></li>
+<li><a href="https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html">grpc-gateway：grpc转换为http协议对外提供服务</a></details>
+
+</li>
+</ul>
+<h3 id="database-client">Database Client</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows">15个windows上好用的client</a></p>
+</details>
+
+<h3 id="linux-换行符">linux 换行符</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://blog.csdn.net/mulangren1988/article/details/54316783">https://blog.csdn.net/mulangren1988/article/details/54316783</a></p>
+<h3 id="带空格文件名参数传递-xargs">带空格文件名参数传递 xargs</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
+</details>
+
+<h3 id="graphql-一种用于-api-的查询语言">GraphQL 一种用于 API 的查询语言</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
+<p>GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+</blockquote>
+<p>中文网 : <a href="http://graphql.cn/">官网</a>
+引子 : <a href="https://segmentfault.com/a/1190000006132986">segmentfault</a>
+知乎专栏 : <a href="https://zhuanlan.zhihu.com/p/28077095">面向未来的API —— GitHub GraphQL API 使用介绍</a></p>
+<blockquote>
+<p>2018年11月16日 10点04分
+要构建一个graphql需要的成本太大了 还不如restful来的快</p>
+</blockquote>
+</details>
+
+<h3 id="排序算法图解博客">排序算法图解博客</h3>
+<details>
+  <summary>show</summary>
+看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
+</details>
+
+<h2 id="网站软件">网站/软件</h2>
+<h3 id="一个素材网站-devianart">一个素材网站 devianart</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="https://www.deviantart.com/">https://www.deviantart.com/</a></p>
+</details>
+
+<h3 id="icon相关-素材站软件">icon相关 素材站/软件</h3>
+<details>
+  <summary>show</summary>
+
+<h4 id="阿里巴巴矢量图标库">阿里巴巴矢量图标库</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png" alt="image"></p>
+<p>link : <a href="http://iconfont.cn/">http://iconfont.cn/</a></p>
+<h4 id="iconstroe">iconstroe</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png" alt="image"></p>
+<p>link : <a href="https://iconstore.co/">https://iconstore.co/</a></p>
+<h4 id="flaticon">flaticon</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png" alt="image"></p>
+<p>link : <a href="https://www.flaticon.com/">https://www.flaticon.com/</a></p>
+<h4 id="nucleo-icon管理工具">Nucleo Icon管理工具</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png" alt="image"></p>
+<p><a href="https://nucleoapp.com/">https://nucleoapp.com/</a></p>
+</details>
+
+<h3 id="软件推介--cmder">软件推介 : cmder</h3>
+<details>
+  <summary>show</summary>
+
+<blockquote>
+<p>一个高颜值功能强大的的windows终端管理器</p>
+<p>介绍 : <a href="https://zhuanlan.zhihu.com/p/28400466">https://zhuanlan.zhihu.com/p/28400466</a></p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/23525754/40038175-47ab3728-5843-11e8-8673-10bd2894ad70.png" alt="image"></p>
+<h4 id="tips">Tips:</h4>
+<p>软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.</p>
+<p>但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.</p>
+<p>所以我们下载full, 解压在<code>C:\Program Files</code>, 可以发现整个软件大概250MB, 我们从软件目录下的<code>C:\Program Files\cmder\vendor</code>中删去<code>git-for-windows</code>文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.</p>
+</details>
+
+<h3 id="数据结构算法可视化网站">数据结构/算法可视化网站</h3>
+<details>
+  <summary>show</summary>
+
+<p><img src="http://image.youyinnn.cn/sorting-algorithms.png" alt="aa">
+<a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png" alt="image">
+<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png" alt="image">
+<a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
+</details>
+
+<h3 id="经纬度行政区域查询api">经纬度行政区域查询API</h3>
+<details>
+  <summary>show</summary>
+
+<p><a href="http://jwd.funnyapi.com/#/index">home</a></p>
+</details>
+
+<h3 id="win10-自带录电脑音软件">win10 自带录电脑音软件</h3>
+<details>
+  <summary>show</summary>
+
+
+<p><img src="https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg" alt="jEHdM1ZoRC">
+<img src="https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png" alt="image">
+<img src="https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png" alt="image"></p>
+<p>然后打开win10自带的录音软件Voice Recorder</p>
+</details>
+
+<h2 id="htmlh5">HTML/H5</h2>
+<h3 id="textarea的字数限制">textarea的字数限制</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-html">&lt;textarea rows=&quot;5&quot;  maxlength=&quot;200&quot; onchange=&quot;this.value=this.value.substring(0, 200)&quot; onkeydown=&quot;this.value=this.value.substring(0, 200)&quot; onkeyup=&quot;this.value=this.value.substring(0, 200)&quot; &gt;&lt;/textarea&gt;</code></pre>
+<p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
+</details>
+
+<h3 id="input只允许输入数字">input只允许输入数字</h3>
+<details>
+  <summary>show</summary>
+
+<pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
+</details>

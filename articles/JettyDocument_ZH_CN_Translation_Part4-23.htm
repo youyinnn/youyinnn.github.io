@@ -1,0 +1,482 @@
+<hr>
+<p>title : JettyDocument_ZH_CN_Translation_Part4-23
+tags :</p>
+<ul>
+<li>jetty</li>
+<li>document
+categories :</li>
+<li>translation
+series: JettyDocument_ZH_CN_Translation</li>
+</ul>
+<hr>
+<p><span id="top"></span></p>
+<h3 id="ⅳ-jetty开发指南-23jetty和maven">Ⅳ. Jetty开发指南-23.Jetty和Maven</h3>
+<ul>
+<li><ol start="23">
+<li><a href="#23jetty%E5%92%8Cmaven">Jetty和Maven</a></li>
+</ol>
+<ul>
+<li><a href="#231%E4%BD%BF%E7%94%A8maven">使用Maven</a><ul>
+<li><a href="#2311%E4%BD%BF%E7%94%A8maven%E5%81%9A%E5%B5%8C%E5%85%A5%E5%BC%8Fjetty%E5%BC%80%E5%8F%91">使用Maven做嵌入式Jetty开发</a></li>
+<li><a href="#2321%E4%BD%BF%E7%94%A8maven%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86%E7%9A%84wabapp">使用Maven开发标准的WebApp</a></li>
+</ul>
+</li>
+<li><a href="#232%E9%85%8D%E7%BD%AEjetty%E7%9A%84maven%E6%8F%92%E4%BB%B6">配置Jetty的Maven插件</a><ul>
+<li><a href="#2321%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li><a href="#2322%E6%94%AF%E6%8C%81%E7%9B%AE%E6%A0%87">支持目标</a></li>
+<li><a href="#2323%E9%85%8D%E7%BD%AEjetty%E5%AE%B9%E5%99%A8">配置Jetty容器</a></li>
+<li><a href="#2324%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84webapp">配置你的WebApp</a></li>
+<li><a href="#2325jettyrun">jetty:run</a></li>
+<li><a href="#2326jettyrunwar">jetty:run-war</a></li>
+<li><a href="#2327jettyrunexploded">jetty:run-exploded</a></li>
+<li><a href="#2328jettyrunforked">jetty:run-forked</a></li>
+<li><a href="#2329jettystart">jetty:start</a></li>
+<li><a href="#23210jettystop">jetty:stop</a></li>
+<li><a href="#23211jettyeffectivewebxml">jetty:effective-web-xml</a></li>
+<li><a href="#23212%E4%BD%BF%E7%94%A8%E8%A6%86%E7%9B%96war">使用覆盖war</a></li>
+<li><a href="#23213%E9%85%8D%E7%BD%AEsecurity">配置Security</a></li>
+<li><a href="#23214%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAwebapproot%E7%9B%AE%E5%BD%95">使用多个WebappRoot目录</a></li>
+<li><a href="#23215%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E4%BB%A5%E4%B8%8A%E7%9A%84webapp">运行一个以上的Webapp</a></li>
+<li><a href="#23216%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7">设置系统属性</a></li>
+</ul>
+</li>
+<li><a href="#233jetty-maven%E6%8F%92%E4%BB%B6%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%AB%E6%8F%8F">Jetty Maven插件的文件扫描</a></li>
+<li><a href="#234jetty-jspc-maven%E6%8F%92%E4%BB%B6">Jetty Jspc Maven插件</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><span id="23jetty和maven"></span></p>
+<h3 id="23、jetty和maven">23、Jetty和Maven</h3>
+<ul>
+<li>23.1、<a href="#231%E4%BD%BF%E7%94%A8maven">使用Maven</a></li>
+<li>23.2、<a href="#232%E9%85%8D%E7%BD%AEjetty%E7%9A%84maven%E6%8F%92%E4%BB%B6">配置Jetty的Maven插件</a></li>
+<li>23.3、<a href="#233jetty-maven%E6%8F%92%E4%BB%B6%E7%9A%84%E6%96%87%E6%A1%A3%E6%89%AB%E6%8F%8F">Jetty Maven插件的文件扫描</a></li>
+<li>23.4、<a href="#234jetty-jspc-maven%E6%8F%92%E4%BB%B6">Jetty Jspc Maven插件</a></li>
+</ul>
+<p><span id="231使用maven"></span></p>
+<h4 id="231、使用maven">23.1、使用Maven</h4>
+<ul>
+<li>23.1.1、<a href="#2311%E4%BD%BF%E7%94%A8maven%E5%81%9A%E5%B5%8C%E5%85%A5%E5%BC%8Fjetty%E5%BC%80%E5%8F%91">使用Maven做嵌入式Jetty开发</a></li>
+<li>23.1.2、<a href="#2321%E4%BD%BF%E7%94%A8maven%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86%E7%9A%84wabapp">使用Maven开发标准的WebApp</a></li>
+</ul>
+<blockquote>
+<p><em>插播原文：Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em></p>
+</blockquote>
+<p>所以这是一个理想的用来构建web应用的工具，一些插件比如<code>jetty-maven-plugin</code>可以很容易的就运行一个web应用，以节省了部署操作所花费的时间。你可以非常容易地使用Maven去构建、测试、运行一个嵌入了Jetty服务器的web项目。</p>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<p>使用<code>jetty-maven-plugin</code>并不是必须的。但是用Maven来实现Jetty是一种流行的做法，不过你还是可以根据你的业务需求来选择其它流行的工具，比如ant和gradle。</p>
+</blockquote>
+<p>首先我们来看一个非常简单的java应用的HelloWorld，它嵌入了Jetty。然后看一个简单的web应用，它使用<code>jetty-maven-plugin</code>来加快了开发周期。</p>
+<p><span id="2311使用maven做嵌入式jetty开发"></span></p>
+<h5 id="2311、使用maven做嵌入式jetty开发">23.1.1、使用Maven做嵌入式Jetty开发</h5>
+<p>为了理解对Jetty的构建和运行的基本操作，你首先得了解“Jetty的嵌入式开发”。</p>
+<p>俗话说得好，“约定大于配置”，所以你最好使用Maven推荐的标准web应用目录结构。你可以使用<code>archetypes</code>去快速地设置好基本的Maven项目结构，但在本教程中我们将会手动地创建项目结构：</p>
+<pre><code>&gt; mkdir JettyMavenHelloWorld
+&gt; cd JettyMavenHelloWorld
+&gt; mkdir -p src/main/java/org/example</code></pre><br>
+
+<h6 id="23111、创建helloworld类">23.1.1.1、创建HelloWorld类</h6>
+<p>路径<code>src/main/java/org/example/HelloWorld.java</code>:</p>
+<pre><code>package org.example;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import java.io.IOException;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+public class HelloWorld extends AbstractHandler
+{
+    public void handle(String target,
+                       Request baseRequest,
+                       HttpServletRequest request,
+                       HttpServletResponse response)
+        throws IOException, ServletException
+    {
+        response.setContentType(&quot;text/html;charset=utf-8&quot;);
+        response.setStatus(HttpServletResponse.SC_OK);
+        baseRequest.setHandled(true);
+        response.getWriter().println(&quot;&lt;h1&gt;Hello World&lt;/h1&gt;&quot;);
+    }
+
+    public static void main(String[] args) throws Exception
+    {
+        Server server = new Server(8080);
+        server.setHandler(new HelloWorld());
+
+        server.start();
+        server.join();
+    }
+}</code></pre><br>
+
+<h6 id="23112、创建pom文件">23.1.1.2、创建POM文件</h6>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;org.example&lt;/groupId&gt;
+  &lt;artifactId&gt;hello-world&lt;/artifactId&gt;
+  &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;name&gt;Jetty HelloWorld&lt;/name&gt;
+
+  &lt;properties&gt;
+      &lt;!-- Adapt this to a version found on
+           http://central.maven.org/maven2/org/eclipse/jetty/jetty-maven-plugin/
+        --&gt;
+      &lt;jettyVersion&gt;9.3.9.v20160517&lt;/jettyVersion&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+      &lt;artifactId&gt;jetty-server&lt;/artifactId&gt;
+      &lt;version&gt;${jettyVersion}&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.1&lt;/version&gt;
+        &lt;executions&gt;
+          &lt;execution&gt;&lt;goals&gt;&lt;goal&gt;java&lt;/goal&gt;&lt;/goals&gt;&lt;/execution&gt;
+        &lt;/executions&gt;
+        &lt;configuration&gt;
+          &lt;mainClass&gt;org.example.HelloWorld&lt;/mainClass&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</code></pre><br>
+
+<h6 id="23113、构建和运行嵌入式helloworld">23.1.1.3、构建和运行嵌入式HelloWorld</h6>
+<p>你现在可以使用以下命令编译和执行Hello World类：</p>
+<pre><code>&gt; mvn clean compile exec:java</code></pre><p>使用浏览器访问<code>http://localhost:8080</code>页面，你就可以看见HelloWorld页面了。你可以观察一下Maven到底干了什么，使用<code>mvn dependency:tree</code>命令，它会揭示传递依赖关系以及下载内容：</p>
+<pre><code>&gt; mvn dependency:tree
+[INFO] Scanning for projects...
+...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jetty HelloWorld 0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ hello-world ---
+...
+[INFO] org.example:hello-world:jar:0.1-SNAPSHOT
+[INFO] \- org.eclipse.jetty:jetty-server:jar:9.3.9.v20160517:compile
+[INFO]    +- javax.servlet:javax.servlet-api:jar:3.1.0:compile
+[INFO]    +- org.eclipse.jetty:jetty-http:jar:9.3.9.v20160517:compile
+[INFO]    |  \- org.eclipse.jetty:jetty-util:jar:9.3.9.v20160517:compile
+[INFO]    \- org.eclipse.jetty:jetty-io:jar:9.3.9.v20160517:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.145 s
+[INFO] Finished at: 2016-08-01T13:46:42-04:00
+[INFO] Final Memory: 15M/209M
+[INFO] ------------------------------------------------------------------------</code></pre><p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="2321使用maven开发标准的wabapp"></span></p>
+<h5 id="2312、使用maven开发标准的webapp">23.1.2、使用Maven开发标准的WebApp</h5>
+<p>之前的部分演示了在应用中如何使用maven去做嵌入式Jetty。现在我们将研究如何使用Maven和Jetty开发一个标准的web应用，首先创建Maven标准web目录结构：</p>
+<pre><code>&gt; mkdir JettyMavenHelloWarApp
+&gt; cd JettyMavenHelloWebApp
+&gt; mkdir -p src/main/java/org/example
+&gt; mkdir -p src/main/webapp/WEB-INF</code></pre><br>
+
+<h6 id="23121、创建一个servlet">23.1.2.1、创建一个Servlet</h6>
+<p>路径<code>src/main/java/org/example/HelloServlet.java</code>：</p>
+<pre><code>package org.example;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class HelloServlet extends HttpServlet
+{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setContentType(&quot;text/html&quot;);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println(&quot;&lt;h1&gt;Hello Servlet&lt;/h1&gt;&quot;);
+        response.getWriter().println(&quot;session=&quot; + request.getSession(true).getId());
+    }
+}</code></pre><p>你需要在<code>web.xml</code>中声明这个servlet：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app
+   xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;
+   metadata-complete=&quot;false&quot;
+   version=&quot;3.1&quot;&gt;
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.example.HelloServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/hello/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;</code></pre><br>
+
+<h6 id="23122、创建pom">23.1.2.2、创建POM</h6>
+<p>特别注意里面有<code>jetty-maven-plugin</code>插件：</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;org.example&lt;/groupId&gt;
+  &lt;artifactId&gt;hello-world&lt;/artifactId&gt;
+  &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;name&gt;Jetty HelloWorld WebApp&lt;/name&gt;
+
+  &lt;properties&gt;
+      &lt;jettyVersion&gt;9.4.6.v20170531&lt;/jettyVersion&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;3.1.0&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;${jettyVersion}&lt;/version&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+
+&lt;/project&gt;</code></pre><br>
+
+<h6 id="23123、构建和运行web项目">23.1.2.3、构建和运行Web项目</h6>
+<p>现在你可以同时构建和运行web应用，不需要把项目组装成一个war，你只需要使用<code>jetty-maven-plugin</code>提供的命令就可以了：</p>
+<pre><code>&gt; mvn jetty:run</code></pre><p>然后你可以在<code>http://localhost:8080/hello</code>地址中看到静态和动态的内容。</p>
+<h6 id="23124、创建一个war文件">23.1.2.4、创建一个war文件</h6>
+<p>你可以通过以下的命令，从项目中创建一个Web应用存档（Web Application Archive (WAR)）文件：</p>
+<pre><code>&gt; mvn package</code></pre><p>生产的war文件会在target目录，并且它可以部署在任何的标准servlet服务器，包括Jetty。</p>
+<p><a href="#top">回到顶部</a></p>
+<hr>
+<p><span id="232配置jetty的maven插件"></span></p>
+<h4 id="232、配置jetty的maven插件">23.2、配置Jetty的Maven插件</h4>
+<ul>
+<li>23.2.1、<a href="#2321%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li>23.2.2、<a href="#2322%E6%94%AF%E6%8C%81%E7%9B%AE%E6%A0%87">支持目标</a></li>
+<li>23.2.3、<a href="#2323%E9%85%8D%E7%BD%AEjetty%E5%AE%B9%E5%99%A8">配置Jetty容器</a></li>
+<li>23.2.4、<a href="#2324%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84webapp">配置你的WebApp</a></li>
+<li>23.2.5、<a href="#2325jettyrun">jetty:run</a></li>
+<li>23.2.6、<a href="#2326jettyrunwar">jetty:run-war</a></li>
+<li>23.2.7、<a href="#2327jettyrunexploded">jetty:run-exploded</a></li>
+<li>23.2.8、<a href="#2328jettyrunforked">jetty:run-forked</a></li>
+<li>23.2.9、<a href="#2329jettystart">jetty:start</a></li>
+<li>23.2.10、<a href="#23210jettystop">jetty:stop</a></li>
+<li>23.2.11、<a href="#23211jettyeffectivewebxml">jetty:effective-web-xml</a></li>
+<li>23.2.12、<a href="#23212%E4%BD%BF%E7%94%A8%E8%A6%86%E7%9B%96war">使用覆盖war</a></li>
+<li>23.2.13、<a href="#23213%E9%85%8D%E7%BD%AEsecurity">配置Security</a></li>
+<li>23.2.14、<a href="#23214%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAwebapproot%E7%9B%AE%E5%BD%95">使用多个WebappRoot目录</a></li>
+<li>23.2.15、<a href="#23215%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E4%BB%A5%E4%B8%8A%E7%9A%84webapp">运行一个以上的Webapp</a></li>
+<li>23.2.16、<a href="#23216%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7">设置系统属性</a></li>
+</ul>
+<p>Jetty Maven插件插件对于快速开发和快速测试来说是非常有用的。你可以把它添加到任意一个webapp项目中，只要这个项目的结构符合Maven标准。插件会定期的扫描你的项目的变化，并且自动的重新部署项目。这让生产周期大大缩减，因为你不用做部署和构建的步骤：你只需要在IDE里面做出修改，然后运行的web容器会自动地重新部署这些修改，所以在这样的情况下，你可以非常直接地做测试工作。</p>
+<blockquote>
+<p><strong>重要：</strong></p>
+<p>你需要Maven3.3以上才能支持这个插件。</p>
+</blockquote>
+<p>虽然Jetty Maven插件可以非常有效地进行开发，但是我们并不推荐把它运用到生产环境。因为Maven插件的运作本身需要许多内置Maven API，并且Maven它本身并不是一个生产部署工具。我们还是推荐你使用传统的开发版部署方法或者使用嵌入式Jetty。</p>
+<br>
+
+<p><span id="2321快速开始"></span></p>
+<h5 id="2321、快速开始">23.2.1、快速开始</h5>
+<p>首先，在pom中配置插件：</p>
+<pre><code>&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;9.4.6.v20170531&lt;/version&gt;
+&lt;/plugin&gt;</code></pre><p>然后在和pom同级的目录下，执行以下命令：</p>
+<pre><code>mvn jetty:run</code></pre><p>然后你可以在<code>http://localhost:8080/</code>访问你的项目。</p>
+<p>Jetty会一直执行下去直到你停止它。当它在运行的时候，它会定期扫描你项目文件是否有变动，如果文件有变动并且重编译了成class文件的话，Jetty会重新部署你的项目，然后你可以直接测试你刚才的变更结果。</p>
+<p>你可以在终端窗口使用<code>ctrl-c</code>热键来终止这个插件的运行。</p>
+<blockquote>
+<p><strong>注意：</strong></p>
+<p>运行Jetty实例的类路径和它下面部署的web应用都是通过Maven来管理的，这可能和你期待的有点不同。比如说：一个web应用的依赖jar可能会引用本地maven仓库中的版本，而不是WEB-INF/lib目录下的jar包。</p>
+</blockquote>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="2322支持目标"></span></p>
+<h5 id="2322、支持目标">23.2.2、支持目标</h5>
+<p>Jetty Maven插件有大量的Maven目标。这其中最有用的目标就是run目标，它可以运行一个未装配的webapp。还有其它的目标，可以帮助你完成不同的任务。比如说，你可能需要在另外一个Jetty的实例上运行你的webapp而不是就在当前的maven进程里面运行；或者你可能需要在你想部署的webapp上，对项目的生命周期的各个阶段进行更细致粒度的控制。</p>
+<p>Maven中有很多目标都可以完成这些任务，你可以通过命令来查看Jetty Maven插件支持哪些目标：</p>
+<pre><code>mvn jetty:help</code></pre><p>为了看到更多详细信息，你可以传入特定目标的名字：</p>
+<pre><code>mvn jetty:help -Ddetail=true -Dgoal= &lt;goal name&gt;</code></pre><p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="2323配置jetty容器"></span></p>
+<h5 id="2323、配置jetty容器">23.2.3、配置Jetty容器</h5>
+<ul>
+<li>httpConnector
+可选项。如果没有指定，Jetty会创建一个<code>ServerConnector</code>实例来监听8080端口。你可以通过命令行在启动的时候更改这些默认的设置，比如说<code>mvn -Djetty.http.port=9999 jetty:run</code>。除此之外，你可以使用配置对象来设置<code>ServerConnector</code>信息。以下是可配置的子对象：<ul>
+<li>port：<ul>
+<li>可修改的端口号，默认是8080。</li>
+</ul>
+</li>
+<li>host：<ul>
+<li>特定的connector接口，默认是所有接口。</li>
+</ul>
+</li>
+<li>name：<ul>
+<li>connector的名字。</li>
+</ul>
+</li>
+<li>idleTimeout：<ul>
+<li>最大等待连接时间。</li>
+</ul>
+</li>
+<li>soLinger：<ul>
+<li>socket的延迟时间。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code>&lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+    &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;httpConnector&gt;
+            &lt;port&gt;8888&lt;/port&gt;
+        &lt;/httpConnector&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre><br>
+
+<ul>
+<li>jettyXml
+可选项。这里可以配置你需要加载的jetty的xml文件，需要用逗号分开。</li>
+</ul>
+<p>示例：</p>
+<pre><code>&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;9.4.6.v20170531&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;jettyXml&gt;jetty.xml,jetty-ssl.xml,jetty-https.xml&lt;/jettyXml&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre><br>
+
+<ul>
+<li>scanIntervalSeconds
+扫描和检查webapp变更的时间间隔，这可以用来做自动的热部署。默认情况下为0，意思是不开启热部署，取一个大于1 的值就开启了热部署。</li>
+</ul>
+<br>
+
+<ul>
+<li>reload
+默认值是“automatic”，也就是自动的，只要你配置了一个非0的<code>scanIntervalSeconds</code>。你可以设置为“manual”，也就是手动的，这时你需要手动触发扫描，你得在插件运行的情况下在控制台键入一个换行键。这对于你在做一些重要的变更的时候比较有用。</li>
+</ul>
+<br>
+
+<ul>
+<li>dumpOnStart
+可选项。默认是false。如果为true，Jetty会在启动的时候转储出服务器结构。</li>
+</ul>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：后面的部分我感觉配置不上，也就不翻译了。</em></p>
+</blockquote>
+<ul>
+<li>loginServices
+Optional. A list of org.eclipse.jetty.security.LoginService implementations. Note that there is no default realm. If you use a realm in your web.xml you can specify a corresponding realm here. You could instead configure the login services in a jetty xml file and add its location to the jettyXml parameter.</li>
+</ul>
+<br>
+
+<ul>
+<li><p>requestLog
+Optional. An implementation of the org.eclipse.jetty.server.RequestLog request log interface. An implementation that respects the NCSA format is available as org.eclipse.jetty.server.NCSARequestLog. There are three other ways to configure the RequestLog:</p>
+<ul>
+<li>In a jetty xml config file, as specified in the jettyXml parameter.</li>
+<li>In a context xml config file, as specified in the contextXml parameter.</li>
+<li>In the webApp element.
+See Configuring Request Logs for more information.</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<ul>
+<li>server
+Optional as of Jetty 9.3.1. This would configure an instance of the org.eclipse.jetty.server.Server for the plugin to use, however it is usually NOT necessary to configure this, as the plugin will automatically configure one for you. In particular, if you use the jettyXml element, then you generally DON’T want to define this element, as you are probably using the jettyXml file to configure up a Server with a special constructor argument, such as a custom threadpool. If you define both a server element AND use a jetty xml element which points to a config file that has a line like <Configure id="Server" class="org.eclipse.jetty.server.Server"> then the the xml configuration will override what you configure for the server in the pom.xml.</li>
+</ul>
+<br>
+
+<ul>
+<li>stopPort
+Optional. Port to listen on for stop commands. Useful to use in conjunction with the stop or run-forked goals.</li>
+</ul>
+<br>
+
+<ul>
+<li>stopKey
+Optional. Used in conjunction with stopPort for stopping jetty. Useful when used in conjunction with the stop or run-forked goals.</li>
+</ul>
+<br>
+
+<ul>
+<li>systemProperties
+Optional. Allows you to configure System properties for the execution of the plugin. For more information, see Setting System Properties.</li>
+</ul>
+<br>
+
+<ul>
+<li>systemPropertiesFile
+Optional. A file containing System properties to set for the execution of the plugin. By default, settings that you make here do not override any system properties already set on the command line, by the JVM, or in the POM via systemProperties. Read Setting System Properties for how to force overrides.</li>
+</ul>
+<br>
+
+<ul>
+<li>skip
+Default is false. If true, the execution of the plugin exits. Same as setting the SystemProperty -Djetty.skip on the command line. This is most useful when configuring Jetty for execution during integration testing and you want to skip the tests.</li>
+</ul>
+<br>
+
+<ul>
+<li>useProvidedScope
+Default value is false. If true, the dependencies with <scope>provided</scope> are placed onto the container classpath. Be aware that this is NOT the webapp classpath, as &quot;provided&quot; indicates that these dependencies would normally be expected to be provided by the container. You should very rarely ever need to use this. Instead, you should copy the provided dependencies as explicit dependencies of the plugin instead.</li>
+</ul>
+<br>
+
+<ul>
+<li>excludedGoals
+Optional. A list of Jetty plugin goal names that will cause the plugin to print an informative message and exit. Useful if you want to prevent users from executing goals that you know cannot work with your project.</li>
+</ul>
+<br>
+
+<hr>
+<p><span id="233jetty-maven插件的文档扫描"></span></p>
+<h4 id="233、jetty-maven插件的文件扫描">23.3、Jetty Maven插件的文件扫描</h4>
+<p><a href="#top">回到顶部</a></p>
+<hr>
+<p><span id="234jetty-jspc-maven插件"></span></p>
+<h4 id="234、jetty-jspc-maven插件">23.4、Jetty Jspc Maven插件</h4>
+<p><a href="#top">回到顶部</a></p>
+<hr>

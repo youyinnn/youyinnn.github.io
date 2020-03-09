@@ -1,0 +1,405 @@
+<hr>
+<p>title : JettyDocument_ZH_CN_Translation_Part3-13
+tags :</p>
+<ul>
+<li>jetty</li>
+<li>document
+categories :</li>
+<li>translation
+series: JettyDocument_ZH_CN_Translation</li>
+</ul>
+<hr>
+<p><span id="top"></span></p>
+<h3 id="ⅲ-jetty管理者指南-13注释">Ⅲ. Jetty管理者指南-13.注释</h3>
+<ul>
+<li><ol start="13">
+<li><a href="#13%E6%B3%A8%E8%A7%A3">注解</a></li>
+</ol>
+<ul>
+<li><a href="#131%E5%BF%AB%E9%80%9F%E8%AE%BE%E7%BD%AE">快速设置</a><ul>
+<li><a href="#1311%E5%85%B3%E4%BA%8Ejetty%E5%8F%91%E8%A1%8C%E7%89%88">关于Jetty发行版</a></li>
+<li><a href="#1312%E5%85%B3%E4%BA%8Ejetty-maven-plugin">关于Jetty Maven Plugin</a></li>
+<li><a href="#1313%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F">关于嵌入式</a></li>
+</ul>
+</li>
+<li><a href="#132%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">使用注解</a><ul>
+<li><a href="#1321%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%B3%A8%E8%A7%A3">支持哪些注解</a></li>
+<li><a href="#1322%E6%A3%80%E6%B5%8B%E6%B3%A8%E8%A7%A3%E5%92%8C%E8%87%AA%E6%A3%80%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AF%B9%E6%AF%94">检测注解和自检注解的对比</a></li>
+<li><a href="#1323%E5%93%AA%E4%BA%9Bjar%E5%8C%85%E6%94%AF%E6%8C%81%E6%89%AB%E6%8F%8F%E6%A3%80%E6%9F%A5%E6%B3%A8%E8%A7%A3">哪些jar包支持扫描检查注解</a></li>
+<li><a href="#1324%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%B3%A8%E8%A7%A3%E6%89%AB%E6%8F%8F">多线程注解扫描</a></li>
+<li><a href="#1325servletcontainerinitializers">ServletContainerInitializers</a></li>
+</ul>
+</li>
+<li><a href="#133%E5%9C%A8jetty%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">在Jetty嵌入式开发中使用注解</a><ul>
+<li><a href="#1331%E8%AE%BE%E7%BD%AE%E7%B1%BB%E8%B7%AF%E5%BE%84">设置类路径</a></li>
+<li><a href="#1332%E6%A0%97%E5%AD%90">栗子</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><span id="13注解"></span></p>
+<h4 id="13、注解">13、注解</h4>
+<ul>
+<li>13.1、<a href="#131%E5%BF%AB%E9%80%9F%E8%AE%BE%E7%BD%AE">快速设置</a></li>
+<li>13.2、<a href="#132%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">使用注解</a></li>
+<li>13.3、<a href="#133%E5%9C%A8jetty%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">在Jetty嵌入式开发中使用注解</a></li>
+</ul>
+<p>Jetty支持servlet规范的annotation。但是这默认是不开启的，所以接下来的内容会向你展示如何开启这个支持，以及如何使用它。</p>
+<br>
+
+<p><span id="131快速设置"></span></p>
+<h5 id="131、快速设置">13.1、快速设置</h5>
+<ul>
+<li>13.1.1、<a href="#1311%E5%85%B3%E4%BA%8Ejetty%E5%8F%91%E8%A1%8C%E7%89%88">关于Jetty发行版</a></li>
+<li>13.1.2、<a href="#1312%E5%85%B3%E4%BA%8Ejetty-maven-plugin">关于Jetty Maven Plugin</a></li>
+<li>13.1.3、<a href="#1313%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F">关于嵌入式</a><br>
+
+</li>
+</ul>
+<p><span id="1311关于jetty发行版"></span></p>
+<h6 id="1311、关于jetty发行版">13.1.1、关于Jetty发行版</h6>
+<p>如果你是使用的Jetty发行版，那么注解是默认支持的。注解模块以及它所需要的过渡的依赖都是负责支持注解功能的。</p>
+<p>你需要注意的是，依赖JNDI的注解，比如<code>@Resource</code>和<code>@Resources</code>都是通过JNDI模块来实现的，JNDI模块是注解模块的过渡依赖模块。</p>
+<blockquote>
+<p><em>译者文外补充：Jetty发行版就是Jetty的客户端，与之相对的有Jetty嵌入式，我感觉文档是在强调这两个区别。</em></p>
+</blockquote>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1312关于jetty-maven-plugin"></span></p>
+<h6 id="1312、关于jetty-maven-plugin">13.1.2、关于Jetty Maven Plugin</h6>
+<p>注解和JNDI在Jetty Maven Plugin中都是预置的。</p>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1313关于嵌入式"></span></p>
+<h6 id="1313、关于嵌入式">13.1.3、关于嵌入式</h6>
+<p>为了在嵌入式Jetty场景中使用注解，你需要加入<code>jetty-annotations</code>jar包和所有它依赖的jar包到classpath下。你还需要把<code>org.eclipse.jetty.annotations.AnnotationConfiguration</code>类添加到装载<code>Configuration classes</code>的列表中，并把这个列表应用到代表你的web应用的<code>org.eclipse.jetty.wabapp.WebAppContext</code>类中。</p>
+<p>下面这个栗子设置了一个标准的<code>test-spec.war</code>web应用，这个包你可以在我们发行版的demo-base中找到。你需要注意的是<code>test-spec.war</code>并不只运用到了注解，还运用到了JNDI，所以这个栗子还激活了其它一系列的配置（通过<code>org.eclipse.jetty.plus.webapp.EnvConfiguration</code>，<code>org.eclipse.jetty.plus.webapp.PlusConfiguration</code>和它们自身依赖的jars）。</p>
+<pre><code>package org.eclipse.jetty.embedded;
+
+import java.io.File;
+
+import org.eclipse.jetty.plus.jndi.EnvEntry;
+import org.eclipse.jetty.plus.jndi.Resource;
+import org.eclipse.jetty.plus.jndi.Transaction;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.Configuration;
+import org.eclipse.jetty.webapp.WebAppContext;
+
+/**
+ * ServerWithAnnotations
+ */
+public class ServerWithAnnotations
+{
+    public static final void main( String args[] ) throws Exception
+    {
+        // Create the server
+        Server server = new Server(8080);
+
+        // Enable parsing of jndi-related parts of web.xml and jetty-env.xml
+        Configuration.ClassList classlist = Configuration.ClassList
+                .setServerDefault(server);
+        classlist.addAfter(&quot;org.eclipse.jetty.webapp.FragmentConfiguration&quot;,
+                &quot;org.eclipse.jetty.plus.webapp.EnvConfiguration&quot;,
+                &quot;org.eclipse.jetty.plus.webapp.PlusConfiguration&quot;);
+        classlist.addBefore(
+                &quot;org.eclipse.jetty.webapp.JettyWebXmlConfiguration&quot;,
+                &quot;org.eclipse.jetty.annotations.AnnotationConfiguration&quot;);
+
+        // Create a WebApp
+        WebAppContext webapp = new WebAppContext();
+        webapp.setContextPath(&quot;/&quot;);
+        File warFile = new File(
+                &quot;../../jetty-distribution/target/distribution/demo-base/webapps/test.war&quot;);
+        webapp.setWar(warFile.getAbsolutePath());
+        webapp.setAttribute(
+                &quot;org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern&quot;,
+                &quot;.*/javax.servlet-[^/]*\\.jar$|.*/servlet-api-[^/]*\\.jar$&quot;);
+        server.setHandler(webapp);
+
+        // Register new transaction manager in JNDI
+        // At runtime, the webapp accesses this as java:comp/UserTransaction
+        new Transaction(new com.acme.MockUserTransaction());
+
+        // Define an env entry with webapp scope.
+        new EnvEntry(webapp, &quot;maxAmount&quot;, new Double(100), true);
+
+        // Register a mock DataSource scoped to the webapp
+        new Resource(webapp, &quot;jdbc/mydatasource&quot;, new com.acme.MockDataSource());
+
+        // Configure a LoginService
+        HashLoginService loginService = new HashLoginService();
+        loginService.setName(&quot;Test Realm&quot;);
+        loginService.setConfig(&quot;src/test/resources/realm.properties&quot;);
+        server.addBean(loginService);
+
+        server.start();
+        server.join();
+    }
+
+}</code></pre><p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="132使用注解"></span></p>
+<h5 id="132、使用注解">13.2、使用注解</h5>
+<ul>
+<li>13.2.1、<a href="#1321%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%B3%A8%E8%A7%A3">支持哪些注解</a></li>
+<li>13.2.2、<a href="#1322%E6%A3%80%E6%B5%8B%E6%B3%A8%E8%A7%A3%E5%92%8C%E8%87%AA%E6%A3%80%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AF%B9%E6%AF%94">检测注解和自检注解的对比</a></li>
+<li>13.2.3、<a href="#1323%E5%93%AA%E4%BA%9Bjar%E5%8C%85%E6%94%AF%E6%8C%81%E6%89%AB%E6%8F%8F%E6%A3%80%E6%9F%A5%E6%B3%A8%E8%A7%A3">哪些jar包支持扫描检查注解</a></li>
+<li>13.2.4、<a href="#1324%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%B3%A8%E8%A7%A3%E6%89%AB%E6%8F%8F">多线程注解扫描</a></li>
+<li>13.2.5、<a href="#1325servletcontainerinitializers">ServletContainerInitializers</a></li>
+</ul>
+<p><span id="1321支持哪些注解"></span></p>
+<h6 id="1321、支持哪些注解">13.2.1、支持哪些注解</h6>
+<p>Jetty支持解释和运用的注解有：</p>
+<ul>
+<li>@Resource</li>
+<li>@Resources</li>
+<li>@PostConstruct</li>
+<li>@PreDestroy</li>
+<li>@DeclaredRoles</li>
+<li>@RunAs</li>
+<li>@MultipartConfig</li>
+<li>@WebServlet</li>
+<li>@WebFilter</li>
+<li>@WebListener</li>
+<li>@WebInitParam</li>
+<li>@ServletSecurity, @HttpConstraint, @HttpMethodConstraint</li>
+<li>@HandlesTypes (on ServletContainerInitializers)</li>
+</ul>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1322检测注解和自检注解的对比"></span></p>
+<h6 id="1322、检测注解和自检注解的对比">13.2.2、检测注解和自检注解的对比</h6>
+<p>一些类型的注解可以标注在任何类中，虽然这些注释并不一定能和容器产生直接交互作用。这些类型的注解我们称为“discovered（发现/检测）注释”，这代表容器需要主动的去检测这些注释。</p>
+<p>其它类型的注释我们称之为“introspected（自检）注释”，这意味着这种自检行为会发生在被容器的生命周期中直接作用的类上面（比如<code>javax.servlet.Servlet, javax.servlet.Filter</code>等等）因此可以通过对该类的简单的检测就可以找到。</p>
+<p>一些简单的“discovered（发现/检测）”注释比如：</p>
+<ul>
+<li>@WebServlet</li>
+<li>@WebFilter</li>
+<li>@WebListener</li>
+</ul>
+<p>一些简单的“introspected（自检）”注释比如：</p>
+<ul>
+<li>@PostConstruct</li>
+<li>@PreDestroy</li>
+<li>@Resource</li>
+</ul>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1323哪些jar包支持扫描检查注解"></span></p>
+<h6 id="1323、哪些jar包支持扫描检查注解">13.2.3、哪些jar包支持扫描检查注解</h6>
+<br>
+
+<p>web.xml文件可以包含<code>metadata-complete</code>属性。如果它的值为真，那么将不会扫描可检测的注释。然而，对类的扫描行为仍然会发生，因为有<code>javax.servlet.ServletContainerInitializer</code>。类一旦实现了这个接口，Jetty就会使用<code>javax.util.ServiceLoader</code>机制找到这个类，并且如果它里面有<code>@HandlesTypes</code>注释，那么jetty就必定会有层次地扫描这个类。如果你容器路径下或者<code>WEB-INF/lib</code>目录中包含了许多jar包的话，这样会非常消耗时间。</p>
+<p>如果扫描一旦发生，要么是你没指定<code>metadata-complete</code>或者指定为false，要么是存在一个或者多个<code>javax.servlet.ServletContainerInitializer</code>和<code>@HandlesTypes</code>，这样Jetty就必须兼顾容器的路径内容以及web应用的类路径内容。</p>
+<p>默认的情况下，Jetty不会扫描任何包含在容器类路径下的任何类。如果你需要扫描容器类路径下的类或者jar文件的话，你可以使用<code>org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</code>，这是一个<code>WebAppContext</code>属性，可以为你想要扫描容器类路径下的jar或者目录指定匹配模式，好进行扫描行为。</p>
+<p>默认的情况下，Jetty会按照顺序扫描<strong>所有</strong><code>WEB-INF/classes</code>下的类和<strong>所有</strong><code>WEB-INF/lib</code>下的jar包，前提是你有在web.xml下制定任何绝对或者相对的顺序。如果你的web应用包含许多jar文件，你可以通过省略扫描这些jar包来显式的加速部署速度。为了做到这一点，你可以在<code>WebAppContext</code>中设置<code>org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</code>属性，通过模式来定义你需要扫描的jar包。</p>
+<p>你需要注意到的是如果你有配置web应用的<code>extraClasspath</code>，那么它也会参与扫描过程。这里面的任何jar或者类都会像在<code>WEB-INF/classes</code>或者<code>WEB-INF/lib</code>中一样被扫描。</p>
+<p>如果你需要控制它们被应用到的顺序，你可以在<a href="#1325servletcontainerinitializers">这里</a>了解到更多。</p>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1324多线程注解扫描"></span></p>
+<h6 id="1324、多线程注解扫描">13.2.4、多线程注解扫描</h6>
+<p>如果要执行注释扫描，默认的情况下，Jetty会使用多线程的方式去实现，企图以最短的时间完成。</p>
+<p>如果处于某些原因你不想以多线程的方式扫描，你可以在Jetty中配置为单线程扫描。有以下几种方式：</p>
+<ul>
+<li>Set the context attribute org.eclipse.jetty.annotations.multiThreaded to false</li>
+<li>Set the Server attribute org.eclipse.jetty.annotations.multiThreaded to false</li>
+<li>Set the System property org.eclipse.jetty.annotations.multiThreaded to false</li>
+</ul>
+<p>第一种只适用当前web应用，第二种适用所有部署在同一个server实例上的webapp，第三种适用所有在同一个JVM下部署的webapp。</p>
+<p>默认的情况下，Jetty会最大等待60秒来完成所有线程的扫描。你可以通过以下的设置来配置你想要的秒数：</p>
+<ul>
+<li>Set the context attribute org.eclipse.jetty.annotations.maxWait</li>
+<li>Set the Server attribute org.eclipse.jetty.annotations.maxWait</li>
+<li>Set the System property org.eclipse.jetty.annotations.maxWait</li>
+</ul>
+<p>第一种只适用当前web应用，第二种适用所有部署在同一个server实例上的webapp，第三种适用所有在同一个JVM下部署的webapp。</p>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1325servletcontainerinitializers"></span></p>
+<h6 id="1325、servletcontainerinitializers">13.2.5、ServletContainerInitializers</h6>
+<p><code>javax.servlet.ServletContainerInitializer</code>可以在存在于容器的类路径下、webapp的<code>WEB-INF/classes</code>目录中、webapp的<code>WEB-INF/lib</code>jar中，或者是你为web应用配置的额外的<code>extraClasspath</code>下。</p>
+<p>Servlet规范并没有定义说我们应该在web应用启动的时候必须得按照顺序调用哪一个<code>ServletContainerInitializer</code>。在默认的情况下，Jetty会按照以下的顺序调用：</p>
+<ul>
+<li>ServletContainerInitializers from the container’s classpath</li>
+<li>ServletContainerInitializers from WEB-INF/classes</li>
+<li>ServletContainerInitializers from WEB-INF/lib jars in the order established in web.xml, or in the order that the SCI is returned by the javax.util.ServiceLoader if there is no ordering</li>
+</ul>
+<blockquote>
+<p><em>译者文外补充：后面还有两个内容是关于控制<code>javax.servlet.ServletContainerInitializer</code>的调用顺序配置，和排除<code>javax.servlet.ServletContainerInitializer</code>。我就不翻译了，有需要的可以看<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/using-annotations.html">原文</a>。</em></p>
+</blockquote>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="133在jetty嵌入式开发中使用注解"></span></p>
+<h4 id="133、在jetty嵌入式开发中使用注解">13.3、在Jetty嵌入式开发中使用注解</h4>
+<ul>
+<li>13.3.1、<a href="#1331%E8%AE%BE%E7%BD%AE%E7%B1%BB%E8%B7%AF%E5%BE%84">设置类路径</a></li>
+<li>13.3.2、<a href="#1332%E6%A0%97%E5%AD%90">栗子</a></li>
+</ul>
+<p><span id="1331设置类路径"></span></p>
+<h5 id="1331、设置类路径">13.3.1、设置类路径</h5>
+<p>你需要在类路径下加入以下的jar。你可以从Jetty发行版目录中找到它们，或者使用maven依赖：</p>
+<ul>
+<li>jetty-plus.jar</li>
+<li>jetty-annotations.jar</li>
+</ul>
+<p>你可能还需要<code>asm</code>jar，你可以通过<a href="http://central.maven.org/maven2/org/eclipse/jetty/orbit/org.objectweb.asm/3.3.1.v201105211655/org.objectweb.asm-3.3.1.v201105211655.jar">这个连接</a>下载到。</p>
+<p><a href="#top">回到顶部</a>
+<br></p>
+<p><span id="1332栗子"></span></p>
+<h5 id="1332、栗子">13.3.2、栗子</h5>
+<p>这个栗子设置了一个Jetty服务器，执行了一些设置来确保注解被扫描到，然后部署一个运用到了注解的web应用。</p>
+<p>这个栗子使用<code>@Resource</code>注解来调用JNDI，所以我们能看到classpath中有一些必要的JNDI的jar包。</p>
+<p>这个栗子还添加了一些配置类来支持JNDI（见19行）。</p>
+<pre><code>import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
+
+/**
+ * ServerWithAnnotations
+ *
+ *
+ */
+public class ServerWithAnnotations
+{
+    public static final void main(String args[]) throws Exception
+    {
+        //Create the server
+        Server server = new Server(8080);
+
+        //Enable parsing of jndi-related parts of web.xml and jetty-env.xml
+        org.eclipse.jetty.webapp.Configuration.ClassList classlist = org.eclipse.jetty.webapp.Configuration.ClassList.setServerDefault(server);
+        classlist.addAfter(&quot;org.eclipse.jetty.webapp.FragmentConfiguration&quot;, &quot;org.eclipse.jetty.plus.webapp.EnvConfiguration&quot;, &quot;org.eclipse.jetty.plus.webapp.PlusConfiguration&quot;);
+        classlist.addBefore(&quot;org.eclipse.jetty.webapp.JettyWebXmlConfiguration&quot;, &quot;org.eclipse.jetty.annotations.AnnotationConfiguration&quot;);
+
+        //Create a WebApp
+        WebAppContext webapp = new WebAppContext();
+        webapp.setContextPath(&quot;/&quot;);
+        webapp.setWar(&quot;../../tests/test-webapps/test-servlet-spec/test-spec-webapp/target/test-spec-webapp-9.0.4-SNAPSHOT.war&quot;);
+        server.setHandler(webapp);
+
+        //Register new transaction manager in JNDI
+        //At runtime, the webapp accesses this as java:comp/UserTransaction
+        org.eclipse.jetty.plus.jndi.Transaction transactionMgr = new org.eclipse.jetty.plus.jndi.Transaction(new com.acme.MockUserTransaction());
+
+        //Define an env entry with webapp scope.
+        org.eclipse.jetty.plus.jndi.EnvEntry maxAmount = new org.eclipse.jetty.plus.jndi.EnvEntry (webapp, &quot;maxAmount&quot;, new Double(100), true);
+
+
+        // Register a  mock DataSource scoped to the webapp
+        org.eclipse.jetty.plus.jndi.Resource mydatasource = new org.eclipse.jetty.plus.jndi.Resource(webapp, &quot;jdbc/mydatasource&quot;, new com.acme.MockDataSource());
+
+        // Configure a LoginService
+        HashLoginService loginService = new HashLoginService();
+        loginService.setName(&quot;Test Realm&quot;);
+        loginService.setConfig(&quot;src/test/resources/realm.properties&quot;);
+        server.addBean(loginService);
+
+
+        server.start();
+        server.join();
+    }
+
+}</code></pre><p>在19行中的配置类，负责设置JNDI和添加<code>java:comp/env</code>。</p>
+<p>在20行我们添加了的类会确保注释会被检查到。</p>
+<p>在30，33和37行的JNDI资源中，我们可以使用<code>@Resource</code>注释去配置。</p>
+<p>根据下面的设置，一个使用注释的servlet，并且Jetty在webapp被部署的时候会遵循注释去创建这个类：</p>
+<pre><code>import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RunAs;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import javax.transaction.UserTransaction;
+
+/**
+ * AnnotationTest
+ *
+ * Use servlet 3.0 annotations from within Jetty.
+ *
+ * Also uses servlet 2.5 resource injection and lifecycle callbacks
+ */
+
+@RunAs(&quot;special&quot;)
+@WebServlet(urlPatterns = {&quot;/&quot;,&quot;/test/*&quot;}, name=&quot;AnnotationTest&quot;, initParams={@WebInitParam(name=&quot;fromAnnotation&quot;, value=&quot;xyz&quot;)})
+@DeclareRoles({&quot;user&quot;,&quot;client&quot;})
+public class AnnotationTest extends HttpServlet
+{
+    private DataSource myDS;
+
+    @Resource(mappedName=&quot;UserTransaction&quot;)
+    private UserTransaction myUserTransaction;
+
+    @Resource(mappedName=&quot;maxAmount&quot;)
+    private Double maxAmount;
+
+
+    @Resource(mappedName=&quot;jdbc/mydatasource&quot;)
+    public void setMyDatasource(DataSource ds)
+    {
+        myDS=ds;
+    }
+
+
+    @PostConstruct
+    private void myPostConstructMethod ()
+    {
+        System.err.println(&quot;PostConstruct called&quot;);
+    }
+
+
+    @PreDestroy
+    private void myPreDestroyMethod()
+    {
+        System.err.println(&quot;PreDestroy called&quot;);
+    }
+
+    public void init(ServletConfig config) throws ServletException
+    {
+        super.init(config);
+    }
+
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        doGet(request, response);
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        try
+        {
+            response.setContentType(&quot;text/html&quot;);
+            ServletOutputStream out = response.getOutputStream();
+            out.println(&quot;&lt;html&gt;&quot;);
+            out.println(&quot;&lt;body&gt;&quot;);
+            out.println(&quot;&lt;h1&gt;Results&lt;/h1&gt;&quot;);
+            out.println(myDS.toString());
+            out.println(&quot;&lt;br/&gt;&quot;);
+            out.println(maxAmount.toString());
+            out.println(&quot;&lt;/body&gt;&quot;);
+            out.println(&quot;&lt;/html&gt;&quot;);
+            out.flush();
+        }
+        catch (Exception e)
+        {
+            throw new ServletException(e);
+        }
+    }
+}</code></pre><blockquote>
+<p><em>译者文外补充：在Jetty中使用注释很重要的一点就是，Jetty只会扫描类路径下的.class文件，也即编译结果，以及项目lib中的jar文件，除此之外不会扫描其它地方。所以在使用编译器开发的时候，要详细设置好类路径。</em></p>
+</blockquote>
+<p><img src="https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/ServletAnnontationExp.png" alt="ServletAnnontationExp"></p>
+<blockquote>
+<p><em>译者文外补充：如上图所示，我使用idea配置，我的war路径为src路径，但是在IDEA开发中，编译结果是在out目录下的，所以我设置了一个额外的类路径，将编译出的类结果加入到classpath中，这样我就可以扫描这下面的class，也就能扫描其中的注释了。我框出来的日志表明确实是有class被扫描到了并且有耗时结果，如果耗时结果为0的话，肯定是类路径设置错了。</em></p>
+</blockquote>
+<p><a href="#top">回到顶部</a></p>
+<hr>
