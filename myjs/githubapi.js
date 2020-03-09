@@ -190,19 +190,6 @@ function get_article(number) {
     }, timeoutfunc)
 }
 
-function get_about() {
-    get_issues_by_label(about_label, function(re) {
-        setgohub('Go hub', re[0].html_url)
-        render_md(re[0].body)
-        $(md).animateCss('fadeIn')
-        showbbt()
-        $('#toc')[0].style.display = 'inline-block'
-        $('#toc').removeClass('myhide')
-        hideloading()
-        $(md).animateCss('fadeIn')
-    }, true)
-}
-
 function get_resume() {
     get_issues_by_label(resume_label, function(re) {
         if (re.length === 0) {
@@ -243,6 +230,7 @@ function get_friendlinked() {
         ditem.innerText = key.replace(/\n|\r\n/g, '')
         appendc(fldd, ditem)
     }
+
 }
 
 function get_issues_comments(number, issuesbody, func, timeout) {
