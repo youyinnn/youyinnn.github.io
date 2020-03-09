@@ -2,7 +2,6 @@ var docpanel = $('#docpanel')[0]
 var md = $('#md')[0]
 var toc = $('#sidetoc')[0]
 var toccontainer = $('#sidetoccontainer')[0]
-var loading = $('#loading')[0]
 var homepage = $('#homepage')[0]
 var scriptsearcher = $('#scriptsearcher')[0]
 var gohub = $('#gohub')[0]
@@ -62,14 +61,19 @@ $(function() {
     }
     settimeout()
     get_friendlinked()
-    let path = location.path
-    if (path === '') {
-        hideloading()
+    let pathname = location.pathname
+    if (pathname === '/') {
         hidesidetoc()
         rmclass(homepage, 'myhide')
         adclass(homepage, 'myshow')
         setgohub('My hub', 'https://github.com/' + username)
         showbbt()
+    } else if (pathname === '/about/') {
+        changepagetitle('about | youyinnn')
+        new_render_md()
+    } else if (pathname === '/resume/') {
+        changepagetitle('resume | youyinnn')
+        new_render_md()
     } else {
         // showloading()
         // let params = location.search.substring(1).split('&')
@@ -85,18 +89,12 @@ $(function() {
         // } else if (key === 'to' && value === 'article') {
         //     changepagetitle('article | youyinnn')
         //     get_article(params[1].split('=')[1])
-        // } else if (key === 'to' && value === 'about') {
-        //     changepagetitle('about | youyinnn')
-        //     get_about()
         // } else if (key === 'to' && value === 'todo') {
         //     changepagetitle('todo | youyinnn')
         //     get_todo()
         // } else if (key === 'to' && value === 'script') {
         //     changepagetitle('script | youyinnn')
         //     get_script()
-        // } else if (key === 'to' && value === 'resume') {
-        //     changepagetitle('resume | youyinnn')
-        //     get_resume()
         // } else if (key === 'xixi' && value === 'haha') {
         //     changepagetitle('egg | youyinnn')
         //     get_egg()

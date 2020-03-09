@@ -3,66 +3,68 @@ const path = require('path')
 const marked = require('marked')
 
 let postsPath = path.join(__dirname, '..', '_posts')
-let publicPath = path.join(__dirname, '..')
+let htmlPath = path.join(__dirname, '..', 'index.html')
+
+var html = undefined
 
 function file2file(set) {
-    let sourceStr = fs.readFileSync(set.sourceFile, {
+    let sourceStr = fs.readFileSync(set.sourceFilePath, {
         encoding: 'utf-8'
     })
-    sourceStr = set.handleFunc(sourceStr)
-    fs.writeFileSync(set.outputFile, sourceStr, {
+    fs.writeFileSync(set.outputFilePath, set.handleFunc(sourceStr), {
         encoding: 'utf-8'
     })
 }
 
-function md2htm(set) {
-    file2file({
-        sourceFile: set.mdFile,
-        outputFile: set.outputFile,
-        handleFunc: marked
+function md2html(sourceFilePath, outputFilePath) {
+    let sourceMdStr = fs.readFileSync(sourceFilePath, {
+        encoding: 'utf-8'
+    })
+    if (html === undefined) {
+        html = fs.readFileSync(htmlPath, {
+            encoding: 'utf-8'
+        })
+    }
+    let mdStr = marked(sourceMdStr, {
+        gfm: true,
+        breaks: true
+    })
+    fs.writeFileSync(outputFilePath, html.replace(/\{\{\% md \%\}\}/, mdStr), {
+        encoding: 'utf-8'
     })
 }
 
 // articles 2 htm
 let postsrs = fs.readdirSync(postsPath)
 for (pname of postsrs) {
-    md2htm({
-        mdFile: path.join(postsPath, pname),
-        outputFile: path.join(publicPath, 'articles', pname.split('.')[0] + '\.htm')
-    })
+    
 }
 
 let resourcesPath = path.join(__dirname, '..', 'resources')
 let websrcPath = path.join(__dirname, '..', '_websrc')
 
 // about
-md2htm({
-    mdFile: path.join(websrcPath, 'about.md'),
-    outputFile: path.join(__dirname, '..', 'about', 'index.html')
-})
+md2html(
+    path.join(websrcPath, 'about.md'),
+    path.join(__dirname, '..','about', 'index.html')
+)
 
 // resume
-md2htm({
-    mdFile: path.join(websrcPath, 'resume.md'),
-    outputFile: path.join(__dirname, '..', 'resume', 'index.html')
-})
+md2html(
+    path.join(websrcPath, 'resume.md'),
+    path.join(__dirname, '..','resume', 'index.html')
+)
 
 // scripts
-md2htm({
-    mdFile: path.join(websrcPath, 'scripts.md'),
-    outputFile: path.join(__dirname, '..', 'scripts', 'index.html')
-})
+
 
 // todos
-md2htm({
-    mdFile: path.join(websrcPath, 'todos.md'),
-    outputFile: path.join(__dirname, '..', 'todos', 'index.html')
-})
+
 
 // firends link
 file2file({
-    sourceFile: path.join(websrcPath, 'friendslink.json'),
-    outputFile: path.join(resourcesPath, 'friendslink.js'),
+    sourceFilePath: path.join(websrcPath, 'friendslink.json'),
+    outputFilePath: path.join(resourcesPath, 'friendslink.js'),
     handleFunc: function (src) {
         return `var friendslink = ${src}`
     }

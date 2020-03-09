@@ -131,18 +131,68 @@ function render_md(text) {
     setimg()
 }
 
+function new_render_md() {
+    $('#md').addClass('article')
+    let as = $('#md a')
+    for (let i = 0; i < as.length; i++) {
+        as[i].target = '_blank'
+    }
+    $('pre, pre code').each(function(i, block) {
+        hljs.highlightBlock(block)
+        hljs.lineNumbersBlock(block)
+    })
+    $('.reference-link').each(function() {
+        this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
+    })
+    $('.gifbtn').each(function() {
+        bindev(this, 'click', function() {
+            let noshow = this.getAttribute('show') === 'no'
+            if (noshow) {
+                $(this).after('<img id="' + this.innerText.substring(0, this.innerText.length - 4) + '" src="' + this.getAttribute('lk') + '"></img>')
+                this.setAttribute('show', 'yes')
+            } else {
+                $('#' + this.innerText.substring(0, this.innerText.length - 4)).remove()
+                this.setAttribute('show', 'no')
+            }
+        })
+    })
+    var $root = $('html, body')
+    $('.markdown-toc a').click(function() {
+        if ($(md).hasClass('panelup')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
+            }, 600)
+        }
+        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
+            }, 600)
+        }
+        if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
+            }, 600)
+        }
+    })
+    $('.katex').parent().addClass('katexp')
+    $('thead').each(function() {
+        let trs = $(this).next().find('tr')
+        let trl = $(trs[0]).find('td').length
+        let lasttr = $(trs[trs.length - 1])
+        if (lasttr.find('td').length !== trl) {
+            lasttr.append(c('td'))
+        }
+    })
+    setimg()
+    setTimeout(() => {
+        rmclass(md, 'myhide')
+        adclass(md, 'myshow')
+        $(md).animateCss('fadeIn')
+    }, 300);
+}
+
 function articlespage(pageto) {
     docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
-}
-
-function hideloading() {
-    rmclass(loading, 'myshow')
-    adclass(loading, 'myhide')
-}
-
-function showloading() {
-    rmclass(loading, 'myhide')
-    adclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
@@ -341,7 +391,7 @@ function articlesmetadatahandle(articlemetadata) {
                     appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
                 }
             }
-    
+
             // handle cates panel
             let haved = false
             for (let j = 0; j < all_cates.length; j++) {
@@ -906,9 +956,9 @@ function setarrow() {
             e.clearSelection();
         })
     })
-    arrows.mouseover(function () {
+    arrows.mouseover(function() {
         $(this).find('.panchorlink').css('opacity', '1')
-    }).mouseout(function (){  
+    }).mouseout(function() {
         $(this).find('.panchorlink').css('opacity', '0')
     })
     $(window).scroll(function() {
