@@ -1,0 +1,278 @@
+<hr>
+<p>title: Java运算符的阴谋论
+categories:</p>
+<ul>
+<li>note
+comments: true
+tags:</li>
+<li>java</li>
+<li>operator
+date: 2018-6-3 21:28:00</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>小心点，一不小心你就栽跟头了 :ghost:</p>
+<p>{% endcq%}</p>
+<h3 id="你画我猜">你画我猜</h3>
+<p>下面程序输出多少？</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    int i = 2;
+    i += i -= i *= i;
+    System.out.println(i);
+}</code></pre>
+<p>答案：0</p>
+<h3 id="为什么说阴谋论？">为什么说阴谋论？</h3>
+<ul>
+<li>你知道Java里有哪几种运算符嘛？</li>
+<li>你知道<code>-=</code>是算数运算符还是赋值运算符嘛？</li>
+<li>你知道是<code>|</code>和<code>||</code>到底哪个才是短路嘛？</li>
+<li>你知道怎么不用<code>*</code>或<code>/</code>做2的倍数的乘除运算嘛？</li>
+<li>你知道<code>&gt;&gt;</code>和<code>&gt;&gt;&gt;</code>有什么区别嘛？</li>
+<li>你知道<code>-1 &gt;&gt;&gt; 1 = 2147483647</code>怎么来的嘛？</li>
+<li>你知道<code>&lt;&lt;&lt;</code>代表什么意思嘛？</li>
+<li>你知道还有一种运算符它里面全是字母没有符号嘛？</li>
+<li>上面的问题你如果有一大半不会，那你还不觉得Java运算符里有阴谋吗？</li>
+</ul>
+<h3 id="运算符种类">运算符种类</h3>
+<h4 id="算数运算符">算数运算符</h4>
+<p>没得说，加减乘除模，+、-、*、/、%</p>
+<h4 id="一元运算符">一元运算符</h4>
+<ul>
+<li><strong>-，</strong>负号运算符</li>
+<li><strong>+，</strong>正号运算符（还有这玩意？你不知道吧？）</li>
+<li><strong>++，</strong>自加运算符，注意前后</li>
+<li><strong>--，</strong>自减运算符，注意前后</li>
+<li><strong>!，</strong>非运算符，用于逻辑语句改是非</li>
+</ul>
+<h4 id="赋值运算符">赋值运算符</h4>
+<ul>
+<li><strong>=，</strong>就这一个</li>
+</ul>
+<h4 id="复合赋值运算符">复合赋值运算符</h4>
+<ul>
+<li><strong>+=</strong>, for adding left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>-=</strong>, for subtracting left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>*=</strong>, for multiplying left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>/=</strong>, for dividing left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>^=</strong>, for raising power of left operand to right operand and assigning it to variable on the left.</li>
+<li><strong>%=</strong>, for assigning modulo of left operand with right operand and then assigning it to variable on the left.</li>
+</ul>
+<p>都不解释了</p>
+<h4 id="关系运算符">关系运算符</h4>
+<ul>
+<li><strong>== , Equal to :</strong> returns true of left hand side is equal to right hand side.</li>
+<li><strong>!= , Not Equal to :</strong> returns true of left hand side is not equal to right hand side.</li>
+<li><strong>&lt; , less than :</strong> returns true of left hand side is less than right hand side.</li>
+<li><strong>&lt;= , less than or equal to :</strong> returns true of left hand side is less than or equal to right hand side.</li>
+<li><strong>&gt; , Greater than :</strong> returns true of left hand side is greater than right hand side.</li>
+<li><strong>&gt;= , Greater than or equal to:</strong> returns true of left hand side is greater than or equal to right hand side.</li>
+</ul>
+<h4 id="逻辑运算符">逻辑运算符</h4>
+<ul>
+<li>*<em>&amp;&amp; , *</em>短路与</li>
+<li><strong>|| ,</strong>短路或</li>
+<li><strong>&amp;，</strong>非短路与</li>
+<li><strong>|，</strong>非短路或</li>
+</ul>
+<h4 id="三元运算符">三元运算符</h4>
+<pre><code class="language-java">int i = 1 &gt; 2 ? 1 : 2;</code></pre>
+<h4 id="位运算符">位运算符</h4>
+<ul>
+<li><strong>&amp;，</strong>二进制和运算</li>
+<li><strong>|，</strong>二进制或运算</li>
+<li><strong>^，</strong>二进制异或预算</li>
+<li><strong>~，</strong>二进制逆运算</li>
+</ul>
+<h4 id="位移运算符以及二进制补码位移规则">位移运算符以及二进制补码位移规则</h4>
+<ul>
+<li><strong>&lt;&lt; ,</strong>有符号左移，<strong>丢弃最高位，低位补0</strong> </li>
+<li><strong>&gt;&gt; , **有符号右移，</strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃** </li>
+<li><strong>&gt;&gt;&gt; ,</strong> 无符号左移，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </li>
+</ul>
+<pre><code class="language-java">@Test
+public void testShift(){
+    int a = 8;
+    int b = 7;
+    int c = -1;
+    System.out.println(a &gt;&gt; 1);
+    System.out.println(a &gt;&gt; 2);
+    System.out.println(b &lt;&lt; 1);
+    System.out.println(b &lt;&lt; 2);
+    System.out.println(c &gt;&gt; 1);
+    System.out.println(c &gt;&gt;&gt; 1);
+    System.out.println(c &gt;&gt;&gt; 2);
+}</code></pre>
+<pre><code class="language-console">4 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0100 -&gt; 8 / 2
+2 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0010 -&gt; 8 / 4
+14 // 0000 ... 0000 0111 -&gt; 0000 ... 0000 1110 -&gt; 7 * 2
+28 // 0000 ... 0000 0111 -&gt; 0000 ... 0001 1100 -&gt; 7 * 4
+-1 
+2147483647
+1073741823</code></pre>
+<p>上面的<strong>负数计算</strong>可能看不懂，我们先复习一下数的二进制表示</p>
+<p>以有符号数来说，数的二进制表示有<strong>原码表示法</strong>、<strong>补码表示法</strong>、<strong>移码表示法</strong>我们观察以下码表</p>
+<table>
+<thead>
+<tr>
+<th align="center">真值x（十进制）</th>
+<th align="center">真值x（二进制）</th>
+<th align="center">原码</th>
+<th align="center">反码（过渡）</th>
+<th align="center">补码</th>
+<th align="center">移码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-127</td>
+<td align="center">- 0111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td align="center">- 0000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 111 1110</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+</tr>
+<tr>
+<td align="center">+0</td>
+<td align="center">+ 0000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-0</td>
+<td align="center">- 0000 0000</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+1</td>
+<td align="center">+ 0000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+127</td>
+<td align="center">+ 0111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+</tr>
+</tbody></table>
+<p>所以对于<strong>-1</strong>，Java中的的int长度为32，一步步来</p>
+<p><strong>二进制真值表示：</strong>- 0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p><strong>二进制原码表示： ** **1</strong>000 0000 0000 0000 0000 0000 0000 0001</p>
+<p><strong>二进制反码表示： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1110</p>
+<p><strong>二进制补码表示： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>我们始终都得记住这一点，<strong>计算机中的负数都是用二进制补码存储的</strong>，所以负数的二进制运算也是基于补码来算的</p>
+<p><strong>所以：</strong></p>
+<ul>
+<li><p>当我们运算：<strong>-1 &gt;&gt; 1</strong> 的时候，<strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p><strong>得结果： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>去掉尾部多出来的1之后，整个补码表示的负数还是<strong>-1</strong></p>
+</li>
+<li><p>当我们运算：<strong>-1 &gt;&gt;&gt; 1</strong> 的时候，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **0</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^31 - 1 = 2147483648 - 1 = 2147483647</strong> 去计算</p>
+<p><strong>2147483647的补码正是0111 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：<strong>-1 &gt;&gt;&gt; 2</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **0</strong>011 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">11</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>011 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^30 - 1 = 1073741824 - 1 = 1073741823</strong> 去计算</p>
+<p><strong>1073741823的补码正是0011 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：<strong>-9 &gt;&gt;&gt; 4</strong></p>
+<p><strong>有原码： ** **1</strong>000 0000 0000 0000 0000 0000 0000 1001</p>
+<p><strong>有反码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 0110</p>
+<p><strong>有补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 0111</p>
+<p><strong>新补码： ** **0</strong>000 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">0111</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>000 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^28 - 1 = 268435456 - 1 = 268435455</strong> 去计算</p>
+<p><strong>268435455的补码正是0000 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+</ul>
+<h4 id="类型判断运算符">类型判断运算符</h4>
+<p>使用格式：</p>
+<pre><code class="language-java">    object instanceof Class/SubClass/Interface</code></pre>
+<h4 id="位运位移运算的使用场景">位运/位移运算的使用场景</h4>
+<h5 id="2的次幂快速乘除运算">2的次幂快速乘除运算</h5>
+<p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
+<h5 id="快速模2奇偶判断（不要再只会x--2--0啦）">快速模2/奇偶判断（不要再只会x % 2 == 0啦）</h5>
+<p>任意数与1取位与，结果为1则是奇数</p>
+<pre><code class="language-java">// x &amp; 1 等价于 x % 2
+System.out.println(3 &amp; 1); //1
+System.out.println(2 &amp; 1); //0</code></pre>
+<h5 id="快速两数交换不用中间值">快速两数交换/不用中间值</h5>
+<pre><code class="language-java">int a = 999;
+int b = 888;
+a ^= b;
+b ^= a;
+a ^= b;
+System.out.println(a); // 888
+System.out.println(b); // 999</code></pre>
+<h5 id="加密解密">加密解密</h5>
+<pre><code class="language-java">@Test
+public void testEncript(){
+    int plaintext = 0b00001111; // 0000 1111
+    int key =       0b01010101; // 0101 0101
+
+    //encription
+    int cipher = plaintext ^ key; // 0101 1010
+
+    //decription
+    int plaintext2 = cipher ^ key; // 0000 1111
+}</code></pre>
+<h5 id="bitmask">BitMask</h5>
+<p>什么是BitMask？一般翻译为<strong>位掩码</strong>，是一种以高效、省空间的方式对<strong>状态（status）</strong>进行<strong>设置（set）、清零（clear）、检查（check）</strong>的位运算运用。</p>
+<p>比如我们在业务中<strong>某条记录</strong>需要记录16个<strong>A业务状态</strong>，也就是需要4个bit位来记录我们的<strong>A业务状态</strong>，假设我们这条记录还有其他<strong>业务的状态</strong>，我们选择记录的第<strong>5-8位</strong>来记录<strong>A业务状态</strong>，则可以假设有如下记录：</p>
+<p><strong>record：</strong>1001 <strong>0111</strong> 0010</p>
+<p>则中间的<strong>0111</strong>才是我们真正想要操作的记录位，我们可以用<strong>BitMask</strong>来操作：</p>
+<ul>
+<li>设置<strong>BitMask：</strong>0x0<strong>F</strong>0 -&gt; 0000 <strong>1111</strong> 0000</li>
+<li>对于<strong>检查（check）</strong>：<strong>record &amp; mask</strong></li>
+<li>对于<strong>清零（clear）</strong>：<strong>record &amp; ~mask</strong></li>
+<li>对于<strong>设置（set）</strong>：<strong>record &amp; ~mask | status binary code</strong></li>
+</ul>
+<pre><code class="language-java">@Test
+public void testBitMask(){
+    // Mask: 0000 1111 0000 -&gt; 0x0F0 -&gt; 240
+    int mask = 0x0F0;
+    // Record: 0111 0011 1111 -&gt; 0x73F -&gt; 1855
+    int record = 0x73F;
+    int status;
+    // check
+    status = record &amp; mask;
+    System.out.println(status); // 48 -&gt; 0000 0011 0000
+    // clear
+    status = record &amp; ~mask;
+    System.out.println(status); // 1807 -&gt; 0111 0000 1111
+    // set
+    status = record &amp; ~mask | 0x060;
+    System.out.println(status); // 1903 -&gt; 0111 0110 1111
+}</code></pre>
+<h5 id="bitmap算法">BitMap算法</h5>
+<p>貌似是一个很强的东西，待更新</p>
+<hr>
+<p><strong>参考</strong></p>
+<p><a href="https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators">https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators</a></p>
+<p><a href="http://www.52ij.com/jishu/102.html">http://www.52ij.com/jishu/102.html</a></p>
+<p><a href="https://segmentfault.com/q/1010000005850046">https://segmentfault.com/q/1010000005850046</a></p>
+<p><a href="https://blog.csdn.net/tangxiaoyin/article/details/80123142">https://blog.csdn.net/tangxiaoyin/article/details/80123142</a></p>

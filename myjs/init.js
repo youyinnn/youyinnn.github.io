@@ -62,8 +62,8 @@ $(function() {
     }
     settimeout()
     get_friendlinked()
-    let search = location.search
-    if (search === '') {
+    let path = location.path
+    if (path === '') {
         hideloading()
         hidesidetoc()
         rmclass(homepage, 'myhide')
@@ -71,39 +71,39 @@ $(function() {
         setgohub('My hub', 'https://github.com/' + username)
         showbbt()
     } else {
-        showloading()
-        let params = location.search.substring(1).split('&')
-        let kv = params[0].split('=')
-        let key = kv[0]
-        let value = kv[1]
-        if (key === 'to' && value === 'articles') {
-            changepagetitle('articles | youyinnn')
-            get_articles()
-            let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
-            index = client.initIndex('blog');
-            checkcache()
-        } else if (key === 'to' && value === 'article') {
-            changepagetitle('article | youyinnn')
-            get_article(params[1].split('=')[1])
-        } else if (key === 'to' && value === 'about') {
-            changepagetitle('about | youyinnn')
-            get_about()
-        } else if (key === 'to' && value === 'todo') {
-            changepagetitle('todo | youyinnn')
-            get_todo()
-        } else if (key === 'to' && value === 'script') {
-            changepagetitle('script | youyinnn')
-            get_script()
-        } else if (key === 'to' && value === 'resume') {
-            changepagetitle('resume | youyinnn')
-            get_resume()
-        } else if (key === 'xixi' && value === 'haha') {
-            changepagetitle('egg | youyinnn')
-            get_egg()
-        } else {
-            alert('No such page.')
-            location = '/'
-        }
+        // showloading()
+        // let params = location.search.substring(1).split('&')
+        // let kv = params[0].split('=')
+        // let key = kv[0]
+        // let value = kv[1]
+        // if (key === 'to' && value === 'articles') {
+        //     changepagetitle('articles | youyinnn')
+        //     get_articles()
+        //     let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
+        //     index = client.initIndex('blog');
+        //     checkcache()
+        // } else if (key === 'to' && value === 'article') {
+        //     changepagetitle('article | youyinnn')
+        //     get_article(params[1].split('=')[1])
+        // } else if (key === 'to' && value === 'about') {
+        //     changepagetitle('about | youyinnn')
+        //     get_about()
+        // } else if (key === 'to' && value === 'todo') {
+        //     changepagetitle('todo | youyinnn')
+        //     get_todo()
+        // } else if (key === 'to' && value === 'script') {
+        //     changepagetitle('script | youyinnn')
+        //     get_script()
+        // } else if (key === 'to' && value === 'resume') {
+        //     changepagetitle('resume | youyinnn')
+        //     get_resume()
+        // } else if (key === 'xixi' && value === 'haha') {
+        //     changepagetitle('egg | youyinnn')
+        //     get_egg()
+        // } else {
+        //     alert('No such page.')
+        //     location = '/'
+        // }
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')

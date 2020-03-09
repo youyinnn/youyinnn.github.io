@@ -1,0 +1,165 @@
+<hr>
+<p>title: Docker Swarm&amp;ClusterSetup
+categories:</p>
+<ul>
+<li>note</li>
+<li>docker
+tags:</li>
+<li>docker</li>
+<li>cluster</li>
+<li>swarm
+date: 2018-11-28 21:06:03
+series: docker</li>
+</ul>
+<hr>
+<h3 id="introduction">Introduction</h3>
+<p>In the last post, we discussed the relationship between Application and Service. </p>
+<p>So they say: <strong>Services are really just &quot;Containers in Production&quot;.</strong></p>
+<p>And when we deploy a service, we use <code>docker swarm init</code> to prepare for it.</p>
+<p>Now let&#39;s learn what is swarm and how to setup a cluster with <strong>docker-machine</strong>.</p>
+<h3 id="swarm">Swarm</h3>
+<p><strong>A swarm is a group of machines that are running Docker and joined into a cluster.</strong></p>
+<p>After that has happened, you continue to run the Docker commands you’re used to, but now they are executed on a cluster by a <strong>swarm manager</strong>. The machines in a swarm can be <strong>physical or virtual</strong>. After joining a swarm, they are referred to as <strong>nodes</strong>.</p>
+<p>Swarm managers can use several <strong>strategies</strong> to run containers, such as :</p>
+<ul>
+<li><p>“emptiest node” </p>
+<p>  which fills the least utilized machines with containers.</p>
+</li>
+<li><p>“global”</p>
+<p>  which ensures that each machine gets exactly one instance of the specified container. </p>
+</li>
+</ul>
+<p>You instruct the swarm manager to use these strategies <strong>in the Compose file</strong>, just like the one you have already been using.</p>
+<h4 id="swarm-manager">Swarm manager</h4>
+<p>Swarm managers are the only machines in a swarm that can execute your commands, or authorize other machines to join the swarm as <strong>workers</strong>. Workers are just there to provide capacity and do not have the authority to tell any other machine what it can and cannot do.</p>
+<pre><code>Relationship in swarm:
+
+    1.each virtual/physical machine as a &quot;node&quot; ni a swarm.
+                            (node)            (node)            (node)
+                               -------            -------            -------
+      2.&quot;swarm init&quot; ---&gt;      |  A  |            |  B  |            |  C  |
+       then A became          -------            -------            -------
+       manager             &quot;swarm manager&quot;     &quot;worker&quot;        &quot;worker&quot;
+
+    3.other nodes can &quot;join&quot; the swarm and became &quot;worker&quot; to work for the &quot;manager&quot;,
+    &quot;manager&quot; certainly can manage it&#39;s &quot;workers&quot;</code></pre><h3 id="setup-your-swarm-with-virtual-machines">Setup your swarm with virtual machines</h3>
+<blockquote>
+<p><strong>:warning:Notice:</strong></p>
+<p>If your machine is a cloud server such as &quot;Tencent Cloud Server&quot;, you might couldn&#39;t able to create a vm on it.Because your machine is also a vm too ! There are some hardware options should support from a phycial machine.</p>
+<p>But you can still follow the post and practice with it, on this section, you should focus on the concept of swarm and knowning how to create vms with <code>docker-machine</code>.</p>
+</blockquote>
+<p>So, how can we setup a swarm with multiple machine for just practice ? Several real machine ? No, you could create some virtual machine by <code>docker-machine</code>. Then use the as a node of swarm.</p>
+<h4 id="install-virtualbox">Install VirtualBox</h4>
+<p>You need a hypervisor that can create virtual machines (VMs), so <a href="https://www.virtualbox.org/wiki/Downloads">install Oracle VirtualBox</a> for your machine’s OS.</p>
+<p>Some RPM base:</p>
+<ul>
+<li><a href="http://rpmfind.net/linux/RPM/index.html">rpmfind</a></li>
+<li><a href="https://pkgs.org/">pkgs</a></li>
+<li><a href="http://rpm.pbone.net/">pbone</a></li>
+</ul>
+<h4 id="install-docker-machine">Install docker-machine</h4>
+<blockquote>
+<p><strong>Notice:</strong></p>
+<p><strong>Never ever intall docker on WIN10 system !!! Because the <code>Hyper-V</code> that docker need will just weaken your machine&#39;s performance at some ways !!! Such as I found my LOL&#39;s fps rate was suddenly fall down to 58-61, and it usually was 100+ !!! And when I uninstall the docker on WIN10 then turn off the <code>Hyper-V</code> on windows functional options, the fps problem was solved !!!</strong> </p>
+</blockquote>
+<ol>
+<li><p>download</p>
+<pre><code class="language-bash"> $ base=https://github.com/docker/machine/releases/download/v0.16.0 &amp;&amp; wget $base/docker-machine-$(uname -s)-$(uname -m) &gt;/tmp/docker-machine</code></pre>
+</li>
+<li><p>install</p>
+<pre><code class="language-bash"> $ install /tmp/docker-machine /usr/local/bin/docker-machine</code></pre>
+</li>
+<li><p>verify</p>
+<pre><code class="language-bash"> $ docker-machine
+ Usage: docker-machine [OPTIONS] COMMAND [arg...]
+ Create and manage machines running Docker.
+ Version: 0.16.0, build 702c267f
+ ...</code></pre>
+</li>
+</ol>
+<p>Reference: <a href="https://docs.docker.com/machine/install-machine/#install-machine-directly">https://docs.docker.com/machine/install-machine/#install-machine-directly</a></p>
+<h4 id="create-virtual-machines">Create virtual machines</h4>
+<p>Now, create a couple of VMs using <code>docker-machine</code>, using the VirtualBox driver:</p>
+<pre><code class="language-bash">$ docker-machine create --driver virtualbox myvm1
+$ docker-machine create --driver virtualbox myvm2</code></pre>
+<p>You now have two VMs created, named <code>myvm1</code> and <code>myvm2</code>.</p>
+<p>Use this command to list the machines and get their IP addresses.</p>
+<pre><code class="language-bash">$ docker-machine ls</code></pre>
+<p>Here is example output from this command.</p>
+<pre><code class="language-bash">$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
+myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce</code></pre>
+<h4 id="initalize-the-swarm-and-add-nodes">Initalize the swarm and add nodes</h4>
+<p>The first machine acts as the manager, which executes management commands and authenticates workers to join the swarm, and the second is a worker.</p>
+<p>You can send commands to your VMs using <code>docker-machine ssh</code>. Instruct <code>myvm1</code> to become a swarm manager with <code>docker swarm init</code> and look for output like this:</p>
+<pre><code class="language-bash">$ docker-machine ssh myvm1 &quot;docker swarm init --advertise-addr &lt;myvm1 ip&gt;&quot;
+Swarm initialized: current node &lt;node ID&gt; is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+  docker swarm join \
+  --token &lt;token&gt; \
+  &lt;myvm ip&gt;:&lt;port&gt;
+
+To add a manager to this swarm, run &#39;docker swarm join-token manager&#39; and follow the instructions.</code></pre>
+<blockquote>
+<h5 id="ports-2377-and-2376">Ports 2377 and 2376</h5>
+<p>Always run <code>docker swarm init</code> and <code>docker swarm join</code> with port 2377 (the swarm management port), or no port at all and let it take the default.</p>
+<p>The machine IP addresses returned by <code>docker-machine ls</code> include port 2376, which is the Docker daemon port. Do not use this port or <a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2">you may experience errors</a>.</p>
+</blockquote>
+<blockquote>
+<h5 id="having-trouble-using-ssh-try-the---native-ssh-flag">Having trouble using SSH? Try the --native-ssh flag</h5>
+<p>Docker Machine has <a href="https://docs.docker.com/machine/reference/ssh/#different-types-of-ssh">the option to let you use your own system’s SSH</a>, if for some reason you’re having trouble sending commands to your Swarm manager. Just specify the <code>--native-ssh</code> flag when invoking the <code>ssh</code> command:</p>
+<pre><code>docker-machine --native-ssh ssh myvm1 ...</code></pre></blockquote>
+<p>As you can see, the response to <code>docker swarm init</code> contains a pre-configured <code>docker swarm join</code> command for you to run on any nodes you want to add. Copy this command, and send it to <code>myvm2</code> via <code>docker-machine ssh</code> to have <code>myvm2</code> join your new swarm as a worker:</p>
+<pre><code>$ docker-machine ssh myvm2 &quot;docker swarm join \
+--token &lt;token&gt; \
+&lt;ip&gt;:2377&quot;
+
+This node joined a swarm as a worker.</code></pre><p>Congratulations, you have created your first swarm!</p>
+<p>Run <code>docker node ls</code> on the manager to view the nodes in this swarm:</p>
+<pre><code>$ docker-machine ssh myvm1 &quot;docker node ls&quot;
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
+rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader</code></pre><blockquote>
+<h5 id="leaving-a-swarm">Leaving a swarm</h5>
+<p>If you want to start over, you can run <code>docker swarm leave</code> from each node.</p>
+</blockquote>
+<h3 id="deploy-your-app-on-the-swarm-cluster">Deploy your app on the swarm cluster</h3>
+<p><strong>The hard part is over.</strong> Now you just repeat the process you used in <a href="https://docs.docker.com/get-started/part3/">part 3</a> to deploy on your new swarm. </p>
+<p><strong>Just remember that only swarm managers like <code>myvm1</code> execute Docker commands; workers are just for capacity.</strong></p>
+<h4 id="two-ways-to-talk-to-your-vms">Two ways to talk to your vms</h4>
+<p>So far, you’ve been wrapping Docker commands in <code>docker-machine ssh</code> to talk to the VMs. </p>
+<p>Another option is to run <code>docker-machine env &lt;machine&gt;</code> to get and run a command that configures your current shell to talk to the Docker daemon on the VM. This method works better for the next step because it allows you to use your local <code>docker-compose.yml</code> file to deploy the app “remotely” without having to copy it anywhere.</p>
+<p>Type <code>docker-machine env myvm1</code>, then copy-paste and run the command provided as the last line of the output to configure your shell to talk to <code>myvm1</code>, the swarm manager.</p>
+<p>The commands to configure your shell differ depending on whether you are Mac, Linux, or Windows, so examples of each are shown on the tabs below.</p>
+<p>To more details, refer to: <a href="https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager</a></p>
+<h4 id="deploy">Deploy</h4>
+<pre><code class="language-bash"># send compose file to manager node with scp
+$ docker-machine scp docker-compose.yml myvm1:~                                             
+
+# deploy it
+$ docker-machine ssh myvm1 &quot;docker stack deploy -c docker-compose.yml getstartedlab&quot;  
+Creating network getstartedlab_webnet
+Creating service getstartedlab_web
+
+# get it&#39;s info
+$ docker-machine ssh myvm1 &quot;docker stack ps getstartedlab&quot;
+ID                  NAME                  IMAGE                              NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS              
+kjeymj6rp0y8        getstartedlab_web.1   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
+dehkjrmu0fxn        getstartedlab_web.2   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
+acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
+36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
+q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          </code></pre>
+<h3 id="accessing-your-cluster">Accessing your cluster</h3>
+<p>You can access your app from the IP address of <strong>either</strong> <code>myvm1</code> or <code>myvm2</code>.</p>
+<p>The network you created is shared between them and load-balancing. Run <code>docker-machine ls</code> to get your VMs’ IP addresses and visit either of them on a browser, hitting refresh (or just <code>curl</code> them).</p>
+<p>There are five possible container IDs all cycling by randomly, demonstrating the load-balancing.</p>
+<p><strong>The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh</strong>. </p>
+<p>This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called <code>my-web</code> published at port <code>8080</code> on a three-node swarm would look:</p>
+<p><img src="https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png" alt="ingress-routing-mesh"></p>
+<h3 id="enough-for-now">Enough for now</h3>
+<p>So far you can do a lot of things with docker-machine and knowing how to setup a docker swarm with what you&#39;ve learn.</p>
+<p>There are also some options you might have check out such as cleanup/reboot/reset.</p>
+<p>Please refer to: <a href="https://docs.docker.com/get-started/part4/#cleanup-and-reboot">https://docs.docker.com/get-started/part4/#cleanup-and-reboot</a></p>

@@ -6,19 +6,19 @@ $(function() {
         location = '/' + '?to=articles'
     })
     $('#scriptbut').bind('click', function() {
-        location = '/' + '?to=script'
+        location = '/' + 'scripts'
     })
     $('#todobut').bind('click', function() {
-        location = '/' + '?to=todo'
+        location = '/' + 'todos'
     })
     $('#resumebut').bind('click', function() {
-        location = '/' + '?to=resume'
+        location = '/' + 'resume'
     })
     $('#egg').bind('click', function() {
         location = '/' + '?xixi=haha'
     })
     $('#showmore').bind('click', function() {
-        location = '/' + '?to=about'
+        location = '/' + 'about'
     })
     $('#toarticles').bind('click', function() {
         location = '/' + '?to=articles'

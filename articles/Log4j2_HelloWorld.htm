@@ -1,0 +1,130 @@
+<hr>
+<p>title: Log4j2_HelloWorld
+tags:</p>
+<ul>
+<li>log4j2</li>
+<li>learning
+categories:</li>
+<li>note</li>
+<li>toolslearning</li>
+<li>log4j2
+comments: true
+abbrlink: 6cdb73
+date: 2017-11-17 16:13:21
+series: Log4j2</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>Lo4j2是啥就不解释了，之前无论是使用log4j还是log4j2，同样只是简单的各种百度然后复制粘贴没有系统的总结一下，今天把一个小小的Ajax的测试程序放服务器上面都不知道怎么查错，然后想写一下log来看看哪错了吧，发现还是不会独立配置log4j，于是想总结一波。基本的思路是总结官方文档和官方推荐的中文文档，尽量简洁表达出原理以及应用。</p>
+<p>{% endcq %}</p>
+<!-- more -->
+
+<hr>
+<h3 id="准备工作">准备工作</h3>
+<h4 id="maven依赖">Maven依赖</h4>
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
+    &lt;version&gt;2.9.1&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+    &lt;version&gt;2.9.1&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+<p>认准这俩依赖</p>
+<h4 id="默认配置文件如果配置文件缺省的情况下，也会是这样的配置">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4>
+<p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration status=&quot;OFF&quot;&gt;
+    &lt;appenders&gt;
+        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+            &lt;PatternLayout pattern=&quot;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;/&gt;
+        &lt;/Console&gt;
+    &lt;/appenders&gt;
+    &lt;loggers&gt;
+        &lt;root level=&quot;error&quot;&gt;
+            &lt;appender-ref ref=&quot;Console&quot;/&gt;
+        &lt;/root&gt;
+    &lt;/loggers&gt;
+&lt;/configuration&gt;</code></pre>
+<h4 id="helloword">HelloWord</h4>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+        logger.trace(&quot;trace level&quot;);
+        logger.debug(&quot;debug level&quot;);
+        logger.info(&quot;info level&quot;);
+        logger.warn(&quot;warn level&quot;);
+        logger.error(&quot;error level&quot;);
+        logger.fatal(&quot;fatal level&quot;);
+    }
+}</code></pre>
+<hr>
+<h3 id="运行helloworld">运行HelloWorld</h3>
+<p>运行上面的代码之后会出现如下的log</p>
+<pre><code class="language-cmd">13:34:41.070 [main] ERROR mylog - error level
+13:34:41.072 [main] FATAL mylog - fatal level</code></pre>
+<p>你会很奇怪，为什么我们写了这么多log，却只出现两行log信息，我们去看看我们的配置文件：</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration status=&quot;OFF&quot;&gt;
+  &lt;!-- 这里定义了一个appenders --&gt;
+    &lt;appenders&gt;
+      &lt;!-- appenders里面配置了一个Console --&gt;
+        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+          &lt;!-- 这是输出格式 --&gt;
+            &lt;PatternLayout pattern=&quot;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;/&gt;
+        &lt;/Console&gt;
+    &lt;/appenders&gt;
+
+    &lt;!-- 然后就是定义loggers --&gt;
+    &lt;loggers&gt;
+      &lt;!-- 这是根logger 是所有自定义logger的父logger --&gt;
+        &lt;root level=&quot;error&quot;&gt;
+            &lt;appender-ref ref=&quot;Console&quot;/&gt;
+        &lt;/root&gt;
+    &lt;/loggers&gt;
+&lt;/configuration&gt;</code></pre>
+<p>首先看我们的Java代码：</p>
+<pre><code class="language-java">Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);</code></pre>
+<p>这一行是获取我们在配置文件中配置好的root logger，然后使用这个logger去打印了6条日志。</p>
+<p>然后解释一下单词含义（my style~）：</p>
+<blockquote>
+<p>Appender：
+<em>n.</em> 附着器,输出目的地,输出源；</p>
+</blockquote>
+<p>它的子元素Console，代表的是控制台，所以很明显就是，我们配置了一个以控制台作为输出源的输出源；并将这个输出源命名为<code>Console</code>，然后配置了这个控制台输出源的输出Pattern。</p>
+<p>然后我们在<code>loggers</code>里面配置了一个logger：<code>root</code>，这个节点代表所有logger的根logger，然后log级别定为<code>error</code>，意思是<strong>只输出error级别以下包括error的日志信息</strong>，之后这个根log的输出源引用的是<code>name</code>值为<code>Console</code>的Appender，也即我们配置的唯一一个Appender。</p>
+<p>那么error以下是哪些信息？</p>
+<blockquote>
+<hr>
+<p>log4j规定了默认的几个级别：<code>trace &lt; debug &lt; info &lt; warn &lt; error &lt; fatal</code>等。这里要说明一下：</p>
+<ol>
+<li><p>级别之间是包含的关系，意思是如果你设置日志级别是trace，则大于等于这个级别的日志都会输出。</p>
+</li>
+<li><p>基本上默认的级别没多大区别，就是一个默认的设定。你可以通过它的API自己定义级别。你也可以随意调用这些方法，不过你要在配置文件里面好好处理了，否则就起不到日志的作用了，而且也不易读，相当于一个规范，你要完全定义一套也可以，不用没多大必要。</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><p>trace： 是追踪，就是程序推进以下，你就可以写个trace输出，所以trace应该会特别多，不过没关系，我们可以设置最低日志级别不让他输出。</p>
+</li>
+<li><p>debug： 调试么，我一般就只用这个作为最低级别，trace压根不用。是在没办法就用eclipse或者idea的debug功能就好了么。</p>
+</li>
+<li><p>info： 输出一下你感兴趣的或者重要的信息，这个用的最多了。</p>
+</li>
+<li><p>warn： 有些信息不是错误信息，但是也要给程序员的一些提示，类似于eclipse中代码的验证不是有error 和warn。</p>
+</li>
+<li><p>error： 错误信息。用的也比较多。</p>
+</li>
+<li><p>fatal： 级别比较高了。重大错误，这种级别你可以直接停止程序了，是不应该出现的错误么！不用那么紧张，其实就是一个程度的问题。</p>
+</li>
+</ul>
+<hr>
+</blockquote>
+<p>到这里我们就知道，为什么会只打印两条log了，打印的两条log分别是：error级别以及fatal级别的log。</p>
+<hr>
+<p><em>参考：<a href="http://www.cnblogs.com/leo-lsw/p/log4j2tutorial.html">http://www.cnblogs.com/leo-lsw/p/log4j2tutorial.html</a></em></p>
+<p><em>参考：<a href="https://my.oschina.net/xianggao/blog/523401">https://my.oschina.net/xianggao/blog/523401</a></em></p>

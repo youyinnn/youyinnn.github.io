@@ -1,0 +1,64 @@
+<hr>
+<p>title: Log4j2_Lookups
+categories:</p>
+<ul>
+<li>note</li>
+<li>toolslearning</li>
+<li>log4j2
+comments: true
+tags:</li>
+<li>log4j2</li>
+<li>learning
+abbrlink: 244cf139
+date: 2017-12-09 15:28:15
+series: Log4j2</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>Lookups：让你的配置更灵活</p>
+<p>{% endcq %}</p>
+<!-- more -->
+
+<h3 id="lookups">Lookups</h3>
+<p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
+<h4 id="contextmap-lookup">ContextMap Lookup</h4>
+<p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
+<p><strong>引用方法：<code>$${ctx:KEY}</code></strong></p>
+<p>代码中写：</p>
+<pre><code class="language-java">ThreadContext.put(&quot;aaa&quot;, &quot;bbb&quot;);</code></pre>
+<p>配置示例：</p>
+<pre><code class="language-xml">&lt;PatternLayout pattern=&quot;$${ctx:aaa} %d{HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
+<p>输出：</p>
+<pre><code class="language-console">bbb  log4j2test.Main 19 15:20:07.859 [main] INFO  - info level</code></pre>
+<h4 id="date-lookup">Date Lookup</h4>
+<p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
+<p><strong>引用方法：<code>$${date:SimpleDateFormat}</code></strong></p>
+<p>配置示例：</p>
+<pre><code class="language-xml">&lt;PatternLayout pattern=&quot;$${ctx:aaa} $${date:HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
+<h4 id="environment-lookup">Environment Lookup</h4>
+<p>输出系统中的环境变量，无论是全局变量文件<code>/etc/profile</code>中的，还是运行时定义的变量。</p>
+<p><strong>引用方法：<code>$${env:KEY}</code></strong></p>
+<p>配置示例：</p>
+<pre><code class="language-xml">&lt;PatternLayout pattern=&quot;$${env:USER} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
+<h4 id="java-lookup">Java Lookup</h4>
+<p>输出一些JVM信息：</p>
+<ul>
+<li>version：Java版本</li>
+<li>rentime：Java运行时版本信息</li>
+<li>vm：虚拟机版本</li>
+<li>os：操作系统版本</li>
+<li>locale：一些硬件信息如：default locale: en_US, platform encoding: Cp1252</li>
+<li>hw：一些硬件信息如：processors: 4, architecture: amd64-64, instruction sets: amd64</li>
+</ul>
+<p><strong>引用方法：<code>$${java:KEY}</code></strong></p>
+<p>配置示例：</p>
+<pre><code class="language-xml">&lt;PatternLayout header=&quot;${java:runtime} - ${java:vm} - ${java:os}&quot;&gt;
+  &lt;Pattern&gt;%d %m%n&lt;/Pattern&gt;
+&lt;/PatternLayout&gt;</code></pre>
+<h4 id="system-properties-lookup">System Properties Lookup</h4>
+<p>获取系统属性的值</p>
+<p><strong>引用方法：<code>$${sys:KEY}</code></strong></p>
+<p>配置示例：</p>
+<pre><code class="language-xml">&lt;Appenders&gt;
+  &lt;File name=&quot;ApplicationLog&quot; fileName=&quot;${sys:logPath}/app.log&quot;/&gt;
+&lt;/Appenders&gt;</code></pre>

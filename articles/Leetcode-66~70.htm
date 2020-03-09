@@ -1,0 +1,283 @@
+<hr>
+<p>title: Leetcode-66~70
+categories:</p>
+<ul>
+<li>note</li>
+<li>algorithm</li>
+<li>leetcode
+tags:</li>
+<li>leetcode</li>
+<li>mysqrt</li>
+<li>binary-question
+date: 2019-04-02 22:40:00 +8
+series: leetcode</li>
+</ul>
+<hr>
+<h3 id="66plus-oneeasy">66.Plus One(Easy)</h3>
+<p>Given a <strong>non-empty</strong> array of digits representing a non-negative integer, plus one to the integer.</p>
+<p>The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.</p>
+<p>You may assume the integer does not contain any leading zero, except the number 0 itself.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.</code></pre><h4 id="solution">Solution</h4>
+<p>处理carry的题目我们前面碰的多了，熟能生巧</p>
+<pre><code class="language-java">public int[] plusOne(int[] digits) {
+    boolean carry = true;
+    for (int i = digits.length - 1; i &gt;= 0; i--) {
+        if (carry) {
+            int tmp = digits[i] + 1;
+            if (tmp &gt;= 10) {
+                digits[i] = tmp % 10;
+            } else {
+                digits[i] = tmp;
+                carry = false;
+            }
+        }
+    }
+    if (carry) {
+        int[] ans = new int[digits.length + 1];
+        ans[0] = 1;
+        return ans;
+    } else {
+        return digits;
+    }
+}</code></pre>
+<h3 id="67add-binaryeasy">67.Add Binary(Easy)</h3>
+<p>Given two binary strings, return their sum (also a binary string).</p>
+<p>The input strings are both <strong>non-empty</strong> and contains only characters <code>1</code> or <code>0</code>.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: a = &quot;11&quot;, b = &quot;1&quot;
+Output: &quot;100&quot;</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: a = &quot;1010&quot;, b = &quot;1011&quot;
+Output: &quot;10101&quot;</code></pre><h4 id="solution-1">Solution</h4>
+<p>和<a href="https://youyinnn.github.io/?to=post&amp;number=111#_root-43.%20Multiply%20Strings(Medium)">MultiplyString</a>一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理</p>
+<pre><code class="language-java">public String addBinary(String a, String b) {
+    if (a.length() &lt; b.length()) {
+        return addBinary(b, a);
+    }
+    char[] ac = a.toCharArray();
+    char[] bc = b.toCharArray();
+    int ai = ac.length - 1;
+    int bi = bc.length - 1;
+    while (bi &gt;= 0) {
+        ac[ai] = ac[ai] == &#39;0&#39;
+                // aci = 0
+                ? bc[bi]
+                // aci = 1
+                : (bc[bi] == &#39;0&#39;
+                    // bci = 0
+                    ? &#39;1&#39;
+                    // bci = 1
+                    : &#39;2&#39;);
+        bi--;
+        ai--;
+    }
+    StringBuilder sb = new StringBuilder();
+    boolean carry = false;
+    for (int i = ac.length - 1; i &gt;= 0; i--) {
+        if (carry) {
+            if (ac[i] == &#39;0&#39;) {
+                ac[i] = &#39;1&#39;;
+                carry = false;
+            } else if (ac[i] == &#39;1&#39;) {
+                ac[i] = &#39;2&#39;;
+            } else if (ac[i] == &#39;2&#39;){
+                ac[i] = &#39;3&#39;;
+            }
+        }
+        if (ac[i] == &#39;2&#39;) {
+            ac[i] = &#39;0&#39;;
+            carry = true;
+        } else if (ac[i] == &#39;3&#39;) {
+            ac[i] = &#39;1&#39;;
+            carry = true;
+        }
+        sb.insert(0, ac[i]);
+    }
+    if (carry) {
+        sb.insert(0, &#39;1&#39;);
+    }
+    return sb.toString();
+}</code></pre>
+<h3 id="68text-justificationhard">68.Text Justification(Hard)</h3>
+<p>Given an array of words and a width <em>maxWidth</em>, format the text such that each line has exactly <em>maxWidth</em>characters and is fully (left and right) justified.</p>
+<p>You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces <code>&#39; &#39;</code> when necessary so that each line has exactly <em>maxWidth</em> characters.</p>
+<p>Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.</p>
+<p>For the last line of text, it should be left justified and no <strong>extra</strong> space is inserted between words.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>A word is defined as a character sequence consisting of non-space characters only.</li>
+<li>Each word&#39;s length is guaranteed to be greater than 0 and not exceed <em>maxWidth</em>.</li>
+<li>The input array <code>words</code> contains at least one word.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+words = [&quot;This&quot;, &quot;is&quot;, &quot;an&quot;, &quot;example&quot;, &quot;of&quot;, &quot;text&quot;, &quot;justification.&quot;]
+maxWidth = 16
+Output:
+[
+   &quot;This    is    an&quot;,
+   &quot;example  of text&quot;,
+   &quot;justification.  &quot;
+]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input:
+words = [&quot;What&quot;,&quot;must&quot;,&quot;be&quot;,&quot;acknowledgment&quot;,&quot;shall&quot;,&quot;be&quot;]
+maxWidth = 16
+Output:
+[
+  &quot;What   must   be&quot;,
+  &quot;acknowledgment  &quot;,
+  &quot;shall be        &quot;
+]
+Explanation: Note that the last line is &quot;shall be    &quot; instead of &quot;shall     be&quot;,
+             because the last line must be left-justified instead of fully-justified.
+             Note that the second line is also left-justified becase it contains only one word.</code></pre><p><strong>Example 3:</strong></p>
+<pre><code>Input:
+words = [&quot;Science&quot;,&quot;is&quot;,&quot;what&quot;,&quot;we&quot;,&quot;understand&quot;,&quot;well&quot;,&quot;enough&quot;,&quot;to&quot;,&quot;explain&quot;,
+         &quot;to&quot;,&quot;a&quot;,&quot;computer.&quot;,&quot;Art&quot;,&quot;is&quot;,&quot;everything&quot;,&quot;else&quot;,&quot;we&quot;,&quot;do&quot;]
+maxWidth = 20
+Output:
+[
+  &quot;Science  is  what we&quot;,
+  &quot;understand      well&quot;,
+  &quot;enough to explain to&quot;,
+  &quot;a  computer.  Art is&quot;,
+  &quot;everything  else  we&quot;,
+  &quot;do                  &quot;
+]</code></pre><h4 id="solution-2">Solution</h4>
+<p>这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的</p>
+<p>首先我们要来看一下标准解的条件：</p>
+<ul>
+<li>每一行尽可能的吃能吃的单词；（Greedy）</li>
+<li>每一行单词之间的空格要分布均匀，如果有不均匀，那么左边的空格要比右边的空格多；（full-justify）</li>
+<li>如果一行只有一个单词，那么它左对齐；（left-justify）</li>
+<li>最后一行无论多少单词，都是左对齐；（left-justify）</li>
+</ul>
+<p>我们的步骤可以简单地理解为：</p>
+<ol>
+<li>从剩下的单词中，尽可能地吃能吃的单词；<code>findRight</code></li>
+<li>调整当前吃下的单词的空格；<code>justify</code></li>
+<li>将调整好的单词添加到结果；</li>
+<li>如果还有剩下的单词，重复步骤1；</li>
+</ol>
+<pre><code class="language-java"> public List&lt;String&gt; fullJustify(String[] words, int maxWidth) {
+    int left = 0; List&lt;String&gt; result = new ArrayList&lt;&gt;();
+
+    while (left &lt; words.length) {
+        int right = findRight(left, words, maxWidth);
+        result.add(justify(left, right, words, maxWidth));
+        left = right + 1;
+    }
+
+    return result;
+}
+
+private int findRight(int left, String[] words, int maxWidth) {
+    int right = left;
+    int sum = words[right++].length();
+
+    while (right &lt; words.length &amp;&amp; (sum + 1 + words[right].length()) &lt;= maxWidth)
+        sum += 1 + words[right++].length();
+
+    return right - 1;
+}
+
+private String justify(int left, int right, String[] words, int maxWidth) {
+    if (right - left == 0) return padResult(words[left], maxWidth);
+
+    boolean isLastLine = right == words.length - 1;
+    int numSpaces = right - left;
+    int totalSpace = maxWidth - wordsLength(left, right, words);
+
+    String space = isLastLine ? &quot; &quot; : blank(totalSpace / numSpaces);
+    int remainder = isLastLine ? 0 : totalSpace % numSpaces;
+
+    StringBuilder result = new StringBuilder();
+    for (int i = left; i &lt;= right; i++)
+        result.append(words[i])
+            .append(space)
+            .append(remainder-- &gt; 0 ? &quot; &quot; : &quot;&quot;);
+
+    return padResult(result.toString().trim(), maxWidth);
+}
+
+private int wordsLength(int left, int right, String[] words) {
+    int wordsLength = 0;
+    for (int i = left; i &lt;= right; i++) wordsLength += words[i].length();
+    return wordsLength;
+}
+
+private String padResult(String result, int maxWidth) {
+    return result + blank(maxWidth - result.length());
+}
+
+private String blank(int length) {
+    return new String(new char[length]).replace(&#39;\0&#39;, &#39; &#39;);
+}</code></pre>
+<h3 id="69sqrtx-easy">69.Sqrt(x) (Easy)</h3>
+<p>Implement <code>int sqrt(int x)</code>.</p>
+<p>Compute and return the square root of <em>x</em>, where <em>x</em> is guaranteed to be a non-negative integer.</p>
+<p>Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 4
+Output: 2</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since 
+             the decimal part is truncated, 2 is returned.</code></pre><h4 id="binary">Binary</h4>
+<p>这题虽然是简单题，但我也还是在弯路上走了很久</p>
+<p>题目给到提示了：</p>
+<ol>
+<li><strong>Try exploring all integers.</strong></li>
+<li><strong>Use the sorted property of integers to reduced the search space.</strong></li>
+</ol>
+<p>这两条提示我开始没看出来什么，后面发现- -，原来都已经告诉你标准的二分法思路了</p>
+<p>于是我们要求X的开根号，可以这样想：</p>
+<ul>
+<li>答案肯定在<code>[1~X]</code>之间；</li>
+<li>二分的思路找最接近X^2的数，因为毕竟是整数结果；</li>
+</ul>
+<pre><code class="language-java">public int mySqrt(int x) {
+    int low = 1, high = x, mid;
+    while (low &lt; high) {
+        mid = low + (high - low) / 2;
+        if (mid == x / mid) {
+            return mid;
+        } else if (mid &gt; x / mid) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return low &gt; x / low ? low - 1 : low;
+}</code></pre>
+<h3 id="70climbingstairseasy">70.ClimbingStairs(Easy)</h3>
+<p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p><strong>Note:</strong> Given <em>n</em> will be a positive integer.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step</code></pre><h4 id="solution-3">Solution</h4>
+<pre><code class="language-java">public int climbStairs(int n) {
+    int a = 1, b = 0;
+    int ans = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        ans = a + b;
+        b = a;
+        a = ans;
+    }
+    return ans;
+}</code></pre>
