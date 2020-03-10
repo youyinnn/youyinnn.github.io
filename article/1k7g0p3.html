@@ -8,23 +8,14 @@
     <meta name="baidu-site-verification" content="l09YSIpJQW" />
     <meta name="referrer" content="origin">
     <title>blog | youyinnn</title>
-    <link rel="stylesheet" href="/mycss/main.css">
-    <link rel="stylesheet" href="/mycss/media.css">
-    <link rel="stylesheet" href="/mycss/default.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@9-18-stable/src/styles/github-gist.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
-    
     <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
 
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
 </head>
 
 <body>
@@ -389,12 +380,12 @@
             </a>
             4. 时延
           </h5><p>（1）发送时延，是主机或者路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特开始算起，到该帧的最后一个比特发送完毕所需要的时间。</p>
-<p>$TransmissionDelay = \dfrac{DataBitLength(bit)}{BitRate(bit/s)}$</p>
+<p>$$TransmissionDelay = \dfrac{DataBitLength(bit)}{BitRate(bit/s)}$$</p>
 <blockquote>
 <p> 数据帧长度 / 速率</p>
 </blockquote>
 <p>（2）传播时延，是电磁波在信道中传播一定距离需要花的时间。</p>
-<p>$PropagationDelay = \dfrac{ChannelLength(m)}{ElectWaveSpeedRate(m/s)}$</p>
+<p>$$PropagationDelay = \dfrac{ChannelLength(m)}{ElectWaveSpeedRate(m/s)}$$</p>
 <blockquote>
 <p>信道长度 / 电磁波在信道上的传播速率</p>
 </blockquote>
@@ -407,7 +398,7 @@
               <span class="header-link"></span>
             </a>
             5. 时延带宽积（略）
-          </h5><p>$ DelayBandWidthProduct =  TransmissionDelay \times BandWidth$</p>
+          </h5><p>$$ DelayBandWidthProduct =  TransmissionDelay \times BandWidth$$</p>
 
           <h5>
             <a name="_root-6. 往返时间RTT" class="reference-link" target="_blank">
@@ -415,9 +406,9 @@
             </a>
             6. 往返时间RTT
           </h5><p>Round-Trip Time是一个重要的指标，它代表了双向交互一次所需要的时间。比如，如果A向B发送数据，数据长度是100MB，发送速率是100 Mbit/s</p>
-<p>$TranmissionDelay = \dfrac{DataBitLength}{BitRate} = \dfrac{100 \times 2^{20} \times 8}{100 \times 10^{6}} \thickapprox 8.39s$</p>
+<p>$$TranmissionDelay = \dfrac{DataBitLength}{BitRate} = \dfrac{100 \times 2^{20} \times 8}{100 \times 10^{6}} \thickapprox 8.39s$$</p>
 <p>如果B正确收完100MB的数据之后，就立即向A发送确认，假定A只有在收到B的确认信息后，才能继续向B发送数据。显然这需要等一个RTT的时间。如果RTT = 2s，那么有效数据率为：</p>
-<p>$ EffectiveBitRate = \dfrac{DataBitLength}{TransmissionDelay + RTT} = \dfrac{100 \times 2^{20} \times 8}{8.39 + 2} \thickapprox 80.7Mbit/s$</p>
+<p>$$ EffectiveBitRate = \dfrac{DataBitLength}{TransmissionDelay + RTT} = \dfrac{100 \times 2^{20} \times 8}{8.39 + 2} \thickapprox 80.7Mbit/s$$</p>
 <p>可以看出，考虑上RTT之后，实际有效的速率会大受影响。</p>
 
           <h5>
@@ -575,28 +566,8 @@
         <button id="share_png_paned_close" class="btn btn-dark">Close</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-
-    <script src="/myjs/tool.js"></script>
-
-    <script src="/myjs/init.js"></script>
-    <script src="/myjs/eventbind.js"></script>
-    <script src="/myjs/githubapi.js"></script>
-    <script src="/myjs/elementcreate.js"></script>
-    <script src="/myjs/main.js"></script>
-    <script src="/resources/friendslink.js"></script>
-    <script src="/resources/cache.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
     <script>
-        0
+        importJsAfterLoad()
     </script>
 </body>
 
