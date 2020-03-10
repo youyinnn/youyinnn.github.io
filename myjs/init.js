@@ -106,7 +106,7 @@ $(function() {
 
         setTimeout(() => {
             hidetopbar()
-        }, 400);
+        }, 250);
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
