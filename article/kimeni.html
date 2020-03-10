@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,16 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: kimeni<br>title: Electron_UI<br>categories:</p>
-<ul>
-<li>note</li>
-<li>electron<br>comments: true<br>tags:</li>
-<li>electron<br>series: electron<br>date: 2019-10-10 11:44:21</li>
-</ul>
-<hr>
-<h3 id="对话框">对话框</h3>
-<blockquote>
+        
+          <h3>
+            <a name="_root-对话框" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            对话框
+          </h3><blockquote>
 <p>显示用于打开和保存文件、警报等的本机系统对话框。</p>
 </blockquote>
 <p>线程：<a href="https://electronjs.org/docs/glossary#main-process">主线程</a></p>
@@ -167,8 +159,13 @@ console.log(dialog)</code></pre>
 <li>消息对话框 </li>
 <li>错误对话框</li>
 </ul>
-<h4 id="例子">例子</h4>
-<pre><code class="language-javascript">// 同步的获取文件路径的对话框
+
+          <h4>
+            <a name="_root-例子" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            例子
+          </h4><pre><code class="language-javascript">// 同步的获取文件路径的对话框
 $(&#39;#sopendialog&#39;).click(() =&gt; {
     let p = dialog.showOpenDialogSync(win, {})
     console.log(p)
@@ -195,14 +192,24 @@ $(&#39;#smsgboxdialog&#39;).click(() =&gt; {
     })
     console.log(rs)
 })</code></pre>
-<h3 id="菜单">菜单</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-菜单" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            菜单
+          </h3><blockquote>
 <p>创建原生应用菜单和上下文菜单。</p>
 </blockquote>
 <p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
 <p>创建新菜单。</p>
-<h4 id="静态方法"><a href="https://electronjs.org/docs/api/menu#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95">静态方法</a></h4>
-<p><a href="https://electronjs.org/docs/api/menu#menusetapplicationmenumenu"><code>Menu.setApplicationMenu(menu)</code></a></p>
+
+          <h4>
+            <a name="_root-静态方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            静态方法
+          </h4><p><a href="https://electronjs.org/docs/api/menu#menusetapplicationmenumenu"><code>Menu.setApplicationMenu(menu)</code></a></p>
 <ul>
 <li><code>menu</code> Menu | null</li>
 </ul>
@@ -220,8 +227,13 @@ $(&#39;#smsgboxdialog&#39;).click(() =&gt; {
 <p>返回 <code>Menu</code></p>
 <p>一般来说 <code>template</code>是一个<code>options</code>类型的数组，用于构建一个 <a href="https://electronjs.org/docs/api/menu-item">MenuItem</a>。使用情况可以在上文提及。</p>
 <p>You can also attach other fields to the element of the <code>template</code> and they will become properties of the constructed menu items.</p>
-<h4 id="例子-1">例子</h4>
-<p>应用菜单</p>
+
+          <h4>
+            <a name="_root-例子" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            例子
+          </h4><p>应用菜单</p>
 <pre><code class="language-javascript">const template = [
     {
         label: &#39;Menu1&#39;,
@@ -292,9 +304,19 @@ menu.append(new MenuItem({
         label: &#39;lolo&#39;,
     })]
 }))</code></pre>
-<h3 id="任务栏">任务栏</h3>
-<h4 id="任务菜单">任务菜单</h4>
-<p>Windows 允许应用程序定义一个自定义上下文菜单，用户可以看到该菜单 右键单击任务栏中的应用图标。 该上下文菜单被成为 <code>弹出列表</code>. 您可以在弹出列表的 <code>Tasks</code> 类别中指定自定义操作， 来自 MSDN 的引用：</p>
+
+          <h3>
+            <a name="_root-任务栏" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            任务栏
+          </h3>
+          <h4>
+            <a name="_root-任务菜单" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            任务菜单
+          </h4><p>Windows 允许应用程序定义一个自定义上下文菜单，用户可以看到该菜单 右键单击任务栏中的应用图标。 该上下文菜单被成为 <code>弹出列表</code>. 您可以在弹出列表的 <code>Tasks</code> 类别中指定自定义操作， 来自 MSDN 的引用：</p>
 <blockquote>
 <p>应用程序的tasks应该是基于程序的功能和用户能用它做一些的关键性事情来制定的。 任务应当是上下文无关的，因为它不需要程序运行就可以工作 而且他们应该是统计上用户在这个应用上最多的行为例如: 撰写一封邮件或者在邮件程序里打开日历，word处理程序新建一个文档，以某一种模式启动应用程序，或者是启动应用程序的某些子命令。 一个应用程序不应当把菜单用一些用户不需要的高级功能的或者只会使用一次的动作例如注册给弄得杂乱无章。 不要将tasks功能用于广告项目例如升级或者特价产品之类。</p>
 <p>强烈推荐task列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
@@ -318,8 +340,13 @@ app.setUserTasks([
 <pre><code class="language-javascript">const { app } = require(&#39;electron&#39;)
 app.setUserTasks([])</code></pre>
 <p>当你的应用关闭时，用户任务仍然会被显示，因此在你的应用被卸载之前，任务的图标和程序的路径必须是存在的。</p>
-<h3 id="托盘">托盘</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-托盘" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            托盘
+          </h3><blockquote>
 <p>添加图标和上下文菜单到系统通知区</p>
 </blockquote>
 <p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
@@ -366,8 +393,13 @@ app.on(&#39;ready&#39;, () =&gt; {
 <li>在 Windows 上, 建议使用 <code>ICO</code> 图标来获得最佳视觉效果。</li>
 </ul>
 <p>如果要在所有平台上保持完全相同的行为, 则不应依赖 <code>click</code> 事件, 并且始终将上下文菜单附加到任务栏图标。</p>
-<h4 id="事件">事件</h4>
-<p>windows下托盘的事件有点击、左右键单击、双击等事件</p>
+
+          <h4>
+            <a name="_root-事件" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            事件
+          </h4><p>windows下托盘的事件有点击、左右键单击、双击等事件</p>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
@@ -393,19 +425,10 @@ app.on(&#39;ready&#39;, () =&gt; {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

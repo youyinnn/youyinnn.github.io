@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 3yl2hx<br>title: Leetcode-16~20<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm</li>
-<li>leetcode<br>tags:</li>
-<li>leetcode<br>date: 2019-03-06 20:13:00<br>series: leetcode</li>
-</ul>
-<hr>
-<h3 id="163sumclosestmedium">16.3SumClosest(Medium)</h3>
-<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
+        
+          <h3>
+            <a name="_root-16.3SumClosest(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            16.3SumClosest(Medium)
+          </h3><p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given array nums = [-1, 2, 1, -4], and target = 1.
 
@@ -178,8 +169,13 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code></pre><p>和
     }
     return closest;
 }</code></pre>
-<h3 id="17-letter-combinations-of-a-phone-numbermedium">17. Letter Combinations of a Phone Number(Medium)</h3>
-<p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent.</p>
+
+          <h3>
+            <a name="_root-17. Letter Combinations of a Phone Number(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            17. Letter Combinations of a Phone Number(Medium)
+          </h3><p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent.</p>
 <p>A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
 <p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png" alt="img"></p>
 <p><strong>Example:</strong></p>
@@ -240,8 +236,13 @@ private static List&lt;String&gt; get(char[] set, int start, int end) {
     }
     return ans;
 }</code></pre>
-<h3 id="18-4summedium">18. 4Sum(Medium)</h3>
-<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, are there elements <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> = <code>target</code>? Find all unique quadruplets in the array which gives the sum of <code>target</code>.</p>
+
+          <h3>
+            <a name="_root-18. 4Sum(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            18. 4Sum(Medium)
+          </h3><p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, are there elements <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> = <code>target</code>? Find all unique quadruplets in the array which gives the sum of <code>target</code>.</p>
 <p><strong>Note:</strong></p>
 <p>The solution set must not contain duplicate quadruplets.</p>
 <p><strong>Example:</strong></p>
@@ -289,8 +290,13 @@ A solution set is:
     }
     return ans;
 }</code></pre>
-<h3 id="19-remove-nth-node-from-end-of-listmedium">19. Remove Nth Node From End Of List(Medium)</h3>
-<p>Given a linked list, remove the <em>n</em>-th node from the end of list and return its head.</p>
+
+          <h3>
+            <a name="_root-19. Remove Nth Node From End Of List(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            19. Remove Nth Node From End Of List(Medium)
+          </h3><p>Given a linked list, remove the <em>n</em>-th node from the end of list and return its head.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
 
@@ -298,8 +304,13 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 <p>Given <em>n</em> will always be valid.</p>
 <p><strong>Follow up:</strong></p>
 <p>Could you do this in one pass?</p>
-<h4 id="two-pass-solution-beat-100">Two Pass Solution (Beat 100%)</h4>
-<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+
+          <h4>
+            <a name="_root-Two Pass Solution (Beat 100%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Two Pass Solution (Beat 100%)
+          </h4><pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode pre = head;
     int size = 1;
     while (pre.next != null) {
@@ -322,8 +333,13 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     return head;
 }</code></pre>
 <p>没什么说的，one pass获得长度，two pass直接定位删除</p>
-<h4 id="one-pass-solution-beat-100">One Pass Solution (Beat 100%)</h4>
-<pre><code class="language-java">public ListNode removeNthFromEnd2(ListNode head, int n) {
+
+          <h4>
+            <a name="_root-One Pass Solution (Beat 100%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            One Pass Solution (Beat 100%)
+          </h4><pre><code class="language-java">public ListNode removeNthFromEnd2(ListNode head, int n) {
     ListNode pre = new ListNode(0), now = head, check;
     pre.next = head;
     if (head == null) {
@@ -353,8 +369,13 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     return head;
 }</code></pre>
 <p>遍历链，对每个结点都往后找n+1个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
-<h3 id="20-valid-parentheses">20. Valid Parentheses</h3>
-<p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+
+          <h3>
+            <a name="_root-20. Valid Parentheses" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            20. Valid Parentheses
+          </h3><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
 <p>An input string is valid if:</p>
 <ol>
 <li>Open brackets must be closed by the same type of brackets.</li>
@@ -371,8 +392,13 @@ Output: false</code></pre><p><strong>Example 4:</strong></p>
 <pre><code>Input: &quot;([)]&quot;
 Output: false</code></pre><p><strong>Example 5:</strong></p>
 <pre><code>Input: &quot;{[]}&quot;
-Output: true</code></pre><h4 id="stack">Stack</h4>
-<p>没什么说的，和数据结构书上的表达式求值是一样的，比书上的简单</p>
+Output: true</code></pre>
+          <h4>
+            <a name="_root-Stack" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Stack
+          </h4><p>没什么说的，和数据结构书上的表达式求值是一样的，比书上的简单</p>
 <pre><code class="language-java">public boolean isValid(String s) {
     if (s.isEmpty()) {
         return true;
@@ -432,19 +458,10 @@ public boolean isPair(char begin, char end) {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,19 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: v6ei19<br>title: Leetcode-36~40<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm</li>
-<li>leetcode<br>tags:</li>
-<li>leetcode</li>
-<li>sudoku</li>
-<li>combination-sum<br>date: 2019-03-20 19:46:00<br>series: leetcode</li>
-</ul>
-<hr>
-<h3 id="36-valid-sudokumedium">36. Valid Sudoku(Medium)</h3>
-<p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
+        
+          <h3>
+            <a name="_root-36. Valid Sudoku(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            36. Valid Sudoku(Medium)
+          </h3><p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
 <ol>
 <li>Each row must contain the digits <code>1-9</code> without repetition.</li>
 <li>Each column must contain the digits <code>1-9</code> without repetition.</li>
@@ -197,8 +186,13 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
 <li>The given board contain only digits <code>1-9</code> and the character <code>&#39;.&#39;</code>.</li>
 <li>The given board size is always <code>9x9</code>.</li>
 </ul>
-<h4 id="brute-force">Brute Force</h4>
-<p>这图暴力解就已经足够快了，其他解也不觉得有多快，比较无论怎么弄都是常数次，所以空间消耗要考虑好</p>
+
+          <h4>
+            <a name="_root-Brute Force" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Brute Force
+          </h4><p>这图暴力解就已经足够快了，其他解也不觉得有多快，比较无论怎么弄都是常数次，所以空间消耗要考虑好</p>
 <pre><code class="language-java">public boolean isValidSudoku(char[][] board) {
     for (int rowIndex = 0; rowIndex &lt; board.length; rowIndex++) {
         char[] row = board[rowIndex];
@@ -232,8 +226,13 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
     }
     return true;
 }</code></pre>
-<h3 id="37-sudoku-solverhard">37. Sudoku Solver(Hard)</h3>
-<p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
+
+          <h3>
+            <a name="_root-37. Sudoku Solver(Hard)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            37. Sudoku Solver(Hard)
+          </h3><p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
 <p>A sudoku solution must satisfy <strong>all of the following rules</strong>:</p>
 <ol>
 <li>Each of the digits <code>1-9</code> must occur exactly once in each row.</li>
@@ -250,10 +249,20 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
 <li>The given board size is always <code>9x9</code>.</li>
 </ul>
 <p>暂不会解，感觉和马踏棋盘一样要用回溯法，而且需要对数独的解法要有了解；</p>
-<h3 id="38-count-and-sayeasy">38. Count And Say(Easy)</h3>
-<p>傻逼题</p>
-<h3 id="39-combination-summedium">39. Combination Sum(Medium)</h3>
-<p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+
+          <h3>
+            <a name="_root-38. Count And Say(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            38. Count And Say(Easy)
+          </h3><p>傻逼题</p>
+
+          <h3>
+            <a name="_root-39. Combination Sum(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            39. Combination Sum(Medium)
+          </h3><p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -274,8 +283,13 @@ A solution set is:
   [2,3,3],
   [3,5]
 ]</code></pre>
-<h4 id="recursion">Recursion</h4>
-<p>这题比较好用回溯，去重的技巧也有点3sum的意思</p>
+
+          <h4>
+            <a name="_root-Recursion" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Recursion
+          </h4><p>这题比较好用回溯，去重的技巧也有点3sum的意思</p>
 <pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
     Arrays.sort(candidates);
@@ -303,8 +317,13 @@ private void get(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, i
         }
     }
 }</code></pre>
-<h3 id="40-combination-sum-iimedium">40. Combination Sum II(Medium)</h3>
-<p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+
+          <h3>
+            <a name="_root-40. Combination Sum II(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            40. Combination Sum II(Medium)
+          </h3><p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -386,19 +405,10 @@ private void get(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, i
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

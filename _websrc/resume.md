@@ -1,8 +1,8 @@
-## 简历 <acob/>
+## 简历
 
-### 一. 个人信息 <cob tg="pmsg"/>
+### 一. 个人信息 
 
-<co id="pmsg">
+
 
 > **姓：** 黄
 > **年龄：** 22
@@ -14,13 +14,13 @@
 > **本科：** 中南民族大学19年应届生
 > **求职意向：** Java后端开发
 
-</co>
+
 
 ### 二. 专业技能 
 
-#### Java语言 <cob tg="java"/>
+#### Java语言 
 
-<co id="java">
+
 
 - 基础部分
     - 熟悉**Java SE**基本语法、**JDBC**基本操作、**DAO**设计
@@ -48,11 +48,11 @@
     - 了解[**t-io**](https://gitee.com/tywo45/t-io)，整合过**demo**级别的服务，支持**tcp**连接和**websocket**连接，部署即用的IM服务
     - 了解[**java-jwt库**](https://github.com/auth0/java-jwt)的基本使用
 
-</co>
 
-#### 拓展技能 <cob tg="ext"/>
 
-<co id="ext">
+#### 拓展技能 
+
+
 
 - 工具部分
   - 了解**Docker**、**k8s**
@@ -68,24 +68,24 @@
   - 了解前后端交互基本流程，有前后端分离开发经验
   - 了解**restful API**的基本理念
 
-</co>
 
-#### 前端部分 <cob tg="feweb"/>
 
-<co id="feweb">
+#### 前端部分 
+
+
 
 - 熟悉**HTML**/**CSS**基本语法
 - 了解**JavaScript**基本语法(深层次的就不知道了，比如原型链之类的)
 - 会用**JQuery**、会写点**Ajax**
 - 会用**Bootstrap4**
 
-</co>
+
 
 ### 三. 在校项目经历
 
-#### 1. FamilyAssistant（安卓 APP）-大二上寒假<cob tg="fa"/>
+#### 1. FamilyAssistant（安卓 APP）-大二上寒假
 
-<co id="fa">
+
 
 **项目介绍**
 
@@ -114,11 +114,11 @@
 
 - 2017 年（第 10 届）中国大学生计算机设计大赛软件服务外包竞赛，三等奖
 
-</co>
 
-#### 2. 会议室管理系统（Web APP）-大二下<cob tg="me"/>
 
-<co id="me">
+#### 2. 会议室管理系统（Web APP）-大二下
+
+
 
 **项目介绍**
 
@@ -137,11 +137,11 @@
 > - **spring4** | **mybatis3** | **ehcache** | **servlet**
 > - **druid** | **log4j** | **fastjson**
 
-</co>
 
-#### 3. 云呼叫中心平台软件（Web APP）-大二下<cob tg="cloud"/>
 
-<co id="cloud">
+#### 3. 云呼叫中心平台软件（Web APP）-大二下
+
+
 
 **项目介绍**
 
@@ -164,11 +164,11 @@
 > - **jfinal** | **mybatis3**
 > - **fastjson** | **apache-poi** 
 
-</co>
 
-#### 4. 数据快速导入工具（Web APP）-大三上<cob tg="imp"/>
 
-<co id="imp">
+#### 4. 数据快速导入工具（Web APP）-大三上
+
+
 
 **项目介绍**
 
@@ -201,11 +201,11 @@
 
 - 获得团队内部工程基金奖励3000元，并计划投入使用。
 
-</co>
 
-#### 5. 移动会议实时互动系统（安卓 APP+Web APP）-大三下<cob tg="mm"/>
 
-<co id="mm">
+#### 5. 移动会议实时互动系统（安卓 APP+Web APP）-大三下
+
+
 
 **项目介绍**
 
@@ -227,11 +227,11 @@
 > - **jfinal** | **you-im(t-io)**
 > - **cron4j** | **http-client**
 
-</co>
 
-### 四. 实验室经历 <cob tg="thread"/>
 
-<co id="thread">
+### 四. 实验室经历 
+
+
 
 1. `2016/3（大一下）`：通过初试加入本院软件实验室之一的**新思路团队**，成为团队的Java EE小组的**考核期成员**
 2. `2016/9（大二上）`：通过考核成为小组**正式成员**，并担任小组**技术组长**一职
@@ -243,15 +243,15 @@
    1. 引导新任组长；
    2. 参与实验室组织的比赛；
 
-</co>
+
 
 
 
 ### 五. 实习经历
 
-#### 1. 银联商务（武汉光谷软件园）<cob tg="intern-a"/>
+#### 1. 银联商务（武汉光谷软件园）
 
-<co id="intern-a">
+
 
 - 时间：2018.7.4-2018.9.10
 
@@ -272,11 +272,11 @@
 
   > 系统将于12月正式上线，虽然9月初已经离职，但是和导师承诺了就算离职我也会无偿维护系统2个月，有始有终，离职之后依然接着新的需求做升级、优化和改动。后期的优化主要是公司的安全部门对系统进行了评估，提出了升级要求，所以离职这一个月我也收获很多，在web安全上做了一番功夫。
 
-</co>
 
-#### 2. eBay（上海浦东张江德国中心）<cob tg="intern-b"/>
 
-<co id="intern-b">
+#### 2. eBay（上海浦东张江德国中心）
+
+
 
 - 时间：2018.10.8-2019.3.29
 
@@ -295,15 +295,15 @@
     > 4. 2月份主要完成messaging service server端的SonarQube的指标处理；
     > 5. 3月份主要完成messaging service client端的功能的增强、版本release准备、新功能分支之间的迁移、SonarQube的指标处理等工作；
 
-</co>
+
 
 ### 六. 写过的有趣的东西
 
-<co id="product">
 
-#### :star:1. [YouDBUtils](https://github.com/youyinnn/YouDBUtils) <cob tg="dbu"/>
 
-<co id="dbu">
+#### :star:1. [YouDBUtils](https://github.com/youyinnn/YouDBUtils) 
+
+
 
 **这是一个“自用”的数据库工具包，你就把它当成orm框架也行** :smile:
 
@@ -316,11 +316,11 @@
 - **可直接面向Model：** 提供直接面向**Model**类的操作类**ModelHandler**，和数据库记录可直接映射对应，无需映射文件（**这就需要遵循本人的惯例了**）
 - **内置log输出：** 工具内置log输出，依赖**log4j2**，并且与用户配置的log4j2.xml完全无缝融合
 
-</co>
 
-#### :star:2. [YouIM](https://github.com/youyinnn/YouIM) <cob tg="im"/>
 
-<co id="im">
+#### :star:2. [YouIM](https://github.com/youyinnn/YouIM) 
+
+
 
 **基于t-io的轻巧部署的IM服务，支持tcp和ws连接** :vibration_mode:
 
@@ -329,11 +329,11 @@
 - 基于tio
 - 实现了绝大部分的IM业务的处理，开箱即用
 
-</co>
 
-#### :star:3. [YouWebUtils](https://github.com/youyinnn/YouWebUtils) <cob tg="webu"/>
 
-<co id="webu">
+#### :star:3. [YouWebUtils](https://github.com/youyinnn/YouWebUtils) 
+
+
 
 **这是一个“自用”的Web开发工具包** :boxing_glove:
 
@@ -371,11 +371,11 @@
 >       - 集合框架工具类
 >   - fourth：主要放前三个梯队所需辅助类
 
-</co>
 
-#### :star:4. [YouQuickJetty](https://github.com/youyinnn/YouQuickJetty) <cob tg="jet"/>
 
-<co id="jet">
+#### :star:4. [YouQuickJetty](https://github.com/youyinnn/YouQuickJetty) 
+
+
 
 **这是一个“自用”的嵌入式JettyWeb应用快速启动工具** :mouse:
 
@@ -389,11 +389,11 @@
     - 提供一个BaseHttpFilter 基本就是把请求和响应传为Http的
     - 提供一个配置文件的加载工具类
 
-</co>
 
-#### :star:5. [Electron-nice-auto-reload](https://github.com/youyinnn/electron-nice-auto-reload)<cob tg="elea"/>
 
-<co id="elea">
+#### :star:5. [Electron-nice-auto-reload](https://github.com/youyinnn/electron-nice-auto-reload)
+
+
 
 **一个能够帮助你在开发electron应用时快速响应代码改动的NPM包**
 
@@ -404,6 +404,6 @@
     - 重载页面
     - 运行script
 
-</co>
+
 
 <p align="center" style="font-size: 1.2rem;font-weight: bold; ">感谢参阅:heart:</p>

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 19jo7o1<br>title: Cron4jDocument_ZH_CN_Translation_README<br>categories:</p>
-<ul>
-<li>translation<br>tags:</li>
-<li>cron4j</li>
-<li>scheduler</li>
-<li>readme<br>series: Cron4jDocument_ZH_CN_Translation<br>date: 2018-05-07 17:12:01</li>
-</ul>
-<hr>
-<h1 id="cron4j--a-pure-java-cron-like-scheduler">Cron4j : A pure Java cron-like scheduler</h1>
-<p>创立时间：2017年8月20日13:35:01</p>
+        
+          <h1>
+            <a name="_root-Cron4j : A pure Java cron-like scheduler" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Cron4j : A pure Java cron-like scheduler
+          </h1><p>创立时间：2017年8月20日13:35:01</p>
 <p>官方文档地址：<a href="http://www.sauronsoftware.it/projects/cron4j/">http://www.sauronsoftware.it/projects/cron4j/</a></p>
 <hr>
 <p>Maven依赖：</p>
@@ -160,8 +151,13 @@
     &lt;artifactId&gt;cron4j&lt;/artifactId&gt;
     &lt;version&gt;2.2.5&lt;/version&gt;
 &lt;/dependency&gt;</code></pre><hr>
-<h4 id="前言：">前言：</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-前言：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言：
+          </h4><blockquote>
 <p>这是一篇针对cron4j官方英文文档的翻译。</p>
 <p>虽然官方文档并不难看懂，但是本着高尚的自学精神，再加上暑假有点无聊，我尝试着翻译这篇Java工具包的技术文档。</p>
 <p>该翻译并不是来自官方的，仅仅是自学用的翻译，如有翻译错误，请在issue中指出。</p>
@@ -172,8 +168,13 @@
 <p>在完成文档的过程中有一点比较难受的是，我每次实践都至少要等上一分钟才能验证结果...</p>
 </blockquote>
 <hr>
-<h4 id="overview部分：">Overview部分：</h4>
-<p>cron4j是Java平台的一个调度器（也就是任务调度工具/框架），它非常像UNIX系统下的具有进程守护的定时任务工具cron。</p>
+
+          <h4>
+            <a name="_root-Overview部分：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Overview部分：
+          </h4><p>cron4j是Java平台的一个调度器（也就是任务调度工具/框架），它非常像UNIX系统下的具有进程守护的定时任务工具cron。</p>
 <p>有了cron4j，你可以在你规定好的时间内在Java应用程序中执行你指定的任务，而这只需要你制定一些简单的规则。</p>
 <p>虽然Java平台已经内置了一个由<code>java.util.Timer</code>类实例化的调度器，但是cron4j走的是和前者不同的另一条路子。</p>
 <p>你可以说<code>java.util.Timer</code>调度器是</p>
@@ -245,19 +246,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

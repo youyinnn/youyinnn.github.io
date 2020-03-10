@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,20 +136,16 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1tzsbbu<br>title: Express Middleware<br>categories:</p>
-<ul>
-<li>note</li>
-<li>nodejs<br>tags:</li>
-<li>express</li>
-<li>nodejs<br>series: express<br>date: 2019-10-03 16:31:00</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>翻译自官方文档</p>
 <p>{% endcq %}</p>
-<h2 id="writing-middleware">Writing Middleware</h2>
-<p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
+
+          <h2>
+            <a name="_root-Writing Middleware" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Writing Middleware
+          </h2><p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
 <p>中间件能够完成以下事情：</p>
 <ul>
 <li>Execute any code.</li>
@@ -165,8 +156,13 @@
 <p>如果当前中间件不结束该次请求响应周期，它必须调用next方法，将控制传递到下一个中间件，否则请求会被挂起。</p>
 <p>下图展示了中间件功能的基本元素：</p>
 <p><img src="https://image.youyinnn.top/20191003170602.png" alt=""></p>
-<h3 id="example--middleware-function-mylogger">Example:  Middleware function myLogger</h3>
-<p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
+
+          <h3>
+            <a name="_root-Example:  Middleware function myLogger" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Example:  Middleware function myLogger
+          </h3><p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
 <pre><code class="language-javascript">var myLogger = function (req, res, next) {
   console.log(&#39;LOGGED&#39;)
   next()
@@ -190,8 +186,13 @@ app.get(&#39;/&#39;, function (req, res) {
 app.listen(3000)</code></pre>
 <p>中间件加载的顺序很重要：先加载的中间件其方法先被执行。</p>
 <p>如果<code>myLogger</code>是在“路由到根路径”之后加载的话，那么任何请求都不会访问到它，因为根路径路由周期已经结束了。</p>
-<h3 id="example-middleware-function-requesttime">Example: Middleware function requestTime</h3>
-<p>我们创建一个记录请求时间的中间件：</p>
+
+          <h3>
+            <a name="_root-Example: Middleware function requestTime" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Example: Middleware function requestTime
+          </h3><p>我们创建一个记录请求时间的中间件：</p>
 <pre><code class="language-javascript">var requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
@@ -214,8 +215,13 @@ app.get(&#39;/&#39;, function (req, res) {
 })
 
 app.listen(3000)</code></pre>
-<h3 id="configurable-middleware">Configurable middleware</h3>
-<p>如果你需要你的中间件可以配置的话，那么你可以这样做：</p>
+
+          <h3>
+            <a name="_root-Configurable middleware" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Configurable middleware
+          </h3><p>如果你需要你的中间件可以配置的话，那么你可以这样做：</p>
 <p>File: <code>my-middleware.js</code></p>
 <pre><code class="language-javascript">module.exports = function(options) {
   return function(req, res, next) {
@@ -253,19 +259,10 @@ app.use(mw({ option1: &#39;1&#39;, option2: &#39;2&#39; }))</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

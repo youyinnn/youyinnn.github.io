@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 448jer<br>title: Leetcode-26~30<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm</li>
-<li>leetcode<br>tags:</li>
-<li>leetcode<br>date: 2019-03-09 16:21:00<br>series: leetcode</li>
-</ul>
-<hr>
-<h3 id="26-remove-duplicated-from-sorted-arrayeasy">26. Remove Duplicated From Sorted Array(Easy)</h3>
-<p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each element appear only <em>once</em> and return the new length.</p>
+        
+          <h3>
+            <a name="_root-26. Remove Duplicated From Sorted Array(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            26. Remove Duplicated From Sorted Array(Easy)
+          </h3><p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each element appear only <em>once</em> and return the new length.</p>
 <p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with O(1) extra memory.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Given nums = [1,1,2],
@@ -175,8 +166,13 @@ int len = removeDuplicates(nums);
 for (int i = 0; i &lt; len; i++) {
     print(nums[i]);
 }</code></pre>
-<h4 id="brute-force">Brute Force</h4>
-<pre><code class="language-java">public int removeDuplicates(int[] nums) {
+
+          <h4>
+            <a name="_root-Brute Force" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Brute Force
+          </h4><pre><code class="language-java">public int removeDuplicates(int[] nums) {
     int len = 0;
     int range = 0, set = 0;
     for (int i = 0; i &lt; nums.length; i++) {
@@ -192,8 +188,13 @@ for (int i = 0; i &lt; len; i++) {
     }
     return len;
 }</code></pre>
-<h3 id="27-remove-elementeasy">27. Remove Element(Easy)</h3>
-<p>Given an array <em>nums</em> and a value <em>val</em>, remove all instances of that value <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> and return the new length.</p>
+
+          <h3>
+            <a name="_root-27. Remove Element(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            27. Remove Element(Easy)
+          </h3><p>Given an array <em>nums</em> and a value <em>val</em>, remove all instances of that value <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> and return the new length.</p>
 <p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with O(1) extra memory.</p>
 <p>The order of elements can be changed. It doesn&#39;t matter what you leave beyond the new length.</p>
 <p><strong>Example 1:</strong></p>
@@ -211,8 +212,13 @@ Note that the order of those five elements can be arbitrary.
 It doesn&#39;t matter what values are set beyond the returned length.</code></pre><p><strong>Clarification:</strong></p>
 <p>Confused why the returned value is an integer but your answer is an array?</p>
 <p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
-<h4 id="brute-force-1">Brute Force</h4>
-<pre><code class="language-java">public int removeElement(int[] nums, int val) {
+
+          <h4>
+            <a name="_root-Brute Force" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Brute Force
+          </h4><pre><code class="language-java">public int removeElement(int[] nums, int val) {
     int len = 0;
     for (int i = 0; i &lt; nums.length; i++) {
         if (nums[i] != val) {
@@ -221,8 +227,13 @@ It doesn&#39;t matter what values are set beyond the returned length.</code></pr
     }
     return len;
 }</code></pre>
-<h3 id="28-implement-strstr-easy">28. Implement strStr() (Easy)</h3>
-<p>Implement <a href="http://www.cplusplus.com/reference/cstring/strstr/">strStr()</a>.</p>
+
+          <h3>
+            <a name="_root-28. Implement strStr() (Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            28. Implement strStr() (Easy)
+          </h3><p>Implement <a href="http://www.cplusplus.com/reference/cstring/strstr/">strStr()</a>.</p>
 <p>Return the index of the first occurrence of needle in haystack, or <strong>-1</strong> if needle is not part of haystack.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
@@ -232,8 +243,13 @@ Output: -1</code></pre><p><strong>Clarification:</strong></p>
 <p>What should we return when <code>needle</code> is an empty string? This is a great question to ask during an interview.</p>
 <p>For the purpose of this problem, we will return 0 when <code>needle</code> is an empty string. This is consistent to C&#39;s <a href="http://www.cplusplus.com/reference/cstring/strstr/">strstr()</a> and Java&#39;s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)">indexOf()</a>.</p>
 <p>这题其实就是字符串匹配，所以没什么多说的，要么暴力解要么kmp，比较遗憾的是，Leetcode的case不够多，于是暴力解的Runtime居然比KMP解的Runtime还要快</p>
-<h4 id="brute-force---on--m">Brute Force - O(n * m)</h4>
-<pre><code class="language-java">public int strStr(String haystack, String needle) {
+
+          <h4>
+            <a name="_root-Brute Force - O(n * m)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Brute Force - O(n * m)
+          </h4><pre><code class="language-java">public int strStr(String haystack, String needle) {
     if (needle.isEmpty()) {
         return 0;
     }
@@ -250,8 +266,13 @@ Output: -1</code></pre><p><strong>Clarification:</strong></p>
     }
     return -1;
 }</code></pre>
-<h4 id="kmp---on--m">KMP - O(n + m)</h4>
-<pre><code class="language-java">public int strStr(String haystack, String needle) {
+
+          <h4>
+            <a name="_root-KMP - O(n + m)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            KMP - O(n + m)
+          </h4><pre><code class="language-java">public int strStr(String haystack, String needle) {
     if (needle.isEmpty()) {
         return 0;
     }
@@ -299,8 +320,13 @@ public int[] nextVal(char[] p) {
     }
     return nextVal;
 }</code></pre>
-<h3 id="29-divide-two-integer-medium">29. Divide Two Integer (Medium)</h3>
-<p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers without using multiplication, division and mod operator.</p>
+
+          <h3>
+            <a name="_root-29. Divide Two Integer (Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            29. Divide Two Integer (Medium)
+          </h3><p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers without using multiplication, division and mod operator.</p>
 <p>Return the quotient after dividing <code>dividend</code> by <code>divisor</code>.</p>
 <p>The integer division should truncate toward zero.</p>
 <p><strong>Example 1:</strong></p>
@@ -315,8 +341,13 @@ Output: -2</code></pre><p><strong>Note:</strong></p>
 </ul>
 <p>不能用乘除符号、不能用Long，行吧，用位运算试试，两倍两倍地运算，总比暴力一个一个的减要快多了</p>
 <p>但是怎么说，这题也是垃圾题，500+👍，2700+的:thumbsdown:</p>
-<h4 id="bit-operation-beat-100">Bit operation (Beat 100%)</h4>
-<pre><code class="language-java">public int divide(int dividend, int divisor) {       
+
+          <h4>
+            <a name="_root-Bit operation (Beat 100%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Bit operation (Beat 100%)
+          </h4><pre><code class="language-java">public int divide(int dividend, int divisor) {       
     if(dividend ==  Integer.MIN_VALUE &amp;&amp; divisor == -1){
         return Integer.MAX_VALUE;
     }
@@ -337,8 +368,13 @@ public int div(int divid, int divis){
     }
     return q + div(divid - prevSum, divis);
 }</code></pre>
-<h3 id="30-substring-with-concatenation-of-all-wordshard-">30. Substring with Concatenation of All Words(Hard !!)</h3>
-<p>You are given a string, <strong>s</strong>, and a list of words, <strong>words</strong>, that are all of the same length. Find all starting indices of substring(s) in <strong>s</strong> that is a concatenation of each word in <strong>words</strong> exactly once and without any intervening characters.</p>
+
+          <h3>
+            <a name="_root-30. Substring with Concatenation of All Words(Hard !!)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            30. Substring with Concatenation of All Words(Hard !!)
+          </h3><p>You are given a string, <strong>s</strong>, and a list of words, <strong>words</strong>, that are all of the same length. Find all starting indices of substring(s) in <strong>s</strong> that is a concatenation of each word in <strong>words</strong> exactly once and without any intervening characters.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input:
   s = &quot;barfoothefoobarman&quot;,
@@ -362,8 +398,13 @@ Output: []</code></pre><p>这题，变态难，首先words能全排列出n！种
 </ol>
 <p>于是我们处理问题的关键就在于，如何<strong>避免重复的单词对比而滑动窗口</strong></p>
 <p>其实我自己想是已经想到了频数记录，然后滑动窗口了，但是我只能i++地滑动窗口，效率慢了许多，先放上我的解</p>
-<h4 id="my-solution-550ms-beat-90">My Solution (550+ms Beat 9.0%)</h4>
-<pre><code class="language-java">public List&lt;Integer&gt; findSubstring(String s, String[] words) {
+
+          <h4>
+            <a name="_root-My Solution (550+ms Beat 9.0%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            My Solution (550+ms Beat 9.0%)
+          </h4><pre><code class="language-java">public List&lt;Integer&gt; findSubstring(String s, String[] words) {
     LinkedList&lt;Integer&gt; ans = new LinkedList&lt;&gt;();
     if (words.length == 0) {
         return ans;
@@ -414,8 +455,13 @@ Output: []</code></pre><p>这题，变态难，首先words能全排列出n！种
     }
     return ans;
 }</code></pre>
-<h4 id="elegant-solution-9ms-beat-996">Elegant Solution (9ms Beat 99.6%)</h4>
-<p>leetcode上效率最快的解，用一种难以想象的方式去滑动窗口，优雅而晦涩</p>
+
+          <h4>
+            <a name="_root-Elegant Solution (9ms Beat 99.6%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Elegant Solution (9ms Beat 99.6%)
+          </h4><p>leetcode上效率最快的解，用一种难以想象的方式去滑动窗口，优雅而晦涩</p>
 <pre><code class="language-java">public List&lt;Integer&gt; findSubstring2(String s, String[] words) {
     List&lt;Integer&gt; indexes = new ArrayList&lt;&gt;();
     if (words.length == 0) {
@@ -492,19 +538,10 @@ Output: []</code></pre><p>这题，变态难，首先words能全排列出n！种
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

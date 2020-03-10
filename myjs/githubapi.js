@@ -56,7 +56,6 @@ function get_articles() {
     // from localStorage
     let pcbl = sessionStorage.getItem('pcbl')
     handlemetadata(yaml.load(pcbl))
-    showbbt()
 }
 
 function get_article(number) {
@@ -182,32 +181,6 @@ function get_issues_by_label(label, func, closed, timeout, page) {
         url += '&state=closed'
     }
     sendget(urlhandle(url), func, timeoutfunc, timeout)
-}
-
-function syncatesToconfig() {
-    if (!articlesync) {
-        // clear
-        localStorage.removeItem('pcbl')
-        localStorage.removeItem('pcbl_timeout')
-        localStorage.removeItem('pseries')
-        localStorage.removeItem('pod')
-        articlesearchrs = new Array()
-        articles_cache = new Array()
-        filter_articles_cache = new Array()
-
-        popmsg('Sync started.', 30000)
-        setTimeout(function() {
-            popmsg('Sync started..', 30000)
-        }, 1300);
-        setTimeout(function() {
-            popmsg('Sync started...', 30000)
-        }, 2200);
-
-        get_all_articles(1, [])
-
-    } else {
-        location.reload()
-    }
 }
 
 var allarticle

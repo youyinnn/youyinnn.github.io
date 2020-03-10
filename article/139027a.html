@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,22 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 139027a<br>title: Java并发编程第六坎<br>categories:</p>
-<ul>
-<li>note</li>
-<li>booknote</li>
-<li>《艺术》与《技术》<br>comments: true<br>tags:</li>
-<li>java</li>
-<li>thread</li>
-<li>dead-lock</li>
-<li>wait/notify</li>
-<li>consumer/producer</li>
-<li>double-check-singleton<br>date: 2018-7-25 21:33:48<br>series: 并发</li>
-</ul>
-<hr>
-<h3 id="前言">前言</h3>
-<p>不知不觉写到第六坎了，前面刀剑磨刀石内功心法都有了，感觉自己应该很厉害了，其实不是，这一个月因为考试末尾和实习，断断续续的看，反反复复的看，越看越精神，越看越心虚。</p>
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><p>不知不觉写到第六坎了，前面刀剑磨刀石内功心法都有了，感觉自己应该很厉害了，其实不是，这一个月因为考试末尾和实习，断断续续的看，反反复复的看，越看越精神，越看越心虚。</p>
 <p>无论怎么说，短板还是得慢慢补上来，保持谦逊，虚心学习。</p>
 <p>回到整体，前面由内到外说了Java并发中很基本的几件事：</p>
 <ul>
@@ -173,8 +159,13 @@
 <li><strong>双重检查锁延迟初始化的错误与正确示范</strong></li>
 </ul>
 <hr>
-<h3 id="死锁">死锁</h3>
-<p>死锁是多个以上的process互相等待对方释放资源而进入永久等待的一种情况，要产生死锁，就必须同时满足一下四个条件：</p>
+
+          <h3>
+            <a name="_root-死锁" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            死锁
+          </h3><p>死锁是多个以上的process互相等待对方释放资源而进入永久等待的一种情况，要产生死锁，就必须同时满足一下四个条件：</p>
 <ul>
 <li><p><strong>互斥条件</strong></p>
 <p>  ​    即某个资源在一段时间内只能由一个进程占有，不能同时被两个或两个以上的进程占有。这种独占资源如CD-ROM驱动器，打印机等等，必须在占有该资源的进程主动释放它之后，其它进程才能占有该资源。这是由资源本身的属性所决定的。如独木桥就是一种独占资源，两方的人不能同时过桥。</p>
@@ -190,12 +181,27 @@
 </li>
 </ul>
 <p>死锁的处理可以分为：预防，避免，检测和解除</p>
-<h4 id="死锁预防">死锁预防</h4>
-<p>这是一种较为简单、直观的事先预防方法，方法是破坏产生死锁的4个条件，就算破坏一个，死锁也不会产生。这是一种静态方法。</p>
-<h4 id="死锁避免">死锁避免</h4>
-<p>系统在运行时分配资源的时候，能够对资源分配情况进行动态检查，如果结果良好，则允许分配，如果结果显示分配后会出现死锁，则不予分配。这是一种动态方法。</p>
-<h4 id="检测和解除">检测和解除</h4>
-<ul>
+
+          <h4>
+            <a name="_root-死锁预防" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            死锁预防
+          </h4><p>这是一种较为简单、直观的事先预防方法，方法是破坏产生死锁的4个条件，就算破坏一个，死锁也不会产生。这是一种静态方法。</p>
+
+          <h4>
+            <a name="_root-死锁避免" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            死锁避免
+          </h4><p>系统在运行时分配资源的时候，能够对资源分配情况进行动态检查，如果结果良好，则允许分配，如果结果显示分配后会出现死锁，则不予分配。这是一种动态方法。</p>
+
+          <h4>
+            <a name="_root-检测和解除" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            检测和解除
+          </h4><ul>
 <li><p>检测</p>
 <p>  ​    不事先采取限制措施，也不检测系统是否进入安全区，运行系统在运行时发生死锁，但是会通过系统设置的检查机制，检测出死锁发生的地方。</p>
 </li>
@@ -225,8 +231,13 @@
         }).start();
     }
 }</code></pre>
-<h3 id="等待-通知">“等待-通知”</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-“等待-通知”" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            “等待-通知”
+          </h3><blockquote>
 <p>在就餐的时候，厨师和服务员之间的交互就是一种等待通知模式：</p>
 <ol>
 <li>厨师需要一定的时间去做菜</li>
@@ -234,8 +245,13 @@
 <li>服务员取菜的时机是取决于厨师的，只有当厨师将菜放到“台面”上，并“通知（notify）”服务员，服务员菜开始干活</li>
 </ol>
 </blockquote>
-<h4 id="范式">范式</h4>
-<pre><code class="language-java">synchronized(对象) {
+
+          <h4>
+            <a name="_root-范式" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            范式
+          </h4><pre><code class="language-java">synchronized(对象) {
     while(退出等待的条件不满足){
         对象.wait();
     }
@@ -245,8 +261,13 @@
     // 改变退出等待的条件
     对象.notifyAll()；
 }</code></pre>
-<h4 id="实现">实现</h4>
-<pre><code class="language-java">public class WaitNotifyParadigm {
+
+          <h4>
+            <a name="_root-实现" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            实现
+          </h4><pre><code class="language-java">public class WaitNotifyParadigm {
 
     private static String lock = &quot;lock&quot;;
     private static boolean wait = true;
@@ -289,8 +310,13 @@ T2 processing: 2
 T2 processing: 3
 T2 done process, notifyAll...
 T1 stop waitting !</code></pre>
-<h4 id="有超时的等待-通知">有超时的“等待-通知”</h4>
-<p>要搭配<code>wait()</code>的超时机制的话，就得在条件中也考虑超时，我们可以加两个变量来完成超时：</p>
+
+          <h4>
+            <a name="_root-有超时的“等待-通知”" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            有超时的“等待-通知”
+          </h4><p>要搭配<code>wait()</code>的超时机制的话，就得在条件中也考虑超时，我们可以加两个变量来完成超时：</p>
 <ul>
 <li>left：表示剩余多少时间就超时</li>
 <li>end：表示超时时间的完整毫秒数</li>
@@ -335,8 +361,13 @@ T1 stop waitting !</code></pre>
         }).start();
     }
 }</code></pre>
-<h3 id="生产者消费者">“生产者/消费者”</h3>
-<p>利用wait/notify机制，先上一段多消费者/多生产者的示例</p>
+
+          <h3>
+            <a name="_root-“生产者/消费者”" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            “生产者/消费者”
+          </h3><p>利用wait/notify机制，先上一段多消费者/多生产者的示例</p>
 <pre><code class="language-java">public class TestProducerConsumer2 {
 
     static Integer limit = 50;
@@ -430,8 +461,13 @@ class Consumer2 implements Runnable {
 <p>P/C之间各通过对方的LOCK来唤醒对方</p>
 <p>生产/消费到达limit之后，各在自己的LOCK上等待</p>
 <p>消费者之间通过消费者LOCK保证消费同步，生产者之间通过生产者LOCK保证生产同步</p>
-<h3 id="双重检查锁延迟初始化的错误与正确示范">双重检查锁延迟初始化的错误与正确示范</h3>
-<p>关于双重检查锁的由来就不再多说，我们看看双重检查的错误示范：</p>
+
+          <h3>
+            <a name="_root-双重检查锁延迟初始化的错误与正确示范" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            双重检查锁延迟初始化的错误与正确示范
+          </h3><p>关于双重检查锁的由来就不再多说，我们看看双重检查的错误示范：</p>
 <pre><code class="language-java">public class DoubleCheckLocking {
     private static Instance instance;
     public static Instance getInstance() {
@@ -450,8 +486,13 @@ class Consumer2 implements Runnable {
 <p>在线程执行到line4的时候，代码读取到instance不为空，但是instance所引用的对象可能还没有完成对象初始化</p>
 <p>即现在不为空的对象其实并不具备工作能力</p>
 </blockquote>
-<h4 id="探究">探究</h4>
-<p>代码的第七行（<code>instance = new Instance();</code>）问题就出在这里，我们可以把这句话分解为以下三行：</p>
+
+          <h4>
+            <a name="_root-探究" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            探究
+          </h4><p>代码的第七行（<code>instance = new Instance();</code>）问题就出在这里，我们可以把这句话分解为以下三行：</p>
 <ol>
 <li>memory = allocate();        // 1 分配对象的内存空间</li>
 <li>ctorInstance(memory);       // 2 初始化对象</li>
@@ -505,8 +546,13 @@ class Consumer2 implements Runnable {
 <li>禁止2和3的重排序</li>
 <li>允许重排序，但是禁止其他线程感知到这个重排序</li>
 </ul>
-<h4 id="基于volatile的解决方法">基于volatile的解决方法</h4>
-<pre><code class="language-java">public class SafeDoubleCheckLocking {
+
+          <h4>
+            <a name="_root-基于volatile的解决方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            基于volatile的解决方法
+          </h4><pre><code class="language-java">public class SafeDoubleCheckLocking {
     private static volatile Instance instance;
     public static Instance getInstance() {
         if (instance == null) {                            
@@ -520,8 +566,13 @@ class Consumer2 implements Runnable {
     }
 }</code></pre>
 <p>将instance声明为volatile变量，这样做可以<strong>禁止2和3的重排序</strong></p>
-<h4 id="基于内部类和类初始化的解决方案">基于内部类和类初始化的解决方案</h4>
-<p>在JVM初始化类的时候，JVM首先会获取一个锁，保证多个线程同时初始化这个类的同步性，而类的加载和初始化工作，会准备好类中所有的静态变量</p>
+
+          <h4>
+            <a name="_root-基于内部类和类初始化的解决方案" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            基于内部类和类初始化的解决方案
+          </h4><p>在JVM初始化类的时候，JVM首先会获取一个锁，保证多个线程同时初始化这个类的同步性，而类的加载和初始化工作，会准备好类中所有的静态变量</p>
 <p>基于这个特性，我们可以有另外一种线程安全的延迟初始化方案——<code>Initialization On Demand Holder idiom</code></p>
 <pre><code class="language-java">public class InstanceFactory {
     private statci class InstanceHolder {
@@ -562,19 +613,10 @@ class Consumer2 implements Runnable {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

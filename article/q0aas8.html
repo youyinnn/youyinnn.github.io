@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,14 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: q0aas8<br>title: Graduation Design<br>categories:</p>
-<ul>
-<li>随笔<br>comments: true<br>date: 2018-11-2 21:56:10</li>
-</ul>
-<hr>
-<h4 id="graduation-design">Graduation Design</h4>
-<ul>
+        
+          <h4>
+            <a name="_root-Graduation Design" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Graduation Design
+          </h4><ul>
 <li><p>Title：Tracing Monitoring System of Kafka-Cluster with Opentracing API</p>
 </li>
 <li><p>Framework：B/S</p>
@@ -170,10 +164,20 @@
 </ul>
 </li>
 </ul>
-<h4 id="system-design：">System Design：</h4>
-<blockquote>
-<h5 id="demo：">Demo：</h5>
-<ol>
+
+          <h4>
+            <a name="_root-System Design：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            System Design：
+          </h4><blockquote>
+
+          <h5>
+            <a name="_root-Demo：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Demo：
+          </h5><ol>
 <li><p>We got three microservice application : </p>
 <ol>
 <li><p>Service App</p>
@@ -192,8 +196,13 @@
 </ol>
 </li>
 </ol>
-<h5 id="besides：">Besides：</h5>
-<ol>
+
+          <h5>
+            <a name="_root-Besides：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Besides：
+          </h5><ol>
 <li><p>Every request/response/msg were transfered by message system ：<strong>Kafka Cluster</strong></p>
 </li>
 <li><p>Every request/response/msg were traced by tracing system ：<strong>Opentracing</strong></p>
@@ -209,11 +218,21 @@
 </blockquote>
 </li>
 </ol>
-<h5 id="main-goal--result">Main Goal &amp; Result:</h5>
-<p>We could see the tracing result on a <strong>&quot;tracing monitoring page&quot;</strong>，every <strong>&quot;USER Requset process&quot;</strong> are display on this page to assess our system&#39;s preformence</p>
+
+          <h5>
+            <a name="_root-Main Goal &amp; Result:" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main Goal &amp; Result:
+          </h5><p>We could see the tracing result on a <strong>&quot;tracing monitoring page&quot;</strong>，every <strong>&quot;USER Requset process&quot;</strong> are display on this page to assess our system&#39;s preformence</p>
 </blockquote>
-<h4 id="system-design-map">System Design Map</h4>
-<p><img src="https://image.youyinnn.top/20181102231633.png" alt="map"></p>
+
+          <h4>
+            <a name="_root-System Design Map" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            System Design Map
+          </h4><p><img src="https://image.youyinnn.top/20181102231633.png" alt="map"></p>
 <p>As the map show，the green arrows are request/response/msg，we will trace every msg from Kafka Producers/Consumers.</p>
 
     </div>
@@ -240,19 +259,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

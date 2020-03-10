@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,27 +136,29 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1pf7qyq<br>title: Java运算符的阴谋论<br>categories:</p>
-<ul>
-<li>note<br>comments: true<br>tags:</li>
-<li>java</li>
-<li>operator<br>date: 2018-6-3 21:28:00</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>小心点，一不小心你就栽跟头了 :ghost:</p>
 <p>{% endcq%}</p>
-<h3 id="你画我猜">你画我猜</h3>
-<p>下面程序输出多少？</p>
+
+          <h3>
+            <a name="_root-你画我猜" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            你画我猜
+          </h3><p>下面程序输出多少？</p>
 <pre><code class="language-java">public static void main(String[] args) {
     int i = 2;
     i += i -= i *= i;
     System.out.println(i);
 }</code></pre>
 <p>答案：0</p>
-<h3 id="为什么说阴谋论？">为什么说阴谋论？</h3>
-<ul>
+
+          <h3>
+            <a name="_root-为什么说阴谋论？" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            为什么说阴谋论？
+          </h3><ul>
 <li>你知道Java里有哪几种运算符嘛？</li>
 <li>你知道<code>-=</code>是算数运算符还是赋值运算符嘛？</li>
 <li>你知道是<code>|</code>和<code>||</code>到底哪个才是短路嘛？</li>
@@ -172,23 +169,48 @@
 <li>你知道还有一种运算符它里面全是字母没有符号嘛？</li>
 <li>上面的问题你如果有一大半不会，那你还不觉得Java运算符里有阴谋吗？</li>
 </ul>
-<h3 id="运算符种类">运算符种类</h3>
-<h4 id="算数运算符">算数运算符</h4>
-<p>没得说，加减乘除模，+、-、*、/、%</p>
-<h4 id="一元运算符">一元运算符</h4>
-<ul>
+
+          <h3>
+            <a name="_root-运算符种类" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            运算符种类
+          </h3>
+          <h4>
+            <a name="_root-算数运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            算数运算符
+          </h4><p>没得说，加减乘除模，+、-、*、/、%</p>
+
+          <h4>
+            <a name="_root-一元运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            一元运算符
+          </h4><ul>
 <li><strong>-，</strong>负号运算符</li>
 <li><strong>+，</strong>正号运算符（还有这玩意？你不知道吧？）</li>
 <li><strong>++，</strong>自加运算符，注意前后</li>
 <li><strong>--，</strong>自减运算符，注意前后</li>
 <li><strong>!，</strong>非运算符，用于逻辑语句改是非</li>
 </ul>
-<h4 id="赋值运算符">赋值运算符</h4>
-<ul>
+
+          <h4>
+            <a name="_root-赋值运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            赋值运算符
+          </h4><ul>
 <li><strong>=，</strong>就这一个</li>
 </ul>
-<h4 id="复合赋值运算符">复合赋值运算符</h4>
-<ul>
+
+          <h4>
+            <a name="_root-复合赋值运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            复合赋值运算符
+          </h4><ul>
 <li><strong>+=</strong>, for adding left operand with right operand and then assigning it to variable on the left.</li>
 <li><strong>-=</strong>, for subtracting left operand with right operand and then assigning it to variable on the left.</li>
 <li><strong>*=</strong>, for multiplying left operand with right operand and then assigning it to variable on the left.</li>
@@ -197,8 +219,13 @@
 <li><strong>%=</strong>, for assigning modulo of left operand with right operand and then assigning it to variable on the left.</li>
 </ul>
 <p>都不解释了</p>
-<h4 id="关系运算符">关系运算符</h4>
-<ul>
+
+          <h4>
+            <a name="_root-关系运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            关系运算符
+          </h4><ul>
 <li><strong>== , Equal to :</strong> returns true of left hand side is equal to right hand side.</li>
 <li><strong>!= , Not Equal to :</strong> returns true of left hand side is not equal to right hand side.</li>
 <li><strong>&lt; , less than :</strong> returns true of left hand side is less than right hand side.</li>
@@ -206,24 +233,44 @@
 <li><strong>&gt; , Greater than :</strong> returns true of left hand side is greater than right hand side.</li>
 <li><strong>&gt;= , Greater than or equal to:</strong> returns true of left hand side is greater than or equal to right hand side.</li>
 </ul>
-<h4 id="逻辑运算符">逻辑运算符</h4>
-<ul>
+
+          <h4>
+            <a name="_root-逻辑运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            逻辑运算符
+          </h4><ul>
 <li>*<em>&amp;&amp; , *</em>短路与</li>
 <li><strong>|| ,</strong>短路或</li>
 <li><strong>&amp;，</strong>非短路与</li>
 <li><strong>|，</strong>非短路或</li>
 </ul>
-<h4 id="三元运算符">三元运算符</h4>
-<pre><code class="language-java">int i = 1 &gt; 2 ? 1 : 2;</code></pre>
-<h4 id="位运算符">位运算符</h4>
-<ul>
+
+          <h4>
+            <a name="_root-三元运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            三元运算符
+          </h4><pre><code class="language-java">int i = 1 &gt; 2 ? 1 : 2;</code></pre>
+
+          <h4>
+            <a name="_root-位运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            位运算符
+          </h4><ul>
 <li><strong>&amp;，</strong>二进制和运算</li>
 <li><strong>|，</strong>二进制或运算</li>
 <li><strong>^，</strong>二进制异或预算</li>
 <li><strong>~，</strong>二进制逆运算</li>
 </ul>
-<h4 id="位移运算符以及二进制补码位移规则">位移运算符以及二进制补码位移规则</h4>
-<ul>
+
+          <h4>
+            <a name="_root-位移运算符以及二进制补码位移规则" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            位移运算符以及二进制补码位移规则
+          </h4><ul>
 <li><strong>&lt;&lt; ,</strong>有符号左移，<strong>丢弃最高位，低位补0</strong> </li>
 <li><strong>&gt;&gt; , **有符号右移，</strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃** </li>
 <li><strong>&gt;&gt;&gt; ,</strong> 无符号左移，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </li>
@@ -348,27 +395,57 @@ public void testShift(){
 <p><strong>268435455的补码正是0000 1111 1111 1111 1111 1111 1111 1111</strong></p>
 </li>
 </ul>
-<h4 id="类型判断运算符">类型判断运算符</h4>
-<p>使用格式：</p>
+
+          <h4>
+            <a name="_root-类型判断运算符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            类型判断运算符
+          </h4><p>使用格式：</p>
 <pre><code class="language-java">    object instanceof Class/SubClass/Interface</code></pre>
-<h4 id="位运位移运算的使用场景">位运/位移运算的使用场景</h4>
-<h5 id="2的次幂快速乘除运算">2的次幂快速乘除运算</h5>
-<p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
-<h5 id="快速模2奇偶判断（不要再只会x--2--0啦）">快速模2/奇偶判断（不要再只会x % 2 == 0啦）</h5>
-<p>任意数与1取位与，结果为1则是奇数</p>
+
+          <h4>
+            <a name="_root-位运/位移运算的使用场景" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            位运/位移运算的使用场景
+          </h4>
+          <h5>
+            <a name="_root-2的次幂快速乘除运算" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2的次幂快速乘除运算
+          </h5><p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
+
+          <h5>
+            <a name="_root-快速模2/奇偶判断（不要再只会x % 2 == 0啦）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            快速模2/奇偶判断（不要再只会x % 2 == 0啦）
+          </h5><p>任意数与1取位与，结果为1则是奇数</p>
 <pre><code class="language-java">// x &amp; 1 等价于 x % 2
 System.out.println(3 &amp; 1); //1
 System.out.println(2 &amp; 1); //0</code></pre>
-<h5 id="快速两数交换不用中间值">快速两数交换/不用中间值</h5>
-<pre><code class="language-java">int a = 999;
+
+          <h5>
+            <a name="_root-快速两数交换/不用中间值" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            快速两数交换/不用中间值
+          </h5><pre><code class="language-java">int a = 999;
 int b = 888;
 a ^= b;
 b ^= a;
 a ^= b;
 System.out.println(a); // 888
 System.out.println(b); // 999</code></pre>
-<h5 id="加密解密">加密解密</h5>
-<pre><code class="language-java">@Test
+
+          <h5>
+            <a name="_root-加密解密" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            加密解密
+          </h5><pre><code class="language-java">@Test
 public void testEncript(){
     int plaintext = 0b00001111; // 0000 1111
     int key =       0b01010101; // 0101 0101
@@ -379,8 +456,13 @@ public void testEncript(){
     //decription
     int plaintext2 = cipher ^ key; // 0000 1111
 }</code></pre>
-<h5 id="bitmask">BitMask</h5>
-<p>什么是BitMask？一般翻译为<strong>位掩码</strong>，是一种以高效、省空间的方式对<strong>状态（status）</strong>进行<strong>设置（set）、清零（clear）、检查（check）</strong>的位运算运用。</p>
+
+          <h5>
+            <a name="_root-BitMask" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            BitMask
+          </h5><p>什么是BitMask？一般翻译为<strong>位掩码</strong>，是一种以高效、省空间的方式对<strong>状态（status）</strong>进行<strong>设置（set）、清零（clear）、检查（check）</strong>的位运算运用。</p>
 <p>比如我们在业务中<strong>某条记录</strong>需要记录16个<strong>A业务状态</strong>，也就是需要4个bit位来记录我们的<strong>A业务状态</strong>，假设我们这条记录还有其他<strong>业务的状态</strong>，我们选择记录的第<strong>5-8位</strong>来记录<strong>A业务状态</strong>，则可以假设有如下记录：</p>
 <p><strong>record：</strong>1001 <strong>0111</strong> 0010</p>
 <p>则中间的<strong>0111</strong>才是我们真正想要操作的记录位，我们可以用<strong>BitMask</strong>来操作：</p>
@@ -407,8 +489,13 @@ public void testBitMask(){
     status = record &amp; ~mask | 0x060;
     System.out.println(status); // 1903 -&gt; 0111 0110 1111
 }</code></pre>
-<h5 id="bitmap算法">BitMap算法</h5>
-<p>貌似是一个很强的东西，待更新</p>
+
+          <h5>
+            <a name="_root-BitMap算法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            BitMap算法
+          </h5><p>貌似是一个很强的东西，待更新</p>
 <hr>
 <p><strong>参考</strong></p>
 <p><a href="https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators">https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators</a></p>
@@ -440,19 +527,10 @@ public void testBitMask(){
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,42 +136,63 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1arzjog<br>title: Jenkins Introductions&amp;Setup<br>categories:</p>
-<ul>
-<li>note</li>
-<li>jenkins<br>tags:</li>
-<li>setup</li>
-<li>jenkins<br>date: 2018-11-19 14:51:00<br>series: jenkins</li>
-</ul>
-<hr>
-<h3 id="introductions">Introductions</h3>
-<p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
+        
+          <h3>
+            <a name="_root-Introductions" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introductions
+          </h3><p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
 <p><img src="https://image.youyinnn.top/img/20181119145558.png" alt=""></p>
 <p>Jenkins的默认UI也有点丑，还不如官网的UI好看</p>
 <p>但是不影响这玩意的强大表现</p>
-<h3 id="installation-on-centos">Installation on CentOS</h3>
-<h4 id="fetch-yum-repo">Fetch yum repo</h4>
-<p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
+
+          <h3>
+            <a name="_root-Installation on CentOS" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Installation on CentOS
+          </h3>
+          <h4>
+            <a name="_root-Fetch yum repo" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Fetch yum repo
+          </h4><p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
 <p>There is also <a href="http://pkg.jenkins-ci.org/redhat-stable/">a LTS YUM repository</a> for the <a href="https://wiki.jenkins.io/display/JENKINS/LTS+Release+Line">LTS Release Line</a></p>
 <ul>
 <li><code>sudo wget -O /etc/yum.repos.d/jenkins.repo</code> <code>http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo</code></li>
 <li><code>sudo rpm --import</code> <code>https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
 <li><code>sudo yum install jenkins</code></li>
 </ul>
-<h4 id="installation-of-java">Installation of Java</h4>
-<p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
+
+          <h4>
+            <a name="_root-Installation of Java" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Installation of Java
+          </h4><p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
 <pre><code class="language-bash">$ sudo yum install java</code></pre>
 <p><strong>Note:</strong> If running CentOS, ensure you follow the <a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava">guide below</a>.</p>
-<h4 id="startstop">Start/Stop</h4>
-<ul>
+
+          <h4>
+            <a name="_root-Start/Stop" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Start/Stop
+          </h4><ul>
 <li><code>sudo service jenkins start/stop/restart</code></li>
 <li><code>sudo chkconfig jenkins on</code></li>
 </ul>
 <p><strong>Note:</strong> if you get the following error message, ensure that Java has been installed:</p>
 <pre><code class="language-bash">Starting jenkins (via systemctl):  Job `for` jenkins.service failed. See `&#39;systemctl status jenkins.service&#39;` and `&#39;journalctl -xn&#39;` `for` details.[FAILED]</code></pre>
-<h4 id="what-does-this-package-do">What does this package do?</h4>
-<ul>
+
+          <h4>
+            <a name="_root-What does this package do?" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            What does this package do?
+          </h4><ul>
 <li>Jenkins will be launched as a daemon on startup. See <code>/etc/init.d/jenkins</code> for more details.</li>
 <li>The &#39;<code>jenkins</code>&#39; user is created to run this service. If you change this to a different user via the config file, you must change the owner of /var/log/jenkins, /var/lib/jenkins, and /var/cache/jenkins.</li>
 <li>Log file will be placed in <code>/var/log/jenkins/jenkins.log</code>. Check this file if you are troubleshooting Jenkins.</li>
@@ -191,8 +207,13 @@
 <li>要在CentOS下支持Jenkins，请不要使用JDK，要安装OpenJDK</li>
 </ul>
 </blockquote>
-<h4 id="more-change-jenkins-run-as-with-root">More: change Jenkins run as with root</h4>
-<p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
+
+          <h4>
+            <a name="_root-More: change Jenkins run as with root" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            More: change Jenkins run as with root
+          </h4><p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
 <p>1) <code>vim /etc/sysconfig/jenkins</code></p>
 <p>2) 找到JENKINS_USER改为 “root”:</p>
 <pre><code>JENKINS_USER=&quot;root&quot;</code></pre><p>3)然后更改Jenkins home，webroot和日志的所有权：</p>
@@ -202,10 +223,20 @@ $ chown -R root:root /var/log/jenkins</code></pre>
 <p>4).重新启动Jenkins并检查用户是否已被更改</p>
 <pre><code class="language-bash">$ service jenkins restart</code></pre>
 <p>这样我们就给jenkins设置了root权限，我们再运行shell脚本就不会提示权限问题了。</p>
-<h4 id="wiki">Wiki</h4>
-<p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
-<h3 id="create-your-first-pipline-by-using-github-repo-as-branch-source">Create your first pipline by using github repo as branch source</h3>
-<p>To get started quickly with Pipeline:</p>
+
+          <h4>
+            <a name="_root-Wiki" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Wiki
+          </h4><p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
+
+          <h3>
+            <a name="_root-Create your first pipline by using github repo as branch source" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Create your first pipline by using github repo as branch source
+          </h3><p>To get started quickly with Pipeline:</p>
 <ol>
 <li>Copy one of the <a href="https://jenkins.io/doc/pipeline/tour/hello-world/#examples">examples below</a> into your repository and name it <code>Jenkinsfile</code></li>
 <li>Click the <strong>New Item</strong> menu within Jenkins </li>
@@ -253,19 +284,10 @@ pipeline {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

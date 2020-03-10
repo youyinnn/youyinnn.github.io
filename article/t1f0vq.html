@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: t1f0vq<br>title: Leetcode-6~10<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm</li>
-<li>leetcode<br>tags:</li>
-<li>leetcode<br>date: 2019-02-17 13:18:00<br>series: leetcode</li>
-</ul>
-<hr>
-<h3 id="6-zigzag-conversionmedium">6. ZigZag Conversion(Medium)</h3>
-<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+        
+          <h3>
+            <a name="_root-6. ZigZag Conversion(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            6. ZigZag Conversion(Medium)
+          </h3><p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
 <pre><code>P   A   H   N
 A P L S I I G
 Y   I   R</code></pre><p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
@@ -167,8 +158,13 @@ P     I    N
 A   L S  I G
 Y A   H R
 P     I</code></pre><p>说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列</p>
-<h4 id="logical-gap-beat9982">Logical Gap Beat(99.82%)</h4>
-<p>这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：</p>
+
+          <h4>
+            <a name="_root-Logical Gap Beat(99.82%)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Logical Gap Beat(99.82%)
+          </h4><p>这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：</p>
 <pre class="nhi">
 以26个字母序列为例：
 row=3
@@ -248,8 +244,13 @@ E       M       U           04        | 12          | 20
     }
     return sb.toString();
 }</code></pre>
-<h3 id="7-reverse-integereasy">7. Reverse Integer(Easy)</h3>
-<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+
+          <h3>
+            <a name="_root-7. Reverse Integer(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            7. Reverse Integer(Easy)
+          </h3><p>Given a 32-bit signed integer, reverse digits of an integer.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: 123
 Output: 321</code></pre><p><strong>Example 2:</strong></p>
@@ -257,8 +258,13 @@ Output: 321</code></pre><p><strong>Example 2:</strong></p>
 Output: -321</code></pre><p><strong>Example 3:</strong></p>
 <pre><code>Input: 120
 Output: 21</code></pre><p><strong>Note:</strong><br>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
-<h4 id="ⅰ-with-string">Ⅰ. with string</h4>
-<p>You can use only string but in java we have StringBuilder</p>
+
+          <h4>
+            <a name="_root-Ⅰ. with string" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅰ. with string
+          </h4><p>You can use only string but in java we have StringBuilder</p>
 <pre><code class="language-java">public int reverse(int x) {
     int raw = Math.abs(x);
     StringBuilder sb = new StringBuilder(raw + &quot;&quot;);
@@ -274,8 +280,13 @@ Output: 21</code></pre><p><strong>Note:</strong><br>Assume we are dealing with a
     }
     return ans;
 }</code></pre>
-<h4 id="ⅱ-calculate">Ⅱ. calculate</h4>
-<p>Refer from discuss</p>
+
+          <h4>
+            <a name="_root-Ⅱ. calculate" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅱ. calculate
+          </h4><p>Refer from discuss</p>
 <ol>
 <li><p>No need to handle the minus sign cause <strong>Mod</strong> will keep it.</p>
 <p>e.g <code>-51  % 10</code> get  <code>-1</code></p>
@@ -294,8 +305,13 @@ Output: 21</code></pre><p><strong>Note:</strong><br>Assume we are dealing with a
     }
     return ans;
 }</code></pre>
-<h3 id="8-string-to-integermedium">8. String To Integer(Medium)</h3>
-<p>这题是傻逼题，vote第一的discuss就是喷它的，因为有太多的边角case</p>
+
+          <h3>
+            <a name="_root-8. String To Integer(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            8. String To Integer(Medium)
+          </h3><p>这题是傻逼题，vote第一的discuss就是喷它的，因为有太多的边角case</p>
 <pre><code class="language-java">public int myAtoi(String str) {
     int ans = 0;
     char[] chars = str.toCharArray();
@@ -351,8 +367,13 @@ public boolean isSign(char c) {
 public int char2Number(char c) {
     return c - &#39;0&#39;;
 }</code></pre>
-<h3 id="9-parlindrome-numbereasy">9. Parlindrome Number(Easy)</h3>
-<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+
+          <h3>
+            <a name="_root-9. Parlindrome Number(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            9. Parlindrome Number(Easy)
+          </h3><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: 121
 Output: true</code></pre><p><strong>Example 2:</strong></p>
@@ -363,8 +384,13 @@ Explanation: From left to right, it reads -121. From right to left, it becomes 1
 Output: false
 Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</code></pre><p><strong>Follow up:</strong></p>
 <p>Coud you solve it without converting the integer to a string?</p>
-<h4 id="ⅰ-slide-window">Ⅰ. slide window</h4>
-<p>If we know the length of the number sequence, then we could easily pick up any single number on this sequence.</p>
+
+          <h4>
+            <a name="_root-Ⅰ. slide window" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅰ. slide window
+          </h4><p>If we know the length of the number sequence, then we could easily pick up any single number on this sequence.</p>
 <pre class="nhi">
 We have number: x = 10234
                [1] 0 2 3 4
@@ -402,8 +428,13 @@ We call 10000/100 as a 'base', it descide the position of the window.
     } 
     return true;
 }</code></pre>
-<h4 id="ⅱ-just-look-on-half">Ⅱ. just look on half</h4>
-<p>Base on offical solution:</p>
+
+          <h4>
+            <a name="_root-Ⅱ. just look on half" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅱ. just look on half
+          </h4><p>Base on offical solution:</p>
 <pre><code class="language-java">public bool IsPalindrome(int x) {
     if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0)) {
         return false;
@@ -415,8 +446,13 @@ We call 10000/100 as a 'base', it descide the position of the window.
     }
     return x == rev || x == rev/10;
 }</code></pre>
-<h3 id="10-regular-expression-matchinghard">10. Regular Expression Matching(hard)</h3>
-<p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>&#39;.&#39;</code>and <code>&#39;*&#39;</code>.</p>
+
+          <h3>
+            <a name="_root-10. Regular Expression Matching(hard)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            10. Regular Expression Matching(hard)
+          </h3><p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>&#39;.&#39;</code>and <code>&#39;*&#39;</code>.</p>
 <pre><code>&#39;.&#39; Matches any single character.
 &#39;*&#39; Matches zero or more of the preceding element.</code></pre><p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
 <p><strong>Note:</strong></p>
@@ -448,8 +484,13 @@ Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it m
 <pre><code>Input:
 s = &quot;mississippi&quot;
 p = &quot;mis*is*p*.&quot;
-Output: false</code></pre><h4 id="ⅰ-recursion">Ⅰ. Recursion</h4>
-<p>这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多</p>
+Output: false</code></pre>
+          <h4>
+            <a name="_root-Ⅰ. Recursion" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅰ. Recursion
+          </h4><p>这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多</p>
 <p>我开始解的时候沉迷于线性解法，去遍历<code>pattern</code>字串，试图用多个<code>if-else</code>去覆盖到所有的case，但是失败了，因为线性解法去覆盖case的话，不太可能一次性写出所有的case就算真的让你写出来了话，花的时间也非常多</p>
 <p>那么怎么才能一阵见血呢？看你做题的sence了- -</p>
 <p>为了方便，我们把<code>text</code> matching <code>pattern</code>简写成<code>text -&gt; pattern</code></p>
@@ -480,8 +521,13 @@ Output: false</code></pre><h4 id="ⅰ-recursion">Ⅰ. Recursion</h4>
         return firstMatch &amp;&amp; isMatch(text.substring(1), pattern.substring(1));
     }
 }</code></pre>
-<h4 id="ⅱ-dp">Ⅱ. DP</h4>
-<p>DP能写出千种万种方式，只是想不想得到而已，附上我喜欢的<a href="https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235">一种</a></p>
+
+          <h4>
+            <a name="_root-Ⅱ. DP" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅱ. DP
+          </h4><p>DP能写出千种万种方式，只是想不想得到而已，附上我喜欢的<a href="https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235">一种</a></p>
 <pre><code>假如我们有：
 
 Tn = t1t2t3...tn-1tn
@@ -575,19 +621,10 @@ i    false    false    false    false    false    false    false    false    fal
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

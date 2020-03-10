@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,20 +136,20 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1kakozs<br>title: 从头到尾读Iterable与Iterator<br>categories:</p>
-<ul>
-<li>thinking</li>
-<li>从头到尾读系列<br>comments: true<br>date: 2018-05-15 17:22:14<br>tags:</li>
-<li>iterable</li>
-<li>iterator</li>
-<li>collections-framework<br>series: 从头到尾读</li>
-</ul>
-<hr>
-<h3 id="iterable接口">Iterable接口</h3>
-<p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
-<h4 id="源码">源码</h4>
-<pre><code class="language-java">/**
+        
+          <h3>
+            <a name="_root-Iterable接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Iterable接口
+          </h3><p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
+
+          <h4>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h4><pre><code class="language-java">/**
  * 实现这个接口, 意味着对象可以使用forEach循环进行操作
  */
 public interface Iterable&lt;T&gt; {
@@ -186,10 +181,20 @@ public interface Iterable&lt;T&gt; {
         return Spliterators.spliteratorUnknownSize(iterator(), 0);
     }
 }</code></pre>
-<h3 id="iterator接口">Iterator接口</h3>
-<p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
-<h4 id="源码-1">源码</h4>
-<pre><code class="language-java">/**
+
+          <h3>
+            <a name="_root-Iterator接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Iterator接口
+          </h3><p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
+
+          <h4>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h4><pre><code class="language-java">/**
  * 源代码不多 所以去掉了很多注释就贴出来了
  */
 public interface Iterator&lt;E&gt; {
@@ -228,12 +233,22 @@ public interface Iterator&lt;E&gt; {
     }
 }
 </code></pre>
-<h4 id="foreachremaining引例">forEachRemaining引例</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-forEachRemaining引例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            forEachRemaining引例
+          </h4><blockquote>
 <p>待补充</p>
 </blockquote>
-<h3 id="listiterator">ListIterator</h3>
-<p>比一般的迭代器要厉害 </p>
+
+          <h3>
+            <a name="_root-ListIterator" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ListIterator
+          </h3><p>比一般的迭代器要厉害 </p>
 <pre><code class="language-java">/**
  * 实现这个接口，意味着你的迭代器可以允许正向逆向地遍历list
  * 在过程中你甚至可以获取当前迭代的index，甚至是修改元素
@@ -287,19 +302,10 @@ public interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt; {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

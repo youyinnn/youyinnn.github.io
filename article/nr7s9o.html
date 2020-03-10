@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,19 +136,16 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: nr7s9o<br>title: 初探Java8之lambda<br>categories:</p>
-<ul>
-<li>thinking<br>comments: true<br>date: 2018-05-15 10:05:00<br>tags:</li>
-<li>java8</li>
-<li>lambda</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>本文从为知笔记迁移过来, 本文的写作时间是 : 2016/10/17 下午12:28:14, 两年前的文章, 言语难免幼稚, 思维难免浅显, 多多包含.</p>
 <p>{% endcq %}</p>
-<h3 id="引例">引例</h3>
-<pre><code class="language-java">    List&lt;Integer&gt; intlist = new ArrayList&lt;Integer&gt;();
+
+          <h3>
+            <a name="_root-引例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            引例
+          </h3><pre><code class="language-java">    List&lt;Integer&gt; intlist = new ArrayList&lt;Integer&gt;();
 
     intlist.add(1);
     intlist.add(2);
@@ -267,8 +259,13 @@ public interface Consumer&lt;T&gt; {
 <p>在Java5的基础上，lambda就使代码更加简洁。</p>
 <p>那么。。。lambda能在哪里用？前面提到过一个： <code>@FunctionalInterface</code> ，研究了Java8的API文档我发现：</p>
 <p>这是一个FI声明，FI官方给的定义就是：有且仅有一个抽象方法的接口。而且这个抽象方法被称作是函数式方法，这个函数式方法能被lambda表达式的值和返回值类型所匹配。FI能够为多种上下文提供目标类型。</p>
-<h3 id="lambda的用法：">Lambda的用法：</h3>
-<p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。 </p>
+
+          <h3>
+            <a name="_root-Lambda的用法：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Lambda的用法：
+          </h3><p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。 </p>
 <p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。 </p>
 <p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。 </p>
 <p>可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。</p>
@@ -300,8 +297,13 @@ public interface Consumer&lt;T&gt; {
 </li>
 </ul>
 <p>至少我是这样理解他干了这俩事的，所以我们就可以使用这个<code>interfacesay</code>函数！！！</p>
-<h3 id="总结">总结</h3>
-<p>这也就解决了上面的<code>accept</code>方法为什么没有实现却可以使用的问题！</p>
+
+          <h3>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h3><p>这也就解决了上面的<code>accept</code>方法为什么没有实现却可以使用的问题！</p>
 <p>runoob网站还提到，<code>lambda</code>表达式只能引用<code>final</code>或者<code>final</code>局部变量，也就是不能在<code>lambda</code>内修改外部定义的变量，否则编译出错。就算没有说明变量是<code>final</code>，在表达式内也改不了，意思是传进去的变量被标识为有一个隐式的<code>final</code>说明。</p>
 <p>参考：<br><a href="http://www.runoob.com/java/java8-lambda-expressions.html">http://www.runoob.com/java/java8-lambda-expressions.html</a><br><a href="http://blog.csdn.net/samjustin1/article/details/52268004">http://blog.csdn.net/samjustin1/article/details/52268004</a><br>Java Platform SE 8 - API</p>
 
@@ -329,19 +331,10 @@ public interface Consumer&lt;T&gt; {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

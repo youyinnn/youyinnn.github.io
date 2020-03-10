@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1nz9lo5<br>title: Tree Plan-1<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm<br>tags:</li>
-<li>algorithm</li>
-<li>binary-tree<br>date: 2019-01-28 15:11:00</li>
-</ul>
-<hr>
-<h3 id="should-have-a-plan">Should have a PLAN!</h3>
-<p>I was asked a tree problem when I was having a face to face interview at <em>PayPal</em> last Friday, and I might failed on this question.</p>
+        
+          <h3>
+            <a name="_root-Should have a PLAN!" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Should have a PLAN!
+          </h3><p>I was asked a tree problem when I was having a face to face interview at <em>PayPal</em> last Friday, and I might failed on this question.</p>
 <p>It&#39;s been too long that I&#39;m almost forgot the knowledge of TREE, and I&#39;ve never truly go over it and it&#39;s time to get it done.</p>
 <p>The question:</p>
 <pre class="nhi">
@@ -169,8 +160,13 @@ the relationship of Parent-Child. Find the number of group of provided tree.
 e.g：the tree above will have 4 groups [5a,5b,5c,5d],[6],[7a,7b],[5e]
 </pre>
 
-<h3 id="introduction">Introduction</h3>
-<p><strong>Trees:</strong> Unlike Arrays, Linked Lists, Stack and queues, which are linear data structures, trees are hierarchical data structures.</p>
+
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p><strong>Trees:</strong> Unlike Arrays, Linked Lists, Stack and queues, which are linear data structures, trees are hierarchical data structures.</p>
 <p><strong>Tree Vocabulary:</strong> The topmost node is called root of the tree. The elements that are directly under an element are called its children. The element directly above something is called its parent. For example, ‘a’ is a child of ‘f’, and ‘f’ is the parent of ‘a’. Finally, elements with no children are called leaves.</p>
 <pre><code>      tree
       ----
@@ -195,16 +191,26 @@ e.g：the tree above will have 4 groups [5a,5b,5c,5d],[6],[7a,7b],[5e]
 <li><strong>moderate（中等的、适中的）</strong></li>
 <li><strong>hierarchical（阶层的）</strong></li>
 </ol>
-<h3 id="binary-tree">Binary Tree</h3>
-<p><strong>Binary Tree:</strong> A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child.</p>
+
+          <h3>
+            <a name="_root-Binary Tree" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Binary Tree
+          </h3><p><strong>Binary Tree:</strong> A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child.</p>
 <pre>
 Node ┬ int  value
      ├ Node left
      └ Node right
 </pre>
 
-<h4 id="properties">Properties</h4>
-<ol>
+
+          <h4>
+            <a name="_root-Properties" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Properties
+          </h4><ol>
 <li><p>The maximum number of nodes at level ‘l’ of a binary tree is <strong>2^(l-1)</strong></p>
 </li>
 <li><p>Maximum number of nodes in a binary tree of height ‘h’ is <strong>2^h – 1</strong></p>
@@ -222,8 +228,13 @@ Node ┬ int  value
        T = Number of internal nodes with two children</code></pre></li>
 </ol>
 <p><em>PS：前两个理解一下就好了，后面3个用的少，用的时候还得查- -</em></p>
-<h4 id="types-of-binary-tree">Types of Binary Tree</h4>
-<ul>
+
+          <h4>
+            <a name="_root-Types of Binary Tree" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Types of Binary Tree
+          </h4><ul>
 <li><strong>Full Binary Tree</strong> A Binary Tree is full if <strong>every node has 0 or 2 children</strong>. Following are examples of a full binary tree. We can also say a full binary tree is a binary tree in which all nodes except leaves have two children.</li>
 <li><strong>Complete Binary Tree:</strong> A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible.</li>
 <li><strong>Perfect Binary Tree</strong> A Binary tree is Perfect Binary Tree in which all internal nodes have two children and <strong>all leaves are at the same level</strong>.</li>
@@ -260,19 +271,10 @@ Node ┬ int  value
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,17 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: lt42s8<br>title: Docker Persist Data Overview<br>categories:</p>
-<ul>
-<li>note</li>
-<li>docker<br>tags:</li>
-<li>docker</li>
-<li>volume<br>date: 2018-12-4 9:44:33<br>series: docker</li>
-</ul>
-<hr>
-<h3 id="introduction">Introduction</h3>
-<p>By default all files created inside a container are stored on a writable container layer.</p>
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p>By default all files created inside a container are stored on a writable container layer.</p>
 <p>That means that the data doesn&#39;t persist when that container no longer exists, and it can be difficult to get the data out of the container if another process needs it.</p>
 <p>And here&#39;s you should know: a container&#39;s writable layer is tightly coupled to the host machine where the container is running. So <strong>you can&#39;t easily move the data somewhere else</strong>.</p>
 <p>Docker has two options for containers to store files in the host machine, so that the files are persisted even after the container stops: </p>
@@ -160,8 +151,13 @@
 <li><em>bind mounts</em></li>
 </ul>
 <p>If you’re running Docker on Linux you can also use a <em>tmpfs mount</em>.</p>
-<h3 id="choose-the-right-type-of-mount">Choose the right type of mount</h3>
-<p>No matter which type of mount you choose to use, the data looks the same from within the container. It is exposed as either a directory or an individual file in the container’s filesystem.</p>
+
+          <h3>
+            <a name="_root-Choose the right type of mount" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Choose the right type of mount
+          </h3><p>No matter which type of mount you choose to use, the data looks the same from within the container. It is exposed as either a directory or an individual file in the container’s filesystem.</p>
 <p>An easy way to visualize the difference among volumes, bind mounts, and <code>tmpfs</code> mounts is to think about where the data lives on the Docker host.</p>
 <p><img src="https://docs.docker.com/storage/images/types-of-mounts.png" alt="types of mounts and where they live on the Docker host"></p>
 <ul>
@@ -186,16 +182,31 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="use-case">Use case</h3>
-<h4 id="for-volumes">For volumes</h4>
-<ul>
+
+          <h3>
+            <a name="_root-Use case" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Use case
+          </h3>
+          <h4>
+            <a name="_root-For volumes" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            For volumes
+          </h4><ul>
 <li><strong>Sharing data among multiple running containers.</strong> If you don’t explicitly create it, a volume is created the first time it is mounted into a container. When that container stops or is removed, the volume still exists. Multiple containers can mount the same volume simultaneously, either read-write or read-only. Volumes are only removed when you explicitly remove them.</li>
 <li>Volumes help you <strong>decouple the configuration</strong> of the Docker host from the container runtime.</li>
 <li>When you want to <strong>store your container’s data on a remote host or a cloud provider</strong>, rather than locally.</li>
 <li>When you <strong>need to back up, restore, or migrate data</strong> from one Docker host to another, volumes are a better choice. You can stop containers using the volume, then back up the volume’s directory (such as <code>/var/lib/docker/volumes/&lt;volume-name&gt;</code>).</li>
 </ul>
-<h4 id="for-bind-mounts">For bind mounts</h4>
-<ul>
+
+          <h4>
+            <a name="_root-For bind mounts" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            For bind mounts
+          </h4><ul>
 <li><p><strong>Sharing configuration files from the host machine to containers.</strong> </p>
 <p>This is how Docker provides DNS resolution to containers by default, by mounting <code>/etc/resolv.conf</code> from the host machine into each container.</p>
 </li>
@@ -206,16 +217,31 @@
 <li><p>When the file or directory structure of the Docker host is guaranteed to be consistent with the bind mounts the containers require.</p>
 </li>
 </ul>
-<h4 id="for-tmpfs-mounts">For tmpfs mounts</h4>
-<p><code>tmpfs</code> mounts are best used for cases when you do not want the data to persist either on the host machine or within the container. This may be for security reasons or to protect the performance of the container when your application needs to write a large volume of non-persistent state data.</p>
-<h3 id="gemtips-for-using-bind-mounts-or-volumes">:gem:Tips for using bind mounts or volumes</h3>
-<p>If you use either bind mounts or volumes, keep the following in mind:</p>
+
+          <h4>
+            <a name="_root-For tmpfs mounts" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            For tmpfs mounts
+          </h4><p><code>tmpfs</code> mounts are best used for cases when you do not want the data to persist either on the host machine or within the container. This may be for security reasons or to protect the performance of the container when your application needs to write a large volume of non-persistent state data.</p>
+
+          <h3>
+            <a name="_root-:gem:Tips for using bind mounts or volumes" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :gem:Tips for using bind mounts or volumes
+          </h3><p>If you use either bind mounts or volumes, keep the following in mind:</p>
 <ul>
 <li>If you mount an <strong>empty volume</strong> into a directory in the container in which files or directories exist, these files or directories are propagated (copied) into the volume. Similarly, if you start a container and specify a volume which does not already exist, an empty volume is created for you. This is a good way to pre-populate data that another container needs.</li>
 <li>If you mount a <strong>bind mount or non-empty volume</strong> into a directory in the container in which some files or directories exist, these files or directories are obscured by the mount.</li>
 </ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>We have three ways to manage data on a running container:</p>
+
+          <h3>
+            <a name="_root-Conclusion" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Conclusion
+          </h3><p>We have three ways to manage data on a running container:</p>
 <ol>
 <li>volume: <ul>
 <li>docker managed</li>
@@ -260,19 +286,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

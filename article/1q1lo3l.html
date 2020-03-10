@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,20 +136,16 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1q1lo3l<br>title: Electron_打包你的HelloWorld为exe<br>categories:</p>
-<ul>
-<li>note</li>
-<li>electron<br>comments: true<br>tags:</li>
-<li>electron</li>
-<li>helloworld<br>series: electron<br>date: 2017-11-23 13:02:21</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>EXE什么的，看着就忍不住要双击它！</p>
 <p>{% endcq %}</p>
-<h3 id="introduction">Introduction</h3>
-<hr>
+
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><hr>
 <p>首先介绍一下Electron打包应用的方式：</p>
 <ul>
 <li>打包成asar分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging">详情见</a>。</li>
@@ -168,8 +159,13 @@
 <li>重编译源码二进制文件...</li>
 </ul>
 <p>用打包工具进行打包比较傻瓜式，两年前的时候，我用过packager，但是现在不知道为啥不好使了，老卡住，然后我转试builder。</p>
-<h2 id="electron-packager">electron-packager</h2>
-<p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
+
+          <h2>
+            <a name="_root-electron-packager" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            electron-packager
+          </h2><p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
 <pre><code class="language-shell">npm insatll electron-packager -g</code></pre>
 <p>对还是全局安装 不要怂。</p>
 <p>要打包你的项目，你只需要运行下面格式的命令：</p>
@@ -229,8 +225,13 @@ $</code></pre>
 <hr>
 <p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
 <p><em>参考：<a href="https://electronjs.org/docs/tutorial/application-distribution">https://electronjs.org/docs/tutorial/application-distribution</a></em><br><em>参考：<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">https://github.com/electron-userland/electron-packager/blob/master/docs/api.md</a></em><br><em>参考：<a href="http://blog.csdn.net/a1170201028/article/details/59108126">http://blog.csdn.net/a1170201028/article/details/59108126</a></em></p>
-<h2 id="electron-builder">electron-builder</h2>
-<ol>
+
+          <h2>
+            <a name="_root-electron-builder" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            electron-builder
+          </h2><ol>
 <li><p>Specify the standard fields in the application <code>package.json</code> — <a href="https://www.electron.build/configuration/configuration#Metadata-name">name</a>, <code>description</code>, <code>version</code> and <a href="https://docs.npmjs.com/files/package.json#people-fields-author-contributors">author</a>.</p>
 </li>
 <li><p>Specify the <a href="https://www.electron.build/configuration/configuration#configuration">build</a> configuration in the <code>package.json</code> as follows:</p>
@@ -281,19 +282,10 @@ $</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,20 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 7kdfk8<br>title: Java并发编程第七坎<br>categories:</p>
-<ul>
-<li>note</li>
-<li>booknote</li>
-<li>《艺术》与《技术》<br>comments: true<br>tags:</li>
-<li>java</li>
-<li>thread</li>
-<li>AQS</li>
-<li>Lock-Api<br>date: 2018-12-25 22:22:48<br>series: 并发</li>
-</ul>
-<hr>
-<h3 id="introduction">Introduction</h3>
-<blockquote>
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><blockquote>
 <p>事前吐槽：<em>Doug Lea</em>老爷子的注释可真难读，也许是我英语太菜鸡了- -（本来还挺自信的，现在哭着学英语）</p>
 </blockquote>
 <p>接下来我们进入Java并发编程的一个崭新的阶段</p>
@@ -166,8 +154,13 @@
 <li>锁的几种<strong>类型</strong>和使用场景</li>
 <li><strong>Lock API</strong>的使用以及和<code>synchronized</code>的区别</li>
 </ul>
-<h3 id="lock-接口">Lock 接口</h3>
-<p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
+
+          <h3>
+            <a name="_root-Lock 接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Lock 接口
+          </h3><p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
 <p>它提供了同步功能，需要使用者<strong>显式</strong>地去获取锁和释放锁：</p>
 <pre><code class="language-java">Lock lock = new ReentrantLock();
 lock.lock();
@@ -271,8 +264,13 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tr>
 </tbody></table>
 <p>看了下上面的API，我们对于Lock和<code>synchronized</code>的区别就清楚了</p>
-<h3 id="队列同步器">队列同步器</h3>
-<p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
+
+          <h3>
+            <a name="_root-队列同步器" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            队列同步器
+          </h3><p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
 <p><strong>原理：</strong>它使用一个int成员变量来表示<strong>同步状态（state）</strong>，对锁的获取其实就是对该state的获取，对于同步状态的获取和改变，同步器提供了线程安全的方法；另外它还通过一个内置的FIFO的队列来完成资源获取线程的排队。</p>
 <blockquote>
 <p><strong>同步状态</strong>的概念，如果学过操作系统的都知道，在PV问题中会有一个值来代表当前可以访问临界资源的资格，这里的同步状态大概也是这么个意思</p>
@@ -285,17 +283,32 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 <li>同步器是面向锁实现者的，它简化了锁的实现，屏蔽了同步状态管理、线程排队、等待和唤醒等底层操作</li>
 </ul>
 <p><strong>锁和同步器很好地隔离了使用者和实现者锁关注的领域，又增强了锁的可操作性和降低了锁的实现难度</strong></p>
-<h4 id="接口与示例">接口与示例</h4>
-<p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
-<h5 id="状态相关方法">状态相关方法</h5>
-<p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
+
+          <h4>
+            <a name="_root-接口与示例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            接口与示例
+          </h4><p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
+
+          <h5>
+            <a name="_root-状态相关方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            状态相关方法
+          </h5><p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
 <ul>
 <li><code>getState()</code>：获取同步状态</li>
 <li><code>setState()</code>：设置当前同步状态</li>
 <li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
 </ul>
-<h5 id="同步器可重写的方法">同步器可重写的方法</h5>
-<table>
+
+          <h5>
+            <a name="_root-同步器可重写的方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            同步器可重写的方法
+          </h5><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -323,8 +336,13 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 <td>当前同步器是否在独占模式下被线程占用，一般用来表示是否被当前线程独占</td>
 </tr>
 </tbody></table>
-<h5 id="同步器提供的模板方法">同步器提供的模板方法</h5>
-<table>
+
+          <h5>
+            <a name="_root-同步器提供的模板方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            同步器提供的模板方法
+          </h5><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -369,8 +387,13 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tr>
 </tbody></table>
 <p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和是否、同步队列线程集合</p>
-<h3 id="尝试实现一个独占锁">尝试实现一个独占锁</h3>
-<pre><code class="language-java">class Mutex implements Lock {
+
+          <h3>
+            <a name="_root-尝试实现一个独占锁" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            尝试实现一个独占锁
+          </h3><pre><code class="language-java">class Mutex implements Lock {
     static class Q extends AbstractQueuedSynchronizer {
         // 查看是否处于占用状态
         @Override
@@ -450,19 +473,10 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

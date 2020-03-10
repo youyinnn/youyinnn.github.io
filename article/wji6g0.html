@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,24 +136,22 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: wji6g0<br>title: AVL树和红黑树<br>categories:</p>
-<ul>
-<li>note</li>
-<li>datastruct<br>comments: true<br>date: 2018-08-27 15:05:00<br>tags:</li>
-<li>BST</li>
-<li>AVL</li>
-<li>RBT</li>
-<li>algorithm</li>
-<li>tree</li>
-</ul>
-<hr>
-<h3 id="小声bb">小声BB</h3>
-<p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
+        
+          <h3>
+            <a name="_root-小声BB" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            小声BB
+          </h3><p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
 <p>其中红黑树更是在HashMap中大展身手，肯定要研究一下为什么他们要用到RBT</p>
 <hr>
-<h3 id="avl">AVL</h3>
-<p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
+
+          <h3>
+            <a name="_root-AVL" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            AVL
+          </h3><p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
 <p>曰：<strong>二叉结构，元素可比，左小右大，仅此而已</strong></p>
 <p>然后再BB一句为什么有了BST之后，又要研究AVL树：在极端的情况下，一组大小有序的数据插入BST，那么就会生成一条线而不是一棵树，这样对于树的操作就完全退化成链表操作，举例说查找操作从二分法的效率变成了顺序查找</p>
 <p>大部分时候我们使用一棵树，更重要的是要用到他的查找操作，而不是插入或者删除操作</p>
@@ -168,8 +161,13 @@
 <p><strong>Why AVL Trees?</strong> Most of the BST operations (e.g., search, max, min, insert, delete.. etc) take O(h) time where h is the height of the BST. The cost of these operations may become O(n) for a skewed Binary tree. If we make sure that height of the tree remains O(Logn) after every insertion and deletion, then we can guarantee an upper bound of O(Logn) for all these operations. The height of an AVL tree is always O(Logn) where n is the number of nodes in the tree (See <a href="http://www.youtube.com/watch?v=TbvhGcf6UJU">this </a>video lecture for proof).</p>
 </blockquote>
 <p>大部分的BST操作都会在<strong>O(h)</strong>的效率内完成，但是一旦树有倾斜，就会变成<strong>O(n)</strong>的效率，AVL通过旋转来保持平衡防止树倾斜，使得所有操作都在<strong>O(logn)</strong>的效率内完成；因为AVL的高度始终都是<strong>O(logn)</strong>；</p>
-<h4 id="和bst有何异同？">和BST有何异同？</h4>
-<ul>
+
+          <h4>
+            <a name="_root-和BST有何异同？" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            和BST有何异同？
+          </h4><ul>
 <li><p><strong>结点：</strong>AVL树的每一个结点中有一个字段用于存储平衡因子（average factor），这个平衡因子用于记录该结点的左子树高度和右子树高度之差，用以表示这棵树本身是否<strong>平衡</strong>，于是这个平衡因子的取值在一棵合法的AVL数中的每个节点上只可能取值为：-1，0，1；</p>
 </li>
 <li><p><strong>平衡状态：</strong>保证树上的每个结点的平衡因子都只在<strong>[-1，1]</strong>之间，一旦达到+2或者-2，就需要通过选旋转操作来保持平衡；</p>
@@ -211,9 +209,19 @@ T2   T3                           T3   T4</code></pre></li>
 </ul>
 </li>
 </ul>
-<h4 id="结构与过程">结构与过程</h4>
-<h5 id="结点结构">结点结构</h5>
-<p>结构比较简单，左右两子和平衡高度</p>
+
+          <h4>
+            <a name="_root-结构与过程" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            结构与过程
+          </h4>
+          <h5>
+            <a name="_root-结点结构" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            结点结构
+          </h5><p>结构比较简单，左右两子和平衡高度</p>
 <pre><code class="language-java">class Node {
     int key, height;
     Node left, right;
@@ -242,8 +250,13 @@ class AVLTree {
     }
     // ...
 }</code></pre>
-<h5 id="右旋">右旋</h5>
-<pre><code class="language-java">Node rightRotate(Node y) {
+
+          <h5>
+            <a name="_root-右旋" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            右旋
+          </h5><pre><code class="language-java">Node rightRotate(Node y) {
     Node x = y.left;
     Node T2 = x.right;
     // Perform rotation
@@ -260,8 +273,13 @@ class AVLTree {
   /                             \
  x             =====&gt;              y
   \                          /
-   T2                        T2</code></pre><h5 id="左旋">左旋</h5>
-<pre><code class="language-java">Node leftRotate(Node x) {
+   T2                        T2</code></pre>
+          <h5>
+            <a name="_root-左旋" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            左旋
+          </h5><pre><code class="language-java">Node leftRotate(Node x) {
     Node y = x.right;
     Node T2 = y.left;
     // Perform rotation
@@ -279,8 +297,13 @@ class AVLTree {
      y        =====&gt;         x
     /                      \
    T2                      T2</code></pre><p>其他双旋操作都是基于这两个基本操作来搞的；</p>
-<h5 id="插入">插入</h5>
-<pre><code class="language-java">Node insert(Node node, int key) {
+
+          <h5>
+            <a name="_root-插入" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            插入
+          </h5><pre><code class="language-java">Node insert(Node node, int key) {
     /* 1.  Perform the normal BST insertion */
     if (node == null)
         return (new Node(key));
@@ -336,18 +359,38 @@ class AVLTree {
 <li><p>根据四种失衡情况进行旋转；</p>
 </li>
 </ol>
-<h5 id="删除操作">删除操作</h5>
-<p>这个更为复杂点，就先不分析了；</p>
-<h4 id="效率">效率</h4>
-<p>插入、查找、删除均为<strong>O(logn)</strong></p>
-<h4 id="参考">参考</h4>
-<blockquote>
+
+          <h5>
+            <a name="_root-删除操作" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            删除操作
+          </h5><p>这个更为复杂点，就先不分析了；</p>
+
+          <h4>
+            <a name="_root-效率" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            效率
+          </h4><p>插入、查找、删除均为<strong>O(logn)</strong></p>
+
+          <h4>
+            <a name="_root-参考" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            参考
+          </h4><blockquote>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a></p>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-2-deletion/">https://www.geeksforgeeks.org/avl-tree-set-2-deletion/</a></p>
 </blockquote>
 <hr>
-<h3 id="红黑树">红黑树</h3>
-<p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
+
+          <h3>
+            <a name="_root-红黑树" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            红黑树
+          </h3><p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
 <p><strong>1)</strong> 每点非红即黑</p>
 <p><strong>2)</strong> 根结点必定黑</p>
 <p><strong>3)</strong> 红结点若有子节点，这俩子节点必定是黑色（有直接关系的两结点不能同时都是红色）</p>
@@ -371,8 +414,13 @@ class AVLTree {
 <p>如果场景中经常有插入和删除等操作，相应的就会有很多旋转操作，在这个情况下，RBT的表现无疑是更胜一筹；</p>
 <p>如果场景中查询操作更多，那还是选AVL-T吧；</p>
 <p>但是也因为如此，RBT的平衡是用概念去描述的，而非像AVL-T一样可以用高度差去量化平衡，所以RBT的实现稍微复杂和难懂一些；</p>
-<h5 id="插入简要分析">插入简要分析</h5>
-<p>在做插入分析之前，我们再说两件事：</p>
+
+          <h5>
+            <a name="_root-插入简要分析" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            插入简要分析
+          </h5><p>在做插入分析之前，我们再说两件事：</p>
 <ol>
 <li><strong>插入的结点一开始就把他当成一个红色结点来插入；（为什么？因为当成黑色结点插入必然会违背rule4）</strong></li>
 <li><strong>NULL结点虽然不做考虑，但是可以视为是黑色结点；</strong></li>
@@ -413,19 +461,10 @@ class AVLTree {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

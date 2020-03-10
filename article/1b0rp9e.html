@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,24 +136,33 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1b0rp9e<br>title: 排序大礼包<br>categories:</p>
-<ul>
-<li>note</li>
-<li>algorithm<br>comments: true<br>date: 2018-06-02 18:50:00<br>tags:<ul>
-<li>algorithm</li>
-<li>sort</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="术语">术语</h3>
-<p><strong>稳定性：</strong>算法排序前后，相同值的元素的相对位置是否不变，变了就不稳定</p>
+        
+          <h3>
+            <a name="_root-术语" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            术语
+          </h3><p><strong>稳定性：</strong>算法排序前后，相同值的元素的相对位置是否不变，变了就不稳定</p>
 <p><strong>在位性：</strong>算法排序是否要借助额外的内存空间，需要就不在位</p>
-<h3 id="各数据对比">各数据对比</h3>
-<h4 id="基本数据">基本数据</h4>
-<h5 id="小数据量">小数据量</h5>
-<table>
+
+          <h3>
+            <a name="_root-各数据对比" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            各数据对比
+          </h3>
+          <h4>
+            <a name="_root-基本数据" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            基本数据
+          </h4>
+          <h5>
+            <a name="_root-小数据量" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            小数据量
+          </h5><table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -202,8 +206,13 @@
 <td align="center">:heavy_multiplication_x:</td>
 </tr>
 </tbody></table>
-<h5 id="大数据量">大数据量</h5>
-<table>
+
+          <h5>
+            <a name="_root-大数据量" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            大数据量
+          </h5><table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -239,8 +248,13 @@
 <td align="center">:heavy_multiplication_x:</td>
 </tr>
 </tbody></table>
-<h4 id="场景表现（⚠️仅供参考！！！）">场景表现（⚠️仅供参考！！！）</h4>
-<table>
+
+          <h4>
+            <a name="_root-场景表现（⚠️仅供参考！！！）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            场景表现（⚠️仅供参考！！！）
+          </h4><table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -312,8 +326,13 @@
 <li><strong>逆序</strong>情况下表现依次为：<strong>希尔、堆、归并、快排、插入、冒泡</strong></li>
 </ol>
 <hr>
-<h3 id="bubblesort">BubbleSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-BubbleSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            BubbleSort
+          </h3><blockquote>
 <p> 相邻元素之间两两比较，按照大小顺序作为交换，每一轮比较都把最大的元素安排到当前轮次的最后面</p>
 <p> 每一轮都把当前待排序列的最大元素从前往后“移动”到最后面，移动的过程形象为“冒泡”；</p>
 <p> 所用技术：<strong>蛮力法</strong></p>
@@ -338,8 +357,13 @@
     }
 }</code></pre>
 <hr>
-<h3 id="selectionsort">SelectionSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-SelectionSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            SelectionSort
+          </h3><blockquote>
 <p>每次扫描后n-i个元素 选出当前参与扫描的最小值，扫描结束后把最小值放置当前轮次的最前面</p>
 <p>每一轮都把最值放到端位置，例子中就是找的最小值，放到最前面，挑最值的过程称为“选择”</p>
 <p>所用技术：<strong>蛮力法</strong></p>
@@ -368,9 +392,19 @@
     }
 }</code></pre>
 <hr>
-<h3 id="insertionsort">InsertionSort</h3>
-<h4 id="straightinsertionsort">StraightInsertionSort</h4>
-<blockquote>
+
+          <h3>
+            <a name="_root-InsertionSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            InsertionSort
+          </h3>
+          <h4>
+            <a name="_root-StraightInsertionSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            StraightInsertionSort
+          </h4><blockquote>
 <p>将数组分为两部分，一部分是已经排序好的，另一部分是待插入的数组</p>
 <p>每次从待插入的数组中取出<strong>第一个元素</strong>元素和有序数组从后往前进行比较，待插入一个一个<strong>往前挤</strong>，直到找到合适的位置</p>
 <p>直到待插入部分元素为0</p>
@@ -396,8 +430,13 @@
     }
 }</code></pre>
 <hr>
-<h4 id="binaryinsertionsort">BinaryInsertionSort</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-BinaryInsertionSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            BinaryInsertionSort
+          </h4><blockquote>
 <p>直接插入排序是将带插入元素从后往前比较和移动<br>目的是为了在以排序序列中找到自己该插入的位置<br>二分插入排序就是在查找该插入位置的时候，使用二分法去查找<br>而不是逆序查找，这样查找的次数就少了很多</p>
 <p>属性大致同直接插入排序</p>
 </blockquote>
@@ -424,16 +463,26 @@
     }
 }</code></pre>
 <hr>
-<h4 id="shellsort">ShellSort</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-ShellSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ShellSort
+          </h4><blockquote>
 <p>希尔排序，是插入排序的一种，是直接插入排序的改进版</p>
 <p>希尔排序有好几种实现，根据选取的增量的不同而改变</p>
 <p>希尔排序是<strong>不稳定的、在位的</strong></p>
 <p>使用场景：处理<strong>基本有序</strong>，<strong>小量数据</strong></p>
 <p>一般的Shell排序的时间复杂度为<strong>O(n^2)</strong>，好一点的有<strong>O(n^(3/2))</strong>，下界为<strong>O(n(log2n))</strong>，没有快排<strong>O(n(logn))</strong>快</p>
 </blockquote>
-<h5 id="swaphalfshellsort">SwapHalfShellSort</h5>
-<blockquote>
+
+          <h5>
+            <a name="_root-SwapHalfShellSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            SwapHalfShellSort
+          </h5><blockquote>
 <p>常规实现，增量一半一半地砍，交换法做插入</p>
 </blockquote>
 <pre><code class="language-java">    public static void shellSort1(int []arr){
@@ -460,8 +509,13 @@
         }
     }
 }</code></pre>
-<h5 id="movehalfshellsort">MoveHalfShellSort</h5>
-<blockquote>
+
+          <h5>
+            <a name="_root-MoveHalfShellSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            MoveHalfShellSort
+          </h5><blockquote>
 <p>移动法做插入，一半增量    ，这种实现意义不大</p>
 </blockquote>
 <pre><code class="language-java">    public static void shellSort2(int []arr){
@@ -483,8 +537,13 @@
         }
     }</code></pre>
 <hr>
-<h3 id="mergesort">MergeSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-MergeSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            MergeSort
+          </h3><blockquote>
 <p>对于需要排序的数组，把它一分为二，递归分</p>
 <p>分到不可再分为止就开始合并，并且是有序地合并</p>
 <p>所用技术：<strong>分治法</strong></p>
@@ -526,8 +585,13 @@ private static void merge(int[] brr, int[] crr, int[] arr){
     }
 }</code></pre>
 <hr>
-<h3 id="quicksort">QuickSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-QuickSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            QuickSort
+          </h3><blockquote>
 <p> 以arr[l]为左界，arr[r]为右界，选择当前界限内的第一个元素作为分裂点</p>
 <p> 从两界向中间扫描为分裂点寻找一个合适的位置，使得分裂点左边的元素都小于等于分裂点</p>
 <p> 右边的元素都大于等于分裂点，再递归以分裂点对左右两边的子数组进行划分排序</p>
@@ -565,8 +629,13 @@ private static void merge(int[] brr, int[] crr, int[] arr){
 </li>
 </ul>
 </blockquote>
-<h4 id="bothsidequicksort">BothSideQuickSort</h4>
-<pre><code class="language-java">public static void bothSideQuickSort(int[] arr, int left, int right) {
+
+          <h4>
+            <a name="_root-BothSideQuickSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            BothSideQuickSort
+          </h4><pre><code class="language-java">public static void bothSideQuickSort(int[] arr, int left, int right) {
     if (left &lt; right) {
         int s = partition(arr, left, right);
         bothSideQuickSort(arr, left, s - 1);
@@ -596,8 +665,13 @@ private static int partition(int[] arr, int left, int right) {
     return left;
 }</code></pre>
 <hr>
-<h3 id="heapsort">HeapSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-HeapSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            HeapSort
+          </h3><blockquote>
 <p>堆排序很有意思，它的思想就是：</p>
 <p>将每个数组看作一个堆，然后我们将这个堆造成大顶堆（根的值在当前数组中最大）或者小顶堆（最小），然后如果是构造大顶堆，那么堆化成功的时候，将根交换到数组最后，这个时候等于找到了最大的元素了（排好了的意思），然后在这个最大元素之前的子数组规模中再造堆，直到造堆的规模为1为止</p>
 <p>这么看下来的话，有点选择排序的意思</p>
@@ -636,8 +710,13 @@ private static int partition(int[] arr, int left, int right) {
     }
 }</code></pre>
 <hr>
-<h3 id="countingsort">CountingSort</h3>
-<blockquote>
+
+          <h3>
+            <a name="_root-CountingSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            CountingSort
+          </h3><blockquote>
 <p>计数排序也是一种很有意思的算法，紫皮书上说到2种计数排序的思想，它是<strong>时空权衡</strong>思想的代表之一</p>
 <ul>
 <li><p>比较计数：是最直观的思想，针对待排序的每一个元素，算出列表中小于该元素值的元素<strong>个数</strong>，并把结果记录在一张表上，于是这个<strong>“个数”</strong>就是该元素在有序表中的位置。</p>
@@ -662,8 +741,13 @@ private static int partition(int[] arr, int left, int right) {
 </li>
 </ul>
 </blockquote>
-<h4 id="comparisoncountingsort">ComparisonCountingSort</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-ComparisonCountingSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ComparisonCountingSort
+          </h4><blockquote>
 <p>时间复杂度：平方级</p>
 <p>空间复杂度：2n</p>
 <p>好处：算法使得键值移动次数最小化，直接放置键值</p>
@@ -687,8 +771,13 @@ private static int partition(int[] arr, int left, int right) {
     }
     return result;
 }</code></pre>
-<h4 id="distributioncountingsort">DistributionCountingSort</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-DistributionCountingSort" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            DistributionCountingSort
+          </h4><blockquote>
 <p>分布式计数的思想：</p>
 <ol>
 <li>需要知道待排序序列的范围：<strong>rank</strong></li>
@@ -732,8 +821,13 @@ private static int partition(int[] arr, int left, int right) {
     }
     return result;
 }</code></pre>
-<h4 id="distributioncountingsort2">DistributionCountingSort2</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-DistributionCountingSort2" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            DistributionCountingSort2
+          </h4><blockquote>
 <p>再补充一个场景限制，现有实现的分布式计数排序<strong>无法表达整数以外的特性</strong>，比如稳定性</p>
 <p>比方说我有一组元素<strong>[3, 2, 2, 1]</strong>, 其中有两个2，第一个设为2a，后者2b，其他排序完成之后，能够表达出2a或者2b是否还在原来的<strong>相对位置</strong>，但是现在的分布率图，是无状态的，最终的结果仅是<code>result[i] = index + low</code>算出的，比如2元素的计数是<strong>2</strong>，这个<strong>2</strong>无法区分到底是2a还是2b</p>
 <p>有一个方法是用queue数组来存储分布率，所以上面的序列的分布率可以为：</p>
@@ -802,19 +896,10 @@ private static int partition(int[] arr, int left, int right) {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 
