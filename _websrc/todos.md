@@ -17,3 +17,16 @@ datetime: 2018-12-29T15:23:44Z
 ### TeX
 
 $$E=mc^2$$
+
+### FlowChart
+
+```flow
+st=>start: User login
+op=>operation: Operation
+cond=>condition: Successful Yes or No?
+e=>end: Into admin
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
