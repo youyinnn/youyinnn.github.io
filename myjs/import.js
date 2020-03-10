@@ -120,6 +120,8 @@ function importJsAfterLoad() {
     load('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js', {
         attrs: map
     }, () => {
-        renderMathInElement(document.body)
+        for (el of document.getElementsByClassName('markdown-body')) {
+            renderMathInElement(el)
+        }
     })
 }
