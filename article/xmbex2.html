@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: xmbex2<br>title: Leetcode-51~55<br>categories:</p>
+<ul>
+<li>note</li>
+<li>algorithm</li>
+<li>leetcode<br>tags:</li>
+<li>leetcode</li>
+<li>n-queens</li>
+<li>backtrack<br>date: 2019-03-30 10:57:00 +8<br>series: leetcode</li>
+</ul>
+<hr>
+<h3 id="51-n-queenshard">51. N-Queens(Hard)</h3>
+<p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
+<p>Given an integer <em>n</em>, return all distinct solutions to the <em>n</em>-queens puzzle.</p>
+<p>Each solution contains a distinct board configuration of the <em>n</em>-queens&#39; placement, where <code>&#39;Q&#39;</code> and <code>&#39;.&#39;</code> both indicate a queen and an empty space respectively.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: 4
+Output: [
+ [&quot;.Q..&quot;,  // Solution 1
+  &quot;...Q&quot;,
+  &quot;Q...&quot;,
+  &quot;..Q.&quot;],
+
+ [&quot;..Q.&quot;,  // Solution 2
+  &quot;Q...&quot;,
+  &quot;...Q&quot;,
+  &quot;.Q..&quot;]
+]
+Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.</code></pre><h4 id="rough-backtracking">Rough Backtracking</h4>
+<p>要打这题，首先得做好下棋的一步关键的那一步：判断该位置是否能下，于是对于<strong>一张完整的棋盘</strong>来说，我们每下一步之前，就需要判断：</p>
+<ol>
+<li>同行同列是否有棋子；</li>
+<li>对角线是否有棋子；</li>
+</ol>
+<p>于是为了做到这一步，大概会花n * n的时间</p>
+<p>然后用回溯去做每一颗棋子的下棋判断，直观+回溯的考虑的话，确实是这样的，但是这题我们可以用一种更聪明的方式去解决；</p>
+<h4 id="smart-backtracking">Smart Backtracking</h4>
+<p>首先我们的判断步骤，不需要遍历整张<code>n*n</code>的棋盘，我们也不需要事先准备好整张棋盘，如果我们把每一步棋当成一行去填补棋盘，第一行是一个棋子，第二行是第二个棋子，于是</p>
+<ul>
+<li>当我们下第<code>i</code>个棋子的时候，只需要判断前面的<code>0~i-1</code>行棋盘就好了；</li>
+<li>关于对角线，我们也不必遍历整行，因为对角线的位置可以根据行差算出来，比如要插入第<code>i</code>行第<code>j</code>列的时候，需要判断上面<code>i-1</code>行的对角线的话，比如第2行在该行的对角线理论上为<code>j + i - 2</code>或者<code>j - (i - 2)</code>；</li>
+</ul>
+<p>于是我们的判断方法为：</p>
+<pre><code class="language-java">private boolean valid(List&lt;String&gt; cb, int x, int y) {
+    for (int rowIndex = 0; rowIndex &lt; x; rowIndex++) {
+        char[] row = cb.get(rowIndex).toCharArray();
+        if (row[y] == &#39;Q&#39;) {
+            return false;
+        }
+        int gap = x - rowIndex;
+        if (y + gap &lt; row.length &amp;&amp; row[y + gap] == &#39;Q&#39;) {
+            return false;
+        }
+        if (y - gap &gt;= 0 &amp;&amp; row[y - gap] == &#39;Q&#39;) {
+            return false;
+        }
+    }
+    return true;
+}</code></pre>
+<p>这样来说会将判断方法的效率基本提到线性，于是加上回溯：</p>
+<pre><code class="language-java">char[] css;
+
+public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) {
+    css = new char[n];
+    List&lt;List&lt;String&gt;&gt; ans = new ArrayList&lt;&gt;();
+    backtracking(ans, new ArrayList&lt;&gt;(), n, 0);
+    return ans;
+}
+
+private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb, int n, int row) {
+    if (row == n) {
+        ans.add(new ArrayList&lt;&gt;(cb));
+    } else {
+        for (int i = 0; i &lt; n; i++) {
+            if (valid(cb, row, i)) {
+                Arrays.fill(css, &#39;.&#39;);
+                css[i] = &#39;Q&#39;;
+                cb.add(String.valueOf(css));
+                backtracking(ans, cb, n, row + 1);
+                cb.remove(cb.size() - 1);
+            }
+        }
+    }
+}</code></pre>
+<h4 id="elegant-backtracking">Elegant Backtracking</h4>
+<p>很遗憾的是，我们上面再聪明再接近线性的判断效率，其实还是抵不过常数级的，所以我们上面的优化过后的code也仅是打到43.6%，我们再来整理一下我们的<strong>valid</strong>函数：</p>
+<ul>
+<li>同列不能下；</li>
+<li>左右对角线不能下；</li>
+</ul>
+<p>同列的话，我们可以用一个n长度数组去记录，这个数组可以所有行共用；</p>
+<p>对角线的话，我们前面做<a href="https://youyinnn.github.io/?to=post&amp;number=111#_root-43.%20Multiply%20Strings(Medium)"><strong>MultiplyString</strong></a>，有想出来过一个对角线的技巧，于是这里我们也可以将所有的对角线压缩成一行：</p>
+<pre><code>对于一个4*4的棋盘：
+
+对于135°的右向对角线，我们可以将2维的压缩成
+                                 0
+   j = 0  1  2  3               1 1              
+i = 0  0  1  2  3              2 2 2        
+    1  1  2  3  4     --&gt;     3 3 3 3  --&gt;  drSet：0 1 2 3 4 5 6
+    2  2  3  4  5              4 4 4
+    3  3  4  5  6               5 5
+                                 6
+行列关系和压缩数组的关系可以是：
+    dri = col + row
+
+同理对于45°的左向对角线：
+                                   3
+   j =  0   1   2   3            2  2
+i = 0   0   1   2   3          1  1  1
+    1  -1   0   1   2  --&gt;   0  0  0  0  --&gt; dlSet: -3 -2 -1 0 1 2 3
+    2  -2  -1   0   1         -1 -1 -1 
+    3  -3  -2  -1   0           -2 -2
+                                  -3
+行列关系和压缩数组的关系可以是：
+    dli = col - row
+
+然后为了数组下标好处理，我们可以加上一个n
+    dli = col - row + n      --&gt; dlSet: 1 2 3 4 5 6 7</code></pre><p>于是这两行就能在代表整个棋盘的左右对角线，<strong>通过规律可以发现，对角线压缩数组的长度不会超过2n</strong>，于是我们的程序可以在线性的时间内判断对角线和列的棋位是否合法了：</p>
+<pre><code class="language-java">public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) {
+    List&lt;List&lt;String&gt;&gt; ans = new ArrayList&lt;&gt;();
+    backtracking(ans, new ArrayList&lt;&gt;(), new boolean[n], new boolean[n * 2], new boolean[n * 2], n, 0);
+    return ans;
+}
+
+private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb,
+                           boolean[] colSet, boolean[] dlSet, boolean[] drSet, int n, int row) {
+    if (row == n) {
+        ans.add(new ArrayList&lt;&gt;(cb));
+    } else {
+        for (int col = 0; col &lt; n; col++) {
+            int dli = col - row + n;
+            int dri = col + row;
+            if (colSet[col] || dlSet[dli] || drSet[dri]) {
+                continue;
+            }
+            colSet[col] = dlSet[dli] = drSet[dri] =  true;
+            char[] css = new char[n];
+            Arrays.fill(css, &#39;.&#39;);
+            css[col] = &#39;Q&#39;;
+            cb.add(String.valueOf(css));
+            backtracking(ans, cb, colSet, dlSet, drSet, n, row + 1);
+            cb.remove(cb.size() - 1);
+            colSet[col] = dlSet[dli] = drSet[dri] =  false;
+        }
+    }
+}</code></pre>
+<h3 id="52n-queensiihard">52.N-QueensII(Hard)</h3>
+<p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
+<p>Given an integer <em>n</em>, return the number of distinct solutions to the <em>n</em>-queens puzzle.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: 4
+Output: 2
+Explanation: There are two distinct solutions to the 4-queens puzzle as shown below.
+[
+ [&quot;.Q..&quot;,  // Solution 1
+  &quot;...Q&quot;,
+  &quot;Q...&quot;,
+  &quot;..Q.&quot;],
+
+ [&quot;..Q.&quot;,  // Solution 2
+  &quot;Q...&quot;,
+  &quot;...Q&quot;,
+  &quot;.Q..&quot;]
+]</code></pre><h4 id="solution-i">Solution I</h4>
+<p>没什么，就改一改上一题而已</p>
+<pre><code class="language-java">int ans = 0;
+
+public int totalNQueens(int n) {
+    backtracking(new ArrayList&lt;&gt;(), n, 0);
+    return ans;
+}
+
+private void backtracking(List&lt;String&gt; cb, int n, int row) {
+    if (row == n) {
+        ans++;
+    } else {
+        for (int i = 0; i &lt; n; i++) {
+            if (valid(cb, row, i)) {
+                char[] css = new char[n];
+                Arrays.fill(css, &#39;.&#39;);
+                css[i] = &#39;Q&#39;;
+                cb.add(String.valueOf(css));
+                backtracking(cb, n, row + 1);
+                cb.remove(cb.size() - 1);
+            }
+        }
+    }
+}
+
+private boolean valid(List&lt;String&gt; cb, int x, int y) {
+    for (int rowIndex = 0; rowIndex &lt; x; rowIndex++) {
+        char[] row = cb.get(rowIndex).toCharArray();
+        if (row[y] == &#39;Q&#39;) {
+            return false;
+        }
+        int gap = x - rowIndex;
+        if (y + gap &lt; row.length &amp;&amp; row[y + gap] == &#39;Q&#39;) {
+            return false;
+        }
+        if (y - gap &gt;= 0 &amp;&amp; row[y - gap] == &#39;Q&#39;) {
+            return false;
+        }
+    }
+    return true;
+}</code></pre>
+<h4 id="solution-ii">Solution II</h4>
+<pre><code class="language-java">int ans = 0;
+boolean[] colSet, drSet, dlSet;
+
+public int totalNQueens(int n) {
+    colSet = new boolean[n];
+    drSet = new boolean[n * 2];
+    dlSet = new boolean[n * 2];
+    backtracking(n, 0);
+    return ans;
+}
+
+private void backtracking(int n, int row) {
+    if (row == n) {
+        ans++;
+    } else {
+        for (int col = 0; col &lt; n; col++) {
+            int dli = col - row + n;
+            int dri = col + row;
+            if (colSet[col] || drSet[dri] || dlSet[dli]) {
+                continue;
+            }
+            colSet[col] = drSet[dri] = dlSet[dli] = true;
+            backtracking(n, row + 1);
+            colSet[col] = drSet[dri] = dlSet[dli] = false;
+        }
+    }
+}</code></pre>
+<h3 id="53-maximun-subarrayeasy">53. Maximun SubArray(Easy)</h3>
+<p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [-2,1,-3,4,-1,2,1,-5,4],
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow up:</strong></p>
+<p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
+<h4 id="dp">DP</h4>
+<p>不多说，在<a href="https://youyinnn.github.io/?to=post&amp;number=63">地痞</a>有分析过的</p>
+<pre><code class="language-java">public int maxSubArray(int[] nums) {
+    int rMax = 0, max = Integer.MIN_VALUE;
+    for (int current: nums) {
+        rMax = Math.max(current, current + rMax);
+        max = Math.max(max, rMax);
+    }
+    return max;
+}</code></pre>
+<h3 id="54-spiral-matrixmedium">54. Spiral Matrix(Medium)</h3>
+<p>Given a matrix of <em>m</em> x <em>n</em> elements (<em>m</em> rows, <em>n</em> columns), return all elements of the matrix in spiral order.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+Output: [1,2,3,6,9,8,7,4,5]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input:
+[
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9,10,11,12]
+]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]</code></pre><h4 id="brute-force">Brute Force</h4>
+<p>hmmmmm，强打就完事了，怎么强打呢？四个关键点：</p>
+<ol>
+<li><p>起点</p>
+<blockquote>
+<p>我们假设每次我们都从当前圈的左上角为起点</p>
+</blockquote>
+</li>
+<li><p>方向</p>
+<blockquote>
+<p>我们假设每次从起点开始的话，转一圈经过的方向恒为：右-下-左-上</p>
+</blockquote>
+<pre><code> 比如一个3X4的矩阵，从起点0,0开始的话：
+     → → → →                       
+     1 2 3 4          1 2 3 4 ↓        1 2 3 4            1  2  3  4
+                 ==&gt;        5 ↓  ==&gt;         5    ==&gt;  ↑ 10        5
+                            6 ↓        9 8 7 6            9  8  7  6
+                                       ← ← ← ←
+ 于是第一圈就完成了，四个方向均只执行到边界了</code></pre></li>
+<li><p>边界</p>
+<blockquote>
+<p>0我们设每个方向都会有边界，每经过一个方向，边界就上涨或者下调；</p>
+<p>比如一个3X4的矩阵，第一圈的时候，按照下标和方向顺序的话，边界值是：3-2-0-1</p>
+<p>关于上涨和下调，接着看下一点</p>
+</blockquote>
+</li>
+<li><p>单向行进</p>
+<blockquote>
+<p>我们有了起点、方向、边界了之后，就可以开始单向行进了，开始由0,0为起点，朝右行进，边界值为3，于是我们从起点开始遍历列下标</p>
+</blockquote>
+<pre><code> 模拟第一圈的情况：
+ 1. 0,0 - 0,1 - 0,2 - 0,3；到达边右界；于是右边界减少到2；轮到下一个方向；
+ 2. 0,3 - 1,3 - 2,3；到达下边界；于是下边界增加到1；轮到下一个方向；
+ 3. 2,3 - 2,2 - 2,1 - 2,0；到达左边界；于是左边界增加到1；轮到下一个方向；
+ 4. 2,0 - 1,0；到达上边界；于是上边界减少到2；轮到下一个方向；</code></pre></li>
+</ol>
+<p>于是代码为：</p>
+<pre><code class="language-java">public List&lt;Integer&gt; spiralOrder(int[][] matrix) {
+    LinkedList&lt;Integer&gt; ans = new LinkedList&lt;&gt;();
+    if (matrix.length == 0) {
+        return ans;
+    }
+    int[] range = new int[]{matrix[0].length - 1, matrix.length - 1, 0, 1};
+    int[] point = new int[]{0, 0};
+    int rangeIndex = 0;
+    ans.add(matrix[0][0]);
+    while (ans.size() &lt; matrix.length * matrix[0].length) {
+        int nowRange = range[rangeIndex];
+        if (rangeIndex == 0) {
+            for (int i = point[1] + 1; i &lt;= nowRange; i++) {
+                ans.add(matrix[point[0]][i]);
+            }
+            point[1] = nowRange;
+            range[rangeIndex] -= 1;
+        }
+        if (rangeIndex == 1){
+            for (int i = point[0] + 1; i &lt;= nowRange; i++) {
+                ans.add(matrix[i][point[1]]);
+            }
+            point[0] = nowRange;
+            range[rangeIndex] -= 1;
+        }
+        if (rangeIndex == 2) {
+            for (int i = point[1] - 1; i &gt;= nowRange; i--) {
+                ans.add(matrix[point[0]][i]);
+            }
+            point[1] = nowRange;
+            range[rangeIndex] += 1;
+        }
+        if (rangeIndex == 3) {
+            for (int i = point[0] - 1; i &gt;= nowRange; i--) {
+                ans.add(matrix[i][point[1]]);
+            }
+            point[0] = nowRange;
+            range[rangeIndex] += 1;
+        }
+        rangeIndex = nextRange(rangeIndex);
+    }
+    return ans;
+}
+
+private int nextRange(int i) {
+    return i + 1 &lt; 4 ? i + 1 : 0;
+}</code></pre>
+<h3 id="55jump-gamemedium">55.Jump Game(Medium)</h3>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Determine if you are able to reach the last index.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum
+             jump length is 0, which makes it impossible to reach the last index.</code></pre><p>这题就不多解释了，在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
+<h4 id="dp-1">DP</h4>
+<pre><code class="language-java">public boolean canJump(int[] nums) {
+    boolean[] can = new boolean[nums.length];
+    can[nums.length - 1] = true;
+    for (int i = nums.length - 2; i &gt;= 0; i--) {
+        int steps = nums[i];
+        for (int j = i + 1; j &lt; nums.length &amp;&amp; j &lt;= i + steps; j++) {
+            if  (can[j]) {
+                can[i] = true;
+                break;
+            }
+        }
+    }
+    return can[0];
+}</code></pre>
+<h4 id="greedy">Greedy</h4>
+<pre><code class="language-java">public boolean canJump(int[] nums) {
+    int last = nums.length - 1;
+    for (int i = nums.length - 2; i &gt;= 0; i--) {
+        if (i + nums[i] &gt;= last) {
+            last = i;
+        }
+    }
+    return last == 0;
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

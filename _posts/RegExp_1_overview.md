@@ -8,7 +8,6 @@ categories:
   - booknote
   - 《Mastering Regular Expression(Third Edition)》
 comments: true
-abbrlink: 8f39708b
 date: 2017-11-17 00:00:56
 series: 《Mastering Regular Expression(Third Edition)》
 ---

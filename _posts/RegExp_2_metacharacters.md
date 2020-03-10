@@ -8,7 +8,6 @@ comments: true
 tags:
   - learning
   - RegExp
-abbrlink: 591f5cd1
 date: 2017-11-17 00:02:06
 series: 《Mastering Regular Expression(Third Edition)》
 ---

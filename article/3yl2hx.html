@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 3yl2hx<br>title: Leetcode-16~20<br>categories:</p>
+<ul>
+<li>note</li>
+<li>algorithm</li>
+<li>leetcode<br>tags:</li>
+<li>leetcode<br>date: 2019-03-06 20:13:00<br>series: leetcode</li>
+</ul>
+<hr>
+<h3 id="163sumclosestmedium">16.3SumClosest(Medium)</h3>
+<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given array nums = [-1, 2, 1, -4], and target = 1.
+
+The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code></pre><p>和上一题一样，只不过这一题并不用废心思处理重复</p>
+<pre><code class="language-java">public int threeSumClosest2(int[] nums, int target) {
+    Arrays.sort(nums);
+    int closest = nums[0] + nums[1] + nums[nums.length - 1];
+    for (int i = 0; i &lt; nums.length - 2; i++) {
+        int l = i + 1, r = nums.length - 1;
+        while (l &lt; r) {
+            int sum = nums[i] + nums[l] + nums[r];
+            if (sum == target) {
+                return sum;
+            }
+            if (Math.abs(sum - target) &lt; Math.abs(closest - target)) {
+                closest = sum;
+            }
+            if (sum &gt; target) {
+                r--;
+            } else {
+                l++;
+            }
+        }
+    }
+    return closest;
+}</code></pre>
+<h3 id="17-letter-combinations-of-a-phone-numbermedium">17. Letter Combinations of a Phone Number(Medium)</h3>
+<p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent.</p>
+<p>A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png" alt="img"></p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: &quot;23&quot;
+Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].</code></pre><p><strong>Note:</strong></p>
+<p>Although the above answer is in lexicographical order, your answer could be in any order you want.</p>
+<p>这题怎么说，一看就是DP，最终解法有点像最近点对，然后也有点像<strong>Merge Kth Sorted List</strong></p>
+<p>上一个公式：<code>Get(&quot;234&quot;)=Get(&quot;2&quot;) X Get(&quot;34&quot;)</code>；<code>Get(&quot;34&quot;)=Get(&quot;3&quot;) X Get(&quot;4&quot;)</code>；</p>
+<p>于是我们将多个问题始终简化为只处理2个符号的问题，最后暴力求2个符号的问题即可</p>
+<pre><code class="language-java">private static char[][] map = {
+        {}, // 0
+        {}, // 1
+        {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;},  // 2
+        {&#39;d&#39;,&#39;e&#39;,&#39;f&#39;},  // 3
+        {&#39;g&#39;,&#39;h&#39;,&#39;i&#39;},  // 4
+        {&#39;j&#39;,&#39;k&#39;,&#39;l&#39;},  // 5
+        {&#39;m&#39;,&#39;n&#39;,&#39;o&#39;},  // 6
+        {&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;}, // 7
+        {&#39;t&#39;,&#39;u&#39;,&#39;v&#39;},  // 8
+        {&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;}, // 9
+};
+
+private static char[] mapping(char digitalChar) {
+    return map[digitalChar - &#39;0&#39;];
+}
+
+public static List&lt;String&gt; letterCombinations(String digits) {
+    if (digits.isEmpty()) {
+        return Collections.emptyList();
+    }
+    char[] chars = digits.toCharArray();
+    return get(chars, 0, chars.length - 1);
+}
+
+private static List&lt;String&gt; get(char[] set, int start, int end) {
+    LinkedList&lt;String&gt; ans = new LinkedList&lt;&gt;();
+    if (start == end) {
+        char[] mapping = mapping(set[start]);
+        for (char c : mapping) {
+            ans.add(String.valueOf(c));
+        }
+    } else if (end - start == 1) {
+        char[] sm = mapping(set[start]);
+        char[] em = mapping(set[end]);
+        for (char aSm : sm) {
+            for (char anEm : em) {
+                ans.add(aSm + String.valueOf(anEm));
+            }
+        }
+    } else {
+        List&lt;String&gt; a = get(set, start, start + 1);
+        List&lt;String&gt; b = get(set, start + 2, end);
+        for (String as : a) {
+            for (String bs : b) {
+                ans.add(as + bs);
+            }
+        }
+    }
+    return ans;
+}</code></pre>
+<h3 id="18-4summedium">18. 4Sum(Medium)</h3>
+<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, are there elements <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> = <code>target</code>? Find all unique quadruplets in the array which gives the sum of <code>target</code>.</p>
+<p><strong>Note:</strong></p>
+<p>The solution set must not contain duplicate quadruplets.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
+
+A solution set is:
+[
+  [-1,  0, 0, 1],
+  [-2, -1, 1, 2],
+  [-2,  0, 0, 2]
+]</code></pre><p>有了3sum的经验，4sum迎刃而解</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; fourSum(int[] nums, int target) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
+    Arrays.sort(nums);
+    for (int i = 0; i &lt; nums.length; i++) {
+        if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) {
+            continue;
+        }
+        int a = nums[i];
+        for (int j = i + 1; j &lt; nums.length; j++) {
+            if (j &gt; i + 1 &amp;&amp; nums[j] == nums[j - 1]) {
+                continue;
+            }
+            int b = nums[j];
+            int l = j + 1, r = nums.length - 1;
+            while (l &lt; r) {
+                if (a + b + nums[l] + nums[r] == target) {
+                    // l++ r-- here
+                    ans.add(Arrays.asList(a, b, nums[l++], nums[r--]));
+                    // skip same result when low is the same value
+                    while (l &lt; r &amp;&amp; nums[l - 1] == nums[l]) {
+                        l++;
+                    }
+                    // skip same result when high is the same value
+                    while (l &lt; r &amp;&amp; nums[r] == nums[r + 1]) {
+                        r--;
+                    }
+                } else if (a + b + nums[l] + nums[r] &gt; target) {
+                    r--;
+                } else {
+                    l++;
+                }
+            }
+        }
+    }
+    return ans;
+}</code></pre>
+<h3 id="19-remove-nth-node-from-end-of-listmedium">19. Remove Nth Node From End Of List(Medium)</h3>
+<p>Given a linked list, remove the <em>n</em>-th node from the end of list and return its head.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
+
+After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.</code></pre><p><strong>Note:</strong></p>
+<p>Given <em>n</em> will always be valid.</p>
+<p><strong>Follow up:</strong></p>
+<p>Could you do this in one pass?</p>
+<h4 id="two-pass-solution-beat-100">Two Pass Solution (Beat 100%)</h4>
+<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode pre = head;
+    int size = 1;
+    while (pre.next != null) {
+        pre = pre.next;
+        size++;
+    }
+    int f = size - n;
+    if (f == 0) {
+        head = head.next;
+    } else {
+        pre = new ListNode(0);
+        pre.next = head;
+        while (f &gt; 0) {
+            pre = pre.next;
+            f--;
+        }
+        ListNode remove = pre.next;
+        pre.next = remove.next;
+    }
+    return head;
+}</code></pre>
+<p>没什么说的，one pass获得长度，two pass直接定位删除</p>
+<h4 id="one-pass-solution-beat-100">One Pass Solution (Beat 100%)</h4>
+<pre><code class="language-java">public ListNode removeNthFromEnd2(ListNode head, int n) {
+    ListNode pre = new ListNode(0), now = head, check;
+    pre.next = head;
+    if (head == null) {
+        return null;
+    }
+    while (true) {
+        int count = 0;
+        check = now;
+        while (count &lt; n) {
+            if (check == null) {
+                return head.next;
+            }
+            check = check.next;
+            count++;
+        }
+        if (check != null) {
+            pre = pre.next;
+            now = now.next;
+        } else {
+            if (pre.next == head) {
+                return head.next;
+            }
+            pre.next = pre.next.next;
+            break;
+        }
+    }
+    return head;
+}</code></pre>
+<p>遍历链，对每个结点都往后找n+1个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
+<h3 id="20-valid-parentheses">20. Valid Parentheses</h3>
+<p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+<p>An input string is valid if:</p>
+<ol>
+<li>Open brackets must be closed by the same type of brackets.</li>
+<li>Open brackets must be closed in the correct order.</li>
+</ol>
+<p>Note that an empty string is also considered valid.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: &quot;()&quot;
+Output: true</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: &quot;()[]{}&quot;
+Output: true</code></pre><p><strong>Example 3:</strong></p>
+<pre><code>Input: &quot;(]&quot;
+Output: false</code></pre><p><strong>Example 4:</strong></p>
+<pre><code>Input: &quot;([)]&quot;
+Output: false</code></pre><p><strong>Example 5:</strong></p>
+<pre><code>Input: &quot;{[]}&quot;
+Output: true</code></pre><h4 id="stack">Stack</h4>
+<p>没什么说的，和数据结构书上的表达式求值是一样的，比书上的简单</p>
+<pre><code class="language-java">public boolean isValid(String s) {
+    if (s.isEmpty()) {
+        return true;
+    }
+    Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+    for (char c : s.toCharArray()) {
+        if (isBegin(c)) {
+            stack.push(c);
+        } else {
+            if (stack.isEmpty()) {
+                return false;
+            }
+            Character begin = stack.pop();
+            if (!isPair(begin, c)) {
+                return false;
+            }
+        }
+    }
+    return stack.empty();
+}
+
+public boolean isBegin(char a) {
+    return a == &#39;(&#39; || a == &#39;[&#39; || a == &#39;{&#39;;
+}
+
+public boolean isPair(char begin, char end) {
+    if (begin == &#39;(&#39;) {
+        return end == &#39;)&#39;;
+    } else if (begin == &#39;[&#39;) {
+        return end == &#39;]&#39;;
+    } else {
+        return end == &#39;}&#39;;
+    }
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

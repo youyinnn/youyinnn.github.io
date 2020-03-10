@@ -8,7 +8,6 @@ categories:
   - toolslearning
   - log4j2
 comments: true
-abbrlink: 6cdb73
 date: 2017-11-17 16:13:21
 series: Log4j2
 ---

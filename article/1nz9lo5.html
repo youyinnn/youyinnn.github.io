@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1nz9lo5<br>title: Tree Plan-1<br>categories:</p>
+<ul>
+<li>note</li>
+<li>algorithm<br>tags:</li>
+<li>algorithm</li>
+<li>binary-tree<br>date: 2019-01-28 15:11:00</li>
+</ul>
+<hr>
+<h3 id="should-have-a-plan">Should have a PLAN!</h3>
+<p>I was asked a tree problem when I was having a face to face interview at <em>PayPal</em> last Friday, and I might failed on this question.</p>
+<p>It&#39;s been too long that I&#39;m almost forgot the knowledge of TREE, and I&#39;ve never truly go over it and it&#39;s time to get it done.</p>
+<p>The question:</p>
+<pre class="nhi">
+A tree like:                          Node structure:
+              5a &lt;-- root node             Node ┬ int  value
+            /   \                               ├ Node left
+           5b    5c                             └ Node right
+          / \     \
+         6   5d    7a
+                  / \
+                 5e  7b
+Question: 
+A "Group" is defined as a set that it's Nodes have the same value and within 
+the relationship of Parent-Child. Find the number of group of provided tree.
+e.g：the tree above will have 4 groups [5a,5b,5c,5d],[6],[7a,7b],[5e]
+</pre>
+
+<h3 id="introduction">Introduction</h3>
+<p><strong>Trees:</strong> Unlike Arrays, Linked Lists, Stack and queues, which are linear data structures, trees are hierarchical data structures.</p>
+<p><strong>Tree Vocabulary:</strong> The topmost node is called root of the tree. The elements that are directly under an element are called its children. The element directly above something is called its parent. For example, ‘a’ is a child of ‘f’, and ‘f’ is the parent of ‘a’. Finally, elements with no children are called leaves.</p>
+<pre><code>      tree
+      ----
+       j    &lt;-- root
+     /   \
+    f      k  
+  /   \      \
+ a     h      z    &lt;-- leaves </code></pre><p><strong>Why Trees?</strong><br><strong>1.</strong> One reason to use trees might be because you want to store information that naturally forms a hierarchy. For example, the <strong>file system</strong> on a computer:</p>
+<pre><code>file system
+-----------
+     /    &lt;-- root
+  /      \
+...       home
+      /          \
+   ugrad        course
+    /       /      |     \
+  ...      cs101  cs112  cs113  </code></pre><p><strong>2.</strong> Trees (with some ordering e.g., BST) provide moderate access/search (quicker than Linked List and slower than arrays).<br><strong>3.</strong> Trees provide moderate insertion/deletion (quicker than Arrays and slower than Unordered Linked Lists).<br><strong>4.</strong> Like Linked Lists and unlike Arrays, Trees don’t have an upper limit on number of nodes as nodes are linked using pointers.</p>
+<p><strong>Main applications</strong> of trees include:</p>
+<p>1. Manipulate <strong>hierarchical</strong> data.<br>2. Make information easy to search (see tree traversal).<br>3. Manipulate sorted lists of data.<br>4. As a workflow for compositing digital images for visual effects.<br>5. Router algorithms<br>6. Form of a multi-stage decision-making (see business chess).</p>
+<p><strong>Key Word:</strong></p>
+<ol>
+<li><strong>moderate（中等的、适中的）</strong></li>
+<li><strong>hierarchical（阶层的）</strong></li>
+</ol>
+<h3 id="binary-tree">Binary Tree</h3>
+<p><strong>Binary Tree:</strong> A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child.</p>
+<pre>
+Node ┬ int  value
+     ├ Node left
+     └ Node right
+</pre>
+
+<h4 id="properties">Properties</h4>
+<ol>
+<li><p>The maximum number of nodes at level ‘l’ of a binary tree is <strong>2^(l-1)</strong></p>
+</li>
+<li><p>Maximum number of nodes in a binary tree of height ‘h’ is <strong>2^h – 1</strong></p>
+</li>
+<li><p>In a Binary Tree with N nodes, minimum possible height or minimum number of levels is  <strong>⌈ Log2(N+1)⌉</strong></p>
+<p>This can be directly derived from point 2 above. If we consider the convention where height of a leaf node is considered as 0, then above formula for minimum possible height becomes   <strong>⌈ Log2(N+1) ⌉ – 1</strong></p>
+</li>
+<li><p>A Binary Tree with L leaves has at least   ⌈ Log2L ⌉ + 1   levels<br> A Binary tree has maximum number of leaves (and minimum number of levels) when all levels are fully filled. Let all leaves be at level l, then below is true for number of leaves L.</p>
+<pre><code>   L   &lt;=  2l-1  [From Point 1]
+   l =   ⌈ Log2L ⌉ + 1 
+   where l is the minimum number of levels. </code></pre></li>
+<li><p>In Binary tree where every node has 0 or 2 children, number of leaf nodes is always one more than nodes with two children</p>
+<pre><code>    L = T + 1
+ Where L = Number of leaf nodes
+       T = Number of internal nodes with two children</code></pre></li>
+</ol>
+<p><em>PS：前两个理解一下就好了，后面3个用的少，用的时候还得查- -</em></p>
+<h4 id="types-of-binary-tree">Types of Binary Tree</h4>
+<ul>
+<li><strong>Full Binary Tree</strong> A Binary Tree is full if <strong>every node has 0 or 2 children</strong>. Following are examples of a full binary tree. We can also say a full binary tree is a binary tree in which all nodes except leaves have two children.</li>
+<li><strong>Complete Binary Tree:</strong> A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible.</li>
+<li><strong>Perfect Binary Tree</strong> A Binary tree is Perfect Binary Tree in which all internal nodes have two children and <strong>all leaves are at the same level</strong>.</li>
+<li><strong>Balanced Binary Tree</strong><br>A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes. <ul>
+<li><strong>AVL tree</strong> maintains O(log n) height by making sure that the difference between heights of left and right subtrees is 1.</li>
+<li><strong>Red-Black trees</strong> maintain O(log n) height by making sure that the number of Black nodes on every root to leaf paths are same and there are no <strong>adjacent(邻近的)</strong> red nodes.</li>
+<li><strong>Balanced Binary Search trees</strong> are performance wise good as they provide O(log n) time for search, insert and delete.</li>
+</ul>
+</li>
+<li><strong>A degenerate (or pathological) tree</strong> A Tree where every internal node has one child. Such trees are performance-wise same as linked list.</li>
+</ul>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

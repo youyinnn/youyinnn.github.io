@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1arzjog<br>title: Jenkins Introductions&amp;Setup<br>categories:</p>
+<ul>
+<li>note</li>
+<li>jenkins<br>tags:</li>
+<li>setup</li>
+<li>jenkins<br>date: 2018-11-19 14:51:00<br>series: jenkins</li>
+</ul>
+<hr>
+<h3 id="introductions">Introductions</h3>
+<p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
+<p><img src="https://image.youyinnn.top/img/20181119145558.png" alt=""></p>
+<p>Jenkins的默认UI也有点丑，还不如官网的UI好看</p>
+<p>但是不影响这玩意的强大表现</p>
+<h3 id="installation-on-centos">Installation on CentOS</h3>
+<h4 id="fetch-yum-repo">Fetch yum repo</h4>
+<p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
+<p>There is also <a href="http://pkg.jenkins-ci.org/redhat-stable/">a LTS YUM repository</a> for the <a href="https://wiki.jenkins.io/display/JENKINS/LTS+Release+Line">LTS Release Line</a></p>
+<ul>
+<li><code>sudo wget -O /etc/yum.repos.d/jenkins.repo</code> <code>http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo</code></li>
+<li><code>sudo rpm --import</code> <code>https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
+<li><code>sudo yum install jenkins</code></li>
+</ul>
+<h4 id="installation-of-java">Installation of Java</h4>
+<p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
+<pre><code class="language-bash">$ sudo yum install java</code></pre>
+<p><strong>Note:</strong> If running CentOS, ensure you follow the <a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava">guide below</a>.</p>
+<h4 id="startstop">Start/Stop</h4>
+<ul>
+<li><code>sudo service jenkins start/stop/restart</code></li>
+<li><code>sudo chkconfig jenkins on</code></li>
+</ul>
+<p><strong>Note:</strong> if you get the following error message, ensure that Java has been installed:</p>
+<pre><code class="language-bash">Starting jenkins (via systemctl):  Job `for` jenkins.service failed. See `&#39;systemctl status jenkins.service&#39;` and `&#39;journalctl -xn&#39;` `for` details.[FAILED]</code></pre>
+<h4 id="what-does-this-package-do">What does this package do?</h4>
+<ul>
+<li>Jenkins will be launched as a daemon on startup. See <code>/etc/init.d/jenkins</code> for more details.</li>
+<li>The &#39;<code>jenkins</code>&#39; user is created to run this service. If you change this to a different user via the config file, you must change the owner of /var/log/jenkins, /var/lib/jenkins, and /var/cache/jenkins.</li>
+<li>Log file will be placed in <code>/var/log/jenkins/jenkins.log</code>. Check this file if you are troubleshooting Jenkins.</li>
+<li><code>/etc/sysconfig/jenkins</code> will capture configuration parameters for the launch.</li>
+<li>By default, Jenkins listen on port 8080. Access this port with your browser to start configuration.  Note that the built-in firewall may have to be opened to access this port from other computers.  (See <a href="http://www.cyberciti.biz/faq/disable-linux-firewall-under-centos-rhel-fedora/">http://www.cyberciti.biz/faq/disable-linux-firewall-under-centos-rhel-fedora/</a> for instructions how to disable the firewall permanently)</li>
+<li>A Jenkins RPM repository is added in <code>/etc/yum.repos.d/jenkins.repo</code></li>
+</ul>
+<blockquote>
+<p><strong>Notice</strong>:</p>
+<ul>
+<li>可以在<code>/etc/sysconfig/jenkins</code>这个路径下找到Jenkins的配置文件</li>
+<li>要在CentOS下支持Jenkins，请不要使用JDK，要安装OpenJDK</li>
+</ul>
+</blockquote>
+<h4 id="more-change-jenkins-run-as-with-root">More: change Jenkins run as with root</h4>
+<p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
+<p>1) <code>vim /etc/sysconfig/jenkins</code></p>
+<p>2) 找到JENKINS_USER改为 “root”:</p>
+<pre><code>JENKINS_USER=&quot;root&quot;</code></pre><p>3)然后更改Jenkins home，webroot和日志的所有权：</p>
+<pre><code class="language-bash">$ chown -R root:root /var/lib/jenkins
+$ chown -R root:root /var/cache/jenkins
+$ chown -R root:root /var/log/jenkins</code></pre>
+<p>4).重新启动Jenkins并检查用户是否已被更改</p>
+<pre><code class="language-bash">$ service jenkins restart</code></pre>
+<p>这样我们就给jenkins设置了root权限，我们再运行shell脚本就不会提示权限问题了。</p>
+<h4 id="wiki">Wiki</h4>
+<p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
+<h3 id="create-your-first-pipline-by-using-github-repo-as-branch-source">Create your first pipline by using github repo as branch source</h3>
+<p>To get started quickly with Pipeline:</p>
+<ol>
+<li>Copy one of the <a href="https://jenkins.io/doc/pipeline/tour/hello-world/#examples">examples below</a> into your repository and name it <code>Jenkinsfile</code></li>
+<li>Click the <strong>New Item</strong> menu within Jenkins </li>
+<li>Provide a name for your new item (e.g. <strong>My Pipeline</strong>) and select <strong>Multibranch Pipeline</strong></li>
+<li>Click the <strong>Add Source</strong> button, choose the type of repository you want to use and fill in the details.</li>
+<li>Click the <strong>Save</strong> button and watch your first Pipeline run!</li>
+</ol>
+<p><img src="https://image.youyinnn.top/img/20181119184317.png" alt=""></p>
+<p>Jinkinsfile:</p>
+<pre><code class="language-Jenkinsfile">// Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent { docker { image &#39;maven:3.3.3&#39; } }
+    stages {
+        stage(&#39;build&#39;) {
+            steps {
+                sh &#39;mvn --version&#39;
+            }
+        }
+    }
+}</code></pre>
+<p>Then when the pipline is building, you can see the console output at:</p>
+<p><img src="https://image.youyinnn.top/img/20181119185023.png" alt=""></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

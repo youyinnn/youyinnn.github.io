@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1gukab6<br>title: Tess login on Jenkins<br>categories:</p>
+<ul>
+<li>note</li>
+<li>eBay<br>tags:</li>
+<li>tess<br>date: 2018-11-16 14:10:08</li>
+</ul>
+<hr>
+<h3 id="tess-login-on-jenkins">Tess login on Jenkins</h3>
+<h4 id="use-tess-with-rheos-tess-base-agent">Use tess with Rheos tess-base agent</h4>
+<p>Assume that you are at &quot;Job Configure&quot; panel now.</p>
+<h5 id="configure-agent">Configure Agent</h5>
+<p>In order to use tess <strong>effectively and legally</strong>, we should check <strong>&quot;Restrict where this project can be run&quot;</strong> on <strong>&quot;Job Notifications&quot;</strong> and select <code>tess-builder-numsg</code>, this is a image for tess-user that build from <strong><em>Rheos team</em></strong>, it prepared every thing we need for tess.</p>
+<p>The configuration of this agent is at Jenkins: <strong>[Manage Jenkins(系统管理)] -&gt; [Configure System(系统设置)]-&gt;[Cloud(云)]-&gt;[Kubernetes]-&gt;[images]</strong> , named <strong>&quot;tess-builder-numsg&quot;</strong></p>
+<h5 id="configure-parameterized-build参数化构建过程">Configure &quot;Parameterized Build(参数化构建过程)&quot;</h5>
+<h6 id="for-production-cluster-login">For production cluster login</h6>
+<p>We will need four parameters: <code>tess_username</code>,<code>tess_cluster</code>, <code>tess_pin</code>, <code>tess_yubikey_token_twice</code></p>
+<blockquote>
+<p> <strong>Notice:</strong> </p>
+<ol>
+<li>If your want to use two <strong>YubiKey Token</strong>, you have to configure a <strong>Multi-line String Parameter</strong>, to catch two <strong>YubiKey Token</strong> on a <strong>single parameter(<code>tess_yubikey_token_twice</code>)</strong>. It will prevent <strong>&quot;auto enter&quot;</strong> to trigger the build action while we use YubiKey to input access token.</li>
+<li>From the usage above, the Jenkins parameter <code>tess_yubikey_token_twice</code> will separated to two parameters by line-separator.</li>
+</ol>
+</blockquote>
+<h6 id="for-non-production-cluster-login">For non-production cluster login</h6>
+<p>We can use <code>--password</code> option of tess to login tess to non-production cluster, so we just need three parameters: <code>tess_username</code>,<code>tess_cluster</code>, <code>corp_passord</code></p>
+<h5 id="configure-build-execute-shell">Configure Build Execute Shell</h5>
+<h6 id="for-production-cluster">For production cluster</h6>
+<pre><code class="language-shell"># cd to the diractory where tess login script is
+./tess-login.sh ${tess_username}  ${tess_cluster}  ${tess_pin} ${tess_yubikey_token_twice}
+# your work with tess</code></pre>
+<h6 id="for-non-production-cluster">For non-production cluster</h6>
+<pre><code class="language-shell"># cd to the diractory where tess login script is
+./tess-login.sh ${tess_username} ${corp_password} ${tess_cluster}
+# your work with tess</code></pre>
+<h5 id="for-production-cluster-1">For production cluster</h5>
+<h6 id="tess-loginsh">tess-login.sh</h6>
+<p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/prod/tess-login.sh">tess-login.sh</a></p>
+<pre><code class="language-shell">#!/bin/bash
+
+# exit when error &amp; trace
+set -e
+set -x
+
+tess_username=$1
+tess_cluster=$2
+tess_pin=$3
+
+# ${tess_yubikey_token_twice} will separated to $4 and $5 by line-separator
+tess_yubikey_token_1=$4
+tess_yubikey_token_2=$5
+
+echo &quot;token 1: $tess_yubikey_token_1&quot;
+echo &quot;token 2: $tess_yubikey_token_2&quot;
+
+# combine $tess_pin and $tess_yubikey_token_1
+expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubikey_token_1 $tess_yubikey_token_2</code></pre>
+<h6 id="tess-login-by-expectsh">tess-login-by-expect.sh</h6>
+<p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/prod/tess-login-by-expect.sh">tess-login-by-expect.sh</a></p>
+<p>You can also find it <a href="2.-Prepare-expect-on-your-image">below</a>.</p>
+<h5 id="for-non-production-cluster-1">For non-production cluster</h5>
+<h6 id="tess-loginsh-1">tess-login.sh</h6>
+<p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/qa/tess-login.sh">tess-login.sh</a></p>
+<pre><code class="language-shell">#!/bin/bash
+
+username=$1
+corp_password=$2
+server=$3
+
+expect tess-login-by-expect.sh $server $username $corp_password</code></pre>
+<h6 id="tess-login-by-expectsh-1">tess-login-by-expect.sh</h6>
+<p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/qa/tess-login-by-expect.sh">tess-login-by-expect.sh</a></p>
+<h4 id="if-you-want-to-build-our-own-agent-for-tess">If you want to build our own agent for tess</h4>
+<p>Please make sure the agent environment contains the following two requirements for using tess <strong>effectively and legally</strong>.</p>
+<h5 id="1-prepare-the-appropriate-version-of-tess-client-on-your-image">1. Prepare the appropriate version of Tess client on your image</h5>
+<p>To log in to the tess, you should at least use the version <code>release-0.29.x</code>, and I <strong>strongly recommend</strong> you should always use the <strong>latest release version of tess</strong>. From now it&#39;s <code>release-0.33.5</code>.</p>
+<p>here are the details: </p>
+<blockquote>
+<p><strong>Logging in to Production cluster is not the same as logging in to Non-Production Cluster</strong></p>
+<p>If we want to log in the production cluster like <strong>21/22/23</strong>, there are two verification:</p>
+<ol>
+<li><strong>eBay Account verification:</strong> check that you have a valid account.</li>
+<li><strong>Production Cluster Access permission verification:</strong> check that you have the permission to access the production cluster</li>
+</ol>
+<p>each verification require an <strong>YubiKey Token</strong>, though it&#39;s the way they did after version <code>release-0.29.x</code>, before this version, the old version of tess client use just one <strong>YubiKey Token</strong>, so it&#39;s invalid for access the production cluster at present.</p>
+</blockquote>
+<h6 id="how-to-upgrade-tess-client">How to upgrade tess client</h6>
+<p>Perhaps we can&#39;t download the latest version of tess client on the <a href="http://tess.io">http://tess.io</a>, we can still upgrade the latest version by tess client itself !</p>
+<pre><code class="language-bash">$ tess version list</code></pre>
+<p>then you can get the latest version&#39;s number, and <strong>don&#39;t use <code>crul</code>or<code>wget</code>to download the tess client, the url that provide is unreachable on linux system.</strong></p>
+<pre><code class="language-bash">$ tess install release-0.33.5</code></pre>
+<p>and your should add tess to <code>$PATH</code> for good.</p>
+<h5 id="2-prepare-expect-on-your-image">2. Prepare <code>expect</code> on your image</h5>
+<p>We are trying to use shell script to handle all of our work on Jenkins. Perhaps there are some <strong>interactive</strong> client and they might blocked our building process and waiting user to input some command, such as tess login process:</p>
+<pre><code class="language-bash">$ tess login -c 21 --username=numessage
+Username: numessage
+****** Current Cluster Context 21 ******
+Cluster Name: 21
+Cluster URL: https://api.system.svc.21.tess.io
+** You can use &#39;--cluster&#39; switch to a different cluster
+** You can use &#39;tess clusters&#39; to list all available Tess clusters.
+** You can use &#39;tess version list&#39; to list all available tess client versions.
+Pin + YubiKeyToken: </code></pre>
+<p>there is not options on tess client  to let us passing the parameter of <code>Pin + YubiKeyToken</code> ask interaction, besides, it require the second <code>YubiKey Token</code>. </p>
+<p>To handle this situation, we can use <code>expect</code> to passing the parameter by just wrapping the interactive shell on a script named <code>tess-login-by-expect.sh</code>:</p>
+<pre><code class="language-bash">#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set cluster [lindex $argv 1]
+set pin_token1 [lindex $argv 2]
+set token2 [lindex $argv 3]
+
+spawn tess login -c $cluster --username=$username
+
+expect {
+    &quot;Pin + YubiKeyToken:&quot; {
+        send &quot;$pin_token1\n&quot;
+        exp_continue
+    }
+    &quot;YubiKeyToken:&quot; {
+        send &quot;$token2\n&quot;
+        exp_continue
+    }
+    &quot;successfully authenticated&quot; {
+        send eof
+    }
+}
+expect eof</code></pre>
+<p>it will expect two interaction then send our token automatically and expect tess client return &quot;successfully authenticated&quot;.</p>
+<p>Then you could run it on your shell script:</p>
+<pre><code class="language-bash">expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubikey_token_1 $tess_yubikey_token_2</code></pre>
+<h4 id="installation">Installation</h4>
+<p>Need install <code>tcl</code> and <code>expect</code></p>
+<p>e.g on CentOS:</p>
+<pre><code class="language-bash">$ sudo yum install -y tcl expect</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

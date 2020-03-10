@@ -3,7 +3,7 @@ $(function() {
         location = '/'
     })
     $('#articlesbut').bind('click', function() {
-        location = '/' + '?to=articles'
+        location = '/' + 'articles'
     })
     $('#scriptbut').bind('click', function() {
         location = '/' + 'scripts'
@@ -21,7 +21,7 @@ $(function() {
         location = '/' + 'about'
     })
     $('#toarticles').bind('click', function() {
-        location = '/' + '?to=articles'
+        location = '/' + 'articles'
     })
     $('#showhacknical').bind('click', function() {
         if ($('#hacknical_github_analysis').attr('src') === undefined) {

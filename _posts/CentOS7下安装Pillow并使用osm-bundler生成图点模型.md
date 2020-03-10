@@ -11,7 +11,6 @@ tags:
   - Pillow
   - osm-bundler
   - pip
-abbrlink: 2f341c62
 date: 2018-01-21 11:50:30
 ---
 

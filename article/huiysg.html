@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: huiysg<br>title: RegExp_2_metacharacters<br>categories:</p>
+<ul>
+<li>note</li>
+<li>booknote</li>
+<li>《Mastering Regular Expression(Third Edition)》<br>comments: true<br>tags:</li>
+<li>learning</li>
+<li>RegExp<br>date: 2017-11-17 00:02:06<br>series: 《Mastering Regular Expression(Third Edition)》</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>Metacharacters：元字符</p>
+<p>{% endcq %}</p>
+<!-- more -->
+
+<h3 id="元字符的解释">元字符的解释</h3>
+<p>完整的正则表达式由两种字符组成：</p>
+<ul>
+<li>特殊字符，即<code>元字符</code>，它们一般具有特殊的含义，并不匹配字面字符。</li>
+<li>文字，即普通<code>文本字符</code>，匹配的就是字面字符。</li>
+</ul>
+<hr>
+<h4 id="行的起始和结束">行的起始和结束</h4>
+<blockquote>
+<p><code>^</code> 脱字符号，在检查一行文本的时候，<code>^</code>代表一行的开始。</p>
+</blockquote>
+<blockquote>
+<p><code>$</code> 美元符号，在检查一行文本的时候，<code>$</code>代表一行的结束。</p>
+</blockquote>
+<ul>
+<li><code>^cat</code> ：表示匹配以cat开头的行，如categories</li>
+<li><code>cat$</code> ：表示匹配以$结尾的行，如aaaacat</li>
+</ul>
+<p>我们以更机械的方式去解读第一个例子：<code>^cat</code> 匹配的是以c作为一行的第一个字符，紧接着c后面是a，a后面紧接着t的文本。</p>
+<p>这两个符号的特殊之处就在于，它们匹配的只是位置，而不是特定的文本。</p>
+<hr>
+<h4 id="字符组">字符组</h4>
+<h5 id="匹配若干字符之一">匹配若干字符之一</h5>
+<p>这里需要引入一个概念：正则表达式结构体（construct）<code>[...]</code>。它允许使用者列出在某处期望匹配的字符的候选值，通常也被称为字符组。</p>
+<p>比如当我们不确定是要匹配grey还是gray的时候，我们可以这样写<code>gr[ae]y</code>，它想表达的意思是：匹配一段文本，它是先有一个g，g后是一个r，r后可以是a或者e其中之一，然后就是一个y。</p>
+<p>在<code>gr[ae]y</code>中，<code>g</code>或者<code>r</code>、<code>y</code>这样的表达式，它们被解释为：g后面紧跟着、r后面紧跟着这样的“接下来（and then）”的含义，而在<code>[ae]</code>中，里面的字符被解释为：这个结构体的位置被替换为a或者是e。</p>
+<p>我们还有可能遇到的场景是，<code>[123456789]</code>甚至是26个字母全用上的情况，这个时候我们可以使用<strong>字符组元字符</strong><code>-</code>（连接符）来表示一个范围，比如<code>[1-9]</code>和<code>[123456789]</code>是完全相等的。同时还支持多重范围比如<code>[a-h1-6F-I]</code>和<code>[abcdefg123456FGHI]</code>等效。</p>
+<p>还可以在字符组里面使用普通文本[_.!?]可以匹配下划线或者点或者感叹号或者问号。</p>
+<p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。这有点像正常语言中，某个单词在不同的语境中有不同的解释一样，我私称这样的情况为<code>语境分意</code></strong></p>
+<h5 id="排除型字符组">排除型字符组</h5>
+<p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
+<p>你可能已经注意到了，<code>^</code>脱字符在组内和组外的含义的不一样的，由此我们了解到，<strong>元字符会根据环境的不同而改变它所要表达的含义。</strong></p>
+<blockquote>
+<p>书例：<code>q[^u]</code>是否能匹配<code>Iraq</code>？</p>
+<p>我们机械地解读表达式：q后面紧跟一个除了u以外的字符。注意是“后面紧跟”，所以这就意味着，q字符绝对不是最后一个字母。</p>
+<p>因此我们知道：一个字符组，即使是排除型的字符组，也必须匹配一个字符。</p>
+</blockquote>
+<h5 id="点号匹配任意字符">点号匹配任意字符</h5>
+<p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。如果我们要搜索03/19/76、03-19-76、03.19.76，一般的的做法是写<code>03[-/.]19[-/.]76</code>来让字符组匹配一个减号或者斜杠或者英文句号，我们也可以这样写<code>03.19.76</code>。这里又出现<strong>语境分意</strong>的情况了，<code>.</code>在字符组内外的含义不同，而<code>-</code>在字符组内的位置不同语义也不同，如果写成<code>[.-/]</code>，则是用来表示范围的，这里需要特别留心。</p>
+<hr>
+<h4 id="多选结构">多选结构</h4>
+<h5 id="匹配任意子表达式">匹配任意子表达式</h5>
+<p><code>|</code>是一个非常简洁的元字符，它等于布尔运算里面的“或（or）”。比如<code>Bob</code>和<code>Robert</code>是两个表达式，但<code>Bob|Robert</code>就是一个表达式，但是可以匹配里面两种情况。这样的组合称之为“多选分支（alternative）”。</p>
+<p>我们之前的<code>gr[ea]y</code>可以写成<code>grey|gray</code>，或者是<code>gr(a|e)y</code>，最后这种情况用括号来划定多选结构的范围（一般情况下，括号也是元字符）。同样值得注意的是，如果我们写成<code>gr[e|a]y</code>，那么这里面的<code>|</code>就并不代表或而是代表“|”符号本身。</p>
+<p>在表达式<code>gr(a|e)y</code>中，括号是必须的，如果没有括号，<code>gre|ay</code>就变成了匹配<code>gre</code>或者<code>ay</code>了。<strong>多选结构可以包含很多字符，但是不能超过括号的界限。</strong> 再举一个例子：<code>(Fir|1)st [Ss]treet</code>可以匹配<code>First Street</code>、<code>First street</code>、<code>1st Street</code>、<code>1st street</code>等。</p>
+<p>再一次强调，多选结构和字符组的区别是：<strong>字符组只能匹配一个字符，但是多选结构可以匹配多个字符！</strong></p>
+<h4 id="可选项元素">可选项元素</h4>
+<p>比如color和colour，其中只有一个u的区别，我们可以用<code>colou?r</code>这样的表达式来解决，<code>?</code>元字符代表可选，它代表前面一个字母是可选的匹配项。</p>
+<p><code>?</code>只作用与之前紧邻的元素，所以我们让机械来读这个表达式则是：<code>c</code>，然后<code>o</code>然后<code>l</code>然后<code>o</code>然后<code>u?</code>最后<code>r</code>。</p>
+<p>比较特别的是，<code>u?</code>这样的表达式是永远都能匹配成功的，它可以匹配以个u，也可以什么都不匹配。</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

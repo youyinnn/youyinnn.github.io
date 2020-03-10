@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: kimeni<br>title: Electron_UI<br>categories:</p>
+<ul>
+<li>note</li>
+<li>electron<br>comments: true<br>tags:</li>
+<li>electron<br>series: electron<br>date: 2019-10-10 11:44:21</li>
+</ul>
+<hr>
+<h3 id="对话框">对话框</h3>
+<blockquote>
+<p>显示用于打开和保存文件、警报等的本机系统对话框。</p>
+</blockquote>
+<p>线程：<a href="https://electronjs.org/docs/glossary#main-process">主线程</a></p>
+<p>显示用于选择多个文件和目录的对话框的示例:</p>
+<pre><code class="language-javascript">const { dialog } = require(&#39;electron&#39;)
+console.log(dialog.showOpenDialog({ properties: [&#39;openFile&#39;, &#39;openDirectory&#39;, &#39;multiSelections&#39;] }))Copy</code></pre>
+<p>这个对话框是从Electron的主线程上打开的。如果要使用渲染器进程中的对话框对象, 可以使用remote来获得:</p>
+<pre><code class="language-javascript">const { dialog } = require(&#39;electron&#39;).remote
+console.log(dialog)</code></pre>
+<p>对话框的API大致分为：</p>
+<ul>
+<li>获取文件路径的对话框</li>
+<li>保存对话框</li>
+<li>消息对话框 </li>
+<li>错误对话框</li>
+</ul>
+<h4 id="例子">例子</h4>
+<pre><code class="language-javascript">// 同步的获取文件路径的对话框
+$(&#39;#sopendialog&#39;).click(() =&gt; {
+    let p = dialog.showOpenDialogSync(win, {})
+    console.log(p)
+})
+
+// 异步的
+$(&#39;#asopendialog&#39;).click(() =&gt; {
+    let p = dialog.showOpenDialog(win, {})
+    p.then((data) =&gt; {
+        console.log(data)
+        console.log(data.filePaths)
+    })
+})
+
+$(&#39;#smsgboxdialog&#39;).click(() =&gt; {
+    let rs = dialog.showMessageBoxSync(win, {
+        // type: &#39;info&#39;,
+        // type: &#39;error&#39;,
+        type: &#39;question&#39;,
+        title: &#39;Message&#39;,
+        buttons: [&#39;Option one&#39;, &#39;Option two&#39;],
+        message: &#39;This is a stupid box.&#39;,
+        detail: &#39;Extra message.&#39;,
+    })
+    console.log(rs)
+})</code></pre>
+<h3 id="菜单">菜单</h3>
+<blockquote>
+<p>创建原生应用菜单和上下文菜单。</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p>创建新菜单。</p>
+<h4 id="静态方法"><a href="https://electronjs.org/docs/api/menu#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95">静态方法</a></h4>
+<p><a href="https://electronjs.org/docs/api/menu#menusetapplicationmenumenu"><code>Menu.setApplicationMenu(menu)</code></a></p>
+<ul>
+<li><code>menu</code> Menu | null</li>
+</ul>
+<p>当在MacOS、Windows、Linux中使用<code>menu</code>设置程序菜单时，会设置在各个程序窗体的顶层。</p>
+<p>在Windows和Linux中，可以在菜单的顶层标签的某个字母前添加<code>&amp;</code>以绑定快捷键。 例如，使用<code>&amp;File</code>后可以使用<code>Alt-F</code>呼出File的子选项。 被绑定快捷键的字母将会以下划线标出。 <code>&amp;</code>并不会在运行时显示</p>
+<p>使用<code>null</code> 作为参数时将会隐藏默认菜单。在Windows和Linux上还有删除菜单的额外效果。</p>
+<p><strong>Note:</strong> 如果没有在app中设置一个菜单，系统会自动生成一个默认菜单， 默认生成的菜单中包含了一些初始选项，例如 <code>文件</code>,<code>编辑</code>, <code>视图</code>,<code>窗口</code>,<code>帮助</code>。</p>
+<p><a href="https://electronjs.org/docs/api/menu#menugetapplicationmenu"><code>Menu.getApplicationMenu()</code></a></p>
+<p>返回 <code>Menu | null</code> - 如果有设置, 则返回应用程序菜单， 如果没设置，则返回 <code>null</code>。</p>
+<p><strong>注意:</strong> 返回的 <code>menu</code> 实例不支持动态添加或删除菜单项。 但仍然可以动态修改 <a href="https://electronjs.org/docs/api/menu#instance-properties">实例属性 </a>。</p>
+<p><a href="https://electronjs.org/docs/api/menu#menubuildfromtemplatetemplate"><code>Menu.buildFromTemplate(template)</code></a></p>
+<ul>
+<li><code>template</code> (MenuItemConstructorOptions | MenuItem)[]</li>
+</ul>
+<p>返回 <code>Menu</code></p>
+<p>一般来说 <code>template</code>是一个<code>options</code>类型的数组，用于构建一个 <a href="https://electronjs.org/docs/api/menu-item">MenuItem</a>。使用情况可以在上文提及。</p>
+<p>You can also attach other fields to the element of the <code>template</code> and they will become properties of the constructed menu items.</p>
+<h4 id="例子-1">例子</h4>
+<p>应用菜单</p>
+<pre><code class="language-javascript">const template = [
+    {
+        label: &#39;Menu1&#39;,
+        submenu: [
+            new MenuItem({
+                label: &#39;about&#39;,
+                click() {
+                    // 这行不会打在chrome调试控制台上 因为这里的console是nodejs后台
+                    console.log(&#39;about&#39;)
+                }
+            }),
+            { type: &#39;separator&#39; },
+            { role: &#39;about&#39; },
+            new MenuItem({
+                label: &#39;xixi&#39;,
+                type: &#39;checkbox&#39;,
+                click() {
+                    console.log(&#39;check&#39;)
+                }
+            }),
+            new MenuItem({
+                label: &#39;haha&#39;,
+                type: &#39;radio&#39;,
+                click() {
+                    console.log(&#39;radio&#39;)
+                }
+            }),
+        ]
+    },
+]
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
+</code></pre>
+<p>右键菜单</p>
+<pre><code class="language-javascript">
+// 自定义右键菜单
+const menu = new Menu()
+menu.append(new MenuItem({
+    label: &#39;MenuItem1&#39;,
+    click() {
+        console.log(&#39;item 1 clicked&#39;)
+    }
+}))
+menu.append(new MenuItem({
+    type: &#39;separator&#39;
+}))
+menu.append(new MenuItem({
+    label: &#39;MenuItem2&#39;,
+    type: &#39;checkbox&#39;,
+    checked: true
+}))
+// 有下标
+menu.append(new MenuItem({
+    label: &#39;MenuItem3&#39;,
+    type: &#39;radio&#39;,
+    click(mi, bwin, event) {
+        console.log(mi.overrideProperty)
+    },
+    sublabel: &#39;xixi&#39;,
+}))
+// 子菜单
+menu.append(new MenuItem({
+    label: &#39;MenuItem4&#39;,
+    type: &#39;submenu&#39;,
+    sublabel: &#39;xixi&#39;,
+    submenu: [new MenuItem({
+        label: &#39;lolo&#39;,
+    })]
+}))</code></pre>
+<h3 id="任务栏">任务栏</h3>
+<h4 id="任务菜单">任务菜单</h4>
+<p>Windows 允许应用程序定义一个自定义上下文菜单，用户可以看到该菜单 右键单击任务栏中的应用图标。 该上下文菜单被成为 <code>弹出列表</code>. 您可以在弹出列表的 <code>Tasks</code> 类别中指定自定义操作， 来自 MSDN 的引用：</p>
+<blockquote>
+<p>应用程序的tasks应该是基于程序的功能和用户能用它做一些的关键性事情来制定的。 任务应当是上下文无关的，因为它不需要程序运行就可以工作 而且他们应该是统计上用户在这个应用上最多的行为例如: 撰写一封邮件或者在邮件程序里打开日历，word处理程序新建一个文档，以某一种模式启动应用程序，或者是启动应用程序的某些子命令。 一个应用程序不应当把菜单用一些用户不需要的高级功能的或者只会使用一次的动作例如注册给弄得杂乱无章。 不要将tasks功能用于广告项目例如升级或者特价产品之类。</p>
+<p>强烈推荐task列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
+</blockquote>
+<p><strong>Internet Explorer 的 任务:</strong></p>
+<p><img src="https://image.youyinnn.top/20191014094639.png" alt=""></p>
+<p>不同于 macOS 的dock菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>
+<p>你可以使用 <a href="https://electronjs.org/docs/api/app#appsetusertaskstasks-windows">app.setUserTasks</a> API 来设置你的应用中的用户任务：</p>
+<pre><code class="language-javascript">const { app } = require(&#39;electron&#39;)
+app.setUserTasks([
+  {
+    program: process.execPath,
+    arguments: &#39;--new-window&#39;,
+    iconPath: process.execPath,
+    iconIndex: 0,
+    title: &#39;New Window&#39;,
+    description: &#39;Create a new window&#39;
+  }
+])</code></pre>
+<p>调用 <code>app.setUserTasks</code> 并传入空数组就可以清除你的任务列表：</p>
+<pre><code class="language-javascript">const { app } = require(&#39;electron&#39;)
+app.setUserTasks([])</code></pre>
+<p>当你的应用关闭时，用户任务仍然会被显示，因此在你的应用被卸载之前，任务的图标和程序的路径必须是存在的。</p>
+<h3 id="托盘">托盘</h3>
+<blockquote>
+<p>添加图标和上下文菜单到系统通知区</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p><code>Tray</code> 是一个 <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a>.</p>
+<pre><code class="language-javascript">const { app, Menu, Tray } = require(&#39;electron&#39;)
+
+let tray = null
+app.on(&#39;ready&#39;, () =&gt; {
+  tray = new Tray(&#39;/path/to/my/icon&#39;)
+  const contextMenu = Menu.buildFromTemplate([
+    { label: &#39;Item1&#39;, type: &#39;radio&#39; },
+    { label: &#39;Item2&#39;, type: &#39;radio&#39; },
+    { label: &#39;Item3&#39;, type: &#39;radio&#39;, checked: true },
+    { label: &#39;Item4&#39;, type: &#39;radio&#39; }
+  ])
+  tray.setToolTip(&#39;This is my application.&#39;)
+  tray.setContextMenu(contextMenu)
+})Copy</code></pre>
+<p><strong>平台限制：</strong></p>
+<ul>
+<li>在Linux上，如果支持，就使用应用程序指示器，否则将使用<code>GtkStatusIcon</code>。</li>
+<li>在仅支持应用程序指标的Linux发行版中，必须安装<code>libappindicator1</code>才能使任务栏图标正常工作。</li>
+<li>应用程序指标只有当它有一个上下文菜单时才会显示。</li>
+<li>当在Linux上使用应用程序指标时，它的 <code>click</code>事件将被忽略</li>
+<li>在Linux上，为了改变单独的<code>MenuItem</code>，你必须再次调用<code>setContextMenu</code>。 例如：</li>
+</ul>
+<pre><code class="language-javascript">const { app, Menu, Tray } = require(&#39;electron&#39;)
+
+let appIcon = null
+app.on(&#39;ready&#39;, () =&gt; {
+  appIcon = new Tray(&#39;/path/to/my/icon&#39;)
+  const contextMenu = Menu.buildFromTemplate([
+    { label: &#39;Item1&#39;, type: &#39;radio&#39; },
+    { label: &#39;Item2&#39;, type: &#39;radio&#39; }
+  ])
+
+  // Make a change to the context menu
+  contextMenu.items[1].checked = false
+
+  // Call this again for Linux because we modified the context menu
+  appIcon.setContextMenu(contextMenu)
+})Copy</code></pre>
+<ul>
+<li>在 Windows 上, 建议使用 <code>ICO</code> 图标来获得最佳视觉效果。</li>
+</ul>
+<p>如果要在所有平台上保持完全相同的行为, 则不应依赖 <code>click</code> 事件, 并且始终将上下文菜单附加到任务栏图标。</p>
+<h4 id="事件">事件</h4>
+<p>windows下托盘的事件有点击、左右键单击、双击等事件</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

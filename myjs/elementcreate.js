@@ -18,15 +18,12 @@ function createarticlecard(item, pagebelong) {
     tagsbox.style.marginTop = '5px'
     charsbox.style.marginTop = '5px'
     articletitle.innerHTML = item.title
-    articletitle.number = item.number
-    articletitle.href = '/' + '?to=article&number=' + articletitle.number
-    articlecard.id = 'article_' + item.number
-    articleshortmsg.id = 'article_short_msg_' + item.number
+    articletitle.abbrlink = item.abbrlink
+    articletitle.href = '/article/' + articletitle.abbrlink + '.html'
+    articlecard.id = 'article_' + item.abbrlink
+    articleshortmsg.id = 'article_short_msg_' + item.abbrlink
     articlemore.innerHTML = 'more'
-    articlemore.href = '/' + '?to=article&number=' + articletitle.number
-    $(articletitle).click(function () {
-        location = '/' + '?to=article&number=' + articletitle.number
-    })
+    articlemore.href = '/article/' + articletitle.abbrlink + '.html'
     sp1.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date)) + ' | 发于 ' + articlecarddate(dayjs(item.created_at)) + ' | 更于' + articlecarddate(dayjs(item.updated_at))
     let catestaghtml = ''
     let content = ''

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1ae6lng<br>title: Docker Volumes<br>categories:</p>
+<ul>
+<li>note</li>
+<li>docker<br>tags:</li>
+<li>docker</li>
+<li>volume<br>date: 2018-12-5 10:23:09<br>series: docker</li>
+</ul>
+<hr>
+<h3 id="introduction">Introduction</h3>
+<blockquote>
+<p><strong>Volumes are the preferred mechanism for persisting data generated by and used by Docker containers.</strong> While <a href="https://docs.docker.com/storage/bind-mounts/">bind mounts</a> are dependent on the directory structure of the host machine, <strong>volumes are completely managed by Docker</strong>. Volumes have several advantages over bind mounts:</p>
+<ul>
+<li>Volumes are easier to back up or migrate than bind mounts.</li>
+<li>You can manage volumes using Docker CLI commands or the Docker API.</li>
+<li>Volumes work on both Linux and Windows containers.</li>
+<li>Volumes can be more safely shared among multiple containers.</li>
+<li>Volume drivers let you store volumes on remote hosts or cloud providers, to encrypt the contents of volumes, or to add other functionality.</li>
+<li>New volumes can have their content pre-populated by a container.</li>
+</ul>
+<p>In addition, volumes are often a better choice than persisting data in a container’s writable layer, because a volume does not increase the size of the containers using it, and the volume’s contents exist outside the lifecycle of a given container.</p>
+<p><img src="https://docs.docker.com/storage/images/types-of-mounts-volume.png" alt="volumes on the Docker host"></p>
+<p>If your container generates non-persistent state data, consider using a <a href="https://docs.docker.com/storage/tmpfs/">tmpfs mount</a> to avoid storing the data anywhere permanently, and to increase the container’s performance by avoiding writing into the container’s writable layer.</p>
+<p>Volumes use <code>rprivate</code> bind propagation, and bind propagation is not configurable for volumes.</p>
+</blockquote>
+<h3 id="use-volumes-with--v-and---mount-flag">Use volumes with <code>-v</code> and <code>--mount</code> flag</h3>
+<p>There is two ways we could use volume on our target, with <code>-v</code> or <code>--volum</code> flag, or with <code>--mount</code> flag.</p>
+<p>In general, <code>--mount</code> is more explicit and verbose, but it was available for standalone containers since Docker 17.06, before that it only use on swarm services. And the <code>-v</code> flag only support for container, not for services.</p>
+<p>The biggest difference is that the <code>-v</code> or <code>--volume</code> syntax combines all the options together <strong>in one field</strong>, while the <code>--mount</code> syntax separates them.</p>
+<p>If you need to specify volume driver options, you must use <code>--mount</code>.</p>
+<ul>
+<li><p><code>-v</code> or <code>--volume</code> : Consists of three fields, separated by colon characters (<code>:</code>). The fields must be in the correct order, and the meaning of each field is not immediately obvious.</p>
+<ul>
+<li>In the case of named volumes, the first field is the name of the volume, and is unique on a given host machine. For anonymous volumes, the first field is omitted.</li>
+<li>The second field is the path where the file or directory are mounted in the container.</li>
+<li>The third field is optional, and is a comma-separated list of options, such as <code>ro</code>. These options are discussed below.</li>
+</ul>
+</li>
+<li><p><code>--mount</code>  : Consists of multiple key-value pairs, separated by commas and each consisting of a <code>&lt;key&gt;=&lt;value&gt;</code>tuple. The<code>--mount</code>syntax is more verbose than<code>-v</code> or <code>--volume</code>, but the order of the keys is not significant, and the value of the flag is easier to understand.</p>
+<ul>
+<li>The <code>type</code> of the mount, which can be <a href="https://docs.docker.com/storage/bind-mounts/"><code>bind</code></a>, <code>volume</code>, or <a href="https://docs.docker.com/storage/tmpfs/"><code>tmpfs</code></a>. This topic discusses volumes, so the type is always<code>volume</code>.</li>
+<li>The <code>source</code> of the mount. For named volumes, this is the name of the volume. For anonymous volumes, this field is omitted. May be specified as <code>source</code> or <code>src</code>.</li>
+<li>The <code>destination</code> takes as its value the path where the file or directory is mounted in the container. May be specified as <code>destination</code>, <code>dst</code>, or <code>target</code>.</li>
+<li>The <code>readonly</code> option, if present, causes the bind mount to be <a href="https://docs.docker.com/storage/volumes/#use-a-read-only-volume">mounted into the container as read-only</a>.</li>
+<li>The <code>volume-opt</code> option, which can be specified more than once, takes a key-value pair consisting of the option name and its value.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>At this article, I just show the <code>--mount</code> flag.</p>
+</blockquote>
+<h3 id="create-and-manage-volumes">Create and manage volumes</h3>
+<ul>
+<li><p>create</p>
+<pre><code class="language-bash">$ docker volume create my-vol</code></pre>
+</li>
+<li><p>list volumes</p>
+<pre><code class="language-bash">$ docker volume ls</code></pre>
+</li>
+<li><p>inspect volume</p>
+<pre><code class="language-bash">$ docker volume inspect my-vol
+[
+    {
+        &quot;Driver&quot;: &quot;local&quot;,
+        &quot;Labels&quot;: {},
+        &quot;Mountpoint&quot;: &quot;/var/lib/docker/volumes/my-vol/_data&quot;,
+        &quot;Name&quot;: &quot;my-vol&quot;,
+        &quot;Options&quot;: {},
+        &quot;Scope&quot;: &quot;local&quot;
+    }
+]</code></pre>
+</li>
+<li><p>remove volume</p>
+<pre><code class="language-bash">$ docker volume rm my-vol</code></pre>
+</li>
+</ul>
+<h3 id="use-case">Use case</h3>
+<p>If you start a container with a volume that does not yet exist, Docker creates the volume for you. The following example mounts the volume <code>myvol2</code> into <code>/app/</code> in the container.</p>
+<p>The <code>-v</code> and <code>--mount</code> examples below produce the same result. You can’t run them both unless you remove the <code>devtest</code> container and the <code>myvol2</code> volume after running the first one.</p>
+<h4 id="start-with-container">Start with container</h4>
+<pre><code class="language-bash">$ docker run -d \
+  --name devtest \
+  --mount source=myvol2,target=/app \
+  nginx:latest</code></pre>
+<p>Use <code>docker inspect devtest</code> to verify that the volume was created and mounted correctly. Look for the <code>Mounts</code> section:</p>
+<pre><code class="language-bash">&quot;Mounts&quot;: [
+    {
+        &quot;Type&quot;: &quot;volume&quot;,
+        &quot;Name&quot;: &quot;myvol2&quot;,
+        &quot;Source&quot;: &quot;/var/lib/docker/volumes/myvol2/_data&quot;,
+        &quot;Destination&quot;: &quot;/app&quot;,
+        &quot;Driver&quot;: &quot;local&quot;,
+        &quot;Mode&quot;: &quot;&quot;,
+        &quot;RW&quot;: true,
+        &quot;Propagation&quot;: &quot;&quot;
+    }
+],</code></pre>
+<p>This shows that the mount is a volume, it shows the correct source and destination, and that the mount is read-write.</p>
+<p>Stop the container and remove the volume. Note volume removal is a separate step.</p>
+<pre><code class="language-bash">$ docker container stop devtest
+
+$ docker container rm devtest
+
+$ docker volume rm myvol2</code></pre>
+<h4 id="start-with-service">Start with service</h4>
+<p>When you start a service and define a volume, each service container uses its own local volume. None of the containers can share this data if you use the <code>local</code> volume driver, but some volume drivers do support shared storage. Docker for AWS and Docker for Azure both support persistent storage using the Cloudstor plugin.</p>
+<p>The following example starts a <code>nginx</code> service with four replicas, each of which uses a local volume called <code>myvol2</code>.</p>
+<pre><code class="language-bash">$ docker service create -d \
+  --replicas=4 \
+  --name devtest-service \
+  --mount source=myvol2,target=/app \
+  nginx:latest</code></pre>
+<p>Use <code>docker service ps devtest-service</code> to verify that the service is running:</p>
+<pre><code class="language-bash">$ docker service ps devtest-service
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago</code></pre>
+<p>Remove the service, which stops all its tasks:</p>
+<pre><code class="language-bash">$ docker service rm devtest-service</code></pre>
+<p>Removing the service does not remove any volumes created by the service. Volume removal is a separate step.</p>
+<h4 id="populate-a-volume-using-a-container">Populate a volume using a container</h4>
+<p>If you start a container which creates a new volume, as above, and the container has files or directories in the directory to be mounted (such as <code>/app/</code> above), the directory’s contents are copied into the volume. The container then mounts and uses the volume, and other containers which use the volume also have access to the pre-populated content.</p>
+<p>To illustrate this, this example starts an <code>nginx</code> container and populates the new volume <code>nginx-vol</code> with the contents of the container’s <code>/usr/share/nginx/html</code> directory, which is where Nginx stores its default HTML content.</p>
+<p>The <code>--mount</code> and <code>-v</code> examples have the same end result.</p>
+<pre><code class="language-bash">$ docker run -d \
+  --name=nginxtest \
+  --mount source=nginx-vol,destination=/usr/share/nginx/html \
+  nginx:latest</code></pre>
+<p>After running either of these examples, run the following commands to clean up the containers and volumes. Note volume removal is a separate step.</p>
+<pre><code class="language-bash">$ docker container stop nginxtest
+
+$ docker container rm nginxtest
+
+$ docker volume rm nginx-vol</code></pre>
+<h4 id="read-only">Read-only</h4>
+<p>Because the volume could be mount at multiple containers, so there might containers only needs read access to the data.</p>
+<pre><code class="language-bash">$ docker run -d \
+  --name=nginxtest \
+  --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
+  nginx:latest</code></pre>
+<h3 id="other-case">Other case</h3>
+<p>There are other use case on official doc like: <strong>Share data among machines</strong>, <strong>Back up, restore, migrate data volumes</strong> and so on.</p>
+<p>You can check more information by refer to: <a href="https://docs.docker.com/storage/volumes">https://docs.docker.com/storage/volumes</a></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

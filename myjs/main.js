@@ -188,7 +188,7 @@ function new_render_md() {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
         $(md).animateCss('fadeIn')
-    }, 300);
+    }, 200);
 }
 
 function articlespage(pageto) {

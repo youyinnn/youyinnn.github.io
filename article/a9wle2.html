@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: a9wle2<br>title: 我认为的规范的git commit msg<br>top: true<br>categories:</p>
+<ul>
+<li>thinking<br>comments: true<br>tags:</li>
+<li>tips</li>
+<li>github</li>
+<li>git<br>date: 2017-11-29 18:30:01</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系 但你也别每条都这样写</p>
+<p>{% endcq %}</p>
+<!-- more -->
+
+<p>好久没更博了，最近一直在疯狂的推<a href="https://github.com/DomBro96/dataimport">数据快速导入</a>的项目，推的使用在使用git做一些fix和optimize等工作，经常会进行版本回退和msg查阅，看看我昨天晚上到底干了些什么。</p>
+<p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
+<p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html">5 Useful Tips For A Better Commit Message</a></p>
+<p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
+<h3 id="第一行">第一行</h3>
+<p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code></code>分隔，提示符规定如下（持续补充）：</p>
+<p>我把一次工作的标识符分“动作”、“对象”两部分描述：</p>
+<ul>
+<li><p>可能的动作前缀有：</p>
+<ul>
+<li><p>基本操作前缀：</p>
+<blockquote>
+<p><code>ADD</code>：Add 增加<br><code>DEL</code>：Delete 删除<br><code>IMP</code>：Improve 改进<br><code>MG</code>：Merge 合并<br><code>MOD</code>：Modifie 修改<br><code>CPL</code>：Complete 完成</p>
+</blockquote>
+</li>
+<li><p>其他操作前缀：</p>
+<blockquote>
+<p><code>RN</code>：Rename 重命名<br><code>MOV</code>：Move 移动<br><code>CRE</code>：Create 创造<br><code>AMD</code>：Amend 修正<br><code>SUP</code>：Supplement 补充<br><code>RM</code>：Remove 移除</p>
+</blockquote>
+</li>
+<li><p>独立动作：</p>
+<blockquote>
+<p><code>INIT</code>：Initialized Repository 初始化仓库<br><code>RELEASE</code>：Release a Version 发布一个版本<br><code>TODO</code>：Todo List 增加TODO<br><code>TOFUNC</code>：提取重复代码为方法增加代码重用<br><code>FIXBUG</code>：Fix Bug 修复BUG<br><code>RPBUG</code>：Report Bug 通报BUG<br><code>SAYING</code>：Saying 有话要说</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>可能的对象有：</p>
+<ul>
+<li><p>业务之内的对象：</p>
+<blockquote>
+<p><code>FEAT</code>：Feature 某个功能<br><code>MODU</code>：Module 某个模块<br><code>FUNC</code>：Function 某个函数<br><code>CODE</code>：Code 某段代码<br><code>CONT</code>：Content 某种内容<br><code>ANNO</code>：Annotation 某些注释</p>
+</blockquote>
+</li>
+<li><p>业务之外的对象：</p>
+<blockquote>
+<p><code>CONF</code>：Config 配置文件<br><code>DEP</code>：Dependences 依赖配置<br><code>POM</code>：POM文件<br><code>README</code>：Readme文件<br><code>IGNORE</code>：gitignore文件<br><code>FILE</code>：File<br><code>STRUCT</code>：Project Structure 项目结构</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>所以我commit的第一行会是这样的：</p>
+<pre><code class="language-vim">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE</code></pre>
+<p>这表示我当次commit完成了：</p>
+<blockquote>
+<p><em>我在完成一个<code>新功能</code>的同时还<code>发现了一个BUG</code>顺便<code>封装了之前写的重复的代码为函数</code>提高了代码重用率接着<code>修复了之前发现的一些BUG</code>最后还<code>修改了一下ignore文件</code>！</em></p>
+</blockquote>
+<h3 id="第二行">第二行</h3>
+<p>得是一个空行</p>
+<h3 id="第三行">第三行</h3>
+<p>开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+<ul>
+<li>以工作标识符加冒号占一行。</li>
+<li>如有当前工作有多个要点，必须有序得分条说明。</li>
+<li>每条说明文字必须要指明改动源与改动目的。</li>
+<li>当commit多个文件时，涉及代码改动的每条说明文字的最后一个字符必须以一个tab键进行制表空格；然后写上<code>//fileName.fileSuffix</code>来表明当前这条改动的工作是在哪个文件上进行的；如有必要，可在文件名后面加上<code>(12-67)</code>表明改动的行段；如涉及多个文件，则文件之间以空格分隔。</li>
+<li>每个工作说明完之后必须空一行，最后一个工作除外。</li>
+<li>全英文标点符号，即使有中文说明；说明行末不加任何标点符号，即使是英文句号。</li>
+<li>FIX后面必须加上对应<code>RPBUG</code>的版本号（如果是以前的commit中report的BUG的话，如果是当次commit发现的BUG可以不用写版本号，并且可以不写<code>RPBUG</code>标识符），然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
+<li>如果是一些可以忽略说明的工作，则可以直接在标识符后面加上<code>*</code>，表示忽略说明（如<code>MODIGNORE</code>标识符）。</li>
+</ul>
+<p>比如：</p>
+<pre><code class="language-vim">CPLFEAT:
+1.初步完成了用户登陆功能 //LoginService.java
+2.初步完成了用户注册功能 //SignupService.java</code></pre>
+<hr>
+<p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
+<pre><code class="language-vim">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE
+
+CPLFEAT:
+1.初步完成了用户登陆功能 //LoginService.java
+2.初步完成了用户注册功能 //SignupService.java
+
+REBUG:
+1.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(39)
+
+TOFUNC:
+1.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(46-68) LoginService.java(35-57)
+
+FIXBUG：
+1.59ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java
+
+MODIGNORE:*</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>
