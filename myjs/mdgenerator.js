@@ -37,6 +37,9 @@ renderer.heading = function(text, level) {
             ${text}
           </h${level}>`;
 }
+renderer.text = function (text) {
+    return text
+}
 
 function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     let sourceMdStr = fs.readFileSync(sourceFilePath, {
@@ -55,7 +58,8 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
         breaks: true,
         renderer: renderer
     })
-    fs.writeFileSync(outputFilePath, html.replace(/\{\{\% md \%\}\}/, htmlStr), {
+    let html2 = html.split('{{% md %}}')
+    fs.writeFileSync(outputFilePath, html2[0] + htmlStr + html2[1], {
         encoding: 'utf-8'
     })
 }
