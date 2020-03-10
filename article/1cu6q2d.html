@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-61.Rotate List(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            61.Rotate List(Medium)
+          </h3><p>Given a linked list, rotate the list to the right by <em>k</em> places, where <em>k</em> is non-negative.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
+Output: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
+Explanation:
+rotate 1 steps to the right: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL
+rotate 2 steps to the right: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
+Output: 2-&gt;0-&gt;1-&gt;NULL
+Explanation:
+rotate 1 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
+rotate 2 steps to the right: 1-&gt;2-&gt;0-&gt;NULL
+rotate 3 steps to the right: 0-&gt;1-&gt;2-&gt;NULL
+rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>追踪指针，简单直接</p>
+<pre><code class="language-java">public ListNode rotateRight(ListNode head, int k) {
+    if (head == null) {
+        return null;
+    }
+    ListNode newHead, tail = null;
+    int length = 0;
+    ListNode now = head;
+    // 遍历一般计算长度 标志尾巴
+    while (now != null) {
+        if (now.next == null) {
+            tail = now;
+        }
+        now = now.next;
+        length++;
+    }
+
+    // 处理k
+    k %= length;
+    if (k == 0) {
+        return head;
+    }
+    int count = 0;
+    ListNode pre = new ListNode(0);
+    now = head;
+    pre.next = head;
+    // 遍历到转轴点
+    while (count &lt; length - k) {
+        pre = pre.next;
+        now = now.next;
+        count++;
+    }
+    // 断开转轴点
+    pre.next = null;
+    // 转轴点为新的头部
+    newHead = now;
+    // 尾部接上旧头部
+    tail.next = head;
+    return newHead;
+}</code></pre>
+
+          <h3>
+            <a name="_root-62.Unique Paths(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            62.Unique Paths(Medium)
+          </h3><p>A robot is located at the top-left corner of a <em>m</em> x <em>n</em> grid (marked &#39;Start&#39; in the diagram below).</p>
+<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked &#39;Finish&#39; in the diagram below).</p>
+<p>How many possible unique paths are there?</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png" alt="img"><br>Above is a 7 x 3 grid. How many possible unique paths are there?</p>
+<p><strong>Note:</strong> <em>m</em> and <em>n</em> will be at most 100.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: m = 3, n = 2
+Output: 3
+Explanation:
+From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -&gt; Right -&gt; Down
+2. Right -&gt; Down -&gt; Right
+3. Down -&gt; Right -&gt; Right</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: m = 7, n = 3
+Output: 28</code></pre>
+          <h4>
+            <a name="_root-DP" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            DP
+          </h4><p>机器人走方格，有多少种走法题目，在<a href="https://youyinnn.github.io/?to=post&amp;number=63#DP%E7%BB%83%E4%B9%A0-3%EF%BC%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B5%B0%E6%96%B9%E6%A0%BC">地痞</a>解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好pre数组的结果</p>
+<pre><code class="language-java">public int uniquePaths(int m, int n) {
+    int[] pre = new int[n];
+    int[] now = new int[n];
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            now[j] = j &gt; 0 ? (now[j - 1] + pre[j]) : 1;
+        }
+        pre = Arrays.copyOf(now, now.length);
+    }
+    return now[n - 1];
+}</code></pre>
+
+          <h3>
+            <a name="_root-63.Unique Paths II (Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            63.Unique Paths II (Medium)
+          </h3><p>A robot is located at the top-left corner of a <em>m</em> x <em>n</em> grid (marked &#39;Start&#39; in the diagram below).</p>
+<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked &#39;Finish&#39; in the diagram below).</p>
+<p>Now consider if some obstacles are added to the grids. How many unique paths would there be?</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png" alt="img"></p>
+<p>An obstacle and empty space is marked as <code>1</code> and <code>0</code> respectively in the grid.</p>
+<p><strong>Note:</strong> <em>m</em> and <em>n</em> will be at most 100.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+Output: 2
+Explanation:
+There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -&gt; Right -&gt; Down -&gt; Down
+2. Down -&gt; Down -&gt; Right -&gt; Right</code></pre>
+          <h4>
+            <a name="_root-DP" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            DP
+          </h4><p>稍微变种一下，因为有障碍物，所以我们处理第一行now的时候，还是预处理一下pre比较好</p>
+<pre><code class="language-java">public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+    int m = obstacleGrid.length;
+    int n = obstacleGrid[0].length;
+    int[] pre = new int[n];
+    // 如果起点没有障碍物
+    if (obstacleGrid[0][0] != 1) {
+        pre[0] = 1;
+        for (int i = 1; i &lt; pre.length; i++) {
+            if (obstacleGrid[0][i] != 0) {
+                pre[i] = 1;
+            } else {
+                // 一旦碰到障碍物 后面的路就断了
+                break;
+            }
+        }
+    }
+    int[] now = new int[n];
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (obstacleGrid[i][j] == 1) {
+                now[j] = 0;
+            } else {
+                now[j] = j &gt; 0 ? (now[j - 1] + pre[j]) : pre[j];
+            }
+        }
+        pre = Arrays.copyOf(now, now.length);
+    }
+    return now[n - 1];
+}</code></pre>
+
+          <h3>
+            <a name="_root-64.Minimun Path Sum(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            64.Minimun Path Sum(Medium)
+          </h3><p>Given a <em>m</em> x <em>n</em> grid filled with non-negative numbers, find a path from top left to bottom right which <em>minimizes</em> the sum of all numbers along its path.</p>
+<p><strong>Note:</strong> You can only move either down or right at any point in time.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.</code></pre>
+          <h4>
+            <a name="_root-DP" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            DP
+          </h4><p>曾经有一道题，<a href="https://youyinnn.github.io/?to=post&amp;number=63#DP%E7%BB%83%E4%B9%A0-6%EF%BC%9A%E7%A1%AC%E5%B8%81%E6%94%B6%E9%9B%86%E9%97%AE%E9%A2%98">硬币收集问题</a>，这个就相当于收集到的最小币值</p>
+<pre><code class="language-java">public int minPathSum(int[][] grid) {
+    if (grid.length == 0 || grid[0].length == 0) {
+        return 0;
+    }
+    int[] pre = new int[grid[0].length];
+    int[] now = new int[grid[0].length];
+    for (int i = 0; i &lt; grid.length; i++) {
+        for (int j = 0; j &lt; grid[0].length; j++) {
+            if (i == 0 &amp;&amp; j == 0) {
+                now[0] = grid[0][0];
+            } else if (i == 0) {
+                now[j] = grid[0][j] + now[j - 1];
+            } else if (j == 0) {
+                now[j] = grid[i][0] + pre[j];
+            } else {
+                now[j] = grid[i][j] + Math.min(now[j - 1], pre[j]);
+            }
+        }
+        pre = Arrays.copyOf(now, now.length);
+    }
+    return now[now.length - 1];
+}</code></pre>
+
+          <h3>
+            <a name="_root-65.Valid Number(Hard)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            65.Valid Number(Hard)
+          </h3><p>不做，傻逼题</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

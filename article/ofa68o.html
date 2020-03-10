@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><p>一言难尽 直接开始吧 时间有限 就不一一解读接口了</p>
+<p>这篇是逐行级别的<code>HashMap</code>的<strong>“基础操作”</strong>源码解读，仅仅分析一些核心的<strong>单元素基础操作（CRUD）</strong>，尽可能从大框架思路去分析实现思路，一些太细的变量和无关操作，就不分析太多了</p>
+<p>本篇因为时间和精力有限，也跳过了一些很底层的分析如hash计算，比特位计算等，网上还有好多大神对于这个分析的比我好得多</p>
+<p><strong>多元素操作如<code>putAll</code></strong>以及一些克隆和序列化的操作的话，就不分析了</p>
+<p>开篇即是对于作者实现笔记的解读，你可能觉得就是一篇源码英文翻译，但是到后面到了方法的时候，每行都是根据自己的理解去解读的，如果您有其他的看法，可以留言讨论。</p>
+<hr>
+
+          <h3>
+            <a name="_root-Document介绍" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Document介绍
+          </h3><blockquote>
+<p>基于哈希表实现的<code>Map</code>接口。这个实现提供了所有可选的映射操作，并允许空值和空键。(HashMap类大致相当于Hashtable，但它是非同步的，并且允许为空。)这个类不保证映射的顺序；特别地，它不能保证顺序会随时间保持不变（也就是说顺序可能会在其他的操作中被改变）。</p>
+<p>这个实现为基本操作（<code>get</code>和<code>put</code>）提供了恒定时间的性能，假设哈希函数将元素适当地分散在各个桶（ <strong>buckets，存储元素的结构，后文用仓位描述这个概念</strong> ）中。对集合视图的遍历迭代所花费的时间，与<code>HashMap</code>实例的 <strong>“容量（capacity）”</strong> 及其 <strong>大小（键-值映射数）</strong> 成比例。因此，如果迭代性能很重要，那么不要将初始容量设置得太高（或者负载系数太低），这是非常重要的。</p>
+<p><code>HashMap</code>实例有两个影响其性能的参数：初始容量 <strong>（initial capacity）</strong> 和负载因子<strong>（load factor）</strong>。容量是哈希表中的桶数<strong>（箱子数）</strong>，初始容量只是创建哈希表时的容量。负载因子是在哈希表的容量自动增加之前，哈希表被允许达到的最大容量的度量<strong>（阈值）</strong>。当哈希表中的条目数量超过负载因子和当前容量的乘积时，哈希表就会被重新哈希(也就是说，重新构建内部数据结构)，这样哈希表的容量大约是原来的两倍。</p>
+<p>一般来说，默认的负载因子<strong>(0.75)</strong>在时间和空间成本之间提供了很好的权衡。较高的值减少了空间开销，但增加了查找成本（反映在<code>HashMap</code>类的大多数操作中，包括<code>get</code>和<code>put</code>）。在设置映射的初始容量时，应该考虑映射中的<strong>期望最大键值对数量</strong>及其<strong>负载因子</strong>，以最小化重哈希<strong>（rehash）</strong>操作的次数。如果初始容量大于<strong>期望最大键值对数量</strong>除以<strong>负载因子</strong>，就不会发生重哈希操作。 </p>
+<p>如果要将许多映射（键值对）存储在<code>HashMap</code>实例中，那么使用足够大的容量创建映射将使映射存储的效率更高，而不是让它根据需要执行自动重哈希以增长表。注意，使用具有相同<code>hashCode()</code>的多个键确实会降低任何散列表的性能。为了改善影响，当键具有可比性时，这个类可以使用键之间的比较顺序来帮助断开连接（避免hash冲突）。</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-作者给的实现提示" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作者给的实现提示
+          </h3>
+          <h4>
+            <a name="_root-1.关于整体结构" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1.关于整体结构
+          </h4><blockquote>
+<p>这个map实现，在一般的情况下就像是一个个由哈希表（<strong>hash table</strong>）组织起来的箱子一样，但是当这些箱子的数量变得非常大（非常大如何衡量？）的时候，它会用树结点（<strong>TreeNode</strong>）结构去替换箱子的结构，每个结构和<code>java.util.TreeMap</code>很相似。</p>
+<p>类中大部分的方法都是在一般的情况下考虑的（<strong>table method</strong>），你可以把它想象成当作一堆普通箱子一样使用，但是在合适的情况下（可能只是简单的判断结构是否<code>instanceof</code>一个Node）会将转接到<strong>TreeNode</strong>结构下可用的方法（<strong>tree method</strong>），这时候你需要讲每个箱子当成一棵树去对待。</p>
+<p><strong>TreeNode</strong>结构下的这些箱子可能会被遍历或者有别的用途，但是在这个<strong>TreeNode</strong>结构里的箱子数量越来越多的情况下，依旧支持以理想的速度进行快速查找操作。然而，考虑到map中绝大多数的箱子结构都是一般的结构，那么检查这些树结构箱子的操作就可能在表方法（<strong>table method</strong>）进行的过程中被延迟执行。</p>
+</blockquote>
+
+          <h4>
+            <a name="_root-2.关于Tree Bins" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.关于Tree Bins
+          </h4><blockquote>
+<p> 树箱子（<strong>Tree bins</strong>，箱子都是<strong>TreeNode</strong>结构）的顺序首先由元素的hashCode（哈希码）决定，但是在有关联的情况下，如果两个元素实现了同一个<code>class C implements Comparable&lt;C&gt;</code>接口的话，那么它们的顺序由实现了的比较方法决定（我们保守地通过反射去验证this对象来检查泛型--详情见<code>comparableClassFor</code>方法）。</p>
+<p> 树箱子的增加比较复杂但是绝对值得，最坏的情况下也有<strong>O(logn)</strong>效率，但是操作要求键（KEYS）必须有唯一的哈希（hashs）或者有序性保证，因此，在一些意外情况或者<code>hashCode()</code>方法实现得太烂，也就是一些键（KEYS）共享一个hashCode的情况下，只要它们还能互相比较，性能会慢慢退化。（如果这些办法都没有被采用，我们可能会在两倍的时间效率或者空间效率上进行比较元素，这是在没有预防措施的情况下。但是这样的情况只会在菜鸟程序员的身上才有可能发生，因为程序已经够慢了，再慢一点也没差）</p>
+</blockquote>
+
+          <h4>
+            <a name="_root-3.TreeNode结构带来的性能" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.TreeNode结构带来的性能
+          </h4><blockquote>
+<p>因为 <strong>TreeNodes</strong> 结构一般都是普通结点大小的两倍左右大，我们仅仅是在当箱子装了足够的结点的时候，为了保证能够继续使用才使用这个结构（看<code>TREEIFY_THRESHOLD</code>，树化阈值）。而且当他们的数量变小的时候（移除操作或者恢复大小的操作）它们会变回一般的箱子结构。</p>
+<p>在使用分布良好的用户实现的哈希码的时候，很少使用树箱子结构。</p>
+<p>理想情况中，如果哈希码的实现能保证随机性，那么容器中的节点分布频率遵循<a href="http://en.wikipedia.org/wiki/Poisson_distribution">泊松分布</a>，默认调整大小的参数平均约为 <strong>0.5</strong> ，阈值为 <strong>0.75</strong> ，虽然由于方差较大，会适当调整分布粒度。（这个意思大致是说，保持容器的载量是容器的容量的 <strong>0.5~0.75</strong> 之间，接近 <strong>0.75</strong> 就需要考虑容器扩容）</p>
+<p>如果忽视方差,预期的列表大小k的出现次数是：<strong>(exp(-0.5) * pow(0.5, k) / 阶乘(k))</strong>，值如下：</p>
+<ul>
+<li><p>0:    0.60653066</p>
+</li>
+<li><p>1:    0.30326533</p>
+</li>
+<li><p>2:    0.07581633</p>
+</li>
+<li><p>3:    0.01263606</p>
+</li>
+<li><p>4:    0.00157952</p>
+</li>
+<li><p>5:    0.00015795</p>
+</li>
+<li><p>6:    0.00001316</p>
+</li>
+<li><p>7:    0.00000094</p>
+</li>
+<li><p>8:    0.00000006</p>
+</li>
+</ul>
+<p>更多的值就已经不到千万分之一了，也就是说在<code>hashCode()</code>实现得理想的情况下，几乎容器中几乎不可能出现两位数以上的树箱子。</p>
+<p>树箱的根通常是它的第一个节点。然而，有时（当前的实现，仅在<code>Iterator.remove</code>方法上出现这个情况），根可能会在其他地方，但可以通过<code>TreeNode.root()</code>方法恢复父节点跟随。</p>
+</blockquote>
+
+          <h4>
+            <a name="_root-4.其他的细节" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            4.其他的细节
+          </h4><blockquote>
+<p>所有适用的内部方法都接受哈希码作为参数（通常由public方法提供），允许它们可以在不重新计算用户实现的哈希码的情况下相互调用。大多数内部方法也接受一个“tab”参数，这个参数通常是当前的表，但可能是新表或旧表调整或转换。</p>
+<p>当箱子（bin）列表被树化、分割或未树化时，我们保留它们具有相同的相对访问 / 遍历顺序（例如：字段、后一个结点）以更好地保存局部，并稍微保留简化调用的分割和遍历的函数调用<code>iterator.remove</code>。当在插入时使用比较器时，保持一次全部排序（或这里要求的最接近的排序）以达到重新平衡，我们将类和标识码进行比较，以作为一个权衡的选择。</p>
+<p><strong>普通模式</strong>和<strong>树模式</strong>之间的使用和转换是有点复杂的，可以参考<code>LinkedHashMap</code>。看到其中是在<strong>插入</strong>时调用<strong>hook方法</strong>，允许<code>LinkedHashMap</code>内部进行<strong>删除操作</strong>和<strong>访问操作</strong>，否则保持这些机制独立性。（这也要求将map实例传递给一些实用程序方法，而这可能会创建一些新的节点。）</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-static final成员变量" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            static final成员变量
+          </h3><pre><code class="language-java">// 默认的初始化容器容量 一开始就是16个
+static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
+
+// 最大的容量 
+// 只在你使用指定容量的构造函数构造容器的时候 并且你给的值比这个值更大的时候使用
+// 无论如何一个容器初始化容量不会大过这个值
+// 而且最好是小于这个值的2的任意次方
+static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;
+
+// 默认的负载因子
+static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+// 树化阈值
+// 箱子结构超过这个阈值的时候会用树结构而不是链结构去管理箱子
+// 当一条链结点超过这个阈值的时候 箱子会变成树结构
+// 这个值必须大于2，并且应该至少为8，以便匹配在树中进行删除操作后因为尺寸收缩而转换为普通箱子的情况
+static final int TREEIFY_THRESHOLD = 8;
+
+// 逆树化阈值
+// 在一些恢复容量的操作中 当箱子容量小于这个阈值的时候会对箱子进行逆树化
+// 这个值最大是6
+static final int UNTREEIFY_THRESHOLD = 6;
+
+// 最小的表容量
+// 超过这个最小的表容量就应该树化了(否则如果在一个仓位中有太多节点，表将被调整大小)
+// 这个值至少为4 * TREEIFY_THRESHOLD 以避免调整大小和树化阈值之间的冲突
+static final int MIN_TREEIFY_CAPACITY = 64;</code></pre>
+
+          <h3>
+            <a name="_root-内部类：链箱子——结点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            内部类：链箱子——结点
+          </h3><pre><code class="language-java">/**
+ * Basic hash bin node, used for most entries.  (See below for
+ * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
+ */
+static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+    final int hash;
+    final K key;
+    V value;
+    Node&lt;K,V&gt; next;
+
+    Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        this.hash = hash;
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+
+    public final K getKey()        { return key; }
+    public final V getValue()      { return value; }
+    public final String toString() { return key + &quot;=&quot; + value; }
+
+    public final int hashCode() {
+        return Objects.hashCode(key) ^ Objects.hashCode(value);
+    }
+
+    public final V setValue(V newValue) {
+        V oldValue = value;
+        value = newValue;
+        return oldValue;
+    }
+
+    public final boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (o instanceof Map.Entry) {
+            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
+            if (Objects.equals(key, e.getKey()) &amp;&amp;
+                Objects.equals(value, e.getValue()))
+                return true;
+        }
+        return false;
+    }
+}</code></pre>
+<p>简单而常规，主要是两个final变量，存储Key和hash，然后是value和下一个结点；</p>
+<p><img src="https://image.youyinnn.top/20180817154531.png" alt=""></p>
+
+          <h3>
+            <a name="_root-静态方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            静态方法
+          </h3>
+          <h4>
+            <a name="_root-hash" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            hash
+          </h4><pre><code class="language-java">// 计算key.hashCode()，并将(XORs)的高比特位分散到低比特位 以减少hash冲突
+// 应用了一种转换 将高比特的影响向下传播
+// 比特传播的速度 效用和质量之间存在权衡
+static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}</code></pre>
+
+          <h4>
+            <a name="_root-comparableClassFor" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            comparableClassFor
+          </h4><pre><code class="language-java">// 如果x实现了比较器接口就返回x的Class对象 不然就返回null
+static Class&lt;?&gt; comparableClassFor(Object x) {
+    //...
+}</code></pre>
+
+          <h4>
+            <a name="_root-compareComparables" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            compareComparables
+          </h4><pre><code class="language-java">// 返回两个可比较对象的比较结果
+@SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;}) // for cast to Comparable
+static int compareComparables(Class&lt;?&gt; kc, Object k, Object x) {
+    return (x == null || x.getClass() != kc ? 0 :
+            ((Comparable)k).compareTo(x));
+}</code></pre>
+
+          <h4>
+            <a name="_root-tableSizeFor" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            tableSizeFor
+          </h4><pre><code class="language-java">// 无论给什么容量 总是调整为比他大的2的若干次幂大大小 最大不超过MAXIMUM_CAPACITY
+static final int tableSizeFor(int cap) {
+    int n = cap - 1;
+    n |= n &gt;&gt;&gt; 1;
+    n |= n &gt;&gt;&gt; 2;
+    n |= n &gt;&gt;&gt; 4;
+    n |= n &gt;&gt;&gt; 8;
+    n |= n &gt;&gt;&gt; 16;
+    return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}</code></pre>
+
+          <h3>
+            <a name="_root-成员变量" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            成员变量
+          </h3><pre><code class="language-java">// 表
+// 以一个Node&lt;K,V&gt;数组来表示一张表的第一层结构 我称这个数组为“主仓”
+// 刚初始化的时候首先使用的表 在有必要的时候会重新计算容量
+// 表的长度总是2的任意次幂 （某些情况下也可以是0）
+transient Node&lt;K,V&gt;[] table;
+
+// 键值对集合
+// 保存键值对的集合 注意AbstractMap的成员白能力用的是keySet() and values()
+transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+
+// 载量 这个map中装了多少对键值对
+transient int size;
+
+// 这个map改变结构的次数 可以是HaspMap结构的改变也可以是内部结构的改变
+// 通常迭代的时候会用这个值做参考
+transient int modCount;
+
+// 下一次容量调整（load_factor * capacity）要达到的的阈值
+int threshold;
+
+// 当前哈希表的负载因子
+final float loadFactor;</code></pre>
+
+          <h3>
+            <a name="_root-构造函数" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            构造函数
+          </h3><p>本来不打算分析构造函数的，但是检查文章的时候发现，构造函数也有点东西，构造函数有4个，放map的那个就忽略了，先看无参的：</p>
+
+          <h4>
+            <a name="_root-无参" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            无参
+          </h4><pre><code class="language-java">/**
+ * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity
+ * (16) and the default load factor (0.75).
+ */
+public HashMap() {
+    this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
+}</code></pre>
+<p>函数就只指定了一个默认的负载因子，其他的参数会在<code>resize()</code>方法做出，往下看就知道了；</p>
+
+          <h4>
+            <a name="_root-有参1" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            有参1
+          </h4><pre><code class="language-java">public HashMap(int initialCapacity) {
+    this(initialCapacity, DEFAULT_LOAD_FACTOR);
+}</code></pre>
+
+          <h4>
+            <a name="_root-有参2" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            有参2
+          </h4><pre><code class="language-java">public HashMap(int initialCapacity, float loadFactor) {
+    if (initialCapacity &lt; 0)
+        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
+                                           initialCapacity);
+    if (initialCapacity &gt; MAXIMUM_CAPACITY)
+        initialCapacity = MAXIMUM_CAPACITY;
+    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
+        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +
+                                           loadFactor);
+    this.loadFactor = loadFactor;
+    this.threshold = tableSizeFor(initialCapacity);
+}</code></pre>
+<p>这里其他的都不重要，关键看<code>line:11</code>，其实我们指定初始容量并是直接的给表指定长度，而是直接指定阈值大小，因为我指定1000容量的容器，肯定是计划好能一次性不扩容地装1000个，读后面你会发现，hashmap你是不会装满的，到了它容量的75%（默认情况下）它就会扩容，因为它要留一大部分的空间来防止hash冲突；</p>
+
+          <h3>
+            <a name="_root-结构剧透！" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            结构剧透！
+          </h3><p><img src="https://image.youyinnn.top/20180817171145.png" alt=""></p>
+<p>我们看到，这就是一张一般的HashMap的结构，最上面的一横排是一个<code>Node&lt;K,V&gt;[]</code>也就是成员变量table，我私称这个table为<strong>主仓（main warehouse）。</strong></p>
+<p>每hash到的元素都会首先被放到<strong>主仓</strong>对应下标的位置上去，我私称每个下标对应的位置为一个<strong>仓位（position）</strong>，每一个<strong>箱子（也就是每一个结点）</strong>经过hash散列后，如果分到同一个仓位中，将在这个仓位上组织成链表，我私称这个链表为<strong>链箱群（linked bins）</strong>，如果<strong>链箱群</strong>长度达到树化阈值，那么这条<strong>链箱群</strong>就会树化为树结构，我私称这个树结构为<strong>树箱群（tree bins）</strong>。<strong>链箱群</strong>和<strong>树箱群</strong>我统称为<strong>箱群结构（bins structure）</strong></p>
+<p>所以我们找元素的时候有这么一件事：<strong>hashCode找仓位，equals找箱子！</strong></p>
+
+          <h3>
+            <a name="_root-成员方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            成员方法
+          </h3>
+          <h4>
+            <a name="_root-get" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            get
+          </h4><pre><code class="language-java">// 多的没什么好说 关键是引出getNode方法
+public V get(Object key) {
+    Node&lt;K,V&gt; e;
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}</code></pre>
+
+          <h5>
+            <a name="_root-getNode" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            getNode
+          </h5><pre><code class="language-java">final Node&lt;K,V&gt; getNode(int hash, Object key) {
+    Node&lt;K,V&gt;[] tab; 
+    Node&lt;K,V&gt; first, e; 
+    int n; K k;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (first = tab[(n - 1) &amp; hash]) != null) {
+        if (first.hash == hash &amp;&amp; // always check first node
+            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+            return first;
+        if ((e = first.next) != null) {
+            if (first instanceof TreeNode)
+                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+            do {
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}</code></pre>
+<p>这里有5个变量，第一个<strong>tab</strong>变量引用map的<strong>主仓</strong>；</p>
+<p>然后<strong>first</strong>根据hash去找到的<strong>主仓</strong>上的仓位的第一个<strong>箱子</strong>；</p>
+<p><strong>e</strong>表示箱群中的某个<strong>箱子</strong>；</p>
+<p><strong>n</strong>表示<strong>主仓数组的长度</strong>；</p>
+<p><strong>k</strong>表示当前访问的箱子的Key对象；</p>
+<p>读完代码发现，在一系列严谨的条件过后，首先看第一个箱子的hash值和要找到的key的hash值是否相等，相等则再比较地址以及equals方法；</p>
+<p>如果第一个箱子并不是要找的元素，且当前仓位不只一个箱子而是一个箱群，那么接下来就开始判断<strong>箱群结构</strong>，如果first是<strong>树箱</strong>，那么就用<strong>树结构的方法去查找结点</strong>，否则就是<strong>链箱群</strong>，接着就是中规中矩的链遍历，对比步骤和上面一致；</p>
+<p><strong>无论是树箱子还是链箱子的查找，都是<code>k == key || k.equals(key)</code>这样的比较句式！</strong></p>
+<p>注意到<code>line:8</code>有一句<code>(n - 1) &amp; hash</code>，这是将hash再映射到主仓的下标中，这也就解释了为什么会有<code>first.hash == hash</code>这样的语句，因为即使不同的hash也有可能映射到同一个仓位，下文的<code>hash &amp; (n - 1)</code>也是计算仓位的下标，二者没有区别；</p>
+<p>但是要注意的是，这样计算下标是有要求的，<strong>要求就是表容量必须是2的次幂，才能进行这样的运算</strong>，这也是为什么有静态方法<code>tableSizeFor</code>这个方法，比如说你指定初始化容量为1000，实际创建出来的表容量也是比1000大的2的次幂数即1024，我们配合有参1构造方法去解答，当我们最开始使用有参构造1的时候，只有<strong>threshold</strong>被赋值为比如说1000，然后到了<code>resize()</code>方法：</p>
+<blockquote>
+<p>oldCap=0；</p>
+<p>oldThr = threshold = 1024；</p>
+<p>newCap = oldThr = 1024；</p>
+<p>newThr = newCap * loadFactor = 1024 * 0.75；</p>
+</blockquote>
+<p>所以新容量就是1024！</p>
+
+          <h4>
+            <a name="_root-containsKey" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            containsKey
+          </h4><pre><code class="language-java">public boolean containsKey(Object key) {
+    return getNode(hash(key), key) != null;
+}</code></pre>
+<p>不解释了</p>
+
+          <h4>
+            <a name="_root-put" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            put
+          </h4><pre><code class="language-java">// 引putVal
+public V put(K key, V value) {
+    return putVal(hash(key), key, value, false, true);
+}</code></pre>
+
+          <h5>
+            <a name="_root-putVal" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            putVal
+          </h5><pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+               boolean evict) {
+    Node&lt;K,V&gt;[] tab; 
+    Node&lt;K,V&gt; p; 
+    int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}</code></pre>
+<p>假设我们要存储的key和value组装成了一个<strong>箱子（node）</strong>，我们的工作是要把这个箱子放在map中合适的位置上</p>
+<ul>
+<li><strong>tab</strong>代表当前的表，在<code>line:6</code>被赋值，<code>line:7</code>我们看到如果map是一个没被初始化过的map，那么就调用<code>resize()</code>方法初始化一个map；</li>
+<li><strong>p</strong>用来预存之前在这个仓位上的第一个箱子，也就是一个结点，在<code>line:8</code>被赋值，同时也做链遍历的<strong>双指针之一</strong>，且如果位置上原本就没有元素的话，就不会进行<code>line:10-38</code>的一系列操作，而是直接在<code>line:9</code>被赋予新的结点；如果原来位置上有元素的话，那么继续进行如下逻辑：<ul>
+<li>首先有一个<strong>e</strong>，用来存储一个结点，这个e有两个作用，一个是用作链遍历的<strong>双指针之一</strong>，另一个就是在链中已经存在一个和要存入的箱子具有相同的<strong>hash和key</strong>的箱子的情况下，存储这个已存在的箱子，用于后面判断是否覆盖value</li>
+<li>还有一个<strong>k</strong>，用来存储要存入箱子的key值；</li>
+</ul>
+</li>
+</ul>
+<p><code>line:12-16</code>如果hash（key的hash值）、key都一样，那e就被赋值为p，这时候也就是该仓位上原来的第一个箱子；如果不一样，那就接着判断p是不是树箱子，如果是树箱子，那么就按照树的方式去存放我们要存放的箱子；</p>
+<p>如果还不是树箱子，意味着这时候这个<strong>仓位</strong>下的箱群结构是<strong>链箱群</strong>，我们执行<code>line:17-30</code>，尝试摸到链尾，把新结点添加到链尾<code>line:20</code>，然后判断链长度，到达树化阈值就将<strong>链箱群</strong>树化为<strong>树箱群</strong><code>line:21-22</code>；</p>
+<p>如果在摸链尾的过程中发现有hash和key都一样的，这就意味着<strong>key冲突（key conflict）</strong>，赋值<strong>e</strong>之后（代表记下这个冲突的位置了），那就可以退出循环了<code>line:25-27</code>；</p>
+<p><code>line:31-37</code>是对<strong>key冲突</strong>的情况进行判断，如果变量<strong>onlyIfAbsent</strong>是真，那么就不覆盖原有key对应的value；我们的<code>put</code>方法传的就是false，也就是默认覆盖key相同的value；</p>
+<p><strong>需要强调的是：整个方法中，hash方法和equals方法的地位都是无比重要的！</strong></p>
+<p>后面还注意到有<code>afterNodeAccess</code>和<code>afterNodeInsertion</code>两个方法，这两个方法在<code>HashMap</code>中没有实现，是给<code>LinkedHashMap</code>去实现的，在这里我们不必关心；</p>
+<p>最后调整主仓，如果主仓size大于阈值就执行<code>resize()</code>方法；</p>
+
+          <h6>
+            <a name="_root-resize" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            resize
+          </h6><pre><code class="language-java">// 这个方法很关键 用于调整主仓的大小
+// 要么是初始化一个主仓 要么将主仓扩至2倍大
+// 如果旧主仓是null 那就分配一个和根据阈值做参考的主仓
+// 否则的话 使用2的次幂值去调整容量 元素要么在原来的位置 要么在新的表中有2的次幂的偏移量
+final Node&lt;K,V&gt;[] resize() {
+    Node&lt;K,V&gt;[] oldTab = table;
+    int oldCap = (oldTab == null) ? 0 : oldTab.length;
+    int oldThr = threshold;
+    int newCap, newThr = 0;
+    if (oldCap &gt; 0) {
+        if (oldCap &gt;= MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return oldTab;
+        }
+        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;
+                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+            newThr = oldThr &lt;&lt; 1; // double threshold
+    }
+    else if (oldThr &gt; 0) // initial capacity was placed in threshold
+        newCap = oldThr;
+    else {               // zero initial threshold signifies using defaults
+        newCap = DEFAULT_INITIAL_CAPACITY;
+        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+    }
+    if (newThr == 0) {
+        float ft = (float)newCap * loadFactor;
+        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?
+                  (int)ft : Integer.MAX_VALUE);
+    }
+    threshold = newThr;
+    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+    table = newTab;
+    if (oldTab != null) {
+        for (int j = 0; j &lt; oldCap; ++j) {
+            Node&lt;K,V&gt; e;
+            if ((e = oldTab[j]) != null) {
+                oldTab[j] = null;
+                if (e.next == null)
+                    newTab[e.hash &amp; (newCap - 1)] = e;
+                else if (e instanceof TreeNode)
+                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);
+                else { // preserve order
+                    Node&lt;K,V&gt; loHead = null, loTail = null;
+                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
+                    Node&lt;K,V&gt; next;
+                    do {
+                        next = e.next;
+                        if ((e.hash &amp; oldCap) == 0) {
+                            if (loTail == null)
+                                loHead = e;
+                            else
+                                loTail.next = e;
+                            loTail = e;
+                        }
+                        else {
+                            if (hiTail == null)
+                                hiHead = e;
+                            else
+                                hiTail.next = e;
+                            hiTail = e;
+                        }
+                    } while ((e = next) != null);
+                    if (loTail != null) {
+                        loTail.next = null;
+                        newTab[j] = loHead;
+                    }
+                    if (hiTail != null) {
+                        hiTail.next = null;
+                        newTab[j + oldCap] = hiHead;
+                    }
+                }
+            }
+        }
+    }
+    return newTab;
+}</code></pre>
+<ol>
+<li><code>line:9-29</code>：这一阶段主要是确定新的阈值和新的容量，要么是原来的两倍，要么最大也大不过Integer的最大值</li>
+<li><code>line:33</code>：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有<code>TreeNode</code>对象调用的<code>split</code>方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如<strong>逆树化一个树箱群</strong></li>
+</ol>
+
+          <h6>
+            <a name="_root-树箱子——大名鼎鼎的红黑树" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            树箱子——大名鼎鼎的红黑树
+          </h6><p>这方法里面的一些树操作细节，得先了解清楚<strong>树箱子</strong>的结构，才好继续分析，所以这里先插播一下，了解一下<strong>树箱子</strong>的结构</p>
+<pre><code class="language-java">static final class TreeNode&lt;K,V&gt; extends LinkedHashMap.Entry&lt;K,V&gt; {
+    TreeNode&lt;K,V&gt; parent;  // red-black tree links
+    TreeNode&lt;K,V&gt; left;
+    TreeNode&lt;K,V&gt; right;
+    TreeNode&lt;K,V&gt; prev;    // needed to unlink next upon deletion
+    boolean red;
+    // ...
+}
+// 这个是LinkedHashMap.Entry&lt;K,V&gt; 结构也挺简单
+static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
+    Entry&lt;K,V&gt; before, after;
+    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        super(hash, key, value, next);
+    }
+}</code></pre>
+<p>这里虽然说继承关系稍微复杂了点，但是单纯从数据结构的角度去理解还是挺简单的：</p>
+<p><code>HashMap</code>的<strong>主仓</strong>是一个Node数组，<code>HashMap.Entry</code>，仅仅用于存放键值对；</p>
+<p>而<code>LinkedHashMap</code>的<strong>主仓</strong>之间的<strong>仓位</strong>是以链的形式组织的，<code>LinkedHashMap.Entry&lt;K,V&gt;</code>除了键值对还要存放前一个仓位（before）以及后一个仓位（after）</p>
+<p>再说回<code>TreeNode&lt;K,V&gt;</code>，可以看到，这是一个3+1指针的结点，3分别指向：<strong>父结点（parent）、左孩子结点（left）、右孩子结点（right）</strong>，1指的是<strong>前指针（prev）</strong>，用于删除结点的时候，做辅助指针用，前指针不一定是父节点；再加上间接继承自<code>HashMap.Node&lt;K,V&gt;</code> ，<strong>那么就还有一个next指针！</strong></p>
+<p>如果没分析错的话，<strong>树箱子</strong>的结构就应该是：</p>
+<p><img src="https://image.youyinnn.top/20180818150455.png" alt=""></p>
+<p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和HashMap无关，就忽略了，而且我认为这里有点<strong>设计过度</strong>，<strong>有了prev和next，为什么还要before和after？</strong></p>
+
+          <h6>
+            <a name="_root-treeifyBin" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            treeifyBin
+          </h6><p>不管怎么说，我们还是开始分析树化方法：</p>
+<pre><code class="language-java">// 树化这个hash仓位上的箱群
+final void treeifyBin(Node&lt;K,V&gt;[] tab, int hash) {
+    int n, index; Node&lt;K,V&gt; e;
+    if (tab == null || (n = tab.length) &lt; MIN_TREEIFY_CAPACITY)
+        resize();
+    else if ((e = tab[index = (n - 1) &amp; hash]) != null) {
+        TreeNode&lt;K,V&gt; hd = null, tl = null;
+        do {
+            TreeNode&lt;K,V&gt; p = replacementTreeNode(e, null);
+            if (tl == null)
+                hd = p;
+            else {
+                p.prev = tl;
+                tl.next = p;
+            }
+            tl = p;
+        } while ((e = e.next) != null);
+        if ((tab[index] = hd) != null)
+            hd.treeify(tab);
+    }
+}</code></pre>
+<p>直接开始分析<code>line:6-17</code>，这里有许多指针需要一一分析，整体的操作就是对这条链进行遍历，同时将普通箱子变成树箱（树化）：</p>
+<ul>
+<li><strong>e</strong>代表当前遍历到的普通箱子；</li>
+<li><strong>hd</strong>代表当前链箱的第一个箱子，head箱子，始终指向箱群的第一个箱子；</li>
+<li><strong>tl</strong>代表转换为树箱群之后中的某一个树箱；</li>
+<li><strong>p</strong>代表将<strong>e</strong>箱子树化之后得到的数箱子；</li>
+</ul>
+<p>其实观察两轮<code>do{}</code>操作之后，就比较清晰了，只关心树箱子中的<strong>prev</strong>和<strong>next</strong>指针的话，这顿操作就只是把原来的单项链表copy为一个双向链表，结点之间有<strong>prev</strong>和<strong>next</strong>的关系，原来只有<strong>next</strong>，然后每个<code>Node</code>换成了<code>TreeNode</code>而已；</p>
+<p>然后拿着<strong>hd</strong>和<strong>tab</strong>，调用<code>treeify</code>方法，将这条链变成树，由于树化是选择<strong>红黑树</strong>去做，所以<strong>tab</strong>这个仓位的第一个树箱子不一定是<strong>hd</strong>原来指的那个箱子；关于这个方法，就不继续往下分析了，涉及到很多红黑树的知识，但是：<strong>正是因为红黑树的原因，红黑树的查找、插入、删除的时间复杂度最坏为O(log n)！</strong> </p>
+<blockquote>
+<p><em>参考：</em></p>
+<ul>
+<li><a href="http://www.cnblogs.com/skywang12345/p/3245399.html">http://www.cnblogs.com/skywang12345/p/3245399.html</a></li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/6105630">https://blog.csdn.net/v_JULY_v/article/details/6105630</a></li>
+</ul>
+</blockquote>
+<p>这里要特别留心！<strong>树化过后的箱群，还保有原来的链箱群的prev和next的关系！为了方便直接在prev和next的关系上直接进行逆树化！</strong></p>
+
+          <h4>
+            <a name="_root-remove" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            remove
+          </h4><p>同理引出removeNode</p>
+<pre><code class="language-java">public V remove(Object key) {
+    Node&lt;K,V&gt; e;
+    return (e = removeNode(hash(key), key, null, false, true)) == null ?
+        null : e.value;
+}</code></pre>
+
+          <h5>
+            <a name="_root-removeNode" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            removeNode
+          </h5><pre><code class="language-java">final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (p = tab[index = (n - 1) &amp; hash]) != null) {
+        Node&lt;K,V&gt; node = null, e; K k; V v;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            node = p;
+        else if ((e = p.next) != null) {
+            if (p instanceof TreeNode)
+                node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
+            else {
+                do {
+                    if (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key ||
+                         (key != null &amp;&amp; key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        if (node != null &amp;&amp; (!matchValue || (v = node.value) == value ||
+                             (value != null &amp;&amp; value.equals(v)))) {
+            if (node instanceof TreeNode)
+                ((TreeNode&lt;K,V&gt;)node).removeTreeNode(this, tab, movable);
+            else if (node == p)
+                tab[index] = node.next;
+            else
+                p.next = node.next;
+            ++modCount;
+            --size;
+            afterNodeRemoval(node);
+            return node;
+        }
+    }
+    return null;
+}</code></pre>
+<p>经过get和put的洗礼之后，再看其他的单元素基础操作就比较流畅了，概括一下<code>removeNode</code>到底发生了什么：</p>
+<p>观察<strong>node</strong>这一个变量就好了，它代表在表中是否找到你想要删除的那个箱子，如果找到就赋值为这个箱子，否则就为空</p>
+<ol>
+<li>首先秒找到仓位（hash映射到数组下标），然后判断仓位上第一个箱子是否是要找的，是就赋值给<strong>node</strong></li>
+<li>如果仓位第一个箱子不是要删除的，那么就继续，如果是树箱子就调用树结构的查找箱子的方法，链箱子就往链尾摸，找到就算</li>
+<li>如果找到这么一个<strong>node</strong>，并且这个<strong>node</strong>箱子是树箱子，那么就按照红黑树的删除结点规则去删除，否则就简单的链式删除</li>
+</ol>
+<p>值得注意的是，<code>line:28</code>的<code>removeTreeNode</code>方法会导致：<strong>逆树化</strong>，也就是说树箱群已经小于逆树化的阈值了，这时候就要让<strong>树箱群</strong>逆树化为<strong>链箱群</strong></p>
+<p>至于逆树化也非常简单，因为树化的时候还保留<strong>prev</strong>和<strong>next</strong>关系，所以直接顺着<strong>next</strong>去替换结点结构就行了</p>
+
+          <h3>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h3><p>主要也是好好了解了一下<code>HashMap</code>在存储结构上的特点，再细致的性能方面的分析，目前还没精力研究，其他方法比如<code>containsValue(Object value)</code>、<code>remove(Object key, Object value)</code>、<code>replace(K key, V oldValue, V newValue)</code>，处理思路都大同小异</p>
+<p>本篇关键分析了如下几点：</p>
+<ul>
+<li>HashMap的存储条件</li>
+<li>主仓是什么？链箱子是什么？树箱子是什么？到底是什么结构？</li>
+<li>什么时候树化？树化分几步？什么时候逆树化？</li>
+<li>扩容阈值、树化阈值是什么？分别有什么用？负载因子又是什么？</li>
+</ul>
+<p><strong>HashMap的存储条件：</strong> <strong>KEY</strong>需要实现<code>hashcode</code>和<code>equals</code>方法，前者用来找仓位，后者用来判断是否键冲突！<code>hashcode</code>冲突意味着存储位置的冲突，这对容器的使用者是透明的，使用者不必关心，而<code>equals</code>冲突意味着容器使用者试图替换掉他规定的键上的值！</p>
+<p><strong>主仓：</strong>就是容器的主干，也就是Node数组，主仓上的每一个位置是仓位，注释中多次以bucket（桶）去描述这个概念；</p>
+<p><strong>链箱子：</strong>就是一般的链式结点，每个仓位上一开始放的就是链箱子；</p>
+<p><strong>树箱子：</strong>就是红黑树的一个结点，当这个仓位存放超过8个链箱子的时候，这个<strong>链箱群</strong>就会转变为<strong>树箱群</strong>，树箱群中每一个箱子都是红黑树结点；</p>
+<p><strong>树化时机：</strong>有一个静态变量——<strong>树化阈值<code>TREEIFY_THRESHOLD</code></strong>做参考，值为8，时机如上；</p>
+<p><strong>树化步骤：</strong>将链箱群中的链箱结点替换为树箱结点，这时候还是一条链式结构，然后将这个链式结构转换为一个树结构<code>treeify</code>方法；</p>
+<p><strong>逆树化：</strong>当树箱群箱子数少于<code>UNTREEIFY_THRESHOLD</code>，也就是6的时候，就会逆树化；</p>
+<p><strong>扩容阈值（threshold）：</strong>这个值默认是容量的0.75倍，最好也是容量的0.75倍，当容器载量超过这个值的时候，比如1024的0.75，容器就需要<code>resize()</code>扩容两倍；</p>
+<p><strong>负载因子（load factor）：</strong>默认是0.75，它表示HashMap能在当前容量高效工作的最大载量和容量值比，载量和容量之比如果达到负载因子，那么就需要扩容</p>
+
+          <h3>
+            <a name="_root-源码分析好文索引" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码分析好文索引
+          </h3><ul>
+<li>JDK1.7HashMap分析：<a href="https://www.cnblogs.com/xrq730/p/5030920.html">https://www.cnblogs.com/xrq730/p/5030920.html</a></li>
+<li>JDK1.8HashMap分析：<a href="http://www.importnew.com/20386.html">http://www.importnew.com/20386.html</a></li>
+</ul>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

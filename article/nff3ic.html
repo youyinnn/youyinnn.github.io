@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <p>{% cq %}</p>
+<p>上篇介绍了使用Log4j2之前的准备工作和简单介绍了一个HelloWorld</p>
+<p>现在我们来了解配置中的第一个关键配置：Appenders</p>
+<p>{% endcq %}</p>
+<!-- more -->
+
+<p>官方文档给出的可用的Appender非常多：有Async（异步输出）、Console（控制台输出）、File（文件输出）、甚至还有JDBC和HTTP等24种输出源方式，然而我日常使用的就几个：Console、RollingFile；一个作为本地host调试的时候log，一个作为远程主机调试的时候写log。其他的我就不仔细去研究了。</p>
+<hr>
+
+          <h3>
+            <a name="_root-ConsoleAppender" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ConsoleAppender
+          </h3><p><code>ConsoleAppender</code>，使用的是<code>System.out</code>或者<code>System.err</code>作为输出源，把log打印在控制台上，默认的情况下使用的是<code>System.out</code>。</p>
+<pre><code class="language-xml">&lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+    &lt;PatternLayout pattern=&quot;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;/&gt;
+&lt;/Console&gt;</code></pre>
+
+          <h4>
+            <a name="_root-常用属性" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            常用属性
+          </h4><ul>
+<li>name ：string：appender的名字</li>
+<li>target：string：指定输出对象：可选<code>SYSTEM_OUT</code>或<code>SYSTEM_ERR</code>，默认是前者。</li>
+</ul>
+<hr>
+
+          <h3>
+            <a name="_root-FileAppender" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            FileAppender
+          </h3><p>FileAppender是一个输出流输出源，它可以根据你指定的文件命名去创建一个文件。FileAppender使用FileManager（继承自<code>OutputStreamManager</code>）来执行文件输入输出。</p>
+
+          <h4>
+            <a name="_root-常用属性" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            常用属性
+          </h4><ul>
+<li>name ：string：appender的名字</li>
+<li>append：boolean：默认为true，此时输出记录会被添加在原有文件的文末，否则会清空之前的log重新输出。</li>
+<li>fileName：string：输出文件的名字</li>
+</ul>
+<p>还有一些属性包括：缓冲流的设置、文件在linux系统下的组、用户、权限等。</p>
+<pre><code class="language-xml">&lt;File name=&quot;MyFile&quot; fileName=&quot;logs/app.log&quot;&gt;
+  &lt;PatternLayout&gt;
+    &lt;Pattern&gt;%d %p %c{1.} [%t] %m%n&lt;/Pattern&gt;
+  &lt;/PatternLayout&gt;
+&lt;/File&gt;</code></pre>
+<hr>
+
+          <h3>
+            <a name="_root-RandomAccessFileAppender" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            RandomAccessFileAppender
+          </h3><p>RandomAccessFileAppender和标准的FileAppender很像，只不过RandomAccessFileAppender总是以缓冲的形式输出（并且不能关闭缓冲流），在其内部实现中，它使用<code>ByteBuffer + RandomAccessFile</code>去代替了<code>BufferedOutputStream</code>。它的性能比FileAppender能高出20%~200%。</p>
+
+          <h4>
+            <a name="_root-常用属性" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            常用属性
+          </h4><ul>
+<li>name ：string：appender的名字</li>
+<li>append：boolean：默认为true，此时输出记录会被添加在原有文件的文末，否则会清空之前的log重新输出。</li>
+<li>fileName：string：输出文件的名字</li>
+<li>bufferSize：ingeger：默认是256*1024 btyes</li>
+</ul>
+<pre><code class="language-xml">&lt;RandomAccessFile name=&quot;MyFile2&quot; fileName=&quot;logs/app2.log&quot;&gt;
+    &lt;PatternLayout&gt;
+        &lt;Pattern&gt;%d %p %c{1.} [%t] %m%n&lt;/Pattern&gt;
+    &lt;/PatternLayout&gt;
+&lt;/RandomAccessFile&gt;</code></pre>
+<hr>
+
+          <h3>
+            <a name="_root-RollingFileAppender（重点）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            RollingFileAppender（重点）
+          </h3><p>RollingFileAppender是最常用的输出流，它可以根据<code>TrggeringPolicy(触发策略)</code>和<code>RolloverPolicy(切换策略)</code>来切换不同的日志文件，以达到可定制度更高的分类日志文件输出。</p>
+<p>RollingFileAppender要求指定<code>TriggeringPolicy</code>和<code>RolloverStrategy</code>。触发策略决定了当切换策略定义好如何切换的时候，是否执行切换。如果没有指定切换策略，那么RollingFileAppender会使用默认的切换策略。</p>
+
+          <h4>
+            <a name="_root-常用属性" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            常用属性
+          </h4><ul>
+<li>name ：string：appender的名字</li>
+<li>append：boolean：默认为true，此时输出记录会被添加在原有文件的文末，否则会清空之前的log重新输出。</li>
+<li>fileName：string：输出文件的名字</li>
+<li>filePattern：string：切换日志文件时使用的文件名模式，默认的切换策略会使用时间和日期以及一个int标号，其中日期pattern可以参考<a href="http://download.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a>，标号使用<code>%i</code>匹配。模式同样支持获取运行时的值，所以任何实时取值的Lookups（比如<a href="https://logging.apache.org/log4j/2.x/manual/lookups.html#DateLookup">DateLookup</a>）</li>
+<li>filePermissions：string：文件权限，POSIX格式，例如“rw-------”</li>
+<li>fileOwner：string：文件所有者</li>
+<li>fileGroup：string：文件所属组</li>
+</ul>
+
+          <h4>
+            <a name="_root-Triggering Policies 触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Triggering Policies 触发策略
+          </h4>
+          <h5>
+            <a name="_root-Composite Triggering Policy 复合触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Composite Triggering Policy 复合触发策略
+          </h5><p>这种触发策略连接了多个触发策略，如果其中一项策略返回true，则整个复合触发策略返回true，CompositeTriggeringPolicy可以使用一个<code>Policies</code>元素来简单配置。</p>
+<pre><code class="language-xml">&lt;Policies&gt;
+  &lt;OnStartupTriggeringPolicy /&gt;
+  &lt;SizeBasedTriggeringPolicy size=&quot;20 MB&quot; /&gt;
+  &lt;TimeBasedTriggeringPolicy /&gt;
+&lt;/Policies&gt;</code></pre>
+
+          <h5>
+            <a name="_root-Cron Triggering Policies Cron触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Cron Triggering Policies Cron触发策略
+          </h5><p>使用cron表达式来进行切换触发</p>
+<p>属性：</p>
+<ul>
+<li>schedule：string：cron表达式</li>
+<li>evaluateOnStartup：boolean：在项目启动的时候，cron表达式会对日志文件最后的修改时间戳进行评估，看是否立即切换日志文件。</li>
+</ul>
+
+          <h5>
+            <a name="_root-On Startup Triggering Policy 启动触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            On Startup Triggering Policy 启动触发策略
+          </h5><p>项目JVM启动的时候即触发策略</p>
+<p>属性：</p>
+<ul>
+<li>mixSize：integer：必须切换的最小文件size，如果是0，则立即切换；默认的值是1，防止在当前日志文件为空的时候切换。</li>
+</ul>
+
+          <h5>
+            <a name="_root-SizeBased Triggering Policy 文件体积触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            SizeBased Triggering Policy 文件体积触发策略
+          </h5><p>根据文件大小切换</p>
+<p>属性：</p>
+<ul>
+<li>size：integer：到了某个size之后即切换，需要使用KB、MB、GB等后缀描述，如<code>20MB</code></li>
+</ul>
+
+          <h5>
+            <a name="_root-TimeBased Triggering Policy 时间触发策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            TimeBased Triggering Policy 时间触发策略
+          </h5><p>根据时间切换，这种切换会在 date/time 模式无法运用在当前激活的文件的时候生效。这个策略接受一个<code>interval</code>属性，这个属性回根据当前的time pattern以及<code>modulate</code>这个布尔属性来决定切换文件的频繁程度。</p>
+<p>属性：</p>
+<ul>
+<li>interval：integer：根据date pattern里特定的时间单位决定多久切换一次日志文件。比如date pattren里最精确的单位是hour，然后增量是4，那么会每4小时切换一次，默认的值是1。</li>
+<li>modulate：boolean：决定当下一次切换时间出现在时间间隔的边缘的时候，是否校正时间间隔。比如，如果是hour，当前时间是3am，然后interval是4，那么下一次切换时间是4am，再下一次就是8am，再就是午时等等。</li>
+<li>maxRandomDelay：integer：决定延迟切换的最大延迟秒数。默认是0，没有延迟。当服务器中有多个项目配置了同一时间输出日志的时候会非常有用，这会减缓io压力，加快io速度。</li>
+</ul>
+
+          <h4>
+            <a name="_root-Rollover Strategies 切换策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Rollover Strategies 切换策略
+          </h4>
+          <h5>
+            <a name="_root-Default Rollover Strategy 默认的切换策略" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Default Rollover Strategy 默认的切换策略
+          </h5><p>默认的切换策略可以同时接收date/time pattern以及一个从filePattern属性中指定的integer参数。如果提供了date/time pattern，则会被替换为日期和时间值。如果pattern里有integer值，那么每次切换就会增加1。pattern里还可以写gz、zip、bz2等后缀。</p>
+<p>属性：</p>
+<ul>
+<li>fileIndex：string：如果设置了max属性，大的index值的文件会比小index值的文件新。如果设置了min，文件重命名以及index计数器会跟随&quot;<a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#RolloverStrategies">fixed window</a>&quot;策略。</li>
+<li>min：integer：计数器的最小值，默认值是1</li>
+<li>max：integer：计数器的最大值，如果达到了这个值，那么会删除掉最早创建的那一个日志文件，默认值是7</li>
+<li>compressionLevel：integer：压缩等级，针对压缩文件而言，取值0-9，0则无压缩，1是最快的速度生成压缩文件，9是最好的压缩率</li>
+<li>tempCompressedFilePattern：string：在压缩期间生成的log文件名pattern</li>
+</ul>
+<p><em>后面还有更多的自定义策略细节，我就不一一说了，我感觉更详细的日志定制方案比如定时删除和执行script等，没有什么必要，可能是我当前能接触到的场景规模有限。</em></p>
+<p>和FileAppender一样，RollingFileAppender也有对应的缓冲流版本。</p>
+<hr>
+
+          <h3>
+            <a name="_root-RollingRandomAccessFileAppender（最常用）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            RollingRandomAccessFileAppender（最常用）
+          </h3><p>这个就是RollingFileAppender的升级版，也是最常用的版本，它的属性、策略和前面的RollingFileAppender以及RandomAccessFileAppender一致，参考前面的就好了。</p>
+
+          <h4>
+            <a name="_root-例子" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            例子
+          </h4>
+          <h5>
+            <a name="_root-1" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1
+          </h5><pre><code class="language-xml">&lt;RollingRandomAccessFile name=&quot;RollingFile&quot; fileName=&quot;logs/a.log&quot;
+             filePattern=&quot;logs/$${date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;&gt;
+    &lt;PatternLayout&gt;
+        &lt;Pattern&gt;%d %p %c{1.} [%t] %m%n&lt;/Pattern&gt;
+    &lt;/PatternLayout&gt;
+    &lt;Policies&gt;
+        &lt;TimeBasedTriggeringPolicy /&gt;
+        &lt;SizeBasedTriggeringPolicy size=&quot;250 MB&quot;/&gt;
+    &lt;/Policies&gt;
+&lt;/RollingRandomAccessFile&gt;</code></pre>
+<p>触发策略：</p>
+<p>1、按照时间切换：由于<code>filePattern</code>属性中配置的最精确的time pattern是<code>mm</code>即Minute in hour，且这条触发策略没有指定interval，那么默认是1分钟切换一次。</p>
+<p>2、根据size切换，如果按照上一条的策略，在1分钟内产生超过250MB的日志，则切换，且<code>%i</code>加一。</p>
+<p>切换策略：</p>
+<pre><code class="language-js">filePattern=&quot;logs/%d{yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;</code></pre>
+<p>在logs文件夹下，<code>%d{yyyy-MM}</code>按照月份建立一级文件夹，一月一个文件夹，然后月份里按照触发策略的约束去执行切换策略进行日志文件的切换。</p>
+
+          <h5>
+            <a name="_root-2" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2
+          </h5><pre><code class="language-xml">&lt;RollingRandomAccessFile name=&quot;RollingFile&quot; fileName=&quot;logs/a.log&quot;
+             filePattern=&quot;logs/$${date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;&gt;
+    &lt;PatternLayout&gt;
+        &lt;Pattern&gt;%d %p %c{1.} [%t] %m%n&lt;/Pattern&gt;
+    &lt;/PatternLayout&gt;
+    &lt;Policies&gt;
+        &lt;TimeBasedTriggeringPolicy /&gt;
+        &lt;SizeBasedTriggeringPolicy size=&quot;250 MB&quot;/&gt;
+    &lt;/Policies&gt;
+    &lt;DefaultRolloverStrategy max=&quot;20&quot;/&gt;
+&lt;/RollingRandomAccessFile&gt;</code></pre>
+<p>比1多指定了一个默认切换策略属性<code>max</code>：最大保留20个log文件</p>
+<hr>
+
+          <h3>
+            <a name="_root-SMTPAppender" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            SMTPAppender
+          </h3><p>能给你发邮件的Appender，这个也挺有意思的，<a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#SMTPAppender">参考</a>。</p>
+<hr>
+<p>常用的Appender就介绍这么多，下一节介绍Layout pattern。</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-36. Valid Sudoku(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            36. Valid Sudoku(Medium)
+          </h3><p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
+<ol>
+<li>Each row must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each column must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each of the 9 <code>3x3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without repetition.</li>
+</ol>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="sudoku"></p>
+<p>A partially filled sudoku which is valid.</p>
+<p>The Sudoku board could be partially filled, where empty cells are filled with the character <code>&#39;.&#39;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+[
+  [&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],
+  [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],
+  [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],
+  [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],
+  [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]
+]
+Output: true</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input:
+[
+  [&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],
+  [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],
+  [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],
+  [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],
+  [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being 
+    modified to 8. Since there are two 8&#39;s in the top left 3x3 sub-box, it is invalid.</code></pre><p><strong>Note:</strong></p>
+<ul>
+<li>A Sudoku board (partially filled) could be valid but is not necessarily solvable.</li>
+<li>Only the filled cells need to be validated according to the mentioned rules.</li>
+<li>The given board contain only digits <code>1-9</code> and the character <code>&#39;.&#39;</code>.</li>
+<li>The given board size is always <code>9x9</code>.</li>
+</ul>
+
+          <h4>
+            <a name="_root-Brute Force" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Brute Force
+          </h4><p>这图暴力解就已经足够快了，其他解也不觉得有多快，比较无论怎么弄都是常数次，所以空间消耗要考虑好</p>
+<pre><code class="language-java">public boolean isValidSudoku(char[][] board) {
+    for (int rowIndex = 0; rowIndex &lt; board.length; rowIndex++) {
+        char[] row = board[rowIndex];
+        for (int columnIndex = 0; columnIndex &lt; row.length; columnIndex++) {
+            char number = row[columnIndex];
+            if (number != &#39;.&#39;) {
+                for (int col = 0; col &lt; row.length; col++) {
+                    // duplicate in same row
+                    if (col != columnIndex &amp;&amp; row[col] == number) {
+                        return false;
+                    }
+                }
+                for (int ro = 0; ro &lt; row.length; ro++) {
+                    // duplicate in same column
+                    if (ro != rowIndex &amp;&amp; board[ro][columnIndex] == number) {
+                        return false;
+                    }
+                }
+                int rowFactor = rowIndex / 3;
+                int colFactor = columnIndex / 3;
+                // duplicate in 3x3
+                for (int rs = rowFactor * 3; rs &lt; (rowFactor * 3) + 3; rs++) {
+                    for (int cs = colFactor * 3; cs &lt; (colFactor * 3) + 3; cs++) {
+                        if (rs != rowIndex &amp;&amp; cs != columnIndex &amp;&amp; board[rs][cs] == number) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}</code></pre>
+
+          <h3>
+            <a name="_root-37. Sudoku Solver(Hard)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            37. Sudoku Solver(Hard)
+          </h3><p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
+<p>A sudoku solution must satisfy <strong>all of the following rules</strong>:</p>
+<ol>
+<li>Each of the digits <code>1-9</code> must occur exactly once in each row.</li>
+<li>Each of the digits <code>1-9</code> must occur exactly once in each column.</li>
+<li>Each of the the digits <code>1-9</code> must occur exactly once in each of the 9 <code>3x3</code> sub-boxes of the grid.</li>
+</ol>
+<p>Empty cells are indicated by the character <code>&#39;.&#39;</code>.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="img"><br>A sudoku puzzle...</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png" alt="img"><br>...and its solution numbers marked in red.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The given board contain only digits <code>1-9</code> and the character <code>&#39;.&#39;</code>.</li>
+<li>You may assume that the given Sudoku puzzle will have a single unique solution.</li>
+<li>The given board size is always <code>9x9</code>.</li>
+</ul>
+<p>暂不会解，感觉和马踏棋盘一样要用回溯法，而且需要对数独的解法要有了解；</p>
+
+          <h3>
+            <a name="_root-38. Count And Say(Easy)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            38. Count And Say(Easy)
+          </h3><p>傻逼题</p>
+
+          <h3>
+            <a name="_root-39. Combination Sum(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            39. Combination Sum(Medium)
+          </h3><p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code class="language-java">Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]</code></pre>
+
+          <h4>
+            <a name="_root-Recursion" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Recursion
+          </h4><p>这题比较好用回溯，去重的技巧也有点3sum的意思</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
+    Arrays.sort(candidates);
+    for (int i = 0; i &lt; candidates.length; i++) {
+        int candidate = candidates[i];
+        LinkedList&lt;Integer&gt; one = new LinkedList&lt;&gt;();
+        one.add(candidate);
+        get(ans, one, candidates, i, target - candidate);
+    }
+    return ans;
+}
+
+private void get(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, int[] candidates, int offset, int target) {
+    if (target == 0) {
+        ans.add(new LinkedList&lt;&gt;(one));
+    }
+    if (candidates[offset] &lt;= target) {
+        for (int i = offset; i &lt; candidates.length; i++) {
+            int candidate = candidates[i];
+            if (candidate &lt;= target) {
+                one.add(candidate);
+                get(ans, one, candidates, i, target - candidate);
+                one.remove(one.size() - 1);
+            }
+        }
+    }
+}</code></pre>
+
+          <h3>
+            <a name="_root-40. Combination Sum II(Medium)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            40. Combination Sum II(Medium)
+          </h3><p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [10,1,2,7,6,1,5], target = 8,
+A solution set is:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: candidates = [2,5,2,1,2], target = 5,
+A solution set is:
+[
+  [1,2,2],
+  [5]
+]</code></pre><p>这题和上题一样，多费心思处理重复就好了</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
+    Arrays.sort(candidates);
+    for (int i = 0; i &lt; candidates.length; i++) {
+        if (i &gt; 0 &amp;&amp; candidates[i] == candidates[i - 1]) {
+            continue;
+        }
+        int candidate = candidates[i];
+        LinkedList&lt;Integer&gt; one = new LinkedList&lt;&gt;();
+        one.add(candidate);
+        get(ans, one, candidates, i + 1, target - candidate);
+    }
+    return ans;
+}
+
+private void get(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, int[] candidates, int offset, int target) {
+    if (target == 0) {
+        ans.add(new LinkedList&lt;&gt;(one));
+    }
+    if (offset &lt; candidates.length &amp;&amp; candidates[offset] &lt;= target) {
+        for (int i = offset; i &lt; candidates.length; i++) {
+            if (i != offset &amp;&amp; candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+            int candidate = candidates[i];
+            if (candidate &lt;= target) {
+                one.add(candidate);
+                get(ans, one, candidates, i + 1, target - candidate);
+                one.remove(one.size() - 1);
+            } else {
+                break;
+            }
+        }
+    }
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

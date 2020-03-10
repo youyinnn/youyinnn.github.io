@@ -131,18 +131,66 @@ function render_md(text) {
     setimg()
 }
 
+function new_render_md() {
+    $('#md').addClass('article')
+    let as = $('#md a')
+    for (let i = 0; i < as.length; i++) {
+        as[i].target = '_blank'
+    }
+    $('.reference-link').each(function() {
+        this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
+    })
+    $('.gifbtn').each(function() {
+        bindev(this, 'click', function() {
+            let noshow = this.getAttribute('show') === 'no'
+            if (noshow) {
+                $(this).after('<img id="' + this.innerText.substring(0, this.innerText.length - 4) + '" src="' + this.getAttribute('lk') + '"></img>')
+                this.setAttribute('show', 'yes')
+            } else {
+                $('#' + this.innerText.substring(0, this.innerText.length - 4)).remove()
+                this.setAttribute('show', 'no')
+            }
+        })
+    })
+    var $root = $('html, body')
+    $('.markdown-toc a').click(function() {
+        if ($(md).hasClass('panelup')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
+            }, 600)
+        }
+        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
+            }, 600)
+        }
+        if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
+            $root.animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
+            }, 600)
+        }
+    })
+    $('.katex').parent().addClass('katexp')
+    $('thead').each(function() {
+        let trs = $(this).next().find('tr')
+        let trl = $(trs[0]).find('td').length
+        let lasttr = $(trs[trs.length - 1])
+        if (lasttr.find('td').length !== trl) {
+            lasttr.append(c('td'))
+        }
+    })
+    setimg()
+    hljs.initHighlightingOnLoad()
+    $('pre').addClass('hljs')
+    setTimeout(() => {
+        rmclass(md, 'myhide')
+        adclass(md, 'myshow')
+        $(md).animateCss('fadeIn')
+    }, 200);
+}
+
 function articlespage(pageto) {
     docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
-}
-
-function hideloading() {
-    rmclass(loading, 'myshow')
-    adclass(loading, 'myhide')
-}
-
-function showloading() {
-    rmclass(loading, 'myhide')
-    adclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
@@ -341,7 +389,7 @@ function articlesmetadatahandle(articlemetadata) {
                     appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
                 }
             }
-    
+
             // handle cates panel
             let haved = false
             for (let j = 0; j < all_cates.length; j++) {
@@ -448,17 +496,6 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
     scrollToTop(0)
 }
 
-function setheightfordocpanel() {
-    if ($('.pagebox').length !== 0) {
-        let pbh = parseFloat($('.pagebox').not('.pageboxhide').css('height').split('px')[0]) + 140
-        if (pbh < window.getclienth() - $(topbar)[0].clientHeight) {
-            pbh = window.getclienth() - $(topbar)[0].clientHeight
-        }
-        $(docpanel).css('height', pbh)
-        $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
-    }
-}
-
 function filter() {
     nowpage = 1
     $('#pgboxbox').addClass('pageboxhide')
@@ -513,10 +550,6 @@ function rstopaging(articles) {
     for (let i = 0; i < as.length; i++) {
         as[i].target = '_blank'
     }
-    $('pre, pre code').each(function(i, block) {
-        hljs.highlightBlock(block)
-        hljs.lineNumbersBlock(block)
-    })
     $('.reference-link').each(function() {
         this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
     })
@@ -533,9 +566,7 @@ function rstopaging(articles) {
         })
     })
     window.totalpages = totalpages
-    setTimeout(function() {
-        rmclass(pageboxbox, 'myhide')
-    }, 100);
+    rmclass(pageboxbox, 'myhide')
     pagination()
 }
 
@@ -578,7 +609,7 @@ function pagination() {
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
-        setheightfordocpanel()
+        // setheightfordocpanel()
     })
 
     let pre = c('li')
@@ -607,7 +638,7 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            setheightfordocpanel()
+            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
@@ -634,9 +665,10 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                setheightfordocpanel()
+                // setheightfordocpanel()
                 scrollToTop(0)
                 $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+                $('#pagebox-' + nowpage).animateCss('fadeIn')
             }
         })
     }
@@ -662,9 +694,10 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            setheightfordocpanel()
+            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            $('#pagebox-' + nowpage).animateCss('fadeIn')
         }
     })
 
@@ -690,9 +723,10 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            setheightfordocpanel()
+            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            $('#pagebox-' + nowpage).animateCss('fadeIn')
         }
     })
     appendc($('#pgboxbox')[0], pn)
@@ -700,7 +734,7 @@ function pagination() {
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
-    setheightfordocpanel()
+    // setheightfordocpanel()
 }
 
 function cleansearch() {
@@ -896,7 +930,7 @@ function setarrow() {
         link.innerText = '+'
         adclass(link, 'panchorlink')
         appendc(i, link)
-        let url = location.origin + '/' + location.search + '#' + encodeURI($(i).find('a')[0].name)
+        let url = location.href + '#' + encodeURI($(i).find('a')[0].name)
         $(i)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(e) {
             popmsg('Copy link successed.')
@@ -906,9 +940,9 @@ function setarrow() {
             e.clearSelection();
         })
     })
-    arrows.mouseover(function () {
+    arrows.mouseover(function() {
         $(this).find('.panchorlink').css('opacity', '1')
-    }).mouseout(function (){  
+    }).mouseout(function() {
         $(this).find('.panchorlink').css('opacity', '0')
     })
     $(window).scroll(function() {
@@ -931,16 +965,15 @@ function setarrow() {
     })
 }
 
-function showseries(ps) {
+function showseries(abbrlink, ps) {
     let sb = $('#seriesbox')
-    let nownumber = location.href.split('number=')[1].split('#')[0]
     for (let i = 0; i < ps.length; i++) {
         let sa = c('a')
         let it = ps[i].split('===')
-        if (it[1] === nownumber) {
+        if (it[1] === abbrlink) {
             adclass(sa, 'adis')
         } else {
-            sa.href = 'https://' + blog_repo + '/?to=article&number=' + it[1]
+            sa.href = 'https://' + blog_repo + '/article/' + it[1] + '.html'
             sa.target = '_blank'
         }
         sa.innerText = it[0]
@@ -1105,19 +1138,16 @@ function handlemetadata(metadata) {
     rmclass(articles_side_panel, 'myhide')
     adclass(articles_side_panel, 'myshow')
     $('#blog_statistic_body').removeClass('myhide')
-    setTimeout(function() {
-        setheightfordocpanel()
-    }, 250)
 }
 
-function seriesorderhandle(number, psname, sbody, obody) {
+function seriesorderhandle(abbrlink, psname, sbody, obody) {
     if (psname !== undefined) {
         let ses = yaml.load(sbody)
         let ps
         for (let i = 0; i < ses.length; i++) {
             if (ses[i].se === psname) {
                 ps = ses[i].ps
-                showseries(ps)
+                showseries(abbrlink, ps)
                 break
             }
         }
@@ -1126,7 +1156,7 @@ function seriesorderhandle(number, psname, sbody, obody) {
     let preindex
     let nextindex
     articleorder.find(function(now, nowindex) {
-        if (now === document.title + '<=>' + number) {
+        if (now === document.title + '<=>' + abbrlink) {
             preindex = nowindex - 1
             nextindex = nowindex + 1
             return true
@@ -1140,11 +1170,11 @@ function seriesorderhandle(number, psname, sbody, obody) {
         $('#nextarticlebtn').removeClass('disabled')
         let prearr = articleorder[preindex].split('<=>')
         let pretitle = prearr[0]
-        let prenumber = prearr[1]
+        let preabbrlink = prearr[1]
         $('#nextarticlebtn').attr('data-original-title', pretitle)
         $('#nextarticlebtn').tooltip('show')
         $('#nextarticlebtn').click(function() {
-            location = '/' + '?to=article&number=' + prenumber
+            location = '/article/' + preabbrlink + '.html'
         })
     }
     if (nextindex === articleorder.length) {
@@ -1154,11 +1184,11 @@ function seriesorderhandle(number, psname, sbody, obody) {
         $('#prearticlebtn').removeClass('disabled')
         let nextarr = articleorder[nextindex].split('<=>')
         let nexttitle = nextarr[0]
-        let nextnumber = nextarr[1]
+        let nextabbrlink = nextarr[1]
         $('#prearticlebtn').attr('data-original-title', nexttitle)
         $('#prearticlebtn').tooltip('show')
         $('#prearticlebtn').click(function() {
-            location = '/' + '?to=article&number=' + nextnumber
+            location = '/article/' + nextabbrlink + '.html'
         })
     }
 }
@@ -1194,4 +1224,11 @@ function jumpToAnchor() {
     setTimeout(function() {
         $('.markdown-toc').find(hash).click()
     }, 1000);
+}
+
+function getmetadatafromabbrlink(abbrlink) {
+    let articlesMetadate = yaml.load(sessionStorage.getItem('pcbl'))
+    return articlesMetadate.find((v) => {
+        return v.abbrlink === abbrlink
+    })
 }

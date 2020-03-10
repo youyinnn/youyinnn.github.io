@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <blockquote>
+<p>转载自：<a href="http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/">http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/</a></p>
+</blockquote>
+
+          <h3>
+            <a name="_root-Understanding the nodejs&#39; event loop" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Understanding the nodejs&#39; event loop
+          </h3><p>The first basic thesis of node.js is that I/O is expensive:</p>
+<p><img src="https://image.youyinnn.top/20191002162139.png" alt=""></p>
+<p>So the largest waste with current programming technologies comes from waiting for I/O to complete. There are several ways in which one can deal with the performance impact (from <a href="http://www.nightmare.com/medusa/async_sockets.html">Sam Rushing</a>):</p>
+<ul>
+<li><strong>synchronous</strong>: you handle one request at a time, each in turn. <em>pros</em>: simple <em>cons</em>: any one request can hold up all the other requests</li>
+<li><strong>fork a new process</strong>: you start a new process to handle each request. <em>pros</em>: easy <em>cons</em>: does not scale well, hundreds of connections means hundreds of processes. fork() is the Unix programmer&#39;s hammer. Because it&#39;s available, every problem looks like a nail. It&#39;s usually overkill</li>
+<li><strong>threads</strong>: start a new thread to handle each request. <em>pros</em>: easy, and kinder to the kernel than using fork, since threads usually have much less overhead <em>cons</em>: your machine may not have threads, and threaded programming can get very complicated very fast, with worries about controlling access to shared resources.</li>
+</ul>
+<p>The second basis thesis is that thread-per-connection is memory-expensive: [e.g. that graph everyone showns about Apache sucking up memory compared to Nginx]</p>
+<p>Apache is multithreaded: it spawns a <a href="http://httpd.apache.org/docs/2.0/mod/worker.html">thread per request</a> (or <a href="http://httpd.apache.org/docs/2.0/mod/prefork.html">process</a>, it depends on the conf). You can see how that overhead eats up memory as the number of concurrent connections increases and more threads are needed to serve multiple simulataneous clients. Nginx and Node.js are not multithreaded, because threads and processes carry a heavy memory cost. They are single-threaded, but event-based. This eliminates the overhead created by thousands of threads/processes by handling many connections in a single thread.</p>
+
+          <h3>
+            <a name="_root-<strong>Node.js keeps a single thread for your code...</strong>" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            <strong>Node.js keeps a single thread for your code...</strong>
+          </h3><p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &amp;lt; now + 1000) { // do nothing }</code></p>
+
+          <h3>
+            <a name="_root-<strong>...however, everything runs in parallel except your code</strong>" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            <strong>...however, everything runs in parallel except your code</strong>
+          </h3><p>There is no way of making code run in parallel within a single request. However, all I/O is evented and asynchronous, so the following won&#39;t block the server: [codesyntax lang=&quot;javascript&quot;]</p>
+<pre><code> c.query(
+   &#39;SELECT SLEEP(20);&#39;,
+   function (err, results, fields) {
+     if (err) {
+       throw err;
+     }
+     res.writeHead(200, {&#39;Content-Type&#39;: &#39;text/html&#39;});
+     res.end(&#39;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;Hello&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Return from async DB query&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&#39;);
+     c.end();
+    }
+);</code></pre><p>If you do that in one request, other requests can be processed just fine while the database is running it&#39;s sleep.</p>
+
+          <h3>
+            <a name="_root-Why is this good? When do we go from sync to async/parallel execution?" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Why is this good? When do we go from sync to async/parallel execution?
+          </h3><p>Having synchronous execution is good, because it simplifies writing code (compared to threads, where concurrency issues have a tendency to result in WTFs).</p>
+<p>In node.js, you aren&#39;t supposed to worry about what happens in the backend: just use callbacks when you are doing I/O; and you are guaranteed that your code is never interrupted and that doing I/O will not block other requests without having to incur the costs of thread/process per request (e.g. memory overhead in Apache).</p>
+<p>Having asynchronous I/O is good, because I/O is more expensive than most code and we should be doing something better than just waiting for I/O.</p>
+<p><img src="https://image.youyinnn.top/20191002162216.png" alt=""></p>
+<p>An event loop is &quot;an entity that handles and processes external events and converts them into callback invocations&quot;. So I/O calls are the points at which Node.js can switch from one request to another. At an I/O call, your code saves the callback and returns control to the node.js runtime environment. The callback will be called later when the data actually is available.</p>
+<p>Of course, on the backend, there are <a href="http://stackoverflow.com/questions/3629784/how-is-node-js-inherently-faster-when-it-still-relies-on-threads-internally">threads and processes for DB access and process execution</a>. However, these are not explicitly exposed to your code, so you can&#39;t worry about them other than by knowing that I/O interactions e.g. with the database, or with other processes will be asynchronous from the perspective of each request since the results from those threads are returned via the event loop to your code. Compared to the Apache model, there are a lot less threads and thread overhead, since threads aren&#39;t needed for each connection; just when you absolutely positively must have something else running in parallel and even then the management is handled by Node.js.</p>
+<p>Other than I/O calls, Node.js expects that all requests return quickly; e.g. <a href="http://stackoverflow.com/questions/3491811/node-js-and-cpu-intensive-requests">CPU-intensive work should be split off to another process</a> with which you can interact as with events, or by using an abstraction like <a href="http://blog.std.in/2010/07/08/nodejs-webworker-design/">WebWorkers</a>. This (obviously) means that you can&#39;t parallelize your code without another thread in the background with which you interact via events. Basically, all objects which emit events (e.g. are instances of EventEmitter) support asynchronous evented interaction and you can interact with blocking code in this manner e.g. using files, sockets or child processes all of which are EventEmitters in Node.js. <a href="http://developer.yahoo.com/blogs/ydn/posts/2010/07/multicore_http_server_with_nodejs/">Multicore can be done</a> using this approach; see also: node-http-proxy.</p>
+<p><strong>Internal implementation</strong></p>
+<p><a href="https://github.com/ry/node/tree/master/deps">Internally</a>, node.js relies on <a href="http://software.schmorp.de/pkg/libev.html">libev</a> to provide the event loop, which is supplemented by <a href="http://software.schmorp.de/pkg/libeio.html">libeio</a> which uses pooled threads to provide asynchronous I/O. To learn even more, have a look at the <a href="http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod">libev documentation</a>.</p>
+
+          <h3>
+            <a name="_root-So how do we do async in Node.js?" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            So how do we do async in Node.js?
+          </h3><p>Tim Caswell describes the patterns in his <a href="http://creationix.com/jsconf.pdf">excellent presentation</a></p>
+<ul>
+<li>First-class functions. E.g. we pass around functions as data, shuffle them around and execute them when needed.</li>
+<li>Function composition. Also known as having anonymous functions or closures that are executed after something happens in the evented I/O.</li>
+</ul>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

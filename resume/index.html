@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h2>
+            <a name="_root-简历" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            简历
+          </h2>
+          <h3>
+            <a name="_root-一. 个人信息" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            一. 个人信息
+          </h3><blockquote>
+<p><strong>姓：</strong> 黄<br><strong>年龄：</strong> 22<br><strong>性别：</strong> 男<br><strong>邮箱：</strong> youyinnn@gmail.com<br><strong>Github：</strong> <a href="https://github.com/youyinnn">https://github.com/youyinnn</a><br><strong>博客：</strong> <a href="https://youyinnn.github.io">https://youyinnn.github.io</a><br><strong>电子简历：</strong> <a href="https://youyinnn.github.io/?to=resume">https://youyinnn.github.io/?to=resume</a><br><strong>本科：</strong> 中南民族大学19年应届生<br><strong>求职意向：</strong> Java后端开发</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-二. 专业技能" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            二. 专业技能
+          </h3>
+          <h4>
+            <a name="_root-Java语言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Java语言
+          </h4><ul>
+<li><p>基础部分</p>
+<ul>
+<li>熟悉<strong>Java SE</strong>基本语法、<strong>JDBC</strong>基本操作、<strong>DAO</strong>设计</li>
+<li>了解<strong>MySQL</strong>数据库基本使用，了解基本<strong>SQL</strong>语法</li>
+<li>学过<strong>DBUtils</strong>，了解基本使用</li>
+<li>学过<strong>DBCP</strong>连接池，了解基本配置</li>
+</ul>
+</li>
+<li><p>Java Web部分</p>
+<ul>
+<li>熟悉<strong>Servlet</strong>、<strong>MVC</strong>设计</li>
+<li>了解<strong>Filter</strong>/<strong>Listener</strong>/<strong>HttpSession</strong>的基本使用</li>
+</ul>
+</li>
+<li><p>主流框架部分</p>
+<ul>
+<li>熟悉<strong>log4j2</strong></li>
+<li>了解<strong>Spring Boot</strong>、<strong>Spring MVC</strong>的基本使用</li>
+<li>学过<strong>Hibernate5</strong>、<strong>Spring4</strong>、<strong>Mybatis3</strong>、<strong>log4j</strong>，了解基本使用</li>
+</ul>
+</li>
+<li><p>Server部分</p>
+<ul>
+<li>熟悉<strong>Tomcat</strong>的基本使用</li>
+<li>了解<strong>Jetty</strong>的基本使用，曾经翻译过部分官方文档，<a href="https://github.com/youyinnn/JettyDocTranslation">传送门</a></li>
+</ul>
+</li>
+<li><p>拓展部分</p>
+<ul>
+<li>熟悉<strong>maven</strong>、<a href="https://github.com/jfinal/jfinal"><strong>jfinal</strong></a>、<a href="https://github.com/alibaba/druid"><strong>druid</strong></a>、<a href="https://github.com/alibaba/fastjson"><strong>fastJson</strong></a>的基本使用.</li>
+<li>了解<a href="https://github.com/cglib/cglib"><strong>cglib库</strong></a>的基本使用</li>
+<li>了解<a href="http://www.sauronsoftware.it/projects/cron4j/manual.php"><strong>cron4j库</strong></a>的基本使用，曾经翻译过完整的官方文档，<a href="https://github.com/youyinnn/Cron4jTranslation">传送门</a></li>
+<li>了解<a href="https://gitee.com/tywo45/t-io"><strong>t-io</strong></a>，整合过<strong>demo</strong>级别的服务，支持<strong>tcp</strong>连接和<strong>websocket</strong>连接，部署即用的IM服务</li>
+<li>了解<a href="https://github.com/auth0/java-jwt"><strong>java-jwt库</strong></a>的基本使用</li>
+</ul>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-拓展技能" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            拓展技能
+          </h4><ul>
+<li>工具部分<ul>
+<li>了解<strong>Docker</strong>、<strong>k8s</strong></li>
+<li>能熟练使用<strong>Git</strong>/<strong>Github</strong>， 有团队协作开发经验</li>
+<li>能熟练使用<strong>Eclipse</strong>/<strong>IntelliJ IDEA</strong>，近两年主要使用<strong>IDEA</strong></li>
+<li>能熟练使用<strong>Atom</strong>/<strong>VScode</strong>等编辑器</li>
+<li>能熟练使用<strong>Postman</strong></li>
+<li>能熟练使用<strong>eolinker</strong>，了解<strong>swagger</strong>等接口管理工具</li>
+<li>了解基本<strong>linux</strong>命令</li>
+<li>熟悉<strong>markdown</strong>语法</li>
+</ul>
+</li>
+<li>实践部分<ul>
+<li>熟悉基本的软件开发流程，有系统设计经验</li>
+<li>了解前后端交互基本流程，有前后端分离开发经验</li>
+<li>了解<strong>restful API</strong>的基本理念</li>
+</ul>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-前端部分" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前端部分
+          </h4><ul>
+<li>熟悉<strong>HTML</strong>/<strong>CSS</strong>基本语法</li>
+<li>了解<strong>JavaScript</strong>基本语法(深层次的就不知道了，比如原型链之类的)</li>
+<li>会用<strong>JQuery</strong>、会写点<strong>Ajax</strong></li>
+<li>会用<strong>Bootstrap4</strong></li>
+</ul>
+
+          <h3>
+            <a name="_root-三. 在校项目经历" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            三. 在校项目经历
+          </h3>
+          <h4>
+            <a name="_root-1. FamilyAssistant（安卓 APP）-大二上寒假" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1. FamilyAssistant（安卓 APP）-大二上寒假
+          </h4><p><strong>项目介绍</strong></p>
+<blockquote>
+<p>参赛作品，中文名为“家庭助手”</p>
+<p>意在提供定位服务、定时提醒推送、即时通讯等服务，以及对年长者友好的UI界面，方便人们时刻关心和关注自己的家庭成员</p>
+</blockquote>
+<p><strong>主要职责</strong></p>
+<ol>
+<li>后端开发：使用Java ee技术，主要为app提供用户管理服务支持</li>
+<li>前后端交互接口协定：实践restful API，规定好前后端交互的接口规范</li>
+</ol>
+<p><strong>后端主要技术架构</strong></p>
+<blockquote>
+<p>第一版：</p>
+<ul>
+<li><strong>servlet</strong> | <strong>spring4</strong> | <strong>dbutils</strong></li>
+<li><strong>dbcp</strong> | <strong>log4j</strong> | <strong>fastjson</strong></li>
+</ul>
+<p>第二版：</p>
+<ul>
+<li><strong>spring4</strong> | <strong>hibernate5</strong> | <strong>servlet</strong></li>
+<li><strong>dbcp</strong> | <strong>log4j</strong> | <strong>fastjson</strong></li>
+</ul>
+</blockquote>
+<p><strong>项目成果</strong></p>
+<ul>
+<li>2017 年（第 10 届）中国大学生计算机设计大赛软件服务外包竞赛，三等奖</li>
+</ul>
+
+          <h4>
+            <a name="_root-2. 会议室管理系统（Web APP）-大二下" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2. 会议室管理系统（Web APP）-大二下
+          </h4><p><strong>项目介绍</strong></p>
+<blockquote>
+<p>团队内部项目，提供团队会议室的使用管理平台</p>
+<p>提供服务如对会议室的预约，会议时刻表查看，设备状态查看，基本的团队人员信息管理，以及基本的系统后台管理</p>
+</blockquote>
+<p><strong>主要职责</strong></p>
+<ol>
+<li>项目负责人：主要负责项目进度安排，人员选配</li>
+<li>后端开发：使用java ee技术，主要为系统提供所有的后端服务支持</li>
+<li>前后端交互接口协定：实践restful API，规定好前后端交互的接口规范</li>
+</ol>
+<p><strong>后端主要技术架构</strong></p>
+<blockquote>
+<ul>
+<li><strong>spring4</strong> | <strong>mybatis3</strong> | <strong>ehcache</strong> | <strong>servlet</strong></li>
+<li><strong>druid</strong> | <strong>log4j</strong> | <strong>fastjson</strong></li>
+</ul>
+</blockquote>
+
+          <h4>
+            <a name="_root-3. 云呼叫中心平台软件（Web APP）-大二下" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3. 云呼叫中心平台软件（Web APP）-大二下
+          </h4><p><strong>项目介绍</strong></p>
+<blockquote>
+<p>参赛作品，面向两个对象：<strong>有呼叫服务需求的企业</strong>以及提供呼叫服务的<strong>传统呼叫中心平台</strong></p>
+<p>平台提供服务包括：</p>
+<ul>
+<li>让有呼叫需求的企业发布呼叫任务</li>
+<li>传统呼叫中心平台可以受理任务</li>
+<li>对任务状态的跟踪和结果反馈（报表）</li>
+</ul>
+</blockquote>
+<p><strong>主要职责</strong></p>
+<ol>
+<li>项目负责人：主要负责进度安排，后端技术选型，人员选配</li>
+<li>后端技术指导：主要负责后端技术的选型以及系统架构设计</li>
+<li>前后端交互接口协定：实践restful API，规定好前后端交互的接口规范</li>
+</ol>
+<p><strong>后端主要技术架构</strong></p>
+<blockquote>
+<ul>
+<li><strong>jfinal</strong> | <strong>mybatis3</strong></li>
+<li><strong>fastjson</strong> | <strong>apache-poi</strong> </li>
+</ul>
+</blockquote>
+
+          <h4>
+            <a name="_root-4. 数据快速导入工具（Web APP）-大三上" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            4. 数据快速导入工具（Web APP）-大三上
+          </h4><p><strong>项目介绍</strong></p>
+<blockquote>
+<p>团队内部项目，主要解决大量数据在<strong>不同数据库之间</strong>以及<strong>不同office文件</strong>中的<strong>导入导出</strong></p>
+<p>针对的数据对象有：</p>
+<ol>
+<li><strong>xlsx</strong>、<strong>xls</strong>、<strong>csv</strong>格式文件</li>
+<li><strong>MySQL</strong>数据</li>
+<li><strong>MongoDB</strong>数据</li>
+</ol>
+<p>工具提供的服务有以下4个：</p>
+<ul>
+<li><strong>文件导入数据库：</strong>将<strong>xlsx</strong>、<strong>xls</strong>、<strong>csv</strong>等格式文件数据导入到<strong>MySQL</strong>、<strong>MongoDB</strong>等数据库中</li>
+<li><strong>数据库导出到文件：</strong>将<strong>MySQL</strong>、<strong>MongoDB</strong>等数据库数据导出为<strong>xlsx</strong>、<strong>xls</strong>、<strong>csv</strong>格式文件</li>
+<li><strong>数据库之间互相导入：</strong> <strong>MySQL</strong>数据和<strong>MongoDB</strong>数据的互相转换</li>
+<li><strong>文件格式转换：</strong> <strong>xlsx</strong>、<strong>xls</strong>、<strong>csv</strong>等格式文件互相转换</li>
+</ul>
+</blockquote>
+<p><strong>主要职责</strong></p>
+<ol>
+<li>项目负责人：主要负责进度安排，后端技术选型，人员选配</li>
+<li>后端技术指导：主要负责后端技术的选型以及系统架构设计</li>
+<li>前端开发：主要使用原生<strong>HTML</strong>/<strong>CSS</strong>/<strong>JS</strong>语言进行简单的界面开发</li>
+</ol>
+<p><strong>后端主要技术架构</strong></p>
+<blockquote>
+<ul>
+<li><strong>jfinal</strong> | <strong>apache-poi</strong></li>
+</ul>
+</blockquote>
+<p><strong>项目成果</strong></p>
+<ul>
+<li>获得团队内部工程基金奖励3000元，并计划投入使用。</li>
+</ul>
+
+          <h4>
+            <a name="_root-5. 移动会议实时互动系统（安卓 APP+Web APP）-大三下" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            5. 移动会议实时互动系统（安卓 APP+Web APP）-大三下
+          </h4><p><strong>项目介绍</strong></p>
+<blockquote>
+<p>参赛作品，主要是通过<strong>安卓手机APP</strong>给<strong>会议或者活动的主办方</strong>提供和<strong>与会者或者观众</strong>实时互动的服务</p>
+<p>大致业务有：</p>
+<ul>
+<li>主办方可以在APP上发布一次活动和会议，感兴趣的观众可以通过APP申请加入活动或者会议</li>
+<li>主办方在会议的过程中可以实时发布如投票、评分、抽奖、弹幕等互动</li>
+<li>观众可以在活动聊天室发布文字消息和图片消息</li>
+</ul>
+</blockquote>
+<p><strong>主要职责</strong></p>
+<ol>
+<li>后端技术指导：主要负责后端技术的选型以及系统架构设计</li>
+<li>弹幕互动业务：主要使用自己整合的<strong>t-io工具</strong>负责实现实时弹幕的业务</li>
+</ol>
+<p><strong>后端主要技术架构</strong></p>
+<blockquote>
+<ul>
+<li><strong>jfinal</strong> | <strong>you-im(t-io)</strong></li>
+<li><strong>cron4j</strong> | <strong>http-client</strong></li>
+</ul>
+</blockquote>
+
+          <h3>
+            <a name="_root-四. 实验室经历" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            四. 实验室经历
+          </h3><ol>
+<li><code>2016/3（大一下）</code>：通过初试加入本院软件实验室之一的<strong>新思路团队</strong>，成为团队的Java EE小组的<strong>考核期成员</strong></li>
+<li><code>2016/9（大二上）</code>：通过考核成为小组<strong>正式成员</strong>，并担任小组<strong>技术组长</strong>一职</li>
+<li><code>2016/9-2017/10（大二一年）</code>：作为<strong>技术组长</strong>，主要职责：<ol>
+<li>负责小组的技术方向和进度的把控，和小组成员一起共同进步；</li>
+<li>负责秋春两季的新人招新与考核；</li>
+<li>积极与其他组寻求在比赛上、项目上的合作机会并参与过几次软件类比赛，和小组成员积累项目经验；</li>
+</ol>
+</li>
+<li><code>2017/10-至今（大三一年）</code>：<ol>
+<li>引导新任组长；</li>
+<li>参与实验室组织的比赛；</li>
+</ol>
+</li>
+</ol>
+
+          <h3>
+            <a name="_root-五. 实习经历" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            五. 实习经历
+          </h3>
+          <h4>
+            <a name="_root-1. 银联商务（武汉光谷软件园）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1. 银联商务（武汉光谷软件园）
+          </h4><ul>
+<li><p>时间：2018.7.4-2018.9.10</p>
+</li>
+<li><p>职务：Java后端开发实习生</p>
+</li>
+<li><p>部门：技术开发中心-MIS室</p>
+</li>
+<li><p>实习经历：</p>
+<blockquote>
+<p>和另外一位同事负责开发面向科室内部和部分核心商户的知识库平台系统。主要贡献了前端90%的代码和后端70%的代码，以及代码的优化，项目进度的安排和管理。</p>
+<p>系统需求场景：</p>
+<ol>
+<li>银联对接的商户经常会问许多重复性、答案固定的问题，所以就开发一个知识库系统，提供给和银联对接的商户，让他们在系统里查询问题、下载文档和资料工具等；</li>
+<li>科室内部要建立一个资料库，用于内部使用，可以存放文档资料、文件工具、链接资料等；</li>
+</ol>
+</blockquote>
+</li>
+<li><p>后续：</p>
+<blockquote>
+<p>系统将于12月正式上线，虽然9月初已经离职，但是和导师承诺了就算离职我也会无偿维护系统2个月，有始有终，离职之后依然接着新的需求做升级、优化和改动。后期的优化主要是公司的安全部门对系统进行了评估，提出了升级要求，所以离职这一个月我也收获很多，在web安全上做了一番功夫。</p>
+</blockquote>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-2. eBay（上海浦东张江德国中心）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2. eBay（上海浦东张江德国中心）
+          </h4><ul>
+<li><p>时间：2018.10.8-2019.3.29</p>
+</li>
+<li><p>职务：Java Development Engineer Intern</p>
+</li>
+<li><p>部门：DPE</p>
+</li>
+<li><p>实习经历：</p>
+<blockquote>
+<ol>
+<li>10月份主要是负责完成公司内部Springboot一个component的功能增强。Component大致是一个kafka的client，然后是对consumer和producer的请求和响应做trace，使用的是公司内部一个基于Opentracing的另一个component。并完成了Trace和Trace Propagation。以及对这个component的部分代码进行优化。</li>
+<li>11-12月份主要是完成：<ol>
+<li>对Team中的一些在Jenkins上的CI脚本的整理、优化；</li>
+<li>协助Full-Time同事fix一些客户提交的issues；</li>
+<li>用docker-compose完成对Team中产品server端的本地化；</li>
+</ol>
+</li>
+<li>1月份主要针对Team产品中的client端的API进行2.0的设计和编写，之前的API太底层，对客户不太友好，比较厚重，所以2.0的目标是让客户短几行就写出consumer/producer的API；</li>
+<li>2月份主要完成messaging service server端的SonarQube的指标处理；</li>
+<li>3月份主要完成messaging service client端的功能的增强、版本release准备、新功能分支之间的迁移、SonarQube的指标处理等工作；</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+
+          <h3>
+            <a name="_root-六. 写过的有趣的东西" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            六. 写过的有趣的东西
+          </h3>
+          <h4>
+            <a name="_root-:star:1. YouDBUtils" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :star:1. YouDBUtils
+          </h4><p><strong>这是一个“自用”的数据库工具包，你就把它当成orm框架也行</strong> :smile:</p>
+<p><strong>特点</strong></p>
+<ul>
+<li><strong>拒绝配置文件：</strong> 以alibaba的<strong>Druid</strong>为基础（拒绝<strong>DBCP/C3P0</strong>），支持代码配置<strong>Druid</strong>，拒绝配置文件</li>
+<li><strong>常规：</strong> 仅支持<strong>MySQL/SQLite</strong>（自用. 轻巧）</li>
+<li><strong>Transaction支持：</strong> 内置类似spring的控制反转，主要用于生成指定包下的Service类的代理类（依赖<strong>cglib</strong>），让其具有事务特性（ThreadLocal），在ioc容器中以类名获取，支持依赖注入DAO对象。</li>
+<li><strong>不忘底层：</strong> 提供<strong>CRUD</strong>的基本操作类<strong>SqlExecutor</strong></li>
+<li><strong>可直接面向Model：</strong> 提供直接面向<strong>Model</strong>类的操作类<strong>ModelHandler</strong>，和数据库记录可直接映射对应，无需映射文件（<strong>这就需要遵循本人的惯例了</strong>）</li>
+<li><strong>内置log输出：</strong> 工具内置log输出，依赖<strong>log4j2</strong>，并且与用户配置的log4j2.xml完全无缝融合</li>
+</ul>
+
+          <h4>
+            <a name="_root-:star:2. YouIM" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :star:2. YouIM
+          </h4><p><strong>基于t-io的轻巧部署的IM服务，支持tcp和ws连接</strong> :vibration_mode:</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>基于tio</li>
+<li>实现了绝大部分的IM业务的处理，开箱即用</li>
+</ul>
+
+          <h4>
+            <a name="_root-:star:3. YouWebUtils" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :star:3. YouWebUtils
+          </h4><p><strong>这是一个“自用”的Web开发工具包</strong> :boxing_glove:</p>
+<p><strong>介绍</strong></p>
+<blockquote>
+<ul>
+<li>分4个梯队<ul>
+<li>first：主要放和web组件相关的基层类，如BaseHttpFilter</li>
+<li>second：主要放web开发常用工具类，如：<ul>
+<li>Json处理<ul>
+<li>json模板池</li>
+<li>json对象与json串转换</li>
+<li>json以key寻value</li>
+<li>json串处理</li>
+</ul>
+</li>
+<li>Jwt处理<ul>
+<li>签发token</li>
+<li>验证token</li>
+</ul>
+</li>
+<li>Properties处理<ul>
+<li>常用系统prop的快速获取</li>
+<li>pid获取</li>
+<li>快速load一个properties文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>third：主要放项目开发常用工具类，如：<ul>
+<li>Class处理<ul>
+<li>提供扫描类等方法</li>
+</ul>
+</li>
+<li>数据库处理<ul>
+<li>库处理：从连接中获取所连接的库名/从库中获取所有表名</li>
+<li>表处理：表存在/从表中获取所有列名</li>
+<li>类名处理：转换类名为符合阿里巴巴手册对应的表名格式</li>
+<li>sql脚本执行</li>
+</ul>
+</li>
+<li>Dom4j封装处理<ul>
+<li>快速xml文件读取</li>
+</ul>
+</li>
+<li>Log4j2封装处理<ul>
+<li>分主次地融合多个具有log4j2配置文件格式的xml文件（实现嵌入log4j2配置）</li>
+</ul>
+</li>
+<li>反射工具类</li>
+<li>sql脚本执行工具类</li>
+<li>集合框架工具类</li>
+</ul>
+</li>
+<li>fourth：主要放前三个梯队所需辅助类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+          <h4>
+            <a name="_root-:star:4. YouQuickJetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :star:4. YouQuickJetty
+          </h4><p><strong>这是一个“自用”的嵌入式JettyWeb应用快速启动工具</strong> :mouse:</p>
+<p><strong>介绍</strong><br>使用嵌入式Jetty来快速启动一个Web项目，并且快速部署，在生产环境中的任何地方一键启动项目，并且会陆续集成多种Web开发中常用的功能。</p>
+<p>需要特别声明的是，因为这个工具类是自用的工具类，所以使用了本人所习惯的惯例来减少配置量，所以惯例部分一定要看仔细。</p>
+<ul>
+<li>功能：<ul>
+<li>快速嵌入Jetty到你的项目中</li>
+<li>提供一个BaseHttpFilter 基本就是把请求和响应传为Http的</li>
+<li>提供一个配置文件的加载工具类</li>
+</ul>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-:star:5. Electron-nice-auto-reload" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            :star:5. Electron-nice-auto-reload
+          </h4><p><strong>一个能够帮助你在开发electron应用时快速响应代码改动的NPM包</strong></p>
+<p>功能：</p>
+<ul>
+<li>监听文件变动事件</li>
+<li>设定文件变动事件的响应动作：<ul>
+<li>重启App</li>
+<li>重载页面</li>
+<li>运行script</li>
+</ul>
+</li>
+</ul>
+<p align="center" style="font-size: 1.2rem;font-weight: bold; ">感谢参阅:heart:</p>
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

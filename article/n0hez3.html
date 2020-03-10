@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-HelloWorld" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            HelloWorld
+          </h3><p>昨天的小米笔试题: <strong>请用Lambda写一个将int数组[1,2,3]转换为String数组[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</strong></p>
+<p>当时没写完整，就这个为例作为开始吧, 完整代码如下:</p>
+<pre><code class="language-java">  int[] si = {1, 2, 3};
+  Function&lt;int[], String[]&gt; f = (int[] ar) -&gt; {
+      String[] ss = new String[ar.length];
+      for (int i = 0; i &lt; ar.length ; i++) {
+          ss[i] = ar[i] + &quot;&quot;;
+      }
+      return ss;
+  };
+  System.out.println(Arrays.toString(f.apply(si)));</code></pre>
+<p>看不懂是不是?看不懂就对了,Lambda是一个语法糖,它的语法你得看得懂,才知道上面的代码干了什么.</p>
+
+          <h3>
+            <a name="_root-语法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            语法
+          </h3>
+          <h4>
+            <a name="_root-要点1-函数式接口的支持" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            要点1-函数式接口的支持
+          </h4><blockquote>
+<p>语法必须要函数式接口的支持, 函数式接口: <strong>即接口中只有一个抽象方法</strong>.一般需要<code>@FunctionalInterface</code>注解修饰类.</p>
+<p>我们称这个唯一的抽象方法为, <strong>函数方法</strong></p>
+</blockquote>
+
+          <h4>
+            <a name="_root-要点2-箭头语法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            要点2-箭头语法
+          </h4><p>函数式写法格式, 分<strong>左右两边</strong>:</p>
+<pre><code class="language-lambda">  (param1, param2, ...) -&gt; {statement1;statement2;...;};</code></pre>
+<ul>
+<li><p><strong>左边-参数列表</strong>-方法要传递的参数:</p>
+<ul>
+<li>根据泛型可以省略参数列表的类型</li>
+<li>没有参数或者有两个以上参数时必须写<code>()</code>, 只有一个参数时可以省略<code>()</code></li>
+</ul>
+</li>
+<li><p><strong>右边-语句块</strong>-表达式要执行的语句:</p>
+<ul>
+<li>如果只有一条语句, 则可以省略<code>{}</code>, 多条语句必须要<code>{}</code></li>
+<li>如果有返回值, 且只有一条语句, 则可以<code>return</code>, 多条语句必须加</li>
+</ul>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-要点3-参数列表类型和返回值类型" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            要点3-参数列表类型和返回值类型
+          </h4><p>我们的lambda表达式, 最终还是得被一个<strong>函数式接口</strong>所引用, 我们的表达式可能有<strong>参数列表</strong>, 可能有<strong>返回值</strong>, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口</p>
+<pre><code class="language-java">@FunctionalInterface
+interface MyFunction&lt;T, R&gt; {
+    /**
+     * 函数方法:
+     *  处理两个T类型的对象, 返回R类型的结果
+     */
+    R get(T t1, T t2);
+}</code></pre>
+<p>很容易就看出, 我们是根据接口上的<strong>泛型</strong>去规定<strong>参数列表类型</strong>以及<strong>返回值类型</strong>的,  当我们省略类型的时候, 因为lambda是<strong>依靠泛型填充类型</strong>, 编译的时候, 代码就已经根据上下文自动填补类型了, 比如说这里的<code>get(T t1, T t2)</code>方法, 你<strong>传递什么参数</strong>, 参数类型就是什么, <strong>方法体中实现的</strong>的返回语句是什么类型的, 函数的返回值类型就是什么</p>
+<pre><code class="language-java">public class Main{
+    public static &lt;T, R&gt; R invokeGet(T t1, T t2, MyFunction&lt;T, R&gt; mf) {
+        return mf.get(t1, t2);
+    }    
+}</code></pre>
+<p>我们可以如下省略类型的调用: </p>
+<pre><code class="language-java">    Person p1 = new Person(&quot;abc&quot;, 12);
+    Person p2 = new Person(&quot;efg&quot;, 13);
+    Integer integer =
+            Main.invokeGet(p1, p2, (ax, bx) -&gt; ax.getName().length() + bx.getName().length());</code></pre>
+<p>正常的做法是: </p>
+<pre><code class="language-java">    Integer integer =
+            Main.&lt;Person, Integer&gt;invokeGet(p1, p2, (ax, bx) -&gt; ax.getName().length() + bx.getName().length());</code></pre>
+<p>那么这里为什么可以省略? 因为我<code>invokeGet</code>的时候, 传进去的<strong>t1, t2</strong>是<strong>p1, p2</strong>, 所以<strong>T类型</strong>被补充为<strong>Person类型</strong>, 而对于返回值类型, 因为我们这里的方法体实现就一句话, 所以<strong>{}</strong>省略了, <strong>return</strong> 也省略了, 返回值类型就是语句<code>ax.getName().length() + bx.getName().length()</code>所运算出的类型.</p>
+
+          <h4>
+            <a name="_root-代码示例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            代码示例
+          </h4><pre><code class="language-java">public class Main{
+
+    /**
+     * 语法格式一: 无参 无返回值
+     * 常用场景: 替代匿名内部类;
+     *  () -&gt; System.out.println(&quot;xixi&quot;);
+     */
+    @Test
+    public void test1(){
+        Runnable run = () -&gt; System.out.println(&quot;xixi&quot;);
+        run.run();
+    }
+
+    /**
+     * 语法二: 一个参数 无返回值
+     * Tips: 一个参数的话 小括号可以省略不写了 甚至可以配合方法引用(如代码中)
+     *
+     *         Consumer&lt;String&gt; consumer = x -&gt; System.out.println(x);
+     *         Consumer&lt;String&gt; consumer = (x) -&gt; System.out.println(x);
+     *
+     * 常用场景: 和Consumer接口配合
+     */
+    @Test
+    public void test2(){
+        Consumer&lt;String&gt; consumer = System.out::println;
+        consumer.accept(&quot;haha&quot;);
+    }
+
+    /**
+     * 语法三: 两个参数, 有返回值
+     * Tips1:
+     *  返回值类型在接口方法上已经定义, 参数列表类型已经被泛型规定好了也可以省略,如:
+     *          int compare(T o1, T o2);
+     *
+     * Tips2:
+     *  如果实现的方法体中有一条语句, 那么return和大括号可以省略不写
+     *
+     * Tips3:
+     *  如果实现的方法体中有多条语句, 那么必须要大括号和return
+     *
+     * Tips4:
+     *  Comparator接口中已经写好了常用的自然顺序比较或者逆序比较的默认方法可以直接用默认方法引用
+     */
+    @Test
+    public void test3(){
+        //Comparator&lt;Integer&gt; comparator = Comparator.reverseOrder();
+        Comparator&lt;Integer&gt; comparator = (x, y) -&gt; y.compareTo(x);
+
+        Comparator&lt;Integer&gt; comparator1 = (x, y) -&gt; {
+            System.out.println(x + y);
+            return y.compareTo(x);
+        };
+    }
+
+    /**
+     * Lambda表达式的高级用法:
+     *  (1) 连续泛型指定参数和返回值的类型
+     *  (2) 静态方法指定泛型调用
+     *  (3) 传递函数式接口
+     */
+    public static &lt;T, R&gt; R invokeGet(T t1, T t2, MyFunction&lt;T, R&gt; mf) {
+        return mf.get(t1, t2);
+    }
+
+    @Test
+    public void test4(){
+        Person p1 = new Person(&quot;abc&quot;, 12);
+        Person p2 = new Person(&quot;uiop&quot;, 13);
+        Integer integer = 
+                Main.invokeGet(p1, p2, (ax, bx) -&gt; ax.getName().length() + bx.getName().length());
+        String s = 
+                Main.invokeGet(p1, p2, (ax, bx) -&gt; ax.getAge() + &quot; : &quot; + bx.getAge());
+
+        System.out.println(integer);
+        System.out.println(s);
+    }
+}</code></pre>
+
+          <h3>
+            <a name="_root-五大核心函数式接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            五大核心函数式接口
+          </h3><p>前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的<strong>五大核心函数式接口</strong>, 这样的函数式接口在Java8中到处都是.</p>
+<p>所以说了解这<strong>五大核心函数式接口</strong>到底能干什么, 这点是非常重要的.</p>
+<p>首先看看我写的笔试题的未完整版是什么样子的:</p>
+<pre><code class="language-java">  Function f = (int[] arr) -&gt; {
+      String[] s = new String[arr.length];
+      for (int i = 0; i &lt; arr.length ; i++) {
+          s[i] = arr[i] + &quot;&quot;;
+      }
+      return s;
+  };</code></pre>
+<p>再来看看完整版:</p>
+<pre><code class="language-java">  int[] si = {1, 2, 3};
+  Function&lt;int[], String[]&gt; f = (int[] ar) -&gt; {
+      String[] ss = new String[ar.length];
+      for (int i = 0; i &lt; ar.length ; i++) {
+          ss[i] = ar[i] + &quot;&quot;;
+      }
+      return ss;
+  };
+  System.out.println(Arrays.toString(f.apply(si)));</code></pre>
+<p>这和完整版相比, 缺少的是<code>Function</code>类后面的泛型定义, 所以这段代码是过不了的, 了解一下<strong>五大核心函数式接口</strong>,</p>
+
+          <h4>
+            <a name="_root-Consumer<T> 消费型接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Consumer<T> 消费型接口
+          </h4>
+          <h5>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h5><pre><code class="language-java">@FunctionalInterface
+public interface Consumer&lt;T&gt; {
+
+    void accept(T t);
+
+    default Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after) {
+        Objects.requireNonNull(after);
+        return (T t) -&gt; { accept(t); after.accept(t); };
+    }
+}</code></pre>
+
+          <h5>
+            <a name="_root-函数方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            函数方法
+          </h5><pre><code class="language-java">    void accept(T t);</code></pre>
+<p>消费型接口, 意思就是<strong>&quot;只进不出&quot;</strong>的表现, 所以我们看到方法并没有<strong>返回值类型</strong></p>
+
+          <h5>
+            <a name="_root-默认方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            默认方法
+          </h5><p>这个方法相当于将两个<code>Consumer</code>函数组合在了一起, 形成一个新的<code>Consumer</code>函数, after函数在源函数之后执行, 相当于一个<strong>&quot;后置函数&quot;</strong></p>
+
+          <h5>
+            <a name="_root-示例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            示例
+          </h5><pre><code class="language-java">    @Test
+    public void testConsumer(){
+        Person p1 = new Person(&quot;abc&quot;, 12);
+        Person p2 = new Person(&quot;uiop&quot;, 13);
+
+        Consumer&lt;Person&gt; gn = 
+            (person) -&gt; System.out.println(&quot;Name is : &quot; + person.getName());
+        Consumer&lt;Person&gt; ga = 
+            (person) -&gt; System.out.println(&quot;Age is : &quot; + person.getAge());
+        Consumer&lt;Person&gt; gnAndga = gn.andThen(ga);
+
+        gn.accept(p1);
+        ga.accept(p2);
+        gnAndga.accept(p1);
+    }</code></pre>
+<pre><code class="language-console">Name is : abc
+Age is : 13
+Name is : abc
+Age is : 12</code></pre>
+
+          <h4>
+            <a name="_root-Supplier<T> 供给型接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Supplier<T> 供给型接口
+          </h4>
+          <h5>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h5><pre><code class="language-java">@FunctionalInterface
+public interface Supplier&lt;T&gt; {
+    T get();
+}</code></pre>
+
+          <h5>
+            <a name="_root-函数方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            函数方法
+          </h5><pre><code class="language-java">    T get();</code></pre>
+<p><strong>&quot;有出没进&quot;</strong>, 供给型的函数接口.</p>
+
+          <h5>
+            <a name="_root-示例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            示例
+          </h5><pre><code class="language-java">@Test
+public void testSupplier(){
+    Supplier&lt;Person&gt; supplier = () -&gt; new Person();
+    Person person = supplier.get();
+    System.out.println(person);
+}</code></pre>
+
+          <h4>
+            <a name="_root-Function&lt;T, R&gt; 函数型接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Function&lt;T, R&gt; 函数型接口
+          </h4>
+          <h5>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h5><pre><code class="language-java">@FunctionalInterface
+public interface Function&lt;T, R&gt; {
+
+    R apply(T t);
+
+    default &lt;V&gt; Function&lt;V, R&gt; compose(Function&lt;? super V, ? extends T&gt; before) {
+        Objects.requireNonNull(before);
+        return (V v) -&gt; apply(before.apply(v));
+    }
+
+    default &lt;V&gt; Function&lt;T, V&gt; andThen(Function&lt;? super R, ? extends V&gt; after) {
+        Objects.requireNonNull(after);
+        return (T t) -&gt; after.apply(apply(t));
+    }
+
+    static &lt;T&gt; Function&lt;T, T&gt; identity() {
+        return t -&gt; t;
+    }
+}</code></pre>
+
+          <h5>
+            <a name="_root-函数方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            函数方法
+          </h5><pre><code class="language-java">    R apply(T t);</code></pre>
+<p>就像一个函数, <strong>&quot;有进有出&quot;</strong></p>
+
+          <h5>
+            <a name="_root-默认方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            默认方法
+          </h5><p><code>andThen</code>方法我们在消费型接口的时候已经介绍过了, 然后<code>compose</code>方法和这个方法差不多, 只不过这个方法是在源函数之前执行, 相当于是一个<strong>&quot;前置函数&quot;</strong></p>
+
+          <h5>
+            <a name="_root-静态方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            静态方法
+          </h5><p>这个方法暂时还没摸到有什么作用</p>
+
+          <h5>
+            <a name="_root-示例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            示例
+          </h5><pre><code class="language-java">@Test
+public void testFunction(){
+    Person person = new Person();
+    Function&lt;Person, Person&gt; function = (ps) -&gt; {
+        System.out.println(&quot;nothing change~&quot;);
+        return ps;
+    };
+    function = function.compose((ps) -&gt; {
+        System.out.println(&quot;before&quot;);
+        ps.setName(&quot;xixi&quot;);
+        return ps;
+    });
+    function = function.andThen((ps) -&gt; {
+        System.out.println(&quot;after&quot;);
+        ps.setAge(15);
+       return ps;
+    });
+    System.out.println(function.apply(person));
+}</code></pre>
+<pre><code class="language-console">before
+nothing change~
+after
+Person{name=&#39;xixi&#39;, age=15}</code></pre>
+
+          <h4>
+            <a name="_root-Predicate<T> 条件预测型接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Predicate<T> 条件预测型接口
+          </h4>
+          <h5>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h5><pre><code class="language-java">@FunctionalInterface
+public interface Predicate&lt;T&gt; {
+
+    boolean test(T t);
+
+    default Predicate&lt;T&gt; and(Predicate&lt;? super T&gt; other) {
+        Objects.requireNonNull(other);
+        return (t) -&gt; test(t) &amp;&amp; other.test(t);
+    }
+
+    default Predicate&lt;T&gt; negate() {
+        return (t) -&gt; !test(t);
+    }
+
+    default Predicate&lt;T&gt; or(Predicate&lt;? super T&gt; other) {
+        Objects.requireNonNull(other);
+        return (t) -&gt; test(t) || other.test(t);
+    }
+
+    static &lt;T&gt; Predicate&lt;T&gt; isEqual(Object targetRef) {
+        return (null == targetRef)
+                ? Objects::isNull
+                : object -&gt; targetRef.equals(object);
+    }
+}</code></pre>
+
+          <h5>
+            <a name="_root-函数方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            函数方法
+          </h5><pre><code class="language-java">    boolean test(T t);</code></pre>
+<p>给个T, 返回个布尔值</p>
+
+          <h4>
+            <a name="_root-默认方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            默认方法
+          </h4><p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
+
+          <h4>
+            <a name="_root-Comparator<T> 比较器接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Comparator<T> 比较器接口
+          </h4><p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是<strong>&quot;四大核心函数式接口&quot;</strong>的, 这个我放在第五个, 因为这个接口里的方法有很有价值. </p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

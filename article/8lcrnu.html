@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><p>这篇记录下从今天开始，复习到、新遇到的所有算法题</p>
+<ul>
+<li>栈相关</li>
+<li>数学逻辑相关</li>
+</ul>
+<hr>
+
+          <h4>
+            <a name="_root-栈相关" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            栈相关
+          </h4>
+          <h5>
+            <a name="_root-汉诺塔（递归方法）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            汉诺塔（递归方法）
+          </h5>
+          <h6>
+            <a name="_root-C语言实现" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            C语言实现
+          </h6><pre><code class="language-c">void hanoi(int n, char source, char help, char target) {
+    // 讲塔座上按照直径大小自上而下编号为1到n的n个圆盘按规则搬到塔座target上，help做辅助塔
+    if (n == 1) {
+        move(source, 1, target);
+    } else {
+        hanoi(n-1, source, target, help);    // 将要搬离的n个盘中的前n-1个盘搬到help塔上，用target塔为辅助
+        move(source, n, target);            // 将编号为n的盘移动到target塔上
+        hanoi(n-1, help, source, target);    // 将之前的放在help塔上的n-1个盘移动到target塔，用souece塔做辅助塔
+    }
+}
+
+void move(char source, int n, char target){
+    // 将source塔上的盘子n搬到target塔上，移动步数加1（设置为全局变量）
+    printf(&quot;Step: %i. Move disk %i from %c to %c\n&quot;, ++stepCount, n, x, z);
+}</code></pre>
+<blockquote>
+<p>参考：《数据结构（C语言版）》——严蔚敏. P55</p>
+</blockquote>
+<hr>
+
+          <h4>
+            <a name="_root-数学逻辑相关" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            数学逻辑相关
+          </h4>
+          <h5>
+            <a name="_root-有理数的循环节" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            有理数的循环节
+          </h5><blockquote>
+<p>两次看到这题，第一次是在某年蓝桥杯上，第二次就是昨天（2018年9月10日）的快手笔试。如出一辙，分码未写。</p>
+<p>1/7 = 0.142857142... 是个无限循环小数。任何有理数都可以表示为无限循环小数的形式。本题目要求即是：给出一个数字的循环小数表示法。</p>
+<p>例如：</p>
+<p>输入：<br>1,5</p>
+<p>则输出：<br>0.2</p>
+<p>输入：<br>1,7</p>
+<p>则输出：</p>
+<p>0.[142857]</p>
+<p>输入：</p>
+<p>7,6</p>
+<p>则输出:</p>
+<p>1.1[6]</p>
+<p>用户输入的格式是：</p>
+<p>整数,整数</p>
+<p>每个整数范围均为：1~1000</p>
+<p>程序输出两个整数做除法产生的小数或无限循环小数（循环节用方括号括起）。</p>
+</blockquote>
+<p>这题.....真是纯数学题，你要是不懂怎么判断循环节，那就凉了，然后就求循环嘛，然后又发现一个很尴尬的事情，余数不会求....折腾了大半天，搞定- -</p>
+<p>首先我们手算3个例子，1/4和1/7和1/6</p>
+<p><img src="https://image.youyinnn.top/20180912111445.png" alt=""></p>
+<p>我们每次计算的时候，<strong>都需要将余数乘以10，再和除数取余，再进行下一轮计算，直到余数为0或者余数重复出现为止，与此同时我们可以记录每一轮的商</strong>；</p>
+<p>比如1/4，余数是1，<code>(1*10)%4=2</code>，再继续<code>(2*10)%4=0</code>，算到0就可以截止了</p>
+<p>1/7，余数是1，<code>(1*10)%7=3</code>，<code>(3*10)%7=2</code>，<code>(2*10)%7=6</code>，<code>(6*10)%7=4</code>，<code>(4*10)%7=5``(5*10)%7=1</code>，又碰到一样的余数了，说明下一轮得到的商之前是已经求出来过的，所以已经找到循环节了；</p>
+
+          <h6>
+            <a name="_root-Java实现" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Java实现
+          </h6><pre><code class="language-java">// resulet : k.(m1m2m3m4...mn)
+private static String getRepetend(int a, int b) {
+    int k = a / b;
+    a = a % b;
+    StringBuilder msb = new StringBuilder();
+    msb.append(&quot;.&quot;);
+    while (true) {
+        int mi = (a * 10) / b;
+        a = (a * 10) % b;
+        int index = msb.indexOf(mi + &quot;&quot;);
+        if (index != -1) {
+            msb.insert(index, &quot;(&quot;);
+            break;
+        }
+        msb.append(mi);
+        if (a == 0) {
+            break;
+        }
+    }
+    msb.insert(0, k);
+    if (msb.indexOf(&quot;(&quot;) != -1) {
+        msb.append(&quot;)&quot;);
+    }
+    return msb.toString();
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

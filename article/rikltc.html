@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><p>本书第二版为止，其实还是针对于Java SE 7 Specification（后简称Spec），然而到了Java8，情况又有很大的不同，比如最出名的Permanent Generation，就在8中被HotSpot虚拟机移除掉了，所以这一系列的文章，我后续还需要慢慢地研究和重写</p>
+<p>然后是一篇关于Java SE 7 Spec的<a href="http://blog.jamesdbloom.com/JVMInternals.html#threads">好文</a></p>
+
+          <h3>
+            <a name="_root-JVM运行时数据区" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            JVM运行时数据区
+          </h3><p>基本上整个第二章说的都是<strong>运行时数据取区</strong>,，Java虚拟机在执行Java程序的时候,，会把它所管理的内存划分为若干个不同的数据区域</p>
+<p>这些数据区域有<strong>各自的用途</strong>以及<strong>各自的生命周期</strong>(创建和销毁策略)</p>
+<p><img src="https://image.youyinnn.top/jvmRuntimeDataArea2.png" alt="jvmRuntimeDataArea"></p>
+<p>我们得特别注意，这里我们再将<strong>JVM的运行时数据区</strong>划分为：<strong>线程共享数据区</strong>，<strong>线程私有数据区</strong></p>
+
+          <h4>
+            <a name="_root-1. 程序计数器（PCR）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1. 程序计数器（PCR）
+          </h4>
+          <h5>
+            <a name="_root-作用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作用
+          </h5><p>它可以看作是<strong>当前线程程序执行的字节码的行号指示器</strong></p>
+<p>字节码解释器工作的时候，就是通过改变这个计数器里的值来选取下一条需要执行的字节码指令，程序的分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖计数器</p>
+
+          <h5>
+            <a name="_root-特点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            特点
+          </h5><ul>
+<li><strong>内存较小</strong></li>
+<li><strong>线程私有</strong>：每条线程都有自己的独立的程序计数器，各线程之间的计数器互不影响，独立存储</li>
+<li><strong>仅面对Java方法计数</strong>：如果线程执行的是Java方法，则计数器有记录，记录的是所执行字节码的指令地址，如果执行的是Native方法，则计数器记录为空</li>
+<li><strong>不会内存溢出</strong>：则个区域是JVM中唯一不会出<code>OutOfMemoryError</code>的地方</li>
+</ul>
+
+          <h4>
+            <a name="_root-2. Java虚拟机栈（JVM Stack）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2. Java虚拟机栈（JVM Stack）
+          </h4>
+          <h5>
+            <a name="_root-作用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作用
+          </h5><p>虚拟机栈描述的是<strong>Java方法执行（注意是方法执行）的内存模型</strong></p>
+<p>当<strong>每个方法执行的同时</strong>，<strong>会创建一个栈帧（Stack Frame）</strong>用于存放<u><strong>局部变量表（这个表就是我们Java程序员常说的栈内存所在）</strong></u>、<u><strong>操作数栈</strong></u>、<strong><u>动态链接</u></strong>、<strong><u>方法出口</u></strong>等信息</p>
+<p>每个方法从<strong>调用</strong>到<strong>执行完成的过程</strong>，就对应着一个栈帧在虚拟机栈中入栈到出栈</p>
+
+          <h5>
+            <a name="_root-局部变量表" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            局部变量表
+          </h5>
+          <h6>
+            <a name="_root-存放内容" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            存放内容
+          </h6><p>这里存放了编译期可知的各种：</p>
+<ul>
+<li><strong>基本数据类型</strong>（boolean、byte、char、short、int、float、long、double）</li>
+<li><strong>对象引用（reference类型， 这个是重点，它不同于对象本身，它可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他和此对象相关的位置）</strong></li>
+<li><strong>returnAddress类型（指向了一条字节码指令地址）</strong></li>
+</ul>
+
+          <h6>
+            <a name="_root-特点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            特点
+          </h6><ul>
+<li>其中64位长度的<strong>long类型</strong>和<strong>double类型</strong>数据会占用两个<strong>局部变量空间（Slot）</strong>，其他占1个</li>
+<li>局部变量表所需内存空间<strong>在编译器就完成分配，运行期间不会改变</strong>，当方法入栈时，运行期间栈帧所需的内存大小是<strong>完全固定的</strong></li>
+</ul>
+
+          <h5>
+            <a name="_root-特点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            特点
+          </h5><ul>
+<li><strong>线程私有</strong></li>
+<li><strong>两个异常</strong>：<code>StackOverflowError</code>栈深过长和<code>OutOfMemoryError</code>扩充内存时内存不够而溢出</li>
+</ul>
+
+          <h4>
+            <a name="_root-3. 本地方法栈（NM Stack）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3. 本地方法栈（NM Stack）
+          </h4><p>这个区域和<strong>JVM-Stack</strong>如出一辙，唯一不同的地方就是，<strong>JVM-Stack</strong>执行的是Java方法，而<strong>NM-Stack</strong>执行的是Native方法，这里同样也会抛出<code>StackOverflowError</code>栈深过长和<code>OutOfMemoryError</code>扩充内存时内存不够而溢出两个异常</p>
+
+          <h4>
+            <a name="_root-4. Java堆（Java Heap/GC Heap）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            4. Java堆（Java Heap/GC Heap）
+          </h4>
+          <h5>
+            <a name="_root-作用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作用
+          </h5><p>唯一的目的就是<strong>存放对象实例</strong>，“几乎”所有的<strong>对象实例以及数组</strong>都在这里分配内存</p>
+
+          <h5>
+            <a name="_root-特点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            特点
+          </h5><ul>
+<li><p><strong>内存最大</strong></p>
+</li>
+<li><p><strong>线程共享：</strong> 因为存放的是所有对象的实例</p>
+</li>
+<li><p><strong>别名GC-Heap：</strong> 是垃圾收集器（Garbage Collector）管理的主要区域</p>
+</li>
+<li><p><strong>堆内再划分：</strong> 基于<strong>CG分代收集算法</strong>，还可细分为新生代、老年代</p>
+<p><strong>再划分的意义：</strong> 为了更好地管理回收内存，或者说更快地分配内存</p>
+</li>
+<li><p><strong>可以不连续：</strong> 内存空间可以不连续，只要逻辑连续即可</p>
+</li>
+<li><p><strong>一个异常：</strong><code>OutOfMemoryError</code></p>
+</li>
+</ul>
+
+          <h4>
+            <a name="_root-5. 方法区（Method Area）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            5. 方法区（Method Area）
+          </h4>
+          <h5>
+            <a name="_root-作用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作用
+          </h5><p>用于存储已被虚拟机加载的<strong>类信息</strong>、<strong>常量</strong>、<strong>静态变量</strong>、<strong>即时编译器编译后的代码</strong>等数据</p>
+
+          <h5>
+            <a name="_root-特点" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            特点
+          </h5><ul>
+<li><p><strong>逻辑上是堆的一部分</strong></p>
+<blockquote>
+<p>虽然JVM Spec把方法区描述为堆的一个<strong>逻辑部分</strong>，但它有一个别名：Non-Heap，目的应该是表面它相比于堆的其它部分的特殊性；</p>
+</blockquote>
+</li>
+<li><p><strong>线程共享</strong></p>
+</li>
+<li><p><strong>CG执行少：</strong></p>
+<ul>
+<li>回收内容：针对<strong>常量池的回收</strong>和对<strong>类型的卸载</strong></li>
+<li>回收难度大，尤其是类型卸载</li>
+<li>回收必要性：很有必要</li>
+</ul>
+</li>
+<li><p><strong>一个异常：</strong><code>OutOfMemoryError</code></p>
+</li>
+</ul>
+
+          <h5>
+            <a name="_root-运行时常量池（Runtime Constant Pool）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            运行时常量池（Runtime Constant Pool）
+          </h5><p>它是方法区的一部分</p>
+<p>在Class文件中除了有类的版本、字段、方法、接口等描述信息，还有一项信息是常量池（Constant Pool Table），用于存放<strong>“编译期”生成的各种字面量和符号引用</strong>，这部分常量是运行之前就确定好了的，并且在类被加载后将这些信息<strong>转入</strong>运行时常量池存放</p>
+<ul>
+<li><p>但是有的常量并不一定是在编译器就确定好的，有可能是在系统运行的过程中才确定的，所以这部分常量就放置在运行时常量池中</p>
+</li>
+<li><p>以及编译期翻译出来的直接引用也存储在运行时常量池中</p>
+</li>
+</ul>
+
+          <h6>
+            <a name="_root-和Class文件常量池的区别" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            和Class文件常量池的区别
+          </h6><ul>
+<li><strong>动态特性：</strong>并不要求常量只有在编译期才能产生，运行期间也可以放入新的常量到<strong>运行时常量池</strong>中</li>
+<li><strong>一个异常：</strong><code>OutOfMemoryError</code></li>
+</ul>
+
+          <h4>
+            <a name="_root-* 6. 直接内存（Direct Memory）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            * 6. 直接内存（Direct Memory）
+          </h4>
+          <h5>
+            <a name="_root-介绍" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            介绍
+          </h5><p>在NIO类的使用中，基于通道（Channel）和缓冲区（Buffer）的IO方式，它们使用的是<strong>Native函数库直接分配的堆外内存（注意是堆外）</strong>，这部分内存并不属于堆或者JVM的运行时数据区内存</p>
+<p>通过堆中的一个<strong>DirectByteBuffer对象</strong>来操作这块<strong>内存的引用</strong></p>
+
+          <h5>
+            <a name="_root-作用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            作用
+          </h5><p>在某些场景中显著地提高性能，因为避免了<strong>Java堆</strong>和<strong>Native堆</strong>中来回复制数据</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>
