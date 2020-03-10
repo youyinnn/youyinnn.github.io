@@ -13,7 +13,7 @@ function createarticlecard(item, pagebelong) {
     adclass(articletitle, 'articlecardtitle font-weight-bold')
     adclass(articletime, 'articlecardtime')
     adclass(tagsandcates, 'articlecardtime')
-    adclass(articleshortmsg, 'articleshortmsg')
+    adclass(articleshortmsg, 'articleshortmsg markdown-body editormd-html-preview')
     adclass(articlemore, 'articlemore')
     tagsbox.style.marginTop = '5px'
     charsbox.style.marginTop = '5px'
