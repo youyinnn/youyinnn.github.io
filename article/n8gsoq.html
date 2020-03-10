@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h1>
+            <a name="_root-Jetty : Servlet Engine and HTTP server" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Jetty : Servlet Engine and HTTP server
+          </h1><p>创立时间：2017年8月25日16:13:49</p>
+<p>官方文档地址：<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/">http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/</a></p>
+<hr>
+<p>Maven依赖：</p>
+<pre><code>&lt;properties&gt;
+    &lt;jetty-version&gt;9.4.6.v20170531&lt;/jetty-version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+
+    &lt;!-- jetty-server部分 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-server&lt;/artifactId&gt;
+        &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- jetty-servlet部分 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-servlet&lt;/artifactId&gt;
+        &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- jetty-webapp部分 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-webapp&lt;/artifactId&gt;
+        &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- jetty-util部分 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-util&lt;/artifactId&gt;
+        &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- jetty-security部分 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-security&lt;/artifactId&gt;
+        &lt;version&gt;${jetty-version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;</code></pre><p>注意：以上依赖并不是全部需要，可以按需导入</p>
+<hr>
+
+          <h4>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h4><blockquote>
+<p>这是一篇针对Jetty的官方英文文档翻译，对应版本号为：9.4.6.v20170531。</p>
+<p>本着高尚的自学精神，再加上暑假有点无聊，我尝试着翻译Jetty的官方文档。</p>
+<p>该翻译并不是来自于官方的，仅仅是自学用的翻译，如有错误，请在issue中指出。</p>
+<p>文档并没有严格按照语法规范翻译，首先遵从本人自己的理解（如有理解错误也请在issue中指出），再尽量翻译成通俗的语句，要求的是能根据本文快速掌握Jetty。一切以实践为标准，我在学习的时候也会先实践，再结合实践翻译到文档中。</p>
+<p>按照预期计划，我并不打算翻译全部的官方文档，仅仅满足我本身的开发需求足矣。一是本人知识水平有限，二是本身学习Jetty就是我当下的需求之一，我只是按需学习，再顺便做一些有趣的事情。</p>
+<p>博客园平台也有一位前辈“已往之不谏”，他在16年的时候也在他的博客中发布了部分的文档翻译（当时版本：9.3.11.v20160721)，这里是<a href="http://www.cnblogs.com/yiwangzhibujian/p/5832294.html">地址</a>，我在开启这个计划之前也和前辈联系过，他表示他翻译的章节已经满足他当时的开发需求，也满足了大部分Jetty开发者的需求，所以就没有继续翻译下去。他也不建议我开启翻译计划，本身翻译就是一件特别枯燥的事情，我也非常认同这一点。</p>
+<p>在和前辈联系过之后，本来我已经取消了这个翻译计划了，但是在照着前辈的博客学习的时候，我发现博客里面有部分翻译有不足的地方，而且我也有一些更多的东西想表达出来，于是没有思考多久，我就重启了这个翻译计划。</p>
+<p>除此之外，我还找到了一个9.2版本的翻译文档，基本翻译了一半以上，就是翻译的有点生硬。这里是<a href="http://ykgarfield.github.io/jetty-9.2.3.v20140905-zh/index.html">地址</a>，可能需要翻墙。</p>
+<p>此外CSDN还有位前辈也做了类似的翻译教程，<a href="http://blog.csdn.net/liuy_98_1001/article/category/2295505">这里</a>。</p>
+<p>浏览了以下百度的、谷歌的搜索前10的Jetty相关教程文章，有的要么太旧、已经不能运用到实际，有的要么东一块西一块，不明所以，甚至还有一篇《Jett6指南书》，可惜最后也搁浅了，国外也没有相关书籍，国内就更加没有了。这样看来Jetty的学习资料还是挺稀缺的（也可能是我搜索力度不够）。</p>
+<p>大致看了下Jetty官方的目录，讲的太泛、太宽，入门章节就提到了它的许多feature，但是并没有好好介绍它的核心feature——“嵌入式开发”，这对新手来说太不友好了，但是回过头来想想，也许Jetty的定位就不是给新手使用的呢？</p>
+<p>我之前也有动手翻译过一篇关于六年前的Java scheduler工具类Cron4j的官方文档，<a href="https://github.com/youyinnn/Cron4jTranslation">传送门</a>。</p>
+</blockquote>
+<hr>
+
+          <h4>
+            <a name="_root-已经翻译的部分:" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            已经翻译的部分:
+          </h4><ul>
+<li><a href="https://youyinnn.github.io/?panel=post&amp;number=33">part1 入门篇</a></li>
+<li><a href="https://youyinnn.github.io/?panel=post&amp;number=34">part3-13 注解和在嵌入式中使用注解</a></li>
+<li><a href="https://youyinnn.github.io/?panel=post&amp;number=35">part4-21 嵌入式开发部分</a></li>
+<li><a href="https://youyinnn.github.io/?panel=post&amp;number=36">part4-23 maven扩展部分</a></li>
+</ul>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

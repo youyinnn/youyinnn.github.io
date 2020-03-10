@@ -252,7 +252,6 @@
   padding: 5px 20px;
   background-color: white;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
-  text-align: right;
 }
 
 .articlecardtitle {
@@ -285,12 +284,12 @@
 .articlemore {
   background-color: var(--ymain-color);
   padding: 0 .5rem;
-  display: inline-block;
   color: white;
   text-align: center;
   text-decoration: none;
   width: 4rem;
-  margin-bottom: .5rem
+  margin-bottom: .5rem;
+  float: right;
 }
 
 .articlemore:hover {
@@ -642,7 +641,6 @@
 
 #articleshare {
   right: 2rem;
-  position: absolute;
 }
 
 #nocomment {
@@ -720,6 +718,7 @@
   text-align: center;
   transform: translateX(-50%);
   margin: 1rem auto;
+  top: initial !important
 }
 
 #articlesearch {
@@ -1174,7 +1173,6 @@
 }
 
 #movebtn {
-  position: relative;
   top: 2.5rem;
 }
 
@@ -1196,22 +1194,6 @@ body.iframe .powered {
   text-align: left !important;
 }
 
-.articleorderbtn {
-  position: absolute;
-  right: .6rem;
-  z-index: 290;
-  display: inline-block;
-  margin: 1rem 0 0;
-  width: 19px;
-  background-color: whitesmoke;
-}
-
-.articleorderbtn button {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
-  padding: .1rem;
-  width: 20px;
-}
-
 .bdgonarticlecard {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
     border-radius: .25rem !important;
@@ -1225,4 +1207,9 @@ summary:focus {
 }
 summary {
   margin-bottom: 1rem;
+}
+
+.markdown-body a{
+  color: #22a67b;
+  font-weight: bold;
 }

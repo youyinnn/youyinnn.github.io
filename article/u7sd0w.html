@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p>At the part of &quot;Container&quot;, we&#39;ve know we can define a <code>docker-compose.yaml</code> to deploy a service on our swarm so it can run on multiple machine.</p>
+<p>As we practice before, our service just contains one container: a python app that provide web service with Flask.</p>
+<p>But did you remember that sentence ? <strong>Services are really just &quot;Containers in Production&quot;</strong></p>
+<p>So we can define multiple containers in one service !!! Sounds nice isn&#39;t it ?</p>
+<p>This is what they call <strong>&quot;a Stack&quot;</strong>, and that sounds very confused.</p>
+
+          <h3>
+            <a name="_root-Stack" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Stack
+          </h3><p>A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. </p>
+<p>A single stack is capable of defining and coordinating the functionality of an entire application (though very complex applications may want to use multiple stacks).</p>
+<p>We&#39;ve been technically work with stack while we deploy a Composefile with <code>docker stack deploy</code>. But that was a single service stack running on a single host, which is not usually what takes place in production. Here, you can take what you’ve learned, make multiple services relate to each other, and run them on multiple machines.</p>
+<blockquote>
+<p>Now we should build up a main concept for this:</p>
+<ol>
+<li>one service mapping one containers</li>
+<li>one stack including multiple servcices</li>
+<li>one stack can running at multiple machines</li>
+</ol>
+</blockquote>
+<ol>
+<li><p>composefile</p>
+<pre><code class="language-yaml"> version: &quot;3&quot;
+ services:
+   web:
+     # replace username/repo:tag with your name and image details
+     image: youyinnn/getstarted:tag1
+     deploy:
+       replicas: 3
+       restart_policy:
+         condition: on-failure
+       resources:
+         limits:
+           cpus: &quot;0.1&quot;
+           memory: 50M
+     ports:
+       - &quot;4000:80&quot;
+     networks:
+       - webnet
+   visualizer:
+     image: dockersamples/visualizer:stable
+     ports:
+       - &quot;5000:8080&quot;
+     volumes:
+       - &quot;/var/run/docker.sock:/var/run/docker.sock&quot;
+     deploy:
+       placement:
+         constraints: [node.role == manager]
+     networks:
+       - webnet
+ networks:
+   webnet:</code></pre>
+<p> The only thing new here is the peer service to <code>web</code>, named <code>visualizer</code>. Notice two new things here: a <code>volumes</code> key, giving the visualizer access to the host’s socket file for Docker, and a <code>placement</code> key, ensuring that this service only ever runs on a swarm manager -- never a worker. That’s because this container, built from <a href="https://github.com/ManoMarks/docker-swarm-visualizer">an open source project created by Docker</a>, displays Docker services running on a swarm in a diagram.</p>
+<p> We talk more about placement constraints and volumes in a moment.</p>
+</li>
+<li><p>Re-run the <code>docker stack deploy</code> command on the manager, and whatever services need updating are updated</p>
+<p> As we just got a cloud server, so we can just simply deploy our stack on one machine and continue the learning.</p>
+<pre><code class="language-bash"> # make sure you&#39;ve run `docker swarm init`
+ $ docker stack deploy -c docker-compose.yml getstartedlab
+ Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
+ Creating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)</code></pre>
+</li>
+<li><p>Check stack&#39;s status</p>
+<pre><code class="language-bash"> $ docker stack ps getstartedlab
+ ID                  NAME                         IMAGE                             NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+ xixa1lh6topy        getstartedlab_web.1          youyinnn/getstarted:tag1          VM_16_214_centos    Running             Running 28 minutes ago                       
+ upz5s23iduz6        getstartedlab_visualizer.1   dockersamples/visualizer:stable   VM_16_214_centos    Running             Running 28 minutes ago                       
+ kr8sdm9g4qnl        getstartedlab_web.2          youyinnn/getstarted:tag1          VM_16_214_centos    Running             Running 28 minutes ago                       </code></pre>
+</li>
+<li><p>Take a look at the <code>visualizer</code></p>
+<p> <img src="https://image.youyinnn.top/20181129222014.png" alt=""></p>
+<p> and you can also visit the port:4000 to visit the Flask web app.</p>
+</li>
+</ol>
+
+          <h3>
+            <a name="_root-A preview of persist data from docker container to host" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            A preview of persist data from docker container to host
+          </h3><p>There still a section about <strong>&quot;Persist data&quot;</strong> on offical doc, it show us how to create a redis service and presist data from container&#39;s inside filesystem to host filesystem. We will just take a look for the compose file and explain it&#39;s usage.</p>
+<pre><code class="language-yaml">version: &quot;3&quot;
+services:
+  web:
+    # ...
+  visualizer:
+    # ...
+  redis:
+    image: redis
+    ports:
+      - &quot;6379:6379&quot;
+    volumes:
+      - &quot;/home/docker/data:/data&quot;
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    command: redis-server --appendonly yes
+    networks:
+      - webnet
+networks:
+  webnet:</code></pre>
+<p>Redis has an official image in the Docker library and has been granted the short <code>image</code> name of just <code>redis</code>, so no <code>username/repo</code> notation here. </p>
+<p><strong>The Redis port, 6379, has been pre-configured by Redis</strong> to be exposed from the container to the host, and here in our Compose file we expose it from the host to the world, so you can actually enter the IP for any of your nodes into Redis Desktop Manager and manage this Redis instance, if you so choose.</p>
+<p><strong>Most importantly</strong>, there are a couple of things in the <code>redis</code> specification that make data persist between deployments of this stack:</p>
+<ul>
+<li><code>redis</code> always runs on the manager, so it’s always using the same filesystem.</li>
+<li><code>redis</code> accesses an arbitrary directory in the host’s file system as <code>/data</code> inside the container, which is where Redis stores data.</li>
+</ul>
+<p>Together, this is creating a <strong>“source of truth”</strong> in your host’s physical filesystem for the Redis data. Without this, Redis would store its data in <code>/data</code> inside the container’s filesystem, which would get wiped out if that container were ever redeployed.</p>
+<p>This source of truth has two components:</p>
+<ul>
+<li><p>The <strong>placement</strong> constraint you put on the Redis service, ensuring that it always uses the same host.</p>
+</li>
+<li><p>The <strong>volume</strong> you created that lets the container access <code>./data</code> (on the host) as <code>/data</code> (inside the Redis container). While containers come and go, the files stored on <code>./data</code> on the specified host persists, enabling continuity.</p>
+<blockquote>
+<p>In other words, anything you write to redis will stored on <code>/home/docker/data</code> on your host.</p>
+</blockquote>
+</li>
+</ul>
+<p>You are ready to deploy your new Redis-using stack.</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

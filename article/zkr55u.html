@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-Service" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Service
+          </h3><p>In a distributed application, different pieces of the app are called “services.” For example, if you imagine a video sharing site, it probably includes <strong>[1]a service for storing application data in a database</strong>, <strong>[2]a service for video transcoding in the background after a user uploads something</strong>, <strong>[3]a service for the front-end</strong>, and so on.</p>
+<p>Services are really just “containers in production.” A service only runs one image, but it codifies the way that image runs:</p>
+<ul>
+<li>what ports it should use</li>
+<li>how many replicas of the container should run so the service has the capacity it needs</li>
+<li>scaling a service changes the number of container instances running that piece of software</li>
+<li>assigning more computing resources to the service in the process</li>
+<li>....</li>
+</ul>
+<p>Luckily it’s very easy to <strong>define</strong>, run, and scale services with the Docker platform -- just write a <code>docker-compose.yml</code> file</p>
+<p>A <code>docker-compose.yml</code> file is a YAML file that defines how Docker containers should behave in production.</p>
+<blockquote>
+<p>image或者说container只是一个app的运行环境，通常来说在完整系统里面我们不止要用到1个app，这也是微服务的架构，而每个app有各自的环境资源和部署策略</p>
+<p>我们这样去看待：</p>
+<ul>
+<li>app是面向业务，而提供解决方案的</li>
+<li>servcie是面向使用者，而提供使用这个app的管理办法的</li>
+</ul>
+<p>当我们将app看成是一个service的时候，我们可以对service做要上生产环境时候的确保配置，比如为每一个container设置一些容器管理参数，比如replicas、cpu资源、memory资源、重启策略等等</p>
+<p>于是我们可以用<code>docker-compose.yaml</code>去组织一个service，这是投入生产环境时候的正确做法</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-<code>docker-compose.yml</code>" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            <code>docker-compose.yml</code>
+          </h3><p>Save this file as <code>docker-compose.yml</code> wherever you want. Be sure you have <a href="https://docs.docker.com/get-started/part2/#share-your-image">pushed the image</a> you created in <a href="https://docs.docker.com/get-started/part2/">Part 2</a> to a registry, and update this <code>.yml</code> by replacing <code>username/repo:tag</code> with your image details.</p>
+<pre><code>version: &quot;3&quot;
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: username/repo:tag
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: &quot;0.1&quot;
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - &quot;4000:80&quot;
+    networks:
+      - webnet
+networks:
+  webnet:</code></pre><p>This <code>docker-compose.yml</code> file tells Docker to do the following:</p>
+<ul>
+<li>Pull the image we uploaded <strong>before</strong> from the registry.</li>
+<li>Run 5 instances of that image as a service called <code>web</code>, limiting each one to use, at most, 10% of the CPU (across all cores), and 50MB of RAM.</li>
+<li>Immediately restart containers if one fails.</li>
+<li>Map port 4000 on the host to <code>web</code>’s port 80.</li>
+<li>Instruct <code>web</code>’s containers to share port 80 via a load-balanced network called <code>webnet</code>. (Internally, the containers themselves publish to <code>web</code>’s port 80 at an ephemeral port.)</li>
+<li>Define the <code>webnet</code> network with the default settings (which is a load-balanced overlay network).</li>
+</ul>
+
+          <h3>
+            <a name="_root-Deploy a load-balanced app" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Deploy a load-balanced app
+          </h3><p>Before we can use the <code>docker stack deploy</code> command we first run:</p>
+<pre><code class="language-bash">$ docker swarm init
+Swarm initialized: current node (gadm7xrpe7br364zscnmexkf6) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-16a3wl8wfmnu8z3vzu9t2a32x8mdb7n1c25ehkqbdfxtn1g6s9-8f5x4jehjlffr957k35euvojz 10.169.161.227:2377
+
+To add a manager to this swarm, run &#39;docker swarm join-token manager&#39; and follow the instructions.</code></pre>
+<blockquote>
+<p><strong>Note</strong>: We get into the meaning of that command in <a href="https://docs.docker.com/get-started/part4/">part 4</a>. If you don’t run <code>docker swarm init</code> you get an error that “this node is not a swarm manager.”</p>
+</blockquote>
+<p>Now let’s run it. You need to give your app a name. Here, it is set to <code>getstartedlab</code>:</p>
+<pre><code class="language-bash">$ docker stack deploy -c docker-compose.yml getstartedlab
+Creating network getstartedlab_webnet
+Creating service getstartedlab_web</code></pre>
+<p>Our single service stack is running 5 container instances of our deployed image on one host. Let’s investigate.</p>
+<p>Get the service ID for the one service in our application:</p>
+<pre><code class="language-bash">$ docker service ls</code></pre>
+<p>Look for output for the <code>web</code> service, prepended with your app name. If you named it the same as shown in this example, the name is<code>getstartedlab_web</code>. The service ID is listed as well, along with the number of replicas, image name, and <strong>exposed ports</strong>.</p>
+<p>A single container running in a service is called a <strong>task</strong>. Tasks are given unique IDs that numerically increment, up to the number of <code>replicas</code> you defined in <code>docker-compose.yml</code>. List the tasks for your service:</p>
+<pre><code class="language-bash">$ docker service ps getstartedlab_web</code></pre>
+<p>Tasks also show up if you just list all the containers on your system, though that is not filtered by service:</p>
+<pre><code class="language-bash">$ docker container ls -q</code></pre>
+
+          <h3>
+            <a name="_root-Scale the app" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Scale the app
+          </h3><p>You can scale the app by changing the <code>replicas</code> value in <code>docker-compose.yml</code>, saving the change, and re-running the <code>docker stack deploy</code> command:</p>
+<pre><code>docker stack deploy -c docker-compose.yml getstartedlab</code></pre><p>Docker performs an in-place update, no need to tear the stack down first or kill any containers.</p>
+<p>Now, re-run <code>docker container ls -q</code> to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.</p>
+
+          <h3>
+            <a name="_root-Take down the app and the swarm" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Take down the app and the swarm
+          </h3><ul>
+<li><p>Take the app down with <code>docker stack rm</code>:</p>
+<pre><code class="language-bash">$ docker stack rm getstartedlab</code></pre>
+</li>
+<li><p>Take down the swarm.</p>
+<pre><code class="language-bash">$ docker swarm leave --force</code></pre>
+</li>
+</ul>
+<p>It’s as easy as that to stand up and scale your app with Docker. You’ve taken a huge step towards learning how to run containers in production. Up next, you learn how to run this app as a bonafide swarm on a cluster of Docker machines.</p>
+<blockquote>
+<p><strong>Note</strong>: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using <a href="https://docs.docker.com/docker-cloud/">Docker Cloud</a>, or on any hardware or cloud provider you choose with <a href="https://www.docker.com/enterprise-edition">Docker Enterprise Edition</a>.</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-Compose file Reference" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Compose file Reference
+          </h3><p><a href="https://docs.docker.com/compose/compose-file/#args">https://docs.docker.com/compose/compose-file/#args</a></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

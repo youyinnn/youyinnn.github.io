@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <p>{% cq %}<br>前言：之前留下的17大创项目总得做点什么，马上就要结题了，我们做的AR留影需要将用户照下来的照片生成点云然后合成模型。由此Escnqh[link:gayhub]找到了使用PIL+osm-bundler的解决方案。<br>{% endcq %}</p>
+<!-- more -->
+
+
+          <h3>
+            <a name="_root-Python Photogrammetry ToolKit（PPT）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Python Photogrammetry ToolKit（PPT）
+          </h3><p>这玩意是意大利的一个团队开发的一个Python图像处理工具包，正是这个工具包提供的osm-bundler加上PIL构成了一套解决方案。</p>
+<p>官网：<a href="http://184.106.205.13/arcteam/ppt.php">http://184.106.205.13/arcteam/ppt.php</a></p>
+
+          <h4>
+            <a name="_root-PIL" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            PIL
+          </h4><blockquote>
+<p>The Python Imaging Library (PIL) adds image processing capabilities to your Python interpreter. This library supports many file formats, and provides powerful image processing and graphics capabilities.</p>
+</blockquote>
+<p>简单来说就是Python的图像处理库，osm-bundler基于这个库对图像进行分析。</p>
+<p>官网：<a href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a></p>
+<p>但是很坑的一点是，这个项目09年就停止维护了，所以安装这个东西异常困难。</p>
+
+          <h4>
+            <a name="_root-Pillow" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Pillow
+          </h4><p>由于PIL属于史前神物，无法触碰，安装过程中所需要的组件特别零散，其实这对于Debian系的Linux系统来说问题并不大，大部分的库使用apt就能获取到，但是我的服务器是CentOS7，属于Redhat系的，只有yum和rpm。而开发PPT的意大利团队是在Debian下开发的，Redhat下库的获取不一样，所以我还不能按照官方给的思路来进行PPT的部署- -///。</p>
+<p>于是我找到了Pillow。</p>
+<p>介绍：</p>
+<blockquote>
+<p>Pillow is the friendly PIL fork by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors.</p>
+</blockquote>
+<p>Pillow是PIL的一个友好的Fork，而且这个项目在GitHub上持续维护。</p>
+<p>官网：<a href="http://pillow.readthedocs.io/en/latest/index.html">http://pillow.readthedocs.io/en/latest/index.html</a></p>
+<p>hub：<a href="https://github.com/python-pillow/Pillow">https://github.com/python-pillow/Pillow</a></p>
+<p>所以说，我可以使用Pillow来代替PIL，这是完全可行的！！</p>
+<p>而且Pillow的安装异常简单，我们只需要使用python系的包管理工具PIP就可以一键安装！！！</p>
+
+          <h4>
+            <a name="_root-PIP" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            PIP
+          </h4><blockquote>
+<p>The PyPA recommended tool for installing Python packages.</p>
+</blockquote>
+<p>官网：<a href="https://pip.pypa.io/en/stable/">https://pip.pypa.io/en/stable/</a></p>
+<hr>
+
+          <h3>
+            <a name="_root-安装PPT" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装PPT
+          </h3>
+          <h4>
+            <a name="_root-安装Python" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装Python
+          </h4><p>这是一切的大前提，你的系统里需要有python环境，但是一般的linux都会内置一个，只不过你不要使用版本太低的python就好，具体到多少我也不清楚，python的版本断代真的是傻的不行。</p>
+
+          <h4>
+            <a name="_root-安装pip" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装pip
+          </h4><p>自己看：<a href="https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers">https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers</a></p>
+<p>然后需要更新一下pip</p>
+<pre><code class="language-bash">pip install -U pip</code></pre>
+
+          <h4>
+            <a name="_root-安装Pillow" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装Pillow
+          </h4><p>Installation页：<a href="http://pillow.readthedocs.io/en/latest/installation.html">http://pillow.readthedocs.io/en/latest/installation.html</a></p>
+<p>大概浏览一下这个页面，不要急着一上来就安装Pillow。</p>
+<p>在“External Libraries”一节，它提示我们，在安装Pillow之前我们需要安装完运行Pillow所需的库。</p>
+<p>开发Pillow的团队在hub的depends文件夹下提供了这些库在各种系统下的安装脚本，我们选择fedora_23.sh的脚本(fedora是RedHat)，但是不要运行这个脚本，我们看它对应的package需要安装哪些就好。</p>
+<p><img src="https://image.youyinnn.top/3aef0a673e1639aec3272e205b934971.png" alt="fedora"></p>
+<p>如图最下面一行，在centos下就可以执行：</p>
+<pre><code class="language-bash">yum install libtiff-devel libjpeg-devel zlib-devel freetype-devel  lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter  tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel</code></pre>
+<p><img src="https://image.youyinnn.top/5e3b4f30ce74fefbc7e2ebfcccb76543.png" alt="yum"></p>
+<p>这些我都安装过了，其中丢失的python3-tkinter在centos下没有那就不用管了。</p>
+<p>这些库安装完之后，我们就可以安装Pillow了：</p>
+<pre><code class="language-bash">pip install Pillow</code></pre>
+<p>安装完Pillow我们来验证一下，我们写一个test.py脚本：</p>
+<pre><code class="language-python">from PIL import Image
+picPath = &#39;./card.jpg&#39;
+
+im = Image.open(picPath)
+print im.getbbox()</code></pre>
+<p>和脚本一起有一个card.jpg文件，我们使用Pillow来分析这个文件，执行：</p>
+<pre><code class="language-bash">python test.py</code></pre>
+<p>分析出了数据：</p>
+<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# python test.py
+(0, 0, 564, 738)
+[root@VM_16_214_centos youyinnn]#</code></pre>
+<p>说明已经安装成功！</p>
+
+          <h4>
+            <a name="_root-安装BLAS库" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装BLAS库
+          </h4><p>我们要使用PPT，除了PIL之外，还需要两个重要组件，其中一个便是 BLAS (libblas3gf, libblas-dev) 。</p>
+<p>就不介绍了，直接开始安装，在centos下的安装比较奇葩，因为PPT官网给的包名什么的都是apt有的，有的可能yum下没有，所以我们需要选择合适的库：</p>
+<p>首先把blas安装了：</p>
+<pre><code class="language-bash">yum install blas</code></pre>
+<p>以上命令在我的主机上会安装&quot;blas-3.4.2-8.el7.x86_64&quot;：</p>
+<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# yum install blas
+Loaded plugins: fastestmirror, langpacks
+Repository epel is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+Package blas-3.4.2-8.el7.x86_64 already installed and latest version
+Nothing to do
+[root@VM_16_214_centos youyinnn]#</code></pre>
+<p>它主要提供一下三个lib：</p>
+<pre><code class="language-bash">/usr/lib64/libblas.so.3
+/usr/lib64/libblas.so.3.4
+/usr/lib64/libblas.so.3.4.2</code></pre>
+<p>然后search一下blas：</p>
+<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# yum search blas
+Loaded plugins: fastestmirror, langpacks
+Repository epel is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+==================================================================================== N/S matched: blas ====================================================================================
+blas-devel.i686 : BLAS development libraries
+blas-devel.x86_64 : BLAS development libraries
+blas-static.i686 : BLAS static libraries
+blas-static.x86_64 : BLAS static libraries
+blas64-devel.x86_64 : BLAS development libraries
+blas64-static.x86_64 : BLAS static libraries (64bit INTEGER)
+...
+
+[root@VM_16_214_centos youyinnn]#</code></pre>
+<p>得出的结果比较多，我们需要选择安装“blas-devel”，至于是否是64位系统的选择，就看你自己的机子了。</p>
+<p>安装的“blas-devel”提供下面这个lib：</p>
+<pre><code class="language-bash">/usr/lib64/libblas.so</code></pre>
+<p>PPT还需要安装的是“libblas3gf”，但是这个玩意centos没有，好在我找到了对应的一个rpm：<a href="https://altlinux.pkgs.org/sisyphus/classic-x86_64/libblas3gf-3.9.2-alt1.x86_64.rpm.html">https://altlinux.pkgs.org/sisyphus/classic-x86_64/libblas3gf-3.9.2-alt1.x86_64.rpm.html</a></p>
+<p>所以我们要下载这个文件，然后使用rpm来安装它！</p>
+<p>安装完了之后我们可以得到这个关键的lib：</p>
+<pre><code class="language-bash">/usr/lib64/libblas.so.3gf
+/usr/lib64/libblas.so.3gf.0</code></pre>
+<p>然后我们BLAS就安装完成了！</p>
+
+          <h4>
+            <a name="_root-安装LAPACK库" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            安装LAPACK库
+          </h4><p>LAPACK库需要安装：LAPACK (liblapack3gf, liblapack-dev)</p>
+<p>直接yum：</p>
+<pre><code class="language-bash">yum install lapack</code></pre>
+<p>会安装：</p>
+<pre><code class="language-bash">[root@VM_16_214_centos linux]# yum install lapack
+Loaded plugins: fastestmirror, langpacks
+Repository epel is listed more than once in the configuration
+Loading mirror speeds from cached hostfile
+Package lapack-3.4.2-8.el7.x86_64 already installed and latest version
+Nothing to do
+[root@VM_16_214_centos linux]#</code></pre>
+<p>它提供了：</p>
+<pre><code class="language-bash">/usr/lib64/liblapack.so.3
+/usr/lib64/liblapack.so.3.4
+/usr/lib64/liblapack.so.3.4.2
+/usr/lib64/liblapacke.so.3
+/usr/lib64/liblapacke.so.3.4
+/usr/lib64/liblapacke.so.3.4.2</code></pre>
+<p>然后安装liblapack3gf，这里巨坑的是，liblapack3gf只有Debian系统有，连rpm都没有，开始是想把deb<br>文件转成rpm文件的，直到后来Escnqh输入了一行玄学指令：</p>
+<pre><code class="language-bash">ln -s /usr/lib64/liblapack.so.3 /usr/lib64/liblapack.so.3gf</code></pre>
+<p>直接用liblapack.so.3伪装成liblapack.so.3gf（- -）...</p>
+<p>最后liblapack-dev我反正没安装，后面好像也能跑出模型- -</p>
+<p>支持LAPACK库也安装完毕。</p>
+<hr>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

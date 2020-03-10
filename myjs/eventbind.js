@@ -3,25 +3,25 @@ $(function() {
         location = '/'
     })
     $('#articlesbut').bind('click', function() {
-        location = '/' + '?to=articles'
+        location = '/' + 'articles'
     })
     $('#scriptbut').bind('click', function() {
-        location = '/' + '?to=script'
+        location = '/' + 'scripts'
     })
     $('#todobut').bind('click', function() {
-        location = '/' + '?to=todo'
+        location = '/' + 'todos'
     })
     $('#resumebut').bind('click', function() {
-        location = '/' + '?to=resume'
+        location = '/' + 'resume'
     })
     $('#egg').bind('click', function() {
         location = '/' + '?xixi=haha'
     })
     $('#showmore').bind('click', function() {
-        location = '/' + '?to=about'
+        location = '/' + 'about'
     })
     $('#toarticles').bind('click', function() {
-        location = '/' + '?to=articles'
+        location = '/' + 'articles'
     })
     $('#showhacknical').bind('click', function() {
         if ($('#hacknical_github_analysis').attr('src') === undefined) {
@@ -138,41 +138,5 @@ $(function() {
     })
     $('#share_png_paned_close').bind('click', function() {
         $('#share_png_panel').addClass('myhide')
-    })
-    $('#corder').bind('click', function() {
-        $('#corder').attr('disabled', '')
-        $('#norder').removeAttr('disabled')
-        $(this).tooltip('hide')
-        articlesod = false
-        filter()
-    })
-    $('#norder').bind('click', function() {
-        $('#norder').attr('disabled', '')
-        $('#corder').removeAttr('disabled')
-        $(this).tooltip('hide')
-        articlesod = true
-        filter()
-    })
-    $('#cleancache').bind('click', function() {
-        if ($('.stgt.btn.btn-info').length == 1 || $('.adisable').length > 0) {
-            popmsg('Please remove the filter from cate or tags first.', 5000)
-        } else {
-            clearTimeout(cachedcleaner)
-            if (!cachedcleanerLock) {
-                cachedcleanerLock = true
-                cachedcleaner = setTimeout(() => {
-                    $(this).tooltip('hide')
-                    localStorage.removeItem('pcbl')
-                    localStorage.removeItem('pcbl_timeout')
-                    localStorage.removeItem('pseries')
-                    localStorage.removeItem('pod')
-                    articles_cache = new Array()
-                    get_articles()
-                }, 200);
-            }
-        }
-    })
-    $('#cleancache').bind('mouseenter', function() {
-        checkcache()
     })
 })

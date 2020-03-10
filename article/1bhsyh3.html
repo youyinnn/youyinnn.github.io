@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <p>{% cq %}</p>
+<p>本文从为知笔记迁移过来, 本文的写作时间是 : 2016/10/18 下午1:41:28, 两年前的文章, 言语难免幼稚, 思维难免浅显, 多多包含.</p>
+<p>{% endcq %}</p>
+<blockquote>
+<p>在学习这个东西的时候，找了很多资料，网上说的也都很笼统，找不到一个比较容易上手的例子，直到我看到一篇文章，作者在整体讲述Java5-8的新特性，其中讲完Java8的lambda表达式之后，马上就讲方法引用这个特性，我才更加清楚的意识到，方法引用其实是比lambda更加简洁的一个语法糖（不知道我这样理解对不对），但是，常识告诉我们，越简单的技术，限制条件就越多，为什么网上的关于方法引用的讲解都很散，因为方法引用的使用条件有点多。</p>
+</blockquote>
+<p>根据这篇文章，我又自己写了一个例子，来说明为什么方法引用可以是一个更加简洁的lambda：</p>
+
+          <h4>
+            <a name="_root-引例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            引例
+          </h4><pre><code class="language-java">public class methodReferences {
+
+    //标准FI
+    interface methodReferencesFI{
+        List&lt;String&gt; toList(String[] string);
+    }
+
+    public static void main(String[] args) {
+
+        //lambda登场，这时候干了哪两件事？
+        methodReferencesFI lam = person-&gt;{return Arrays.asList(person);};
+
+        //MethodReferences登场，这时候其实也干了两件事
+        methodReferencesFI mr = Arrays::asList;
+
+        //给定数组
+        String[] person = {&quot;Tom&quot;,&quot;Jack&quot;,&quot;Jimy&quot;};
+
+        System.out.println(&quot;lambda &#39;s toList :&quot;+lam.toList(person));
+
+        //神奇的事情
+        System.out.println(&quot;MethodReferances &#39;s toList :&quot;+mr.toList(person));
+
+        //更神奇的事
+        List&lt;String&gt; personlist = mr.toList(person);
+
+        //这也是静态方法引用
+        personlist.forEach(System.out::println);
+
+    }
+​
+}</code></pre>
+<p>你看，两种方式，同样实现了<code>methodReferencesFI</code> ，只是MR更加简便。这里同时也演示了昨天我没举例的有返回值的FI方法是如何使用lambda的。</p>
+<p>这样看来，方法引用，好像更6一点啊？但是，但是，前面说了，越简单的技术，使用条件就越多，这里的使用条件就是，引用的方法是静态方法 ，比如asList是Arrays这个工具类下面的静态方法，这种工具类一般不用创建对象，可以直接用类名调用方法。这就是方法引用的其中一个限制条件。</p>
+<p>刚才我又看了一篇文章，让我对于lambda表达式和方法引用之间的关系又有了新的理解。</p>
+<p>上面说到，我们通常用lambda表达式来创建匿名方法，然而，我们有时候仅仅是调用了一个已经存在的方法：</p>
+<pre><code class="language-java">Arrays.sort(stringsArray,(s1,s2)-&gt;s1.compareToIgnoreCase(s2));</code></pre>
+<p>但是在JAVA8中，还可以直接通过方法引用来简写lambda表达式中已经存在的方法。</p>
+<pre><code class="language-java">Arrays.sort(stringsArray, String::compareToIgnoreCase);</code></pre>
+
+          <h4>
+            <a name="_root-四种方法引用的形式" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            四种方法引用的形式
+          </h4>
+          <h5>
+            <a name="_root-1. 引用某个对象的实例方法：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1. 引用某个对象的实例方法：
+          </h5><pre><code class="language-java">class ComparisonProvider{
+            public int compareByName(Person a,Person b){
+                return a.getName().compareTo(b.getName());
+            }
+​
+            public int compareByAge(Person a,Person b){
+                return a.getBirthday().compareTo(b.getBirthday());
+            }
+        }
+​
+ComparisonProvider provider = new ComparisonProvider();
+​
+//使用lambda表达式
+//对象的实例方法
+Arrays.sort(persons,(a,b)-&gt;provider.compareByAge(a,b));
+​
+//使用方法引用
+//引用的是对象的实例方法
+Arrays.sort(persons, provider::compareByAge);</code></pre>
+<p>首先我们来分析一下这里为什么可以用lambda，我们来看一下这个Arrays.sort的源码：</p>
+<pre><code class="language-java">    public static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c) {
+        if (c == null) {
+            sort(a);
+        } else {
+            if (LegacyMergeSort.userRequested)
+                legacyMergeSort(a, c);
+            else
+                TimSort.sort(a, 0, a.length, c, null, 0, 0);
+        }
+    }</code></pre>
+<p>这里看不出什么花，再看第二个参数：Comparator&lt;? super T&gt; c ，行，看源码之后我发现，这是一个FI，里面定义了唯一的一个抽象方法。。。？？唉不对？有两个抽象方法。。这就很尴尬了。。这和官方给出的FI的定义不符啊，这不是打脸嘛，后面我去查资料和看源码注释了解到，虽然这个接口显式定义了两个类方法，但是equals是一个明确声明为继承自Object的具体的函数！！！ </p>
+<p>但是，例子上这个lambda的使用方式，和我昨天学的有点不太一样，昨天的是，首先有一个FI，然后一步做两步，实现FI，实现FI方法，再调用该方法，但是呢，这里一步做了三件事情。我们先来看看如果用按照昨天的步骤做会如何。</p>
+<pre><code class="language-java">    //开始肯定是一步做两步了
+    Comparator&lt;Person&gt; comparator = (Person a,Person b)-&gt;provider.compareByName(a,b);
+    ​
+    //然后调用
+    Arrays.sort(persons,comparator);
+    现在直接：
+    Arrays.sort(persons,(a,b)-&gt;provider.compareByAge(a,b));
+    而方法引用更直接：
+    Arrays.sort(persons, provider::compareByAge);</code></pre>
+
+          <h5>
+            <a name="_root-2. 引用特定类的类型对象的实例方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2. 引用特定类的类型对象的实例方法
+          </h5><p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
+
+          <h5>
+            <a name="_root-3. 构造函数的引用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3. 构造函数的引用
+          </h5><p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
+
+          <h5>
+            <a name="_root-4. 静态方法引用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            4. 静态方法引用
+          </h5><p>格式<code>Class::static_method</code></p>
+<p>到这里方法引用总算是粗略的过了一遍，但是回想前面这一路学习下来，我还是有一个地方，不是很理解。</p>
+<pre><code class="language-java">    //这也是静态方法引用
+    personlist.forEach(System.out::println);</code></pre>
+<p>上文有一个地方说道这个...我们把这句话用lambda表示出来看看：</p>
+<pre><code class="language-java">    personlist.forEach((p)-&gt;System.out.println(p));</code></pre>
+<p>但是...静态在哪？往上找源码我发现，只有out这个对象是静态的 ，其他的类都没有静态方法和这个相关，首先，System里面有一个静态的PrintStream对象out，然后PrintStream里面有一个已经实现的非静态方法println。静态对象应用非静态方法，算是静态引用么？</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

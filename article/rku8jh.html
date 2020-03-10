@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h4>
+            <a name="_root-ArrayList类" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ArrayList类
+          </h4><p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
+<p>这个计划搁置了很久，大概有15天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习offer有没有已经不重要了，<strong>剑指秋招！</strong></p>
+<p>为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近1小时手撸了一个ArrayList的自实现，再搭配源码来看<strong>自己在基础方法上有哪些没考虑到的点</strong>，以及<strong>实际投入使用的ArrayList到底优秀在哪里</strong></p>
+
+          <h4>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h4>
+          <h5>
+            <a name="_root-类头" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            类头
+          </h5><pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+    //...
+}</code></pre>
+<p>首先继承了<code>AbstractList</code></p>
+<p>我们顺着<code>AbstractList</code>往里摸，一直到最后我们发现，还有<strong>Collection接口和Iterable接口</strong>，这两个接口加上<strong>List接口</strong>为我们提供了非常重要的集合接口规范</p>
+<p>然后我们往下看</p>
+
+          <h5>
+            <a name="_root-成员变量" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            成员变量
+          </h5><p>ArrayList这个类的成员变量并不复杂</p>
+<pre><code class="language-java">// 这是默认的容器长度
+private static final int DEFAULT_CAPACITY = 10;
+
+// 这是一个空的容器数组
+private static final Object[] EMPTY_ELEMENTDATA = {};
+
+// 这是默认容量的空的容器数组 用这个数组和上面那个数组对比
+// 来分辨出第一个元素被添加进来的时候到底有多膨胀
+private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
+// 存储元素的数组
+// ArrayList的容量就是这个数组的长度
+// 在空数组的情况下 如果 elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
+// 那么我们加入第一个元素的时候会选择以DEFAULT_CAPACITY为初试容量去扩展容器
+transient Object[] elementData; // non-private to simplify nested class access
+
+// 包含元素的个数 我更愿意将size叫成是载量
+private int size;</code></pre>
+<p>其中最重要的显然就是<strong>elementData</strong>这个变量了，它就是整个容器的核心</p>
+<p>其次就是<strong>size</strong>这个变量，在<strong>线性结构</strong>中，我们常接触到的两个概念：<strong>capacity（容量）、size（大小）</strong></p>
+<p>前者表示容器<strong>能装多少</strong>，后者表示容器<strong>装了多少</strong>，但我们使用后者的时候，总说<strong>“这个容器大小是多少”</strong>，这个<strong>”大小“</strong>的说法很容易和<strong>“容量”</strong>混为一谈</p>
+<p>所以我更愿意将<strong>size</strong>叫成是<strong>载量（loaded size）</strong></p>
+<p>在这里我们还需要留意一个变量，这个变量来自于<strong>AbstractList抽象类</strong></p>
+<pre><code class="language-java">protected transient int modCount = 0;</code></pre>
+<p>这个值记录着List的<strong>结构被改变的次数</strong>，结构改变指的是<strong>任何会影响到size的操作</strong><br>因为这些改动，可能会<strong>扰乱容器结构</strong>，而导致迭代过程会出现错误的结果<br>这个变量会在迭代器中去补充一些逻辑，比如非法的修改会扰乱迭代过程，则<strong>会抛出异常</strong><br>如果子类也要用到这个变量，要求<strong>每一个可能改动容器结构的操作都需要调用一次这个变量</strong></p>
+
+          <h5>
+            <a name="_root-构造方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            构造方法
+          </h5><p>总共有三个，我们只关心前两个就好了</p>
+<pre><code class="language-java">public ArrayList(int initialCapacity) {
+    if (initialCapacity &gt; 0) {
+        this.elementData = new Object[initialCapacity];
+    } else if (initialCapacity == 0) {
+        this.elementData = EMPTY_ELEMENTDATA;
+    } else {
+        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+
+                                           initialCapacity);
+    }
+}
+public ArrayList() {
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}</code></pre>
+<p>这里给出了我们的两个常量<strong>EMPTY_ELEMENTDATA</strong>和<strong>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</strong>的去处，在我的自实现里，<strong>无论是哪种方法我都选择了new出数组对象</strong>，而这里还会有点偷懒，如果没有指定容量的话，则并不会<strong>new Object[DEFAULT_CAPACITY]</strong>，等到真正要加入元素的时候，才创建对象，这在下面add方法的时候会看到</p>
+
+          <h5>
+            <a name="_root-成员方法" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            成员方法
+          </h5><p>接下来我们进入成员方法部分</p>
+
+          <h6>
+            <a name="_root-trimToSize" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            trimToSize
+          </h6><pre><code class="language-java">public void trimToSize() {
+    modCount++;
+    if (size &lt; elementData.length) {
+        elementData = (size == 0)
+          ? EMPTY_ELEMENTDATA
+          : Arrays.copyOf(elementData, size);
+    }
+}</code></pre>
+<p>首当其冲就是这个方法 该方法用于<strong>修剪容器的容量</strong></p>
+<p>怎么个<strong>修剪</strong>法？将容器的<strong>”容量“</strong>修剪为当前列表的<strong>载量</strong>，其目的是为了<strong>优化容器对象所占存储空间</strong></p>
+<p>比如我们容器初始容量为10，里面装了3个元素，那么就有<strong>7个元素空间是被null占着的</strong></p>
+<p>假设我们容器的使用场景总是在小于等于3的情况下工作，那么我们就可以把容器的容量修剪一下</p>
+<p><strong>修剪前：</strong>[a, b, c, <strong>null, null, null, null, null, null, null</strong>]</p>
+<p><strong>修剪后：</strong>[a, b, c]</p>
+<p>并且<strong>修剪</strong>操作会访问<strong>modCount</strong>变量，意味着这告诉容器的<strong>迭代器</strong>，这个修剪方法可能会<strong>扰乱迭代过程</strong></p>
+<p>在修剪的时候，我们看到了这样的一个方法：<strong>Arrays.copyOf(elementData, size)</strong></p>
+
+          <h6>
+            <a name="_root-Arrays.copyOf" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Arrays.copyOf
+          </h6><pre><code class="language-java">public static &lt;T&gt; T[] copyOf(T[] original, int newLength) {
+    return (T[]) copyOf(original, newLength, original.getClass());
+}
+
+public static &lt;T,U&gt; T[] copyOf(U[] original, int newLength, Class&lt;? extends T[]&gt; newType) {
+    T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) new Object[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+    System.arraycopy(original, 0, copy, 0,
+                     Math.min(original.length, newLength));
+    return copy;
+}</code></pre>
+<p>重点是<strong>line：10</strong>，整个方法是按照<strong>源数组的长度（original.length）</strong>以及<strong>新长度（newLength）</strong>的最小值去复制数组的</p>
+
+          <h6>
+            <a name="_root-ensureCapacity" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ensureCapacity
+          </h6><pre><code class="language-java">public void ensureCapacity(int minCapacity) {
+    int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+        ? 0
+        : DEFAULT_CAPACITY;
+
+    if (minCapacity &gt; minExpand) {
+        ensureExplicitCapacity(minCapacity);
+    }
+}</code></pre>
+<p>这个方法用于提升容器的容量，这个方法告诉容器：<strong>至少要保证根据传入的最小容量（minCapacity）参数那么多的容量</strong></p>
+<p>在这个方法里的选择是：</p>
+<ul>
+<li>对于<strong>最小扩容量（minExpand）</strong>，如果当前容器为空容器，则最小扩容量为<strong>DEFAULT_CAPACITY（10）</strong>，如果容器<strong>不是空容器</strong>，则最<strong>小扩容量为0</strong></li>
+<li>一旦<strong>最小容量（minCapacity）&gt; 最小扩容量（minExpand）</strong>，则需要<strong>确保显式容量</strong></li>
+</ul>
+<p>这里的理解有点绕，我们把它放到场景去分析一下：</p>
+<p><strong>场景1，空容器：</strong></p>
+<p>空容器传进来，<strong>minExpand</strong>就得<strong>DEFAULT_CAPACITY</strong>等于10，那么如果我们传入的<strong>minCapacity</strong>甚至小于默认的容量，那你就<strong>一边呆着吧</strong></p>
+<p>如果大于10，那就<strong>按照你的来</strong>，虽然还得进<strong>ensureExplicitCapacity方法</strong>，但是看到了后面就会发现，确实是会按照你给的大于10的值来扩容</p>
+<p><strong>场景2，[ 1 / 10 ] 的容器：</strong></p>
+<p><strong>minExpand</strong>肯定是0，那么只要我们传入的传入的<strong>minCapacity</strong>大于0，是肯定可以进<strong>ensureExplicitCapacity方法</strong>的，到了方法里面我们发现，如果你给的<strong>minCapacity</strong>还没有当前容器长度的<strong>1.5倍</strong>大，那么容器至少也会扩到<strong>1.5倍</strong>而忽略你给的值，大于<strong>1.5倍</strong>救会采用你给值来扩容</p>
+<p>为什么是<strong>1.5倍</strong>？往下看就知道了</p>
+<p>我们来看<strong>ensureExplicitCapacity方法</strong></p>
+<pre><code class="language-java">private void ensureExplicitCapacity(int minCapacity) {
+    modCount++;
+
+    // overflow-conscious code
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);
+}</code></pre>
+<p>除了会改变容器结构，我们还得注意：当<strong>允许的最小容量（minCapacity）</strong>大于<strong>当前容器容量（elementData.length）</strong>的时候，这个时候我们就需要进行<strong>溢出考虑(overflow-conscious)</strong>了</p>
+
+          <h6>
+            <a name="_root-grow" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            grow
+          </h6><pre><code class="language-java">private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+
+private void grow(int minCapacity) {
+    // overflow-conscious code
+    int oldCapacity = elementData.length;
+    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+    if (newCapacity - minCapacity &lt; 0)
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+        newCapacity = hugeCapacity(minCapacity);
+    // minCapacity is usually close to size, so this is a win:
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}</code></pre>
+<p>这里规定：<strong>数组最大的长度（MAX_ARRAY_SIZE）</strong>为Integer值所能表示的最大的数减8，也就是<strong>(2^31 - 1) - 8</strong></p>
+<p>在方法里首先考虑<strong>新容量（newCapacity）</strong>怎么定义：</p>
+<ul>
+<li><strong>先定义新容量为旧容量的1.5倍（line：6）！</strong> </li>
+<li>一旦<strong>新容量（1.5倍）</strong>比<strong>允许的最小容量（minCapacity，这是用户期望的最小扩容量）</strong>要小，那么新容量被<strong>重新定义</strong>为允许的最小容量</li>
+<li>一旦<strong>新容量（这时候可能是期望值，也可能是1.5倍）</strong>大于<strong>数组最大的长度（MAX_ARRAY_SIZE）</strong>，那么我们就按照<strong>hugeCapacity(minCapacity)</strong>方法去<strong>重新定义新容量</strong></li>
+</ul>
+<p>于是我们发现，<strong>ArrayList</strong>的每次扩容，<strong>最少都得是原容器的1.5倍</strong></p>
+<p>对于<strong>hugeCapacity</strong></p>
+<pre><code class="language-java">private static int hugeCapacity(int minCapacity) {
+    if (minCapacity &lt; 0) // overflow
+        throw new OutOfMemoryError();
+    return (minCapacity &gt; MAX_ARRAY_SIZE) ?
+        Integer.MAX_VALUE :
+        MAX_ARRAY_SIZE;
+}</code></pre>
+<p>我们知道，既然<strong>minCapacity</strong>是个<strong>int值</strong>，那么它最大值就只能为<strong>Integer.MAX_VALUE</strong>，而我们这里定义的最大的数组长度为<strong>Integer.MAX_VALUE - 8</strong>，也就是说，这个定义并不是一定的，如果我们设置的minCapacity的值在<strong>( Integer.MAX_VALUE - 8, Integer.MAX_VALUE ]</strong>之间的话，那我们还是允许用<strong>Integer.MAX_VALUE</strong>作为最大数组长度的</p>
+<p>这里我就有个疑问了，<strong>-8的意义在哪里？一开始就定义到最大值不就好了？</strong></p>
+<p>考虑完新容量之后，开始使用<strong>Arrays.copyOf</strong>来扩展容量<strong>（grow line：12）</strong></p>
+
+          <h6>
+            <a name="_root-contains和indexOf" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            contains和indexOf
+          </h6><pre><code class="language-java">public boolean contains(Object o) {
+    return indexOf(o) &gt;= 0;
+}
+
+public int indexOf(Object o) {
+    if (o == null) {
+        for (int i = 0; i &lt; size; i++)
+            if (elementData[i]==null)
+                return i;
+    } else {
+        for (int i = 0; i &lt; size; i++)
+            if (o.equals(elementData[i]))
+                return i;
+    }
+    return -1;
+}</code></pre>
+<p>和自实现不同的是，这里<strong>contains调用的是indexOf的实现</strong>，而且<strong>indexOf</strong>还允许<strong>查找到第一个null元素在哪里</strong>，这是我在自实现里没考虑过的</p>
+
+          <h6>
+            <a name="_root-get和set" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            get和set
+          </h6><pre><code class="language-java">E elementData(int index) {
+    return (E) elementData[index];
+}
+
+public E get(int index) {
+    rangeCheck(index);
+
+    return elementData(index);
+}
+
+public E set(int index, E element) {
+    rangeCheck(index);
+
+    E oldValue = elementData(index);
+    elementData[index] = element;
+    return oldValue;
+}</code></pre>
+<pre><code class="language-java">private void rangeCheck(int index) {
+    if (index &gt;= size)
+        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+}</code></pre>
+<p>首先看<strong>get&amp;set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
+
+          <h6>
+            <a name="_root-add1" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            add1
+          </h6><p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
+<pre><code class="language-java">public boolean add(E e) {
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}</code></pre>
+<p>这里我们又注意到了<strong>ensureCapacityInternal</strong>这个方法</p>
+<pre><code class="language-java">private static int calculateCapacity(Object[] elementData, int minCapacity) {
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        return Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    return minCapacity;
+}
+
+private void ensureCapacityInternal(int minCapacity) {
+    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+}
+
+private void ensureExplicitCapacity(int minCapacity) {
+    modCount++;
+
+    // overflow-conscious code
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);
+}</code></pre>
+<p>从方法名意义上去解释，当我们调用<strong>add(E e)</strong>的时候，是把元素加到数组的尾部位置，在这之前我们得先<strong>确保容器的内部容量（ensureCapacityInternal）</strong>，确保这个内部容量至少得是当前的<strong>载量（size） + 1</strong>，以这个值作为我们<strong>允许的最小容量（minCapacity）</strong></p>
+<p>也就是说，我的<strong>elementData</strong>数组至少还有最后一个位置可以让我顺利添加一个元素</p>
+<p>在确保内部容量的时候，得先<strong>计算容量（calculateCapacity）</strong>，这里面的处理没有太多的花哨，如果容器为空，而且你给的<strong>允许的最小容量（minCapacity）</strong>还不如<strong>默认容量（10）</strong>大的话，那就直接选默认容量，只要容器不为空，哪怕里面只有一个元素，你给的<strong>允许的最小容量（minCapacity）</strong>甚至只是<strong>2</strong>，那也还是用2作为<strong>参照</strong>去调整容量，但这仅仅只是<strong>参照</strong></p>
+<p>为什么说仅仅是<strong>参照</strong>？重点在<strong>ensureExplicitCapacity</strong>这里</p>
+<p>我们先理一理调用栈：</p>
+<ul>
+<li><strong>add(E e)</strong><ul>
+<li><strong>ensureCapacityInternal(size + 1)</strong><ul>
+<li><strong>calculateCapacity(elementData, minCapacity)</strong></li>
+<li><strong>ensureExplicitCapacity(calculateCapacity(elementData, minCapacity))</strong><ul>
+<li><strong>grow(minCapacity)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>准备3个场景：</p>
+<ul>
+<li>空容器，加一个元素</li>
+<li>非空容器，容器容量足够  <strong>[ 1 / 10 ]  (size &lt; element.length)</strong></li>
+<li>非空容器，容器容量已满  <strong>[ 10 / 10 ]  （size == element.length）</strong></li>
+</ul>
+<hr>
+<p>对于<strong>场景1</strong>：</p>
+<ul>
+<li><p><strong>add(E e)</strong></p>
+<ul>
+<li><p><strong>ensureCapacityInternal(0 + 1)</strong></p>
+<ul>
+<li><p><strong>calculateCapacity(elementData, 0 + 1)    ==》   10</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(10)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(10)</strong>的时候，因为这时候<strong>elementData</strong>其实是空的，所以会继续到<strong>grow（10）</strong></p>
+</li>
+<li><p><strong>grow（10）</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>保证完内部容量之后</strong>，可以进行<strong>elementData[size++] = e</strong>了，所以总的来说，最最最开始的时候，数组扩容肯定是一扩到10的</p>
+<p>对于<strong>场景2</strong>：</p>
+<ul>
+<li><p><strong>add(E e)</strong></p>
+<ul>
+<li><p><strong>ensureCapacityInternal(1 + 1)</strong></p>
+<ul>
+<li><p><strong>calculateCapacity(elementData, 1 + 1)    ==》   2</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(2)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(2)</strong>的时候，因为这时候<strong>elementData.length = 10 &gt; 2</strong>，所以并不会调用<strong>grow</strong>来扩容</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
+<p>对于<strong>场景3</strong>：</p>
+<ul>
+<li><p><strong>add(E e)</strong></p>
+<ul>
+<li><p><strong>ensureCapacityInternal(10 + 1)</strong></p>
+<ul>
+<li><p><strong>calculateCapacity(elementData, 10 + 1)    ==》   11</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(11)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(11)</strong>的时候，因为这时候<strong>elementData.length = 10 &lt; 11</strong>，所以会继续到<strong>grow（11）来进行扩容</strong></p>
+</li>
+<li><p><strong>grow（11）</strong></p>
+<p>往上翻<strong>grow</strong>会发现，这里新容量是扩展到了<strong>15</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
+<hr>
+
+          <h6>
+            <a name="_root-add2" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            add2
+          </h6><pre><code class="language-java">public void add(int index, E element) {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    System.arraycopy(elementData, index, elementData, index + 1,
+                     size - index);
+    elementData[index] = element;
+    size++;
+}</code></pre>
+<pre><code class="language-java">private void rangeCheckForAdd(int index) {
+    if (index &gt; size || index &lt; 0)
+        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+}</code></pre>
+<p>对于<strong>index</strong>的限定：<strong>不能在载量之外，也不能小于0</strong>，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多</p>
+
+          <h6>
+            <a name="_root-remove1" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            remove1
+          </h6><pre><code class="language-java">public E remove(int index) {
+    rangeCheck(index);
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}</code></pre>
+<p>基本都是常规操作，但是！这里的<strong>line：11</strong>是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写<strong>elementData[--size] = null</strong>这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，<strong>将这个对象的引用摘除，好让GC管管这个被删除的元素</strong></p>
+<p>这就是真正投入使用的容器，要考虑到的事情，<strong>为用户尽可能地提高时间和空间效率！</strong></p>
+
+          <h6>
+            <a name="_root-remove2" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            remove2
+          </h6><pre><code class="language-java">public boolean remove(Object o) {
+    if (o == null) {
+        for (int index = 0; index &lt; size; index++)
+            if (elementData[index] == null) {
+                fastRemove(index);
+                return true;
+            }
+    } else {
+        for (int index = 0; index &lt; size; index++)
+            if (o.equals(elementData[index])) {
+                fastRemove(index);
+                return true;
+            }
+    }
+    return false;
+}
+private void fastRemove(int index) {
+    modCount++;
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+}</code></pre>
+<p>常规，我在想为什么remove1里的代码不用<strong>fastRemove</strong>，这两段完全是一摸一样的</p>
+
+          <h6>
+            <a name="_root-clear" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            clear
+          </h6><pre><code class="language-java">public void clear() {
+    modCount++;
+
+    // clear to let GC do its work
+    for (int i = 0; i &lt; size; i++)
+        elementData[i] = null;
+
+    size = 0;
+}</code></pre>
+<p>同理，很多自实现也只是将<strong>size</strong>置为零，并没扣考虑GC，但是我觉得这里是否存在一个<strong>更好的实现</strong>呢？比如说可以这样：</p>
+<pre><code class="language-java">public void clear() {
+    modCount++;
+
+    // clear to let GC do its work
+    elementData = new Object[elementData.length];
+
+    size = 0;
+}</code></pre>
+<p>转瞬我就想明白了，这其实是一个<strong>时间换空间的选择！</strong></p>
+<p>确实for循环一个个置空确实比较浪费时间，比如有30w个元素在容器中，我就得for30w次</p>
+<p>但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的<strong>更好的实现</strong>，那么我还得在内存中再申请<strong>30w个元素长度的数组空间</strong>，虽然看上去，我好像马上就<strong>摘除了原elementData的引用</strong>，但实际上，原<strong>elementData</strong>的数组数据仍然会在内存中停留一段时间，<strong>等待下一次GC并且GC选择回收它</strong></p>
+<p>上面只是我的推测，实际GC是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧</p>
+
+          <h6>
+            <a name="_root-removeAll和retainAll" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            removeAll和retainAll
+          </h6><p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
+<pre><code class="language-java">public boolean removeAll(Collection&lt;?&gt; c) {
+    Objects.requireNonNull(c);
+    return batchRemove(c, false);
+}</code></pre>
+<pre><code class="language-java">public boolean retainAll(Collection&lt;?&gt; c) {
+    Objects.requireNonNull(c);
+    return batchRemove(c, true);
+}</code></pre>
+<p>这两个方法很相似，作用恰好相反，</p>
+<ul>
+<li><strong>removeAll是移除交集元素，留下补集元素</strong></li>
+<li><strong>retainAll是移除补集元素，保留交集元素</strong></li>
+</ul>
+<p>两个方法都调用了<strong>bantchRemove</strong>方法</p>
+<p>为了方便理解，我们将<strong>bantchRemove</strong>源码中的</p>
+<ul>
+<li><strong>complement重命名为justComplement，这个变量标识是取补集还是交集</strong></li>
+<li><strong>r重命名为readIndex，标识到元素的下标</strong></li>
+<li><strong>w重命名为writeIndex，标识写到元素的下标</strong></li>
+</ul>
+<pre><code class="language-java">private boolean batchRemove(Collection&lt;?&gt; c, boolean justComplement) {
+    final Object[] elementData = this.elementData;
+    int readIndex = 0, writeIndex = 0;
+    boolean modified = false;
+    try {
+        for (; readIndex &lt; size; readIndex++)
+            if (c.contains(elementData[readIndex]) == justComplement)
+                elementData[writeIndex++] = elementData[readIndex];
+    } finally {
+        // Preserve behavioral compatibility with AbstractCollection,
+        // even if c.contains() throws.
+        if (readIndex != size) {
+            System.arraycopy(elementData, readIndex,
+                             elementData, writeIndex,
+                             size - readIndex);
+            writeIndex += size - readIndex;
+        }
+        if (writeIndex != size) {
+            // clear to let GC do its work
+            for (int i = writeIndex; i &lt; size; i++)
+                elementData[i] = null;
+            modCount += size - writeIndex;
+            size = writeIndex;
+            modified = true;
+        }
+    }
+    return modified;
+}</code></pre>
+<p>我们看<strong>try块代码</strong>，代码遍历了<strong>elementData</strong>，其中这一句的解读很有意思：</p>
+<pre><code class="language-java">c.contains(elementData[r]) == justComplement</code></pre>
+<p>在<strong>justComplement</strong>为<strong>false</strong>的情况下：</p>
+<ul>
+<li>如果c中没有原容器当前遍历到的元素，则<strong>（false == false）= true</strong>，将这个<strong>c中没有的元素</strong>覆盖到<strong>elementData[writeIndex]</strong>的位置</li>
+<li>如果c中有原容器当前遍历到的元素，则<strong>（true == false）= false</strong>，不进行操作，进入下次循环</li>
+</ul>
+<p>总的来说，就是<strong>把原容器和c容器中不相交的元素按顺序移到原容器的前面去了</strong></p>
+<p>同理在<strong>justComplement</strong>为<strong>true</strong>的情况下：</p>
+<ul>
+<li>如果c中没有原容器当前遍历到的元素，则<strong>（false == true）= false</strong>，不进行操作，进入下次循环</li>
+<li>如果c中有原容器当前遍历到的元素，则<strong>（true == true）= true</strong>，将这个<strong>c中有的元素</strong>覆盖到<strong>elementData[writeIndex]</strong>的位置</li>
+</ul>
+<p>就是<strong>把原容器和c容器中相交的元素按顺序移到原容器的前面去了</strong></p>
+<p>然后有点迷的是<strong>finally块</strong>的语句</p>
+<p>第一个判断应该是说，加入之前抛了一些异常什么的，导致上面的for循环中断了，如此一来应该是<strong>没读完原容器里的元素</strong>的，好了，没读完就算了，<strong>把剩下没读完的元素移到之前写好的元素之后</strong>，那这部分也算<strong>读到了写好了（line：16）</strong></p>
+<p>我认为这样的做法是<strong>保护未读取完的元素数据不被丢失</strong></p>
+<p>第二个判断，好了读完也写完了，现在数组中可能有三部分：</p>
+<ul>
+<li>第一部分是选择<strong>写下的元素序列</strong>，这部分<strong>有效</strong></li>
+<li>第二部分可能是之前出错了，没读完的元素但是我移动到紧接着第一部分序列的后边了，这部分也<strong>有效</strong></li>
+<li>第三部分就是第二部分往前移动之前剩下的一些错位的元素，这部分不应该被访问到，所以<strong>无效</strong></li>
+</ul>
+<p>读完写完之后，<strong>(writeIndex != size)</strong>这样的条件会在什么情况下出现？第二部分真的有往前移动的时候，也就是说包含<strong>无效元素</strong>的时候</p>
+<p>所以这时候就要<strong>摘除无效元素的引用，然后重置载量为写元素的长度</strong></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

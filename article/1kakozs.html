@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/import.js"></script>
+    <script>
+        importJsBeforeLoad()
+    </script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        
+          <h3>
+            <a name="_root-Iterable接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Iterable接口
+          </h3><p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
+
+          <h4>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h4><pre><code class="language-java">/**
+ * 实现这个接口, 意味着对象可以使用forEach循环进行操作
+ */
+public interface Iterable&lt;T&gt; {
+    /**
+     * 返回一个迭代器
+     */
+    Iterator&lt;T&gt; iterator();
+
+    /**
+     * (1)和lambda有关, 执行这个方法等效于
+     *  for (E element : collection) {
+     *      //对e进行每一个action操作
+     *  }
+     */
+    default void forEach(Consumer&lt;? super T&gt; action) {
+        Objects.requireNonNull(action);
+        for (T t : this) {
+            action.accept(t);
+        }
+    }
+
+    /**
+     * (1)返回一个源迭代器的子集迭代器, 这个子集迭代器可以迭代指定部分的源集合的元素
+     * (2)意思是返回一个阉割版的迭代器.
+     * (3)关键是Spliterator&lt;T&gt;这个接口, 默认的情况下, 这个方法并不阉割迭代器.
+     * 具体作用暂未摸索到, 以后再回来看看.
+     */
+    default Spliterator&lt;T&gt; spliterator() {
+        return Spliterators.spliteratorUnknownSize(iterator(), 0);
+    }
+}</code></pre>
+
+          <h3>
+            <a name="_root-Iterator接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Iterator接口
+          </h3><p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
+
+          <h4>
+            <a name="_root-源码" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            源码
+          </h4><pre><code class="language-java">/**
+ * 源代码不多 所以去掉了很多注释就贴出来了
+ */
+public interface Iterator&lt;E&gt; {
+
+    /**
+     * 如果当次迭代还有下一个元素 就返回true 否则返回false
+     */
+    boolean hasNext();
+
+    /**
+     * (1)获取下一个元素, 并且指针下移一次
+     * (2)如果迭代器没有下一个元素, 仍要强行调用该方法, 则会抛出
+     *
+     * @throws NoSuchElementException 这个异常
+     */
+    E next();
+
+    /**
+     * (1)移除元素
+     * (2)这个方法会抛出两种异常:
+     *  1)必须至少调用一次next方法, 且不能是最后一次next方法调用完之后, 才能调用remove, 否则抛出@throws IllegalStateException
+     *  2)如果没有自己的实现, 则调用默认方法, 默认就是不支持remove方法, 所以会抛出@throws UnsupportedOperationException
+     */
+    default void remove() {
+        throw new UnsupportedOperationException(&quot;remove&quot;);
+    }
+
+    /**
+     * (1)这个方法用于执行对Collection里所有元素的遍历, 每次遍历都对元素执行一遍action, 对于Consumer, 这个是1.8的特性, lambda语法糖的一些特性, 这块是对于forEach循环增强的方法.
+     * (2)对于这个方法到底在哪里用到, 以后看读源码的时候是否会再遇到它吧.
+     */
+    default void forEachRemaining(Consumer&lt;? super E&gt; action) {
+        Objects.requireNonNull(action);
+        while (hasNext())
+            action.accept(next());
+    }
+}
+</code></pre>
+
+          <h4>
+            <a name="_root-forEachRemaining引例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            forEachRemaining引例
+          </h4><blockquote>
+<p>待补充</p>
+</blockquote>
+
+          <h3>
+            <a name="_root-ListIterator" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ListIterator
+          </h3><p>比一般的迭代器要厉害 </p>
+<pre><code class="language-java">/**
+ * 实现这个接口，意味着你的迭代器可以允许正向逆向地遍历list
+ * 在过程中你甚至可以获取当前迭代的index，甚至是修改元素
+ */
+public interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt; {
+
+    // 查询操作
+    boolean hasNext();
+
+    E next();
+
+    // 这个是前向询问是否有元素
+    boolean hasPrevious();
+
+    // 这是前向访问元素 作用和next()相反
+    E previous();
+
+    // 一个是获取后向index 一个是前向
+    int nextIndex();
+    int previousIndex();
+
+    // 修改操作
+    void remove();
+
+    void set(E e);
+
+    void add(E e);
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script>
+        importJsAfterLoad()
+    </script>
+</body>
+
+</html>

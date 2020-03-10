@@ -13,21 +13,18 @@ function createarticlecard(item, pagebelong) {
     adclass(articletitle, 'articlecardtitle font-weight-bold')
     adclass(articletime, 'articlecardtime')
     adclass(tagsandcates, 'articlecardtime')
-    adclass(articleshortmsg, 'articleshortmsg')
+    adclass(articleshortmsg, 'articleshortmsg markdown-body editormd-html-preview')
     adclass(articlemore, 'articlemore')
     tagsbox.style.marginTop = '5px'
     charsbox.style.marginTop = '5px'
     articletitle.innerHTML = item.title
-    articletitle.number = item.number
-    articletitle.href = '/' + '?to=article&number=' + articletitle.number
-    articlecard.id = 'article_' + item.number
-    articleshortmsg.id = 'article_short_msg_' + item.number
+    articletitle.abbrlink = item.abbrlink
+    articletitle.href = '/article/' + articletitle.abbrlink + '.html'
+    articlecard.id = 'article_' + item.abbrlink
+    articleshortmsg.id = 'article_short_msg_' + item.abbrlink
     articlemore.innerHTML = 'more'
-    articlemore.href = '/' + '?to=article&number=' + articletitle.number
-    $(articletitle).click(function () {
-        location = '/' + '?to=article&number=' + articletitle.number
-    })
-    sp1.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date)) + ' | 发于 ' + articlecarddate(dayjs(item.created_at)) + ' | 更于' + articlecarddate(dayjs(item.updated_at))
+    articlemore.href = '/article/' + articletitle.abbrlink + '.html'
+    sp1.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date))
     let catestaghtml = ''
     let content = ''
     if (item.categories !== undefined && item.categories.length !== 0) {
@@ -63,60 +60,7 @@ function createarticlecard(item, pagebelong) {
     appendc(articlecard, articleshortmsg)
     appendc(articlecard, articlemore)
     appendc($('#pagebox-' + pagebelong)[0], articlecard)
-    let text = item.short_contant
-    let cq = text.match(/{%.*cq.*%}/gm)
-    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
-    if (emojis !== null) {
-        emojis.forEach(emoji => {
-            text = text.replace(emoji, window.emoji.replace_colons(emoji))
-        });
-    }
-    if (cq) {
-        for (let i = 0; i < cq.length; i += 2) {
-            let cqindex = text.search(cq[i]);
-            let endcqindex = text.search(cq[i + 1]);
-            let saying = text.substring(cqindex, endcqindex + 11)
-            let newsaying = '<div class="saying mb-4">' + text.substring(cqindex + cq[i].length + 2, endcqindex).replace(/\r\n|\r|\n/gm, '') + '</div>'
-            text = text.replace(saying, newsaying)
-        }
-    }
-    let gifs = text.match(/!\[.*\]\(.*.gif\)/g)
-    if (gifs !== null) {
-        gifs.forEach(gif => {
-            let gifalt = gif.match(/\[.*\]/g)
-            gifalt = gifalt[0].substring(1, gifalt[0].length - 1);
-            let giflk = gif.match(/\(.*\)/g)
-            giflk = giflk[0].substring(1, giflk[0].length - 1);
-            let gifbut = '<button class="gifbtn stgt btn btn-dark" show="no" lk="' + giflk + '">查看或隐藏' + gifalt + '.gif</button>'
-            text = text.replace(gif, gifbut)
-        });
-    }
-    let katexmds = text.match(/\$\$.*\$\$/g)
-    if (katexmds !== null) {
-        katexmds.forEach(ktmd => {
-            let kt = ktmd.replace(/\$\$/gm, '')
-            let kthtml = katex.renderToString(kt, {
-                throwOnError: false
-            })
-            text = text.replace(ktmd, kthtml)
-        })
-    }
-    editormd.markdownToHTML(articleshortmsg.id, {
-        markdown: text,
-        htmlDecode: 'style,script,iframe',
-        tocm: true, // Using [TOCM]
-        tocContainer: '#sidetoc',
-        taskList: true,
-        // tex: true, // 默认不解析
-        flowChart: true, // 默认不解析
-        sequenceDiagram: true, // 默认不解析
-    })
-    let pres = $('pre')
-    for (p of pres) {
-        if (p.innerText === '') {
-            $(p).remove()
-        }
-    }
+    $(`#article_short_msg_${item.abbrlink}`).html(item.short_contant)
 }
 
 function createarticlehead(re) {
@@ -126,32 +70,25 @@ function createarticlehead(re) {
     let articletime = c('div')
     let sp1 = c('span')
     let sp2 = c('span')
-    let sp3 = c('span')
-    let sp4 = c('span')
     let sp5 = c('span')
     let sp6 = c('span')
     adclass(articlehead, 'articlehead onearticle')
     adclass(articletitle, 'articletitle')
     adclass(articletime, 'articletime')
     adclass(sp1, 'font-weight-bold mr-2')
-    adclass(sp3, 'font-weight-bold mr-2')
     adclass(sp5, 'font-weight-bold mr-2')
     adclass(sp6, 'mdcharlength')
     sp1.innerHTML = 'Post:'
-    sp2.innerHTML = dayjs(re.created_at).format('MMM,DD YYYY') + articlecarddate(dayjs(re.created_at))
-    sp3.innerHTML = '<br>Mod:'
-    sp4.innerHTML = dayjs(re.updated_at).format('MMM,DD YYYY') + articlecarddate(dayjs(re.updated_at))
-    sp5.innerHTML = '<br>Chars:'
+    sp2.innerHTML = dayjs(re.date).format('MMM,DD YYYY') + '&nbsp;&nbsp;' + articlecarddate(dayjs(re.date))
+    sp5.innerHTML = '<br>Chars:' + re.char_count
     articletitle.innerHTML = title
     appendc(articletime, sp1)
     appendc(articletime, sp2)
-    appendc(articletime, sp3)
-    appendc(articletime, sp4)
     appendc(articletime, sp5)
     appendc(articletime, sp6)
     appendc(articlehead, articletitle)
     appendc(articlehead, articletime)
-    appendc(md, articlehead)
+    md.prepend(articlehead)
 }
 
 function showhexometadata(hexometadata) {
