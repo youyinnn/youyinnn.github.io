@@ -211,3 +211,7 @@ x {
   font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
 }
+
+.katex-display{
+  overflow: auto;
+}
