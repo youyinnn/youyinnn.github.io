@@ -63,6 +63,12 @@ $(function() {
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
         get_articles()
+        hljs.initHighlightingOnLoad()
+        $('pre').addClass('hljs')
+        for (pre of $('pre')) {
+            if (pre.innerText.trim().length === 0)
+                $(pre).remove()
+        }
     } else if (pathname.startsWith('/article/')) {
         new_render_md()
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
@@ -94,7 +100,7 @@ $(function() {
             </div>`
         $(md).append(end)
 
-        seriesorderhandle(metadata.abbrlink, metadata.series, 
+        seriesorderhandle(metadata.abbrlink, metadata.series,
             sessionStorage.getItem('pseries'),
             sessionStorage.getItem('pod'))
 
@@ -106,29 +112,8 @@ $(function() {
         $(this).animateCss('pulse')
     })
     var clear
-    // $(window).resize(function() {
-    //     if (location.href.endsWith('?to=articles')) {
-    //         clearTimeout(clear)
-    //         clear = setTimeout(function() {
-    //             setheightfordocpanel()
-    //         }, 200);
-    //     }
-    // })
-    $('[data-toggle="tooltip"]').tooltip()
 
-    // observer for docpanel height & pagationbox top fix
-    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    // let observer = new MutationObserver(function(mutationList) {
-    //     setTimeout(function() {
-    //         setheightfordocpanel()
-    //     }, 250);
-    // })
-    // let article = $('#docpanel')[0]
-    // let options = {
-    //     'attributes': true,
-    //     'attributeOldValue': true
-    // };
-    // observer.observe(article, options);
+    $('[data-toggle="tooltip"]').tooltip()
 
     // remove null content code block
     $('code').each(function() {
@@ -136,6 +121,7 @@ $(function() {
             $(this).remove()
         }
     })
+
 })
 
 $.fn.extend({

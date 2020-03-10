@@ -1208,3 +1208,8 @@ summary:focus {
 summary {
   margin-bottom: 1rem;
 }
+
+.markdown-body a{
+  color: #22a67b;
+  font-weight: bold;
+}
