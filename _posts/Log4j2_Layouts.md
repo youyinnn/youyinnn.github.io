@@ -8,7 +8,6 @@ comments: true
 tags:
   - log4j2
   - learning
-abbrlink: 1ae8a038
 date: 2017-12-08 14:39:16
 series: Log4j2
 ---

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1ei198o<br>title: Docker Orientation&amp;Setup<br>categories:</p>
+<ul>
+<li>note</li>
+<li>docker<br>tags:</li>
+<li>docker<br>date: 2018-11-14 13:50:11<br>series: docker</li>
+</ul>
+<hr>
+<h3 id="docker-concepts">Docker concepts</h3>
+<p>Docker is a platform for developers and sysadmins to <strong>develop, deploy, and run</strong> applications with containers. The use of Linux containers to deploy applications is called <em>containerization</em>. Containers are not new, but their use for easily deploying applications is.</p>
+<p>Containerization is increasingly popular because containers are:</p>
+<ul>
+<li>Flexible: Even the most complex applications can be containerized.</li>
+<li>Lightweight: Containers leverage and share the host kernel.</li>
+<li>Interchangeable: You can deploy updates and upgrades on-the-fly.</li>
+<li>Portable: You can build locally, deploy to the cloud, and run anywhere.</li>
+<li>Scalable: You can increase and automatically distribute container replicas.</li>
+<li>Stackable: You can stack services vertically and on-the-fly.</li>
+</ul>
+<blockquote>
+<p>优点巨多，这也是为什么开发中vm被container技术迅速淘汰的原因</p>
+</blockquote>
+<p><img src="https://docs.docker.com/get-started/images/laurel-docker-containers.png" alt="Containers are portable"></p>
+<h4 id="images-and-containers">Images and containers</h4>
+<p>A container is launched by running an image. An <strong>image</strong> is an executable package that includes everything needed to run an application--the code, a runtime, libraries, environment variables, and configuration files.</p>
+<p>A <strong>container</strong> is a runtime instance of an image--what the image becomes in memory when executed (that is, an image with state, or a user process). You can see a list of your running containers with the command, <code>docker ps</code>, just as you would in Linux.</p>
+<blockquote>
+<p>这里表明了image是一个只读的镜像，包含了运行app所需要的代码/运行库/运行环变量/配置文件</p>
+<p>而container是一个运行时的image实例</p>
+</blockquote>
+<h4 id="containers-and-virtual-machines">Containers and virtual machines</h4>
+<p>A <strong>container</strong> runs <em>natively</em> on Linux and shares the kernel of the host machine with other containers. It runs a discrete process, taking no more memory than any other executable, making it lightweight.</p>
+<p>By contrast, a <strong>virtual machine</strong> (VM) runs a full-blown “guest” operating system with <em>virtual</em> access to host resources through a hypervisor. In general, VMs provide an environment with more resources than most applications need.</p>
+<p><img src="https://image.youyinnn.top/img/20181116135034.png" alt=""></p>
+<h3 id="setup">Setup</h3>
+<h4 id="installation">Installation</h4>
+<p>For more information, please go to the official site : </p>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-ce-1">https://docs.docker.com/install/linux/docker-ce/centos/#upgrade-docker-ce-1</a></p>
+<ol>
+<li><p>update yum packages</p>
+<pre><code class="language-bash">$ sudo yum update</code></pre>
+</li>
+<li><p>perform the docker installation script(<a href="http://www.docker.org.cn/book/install/install-docker-on-rhel-29.html" title="docker installation reference">reference here</a>)</p>
+<pre><code class="language-bash">$ curl -sSL https://get.docker.com/ | sh </code></pre>
+<p>if it&#39;s error because the fallowing problem:</p>
+<pre><code class="language-ba">Error: Package: docker-ce-17.06.0.ce-1.el7.centos.x86_64 (docker-ce-stable)
+           Requires: container-selinux &gt;= 2.9
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest</code></pre>
+<p>seems like you should update or get your container-selinux before your installation move forward, here is the solution reference on <a href="https://stackoverflow.com/questions/45272827/docker-ce-on-rhel-requires-container-selinux-2-9" title="requires container-selinux">requires container-selinux</a>:</p>
+<blockquote>
+<p>Installing the Selinux from the Centos repository worked for me: </p>
+<ol>
+<li>Go to <a href="http://mirror.centos.org/centos/7/extras/x86_64/Packages/">http://mirror.centos.org/centos/7/extras/x86_64/Packages/</a> </li>
+<li>Find the latest version for container-selinux i.e. container-selinux-2.21-1.el7.noarch.rpm </li>
+<li>Run the following command on your terminal: $ sudo yum install -y <a href="http://mirror.centos.org/centos/7/extras/x86_64/Packages/**Add_current_container-selinux_package_here">http://mirror.centos.org/centos/7/extras/x86_64/Packages/**Add_current_container-selinux_package_here</a>** </li>
+<li>The command should looks like the following $ sudo yum install -y <a href="http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.21-1.el7.noarch.rpm">http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.21-1.el7.noarch.rpm</a><br> Note: the container version is constantly being updated, that is why you should look for the latest version in the Centos&#39; repository</li>
+</ol>
+</blockquote>
+<p>for now it may look like:</p>
+<pre><code class="language-bash">$ sudo yum install -y http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.55-1.el7.noarch.rpm</code></pre>
+<p>then you could try the installation script again and it should be done</p>
+</li>
+<li><p>start docker service</p>
+<pre><code class="language-bash">$ sudo service docker start
+[sudo] password for xxx: 
+Redirecting to /bin/systemctl start docker.service</code></pre>
+</li>
+</ol>
+<h4 id="verify-your-installation">Verify your installation</h4>
+<pre><code class="language-bash">$ sudo docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+d1725b59e92d: Pull complete 
+Digest: sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+   (amd64)
+3. The Docker daemon created a new container from that image which runs the
+   executable that produces the output you are currently reading.
+4. The Docker daemon streamed that output to the Docker client, which sent it
+   to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+$ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+https://hub.docker.com/
+
+For more examples and ideas, visit:
+https://docs.docker.com/get-started/</code></pre>
+<h3 id="optional-linux-post-installation-steps">Optional Linux post-installation steps</h3>
+<h4 id="manage-docker-as-a-non-root-user">Manage Docker as a non-root user</h4>
+<p>You might trouble with permissions problems like:</p>
+<pre><code class="language-bash">$ docker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.39/containers/json: dial unix /var/run/docker.sock: connect: permission denied</code></pre>
+<p>It&#39;s because the Docker daemon binds to a Unix socket instead of a TCP port. By default that Unix socket is owned by the user <code>root</code> and other users can only access it using <code>sudo</code>. The Docker daemon always runs as the <code>root</code> user.</p>
+<p>If you don’t want to preface the <code>docker</code> command with <code>sudo</code>, create a Unix group called <code>docker</code> and add users to it. When the Docker daemon starts, it creates a Unix socket accessible by members of the <code>docker</code> group.</p>
+<ol>
+<li><p>create the docker group:</p>
+<pre><code class="language-bash">$ sudo groupadd docker</code></pre>
+</li>
+<li><p>add your user to the <code>docker</code> group</p>
+<pre><code class="language-bash">$ sudo usermod -aG docker $USER</code></pre>
+<p>or</p>
+<pre><code class="language-bash">$ sudo gpasswd -a $USER docker</code></pre>
+</li>
+<li><p>update the group</p>
+<pre><code class="language-bash">$ newgrp docker</code></pre>
+</li>
+</ol>
+<p>Then you can run docker commands without sudo.</p>
+<h4 id="configure-docker-to-start-on-boot">Configure Docker to start on boot</h4>
+<p>Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher) use <a href="https://docs.docker.com/install/linux/linux-postinstall/#systemd"><code>systemd</code></a> to manage which services start when the system boots. Ubuntu 14.10 and below use <a href="https://docs.docker.com/install/linux/linux-postinstall/#upstart"><code>upstart</code></a>.</p>
+<h5 id="systemd"><code>systemd</code></h5>
+<pre><code>$ sudo systemctl enable docker</code></pre><p>To disable this behavior, use <code>disable</code> instead.</p>
+<pre><code>$ sudo systemctl disable docker</code></pre><p>If you need to add an HTTP Proxy, set a different directory or partition for the Docker runtime files, or make other customizations, see<a href="https://docs.docker.com/engine/admin/systemd/">customize your systemd Docker daemon options</a>.</p>
+<h4 id="more-options">More options</h4>
+<p>Please refer to <a href="https://docs.docker.com/install/linux/linux-postinstall" title="docker post installation options">post-install</a></p>
+<p>Congrats and enjoy your journey of docker~</p>
+<hr>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

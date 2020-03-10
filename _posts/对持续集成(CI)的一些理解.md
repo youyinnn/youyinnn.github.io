@@ -4,6 +4,7 @@ tags:
    - CI
 categories:
    - thinking
+date: 2018-5-08 15:53:01
 ---
 
 ### 什么是CI

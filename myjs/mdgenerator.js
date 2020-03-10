@@ -1,11 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
+const yaml = require('js-yaml')
+const { crc32 } = require('crc');
 
 let postsPath = path.join(__dirname, '..', '_posts')
 let htmlPath = path.join(__dirname, '..', 'index.html')
-
-var html = undefined
 
 function file2file(set) {
     let sourceStr = fs.readFileSync(set.sourceFilePath, {
@@ -16,7 +16,8 @@ function file2file(set) {
     })
 }
 
-function md2html(sourceFilePath, outputFilePath) {
+var html = undefined
+function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     let sourceMdStr = fs.readFileSync(sourceFilePath, {
         encoding: 'utf-8'
     })
@@ -25,23 +26,116 @@ function md2html(sourceFilePath, outputFilePath) {
             encoding: 'utf-8'
         })
     }
-    let mdStr = marked(sourceMdStr, {
+    if (sourceMdStrHandleFunc !== undefined) {
+        sourceMdStr = sourceMdStrHandleFunc(sourceMdStr)
+    }
+    let htmlStr = marked(sourceMdStr, {
         gfm: true,
         breaks: true
     })
-    fs.writeFileSync(outputFilePath, html.replace(/\{\{\% md \%\}\}/, mdStr), {
+    fs.writeFileSync(outputFilePath, html.replace(/\{\{\% md \%\}\}/, htmlStr), {
         encoding: 'utf-8'
     })
 }
 
 // articles 2 htm
 let postsrs = fs.readdirSync(postsPath)
+let newarticlemetadata = new Array()
+let series = new Array()
+let shortmsgline = 25
 for (pname of postsrs) {
-    
+    let abbrlink = crc32(pname).toString(36)
+    md2html(
+        path.join(postsPath, pname),
+        path.join(__dirname, '..', 'article', abbrlink + '.html'),
+        function (sourceMdStr) {
+            sourceMdStr = sourceMdStr.replace('---', `---\nabbrlink: ${abbrlink}`)
+            let metadata =  syncreihandle2metadata(sourceMdStr)
+            newarticlemetadata.push(metadata)
+            let pseriesname = metadata.series
+            if (pseriesname !== undefined) {
+                let pseries
+                for (let j = 0; j < series.length; j++) {
+                    if (series[j].se === pseriesname)
+                        pseries = series[j].ps
+                }
+                if (pseries === undefined) {
+                    let item = new Object()
+                    item.se = pseriesname
+                    item.ps = pseries = new Array()
+                    series.push(item)
+                }
+                let ss = metadata.title + '.html'
+                pseries.unshift(ss)
+            }
+            return sourceMdStr
+        }
+    )
+}
+
+series = yaml.dump(series.reverse())
+newarticlemetadata = yaml.dump(newarticlemetadata)
+
+function syncreihandle2metadata(text) {
+    let endindex = text.indexOf('---', 3) + 3
+    let metadata = text.substring(4, endindex - 3)
+    metadata = yaml.load(metadata)
+    let body = text.substring(endindex, text.length)
+    metadata.char_count = body.length
+    let short = new Array()
+    body = body.split(/\n/)
+    for (let i = 0; i < shortmsgline; i++) {
+        short.push(body[i])
+    }
+    while (short[0] === '\n') {
+        short.shift()
+    }
+    let shortcontant = ''
+    let codeparecount = 0
+    let startpreindex = -1
+    let endpreindex = -1
+    for (let j = 0; j < short.length; j++) {
+        if (short[j].search('```') === 0) {
+            codeparecount++
+        }
+        let presi = short[j].search('<pre')
+        let preei = short[j].search('</pre')
+        startpreindex = presi !== -1 ? presi : startpreindex
+        endpreindex = preei !== -1 ? preei : endpreindex
+        shortcontant += short[j]
+        shortcontant += '\n'
+    }
+    if (codeparecount % 2 !== 0) {
+        shortcontant += '```'
+        shortcontant += '\n'
+    }
+    if (startpreindex !== -1 && endpreindex < startpreindex) {
+        for (let i = shortmsgline; endpreindex < startpreindex; i++) {
+            if (i == 35) {
+                shortcontant += '</pre>'
+                shortcontant += '\n'
+                break
+            }
+            endpreindex = body[i].search('</pre')
+            shortcontant += body[i]
+            shortcontant += '\n'
+        }
+    }
+    metadata.short_contant = shortcontant.replace(/!\[.*\]\(.*\)/gm, '')
+    return metadata
 }
 
 let resourcesPath = path.join(__dirname, '..', 'resources')
 let websrcPath = path.join(__dirname, '..', '_websrc')
+fs.writeFileSync(path.join(resourcesPath, 'cache.js'),`
+    sessionStorage.setItem('pseries', ${JSON.stringify(series)});
+
+    sessionStorage.setItem('pcbl', ${JSON.stringify(newarticlemetadata)});
+`)
+fs.copyFileSync(
+    htmlPath,
+    path.join(__dirname, '..', 'articles', 'index.html'),
+)
 
 // about
 md2html(
@@ -56,10 +150,16 @@ md2html(
 )
 
 // scripts
-
+md2html(
+    path.join(websrcPath, 'scripts.md'),
+    path.join(__dirname, '..','scripts', 'index.html')
+)
 
 // todos
-
+md2html(
+    path.join(websrcPath, 'todos.md'),
+    path.join(__dirname, '..','todos', 'index.html')
+)
 
 // firends link
 file2file({

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 19jo7o1<br>title: Cron4jDocument_ZH_CN_Translation_README<br>categories:</p>
+<ul>
+<li>translation<br>tags:</li>
+<li>cron4j</li>
+<li>scheduler</li>
+<li>readme<br>series: Cron4jDocument_ZH_CN_Translation<br>date: 2018-05-07 17:12:01</li>
+</ul>
+<hr>
+<h1 id="cron4j--a-pure-java-cron-like-scheduler">Cron4j : A pure Java cron-like scheduler</h1>
+<p>创立时间：2017年8月20日13:35:01</p>
+<p>官方文档地址：<a href="http://www.sauronsoftware.it/projects/cron4j/">http://www.sauronsoftware.it/projects/cron4j/</a></p>
+<hr>
+<p>Maven依赖：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;it.sauronsoftware.cron4j&lt;/groupId&gt;
+    &lt;artifactId&gt;cron4j&lt;/artifactId&gt;
+    &lt;version&gt;2.2.5&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><hr>
+<h4 id="前言：">前言：</h4>
+<blockquote>
+<p>这是一篇针对cron4j官方英文文档的翻译。</p>
+<p>虽然官方文档并不难看懂，但是本着高尚的自学精神，再加上暑假有点无聊，我尝试着翻译这篇Java工具包的技术文档。</p>
+<p>该翻译并不是来自官方的，仅仅是自学用的翻译，如有翻译错误，请在issue中指出。</p>
+<p>本人并仅仅英语四级压线水平，所以文档并没有严格按照语法规范翻译，首先遵从本人自己的理解（如有理解错误也请在issue中指出），再尽量翻译成通俗的语句，要求的是能根据本文快速掌握cron4j工具。一切以实践为标准，我在学习的时候也会先实践，再结合实践翻译到文档中。</p>
+<p>在JavaWeb开发中，一些后台业务场景会有需要定时任务的需求，这些定时任务如果人工去执行的话就会显得非常蠢，所以就有了定时任务工具包/框架的出现。</p>
+<p>其实流行的定时任务框架就像Quartz这样的，应该是运用到生产环境中比较好的选择，但是Quartz的官方文档结构有点蛋疼（也可能是我没细看），并不能简明直接的让开发者循序渐进的掌握它。而在一些博客中对比也谈到Quartz比Cron4j臃肿一些，这也是增加学习成本的原因之意。它们的性能对比不知道怎么样，不过我猜应该是Quartz要好一点，毕竟持续到近两个月前Quartz还在继续维护当中，而Cron4j最近的发布时间是：28-Dec-2011（膜拜）。</p>
+<p>我为什么选择cron4j，是因为最近在学JFinal3.2，里面插件扩展的章节介绍到了cron4j，之前也有思考过定时任务的解决方案，恰好再此了解到它。在学习cron4j的过程中也确实感受到了它的“pure”之意，所以我也愿意花一些时间来去翻译它的官方文档和学习它。</p>
+<p>在完成文档的过程中有一点比较难受的是，我每次实践都至少要等上一分钟才能验证结果...</p>
+</blockquote>
+<hr>
+<h4 id="overview部分：">Overview部分：</h4>
+<p>cron4j是Java平台的一个调度器（也就是任务调度工具/框架），它非常像UNIX系统下的具有进程守护的定时任务工具cron。</p>
+<p>有了cron4j，你可以在你规定好的时间内在Java应用程序中执行你指定的任务，而这只需要你制定一些简单的规则。</p>
+<p>虽然Java平台已经内置了一个由<code>java.util.Timer</code>类实例化的调度器，但是cron4j走的是和前者不同的另一条路子。</p>
+<p>你可以说<code>java.util.Timer</code>调度器是</p>
+<blockquote>
+<p>“从现在开始过5分钟后启动这个任务”</p>
+</blockquote>
+<p>或者说</p>
+<blockquote>
+<p>“从现在开始过5分钟后执行这个任务，然后每10分钟重复执行它”。</p>
+</blockquote>
+<p>这就是<code>java.util.Timer</code>。</p>
+<p>而cron4j调度器会让你稍微多做一些复杂的事情，<br>比如：</p>
+<blockquote>
+<p>“在每个周一的12时执行这个任务”</p>
+<p>“每隔5分钟执行这个任务，但是周末期间可以不执行”</p>
+<p>“在8：00am到8：00pm之间的每个小时执行一次任务，而在8：00pm到8：00am之间的每5分钟执行一次任务”</p>
+<p>“除了7月和8月之外的月份内并且在一周内除了周日之外，每天都执行一次任务”</p>
+</blockquote>
+<p>这些蜜汁操作，想要实现它们你只需要简单的写一小行代码就可以Duang出来。</p>
+<p>把cron4j使用到你的项目里面其实非常简单，你只需要掌握一些常用API就足够了。启动定时任务的启动规则必须是一个字符串表达式，它被称为<strong>scheduling pattern（调度模式）</strong>，它的语法等同于UNIX系统中crontab所使用的语法一样。如果你了解过UNIX中crontab的操作，那么恭喜你，你已经掌握本工具的一大半了。如果你不会，don&#39;t worry：crontab的调度模式你只需要花上几分钟就能掌握（骗人！），再说了，后面还有documentation给你学习呢。</p>
+<hr>
+<p>运行要求：</p>
+<p>你可以在任何Java平台使用它。</p>
+<p>License:</p>
+<pre><code>cron4j is Free Software and it is licensed under LGPL (you will find a copy of the license bundled into the downloadable software distribution).</code></pre><p>Feedback</p>
+<p>...</p>
+<p>Make a donation</p>
+<p>...</p>
+<hr>
+<p>翻译进度：</p>
+<blockquote>
+<p>第一阶段</p>
+<p>时间：2017年8月20日21:03:12</p>
+<p>内容：Overview、doc的前三节</p>
+</blockquote>
+<blockquote>
+<p>第二阶段</p>
+<p>时间：2017年8月21日00:01:13</p>
+<p>内容：doc第四、五节 第六节的大部分</p>
+</blockquote>
+<blockquote>
+<p>第三阶段</p>
+<p>时间：2017年8月21日22:15:33</p>
+<p>内容：doc第七到末节</p>
+</blockquote>
+<p><a href="https://youyinnn.github.io/?panel=post&amp;number=32">正文</a></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

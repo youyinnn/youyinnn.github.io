@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 2032k5<br>title: Introductions of eBay Tess<br>categories:</p>
+<ul>
+<li>note</li>
+<li>eBay<br>tags:</li>
+<li>eBay</li>
+<li>tess<br>date: 2018-11-15 16:18:00</li>
+</ul>
+<hr>
+<h3 id="tess">Tess</h3>
+<h4 id="0-what-is-tess">0. What is Tess?</h4>
+<p>Tess.IO is eBay’s cluster manager, with a vision of ensuring a world-class <strong>build, ship and run</strong> experience for eBay’s applications at scale, while ensuring high efficiency, security, and agility to the developers. Tess.IO leverages Kubernetes under its hood. Kubernetes (commonly referred to as “k8s”) is an open source container cluster manager that aims to provide a “platform for automating deployment, scaling, and operations of application containers across clusters of hosts.”</p>
+<p>Tess makes DevOps a breeze.</p>
+<blockquote>
+<p>So, you don&#39;t have to setup k8s or docker on your server anymore.</p>
+<p>Tess is not an new tech, it&#39;s a plus-version of k8s cli with eBay&#39;s own way.</p>
+</blockquote>
+<h4 id="01-further-reading">0.1. Further Reading</h4>
+<p>To best introduce topics, the following instructions suggest a way of consuming this documentation such that topics build upon previous topics.</p>
+<p>First, you’ll want to understand what Tess.IO is. For this, read the <a href="https://tess.io/userdocs/getting-start/intro">Introduction</a>. Next, you’ll want to set up your machine with the necessary tools and configuration to talk to Tess.IO. For this, read <a href="https://tess.io/userdocs/getting-start/setup">Setup</a>. Finally, you’ll want to run the <a href="https://tess.io/userdocs/getting-start/hello-world">Hello World</a> example.</p>
+<p>From here, you can branch out depending on your needs. Consider starting with <a href="https://tess.io/userdocs/getting-start/models">Model Workloads</a> followed by <a href="https://tess.io/userdocs/getting-start/build-and-deploy">Build and Deploy</a>.</p>
+<p>For a better understanding of Kubernetes we recommend reading the following documentation:</p>
+<ul>
+<li>Core Kubernetes <a href="https://kubernetes.io/docs/home">documentation</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/object-management-kubectl/declarative-config/">Declarative</a> configuration files</li>
+<li>Kubernetes <a href="https://github.com/kubernetes/examples">examples</a>.</li>
+<li>Kubernetes <a href="https://www.youtube.com/playlist?list=PLIivdWyY5sqL3xfXz5xJvwzFW_tlQB_GB">best practices</a>.</li>
+</ul>
+<blockquote>
+<p>I strongly recommends Tess user would have basic knowledge of k8s, otherwise you will get some trouble and you don&#39;t event know how to fix it.</p>
+<p>Anyway, keep learning.</p>
+</blockquote>
+<h4 id="1-setup-tess-on-your-server">1. Setup Tess on your server</h4>
+<p>Follow the instructions of <a href="https://tess.io/userdocs/getting-start/setup/">setup</a>.</p>
+<h4 id="2-finish-your-helloworld">2. Finish your helloworld</h4>
+<p>Follow the instructions of <a href="https://tess.io/userdocs/getting-start/hello-world/">helloworld</a>.</p>
+<h5 id="21-why-does-my-applications-creations-are-always-failed">2.1 Why does my application&#39;s creations are always failed?</h5>
+<p>Try</p>
+<pre><code class="language-bash">$ tskb get application tesshjapp -o yaml</code></pre>
+<p>and</p>
+<pre><code class="language-bash">apiVersion: ebay/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: 2018-11-13T08:46:53Z
+  labels:
+    account.tess.io/name: jhuang9
+  name: tesshjapp
+  resourceVersion: &quot;1527349281&quot;
+  selfLink: /apis/ebay/v1alpha1/applications/tesshjapp
+  uid: ab51990f-e720-11e8-8642-74dbd180c0ec
+spec:
+  appType:
+    category: web
+    type: generic
+  owner: jhuang9
+status:
+  conditions:
+  - lastProbeTime: 2018-11-13T08:47:24Z
+    lastTransitionTime: 2018-11-13T08:47:24Z
+    message: Error querying escalation owner name manager Owner not found for the
+      given user - jhuang9
+    reason: MissingEscalationOwner
+    status: &quot;True&quot;
+    type: Failed
+  phase: Failed
+  startTime: 2018-11-13T08:47:24Z</code></pre>
+<p>It seems like your account is &quot;MissingEscalationOwner&quot;</p>
+<p><img src="https://image.youyinnn.top/img/20181115155241.png" alt=""></p>
+<p>As Tess member said, we can create Application using -f option to create app with file:</p>
+<pre><code class="language-bash">$ tskb create -f app.yaml</code></pre>
+<p>and the app.yaml file may look like:</p>
+<pre><code class="language-yaml">apiVersion: apps.tess.io/v1alpha1
+kind: Application
+metadata:
+ labels:
+   account.tess.io/name: accountName
+ name: applicationName
+spec:
+ appType:
+   category: web
+   type: generic
+ escalationOwner: manager
+ owner: appOwner</code></pre>
+<h4 id="3-learn-the-main-concepts-of-tess-model">3. Learn the main concepts of Tess Model</h4>
+<p><a href="https://tess.io/userdocs/models/">Tess Model</a></p>
+<h4 id="4-now-get-to-work">4. Now, get to work!</h4>
+<p>You&#39;ve got enough knowledge to move to k8s/prometheus/grafana.</p>
+<p>This is not the end, it just a beginning.</p>
+<p>Here&#39;s some tips:</p>
+<ol>
+<li><p>work with namespace at the most of time</p>
+</li>
+<li><p>use tess to get help, It does give a lot of help</p>
+<pre><code class="language-bash">$ tess
+Tess CLI Version: {&quot;Experimental&quot;:&quot;true&quot;,&quot;Major&quot;:&quot;1&quot;,&quot;Minor&quot;:&quot;8+&quot;,&quot;Tess Release&quot;:&quot;release-0.33.2&quot;}
+Fetching released Tess CLI versions...
+** New version release-0.33.5 available. Please use `tess version list` to get the released versions.
+Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;8+&quot;, GitVersion:&quot;v0.0.0-master+$Format:%h{{% md %}}quot;, GitCommit:&quot;$Format:%H{{% md %}}quot;, GitTreeState:&quot;&quot;, BuildDate:&quot;1970-01-01T00:00:00Z&quot;, GoVersion:&quot;go1.9.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+
+Tess CLI is currently an alpha offering. Functionalities are subject to be changed based on customer feedback and
+product direction. 
+
+  * We are on slack: https://tessio.slack.com
+
+Commands to initialize tess
+  login       Login to Tess
+  init        Initialize Tess workspace
+
+Commands to manipulate kube objects
+  kubectl     kubectl controls the Kubernetes cluster manager
+
+Commands to manipulate groups/applications/accounts
+  get         Display one or many resources
+  annotate    Update the annotations on a resource
+  create      Create a resource by filename or stdin
+  delete      Delete resources by filenames, stdin, resources and names, or by resources and label selector
+  describe    Show details of a specific resource or group of resources
+  edit        Edit a resource on the server
+  label       Update the labels on a resource
+  replace     Replace a resource by filename or stdin
+
+Other Commands:
+  clusters    List Tess clusters
+  help        Help about any command
+  install     Install specified Tess CLI version
+  status      Print the cluster and user account information
+  version     Print the client and server version information
+
+Use &quot;tess &lt;command&gt; --help&quot; for more information about a given command.
+Use &quot;tess options&quot; for a list of global command-line options (applies to all commands).</code></pre>
+</li>
+</ol>
+<hr>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

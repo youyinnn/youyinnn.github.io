@@ -8,7 +8,6 @@ tags:
   - tips
   - github
   - git
-abbrlink: 236e6e34
 date: 2017-11-29 18:30:01
 ---
 

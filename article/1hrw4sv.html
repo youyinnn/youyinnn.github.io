@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1hrw4sv<br>title: Leetcode-21~25<br>categories:</p>
+<ul>
+<li>note</li>
+<li>algorithm</li>
+<li>leetcode<br>tags:</li>
+<li>leetcode<br>date: 2019-03-06 21:17:00<br>series: leetcode</li>
+</ul>
+<hr>
+<h3 id="21-merge-two-sorted-listseasy">21. Merge Two Sorted Lists(Easy)</h3>
+<p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</code></pre><h4 id="brute-forcebeat-9065">Brute Force(Beat 90.65%)</h4>
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null || l2 == null) {
+        return l1 == null ? l2 : l1;
+    }
+    ListNode pre = new ListNode(0);
+    pre.next = l1;
+    ListNode head = l1;
+    // use l1 l2 as pointers
+    while (l2 != null &amp;&amp; l1 != null) {
+        if (l2.val &lt; l1.val) {
+            pre.next = l2;
+            l2 = l2.next;
+            pre.next.next = l1;
+            // if l2 is little than head
+            // then it become a new head
+            if (head == l1) {
+                head = pre.next;
+            }
+        }
+        pre = pre.next;
+        l1 = pre.next;
+    }
+    // the rest of l2 were all bigger than l1
+    if (l2 != null) {
+        pre.next = l2;
+    }
+    return head;
+}</code></pre>
+<p>大致思想是以第一条链为参照，做插入排序，分别用l1，l2做now指针</p>
+<p>链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原head的基础上，加一个pre，再标识now，然后迭代两个指针</p>
+<h3 id="22-generate-parentheses">22. Generate Parentheses</h3>
+<p>Given <em>n</em> pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+<p>For example, given <em>n</em> = 3, a solution set is:</p>
+<pre><code>[
+  &quot;((()))&quot;,
+  &quot;(()())&quot;,
+  &quot;(())()&quot;,
+  &quot;()(())&quot;,
+  &quot;()()()&quot;
+]</code></pre><p>这道题我自己想的时候，想到了很多方法，比如<strong>填坑</strong>，但是填坑怎么处理对称重复的解我实在是想不出，然后又想到了一种<strong>欠债</strong>法，比如我们把开口和闭口分开，有两个债主分别管理两种债务，开口符号出现一个就代表欠一次债，闭口也是；而其中的要求就是，之前的欠债计算中，闭口欠债绝对不能比开口欠债多，这样后面的解才合法</p>
+<p>也就是在创造序列的时候，最后一个序列必须是闭口，最后一个还债的必须是闭口，不是闭口的不考虑</p>
+<p>可惜的是，这样的思路我并没有坚持下去，后面在评论区，高分解果然也是一样的思路，只不过不同的是，它用更算法逻辑的思路去解释这件事：<strong>有选择地递归</strong></p>
+<p>非常遗憾的是，高分解用<strong>backtracing</strong>去解释这种思路，但是他并不是回溯，因为它没有走进死胡同，再折返回去，而是每次都选择正确的道路</p>
+<h4 id="rightfully-recursion">Rightfully Recursion</h4>
+<pre><code class="language-java">public List&lt;String&gt; generateParenthesis(int n) {
+    LinkedList&lt;String&gt; ans = new LinkedList&lt;&gt;();
+    return get(ans, &quot;&quot;, 0, 0 ,n);
+}
+
+private List&lt;String&gt; get(List&lt;String&gt; ans, String str, int open, int close, int n) {
+    if (str.length() == n * 2) {
+        // means we reach the end
+        ans.add(str);
+    } else {
+        // one rightful path
+        if (open &lt; n) {
+            get(ans, str + &quot;(&quot;, open + 1, close, n);
+        }
+        // another rightful path
+        if (close &lt; open) {
+            get(ans, str + &quot;)&quot;, open, close + 1, n);
+        }
+    }
+    return ans;
+}</code></pre>
+<h3 id="23-merge-k-sorted-listshard">23. Merge K Sorted Lists(Hard)</h3>
+<p>Merge <em>k</em> sorted linked lists and return it as one sorted list. Analyze and describe its complexity.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input:
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</code></pre><p>做这题的时候，我有很多种思路，一步步网上打才发现，原来大道至简，用归并排序才是王道，真的不要怕使用递归，栈不深的情况下，递归是一个很高效的算法</p>
+<p>写上面那句话的时候突然灵机一想，想到两个月前面试里被面试官问道：若干日志文件，每个日子文件里的日志按照时间顺序打的，怎么合并成一个有序日志文件</p>
+<p>当时只能说出分段排序，然后被面试官继续问怎么分段，然后又扯用索引，现在回来一想，归并是个多么美妙的算法</p>
+<p>以归并的思想来看这道题，根本不算难题</p>
+<h4 id="merge-sortbeat-100">Merge Sort(Beat 100%)</h4>
+<pre><code class="language-java">public ListNode mergeKLists(ListNode[] lists) {
+    return mergeKLists(lists, 0, lists.length - 1);
+}
+
+// merge sort
+private ListNode mergeKLists(ListNode[] lists, int start, int end) {
+    int length = end - start + 1;
+    if (lists.length == 0) {
+        return null;
+    }
+    if (length == 1) {
+        return lists[start];
+    }
+    if (length == 2) {
+        return mergeTwoLists(lists[start], lists[end]);
+    } else {
+        int mid = (length / 2) + start;
+        ListNode right = mergeKLists(lists, start, mid);
+        ListNode left = mergeKLists(lists, mid + 1, end);
+        return mergeTwoLists(right, left);
+    }
+}
+
+// 用到之前的合并2个有序List
+private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null || l2 == null) {
+        return l1 == null ? l2 : l1;
+    }
+    ListNode pre = new ListNode(0);
+    pre.next = l1;
+    ListNode head = l1;
+    while (l2 != null &amp;&amp; l1 != null) {
+        if (l2.val &lt; l1.val) {
+            pre.next = l2;
+            l2 = l2.next;
+            pre.next.next = l1;
+            if (head == l1) {
+                head = pre.next;
+            }
+        }
+        pre = pre.next;
+        l1 = pre.next;
+    }
+    if (l2 != null) {
+        pre.next = l2;
+    }
+    return head;
+}</code></pre>
+<h3 id="24-swap-nodes-in-pairsmedium">24. Swap Nodes In Pairs(Medium)</h3>
+<p>Given a linked list, swap every two adjacent nodes and return its head.</p>
+<p>You may <strong>not</strong> modify the values in the list&#39;s nodes, only nodes itself may be changed.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.</code></pre><h4 id="brute-forcebeat-100">Brute Force(Beat 100%)</h4>
+<pre><code class="language-java">public ListNode swapPairs(ListNode head) {
+    if (head == null) {
+        return null;
+    }
+    if (head.next == null) {
+        return head;
+    }
+    ListNode newHead = head.next;
+    ListNode pre = new ListNode(0);
+    pre.next = head;
+    ListNode now = pre.next;
+    ListNode next = now.next;
+    while (next != null) {
+        pre.next = next;
+        now.next = next.next;
+        next.next = now;
+
+        pre = now;
+        now = pre.next;
+        if (now == null) {
+            break;
+        }
+        next = now.next;
+    }
+    return newHead;
+}</code></pre>
+<p>没难度的，指针做好就行</p>
+<h3 id="25-reverse-nodes-in-k-grouphard">25. Reverse Nodes In K-Group(Hard)</h3>
+<p>Given a linked list, reverse the nodes of a linked list <em>k</em> at a time and return its modified list.</p>
+<p><em>k</em> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <em>k</em> then left-out nodes in the end should remain as it is.</p>
+<p><strong>Example:</strong></p>
+<p>Given this linked list: <code>1-&gt;2-&gt;3-&gt;4-&gt;5</code></p>
+<p>For <em>k</em> = 2, you should return: <code>2-&gt;1-&gt;4-&gt;3-&gt;5</code></p>
+<p>For <em>k</em> = 3, you should return: <code>3-&gt;2-&gt;1-&gt;4-&gt;5</code></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Only constant extra memory is allowed.</li>
+<li>You may not alter the values in the list&#39;s nodes, only nodes itself may be changed.</li>
+</ul>
+<h4 id="brute-force-beat-9932">Brute Force (Beat 99.32%)</h4>
+<p>这题，做出来了就是成功了，基本上思路就是直观的暴力解，解题的难点在于，如何处理指针</p>
+<p>做链表题的时候始终要记住一句话：<strong>Keep tracking the pointer</strong></p>
+<p>跟踪指针到最后，你就赢了</p>
+<p>我们的思路很简单，首先从头开始，每k个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去</p>
+<p>要做到这件事，首先我们得做到逆转一段链表，这件事也没什么技巧，hmmmmm，好吧还是有点东西的，我总是喜欢分治法+递归，我已经爱上了这种简单直接的做法了</p>
+<p>上公式：<code>reverse(2 -&gt; 3 -&gt; 4 -&gt; 5) = reverse ( reverse (2 -&gt; 3) -&gt; reverse(3 -&gt; 4))</code>，于是所有的逆转都变成了两个结点链表的逆转，而且为了更简单地做到这件事，我还用一个数据结构来表示一条链，记录它的头和尾，以更好地接上两个链</p>
+<pre><code class="language-java">class Segment {
+    ListNode head;
+    ListNode tail;
+
+    Segment(ListNode head, ListNode tail) {
+        this.head = head;
+        this.tail = tail;
+    }
+}
+private Segment reverse(ListNode head) {
+    if (head == null) {
+        return null;
+    }
+    ListNode a = head;
+    ListNode b = head.next;
+    if (b == null) {
+        return new Segment(head, head);
+    } else if (b.next == null) {
+        b.next = a;
+        a.next = null;
+        return new Segment(b, a);
+    } else {
+        ListNode right = b.next;
+        b.next = null;
+        Segment leftSeg = reverse(a);
+        Segment rightSeg = reverse(right);
+        // reconnect two seg
+        rightSeg.tail.next = leftSeg.head;
+        // reassign seg tail cause we connect a new list after it
+        rightSeg.tail = leftSeg.tail;
+        return rightSeg;
+    }
+}</code></pre>
+<p>那么接下来：我们用4个指针，来对原链进行分段逆转，大致思路如下：</p>
+<pre><code>               head (ignore this)
+                 ↓
+origin list:     1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+assume k is: 3
+
+assign some pointer：
+
+1. nowPre: the pre node of this segment
+2. nowHead: the head node of this segment
+3. tmp: the head of next segment
+4. tmpPre: the pre node of tmp node, it also the tail node of the reversed segment
+
+        newHead -&gt; NULL
+
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+               ↗     ↑
+           tmpPre    tmp
+                      ↑
+                    nowHead
+
+这是初始状态，我们开始移动tmp和tmpPre：
+
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   nowHead tmpPre    tmp
+
+于是这时候我们可以将链看成是三段：
+1. nowPre之前的结点是一段；           记为A段
+2. nowHead到tmpPre的结点是一段；    记为B段
+3. tmp之后的结点是一段；               记为C段
+
+这时候可以看出，我们要逆转的段是第二段，于是先断开BC之间的连接：
+
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3       4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗        ↑
+                   nowHead tmpPre      tmp
+
+这时候逆转B段（注意原来的nowPre、tmpPre、nowHead也会变的）：
+
+                   nowPre → 0
+                            ↓
+                  3 -&gt; 2 -&gt; 1           4 -&gt; 5 -&gt; 6 -&gt; NULL
+                  ↑         ↑           ↑
+               tmpPre    nowHead       tmp
+
+然后nowHead.next = tmp，就可以接上BC段：
+
+                       nowPre → 0
+                                ↓
+                      3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   tmpPre  nowHead  tmp
+
+再nowPre.next = tmpPre，纠正AB段：
+
+        nowPre → 0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   tmpPre  nowHead  tmp
+
+最后调整指针，为下一次处理做准备（若是第一次处理，则newHead必定为空，则可以指定newHead）：
+1. newHead = reverseSegment.head
+2. nowPre = nowHead
+3. nowHead = tmp
+4. tmpPre = nowPre
+
+               newHead
+                  ↓
+             0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                            ↑    ↑
+                       nowPre    tmp
+                            ↑    ↑
+                       tmpPre    nowHead</code></pre><p>于是代码：</p>
+<pre><code class="language-java">public ListNode reverseKGroup(ListNode head, int k) {
+    if (k == 1) {
+        return head;
+    }
+    ListNode
+            nowPre = new ListNode(0),
+            tmp = head,
+            newHead = null,
+            nowHead, tmpPre;
+    nowPre.next = tmp;
+
+    while (tmp != null) {
+        nowHead = tmp;
+        tmpPre = nowPre;
+        int count = 0;
+        while (count &lt; k &amp;&amp; tmp != null) {
+            tmp = tmp.next;
+            tmpPre = tmpPre.next;
+            count++;
+        }
+        if (count == k) {
+            // disconnected two part
+            tmpPre.next = null;
+            // reverse segment
+            Segment reverse = reverse(nowHead);
+            if (newHead == null) {
+                newHead = reverse.head;
+            }
+            // reconnected part B &amp; C
+            nowHead.next = tmp;
+            // reconnected part A &amp; B
+            nowPre.next = tmpPre;
+            // reassign the nowPre
+            nowPre = nowHead;
+        }
+    }
+    // when k is bigger than list length then newHead will be null
+    // so just return head
+    return newHead == null ? head : newHead; 
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

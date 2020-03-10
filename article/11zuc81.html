@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 11zuc81<br>title: Electron_上手铺垫<br>categories:</p>
+<ul>
+<li>note</li>
+<li>electron<br>comments: true<br>tags:</li>
+<li>electron<br>series: electron<br>date: 2019-10-03 22:35:21</li>
+</ul>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>官方指南不叫指南，叫document，于是乎开始无教程纯瞎子摸石头，于是想着把整个官方指南都看一遍，然后梳理梳理。</p>
+<ul>
+<li>关于electron的命名空间</li>
+<li>主进程和渲染进程<ul>
+<li>区别</li>
+<li>通信方式</li>
+</ul>
+</li>
+<li>添加功能<ul>
+<li>通知</li>
+<li>任务栏进度bar</li>
+<li>其他</li>
+</ul>
+</li>
+</ul>
+<h2 id="electron-namespace">Electron Namespace</h2>
+<p><code>electron</code> 模块所提供的功能都是通过命名空间暴露出来的。 比如说： <code>electron.app</code>负责管理Electron 应用程序的生命周期， <code>electron.BrowserWindow</code>类负责创建窗口。</p>
+<p>从0.37开始，可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a> (es6解构赋值)来使内置模块更容易使用。</p>
+<pre><code class="language-javascript">const { app, BrowserWindow } = require(&#39;electron&#39;)
+
+let win
+
+app.on(&#39;ready&#39;, () =&gt; {
+  win = new BrowserWindow()
+  win.loadURL(&#39;https://github.com&#39;)
+})Copy</code></pre>
+<p>如果您需要整个 <code>electron</code> 模块, 则可以<code>require</code>它, 然后使用 destructuring 从 <code>electron</code> 访问各个模块。</p>
+<pre><code class="language-javascript">const electron = require(&#39;electron&#39;)
+const { app, BrowserWindow } = electron
+
+let win
+
+app.on(&#39;ready&#39;, () =&gt; {
+  win = new BrowserWindow()
+  win.loadURL(&#39;https://github.com&#39;)
+})Copy</code></pre>
+<p>这等效于以下代码:</p>
+<pre><code class="language-javascript">const electron = require(&#39;electron&#39;)
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
+let win
+
+app.on(&#39;ready&#39;, () =&gt; {
+  win = new BrowserWindow()
+  win.loadURL(&#39;https://github.com&#39;)
+})</code></pre>
+<h2 id="process">Process</h2>
+<p>Electron 运行 <code>package.json</code> 的 <code>main</code> 脚本的进程被称为<strong>主进程</strong>。 在主进程中运行的脚本通过创建web页面来展示用户界面。 一个 Electron 应用总是有且只有一个主进程。</p>
+<p>由于 Electron 使用了 Chromium 来展示 web 页面，所以 Chromium 的多进程架构也被使用到。 每个 Electron 中的 web 页面运行在它自己的<strong>渲染进程</strong>中。</p>
+<blockquote>
+<p>在普通的浏览器中，web页面通常在沙盒环境中运行，并且无法访问操作系统的原生资源。 然而 Electron 的用户在 Node.js 的 API 支持下可以在页面中和操作系统进行一些底层交互。</p>
+</blockquote>
+<h3 id="differences-between-main-process-and-render-process">Differences Between Main Process And Render Process</h3>
+<p>主进程使用 <code>BrowserWindow</code> 实例创建页面。 每个 <code>BrowserWindow</code> 实例都在自己的渲染进程里运行页面。 当一个 <code>BrowserWindow</code> 实例被销毁后，相应的渲染进程也会被终止。</p>
+<p>主进程管理所有的web页面和它们对应的渲染进程。 每个渲染进程都是独立的，它只关心它所运行的 web 页面。</p>
+<p>在页面中调用与 GUI 相关的原生 API 是不被允许的，因为在 web 页面里操作原生的 GUI 资源是非常危险的，而且容易造成资源泄露。 如果你想在 web 页面里使用 GUI 操作，其对应的渲染进程必须与主进程进行通讯，请求主进程进行相关的 GUI 操作。</p>
+<p>Node. js 的所有 <a href="https://nodejs.org/api/">内置模块 </a>都在Electron中可用， 第三方 node 模块中也完全支持 (包括 <a href="https://electronjs.org/docs/tutorial/using-native-node-modules">原生模块 </a>)。</p>
+<p>Electron 还为开发原生桌面应用程序提供了一些额外的内置模块。 某些模块仅在主进程中可用, 有些仅在渲染进程 (web 页) 中可用, 而有些在这两个进程中都可以使用。</p>
+<p><strong>基本规则是: 如果一个模块是 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI </a>或底层系统相关的, 那么它应该只在主进程中可用。</strong></p>
+<h3 id="communication-of-processes">Communication Of Processes</h3>
+<p>进程之间的通信有3种：</p>
+<ul>
+<li>ipcMain和ipcRenderer：实现进程间的<strong>异步同步消息通信</strong></li>
+<li>remote模块RPC通信：<strong>主进程API</strong>暴露到渲染进程</li>
+<li>页面间共享对象：可以暴露对象也可以通信</li>
+</ul>
+<h4 id="ipc">IPC</h4>
+<p><code>ipcMain</code>模块是<a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a> 类的一个实例。 当在主进程中使用时，它处理从渲染器进程（网页）发送出来的异步和同步信息。 从渲染器进程发送的消息将被发送到该模块。</p>
+<p><code>ipcRenderer</code> 是一个 <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a> 的实例。 你可以使用它提供的一些方法从渲染进程 (web 页面) 发送同步或异步的消息到主进程。 也可以接收主进程回复的消息。</p>
+<p>在main.js中：</p>
+<pre><code class="language-javascript">// 主进程和渲染进程之间通信
+const {
+    ipcMain
+} = require(&#39;electron&#39;)
+ipcMain.on(&#39;asynchronous-message&#39;, (event, arg) =&gt; {
+    console.log(arg)
+    // 通过event的reply方法 回复异步信息
+    setTimeout(() =&gt; {
+        event.reply(&#39;asynchronous-reply&#39;, &#39;as-pong&#39;)
+    }, 2000);
+})
+ipcMain.on(&#39;synchronous-message&#39;, (event, arg) =&gt; {
+    console.log(arg)
+    // 直接用event的returnValue值来回复消息
+    event.returnValue = &#39;s-pong&#39;
+})
+
+</code></pre>
+<p>在render.js中：</p>
+<pre><code class="language-javascript">const { ipcRenderer } = require(&#39;electron&#39;)
+$(&#39;#asmessage&#39;).click(() =&gt; {
+    // 异步信息 直接发送
+    ipcRenderer.send(&#39;asynchronous-message&#39;,&#39;as-ping&#39;)
+})
+// 监听异步信息的响应
+ipcRenderer.on(&#39;asynchronous-reply&#39;, (event, arg) =&gt; {
+    // pong
+    console.log(arg)
+})
+$(&#39;#smessage&#39;).click(() =&gt; {
+    // 同步信息 发送之后等待响应
+    console.log(ipcRenderer.sendSync(&#39;synchronous-message&#39;,&#39;s-ping&#39;))
+})</code></pre>
+<h4 id="remote">Remote</h4>
+<p><code>remote</code> 模块为渲染进程（web页面）和主进程通信（IPC）提供了一种简单方法。</p>
+<p>在Electron中, GUI 相关的模块 (如 <code>dialog</code>、<code>menu</code> 等) 仅在主进程中可用, 在渲染进程中不可用。 为了在渲染进程中使用它们, <code>ipc</code> 模块是向主进程发送进程间消息所必需的。 使用 <code>remote</code> 模块, 你可以调用 main 进程对象的方法, 而不必显式发送进程间消息, 类似于 Java 的 <a href="https://en.wikipedia.org/wiki/Java_remote_method_invocation">RMI </a>。<br>例如：从渲染进程创建浏览器窗口/获取app对象</p>
+<pre><code class="language-javascript">const { BrowserWindow } = require(&#39;electron&#39;).remote
+let win = new BrowserWindow({ width: 800, height: 600 })
+win.loadURL(&#39;https://github.com&#39;)Copy
+
+const app = require(&#39;electron&#39;).remote.app
+console.log(app)</code></pre>
+<p><strong>注意:</strong> 反过来（如果需要从主进程访问渲染进程），可以使用 <a href="https://electronjs.org/docs/api/web-contents#contentsexecutejavascriptcode-usergesture-callback">webContents. executeJavascript </a>。</p>
+<p><strong>注意事项：</strong> 因为安全原因，remote 模块能在以下几种情况下被禁用：</p>
+<ul>
+<li><a href="https://electronjs.org/docs/api/browser-window"><code>BrowserWindow</code></a> - 通过设置 <code>enableRemoteModule</code> 选项为 <code>false</code>。</li>
+<li><a href="https://electronjs.org/docs/api/webview-tag"><code>&lt;webview&gt;</code></a> - 通过把 <code>enableremotemodule</code>属性设置成 <code>false</code>。</li>
+</ul>
+<p>在上面的示例中, <a href="https://github.com/electron/electron/blob/master/docs/api/browser-window.md"><code>BrowserWindow</code></a>和<code>win</code> 都是远程对象, <code>new BrowserWindow</code> 在渲染过程中没有创建 <code>BrowserWindow</code> 对象。 取而代之的是，它在主进程中创建了一个 <code>BrowserWindow</code>对象，并且在渲染进程中返回相应的远程对象，即<code>win</code>对象。</p>
+<p><strong>注意：</strong> 当远程对象被第一次引用时，只有<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties">可枚举的属性</a>可以通过远程访问。</p>
+<p><strong>注意：</strong> 当通过<code>remote</code>模块访问时，数组和缓冲区在IPC上复制。 在渲染进程中修改它们不会在主进程中修改它们，反之亦然。 </p>
+<p>Electron 确保只要渲染进程中的远程对象一直存在（换句话说，没有被回收），主进程中的相应对象就不会被释放。 当远程对象被垃圾回收后，主进程中的相应对象将被解除引用。</p>
+<p>如果远程对象在渲染进程中泄露（例如存储在映射中，但从未释放），则主进程中的相应对象也将被泄漏，所以您应该非常小心，不要泄漏远程对象。</p>
+<p>但是，字符串和数字等主要值的类型是通过复制发送的。</p>
+<h4 id="sharing-object">Sharing Object</h4>
+<p>在两个网页（渲染进程）间共享数据最简单的方法是使用浏览器中已经实现的 HTML5 API。 其中比较好的方案是用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage">Storage API</a>， <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code>localStorage</code></a>，<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a> 或者 <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a>。</p>
+<p>你还可以用 <code>Electron</code> 内的 IPC 机制实现。将数据存在主进程的某个全局变量中，然后在多个渲染进程中使用 <code>remote</code> 模块来访问它。</p>
+<p>主进程和渲染进程之间：</p>
+<pre><code class="language-javascript">// 在主进程中
+let win = new BrowserWindow({...})
+
+global.share = {
+    win: win
+}
+
+const win = require(&#39;electron&#39;).remote.getGlobal(&#39;share&#39;).win</code></pre>
+<p>渲染进程之间：</p>
+<pre><code class="language-javascript">// 在主进程中
+global.sharedObject = {
+  someProperty: &#39;default value&#39;
+}                       
+// 在第一个页面中
+require(&#39;electron&#39;).remote.getGlobal(&#39;sharedObject&#39;).someProperty = &#39;new value&#39;
+// 在第二个页面中
+console.log(require(&#39;electron&#39;).remote.getGlobal(&#39;sharedObject&#39;).someProperty)</code></pre>
+<h2 id="optional-function">Optional Function</h2>
+<h4 id="notification">Notification</h4>
+<p>这个功能就是弹出系统的提示窗，但是支持很不友好，有很多BUG，也许是我没调出来，但是github上也有专门的<a href="https://github.com/electron/electron/issues/10864">issue</a>还在open，说明我不是特例，我反正搞了好久没搞出来。</p>
+<p>所有三个操作系统都提供了应用程序向用户发送通知的手段。 Electron允许开发者使用 <a href="https://notifications.spec.whatwg.org/">HTML5 Notification API</a> 发送通知，并使用当前运行的操作系统的本地通知 API 来显示它。</p>
+<p><strong>注意:</strong> 由于这是一个 HTML5 API，它只能在渲染器进程中使用。 如果你想在主进程中显示通知，请查看 <a href="https://electronjs.org/docs/api/notification">Notification</a> 模块.</p>
+<pre><code class="language-javascript">let myNotification = new Notification(&#39;标题&#39;, {
+  body: &#39;通知正文内容&#39;
+})
+
+myNotification.onclick = () =&gt; {
+  console.log(&#39;通知被点击&#39;)
+}</code></pre>
+<h4 id="progressbar">ProgressBar</h4>
+<p>可以设置托盘图标的绿色进度条</p>
+<pre><code class="language-javascript">let progress = 0;
+$(&#39;#processbar&#39;).click(function () {
+    if (progress === 0) {
+        progress = 0.5
+    } else {
+        progress = 0
+    }
+    win.setProgressBar(progress)
+})</code></pre>
+<h4 id="others">Others</h4>
+<p>其他的功能还有自定义Windows的任务栏，键盘快捷键的设置，离线在线监测（仅根据网络的connection状态来判断的），任务栏托盘图标闪烁等，文件拖拽等。</p>
+<pre><code class="language-javascript">let flash = false
+$(&#39;#flash&#39;).click(function () {
+    if (flash) {
+        flash = false
+    } else {
+        flash = true
+    }
+    // win.once(&#39;focus&#39;, () =&gt; win.flashFrame(false))
+    win.flashFrame(flash)
+})</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

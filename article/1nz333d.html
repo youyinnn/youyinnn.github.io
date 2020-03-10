@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1nz333d<br>title: 计算机网络-谢希仁-2<br>categories:</p>
+<ul>
+<li>note</li>
+<li>booknote</li>
+<li>计算机网络<br>comments: true<br>date: 2018-07-03 20:44:33<br>tags:</li>
+<li>计算机网络<br>series: 《计算机网络》</li>
+</ul>
+<hr>
+<h3 id="chapter2-物理层">Chapter2-物理层</h3>
+<p>物理层是计网体系结构中的最下面一层，本章主要介绍：</p>
+<ol>
+<li>物理层的基本任务</li>
+<li>几种常用的信道复用技术</li>
+<li>几种常用的宽带接入技术</li>
+</ol>
+<h4 id="21-物理层基本概念">2.1 物理层基本概念</h4>
+<h5 id="物理层的主要任务">物理层的主要任务</h5>
+<p>物理层的主要任务是确定与传输媒体的接口有关的一些特性：</p>
+<ol>
+<li><strong>机械特性：</strong>指明接口所用界掀起的形状和尺寸、引脚数目和排列、固定和锁定装置。平时常见的各种规格的接插件都有严格的标准化规定。</li>
+<li><strong>电气特性：</strong>指明在接口电缆的各条线上出现的电压的范围。</li>
+<li><strong>功能特性：</strong>指明某条线上出现的某个电平的意义。</li>
+<li><strong>过程特性：</strong>指明对于不同功能的各种可能事件的出现顺序。</li>
+<li><strong>传输方式转换：</strong>计算机内部大多采用<strong>并行传输</strong>，但是数据通信线路上一般都是<strong>串行传输（处于经济上的考虑）</strong>，所以需要转换。</li>
+</ol>
+<h4 id="22-数据通信基本知识">2.2 数据通信基本知识</h4>
+<h5 id="221-数据通信系统模型">2.2.1 数据通信系统模型</h5>
+<p>一个数据通信系统大致可以分为：<strong>源系统（发送端）</strong>、<strong>传输系统（传输线路）</strong>和<strong>目的系统（接受端、接收方）</strong></p>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180705135038.png" alt=""></p>
+<h6 id="常用术语">常用术语</h6>
+<ul>
+<li><p><strong>源点：</strong>源点设备要产生传输的数据，例如计算器键盘输入的字符，计算机产生输出的数字比特流</p>
+</li>
+<li><p><strong>发送器：</strong>源点产生的数字比特流要通过发送器<strong>编码</strong>之后才能够在传输系统中传输。典型的发送器就是<strong>调制器</strong></p>
+</li>
+<li><p><strong>接收器：</strong>接受传输系统传过来的信号，并将信号转换为可以被目的设备处理的信息。典型的接收器就是解调器，它用于将模拟信号解调，还原成原来的数字比特流</p>
+</li>
+<li><p><strong>终点：</strong>终点设备从接收器获取传输过来的数字比特流，然后输出信息</p>
+</li>
+<li><p>通信的目的是传送<strong>消息（message）</strong></p>
+</li>
+<li><p><strong>数据（data）</strong>是运送消息的实体</p>
+</li>
+<li><p><strong>信号（signal）</strong>是数据的电气表现，信号分类两大类：</p>
+<ul>
+<li><strong>模拟信号（连续信号）</strong>——代表消息的参数的<u>取值是<strong>连续</strong>的</u>，如传送的波</li>
+<li><strong>数字信号（离散信号）</strong>——代表消息的参数的<u>取值是<strong>离散</strong>的</u>，如比特流</li>
+</ul>
+</li>
+<li><p><strong>码元</strong>是代表不同离散数值的基本波形，在使用二进制编码的时候，码元就只有两种，0和1</p>
+<p>对于码元的理解在下面可以加以说明</p>
+</li>
+</ul>
+<h5 id="222-信道基本概念">2.2.2 信道基本概念</h5>
+<p>首先要明确：<strong>“信道”</strong>指的是<u>向<strong>某一方向</strong>传送信息的媒体</u>，所以一般一条通信电路往往包含一条<strong>发送信道</strong>和<strong>一条接收信道</strong>。</p>
+<p>从信道的交互方式来看，可以有一下三种基本的交互方式：</p>
+<ol>
+<li><strong>单工通信</strong>，只有一个方向且没有反方向的交互。无线电广播或有线电广播以及电视广播就属于这种。</li>
+<li><strong>半双工通信</strong>，两个方向都可，但是同时只能往一个方向进行通讯。</li>
+<li><strong>双全工通信</strong>，两个方向都可以，同时发同时接都可以。</li>
+</ol>
+<p>来自信源的信号通常称为<strong>基带信号</strong>，但是基带信号大多包含有较多的<strong>低频成分</strong>，甚至有直流成分，<u>而许多信道并不能传输这种低频成分或者直流成分</u>，为了解决这个问题，所以<strong>必须对基带信号进行调制（modulation）</strong>。</p>
+<h6 id="调制">调制</h6>
+<ul>
+<li><strong>基带调制：</strong>仅对基带信号进行波形变换，使之能和信道特性相适应，这种调制是把数字信号转换为另一种形式的数字信号，所以一般叫基带调制为<strong>编码</strong></li>
+</ul>
+<p><img src="https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180706133415.png" alt=""></p>
+<p>以上是<strong>常用</strong>的基带调制方式，用的多的就是曼切斯特编码，常用于传统的以太网，这里我们可以补充一下码元的理解，拿曼切斯特来举例的话，它用<strong>两个码元代表一个位</strong>，也就是<strong>10代表1，01代表0</strong>，这样做的做法是用于同步时钟</p>
+<ul>
+<li><strong>带通调制：</strong>需要使用<strong>载波（carrier）</strong>进行调制，把基带信号的频率搬到高频段，并转换为模拟信号</li>
+</ul>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706160531.png" alt=""></p>
+<p>以上是<strong>基本</strong>的带同调制的方式</p>
+<h5 id="23-信道复用技术">2.3 信道复用技术</h5>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706163834.png" alt=""></p>
+<h6 id="231-频分复用、时分复用和统计时分复用">2.3.1 频分复用、时分复用和统计时分复用</h6>
+<ul>
+<li><strong>频分复用（Frequency Divition Multiplexing，FDM）：</strong>所有用户在同一时间占用不同的带宽资源（这里的带宽是指频率带宽而不是发送速率）</li>
+<li><strong>时分复用（Time Divition Multiplexing，TDM）：</strong>所有用户在不同时间占用同样的频带宽度，更有利于数字信号的传输</li>
+</ul>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707164750.png" alt=""></p>
+<p>从图片我们可以注意到，在频分复用的时候，非常占带宽，用户越多，带宽越大；在时分复用的时候，看似可以规律的使用一致的带宽，但是不一定所用用户在自己的时间里都发信息，这样可能就会有很多浪费，信道利用率很低。</p>
+<p><strong>统计时分复用（Statistic TDM，STDM）</strong>就是为了解决时分复用的这个问题，使用一个集中器，将同一段时间的数据集中起来：</p>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707165324.png" alt=""></p>
+<p>但是STDM中集中器的使用前提是假定各个用户是<u><strong>间歇地工作</strong></u></p>
+<h6 id="232-波分复用">2.3.2 波分复用</h6>
+<p>波分复用（Wavelength DM，WDM）即光的频分复用</p>
+<h6 id="233-码分复用">2.3.3 码分复用</h6>
+<p><strong>码分复用（Code Division Multiplexing，CDM）</strong>又叫做<strong>码分多址（Code Division Multiple Access，CDMA）</strong>，每个用户可以在同样的频带进行通信，由于<u><strong>各用户使用经过特殊挑选的不同码型，因此各用户之间并不会干扰</strong></u>。</p>
+<p>CDMA已被广泛使用在民用移动通信中，采用码分多址的好处：</p>
+<ul>
+<li>提高通信的话音质量和数据传输可靠性</li>
+<li>减少干扰对通信的影响</li>
+<li>增大通信系统容量</li>
+<li>降低手机的平均发射功率</li>
+</ul>
+<p>工作原理：</p>
+<ol>
+<li><p>CDMA中，每一个比特时间再划分为<em>m</em>个短的间歇，称为<strong>码片（chip）</strong>，通常<em>m</em>的值为64或者128</p>
+</li>
+<li><p>使用CMDA的每一个站被指派一个唯一的<em>m</em>bit<strong>码片序列（chip sequence）</strong></p>
+<blockquote>
+<p>如果要发送0，则发送序列的二进制反码，如果发送1则发送序列二进制原码</p>
+</blockquote>
+</li>
+<li><p>为了方便，将0写成-1，1写成+1</p>
+</li>
+<li><p>CDMA系统还有一个重要特点就是：每个站分配的序列不仅不同，而且互相必须<strong>正交</strong>，这样用公式去解释是：<u><strong>S站序列和其他站序列的向量内积为0，和自己的序列向量内积是1</strong></u></p>
+</li>
+</ol>
+<p><img src="https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707171300.png" alt=""></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

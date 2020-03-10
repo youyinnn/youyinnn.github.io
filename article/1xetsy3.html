@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1xetsy3<br>title: 写在21岁的最后一天<br>categories:</p>
+<ul>
+<li>随笔<br>date: 2018-11-17 15:53:00</li>
+</ul>
+<hr>
+<h4 id="0-特定的时刻">0. 特定的时刻</h4>
+<p>我是完全不过生日的, 不要礼物不要钱, 不请朋友大鱼大肉也不买蛋糕许愿望更不拉帮结派开party, 过生日我只会想家人想妈妈</p>
+<p>但是今年这个生日有点特殊吧</p>
+<p>不知道什么时候在哪里听到过一句话, 说<strong>人生可以分成7年7年的组合去过, 每次都把7年当成一辈子去过</strong></p>
+<p><strong>你要认真地, 过好每一个7年, 过好每一辈子</strong></p>
+<p>所以在第3个7年的最后一天要结束的时候, 想把时间往前推7年, 看看我这第一个重要的7年过的到底怎么样</p>
+<p>但是- -</p>
+<p>记性不太好, 差不多只能回忆近况吧</p>
+<h4 id="1-上海ebay">1. 上海eBay</h4>
+<p>现在是18年11月, 离开武汉来魔都已经一个多月了, 现在的状态很舒适和安逸, 但是也<strong>太过于舒适和安逸</strong>了</p>
+<p>:right_anger_bubble: 500强公司的Intern, 310一天的工资, 租的复式小阁楼房子, 一室一厅独卫空调电视, 十一期间该买的都买了, 房子置办的温馨又懒惰:cat2:</p>
+<p>:bus: 公司和家就300m路程, 每天上下班唯一的阻碍就是一个1分半钟的20米人行道红绿灯, 每天交通压力还是挺大的:smiley:</p>
+<p>:happy:工作环境也跟给力, 公司135早上有免费早餐, 24下午有免费水果, 5下午有免费蛋糕:cake: , manager挺谈得来的, 给我的Main Task也顺顺利利的完成了, 同事都会ignore你的学历, 虽然周围都是985/211的Master Degree(水平看着还可以吧), 而我只是一个双非的undergraduate</p>
+<p>刚开始还8点起床, 9点前到公司, 后来干脆每天9点起床9点半到公司, 中午还可以回家自己吃饭, 下午差不多6点就下班回家, 回家玩一会就开始看书或者干脆写博客</p>
+<p>然后尽管魔都食宿消费基本是武汉的1.5~2倍, 但是非常幸运的是, 家旁边就有一个小菜馆, 基本30左右就可以饱饱的吃两餐</p>
+<p>是挺舒服的吧?</p>
+<h4 id="2-武汉银联商务">2. 武汉银联商务</h4>
+<p>再往前数4个月, 7月份</p>
+<p>9月份在武汉银联商务实习, 同事照样名校MD, 但是水平是真的次, 银联是我第一份Intern, 虽然环境一般, 但是给我的工作还是认认真真的做了, 开发一个内部使用的系统, 和一个华师的研究生一起做, 这哥什么都不会, git/maven还是我现场教的, 基本的CS素养都没有, 说写前端连css都调不会, 写的code也烂的亚批, 他写的code我改了90%</p>
+<p>这两个月做这个系统别提我多郁闷了, 每天都很窒息😠💢</p>
+<p>最后结果反正是交付了, 别的不说我基本的责任心还是有的, 9月份离职之后, 系统还不具备上线条件, 对于安全的case没有cover到(导师的锅, 一开始就没觉得要交付这么严格, 所以我就没将安全性考虑进去)</p>
+<p>所以10月份我人已经到eBay的实习期间, 晚上回家还加班给UMS写代码</p>
+<p>而且在这期间我也一刻不停的在学习, 找工作, 因为并不觉得银联是唯一的选择, 也不想留在银联, 国企的办公室氛围实在是太没有激情了, 一点都不geek, 转正还得穿正装上班, 我并不觉得这是一个程序猿该有的样子</p>
+<p>特别是, 就算是intern, 也不能穿短裤子上班, 你知道在武汉最热:sunny:的时候每天穿长裤去上班有多热吗, 下班回家第一件事不是吃饭而是回寝室换裤子</p>
+<h4 id="3-关于放弃考研">3. 关于放弃考研</h4>
+<p>3月份开学的时候, 我做出了要考研的选择, 1是想提升学历, 2是并不想太早就放弃&quot;学生&quot;这个身份</p>
+<p>和家里人商量, 和女朋友谈谈 和朋友们讨论</p>
+<p>跌跌撞撞了2个月, 大张旗鼓了2个月, 各种考研书都买了, 高数都看了2章了, 笔记满满的, 人生第一次记录错题本</p>
+<p>我都不知道我这么爱学习</p>
+<p>所有人都知道我要考研了</p>
+<p>但是考研真不好走, 除了学习之外还得看学校, 关注研训, 纠结要不要参加补习班, 想着能不能推免, 得找好学校好导师吧啦吧啦的</p>
+<p>看起来是在正轨上, 但其实除了学习之外, 还在偷偷地写代码, 因为我控制不住自己, 就是想写代码, 就是想看技术</p>
+<p>然后5月份, 发了个说说&quot;立即推:放弃考研!&quot;</p>
+<p><strong>把能卖的考研书都卖了, 打开电脑, coding</strong></p>
+<h4 id="4-找工作">4. 找工作</h4>
+<p>放下高数38, 真正开始找工作了才发现工作也并不好找, 尤其是我已经错过春招最开始的时候了, 等我准备好简历, 急忙刷了一些题, 匆匆看了几篇面经之后, 已经6月份了</p>
+<p>这时候开始找工作, 我是觉得我已经落后别人一截了- -</p>
+<p>而且找工作的时候运气也很重要, 万一面试官根本就没心思在你身上, 那你表现再好也是白费</p>
+<p>所以这一个月的经历并不好受, 特别是小米和头条的面试, 因为准备不足完全被人看扁了</p>
+<p>也正是这段时间, 认识到了自己的不足, 认识到了真正重要的是什么, 认识到了一个应届生应该有什么样的value, 别人才会要你, 认识到了其实之前在学校中, 我过多专注在业务上而不是基础知识, 这是我最遗憾的事情</p>
+<p>fail了很多次, 一次比一次灰心, 都在想自己是不是很差, 但还是慢慢撑过来了, 甚至去银联只是一个缓兵之计而已</p>
+<p>直到9月初的一次eBay的电面, 给了我intern的offer, 说intern有转正机会</p>
+<p><strong>就像救命稻草一样, 真的是救命稻草一样, 所有人都说你不match, 就有人看中你了的感觉</strong></p>
+<h4 id="5-大学">5. 大学</h4>
+<p>虽然高考不咋地, 但是来民大真的是非常幸运, 遇到的schoolmate也很nice</p>
+<p>我大学里面也很努力呀</p>
+<p>在英协外联的日子里真的很努力, 除了学习之外, 我在这里学到了很重要的东西: <strong>要非常专业地去对待你的肩上这份责任的这么一个态度</strong>, 这个态度影响了我后面的很多事情</p>
+<p>在英协这段时期努力奔波的时候, 同时也幸运的找到几个朋友, 有过小2个月的乐队时期, 再续高中时候的band dreaming, 有幸在一家清吧show了一场, 虽然drummer那时候快要毕业了去日本了, 虽然后面一个吉他溜号了(具体是咋的我忘了) </p>
+<p>努力进了实验室, 努力学技术, 努力和组员一起学习Java, 努力做项目, 努力参加含金量不高的比赛, 努力做一些没意义的工作(吐槽一下实验室的work flow确实问题很大), 有为改变实验室的毒瘤work flow而用心过虽然最后什么都没有改变</p>
+<p>认真地当上了组长, 认真地准备每次招新, 认真地对待每个newbie, 能不放弃的孩子我都没有放弃, 认真的准备每周的技术例会</p>
+<p>很专业的去对待每件事情, 无论是来自实验室, 还是来自其他地方</p>
+<p><strong>努力地做出改变, 努力的code</strong></p>
+<p>然后还在大三最忙的时候, 捞了个班助当, 接到了一群和我3年前刚来的时候一模一样的孩子, 年轻人是真的很有活力(倚老卖老), 认真对待新生工作, 和孩子们交朋友, 帮老师收集材料</p>
+<p>我和很多人说过, 我当年的班助, 就是一个超级nice的学姐, 真的非常非常nice, 所以我也想像她一样, 对我的孩子也非常nice, 真的努力了, 但是有的工作还是没有顾及到, 本身还有很多要忙的, 有点遗憾</p>
+<h4 id="6-近期的顾虑">6. 近期的顾虑</h4>
+<p>其实来eBay也不是很好的选择, 因为公司都是Intern和Full-time混合的工作制, 所以有Internship并不和转正挂钩, 该走校招还是走校招, 该笔试还是得笔试</p>
+<p>最近eBay的校招fail掉了, 说来也难怪, 我本身就不太适应笔试, eBay的笔试有点难度, 时间也有点迷(75分钟21选择2编程) , 但是由于笔试期间没时间准备, 一直在focus on my work, 再加上eBay校招是偶尔开, 开也只是面向名校, 所以我一双非本科在复旦/上交/同济的MD面前还是不够看</p>
+<p>学历菜就算了, 笔试也菜, fail了我也认</p>
+<p>eBay这边的Internship虽然能持续6个月, 但转正还是有点不好说, 不是难, 而是还是那句话, <strong>找工作是看运气的</strong>, 所以我想先在冬天认认真真的沉淀好了, 然后春天再去找机会</p>
+<h4 id="7-winter-is-comming">7. &quot;Winter is comming&quot;</h4>
+<p>说不准我是运气好还是不好</p>
+<p>这辈子过的有点菜, 下辈子再认真一点, 再努力一点</p>
+<p>14-21岁这辈子已经过完了, 下辈子再见吧</p>
+<h4 id="8-">8. ...</h4>
+<p>唉😔</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

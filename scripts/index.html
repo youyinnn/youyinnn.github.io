@@ -1,4 +1,147 @@
-<h2 id="java相关">Java相关</h2>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <h2 id="java相关">Java相关</h2>
 <h3 id="java8系列文章">Java8系列文章</h3>
 <details>
   <summary>show</summary> 
@@ -21,8 +164,7 @@
 <details>
   <summary>show</summary> 
 
-<p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a>
-参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
+<p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a><br>参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
 </details>
 
 <h3 id="牛客-integer的拆箱装箱">牛客 Integer的拆箱装箱</h3>
@@ -59,9 +201,7 @@
 <h5 id="共同点-：">共同点 ：</h5>
 <ol>
 <li>他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 </li>
-<li>wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException
-如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
-需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 </li>
+<li>wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException<br>如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。<br>需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 </li>
 </ol>
 <h5 id="不同点-：">不同点 ：</h5>
 <ol>
@@ -106,9 +246,7 @@
 <details>
   <summary>show</summary> 
 
-<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a>
-<a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a>
-<a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
+<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a><br><a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a><br><a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
 </details>
 
 <h3 id="java字符串压缩">Java字符串压缩</h3>
@@ -543,11 +681,9 @@ jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.fi
 <details>
   <summary>show</summary>
 
-<p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
-原因如下：</p>
+<p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题<br>原因如下：</p>
 <blockquote>
-<p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
-引自：<a href="https://blog.csdn.net/wang704987562/article/details/54093979">https://blog.csdn.net/wang704987562/article/details/54093979</a></p>
+<p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。<br>引自：<a href="https://blog.csdn.net/wang704987562/article/details/54093979">https://blog.csdn.net/wang704987562/article/details/54093979</a></p>
 </blockquote>
 <p>JS判断：</p>
 <pre><code class="language-javascript">function isEmojiCharacter(substring) {  
@@ -695,8 +831,7 @@ function isChrome() {
 <details>
   <summary>show</summary>
 
-<p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a>
-<a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
+<p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a><br><a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
 <pre><code class="language-javascript">let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
 let observer = new MutationObserver(function(mutationList) {
     setTimeout(function() {
@@ -722,8 +857,7 @@ observer.observe(article, options);</code></pre>
 <details>
   <summary>show</summary>
 
-<p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a>
-<a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
+<p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a><br><a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
 </details>
 
 <h2 id="css相关">CSS相关</h2>
@@ -973,8 +1107,7 @@ observer.observe(article, options);</code></pre>
 <details>
   <summary>show</summary>
 
-<p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
-<a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
+<p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎<br><a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
 </details>
 
 <h3 id="windows下调试ios网页设备">windows下调试iOS网页设备</h3>
@@ -1003,13 +1136,11 @@ observer.observe(article, options);</code></pre>
 <h4 id="1-highlightjs-的坑">1. highlight.js 的坑</h4>
 <h5 id="highlightjs无效问题">highlight.js无效问题</h5>
 <blockquote>
-<p><strong>hub主页上的highlight.js文件是用不了的!!!</strong>
-解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
+<p><strong>hub主页上的highlight.js文件是用不了的!!!</strong><br>解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
 </blockquote>
 <h5 id="始终只能渲染code而无法渲染pre的问题">始终只能渲染code而无法渲染pre的问题</h5>
 <blockquote>
-<p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong>
-解决: 把pre也一起选中就好了</p>
+<p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong><br>解决: 把pre也一起选中就好了</p>
 </blockquote>
 <pre><code class="language-js">  $(&#39;pre, pre code&#39;).each(function(i, block) {
     hljs.highlightBlock(block);
@@ -1022,8 +1153,7 @@ observer.observe(article, options);</code></pre>
 <li>首先不引用lib下的prettify.min.js文件</li>
 <li>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</li>
 </ol>
-<p><img src="https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png" alt="image">
-修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png" alt="image"><br>修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
 <h5 id="2-css覆盖">2. css覆盖</h5>
 <p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
 <p>注释一部分editormd.preview.css:</p>
@@ -1093,9 +1223,7 @@ $ nvm install 8</code></pre>
 <hr>
 <p>Linux下安装nvm</p>
 <p>看得懂就行啦：<a href="https://github.com/creationix/nvm#git-install">https://github.com/creationix/nvm#git-install</a></p>
-<p>参考: 
-<a href="https://i5ting.github.io/How-to-learn-node-correctly/#10302">https://i5ting.github.io/How-to-learn-node-correctly/#10302</a>
-<a href="https://blog.csdn.net/jingtian678/article/details/78422760">https://blog.csdn.net/jingtian678/article/details/78422760</a></p>
+<p>参考:<br><a href="https://i5ting.github.io/How-to-learn-node-correctly/#10302">https://i5ting.github.io/How-to-learn-node-correctly/#10302</a><br><a href="https://blog.csdn.net/jingtian678/article/details/78422760">https://blog.csdn.net/jingtian678/article/details/78422760</a></p>
 <h3 id="regex-匹配换行符匹配尾部空格">Regex 匹配换行符/匹配尾部空格</h3>
 <pre><code class="language-regex">([\s\S]*)</code></pre>
 <pre><code class="language-regex">\s*$</code></pre>
@@ -1186,18 +1314,14 @@ $ nvm install 8</code></pre>
 <details>
   <summary>show</summary>
 
-<p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a>
-<a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a>
-<a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a>
-编程珠玑</p>
+<p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a><br><a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a><br>编程珠玑</p>
 </details>
 
 <h3 id="mysql用户管理">MySQL用户管理</h3>
 <details>
   <summary>show</summary>
 
-<p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a>
-<a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
+<p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a><br><a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
 </details>
 
 <h3 id="在windows的右键菜单上增加新建自定义类型文件的选项">在Windows的右键菜单上增加新建自定义类型文件的选项</h3>
@@ -1257,8 +1381,7 @@ $ nvm install 8</code></pre>
 <details>
   <summary>show</summary>
 
-<p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a>
-<a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
+<p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a><br><a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
 </details>
 
 <h3 id="正则表达式-密码强度">正则表达式 密码强度</h3>
@@ -1273,22 +1396,17 @@ $ nvm install 8</code></pre>
   <summary>show</summary>
 
 <p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
-<p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt
-而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
-<p>魔数列表参考如下：
-<a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
+<p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt<br>而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
+<p>魔数列表参考如下：<br><a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
 </details>
 
 <h3 id="xss攻击和java处理xss">xss攻击和Java处理xss</h3>
 <details>
   <summary>show</summary>
 
-<p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a>
-<a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
-<p>Java的html解析器
-<a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
-<p>前端xss处理：
-<a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
+<p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
+<p>Java的html解析器<br><a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
+<p>前端xss处理：<br><a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
 </details>
 
 <h3 id="微服务集群分布式">微服务/集群/分布式</h3>
@@ -1300,15 +1418,9 @@ $ nvm install 8</code></pre>
 <h4 id="集群和分布式">集群和分布式</h4>
 <blockquote>
 <p>小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群</p>
-<p>作者：张鹏飞
-链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a>
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>作者：张鹏飞<br>链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
-<p>参考：
-<a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a>
-<a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a>
-<a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
+<p>参考：<br><a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a><br><a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a><br><a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
 </details>
 
 <h3 id="什么是为什么要tracing？opentracing的入门铺垫">什么是/为什么要Tracing？Opentracing的入门铺垫</h3>
@@ -1335,21 +1447,16 @@ $ nvm install 8</code></pre>
 <details>
   <summary>show</summary>
 
-<p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a>
-<a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a>
-<a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
+<p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a><br><a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a><br><a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
 </details>
 
 <h3 id="html2canvas-页面输出为canvas">html2canvas 页面输出为canvas</h3>
 <details>
   <summary>show</summary>
 
-<p>超级棒的插件：
-教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a>
-hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
+<p>超级棒的插件：<br>教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a><br>hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
 <h4 id="生成的canvas没有图片的坑：">生成的canvas没有图片的坑：</h4>
-<p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
-开启html2canvas的useCORS配置项。即作如下设置： </p>
+<p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。<br>开启html2canvas的useCORS配置项。即作如下设置： </p>
 <pre><code class="language-javascript">var opts = {useCORS: true};
 html2canvas(element, opts);</code></pre>
 </details>
@@ -1499,12 +1606,9 @@ html2canvas(element, opts);</code></pre>
 <p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
 <p>GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
 </blockquote>
-<p>中文网 : <a href="http://graphql.cn/">官网</a>
-引子 : <a href="https://segmentfault.com/a/1190000006132986">segmentfault</a>
-知乎专栏 : <a href="https://zhuanlan.zhihu.com/p/28077095">面向未来的API —— GitHub GraphQL API 使用介绍</a></p>
+<p>中文网 : <a href="http://graphql.cn/">官网</a><br>引子 : <a href="https://segmentfault.com/a/1190000006132986">segmentfault</a><br>知乎专栏 : <a href="https://zhuanlan.zhihu.com/p/28077095">面向未来的API —— GitHub GraphQL API 使用介绍</a></p>
 <blockquote>
-<p>2018年11月16日 10点04分
-要构建一个graphql需要的成本太大了 还不如restful来的快</p>
+<p>2018年11月16日 10点04分<br>要构建一个graphql需要的成本太大了 还不如restful来的快</p>
 </blockquote>
 </details>
 
@@ -1559,12 +1663,9 @@ html2canvas(element, opts);</code></pre>
 <details>
   <summary>show</summary>
 
-<p><img src="http://image.youyinnn.cn/sorting-algorithms.png" alt="aa">
-<a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
-<p><img src="https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png" alt="image">
-<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
-<p><img src="https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png" alt="image">
-<a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
+<p><img src="http://image.youyinnn.cn/sorting-algorithms.png" alt="aa"><br><a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png" alt="image"><br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png" alt="image"><br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
 </details>
 
 <h3 id="经纬度行政区域查询api">经纬度行政区域查询API</h3>
@@ -1579,9 +1680,7 @@ html2canvas(element, opts);</code></pre>
   <summary>show</summary>
 
 
-<p><img src="https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg" alt="jEHdM1ZoRC">
-<img src="https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png" alt="image">
-<img src="https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg" alt="jEHdM1ZoRC"><br><img src="https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png" alt="image"><br><img src="https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png" alt="image"></p>
 <p>然后打开win10自带的录音软件Voice Recorder</p>
 </details>
 
@@ -1600,3 +1699,57 @@ html2canvas(element, opts);</code></pre>
 
 <pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
 </details>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

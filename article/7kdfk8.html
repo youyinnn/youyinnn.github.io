@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 7kdfk8<br>title: Java并发编程第七坎<br>categories:</p>
+<ul>
+<li>note</li>
+<li>booknote</li>
+<li>《艺术》与《技术》<br>comments: true<br>tags:</li>
+<li>java</li>
+<li>thread</li>
+<li>AQS</li>
+<li>Lock-Api<br>date: 2018-12-25 22:22:48<br>series: 并发</li>
+</ul>
+<hr>
+<h3 id="introduction">Introduction</h3>
+<blockquote>
+<p>事前吐槽：<em>Doug Lea</em>老爷子的注释可真难读，也许是我英语太菜鸡了- -（本来还挺自信的，现在哭着学英语）</p>
+</blockquote>
+<p>接下来我们进入Java并发编程的一个崭新的阶段</p>
+<p>前面我们对于锁的实现和同步的编程，都是基于<code>synchronized</code>关键字的实现，现在开始接触到的，是Java并发包中提供的锁相关的API，首先可以了解到的是，我们可以通过API的方式去实现<strong>“获取锁”</strong>和<strong>“释放锁”</strong>，从而更灵活的去进行并发编程</p>
+<p>至此，以后我们再谈起<strong>“Java中的锁”</strong>，它可能指的是多个意义上的，讨论之前先要明确一个方向：</p>
+<ul>
+<li><code>synchronized</code>/<code>volatile</code>关键字的使用</li>
+<li>锁的几种<strong>等级</strong>和区别</li>
+<li>锁的几种<strong>类型</strong>和使用场景</li>
+<li><strong>Lock API</strong>的使用以及和<code>synchronized</code>的区别</li>
+</ul>
+<h3 id="lock-接口">Lock 接口</h3>
+<p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
+<p>它提供了同步功能，需要使用者<strong>显式</strong>地去获取锁和释放锁：</p>
+<pre><code class="language-java">Lock lock = new ReentrantLock();
+lock.lock();
+try {}
+finally { // 保证获取锁之后，最终能够被释放掉
+    lock.unlock();
+}</code></pre>
+<p>虽然不比关键字便捷，但是它的使用非常灵活，不一定要先获取锁才能够释放锁，拥有了更方便的可操作性、可中断性和<strong>超时获取锁</strong>等关键字不具备的特点</p>
+<table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">非阻塞获取锁</td>
+<td align="center">无论有没有获取成功，都会从获取动作返回；</td>
+</tr>
+<tr>
+<td align="center">能够被中断地获取锁</td>
+<td align="center">和<code>synchronized</code>不同，线程在获取锁的过程中能够响应中断，当获取到锁的线程被中断的时候，中断异常会抛出，同时释放锁；</td>
+</tr>
+<tr>
+<td align="center">超时获取</td>
+<td align="center">在指定的时间内获取到锁，否则从获取动作返回；</td>
+</tr>
+</tbody></table>
+<p>上面这三个点都有一些confuse的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用<code>synchronized</code>的时候的一个细节：<code>synchronized</code>与中断</p>
+<pre><code class="language-java">public static void main(String[] args) throws InterruptedException {
+    String lockA = &quot;A&quot;;
+    Thread t1 = new Thread(() -&gt; {
+        synchronized (lockA) {
+            System.out.println(&quot;T1 get LockA&quot;);
+            while (true) {
+            }
+        }
+    });
+    Thread t2= new Thread(() -&gt; {
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;T2 trying to get LockA&quot;);
+        synchronized (lockA) {
+            System.out.println(&quot;T2 get LockA&quot;);
+        }
+    });
+    t1.start();
+    t2.start();
+    TimeUnit.SECONDS.sleep(3);
+    while (t2.isAlive() &amp;&amp; t1.isAlive()) {
+        TimeUnit.MILLISECONDS.sleep(300);
+        if (!t1.isInterrupted()) {t1.interrupt();}
+        if (!t2.isInterrupted()) {t2.interrupt();}
+        System.out.println(&quot;T1 Alive: &quot; + t1.isAlive() + &quot;, isInterrupted: &quot; + t1.isInterrupted() + &quot;, State: &quot; + t1.getState());
+        System.out.println(&quot;T2 Alive: &quot; + t2.isAlive() + &quot;, isInterrupted: &quot; + t2.isInterrupted() + &quot;, State: &quot; + t2.getState());
+    }
+}</code></pre>
+<pre><code class="language-java">T1 get LockA
+T2 trying to get LockA
+T1 Alive: true, isInterrupted: true, State: RUNNABLE
+T2 Alive: true, isInterrupted: true, State: BLOCKED
+T1 Alive: true, isInterrupted: true, State: RUNNABLE
+T2 Alive: true, isInterrupted: true, State: BLOCKED
+// ....</code></pre>
+<p>我们发现，在<code>synchronized</code>的过程中，T2是等待获取锁被BLOCKED住的线程，这时候是无法响应中断的，<strong>即使线程的已经打了中断标志！</strong>而在T1中，是可以根据中断标志去响应中断的，或者能够短睡眠去响应中断异常；</p>
+<p>也就是，在<code>synchronized</code>外面BLOCKED住的线程：<strong>只能是阻塞；无法被中断；没有超时；</strong></p>
+<p>而Lock就更为灵活</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void lock()</td>
+<td>等阻塞获取锁，获取到锁之后，从该方法返回；否则一直在该方法中等待（此时线程的状态是WATING）</td>
+</tr>
+<tr>
+<td>void lockInterruptibly() <code>throws InterruptedException</code></td>
+<td>可中断地获取锁，在锁的获取过程中，其它线程可以中断这个过程</td>
+</tr>
+<tr>
+<td>boolean tryLock()</td>
+<td>非阻塞式地获取锁，如果获取成功，则返回true，获取失败，则返回false</td>
+</tr>
+<tr>
+<td>boolean tryLock(long time, TimeUnit unit) <code>throws InterruptedException</code></td>
+<td>超时获取：若在限定时间内获取到锁，则返回true；若获取过程中被中断，则抛出异常；若超时，则返回false</td>
+</tr>
+<tr>
+<td>void unlock()</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>Condition newCondition()</td>
+<td>获取等待通知组件，改组件和当前的锁绑定，当前线程只有获取到锁了，才能调用改组件的<code>wait()</code>方法</td>
+</tr>
+</tbody></table>
+<p>看了下上面的API，我们对于Lock和<code>synchronized</code>的区别就清楚了</p>
+<h3 id="队列同步器">队列同步器</h3>
+<p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
+<p><strong>原理：</strong>它使用一个int成员变量来表示<strong>同步状态（state）</strong>，对锁的获取其实就是对该state的获取，对于同步状态的获取和改变，同步器提供了线程安全的方法；另外它还通过一个内置的FIFO的队列来完成资源获取线程的排队。</p>
+<blockquote>
+<p><strong>同步状态</strong>的概念，如果学过操作系统的都知道，在PV问题中会有一个值来代表当前可以访问临界资源的资格，这里的同步状态大概也是这么个意思</p>
+<p>基本上state如果是0就代表无法获取，如果大于0就代表能够获取一次，比如说如果现在AQS的state是2，你还能acquire2次，每次acquire(1)，因为是只有1个线程在acquire嘛，等到state不够了的时候，就开始排队了</p>
+</blockquote>
+<p>同步器的使用主要是通过<strong>继承</strong>的方式，实现Lock API的时候，推荐同时在里面写一个静态内部类来实现同步器，同步器没有实现任何同步接口，仅是定义了若干同步状态的获取和释放方法来提供自定义组件去使用，并且同步器支持独占式和共享式的实现，所以它可以为多种不同的同步组件去服务（<code>ReentrantLock</code>、<code>ReentrantReadWriteLock</code>、<code>CountDownLatch</code>）</p>
+<p>它和Lock的关系就像前后端的关系一样：</p>
+<ul>
+<li>Lock是面向锁使用者的，它定义了使用者所需要的锁的方法，隐藏了实现细节</li>
+<li>同步器是面向锁实现者的，它简化了锁的实现，屏蔽了同步状态管理、线程排队、等待和唤醒等底层操作</li>
+</ul>
+<p><strong>锁和同步器很好地隔离了使用者和实现者锁关注的领域，又增强了锁的可操作性和降低了锁的实现难度</strong></p>
+<h4 id="接口与示例">接口与示例</h4>
+<p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
+<h5 id="状态相关方法">状态相关方法</h5>
+<p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
+<ul>
+<li><code>getState()</code>：获取同步状态</li>
+<li><code>setState()</code>：设置当前同步状态</li>
+<li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
+</ul>
+<h5 id="同步器可重写的方法">同步器可重写的方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>protected boolean tryAccquire(int arg)</code></td>
+<td>独占式获取同步状态，这个方法需要查询同步状态是否符合预期，然后再使用CAS设置新的同步状态</td>
+</tr>
+<tr>
+<td><code>protected boolean tryRelease(int arg)</code></td>
+<td>独占式释放同步状态</td>
+</tr>
+<tr>
+<td><code>protected int tryAcquireShared(int arg)</code></td>
+<td>共享式获取同步状态，若返回大于0的值则表示获取成功，否则获取失败</td>
+</tr>
+<tr>
+<td><code>protected int tryReleaseShared(int arg)</code></td>
+<td>共享式释放同步状态</td>
+</tr>
+<tr>
+<td><code>protected boolean isHeldExclusively()</code></td>
+<td>当前同步器是否在独占模式下被线程占用，一般用来表示是否被当前线程独占</td>
+</tr>
+</tbody></table>
+<h5 id="同步器提供的模板方法">同步器提供的模板方法</h5>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void acquire(int arg)</code></td>
+<td>独占式获取同步状态，如果同步状态获取成功，则从该方法返回，否则进入同步队列等待，该方法会调用重写的<code>tryAcquire</code>方法</td>
+</tr>
+<tr>
+<td><code>void acquireInterruptibly(int arg)</code></td>
+<td>和<code>acquire</code>相同，但是这个方法能够响应中断，当前线程如果没获取到同步状态而进入到同步队列中等待的时候，这时候中断这个线程，它就会从队列中退出并且抛出异常</td>
+</tr>
+<tr>
+<td><code>boolean tryAcquireNanos(int arg, long nanos)</code></td>
+<td>在<code>acquireInterruptibly</code>的基础上加了超时限制，如果在限时内获取到同步状态了就返回true，否则返回false</td>
+</tr>
+<tr>
+<td><code>void acquireShared(int arg)</code></td>
+<td>共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态</td>
+</tr>
+<tr>
+<td><code>void acquireSharedInterruptibly(int arg)</code></td>
+<td>共享式可中断获取同步状态</td>
+</tr>
+<tr>
+<td><code>boolean acquireSharedNanos(ing arg, long nanos)</code></td>
+<td>共享式可中断有超时获取同步状态，限时内获取到就返回true，否则返回false</td>
+</tr>
+<tr>
+<td><code>boolean release(int arg)</code></td>
+<td>独占式释放同步状态，并唤醒在同步队列中等待的第一个线程</td>
+</tr>
+<tr>
+<td><code>boolean releaseShared(int arg)</code></td>
+<td>共享式释放同步状态</td>
+</tr>
+<tr>
+<td><code>Collection&lt;Thread&gt; getQueuedThreads()</code></td>
+<td>获取等待在同步队列上的线程集合</td>
+</tr>
+</tbody></table>
+<p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和是否、同步队列线程集合</p>
+<h3 id="尝试实现一个独占锁">尝试实现一个独占锁</h3>
+<pre><code class="language-java">class Mutex implements Lock {
+    static class Q extends AbstractQueuedSynchronizer {
+        // 查看是否处于占用状态
+        @Override
+        protected boolean isHeldExclusively() {return getState() == 1;}
+        @Override
+        public boolean tryAcquire(int acquire) {
+            // 状态为0的时候获取锁
+            if (compareAndSetState(0, acquire)) {
+                setExclusiveOwnerThread(Thread.currentThread());
+                return true;
+            }
+            return false;
+        }
+        @Override
+        protected boolean tryRelease(int release) {
+            if (getState() == 0) {
+                throw new IllegalMonitorStateException();
+            }
+            // 释放锁并将状态设置为0
+            setExclusiveOwnerThread(null);
+            setState(0);
+            return true;
+        }
+        // 返回一个Condition对象 每一个conditionObject都包含了一个condition队列
+        Condition newCondition() {return new ConditionObject();}
+        // 返回当前持有本锁的线程对象
+        public Thread getOwnerThread() {return getExclusiveOwnerThread();}
+    }
+    private final Q q = new Q();
+    @Override
+    public void lock() {q.acquire(1);}
+    @Override
+    public void lockInterruptibly() throws InterruptedException {
+        q.acquireInterruptibly(1);
+    }
+    @Override
+    public boolean tryLock() {return q.tryAcquire(1);}
+    @Override
+    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+        return q.tryAcquireNanos(1, unit.toNanos(time));
+    }
+    @Override
+    public void unlock() {q.release(1);}
+    @Override
+    public Condition newCondition() {return q.newCondition();}
+    // 可以额外附加的实现
+    public boolean isLocked() {return q.isHeldExclusively();}
+    public boolean hasQueuedThreads() {return q.hasQueuedThreads();}
+    public Thread getExclusiveOwnerThread() {return q.getOwnerThread();}
+}</code></pre>
+<p>我们要实现一个Mutex，首先实现<code>Lock</code>接口，然后写一个内部类并继承<code>AbstractQueuedSynchronizer</code>，在Mutex中实例化一个同步器对象，并把同步器对象的方法代理为，Lock接口的方法的实现</p>
+<p>值得注意的是，<code>AbstractQueuedSynchronizer</code>类本身就提供了很多方法作为实现同步组件的有力工具，比如在<code>tryAcquire(int acquire)</code>方法的实现里，就用到了<code>compareAndSetState</code>尝试设置同步状态，并且如果设置成功的话，就代表当前线程已经获取到该锁了，随后就把当前线程和该同步器进行绑定，即通过<code>setExclusiveOwnerThread</code>方法将该线程设置为锁的持有者</p>
+<p>其他诸如获取Queue中的线程集合、判断是锁是否被锁上、获取锁的持有线程等等这些方法，都能通过同步器提供的方法去灵活实现，在这样灵活的同步器的帮助下，能够实现符合很多场景的同步组件</p>
+<p>最后，我们还注意到有一个<code>newCondition</code>方法，这个方法返回的对象有什么用，我们以后再慢慢研究</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

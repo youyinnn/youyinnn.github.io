@@ -74,6 +74,18 @@ $(function() {
     } else if (pathname === '/resume/') {
         changepagetitle('resume | youyinnn')
         new_render_md()
+    } else if (pathname === '/scripts/') {
+        changepagetitle('scripts | youyinnn')
+        new_render_md()
+    } else if (pathname === '/todos/') {
+        changepagetitle('scripts | youyinnn')
+        new_render_md()
+    } else if (pathname === '/articles/') {
+        changepagetitle('articles | youyinnn')
+        get_articles()
+    }  else if (pathname.startsWith('/article/')) {
+        changepagetitle('article | youyinnn')
+        new_render_md()
     } else {
         // showloading()
         // let params = location.search.substring(1).split('&')

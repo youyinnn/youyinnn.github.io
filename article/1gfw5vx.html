@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1gfw5vx<br>title: 自实现ArrayList<br>categories:</p>
+<ul>
+<li>note<br>comments: true<br>date: 2018-06-04 22:47:12<br>tags:</li>
+<li>arraylist</li>
+</ul>
+<hr>
+<h4 id="前言">前言</h4>
+<p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
+<p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection接口、Iterable接口、Iterator接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
+<p>为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读</p>
+<p>大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是<strong>往JDK源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
+<p>话不多说，开搞</p>
+<h4 id="热身">热身</h4>
+<p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
+<pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+    //...
+}</code></pre>
+<p>这里面重要的内容首先我们就盯着<code>AbstractList</code>这个抽象类，一直往深了摸，摸到了<code>Collection</code>这个接口，这个接口继承了<code>Iterable</code>接口，欸~摸到宝了，我们拿这个玩意去开展我们的<strong>自实现类</strong>，为什么其他的抽象类、其他的接口不用管呢？</p>
+<p>在我看来，<strong>无论是Collection、List这类的接口，还是AbstractList、AbstractCollection这些抽象类</strong>它们仅是提供一个<strong>接口规范以及一定的实现</strong>，真正有意思的东西，还得是<strong>迭代器</strong>这个利器！</p>
+<p>于是马上写好自实现的类头，加上泛型就不用说了</p>
+<pre><code class="language-java">public class MyArrayList&lt;E&gt; implements Iterable&lt;E&gt;{
+
+    @Override
+    public Iterator&lt;E&gt; iterator() {
+        return null;
+    }
+
+    @Override
+    public void forEach(Consumer&lt;? super E&gt; action) {
+
+    }
+
+    @Override
+    public Spliterator&lt;E&gt; spliterator() {
+        return null;
+    }
+}</code></pre>
+<p>这里面除了<code>Iterator()</code>方法之外，另外两个方法不太熟，但首先我们保证好一个容器结构应有的几个基本接口：</p>
+<ul>
+<li><strong>get(int index)</strong></li>
+<li><strong>int size()</strong></li>
+<li><strong>E remove(int index)</strong></li>
+<li><strong>void add(E element)</strong></li>
+<li><strong>void add(int index, E element)</strong></li>
+<li><strong>boolean contains(int index)</strong></li>
+<li><strong>int indexOf(E element)</strong></li>
+</ul>
+<p>里面注意的几个点：</p>
+<ul>
+<li>凡是牵扯到<strong>索引操作</strong>的，都需要<strong>判断index是否合法</strong>，比如是负数或者超过界限了</li>
+<li>add方法的<strong>扩容问题</strong></li>
+</ul>
+<p>准备就绪，咔咔咔就写下十几行代码：</p>
+<pre><code class="language-java">private final int DEFAULT_CAPACTTY = 10;
+private int size = 0;
+private E[] array;
+
+MyArrayList() {
+    array = (E[]) new Object[DEFAULT_CAPACTTY];
+}
+
+MyArrayList(int capacity) {
+    array = (E[]) new Object[capacity];
+}
+
+public int size() {
+    return size;
+}
+public E get(int index) {
+    E element = null;
+    if (index &lt;= endIndex()) {
+        element = array[index];
+    }
+    return element;
+}
+public boolean contains(E target) {
+    if (target != null) {
+        for (E e : this) {
+            if (e.equals(target)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+public int indexOf(E element) {
+    if (element != null) {
+        for (int i = 0; i &lt; size; i++) {
+            if (element.equals(array[i])) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}</code></pre>
+<p>这些就不解释了，为了方便，我还写了一个获取末尾元素下标值的方法，这也是基本的</p>
+<pre><code class="language-java">private int endIndex() {
+    return size - 1;
+}</code></pre>
+<h5 id="remove">remove</h5>
+<pre><code class="language-java">public E remove(int index) {
+    E element;
+    if (index &gt;= 0 &amp;&amp; index &lt;= endIndex()) {
+        element = array[index];
+        if (index &lt; endIndex()) {
+            System.arraycopy(array, index + 1, array, index, endIndex() - index);
+        }
+        size--;
+        return element;
+    } else {
+        throw new ArrayIndexOutOfBoundsException(&quot;index:&quot; + index);
+    }
+}    </code></pre>
+<p>基本思路，如果index在可取范围内，则可以remove，否则抛出异常</p>
+<p>在可取范围内，如果index不是最后一个的话，那么移除该元素就得：</p>
+<ul>
+<li><strong>index位之后的元素往前移一位</strong></li>
+<li><strong>size--</strong></li>
+</ul>
+<p>否则只进行<code>size--</code></p>
+<h5 id="add">add</h5>
+<pre><code class="language-java">public void add(E element) {
+    add(size, element);
+}
+
+public void add(int index, E element) {
+    if (index &lt; 0) {
+        throw new ArrayIndexOutOfBoundsException(&quot;index:&quot; + index);
+    } else {
+        // 如果插入位置为当前数组尾部或者更后面 则统一插到尾部位置
+        adjustArray();
+        if (index &lt; size) {
+            System.arraycopy(array, index, array, index + 1, endIndex() - index);
+        }
+        array[index] = element;
+        size++;
+    }
+}
+
+public void adjustArray() {
+    if (size == array.length) {
+        E[] newArr = (E[]) new Object[array.length * 2];
+        System.arraycopy(array, 0, newArr, 0, array.length);
+        array = newArr;
+    }
+}</code></pre>
+<p>实现<code>add(int index, E element)</code>和传统的不太一样，我的这个方法更具体一些，我们把扩容的事情抽象成一个<code>adjustArray</code>方法，如果要插入的位置在当前列表的中间，我们将数组从要插入的位置开始往后移一位</p>
+<h5 id="iterator">Iterator</h5>
+<p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
+<pre><code class="language-java">private class MyArrayListIterator implements Iterator&lt;E&gt;{
+
+    private int currentIndex = 0;
+
+    @Override
+    public boolean hasNext() {
+        return currentIndex &lt; size;
+    }
+
+    @Override
+    public E next() {
+        return array[currentIndex++];
+    }
+
+    @Override
+    public void remove() {
+        MyArrayList.this.remove(--currentIndex);
+    }
+
+    @Override
+    public void forEachRemaining(Consumer&lt;? super E&gt; action) {
+        MyArrayList.this.forEach(action);
+    }
+}</code></pre>
+<p>这是我们写在<strong>MyArrayList</strong>类中的内部类，由于是基于数组的实现，<strong>三大迭代器方法</strong>也很简单就实现了，我们写完之后，<strong>Iterable</strong>方法就可以写两个了：</p>
+<pre><code class="language-java">@Override
+public Iterator&lt;E&gt; iterator() {
+    return new MyArrayListIterator();
+}
+
+@Override
+public void forEach(Consumer&lt;? super E&gt; action) {
+    if (action != null) {
+        for (E e : this) {
+            action.accept(e);
+        }
+    }
+}</code></pre>
+<p>目前为止（2018年6月5日-08点55分）<a href="https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java">代码快照</a>，我们的自实现算是基本达标了，接下来我们进入阅读ArrayList的环节</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

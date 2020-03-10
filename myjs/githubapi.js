@@ -46,7 +46,6 @@ function urlhandle(url) {
     }
 }
 
-
 function get_articles() {
     $('#pgboxbox').remove()
     $('.treenode').remove()
@@ -55,43 +54,9 @@ function get_articles() {
     all_tags = new Array()
     $('#blog_statistic_body').addClass('myhide')
     // from localStorage
-    let pcbl = localStorage.getItem('pcbl')
-    let pcbl_timeout = localStorage.getItem('pcbl_timeout')
-    setgohub('Go hub', 'https://github.com/' + username + '/' + blog_repo + '/issues')
-    if (pcbl === null && pcbl_timeout === null) {
-        // request
-        let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
-        sendget(urlhandle(url), function(re) {
-            get_issues_comments(re[0].number, re[0].body, function(issuesbody, re) {
-                newpc = yaml.load(re[0].body)
-                localStorage.setItem('pcbl', JSON.stringify(newpc))
-                localStorage.setItem('pcbl_timeout',
-                    new Date(new Date().getTime() + pcbl_timeout_period).getTime())
-                localStorage.setItem('pseries', re[1].body)
-                localStorage.setItem('pod', re[2].body)
-                handlemetadata(newpc)
-                checkcache()
-                cachedcleanerLock = false
-            })
-        }, timeoutfunc)
-    } else {
-        let pcbl_timeout = parseInt(localStorage.getItem('pcbl_timeout'))
-        let now = new Date().getTime()
-        // timeout
-        if (now > pcbl_timeout) {
-            localStorage.removeItem('pcbl')
-            localStorage.removeItem('pcbl_timeout')
-            localStorage.removeItem('pseries')
-            localStorage.removeItem('pod')
-            get_articles()
-            return
-        } else {
-            hideloading()
-            handlemetadata(JSON.parse(pcbl))
-            showbbt()
-            checkcache()
-        }
-    }
+    let pcbl = sessionStorage.getItem('pcbl')
+    handlemetadata(yaml.load(pcbl))
+    showbbt()
 }
 
 function get_article(number) {
@@ -190,36 +155,6 @@ function get_article(number) {
     }, timeoutfunc)
 }
 
-function get_resume() {
-    get_issues_by_label(resume_label, function(re) {
-        if (re.length === 0) {
-            no_label(resume_label)
-        } else {
-            $('[data-toggle="tooltip"]').tooltip()
-            setgohub('Go hub', re[0].html_url)
-            render_md(re[0].body)
-            adclass(md, 'resume')
-            setcoll()
-            hidetopbar()
-            showbbt()
-            if (getclientw() > 700) {
-                setTimeout(function() {
-                    $('#gohub').tooltip('show')
-                    $('#hb').tooltip('show')
-                }, 1000);
-                setTimeout(function() {
-                    $('#gohub').tooltip('hide')
-                    $('#hb').tooltip('hide')
-                }, 3500);
-            }
-            $('#busuanzi_container_page_pv').addClass('mpgvresume')
-            $(md).animateCss('fadeIn')
-        }
-        hideloading()
-        $(md).animateCss('fadeIn')
-    }, true)
-}
-
 function get_friendlinked() {
     let keys = Object.keys(friendslink)
     for (key of keys) {
@@ -230,7 +165,6 @@ function get_friendlinked() {
         ditem.innerText = key.replace(/\n|\r\n/g, '')
         appendc(fldd, ditem)
     }
-
 }
 
 function get_issues_comments(number, issuesbody, func, timeout) {
@@ -240,29 +174,6 @@ function get_issues_comments(number, issuesbody, func, timeout) {
         hideloading()
         showbbt()
     }, timeoutfunc, timeout)
-}
-
-function get_todo() {
-    get_issues_by_label(todo_label, function(re) {
-        setgohub('Go hub', re[0].html_url)
-        get_issues_comments(re[0].number, re[0].body, createtodo)
-    }, true)
-}
-
-function get_script() {
-    get_issues_by_label(script_label, function(re) {
-        setgohub('Go hub', re[0].html_url)
-        get_issues_comments(re[0].number, re[0].body, createscript)
-        $('#toc')[0].style.display = 'inline-block'
-        $('#toc').removeClass('myhide')
-    }, true)
-}
-
-function get_egg() {
-    get_issues_by_label(egg_label, function(re) {
-        setgohub('Go hub', re[0].html_url)
-        get_issues_comments(re[0].number, re[0].body, createegg)
-    }, true)
 }
 
 function get_issues_by_label(label, func, closed, timeout, page) {

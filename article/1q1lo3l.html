@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1q1lo3l<br>title: Electron_打包你的HelloWorld为exe<br>categories:</p>
+<ul>
+<li>note</li>
+<li>electron<br>comments: true<br>tags:</li>
+<li>electron</li>
+<li>helloworld<br>series: electron<br>date: 2017-11-23 13:02:21</li>
+</ul>
+<hr>
+<p>{% cq %}</p>
+<p>EXE什么的，看着就忍不住要双击它！</p>
+<p>{% endcq %}</p>
+<h3 id="introduction">Introduction</h3>
+<hr>
+<p>首先介绍一下Electron打包应用的方式：</p>
+<ul>
+<li>打包成asar分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging">详情见</a>。</li>
+<li>重构官网提供的二进制release，这种方式也比较麻烦。</li>
+<li>通过打包工具：<ul>
+<li><a href="https://github.com/electron-userland/electron-forge">electron-forge</a></li>
+<li><a href="https://github.com/electron-userland/electron-builder">electron-builder</a></li>
+<li><a href="https://github.com/electron-userland/electron-packager">electron-packager</a></li>
+</ul>
+</li>
+<li>重编译源码二进制文件...</li>
+</ul>
+<p>用打包工具进行打包比较傻瓜式，两年前的时候，我用过packager，但是现在不知道为啥不好使了，老卡住，然后我转试builder。</p>
+<h2 id="electron-packager">electron-packager</h2>
+<p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
+<pre><code class="language-shell">npm insatll electron-packager -g</code></pre>
+<p>对还是全局安装 不要怂。</p>
+<p>要打包你的项目，你只需要运行下面格式的命令：</p>
+<pre><code class="language-shell">electron-packager &lt;sourcedir&gt; &lt;appname&gt; --platform=&lt;platform&gt; --arch=&lt;arch&gt; [optional flags...]</code></pre>
+<p>里面的参数含义我们可以通过<a href="https://github.com/electron-userland/electron-packager/blob/master/usage.txt">txt</a>进行简单的参考，或者在<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">md</a>进行深入研究。</p>
+<p>推荐是看md的比较清晰一点</p>
+<p>在上篇中，我们构造的helloworld的目录结构为：</p>
+<pre><code>your-app/
+├── package.json
+├── main.js
+└── index.html</code></pre><p>在我们的演示中，我们运行的是这样的命令：</p>
+<pre><code class="language-shell">electron-packager . helloworldappname --out outputdir --electronVersion 1.7.9</code></pre>
+<p>我们在项目目录根目录下运行了这个命令，所以第一个<code>.</code>代表的<code>&lt;sourcedir&gt;</code>是本目录，然后我们指定了<code>&lt;appname&gt;</code>为<code>helloworldappname</code>，然后我们指定了<code>--out</code>表示打包输出的目录，最后指定了我们使用的electron的版本号。</p>
+<p>我没有指定<code>--platform</code>和<code>--arch</code>是因为这俩在默认的情况下是选取本机参数，比如我是win32x64。</p>
+<p>但是每次打包都要写这巨长的命令，确实有点麻烦，我们可以使用npm的<code>run-script</code>功能去快速的执行写好的命令：</p>
+<p>npm<code>run-script</code>是默认运行当前目录下<code>package.json</code>文件中script定义好的命令，具体的应用自己去学npm相关知识，我在项目的<code>package.json</code>文件中写好：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;helloworld&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;main&quot;: &quot;main.js&quot;,
+  &quot;scripts&quot;:{
+    &quot;start&quot; : &quot;electron .&quot;,
+    &quot;pk&quot;: &quot;electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9&quot;
+  }
+}</code></pre>
+<p>然后在根目录下运行命令：</p>
+<pre><code class="language-shell">npm run-script pk</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-shell">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+$ ll
+total 6
+-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html
+-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js
+-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+$ npm run-script pk
+
+&gt; helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld
+&gt; electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9
+
+Packaging app for platform win32 x64 using electron v1.7.9
+Wrote new app to outputdir\helloworldappname-win32-x64
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+$ ll
+total 6
+-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html
+-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js
+drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/
+-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+$</code></pre>
+<p>然后项目目录下会生成：<br><img src="https://image.youyinnn.top/ba4fa76eb64909e4d4959799cf130547.png" alt="electronpk"></p>
+<p>运行exe：<br><img src="https://image.youyinnn.top/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
+<hr>
+<p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
+<p><em>参考：<a href="https://electronjs.org/docs/tutorial/application-distribution">https://electronjs.org/docs/tutorial/application-distribution</a></em><br><em>参考：<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">https://github.com/electron-userland/electron-packager/blob/master/docs/api.md</a></em><br><em>参考：<a href="http://blog.csdn.net/a1170201028/article/details/59108126">http://blog.csdn.net/a1170201028/article/details/59108126</a></em></p>
+<h2 id="electron-builder">electron-builder</h2>
+<ol>
+<li><p>Specify the standard fields in the application <code>package.json</code> — <a href="https://www.electron.build/configuration/configuration#Metadata-name">name</a>, <code>description</code>, <code>version</code> and <a href="https://docs.npmjs.com/files/package.json#people-fields-author-contributors">author</a>.</p>
+</li>
+<li><p>Specify the <a href="https://www.electron.build/configuration/configuration#configuration">build</a> configuration in the <code>package.json</code> as follows:</p>
+<pre><code>&quot;build&quot;: {
+  &quot;appId&quot;: &quot;your.id&quot;,
+  &quot;mac&quot;: {
+    &quot;category&quot;: &quot;your.app.category.type&quot;
+  }
+}</code></pre><p>See <a href="https://www.electron.build/configuration/configuration#configuration">all options</a>. Option <a href="https://www.electron.build/configuration/contents#files">files</a> to indicate which files should be packed in the final application, including the entry file, maybe required.</p>
+</li>
+<li><p>Add <a href="https://www.electron.build/icons">icons</a>.</p>
+</li>
+<li><p>Add the <a href="https://docs.npmjs.com/cli/run-script">scripts</a> key to the development <code>package.json</code>:</p>
+<pre><code>&quot;scripts&quot;: {
+  &quot;pack&quot;: &quot;electron-builder --dir&quot;,
+  &quot;dist&quot;: &quot;electron-builder&quot;
+}</code></pre><p>Then you can run<code>yarn dist</code>(to package in a distributable format (e.g. dmg, windows installer, deb package)) or<code>yarn pack</code>(only generates the package directory without really packaging it. This is useful for testing purposes).</p>
+<p>To ensure your native dependencies are always matched electron version, simply add script <code>&quot;postinstall&quot;: &quot;electron-builder install-app-deps&quot;</code> to your <code>package.json</code>.</p>
+</li>
+<li><p>If you have native addons of your own that are part of the application (not as a dependency), set <a href="https://www.electron.build/configuration/configuration#Configuration-nodeGypRebuild">nodeGypRebuild</a> to <code>true</code>.</p>
+</li>
+</ol>
+<p>Please note that everything is packaged into an asar archive <a href="https://www.electron.build/configuration/configuration#Configuration-asar">by default</a>.</p>
+<p>For an app that will be shipped to production, you should sign your application. See <a href="https://www.electron.build/code-signing#where-to-buy-code-signing-certificate">Where to buy code signing certificates</a>.</p>
+<p>这个build的时候也需要下载一些东西，源可能也被墙了，所以只有科学上网了。</p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>

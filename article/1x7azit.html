@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/mycss/loading.css">
+    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/mycss/media.css">
+    <link rel="stylesheet" href="/mycss/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/styles/github-gist.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/quicklink.umd.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg em-svg em-rocket"></button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <span id="slogan">
+            <i id="wolf-logo" class="em-svg em-new_moon mr-4"></i>I'M BACK
+        </span>
+        <div id="showmore"> &gt; About Me & This Blog</div>
+        <div id="showhacknical"> &gt; My Github Analysis</div>
+        <div id="toarticles"> &gt; My Tech Articles</div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="series" class="unselectable">
+        <span>系</span>
+        <span>列</span>
+        <span>文</span>
+        <span>章</span>
+    </div>
+    <div id="seriesbox" class="unselectable">
+
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistic</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Site running days:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Total article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Char count:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Category count:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tag count:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-dark" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-dark" type="button">cates</button>
+                <button id="tags" class="btn btn-dark" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-dark" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+        <div class="articleorderbtn">
+            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
+            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
+            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+    </div>
+    <div id="md" class="myhide">
+        <hr>
+<p>abbrlink: 1x7azit<br>title: Some Backtracking Problem In Leetcode<br>categories:</p>
+<ul>
+<li>note</li>
+<li>leetcode<br>tags:</li>
+<li>leetcode</li>
+<li>backtracking<br>date: 2019-03-24 16:26:00 +8</li>
+</ul>
+<hr>
+<h3 id="introduction">Introduction</h3>
+<p>在Leetcode上做到某些题的时候，会发现这些题的解法大致都是差不多，将<strong>ans容器</strong>传递到某个方法中，这个方法一般有<code>dfs</code>，<code>backtracking</code>，<code>bfs</code>，等命名，然后方法中会有递归调用，然后到达某一个出口的时候，就会将当前的<strong>tmp答案</strong>放置到<strong>ans容器</strong>中，于是达到探索所有解的目的</p>
+<p>这篇大概也是各个题的题解，只是在评论区里看到有人<a href="https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)">整理</a>了，我就一起整理下来分析分析</p>
+<blockquote>
+<p>This structure might apply to many other backtracking questions, but here I am just going to demonstrate Subsets, Permutations, and Combination Sum.</p>
+</blockquote>
+<h3 id="subset">Subset</h3>
+<p>Given a set of <strong>distinct</strong> integers, <em>nums</em>, return all possible subsets (the power set).</p>
+<p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: nums = [1,2,3]
+Output:
+[
+  [3],
+  [1],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
+  [1,2],
+  []
+]</code></pre><h4 id="solution">Solution</h4>
+<p>要找到一组无重复序列的子集，我们可以通过回溯的思想，去做这件事情，比如有序列<code>[1,2,3]</code>，因为子集可以不管顺序，所以123和321和312之类的是一样的，所以我们可以按照顺序决定谁开头，然后从这个开头位置开始进行回溯，比如：</p>
+<pre><code>第一个开头是什么都没有，这也是空集的情况[]；
+
+[]——》  记录这个序列；
+
+第二个开头是1，于是由1开始进行递归：
+
+  |----1——》  记录这个序列，加入2；这时候i从0开始；
+     |----1，2——》  记录这个序列，加入3；这时候i从1开始；
+        |---- 1，2，3——》  记录这个序列，这时候i从2开始，达到序列底部，删除3，回退到上一层； 
+     |----1《——  从上一层回退回来的，删除2，结束该次循环；
+     |----1，3——》  记录这个序列，这时候i从2开始，达到序列底部，删除3，回退到上一层；
+  |----1《——  从上一层回退回来的，删除1，结束该次循环；
+
+于是1开头的子集已经访问完毕，继续
+
+第三个开头是2，于是由2开始进行递归：
+
+    |----2——》  记录这个序列，加入3；这时候i从1开始；
+       |----2，3——》  记录这个序列，这时候i从2开始，达到序列底部，删除3，回退到上一层；
+    |----2《——  从上一层回退回来的，删除2，结束该次循环；
+
+于是2开头的子集已经访问完毕，继续
+
+第三个开头是3，于是由3开始进行递归：
+
+    |----3——》  记录这个序列，这时候i从2开始，达到序列底部，删除3，回退到上一层；
+    |----3《——  从上一层回退回来的，删除3，结束该次循环；
+
+于是3开头的子集已经访问完毕，序列所有数字均已经作为开头访问过子序列了，求解完毕；</code></pre><p>于是实现可以简单的写出：</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList();
+    backtracking(ans, new ArrayList&lt;&gt;(), nums, 0);
+    return ans;
+}
+
+private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] nums, int start) {
+    ans.add(new ArrayList&lt;&gt;(tmp));
+    for (int i = start; i &lt; nums.length; i++) {
+        tmp.add(nums[i]);
+        backtracking(ans, tmp, nums, i + 1);
+        tmp.remove(tmp.size() - 1);
+    }
+}</code></pre>
+<h3 id="subset-ii">Subset II</h3>
+<p>Given a collection of integers that might contain duplicates, <strong>nums</strong>, return all possible subsets (the power set).</p>
+<p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [1,2,2]
+Output:
+[
+  [2],
+  [1],
+  [1,2,2],
+  [2,2],
+  [1,2],
+  []
+]</code></pre><p>和上题差不多，只是这类题总会有，无重复序列，有重复序列的两种题型出现，于是我们如何在处理有重复序列的时候，避免重复解成了解决第二类问题的关键</p>
+<h4 id="solution-1">Solution</h4>
+<p>避免判断重复的关键是：<strong>先对序列进行排序</strong>！</p>
+<p>我们以<code>[1,2,2]</code>为例</p>
+<pre><code>第一个开头是什么都没有，这也是空集的情况[]；
+
+[]——》  记录这个序列；
+
+第二个开头是1，于是由1开始进行递归：
+
+  |----1——》  记录这个序列，加入2；这时候i从0开始；
+     |----1，2——》  记录这个序列，加入2；这时候i从1开始；
+        |---- 1，2，2——》  记录这个序列，这时候i从2开始，达到序列底部，删除2，回退到上一层； 
+     |----1《——  从上一层回退回来的，删除2，结束该次循环；
+     |----1，2——》  这个序列i=2的时候，i != start &amp;&amp; nums[i] == nums[i - 1]
+  |----1《——  从上一层回退回来的，删除1，结束该次循环；
+
+于是1开头的子集已经访问完毕，继续
+
+第三个开头是2，于是由2开始进行递归：
+
+    |----2——》  记录这个序列，加入2；这时候i从1开始；
+       |----2，2——》  记录这个序列，这时候i从2开始，达到序列底部，删除2，回退到上一层；
+    |----2《——  从上一层回退回来的，删除2，结束该次循环；
+
+于是2开头的子集已经访问完毕，继续
+
+第三个开头是2，于是由2开始进行递归：
+
+    因为这时候start还是0，而i != start &amp;&amp; nums[i] == nums[i - 1]成立，于是2就应该跳过；
+
+于是3开头的子集已经访问完毕，序列所有数字均已经作为开头访问过子序列了，求解完毕；</code></pre><pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(int[] nums) {
+    ArrayList&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+    Arrays.sort(nums);
+    backtracking(ans, new ArrayList&lt;&gt;(), nums, 0);
+    return ans;
+}
+
+private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] nums, int start) {
+    ans.add(new ArrayList&lt;&gt;(tmp));
+    for (int i = start; i &lt; nums.length; i++) {
+        if (i != start &amp;&amp; nums[i] == nums[i - 1]) {
+            continue;
+        }
+        tmp.add(nums[i]);
+        backtracking(ans, tmp, nums, i + 1);
+        tmp.remove(tmp.size() - 1);
+    }
+}</code></pre>
+<h3 id="permutation">Permutation</h3>
+<p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [1,2,3]
+Output:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]</code></pre><h4 id="solution-2">Solution</h4>
+<p>这题就并不是找子集了，于是123和321是两个解，我们还是以前两题相类似的思路，顺序以某个数字开头，然后依次递归下去，比如以<code>1</code>开头，然后从剩下的数字中分别可以遍历出<code>12</code>和<code>13</code>，然后<code>12</code>从剩下的3中遍历出结果<code>123</code>，而<code>13</code>可以从剩下的2中遍历出<code>132</code>；于是1开头的所有排列已经找到了；依次类推2和3开头的结果</p>
+<p>其中有tricky的地方是，每次我们要找下一个候选的时候，我们要判断当前后续是否在当此排列人当中，如果在就跳过，跳过的方法也很简单，因为序列本身无重复，所以直接<code>!tmp.contains(nums[i])</code>就好，于是实现可以是：</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
+    backtracking(ans, new ArrayList(), nums);
+    return ans;
+}
+
+private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] nums) {
+    if (tmp.size() == nums.length) {
+        ans.add(new ArrayList&lt;&gt;(tmp));
+    } else {
+        for (int i = 0; i &lt; nums.length; i++) {
+            // skip when 
+            if (!tmp.contains(nums[i])) {
+                tmp.add(nums[i]);
+                backtracking(ans, tmp, nums);
+                tmp.remove(tmp.size() - 1);
+            }
+        }
+    }
+}</code></pre>
+<h3 id="permutation-ii">Permutation II</h3>
+<p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [1,1,2]
+Output:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+]</code></pre><h4 id="solution-3">Solution</h4>
+<p>这里又有不同了，序列中有重复的数字，那么不能像上一题一样用数值去判断是否存在过<strong>tmp</strong> 中了，所以我们可以设置一个flag数组，用于标识对应位置上的数组是否出现过，实际上我们上一题也可以用这样的方法</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) {
+    Arrays.sort(nums);
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList();
+    int[] flags = new int[nums.length];
+    backtracking(ans, new ArrayList(), nums, flags);
+    return ans;
+}
+
+public void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] nums, int[] flags) {
+    if (tmp.size() == nums.length) {
+        ans.add(new ArrayList(tmp));
+    } else {
+        for (int i = 0; i &lt; nums.length; i++) {
+            // 如果出现过就跳过
+            if (flags[i] == 0) {
+                if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; flags[i - 1] == 0) {
+                    continue;
+                }
+                tmp.add(nums[i]);
+                flags[i] = 1;
+                backtracking(ans, tmp, nums, flags);
+                flags[i] = 0;
+                tmp.remove(tmp.size() - 1);
+            }
+        }
+    }
+}</code></pre>
+<p>关键去重是这一行：<code>i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; flags[i - 1] == 0</code></p>
+<p>前面两个子条件可以理解，之前我们去重都是这样做的，第三个条件是什么意思呢？如果和当前数组重复的元素也就是前一位，<strong>并没有被计入tmp序列的话</strong>，那么就说明它已经被还原为0了，说明这是一个新开始了，比如说序列<code>[1,1,3]</code>，当以<strong>第一个1</strong>为开头的时候，序列解已经给出<code>1,1,3/1,3,1</code>了，等到给出解的时候，所有的flag已经都还原成<code>[0,0,0]</code>，意味着重新计数了，等到以<strong>第二个1</strong>为开头的时候，这时候判断它和第一个一数值相等，并且第一个1都没有被纳入计数的时候，于是这是一个开始，且是重复的开始，所以可以跳过</p>
+<h3 id="combination-sum">Combination Sum</h3>
+<p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]</code></pre><h4 id="solution-4">Solution</h4>
+<p>这里首先说说排列和组合的区别，前面两题<strong>Permutation</strong>，是排列问题，排列问题需要考虑顺序，也就是123和321是两个解，所以每次回溯的循环都是从0开始，以1开头要考虑所有的其他数字，以3开头也要考虑所有的其他数字；</p>
+<p>而组合是不需要考虑顺序的，也就是123和321是同一个解，于是每次循环都从一个新的start开始，比如序列<code>[1, 2, 3]</code>的话，从1开头，要考虑自己和剩下的2和3，从2开头就只需要考虑自己和3就行了，从3开头就只需要考虑自己就好了；</p>
+<p>然后对于这题来说，每次我们往下传的时候，都传做好减法的target，一直到最后target为0的时候，等于找到了一组解，于是代码为：</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
+    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+    backtrack(ans, new ArrayList&lt;&gt;(), candidates, 0, target);
+    return ans;
+}
+
+private void backtrack(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] candidate, int start, int target) {
+    if (target == 0) {
+        ans.add(new ArrayList&lt;&gt;(tmp));
+    } else if (target &gt; 0) {
+        for (int i = start; i &lt; candidate.length; i++) {
+            tmp.add(candidate[i]);
+            backtrack(ans, tmp, candidate, i, target - candidate[i]);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+}</code></pre>
+<h3 id="combination-sum-ii">Combination Sum II</h3>
+<p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [10,1,2,7,6,1,5], target = 8,
+A solution set is:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: candidates = [2,5,2,1,2], target = 5,
+A solution set is:
+[
+  [1,2,2],
+  [5]
+]</code></pre><h4 id="solution-5">Solution</h4>
+<p>额，我觉得到现在已经轻车熟路了，这里要注意的是，题目里说了每一个候选数字自能使用一次，于是我们往下传的时候，start要是i+1</p>
+<pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) {
+    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+    Arrays.sort(candidates);
+    backtrack(ans, new ArrayList&lt;&gt;(), candidates, 0, target);
+    return ans;
+}
+
+private void backtrack(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, int[] candidate, int start, int target) {
+    if (target == 0) {
+        ans.add(new ArrayList&lt;&gt;(tmp));
+    } else if (target &gt; 0) {
+        for (int i = start; i &lt; candidate.length; i++) {
+            if (i &gt; start &amp;&amp; candidate[i] == candidate[i - 1]) {
+                continue;
+            }
+            tmp.add(candidate[i]);
+            backtrack(ans, tmp, candidate, i + 1, target - candidate[i]);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+}</code></pre>
+<h3 id="palindrome-partitioning">Palindrome Partitioning</h3>
+<p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
+<p>Return all possible palindrome partitioning of <em>s</em>.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: &quot;aab&quot;
+Output:
+[
+  [&quot;aa&quot;,&quot;b&quot;],
+  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
+]</code></pre><h4 id="solution-6">Solution</h4>
+<p>这题怎么说，其实可以用dp，而不用回溯，因为回溯确实有点魔幻，因为在回溯里不太好追踪子集，至少我这个笨脑子追踪不了</p>
+<pre><code class="language-java">public List&lt;List&lt;String&gt;&gt; partition(String s) {
+   List&lt;List&lt;String&gt;&gt; list = new ArrayList&lt;&gt;();
+   backtrack(list, new ArrayList&lt;&gt;(), s, 0);
+   return list;
+}
+
+public void backtrack(List&lt;List&lt;String&gt;&gt; list, List&lt;String&gt; tempList, String s, int start){
+   if(start == s.length())
+      list.add(new ArrayList&lt;&gt;(tempList));
+   else{
+      for(int i = start; i &lt; s.length(); i++){
+         if(isPalindrome(s, start, i)){
+            tempList.add(s.substring(start, i + 1));
+            backtrack(list, tempList, s, i + 1);
+            tempList.remove(tempList.size() - 1);
+         }
+      }
+   }
+}
+
+public boolean isPalindrome(String s, int low, int high){
+   while(low &lt; high)
+      if(s.charAt(low++) != s.charAt(high--)) return false;
+   return true;
+} </code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
+
+    <script src="/myjs/tool.js"></script>
+
+    <script src="/myjs/init.js"></script>
+    <script src="/myjs/eventbind.js"></script>
+    <script src="/myjs/githubapi.js"></script>
+    <script src="/myjs/elementcreate.js"></script>
+    <script src="/myjs/main.js"></script>
+    <script src="/resources/friendslink.js"></script>
+    <script src="/resources/cache.js"></script>
+    <script>
+        0
+    </script>
+</body>
+
+</html>
