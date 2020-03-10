@@ -180,6 +180,8 @@ function new_render_md() {
         }
     })
     setimg()
+    hljs.initHighlightingOnLoad()
+    $('pre').addClass('hljs')
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
@@ -666,6 +668,7 @@ function pagination() {
                 // setheightfordocpanel()
                 scrollToTop(0)
                 $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+                $('#pagebox-' + nowpage).animateCss('fadeIn')
             }
         })
     }
@@ -694,6 +697,7 @@ function pagination() {
             // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            $('#pagebox-' + nowpage).animateCss('fadeIn')
         }
     })
 
@@ -722,6 +726,7 @@ function pagination() {
             // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            $('#pagebox-' + nowpage).animateCss('fadeIn')
         }
     })
     appendc($('#pgboxbox')[0], pn)
