@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,30 +136,30 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: huiysg<br>title: RegExp_2_metacharacters<br>categories:</p>
-<ul>
-<li>note</li>
-<li>booknote</li>
-<li>《Mastering Regular Expression(Third Edition)》<br>comments: true<br>tags:</li>
-<li>learning</li>
-<li>RegExp<br>date: 2017-11-17 00:02:06<br>series: 《Mastering Regular Expression(Third Edition)》</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>Metacharacters：元字符</p>
 <p>{% endcq %}</p>
 <!-- more -->
 
-<h3 id="元字符的解释">元字符的解释</h3>
-<p>完整的正则表达式由两种字符组成：</p>
+
+          <h3>
+            <a name="_root-元字符的解释" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            元字符的解释
+          </h3><p>完整的正则表达式由两种字符组成：</p>
 <ul>
 <li>特殊字符，即<code>元字符</code>，它们一般具有特殊的含义，并不匹配字面字符。</li>
 <li>文字，即普通<code>文本字符</code>，匹配的就是字面字符。</li>
 </ul>
 <hr>
-<h4 id="行的起始和结束">行的起始和结束</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-行的起始和结束" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            行的起始和结束
+          </h4><blockquote>
 <p><code>^</code> 脱字符号，在检查一行文本的时候，<code>^</code>代表一行的开始。</p>
 </blockquote>
 <blockquote>
@@ -177,33 +172,68 @@
 <p>我们以更机械的方式去解读第一个例子：<code>^cat</code> 匹配的是以c作为一行的第一个字符，紧接着c后面是a，a后面紧接着t的文本。</p>
 <p>这两个符号的特殊之处就在于，它们匹配的只是位置，而不是特定的文本。</p>
 <hr>
-<h4 id="字符组">字符组</h4>
-<h5 id="匹配若干字符之一">匹配若干字符之一</h5>
-<p>这里需要引入一个概念：正则表达式结构体（construct）<code>[...]</code>。它允许使用者列出在某处期望匹配的字符的候选值，通常也被称为字符组。</p>
+
+          <h4>
+            <a name="_root-字符组" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            字符组
+          </h4>
+          <h5>
+            <a name="_root-匹配若干字符之一" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            匹配若干字符之一
+          </h5><p>这里需要引入一个概念：正则表达式结构体（construct）<code>[...]</code>。它允许使用者列出在某处期望匹配的字符的候选值，通常也被称为字符组。</p>
 <p>比如当我们不确定是要匹配grey还是gray的时候，我们可以这样写<code>gr[ae]y</code>，它想表达的意思是：匹配一段文本，它是先有一个g，g后是一个r，r后可以是a或者e其中之一，然后就是一个y。</p>
 <p>在<code>gr[ae]y</code>中，<code>g</code>或者<code>r</code>、<code>y</code>这样的表达式，它们被解释为：g后面紧跟着、r后面紧跟着这样的“接下来（and then）”的含义，而在<code>[ae]</code>中，里面的字符被解释为：这个结构体的位置被替换为a或者是e。</p>
 <p>我们还有可能遇到的场景是，<code>[123456789]</code>甚至是26个字母全用上的情况，这个时候我们可以使用<strong>字符组元字符</strong><code>-</code>（连接符）来表示一个范围，比如<code>[1-9]</code>和<code>[123456789]</code>是完全相等的。同时还支持多重范围比如<code>[a-h1-6F-I]</code>和<code>[abcdefg123456FGHI]</code>等效。</p>
 <p>还可以在字符组里面使用普通文本[_.!?]可以匹配下划线或者点或者感叹号或者问号。</p>
 <p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。这有点像正常语言中，某个单词在不同的语境中有不同的解释一样，我私称这样的情况为<code>语境分意</code></strong></p>
-<h5 id="排除型字符组">排除型字符组</h5>
-<p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
+
+          <h5>
+            <a name="_root-排除型字符组" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            排除型字符组
+          </h5><p>还有一种字符组形如：<code>[^...]</code>，这个字符组会匹配任何<strong>未</strong>列出的字符。例如<code>[^1-6]</code>匹配除了1到6以外的任何字符。</p>
 <p>你可能已经注意到了，<code>^</code>脱字符在组内和组外的含义的不一样的，由此我们了解到，<strong>元字符会根据环境的不同而改变它所要表达的含义。</strong></p>
 <blockquote>
 <p>书例：<code>q[^u]</code>是否能匹配<code>Iraq</code>？</p>
 <p>我们机械地解读表达式：q后面紧跟一个除了u以外的字符。注意是“后面紧跟”，所以这就意味着，q字符绝对不是最后一个字母。</p>
 <p>因此我们知道：一个字符组，即使是排除型的字符组，也必须匹配一个字符。</p>
 </blockquote>
-<h5 id="点号匹配任意字符">点号匹配任意字符</h5>
-<p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。如果我们要搜索03/19/76、03-19-76、03.19.76，一般的的做法是写<code>03[-/.]19[-/.]76</code>来让字符组匹配一个减号或者斜杠或者英文句号，我们也可以这样写<code>03.19.76</code>。这里又出现<strong>语境分意</strong>的情况了，<code>.</code>在字符组内外的含义不同，而<code>-</code>在字符组内的位置不同语义也不同，如果写成<code>[.-/]</code>，则是用来表示范围的，这里需要特别留心。</p>
+
+          <h5>
+            <a name="_root-点号匹配任意字符" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            点号匹配任意字符
+          </h5><p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。如果我们要搜索03/19/76、03-19-76、03.19.76，一般的的做法是写<code>03[-/.]19[-/.]76</code>来让字符组匹配一个减号或者斜杠或者英文句号，我们也可以这样写<code>03.19.76</code>。这里又出现<strong>语境分意</strong>的情况了，<code>.</code>在字符组内外的含义不同，而<code>-</code>在字符组内的位置不同语义也不同，如果写成<code>[.-/]</code>，则是用来表示范围的，这里需要特别留心。</p>
 <hr>
-<h4 id="多选结构">多选结构</h4>
-<h5 id="匹配任意子表达式">匹配任意子表达式</h5>
-<p><code>|</code>是一个非常简洁的元字符，它等于布尔运算里面的“或（or）”。比如<code>Bob</code>和<code>Robert</code>是两个表达式，但<code>Bob|Robert</code>就是一个表达式，但是可以匹配里面两种情况。这样的组合称之为“多选分支（alternative）”。</p>
+
+          <h4>
+            <a name="_root-多选结构" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            多选结构
+          </h4>
+          <h5>
+            <a name="_root-匹配任意子表达式" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            匹配任意子表达式
+          </h5><p><code>|</code>是一个非常简洁的元字符，它等于布尔运算里面的“或（or）”。比如<code>Bob</code>和<code>Robert</code>是两个表达式，但<code>Bob|Robert</code>就是一个表达式，但是可以匹配里面两种情况。这样的组合称之为“多选分支（alternative）”。</p>
 <p>我们之前的<code>gr[ea]y</code>可以写成<code>grey|gray</code>，或者是<code>gr(a|e)y</code>，最后这种情况用括号来划定多选结构的范围（一般情况下，括号也是元字符）。同样值得注意的是，如果我们写成<code>gr[e|a]y</code>，那么这里面的<code>|</code>就并不代表或而是代表“|”符号本身。</p>
 <p>在表达式<code>gr(a|e)y</code>中，括号是必须的，如果没有括号，<code>gre|ay</code>就变成了匹配<code>gre</code>或者<code>ay</code>了。<strong>多选结构可以包含很多字符，但是不能超过括号的界限。</strong> 再举一个例子：<code>(Fir|1)st [Ss]treet</code>可以匹配<code>First Street</code>、<code>First street</code>、<code>1st Street</code>、<code>1st street</code>等。</p>
 <p>再一次强调，多选结构和字符组的区别是：<strong>字符组只能匹配一个字符，但是多选结构可以匹配多个字符！</strong></p>
-<h4 id="可选项元素">可选项元素</h4>
-<p>比如color和colour，其中只有一个u的区别，我们可以用<code>colou?r</code>这样的表达式来解决，<code>?</code>元字符代表可选，它代表前面一个字母是可选的匹配项。</p>
+
+          <h4>
+            <a name="_root-可选项元素" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            可选项元素
+          </h4><p>比如color和colour，其中只有一个u的区别，我们可以用<code>colou?r</code>这样的表达式来解决，<code>?</code>元字符代表可选，它代表前面一个字母是可选的匹配项。</p>
 <p><code>?</code>只作用与之前紧邻的元素，所以我们让机械来读这个表达式则是：<code>c</code>，然后<code>o</code>然后<code>l</code>然后<code>o</code>然后<code>u?</code>最后<code>r</code>。</p>
 <p>比较特别的是，<code>u?</code>这样的表达式是永远都能匹配成功的，它可以匹配以个u，也可以什么都不匹配。</p>
 
@@ -231,19 +261,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

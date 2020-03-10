@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,25 +136,25 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 3zxt7z<br>title: Log4j2_Lookups<br>categories:</p>
-<ul>
-<li>note</li>
-<li>toolslearning</li>
-<li>log4j2<br>comments: true<br>tags:</li>
-<li>log4j2</li>
-<li>learning<br>date: 2017-12-09 15:28:15<br>series: Log4j2</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>Lookups：让你的配置更灵活</p>
 <p>{% endcq %}</p>
 <!-- more -->
 
-<h3 id="lookups">Lookups</h3>
-<p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
-<h4 id="contextmap-lookup">ContextMap Lookup</h4>
-<p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
+
+          <h3>
+            <a name="_root-Lookups" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Lookups
+          </h3><p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
+
+          <h4>
+            <a name="_root-ContextMap Lookup" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ContextMap Lookup
+          </h4><p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
 <p><strong>引用方法：<code>${ctx:KEY}</code></strong></p>
 <p>代码中写：</p>
 <pre><code class="language-java">ThreadContext.put(&quot;aaa&quot;, &quot;bbb&quot;);</code></pre>
@@ -167,18 +162,33 @@
 <pre><code class="language-xml">&lt;PatternLayout pattern=&quot;${ctx:aaa} %d{HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
 <p>输出：</p>
 <pre><code class="language-console">bbb  log4j2test.Main 19 15:20:07.859 [main] INFO  - info level</code></pre>
-<h4 id="date-lookup">Date Lookup</h4>
-<p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
+
+          <h4>
+            <a name="_root-Date Lookup" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Date Lookup
+          </h4><p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
 <p><strong>引用方法：<code>${date:SimpleDateFormat}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;PatternLayout pattern=&quot;${ctx:aaa} ${date:HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
-<h4 id="environment-lookup">Environment Lookup</h4>
-<p>输出系统中的环境变量，无论是全局变量文件<code>/etc/profile</code>中的，还是运行时定义的变量。</p>
+
+          <h4>
+            <a name="_root-Environment Lookup" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Environment Lookup
+          </h4><p>输出系统中的环境变量，无论是全局变量文件<code>/etc/profile</code>中的，还是运行时定义的变量。</p>
 <p><strong>引用方法：<code>${env:KEY}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;PatternLayout pattern=&quot;${env:USER} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
-<h4 id="java-lookup">Java Lookup</h4>
-<p>输出一些JVM信息：</p>
+
+          <h4>
+            <a name="_root-Java Lookup" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Java Lookup
+          </h4><p>输出一些JVM信息：</p>
 <ul>
 <li>version：Java版本</li>
 <li>rentime：Java运行时版本信息</li>
@@ -192,8 +202,13 @@
 <pre><code class="language-xml">&lt;PatternLayout header=&quot;${java:runtime} - ${java:vm} - ${java:os}&quot;&gt;
   &lt;Pattern&gt;%d %m%n&lt;/Pattern&gt;
 &lt;/PatternLayout&gt;</code></pre>
-<h4 id="system-properties-lookup">System Properties Lookup</h4>
-<p>获取系统属性的值</p>
+
+          <h4>
+            <a name="_root-System Properties Lookup" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            System Properties Lookup
+          </h4><p>获取系统属性的值</p>
 <p><strong>引用方法：<code>${sys:KEY}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;Appenders&gt;
@@ -224,19 +239,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,21 +136,24 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1gfw5vx<br>title: 自实现ArrayList<br>categories:</p>
-<ul>
-<li>note<br>comments: true<br>date: 2018-06-04 22:47:12<br>tags:</li>
-<li>arraylist</li>
-</ul>
-<hr>
-<h4 id="前言">前言</h4>
-<p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
+        
+          <h4>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h4><p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
 <p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection接口、Iterable接口、Iterator接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
 <p>为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读</p>
 <p>大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是<strong>往JDK源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
 <p>话不多说，开搞</p>
-<h4 id="热身">热身</h4>
-<p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
+
+          <h4>
+            <a name="_root-热身" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            热身
+          </h4><p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
 <pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
         implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -244,8 +242,13 @@ public int indexOf(E element) {
 <pre><code class="language-java">private int endIndex() {
     return size - 1;
 }</code></pre>
-<h5 id="remove">remove</h5>
-<pre><code class="language-java">public E remove(int index) {
+
+          <h5>
+            <a name="_root-remove" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            remove
+          </h5><pre><code class="language-java">public E remove(int index) {
     E element;
     if (index &gt;= 0 &amp;&amp; index &lt;= endIndex()) {
         element = array[index];
@@ -265,8 +268,13 @@ public int indexOf(E element) {
 <li><strong>size--</strong></li>
 </ul>
 <p>否则只进行<code>size--</code></p>
-<h5 id="add">add</h5>
-<pre><code class="language-java">public void add(E element) {
+
+          <h5>
+            <a name="_root-add" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            add
+          </h5><pre><code class="language-java">public void add(E element) {
     add(size, element);
 }
 
@@ -292,8 +300,13 @@ public void adjustArray() {
     }
 }</code></pre>
 <p>实现<code>add(int index, E element)</code>和传统的不太一样，我的这个方法更具体一些，我们把扩容的事情抽象成一个<code>adjustArray</code>方法，如果要插入的位置在当前列表的中间，我们将数组从要插入的位置开始往后移一位</p>
-<h5 id="iterator">Iterator</h5>
-<p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
+
+          <h5>
+            <a name="_root-Iterator" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Iterator
+          </h5><p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
 <pre><code class="language-java">private class MyArrayListIterator implements Iterator&lt;E&gt;{
 
     private int currentIndex = 0;
@@ -358,19 +371,10 @@ public void forEach(Consumer&lt;? super E&gt; action) {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

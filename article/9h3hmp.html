@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,15 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 9h3hmp<br>title: 记一次设计模式之旅<br>categories:</p>
-<ul>
-<li>note<br>comments: true<br>date: 2018-08-09 15:21:33<br>tags:</li>
-<li>design-pattern</li>
-</ul>
-<hr>
-<h3 id="前言">前言</h3>
-<p>我</p>
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><p>我</p>
 <p>面试（大约两个月前）</p>
 <p>被问线程安全单例</p>
 <p>实际上写得出</p>
@@ -160,12 +153,22 @@
 <p>耻辱</p>
 <p>说明：本篇代码大部分引自：<a href="https://github.com/iluwatar/java-design-patterns">https://github.com/iluwatar/java-design-patterns</a> </p>
 <hr>
-<h3 id="singleton">Singleton</h3>
-<p>单例模式（Singleton）算是工厂模式的一种特例，你不需要给出任何参数，就可以马上得到一个在任何地方都可以调用到的唯一的实例</p>
+
+          <h3>
+            <a name="_root-Singleton" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Singleton
+          </h3><p>单例模式（Singleton）算是工厂模式的一种特例，你不需要给出任何参数，就可以马上得到一个在任何地方都可以调用到的唯一的实例</p>
 <p>第一次接触到单例，还是在1年多前学习spring的时候，在配置Bean的时候有单例多例配置</p>
 <p>总的来说，一个实例，如果是用作工具类或者工具对象的话，那么它并不需要创建多个实例，我们就可以用单例的形式去获取这个对象</p>
-<h4 id="hungrymanstyle（thread-safe）">HungryManStyle（thread safe）</h4>
-<pre><code class="language-java">/**
+
+          <h4>
+            <a name="_root-HungryManStyle（thread safe）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            HungryManStyle（thread safe）
+          </h4><pre><code class="language-java">/**
  * 使用静态对象进行预加载来保证线程安全的
  * 一般我们称这样的单例为饿汉式单例 不管三七二十一 一旦加载这个类就创建对象
  * 一般是在第一次引用这个类的时候就加载这个类
@@ -178,9 +181,19 @@ class Singleton{
     }
 }</code></pre>
 <p>要说的话都在注释里了</p>
-<h4 id="lazymanstyle">LazyManStyle</h4>
-<h5 id="无锁（非线程安全）">无锁（非线程安全）</h5>
-<pre><code class="language-java">public class Singleton {
+
+          <h4>
+            <a name="_root-LazyManStyle" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            LazyManStyle
+          </h4>
+          <h5>
+            <a name="_root-无锁（非线程安全）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            无锁（非线程安全）
+          </h5><pre><code class="language-java">public class Singleton {
     private Singleton(){}
     private static final Singleton INSTANCE;
     public static Singleton getInstance(){
@@ -196,8 +209,13 @@ class Singleton{
 <li>判断是否初始化了instance变量 始终只返会同一个对象</li>
 </ul>
 <p>但是这种单例只能在单线程的情况下正常工作，在多线程的情况下，如果多个线程同一时刻在line5处判断实例变量不为空，那么就可能有多个线程同时执行line6，在这个时间，会有大量的实例挤破头得被instance引用，这样会造成资源浪费</p>
-<h5 id="简单synchronized上锁（线程安全）">简单Synchronized上锁（线程安全）</h5>
-<pre><code class="language-java">public class Singleton{
+
+          <h5>
+            <a name="_root-简单Synchronized上锁（线程安全）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            简单Synchronized上锁（线程安全）
+          </h5><pre><code class="language-java">public class Singleton{
     private Singleton(){}
     private static final Singletion INSTANCE;
     public static synchronized Singleton getInstance(){
@@ -219,8 +237,13 @@ public static Singleton getInstance(){
 }</code></pre>
 <p>优点，比上面那种安全，缺点，获取对象的时候资源浪费，我们上锁的目的只是<strong>防止最开始在实例未被初始化的时候，被多线程访问导致line5判断异常</strong>，往后在实例被创建好了之后，并不需要防止多线程同时访问，每次调用方法都加锁只会增加无意义的消耗，我称这个为<strong>“无意义锁”</strong></p>
 <p>这种实现不可取</p>
-<h5 id="想当然的双重检查锁（非线程安全）">想当然的双重检查锁（非线程安全）</h5>
-<pre><code class="language-java">public class Singleton{
+
+          <h5>
+            <a name="_root-想当然的双重检查锁（非线程安全）" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            想当然的双重检查锁（非线程安全）
+          </h5><pre><code class="language-java">public class Singleton{
     private Singleton(){}
     private static final Singletion INSTANCE;
     public static Singleton getInstance(){
@@ -236,8 +259,13 @@ public static Singleton getInstance(){
 }</code></pre>
 <p>这个实现，看似可以避免<strong>无意义锁</strong>的问题，但是line8可能会因为某单线程的重排序导致其他线程对该实例的可见性问题，对于双重检查锁的错误，在系列文章《并发编程第六坎》中可以看到，这里不再赘述</p>
 <p>基于双重检查锁的解决方案，给出两种比较标准的实现：</p>
-<h5 id="基于内部类和类加载机制的initialization-on-demand-holder-idiom">基于内部类和类加载机制的——Initialization On Demand Holder Idiom</h5>
-<pre><code class="language-java">public final class InitializingOnDemandHolderIdiom {
+
+          <h5>
+            <a name="_root-基于内部类和类加载机制的——Initialization On Demand Holder Idiom" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            基于内部类和类加载机制的——Initialization On Demand Holder Idiom
+          </h5><pre><code class="language-java">public final class InitializingOnDemandHolderIdiom {
     private InitializingOnDemandHolderIdiom(){}
     public static InitializingOnDemandHolderIdiom getInstance() {
         return HelperHolder.INSTANCE;
@@ -257,8 +285,13 @@ public static Singleton getInstance(){
 </ul>
 </blockquote>
 <p>在这里我们多接触了一个概念——<strong>初始化锁LC锁</strong>，具体的介绍可以看第六坎</p>
-<h5 id="基于volatile变量的线程安全的双重检查锁">基于volatile变量的——线程安全的双重检查锁</h5>
-<pre><code class="language-java">public final class ThreadSafeDoubleCheckLocking {
+
+          <h5>
+            <a name="_root-基于volatile变量的——线程安全的双重检查锁" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            基于volatile变量的——线程安全的双重检查锁
+          </h5><pre><code class="language-java">public final class ThreadSafeDoubleCheckLocking {
   private static volatile ThreadSafeDoubleCheckLocking instance;
   private ThreadSafeDoubleCheckLocking() {
     // 防止被反射实例化
@@ -286,8 +319,13 @@ public static Singleton getInstance(){
   }
 }</code></pre>
 <p>关键是volatile的声明，原因见第六坎</p>
-<h5 id="枚举法单例">枚举法单例</h5>
-<pre><code class="language-java">public enum EnumSingleton {
+
+          <h5>
+            <a name="_root-枚举法单例" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            枚举法单例
+          </h5><pre><code class="language-java">public enum EnumSingleton {
   INSTANCE;
   @Override
   public String toString() {
@@ -298,8 +336,13 @@ public static Singleton getInstance(){
 <p>单例的枚举实现在《Effective Java》中有提到，因为其<strong>功能完整、使用简洁、无偿地提供了序列化机制、在面对复杂的序列化或者反射攻击时仍然可以绝对防止多次实例化</strong>等优点，单元素的枚举类型被作者认为是实现Singleton的最佳方法。 </p>
 <p>具体可以参考：<a href="https://blog.csdn.net/gavin_dyson/article/details/70832185">https://blog.csdn.net/gavin_dyson/article/details/70832185</a></p>
 <p>里面说了，为什么枚举类会有一次性锁的效果，其实枚举是一种语法糖，本质是上利用的还是静态特性，然后因为<strong>语法糖揪在一起（自创说法）</strong>的原因，序列化绝对安全</p>
-<h4 id="总结">总结</h4>
-<p>这么多单例，最好的实现无疑是最后三种，最后三种各自有各自的优点</p>
+
+          <h4>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h4><p>这么多单例，最好的实现无疑是最后三种，最后三种各自有各自的优点</p>
 <ul>
 <li><strong>静态内部类实现：</strong>所有版本通用，常规且有效</li>
 <li><strong>volatile双重检查锁实现：</strong>只适用JDK1.5以上，正式切有效</li>
@@ -307,13 +350,23 @@ public static Singleton getInstance(){
 </ul>
 <p>多提一句，饿汉式写法没有绝对的漏洞，只是如果你的实例内容如果多，占用空间大，而且没有一开始就需要伴随系统初始化的必要的话，有点浪费资源，其他也没差。</p>
 <hr>
-<h3 id="observerdependentspublisher-subscriber">Observer/Dependents/Publisher-Subscriber</h3>
-<p>观察者模式意在建立一种一对多的关联关系，在这个关系中，任意其中一个对象发生了状态变化，其他对象都可以自动感知到这个变化。</p>
+
+          <h3>
+            <a name="_root-Observer/Dependents/Publisher-Subscriber" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Observer/Dependents/Publisher-Subscriber
+          </h3><p>观察者模式意在建立一种一对多的关联关系，在这个关系中，任意其中一个对象发生了状态变化，其他对象都可以自动感知到这个变化。</p>
 <p>观察者模式又称为：关联模式、发布者-订阅者模式</p>
 <p>这样的关系很容易理解，就像电视台播报的天气预报一样，天气一变，气象台就会发送变动天气的短信给当地用户，武汉就一天至少2封高温预警的短信- -</p>
 <p>我们首先来看</p>
-<h4 id="subjectpublisher">Subject/Publisher</h4>
-<pre><code class="language-java">/**
+
+          <h4>
+            <a name="_root-Subject/Publisher" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Subject/Publisher
+          </h4><pre><code class="language-java">/**
  * Weather对象可以被实现了观察者接口WeatherObserver并且在Weather对象这里注册为观察者的对象才能接受
  * 该Weather对象的发布内容
  */
@@ -352,12 +405,22 @@ public enum WeatherType {
     return this.name().toLowerCase();
   }
 }</code></pre>
-<h4 id="观察者接口">观察者接口</h4>
-<pre><code class="language-java">public interface WeatherObserver {
+
+          <h4>
+            <a name="_root-观察者接口" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            观察者接口
+          </h4><pre><code class="language-java">public interface WeatherObserver {
   void update(WeatherType currentWeather);
 }</code></pre>
-<h4 id="observersubscriber">Observer/Subscriber</h4>
-<pre><code class="language-java">public class Orcs implements WeatherObserver {
+
+          <h4>
+            <a name="_root-Observer/Subscriber" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Observer/Subscriber
+          </h4><pre><code class="language-java">public class Orcs implements WeatherObserver {
   @Override
   public void update(WeatherType currentWeather) {
     switch (currentWeather) {
@@ -365,8 +428,13 @@ public enum WeatherType {
     }
   }
 }</code></pre>
-<h4 id="main">Main</h4>
-<pre><code class="language-java">  public static void main(String[] args) {
+
+          <h4>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h4><pre><code class="language-java">  public static void main(String[] args) {
     Weather weather = new Weather();
     weather.addObserver(new Orcs());
     weather.timePasses();
@@ -374,9 +442,19 @@ public enum WeatherType {
     weather.timePasses();
     weather.timePasses();
   }</code></pre>
-<h4 id="通用模板">通用模板</h4>
-<h5 id="abstractsubject">AbstractSubject</h5>
-<pre><code class="language-java">/**
+
+          <h4>
+            <a name="_root-通用模板" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            通用模板
+          </h4>
+          <h5>
+            <a name="_root-AbstractSubject" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            AbstractSubject
+          </h5><pre><code class="language-java">/**
  * 基于泛型和集合框架的通用Subject模板
  * @param &lt;S&gt; Subject
  * @param &lt;O&gt; Observer
@@ -403,8 +481,13 @@ public abstract class Observable&lt;
     }
   }
 }</code></pre>
-<h5 id="observer-interface">Observer-Interface</h5>
-<p>观察者接口的最顶层抽象接口</p>
+
+          <h5>
+            <a name="_root-Observer-Interface" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Observer-Interface
+          </h5><p>观察者接口的最顶层抽象接口</p>
 <pre><code class="language-java">/**
  * Observer
  * @param &lt;S&gt; Observable
@@ -417,12 +500,22 @@ public interface Observer&lt;S extends Observable&lt;S, O, A&gt;,
 
   void update(S subject, A argument);
 }</code></pre>
-<h5 id="observer-generics-map">Observer-Generics-Map</h5>
-<p>规定好泛型的观察者接口</p>
+
+          <h5>
+            <a name="_root-Observer-Generics-Map" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Observer-Generics-Map
+          </h5><p>规定好泛型的观察者接口</p>
 <pre><code class="language-java">public interface Race extends Observer&lt;GWeather, Race, WeatherType&gt; {
 }</code></pre>
-<h5 id="subject-implement">Subject-Implement</h5>
-<pre><code class="language-java">public class GWeather extends Observable&lt;GWeather, Race, WeatherType&gt; {
+
+          <h5>
+            <a name="_root-Subject-Implement" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Subject-Implement
+          </h5><pre><code class="language-java">public class GWeather extends Observable&lt;GWeather, Race, WeatherType&gt; {
   private WeatherType currentWeather;
   public GWeather() {
     currentWeather = WeatherType.SUNNY;
@@ -435,8 +528,13 @@ public interface Observer&lt;S extends Observable&lt;S, O, A&gt;,
     notifyObservers(currentWeather);  //通知
   }
 }</code></pre>
-<h5 id="observer-implement">Observer-implement</h5>
-<pre><code class="language-java">public class GOrcs implements Race {
+
+          <h5>
+            <a name="_root-Observer-implement" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Observer-implement
+          </h5><pre><code class="language-java">public class GOrcs implements Race {
 
   @Override
   public void update(GWeather weather, WeatherType weatherType) {
@@ -445,8 +543,13 @@ public interface Observer&lt;S extends Observable&lt;S, O, A&gt;,
     }
   }
 }</code></pre>
-<h5 id="main-1">Main</h5>
-<pre><code class="language-java">  public static void main(String[] args) {
+
+          <h5>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h5><pre><code class="language-java">  public static void main(String[] args) {
     GWeather gWeather = new GWeather();
     gWeather.addObserver(new GOrcs());
     gWeather.addObserver(new GHobbits());
@@ -456,18 +559,33 @@ public interface Observer&lt;S extends Observable&lt;S, O, A&gt;,
     gWeather.timePasses();
     gWeather.timePasses();
   }</code></pre>
-<h4 id="总结-1">总结</h4>
-<p>总的来说就是：<strong>观察者把自己的引用注册到发布者给的接口中，发布者每次状态变更就通知所有注册了的引用。</strong></p>
+
+          <h4>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h4><p>总的来说就是：<strong>观察者把自己的引用注册到发布者给的接口中，发布者每次状态变更就通知所有注册了的引用。</strong></p>
 <hr>
-<h3 id="decoratorwrapper">Decorator/Wrapper</h3>
-<p>装饰器（也称包装器）的意图是<strong>动态（运行时）、弹性的（可选）、无侵入的（不改源码）</strong>地给某个类添加功能或者增强功能。</p>
+
+          <h3>
+            <a name="_root-Decorator/Wrapper" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Decorator/Wrapper
+          </h3><p>装饰器（也称包装器）的意图是<strong>动态（运行时）、弹性的（可选）、无侵入的（不改源码）</strong>地给某个类添加功能或者增强功能。</p>
 <p>参考项目的作者<code>iluwatter</code>有这样一段比喻：</p>
 <blockquote>
 <p>附近的山里有一只巨魔（Troll），他平时都空着手，偶尔也会拿着武器；</p>
 <p>如果你要让同一只巨魔拿着武器的话，你不需要new一只一模一样的巨魔，你只需要包装这只巨魔就好了[doge]</p>
 </blockquote>
-<h4 id="object-interface-and-simple-implement">Object-Interface and Simple Implement</h4>
-<pre><code class="language-java">public interface Troll {
+
+          <h4>
+            <a name="_root-Object-Interface and Simple Implement" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Object-Interface and Simple Implement
+          </h4><pre><code class="language-java">public interface Troll {
   void attack();
   int getAttackPower();
 }
@@ -483,8 +601,13 @@ public class SimpleTroll implements Troll {
   }
 }</code></pre>
 <p>现在我们有一只攻击力+10的巨魔，接下来我们给它把无尽</p>
-<h4 id="decorator">Decorator</h4>
-<pre><code class="language-java">public class ClubbedTroll implements Troll {
+
+          <h4>
+            <a name="_root-Decorator" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Decorator
+          </h4><pre><code class="language-java">public class ClubbedTroll implements Troll {
   private Troll decorated;
   public ClubbedTroll(Troll decorated) {
     this.decorated = decorated;
@@ -498,19 +621,34 @@ public class SimpleTroll implements Troll {
     return decorated.getAttackPower() + 100;
   }
 }</code></pre>
-<h4 id="main-2">Main</h4>
-<pre><code class="language-java">// 空手巨魔
+
+          <h4>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h4><pre><code class="language-java">// 空手巨魔
 Troll troll = new SimpleTroll();
 troll.attack(); // 平A无暴击
 
 // 出无尽的巨魔
 troll = new ClubbedTroll(troll);
 troll.attack(); // 暴击！</code></pre>
-<h4 id="总结-2">总结</h4>
-<p>感觉和AOP差不多，只不过实现思路和需求不一样</p>
+
+          <h4>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h4><p>感觉和AOP差不多，只不过实现思路和需求不一样</p>
 <hr>
-<h3 id="adapterwrapper">Adapter/Wrapper</h3>
-<p>适配器模式，也是包装模式的一种，它和装饰器模式有一方面像的一点就是，它们都是包装要使用的类，只不过装饰器是针对同一种类去包装，企图强化这个类；而适配器是要包装两个类为一个统一的类，在适配器里兼容一个类的输出，让它的输出为另一个类可用的输入，适配器输出这另一个类的输出，企图让这两个类联合工作。</p>
+
+          <h3>
+            <a name="_root-Adapter/Wrapper" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Adapter/Wrapper
+          </h3><p>适配器模式，也是包装模式的一种，它和装饰器模式有一方面像的一点就是，它们都是包装要使用的类，只不过装饰器是针对同一种类去包装，企图强化这个类；而适配器是要包装两个类为一个统一的类，在适配器里兼容一个类的输出，让它的输出为另一个类可用的输入，适配器输出这另一个类的输出，企图让这两个类联合工作。</p>
 <p>参考项目的作者<code>iluwatter</code>有这样一段比喻：</p>
 <blockquote>
 <p>假设你想将你内存卡上的一些图片传到你电脑上去，你需要一种适配器，这个适配器可以适用于你电脑的端口，这样你才能将你的内存卡装载到你的电脑上去，在这个例子里面，读卡器就是一个适配器。</p>
@@ -519,8 +657,13 @@ troll.attack(); // 暴击！</code></pre>
 <blockquote>
 <p>适配器是要包装两个类为一个统一的类，在适配器里兼容一个类的输出，让它的输出为另一个类可用的输入，适配器输出这另一个类的输出，企图让这两个类联合工作。（这话是我说的~）</p>
 </blockquote>
-<h4 id="two-interfaces">Two Interfaces</h4>
-<p>首先我们来看适配器要适配的两个对象类，场景如下：<code>假设船长只会划船，并不会航海，但是旁边有一艘渔船可以出海</code>，于是我们先有两个接口，划船只能划水，渔船可以航海：</p>
+
+          <h4>
+            <a name="_root-Two Interfaces" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Two Interfaces
+          </h4><p>首先我们来看适配器要适配的两个对象类，场景如下：<code>假设船长只会划船，并不会航海，但是旁边有一艘渔船可以出海</code>，于是我们先有两个接口，划船只能划水，渔船可以航海：</p>
 <pre><code class="language-java">public interface RowingBoat {
   void row();
 }
@@ -530,8 +673,13 @@ public class FishingBoat {
     System.out.println(&quot;The fishing boat is sailing&quot;);
   }
 }</code></pre>
-<h4 id="user">User</h4>
-<p>再来看看我们的船长：</p>
+
+          <h4>
+            <a name="_root-User" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            User
+          </h4><p>再来看看我们的船长：</p>
 <pre><code class="language-java">public class Captain implements RowingBoat {
 
   private RowingBoat rowingBoat;
@@ -546,8 +694,13 @@ public class FishingBoat {
   }
 }</code></pre>
 <p>可以看到，这里有一个关键的地方，船长实现RowingBoat类的方式是解耦的，是传入一个RowingBoat对象，基于这个，我们可以编写一个适配器</p>
-<h4 id="adapter">Adapter</h4>
-<pre><code class="language-java">public class FishingBoatAdapter implements RowingBoat {
+
+          <h4>
+            <a name="_root-Adapter" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Adapter
+          </h4><pre><code class="language-java">public class FishingBoatAdapter implements RowingBoat {
   private FishingBoat boat;
   public FishingBoatAdapter() {
     boat = new FishingBoat();
@@ -558,17 +711,37 @@ public class FishingBoat {
   }
 }</code></pre>
 <p>在这个适配器中我们可以看到，我们将<code>RowingBoat</code>中的<code>row()</code>方法实现为<code>FishingBoat</code>的<code>sail()</code>方法</p>
-<h4 id="main-3">Main</h4>
-<pre><code class="language-java">Captain captain = new Captain(new FishingBoatAdapter());
+
+          <h4>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h4><pre><code class="language-java">Captain captain = new Captain(new FishingBoatAdapter());
 captain.row();</code></pre>
-<h4 id="总结-3">总结</h4>
-<p>总的来说，适配器和装饰器差不多，我们需要注意的点是，我们的使用者需要对原来的对象有良好的解耦支持，这样我们适配后的对象才能更好地被使用者使用。</p>
+
+          <h4>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h4><p>总的来说，适配器和装饰器差不多，我们需要注意的点是，我们的使用者需要对原来的对象有良好的解耦支持，这样我们适配后的对象才能更好地被使用者使用。</p>
 <hr>
-<h3 id="factory">Factory</h3>
-<p>工厂模式，在工程化编程中有着举足轻重的地位，将对象的创建、参数分派等行为工程化，是一个项目严谨编写的第一步体现。</p>
+
+          <h3>
+            <a name="_root-Factory" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory
+          </h3><p>工厂模式，在工程化编程中有着举足轻重的地位，将对象的创建、参数分派等行为工程化，是一个项目严谨编写的第一步体现。</p>
 <p>项目的作者写分别引了<code>Factory-method</code>和<code>Factory-kit</code>两部分，我们先从method开始说起</p>
-<h4 id="factory-method">Factory-method</h4>
-<p>工厂方法模式，是要定义一个专门用于创建对象的接口，只不过创建对象的方式是让实现子类去决定应该创建具体哪一个对象，工厂方法模式<strong>让一个类将实例化过程延迟到子类上</strong>。</p>
+
+          <h4>
+            <a name="_root-Factory-method" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory-method
+          </h4><p>工厂方法模式，是要定义一个专门用于创建对象的接口，只不过创建对象的方式是让实现子类去决定应该创建具体哪一个对象，工厂方法模式<strong>让一个类将实例化过程延迟到子类上</strong>。</p>
 <p>我们来看比喻：</p>
 <blockquote>
 <p> 一个铁匠（BlackSmith）打造（manufacture）武器，精灵（Elves）要求使用小巧的（Elvish）武器，半兽人（Orcs）要求使用重型武器（Orcish）。根据客户要求的不同会召集到打造同一类型武器的铁匠。</p>
@@ -577,14 +750,24 @@ captain.row();</code></pre>
 <blockquote>
 <p>将实例化过程的逻辑以委派方式提供给子类</p>
 </blockquote>
-<h5 id="factory-interface">Factory Interface</h5>
-<pre><code class="language-java">public interface Blacksmith {
+
+          <h5>
+            <a name="_root-Factory Interface" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory Interface
+          </h5><pre><code class="language-java">public interface Blacksmith {
   Weapon manufactureWeapon(WeaponType weaponType);
 }</code></pre>
 <p>首先我们有个工厂类，这个类代表能够制造武器的工匠（先不管可以制造什么类型的武器）</p>
 <p>然后下面就是武器的抽象接口和武器的类型</p>
-<h5 id="product-interface">Product Interface</h5>
-<pre><code class="language-java">public interface Weapon {
+
+          <h5>
+            <a name="_root-Product Interface" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Product Interface
+          </h5><pre><code class="language-java">public interface Weapon {
   WeaponType getWeaponType();
 }
 public enum WeaponType {
@@ -598,8 +781,13 @@ public enum WeaponType {
     return title;
   }
 }</code></pre>
-<h5 id="different-instance-class">Different Instance Class</h5>
-<p>然后我们有不同的实例类，分别是精灵武器和兽人武器</p>
+
+          <h5>
+            <a name="_root-Different Instance Class" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Different Instance Class
+          </h5><p>然后我们有不同的实例类，分别是精灵武器和兽人武器</p>
 <pre><code class="language-java">public class ElfWeapon implements Weapon {
   private WeaponType weaponType;
   public ElfWeapon(WeaponType weaponType) {this.weaponType = weaponType;}
@@ -617,8 +805,13 @@ public class OrcWeapon implements Weapon {
   @Override
   public WeaponType getWeaponType() {return weaponType;}
 }</code></pre>
-<h5 id="different-factory-class">Different Factory Class</h5>
-<p>然后我们有不同的工厂类，分别是精灵武器工匠和兽人武器工具</p>
+
+          <h5>
+            <a name="_root-Different Factory Class" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Different Factory Class
+          </h5><p>然后我们有不同的工厂类，分别是精灵武器工匠和兽人武器工具</p>
 <pre><code class="language-java">public class ElfBlacksmith implements Blacksmith {
   public Weapon manufactureWeapon(WeaponType weaponType) {
     return new ElfWeapon(weaponType);
@@ -631,8 +824,13 @@ public class OrcBlacksmith implements Blacksmith {
   }
 }
 </code></pre>
-<h5 id="main-4">Main</h5>
-<pre><code class="language-java">public class App {
+
+          <h5>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h5><pre><code class="language-java">public class App {
   private final Blacksmith blacksmith;
   public App(Blacksmith blacksmith) {
     this.blacksmith = blacksmith;
@@ -663,10 +861,20 @@ public class OrcBlacksmith implements Blacksmith {
 <li>最后在App里面，完美地使用了多态的特性：<strong>父类引用指向子类对象</strong></li>
 </ol>
 </blockquote>
-<h4 id="factory-kit">Factory-kit</h4>
-<p>为了更加清晰化工厂模式，于是就有了<code>Factory-kit</code>，意图定义一个不变的常量来将工匠和工厂区分开来</p>
-<h5 id="product">Product</h5>
-<p>我们先看产品有哪些：</p>
+
+          <h4>
+            <a name="_root-Factory-kit" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory-kit
+          </h4><p>为了更加清晰化工厂模式，于是就有了<code>Factory-kit</code>，意图定义一个不变的常量来将工匠和工厂区分开来</p>
+
+          <h5>
+            <a name="_root-Product" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Product
+          </h5><p>我们先看产品有哪些：</p>
 <pre><code class="language-java">public interface Weapon {
 }
 public class Axe implements Weapon {
@@ -690,13 +898,23 @@ public class Sword implements Weapon {
 public enum WeaponType {
   SWORD, AXE, BOW
 }</code></pre>
-<h5 id="builder">Builder</h5>
-<p>再看看工匠，这里用到了Java8的函数式特性，传入一个供给者对象</p>
+
+          <h5>
+            <a name="_root-Builder" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Builder
+          </h5><p>再看看工匠，这里用到了Java8的函数式特性，传入一个供给者对象</p>
 <pre><code class="language-java">public interface Builder {
   void add(WeaponType name, Supplier&lt;Weapon&gt; supplier);            // 4
 }</code></pre>
-<h5 id="factory-1">Factory</h5>
-<p>接下来就是重点，看看我们的工厂是如何协调工匠和产品的</p>
+
+          <h5>
+            <a name="_root-Factory" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory
+          </h5><p>接下来就是重点，看看我们的工厂是如何协调工匠和产品的</p>
 <pre><code class="language-java">public interface WeaponFactory {
   // 制造武器，根据传入的WeaponType选取工厂中存在的工匠制造想对应的武器
   Weapon create(WeaponType name);                                // 6
@@ -708,8 +926,13 @@ public enum WeaponType {
     return name -&gt; map.get(name).get();                            // 5
   }
 }</code></pre>
-<h5 id="main-5">Main</h5>
-<pre><code class="language-java">public class App {
+
+          <h5>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h5><pre><code class="language-java">public class App {
   public static void main(String[] args) {
     WeaponFactory factory = WeaponFactory.factory(builder -&gt; {    // 1.1
       builder.add(WeaponType.SWORD, Sword::new);                // 3.1
@@ -731,17 +954,32 @@ public enum WeaponType {
 <li>这段实现真的是无比的迷，毫无逻辑可言</li>
 </ol>
 <p>大致看懂这段语法糖之后，可以自己尝试实现一个平民版的工厂Kit，函数式编程很大程度上扭曲了Java程序编程的直接意图，让程序晦涩难懂，复现难度大。</p>
-<h4 id="friendly-factory-kit">Friendly Factory-kit</h4>
-<p>下面是我改进的亲民版的<code>Factory-kit</code>，虽然也用到了Lambda和方法引用，但是特别强调了面向对象思想，并不难懂</p>
-<h5 id="interfaces">Interfaces</h5>
-<pre><code class="language-java">public interface Builder {
+
+          <h4>
+            <a name="_root-Friendly Factory-kit" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Friendly Factory-kit
+          </h4><p>下面是我改进的亲民版的<code>Factory-kit</code>，虽然也用到了Lambda和方法引用，但是特别强调了面向对象思想，并不难懂</p>
+
+          <h5>
+            <a name="_root-Interfaces" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Interfaces
+          </h5><pre><code class="language-java">public interface Builder {
     Product build();
 }
 public interface Product {
 }</code></pre>
 <p>两个接口，一个代表工匠，提供一个<code>buili()</code>方法去获取<code>Product</code>，一个<code>Product</code>接口用做类型约束</p>
-<h5 id="factory-2">Factory</h5>
-<pre><code class="language-java">public class Factory&lt;PT&gt; {
+
+          <h5>
+            <a name="_root-Factory" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory
+          </h5><pre><code class="language-java">public class Factory&lt;PT&gt; {
     private HashMap&lt;PT, Builder&gt; builders = new HashMap&lt;&gt;();
 
     void addBuilder(PT productType, Builder builder) {
@@ -753,9 +991,19 @@ public interface Product {
     }
 }</code></pre>
 <p>注意<code>addBuilder</code>方法，第二个参数直接就是Builder，因为你观察Builder可以发现，Builder接口直接就可以是一个<code>Supplier</code>，用以直接生产产品</p>
-<h5 id="implements">Implements</h5>
-<h6 id="product-implemenets">Product implemenets</h6>
-<pre><code class="language-java">public class Axe implements Product {
+
+          <h5>
+            <a name="_root-Implements" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Implements
+          </h5>
+          <h6>
+            <a name="_root-Product implemenets" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Product implemenets
+          </h6><pre><code class="language-java">public class Axe implements Product {
   @Override
   public String toString() {
     return &quot;Axe&quot;;
@@ -770,24 +1018,39 @@ public class Bow implements Product {
 public enum WeaponType {
   AXE, BOW
 }</code></pre>
-<h6 id="factory-implements">Factory implements</h6>
-<pre><code class="language-java">public class WeaponFactory extends Factory&lt;WeaponType&gt; {
+
+          <h6>
+            <a name="_root-Factory implements" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Factory implements
+          </h6><pre><code class="language-java">public class WeaponFactory extends Factory&lt;WeaponType&gt; {
     public WeaponFactory() {
         addBuilder(WeaponType.AXE, Axe::new);
         addBuilder(WeaponType.BOW, () -&gt; new Bow());
     }
 }</code></pre>
 <p>这里稍微用到了一些Lambda的语法了，我们在继承<code>Factory</code>的时候，用泛型去规定产品类型，然后在实现子类的构造方法里面注册工匠，我们注意到，传递<code>Builder</code>的时候，第一次传生产<code>Axe</code>对象的<code>Builder</code>的时候，我直接使用了<code>Axe</code>的构造方法引用，这其实是<strong>初始化了一个专门生产<code>Axe</code>对象的<code>Builder</code>对象，这个<code>Builder</code>对象的<code>build</code>方法的实现就是返回生成的<code>Axe</code>对象</strong>，如果不是很好理解，可以看第二次传入生产<code>Bow</code>对象的<code>Builder</code>对象，一看就懂</p>
-<h5 id="main-6">Main</h5>
-<pre><code class="language-java">public class App {
+
+          <h5>
+            <a name="_root-Main" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Main
+          </h5><pre><code class="language-java">public class App {
     public static void main(String[] args) {
         WeaponFactory factory = new WeaponFactory();
         System.out.println(factory.produce(WeaponType.AXE));
         System.out.println(factory.produce(WeaponType.BOW));
     }
 }</code></pre>
-<h4 id="总结-4">总结</h4>
-<p>对于工厂方法，因为它的地位太重要，所以我们在设计一个工厂的时候要特别注意方法和其他对象之间的解耦性，让这个工厂通用性更强一些</p>
+
+          <h4>
+            <a name="_root-总结" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            总结
+          </h4><p>对于工厂方法，因为它的地位太重要，所以我们在设计一个工厂的时候要特别注意方法和其他对象之间的解耦性，让这个工厂通用性更强一些</p>
 <hr>
 
     </div>
@@ -814,19 +1077,10 @@ public enum WeaponType {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

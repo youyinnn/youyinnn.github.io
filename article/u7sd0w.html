@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,22 +136,24 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: u7sd0w<br>title: Docker Stack<br>categories:</p>
-<ul>
-<li>note</li>
-<li>docker<br>tags:</li>
-<li>docker<br>date: 2018-11-29 16:46:00<br>series: docker</li>
-</ul>
-<hr>
-<h3 id="introduction">Introduction</h3>
-<p>At the part of &quot;Container&quot;, we&#39;ve know we can define a <code>docker-compose.yaml</code> to deploy a service on our swarm so it can run on multiple machine.</p>
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p>At the part of &quot;Container&quot;, we&#39;ve know we can define a <code>docker-compose.yaml</code> to deploy a service on our swarm so it can run on multiple machine.</p>
 <p>As we practice before, our service just contains one container: a python app that provide web service with Flask.</p>
 <p>But did you remember that sentence ? <strong>Services are really just &quot;Containers in Production&quot;</strong></p>
 <p>So we can define multiple containers in one service !!! Sounds nice isn&#39;t it ?</p>
 <p>This is what they call <strong>&quot;a Stack&quot;</strong>, and that sounds very confused.</p>
-<h3 id="stack">Stack</h3>
-<p>A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. </p>
+
+          <h3>
+            <a name="_root-Stack" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Stack
+          </h3><p>A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. </p>
 <p>A single stack is capable of defining and coordinating the functionality of an entire application (though very complex applications may want to use multiple stacks).</p>
 <p>We&#39;ve been technically work with stack while we deploy a Composefile with <code>docker stack deploy</code>. But that was a single service stack running on a single host, which is not usually what takes place in production. Here, you can take what you’ve learned, make multiple services relate to each other, and run them on multiple machines.</p>
 <blockquote>
@@ -221,8 +218,13 @@
 <p> and you can also visit the port:4000 to visit the Flask web app.</p>
 </li>
 </ol>
-<h3 id="a-preview-of-persist-data-from-docker-container-to-host">A preview of persist data from docker container to host</h3>
-<p>There still a section about <strong>&quot;Persist data&quot;</strong> on offical doc, it show us how to create a redis service and presist data from container&#39;s inside filesystem to host filesystem. We will just take a look for the compose file and explain it&#39;s usage.</p>
+
+          <h3>
+            <a name="_root-A preview of persist data from docker container to host" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            A preview of persist data from docker container to host
+          </h3><p>There still a section about <strong>&quot;Persist data&quot;</strong> on offical doc, it show us how to create a redis service and presist data from container&#39;s inside filesystem to host filesystem. We will just take a look for the compose file and explain it&#39;s usage.</p>
 <pre><code class="language-yaml">version: &quot;3&quot;
 services:
   web:
@@ -287,19 +289,10 @@ networks:
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,25 +136,25 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: en4hhw<br>title: Log4j2_HelloWorld<br>tags:</p>
-<ul>
-<li>log4j2</li>
-<li>learning<br>categories:</li>
-<li>note</li>
-<li>toolslearning</li>
-<li>log4j2<br>comments: true<br>date: 2017-11-17 16:13:21<br>series: Log4j2</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>Lo4j2是啥就不解释了，之前无论是使用log4j还是log4j2，同样只是简单的各种百度然后复制粘贴没有系统的总结一下，今天把一个小小的Ajax的测试程序放服务器上面都不知道怎么查错，然后想写一下log来看看哪错了吧，发现还是不会独立配置log4j，于是想总结一波。基本的思路是总结官方文档和官方推荐的中文文档，尽量简洁表达出原理以及应用。</p>
 <p>{% endcq %}</p>
 <!-- more -->
 
 <hr>
-<h3 id="准备工作">准备工作</h3>
-<h4 id="maven依赖">Maven依赖</h4>
-<pre><code class="language-xml">&lt;dependencies&gt;
+
+          <h3>
+            <a name="_root-准备工作" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            准备工作
+          </h3>
+          <h4>
+            <a name="_root-Maven依赖" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Maven依赖
+          </h4><pre><code class="language-xml">&lt;dependencies&gt;
   &lt;dependency&gt;
     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
     &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
@@ -172,8 +167,13 @@
   &lt;/dependency&gt;
 &lt;/dependencies&gt;</code></pre>
 <p>认准这俩依赖</p>
-<h4 id="默认配置文件如果配置文件缺省的情况下，也会是这样的配置">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4>
-<p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
+
+          <h4>
+            <a name="_root-默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)
+          </h4><p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
 <pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;configuration status=&quot;OFF&quot;&gt;
     &lt;appenders&gt;
@@ -187,8 +187,13 @@
         &lt;/root&gt;
     &lt;/loggers&gt;
 &lt;/configuration&gt;</code></pre>
-<h4 id="helloword">HelloWord</h4>
-<pre><code class="language-java">public class Main {
+
+          <h4>
+            <a name="_root-HelloWord" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            HelloWord
+          </h4><pre><code class="language-java">public class Main {
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
         logger.trace(&quot;trace level&quot;);
@@ -200,8 +205,13 @@
     }
 }</code></pre>
 <hr>
-<h3 id="运行helloworld">运行HelloWorld</h3>
-<p>运行上面的代码之后会出现如下的log</p>
+
+          <h3>
+            <a name="_root-运行HelloWorld" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            运行HelloWorld
+          </h3><p>运行上面的代码之后会出现如下的log</p>
 <pre><code class="language-cmd">13:34:41.070 [main] ERROR mylog - error level
 13:34:41.072 [main] FATAL mylog - fatal level</code></pre>
 <p>你会很奇怪，为什么我们写了这么多log，却只出现两行log信息，我们去看看我们的配置文件：</p>
@@ -289,19 +299,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

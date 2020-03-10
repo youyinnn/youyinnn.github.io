@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,16 +136,13 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 17hjlts<br>title : JettyDocument_ZH_CN_Translation_Part1<br>tags :</p>
-<ul>
-<li>jetty</li>
-<li>document<br>categories :</li>
-<li>translation<br>series: JettyDocument_ZH_CN_Translation<br>date: 2018-05-07 17:30:01</li>
-</ul>
-<hr>
-<h3 id="ⅰ开始使用jetty">Ⅰ.开始使用Jetty</h3>
-<p><span id="top"></span></p>
+        
+          <h3>
+            <a name="_root-Ⅰ.开始使用Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Ⅰ.开始使用Jetty
+          </h3><p><span id="top"></span></p>
 <ul>
 <li><ol>
 <li><a href="#1%E5%85%B3%E4%BA%8Ejetty%E7%9A%84%E4%BB%8B%E7%BB%8D">关于Jetty的介绍</a></li>
@@ -201,16 +193,26 @@
 </ul>
 <hr>
 <p><span id="1关于jetty的介绍"></span></p>
-<h3 id="1、关于jetty的介绍">1、关于Jetty的介绍</h3>
-<ul>
+
+          <h3>
+            <a name="_root-1、关于Jetty的介绍" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1、关于Jetty的介绍
+          </h3><ul>
 <li>1.1、<a href="#11%E4%BB%80%E4%B9%88%E6%98%AFjetty">什么是Jetty</a></li>
 <li>1.2、<a href="#12%E6%88%91%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AA%E7%89%88%E6%9C%AC">我应该使用哪个版本</a></li>
 <li>1.3、<a href="#13jetty%E5%92%8Cjavaee%E7%9A%84web%E8%A7%84%E8%8C%83">Jetty和JavaEE的Web规范</a></li>
 <li>1.4、<a href="#14%E5%9C%A8maven%E9%87%8C%E9%9D%A2%E6%89%BE%E5%88%B0jetty">在Maven里面找到Jetty</a></li>
 </ul>
 <p><span id="11什么是jetty"></span></p>
-<h4 id="11、什么是jetty">1.1、什么是Jetty</h4>
-<p>Jetty是一个开源的项目，它可以作为HTTP服务器，HTTP客户端，和Servlet容器来使用。</p>
+
+          <h4>
+            <a name="_root-1.1、什么是Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1.1、什么是Jetty
+          </h4><p>Jetty是一个开源的项目，它可以作为HTTP服务器，HTTP客户端，和Servlet容器来使用。</p>
 <p>这个指南总共分为以下5个部分：</p>
 <blockquote>
 <ul>
@@ -240,8 +242,13 @@
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="12我应该使用哪个版本"></span></p>
-<h4 id="12、我应该使用哪个版本">1.2、我应该使用哪个版本</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-1.2、我应该使用哪个版本" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1.2、我应该使用哪个版本
+          </h4><blockquote>
 <p><em>这里使用表格介绍了Jetty版本对应的发布年、持有者、支持的JDK版本、支持的协议、servlet规范版本、JSP规范版本、以及是否是稳定还是已经被遗弃。</em></p>
 <p><em>Markdown作表格实在是太蛋疼了我就不搞了，大家可以在<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/what-jetty-version.html">这里</a>去参照。</em></p>
 </blockquote>
@@ -251,16 +258,26 @@
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="13jetty和javaee的web规范"></span></p>
-<h4 id="13、jetty和javaee的web规范">1.3、Jetty和JavaEE的Web规范</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-1.3、Jetty和JavaEE的Web规范" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1.3、Jetty和JavaEE的Web规范
+          </h4><blockquote>
 <p><em>这里介绍的也是Jetty对JavaEE规范的支持程度，值得一提的是，Jetty并没有实现完整的规范，部分规范需要以Jetty插件的形式去支持。</em></p>
 <p><em>表格我也不搞了，大家可以在<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/jetty-javaee.html">这里</a>去参照。</em></p>
 </blockquote>
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="14在maven里面找到jetty"></span></p>
-<h4 id="14、在maven里面找到jetty">1.4、在Maven里面找到Jetty</h4>
-<blockquote>
+
+          <h4>
+            <a name="_root-1.4、在Maven里面找到Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            1.4、在Maven里面找到Jetty
+          </h4><blockquote>
 <p><em>就是告诉你Jetty的maven坐标，但是官网在这里比较坑，文档中说，Jetty是从项目成立初始就把项目发布到maven上了，由于历史原因，它的坐标变动了很多次，但是文档给出的示例代码也太不负责任了：</em></p>
 </blockquote>
 <pre><code>&lt;dependency&gt;
@@ -279,16 +296,31 @@
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="2使用jetty"></span></p>
-<h3 id="2、使用jetty">2、使用Jetty</h3>
-<ul>
+
+          <h3>
+            <a name="_root-2、使用Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2、使用Jetty
+          </h3><ul>
 <li>2.1、<a href="#21%E4%B8%8B%E8%BD%BDjetty">下载Jetty</a></li>
 <li>2.2、<a href="#22%E8%BF%90%E8%A1%8Cjetty">运行Jetty</a></li>
 <li>2.3、<a href="#23%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8">部署Web应用</a></li>
 </ul>
 <p><span id="21下载jetty"></span></p>
-<h4 id="21、下载jetty">2.1、下载Jetty</h4>
-<h5 id="独立版本：">独立版本：</h5>
-<p>独立的Jetty版本你可以在eclipse公司主页上下载：</p>
+
+          <h4>
+            <a name="_root-2.1、下载Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.1、下载Jetty
+          </h4>
+          <h5>
+            <a name="_root-独立版本：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            独立版本：
+          </h5><p>独立的Jetty版本你可以在eclipse公司主页上下载：</p>
 <p><strong>Jetty</strong> <a href="https://www.eclipse.org/jetty/download.html">https://www.eclipse.org/jetty/download.html</a></p>
 <p>它包含了zip和gzip两种格式，去下载一个最适合你系统的版本吧。让你下载好并且解压好之后，你会得到一个<code>jetty-distribution-VERSION</code>的目录。</p>
 <p>把这个目录放在你常用的位置，文章后面的部分会引用到这个目录，我们使用<code>JETTY_HOME</code>或者<code>${jetty.home}</code>来在环境变量和Java程序中引用它。</p>
@@ -353,15 +385,25 @@
 <p>webapps/</p>
 <p>包含在Jetty默认配置下运行的web项目</p>
 </blockquote>
-<h5 id="家用版">家用版</h5>
-<blockquote>
+
+          <h5>
+            <a name="_root-家用版" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            家用版
+          </h5><blockquote>
 <p><em>这个我也不知道怎么介绍，官网的意思是说，这个是较小的Jetty版本，适合对Jetty比较熟悉了的高级的Jetty用户使用，下载地址和目录说明我就不写了，大家有能力自己去了解。</em></p>
 </blockquote>
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="22运行jetty"></span></p>
-<h4 id="22、运行jetty">2.2、运行Jetty</h4>
-<ul>
+
+          <h4>
+            <a name="_root-2.2、运行Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2、运行Jetty
+          </h4><ul>
 <li><a href="#221demo-base">2.2.1、Demo Base</a></li>
 <li><a href="#222%E5%88%9B%E5%BB%BAjetty-base">2.2.2、创建Jetty Base</a></li>
 <li><a href="#223%E6%9B%B4%E6%94%B9jetty%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7">2.2.3、更改Jetty的端口号</a></li>
@@ -369,8 +411,13 @@
 <li><a href="#225%E6%9B%B4%E6%94%B9https%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7">2.2.5、更改HTTPS的端口号</a></li>
 <li><a href="#226%E8%8E%B7%E5%8F%96%E6%9B%B4%E5%A4%9A%E7%9A%84startjar%E9%80%89%E9%A1%B9">2.2.6、获取更多的start.jar选项</a></li>
 </ul>
-<h5 id="220、一个helloworld：">2.2.0、一个HelloWorld：</h5>
-<p>你可以使用一下命令来启动Jetty，默认使用8080端口，在这之前你得把Jetty的根目录配置到环境变量中：</p>
+
+          <h5>
+            <a name="_root-2.2.0、一个HelloWorld：" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.0、一个HelloWorld：
+          </h5><p>你可以使用一下命令来启动Jetty，默认使用8080端口，在这之前你得把Jetty的根目录配置到环境变量中：</p>
 <pre><code>&gt; cd $JETTY_HOME
 &gt; java -jar start.jar
 
@@ -383,8 +430,13 @@
 <p>从警告信息中我们可以看到，它告诉我们，我们的命令并不是执行在<code>{jetty.base}</code>目录中，这样的做法是不被推荐的。</p>
 <p><a href="#%E5%88%9B%E5%BB%BAjetty-base">下面</a>会告诉你如何创建Jetty Base目录。</p>
 <p><span id="221demo-base"></span></p>
-<h5 id="221、demo-base">2.2.1、Demo Base</h5>
-<p>在标准Jetty目录中，有一个名为<code>demo-base</code>的目录，它演示了不在<code>JETTY_HOME</code>目录下运行Jetty Base项目的推荐做法：</p>
+
+          <h5>
+            <a name="_root-2.2.1、Demo Base" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.1、Demo Base
+          </h5><p>在标准Jetty目录中，有一个名为<code>demo-base</code>的目录，它演示了不在<code>JETTY_HOME</code>目录下运行Jetty Base项目的推荐做法：</p>
 <pre><code>&gt; cd $JETTY_HOME/demo-base/
 &gt; java -jar $JETTY_HOME/start.jar
 
@@ -419,8 +471,13 @@
 <p><code>--list-config</code>命令会显示一些关于服务器重要信息。包含Java和Jetty和环境变量、配置命令、任何的JVM参数或者系统变量设置、基础服务器配置、全列的Jetty服务器的类路径、被激活使用的JettyXML配置文件。</p>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="222创建jetty-base"></span></p>
-<h5 id="222、创建jetty-base">2.2.2、创建Jetty Base</h5>
-<p>上述demo-bases目录给我们展示了Jetty的Jetty Base机制。一个Jetty Base目录允许使用单独的配置并且可以在Jetty目录以外的地方建立一个Jetty服务器实例，这样一来可以减小升级带来的代价。Jetty的默认配置是基于以下两个配置项：</p>
+
+          <h5>
+            <a name="_root-2.2.2、创建Jetty Base" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.2、创建Jetty Base
+          </h5><p>上述demo-bases目录给我们展示了Jetty的Jetty Base机制。一个Jetty Base目录允许使用单独的配置并且可以在Jetty目录以外的地方建立一个Jetty服务器实例，这样一来可以减小升级带来的代价。Jetty的默认配置是基于以下两个配置项：</p>
 <p><strong>jetty.home</strong>：用来定义Jetty根目录的位置的配置项，根目录包含：libs、默认模块、默认XML文件（具体的如 start.jar、lib、etc）。<br><strong>jetty.base</strong>：用来定义一个Jetty服务器的特殊实现，这个目录同时包含：它的配置文件、日志文件、web项目（具体如 start.d/*.ini文件，logs、webapps）。</p>
 <blockquote>
 <p><strong>注意</strong></p>
@@ -469,8 +526,13 @@ INFO: Base directory was modified
 </blockquote>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="223更改jetty的端口号"></span></p>
-<h5 id="223、更改jetty的端口号">2.2.3、更改Jetty的端口号</h5>
-<pre><code>&gt; cd $JETTY_BASE
+
+          <h5>
+            <a name="_root-2.2.3、更改Jetty的端口号" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.3、更改Jetty的端口号
+          </h5><pre><code>&gt; cd $JETTY_BASE
 &gt; java -jar $JETTY_HOME/start.jar jetty.http.port=8081
 ...</code></pre><p>当项目运行的时候，就会在8081端口中运行，你需要注意的是，使用命令行配置只对当次的JettyBase中的web项目有效，如果你想永久地改变当前JettyBase的web项目运行的端口号，你可以修改start.d目录中http.ini文件的配置。</p>
 <blockquote>
@@ -491,8 +553,13 @@ INFO: Base directory was modified
 </blockquote>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="224为https和http2添加ssl"></span></p>
-<h5 id="224、为https和http2添加ssl">2.2.4、为HTTPS和HTTP2添加SSL</h5>
-<p>在上面的栗子中，我们可以为服务器激活附加的HTTPS模块和HTTP2模块。你可以使用以下命令添加：</p>
+
+          <h5>
+            <a name="_root-2.2.4、为HTTPS和HTTP2添加SSL" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.4、为HTTPS和HTTP2添加SSL
+          </h5><p>在上面的栗子中，我们可以为服务器激活附加的HTTPS模块和HTTP2模块。你可以使用以下命令添加：</p>
 <pre><code>&gt; java -jar $JETTY_HOME/start.jar --add-to-start=https,http2
 
 ALERT: There are enabled module(s) with licenses.
@@ -538,14 +605,24 @@ INFO  : Base directory was modified
 </ul>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="225更改https的端口号"></span></p>
-<h5 id="225、更改https的端口号">2.2.5、更改HTTPS的端口号</h5>
-<p>你可以通过命令：</p>
+
+          <h5>
+            <a name="_root-2.2.5、更改HTTPS的端口号" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.5、更改HTTPS的端口号
+          </h5><p>你可以通过命令：</p>
 <pre><code>&gt; cd $JETTY_BASE
 &gt; java -jar $JETTY_HOME/start.jar jetty.ssl.port=8444</code></pre><p>除此之外，你还可以在<code>start.ini</code>或者<code>start.d/*.ini</code>中设置有效的命令行去修改ssl端口号，你可以在“<a href="">Start.ini vs Start.d</a>”中了解到更多。</p>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="226获取更多的startjar选项"></span></p>
-<h5 id="226、获取更多的startjar选项">2.2.6、获取更多的start.jar选项</h5>
-<p><code>start.jar</code>的工作有：</p>
+
+          <h5>
+            <a name="_root-2.2.6、获取更多的start.jar选项" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.2.6、获取更多的start.jar选项
+          </h5><p><code>start.jar</code>的工作有：</p>
 <ul>
 <li><p>解释start.ini和start.d目录下的配置文件的命令行来建立Java类路径环境。</p>
 </li>
@@ -559,8 +636,13 @@ INFO  : Base directory was modified
 <pre><code>&gt; java -jar $JETTY_HOME/start.jar --help</code></pre><p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="23部署web应用"></span></p>
-<h4 id="23、部署web应用">2.3、部署Web应用</h4>
-<p>一个配置了deploy模块的Jetty服务器实例（即一个JettyBase）会有一个web应用部署器在webapps目录，它支持对web应用的热部署。按照下面的协定方式把标准的WAR文件和Jetty配置文件放置在webapps目录下你就可以在服务器上实现热部署了。</p>
+
+          <h4>
+            <a name="_root-2.3、部署Web应用" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            2.3、部署Web应用
+          </h4><p>一个配置了deploy模块的Jetty服务器实例（即一个JettyBase）会有一个web应用部署器在webapps目录，它支持对web应用的热部署。按照下面的协定方式把标准的WAR文件和Jetty配置文件放置在webapps目录下你就可以在服务器上实现热部署了。</p>
 <ul>
 <li><p>一个名为<code>example/</code>的目录作为将要被部署的Web应用，它需要包含<code>WEB-INF</code>子目录，不然这个应用就会被当作静态内容。一般的情况下路由路径会是<code>http://localhost:8080/example/</code>，除非你的目录名为<code>ROOT</code>，这样你的路径就会是<code>http://localhost:8080/</code>。如果目录名以.d结尾，那么它将被忽略（它可以作为额外的配置文件的放置目录使用）</p>
 </li>
@@ -573,21 +655,36 @@ INFO  : Base directory was modified
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="3关于jetty-configuration的介绍"></span></p>
-<h3 id="3、关于jetty-configuration的介绍">3、关于Jetty Configuration的介绍</h3>
-<ul>
+
+          <h3>
+            <a name="_root-3、关于Jetty Configuration的介绍" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3、关于Jetty Configuration的介绍
+          </h3><ul>
 <li>3.1、<a href="#31%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEjetty">如何配置Jetty</a></li>
 <li>3.2、<a href="#32%E5%8F%AF%E4%BB%A5%E5%9C%A8jetty%E9%87%8C%E9%9D%A2%E9%85%8D%E7%BD%AE%E4%BB%80%E4%B9%88">可以在Jetty里面配置什么</a></li>
 </ul>
-<h4 id="31、如何配置jetty">3.1、如何配置Jetty</h4>
-<ul>
+
+          <h4>
+            <a name="_root-3.1、如何配置Jetty" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.1、如何配置Jetty
+          </h4><ul>
 <li><a href="#311%E4%BD%BF%E7%94%A8pojo%E7%9A%84%E6%96%B9%E6%B3%95%E9%85%8D%E7%BD%AE">3.1.1、使用POJO的方法配置</a></li>
 <li><a href="#312%E4%BD%BF%E7%94%A8start%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE">3.1.2、使用Start配置文件配置</a></li>
 <li><a href="#313%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">3.1.3、其他配置文件</a></li>
 <li><a href="#314jetty%E7%9A%84ioc-xml%E7%9A%84%E5%BD%A2%E5%BC%8F%E9%85%8D%E7%BD%AE">3.1.4、Jetty的IoC XML的形式配置</a></li>
 </ul>
 <p><span id="311使用pojo的方法配置"></span></p>
-<h5 id="311、使用pojo的方法配置">3.1.1、使用POJO的方法配置</h5>
-<p>Jetty的核心组件就是POJO，配置的过程就是实例化的POJO、给POJO装配属性的过程。你可以通过以下的方法实现：</p>
+
+          <h5>
+            <a name="_root-3.1.1、使用POJO的方法配置" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.1.1、使用POJO的方法配置
+          </h5><p>Jetty的核心组件就是POJO，配置的过程就是实例化的POJO、给POJO装配属性的过程。你可以通过以下的方法实现：</p>
 <ul>
 <li><p>在嵌入式开发中，把Jetty对象写在Java代码里。</p>
 </li>
@@ -601,8 +698,13 @@ INFO  : Base directory was modified
 </li>
 </ul>
 <p><span id="312使用start配置文件配置"></span></p>
-<h5 id="312、使用start配置文件配置">3.1.2、使用Start配置文件配置</h5>
-<p>Jetty使用以下的配置文件去实例化，通过start.jar机制去注入和启动服务器。</p>
+
+          <h5>
+            <a name="_root-3.1.2、使用Start配置文件配置" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.1.2、使用Start配置文件配置
+          </h5><p>Jetty使用以下的配置文件去实例化，通过start.jar机制去注入和启动服务器。</p>
 <ul>
 <li><strong>ini文件：</strong><br>Jetty的启动机制是使用命令行来完成的，<code>$JETTY_BASE/start.ini</code>或者是<code>$JETTY_BASE/start.d/*.ini</code>文件写好了有效的命令行参数来启动Jetty，这些参数可能是：<ul>
 <li><blockquote>
@@ -676,8 +778,13 @@ INFO  : Base directory was modified
 <p><img src="https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/Jetty_Configuration_File_Relationships.png" alt="Jetty_Configuration_File_Relationships"></p>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="313其他配置文件"></span></p>
-<h5 id="313、其他的配置文件">3.1.3、其他的配置文件</h5>
-<ul>
+
+          <h5>
+            <a name="_root-3.1.3、其他的配置文件" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.1.3、其他的配置文件
+          </h5><ul>
 <li><strong>Context XML文件</strong></li>
 <li><strong>web.xml文件</strong></li>
 <li><strong>properties文件</strong></li>
@@ -685,8 +792,13 @@ INFO  : Base directory was modified
 <p>关于这三种配置文件的介绍内容就不再翻译，有需要的同学可以去<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/quick-start-configure.html#quickstart-config-how">原文</a>学习。</p>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="314jetty的ioc-xml的形式配置"></span></p>
-<h5 id="314、jetty的ioc-xml的形式配置">3.1.4、Jetty的IoC XML的形式配置</h5>
-<p>你可以在Java代码里面启动服务器：</p>
+
+          <h5>
+            <a name="_root-3.1.4、Jetty的IoC XML的形式配置" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.1.4、Jetty的IoC XML的形式配置
+          </h5><p>你可以在Java代码里面启动服务器：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Connector;
@@ -766,16 +878,26 @@ public class ExampleServer
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="32可以在jetty里面配置什么"></span></p>
-<h4 id="32、可以在jetty里面配置什么">3.2、可以在Jetty里面配置什么</h4>
-<ul>
+
+          <h4>
+            <a name="_root-3.2、可以在Jetty里面配置什么" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.2、可以在Jetty里面配置什么
+          </h4><ul>
 <li><a href="#321%E9%85%8D%E7%BD%AEserver">配置Server</a></li>
 <li><a href="#322%E9%85%8D%E7%BD%AEconnectors">配置Connectors</a></li>
 <li><a href="#323%E9%85%8D%E7%BD%AEcontexts">配置Contexts</a></li>
 </ul>
 <p>这一部分会给出一些之前的章节没有介绍过的配置机制的概述。在整个文档的最后一部分中的“<a href="">Jetty Architecture</a>”章节会为你解释Jetty服务器的整体架构，这对于你了解Jetty的运行机制会非常有帮助，如果你还想修改Jetty默认的架构的话，你可以得到一些非常重要的指导。当然，Jetty的默认架构已经满足绝大部分的需求了。</p>
 <p><span id="321配置server"></span></p>
-<h5 id="321、配置server">3.2.1、配置Server</h5>
-<p>Server实例是Jetty服务器的中央协调对象（central coordination object），它提供了所有Jetty服务器组件所需要的服务以及生命周期的管理。在标准的Jetty发行版里面，核心的server服务的配置是在<code>etc/jetty.xml</code>文件中，但是你可以混合其他的服务器配置，可配置内容如下：</p>
+
+          <h5>
+            <a name="_root-3.2.1、配置Server" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.2.1、配置Server
+          </h5><p>Server实例是Jetty服务器的中央协调对象（central coordination object），它提供了所有Jetty服务器组件所需要的服务以及生命周期的管理。在标准的Jetty发行版里面，核心的server服务的配置是在<code>etc/jetty.xml</code>文件中，但是你可以混合其他的服务器配置，可配置内容如下：</p>
 <blockquote>
 <p>ThreadPool</p>
 <p>Handlers</p>
@@ -786,8 +908,13 @@ public class ExampleServer
 </blockquote>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="322配置connectors"></span></p>
-<h5 id="322、配置connectors">3.2.2、配置Connectors</h5>
-<p>Jetty服务器连接器是一个网络端点接受连接一个或多个协议产生Jetty服务器的请求或消息。在标准Jetty服务器中，可以通过额外的文件增加Jetty服务器支持的协议，例如http.ini，https.ini 和jetty-http2.xml，连接的配置一般都是典型的，如下：</p>
+
+          <h5>
+            <a name="_root-3.2.2、配置Connectors" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.2.2、配置Connectors
+          </h5><p>Jetty服务器连接器是一个网络端点接受连接一个或多个协议产生Jetty服务器的请求或消息。在标准Jetty服务器中，可以通过额外的文件增加Jetty服务器支持的协议，例如http.ini，https.ini 和jetty-http2.xml，连接的配置一般都是典型的，如下：</p>
 <blockquote>
 <p>Port</p>
 <p>Host</p>
@@ -797,8 +924,13 @@ public class ExampleServer
 </blockquote>
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="323配置contexts"></span></p>
-<h5 id="323、配置contexts">3.2.3、配置Contexts</h5>
-<p>常见的Context配置：</p>
+
+          <h5>
+            <a name="_root-3.2.3、配置Contexts" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            3.2.3、配置Contexts
+          </h5><p>常见的Context配置：</p>
 <blockquote>
 <p>contextPath</p>
 <p>virtualHost</p>
@@ -866,19 +998,10 @@ public class OneContext
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

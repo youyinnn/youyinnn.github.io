@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,18 +136,22 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: pjff39<br>title: 微服务架构理论基础-康威定律<br>categories:</p>
-<ul>
-<li>reprinted<br>date: 2018-11-06 10:44:01</li>
-</ul>
-<hr>
-<h3 id="前言">前言</h3>
-<blockquote>
+        
+          <h3>
+            <a name="_root-前言" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            前言
+          </h3><blockquote>
 <p>可能出乎很多人意料之外的一个事实是，微服务很多核心理念其实在半个世纪前的一篇文章中就被阐述过了，而且这篇文章中的很多论点在软件开发飞速发展的这半个世纪中竟然一再被验证，这就是康威定律。</p>
 </blockquote>
-<h3 id="概述">概述</h3>
-<p>微服务是最近非常火热的新概念，大家都在追，也都觉得很对，但是似乎没有很充足的理论基础说明这是正确的，给人的感觉是 <strong>不明觉厉</strong> 。前段时间看了Mike Amundsen <a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world">《远距离条件下的康威定律——分布式世界中实现团队构建》</a>（是Design RESTful API的作者）在InfoQ上的一个分享，觉得很有帮助，结合自己的一些思考，整理了该演讲的内容。</p>
+
+          <h3>
+            <a name="_root-概述" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            概述
+          </h3><p>微服务是最近非常火热的新概念，大家都在追，也都觉得很对，但是似乎没有很充足的理论基础说明这是正确的，给人的感觉是 <strong>不明觉厉</strong> 。前段时间看了Mike Amundsen <a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world">《远距离条件下的康威定律——分布式世界中实现团队构建》</a>（是Design RESTful API的作者）在InfoQ上的一个分享，觉得很有帮助，结合自己的一些思考，整理了该演讲的内容。</p>
 <p>可能出乎很多人意料之外的一个事实是，微服务很多核心理念其实在半个世纪前的一篇文章中就被阐述过了，而且这篇文章中的很多论点在软件开发飞速发展的这半个世纪中竟然一再被验证，这就是<a href="http://www.melconway.com/Home/Conways_Law.html">康威定律（Conway&#39;s Law）</a>。</p>
 <p><img src="http://img1.tbcdn.cn/L1/461/1/3fa834ea8c880a97d00f187f67962a8218b16f22" alt="screenshot"><img src="http://img2.tbcdn.cn/L1/461/1/ad8ba09ed2350c2a8c2f067d80197e74aefcef8d" alt="screenshot"></p>
 <p>在康威的这篇文章中，最有名的一句话就是：</p>
@@ -162,8 +161,13 @@
 <p>中文直译大概的意思就是：设计系统的组织，其产生的设计等同于组织之内、组织之间的沟通结构。看看下面的图片（来源于互联网，侵删），再想想Apple的产品、微软的产品设计，就能形象生动的理解这句话。<br><img src="http://img2.tbcdn.cn/L1/461/1/74ab78cb5db601e5db68adf61e6dc58f437df4e0" alt="screenshot"></p>
 <p>用通俗的说法就是：组织形式等同系统设计。</p>
 <p>这里的系统按原作者的意思并不局限于软件系统。据说这篇文章最初投的哈佛商业评论，结果程序员屌丝的文章不入商业人士的法眼，无情被拒，康威就投到了一个编程相关的杂志，所以被误解为是针对软件开发的。最初这篇文章显然不敢自称定律（law），只是描述了作者自己的发现和总结。后来，在Brooks Law著名的人月神话中，引用这个论点，并将其“吹捧”成了现在我们熟知“康威定律”。</p>
-<h3 id="康威定律详细介绍">康威定律详细介绍</h3>
-<p>Mike从他的角度归纳这篇论文中的其他一些核心观点，如下：</p>
+
+          <h3>
+            <a name="_root-康威定律详细介绍" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            康威定律详细介绍
+          </h3><p>Mike从他的角度归纳这篇论文中的其他一些核心观点，如下：</p>
 <ul>
 <li>第一定律<ul>
 <li>Communication dictates design</li>
@@ -186,8 +190,13 @@
 </ul>
 </li>
 </ul>
-<h4 id="人是复杂社会动物">人是复杂社会动物</h4>
-<ul>
+
+          <h4>
+            <a name="_root-人是复杂社会动物" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            人是复杂社会动物
+          </h4><ul>
 <li>第一定律<ul>
 <li>Communication dictates design</li>
 <li>组织沟通方式决定系统设计</li>
@@ -219,8 +228,13 @@
 <p><img src="http://img2.tbcdn.cn/L1/461/1/a63beac73c8d217c71aba36c4a6e270a3fa18603" alt="screenshot"></p>
 <p>是不是和上面的沟通成本的数字很貌似有关联？是的，我们的大脑智力只能支持我们维系这么多的关系。（大家都知道这不是程序猿擅长的领域，在开发团队里，这个值应该更小，估计和猿差不多 -_-凸 ）</p>
 <p>沟通的问题，会带来系统设计的问题，进而影响整个系统的开发效率和最终产品结果。</p>
-<h4 id="一口气吃不成胖子，先搞定能搞定的">一口气吃不成胖子，先搞定能搞定的</h4>
-<ul>
+
+          <h4>
+            <a name="_root-一口气吃不成胖子，先搞定能搞定的" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            一口气吃不成胖子，先搞定能搞定的
+          </h4><ul>
 <li>第二定律:<ul>
 <li>There is never enough time to do something right, but there is always enough time to do it over</li>
 <li>时间再多一件事情也不可能做的完美，但总有时间做完一件事情</li>
@@ -242,8 +256,13 @@
 <p>对于飞机这样的复杂系统，再牛逼的人也无法考虑到漏洞的方方面面，所以Eric建议放弃打造完美系统的想法，而是通过不断的试飞，发现问题，确保问题发生时，系统能自动复原即可，而不追求飞行系统的绝对正确和安全。</p>
 <p>下面的图很好的解释了这个过程：<br><img src="http://img1.tbcdn.cn/L1/461/1/a7fab1b350cd8c03d5e9ddded183c7bda114c326" alt="screenshot"><br>听着很耳熟不是吗？这不就是 <strong>持续集成</strong> 和敏捷开发吗？的确就是。</p>
 <p>另一方面，这和互联网公司维护的分布式系统的弹性设计也是一个道理。对于一个分布式系统，我们几乎永远不可能找到并修复所有的bug，单元测试覆盖1000%也没有用，错误流淌在分布式系统的血液里。解决方法不是消灭这些问题，而是容忍这些问题，在问题发生时，能自动回复，微服务组成的系统，每一个微服务都可能挂掉，这是常态，我们只有有足够的冗余和备份即可。即所谓的 <strong>弹性设计（Resilience）</strong> 或者叫高可用设计（High Availability）。</p>
-<h4 id="种瓜得瓜，做独立自治的字系统减少沟通成本">种瓜得瓜，做独立自治的字系统减少沟通成本</h4>
-<ul>
+
+          <h4>
+            <a name="_root-种瓜得瓜，做独立自治的字系统减少沟通成本" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            种瓜得瓜，做独立自治的字系统减少沟通成本
+          </h4><ul>
 <li>第三定律<ul>
 <li>There is a homomorphism from the linear graph of a system to the linear graph of its design organization</li>
 <li>线型系统和线型组织架构间有潜在的异质同态特性</li>
@@ -254,8 +273,13 @@
 <p>这是康威第一定律组织和设计间内在关系的一个具体应用。更直白的说，你想要什么样的系统，就搭建什么样的团队。如果你的团队分成前端团队，Java后台开发团队，DBA团队，运维团队，你的系统就会长成下面的样子：<br><img src="http://img4.tbcdn.cn/L1/461/1/f4c2d4a8f8390ca6be19b54a524c8272aced3e34" alt="screenshot"></p>
 <p>相反，如果你的系统是按照业务边界划分的，大家按照一个业务目标去把自己的模块做出小系统，小产品的话，你的大系统就会长成下面的样子，即微服务的架构<br><img src="http://img3.tbcdn.cn/L1/461/1/c827db7a12d730140d4c0e6947535e168902a73e" alt="screenshot"></p>
 <p>微服务的理念团队间应该是 <strong>inter-operate, not integrate</strong> 。inter-operate是定义好系统的边界和接口，在一个团队内全栈，让团队自治，原因就是因为如果团队按照这样的方式组建，将沟通的成本维持在系统内部，每个子系统就会更加内聚，彼此的依赖耦合能变弱，跨系统的沟通成本也就能降低。</p>
-<h4 id="合久必分，分而治之">合久必分，分而治之</h4>
-<ul>
+
+          <h4>
+            <a name="_root-合久必分，分而治之" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            合久必分，分而治之
+          </h4><ul>
 <li>第四定律<ul>
 <li>The structures of large systems tend to disintegrate during development, qualitatively more so than with small systems</li>
 <li>大的系统组织总是比小系统更倾向于分解</li>
@@ -269,8 +293,13 @@
 <li>人多管不过来啊，找几个经理帮我管，我管经理</li>
 <li>最后， <strong>康威定律</strong> 告诉我们组织沟通的方式会在系统设计上有所表达，每个经理都被赋予一定的职责去做大系统的某一小部分，他们和大系统便有了沟通的边界，所以大的系统也会因此被拆分成一个个小团队负责的小系统（微服务是一种好的模式）</li>
 </ul>
-<h3 id="康威定律如何解释微服务的合理性">康威定律如何解释微服务的合理性</h3>
-<p>了解了康威定律是什么，再来看看他如何在半个世纪前就奠定了微服务架构的理论基础。</p>
+
+          <h3>
+            <a name="_root-康威定律如何解释微服务的合理性" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            康威定律如何解释微服务的合理性
+          </h3><p>了解了康威定律是什么，再来看看他如何在半个世纪前就奠定了微服务架构的理论基础。</p>
 <ul>
 <li>人与人的沟通是非常复杂的，一个人的沟通精力是有限的，所以当问题太复杂需要很多人解决的时候，我们需要做拆分组织来达成对沟通效率的管理</li>
 <li>组织内人与人的沟通方式决定了他们参与的系统设计，管理者可以通过不同的拆分方式带来不同的团队间沟通方式，从而影响系统设计</li>
@@ -294,8 +323,13 @@
 <li>容错</li>
 <li>快速演化</li>
 </ul>
-<h3 id="参考资料">参考资料</h3>
-<ul>
+
+          <h3>
+            <a name="_root-参考资料" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            参考资料
+          </h3><ul>
 <li><a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world">远距离条件下的康威定律——分布式世界中实现团队构建</a>，本文图片来源该ppt截图</li>
 <li><a href="https://en.wikipedia.org/wiki/Conway%27s_law">Conway‘s Law in wiki</a></li>
 <li><a href="http://www.melconway.com/Home/Conways_Law.html">Conway&#39;s Law Homepage</a></li>
@@ -328,19 +362,10 @@
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

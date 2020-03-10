@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,28 +136,30 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1u7rv30<br>title: Java并发编程第八坎<br>categories:</p>
-<ul>
-<li>note</li>
-<li>booknote</li>
-<li>《艺术》与《技术》<br>comments: true<br>tags:</li>
-<li>java</li>
-<li>thread</li>
-<li>Lock-Api</li>
-<li>reentrantLock</li>
-<li>reentrantReadWriteLock<br>date: 2019-01-07 22:46:48<br>series: 并发</li>
-</ul>
-<hr>
-<h3 id="introduction">Introduction</h3>
-<p>我们对Lock和AQS有了一定的了解了之后，可以尝试着接触一些Lock+AQS的基本实现了，本篇会了解到最基本的同步组件<code>ReentrantLock</code>和<code>ReentrantReadWriteLock</code>，前者提供了排他锁的实现，并且支持重入，后者在前者的基础上，支持锁的分级，写锁排他读锁共享。特别的，重入锁的获取还有公平和非公平之分，我们先从这部分入手。</p>
-<h4 id="fair-lock--nonfair-lock">Fair Lock &amp; Nonfair Lock</h4>
-<p>公平锁：锁的获取次序和请求锁的时间顺序一致，即在绝对的时间里，等待时间越久的线程越先获取到锁。</p>
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p>我们对Lock和AQS有了一定的了解了之后，可以尝试着接触一些Lock+AQS的基本实现了，本篇会了解到最基本的同步组件<code>ReentrantLock</code>和<code>ReentrantReadWriteLock</code>，前者提供了排他锁的实现，并且支持重入，后者在前者的基础上，支持锁的分级，写锁排他读锁共享。特别的，重入锁的获取还有公平和非公平之分，我们先从这部分入手。</p>
+
+          <h4>
+            <a name="_root-Fair Lock &amp; Nonfair Lock" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Fair Lock &amp; Nonfair Lock
+          </h4><p>公平锁：锁的获取次序和请求锁的时间顺序一致，即在绝对的时间里，等待时间越久的线程越先获取到锁。</p>
 <p>非公平锁：锁的获取和瞬间的竞争有关，一瞬间谁运气好就能获取到锁，而且锁的获取即同步状态的获取，刚获取到同步状态的线程，再次获取到状态的机会比较大。</p>
 <p>说明：虽然非公平锁可能会造成“饥饿”情况，但是大多数情况下还是非公平锁用的多，因为公平锁在释放锁又再获取锁的时候，总是会<strong>切换线程</strong>，而非公平锁一段时间内很可能总是那一个线程不停放锁持锁，<strong>线程切换的开销小就意味着——吞吐量大</strong></p>
 <p>再说多一点，公平性和非公平性是<strong>“针对未入队结点”</strong>和<strong>“已入队结点”</strong>而言，上一篇文章已经提到过，队列中的结点都是公平获取锁的，遵从FIFO，至于具体的体现，继续往下读，读到FairSync的<code>tryAcquire</code>和<code>hasQueuedPredecessors</code>方法就知道了</p>
-<h4 id="reentrantlock">ReentrantLock</h4>
-<p>重入锁可以通过构造器来决定公平机制，默认是非公平锁：</p>
+
+          <h4>
+            <a name="_root-ReentrantLock" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ReentrantLock
+          </h4><p>重入锁可以通过构造器来决定公平机制，默认是非公平锁：</p>
 <pre><code class="language-java">/**
  * Creates an instance of {@code ReentrantLock}.
  * This is equivalent to using {@code ReentrantLock(false)}.
@@ -322,15 +319,25 @@ static final class FairSync extends Sync {
 </ol>
 </li>
 </ol>
-<h5 id="real-meaning-of-fair">Real meaning of &quot;fair&quot;</h5>
-<p>读完上面的方法之后，接下来这句话非常重要：为什么之前说，公平性和非公平性是<strong>“针对未入队结点”</strong>和<strong>“已入队结点”</strong>而言？因为<strong>已入队的结点之间不存在竞争</strong>，竞争仅仅是队列前几个结点和未入队的新线程而言：</p>
+
+          <h5>
+            <a name="_root-Real meaning of &quot;fair&quot;" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Real meaning of &quot;fair&quot;
+          </h5><p>读完上面的方法之后，接下来这句话非常重要：为什么之前说，公平性和非公平性是<strong>“针对未入队结点”</strong>和<strong>“已入队结点”</strong>而言？因为<strong>已入队的结点之间不存在竞争</strong>，竞争仅仅是队列前几个结点和未入队的新线程而言：</p>
 <ul>
 <li>如果是公平锁，未入队的新线程在<code>hasQueuePredecessors</code>方法之后，肯定是false，导致<code>tryAcquire</code>方法必定返回false，导致这个新线程必定组成结点然后入队排队，<strong>即不入队的线程没有参与同步资源竞争的权利</strong>；</li>
 <li>如果是非公平锁，未入队的新线程有机会和已入队的一起竞争同步资源；所以才叫非公平！</li>
 </ul>
 <p>所以不要误解非公平锁的情况下，后排队的结点线程也能很<strong>“不公平”</strong>地比先排队的结点线程先获得同步状态，这是不可能的；</p>
-<h4 id="reentrantreadwritelock">ReentrantReadWriteLock</h4>
-<p>在Lock接口之前，我们使用等待通知的设计机制可以简单地实现一个读写场景，当写操作开始的时候，所有后续读写操作都进入等待，写操作完成之后，通知唤醒等待线程；基于这样的逻辑，才能避免脏读</p>
+
+          <h4>
+            <a name="_root-ReentrantReadWriteLock" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ReentrantReadWriteLock
+          </h4><p>在Lock接口之前，我们使用等待通知的设计机制可以简单地实现一个读写场景，当写操作开始的时候，所有后续读写操作都进入等待，写操作完成之后，通知唤醒等待线程；基于这样的逻辑，才能避免脏读</p>
 <p>所以读写锁的基本思想是：<strong>写锁的优先度高于读锁，可以多读，只能单写；</strong></p>
 <p><strong>换句话说，写锁是独占锁，读锁是共享锁</strong></p>
 <p>使用读写锁的时候，只需要在读操作的时候获取读锁，写操作的时候获取写锁就可以了，比<code>synchronized</code>关键字加等待通知方法更加简单明了</p>
@@ -365,8 +372,13 @@ static final class FairSync extends Sync {
 <td><strong>判断当前写锁被获取的次数；</strong></td>
 </tr>
 </tbody></table>
-<h5 id="read-write-state-design">Read Write State Design</h5>
-<p>我们来思考一下，对于一个读写锁来说，它应当将读写分离为2把锁，但是读写锁的排队应该排在同一队，所以读写锁的AQS应该是同一个实例，所以问题来了，如何在一个AQS实例上的一个state变量中表示读与写两种同步状态？老爷子给出了这样的答案：</p>
+
+          <h5>
+            <a name="_root-Read Write State Design" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Read Write State Design
+          </h5><p>我们来思考一下，对于一个读写锁来说，它应当将读写分离为2把锁，但是读写锁的排队应该排在同一队，所以读写锁的AQS应该是同一个实例，所以问题来了，如何在一个AQS实例上的一个state变量中表示读与写两种同步状态？老爷子给出了这样的答案：</p>
 <pre class="nhi">
     int value
     |&lt;-----------------------------32------------------------------&gt;|
@@ -384,8 +396,13 @@ static final class FairSync extends Sync {
 
 <p>通过位运算，假设当前同步状态值为S，那么写状态就等于S &amp; 0x0000FFFF（高16位清零），读状态等于S &gt;&gt;&gt; 16（无符号补位0右移16位）</p>
 <p>当写状态要增加1的时候，直接S + 1，当读状态要增加1的是，直接S + 0x00010000就行</p>
-<h5 id="structure">Structure</h5>
-<pre><code class="language-java">public class ReentrantReadWriteLock
+
+          <h5>
+            <a name="_root-Structure" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Structure
+          </h5><pre><code class="language-java">public class ReentrantReadWriteLock
         implements ReadWriteLock, java.io.Serializable {
 
     private final ReentrantReadWriteLock.ReadLock readerLock;
@@ -405,8 +422,13 @@ static final class FairSync extends Sync {
     // ...
 }</code></pre>
 <p>这是重入读写锁的整体结构，可以看到ReentrantReadWriteLock仅仅只是实现了ReadWriteLock接口而已，这个接口仅定义了获取ReadLock和WriteLock的方法，真正的锁实现是<code>ReentrantReadWriteLock.ReadLock</code>和<code>ReentrantReadWriteLock.WriteLock</code>，而这两个锁实现，用的是同一个<code>Sync</code>实例，<code>Sync</code>实例即实现了AQS的公平锁或者非公平锁</p>
-<h5 id="fair--nonfair">Fair &amp; NonFair</h5>
-<p>我们先来看非公平锁和公平锁的实现：</p>
+
+          <h5>
+            <a name="_root-Fair &amp; NonFair" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Fair &amp; NonFair
+          </h5><p>我们先来看非公平锁和公平锁的实现：</p>
 <pre><code class="language-java">static final class NonfairSync extends Sync {
     private static final long serialVersionUID = -8159625535654395037L;
     final boolean writerShouldBlock() {
@@ -431,8 +453,13 @@ static final class FairSync extends Sync {
         s.thread != null;
 }</code></pre>
 <p>如果队列中的第一个等待结点明显是是独占式锁的结点的话，就返回true，两个方法连起来的意思是，如果队列中的第一个结点是写锁（独占锁）的话，读锁应该被Block住</p>
-<h5 id="sync-in-reentrantreadwritelock">Sync in ReentrantReadWriteLock</h5>
-<pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
+
+          <h5>
+            <a name="_root-Sync in ReentrantReadWriteLock" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Sync in ReentrantReadWriteLock
+          </h5><pre><code class="language-java">abstract static class Sync extends AbstractQueuedSynchronizer {
     static final int SHARED_SHIFT   = 16;
     static final int SHARED_UNIT    = (1 &lt;&lt; SHARED_SHIFT);
     static final int MAX_COUNT      = (1 &lt;&lt; SHARED_SHIFT) - 1;
@@ -570,8 +597,13 @@ private transient int firstReaderHoldCount;</code></pre>
 <li><code>tryWriteLock</code>：和<code>tryAcquire</code>相比仅仅少了<code>writerShouldBlock</code></li>
 <li><code>tryReadLock</code>：和<code>tryAcquire</code>相比仅仅少了<code>readerShouldBlock</code></li>
 </ul>
-<h5 id="readlock--writelock-in-reentrantreadwirtelock">ReadLock &amp; WriteLock in ReentrantReadWirteLock</h5>
-<p>大致读下了上面的<code>Sync</code>之后，剩下的<code>ReadLock</code>&amp; <code>WriteLock</code>其实就很简单了</p>
+
+          <h5>
+            <a name="_root-ReadLock &amp; WriteLock in ReentrantReadWirteLock" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ReadLock &amp; WriteLock in ReentrantReadWirteLock
+          </h5><p>大致读下了上面的<code>Sync</code>之后，剩下的<code>ReadLock</code>&amp; <code>WriteLock</code>其实就很简单了</p>
 <pre><code class="language-java">public static class ReadLock implements Lock, java.io.Serializable {
     private final Sync sync;
     protected ReadLock(ReentrantReadWriteLock lock) {
@@ -620,19 +652,10 @@ public static class WriteLock implements Lock, java.io.Serializable {
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

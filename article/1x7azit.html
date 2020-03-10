@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,23 +136,24 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: 1x7azit<br>title: Some Backtracking Problem In Leetcode<br>categories:</p>
-<ul>
-<li>note</li>
-<li>leetcode<br>tags:</li>
-<li>leetcode</li>
-<li>backtracking<br>date: 2019-03-24 16:26:00 +8</li>
-</ul>
-<hr>
-<h3 id="introduction">Introduction</h3>
-<p>在Leetcode上做到某些题的时候，会发现这些题的解法大致都是差不多，将<strong>ans容器</strong>传递到某个方法中，这个方法一般有<code>dfs</code>，<code>backtracking</code>，<code>bfs</code>，等命名，然后方法中会有递归调用，然后到达某一个出口的时候，就会将当前的<strong>tmp答案</strong>放置到<strong>ans容器</strong>中，于是达到探索所有解的目的</p>
+        
+          <h3>
+            <a name="_root-Introduction" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Introduction
+          </h3><p>在Leetcode上做到某些题的时候，会发现这些题的解法大致都是差不多，将<strong>ans容器</strong>传递到某个方法中，这个方法一般有<code>dfs</code>，<code>backtracking</code>，<code>bfs</code>，等命名，然后方法中会有递归调用，然后到达某一个出口的时候，就会将当前的<strong>tmp答案</strong>放置到<strong>ans容器</strong>中，于是达到探索所有解的目的</p>
 <p>这篇大概也是各个题的题解，只是在评论区里看到有人<a href="https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)">整理</a>了，我就一起整理下来分析分析</p>
 <blockquote>
 <p>This structure might apply to many other backtracking questions, but here I am just going to demonstrate Subsets, Permutations, and Combination Sum.</p>
 </blockquote>
-<h3 id="subset">Subset</h3>
-<p>Given a set of <strong>distinct</strong> integers, <em>nums</em>, return all possible subsets (the power set).</p>
+
+          <h3>
+            <a name="_root-Subset" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Subset
+          </h3><p>Given a set of <strong>distinct</strong> integers, <em>nums</em>, return all possible subsets (the power set).</p>
 <p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: nums = [1,2,3]
@@ -171,8 +167,13 @@ Output:
   [2,3],
   [1,2],
   []
-]</code></pre><h4 id="solution">Solution</h4>
-<p>要找到一组无重复序列的子集，我们可以通过回溯的思想，去做这件事情，比如有序列<code>[1,2,3]</code>，因为子集可以不管顺序，所以123和321和312之类的是一样的，所以我们可以按照顺序决定谁开头，然后从这个开头位置开始进行回溯，比如：</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>要找到一组无重复序列的子集，我们可以通过回溯的思想，去做这件事情，比如有序列<code>[1,2,3]</code>，因为子集可以不管顺序，所以123和321和312之类的是一样的，所以我们可以按照顺序决定谁开头，然后从这个开头位置开始进行回溯，比如：</p>
 <pre><code>第一个开头是什么都没有，这也是空集的情况[]；
 
 []——》  记录这个序列；
@@ -216,8 +217,13 @@ private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&g
         tmp.remove(tmp.size() - 1);
     }
 }</code></pre>
-<h3 id="subset-ii">Subset II</h3>
-<p>Given a collection of integers that might contain duplicates, <strong>nums</strong>, return all possible subsets (the power set).</p>
+
+          <h3>
+            <a name="_root-Subset II" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Subset II
+          </h3><p>Given a collection of integers that might contain duplicates, <strong>nums</strong>, return all possible subsets (the power set).</p>
 <p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,2,2]
@@ -230,8 +236,13 @@ Output:
   [1,2],
   []
 ]</code></pre><p>和上题差不多，只是这类题总会有，无重复序列，有重复序列的两种题型出现，于是我们如何在处理有重复序列的时候，避免重复解成了解决第二类问题的关键</p>
-<h4 id="solution-1">Solution</h4>
-<p>避免判断重复的关键是：<strong>先对序列进行排序</strong>！</p>
+
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>避免判断重复的关键是：<strong>先对序列进行排序</strong>！</p>
 <p>我们以<code>[1,2,2]</code>为例</p>
 <pre><code>第一个开头是什么都没有，这也是空集的情况[]；
 
@@ -278,8 +289,13 @@ private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&g
         tmp.remove(tmp.size() - 1);
     }
 }</code></pre>
-<h3 id="permutation">Permutation</h3>
-<p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
+
+          <h3>
+            <a name="_root-Permutation" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Permutation
+          </h3><p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,2,3]
 Output:
@@ -290,8 +306,13 @@ Output:
   [2,3,1],
   [3,1,2],
   [3,2,1]
-]</code></pre><h4 id="solution-2">Solution</h4>
-<p>这题就并不是找子集了，于是123和321是两个解，我们还是以前两题相类似的思路，顺序以某个数字开头，然后依次递归下去，比如以<code>1</code>开头，然后从剩下的数字中分别可以遍历出<code>12</code>和<code>13</code>，然后<code>12</code>从剩下的3中遍历出结果<code>123</code>，而<code>13</code>可以从剩下的2中遍历出<code>132</code>；于是1开头的所有排列已经找到了；依次类推2和3开头的结果</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>这题就并不是找子集了，于是123和321是两个解，我们还是以前两题相类似的思路，顺序以某个数字开头，然后依次递归下去，比如以<code>1</code>开头，然后从剩下的数字中分别可以遍历出<code>12</code>和<code>13</code>，然后<code>12</code>从剩下的3中遍历出结果<code>123</code>，而<code>13</code>可以从剩下的2中遍历出<code>132</code>；于是1开头的所有排列已经找到了；依次类推2和3开头的结果</p>
 <p>其中有tricky的地方是，每次我们要找下一个候选的时候，我们要判断当前后续是否在当此排列人当中，如果在就跳过，跳过的方法也很简单，因为序列本身无重复，所以直接<code>!tmp.contains(nums[i])</code>就好，于是实现可以是：</p>
 <pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) {
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList&lt;&gt;();
@@ -313,8 +334,13 @@ private void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&g
         }
     }
 }</code></pre>
-<h3 id="permutation-ii">Permutation II</h3>
-<p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+
+          <h3>
+            <a name="_root-Permutation II" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Permutation II
+          </h3><p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,1,2]
 Output:
@@ -322,8 +348,13 @@ Output:
   [1,1,2],
   [1,2,1],
   [2,1,1]
-]</code></pre><h4 id="solution-3">Solution</h4>
-<p>这里又有不同了，序列中有重复的数字，那么不能像上一题一样用数值去判断是否存在过<strong>tmp</strong> 中了，所以我们可以设置一个flag数组，用于标识对应位置上的数组是否出现过，实际上我们上一题也可以用这样的方法</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>这里又有不同了，序列中有重复的数字，那么不能像上一题一样用数值去判断是否存在过<strong>tmp</strong> 中了，所以我们可以设置一个flag数组，用于标识对应位置上的数组是否出现过，实际上我们上一题也可以用这样的方法</p>
 <pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) {
     Arrays.sort(nums);
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = new LinkedList();
@@ -353,8 +384,13 @@ public void backtracking(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt
 }</code></pre>
 <p>关键去重是这一行：<code>i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; flags[i - 1] == 0</code></p>
 <p>前面两个子条件可以理解，之前我们去重都是这样做的，第三个条件是什么意思呢？如果和当前数组重复的元素也就是前一位，<strong>并没有被计入tmp序列的话</strong>，那么就说明它已经被还原为0了，说明这是一个新开始了，比如说序列<code>[1,1,3]</code>，当以<strong>第一个1</strong>为开头的时候，序列解已经给出<code>1,1,3/1,3,1</code>了，等到给出解的时候，所有的flag已经都还原成<code>[0,0,0]</code>，意味着重新计数了，等到以<strong>第二个1</strong>为开头的时候，这时候判断它和第一个一数值相等，并且第一个1都没有被纳入计数的时候，于是这是一个开始，且是重复的开始，所以可以跳过</p>
-<h3 id="combination-sum">Combination Sum</h3>
-<p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+
+          <h3>
+            <a name="_root-Combination Sum" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Combination Sum
+          </h3><p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -374,8 +410,13 @@ A solution set is:
   [2,2,2,2],
   [2,3,3],
   [3,5]
-]</code></pre><h4 id="solution-4">Solution</h4>
-<p>这里首先说说排列和组合的区别，前面两题<strong>Permutation</strong>，是排列问题，排列问题需要考虑顺序，也就是123和321是两个解，所以每次回溯的循环都是从0开始，以1开头要考虑所有的其他数字，以3开头也要考虑所有的其他数字；</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>这里首先说说排列和组合的区别，前面两题<strong>Permutation</strong>，是排列问题，排列问题需要考虑顺序，也就是123和321是两个解，所以每次回溯的循环都是从0开始，以1开头要考虑所有的其他数字，以3开头也要考虑所有的其他数字；</p>
 <p>而组合是不需要考虑顺序的，也就是123和321是同一个解，于是每次循环都从一个新的start开始，比如序列<code>[1, 2, 3]</code>的话，从1开头，要考虑自己和剩下的2和3，从2开头就只需要考虑自己和3就行了，从3开头就只需要考虑自己就好了；</p>
 <p>然后对于这题来说，每次我们往下传的时候，都传做好减法的target，一直到最后target为0的时候，等于找到了一组解，于是代码为：</p>
 <pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
@@ -395,8 +436,13 @@ private void backtrack(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; 
         }
     }
 }</code></pre>
-<h3 id="combination-sum-ii">Combination Sum II</h3>
-<p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+
+          <h3>
+            <a name="_root-Combination Sum II" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Combination Sum II
+          </h3><p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -417,8 +463,13 @@ A solution set is:
 [
   [1,2,2],
   [5]
-]</code></pre><h4 id="solution-5">Solution</h4>
-<p>额，我觉得到现在已经轻车熟路了，这里要注意的是，题目里说了每一个候选数字自能使用一次，于是我们往下传的时候，start要是i+1</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>额，我觉得到现在已经轻车熟路了，这里要注意的是，题目里说了每一个候选数字自能使用一次，于是我们往下传的时候，start要是i+1</p>
 <pre><code class="language-java">public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) {
     List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
     Arrays.sort(candidates);
@@ -440,8 +491,13 @@ private void backtrack(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; 
         }
     }
 }</code></pre>
-<h3 id="palindrome-partitioning">Palindrome Partitioning</h3>
-<p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
+
+          <h3>
+            <a name="_root-Palindrome Partitioning" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Palindrome Partitioning
+          </h3><p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
 <p>Return all possible palindrome partitioning of <em>s</em>.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: &quot;aab&quot;
@@ -449,8 +505,13 @@ Output:
 [
   [&quot;aa&quot;,&quot;b&quot;],
   [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
-]</code></pre><h4 id="solution-6">Solution</h4>
-<p>这题怎么说，其实可以用dp，而不用回溯，因为回溯确实有点魔幻，因为在回溯里不太好追踪子集，至少我这个笨脑子追踪不了</p>
+]</code></pre>
+          <h4>
+            <a name="_root-Solution" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Solution
+          </h4><p>这题怎么说，其实可以用dp，而不用回溯，因为回溯确实有点魔幻，因为在回溯里不太好追踪子集，至少我这个笨脑子追踪不了</p>
 <pre><code class="language-java">public List&lt;List&lt;String&gt;&gt; partition(String s) {
    List&lt;List&lt;String&gt;&gt; list = new ArrayList&lt;&gt;();
    backtrack(list, new ArrayList&lt;&gt;(), s, 0);
@@ -501,19 +562,10 @@ public boolean isPalindrome(String s, int low, int high){
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

@@ -33,26 +33,6 @@ emoji.replace_mode = 'unified'
 emoji.allow_native = true
 
 var index
-var origins = [
-    '127.0.0.1',
-    'https://api.github.com/',
-    'https://youyinnn.github.io',
-]
-
-$(function() {
-    const main_urls = [
-        '?to=about',
-        '?to=articles',
-        '?to=script',
-        '?to=todo',
-        '?to=resume',
-    ]
-    quicklink({
-        priority: true,
-        origins: origins,
-        urls: main_urls
-    })
-})
 
 $(function() {
     if (!!window.ActiveXObject || "ActiveXObject" in window) {
@@ -83,65 +63,72 @@ $(function() {
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
         get_articles()
-    }  else if (pathname.startsWith('/article/')) {
-        changepagetitle('article | youyinnn')
+    } else if (pathname.startsWith('/article/')) {
         new_render_md()
-    } else {
-        // showloading()
-        // let params = location.search.substring(1).split('&')
-        // let kv = params[0].split('=')
-        // let key = kv[0]
-        // let value = kv[1]
-        // if (key === 'to' && value === 'articles') {
-        //     changepagetitle('articles | youyinnn')
-        //     get_articles()
-        //     let client = algoliasearch('31EZJEFZDH', 'cf5795da3477bcd0310fb9218f814fb9');
-        //     index = client.initIndex('blog');
-        //     checkcache()
-        // } else if (key === 'to' && value === 'article') {
-        //     changepagetitle('article | youyinnn')
-        //     get_article(params[1].split('=')[1])
-        // } else if (key === 'to' && value === 'todo') {
-        //     changepagetitle('todo | youyinnn')
-        //     get_todo()
-        // } else if (key === 'to' && value === 'script') {
-        //     changepagetitle('script | youyinnn')
-        //     get_script()
-        // } else if (key === 'xixi' && value === 'haha') {
-        //     changepagetitle('egg | youyinnn')
-        //     get_egg()
-        // } else {
-        //     alert('No such page.')
-        //     location = '/'
-        // }
+        let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
+        createarticlehead(metadata)
+        changepagetitle(metadata.title)
+        // fade in the md panel
+        $(md).animateCss('fadeIn')
+
+        // set parrow
+        setarrow()
+
+        // jump to anchro according to the url's hash
+        jumpToAnchor()
+
+        let end = `
+            <div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;">
+                <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
+                <br>
+                Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/article/${metadata.abbrlink}.html</a>
+                <hr>
+                1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[<a href="javascript:void(0);">https://github.com/youyinnn</a>].
+                <br>
+                2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.
+            </div>
+            <br>
+            <div id="movebtn">
+                <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Next</button>
+                <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
+            </div>`
+        $(md).append(end)
+
+        seriesorderhandle(metadata.abbrlink, metadata.series, 
+            sessionStorage.getItem('pseries'),
+            sessionStorage.getItem('pod'))
+
+        setTimeout(() => {
+            hidetopbar()
+        }, 400);
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
     })
     var clear
-    $(window).resize(function() {
-        if (location.href.endsWith('?to=articles')) {
-            clearTimeout(clear)
-            clear = setTimeout(function() {
-                setheightfordocpanel()
-            }, 200);
-        }
-    })
+    // $(window).resize(function() {
+    //     if (location.href.endsWith('?to=articles')) {
+    //         clearTimeout(clear)
+    //         clear = setTimeout(function() {
+    //             setheightfordocpanel()
+    //         }, 200);
+    //     }
+    // })
     $('[data-toggle="tooltip"]').tooltip()
 
     // observer for docpanel height & pagationbox top fix
-    let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-    let observer = new MutationObserver(function(mutationList) {
-        setTimeout(function() {
-            setheightfordocpanel()
-        }, 250);
-    })
-    let article = $('#docpanel')[0]
-    let options = {
-        'attributes': true,
-        'attributeOldValue': true
-    };
-    observer.observe(article, options);
+    // let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    // let observer = new MutationObserver(function(mutationList) {
+    //     setTimeout(function() {
+    //         setheightfordocpanel()
+    //     }, 250);
+    // })
+    // let article = $('#docpanel')[0]
+    // let options = {
+    //     'attributes': true,
+    //     'attributeOldValue': true
+    // };
+    // observer.observe(article, options);
 
     // remove null content code block
     $('code').each(function() {

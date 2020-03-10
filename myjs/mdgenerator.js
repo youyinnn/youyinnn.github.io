@@ -2,7 +2,11 @@ const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
 const yaml = require('js-yaml')
-const { crc32 } = require('crc');
+const {
+    crc32
+} = require('crc')
+const dayjs = require('dayjs')
+
 
 let postsPath = path.join(__dirname, '..', '_posts')
 let htmlPath = path.join(__dirname, '..', 'index.html')
@@ -17,6 +21,23 @@ function file2file(set) {
 }
 
 var html = undefined
+// Get reference
+const renderer = new marked.Renderer();
+
+// Override function
+renderer.heading = function(text, level) {
+    if (text.search('<a') > 0 || text.startsWith('<a')) {
+        text = text.replace(/\<a href=".*"\>|<\/a>|<code>|<\/code>/g, '')
+    }
+    return `
+          <h${level}>
+            <a name="_root-${text}" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            ${text}
+          </h${level}>`;
+}
+
 function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     let sourceMdStr = fs.readFileSync(sourceFilePath, {
         encoding: 'utf-8'
@@ -31,7 +52,8 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     }
     let htmlStr = marked(sourceMdStr, {
         gfm: true,
-        breaks: true
+        breaks: true,
+        renderer: renderer
     })
     fs.writeFileSync(outputFilePath, html.replace(/\{\{\% md \%\}\}/, htmlStr), {
         encoding: 'utf-8'
@@ -40,18 +62,20 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
 
 // articles 2 htm
 let postsrs = fs.readdirSync(postsPath)
-let newarticlemetadata = new Array()
+let articlemetadata = new Array()
 let series = new Array()
+let articleorder = new Array()
 let shortmsgline = 25
+// iterating md files
 for (pname of postsrs) {
     let abbrlink = crc32(pname).toString(36)
     md2html(
         path.join(postsPath, pname),
         path.join(__dirname, '..', 'article', abbrlink + '.html'),
-        function (sourceMdStr) {
+        function(sourceMdStr) {
             sourceMdStr = sourceMdStr.replace('---', `---\nabbrlink: ${abbrlink}`)
-            let metadata =  syncreihandle2metadata(sourceMdStr)
-            newarticlemetadata.push(metadata)
+            let metadata = syncreihandle2metadata(sourceMdStr)
+            articlemetadata.push(metadata)
             let pseriesname = metadata.series
             if (pseriesname !== undefined) {
                 let pseries
@@ -65,16 +89,27 @@ for (pname of postsrs) {
                     item.ps = pseries = new Array()
                     series.push(item)
                 }
-                let ss = metadata.title + '.html'
+                let ss = metadata.title + '===' + abbrlink
                 pseries.unshift(ss)
             }
-            return sourceMdStr
+            let endindex = sourceMdStr.indexOf('---', 3) + 3
+            let body = sourceMdStr.substring(endindex, sourceMdStr.length)
+            return body
         }
     )
 }
 
+// sort metadata with date
+articlemetadata = articlemetadata.sort((a, b) => {
+    return dayjs(a.date).isBefore(b.date) ? 1 : -1
+})
+
+for (m of articlemetadata) {
+    articleorder.push(m.title + '<=>' + m.abbrlink)
+}
+
 series = yaml.dump(series.reverse())
-newarticlemetadata = yaml.dump(newarticlemetadata)
+articlemetadata = yaml.dump(articlemetadata)
 
 function syncreihandle2metadata(text) {
     let endindex = text.indexOf('---', 3) + 3
@@ -121,16 +156,22 @@ function syncreihandle2metadata(text) {
             shortcontant += '\n'
         }
     }
-    metadata.short_contant = shortcontant.replace(/!\[.*\]\(.*\)/gm, '')
+    metadata.short_contant = marked(shortcontant.replace(/!\[.*\]\(.*\)/gm, ''), {
+        gfm: true,
+        breaks: true,
+        renderer: renderer
+    })
     return metadata
 }
 
 let resourcesPath = path.join(__dirname, '..', 'resources')
 let websrcPath = path.join(__dirname, '..', '_websrc')
-fs.writeFileSync(path.join(resourcesPath, 'cache.js'),`
+fs.writeFileSync(path.join(resourcesPath, 'cache.js'), `
     sessionStorage.setItem('pseries', ${JSON.stringify(series)});
 
-    sessionStorage.setItem('pcbl', ${JSON.stringify(newarticlemetadata)});
+    sessionStorage.setItem('pcbl', ${JSON.stringify(articlemetadata)});
+
+    sessionStorage.setItem('pod', ${JSON.stringify(articleorder.join('>--<'))});
 `)
 fs.copyFileSync(
     htmlPath,
@@ -140,32 +181,32 @@ fs.copyFileSync(
 // about
 md2html(
     path.join(websrcPath, 'about.md'),
-    path.join(__dirname, '..','about', 'index.html')
+    path.join(__dirname, '..', 'about', 'index.html')
 )
 
 // resume
 md2html(
     path.join(websrcPath, 'resume.md'),
-    path.join(__dirname, '..','resume', 'index.html')
+    path.join(__dirname, '..', 'resume', 'index.html')
 )
 
 // scripts
 md2html(
     path.join(websrcPath, 'scripts.md'),
-    path.join(__dirname, '..','scripts', 'index.html')
+    path.join(__dirname, '..', 'scripts', 'index.html')
 )
 
 // todos
 md2html(
     path.join(websrcPath, 'todos.md'),
-    path.join(__dirname, '..','todos', 'index.html')
+    path.join(__dirname, '..', 'todos', 'index.html')
 )
 
 // firends link
 file2file({
     sourceFilePath: path.join(websrcPath, 'friendslink.json'),
     outputFilePath: path.join(resourcesPath, 'friendslink.js'),
-    handleFunc: function (src) {
+    handleFunc: function(src) {
         return `var friendslink = ${src}`
     }
 })

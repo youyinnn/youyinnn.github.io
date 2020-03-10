@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,20 +136,27 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: spovqu<br>title: Linux安装MySql<br>categories:</p>
-<ul>
-<li>reprinted<br>tags:</li>
-<li>mysql</li>
-<li>linux<br>date: 2018-05-03 16:05:01</li>
-</ul>
-<hr>
-<h1 id="linux安装mysql">Linux安装MySql</h1>
-<p>一位哲人说过，只会用 FTP 工具的人都是傻子。</p>
-<h2 id="原料">原料</h2>
-<p>去 <a href="https://www.mysql.com/downloads/">Mysql官网</a> 下载<br>mysql-5.7.19-linux-glibc2.12x86_64.tar.gz。</p>
-<h2 id="步骤">步骤</h2>
-<ul>
+        
+          <h1>
+            <a name="_root-Linux安装MySql" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Linux安装MySql
+          </h1><p>一位哲人说过，只会用 FTP 工具的人都是傻子。</p>
+
+          <h2>
+            <a name="_root-原料" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            原料
+          </h2><p>去 <a href="https://www.mysql.com/downloads/">Mysql官网</a> 下载<br>mysql-5.7.19-linux-glibc2.12x86_64.tar.gz。</p>
+
+          <h2>
+            <a name="_root-步骤" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            步骤
+          </h2><ul>
 <li>上传至 /usr/local/</li>
 <li>解压、重命名<pre><code>tar -xvz -f mysql-5.7.19-linuxglibc2.12x86_64.tar.gz
 mv /usr/local/mysql-5.7.19-linuxglibc2.12x86_64 /usr/local/mysql</code></pre>此时 MySql 的位置在 /usr/local/mysql/</li>
@@ -201,8 +203,13 @@ Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
-Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</code></pre>剩下的初始化密码，建立远程连接就不写了。emmm ,在 Linux 下面 安装 MySql 的方法还有很多，慢慢参透吧。<h2 id="参考">参考</h2>
-<a href="http://www.cnblogs.com/wy123/p/6815049.html">http://www.cnblogs.com/wy123/p/6815049.html</a><br><a href="http://blog.csdn.net/yoon0205/article/details/50605584">http://blog.csdn.net/yoon0205/article/details/50605584</a></li>
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</code></pre>剩下的初始化密码，建立远程连接就不写了。emmm ,在 Linux 下面 安装 MySql 的方法还有很多，慢慢参透吧。
+          <h2>
+            <a name="_root-参考" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            参考
+          </h2><a href="http://www.cnblogs.com/wy123/p/6815049.html">http://www.cnblogs.com/wy123/p/6815049.html</a><br><a href="http://blog.csdn.net/yoon0205/article/details/50605584">http://blog.csdn.net/yoon0205/article/details/50605584</a></li>
 </ul>
 
     </div>
@@ -229,19 +236,10 @@ Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the cu
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 

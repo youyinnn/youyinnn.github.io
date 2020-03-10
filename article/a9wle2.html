@@ -127,11 +127,6 @@
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
             <br>
         </div>
-        <div class="articleorderbtn">
-            <button id="corder" style="border-radius: 1rem 1rem 0 0;" class="btn btn-dark" type="button" title="recently created" data-toggle="tooltip" data-placement="left" disabled>c</button>
-            <button id="norder" style="border-radius: 0 0 1rem 1rem;" class="btn btn-dark mt-2" type="button" title="recently updated" data-toggle="tooltip" data-placement="left">u</button>
-            <button id="cleancache" style="border-radius: 1rem;height: 20px;" class="btn btn-dark mt-2" type="button" title="clear cache" data-toggle="tooltip" data-placement="left"></button>
-        </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
@@ -141,16 +136,7 @@
         <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
     </div>
     <div id="md" class="myhide">
-        <hr>
-<p>abbrlink: a9wle2<br>title: 我认为的规范的git commit msg<br>top: true<br>categories:</p>
-<ul>
-<li>thinking<br>comments: true<br>tags:</li>
-<li>tips</li>
-<li>github</li>
-<li>git<br>date: 2017-11-29 18:30:01</li>
-</ul>
-<hr>
-<p>{% cq %}</p>
+        <p>{% cq %}</p>
 <p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系 但你也别每条都这样写</p>
 <p>{% endcq %}</p>
 <!-- more -->
@@ -159,8 +145,13 @@
 <p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
 <p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html">5 Useful Tips For A Better Commit Message</a></p>
 <p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
-<h3 id="第一行">第一行</h3>
-<p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code></code>分隔，提示符规定如下（持续补充）：</p>
+
+          <h3>
+            <a name="_root-第一行" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            第一行
+          </h3><p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code></code>分隔，提示符规定如下（持续补充）：</p>
 <p>我把一次工作的标识符分“动作”、“对象”两部分描述：</p>
 <ul>
 <li><p>可能的动作前缀有：</p>
@@ -204,10 +195,20 @@
 <blockquote>
 <p><em>我在完成一个<code>新功能</code>的同时还<code>发现了一个BUG</code>顺便<code>封装了之前写的重复的代码为函数</code>提高了代码重用率接着<code>修复了之前发现的一些BUG</code>最后还<code>修改了一下ignore文件</code>！</em></p>
 </blockquote>
-<h3 id="第二行">第二行</h3>
-<p>得是一个空行</p>
-<h3 id="第三行">第三行</h3>
-<p>开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+
+          <h3>
+            <a name="_root-第二行" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            第二行
+          </h3><p>得是一个空行</p>
+
+          <h3>
+            <a name="_root-第三行" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            第三行
+          </h3><p>开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
 <ul>
 <li>以工作标识符加冒号占一行。</li>
 <li>如有当前工作有多个要点，必须有序得分条说明。</li>
@@ -265,19 +266,10 @@ MODIGNORE:*</code></pre>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/hightlight-site-pack.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/highlightjs-line-number-0.0.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/underscore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/sequence-diagram.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/jquery.flowchart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/editormd.min-0.0.3.js"></script>
 
     <script src="/myjs/tool.js"></script>
 
