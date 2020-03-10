@@ -193,6 +193,16 @@ function articlespage(pageto) {
     docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
 }
 
+function hideloading() {
+    rmclass(loading, 'myshow')
+    adclass(loading, 'myhide')
+}
+
+function showloading() {
+    rmclass(loading, 'myhide')
+    adclass(loading, 'myshow')
+}
+
 function hidesidetoc() {
     adclass(sidetoccontainer, 'tochide')
     rmclass(sidetoccontainer, 'tocshow')
