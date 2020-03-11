@@ -73,7 +73,7 @@ function choosebyhosename(local, hub) {
     return location.hostname !== 'youyinnn.github.io' ? local : hub
 }
 
-var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/cache.js')
+var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/cache.js')
 
 var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
@@ -106,8 +106,8 @@ function importJsBeforeLoad() {
 }
 
 function importJsAfterLoad() {
-    let map = new Map()
-    map.set('defer', true)
+    let map = {}
+    map.defer = true
     for (path of after) {
         load(path, {
             async: false,
@@ -118,14 +118,15 @@ function importJsAfterLoad() {
     }
     
     // specially loading for KaXTex https://katex.org/docs/autorender.html
-    map.set('integrity', 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz')
-    map.set('crossorigin', 'anonymous')
+    map.integrity = 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz'
+    map.crossorigin = 'anonymous'
     load('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js', {
+        async: false,
         attrs: map
-    })    
-    map.set('integrity', 'sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI')
-    map.set('crossorigin', 'anonymous')
+    })
+    map.integrity = 'sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI'
     load('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js', {
+        async: false,
         attrs: map
     }, () => {
         for (el of document.getElementsByClassName('markdown-body')) {
