@@ -111,6 +111,8 @@ function importJsAfterLoad() {
         load(path, {
             async: false,
             attrs: map
+        },function (err, script) {
+            console.warn(script.src)
         })
     }
     
