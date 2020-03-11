@@ -69,11 +69,13 @@ var before = [
     'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js',
 ]
 
-function choosebyhosename(local, hub) {
-    return location.hostname !== 'youyinnn.github.io' ? local : hub
+for (let i = 0; i < resourcesList.length; i++) {
+    if (location.hostname !== 'youyinnn.github.io') {
+        resourcesList[i] = '/resources/' + resourcesList[i]
+    } else {
+        resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/' + resourcesList[i]
+    }
 }
-
-var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/cache.js')
 
 var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
@@ -88,14 +90,14 @@ var after = [
     'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
     
     '/myjs/tool.js',
+    '/myjs/githubapi.js',
     '/myjs/init.js',
     '/myjs/eventbind.js',
-    '/myjs/githubapi.js',
     '/myjs/elementcreate.js',
     '/myjs/main.js',
-    '/resources/friendslink.js',
-    cachejs,
 ]
+
+after = resourcesList.concat(after)
 
 function importJsBeforeLoad() {
     for (path of before) {
