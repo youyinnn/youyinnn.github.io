@@ -73,7 +73,7 @@ function choosebyhosename(local, hub) {
     return location.hostname !== 'youyinnn.github.io' ? local : hub
 }
 
-var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/cache.js')
+var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/cache.js')
 
 var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
