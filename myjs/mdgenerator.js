@@ -171,7 +171,7 @@ function syncreihandle2metadata(text) {
 let resourcesPath = path.join(__dirname, '..', 'resources')
 let websrcPath = path.join(__dirname, '..', '_websrc')
 fs.writeFileSync(path.join(resourcesPath, 'cache.js'), `
-    console.log('Cached file version: ${new Date().toString()})
+    console.log('Cached file version: ' + '${new Date().toString()}')
     sessionStorage.setItem('pseries', ${JSON.stringify(series)});
     sessionStorage.setItem('pcbl', ${JSON.stringify(articlemetadata)});
     sessionStorage.setItem('pod', ${JSON.stringify(articleorder.join('>--<'))});
