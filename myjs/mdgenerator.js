@@ -37,12 +37,13 @@ renderer.heading = function(text, level) {
             ${text}
           </h${level}>`;
 }
-renderer.text = function(text) {
+renderer.html = renderer.text = function(text) {
     // convert emoji
-    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
+    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/gm)
     if (emojis !== null) {
         emojis.forEach(ej => {
-            text = text.replace(ej, emoji.replace_colons(ej))
+            let splitors = text.split(ej)
+            text = splitors.join(emoji.replace_colons(ej))
         })
     }
 

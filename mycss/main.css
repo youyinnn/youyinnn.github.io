@@ -100,7 +100,7 @@
   left: 20rem;
   top: 3rem;
   bottom: 0;
-  padding: .5rem;
+  padding: .5rem; 
   background-color: whitesmoke;
   transition: all .2s;
 }
@@ -137,6 +137,19 @@
   background-color: var(--yminor-color);
 }
 
+.toc-h3{
+  margin-left: .5rem;
+}
+.toc-h4{
+  margin-left: 2rem;
+}
+.toc-h5{
+  margin-left: 3rem;
+}
+.toc-h6{
+  margin-left: 3.5rem;
+}
+
 #sidetoc {
   border-left: 0.1rem var(--ydashed-color) dashed;
   position: absolute;
@@ -157,60 +170,17 @@
 #sidetoc a {
   position: relative;
   display: block;
-  padding: 0.4em 0.4em 0.4em 2.5em;
-  /*for ie6/7*/
-  *padding: 0.4em;
-  margin: 0.5em 0;
-  /* background: #ddd; */
-  /*CSS3属性*/
+  padding: 0.4em;
   text-decoration: none;
   transition: all 0.3s ease-out;
 }
 
 #sidetoc a:hover {
-  /* background-color: var(--yfont-minor-color); */
-  background: #eee;
+  background: rgb(151, 151, 151);
 }
 
 #sidetoc a:active {
   transform: translateY(3px);
-}
-
-#sidetoc a::before {
-  content: counter(li);
-  counter-increment: li;
-  position: absolute;
-  left: -.6em;
-  top: 50%;
-  margin-top: -1.3em;
-  background: var(--ymain-color);
-  width: 2.2em;
-  line-height: 2em;
-  text-align: center;
-  font-weight: bold;
-  transition: all 0.3s ease-out;
-  color: white;
-}
-
-#sidetoc a:hover::before {
-  transform: translateX(3px);
-}
-
-#sidetoc ul {
-  /* 创建一个计数器 */
-  counter-reset: li;
-  /* 清除列表默认的编码*/
-  list-style: none;
-  /* 让IE6/7具有默认的编码 */
-  *list-style: decimal;
-  font: 15px 'trebuchet MS', 'lucida sans';
-  padding: 0;
-  margin-bottom: 4em;
-}
-
-#sidetoc ul ul {
-  /* 给二级列表增加一定的左边距*/
-  margin: 0 0 0 1.3em;
 }
 
 #md {
@@ -967,20 +937,6 @@
   transform: translateY(7px);
 }
 
-.parrow h1 a:before,
-.parrow h2 a:before,
-.parrow h3 a:before,
-.parrow h4 a:before,
-.parrow h5 a:before,
-.parrow h6 a:before {
-  position: absolute;
-  color: var(--ymain-color);
-  font-weight: bold;
-  transition: all .4s;
-  transform: scale(1.6);
-  opacity: 0;
-}
-
 .showarrow {
   color: #5ac59c;
 }
@@ -995,6 +951,7 @@
 }
 .panchor:hover {
   color: #3b5d75;
+  transform: translateX(10px);
 }
 
 .panchorlink {
@@ -1209,4 +1166,9 @@ summary {
 .markdown-body a{
   color: #22a67b;
   font-weight: bold;
+}
+
+.markdown-body > p:hover,
+.markdown-body li:hover{
+  background-color: rgb(235, 235, 235);
 }

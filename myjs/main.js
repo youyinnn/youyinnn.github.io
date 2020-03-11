@@ -146,21 +146,32 @@ function new_render_md() {
             }
         })
     })
+    let listhtml = ''
+    for (el of $('h1, h2, h3, h4, h5, h6')) {
+        listhtml += `
+            <div class="toc-${el.tagName.toLowerCase()}">
+                <a href="${el.childNodes[1].name}">
+                    ${el.childNodes[1].name.split('_root-')[1].trim()}
+                </a>
+            </div>`
+    }
+    $('#sidetoc').append(listhtml)
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
+        let tzhref = $.attr(this, 'href')
         if ($(md).hasClass('panelup')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
         }
         if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 48
             }, 600)
         }
         if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 96
             }, 600)
         }
     })
@@ -784,6 +795,11 @@ function showbbt() {
     $('#bbt').removeClass('myhide')
 }
 
+function showtoc() {
+    $('#toc')[0].style.display = 'inline-block'
+    $('#toc').removeClass('myhide')
+}
+
 function hidetopbar() {
     if (getclientw() > 700) {
         adclass(topbar, 'hidetopbar')
@@ -805,55 +821,6 @@ function cgtopbut() {
         } else {
             hidetopbar()
         }
-    }
-}
-
-function setcoll() {
-    let collbuts = $('.collbut')
-    $('#acob').bind('click', function() {
-        if ($('#toc').hasClass('myhide')) {
-            $('#toc')[0].style.display = 'inline-block'
-            this.innerText = '全部隐藏'
-            $('#toc').removeClass('myhide')
-            setTimeout(function() {
-                $('#toc').tooltip('show')
-            }, 600);
-            setTimeout(function() {
-                $('#toc').tooltip('hide')
-            }, 3000);
-            collbuts.each(function() {
-                if (this.innerText === '点击展开') {
-                    this.click()
-                }
-            })
-        } else {
-            this.innerHTML = '全部展开'
-            $('#toc').addClass('myhide')
-            $('#toc')[0].style.display = 'none'
-            collbuts.each(function() {
-                if (this.innerText === '点击隐藏') {
-                    this.click()
-                }
-            })
-        }
-    })
-    for (let i = 0; i < collbuts.length; ++i) {
-        let tg = $(collbuts[i].getAttribute('tg'))[0]
-        tg.setAttribute('h', getstyle(tg, 'height'))
-        tg.style.height = '0px'
-        bindev(collbuts[i], 'click', function() {
-            let h
-            if (getstyle(tg, 'height') === '0px') {
-                h = tg.getAttribute('h')
-                collbuts[i].innerText = '点击隐藏'
-            } else {
-                h = '0px'
-                collbuts[i].innerText = '点击展开'
-            }
-            $('#' + tg.id).animate({
-                height: h
-            }, 800);
-        })
     }
 }
 
@@ -955,8 +922,8 @@ function setarrow() {
         $(this).find('.panchorlink').css('opacity', '0')
     })
     $(window).scroll(function() {
-        let stop = window.scrollY + 14
-        let sbotton = (window.scrollY + getclienth(0.4))
+        let stop = window.scrollY - 10
+        let sbotton = (window.scrollY + getclienth(0.90))
         for (let i = 0; i < arrows.length; i++) {
             let ofs = arrows[i].offsetTop
             if (ofs >= stop && ofs <= sbotton) {
