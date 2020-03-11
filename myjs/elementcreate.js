@@ -2,61 +2,23 @@ function createarticlecard(item, pagebelong) {
     let articlecard = c('div')
     let articletitle = c('a')
     let articletime = c('div')
-    let sp1 = c('span')
     let articleshortmsg = c('div')
     let articlemore = c('a')
-    let tagsandcates = c('div')
-    let tagsbox = c('div')
-    let charsbox = c('div')
-    let catestag = c('span')
     adclass(articlecard, 'articlecard')
-    adclass(articletitle, 'articlecardtitle font-weight-bold')
+    adclass(articletitle, 'articlecardtitle')
     adclass(articletime, 'articlecardtime')
-    adclass(tagsandcates, 'articlecardtime')
-    adclass(articleshortmsg, 'articleshortmsg markdown-body editormd-html-preview')
+    adclass(articleshortmsg, 'articleshortmsg')
     adclass(articlemore, 'articlemore')
-    tagsbox.style.marginTop = '5px'
-    charsbox.style.marginTop = '5px'
     articletitle.innerHTML = item.title
     articletitle.abbrlink = item.abbrlink
     articletitle.href = '/article/' + articletitle.abbrlink + '.html'
     articlecard.id = 'article_' + item.abbrlink
     articleshortmsg.id = 'article_short_msg_' + item.abbrlink
-    articlemore.innerHTML = 'more'
+    articlemore.innerHTML = 'Read more >>'
     articlemore.href = '/article/' + articletitle.abbrlink + '.html'
-    sp1.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date))
-    let catestaghtml = ''
-    let content = ''
-    if (item.categories !== undefined && item.categories.length !== 0) {
-        for (let i = 0; i < item.categories.length; i++) {
-            content += item.categories[i]
-            content += '-'
-        }
-        content = content.substring(0, content.length - 1)
-    } else {
-        content = 'nothing here'
-    }
-    catestaghtml = 'Categories: <span class="bdgonarticlecard badge badge-dark" style="font-size: 100%;max-width: 100%;border-radius: .25rem !important;">' + content + '</span>'
-    catestag.innerHTML = catestaghtml
-    let tagsboxhtml = ''
-    content = ''
-    if (item.tags !== undefined && item.tags.length !== 0) {
-        for (let i = 0; i < item.tags.length; i++) {
-            content += '<span class="bdgonarticlecard badge badge-dark" style="font-size: 100%;max-width: 100%;border-radius: .25rem !important;">' + item.tags[i] + '</span>&nbsp;'
-        }
-    } else {
-        content = 'nothing here'
-    }
-    tagsboxhtml = 'Tags: ' + content
-    tagsbox.innerHTML = tagsboxhtml
-    charsbox.innerHTML = 'Chars: ' + item.char_count + ' c'
+    articletime.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date))
     appendc(articlecard, articletitle)
-    appendc(articletime, sp1)
     appendc(articlecard, articletime)
-    appendc(tagsandcates, catestag)
-    appendc(tagsandcates, tagsbox)
-    appendc(tagsandcates, charsbox)
-    appendc(articlecard, tagsandcates)
     appendc(articlecard, articleshortmsg)
     appendc(articlecard, articlemore)
     appendc($('#pagebox-' + pagebelong)[0], articlecard)

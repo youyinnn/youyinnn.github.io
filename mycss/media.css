@@ -252,6 +252,14 @@
     width: 80%;
   }
 
+  .articlecardtitle {
+    font-size: 16px;
+  }
+
+  .pagebox{
+    padding-bottom: 3rem;
+  }
+
   #homepage {
     top: 6rem;
     line-height: 20rem;
@@ -472,6 +480,14 @@
 
   #hb {
     display: none;
+  }
+
+  .articlecardtitle {
+    font-size: 16px;
+  }
+
+  .pagebox{
+    padding-bottom: 3rem;
   }
 }
 
