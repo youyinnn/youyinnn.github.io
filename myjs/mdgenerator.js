@@ -170,12 +170,7 @@ function syncreihandle2metadata(text) {
 
 let resourcesPath = path.join(__dirname, '..', 'resources')
 let websrcPath = path.join(__dirname, '..', '_websrc')
-fs.writeFileSync(path.join(resourcesPath, 'cache.js'), `
-    console.log('Cached file version: ' + '${new Date().toString()}')
-    sessionStorage.setItem('pseries', ${JSON.stringify(series)});
-    sessionStorage.setItem('pcbl', ${JSON.stringify(articlemetadata)});
-    sessionStorage.setItem('pod', ${JSON.stringify(articleorder.join('>--<'))});
-`)
+
 fs.copyFileSync(
     htmlPath,
     path.join(__dirname, '..', 'articles', 'index.html'),
@@ -206,10 +201,27 @@ md2html(
 )
 
 // firends link
+let friendslinkfilename = 'friendslink.js'
 file2file({
     sourceFilePath: path.join(websrcPath, 'friendslink.json'),
-    outputFilePath: path.join(resourcesPath, 'friendslink.js'),
+    outputFilePath: path.join(resourcesPath, friendslinkfilename),
     handleFunc: function(src) {
         return `var friendslink = ${src}`
     }
 })
+
+let cachefilename = `cache-${crc32(new Date().toString()).toString(36)}.js`
+
+fs.writeFileSync(path.join(resourcesPath, cachefilename), `
+sessionStorage.setItem('pseries', ${JSON.stringify(series)});
+sessionStorage.setItem('pcbl', ${JSON.stringify(articlemetadata)});
+sessionStorage.setItem('pod', ${JSON.stringify(articleorder.join('>--<'))});
+`)
+
+var resoucesList = [
+    friendslinkfilename,
+    cachefilename
+]
+
+fs.writeFileSync(path.join(resourcesPath, 'resources.js'), `
+var resourcesList = ${JSON.stringify(resoucesList)}`)
