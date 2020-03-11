@@ -69,6 +69,12 @@ var before = [
     'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js',
 ]
 
+function choosebyhosename(local, hub) {
+    return location.hostname === 'youyinnn.github.io' ? hub : local
+}
+
+var cachejs = choosebyhosename('https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/cache.js', '/resources/cache.js')
+
 var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js',
@@ -78,9 +84,9 @@ var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
-    'https://cdnjs.com/libraries/flowchart',
+    'https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.13.0/flowchart.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
-
+    
     '/myjs/tool.js',
     '/myjs/init.js',
     '/myjs/eventbind.js',
@@ -88,7 +94,7 @@ var after = [
     '/myjs/elementcreate.js',
     '/myjs/main.js',
     '/resources/friendslink.js',
-    '/resources/cache.js',
+    cachejs,
 ]
 
 function importJsBeforeLoad() {
@@ -101,15 +107,15 @@ function importJsBeforeLoad() {
 
 function importJsAfterLoad() {
     let map = new Map()
-    map.set('defer', true)
     for (path of after) {
         load(path, {
             async: false,
             attrs: map
         })
     }
-
+    
     // specially loading for KaXTex https://katex.org/docs/autorender.html
+    map.set('defer', true)
     map.set('integrity', 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz')
     map.set('crossorigin', 'anonymous')
     load('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js', {
