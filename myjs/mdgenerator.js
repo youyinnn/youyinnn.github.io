@@ -81,7 +81,7 @@ let postsrs = fs.readdirSync(postsPath)
 let articlemetadata = new Array()
 let series = new Array()
 let articleorder = new Array()
-let shortmsgline = 25
+let shortmsgline = 10
 
 const {
     EmojiConvertor
