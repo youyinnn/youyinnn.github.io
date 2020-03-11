@@ -39,7 +39,6 @@ $(function() {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
         return
     }
-    settimeout()
     get_friendlinked()
     let pathname = location.pathname
     if (pathname === '/') {
