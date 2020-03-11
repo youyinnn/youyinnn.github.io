@@ -70,10 +70,10 @@ var before = [
 ]
 
 function choosebyhosename(local, hub) {
-    return location.hostname === 'youyinnn.github.io' ? hub : local
+    return location.hostname !== 'youyinnn.github.io' ? local : hub
 }
 
-var cachejs = choosebyhosename('https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/cache.js', '/resources/cache.js')
+var cachejs = choosebyhosename('/resources/cache.js', 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/cache.js')
 
 var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
@@ -107,17 +107,17 @@ function importJsBeforeLoad() {
 
 function importJsAfterLoad() {
     let map = new Map()
+    map.set('defer', true)
     for (path of after) {
         load(path, {
             async: false,
             attrs: map
         },function (err, script) {
-            console.warn(script.src)
+            console.debug(script.src)
         })
     }
     
     // specially loading for KaXTex https://katex.org/docs/autorender.html
-    map.set('defer', true)
     map.set('integrity', 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz')
     map.set('crossorigin', 'anonymous')
     load('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js', {
