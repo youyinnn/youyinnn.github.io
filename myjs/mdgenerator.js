@@ -38,12 +38,17 @@ renderer.heading = function(text, level) {
           </h${level}>`;
 }
 renderer.text = function(text) {
+    // convert emoji
     let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
     if (emojis !== null) {
         emojis.forEach(ej => {
             text = text.replace(ej, emoji.replace_colons(ej))
         })
     }
+
+    // render {% cq %} {% endcq %}
+    text = text.replace(/\{\% *cq *\%\}/gm, '<div class="saying mb-4">')
+    text = text.replace(/\{\% *endcq *\%\}/gm, '</div>')
     return text
 }
 
