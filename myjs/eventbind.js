@@ -94,14 +94,6 @@ $(function() {
     $('#articlesearchtext').bind('keyup', 'esc', function() {
         this.value = ''
     })
-    $(window).bind('keyup', 'alt+s', function() {
-        syncatesToconfig()
-    })
-    $(window).bind('keyup', 'alt+p', function() {
-        if (location.href.search(/\?to=article&/) !== -1) {
-            md2png()
-        }
-    })
     $('#categories').bind('click', function() {
         if ($('#all_cates').hasClass('myhide')) {
             $('#all_cates').removeClass('myhide')
