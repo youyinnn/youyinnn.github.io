@@ -97,7 +97,7 @@ var after = [
     '/myjs/main.js',
 ]
 
-after = after.concat(resourcesList)
+after = resourcesList.concat(after)
 
 function importJsBeforeLoad() {
     for (path of before) {
