@@ -27,14 +27,9 @@ var searchcount
 var cachedcleaner
 var cachedcleanerLock = false
 
-var emoji
 var index
 
 $(function() {
-    emoji = new EmojiConvertor()
-    emoji.init_env()
-    emoji.replace_mode = 'unified'
-    emoji.allow_native = true
     if (!!window.ActiveXObject || "ActiveXObject" in window) {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
         return

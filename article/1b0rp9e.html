@@ -170,7 +170,7 @@
 <td align="center">O(n^2)</td>
 <td align="center">O(n^2)</td>
 <td align="center">O(1)</td>
-<td align="center">:heavy_check_mark:</td>
+<td align="center">✔️</td>
 </tr>
 <tr>
 <td align="center">选择排序</td>
@@ -178,7 +178,7 @@
 <td align="center">O(n^2)</td>
 <td align="center">O(n^2)</td>
 <td align="center">O(1)</td>
-<td align="center">:heavy_multiplication_x:</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td align="center">插入排序</td>
@@ -186,7 +186,7 @@
 <td align="center">O(n^2)</td>
 <td align="center">O(n^2)</td>
 <td align="center">O(1)</td>
-<td align="center">:heavy_check_mark:</td>
+<td align="center">✔️</td>
 </tr>
 <tr>
 <td align="center">希尔排序</td>
@@ -194,7 +194,7 @@
 <td align="center"><strong>O(nlogn)~O(n^2)</strong></td>
 <td align="center"><strong>O(n^2)</strong></td>
 <td align="center">O(1)</td>
-<td align="center">:heavy_multiplication_x:</td>
+<td align="center">✖️</td>
 </tr>
 </tbody></table>
 
@@ -220,7 +220,7 @@
 <td align="center">O(nlogn)</td>
 <td align="center"><strong>O(n^2)</strong></td>
 <td align="center"><strong>O(logn)~O(n)</strong></td>
-<td align="center">:heavy_multiplication_x:</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td align="center">归并排序</td>
@@ -228,7 +228,7 @@
 <td align="center">O(nlogn)</td>
 <td align="center">O(nlogn)</td>
 <td align="center"><strong>O(n)</strong></td>
-<td align="center">:heavy_check_mark:</td>
+<td align="center">✔️</td>
 </tr>
 <tr>
 <td align="center">堆排序</td>
@@ -236,7 +236,7 @@
 <td align="center">O(nlogn)</td>
 <td align="center">O(nlogn)</td>
 <td align="center">O(1)</td>
-<td align="center">:heavy_multiplication_x:</td>
+<td align="center">✖️</td>
 </tr>
 </tbody></table>
 
@@ -825,7 +825,7 @@ private static int partition(int[] arr, int left, int right) {
 <p><strong>queue[] = { {1a}, {2a, 2b}, {3a} }</strong></p>
 <p>它的时间复杂度依然是<strong>n+n+n+k</strong>，空间复杂度稍微要不一样点，是<strong>n+k+c</strong>，其中c是2b这样的同位元素的数量总和</p>
 <p>关键的是：<strong>它保持了稳定性，结果中的元素还是原来的元素，而不是新算出来的元素</strong></p>
-<p>:warning:需要注意的是，这个实现里的<strong>c</strong>，可能会很致命，如果序列的<strong>rank</strong>比较大的话，会造成<strong>更多</strong>的空间成本</p>
+<p>⚠️需要注意的是，这个实现里的<strong>c</strong>，可能会很致命，如果序列的<strong>rank</strong>比较大的话，会造成<strong>更多</strong>的空间成本</p>
 </blockquote>
 <pre><code class="language-java">public static int[] distributionCountingSort2(int[] arr) {
     int low = arr[0];
