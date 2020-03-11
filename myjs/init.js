@@ -39,6 +39,7 @@ $(function() {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
         return
     }
+    settimeout()
     get_friendlinked()
     let pathname = location.pathname
     if (pathname === '/') {
@@ -62,12 +63,6 @@ $(function() {
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
         get_articles()
-        hljs.initHighlightingOnLoad()
-        $('pre').addClass('hljs')
-        for (pre of $('pre')) {
-            if (pre.innerText.trim().length === 0)
-                $(pre).remove()
-        }
     } else if (pathname.startsWith('/article/')) {
         new_render_md()
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
