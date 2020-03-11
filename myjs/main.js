@@ -180,8 +180,7 @@ function new_render_md() {
         }
     })
     setimg()
-    hljs.initHighlightingOnLoad()
-    $('pre').addClass('hljs')
+    highlightBlock()
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
@@ -189,18 +188,18 @@ function new_render_md() {
     }, 200);
 }
 
+function highlightBlock() {
+    document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    })
+    for (pre of $('pre')) {
+        if (pre.innerText.trim().length === 0)
+            $(pre).remove()
+    }
+}
+
 function articlespage(pageto) {
     docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
-}
-
-function hideloading() {
-    rmclass(loading, 'myshow')
-    adclass(loading, 'myhide')
-}
-
-function showloading() {
-    rmclass(loading, 'myhide')
-    adclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
@@ -316,10 +315,6 @@ function getbodyfrommdtext(mdtext) {
         return body
     }
     return mdtext
-}
-
-function collectbodyfromhubrequest() {
-
 }
 
 function getdocwithnohexofrontmatter(text) {
@@ -474,6 +469,7 @@ function catetagclick(catetag, isfilter, clicknode) {
         catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
     }
     scrollToTop(0)
+    highlightBlock()
 }
 
 function catetreenodeclick(catenode, isfilter, clicktag) {
@@ -575,6 +571,7 @@ function rstopaging(articles) {
             }
         })
     })
+    highlightBlock()
     window.totalpages = totalpages
     rmclass(pageboxbox, 'myhide')
     pagination()
@@ -619,7 +616,6 @@ function pagination() {
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
-        // setheightfordocpanel()
     })
 
     let pre = c('li')
@@ -648,7 +644,6 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
@@ -675,7 +670,6 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                // setheightfordocpanel()
                 scrollToTop(0)
                 $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
                 $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -704,7 +698,6 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -733,7 +726,6 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -744,7 +736,6 @@ function pagination() {
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
-    // setheightfordocpanel()
 }
 
 function cleansearch() {
@@ -777,12 +768,6 @@ function cleansearch() {
 
 function showbbt() {
     $('#bbt').removeClass('myhide')
-}
-
-function no_label(label) {
-    rmclass(docpanel, 'myhide')
-    adclass(docpanel, 'myshow')
-    docpanel.innerHTML = '<div id="nolabel"><i class="em-svg em-warning"></i><span>No label on repo\'s issues : [' + label + '].</span></div>'
 }
 
 function hidetopbar() {

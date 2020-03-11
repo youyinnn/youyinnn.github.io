@@ -975,8 +975,6 @@
 .parrow h6 a:before {
   position: absolute;
   color: var(--ymain-color);
-  content: '>';
-  left: -4rem;
   font-weight: bold;
   transition: all .4s;
   transform: scale(1.6);
@@ -984,12 +982,11 @@
 }
 
 .showarrow {
-  margin-left: 1.2rem;
+  color: #5ac59c;
 }
 
 .showarrow a:before {
   opacity: 1 !important;
-  left: -1.8rem !important;
 }
 
 .panchor {
