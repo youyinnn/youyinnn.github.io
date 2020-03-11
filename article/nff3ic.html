@@ -124,13 +124,13 @@
         <div id="block">
             <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
         </div>
-        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container markdown-toc"></div>
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
-        <p>{% cq %}</p>
+        <p><div class="saying mb-4"></p>
 <p>上篇介绍了使用Log4j2之前的准备工作和简单介绍了一个HelloWorld</p>
 <p>现在我们来了解配置中的第一个关键配置：Appenders</p>
-<p>{% endcq %}</p>
+<p></div></p>
 <!-- more -->
 
 <p>官方文档给出的可用的Appender非常多：有Async（异步输出）、Console（控制台输出）、File（文件输出）、甚至还有JDBC和HTTP等24种输出源方式，然而我日常使用的就几个：Console、RollingFile；一个作为本地host调试的时候log，一个作为远程主机调试的时候写log。其他的我就不仔细去研究了。</p>

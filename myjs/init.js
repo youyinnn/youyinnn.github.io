@@ -27,18 +27,14 @@ var searchcount
 var cachedcleaner
 var cachedcleanerLock = false
 
-var emoji
 var index
 
 $(function() {
-    emoji = new EmojiConvertor()
-    emoji.init_env()
-    emoji.replace_mode = 'unified'
-    emoji.allow_native = true
     if (!!window.ActiveXObject || "ActiveXObject" in window) {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
         return
     }
+    settimeout()
     get_friendlinked()
     let pathname = location.pathname
     if (pathname === '/') {
@@ -53,21 +49,24 @@ $(function() {
     } else if (pathname === '/resume/') {
         changepagetitle('resume | youyinnn')
         new_render_md()
+        setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/resume.md')
+        showbbt()
+        showtoc()
     } else if (pathname === '/scripts/') {
         changepagetitle('scripts | youyinnn')
         new_render_md()
+        setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')
+        showbbt()
+        showtoc()
     } else if (pathname === '/todos/') {
         changepagetitle('scripts | youyinnn')
         new_render_md()
+        setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/todos.md')
+        showbbt()
+        showtoc()
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
         get_articles()
-        hljs.initHighlightingOnLoad()
-        $('pre').addClass('hljs')
-        for (pre of $('pre')) {
-            if (pre.innerText.trim().length === 0)
-                $(pre).remove()
-        }
     } else if (pathname.startsWith('/article/')) {
         new_render_md()
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
@@ -103,15 +102,17 @@ $(function() {
             sessionStorage.getItem('pseries'),
             sessionStorage.getItem('pod'))
 
+        setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_posts/' + metadata.title + '.md')
+
         setTimeout(() => {
             hidetopbar()
         }, 250);
+        showbbt()
+        showtoc()
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
     })
-    var clear
-
     $('[data-toggle="tooltip"]').tooltip()
 
     // remove null content code block

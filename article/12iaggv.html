@@ -124,7 +124,7 @@
         <div id="block">
             <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
         </div>
-        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container"></div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container markdown-toc"></div>
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
@@ -346,9 +346,9 @@
               <span class="header-link"></span>
             </a>
             JIT
-          </h3><p>{% cq %}</p>
+          </h3><p><div class="saying mb-4"></p>
 <p>The just-in-time (JIT) compiler is the heart of the Java Virtual Machine. Nothing in the JVM affects performance more than the compiler, and choosing a compiler is one of the first decisions made when running a Java application—whether you are a Java developer or an end-user.</p>
-<p>{% endcq %}</p>
+<p></div></p>
 <p>这句话摘自<a href="https://www.oreilly.com/library/view/java-performance-the/9781449363512/ch04.html">《Java Performance》Chapter 4. Working with the JIT Compiler</a>，可见JIT对JVM的重要性！</p>
 <p>在早期的一些商用虚拟机，Java代码最初是通过解释器（<strong>Interpreter</strong>）解释执行的，它将代码翻译成JVM能读懂的字节码（<strong>bytecode</strong>），但是这些字节码要运行起来，JVM需要花费时间去解释，并且重复的热点代码可能会重复解释，于是为了提高效率，JIT就出现了</p>
 <p>Just In Time Compiler，即时编译器，它负责在JVM运行的时候对特定的代码进行编译<strong>（有针对性的优化编译）</strong>，将它们编译成机器码，下次再运行这段逻辑的时候，直接执行机器码，提高运行时效率，这项技术大大地提高了Java程序的运行速度</p>

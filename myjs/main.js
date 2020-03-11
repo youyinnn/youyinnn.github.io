@@ -15,12 +15,6 @@ function render_md(text) {
         text = text.substring(endindex, text.length)
     }
     let cq = text.match(/{%.*cq.*%}/gm)
-    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
-    if (emojis !== null) {
-        emojis.forEach(emoji => {
-            text = text.replace(emoji, window.emoji.replace_colons(emoji))
-        });
-    }
     if (cq) {
         for (let i = 0; i < cq.length; i += 2) {
             let cqindex = text.search(cq[i]);
@@ -152,36 +146,38 @@ function new_render_md() {
             }
         })
     })
+    let listhtml = ''
+    for (el of $('h1, h2, h3, h4, h5, h6')) {
+        listhtml += `
+            <div class="toc-${el.tagName.toLowerCase()}">
+                <a href="${el.childNodes[1].name}">
+                    ${el.childNodes[1].name.split('_root-')[1].trim()}
+                </a>
+            </div>`
+    }
+    $('#sidetoc').append(listhtml)
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
+        let tzhref = $.attr(this, 'href')
         if ($(md).hasClass('panelup')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
         }
         if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 48
             }, 600)
         }
         if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 96
             }, 600)
         }
     })
     $('.katex').parent().addClass('katexp')
-    $('thead').each(function() {
-        let trs = $(this).next().find('tr')
-        let trl = $(trs[0]).find('td').length
-        let lasttr = $(trs[trs.length - 1])
-        if (lasttr.find('td').length !== trl) {
-            lasttr.append(c('td'))
-        }
-    })
     setimg()
-    hljs.initHighlightingOnLoad()
-    $('pre').addClass('hljs')
+    highlightBlock()
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
@@ -189,18 +185,46 @@ function new_render_md() {
     }, 200);
 }
 
+function highlightBlock() {
+    document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    })
+    for (pre of $('pre')) {
+        if (pre.innerText.trim().length === 0)
+            $(pre).remove()
+    }
+    flowchartparse()
+}
+
+function flowchartparse() {
+    for (el of document.getElementsByClassName('language-flow')) {
+        let id = new Date().getTime()
+        let text = el.innerText
+        let fcdiv = document.createElement('div')
+        fcdiv.id = 'flow-' + id
+        el.parentElement.appendChild(fcdiv)
+        el.innerText = ''
+
+        flowchart.parse(text).drawSVG(fcdiv.id, {
+            'x': 0,
+            'y': 0,
+            'line-width': 3,
+            'line-length': 50,
+            'text-margin': 20,
+            'font-size': 12,
+            'font-color': 'black',
+            'line-color': 'black',
+            'element-color': 'black',
+            'fill': 'white',
+            'yes-text': 'yes',
+            'no-text': 'no',
+            'arrow-end': 'block',
+        })
+    }
+}
+
 function articlespage(pageto) {
     docpanel.style.cssText = 'transform: translateY(-' + ((articlepanelheight - 48) * (pageto - 1)) + 'px);'
-}
-
-function hideloading() {
-    rmclass(loading, 'myshow')
-    adclass(loading, 'myhide')
-}
-
-function showloading() {
-    rmclass(loading, 'myhide')
-    adclass(loading, 'myshow')
 }
 
 function hidesidetoc() {
@@ -316,10 +340,6 @@ function getbodyfrommdtext(mdtext) {
         return body
     }
     return mdtext
-}
-
-function collectbodyfromhubrequest() {
-
 }
 
 function getdocwithnohexofrontmatter(text) {
@@ -474,6 +494,7 @@ function catetagclick(catetag, isfilter, clicknode) {
         catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
     }
     scrollToTop(0)
+    highlightBlock()
 }
 
 function catetreenodeclick(catenode, isfilter, clicktag) {
@@ -575,6 +596,7 @@ function rstopaging(articles) {
             }
         })
     })
+    highlightBlock()
     window.totalpages = totalpages
     rmclass(pageboxbox, 'myhide')
     pagination()
@@ -619,7 +641,6 @@ function pagination() {
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
-        // setheightfordocpanel()
     })
 
     let pre = c('li')
@@ -648,7 +669,6 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
         }
@@ -675,7 +695,6 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                // setheightfordocpanel()
                 scrollToTop(0)
                 $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
                 $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -704,7 +723,6 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -733,7 +751,6 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            // setheightfordocpanel()
             scrollToTop(0)
             $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
             $('#pagebox-' + nowpage).animateCss('fadeIn')
@@ -744,7 +761,6 @@ function pagination() {
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
-    // setheightfordocpanel()
 }
 
 function cleansearch() {
@@ -779,10 +795,9 @@ function showbbt() {
     $('#bbt').removeClass('myhide')
 }
 
-function no_label(label) {
-    rmclass(docpanel, 'myhide')
-    adclass(docpanel, 'myshow')
-    docpanel.innerHTML = '<div id="nolabel"><i class="em-svg em-warning"></i><span>No label on repo\'s issues : [' + label + '].</span></div>'
+function showtoc() {
+    $('#toc')[0].style.display = 'inline-block'
+    $('#toc').removeClass('myhide')
 }
 
 function hidetopbar() {
@@ -806,55 +821,6 @@ function cgtopbut() {
         } else {
             hidetopbar()
         }
-    }
-}
-
-function setcoll() {
-    let collbuts = $('.collbut')
-    $('#acob').bind('click', function() {
-        if ($('#toc').hasClass('myhide')) {
-            $('#toc')[0].style.display = 'inline-block'
-            this.innerText = '全部隐藏'
-            $('#toc').removeClass('myhide')
-            setTimeout(function() {
-                $('#toc').tooltip('show')
-            }, 600);
-            setTimeout(function() {
-                $('#toc').tooltip('hide')
-            }, 3000);
-            collbuts.each(function() {
-                if (this.innerText === '点击展开') {
-                    this.click()
-                }
-            })
-        } else {
-            this.innerHTML = '全部展开'
-            $('#toc').addClass('myhide')
-            $('#toc')[0].style.display = 'none'
-            collbuts.each(function() {
-                if (this.innerText === '点击隐藏') {
-                    this.click()
-                }
-            })
-        }
-    })
-    for (let i = 0; i < collbuts.length; ++i) {
-        let tg = $(collbuts[i].getAttribute('tg'))[0]
-        tg.setAttribute('h', getstyle(tg, 'height'))
-        tg.style.height = '0px'
-        bindev(collbuts[i], 'click', function() {
-            let h
-            if (getstyle(tg, 'height') === '0px') {
-                h = tg.getAttribute('h')
-                collbuts[i].innerText = '点击隐藏'
-            } else {
-                h = '0px'
-                collbuts[i].innerText = '点击展开'
-            }
-            $('#' + tg.id).animate({
-                height: h
-            }, 800);
-        })
     }
 }
 
@@ -956,8 +922,8 @@ function setarrow() {
         $(this).find('.panchorlink').css('opacity', '0')
     })
     $(window).scroll(function() {
-        let stop = window.scrollY + 14
-        let sbotton = (window.scrollY + getclienth(0.4))
+        let stop = window.scrollY - 10
+        let sbotton = (window.scrollY + getclienth(0.90))
         for (let i = 0; i < arrows.length; i++) {
             let ofs = arrows[i].offsetTop
             if (ofs >= stop && ofs <= sbotton) {
