@@ -64,7 +64,6 @@ function ieOnEnd(script, cb) {
 }
 
 var before = [
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js',
     'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js',
     'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js',
 ]
@@ -86,8 +85,8 @@ var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.13.0/flowchart.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.13.0/flowchart.min.js',
     
     '/myjs/tool.js',
     '/myjs/githubapi.js',

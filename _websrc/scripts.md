@@ -1,34 +1,30 @@
 ## Java相关
 
 ### Java8系列文章
-<details>
-  <summary>show</summary> 
+ 
 
 http://www.importnew.com/11908.html
 
-</details>
+
 
 ### 牛客 HttpServletRequest. getParameter
-<details>
-  <summary>show</summary> 
+ 
 
 ![image](https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png)
 
 >  编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1
-</details>
+
 
 
 ### Java Spliterator
-<details>
-  <summary>show</summary> 
+ 
 
 参考1: https://segmentfault.com/q/1010000007087438
 参考2: https://blog.csdn.net/lh513828570/article/details/56673804
-</details>
+
 
 ### 牛客 Integer的拆箱装箱
-<details>
-  <summary>show</summary> 
+ 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png)
 
@@ -36,11 +32,10 @@ http://www.importnew.com/11908.html
 
 - 基本数据类型和包装类==比较的时候, 基本数据类型会拆箱, 所以是值比较
 - valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用
-</details>
+
 
 ### 牛客 getDeclaredMethods()的范围
-<details>
-  <summary>show</summary> 
+ 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png)
 
@@ -51,11 +46,10 @@ Doc:
 >
 > including public, protected, default (package) access, and private methods, **but excluding inherited methods**.
 
-</details>
+
 
 ### 牛客 sleep()和wait()
-<details>
-  <summary>show</summary> 
+ 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png)
 
@@ -77,11 +71,10 @@ Doc:
 4. sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。
 
 5. wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。
-</details>
+
 
 ### Java static方法中的变量是否存在线程安全问题
-<details>
-  <summary>show</summary> 
+ 
 我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
 
 那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。
@@ -106,20 +99,18 @@ hello方法会不会有多线程安全问题呢？没有！
 > 为什么呢？因为静态方法内声明的变量，每个线程调用时，都会新创建一份，而不会共用一个存储单元。比如这里的tmp,每个线程都会创建自己的一份，因此不会有线程安全问题。
 >
 > 注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！
-</details>
+
 
 ### Java多线程参考
-<details>
-  <summary>show</summary> 
+ 
 
 https://www.cnblogs.com/yjd_hycf_space/p/7526608.html
 http://www.importnew.com/21136.html
 http://www.importnew.com/21089.html
-</details>
+
 
 ### Java字符串压缩
-<details>
-  <summary>show</summary> 
+ 
 
 ``` java
 public class StringCompress {
@@ -196,11 +187,10 @@ public class StringCompress {
 ```
 
 参考：https://blog.csdn.net/isea533/article/details/8199848
-</details>
+
 
 ### Servlet和CGI的区别
-<details>
-  <summary>show</summary> 
+ 
 1. 定义：
 
 CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
@@ -264,11 +254,10 @@ Java Servlet与CGI (Common Gateway Interface 公共网关接口)的比较:
 Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。
 
 转自：https://www.cnblogs.com/MuyouSome/p/3938203.html
-</details>
+
 
 ### Java HashMap好文
-<details>
-  <summary>show</summary> 
+ 
 
 源码解析：
 - https://www.cnblogs.com/xrq730/p/5030920.html
@@ -278,63 +267,56 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 - https://www.cnblogs.com/lchzls/p/6714474.html
 - https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&utm_campaign=client_share&app=news_article&utm_source=mobile_qq&iid=5056005857&utm_medium=toutiao_ios
 - https://blog.csdn.net/u012512634/article/details/72735183
-</details>
+
 
 ### fastjson 转时间
-<details>
-  <summary>show</summary> 
+ 
 
 在field上加注解，比如转ISO格式的时间
 ``` java
 @JSONField(format="yyyy-MM-dd'T'HH:mm:ss'Z'")
 ```
-</details>
+
 
 ### sun.misc.Unsafe
-<details>
-  <summary>show</summary> 
+ 
 
 - http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
 - https://blog.csdn.net/anLA_/article/details/78631026
 - https://blog.csdn.net/lvbaolin123/article/details/80527598
-</details>
+
 
 ### Java String pool
-<details>
-  <summary>show</summary> 
+ 
 
 [Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
-</details>
+
 
 ### Java 静态内部类和非静态内部类
-<details>
-  <summary>show</summary> 
+ 
 
 [Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
-</details>
+
 
 ### bridge method
-<details>
-  <summary>show</summary> 
+ 
 
 - https://cn.aliyun.com/jiaocheng/330720.html
 - https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods
 - https://www.cnblogs.com/zsg88/p/7588929.html
 - https://www.jianshu.com/p/250030ea9b28
-</details>
+
 
 ### finally & return
-<details>
-  <summary>show</summary> 
+ 
 
 - https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
-</details>
+
 
 ## JS代码相关 
 
 ### JS 获取元素样式
-<details>
-  <summary>show</summary>
+
 
 ``` javascript
 /*
@@ -352,11 +334,10 @@ function getStyle(obj, styleName) {
   }
 }
 ```
-</details>
+
 
 ### JS 事件绑定兼容
-<details>
-  <summary>show</summary>
+
 
 ``` javascript
 /*
@@ -389,11 +370,10 @@ function bindev(obj, eventStr, callback) {
   }
 }
 ```
-</details>
+
 
 ### JS 滚动动画
-<details>
-  <summary>show</summary>
+
 
 ``` javascript
 /*
@@ -405,11 +385,10 @@ $('#md').animate({
   scrollTop: $('#elementid').offset().top
 }, 500);
 ```
-</details>
+
 
 ### JS 滚动动画改进
-<details>
-  <summary>show</summary>
+
 
 ``` javascript
 /*
@@ -424,11 +403,10 @@ function scrolltoelement(elementid) {
   }, 500);
 }
 ```
-</details>
+
 
 ### JS 检测页面滚动代码
-<details>
-  <summary>show</summary>
+
 
 ``` JavaScript
 $(window).scroll(function () {
@@ -439,11 +417,10 @@ $(window).scroll(function () {
   percent.innerText = scrollPercent
 })
 ```
-</details>
+
 
 ### JS 小数
-<details>
-  <summary>show</summary>
+
   
 
 1. 丢弃小数部分,保留整数部分 `parseInt(7/2)` 
@@ -459,11 +436,10 @@ $(window).scroll(function () {
 var num =2.446242342;
 num = num.toFixed(2); // 输出结果为 2.45
 ```
-</details>
+
 
 ### JS CSS 动态添加动画效果
-<details>
-  <summary>show</summary>
+
   
 
 ``` javascript
@@ -484,11 +460,10 @@ num = num.toFixed(2); // 输出结果为 2.45
   }
 }
 ```
-</details>
+
 
 ### JS 控制聚焦/失焦事件
-<details>
-  <summary>show</summary>
+
   
 
 ``` js
@@ -499,11 +474,10 @@ num = num.toFixed(2); // 输出结果为 2.45
     $('#scriptsearcher')[0].style.opacity = '0.3'
   })
 ```
-</details>
+
 
 ### AJAX设置请求超时
-<details>
-  <summary>show</summary>
+
   
 
 ``` js
@@ -526,11 +500,10 @@ var ajaxTimeoutTest = $.ajax({
 ```
 
 函数写在complete中，因为无论success还是error，complete函数都会执行。
-</details>
+
 
 ### [Async](https://github.com/caolan/async)
-<details>
-  <summary>show</summary>
+
   
 
 > JS Ajax JQ 同步请求库
@@ -538,11 +511,10 @@ var ajaxTimeoutTest = $.ajax({
 [来源](https://segmentfault.com/q/1010000005789740)
 
 [中文文档](https://blog.csdn.net/marujunyy/article/details/8695205)
-</details>
+
 
 ### JS 刷新页面
-<details>
-  <summary>show</summary>
+
 
 #### 手动 reload
 ``` js
@@ -554,11 +526,10 @@ location.reload();
 ``` js
 <meta http-equiv="refresh" content="5">
 ```
-</details>
+
 
 ### JS获取图片原始尺寸
-<details>
-  <summary>show</summary>
+
 
 
 HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高
@@ -567,11 +538,10 @@ HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片�
    let imgw = this.naturalWidth
    let imgh = this.naturalHeight
 ```
-</details>
+
 
 ### JQuery的高级选择器
-<details>
-  <summary>show</summary>
+
   
 
 ``` javascript
@@ -589,11 +559,10 @@ jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.fi
                                筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
                                $("p").find("span")是从元素开始找，等于$("p span") */
 ```
-</details>
+
 
 ### js取消事件冒泡
-<details>
-  <summary>show</summary>
+
   
 
 ``` javascript
@@ -604,11 +573,10 @@ $("form").bind("submit", function() {
 ```
 
 https://www.cnblogs.com/wangking/p/6113024.html#
-</details>
+
 
 ### JS判断字符串中是否含有Emoji表情
-<details>
-  <summary>show</summary>
+
 
 如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
 原因如下：
@@ -652,11 +620,10 @@ function isEmojiCharacter(substring) {
 }
 ```
 引自： https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&fps=1
-</details>
+
 
 ### Javascript使用字符串作为函数调用语句去调用
-<details>
-  <summary>show</summary>
+
   
 
 ``` javascript
@@ -668,11 +635,10 @@ eval(str+"()");//执行func_abc()函数
 ```
 
 引自：https://blog.csdn.net/qq_26222859/article/details/75285784
-</details>
+
 
 ### JS 数组排序
-<details>
-  <summary>show</summary>
+
   
 
 ``` javascript
@@ -688,11 +654,10 @@ var compare = function (x, y) {//比较函数
 }
 console.log(arr.sort(compare));    
 ```
-</details>
+
 
 ### JS 判断浏览器类型
-<details>
-  <summary>show</summary>
+
 
 ie那段参考自：https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html
 
@@ -740,21 +705,19 @@ function isChrome() {
     return userAgent.indexOf("Chrome") > -1
 }
 ```
-</details>
+
 
 ### JavaScript 解除xhr获取header的限制
-<details>
-  <summary>show</summary>
+
   
 
 http://www.ruanyifeng.com/blog/2016/04/cors.html
 
 需要后端的配合
-</details>
+
 
 ### JS锚点跳转动画
-<details>
-  <summary>show</summary>
+
   
 
 一般我们的锚点都长这样
@@ -771,11 +734,10 @@ http://www.ruanyifeng.com/blog/2016/04/cors.html
         }, 600)
     })
 ```
-</details>
+
 
 ### JS 监听元素任何变化
-<details>
-  <summary>show</summary>
+
 
 [mutationobserver](http://javascript.ruanyifeng.com/dom/mutationobserver.html)
 [csdn blog](https://blog.csdn.net/u010419337/article/details/81474311)
@@ -793,28 +755,25 @@ let options = {
 };
 observer.observe(article, options);
 ```
-</details>
+
 
 ### JQuery UI 拖拽
-<details>
-  <summary>show</summary>
+
 
 https://www.runoob.com/jqueryui/example-draggable.html
-</details>
+
 
 ### JQuery GIF播放/暂停 JS-GIF库
-<details>
-  <summary>show</summary>
+
 
 https://www.lanrenzhijia.com/pic/3719.html
 https://github.com/buzzfeed/libgif-js
-</details>
+
 
 ## CSS相关
 
 ### CSS media设备适配样式设置
-<details>
-  <summary>show</summary>
+
 
 ``` css
 /* 
@@ -827,18 +786,16 @@ https://github.com/buzzfeed/libgif-js
   }
 }
 ```
-</details>
+
 
 ### CSS 动画库animate.css
-<details>
-  <summary>show</summary>
+
 
 介绍博客 : https://www.cnblogs.com/2050/p/3409129.html
-</details>
+
 
 ### CSS 去除按钮选中蓝色边框
-<details>
-  <summary>show</summary>
+
 
 ``` css
 .className {
@@ -851,23 +808,21 @@ https://github.com/buzzfeed/libgif-js
 ```
 
 [参考](https://blog.csdn.net/qq_26222859/article/details/51516011)
-</details>
+
 
 ### CSS 元素失焦/虚化滤镜
-<details>
-  <summary>show</summary>
+
 
 ``` css
 #idname{
    filter : blur(2px);
 }
 ```
-</details>
+
 
 
 ### CSS 文字换行
-<details>
-  <summary>show</summary>
+
 
 强制不换行
 ``` css
@@ -892,11 +847,10 @@ div{
     word-break:break-all;
 }
 ```
-</details>
+
 
 ### CSS placeholder居位设置
-<details>
-  <summary>show</summary>
+
 
 ``` css
 /* placeholder居中 */
@@ -917,11 +871,10 @@ div{
     text-align: center;
 }
 ```
-</details>
+
 
 ### CSS 文字超过元素长度显示省略号
-<details>
-  <summary>show</summary>
+
 
 
 ``` css
@@ -932,11 +885,10 @@ div{
   text-overflow:ellipsis;
 }
 ```
-</details>
+
 
 ### CSS 变量设置和获取
-<details>
-  <summary>show</summary>
+
 
 #### 设置
 ``` css 
@@ -964,11 +916,10 @@ a {
 ```
 
 参考 : http://www.ruanyifeng.com/blog/2017/05/css-variables.html
-</details>
+
 
 ### CSS 元素垂直/水平居中的骚操作
-<details>
-  <summary>show</summary>
+
 
 > 垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;
 
@@ -990,11 +941,10 @@ a {
 ```
 
 参考自知乎 : https://www.zhihu.com/question/24822927
-</details>
+
 
 ### CSS3 瀑布布局
-<details>
-  <summary>show</summary>
+
 
 三列瀑布
 
@@ -1008,18 +958,16 @@ a {
   width: 100%;
 }
 ```
-</details>
+
 
 ### CSS 将DIV画成直角三角形
-<details>
-  <summary>show</summary>
+
 
 教程: https://www.cnblogs.com/v-weiwang/p/5057588.html
-</details>
+
 
 ### CSS自定义滚动条样式
-<details>
-  <summary>show</summary>
+
 
 https://segmentfault.com/a/1190000012800450
 
@@ -1039,93 +987,83 @@ https://segmentfault.com/a/1190000012800450
   *::-webkit-scrollbar-thumb:window-inactive {
     background: #d8dde4; }
 ```
-</details>
+
 
 ### CSS inline-block 垂直居中
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/olafff/p/5103775.html
 
 https://www.cnblogs.com/hutuzhu/p/4450850.html
-</details>
+
 
 ## JS工具/框架相关
 
 ### React Native 
-<details>
-  <summary>show</summary>
+
 
 > 可以做桌面应用
 
 网址: https://proton-native.js.org/#/
-</details>
+
 
 ### Layui
-<details>
-  <summary>show</summary>
+
 
 > 给后端用的前端框架
 
 [官网](http://www.layui.com)
-</details>
+
 
 ### wangEditor 轻量级前端富文本编辑器
-<details>
-  <summary>show</summary>
+
 
 ![image](https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png)
 
 [官网](http://www.wangeditor.com/)
-</details>
+
 
 ### KaTeX 最快的数学公式渲染库
-<details>
-  <summary>show</summary>
+
 
 官方link : https://khan.github.io/KaTeX/function-support.html
 
 editor.md的Demo : http://pandao.github.io/editor.md/examples/katex.html
 
 ![image](https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png)
-</details>
+
 
 ### JQuery 日期选择控件
-<details>
-  <summary>show</summary>
+
 
 网站：https://xdsoft.net/jqplugins/datetimepicker/
-</details>
+
 
 ### JS 数据可视化
-<details>
-  <summary>show</summary>
+
 
 有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
 https://www.zhihu.com/question/19929609/answer/383055223
-</details>
+
 
 ### windows下调试iOS网页设备
-<details>
-  <summary>show</summary>
+
 
 https://www.jianshu.com/p/73715ee54712
-</details>
+
 
 ## 杂文/问题/乱说/黑科技/技巧
 
 ### 关于 github oauth app
-<details>
-  <summary>show</summary>
+
 
 ![image](https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png)
 
 [reference.](https://github.com/timqian/my-notes/issues/9)
-</details>
+
 
 ### 代码高亮的的坑
-<details>
-  <summary>show</summary>
+
 
 > editor.md的preview页 + highlight.js
 
@@ -1173,11 +1111,10 @@ https://www.jianshu.com/p/73715ee54712
 #### 结果
 
 ![image](https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png)
-</details>
+
 
 ### cmd相关
-<details>
-  <summary>show</summary>
+
 
 #### 教程
 - 扫盲：https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/
@@ -1188,11 +1125,10 @@ https://www.jianshu.com/p/73715ee54712
 >  cmd文档/doc文档/command line
 
 [link](http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf)
-</details>
+
 
 ### 关于 CI
-<details>
-  <summary>show</summary>
+
 
 #### 示意图
 
@@ -1201,11 +1137,10 @@ https://www.jianshu.com/p/73715ee54712
 >文章 [The Product Managers’ Guide to Continuous Delivery and DevOps](https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/)
 >
 >对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。
-</details>
+
 
 ### GitHub API response 条数pagination限制
-<details>
-  <summary>show</summary>
+
 
 GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:
 
@@ -1216,11 +1151,10 @@ GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者
 参考: https://developer.github.com/v3/#pagination
 
 我现在的blog所有的comments请求都是9999
-</details>
+
 
 ### 一顿操作 node.js安装
-<details>
-  <summary>show</summary>
+
 
 #### 安装nvm
 
@@ -1256,7 +1190,9 @@ Linux下安装nvm
 https://i5ting.github.io/How-to-learn-node-correctly/#10302
 https://blog.csdn.net/jingtian678/article/details/78422760
 
+
 ### Regex 匹配换行符/匹配尾部空格
+
 
 ``` regex
 ([\s\S]*)
@@ -1265,11 +1201,10 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 ``` regex
 \s*$
 ```
-</details>
+
 
 ### 对IoC/DI的理解
-<details>
-  <summary>show</summary>
+
 
 #### Ioc—Inverse  of Control
 
@@ -1308,11 +1243,10 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 我的理解是：**IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现**。
 
 [参考](https://blog.csdn.net/qq_22654611/article/details/52606960)
-</details>
+
 
 ### 对于游戏来说 怎么选择TCP和UDP?
-<details>
-  <summary>show</summary>
+
 
 - 如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。
 
@@ -1321,11 +1255,10 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 - 如果客户端和服务器都可以独立发包，而且无法忍受延迟（比如：大多数的多人动作类游戏，一些MMO类游戏），那么使用UDP吧。
 
 转自: http://blog.jobbole.com/64638/
-</details>
+
 
 ### OOP三大特性
-<details>
-  <summary>show</summary>
+
 
 #### 封装优点：
 
@@ -1354,61 +1287,55 @@ https://blog.csdn.net/jingtian678/article/details/78422760
   **注意： 继承是多态的基础。**
 
 参考: https://www.cnblogs.com/hysum/p/7100874.html#_label1
-</details>
+
 
 ### BitMap
-<details>
-  <summary>show</summary>
+
 
 http://blog.51cto.com/zengzhaozheng/1404108
 https://blog.csdn.net/hguisu/article/details/7880288
 http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html
 编程珠玑
-</details>
+
 
 ### MySQL用户管理
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/gavin110-lgy/p/5773981.html
 https://www.cnblogs.com/clsn/p/8047028.html
 
-</details>
+
 
 ### 在Windows的右键菜单上增加新建自定义类型文件的选项
-<details>
-  <summary>show</summary>
+
 
 ![image](https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png)
 
 https://www.cnblogs.com/zhengye/articles/2304925.html
-</details>
+
 
 ### 关于引用奥森图标一类的i标签失效的问题
-<details>
-  <summary>show</summary>
+
 
 路径也排查过了 文件也排查过了 也没报错 为什么呢？
 
 因为......
 
 千万要想想是不是全局font-family的问题！！！
-</details>
+
 
 ### git做用户的全局配置的文件夹在哪？
-<details>
-  <summary>show</summary>
+
 
 放在你家
 
 ![image](https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png)
 
 如图可以配置别名
-</details>
+
 
 ### 贪心算法和动态规划的区别
-<details>
-  <summary>show</summary>
+
 
 > 贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。
 >
@@ -1417,42 +1344,37 @@ https://www.cnblogs.com/zhengye/articles/2304925.html
 > 动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 
 
 引自：https://www.cnblogs.com/codeskiller/p/6477181.html
-</details>
+
 
 ### 三种静态查找算法：顺序、二分/折半、索引/分块查找
-<details>
-  <summary>show</summary>
+
 
 文章：https://blog.csdn.net/u011489043/article/details/78683856
-</details>
+
 
 ### MySQL自己更新自己
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/jeffen/p/7016547.html
 
 mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表
-</details>
+
 
 ### 算法：并查集
-<details>
-  <summary>show</summary>
+
 
 https://blog.csdn.net/C20180630/article/details/57074623
 https://blog.csdn.net/u013546077/article/details/64509038
-</details>
+
 
 ### 正则表达式 密码强度
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/cexm/p/7737538.html
-</details>
+
 
 ### 文件头魔数 判断文件类型
-<details>
-  <summary>show</summary>
+
 
 https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
 
@@ -1461,11 +1383,10 @@ https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
 
 魔数列表参考如下：
 https://www.garykessler.net/library/file_sigs.html
-</details>
+
 
 ### xss攻击和Java处理xss
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/digdeep/p/4695348.html
 https://blog.csdn.net/woniumenga/article/details/47323829#
@@ -1475,11 +1396,10 @@ https://github.com/jhy/jsoup
 
 前端xss处理：
 https://jsxss.com/zh/index.html
-</details>
+
 
 ### 微服务/集群/分布式
-<details>
-  <summary>show</summary>
+
 
 #### 微服务好文
 
@@ -1497,11 +1417,10 @@ https://jsxss.com/zh/index.html
 https://blog.csdn.net/cutesource/article/details/5811914
 https://www.zhihu.com/question/20004877/answer/61025046
 https://www.cnblogs.com/aspirant/p/5697807.html
-</details>
+
 
 ### 什么是/为什么要Tracing？Opentracing的入门铺垫
-<details>
-  <summary>show</summary>
+
 
 ![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)
 
@@ -1514,29 +1433,26 @@ https://wu-sheng.gitbooks.io/opentracing-io/content/
 Tutorials:
 
 https://github.com/yurishkuro/opentracing-tutorial/tree/master/java
-</details>
+
 
 ### 什么是/为什么要DevOps？
-<details>
-  <summary>show</summary>
+
 
 ![image](https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png)
 
 https://www.cnblogs.com/liufei1983/p/7152013.html
-</details>
+
 
 ### Spring生命周期详解好文
-<details>
-  <summary>show</summary>
+
 
 https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0
 https://blog.csdn.net/fuzhongmin05/article/details/73389779
 https://blog.csdn.net/qq_23473123/article/details/76610052
-</details>
+
 
 ### html2canvas 页面输出为canvas
-<details>
-  <summary>show</summary>
+
 
 超级棒的插件：
 教程和踩坑：https://segmentfault.com/a/1190000011478657
@@ -1551,11 +1467,10 @@ hub：https://github.com/niklasvh/html2canvas
 var opts = {useCORS: true};
 html2canvas(element, opts);
 ```
-</details>
+
 
 ### k8s
-<details>
-  <summary>show</summary>
+
 
 #### 好文
 - 概念：http://www.dockone.io/article/8341?cmd=redirect&arubalp=12345
@@ -1571,18 +1486,16 @@ html2canvas(element, opts);
     - sample: https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
     - offical reference: https://kubernetes.io/docs/reference/ see the api
 
-</details>
+
 
 ### docker
-<details>
-  <summary>show</summary>
+
 
 介绍与入门：http://www.dockone.io/article/8350
-</details>
+
 
 ### Shell
-<details>
-  <summary>show</summary>
+
 
 #### expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）
 - https://www.jianshu.com/p/70556b1ce932
@@ -1611,7 +1524,9 @@ html2canvas(element, opts);
 #### nohup使用详解
 - https://www.cnblogs.com/jinxiao-pu/p/9131057.html
 
+
 ### Linux
+
 
 #### 工具
 - fzf：https://www.colabug.com/4062481.html
@@ -1632,48 +1547,43 @@ html2canvas(element, opts);
 ##### apt-get详解
 - https://blog.csdn.net/sinat_31206523/article/details/78138822
 - https://blog.csdn.net/yessharing/article/details/55806090
-</details>
+
 
 ### chrome插件开发
-<details>
-  <summary>show</summary>
+
 
 https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83
-</details>
+
 
 ### gRPC & protobuf & Swagger
-<details>
-  <summary>show</summary>
+
 
 - [Grpc+Grpc Gateway实践三 Swagger了解一下](https://segmentfault.com/a/1190000013513469)
 - [google protobuf安装与使用](https://www.cnblogs.com/luoxn28/p/5303517.html)
 - [protobuf](https://github.com/protocolbuffers/protobuf)
 - [grpc-gateway：grpc转换为http协议对外提供服务](https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html)
-</details>
+
 
 ### Database Client
-<details>
-  <summary>show</summary>
+
 
 [15个windows上好用的client](https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows)
-</details>
+
 
 ### linux 换行符
-<details>
-  <summary>show</summary>
+
 
 https://blog.csdn.net/mulangren1988/article/details/54316783
 
+
 ### 带空格文件名参数传递 xargs
-<details>
-  <summary>show</summary>
+
 
 https://blog.csdn.net/u011085172/article/details/77771173
-</details>
+
 
 ### GraphQL 一种用于 API 的查询语言
-<details>
-  <summary>show</summary>
+
 
 > GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 
 >
@@ -1685,26 +1595,23 @@ https://blog.csdn.net/u011085172/article/details/77771173
 
 > 2018年11月16日 10点04分
 > 要构建一个graphql需要的成本太大了 还不如restful来的快
-</details>
+
 
 ### 排序算法图解博客
-<details>
-  <summary>show</summary>
+
 看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
-</details>
+
 
 ## 网站/软件
 
 ### 一个素材网站 devianart
-<details>
-  <summary>show</summary>
+
 
 https://www.deviantart.com/
-</details>
+
 
 ### icon相关 素材站/软件
-<details>
-  <summary>show</summary>
+
 
 #### 阿里巴巴矢量图标库
 
@@ -1729,11 +1636,10 @@ link : https://www.flaticon.com/
 ![image](https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png)
 
 https://nucleoapp.com/
-</details>
+
 
 ### 软件推介 : cmder
-<details>
-  <summary>show</summary>
+
 
 > 一个高颜值功能强大的的windows终端管理器
 > 
@@ -1748,11 +1654,10 @@ https://nucleoapp.com/
 但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.
 
 所以我们下载full, 解压在`C:\Program Files`, 可以发现整个软件大概250MB, 我们从软件目录下的`C:\Program Files\cmder\vendor`中删去`git-for-windows`文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.
-</details>
+
 
 ### 数据结构/算法可视化网站
-<details>
-  <summary>show</summary>
+
 
 ![aa](https://image.youyinnn.top/sorting-algorithms.png)
 https://www.toptal.com/developers/sorting-algorithms
@@ -1763,18 +1668,16 @@ https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 
 ![image](https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png)
 https://visualgo.net/zh
-</details>
+
 
 ### 经纬度行政区域查询API
-<details>
-  <summary>show</summary>
+
 
 [home](http://jwd.funnyapi.com/#/index)
-</details>
+
 
 ### win10 自带录电脑音软件
-<details>
-  <summary>show</summary>
+
 
 
 ![jEHdM1ZoRC](https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg)
@@ -1782,26 +1685,24 @@ https://visualgo.net/zh
 ![image](https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png)
 
 然后打开win10自带的录音软件Voice Recorder
-</details>
+
 
 ## HTML/H5
 
 ### textarea的字数限制
-<details>
-  <summary>show</summary>
+
 
 ``` html
 <textarea rows="5"  maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" ></textarea>
 ```
 
 事实上，有了maxLength属性，textarea的输入就已经会有限制了
-</details>
+
 
 ### input只允许输入数字
-<details>
-  <summary>show</summary>
+
 
 ``` html
 <input type="text" oninput="value=value.replace(/[^\d]/g,'')">
 ```
-</details>
+
