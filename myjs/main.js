@@ -15,12 +15,6 @@ function render_md(text) {
         text = text.substring(endindex, text.length)
     }
     let cq = text.match(/{%.*cq.*%}/gm)
-    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
-    if (emojis !== null) {
-        emojis.forEach(emoji => {
-            text = text.replace(emoji, window.emoji.replace_colons(emoji))
-        });
-    }
     if (cq) {
         for (let i = 0; i < cq.length; i += 2) {
             let cqindex = text.search(cq[i]);
@@ -171,14 +165,6 @@ function new_render_md() {
         }
     })
     $('.katex').parent().addClass('katexp')
-    $('thead').each(function() {
-        let trs = $(this).next().find('tr')
-        let trl = $(trs[0]).find('td').length
-        let lasttr = $(trs[trs.length - 1])
-        if (lasttr.find('td').length !== trl) {
-            lasttr.append(c('td'))
-        }
-    })
     setimg()
     highlightBlock()
     setTimeout(() => {

@@ -217,10 +217,10 @@
           </h4><p><code>tmpfs</code> mounts are best used for cases when you do not want the data to persist either on the host machine or within the container. This may be for security reasons or to protect the performance of the container when your application needs to write a large volume of non-persistent state data.</p>
 
           <h3>
-            <a name="_root-:gem:Tips for using bind mounts or volumes" class="reference-link" target="_blank">
+            <a name="_root-💎Tips for using bind mounts or volumes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
-            :gem:Tips for using bind mounts or volumes
+            💎Tips for using bind mounts or volumes
           </h3><p>If you use either bind mounts or volumes, keep the following in mind:</p>
 <ul>
 <li>If you mount an <strong>empty volume</strong> into a directory in the container in which files or directories exist, these files or directories are propagated (copied) into the volume. Similarly, if you start a container and specify a volume which does not already exist, an empty volume is created for you. This is a good way to pre-populate data that another container needs.</li>

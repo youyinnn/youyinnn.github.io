@@ -64,7 +64,6 @@ function ieOnEnd(script, cb) {
 }
 
 var before = [
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/emoji.js',
     'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js',
     'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js',
 ]

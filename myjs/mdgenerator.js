@@ -37,7 +37,13 @@ renderer.heading = function(text, level) {
             ${text}
           </h${level}>`;
 }
-renderer.text = function (text) {
+renderer.text = function(text) {
+    let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/g)
+    if (emojis !== null) {
+        emojis.forEach(ej => {
+            text = text.replace(ej, emoji.replace_colons(ej))
+        })
+    }
     return text
 }
 
@@ -70,6 +76,16 @@ let articlemetadata = new Array()
 let series = new Array()
 let articleorder = new Array()
 let shortmsgline = 25
+
+const {
+    EmojiConvertor
+} = require('emoji-js')
+var emoji
+emoji = new EmojiConvertor()
+emoji.init_env()
+emoji.replace_mode = 'unified'
+emoji.allow_native = true
+
 // iterating md files
 for (pname of postsrs) {
     let abbrlink = crc32(pname).toString(36)
@@ -225,3 +241,14 @@ var resoucesList = [
 
 fs.writeFileSync(path.join(resourcesPath, 'resources.js'), `
 var resourcesList = ${JSON.stringify(resoucesList)}`)
+
+
+// delete old cache file
+let resfiles = fs.readdirSync(resourcesPath)
+for (resf of resfiles) {
+    if (resf.startsWith('cache') && resf !== cachefilename)
+        fs.unlinkSync(path.join(resourcesPath, resf), (err) => {
+            if (err) throw err;
+            console.log(resf, ' has been deleted.')
+        })
+}
