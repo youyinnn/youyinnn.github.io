@@ -91,10 +91,10 @@ var after = [
     
     '/myjs/tool.js',
     '/myjs/githubapi.js',
-    '/myjs/init.js',
     '/myjs/eventbind.js',
     '/myjs/elementcreate.js',
     '/myjs/main.js',
+    '/myjs/init.js',
 ]
 
 after = resourcesList.concat(after)
