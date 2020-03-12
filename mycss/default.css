@@ -100,8 +100,8 @@ pre {
 }
 
 .egg {
-  background-color: var(--ymain-color);
-  transition: all .2s;
+  background-color: transparent;
+  transition: all .5s;
   border: none;
   height: 100%;
 }
@@ -192,7 +192,7 @@ x {
   transition: all .2s;
 }
 
-.markdown-body p, {
+.markdown-body p {
   margin: 0.8em 0;
   line-height: 1.6rem;
   word-spacing: .05rem;
