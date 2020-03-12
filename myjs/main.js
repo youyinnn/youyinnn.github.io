@@ -193,34 +193,6 @@ function highlightBlock() {
         if (pre.innerText.trim().length === 0)
             $(pre).remove()
     }
-    flowchartparse()
-}
-
-function flowchartparse() {
-    for (el of document.getElementsByClassName('language-flow')) {
-        let id = new Date().getTime()
-        let text = el.innerText
-        let fcdiv = document.createElement('div')
-        fcdiv.id = 'flow-' + id
-        el.parentElement.appendChild(fcdiv)
-        el.innerText = ''
-
-        flowchart.parse(text).drawSVG(fcdiv.id, {
-            'x': 0,
-            'y': 0,
-            'line-width': 3,
-            'line-length': 50,
-            'text-margin': 20,
-            'font-size': 12,
-            'font-color': 'black',
-            'line-color': 'black',
-            'element-color': 'black',
-            'fill': 'white',
-            'yes-text': 'yes',
-            'no-text': 'no',
-            'arrow-end': 'block',
-        })
-    }
 }
 
 function articlespage(pageto) {

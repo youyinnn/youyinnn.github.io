@@ -16,18 +16,3 @@
 ### TeX
 
 $$E=mc^2$$
-
-### FlowChart
-
-```flow
-st=>start: User login
-op=>operation: Operation
-cond=>condition: Successful Yes or No?
-e=>end: Into admin
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)
