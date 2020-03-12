@@ -10,10 +10,11 @@
     <title>blog | youyinnn</title>
     <script>
         if (location.origin === 'https://youyinnn.github.io') {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    if (JSON.parse(xmlhttp.responseText).country === 'CN') {
+            var xmlhttp2 = new XMLHttpRequest();
+            xmlhttp2.onreadystatechange = function() {
+                if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                    let rsjson = JSON.parse(xmlhttp2.responseText)
+                    if (rsjson.country_code === 'CN') {
                         // tricky: github pages building
                         setTimeout(() => {
                             window.location.href = "https://youyinnn.gitee.io" + location.pathname
@@ -21,8 +22,8 @@
                     }
                 }
             }
-            xmlhttp.open("GET", "https://ipinfo.io/json?030ac39a43fc1f", false);
-            xmlhttp.send()
+            xmlhttp2.open("GET", "https://freegeoip.app/json/", true);
+            xmlhttp2.send()
         }
     </script>
     <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
