@@ -7,10 +7,10 @@ if (location.origin === 'https://youyinnn.github.io') {
                 // tricky: github pages building
                 setTimeout(() => {
                     window.location.href = 'https://youyinnn.gitee.io' + location.pathname + '?fromgithub=true'
-                }, 400);
+                }, 200);
             }
         }
     }
-    xmlhttp2.open("GET", "https://api.map.baidu.com/location/ip?ak=GDuCkcOTursQT2efQrpvw2g3ufIGz7rK", true);
+    xmlhttp2.open("GET", "https://www.mxnzp.com/ip/self?app_id=zqnqmetwqpginyrk&app_secret=V21yN25pMGdVSS9ORUNtTGI4UDMrUT09", true);
     xmlhttp2.send()
 }
