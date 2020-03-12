@@ -1,6 +1,5 @@
 
 ### Tiny Java IDE
-datetime: 2018-12-29T15:23:44Z
 
 想开发一个Java IDE 主要feature：
 - 方便阅读源码
@@ -30,3 +29,5 @@ st->op->cond
 cond(yes)->e
 cond(no)->op
 ```
+
+![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)

@@ -210,11 +210,28 @@ md2html(
     path.join(__dirname, '..', 'resume', 'index.html')
 )
 
+var originalImgFunc = renderer.image
+
+renderer.image = function (href, title, text) {
+    let picId = crc32(href).toString(16)
+    return `
+        <div id="_showpic_${picId}" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
+        <script>
+            document.getElementById('_showpic_${picId}').addEventListener('click', function() {
+                document.getElementById('_pic_${picId}').src = 
+                document.getElementById('_pic_${picId}').getAttribute('href')
+                document.getElementById('_pic_${picId}').classList = ['showpic']
+            })
+        </script>
+    `
+}
 // scripts
 md2html(
     path.join(websrcPath, 'scripts.md'),
     path.join(__dirname, '..', 'scripts', 'index.html')
 )
+renderer.image = originalImgFunc
 
 // todos
 md2html(

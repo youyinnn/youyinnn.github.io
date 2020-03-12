@@ -34,7 +34,6 @@ $(function() {
         alert('不支持ie浏览器, 请使用edge或者chrome打开!')
         return
     }
-    settimeout()
     get_friendlinked()
     let pathname = location.pathname
     if (pathname === '/') {
@@ -54,6 +53,7 @@ $(function() {
         showtoc()
     } else if (pathname === '/scripts/') {
         changepagetitle('scripts | youyinnn')
+        $(md).addClass('scripts')
         new_render_md()
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')
         showbbt()
@@ -93,8 +93,8 @@ $(function() {
             </div>
             <br>
             <div id="movebtn">
-                <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-placement="right" data-original-title="" >Next</button>
-                <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
+                <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-trigger="manual" data-placement="right" data-original-title="" >Next</button>
+                <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
             </div>`
         $(md).append(end)
 
