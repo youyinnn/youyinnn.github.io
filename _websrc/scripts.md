@@ -1,14 +1,30 @@
+## :star: API相关
+
+### :speech_balloon: 一些开放的API
+
+[github repo public-apis](https://github.com/public-apis/public-apis)
+
+### :speech_balloon:用来查询IP的API
+
+- 国内：
+  - 搜狐的pv和go，但是都需要跨域
+
+- 国外：
+  - [ip-api](https://ip-api.com/) https要会员
+  - [freegeoip](https://freegeoip.app/) 还行 免费https 每小时1万5的请求 比下面的快
+  - [ipinfo](https://ipinfo.io/developers#https-ssl) https免费 速度慢点
+
 ## :star: Java相关
 
 ### :speech_balloon:Java8系列文章
- 
+
 
 http://www.importnew.com/11908.html
 
 
 
 ### :speech_balloon:牛客 HttpServletRequest. getParameter
- 
+
 
 ![image](https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png)
 
@@ -17,14 +33,14 @@ http://www.importnew.com/11908.html
 
 
 ### :speech_balloon:Java Spliterator
- 
+
 
 参考1: https://segmentfault.com/q/1010000007087438
 参考2: https://blog.csdn.net/lh513828570/article/details/56673804
 
 
 ### :speech_balloon:牛客 Integer的拆箱装箱
- 
+
 
 ![image](https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png)
 
@@ -35,7 +51,7 @@ http://www.importnew.com/11908.html
 
 
 ### :speech_balloon:牛客 getDeclaredMethods()的范围
- 
+
 
 ![image](https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png)
 
@@ -49,7 +65,7 @@ Doc:
 
 
 ### :speech_balloon:牛客 sleep()和wait()
- 
+
 
 ![image](https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png)
 
@@ -74,7 +90,7 @@ Doc:
 
 
 ### :speech_balloon:Java static方法中的变量是否存在线程安全问题
- 
+
 我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
 
 那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。
@@ -102,7 +118,7 @@ hello方法会不会有多线程安全问题呢？没有！
 
 
 ### :speech_balloon:Java多线程参考
- 
+
 
 https://www.cnblogs.com/yjd_hycf_space/p/7526608.html
 http://www.importnew.com/21136.html
@@ -110,7 +126,7 @@ http://www.importnew.com/21089.html
 
 
 ### :speech_balloon:Java字符串压缩
- 
+
 
 ``` java
 public class StringCompress {
@@ -190,7 +206,7 @@ public class StringCompress {
 
 
 ### :speech_balloon:Servlet和CGI的区别
- 
+
 1. 定义：
 
 CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
@@ -257,7 +273,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 
 ### :speech_balloon:Java HashMap好文
- 
+
 
 源码解析：
 - https://www.cnblogs.com/xrq730/p/5030920.html
@@ -270,7 +286,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 
 ### :speech_balloon:fastjson 转时间
- 
+
 
 在field上加注解，比如转ISO格式的时间
 ``` java
@@ -279,7 +295,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 
 ### :speech_balloon:sun.misc.Unsafe
- 
+
 
 - http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
 - https://blog.csdn.net/anLA_/article/details/78631026
@@ -287,19 +303,19 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 
 ### :speech_balloon:Java String pool
- 
+
 
 [Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
 
 
 ### :speech_balloon:Java 静态内部类和非静态内部类
- 
+
 
 [Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
 
 
 ### :speech_balloon:bridge method
- 
+
 
 - https://cn.aliyun.com/jiaocheng/330720.html
 - https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods
@@ -308,7 +324,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 
 ### :speech_balloon:finally & return
- 
+
 
 - https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
 
