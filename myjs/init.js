@@ -121,7 +121,6 @@ $(function() {
             $(this).remove()
         }
     })
-
 })
 
 $.fn.extend({

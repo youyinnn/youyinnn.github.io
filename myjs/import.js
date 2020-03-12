@@ -69,7 +69,7 @@ var before = [
 ]
 
 for (let i = 0; i < resourcesList.length; i++) {
-    if (location.hostname !== 'youyinnn.github.io') {
+    if (location.hostname !== 'youyinnn.github.io' || location.hostname !== 'youyinnn.gitee.io') {
         resourcesList[i] = '/resources/' + resourcesList[i]
     } else {
         resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/' + resourcesList[i]
@@ -82,7 +82,6 @@ var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/marked.min-0.7.0.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
@@ -105,6 +104,7 @@ function importJsBeforeLoad() {
         })
     }
 }
+importJsBeforeLoad()
 
 function importJsAfterLoad() {
     let map = {}
@@ -135,3 +135,7 @@ function importJsAfterLoad() {
         }
     })
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    importJsAfterLoad()
+})
