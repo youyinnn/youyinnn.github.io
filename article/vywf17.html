@@ -8,6 +8,20 @@
     <meta name="baidu-site-verification" content="l09YSIpJQW" />
     <meta name="referrer" content="origin">
     <title>blog | youyinnn</title>
+    <script>
+        if (location.hostname === 'youyinnn.github.io') {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.responseText.search('CHINA') > 0) {
+                        location.href = 'https://youyinnn.gitee.io' + location.pathname
+                    }
+                }
+            }
+            xmlhttp.open("GET", "https://pv.sohu.com/cityjson?ie=utf-8", true);
+            xmlhttp.send();
+        }
+    </script>
     <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
     <link rel="stylesheet" href="/mycss/style.css">
