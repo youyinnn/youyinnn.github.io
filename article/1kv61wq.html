@@ -10,20 +10,6 @@
     <title>blog | youyinnn</title>
     <script>
         if (location.origin === 'https://youyinnn.github.io') {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    let rsjson = JSON.parse(xmlhttp.responseText)
-                    if (rsjson.country === 'CN') {
-                        // tricky: github pages building
-                        setTimeout(() => {
-                            window.location.href = "https://youyinnn.gitee.io" + location.pathname
-                        }, 300);
-                    }
-                }
-            }
-            xmlhttp.open("GET", "https://ipinfo.io/json?030ac39a43fc1f", true);
-            xmlhttp.send()
             var xmlhttp2 = new XMLHttpRequest();
             xmlhttp2.onreadystatechange = function() {
                 if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
