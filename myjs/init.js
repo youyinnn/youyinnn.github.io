@@ -36,6 +36,9 @@ $(function() {
     }
     get_friendlinked()
     let pathname = location.pathname
+    if (location.search === '?fromgithub=true') {
+        popmsg('国内访问 已跳转到Gitee Pages')
+    }
     if (pathname === '/') {
         hidesidetoc()
         rmclass(homepage, 'myhide')

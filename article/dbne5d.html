@@ -8,24 +8,7 @@
     <meta name="baidu-site-verification" content="l09YSIpJQW" />
     <meta name="referrer" content="origin">
     <title>blog | youyinnn</title>
-    <script>
-        if (location.origin === 'https://youyinnn.github.io') {
-            var xmlhttp2 = new XMLHttpRequest();
-            xmlhttp2.onreadystatechange = function() {
-                if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
-                    let rsjson = JSON.parse(xmlhttp2.responseText)
-                    if (rsjson.country_code === 'CN') {
-                        // tricky: github pages building
-                        setTimeout(() => {
-                            window.location.href = "https://youyinnn.gitee.io" + location.pathname
-                        }, 300);
-                    }
-                }
-            }
-            xmlhttp2.open("GET", "https://freegeoip.app/json/", true);
-            xmlhttp2.send()
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/myjs/jump-0.1.js"></script>
     <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/img/favicon.ico" />
     <link rel="stylesheet" href="/mycss/style.css">
@@ -449,7 +432,7 @@ Output: 1</code></pre><pre><code class="language-java">public int searchInsert(i
         <div id="png_box"></div>
         <button id="share_png_paned_close" class="btn btn-dark">Close</button>
     </div>
-    
+
 </body>
 
 </html>
