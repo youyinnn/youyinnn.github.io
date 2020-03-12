@@ -13,11 +13,6 @@ var oauth_token = b64.decode(oauth_token_base64)
 var defaulttimeout
 var shortmsgline = 25
 
-function settimeout() {
-    let nowhour = dayjs().hour()
-    defaulttimeout = (nowhour >= 19 || nowhour <= 6) ? 15000 : 10000
-}
-
 function timeoutfunc(eve) {
     if (eve.status === 0 && eve.statusText !== 'error') {
         console.log('Maybe it\'s timeout because of github api!\n' + 'status:' + eve.status +
