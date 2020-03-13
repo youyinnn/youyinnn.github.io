@@ -34,7 +34,7 @@ function new_render_md() {
             .replace(/&/gm, '&amp;')
             .replace(/"/gm, '&quot;')
             .replace(/ /gm, '&nbsp;')
-            
+
         listhtml += `
             <div class="toc-${el.tagName.toLowerCase()}">
                 <a href="${el.childNodes[1].name}">
@@ -469,6 +469,12 @@ function scrollToTop(interval) {
 }
 
 function pagination() {
+
+    function pageFlesh() {
+        scrollToTop(0)
+        $('#pagebox-' + nowpage).animateCss('fadeInDown')
+    }
+
     nowpage = 1
     let pbs = $('.pagebox')
     for (let i = 1; i < pbs.length; i++) {
@@ -498,8 +504,7 @@ function pagination() {
             rmclass($('.active')[0], 'active')
             adclass($('#pg-' + 1)[0], 'active')
             nowpage = 1
-            scrollToTop(0)
-            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            pageFlesh()
         }
     })
 
@@ -529,8 +534,7 @@ function pagination() {
                 $('#pg-1').addClass('active')
             }
             nowpage--
-            scrollToTop(0)
-            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
+            pageFlesh()
         }
     })
 
@@ -555,9 +559,7 @@ function pagination() {
                 rmclass($('.active')[0], 'active')
                 adclass($('#pg-' + this.id.split('-')[1])[0], 'active')
                 nowpage = clickpg
-                scrollToTop(0)
-                $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
-                $('#pagebox-' + nowpage).animateCss('fadeIn')
+                pageFlesh()
             }
         })
     }
@@ -583,9 +585,7 @@ function pagination() {
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
             nowpage++
-            scrollToTop(0)
-            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
-            $('#pagebox-' + nowpage).animateCss('fadeIn')
+            pageFlesh()
         }
     })
 
@@ -611,13 +611,10 @@ function pagination() {
                 adclass($('#pg-2')[0], 'active')
             }
             nowpage = totalpages
-            scrollToTop(0)
-            $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
-            $('#pagebox-' + nowpage).animateCss('fadeIn')
+            pageFlesh()
         }
     })
     appendc($('#pgboxbox')[0], pn)
-    $('.pagination')[0].style.top = $('.pagebox').not('.pageboxhide').css('height')
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
