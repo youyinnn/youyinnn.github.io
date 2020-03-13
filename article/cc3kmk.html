@@ -581,16 +581,21 @@ public class AnnotationTest extends HttpServlet
 <p><em>译者文外补充：在Jetty中使用注释很重要的一点就是，Jetty只会扫描类路径下的.class文件，也即编译结果，以及项目lib中的jar文件，除此之外不会扫描其它地方。所以在使用编译器开发的时候，要详细设置好类路径。</em></p>
 </blockquote>
 <p>
-        <div id="_showpic_ddb67bf6" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_ddb67bf6" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_ddb67bf6" href=https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/ServletAnnontationExp.png class="hidepic" ></img>
         <script>
-            let funddb67bf6 = function() {
-                document.getElementById('_pic_ddb67bf6').src = document.getElementById('_pic_ddb67bf6').getAttribute('href')
-                document.getElementById('_pic_ddb67bf6').classList = ['showpic']
-                document.getElementById('_showpic_ddb67bf6').removeEventListener('click', funddb67bf6)
-                document.getElementById('_showpic_ddb67bf6').style.display = 'none'
+            let imgselfddb67bf6 = document.getElementById('_pic_ddb67bf6')
+            function isInViewPortOfTwoddb67bf6 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfddb67bf6.getBoundingClientRect() && imgselfddb67bf6.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_ddb67bf6').src = document.getElementById('_pic_ddb67bf6').getAttribute('href')
+                    document.getElementById('_pic_ddb67bf6').classList = ['showpic']
+                    document.getElementById('_showpic_ddb67bf6').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoddb67bf6)
+                }
             }
-            document.getElementById('_showpic_ddb67bf6').addEventListener('click', funddb67bf6)
+            window.addEventListener('scroll', isInViewPortOfTwoddb67bf6)
         </script>
     </p>
 <blockquote>

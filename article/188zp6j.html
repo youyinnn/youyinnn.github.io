@@ -164,31 +164,41 @@
 }</code></pre>
 <p>这个解法的时间复杂度，我们可以从它兵分两路去将它看成是一棵满二叉树：</p>
 <p>
-        <div id="_showpic_c4539200" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_c4539200" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_c4539200" href=http://img.mp.sohu.com/upload/20170702/07bc2cc044c245588e0873e773dd9079_th.png class="hidepic" ></img>
         <script>
-            let func4539200 = function() {
-                document.getElementById('_pic_c4539200').src = document.getElementById('_pic_c4539200').getAttribute('href')
-                document.getElementById('_pic_c4539200').classList = ['showpic']
-                document.getElementById('_showpic_c4539200').removeEventListener('click', func4539200)
-                document.getElementById('_showpic_c4539200').style.display = 'none'
+            let imgselfc4539200 = document.getElementById('_pic_c4539200')
+            function isInViewPortOfTwoc4539200 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfc4539200.getBoundingClientRect() && imgselfc4539200.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_c4539200').src = document.getElementById('_pic_c4539200').getAttribute('href')
+                    document.getElementById('_pic_c4539200').classList = ['showpic']
+                    document.getElementById('_showpic_c4539200').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoc4539200)
+                }
             }
-            document.getElementById('_showpic_c4539200').addEventListener('click', func4539200)
+            window.addEventListener('scroll', isInViewPortOfTwoc4539200)
         </script>
     </p>
 <p>二叉树的结点就是递归次数，这个结果近似是2的n-1次方，也就是<strong>O(2^n)</strong></p>
 <p>显然，指数级的效率是非常低的，我们观察一下这棵树，其中有很多结点是重复计算的：</p>
 <p>
-        <div id="_showpic_2966169e" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_2966169e" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_2966169e" href=http://img.mp.sohu.com/upload/20170702/148d4dfd369240efbd2e28e0f44e8adc_th.png class="hidepic" ></img>
         <script>
-            let fun2966169e = function() {
-                document.getElementById('_pic_2966169e').src = document.getElementById('_pic_2966169e').getAttribute('href')
-                document.getElementById('_pic_2966169e').classList = ['showpic']
-                document.getElementById('_showpic_2966169e').removeEventListener('click', fun2966169e)
-                document.getElementById('_showpic_2966169e').style.display = 'none'
+            let imgself2966169e = document.getElementById('_pic_2966169e')
+            function isInViewPortOfTwo2966169e () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself2966169e.getBoundingClientRect() && imgself2966169e.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_2966169e').src = document.getElementById('_pic_2966169e').getAttribute('href')
+                    document.getElementById('_pic_2966169e').classList = ['showpic']
+                    document.getElementById('_showpic_2966169e').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo2966169e)
+                }
             }
-            document.getElementById('_showpic_2966169e').addEventListener('click', fun2966169e)
+            window.addEventListener('scroll', isInViewPortOfTwo2966169e)
         </script>
     </p>
 <p>为了避免这种重复计算，我们可以将每个子问题求出的结果，放在<strong>一张表</strong>中，每次求解当前问题的时候，索引表中已经求好的子问题，如果说将<strong>递归法</strong>视为自顶向下的方法，那么这种开辟空间存结果的方法，我们称之为<strong>备忘录法</strong>，这是一种自底向上的考虑方法</p>

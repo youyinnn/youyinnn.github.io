@@ -208,16 +208,21 @@ void move(char source, int n, char target){
 <p>这题.....真是纯数学题，你要是不懂怎么判断循环节，那就凉了，然后就求循环嘛，然后又发现一个很尴尬的事情，余数不会求....折腾了大半天，搞定- -</p>
 <p>首先我们手算3个例子，1/4和1/7和1/6</p>
 <p>
-        <div id="_showpic_a5d6bf2e" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_a5d6bf2e" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_a5d6bf2e" href=https://image.youyinnn.top/20180912111445.png class="hidepic" ></img>
         <script>
-            let funa5d6bf2e = function() {
-                document.getElementById('_pic_a5d6bf2e').src = document.getElementById('_pic_a5d6bf2e').getAttribute('href')
-                document.getElementById('_pic_a5d6bf2e').classList = ['showpic']
-                document.getElementById('_showpic_a5d6bf2e').removeEventListener('click', funa5d6bf2e)
-                document.getElementById('_showpic_a5d6bf2e').style.display = 'none'
+            let imgselfa5d6bf2e = document.getElementById('_pic_a5d6bf2e')
+            function isInViewPortOfTwoa5d6bf2e () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfa5d6bf2e.getBoundingClientRect() && imgselfa5d6bf2e.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_a5d6bf2e').src = document.getElementById('_pic_a5d6bf2e').getAttribute('href')
+                    document.getElementById('_pic_a5d6bf2e').classList = ['showpic']
+                    document.getElementById('_showpic_a5d6bf2e').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoa5d6bf2e)
+                }
             }
-            document.getElementById('_showpic_a5d6bf2e').addEventListener('click', funa5d6bf2e)
+            window.addEventListener('scroll', isInViewPortOfTwoa5d6bf2e)
         </script>
     </p>
 <p>我们每次计算的时候，<strong>都需要将余数乘以10，再和除数取余，再进行下一轮计算，直到余数为0或者余数重复出现为止，与此同时我们可以记录每一轮的商</strong>；</p>

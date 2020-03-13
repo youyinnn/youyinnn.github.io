@@ -386,16 +386,21 @@ class AVLTree {
 <p><strong>3)</strong> 红结点若有子节点，这俩子节点必定是黑色（有直接关系的两结点不能同时都是红色）</p>
 <p><strong>4)</strong> 每条从根节点到一个NULL结点的路径上总有相同数量的黑色结点</p>
 <p>
-        <div id="_showpic_fd500339" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_fd500339" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_fd500339" href=https://image.youyinnn.top/20180829110435.png class="hidepic" ></img>
         <script>
-            let funfd500339 = function() {
-                document.getElementById('_pic_fd500339').src = document.getElementById('_pic_fd500339').getAttribute('href')
-                document.getElementById('_pic_fd500339').classList = ['showpic']
-                document.getElementById('_showpic_fd500339').removeEventListener('click', funfd500339)
-                document.getElementById('_showpic_fd500339').style.display = 'none'
+            let imgselffd500339 = document.getElementById('_pic_fd500339')
+            function isInViewPortOfTwofd500339 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselffd500339.getBoundingClientRect() && imgselffd500339.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_fd500339').src = document.getElementById('_pic_fd500339').getAttribute('href')
+                    document.getElementById('_pic_fd500339').classList = ['showpic']
+                    document.getElementById('_showpic_fd500339').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwofd500339)
+                }
             }
-            document.getElementById('_showpic_fd500339').addEventListener('click', funfd500339)
+            window.addEventListener('scroll', isInViewPortOfTwofd500339)
         </script>
     </p>
 <p>前3条没什么难理解的，关键是第四条，到底是什么意思呢？参考<a href="https://baike.baidu.com/item/%E7%BA%A2%E9%BB%91%E6%A0%91">百度百科</a>可知，这句话还可以这样说：<strong>“从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点”</strong></p>

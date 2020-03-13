@@ -313,16 +313,21 @@ menu.append(new MenuItem({
 </blockquote>
 <p><strong>Internet Explorer 的 任务:</strong></p>
 <p>
-        <div id="_showpic_bd924ec9" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_bd924ec9" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_bd924ec9" href=https://image.youyinnn.top/20191014094639.png class="hidepic" ></img>
         <script>
-            let funbd924ec9 = function() {
-                document.getElementById('_pic_bd924ec9').src = document.getElementById('_pic_bd924ec9').getAttribute('href')
-                document.getElementById('_pic_bd924ec9').classList = ['showpic']
-                document.getElementById('_showpic_bd924ec9').removeEventListener('click', funbd924ec9)
-                document.getElementById('_showpic_bd924ec9').style.display = 'none'
+            let imgselfbd924ec9 = document.getElementById('_pic_bd924ec9')
+            function isInViewPortOfTwobd924ec9 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfbd924ec9.getBoundingClientRect() && imgselfbd924ec9.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_bd924ec9').src = document.getElementById('_pic_bd924ec9').getAttribute('href')
+                    document.getElementById('_pic_bd924ec9').classList = ['showpic']
+                    document.getElementById('_showpic_bd924ec9').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwobd924ec9)
+                }
             }
-            document.getElementById('_showpic_bd924ec9').addEventListener('click', funbd924ec9)
+            window.addEventListener('scroll', isInViewPortOfTwobd924ec9)
         </script>
     </p>
 <p>不同于 macOS 的dock菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>

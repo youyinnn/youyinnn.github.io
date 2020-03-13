@@ -95,23 +95,28 @@ emoji.allow_native = true
 // iterating md files
 var originalImgFunc = renderer.image
 
-function imgclick(href, title, text) {
+function imgscroll(href, title, text) {
     let picId = crc32(href).toString(16)
     return `
-        <div id="_showpic_${picId}" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_${picId}" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
         <script>
-            let fun${picId} = function() {
-                document.getElementById('_pic_${picId}').src = document.getElementById('_pic_${picId}').getAttribute('href')
-                document.getElementById('_pic_${picId}').classList = ['showpic']
-                document.getElementById('_showpic_${picId}').removeEventListener('click', fun${picId})
-                document.getElementById('_showpic_${picId}').style.display = 'none'
+            let imgself${picId} = document.getElementById('_pic_${picId}')
+            function isInViewPortOfTwo${picId} () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself${picId}.getBoundingClientRect() && imgself${picId}.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_${picId}').src = document.getElementById('_pic_${picId}').getAttribute('href')
+                    document.getElementById('_pic_${picId}').classList = ['showpic']
+                    document.getElementById('_showpic_${picId}').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo${picId})
+                }
             }
-            document.getElementById('_showpic_${picId}').addEventListener('click', fun${picId})
+            window.addEventListener('scroll', isInViewPortOfTwo${picId})
         </script>
     `
 }
-renderer.image = imgclick
+renderer.image = imgscroll
 for (pname of postsrs) {
     let abbrlink = crc32(pname).toString(36)
     md2html(
@@ -231,7 +236,7 @@ md2html(
 )
 
 // scripts
-renderer.image = imgclick
+renderer.image = imgscroll
 md2html(
     path.join(websrcPath, 'scripts.md'),
     path.join(__dirname, '..', 'scripts', 'index.html')

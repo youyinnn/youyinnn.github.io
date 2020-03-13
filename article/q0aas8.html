@@ -223,16 +223,21 @@
             </a>
             System Design Map
           </h4><p>
-        <div id="_showpic_396486ee" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_396486ee" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_396486ee" href=https://image.youyinnn.top/20181102231633.png class="hidepic" ></img>
         <script>
-            let fun396486ee = function() {
-                document.getElementById('_pic_396486ee').src = document.getElementById('_pic_396486ee').getAttribute('href')
-                document.getElementById('_pic_396486ee').classList = ['showpic']
-                document.getElementById('_showpic_396486ee').removeEventListener('click', fun396486ee)
-                document.getElementById('_showpic_396486ee').style.display = 'none'
+            let imgself396486ee = document.getElementById('_pic_396486ee')
+            function isInViewPortOfTwo396486ee () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself396486ee.getBoundingClientRect() && imgself396486ee.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_396486ee').src = document.getElementById('_pic_396486ee').getAttribute('href')
+                    document.getElementById('_pic_396486ee').classList = ['showpic']
+                    document.getElementById('_showpic_396486ee').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo396486ee)
+                }
             }
-            document.getElementById('_showpic_396486ee').addEventListener('click', fun396486ee)
+            window.addEventListener('scroll', isInViewPortOfTwo396486ee)
         </script>
     </p>
 <p>As the map show，the green arrows are request/response/msg，we will trace every msg from Kafka Producers/Consumers.</p>

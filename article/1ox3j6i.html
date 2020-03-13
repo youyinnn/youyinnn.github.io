@@ -210,31 +210,41 @@
 <p>在“External Libraries”一节，它提示我们，在安装Pillow之前我们需要安装完运行Pillow所需的库。</p>
 <p>开发Pillow的团队在hub的depends文件夹下提供了这些库在各种系统下的安装脚本，我们选择fedora_23.sh的脚本(fedora是RedHat)，但是不要运行这个脚本，我们看它对应的package需要安装哪些就好。</p>
 <p>
-        <div id="_showpic_8433e1c" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_8433e1c" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_8433e1c" href=https://image.youyinnn.top/3aef0a673e1639aec3272e205b934971.png class="hidepic" ></img>
         <script>
-            let fun8433e1c = function() {
-                document.getElementById('_pic_8433e1c').src = document.getElementById('_pic_8433e1c').getAttribute('href')
-                document.getElementById('_pic_8433e1c').classList = ['showpic']
-                document.getElementById('_showpic_8433e1c').removeEventListener('click', fun8433e1c)
-                document.getElementById('_showpic_8433e1c').style.display = 'none'
+            let imgself8433e1c = document.getElementById('_pic_8433e1c')
+            function isInViewPortOfTwo8433e1c () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself8433e1c.getBoundingClientRect() && imgself8433e1c.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_8433e1c').src = document.getElementById('_pic_8433e1c').getAttribute('href')
+                    document.getElementById('_pic_8433e1c').classList = ['showpic']
+                    document.getElementById('_showpic_8433e1c').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo8433e1c)
+                }
             }
-            document.getElementById('_showpic_8433e1c').addEventListener('click', fun8433e1c)
+            window.addEventListener('scroll', isInViewPortOfTwo8433e1c)
         </script>
     </p>
 <p>如图最下面一行，在centos下就可以执行：</p>
 <pre><code class="language-bash">yum install libtiff-devel libjpeg-devel zlib-devel freetype-devel  lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter  tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel</code></pre>
 <p>
-        <div id="_showpic_c7e6d7d8" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_c7e6d7d8" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_c7e6d7d8" href=https://image.youyinnn.top/5e3b4f30ce74fefbc7e2ebfcccb76543.png class="hidepic" ></img>
         <script>
-            let func7e6d7d8 = function() {
-                document.getElementById('_pic_c7e6d7d8').src = document.getElementById('_pic_c7e6d7d8').getAttribute('href')
-                document.getElementById('_pic_c7e6d7d8').classList = ['showpic']
-                document.getElementById('_showpic_c7e6d7d8').removeEventListener('click', func7e6d7d8)
-                document.getElementById('_showpic_c7e6d7d8').style.display = 'none'
+            let imgselfc7e6d7d8 = document.getElementById('_pic_c7e6d7d8')
+            function isInViewPortOfTwoc7e6d7d8 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfc7e6d7d8.getBoundingClientRect() && imgselfc7e6d7d8.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_c7e6d7d8').src = document.getElementById('_pic_c7e6d7d8').getAttribute('href')
+                    document.getElementById('_pic_c7e6d7d8').classList = ['showpic']
+                    document.getElementById('_showpic_c7e6d7d8').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoc7e6d7d8)
+                }
             }
-            document.getElementById('_showpic_c7e6d7d8').addEventListener('click', func7e6d7d8)
+            window.addEventListener('scroll', isInViewPortOfTwoc7e6d7d8)
         </script>
     </p>
 <p>这些我都安装过了，其中丢失的python3-tkinter在centos下没有那就不用管了。</p>

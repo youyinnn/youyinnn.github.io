@@ -42,7 +42,6 @@ function new_render_md() {
                 </a>
             </div>`
     }
-    console.log(listhtml)
     $('#sidetoc').append(listhtml)
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {

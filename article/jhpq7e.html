@@ -182,16 +182,21 @@
 <li>Sweep过后剩下的空间不连续，容易形成碎片空间，对大对象的内存分配不友好，有时候大对象可能因为找不到空间，再来一次GC</li>
 </ul>
 <p>
-        <div id="_showpic_4d61082f" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_4d61082f" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_4d61082f" href=https://plumbr.io/app/uploads/2015/06/GC-sweep.png class="hidepic" ></img>
         <script>
-            let fun4d61082f = function() {
-                document.getElementById('_pic_4d61082f').src = document.getElementById('_pic_4d61082f').getAttribute('href')
-                document.getElementById('_pic_4d61082f').classList = ['showpic']
-                document.getElementById('_showpic_4d61082f').removeEventListener('click', fun4d61082f)
-                document.getElementById('_showpic_4d61082f').style.display = 'none'
+            let imgself4d61082f = document.getElementById('_pic_4d61082f')
+            function isInViewPortOfTwo4d61082f () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself4d61082f.getBoundingClientRect() && imgself4d61082f.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_4d61082f').src = document.getElementById('_pic_4d61082f').getAttribute('href')
+                    document.getElementById('_pic_4d61082f').classList = ['showpic']
+                    document.getElementById('_showpic_4d61082f').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo4d61082f)
+                }
             }
-            document.getElementById('_showpic_4d61082f').addEventListener('click', fun4d61082f)
+            window.addEventListener('scroll', isInViewPortOfTwo4d61082f)
         </script>
     </p>
 
@@ -206,16 +211,21 @@
 <li><strong>Survivor区：</strong>当<strong>Eden区</strong>内存满了的时候，就将还存活的对象复制到这里，然后再把<strong>Eden区</strong>一次性清理掉，两块内存区身份互换，这样每次都是清理另一块的内存，然后按序分配到自己这里，不用考虑碎片</li>
 </ul>
 <p>
-        <div id="_showpic_89b8b2cc" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_89b8b2cc" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_89b8b2cc" href=https://plumbr.io/app/uploads/2015/06/GC-mark-and-copy-in-Java.png class="hidepic" ></img>
         <script>
-            let fun89b8b2cc = function() {
-                document.getElementById('_pic_89b8b2cc').src = document.getElementById('_pic_89b8b2cc').getAttribute('href')
-                document.getElementById('_pic_89b8b2cc').classList = ['showpic']
-                document.getElementById('_showpic_89b8b2cc').removeEventListener('click', fun89b8b2cc)
-                document.getElementById('_showpic_89b8b2cc').style.display = 'none'
+            let imgself89b8b2cc = document.getElementById('_pic_89b8b2cc')
+            function isInViewPortOfTwo89b8b2cc () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself89b8b2cc.getBoundingClientRect() && imgself89b8b2cc.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_89b8b2cc').src = document.getElementById('_pic_89b8b2cc').getAttribute('href')
+                    document.getElementById('_pic_89b8b2cc').classList = ['showpic']
+                    document.getElementById('_showpic_89b8b2cc').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo89b8b2cc)
+                }
             }
-            document.getElementById('_showpic_89b8b2cc').addEventListener('click', fun89b8b2cc)
+            window.addEventListener('scroll', isInViewPortOfTwo89b8b2cc)
         </script>
     </p>
 <p>这样的方法有牺牲一块空间的代价，最初的做法是对半分，但是因为对象的朝生夕死，所以存活的对象其实并不多，HotSpot虚拟机的做法是：<strong>将内存区分成8：1：1的Eden：Survivor：Survivor区，每次只使用Eden和其中一块Survivor，当GC发生的时候，将Eden和使用的Survivor中存活的对象分配到另一个Survivor中，然后清理掉前面两个区域</strong></p>
@@ -229,16 +239,21 @@
           </h4><p>复制算法会牺牲一部分空间，并且<strong>如果系统存在许多存活时间长的对象的时候，算法的效率会降低</strong>，而且很明显的是老年代使用这种算法的效率很低</p>
 <p>标记整理算法就是针对老年代的收集算法，它先将存活对象标记起来，然后将存活对象<strong>向一边移动</strong>，移动完后<strong>从最后一个存活对象往后开始清理空间</strong></p>
 <p>
-        <div id="_showpic_97cff7a1" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_97cff7a1" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_97cff7a1" href=https://plumbr.io/app/uploads/2015/06/GC-mark-sweep-compact.png class="hidepic" ></img>
         <script>
-            let fun97cff7a1 = function() {
-                document.getElementById('_pic_97cff7a1').src = document.getElementById('_pic_97cff7a1').getAttribute('href')
-                document.getElementById('_pic_97cff7a1').classList = ['showpic']
-                document.getElementById('_showpic_97cff7a1').removeEventListener('click', fun97cff7a1)
-                document.getElementById('_showpic_97cff7a1').style.display = 'none'
+            let imgself97cff7a1 = document.getElementById('_pic_97cff7a1')
+            function isInViewPortOfTwo97cff7a1 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself97cff7a1.getBoundingClientRect() && imgself97cff7a1.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_97cff7a1').src = document.getElementById('_pic_97cff7a1').getAttribute('href')
+                    document.getElementById('_pic_97cff7a1').classList = ['showpic']
+                    document.getElementById('_showpic_97cff7a1').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo97cff7a1)
+                }
             }
-            document.getElementById('_showpic_97cff7a1').addEventListener('click', fun97cff7a1)
+            window.addEventListener('scroll', isInViewPortOfTwo97cff7a1)
         </script>
     </p>
 
@@ -266,16 +281,21 @@
           </h4><p>主流的语言都是使用RA来判断对象存活的，甚至古老的Lisp也是。算法的基本思想是预置固定的<strong>“GC Root”对象</strong>作为起点，以树状逻辑开始从root向下索引，结点关系就是引用关系，索引到的对象就说明该对象至少还有一条Reference Chain可以达到GC Root，则说明这个对象仍被系统使用</p>
 <p>没有Reference Chain可达的对象，则基本可以宣告作废了</p>
 <p>
-        <div id="_showpic_773feb32" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_773feb32" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_773feb32" href=https://image.youyinnn.top/20181114235352.png class="hidepic" ></img>
         <script>
-            let fun773feb32 = function() {
-                document.getElementById('_pic_773feb32').src = document.getElementById('_pic_773feb32').getAttribute('href')
-                document.getElementById('_pic_773feb32').classList = ['showpic']
-                document.getElementById('_showpic_773feb32').removeEventListener('click', fun773feb32)
-                document.getElementById('_showpic_773feb32').style.display = 'none'
+            let imgself773feb32 = document.getElementById('_pic_773feb32')
+            function isInViewPortOfTwo773feb32 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself773feb32.getBoundingClientRect() && imgself773feb32.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_773feb32').src = document.getElementById('_pic_773feb32').getAttribute('href')
+                    document.getElementById('_pic_773feb32').classList = ['showpic']
+                    document.getElementById('_showpic_773feb32').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo773feb32)
+                }
             }
-            document.getElementById('_showpic_773feb32').addEventListener('click', fun773feb32)
+            window.addEventListener('scroll', isInViewPortOfTwo773feb32)
         </script>
     </p>
 <p>如图，灰色chain已经没有GC Root可达了，所以这些对象会在下次GC的时候被考虑回收</p>

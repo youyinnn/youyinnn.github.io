@@ -134,16 +134,21 @@
             51. N-Queens(Hard)
           </h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p>
-        <div id="_showpic_fdf8b36d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_fdf8b36d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_fdf8b36d" href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="hidepic" ></img>
         <script>
-            let funfdf8b36d = function() {
-                document.getElementById('_pic_fdf8b36d').src = document.getElementById('_pic_fdf8b36d').getAttribute('href')
-                document.getElementById('_pic_fdf8b36d').classList = ['showpic']
-                document.getElementById('_showpic_fdf8b36d').removeEventListener('click', funfdf8b36d)
-                document.getElementById('_showpic_fdf8b36d').style.display = 'none'
+            let imgselffdf8b36d = document.getElementById('_pic_fdf8b36d')
+            function isInViewPortOfTwofdf8b36d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselffdf8b36d.getBoundingClientRect() && imgselffdf8b36d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_fdf8b36d').src = document.getElementById('_pic_fdf8b36d').getAttribute('href')
+                    document.getElementById('_pic_fdf8b36d').classList = ['showpic']
+                    document.getElementById('_showpic_fdf8b36d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
+                }
             }
-            document.getElementById('_showpic_fdf8b36d').addEventListener('click', funfdf8b36d)
+            window.addEventListener('scroll', isInViewPortOfTwofdf8b36d)
         </script>
     </p>
 <p>Given an integer <em>n</em>, return all distinct solutions to the <em>n</em>-queens puzzle.</p>
@@ -302,16 +307,21 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
             52.N-QueensII(Hard)
           </h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p>
-        <div id="_showpic_fdf8b36d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_fdf8b36d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_fdf8b36d" href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="hidepic" ></img>
         <script>
-            let funfdf8b36d = function() {
-                document.getElementById('_pic_fdf8b36d').src = document.getElementById('_pic_fdf8b36d').getAttribute('href')
-                document.getElementById('_pic_fdf8b36d').classList = ['showpic']
-                document.getElementById('_showpic_fdf8b36d').removeEventListener('click', funfdf8b36d)
-                document.getElementById('_showpic_fdf8b36d').style.display = 'none'
+            let imgselffdf8b36d = document.getElementById('_pic_fdf8b36d')
+            function isInViewPortOfTwofdf8b36d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselffdf8b36d.getBoundingClientRect() && imgselffdf8b36d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_fdf8b36d').src = document.getElementById('_pic_fdf8b36d').getAttribute('href')
+                    document.getElementById('_pic_fdf8b36d').classList = ['showpic']
+                    document.getElementById('_showpic_fdf8b36d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
+                }
             }
-            document.getElementById('_showpic_fdf8b36d').addEventListener('click', funfdf8b36d)
+            window.addEventListener('scroll', isInViewPortOfTwofdf8b36d)
         </script>
     </p>
 <p>Given an integer <em>n</em>, return the number of distinct solutions to the <em>n</em>-queens puzzle.</p>

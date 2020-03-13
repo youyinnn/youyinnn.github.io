@@ -137,16 +137,21 @@
 <p>In a perfect situation is that we don&#39;t want to do any comparing opts, them we grape the element at once. So we need something to record the relationship between key value and the place where it store. Then next time we seek a key, we would able to use this relationship to grape it immediately.</p>
 <p>We define the relationship as <strong>&quot;Hash&quot;</strong>.</p>
 <p>
-        <div id="_showpic_33032c4b" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_33032c4b" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_33032c4b" href=https://www.geeksforgeeks.org/wp-content/uploads/HashingDataStructure-min-768x384.png class="hidepic" ></img>
         <script>
-            let fun33032c4b = function() {
-                document.getElementById('_pic_33032c4b').src = document.getElementById('_pic_33032c4b').getAttribute('href')
-                document.getElementById('_pic_33032c4b').classList = ['showpic']
-                document.getElementById('_showpic_33032c4b').removeEventListener('click', fun33032c4b)
-                document.getElementById('_showpic_33032c4b').style.display = 'none'
+            let imgself33032c4b = document.getElementById('_pic_33032c4b')
+            function isInViewPortOfTwo33032c4b () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself33032c4b.getBoundingClientRect() && imgself33032c4b.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_33032c4b').src = document.getElementById('_pic_33032c4b').getAttribute('href')
+                    document.getElementById('_pic_33032c4b').classList = ['showpic']
+                    document.getElementById('_showpic_33032c4b').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo33032c4b)
+                }
             }
-            document.getElementById('_showpic_33032c4b').addEventListener('click', fun33032c4b)
+            window.addEventListener('scroll', isInViewPortOfTwo33032c4b)
         </script>
     </p>
 <p>And we will discuss two aspect of it: <strong>&quot;Hash Method&quot;</strong> &amp; <strong>&quot;Collision Handle&quot;</strong></p>

@@ -475,16 +475,21 @@
             </a>
             大端序
           </h4><p>
-        <div id="_showpic_4c007a8a" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_4c007a8a" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_4c007a8a" href=https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.png class="hidepic" ></img>
         <script>
-            let fun4c007a8a = function() {
-                document.getElementById('_pic_4c007a8a').src = document.getElementById('_pic_4c007a8a').getAttribute('href')
-                document.getElementById('_pic_4c007a8a').classList = ['showpic']
-                document.getElementById('_showpic_4c007a8a').removeEventListener('click', fun4c007a8a)
-                document.getElementById('_showpic_4c007a8a').style.display = 'none'
+            let imgself4c007a8a = document.getElementById('_pic_4c007a8a')
+            function isInViewPortOfTwo4c007a8a () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself4c007a8a.getBoundingClientRect() && imgself4c007a8a.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_4c007a8a').src = document.getElementById('_pic_4c007a8a').getAttribute('href')
+                    document.getElementById('_pic_4c007a8a').classList = ['showpic']
+                    document.getElementById('_showpic_4c007a8a').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo4c007a8a)
+                }
             }
-            document.getElementById('_showpic_4c007a8a').addEventListener('click', fun4c007a8a)
+            window.addEventListener('scroll', isInViewPortOfTwo4c007a8a)
         </script>
     </p>
 <p>看图就觉得很清晰, 而且很符合正常的读写习惯, 也即是按照顺序把字节填充进去.</p>
@@ -495,16 +500,21 @@
             </a>
             小端序
           </h4><p>
-        <div id="_showpic_65ba330a" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_65ba330a" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_65ba330a" href=https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png class="hidepic" ></img>
         <script>
-            let fun65ba330a = function() {
-                document.getElementById('_pic_65ba330a').src = document.getElementById('_pic_65ba330a').getAttribute('href')
-                document.getElementById('_pic_65ba330a').classList = ['showpic']
-                document.getElementById('_showpic_65ba330a').removeEventListener('click', fun65ba330a)
-                document.getElementById('_showpic_65ba330a').style.display = 'none'
+            let imgself65ba330a = document.getElementById('_pic_65ba330a')
+            function isInViewPortOfTwo65ba330a () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself65ba330a.getBoundingClientRect() && imgself65ba330a.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_65ba330a').src = document.getElementById('_pic_65ba330a').getAttribute('href')
+                    document.getElementById('_pic_65ba330a').classList = ['showpic']
+                    document.getElementById('_showpic_65ba330a').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo65ba330a)
+                }
             }
-            document.getElementById('_showpic_65ba330a').addEventListener('click', fun65ba330a)
+            window.addEventListener('scroll', isInViewPortOfTwo65ba330a)
         </script>
     </p>
 <p>小端序就是反过来的, 字节头位于内存地址的高位, 而尾部位于低位.</p>
@@ -515,16 +525,21 @@
             </a>
             中端序
           </h4><p>中端序也称为是混合序, 其实就是像这样的:<br>
-        <div id="_showpic_482b1ae9" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_482b1ae9" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_482b1ae9" href=https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg class="hidepic" ></img>
         <script>
-            let fun482b1ae9 = function() {
-                document.getElementById('_pic_482b1ae9').src = document.getElementById('_pic_482b1ae9').getAttribute('href')
-                document.getElementById('_pic_482b1ae9').classList = ['showpic']
-                document.getElementById('_showpic_482b1ae9').removeEventListener('click', fun482b1ae9)
-                document.getElementById('_showpic_482b1ae9').style.display = 'none'
+            let imgself482b1ae9 = document.getElementById('_pic_482b1ae9')
+            function isInViewPortOfTwo482b1ae9 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself482b1ae9.getBoundingClientRect() && imgself482b1ae9.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_482b1ae9').src = document.getElementById('_pic_482b1ae9').getAttribute('href')
+                    document.getElementById('_pic_482b1ae9').classList = ['showpic']
+                    document.getElementById('_showpic_482b1ae9').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo482b1ae9)
+                }
             }
-            document.getElementById('_showpic_482b1ae9').addEventListener('click', fun482b1ae9)
+            window.addEventListener('scroll', isInViewPortOfTwo482b1ae9)
         </script>
     </p>
 <p>而具体是什么序, 取决于软件层面操作系统和硬件层面的CPU. 一般来说, 大部分的操作系统(NT, Linux)都是小端序的, 而且Intel X86架构的CPU也都是小端序的, 但例如Power PC这样的架构就是大端序的, 而且Mac OS X也是大端序的.</p>
@@ -549,16 +564,21 @@
             </a>
             UTF-8和本不应存在的BOM
           </h4><p>
-        <div id="_showpic_6a796d31" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_6a796d31" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_6a796d31" href=http://q4fo85yz7.bkt.gdipper.com/utf-8_web_growth.png class="hidepic" ></img>
         <script>
-            let fun6a796d31 = function() {
-                document.getElementById('_pic_6a796d31').src = document.getElementById('_pic_6a796d31').getAttribute('href')
-                document.getElementById('_pic_6a796d31').classList = ['showpic']
-                document.getElementById('_showpic_6a796d31').removeEventListener('click', fun6a796d31)
-                document.getElementById('_showpic_6a796d31').style.display = 'none'
+            let imgself6a796d31 = document.getElementById('_pic_6a796d31')
+            function isInViewPortOfTwo6a796d31 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself6a796d31.getBoundingClientRect() && imgself6a796d31.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_6a796d31').src = document.getElementById('_pic_6a796d31').getAttribute('href')
+                    document.getElementById('_pic_6a796d31').classList = ['showpic']
+                    document.getElementById('_showpic_6a796d31').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo6a796d31)
+                }
             }
-            document.getElementById('_showpic_6a796d31').addEventListener('click', fun6a796d31)
+            window.addEventListener('scroll', isInViewPortOfTwo6a796d31)
         </script>
     </p>
 <p>先来看一下UTF-8在前几年的增长势头(Web页面, 由Google统计).</p>

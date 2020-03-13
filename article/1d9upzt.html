@@ -194,16 +194,21 @@ private double distanceOfTwoPoint(Point a, Point b) {
 </li>
 <li><p>点数大于三时：首先<strong>划分</strong>集合S为SL和SR，使得SL中的每一个点位于SR中每一个点的左边，并且SL和SR中点数相同。分别在SL和SR中解决最近点对问题，得到DL和DR，分别表示SL和SR中的最近点对的距离。令d=min(DL,DR)。如果S中的最近点对(P1,P2)。P1、P2两点一个在SL和一个在SR中，那么P1和P2一定在以L为中心的间隙内，以L-d和L+d为界。 </p>
 <p> 
-        <div id="_showpic_ee1549c3" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_ee1549c3" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_ee1549c3" href=http://image.youyinnn.top/20190227202606.png class="hidepic" ></img>
         <script>
-            let funee1549c3 = function() {
-                document.getElementById('_pic_ee1549c3').src = document.getElementById('_pic_ee1549c3').getAttribute('href')
-                document.getElementById('_pic_ee1549c3').classList = ['showpic']
-                document.getElementById('_showpic_ee1549c3').removeEventListener('click', funee1549c3)
-                document.getElementById('_showpic_ee1549c3').style.display = 'none'
+            let imgselfee1549c3 = document.getElementById('_pic_ee1549c3')
+            function isInViewPortOfTwoee1549c3 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfee1549c3.getBoundingClientRect() && imgselfee1549c3.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_ee1549c3').src = document.getElementById('_pic_ee1549c3').getAttribute('href')
+                    document.getElementById('_pic_ee1549c3').classList = ['showpic']
+                    document.getElementById('_showpic_ee1549c3').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoee1549c3)
+                }
             }
-            document.getElementById('_showpic_ee1549c3').addEventListener('click', funee1549c3)
+            window.addEventListener('scroll', isInViewPortOfTwoee1549c3)
         </script>
     </p>
 </li>
