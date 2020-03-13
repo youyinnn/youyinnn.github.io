@@ -1,2 +1,2 @@
 
-var resourcesList = ["friendslink.js","cache-rte0ur.js"]
+var resourcesList = ["friendslink.js","cache-jisin7.js"]
