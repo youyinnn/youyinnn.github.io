@@ -15,7 +15,7 @@ $(function() {
         location = '/' + 'resume'
     })
     $('#egg').bind('click', function() {
-        location = '/' + '?xixi=haha'
+        location = '/' + 'img/egg'
     })
     $('#showmore').bind('click', function() {
         location = '/' + 'about'
