@@ -3,128 +3,6 @@ var searchtext
 var totalpages
 var nowpage = 1
 
-function render_md(text) {
-    rmclass(md, 'myhide')
-    adclass(md, 'myshow')
-    if (text.substring(0, 3) === '---') {
-        let endindex = text.indexOf('---', 3) + 3
-        let hexo_metadata = gethexofrontmatter(text)
-        hexo_metadata = yaml.load(hexo_metadata.replace(/\r\n/gm, '\n'))
-        window.articlecomment = hexo_metadata.comments === undefined ? true : hexo_metadata.comments
-        showhexometadata(hexo_metadata)
-        text = text.substring(endindex, text.length)
-    }
-    let cq = text.match(/{%.*cq.*%}/gm)
-    if (cq) {
-        for (let i = 0; i < cq.length; i += 2) {
-            let cqindex = text.search(cq[i]);
-            let endcqindex = text.search(cq[i + 1]);
-            let saying = text.substring(cqindex, endcqindex + 11)
-            let newsaying = '<div class="saying mb-4">' + text.substring(cqindex + cq[i].length + 2, endcqindex).replace(/\r\n|\r|\n/gm, '') + '</div>'
-            text = text.replace(saying, newsaying)
-        }
-    }
-    let cobs = text.match(/<cob.*\/>/g)
-    if (cobs !== null) {
-        cobs.forEach(cob => {
-            let cobtg = cob.substring(cob.indexOf('"', 0) + 1, cob.indexOf('"', cob.indexOf('"', 0) + 1))
-            text = text.replace(cob, '<span class="collbut" tg="#' + cobtg + '">点击展开</span>')
-        });
-    }
-    let cos = text.match(/<co .*>/g)
-    if (cos !== null) {
-        cos.forEach(co => {
-            let newco = co.replace('co', 'div class="mycoll"')
-            text = text.replace(co, newco)
-            text = text.replace('</co>', '</div><hr>')
-        });
-    }
-    let gifs = text.match(/!\[.*\]\(.*.gif\)/g)
-    if (gifs !== null) {
-        gifs.forEach(gif => {
-            let gifalt = gif.match(/\[.*\]/g)
-            gifalt = gifalt[0].substring(1, gifalt[0].length - 1);
-            let giflk = gif.match(/\(.*\)/g)
-            giflk = giflk[0].substring(1, giflk[0].length - 1);
-            let gifbut = '<button class="gifbtn stgt btn btn-dark" show="no" lk="' + giflk + '">查看或隐藏' + gifalt + '.gif</button>'
-            text = text.replace(gif, gifbut)
-        });
-    }
-    let katexmds = text.match(/\$\$.*\$\$/g)
-    if (katexmds !== null) {
-        katexmds.forEach(ktmd => {
-            let kt = ktmd.replace(/\$\$/gm, '')
-            let kthtml = katex.renderToString(kt, {
-                throwOnError: false
-            })
-            text = text.replace(ktmd, kthtml)
-        })
-    }
-    text = text.replace('<acob/>', '<span id="acob">全部展开</span>')
-    editormd.markdownToHTML('md', {
-        markdown: text,
-        htmlDecode: 'style,script',
-        tocm: true, // Using [TOCM]
-        tocContainer: '#sidetoc',
-        taskList: true,
-        // tex: true, // 默认不解析
-        flowChart: true, // 默认不解析
-        sequenceDiagram: true, // 默认不解析
-    });
-    $('#md').addClass('article')
-    let as = $('#md a')
-    for (let i = 0; i < as.length; i++) {
-        as[i].target = '_blank'
-    }
-    $('pre, pre code').each(function(i, block) {
-        hljs.highlightBlock(block)
-        hljs.lineNumbersBlock(block)
-    })
-    $('.reference-link').each(function() {
-        this.setAttribute('name', this.getAttribute('name').replace(/\s*$/g, ''))
-    })
-    $('.gifbtn').each(function() {
-        bindev(this, 'click', function() {
-            let noshow = this.getAttribute('show') === 'no'
-            if (noshow) {
-                $(this).after('<img id="' + this.innerText.substring(0, this.innerText.length - 4) + '" src="' + this.getAttribute('lk') + '"></img>')
-                this.setAttribute('show', 'yes')
-            } else {
-                $('#' + this.innerText.substring(0, this.innerText.length - 4)).remove()
-                this.setAttribute('show', 'no')
-            }
-        })
-    })
-    var $root = $('html, body')
-    $('.markdown-toc a').click(function() {
-        if ($(md).hasClass('panelup')) {
-            $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15
-            }, 600)
-        }
-        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
-            $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 48
-            }, 600)
-        }
-        if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
-            $root.animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substring(1, $.attr(this, 'href').length).replace(/\s*$/g, '') + '"]').offset().top - 15 - 96
-            }, 600)
-        }
-    })
-    $('.katex').parent().addClass('katexp')
-    $('thead').each(function() {
-        let trs = $(this).next().find('tr')
-        let trl = $(trs[0]).find('td').length
-        let lasttr = $(trs[trs.length - 1])
-        if (lasttr.find('td').length !== trl) {
-            lasttr.append(c('td'))
-        }
-    })
-    setimg()
-}
-
 function new_render_md() {
     $('#md').addClass('article')
     let as = $('#md a')
@@ -148,13 +26,23 @@ function new_render_md() {
     })
     let listhtml = ''
     for (el of $('h1, h2, h3, h4, h5, h6')) {
+        let transferred = el.childNodes[1].name
+            .split('_root-')[1]
+            .trim()
+            .replace(/>/gm, '&gt;')
+            .replace(/</gm, '&lt;')
+            .replace(/&/gm, '&amp;')
+            .replace(/"/gm, '&quot;')
+            .replace(/ /gm, '&nbsp;')
+            
         listhtml += `
             <div class="toc-${el.tagName.toLowerCase()}">
                 <a href="${el.childNodes[1].name}">
-                    ${el.childNodes[1].name.split('_root-')[1].trim()}
+                    ${transferred}
                 </a>
             </div>`
     }
+    console.log(listhtml)
     $('#sidetoc').append(listhtml)
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
