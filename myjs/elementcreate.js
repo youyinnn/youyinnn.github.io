@@ -6,9 +6,9 @@ function createarticlecard(item, pagebelong) {
     let articlemore = c('a')
     adclass(articlecard, 'articlecard')
     adclass(articletitle, 'articlecardtitle')
-    adclass(articletime, 'articlecardtime')
+    adclass(articletime, 'articlecardtime unselectable')
     adclass(articleshortmsg, 'articleshortmsg')
-    adclass(articlemore, 'articlemore')
+    adclass(articlemore, 'articlemore unselectable')
     articletitle.innerHTML = item.title
     articletitle.abbrlink = item.abbrlink
     articletitle.href = '/article/' + articletitle.abbrlink + '.html'
