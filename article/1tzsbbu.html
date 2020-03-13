@@ -144,7 +144,19 @@
 </ul>
 <p>如果当前中间件不结束该次请求响应周期，它必须调用next方法，将控制传递到下一个中间件，否则请求会被挂起。</p>
 <p>下图展示了中间件功能的基本元素：</p>
-<p><img src="https://image.youyinnn.top/20191003170602.png" alt=""></p>
+<p>
+        <div id="_showpic_5d02eacc" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_5d02eacc" href=https://image.youyinnn.top/20191003170602.png class="hidepic" ></img>
+        <script>
+            let fun5d02eacc = function() {
+                document.getElementById('_pic_5d02eacc').src = document.getElementById('_pic_5d02eacc').getAttribute('href')
+                document.getElementById('_pic_5d02eacc').classList = ['showpic']
+                document.getElementById('_showpic_5d02eacc').removeEventListener('click', fun5d02eacc)
+                document.getElementById('_showpic_5d02eacc').style.display = 'none'
+            }
+            document.getElementById('_showpic_5d02eacc').addEventListener('click', fun5d02eacc)
+        </script>
+    </p>
 
           <h3>
             <a name="_root-Example:  Middleware function myLogger" class="reference-link" target="_blank">

@@ -148,7 +148,19 @@
             Choose the right type of mount
           </h3><p>No matter which type of mount you choose to use, the data looks the same from within the container. It is exposed as either a directory or an individual file in the container’s filesystem.</p>
 <p>An easy way to visualize the difference among volumes, bind mounts, and <code>tmpfs</code> mounts is to think about where the data lives on the Docker host.</p>
-<p><img src="https://docs.docker.com/storage/images/types-of-mounts.png" alt="types of mounts and where they live on the Docker host"></p>
+<p>
+        <div id="_showpic_cec40ad1" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_cec40ad1" href=https://docs.docker.com/storage/images/types-of-mounts.png class="hidepic" ></img>
+        <script>
+            let funcec40ad1 = function() {
+                document.getElementById('_pic_cec40ad1').src = document.getElementById('_pic_cec40ad1').getAttribute('href')
+                document.getElementById('_pic_cec40ad1').classList = ['showpic']
+                document.getElementById('_showpic_cec40ad1').removeEventListener('click', funcec40ad1)
+                document.getElementById('_showpic_cec40ad1').style.display = 'none'
+            }
+            document.getElementById('_showpic_cec40ad1').addEventListener('click', funcec40ad1)
+        </script>
+    </p>
 <ul>
 <li><p><strong>Volumes</strong> are stored in a part of the host filesystem which is <em>managed by Docker</em> (<code>/var/lib/docker/volumes/</code> on Linux). Non-Docker processes should not modify this part of the filesystem. Volumes are the best way to persist data in Docker.</p>
 <blockquote>

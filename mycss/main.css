@@ -1214,6 +1214,7 @@ summary {
   user-select: none;
   cursor: pointer;
   display: inline-block;
+  color: #22a67b;
 }
 
 .showpicbtn:hover {
@@ -1226,4 +1227,23 @@ summary {
 
 .markdown-body img{
   margin-top: 1rem;
+}
+
+.article h1 {
+  font-size: 24px !important;
+}
+.article h2 {
+  font-size: 22px !important;
+}
+
+.article h3 {
+  font-size: 20px !important;
+}
+
+.article h4 {
+  font-size: 18px !important;
+}
+
+.article h5 {
+  font-size: 16px !important;
 }

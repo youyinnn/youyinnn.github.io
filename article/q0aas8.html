@@ -221,7 +221,19 @@
               <span class="header-link"></span>
             </a>
             System Design Map
-          </h4><p><img src="https://image.youyinnn.top/20181102231633.png" alt="map"></p>
+          </h4><p>
+        <div id="_showpic_396486ee" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_396486ee" href=https://image.youyinnn.top/20181102231633.png class="hidepic" ></img>
+        <script>
+            let fun396486ee = function() {
+                document.getElementById('_pic_396486ee').src = document.getElementById('_pic_396486ee').getAttribute('href')
+                document.getElementById('_pic_396486ee').classList = ['showpic']
+                document.getElementById('_showpic_396486ee').removeEventListener('click', fun396486ee)
+                document.getElementById('_showpic_396486ee').style.display = 'none'
+            }
+            document.getElementById('_showpic_396486ee').addEventListener('click', fun396486ee)
+        </script>
+    </p>
 <p>As the map show，the green arrows are request/response/msg，we will trace every msg from Kafka Producers/Consumers.</p>
 
     </div>
