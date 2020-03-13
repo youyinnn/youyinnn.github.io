@@ -473,7 +473,19 @@
               <span class="header-link"></span>
             </a>
             大端序
-          </h4><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.png" alt="大端序"></p>
+          </h4><p>
+        <div id="_showpic_4c007a8a" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_4c007a8a" href=https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.png class="hidepic" ></img>
+        <script>
+            let fun4c007a8a = function() {
+                document.getElementById('_pic_4c007a8a').src = document.getElementById('_pic_4c007a8a').getAttribute('href')
+                document.getElementById('_pic_4c007a8a').classList = ['showpic']
+                document.getElementById('_showpic_4c007a8a').removeEventListener('click', fun4c007a8a)
+                document.getElementById('_showpic_4c007a8a').style.display = 'none'
+            }
+            document.getElementById('_showpic_4c007a8a').addEventListener('click', fun4c007a8a)
+        </script>
+    </p>
 <p>看图就觉得很清晰, 而且很符合正常的读写习惯, 也即是按照顺序把字节填充进去.</p>
 
           <h4>
@@ -481,7 +493,19 @@
               <span class="header-link"></span>
             </a>
             小端序
-          </h4><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png" alt="小端序"></p>
+          </h4><p>
+        <div id="_showpic_65ba330a" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_65ba330a" href=https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png class="hidepic" ></img>
+        <script>
+            let fun65ba330a = function() {
+                document.getElementById('_pic_65ba330a').src = document.getElementById('_pic_65ba330a').getAttribute('href')
+                document.getElementById('_pic_65ba330a').classList = ['showpic']
+                document.getElementById('_showpic_65ba330a').removeEventListener('click', fun65ba330a)
+                document.getElementById('_showpic_65ba330a').style.display = 'none'
+            }
+            document.getElementById('_showpic_65ba330a').addEventListener('click', fun65ba330a)
+        </script>
+    </p>
 <p>小端序就是反过来的, 字节头位于内存地址的高位, 而尾部位于低位.</p>
 
           <h4>
@@ -489,7 +513,19 @@
               <span class="header-link"></span>
             </a>
             中端序
-          </h4><p>中端序也称为是混合序, 其实就是像这样的:<br><img src="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg" alt="混合序"></p>
+          </h4><p>中端序也称为是混合序, 其实就是像这样的:<br>
+        <div id="_showpic_482b1ae9" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_482b1ae9" href=https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg class="hidepic" ></img>
+        <script>
+            let fun482b1ae9 = function() {
+                document.getElementById('_pic_482b1ae9').src = document.getElementById('_pic_482b1ae9').getAttribute('href')
+                document.getElementById('_pic_482b1ae9').classList = ['showpic']
+                document.getElementById('_showpic_482b1ae9').removeEventListener('click', fun482b1ae9)
+                document.getElementById('_showpic_482b1ae9').style.display = 'none'
+            }
+            document.getElementById('_showpic_482b1ae9').addEventListener('click', fun482b1ae9)
+        </script>
+    </p>
 <p>而具体是什么序, 取决于软件层面操作系统和硬件层面的CPU. 一般来说, 大部分的操作系统(NT, Linux)都是小端序的, 而且Intel X86架构的CPU也都是小端序的, 但例如Power PC这样的架构就是大端序的, 而且Mac OS X也是大端序的.</p>
 <p>这样的话, 就很麻烦, 尤其是对于那些设计系统的工程师, 以及一些做跨平台, 异构应用的编写人员就不可避免的考虑到字节序的问题.</p>
 
@@ -511,7 +547,19 @@
               <span class="header-link"></span>
             </a>
             UTF-8和本不应存在的BOM
-          </h4><p><img src="http://q4fo85yz7.bkt.gdipper.com/utf-8_web_growth.png" alt="utf-8_web_growth.png"></p>
+          </h4><p>
+        <div id="_showpic_6a796d31" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_6a796d31" href=http://q4fo85yz7.bkt.gdipper.com/utf-8_web_growth.png class="hidepic" ></img>
+        <script>
+            let fun6a796d31 = function() {
+                document.getElementById('_pic_6a796d31').src = document.getElementById('_pic_6a796d31').getAttribute('href')
+                document.getElementById('_pic_6a796d31').classList = ['showpic']
+                document.getElementById('_showpic_6a796d31').removeEventListener('click', fun6a796d31)
+                document.getElementById('_showpic_6a796d31').style.display = 'none'
+            }
+            document.getElementById('_showpic_6a796d31').addEventListener('click', fun6a796d31)
+        </script>
+    </p>
 <p>先来看一下UTF-8在前几年的增长势头(Web页面, 由Google统计).</p>
 <p>UTF-8在目前仍然是最广泛使用的具体编码方案, 但他却不是UTF最早的, 最早的是UTF-16. 最标准的称呼方法应该是<code>UTF-8</code>, 在一些不区分大小写的语言中, 例如: <code>HTML</code>, <code>CSS</code>, <code>XML</code>等, 都可使用<code>utf-8</code>这样的说法. 但是<code>utf8</code>或者<code>UTF8</code>这样缺失连字符的说法不被认为是正确的, 一些现代的浏览器或者是一些相关的标准(<code>HTML5</code>比如) 也可以有效的识别 但最好还是使用标准名称.</p>
 <p>接下来步入正题, 我们来说说UTF-8的一些组成和特性.</p>

@@ -293,7 +293,19 @@ public int[] twoSum(int[] nums, int target) {
 <p><strong>Example:</strong></p>
 <pre><code>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
 Output: 7 -&gt; 0 -&gt; 8
-Explanation: 342 + 465 = 807.</code></pre><p><img src="https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg" alt=""></p>
+Explanation: 342 + 465 = 807.</code></pre><p>
+        <div id="_showpic_92b068b7" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_92b068b7" href=https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg class="hidepic" ></img>
+        <script>
+            let fun92b068b7 = function() {
+                document.getElementById('_pic_92b068b7').src = document.getElementById('_pic_92b068b7').getAttribute('href')
+                document.getElementById('_pic_92b068b7').classList = ['showpic']
+                document.getElementById('_showpic_92b068b7').removeEventListener('click', fun92b068b7)
+                document.getElementById('_showpic_92b068b7').style.display = 'none'
+            }
+            document.getElementById('_showpic_92b068b7').addEventListener('click', fun92b068b7)
+        </script>
+    </p>
 <p>这题没什么tricky的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的solution：</p>
 <pre><code class="language-java">// 由第三条新的链和它的计算指针完成
 public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

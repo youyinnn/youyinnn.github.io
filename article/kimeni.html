@@ -311,7 +311,19 @@ menu.append(new MenuItem({
 <p>强烈推荐task列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
 </blockquote>
 <p><strong>Internet Explorer 的 任务:</strong></p>
-<p><img src="https://image.youyinnn.top/20191014094639.png" alt=""></p>
+<p>
+        <div id="_showpic_bd924ec9" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_bd924ec9" href=https://image.youyinnn.top/20191014094639.png class="hidepic" ></img>
+        <script>
+            let funbd924ec9 = function() {
+                document.getElementById('_pic_bd924ec9').src = document.getElementById('_pic_bd924ec9').getAttribute('href')
+                document.getElementById('_pic_bd924ec9').classList = ['showpic']
+                document.getElementById('_showpic_bd924ec9').removeEventListener('click', funbd924ec9)
+                document.getElementById('_showpic_bd924ec9').style.display = 'none'
+            }
+            document.getElementById('_showpic_bd924ec9').addEventListener('click', funbd924ec9)
+        </script>
+    </p>
 <p>不同于 macOS 的dock菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>
 <p>你可以使用 <a href="https://electronjs.org/docs/api/app#appsetusertaskstasks-windows">app.setUserTasks</a> API 来设置你的应用中的用户任务：</p>
 <pre><code class="language-javascript">const { app } = require(&#39;electron&#39;)

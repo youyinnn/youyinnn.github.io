@@ -346,7 +346,19 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
 <p>There are five possible container IDs all cycling by randomly, demonstrating the load-balancing.</p>
 <p><strong>The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh</strong>. </p>
 <p>This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called <code>my-web</code> published at port <code>8080</code> on a three-node swarm would look:</p>
-<p><img src="https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png" alt="ingress-routing-mesh"></p>
+<p>
+        <div id="_showpic_417af7" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_417af7" href=https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png class="hidepic" ></img>
+        <script>
+            let fun417af7 = function() {
+                document.getElementById('_pic_417af7').src = document.getElementById('_pic_417af7').getAttribute('href')
+                document.getElementById('_pic_417af7').classList = ['showpic']
+                document.getElementById('_showpic_417af7').removeEventListener('click', fun417af7)
+                document.getElementById('_showpic_417af7').style.display = 'none'
+            }
+            document.getElementById('_showpic_417af7').addEventListener('click', fun417af7)
+        </script>
+    </p>
 
           <h3>
             <a name="_root-Enough for now" class="reference-link" target="_blank">

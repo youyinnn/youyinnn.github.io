@@ -142,7 +142,19 @@
 <li>New volumes can have their content pre-populated by a container.</li>
 </ul>
 <p>In addition, volumes are often a better choice than persisting data in a container’s writable layer, because a volume does not increase the size of the containers using it, and the volume’s contents exist outside the lifecycle of a given container.</p>
-<p><img src="https://docs.docker.com/storage/images/types-of-mounts-volume.png" alt="volumes on the Docker host"></p>
+<p>
+        <div id="_showpic_2f5242e" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_2f5242e" href=https://docs.docker.com/storage/images/types-of-mounts-volume.png class="hidepic" ></img>
+        <script>
+            let fun2f5242e = function() {
+                document.getElementById('_pic_2f5242e').src = document.getElementById('_pic_2f5242e').getAttribute('href')
+                document.getElementById('_pic_2f5242e').classList = ['showpic']
+                document.getElementById('_showpic_2f5242e').removeEventListener('click', fun2f5242e)
+                document.getElementById('_showpic_2f5242e').style.display = 'none'
+            }
+            document.getElementById('_showpic_2f5242e').addEventListener('click', fun2f5242e)
+        </script>
+    </p>
 <p>If your container generates non-persistent state data, consider using a <a href="https://docs.docker.com/storage/tmpfs/">tmpfs mount</a> to avoid storing the data anywhere permanently, and to increase the container’s performance by avoiding writing into the container’s writable layer.</p>
 <p>Volumes use <code>rprivate</code> bind propagation, and bind propagation is not configurable for volumes.</p>
 </blockquote>

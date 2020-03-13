@@ -93,6 +93,25 @@ emoji.replace_mode = 'unified'
 emoji.allow_native = true
 
 // iterating md files
+var originalImgFunc = renderer.image
+
+function imgclick(href, title, text) {
+    let picId = crc32(href).toString(16)
+    return `
+        <div id="_showpic_${picId}" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
+        <script>
+            let fun${picId} = function() {
+                document.getElementById('_pic_${picId}').src = document.getElementById('_pic_${picId}').getAttribute('href')
+                document.getElementById('_pic_${picId}').classList = ['showpic']
+                document.getElementById('_showpic_${picId}').removeEventListener('click', fun${picId})
+                document.getElementById('_showpic_${picId}').style.display = 'none'
+            }
+            document.getElementById('_showpic_${picId}').addEventListener('click', fun${picId})
+        </script>
+    `
+}
+renderer.image = imgclick
 for (pname of postsrs) {
     let abbrlink = crc32(pname).toString(36)
     md2html(
@@ -124,6 +143,7 @@ for (pname of postsrs) {
         }
     )
 }
+renderer.image = originalImgFunc
 
 // sort metadata with date
 articlemetadata = articlemetadata.sort((a, b) => {
@@ -210,23 +230,8 @@ md2html(
     path.join(__dirname, '..', 'resume', 'index.html')
 )
 
-var originalImgFunc = renderer.image
-
-renderer.image = function (href, title, text) {
-    let picId = crc32(href).toString(16)
-    return `
-        <div id="_showpic_${picId}" class="showpicbtn">点击显示图片 >></div>
-        <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
-        <script>
-            document.getElementById('_showpic_${picId}').addEventListener('click', function() {
-                document.getElementById('_pic_${picId}').src = 
-                document.getElementById('_pic_${picId}').getAttribute('href')
-                document.getElementById('_pic_${picId}').classList = ['showpic']
-            })
-        </script>
-    `
-}
 // scripts
+renderer.image = imgclick
 md2html(
     path.join(websrcPath, 'scripts.md'),
     path.join(__dirname, '..', 'scripts', 'index.html')

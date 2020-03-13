@@ -191,7 +191,19 @@
               <span class="header-link"></span>
             </a>
             JMM内存模型抽象结构
-          </h4><p><img src="https://image.youyinnn.top/20180721202202.png" alt=""></p>
+          </h4><p>
+        <div id="_showpic_89ee04f0" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_89ee04f0" href=https://image.youyinnn.top/20180721202202.png class="hidepic" ></img>
+        <script>
+            let fun89ee04f0 = function() {
+                document.getElementById('_pic_89ee04f0').src = document.getElementById('_pic_89ee04f0').getAttribute('href')
+                document.getElementById('_pic_89ee04f0').classList = ['showpic']
+                document.getElementById('_showpic_89ee04f0').removeEventListener('click', fun89ee04f0)
+                document.getElementById('_showpic_89ee04f0').style.display = 'none'
+            }
+            document.getElementById('_showpic_89ee04f0').addEventListener('click', fun89ee04f0)
+        </script>
+    </p>
 <p>线程之间的通信由JMM控制，JMM控制之内从与每个线程的本地内存之间的交互，来为Java程序员提供内存可见性保证</p>
 <p>这里每个线程之间的本地内存在虚拟机中就是每个线程自己的栈空间</p>
 <p>也就是说：<strong>JMM决定一个线程对共享变量的写入在什么时候对另一个线程可见！</strong></p>
@@ -293,7 +305,19 @@
 </ul>
 <p>这在计算机领域中是随处可见的矛盾，既要方便安全，又要性能，于是JMM设计的核心目标就是找到一个平衡点，既要有强有力的规则来保证内存可见性，又要保证处理器可以大展手脚</p>
 <p>于是就有了<strong>Happens Before规则</strong></p>
-<p><img src="https://image.youyinnn.top/20180721222909.png" alt=""></p>
+<p>
+        <div id="_showpic_d2cf499d" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_d2cf499d" href=https://image.youyinnn.top/20180721222909.png class="hidepic" ></img>
+        <script>
+            let fund2cf499d = function() {
+                document.getElementById('_pic_d2cf499d').src = document.getElementById('_pic_d2cf499d').getAttribute('href')
+                document.getElementById('_pic_d2cf499d').classList = ['showpic']
+                document.getElementById('_showpic_d2cf499d').removeEventListener('click', fund2cf499d)
+                document.getElementById('_showpic_d2cf499d').style.display = 'none'
+            }
+            document.getElementById('_showpic_d2cf499d').addEventListener('click', fund2cf499d)
+        </script>
+    </p>
 <p>可以看到，JMM将重排序情况分为：会改变结果的排序、不会改变结果的排序</p>
 <p>对于这两种情况，JMM也有不同的策略：</p>
 <ul>
@@ -486,7 +510,19 @@ class V{
           </h6><blockquote>
 <p>当写一个volatile变的时候，JMM会把该线程对应的本地内存中的共享比变量刷新到主内存。</p>
 </blockquote>
-<p><img src="https://image.youyinnn.top/20180722220148.png" alt=""></p>
+<p>
+        <div id="_showpic_9c160d20" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_9c160d20" href=https://image.youyinnn.top/20180722220148.png class="hidepic" ></img>
+        <script>
+            let fun9c160d20 = function() {
+                document.getElementById('_pic_9c160d20').src = document.getElementById('_pic_9c160d20').getAttribute('href')
+                document.getElementById('_pic_9c160d20').classList = ['showpic']
+                document.getElementById('_showpic_9c160d20').removeEventListener('click', fun9c160d20)
+                document.getElementById('_showpic_9c160d20').style.display = 'none'
+            }
+            document.getElementById('_showpic_9c160d20').addEventListener('click', fun9c160d20)
+        </script>
+    </p>
 <p>线程A在写flag变量之后，本地内存A中被线程更新过的两个共享变量被更新到主内存中。此时本地内存A和主内存中的变量的值是一致的。</p>
 
           <h6>
@@ -497,7 +533,19 @@ class V{
           </h6><blockquote>
 <p>当读一个volatile变量的时候，JMM会把该线程对应的本地内存置为无效，然后从主内存中读取共享变量</p>
 </blockquote>
-<p><img src="https://image.youyinnn.top/20180722222721.png" alt=""></p>
+<p>
+        <div id="_showpic_66aabe0b" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_66aabe0b" href=https://image.youyinnn.top/20180722222721.png class="hidepic" ></img>
+        <script>
+            let fun66aabe0b = function() {
+                document.getElementById('_pic_66aabe0b').src = document.getElementById('_pic_66aabe0b').getAttribute('href')
+                document.getElementById('_pic_66aabe0b').classList = ['showpic']
+                document.getElementById('_showpic_66aabe0b').removeEventListener('click', fun66aabe0b)
+                document.getElementById('_showpic_66aabe0b').style.display = 'none'
+            }
+            document.getElementById('_showpic_66aabe0b').addEventListener('click', fun66aabe0b)
+        </script>
+    </p>
 <p>如图，在读flag之后，本地内存B中的值已经无效了，这时线程B必须从主内存中读取共享变量，这样就完成了内存可见性保证。</p>
 <p>现在对volatile写和volatile读的内存语义做个总结：</p>
 <ol>

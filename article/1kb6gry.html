@@ -147,12 +147,36 @@
               <span class="header-link"></span>
             </a>
             微服务简介
-          </h4><p>这次参加JavaOne2015最大的困难就是听Microservice相关的session，无论内容多么水，只要题目带microservice，必定报不上名，可见Microservice有多火。最喜欢其中一页。关于这个典故，可以参考<a href="%3Chttp://knowyourmeme.com/memes/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means">this</a>，此图适用于一切高大上的名字——技术有SOA，Agile，CLOUD，DevOps等等，古代有道，气，八卦等等。此类名词的最大特点就是 <strong>一解释就懂，一问就不知，一讨论就打架。</strong><br><img src="http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png" alt="screenshot"></p>
+          </h4><p>这次参加JavaOne2015最大的困难就是听Microservice相关的session，无论内容多么水，只要题目带microservice，必定报不上名，可见Microservice有多火。最喜欢其中一页。关于这个典故，可以参考<a href="%3Chttp://knowyourmeme.com/memes/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means">this</a>，此图适用于一切高大上的名字——技术有SOA，Agile，CLOUD，DevOps等等，古代有道，气，八卦等等。此类名词的最大特点就是 <strong>一解释就懂，一问就不知，一讨论就打架。</strong><br>
+        <div id="_showpic_f2ac91f" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_f2ac91f" href=http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png class="hidepic" ></img>
+        <script>
+            let funf2ac91f = function() {
+                document.getElementById('_pic_f2ac91f').src = document.getElementById('_pic_f2ac91f').getAttribute('href')
+                document.getElementById('_pic_f2ac91f').classList = ['showpic']
+                document.getElementById('_showpic_f2ac91f').removeEventListener('click', funf2ac91f)
+                document.getElementById('_showpic_f2ac91f').style.display = 'none'
+            }
+            document.getElementById('_showpic_f2ac91f').addEventListener('click', funf2ac91f)
+        </script>
+    </p>
 <p>微服务的流行，Martin功不可没，这老头也是个奇人，特别擅长抽象归纳和制造概念，我觉的这就是最牛逼的markting啊，感觉这也是目前国人欠缺的能力。</p>
 <blockquote>
 <p>Martin Fowler是国际著名的OO专家，敏捷开发方法的创始人之一，现为ThoughtWorks公司的首席科学家.福勒（Martin Fowler），在面向对象分析设计、UML、模式、软件开发方法学、XP、重构等方面，都是世界顶级的专家，现为Thought Works公司的首席科学家。Thought Works是一家从事企业应用开发和集成的公司。早在20世纪80年代，Fowler就是使用对象技术构建多层企业应用的倡导者，他著有几本经典书籍：《企业应用架构模式》、《UML精粹》和《重构》等。—— 百度百科</p>
 </blockquote>
-<p>先来看看传统的web开发方式，通过对比比较容易理解什么是Microservice Architecture。和Microservice相对应的，这种方式一般被称为Monolithic（比较难传神的翻译）。所有的功能打包在一个WAR包里，基本没有外部依赖（除了容器），部署在一个JEE容器（Tomcat，JBoss，WebLogic）里，包含了DO/DAO，Service，UI等所有逻辑。<br><img src="http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png" alt="screenshot"></p>
+<p>先来看看传统的web开发方式，通过对比比较容易理解什么是Microservice Architecture。和Microservice相对应的，这种方式一般被称为Monolithic（比较难传神的翻译）。所有的功能打包在一个WAR包里，基本没有外部依赖（除了容器），部署在一个JEE容器（Tomcat，JBoss，WebLogic）里，包含了DO/DAO，Service，UI等所有逻辑。<br>
+        <div id="_showpic_e485df0a" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_e485df0a" href=http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png class="hidepic" ></img>
+        <script>
+            let fune485df0a = function() {
+                document.getElementById('_pic_e485df0a').src = document.getElementById('_pic_e485df0a').getAttribute('href')
+                document.getElementById('_pic_e485df0a').classList = ['showpic']
+                document.getElementById('_showpic_e485df0a').removeEventListener('click', fune485df0a)
+                document.getElementById('_showpic_e485df0a').style.display = 'none'
+            }
+            document.getElementById('_showpic_e485df0a').addEventListener('click', fune485df0a)
+        </script>
+    </p>
 <p>Monolithic比较适合小项目，优点是：</p>
 <ul>
 <li>开发简单直接，集中式管理</li>
@@ -167,8 +191,32 @@
 <li>稳定性不高：一个微不足道的小问题，可以导致整个应用挂掉</li>
 <li>扩展性不够：无法满足高并发情况下的业务需求</li>
 </ul>
-<p>所以，现在主流的设计一般会采用Microservice Architecture，就是基于微服务的架构。简单来说， <strong>微服务的目的是有效的拆分应用，实现敏捷开发和部署</strong> 。<br><img src="http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png" alt="screenshot"></p>
-<p>用《The art of scalability》一书里提到的scale cube比较容易理解如何拆分。你看，我们叫分库分表，别人总结成了scale cube，这就是抽象的能力啊，把复杂的东西用最简单的概念解释和总结。X轴代表运行多个负载均衡器之后运行的实例，Y轴代表将应用进一步分解为微服务（分库），数据量大时，还可以用Z轴将服务按数据分区（分表）<br><img src="http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png" alt="screenshot"></p>
+<p>所以，现在主流的设计一般会采用Microservice Architecture，就是基于微服务的架构。简单来说， <strong>微服务的目的是有效的拆分应用，实现敏捷开发和部署</strong> 。<br>
+        <div id="_showpic_15717d74" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_15717d74" href=http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png class="hidepic" ></img>
+        <script>
+            let fun15717d74 = function() {
+                document.getElementById('_pic_15717d74').src = document.getElementById('_pic_15717d74').getAttribute('href')
+                document.getElementById('_pic_15717d74').classList = ['showpic']
+                document.getElementById('_showpic_15717d74').removeEventListener('click', fun15717d74)
+                document.getElementById('_showpic_15717d74').style.display = 'none'
+            }
+            document.getElementById('_showpic_15717d74').addEventListener('click', fun15717d74)
+        </script>
+    </p>
+<p>用《The art of scalability》一书里提到的scale cube比较容易理解如何拆分。你看，我们叫分库分表，别人总结成了scale cube，这就是抽象的能力啊，把复杂的东西用最简单的概念解释和总结。X轴代表运行多个负载均衡器之后运行的实例，Y轴代表将应用进一步分解为微服务（分库），数据量大时，还可以用Z轴将服务按数据分区（分表）<br>
+        <div id="_showpic_5110231e" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_5110231e" href=http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png class="hidepic" ></img>
+        <script>
+            let fun5110231e = function() {
+                document.getElementById('_pic_5110231e').src = document.getElementById('_pic_5110231e').getAttribute('href')
+                document.getElementById('_pic_5110231e').classList = ['showpic']
+                document.getElementById('_showpic_5110231e').removeEventListener('click', fun5110231e)
+                document.getElementById('_showpic_5110231e').style.display = 'none'
+            }
+            document.getElementById('_showpic_5110231e').addEventListener('click', fun5110231e)
+        </script>
+    </p>
 
           <h4>
             <a name="_root-微服务的具体特征" class="reference-link" target="_blank">
@@ -232,7 +280,19 @@
 <li>提供安全，过滤，流控等API管理功能</li>
 </ul>
 <p>我的理解其实这个API Gateway可以有很多广义的实现办法，可以是一个软硬一体的盒子，也可以是一个简单的MVC框架，甚至是一个Node.js的服务端。他们最重要的作用是为前台（通常是移动应用）提供后台服务的聚合，提供一个统一的服务出口，解除他们之间的耦合，不过API Gateway也有可能成为单点故障点或者性能的瓶颈。</p>
-<p>一般用过Taobao Open Platform的就能很容易的体会，TAO就是这个API Gateway。<br><img src="http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png" alt="screenshot"></p>
+<p>一般用过Taobao Open Platform的就能很容易的体会，TAO就是这个API Gateway。<br>
+        <div id="_showpic_6ff35764" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_6ff35764" href=http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png class="hidepic" ></img>
+        <script>
+            let fun6ff35764 = function() {
+                document.getElementById('_pic_6ff35764').src = document.getElementById('_pic_6ff35764').getAttribute('href')
+                document.getElementById('_pic_6ff35764').classList = ['showpic']
+                document.getElementById('_showpic_6ff35764').removeEventListener('click', fun6ff35764)
+                document.getElementById('_showpic_6ff35764').style.display = 'none'
+            }
+            document.getElementById('_showpic_6ff35764').addEventListener('click', fun6ff35764)
+        </script>
+    </p>
 
           <h4>
             <a name="_root-服务之间如何通信？" class="reference-link" target="_blank">
@@ -248,7 +308,19 @@
 </li>
 <li>异步消息调用(Kafka, Notify, MetaQ)</li>
 </ul>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png" alt="screenshot"></p>
+<p>
+        <div id="_showpic_25f8a8ed" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_25f8a8ed" href=http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png class="hidepic" ></img>
+        <script>
+            let fun25f8a8ed = function() {
+                document.getElementById('_pic_25f8a8ed').src = document.getElementById('_pic_25f8a8ed').getAttribute('href')
+                document.getElementById('_pic_25f8a8ed').classList = ['showpic']
+                document.getElementById('_showpic_25f8a8ed').removeEventListener('click', fun25f8a8ed)
+                document.getElementById('_showpic_25f8a8ed').style.display = 'none'
+            }
+            document.getElementById('_showpic_25f8a8ed').addEventListener('click', fun25f8a8ed)
+        </script>
+    </p>
 <p>一般同步调用比较简单，一致性强，但是容易出调用问题，性能体验上也会差些，特别是调用层次多的时候。RESTful和RPC的比较也是一个很有意思的话题。一般REST基于HTTP，更容易实现，更容易被接受，服务端实现技术也更灵活些，各个语言都能支持，同时能跨客户端，对客户端没有特殊的要求，只要封装了HTTP的SDK就能调用，所以相对使用的广一些。RPC也有自己的优点，传输协议更高效，安全更可控，特别在一个公司内部，如果有统一个的开发规范和统一的服务框架时，他的开发效率优势更明显些。就看各自的技术积累实际条件，自己的选择了。</p>
 <p>而异步消息的方式在分布式系统中有特别广泛的应用，他既能减低调用服务之间的耦合，又能成为调用之间的缓冲，确保消息积压不会冲垮被调用方，同时能保证调用方的服务体验，继续干自己该干的活，不至于被后台性能拖慢。不过需要付出的代价是一致性的减弱，需要接受数据最终一致性；还有就是后台服务一般要实现幂等性，因为消息发送出于性能的考虑一般会有重复（保证消息的被收到且仅收到一次对性能是很大的考验）；最后就是必须引入一个独立的broker，如果公司内部没有技术积累，对broker分布式管理也是一个很大的挑战。</p>
 
@@ -262,7 +334,19 @@
 <li>客户端做：优点是架构简单，扩展灵活，只对服务注册器依赖。缺点是客户端要维护所有调用服务的地址，有技术难度，一般大公司都有成熟的内部框架支持，比如Dubbo。</li>
 <li>服务端做：优点是简单，所有服务对于前台调用方透明，一般在小公司在云服务上部署的应用采用的比较多。</li>
 </ul>
-<p><img src="http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png" alt="screenshot"></p>
+<p>
+        <div id="_showpic_a9f83a6d" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_a9f83a6d" href=http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png class="hidepic" ></img>
+        <script>
+            let funa9f83a6d = function() {
+                document.getElementById('_pic_a9f83a6d').src = document.getElementById('_pic_a9f83a6d').getAttribute('href')
+                document.getElementById('_pic_a9f83a6d').classList = ['showpic']
+                document.getElementById('_showpic_a9f83a6d').removeEventListener('click', funa9f83a6d)
+                document.getElementById('_showpic_a9f83a6d').style.display = 'none'
+            }
+            document.getElementById('_showpic_a9f83a6d').addEventListener('click', funa9f83a6d)
+        </script>
+    </p>
 
           <h4>
             <a name="_root-这么多服务，服务挂了怎么办？" class="reference-link" target="_blank">
@@ -277,7 +361,19 @@
 <li>负载均衡</li>
 <li>降级（本地缓存）</li>
 </ul>
-<p>这些方法基本上都很明确通用，就不详细说明了。比如Netflix的Hystrix：<a href="https://github.com/Netflix/Hystrix">https://github.com/Netflix/Hystrix</a><br><img src="http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png" alt="screenshot"></p>
+<p>这些方法基本上都很明确通用，就不详细说明了。比如Netflix的Hystrix：<a href="https://github.com/Netflix/Hystrix">https://github.com/Netflix/Hystrix</a><br>
+        <div id="_showpic_3c0d3e96" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_3c0d3e96" href=http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png class="hidepic" ></img>
+        <script>
+            let fun3c0d3e96 = function() {
+                document.getElementById('_pic_3c0d3e96').src = document.getElementById('_pic_3c0d3e96').getAttribute('href')
+                document.getElementById('_pic_3c0d3e96').classList = ['showpic']
+                document.getElementById('_showpic_3c0d3e96').removeEventListener('click', fun3c0d3e96)
+                document.getElementById('_showpic_3c0d3e96').style.display = 'none'
+            }
+            document.getElementById('_showpic_3c0d3e96').addEventListener('click', fun3c0d3e96)
+        </script>
+    </p>
 
           <h4>
             <a name="_root-WHY - 微服务的应用" class="reference-link" target="_blank">
@@ -293,7 +389,19 @@
 <li>服务部署</li>
 <li>数据调用</li>
 </ul>
-<p><img src="http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png" alt="screenshot"></p>
+<p>
+        <div id="_showpic_1b36efdb" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_1b36efdb" href=http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png class="hidepic" ></img>
+        <script>
+            let fun1b36efdb = function() {
+                document.getElementById('_pic_1b36efdb').src = document.getElementById('_pic_1b36efdb').getAttribute('href')
+                document.getElementById('_pic_1b36efdb').classList = ['showpic']
+                document.getElementById('_showpic_1b36efdb').removeEventListener('click', fun1b36efdb)
+                document.getElementById('_showpic_1b36efdb').style.display = 'none'
+            }
+            document.getElementById('_showpic_1b36efdb').addEventListener('click', fun1b36efdb)
+        </script>
+    </p>
 <p>微服务的优点和缺点（或者说挑战）一样明显。</p>
 <ul>
 <li>优点<ul>
@@ -318,7 +426,19 @@
 <p>没有最好的，只有适合自己的。</p>
 <ul>
 <li>对于大的互联网公司，微服务架构是血液，是习惯，每家公司都有自己的套路和架构，细节有不同，但是核心理念是通的。</li>
-<li>对于一般的公司而言，实践微服务有非常大的技术挑战，于是乎才有了这么多IT供应商考虑这里的商机。微服务比较适合未来有一定的扩展复杂度，且有很大用户增量预期的应用，说人话就是新兴的互联网公司。创业初期，不可能买大量的机器或者很贵的机器，但是又必须考虑应对成功后的巨量的用户，微服务架构成了最好的选择。<br><img src="http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png" alt="screenshot"></li>
+<li>对于一般的公司而言，实践微服务有非常大的技术挑战，于是乎才有了这么多IT供应商考虑这里的商机。微服务比较适合未来有一定的扩展复杂度，且有很大用户增量预期的应用，说人话就是新兴的互联网公司。创业初期，不可能买大量的机器或者很贵的机器，但是又必须考虑应对成功后的巨量的用户，微服务架构成了最好的选择。<br>
+        <div id="_showpic_4e9bc008" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_4e9bc008" href=http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png class="hidepic" ></img>
+        <script>
+            let fun4e9bc008 = function() {
+                document.getElementById('_pic_4e9bc008').src = document.getElementById('_pic_4e9bc008').getAttribute('href')
+                document.getElementById('_pic_4e9bc008').classList = ['showpic']
+                document.getElementById('_showpic_4e9bc008').removeEventListener('click', fun4e9bc008)
+                document.getElementById('_showpic_4e9bc008').style.display = 'none'
+            }
+            document.getElementById('_showpic_4e9bc008').addEventListener('click', fun4e9bc008)
+        </script>
+    </li>
 </ul>
 
           <h3>
@@ -327,8 +447,32 @@
             </a>
             So What - 思考
           </h3><p>看到上面的图，不是不觉得特别的熟悉？其实我们N年前就用的滚瓜烂熟了好不好？裤子都拖了，你就给我看这个？</p>
-<p><img src="https://camo.githubusercontent.com/e5151c52066f1dd92fbae7ed40f6cc0f0d410fa0/68747470733a2f2f7261772e6769746875622e636f6d2f4e6574666c69782f726563697065732d7273732f6d61737465722f696d616765732f526563697065735f5253532e706e67" alt="screenshot"><br>from: <a href="https://github.com/Netflix/recipes-rss/wiki/Architecture">https://github.com/Netflix/recipes-rss/wiki/Architecture</a></p>
-<p>其实本来所谓的微服务就是对互联网在应用技术的一个总结归纳，IT厂商鼓吹所有概念无非是为了生意（business），SOA是，Cloud是，Microservice也是。下面玩笑很有意思的概括了这个情况（我加了第一条线，原图见<a href="http://blog.gardeviance.org/2012/07/adoption-cycles.html">这里</a>）<br><img src="http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png" alt="screenshot"></p>
+<p>
+        <div id="_showpic_72055665" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_72055665" href=https://camo.githubusercontent.com/e5151c52066f1dd92fbae7ed40f6cc0f0d410fa0/68747470733a2f2f7261772e6769746875622e636f6d2f4e6574666c69782f726563697065732d7273732f6d61737465722f696d616765732f526563697065735f5253532e706e67 class="hidepic" ></img>
+        <script>
+            let fun72055665 = function() {
+                document.getElementById('_pic_72055665').src = document.getElementById('_pic_72055665').getAttribute('href')
+                document.getElementById('_pic_72055665').classList = ['showpic']
+                document.getElementById('_showpic_72055665').removeEventListener('click', fun72055665)
+                document.getElementById('_showpic_72055665').style.display = 'none'
+            }
+            document.getElementById('_showpic_72055665').addEventListener('click', fun72055665)
+        </script>
+    <br>from: <a href="https://github.com/Netflix/recipes-rss/wiki/Architecture">https://github.com/Netflix/recipes-rss/wiki/Architecture</a></p>
+<p>其实本来所谓的微服务就是对互联网在应用技术的一个总结归纳，IT厂商鼓吹所有概念无非是为了生意（business），SOA是，Cloud是，Microservice也是。下面玩笑很有意思的概括了这个情况（我加了第一条线，原图见<a href="http://blog.gardeviance.org/2012/07/adoption-cycles.html">这里</a>）<br>
+        <div id="_showpic_513b8eb5" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_513b8eb5" href=http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png class="hidepic" ></img>
+        <script>
+            let fun513b8eb5 = function() {
+                document.getElementById('_pic_513b8eb5').src = document.getElementById('_pic_513b8eb5').getAttribute('href')
+                document.getElementById('_pic_513b8eb5').classList = ['showpic']
+                document.getElementById('_showpic_513b8eb5').removeEventListener('click', fun513b8eb5)
+                document.getElementById('_showpic_513b8eb5').style.display = 'none'
+            }
+            document.getElementById('_showpic_513b8eb5').addEventListener('click', fun513b8eb5)
+        </script>
+    </p>
 <p>所以微服对我们的思考我觉得更多的是思维上的，对已微服务架构， <strong>技术上不是问题，意识比工具重要。</strong></p>
 <ul>
 <li>按照业务 或者客户需求组织资源（这是最难的）</li>
@@ -339,7 +483,19 @@
 <li>DevOps (to PE)</li>
 </ul>
 <p>同时，对于开发同学，有这么多的中间件和强大的PE支持固然是好事，我们也需要深入去了解这些中间件背后的原理，知其然知其所以然，设想下，如果我们是一个小公司的CTO，离开的阿里的大环境，在有限的技术资源如何通过开源技术实施微服务？</p>
-<p>最后，一般提到微服务都离不开DevOps和Docker，理解微服务架构是核心，devops和docker是工具，是手段。下次在抽时间再学习整理下。<br><img src="http://img2.tbcdn.cn/L1/461/1/2ada4ac057eaf561f8862572bf6327845c482ca7.png" alt="screenshot"></p>
+<p>最后，一般提到微服务都离不开DevOps和Docker，理解微服务架构是核心，devops和docker是工具，是手段。下次在抽时间再学习整理下。<br>
+        <div id="_showpic_6d3c652" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_6d3c652" href=http://img2.tbcdn.cn/L1/461/1/2ada4ac057eaf561f8862572bf6327845c482ca7.png class="hidepic" ></img>
+        <script>
+            let fun6d3c652 = function() {
+                document.getElementById('_pic_6d3c652').src = document.getElementById('_pic_6d3c652').getAttribute('href')
+                document.getElementById('_pic_6d3c652').classList = ['showpic']
+                document.getElementById('_showpic_6d3c652').removeEventListener('click', fun6d3c652)
+                document.getElementById('_showpic_6d3c652').style.display = 'none'
+            }
+            document.getElementById('_showpic_6d3c652').addEventListener('click', fun6d3c652)
+        </script>
+    </p>
 <blockquote>
 <p>转载自：<a href="https://yq.aliyun.com/articles/2764">https://yq.aliyun.com/articles/2764</a></p>
 </blockquote>

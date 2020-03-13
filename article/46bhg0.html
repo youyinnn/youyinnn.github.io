@@ -154,7 +154,19 @@
 <pre><code class="language-java">String a = &quot;hello&quot;;        // literal
 String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>我们当然也知道，a和b是两个不同的对象，因为a是直接引用String Pool的<strong>字面量</strong>，而b引用的是一个String对象，虽然这个String对象中的字面量实际上也是引用到String Pool</p>
-<p><img src="https://image.youyinnn.top/20190302153504.png" alt=""></p>
+<p>
+        <div id="_showpic_a29878ec" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
+        <script>
+            let funa29878ec = function() {
+                document.getElementById('_pic_a29878ec').src = document.getElementById('_pic_a29878ec').getAttribute('href')
+                document.getElementById('_pic_a29878ec').classList = ['showpic']
+                document.getElementById('_showpic_a29878ec').removeEventListener('click', funa29878ec)
+                document.getElementById('_showpic_a29878ec').style.display = 'none'
+            }
+            document.getElementById('_showpic_a29878ec').addEventListener('click', funa29878ec)
+        </script>
+    </p>
 <p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121551&amp;idx=1&amp;sn=b14691e0daeca8d1283fc8a860732405&amp;chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&amp;scene=21#wechat_redirect">我终于搞清楚了和String有关的那点事儿。</a></p>
 <blockquote>
 <p>在不同版本的JDK中，Java堆和字符串常量池之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。</p>
@@ -219,7 +231,19 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
           </h4><p>Java中每个对象都是一个类的示例，JVM管理这些对象并将它们存放在Heap中；</p>
 <p>Java中每一个类也是有一个Class对象去对应的，于是经过前面的铺垫我们可以归总一下，Java类对象，也就是所有的Class对象，是存放在PermGen的；</p>
 <p>于是他们的关系如图：</p>
-<p><img src="https://image.youyinnn.top/20190302174113.png" alt=""></p>
+<p>
+        <div id="_showpic_b9872d5" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_b9872d5" href=https://image.youyinnn.top/20190302174113.png class="hidepic" ></img>
+        <script>
+            let funb9872d5 = function() {
+                document.getElementById('_pic_b9872d5').src = document.getElementById('_pic_b9872d5').getAttribute('href')
+                document.getElementById('_pic_b9872d5').classList = ['showpic']
+                document.getElementById('_showpic_b9872d5').removeEventListener('click', funb9872d5)
+                document.getElementById('_showpic_b9872d5').style.display = 'none'
+            }
+            document.getElementById('_showpic_b9872d5').addEventListener('click', funb9872d5)
+        </script>
+    </p>
 <p>那么我们说既然都是对象，而且它们在GCor的眼里反正都是一样的，那为什么不将他们放在一起呢？为什么要将类对象放在PermGen呢？</p>
 <p>有一个技术上的原因是，Class对象仅仅只是用来给JVM看的，而Heap中的其他程序业务相关的示例对象，是Java开发者真正要去关心的，如果说这两个放在一起，那么开发者可能需要花费大量的精力去理解这些Class对象甚至是处理它们可能会报出来的错误；</p>
 <p>在更久以前，它俩确实是放在一起的，但是因为系统类和开发者写的自定义类的装载行为不一样，所以卸载行为变得很少发生，出于性能优化的考虑才推出了PermGen，效果也很显著；</p>
@@ -276,7 +300,19 @@ String s3 = new String(&quot;Hollis&quot;).intern();
 
 System.out.println(s1 == s2);    // false
 System.out.println(s1 == s3);    // true</code></pre>
-<p><img src="https://image.youyinnn.top/20190302153504.png" alt=""></p>
+<p>
+        <div id="_showpic_a29878ec" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
+        <script>
+            let funa29878ec = function() {
+                document.getElementById('_pic_a29878ec').src = document.getElementById('_pic_a29878ec').getAttribute('href')
+                document.getElementById('_pic_a29878ec').classList = ['showpic']
+                document.getElementById('_showpic_a29878ec').removeEventListener('click', funa29878ec)
+                document.getElementById('_showpic_a29878ec').style.display = 'none'
+            }
+            document.getElementById('_showpic_a29878ec').addEventListener('click', funa29878ec)
+        </script>
+    </p>
 <p>由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
 
           <h4>

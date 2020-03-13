@@ -192,7 +192,19 @@ private double distanceOfTwoPoint(Point a, Point b) {
 <li><p>集合中有三个点：两两比较，求三个点中的最近的两个点距离。 </p>
 </li>
 <li><p>点数大于三时：首先<strong>划分</strong>集合S为SL和SR，使得SL中的每一个点位于SR中每一个点的左边，并且SL和SR中点数相同。分别在SL和SR中解决最近点对问题，得到DL和DR，分别表示SL和SR中的最近点对的距离。令d=min(DL,DR)。如果S中的最近点对(P1,P2)。P1、P2两点一个在SL和一个在SR中，那么P1和P2一定在以L为中心的间隙内，以L-d和L+d为界。 </p>
-<p> <img src="http://image.youyinnn.top/20190227202606.png" alt=""></p>
+<p> 
+        <div id="_showpic_ee1549c3" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_ee1549c3" href=http://image.youyinnn.top/20190227202606.png class="hidepic" ></img>
+        <script>
+            let funee1549c3 = function() {
+                document.getElementById('_pic_ee1549c3').src = document.getElementById('_pic_ee1549c3').getAttribute('href')
+                document.getElementById('_pic_ee1549c3').classList = ['showpic']
+                document.getElementById('_showpic_ee1549c3').removeEventListener('click', funee1549c3)
+                document.getElementById('_showpic_ee1549c3').style.display = 'none'
+            }
+            document.getElementById('_showpic_ee1549c3').addEventListener('click', funee1549c3)
+        </script>
+    </p>
 </li>
 </ol>
 <p>针对这个基本思想，我们肯定是得有一个前提的，那就是怎么<strong>划分</strong>？如果说集合<strong>P</strong>是按照x坐标或者y坐标升降任意去排序的，那么我们就可以取集合中间下标的位置为<strong>MID</strong>，那么<strong>MID</strong>左右两边的点就是以x坐标或者y坐标值均匀分为两个子集，记为<strong>P1，P2</strong>；</p>

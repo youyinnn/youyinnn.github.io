@@ -168,7 +168,19 @@
 <p> This is generally done as the first paragraph after the summary, on line 3.</p>
 </li>
 </ol>
-<p><img src="https://image.youyinnn.top/6c9c0fc1f7a32c23e57b689a5bf1aca8.png" alt="git-commit-tips"></p>
+<p>
+        <div id="_showpic_80017720" class="showpicbtn">点击显示图片 >></div>
+        <img id="_pic_80017720" href=https://image.youyinnn.top/6c9c0fc1f7a32c23e57b689a5bf1aca8.png class="hidepic" ></img>
+        <script>
+            let fun80017720 = function() {
+                document.getElementById('_pic_80017720').src = document.getElementById('_pic_80017720').getAttribute('href')
+                document.getElementById('_pic_80017720').classList = ['showpic']
+                document.getElementById('_showpic_80017720').removeEventListener('click', fun80017720)
+                document.getElementById('_showpic_80017720').style.display = 'none'
+            }
+            document.getElementById('_showpic_80017720').addEventListener('click', fun80017720)
+        </script>
+    </p>
 <p>Having a story in your git log will make a huge difference in how you and others perceive your project. By taking great care in commit messages, as you do in your code, you will help to increase overall quality.</p>
 <p>Special thanks to Tim Pope, whose Note About Git Commit Messages literally sets the standard for a good commit message.</p>
 <p>Additional thanks to the creator of Git and a real stickler for a good commit message, Linus Torvalds.</p>
