@@ -307,16 +307,21 @@ static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
 }</code></pre>
 <p>简单而常规，主要是两个final变量，存储Key和hash，然后是value和下一个结点；</p>
 <p>
-        <div id="_showpic_52e9084d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_52e9084d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_52e9084d" href=https://image.youyinnn.top/20180817154531.png class="hidepic" ></img>
         <script>
-            let fun52e9084d = function() {
-                document.getElementById('_pic_52e9084d').src = document.getElementById('_pic_52e9084d').getAttribute('href')
-                document.getElementById('_pic_52e9084d').classList = ['showpic']
-                document.getElementById('_showpic_52e9084d').removeEventListener('click', fun52e9084d)
-                document.getElementById('_showpic_52e9084d').style.display = 'none'
+            let imgself52e9084d = document.getElementById('_pic_52e9084d')
+            function isInViewPortOfTwo52e9084d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself52e9084d.getBoundingClientRect() && imgself52e9084d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_52e9084d').src = document.getElementById('_pic_52e9084d').getAttribute('href')
+                    document.getElementById('_pic_52e9084d').classList = ['showpic']
+                    document.getElementById('_showpic_52e9084d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo52e9084d)
+                }
             }
-            document.getElementById('_showpic_52e9084d').addEventListener('click', fun52e9084d)
+            window.addEventListener('scroll', isInViewPortOfTwo52e9084d)
         </script>
     </p>
 
@@ -460,16 +465,21 @@ public HashMap() {
             </a>
             结构剧透！
           </h3><p>
-        <div id="_showpic_28359cc4" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_28359cc4" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_28359cc4" href=https://image.youyinnn.top/20180817171145.png class="hidepic" ></img>
         <script>
-            let fun28359cc4 = function() {
-                document.getElementById('_pic_28359cc4').src = document.getElementById('_pic_28359cc4').getAttribute('href')
-                document.getElementById('_pic_28359cc4').classList = ['showpic']
-                document.getElementById('_showpic_28359cc4').removeEventListener('click', fun28359cc4)
-                document.getElementById('_showpic_28359cc4').style.display = 'none'
+            let imgself28359cc4 = document.getElementById('_pic_28359cc4')
+            function isInViewPortOfTwo28359cc4 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself28359cc4.getBoundingClientRect() && imgself28359cc4.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_28359cc4').src = document.getElementById('_pic_28359cc4').getAttribute('href')
+                    document.getElementById('_pic_28359cc4').classList = ['showpic']
+                    document.getElementById('_showpic_28359cc4').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo28359cc4)
+                }
             }
-            document.getElementById('_showpic_28359cc4').addEventListener('click', fun28359cc4)
+            window.addEventListener('scroll', isInViewPortOfTwo28359cc4)
         </script>
     </p>
 <p>我们看到，这就是一张一般的HashMap的结构，最上面的一横排是一个<code>Node&lt;K,V&gt;[]</code>也就是成员变量table，我私称这个table为<strong>主仓（main warehouse）。</strong></p>
@@ -737,16 +747,21 @@ static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
 <p>再说回<code>TreeNode&lt;K,V&gt;</code>，可以看到，这是一个3+1指针的结点，3分别指向：<strong>父结点（parent）、左孩子结点（left）、右孩子结点（right）</strong>，1指的是<strong>前指针（prev）</strong>，用于删除结点的时候，做辅助指针用，前指针不一定是父节点；再加上间接继承自<code>HashMap.Node&lt;K,V&gt;</code> ，<strong>那么就还有一个next指针！</strong></p>
 <p>如果没分析错的话，<strong>树箱子</strong>的结构就应该是：</p>
 <p>
-        <div id="_showpic_c0f5bc18" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_c0f5bc18" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_c0f5bc18" href=https://image.youyinnn.top/20180818150455.png class="hidepic" ></img>
         <script>
-            let func0f5bc18 = function() {
-                document.getElementById('_pic_c0f5bc18').src = document.getElementById('_pic_c0f5bc18').getAttribute('href')
-                document.getElementById('_pic_c0f5bc18').classList = ['showpic']
-                document.getElementById('_showpic_c0f5bc18').removeEventListener('click', func0f5bc18)
-                document.getElementById('_showpic_c0f5bc18').style.display = 'none'
+            let imgselfc0f5bc18 = document.getElementById('_pic_c0f5bc18')
+            function isInViewPortOfTwoc0f5bc18 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfc0f5bc18.getBoundingClientRect() && imgselfc0f5bc18.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_c0f5bc18').src = document.getElementById('_pic_c0f5bc18').getAttribute('href')
+                    document.getElementById('_pic_c0f5bc18').classList = ['showpic']
+                    document.getElementById('_showpic_c0f5bc18').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoc0f5bc18)
+                }
             }
-            document.getElementById('_showpic_c0f5bc18').addEventListener('click', func0f5bc18)
+            window.addEventListener('scroll', isInViewPortOfTwoc0f5bc18)
         </script>
     </p>
 <p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和HashMap无关，就忽略了，而且我认为这里有点<strong>设计过度</strong>，<strong>有了prev和next，为什么还要before和after？</strong></p>

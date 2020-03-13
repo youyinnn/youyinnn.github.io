@@ -144,16 +144,21 @@
 </ul>
 <p>In addition, volumes are often a better choice than persisting data in a container’s writable layer, because a volume does not increase the size of the containers using it, and the volume’s contents exist outside the lifecycle of a given container.</p>
 <p>
-        <div id="_showpic_2f5242e" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_2f5242e" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_2f5242e" href=https://docs.docker.com/storage/images/types-of-mounts-volume.png class="hidepic" ></img>
         <script>
-            let fun2f5242e = function() {
-                document.getElementById('_pic_2f5242e').src = document.getElementById('_pic_2f5242e').getAttribute('href')
-                document.getElementById('_pic_2f5242e').classList = ['showpic']
-                document.getElementById('_showpic_2f5242e').removeEventListener('click', fun2f5242e)
-                document.getElementById('_showpic_2f5242e').style.display = 'none'
+            let imgself2f5242e = document.getElementById('_pic_2f5242e')
+            function isInViewPortOfTwo2f5242e () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself2f5242e.getBoundingClientRect() && imgself2f5242e.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_2f5242e').src = document.getElementById('_pic_2f5242e').getAttribute('href')
+                    document.getElementById('_pic_2f5242e').classList = ['showpic']
+                    document.getElementById('_showpic_2f5242e').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo2f5242e)
+                }
             }
-            document.getElementById('_showpic_2f5242e').addEventListener('click', fun2f5242e)
+            window.addEventListener('scroll', isInViewPortOfTwo2f5242e)
         </script>
     </p>
 <p>If your container generates non-persistent state data, consider using a <a href="https://docs.docker.com/storage/tmpfs/">tmpfs mount</a> to avoid storing the data anywhere permanently, and to increase the container’s performance by avoiding writing into the container’s writable layer.</p>

@@ -222,16 +222,21 @@
 </ol>
 <p>下图是这次log的内存图变化：</p>
 <p>
-        <div id="_showpic_e740dec3" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_e740dec3" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_e740dec3" href=https://plumbr.io/app/uploads/2015/06/serial-gc-in-young-generation.png class="hidepic" ></img>
         <script>
-            let fune740dec3 = function() {
-                document.getElementById('_pic_e740dec3').src = document.getElementById('_pic_e740dec3').getAttribute('href')
-                document.getElementById('_pic_e740dec3').classList = ['showpic']
-                document.getElementById('_showpic_e740dec3').removeEventListener('click', fune740dec3)
-                document.getElementById('_showpic_e740dec3').style.display = 'none'
+            let imgselfe740dec3 = document.getElementById('_pic_e740dec3')
+            function isInViewPortOfTwoe740dec3 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfe740dec3.getBoundingClientRect() && imgselfe740dec3.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_e740dec3').src = document.getElementById('_pic_e740dec3').getAttribute('href')
+                    document.getElementById('_pic_e740dec3').classList = ['showpic']
+                    document.getElementById('_showpic_e740dec3').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoe740dec3)
+                }
             }
-            document.getElementById('_showpic_e740dec3').addEventListener('click', fune740dec3)
+            window.addEventListener('scroll', isInViewPortOfTwoe740dec3)
         </script>
     </p>
 <p>从快照结果中我们可以看出年轻代的对象要么被清理掉了，要么存活下来进入S2了，要么被promoted到了老年代</p>
@@ -274,16 +279,21 @@
 </ol>
 <p>内存变化：</p>
 <p>
-        <div id="_showpic_4c84ff9b" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_4c84ff9b" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_4c84ff9b" href=https://plumbr.io/app/uploads/2015/06/serial-gc-in-old-gen-java.png class="hidepic" ></img>
         <script>
-            let fun4c84ff9b = function() {
-                document.getElementById('_pic_4c84ff9b').src = document.getElementById('_pic_4c84ff9b').getAttribute('href')
-                document.getElementById('_pic_4c84ff9b').classList = ['showpic']
-                document.getElementById('_showpic_4c84ff9b').removeEventListener('click', fun4c84ff9b)
-                document.getElementById('_showpic_4c84ff9b').style.display = 'none'
+            let imgself4c84ff9b = document.getElementById('_pic_4c84ff9b')
+            function isInViewPortOfTwo4c84ff9b () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself4c84ff9b.getBoundingClientRect() && imgself4c84ff9b.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_4c84ff9b').src = document.getElementById('_pic_4c84ff9b').getAttribute('href')
+                    document.getElementById('_pic_4c84ff9b').classList = ['showpic']
+                    document.getElementById('_showpic_4c84ff9b').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo4c84ff9b)
+                }
             }
-            document.getElementById('_showpic_4c84ff9b').addEventListener('click', fun4c84ff9b)
+            window.addEventListener('scroll', isInViewPortOfTwo4c84ff9b)
         </script>
     </p>
 
@@ -313,30 +323,40 @@
 <pre><code>2015-05-26T14:27:40.915-0200: 116.115: [GC (Allocation Failure) [PSYoungGen: 2694440K-&gt;1305132K(2796544K)] 9556775K-&gt;8438926K(11185152K), 0.2406675 secs] [Times: user=1.77 sys=0.01, real=0.24 secs]
 2015-05-26T14:27:41.155-0200: 116.356: [Full GC (Ergonomics) [PSYoungGen: 1305132K-&gt;0K(2796544K)] [ParOldGen: 7133794K-&gt;6597672K(8388608K)] 8438926K-&gt;6597672K(11185152K), [Metaspace: 6745K-&gt;6745K(1056768K)], 0.9158801 secs] [Times: user=4.49 sys=0.64, real=0.92 secs]</code></pre><p><strong>Minor GC：</strong></p>
 <p>
-        <div id="_showpic_f2b5d1ce" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_f2b5d1ce" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_f2b5d1ce" href=https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.png class="hidepic" ></img>
         <script>
-            let funf2b5d1ce = function() {
-                document.getElementById('_pic_f2b5d1ce').src = document.getElementById('_pic_f2b5d1ce').getAttribute('href')
-                document.getElementById('_pic_f2b5d1ce').classList = ['showpic']
-                document.getElementById('_showpic_f2b5d1ce').removeEventListener('click', funf2b5d1ce)
-                document.getElementById('_showpic_f2b5d1ce').style.display = 'none'
+            let imgselff2b5d1ce = document.getElementById('_pic_f2b5d1ce')
+            function isInViewPortOfTwof2b5d1ce () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselff2b5d1ce.getBoundingClientRect() && imgselff2b5d1ce.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_f2b5d1ce').src = document.getElementById('_pic_f2b5d1ce').getAttribute('href')
+                    document.getElementById('_pic_f2b5d1ce').classList = ['showpic']
+                    document.getElementById('_showpic_f2b5d1ce').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwof2b5d1ce)
+                }
             }
-            document.getElementById('_showpic_f2b5d1ce').addEventListener('click', funf2b5d1ce)
+            window.addEventListener('scroll', isInViewPortOfTwof2b5d1ce)
         </script>
     </p>
 <p><strong>Full GC：</strong></p>
 <p>
-        <div id="_showpic_3af028a3" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_3af028a3" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_3af028a3" href=https://plumbr.io/app/uploads/2015/06/Java-ParallelGC-in-Old-Generation.png class="hidepic" ></img>
         <script>
-            let fun3af028a3 = function() {
-                document.getElementById('_pic_3af028a3').src = document.getElementById('_pic_3af028a3').getAttribute('href')
-                document.getElementById('_pic_3af028a3').classList = ['showpic']
-                document.getElementById('_showpic_3af028a3').removeEventListener('click', fun3af028a3)
-                document.getElementById('_showpic_3af028a3').style.display = 'none'
+            let imgself3af028a3 = document.getElementById('_pic_3af028a3')
+            function isInViewPortOfTwo3af028a3 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself3af028a3.getBoundingClientRect() && imgself3af028a3.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_3af028a3').src = document.getElementById('_pic_3af028a3').getAttribute('href')
+                    document.getElementById('_pic_3af028a3').classList = ['showpic']
+                    document.getElementById('_showpic_3af028a3').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo3af028a3)
+                }
             }
-            document.getElementById('_showpic_3af028a3').addEventListener('click', fun3af028a3)
+            window.addEventListener('scroll', isInViewPortOfTwo3af028a3)
         </script>
     </p>
 
@@ -366,16 +386,21 @@
             </a>
             Minor GC
           </h5><pre><code>2015-05-26T16:23:07.219-0200: 64.322: [GC (Allocation Failure) 64.322: [ParNew: 613404K-&gt;68068K(613440K), 0.1020465 secs] 10885349K-&gt;10880154K(12514816K), 0.1021309 secs] [Times: user=0.78 sys=0.01, real=0.11 secs]</code></pre><p>
-        <div id="_showpic_f2b5d1ce" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_f2b5d1ce" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_f2b5d1ce" href=https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.png class="hidepic" ></img>
         <script>
-            let funf2b5d1ce = function() {
-                document.getElementById('_pic_f2b5d1ce').src = document.getElementById('_pic_f2b5d1ce').getAttribute('href')
-                document.getElementById('_pic_f2b5d1ce').classList = ['showpic']
-                document.getElementById('_showpic_f2b5d1ce').removeEventListener('click', funf2b5d1ce)
-                document.getElementById('_showpic_f2b5d1ce').style.display = 'none'
+            let imgselff2b5d1ce = document.getElementById('_pic_f2b5d1ce')
+            function isInViewPortOfTwof2b5d1ce () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselff2b5d1ce.getBoundingClientRect() && imgselff2b5d1ce.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_f2b5d1ce').src = document.getElementById('_pic_f2b5d1ce').getAttribute('href')
+                    document.getElementById('_pic_f2b5d1ce').classList = ['showpic']
+                    document.getElementById('_showpic_f2b5d1ce').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwof2b5d1ce)
+                }
             }
-            document.getElementById('_showpic_f2b5d1ce').addEventListener('click', funf2b5d1ce)
+            window.addEventListener('scroll', isInViewPortOfTwof2b5d1ce)
         </script>
     </p>
 
@@ -404,16 +429,21 @@
             Phase 1: Initial Mark
           </h6><p>这里会有CMS会触发的两次暂停之一，这个阶段的主要目标就是将老年代中的<strong>GC Root</strong>和有<strong>被存活年轻代引用</strong>的，后面这个目标很重要，因为老年代是分代收集的</p>
 <p>
-        <div id="_showpic_22ea304" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_22ea304" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_22ea304" href=https://plumbr.io/app/uploads/2015/06/g1-06.png class="hidepic" ></img>
         <script>
-            let fun22ea304 = function() {
-                document.getElementById('_pic_22ea304').src = document.getElementById('_pic_22ea304').getAttribute('href')
-                document.getElementById('_pic_22ea304').classList = ['showpic']
-                document.getElementById('_showpic_22ea304').removeEventListener('click', fun22ea304)
-                document.getElementById('_showpic_22ea304').style.display = 'none'
+            let imgself22ea304 = document.getElementById('_pic_22ea304')
+            function isInViewPortOfTwo22ea304 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself22ea304.getBoundingClientRect() && imgself22ea304.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_22ea304').src = document.getElementById('_pic_22ea304').getAttribute('href')
+                    document.getElementById('_pic_22ea304').classList = ['showpic']
+                    document.getElementById('_showpic_22ea304').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo22ea304)
+                }
             }
-            document.getElementById('_showpic_22ea304').addEventListener('click', fun22ea304)
+            window.addEventListener('scroll', isInViewPortOfTwo22ea304)
         </script>
     </p>
 
@@ -424,16 +454,21 @@
             Phase 2: Concurrent Mark
           </h6><p>在这个阶段里，GCor会遍历老年代然后<strong>标记上所有存活的对象</strong>，遍历过程是从上一个阶段标记好的<strong>GC Root</strong>开始，但是这个过程不会触发大暂停，而是和程序<strong>并发地</strong>进行，需要注意的是，并不是所有的老年代都会被标记，因为程序运行过程中会改变一些引用关系</p>
 <p>
-        <div id="_showpic_3f4e8ab4" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_3f4e8ab4" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_3f4e8ab4" href=https://plumbr.io/app/uploads/2015/06/g1-07.png class="hidepic" ></img>
         <script>
-            let fun3f4e8ab4 = function() {
-                document.getElementById('_pic_3f4e8ab4').src = document.getElementById('_pic_3f4e8ab4').getAttribute('href')
-                document.getElementById('_pic_3f4e8ab4').classList = ['showpic']
-                document.getElementById('_showpic_3f4e8ab4').removeEventListener('click', fun3f4e8ab4)
-                document.getElementById('_showpic_3f4e8ab4').style.display = 'none'
+            let imgself3f4e8ab4 = document.getElementById('_pic_3f4e8ab4')
+            function isInViewPortOfTwo3f4e8ab4 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself3f4e8ab4.getBoundingClientRect() && imgself3f4e8ab4.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_3f4e8ab4').src = document.getElementById('_pic_3f4e8ab4').getAttribute('href')
+                    document.getElementById('_pic_3f4e8ab4').classList = ['showpic']
+                    document.getElementById('_showpic_3f4e8ab4').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo3f4e8ab4)
+                }
             }
-            document.getElementById('_showpic_3f4e8ab4').addEventListener('click', fun3f4e8ab4)
+            window.addEventListener('scroll', isInViewPortOfTwo3f4e8ab4)
         </script>
     </p>
 
@@ -444,30 +479,40 @@
             Phase 3: Concurrent Preclean
           </h6><p>这个阶段还是和应用程序并行的。虽然在上一个并发阶段里，有些引用被改变了，我们称这些对象为<strong>“脏的（dirty）”</strong>，如果出现这种情况的话，JVM会将包含这些脏对象的堆区域划出一个范围，称为<strong>卡（card）</strong>，这就是我们前面提到过的<a href="https://youyinnn.github.io/?to=post&amp;number=109#Object%20Generation-Eden">卡标记（<em>card-marking</em>）</a></p>
 <p>
-        <div id="_showpic_bd1e1d65" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_bd1e1d65" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_bd1e1d65" href=https://plumbr.io/app/uploads/2015/06/g1-08.png class="hidepic" ></img>
         <script>
-            let funbd1e1d65 = function() {
-                document.getElementById('_pic_bd1e1d65').src = document.getElementById('_pic_bd1e1d65').getAttribute('href')
-                document.getElementById('_pic_bd1e1d65').classList = ['showpic']
-                document.getElementById('_showpic_bd1e1d65').removeEventListener('click', funbd1e1d65)
-                document.getElementById('_showpic_bd1e1d65').style.display = 'none'
+            let imgselfbd1e1d65 = document.getElementById('_pic_bd1e1d65')
+            function isInViewPortOfTwobd1e1d65 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfbd1e1d65.getBoundingClientRect() && imgselfbd1e1d65.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_bd1e1d65').src = document.getElementById('_pic_bd1e1d65').getAttribute('href')
+                    document.getElementById('_pic_bd1e1d65').classList = ['showpic']
+                    document.getElementById('_showpic_bd1e1d65').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwobd1e1d65)
+                }
             }
-            document.getElementById('_showpic_bd1e1d65').addEventListener('click', funbd1e1d65)
+            window.addEventListener('scroll', isInViewPortOfTwobd1e1d65)
         </script>
     </p>
 <p>卡标记有两种状态，一种在脏状态，一种是干净状态，本阶段需要针对脏状态的对象进行处理，脏对象被视为占用状态，然后<strong>将卡标记对象引用的对象也标记好</strong>，标记好之后，脏对象就变为干净对象了</p>
 <p>
-        <div id="_showpic_807e34d5" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_807e34d5" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_807e34d5" href=https://plumbr.io/app/uploads/2015/06/g1-09.png class="hidepic" ></img>
         <script>
-            let fun807e34d5 = function() {
-                document.getElementById('_pic_807e34d5').src = document.getElementById('_pic_807e34d5').getAttribute('href')
-                document.getElementById('_pic_807e34d5').classList = ['showpic']
-                document.getElementById('_showpic_807e34d5').removeEventListener('click', fun807e34d5)
-                document.getElementById('_showpic_807e34d5').style.display = 'none'
+            let imgself807e34d5 = document.getElementById('_pic_807e34d5')
+            function isInViewPortOfTwo807e34d5 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself807e34d5.getBoundingClientRect() && imgself807e34d5.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_807e34d5').src = document.getElementById('_pic_807e34d5').getAttribute('href')
+                    document.getElementById('_pic_807e34d5').classList = ['showpic']
+                    document.getElementById('_showpic_807e34d5').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo807e34d5)
+                }
             }
-            document.getElementById('_showpic_807e34d5').addEventListener('click', fun807e34d5)
+            window.addEventListener('scroll', isInViewPortOfTwo807e34d5)
         </script>
     </p>
 <p>额外的，在这个阶段中还会进行一些内部处理，为最后的<strong>重标记（Remark Phase）</strong>阶段做准备</p>
@@ -496,16 +541,21 @@
             Phase 6: Concurrent Sweep
           </h6><p>这个阶段就是和应用程序并发地进行，就是要清理掉不要的对象</p>
 <p>
-        <div id="_showpic_46328501" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_46328501" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_46328501" href=https://plumbr.io/app/uploads/2015/06/g1-10.png class="hidepic" ></img>
         <script>
-            let fun46328501 = function() {
-                document.getElementById('_pic_46328501').src = document.getElementById('_pic_46328501').getAttribute('href')
-                document.getElementById('_pic_46328501').classList = ['showpic']
-                document.getElementById('_showpic_46328501').removeEventListener('click', fun46328501)
-                document.getElementById('_showpic_46328501').style.display = 'none'
+            let imgself46328501 = document.getElementById('_pic_46328501')
+            function isInViewPortOfTwo46328501 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself46328501.getBoundingClientRect() && imgself46328501.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_46328501').src = document.getElementById('_pic_46328501').getAttribute('href')
+                    document.getElementById('_pic_46328501').classList = ['showpic']
+                    document.getElementById('_showpic_46328501').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo46328501)
+                }
             }
-            document.getElementById('_showpic_46328501').addEventListener('click', fun46328501)
+            window.addEventListener('scroll', isInViewPortOfTwo46328501)
         </script>
     </p>
 
@@ -531,30 +581,40 @@
 <li><p>堆内存不必划分为新生代和老年代，而是分为若干个（一般可以是2046个）相同大小的小区域（<strong><em>regions</em></strong>），这些区域用来存放若干个对象，每一种区域又可以分为：Eden Region、Survivor Region、Old Region。</p>
 <p> 因为不同种类的区域之间并不紧靠在一起，所以物理上它们不都在一个连续的空间，但是我们可以将它们逻辑上组成年轻代和老年代，这和之前的概念一致，只不过并不是连续划分空间了</p>
 <p> 
-        <div id="_showpic_15a68c85" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_15a68c85" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_15a68c85" href=https://plumbr.io/app/uploads/2015/06/g1-011.png class="hidepic" ></img>
         <script>
-            let fun15a68c85 = function() {
-                document.getElementById('_pic_15a68c85').src = document.getElementById('_pic_15a68c85').getAttribute('href')
-                document.getElementById('_pic_15a68c85').classList = ['showpic']
-                document.getElementById('_showpic_15a68c85').removeEventListener('click', fun15a68c85)
-                document.getElementById('_showpic_15a68c85').style.display = 'none'
+            let imgself15a68c85 = document.getElementById('_pic_15a68c85')
+            function isInViewPortOfTwo15a68c85 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself15a68c85.getBoundingClientRect() && imgself15a68c85.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_15a68c85').src = document.getElementById('_pic_15a68c85').getAttribute('href')
+                    document.getElementById('_pic_15a68c85').classList = ['showpic']
+                    document.getElementById('_showpic_15a68c85').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo15a68c85)
+                }
             }
-            document.getElementById('_showpic_15a68c85').addEventListener('click', fun15a68c85)
+            window.addEventListener('scroll', isInViewPortOfTwo15a68c85)
         </script>
     </p>
 <p> 这能让GCor们避免每次都清理整片堆内存，反而每次只需要清理一些被视为<strong>待回收集合（collection set）</strong>的部分区域就行了，每次大暂停的时候，都会清理所有的年轻代区域，顺带包括一些老年代区域</p>
 <p> 
-        <div id="_showpic_f7ae05c4" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_f7ae05c4" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_f7ae05c4" href=https://plumbr.io/app/uploads/2015/06/g1-02.png class="hidepic" ></img>
         <script>
-            let funf7ae05c4 = function() {
-                document.getElementById('_pic_f7ae05c4').src = document.getElementById('_pic_f7ae05c4').getAttribute('href')
-                document.getElementById('_pic_f7ae05c4').classList = ['showpic']
-                document.getElementById('_showpic_f7ae05c4').removeEventListener('click', funf7ae05c4)
-                document.getElementById('_showpic_f7ae05c4').style.display = 'none'
+            let imgselff7ae05c4 = document.getElementById('_pic_f7ae05c4')
+            function isInViewPortOfTwof7ae05c4 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselff7ae05c4.getBoundingClientRect() && imgselff7ae05c4.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_f7ae05c4').src = document.getElementById('_pic_f7ae05c4').getAttribute('href')
+                    document.getElementById('_pic_f7ae05c4').classList = ['showpic']
+                    document.getElementById('_showpic_f7ae05c4').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwof7ae05c4)
+                }
             }
-            document.getElementById('_showpic_f7ae05c4').addEventListener('click', funf7ae05c4)
+            window.addEventListener('scroll', isInViewPortOfTwof7ae05c4)
         </script>
     </p>
 </li>
@@ -642,44 +702,59 @@
 <p>但如果遍历整个堆区域的话，会比较麻烦，也会毁掉我们设置回收集合的意义，于是JVM采用了一个方法，它和之前说过的<strong>卡区域（card-table）</strong>有点类似，所以在G1里面和它对应的就是<strong>记忆集合（Remembered set）</strong></p>
 <p>和下图展示的一样：每个区域都有一个列出<strong>指向这个区域的引用</strong>的列表作为记忆集合在旁边，这些引用会被认为是可选的<strong>GC Root</strong>，需要注意的是，在并发标记阶段被视为垃圾的老年区对象不会被列入这个记忆集合中，即使有外部引用指向它们，因为在这样的情况下，这些外部引用也已经被标记为垃圾了</p>
 <p>
-        <div id="_showpic_9f941c2c" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_9f941c2c" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_9f941c2c" href=https://plumbr.io/app/uploads/2016/01/g1-03.png class="hidepic" ></img>
         <script>
-            let fun9f941c2c = function() {
-                document.getElementById('_pic_9f941c2c').src = document.getElementById('_pic_9f941c2c').getAttribute('href')
-                document.getElementById('_pic_9f941c2c').classList = ['showpic']
-                document.getElementById('_showpic_9f941c2c').removeEventListener('click', fun9f941c2c)
-                document.getElementById('_showpic_9f941c2c').style.display = 'none'
+            let imgself9f941c2c = document.getElementById('_pic_9f941c2c')
+            function isInViewPortOfTwo9f941c2c () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself9f941c2c.getBoundingClientRect() && imgself9f941c2c.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_9f941c2c').src = document.getElementById('_pic_9f941c2c').getAttribute('href')
+                    document.getElementById('_pic_9f941c2c').classList = ['showpic']
+                    document.getElementById('_showpic_9f941c2c').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo9f941c2c)
+                }
             }
-            document.getElementById('_showpic_9f941c2c').addEventListener('click', fun9f941c2c)
+            window.addEventListener('scroll', isInViewPortOfTwo9f941c2c)
         </script>
     </p>
 <p>接下来发生的事情就比较简单了：GCor们决定哪些对象是存活的，哪些对象是垃圾</p>
 <p>
-        <div id="_showpic_2db4c03c" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_2db4c03c" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_2db4c03c" href=https://plumbr.io/app/uploads/2016/01/g1-04.png class="hidepic" ></img>
         <script>
-            let fun2db4c03c = function() {
-                document.getElementById('_pic_2db4c03c').src = document.getElementById('_pic_2db4c03c').getAttribute('href')
-                document.getElementById('_pic_2db4c03c').classList = ['showpic']
-                document.getElementById('_showpic_2db4c03c').removeEventListener('click', fun2db4c03c)
-                document.getElementById('_showpic_2db4c03c').style.display = 'none'
+            let imgself2db4c03c = document.getElementById('_pic_2db4c03c')
+            function isInViewPortOfTwo2db4c03c () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself2db4c03c.getBoundingClientRect() && imgself2db4c03c.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_2db4c03c').src = document.getElementById('_pic_2db4c03c').getAttribute('href')
+                    document.getElementById('_pic_2db4c03c').classList = ['showpic']
+                    document.getElementById('_showpic_2db4c03c').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo2db4c03c)
+                }
             }
-            document.getElementById('_showpic_2db4c03c').addEventListener('click', fun2db4c03c)
+            window.addEventListener('scroll', isInViewPortOfTwo2db4c03c)
         </script>
     </p>
 <p>最后，存活下来的对象会被移动到survivor区域，清空出来的新区域又会重新投入一些对象进去</p>
 <p>
-        <div id="_showpic_997b73f1" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_997b73f1" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_997b73f1" href=https://plumbr.io/app/uploads/2016/01/g1-05-v2.png class="hidepic" ></img>
         <script>
-            let fun997b73f1 = function() {
-                document.getElementById('_pic_997b73f1').src = document.getElementById('_pic_997b73f1').getAttribute('href')
-                document.getElementById('_pic_997b73f1').classList = ['showpic']
-                document.getElementById('_showpic_997b73f1').removeEventListener('click', fun997b73f1)
-                document.getElementById('_showpic_997b73f1').style.display = 'none'
+            let imgself997b73f1 = document.getElementById('_pic_997b73f1')
+            function isInViewPortOfTwo997b73f1 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself997b73f1.getBoundingClientRect() && imgself997b73f1.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_997b73f1').src = document.getElementById('_pic_997b73f1').getAttribute('href')
+                    document.getElementById('_pic_997b73f1').classList = ['showpic']
+                    document.getElementById('_showpic_997b73f1').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo997b73f1)
+                }
             }
-            document.getElementById('_showpic_997b73f1').addEventListener('click', fun997b73f1)
+            window.addEventListener('scroll', isInViewPortOfTwo997b73f1)
         </script>
     </p>
 <p>为了维护一个记忆集合，<strong>后写屏障（post-write barrier）</strong>会在一个数据被写入的时候出现。如果一个跨区域引用关系出现了，有关系的引用之间会被记录在各自的记忆集合中。为了减少这个写屏障的开销，放置记录在记忆集合中的这个过程是异步的，并且还有其他的优化功能</p>

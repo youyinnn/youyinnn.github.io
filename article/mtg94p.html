@@ -186,16 +186,21 @@
           </h5><p>默认是只有.符号触发, 我们把所有字母的大小写和.一起加入代码提示的触发:</p>
 <ul>
 <li>开启路径:Window-&gt;Perferences-&gt;Java-&gt;Editor-&gt;Content Assist栏目, 在这个框里把字母大小写敲个遍, <strong>不要忘记把点符号&quot;.&quot;也加上</strong>:<br>
-        <div id="_showpic_8a9a8d89" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_8a9a8d89" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_8a9a8d89" href=https://image.youyinnn.top/cf472e6b33efa166407c366d667ded0c.png class="hidepic" ></img>
         <script>
-            let fun8a9a8d89 = function() {
-                document.getElementById('_pic_8a9a8d89').src = document.getElementById('_pic_8a9a8d89').getAttribute('href')
-                document.getElementById('_pic_8a9a8d89').classList = ['showpic']
-                document.getElementById('_showpic_8a9a8d89').removeEventListener('click', fun8a9a8d89)
-                document.getElementById('_showpic_8a9a8d89').style.display = 'none'
+            let imgself8a9a8d89 = document.getElementById('_pic_8a9a8d89')
+            function isInViewPortOfTwo8a9a8d89 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself8a9a8d89.getBoundingClientRect() && imgself8a9a8d89.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_8a9a8d89').src = document.getElementById('_pic_8a9a8d89').getAttribute('href')
+                    document.getElementById('_pic_8a9a8d89').classList = ['showpic']
+                    document.getElementById('_showpic_8a9a8d89').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo8a9a8d89)
+                }
             }
-            document.getElementById('_showpic_8a9a8d89').addEventListener('click', fun8a9a8d89)
+            window.addEventListener('scroll', isInViewPortOfTwo8a9a8d89)
         </script>
     </li>
 </ul>
@@ -214,16 +219,21 @@
           </h6><ul>
 <li>开启路径:Window-&gt;Perferences-&gt;Keys</li>
 <li>在Keys的搜索框里搜:run, 看到有图标的这个就是了, 默认是Ctrl+F11, 但是这个键位跨度有点大, 我习惯改为Alt+3<br>
-        <div id="_showpic_3551f855" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_3551f855" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_3551f855" href=https://image.youyinnn.top/c1a3c5f51a5e9863949608354f979d95.png class="hidepic" ></img>
         <script>
-            let fun3551f855 = function() {
-                document.getElementById('_pic_3551f855').src = document.getElementById('_pic_3551f855').getAttribute('href')
-                document.getElementById('_pic_3551f855').classList = ['showpic']
-                document.getElementById('_showpic_3551f855').removeEventListener('click', fun3551f855)
-                document.getElementById('_showpic_3551f855').style.display = 'none'
+            let imgself3551f855 = document.getElementById('_pic_3551f855')
+            function isInViewPortOfTwo3551f855 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself3551f855.getBoundingClientRect() && imgself3551f855.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_3551f855').src = document.getElementById('_pic_3551f855').getAttribute('href')
+                    document.getElementById('_pic_3551f855').classList = ['showpic']
+                    document.getElementById('_showpic_3551f855').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo3551f855)
+                }
             }
-            document.getElementById('_showpic_3551f855').addEventListener('click', fun3551f855)
+            window.addEventListener('scroll', isInViewPortOfTwo3551f855)
         </script>
     </li>
 </ul>
@@ -268,44 +278,59 @@
             1.3.1 System.out.println();
           </h6><ul>
 <li><p>默认是sysout呼出, 可以改为sys, 看个人习惯- -<br>
-        <div id="_showpic_1e79937d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_1e79937d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_1e79937d" href=https://image.youyinnn.top/1ff57526c65c8fea970940226be8e74f.png class="hidepic" ></img>
         <script>
-            let fun1e79937d = function() {
-                document.getElementById('_pic_1e79937d').src = document.getElementById('_pic_1e79937d').getAttribute('href')
-                document.getElementById('_pic_1e79937d').classList = ['showpic']
-                document.getElementById('_showpic_1e79937d').removeEventListener('click', fun1e79937d)
-                document.getElementById('_showpic_1e79937d').style.display = 'none'
+            let imgself1e79937d = document.getElementById('_pic_1e79937d')
+            function isInViewPortOfTwo1e79937d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself1e79937d.getBoundingClientRect() && imgself1e79937d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_1e79937d').src = document.getElementById('_pic_1e79937d').getAttribute('href')
+                    document.getElementById('_pic_1e79937d').classList = ['showpic']
+                    document.getElementById('_showpic_1e79937d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo1e79937d)
+                }
             }
-            document.getElementById('_showpic_1e79937d').addEventListener('click', fun1e79937d)
+            window.addEventListener('scroll', isInViewPortOfTwo1e79937d)
         </script>
     </p>
 </li>
 <li><p>修改配置路径:Window-&gt;搜索框搜索:Templates, 找到Java-&gt;Editor-&gt;Templates<br>
-        <div id="_showpic_2ab416e2" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_2ab416e2" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_2ab416e2" href=https://image.youyinnn.top/61305b96fed7d551bff912f41a30ae3e.png class="hidepic" ></img>
         <script>
-            let fun2ab416e2 = function() {
-                document.getElementById('_pic_2ab416e2').src = document.getElementById('_pic_2ab416e2').getAttribute('href')
-                document.getElementById('_pic_2ab416e2').classList = ['showpic']
-                document.getElementById('_showpic_2ab416e2').removeEventListener('click', fun2ab416e2)
-                document.getElementById('_showpic_2ab416e2').style.display = 'none'
+            let imgself2ab416e2 = document.getElementById('_pic_2ab416e2')
+            function isInViewPortOfTwo2ab416e2 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself2ab416e2.getBoundingClientRect() && imgself2ab416e2.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_2ab416e2').src = document.getElementById('_pic_2ab416e2').getAttribute('href')
+                    document.getElementById('_pic_2ab416e2').classList = ['showpic']
+                    document.getElementById('_showpic_2ab416e2').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo2ab416e2)
+                }
             }
-            document.getElementById('_showpic_2ab416e2').addEventListener('click', fun2ab416e2)
+            window.addEventListener('scroll', isInViewPortOfTwo2ab416e2)
         </script>
     </p>
 </li>
 <li><p>双击之后就可以改, 它只是增加了一个 而不是把原来的改了<br>
-        <div id="_showpic_bc2d718c" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_bc2d718c" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_bc2d718c" href=https://image.youyinnn.top/6d8d94bba53204980044b88d8a8db804.png class="hidepic" ></img>
         <script>
-            let funbc2d718c = function() {
-                document.getElementById('_pic_bc2d718c').src = document.getElementById('_pic_bc2d718c').getAttribute('href')
-                document.getElementById('_pic_bc2d718c').classList = ['showpic']
-                document.getElementById('_showpic_bc2d718c').removeEventListener('click', funbc2d718c)
-                document.getElementById('_showpic_bc2d718c').style.display = 'none'
+            let imgselfbc2d718c = document.getElementById('_pic_bc2d718c')
+            function isInViewPortOfTwobc2d718c () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfbc2d718c.getBoundingClientRect() && imgselfbc2d718c.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_bc2d718c').src = document.getElementById('_pic_bc2d718c').getAttribute('href')
+                    document.getElementById('_pic_bc2d718c').classList = ['showpic']
+                    document.getElementById('_showpic_bc2d718c').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwobc2d718c)
+                }
             }
-            document.getElementById('_showpic_bc2d718c').addEventListener('click', funbc2d718c)
+            window.addEventListener('scroll', isInViewPortOfTwobc2d718c)
         </script>
     </p>
 </li>
@@ -317,16 +342,21 @@
             </a>
             1.3.2 for循环/while循环等
           </h6><p>从上面的Templates中可以找到许多代码段, 自己试着呼出就好;<br>
-        <div id="_showpic_c6f9e0e4" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_c6f9e0e4" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_c6f9e0e4" href=https://image.youyinnn.top/50a894e8516a818c2bba882008417f78.png class="hidepic" ></img>
         <script>
-            let func6f9e0e4 = function() {
-                document.getElementById('_pic_c6f9e0e4').src = document.getElementById('_pic_c6f9e0e4').getAttribute('href')
-                document.getElementById('_pic_c6f9e0e4').classList = ['showpic']
-                document.getElementById('_showpic_c6f9e0e4').removeEventListener('click', func6f9e0e4)
-                document.getElementById('_showpic_c6f9e0e4').style.display = 'none'
+            let imgselfc6f9e0e4 = document.getElementById('_pic_c6f9e0e4')
+            function isInViewPortOfTwoc6f9e0e4 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfc6f9e0e4.getBoundingClientRect() && imgselfc6f9e0e4.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_c6f9e0e4').src = document.getElementById('_pic_c6f9e0e4').getAttribute('href')
+                    document.getElementById('_pic_c6f9e0e4').classList = ['showpic']
+                    document.getElementById('_showpic_c6f9e0e4').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoc6f9e0e4)
+                }
             }
-            document.getElementById('_showpic_c6f9e0e4').addEventListener('click', func6f9e0e4)
+            window.addEventListener('scroll', isInViewPortOfTwoc6f9e0e4)
         </script>
     </p>
 <hr>

@@ -179,16 +179,21 @@
             </a>
             💬牛客 HttpServletRequest. getParameter
           </h3><p>
-        <div id="_showpic_47dda41d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_47dda41d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_47dda41d" href=https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png class="hidepic" ></img>
         <script>
-            let fun47dda41d = function() {
-                document.getElementById('_pic_47dda41d').src = document.getElementById('_pic_47dda41d').getAttribute('href')
-                document.getElementById('_pic_47dda41d').classList = ['showpic']
-                document.getElementById('_showpic_47dda41d').removeEventListener('click', fun47dda41d)
-                document.getElementById('_showpic_47dda41d').style.display = 'none'
+            let imgself47dda41d = document.getElementById('_pic_47dda41d')
+            function isInViewPortOfTwo47dda41d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself47dda41d.getBoundingClientRect() && imgself47dda41d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_47dda41d').src = document.getElementById('_pic_47dda41d').getAttribute('href')
+                    document.getElementById('_pic_47dda41d').classList = ['showpic']
+                    document.getElementById('_showpic_47dda41d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo47dda41d)
+                }
             }
-            document.getElementById('_showpic_47dda41d').addEventListener('click', fun47dda41d)
+            window.addEventListener('scroll', isInViewPortOfTwo47dda41d)
         </script>
     </p>
 <blockquote>
@@ -208,29 +213,39 @@
             </a>
             💬牛客 Integer的拆箱装箱
           </h3><p>
-        <div id="_showpic_67d56b54" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_67d56b54" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_67d56b54" href=https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png class="hidepic" ></img>
         <script>
-            let fun67d56b54 = function() {
-                document.getElementById('_pic_67d56b54').src = document.getElementById('_pic_67d56b54').getAttribute('href')
-                document.getElementById('_pic_67d56b54').classList = ['showpic']
-                document.getElementById('_showpic_67d56b54').removeEventListener('click', fun67d56b54)
-                document.getElementById('_showpic_67d56b54').style.display = 'none'
+            let imgself67d56b54 = document.getElementById('_pic_67d56b54')
+            function isInViewPortOfTwo67d56b54 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself67d56b54.getBoundingClientRect() && imgself67d56b54.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_67d56b54').src = document.getElementById('_pic_67d56b54').getAttribute('href')
+                    document.getElementById('_pic_67d56b54').classList = ['showpic']
+                    document.getElementById('_showpic_67d56b54').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo67d56b54)
+                }
             }
-            document.getElementById('_showpic_67d56b54').addEventListener('click', fun67d56b54)
+            window.addEventListener('scroll', isInViewPortOfTwo67d56b54)
         </script>
     </p>
 <p>
-        <div id="_showpic_21cbb2d8" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_21cbb2d8" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_21cbb2d8" href=https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png class="hidepic" ></img>
         <script>
-            let fun21cbb2d8 = function() {
-                document.getElementById('_pic_21cbb2d8').src = document.getElementById('_pic_21cbb2d8').getAttribute('href')
-                document.getElementById('_pic_21cbb2d8').classList = ['showpic']
-                document.getElementById('_showpic_21cbb2d8').removeEventListener('click', fun21cbb2d8)
-                document.getElementById('_showpic_21cbb2d8').style.display = 'none'
+            let imgself21cbb2d8 = document.getElementById('_pic_21cbb2d8')
+            function isInViewPortOfTwo21cbb2d8 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself21cbb2d8.getBoundingClientRect() && imgself21cbb2d8.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_21cbb2d8').src = document.getElementById('_pic_21cbb2d8').getAttribute('href')
+                    document.getElementById('_pic_21cbb2d8').classList = ['showpic']
+                    document.getElementById('_showpic_21cbb2d8').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo21cbb2d8)
+                }
             }
-            document.getElementById('_showpic_21cbb2d8').addEventListener('click', fun21cbb2d8)
+            window.addEventListener('scroll', isInViewPortOfTwo21cbb2d8)
         </script>
     </p>
 <ul>
@@ -244,16 +259,21 @@
             </a>
             💬牛客 getDeclaredMethods()的范围
           </h3><p>
-        <div id="_showpic_e94fd031" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_e94fd031" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_e94fd031" href=https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png class="hidepic" ></img>
         <script>
-            let fune94fd031 = function() {
-                document.getElementById('_pic_e94fd031').src = document.getElementById('_pic_e94fd031').getAttribute('href')
-                document.getElementById('_pic_e94fd031').classList = ['showpic']
-                document.getElementById('_showpic_e94fd031').removeEventListener('click', fune94fd031)
-                document.getElementById('_showpic_e94fd031').style.display = 'none'
+            let imgselfe94fd031 = document.getElementById('_pic_e94fd031')
+            function isInViewPortOfTwoe94fd031 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfe94fd031.getBoundingClientRect() && imgselfe94fd031.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_e94fd031').src = document.getElementById('_pic_e94fd031').getAttribute('href')
+                    document.getElementById('_pic_e94fd031').classList = ['showpic']
+                    document.getElementById('_showpic_e94fd031').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoe94fd031)
+                }
             }
-            document.getElementById('_showpic_e94fd031').addEventListener('click', fune94fd031)
+            window.addEventListener('scroll', isInViewPortOfTwoe94fd031)
         </script>
     </p>
 <p>Doc:</p>
@@ -269,16 +289,21 @@
             </a>
             💬牛客 sleep()和wait()
           </h3><p>
-        <div id="_showpic_36479894" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_36479894" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_36479894" href=https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png class="hidepic" ></img>
         <script>
-            let fun36479894 = function() {
-                document.getElementById('_pic_36479894').src = document.getElementById('_pic_36479894').getAttribute('href')
-                document.getElementById('_pic_36479894').classList = ['showpic']
-                document.getElementById('_showpic_36479894').removeEventListener('click', fun36479894)
-                document.getElementById('_showpic_36479894').style.display = 'none'
+            let imgself36479894 = document.getElementById('_pic_36479894')
+            function isInViewPortOfTwo36479894 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself36479894.getBoundingClientRect() && imgself36479894.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_36479894').src = document.getElementById('_pic_36479894').getAttribute('href')
+                    document.getElementById('_pic_36479894').classList = ['showpic']
+                    document.getElementById('_showpic_36479894').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo36479894)
+                }
             }
-            document.getElementById('_showpic_36479894').addEventListener('click', fun36479894)
+            window.addEventListener('scroll', isInViewPortOfTwo36479894)
         </script>
     </p>
 <p><strong>Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行</strong></p>
@@ -1201,16 +1226,21 @@ observer.observe(article, options);</code></pre>
             </a>
             💬wangEditor 轻量级前端富文本编辑器
           </h3><p>
-        <div id="_showpic_8ad89b50" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_8ad89b50" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_8ad89b50" href=https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png class="hidepic" ></img>
         <script>
-            let fun8ad89b50 = function() {
-                document.getElementById('_pic_8ad89b50').src = document.getElementById('_pic_8ad89b50').getAttribute('href')
-                document.getElementById('_pic_8ad89b50').classList = ['showpic']
-                document.getElementById('_showpic_8ad89b50').removeEventListener('click', fun8ad89b50)
-                document.getElementById('_showpic_8ad89b50').style.display = 'none'
+            let imgself8ad89b50 = document.getElementById('_pic_8ad89b50')
+            function isInViewPortOfTwo8ad89b50 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself8ad89b50.getBoundingClientRect() && imgself8ad89b50.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_8ad89b50').src = document.getElementById('_pic_8ad89b50').getAttribute('href')
+                    document.getElementById('_pic_8ad89b50').classList = ['showpic']
+                    document.getElementById('_showpic_8ad89b50').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo8ad89b50)
+                }
             }
-            document.getElementById('_showpic_8ad89b50').addEventListener('click', fun8ad89b50)
+            window.addEventListener('scroll', isInViewPortOfTwo8ad89b50)
         </script>
     </p>
 <p><a href="http://www.wangeditor.com/">官网</a></p>
@@ -1223,16 +1253,21 @@ observer.observe(article, options);</code></pre>
           </h3><p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
 <p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
 <p>
-        <div id="_showpic_602564a" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_602564a" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_602564a" href=https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png class="hidepic" ></img>
         <script>
-            let fun602564a = function() {
-                document.getElementById('_pic_602564a').src = document.getElementById('_pic_602564a').getAttribute('href')
-                document.getElementById('_pic_602564a').classList = ['showpic']
-                document.getElementById('_showpic_602564a').removeEventListener('click', fun602564a)
-                document.getElementById('_showpic_602564a').style.display = 'none'
+            let imgself602564a = document.getElementById('_pic_602564a')
+            function isInViewPortOfTwo602564a () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself602564a.getBoundingClientRect() && imgself602564a.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_602564a').src = document.getElementById('_pic_602564a').getAttribute('href')
+                    document.getElementById('_pic_602564a').classList = ['showpic']
+                    document.getElementById('_showpic_602564a').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo602564a)
+                }
             }
-            document.getElementById('_showpic_602564a').addEventListener('click', fun602564a)
+            window.addEventListener('scroll', isInViewPortOfTwo602564a)
         </script>
     </p>
 
@@ -1269,16 +1304,21 @@ observer.observe(article, options);</code></pre>
             </a>
             💬关于 github oauth app
           </h3><p>
-        <div id="_showpic_5d357401" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_5d357401" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_5d357401" href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="hidepic" ></img>
         <script>
-            let fun5d357401 = function() {
-                document.getElementById('_pic_5d357401').src = document.getElementById('_pic_5d357401').getAttribute('href')
-                document.getElementById('_pic_5d357401').classList = ['showpic']
-                document.getElementById('_showpic_5d357401').removeEventListener('click', fun5d357401)
-                document.getElementById('_showpic_5d357401').style.display = 'none'
+            let imgself5d357401 = document.getElementById('_pic_5d357401')
+            function isInViewPortOfTwo5d357401 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself5d357401.getBoundingClientRect() && imgself5d357401.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_5d357401').src = document.getElementById('_pic_5d357401').getAttribute('href')
+                    document.getElementById('_pic_5d357401').classList = ['showpic']
+                    document.getElementById('_showpic_5d357401').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo5d357401)
+                }
             }
-            document.getElementById('_showpic_5d357401').addEventListener('click', fun5d357401)
+            window.addEventListener('scroll', isInViewPortOfTwo5d357401)
         </script>
     </p>
 <p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
@@ -1325,16 +1365,21 @@ observer.observe(article, options);</code></pre>
             </a>
             🔹2. editor的默认md code渲染和highlight.js渲染冲突问题
           </h4><p>
-        <div id="_showpic_223fac6d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_223fac6d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_223fac6d" href=https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png class="hidepic" ></img>
         <script>
-            let fun223fac6d = function() {
-                document.getElementById('_pic_223fac6d').src = document.getElementById('_pic_223fac6d').getAttribute('href')
-                document.getElementById('_pic_223fac6d').classList = ['showpic']
-                document.getElementById('_showpic_223fac6d').removeEventListener('click', fun223fac6d)
-                document.getElementById('_showpic_223fac6d').style.display = 'none'
+            let imgself223fac6d = document.getElementById('_pic_223fac6d')
+            function isInViewPortOfTwo223fac6d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself223fac6d.getBoundingClientRect() && imgself223fac6d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_223fac6d').src = document.getElementById('_pic_223fac6d').getAttribute('href')
+                    document.getElementById('_pic_223fac6d').classList = ['showpic']
+                    document.getElementById('_showpic_223fac6d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo223fac6d)
+                }
             }
-            document.getElementById('_showpic_223fac6d').addEventListener('click', fun223fac6d)
+            window.addEventListener('scroll', isInViewPortOfTwo223fac6d)
         </script>
     </p>
 <p>如图用的atom-one-dark, 但是背景还是白色的...</p>
@@ -1349,16 +1394,21 @@ observer.observe(article, options);</code></pre>
 <li>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</li>
 </ol>
 <p>
-        <div id="_showpic_39616b81" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_39616b81" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_39616b81" href=https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png class="hidepic" ></img>
         <script>
-            let fun39616b81 = function() {
-                document.getElementById('_pic_39616b81').src = document.getElementById('_pic_39616b81').getAttribute('href')
-                document.getElementById('_pic_39616b81').classList = ['showpic']
-                document.getElementById('_showpic_39616b81').removeEventListener('click', fun39616b81)
-                document.getElementById('_showpic_39616b81').style.display = 'none'
+            let imgself39616b81 = document.getElementById('_pic_39616b81')
+            function isInViewPortOfTwo39616b81 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself39616b81.getBoundingClientRect() && imgself39616b81.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_39616b81').src = document.getElementById('_pic_39616b81').getAttribute('href')
+                    document.getElementById('_pic_39616b81').classList = ['showpic']
+                    document.getElementById('_showpic_39616b81').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo39616b81)
+                }
             }
-            document.getElementById('_showpic_39616b81').addEventListener('click', fun39616b81)
+            window.addEventListener('scroll', isInViewPortOfTwo39616b81)
         </script>
     <br>修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
 
@@ -1370,16 +1420,21 @@ observer.observe(article, options);</code></pre>
           </h5><p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
 <p>注释一部分editormd.preview.css:</p>
 <p>
-        <div id="_showpic_9a2020ba" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_9a2020ba" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_9a2020ba" href=https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png class="hidepic" ></img>
         <script>
-            let fun9a2020ba = function() {
-                document.getElementById('_pic_9a2020ba').src = document.getElementById('_pic_9a2020ba').getAttribute('href')
-                document.getElementById('_pic_9a2020ba').classList = ['showpic']
-                document.getElementById('_showpic_9a2020ba').removeEventListener('click', fun9a2020ba)
-                document.getElementById('_showpic_9a2020ba').style.display = 'none'
+            let imgself9a2020ba = document.getElementById('_pic_9a2020ba')
+            function isInViewPortOfTwo9a2020ba () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself9a2020ba.getBoundingClientRect() && imgself9a2020ba.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_9a2020ba').src = document.getElementById('_pic_9a2020ba').getAttribute('href')
+                    document.getElementById('_pic_9a2020ba').classList = ['showpic']
+                    document.getElementById('_showpic_9a2020ba').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo9a2020ba)
+                }
             }
-            document.getElementById('_showpic_9a2020ba').addEventListener('click', fun9a2020ba)
+            window.addEventListener('scroll', isInViewPortOfTwo9a2020ba)
         </script>
     </p>
 <p>我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.</p>
@@ -1390,16 +1445,21 @@ observer.observe(article, options);</code></pre>
             </a>
             🔹结果
           </h4><p>
-        <div id="_showpic_25cac22d" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_25cac22d" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_25cac22d" href=https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png class="hidepic" ></img>
         <script>
-            let fun25cac22d = function() {
-                document.getElementById('_pic_25cac22d').src = document.getElementById('_pic_25cac22d').getAttribute('href')
-                document.getElementById('_pic_25cac22d').classList = ['showpic']
-                document.getElementById('_showpic_25cac22d').removeEventListener('click', fun25cac22d)
-                document.getElementById('_showpic_25cac22d').style.display = 'none'
+            let imgself25cac22d = document.getElementById('_pic_25cac22d')
+            function isInViewPortOfTwo25cac22d () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself25cac22d.getBoundingClientRect() && imgself25cac22d.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_25cac22d').src = document.getElementById('_pic_25cac22d').getAttribute('href')
+                    document.getElementById('_pic_25cac22d').classList = ['showpic']
+                    document.getElementById('_showpic_25cac22d').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo25cac22d)
+                }
             }
-            document.getElementById('_showpic_25cac22d').addEventListener('click', fun25cac22d)
+            window.addEventListener('scroll', isInViewPortOfTwo25cac22d)
         </script>
     </p>
 
@@ -1441,16 +1501,21 @@ observer.observe(article, options);</code></pre>
             </a>
             🔹示意图
           </h4><p>
-        <div id="_showpic_28778551" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_28778551" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_28778551" href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="hidepic" ></img>
         <script>
-            let fun28778551 = function() {
-                document.getElementById('_pic_28778551').src = document.getElementById('_pic_28778551').getAttribute('href')
-                document.getElementById('_pic_28778551').classList = ['showpic']
-                document.getElementById('_showpic_28778551').removeEventListener('click', fun28778551)
-                document.getElementById('_showpic_28778551').style.display = 'none'
+            let imgself28778551 = document.getElementById('_pic_28778551')
+            function isInViewPortOfTwo28778551 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself28778551.getBoundingClientRect() && imgself28778551.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_28778551').src = document.getElementById('_pic_28778551').getAttribute('href')
+                    document.getElementById('_pic_28778551').classList = ['showpic']
+                    document.getElementById('_showpic_28778551').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo28778551)
+                }
             }
-            document.getElementById('_showpic_28778551').addEventListener('click', fun28778551)
+            window.addEventListener('scroll', isInViewPortOfTwo28778551)
         </script>
     </p>
 <blockquote>
@@ -1465,29 +1530,39 @@ observer.observe(article, options);</code></pre>
             💬GitHub API response 条数pagination限制
           </h3><p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
 <p>
-        <div id="_showpic_e85900b7" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_e85900b7" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_e85900b7" href=https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png class="hidepic" ></img>
         <script>
-            let fune85900b7 = function() {
-                document.getElementById('_pic_e85900b7').src = document.getElementById('_pic_e85900b7').getAttribute('href')
-                document.getElementById('_pic_e85900b7').classList = ['showpic']
-                document.getElementById('_showpic_e85900b7').removeEventListener('click', fune85900b7)
-                document.getElementById('_showpic_e85900b7').style.display = 'none'
+            let imgselfe85900b7 = document.getElementById('_pic_e85900b7')
+            function isInViewPortOfTwoe85900b7 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfe85900b7.getBoundingClientRect() && imgselfe85900b7.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_e85900b7').src = document.getElementById('_pic_e85900b7').getAttribute('href')
+                    document.getElementById('_pic_e85900b7').classList = ['showpic']
+                    document.getElementById('_showpic_e85900b7').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoe85900b7)
+                }
             }
-            document.getElementById('_showpic_e85900b7').addEventListener('click', fune85900b7)
+            window.addEventListener('scroll', isInViewPortOfTwoe85900b7)
         </script>
     </p>
 <p>
-        <div id="_showpic_c9bc5e64" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_c9bc5e64" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_c9bc5e64" href=https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png class="hidepic" ></img>
         <script>
-            let func9bc5e64 = function() {
-                document.getElementById('_pic_c9bc5e64').src = document.getElementById('_pic_c9bc5e64').getAttribute('href')
-                document.getElementById('_pic_c9bc5e64').classList = ['showpic']
-                document.getElementById('_showpic_c9bc5e64').removeEventListener('click', func9bc5e64)
-                document.getElementById('_showpic_c9bc5e64').style.display = 'none'
+            let imgselfc9bc5e64 = document.getElementById('_pic_c9bc5e64')
+            function isInViewPortOfTwoc9bc5e64 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfc9bc5e64.getBoundingClientRect() && imgselfc9bc5e64.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_c9bc5e64').src = document.getElementById('_pic_c9bc5e64').getAttribute('href')
+                    document.getElementById('_pic_c9bc5e64').classList = ['showpic']
+                    document.getElementById('_showpic_c9bc5e64').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoc9bc5e64)
+                }
             }
-            document.getElementById('_showpic_c9bc5e64').addEventListener('click', func9bc5e64)
+            window.addEventListener('scroll', isInViewPortOfTwoc9bc5e64)
         </script>
     </p>
 <p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
@@ -1671,16 +1746,21 @@ $ nvm install 8</code></pre>
             </a>
             💬在Windows的右键菜单上增加新建自定义类型文件的选项
           </h3><p>
-        <div id="_showpic_a713b4db" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_a713b4db" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_a713b4db" href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="hidepic" ></img>
         <script>
-            let funa713b4db = function() {
-                document.getElementById('_pic_a713b4db').src = document.getElementById('_pic_a713b4db').getAttribute('href')
-                document.getElementById('_pic_a713b4db').classList = ['showpic']
-                document.getElementById('_showpic_a713b4db').removeEventListener('click', funa713b4db)
-                document.getElementById('_showpic_a713b4db').style.display = 'none'
+            let imgselfa713b4db = document.getElementById('_pic_a713b4db')
+            function isInViewPortOfTwoa713b4db () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfa713b4db.getBoundingClientRect() && imgselfa713b4db.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_a713b4db').src = document.getElementById('_pic_a713b4db').getAttribute('href')
+                    document.getElementById('_pic_a713b4db').classList = ['showpic']
+                    document.getElementById('_showpic_a713b4db').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoa713b4db)
+                }
             }
-            document.getElementById('_showpic_a713b4db').addEventListener('click', funa713b4db)
+            window.addEventListener('scroll', isInViewPortOfTwoa713b4db)
         </script>
     </p>
 <p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
@@ -1701,16 +1781,21 @@ $ nvm install 8</code></pre>
             💬git做用户的全局配置的文件夹在哪？
           </h3><p>放在你家</p>
 <p>
-        <div id="_showpic_a63ca3cf" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_a63ca3cf" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_a63ca3cf" href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="hidepic" ></img>
         <script>
-            let funa63ca3cf = function() {
-                document.getElementById('_pic_a63ca3cf').src = document.getElementById('_pic_a63ca3cf').getAttribute('href')
-                document.getElementById('_pic_a63ca3cf').classList = ['showpic']
-                document.getElementById('_showpic_a63ca3cf').removeEventListener('click', funa63ca3cf)
-                document.getElementById('_showpic_a63ca3cf').style.display = 'none'
+            let imgselfa63ca3cf = document.getElementById('_pic_a63ca3cf')
+            function isInViewPortOfTwoa63ca3cf () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfa63ca3cf.getBoundingClientRect() && imgselfa63ca3cf.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_a63ca3cf').src = document.getElementById('_pic_a63ca3cf').getAttribute('href')
+                    document.getElementById('_pic_a63ca3cf').classList = ['showpic']
+                    document.getElementById('_showpic_a63ca3cf').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+                }
             }
-            document.getElementById('_showpic_a63ca3cf').addEventListener('click', funa63ca3cf)
+            window.addEventListener('scroll', isInViewPortOfTwoa63ca3cf)
         </script>
     </p>
 <p>如图可以配置别名</p>
@@ -1804,16 +1889,21 @@ $ nvm install 8</code></pre>
             </a>
             💬什么是/为什么要Tracing？Opentracing的入门铺垫
           </h3><p>
-        <div id="_showpic_40e20c09" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_40e20c09" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_40e20c09" href=https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png class="hidepic" ></img>
         <script>
-            let fun40e20c09 = function() {
-                document.getElementById('_pic_40e20c09').src = document.getElementById('_pic_40e20c09').getAttribute('href')
-                document.getElementById('_pic_40e20c09').classList = ['showpic']
-                document.getElementById('_showpic_40e20c09').removeEventListener('click', fun40e20c09)
-                document.getElementById('_showpic_40e20c09').style.display = 'none'
+            let imgself40e20c09 = document.getElementById('_pic_40e20c09')
+            function isInViewPortOfTwo40e20c09 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself40e20c09.getBoundingClientRect() && imgself40e20c09.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_40e20c09').src = document.getElementById('_pic_40e20c09').getAttribute('href')
+                    document.getElementById('_pic_40e20c09').classList = ['showpic']
+                    document.getElementById('_showpic_40e20c09').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo40e20c09)
+                }
             }
-            document.getElementById('_showpic_40e20c09').addEventListener('click', fun40e20c09)
+            window.addEventListener('scroll', isInViewPortOfTwo40e20c09)
         </script>
     </p>
 <p>好文：<a href="https://yq.aliyun.com/articles/514488">https://yq.aliyun.com/articles/514488</a></p>
@@ -1833,16 +1923,21 @@ $ nvm install 8</code></pre>
             </a>
             💬什么是/为什么要DevOps？
           </h3><p>
-        <div id="_showpic_cbf9cf14" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_cbf9cf14" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_cbf9cf14" href=https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png class="hidepic" ></img>
         <script>
-            let funcbf9cf14 = function() {
-                document.getElementById('_pic_cbf9cf14').src = document.getElementById('_pic_cbf9cf14').getAttribute('href')
-                document.getElementById('_pic_cbf9cf14').classList = ['showpic']
-                document.getElementById('_showpic_cbf9cf14').removeEventListener('click', funcbf9cf14)
-                document.getElementById('_showpic_cbf9cf14').style.display = 'none'
+            let imgselfcbf9cf14 = document.getElementById('_pic_cbf9cf14')
+            function isInViewPortOfTwocbf9cf14 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfcbf9cf14.getBoundingClientRect() && imgselfcbf9cf14.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_cbf9cf14').src = document.getElementById('_pic_cbf9cf14').getAttribute('href')
+                    document.getElementById('_pic_cbf9cf14').classList = ['showpic']
+                    document.getElementById('_showpic_cbf9cf14').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwocbf9cf14)
+                }
             }
-            document.getElementById('_showpic_cbf9cf14').addEventListener('click', funcbf9cf14)
+            window.addEventListener('scroll', isInViewPortOfTwocbf9cf14)
         </script>
     </p>
 <p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
@@ -2150,16 +2245,21 @@ html2canvas(element, opts);</code></pre>
             </a>
             🔹阿里巴巴矢量图标库
           </h4><p>
-        <div id="_showpic_8d147368" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_8d147368" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_8d147368" href=https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png class="hidepic" ></img>
         <script>
-            let fun8d147368 = function() {
-                document.getElementById('_pic_8d147368').src = document.getElementById('_pic_8d147368').getAttribute('href')
-                document.getElementById('_pic_8d147368').classList = ['showpic']
-                document.getElementById('_showpic_8d147368').removeEventListener('click', fun8d147368)
-                document.getElementById('_showpic_8d147368').style.display = 'none'
+            let imgself8d147368 = document.getElementById('_pic_8d147368')
+            function isInViewPortOfTwo8d147368 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself8d147368.getBoundingClientRect() && imgself8d147368.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_8d147368').src = document.getElementById('_pic_8d147368').getAttribute('href')
+                    document.getElementById('_pic_8d147368').classList = ['showpic']
+                    document.getElementById('_showpic_8d147368').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo8d147368)
+                }
             }
-            document.getElementById('_showpic_8d147368').addEventListener('click', fun8d147368)
+            window.addEventListener('scroll', isInViewPortOfTwo8d147368)
         </script>
     </p>
 <p>link : <a href="http://iconfont.cn/">http://iconfont.cn/</a></p>
@@ -2170,16 +2270,21 @@ html2canvas(element, opts);</code></pre>
             </a>
             🔹iconstroe
           </h4><p>
-        <div id="_showpic_cf350a78" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_cf350a78" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_cf350a78" href=https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png class="hidepic" ></img>
         <script>
-            let funcf350a78 = function() {
-                document.getElementById('_pic_cf350a78').src = document.getElementById('_pic_cf350a78').getAttribute('href')
-                document.getElementById('_pic_cf350a78').classList = ['showpic']
-                document.getElementById('_showpic_cf350a78').removeEventListener('click', funcf350a78)
-                document.getElementById('_showpic_cf350a78').style.display = 'none'
+            let imgselfcf350a78 = document.getElementById('_pic_cf350a78')
+            function isInViewPortOfTwocf350a78 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfcf350a78.getBoundingClientRect() && imgselfcf350a78.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_cf350a78').src = document.getElementById('_pic_cf350a78').getAttribute('href')
+                    document.getElementById('_pic_cf350a78').classList = ['showpic']
+                    document.getElementById('_showpic_cf350a78').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwocf350a78)
+                }
             }
-            document.getElementById('_showpic_cf350a78').addEventListener('click', funcf350a78)
+            window.addEventListener('scroll', isInViewPortOfTwocf350a78)
         </script>
     </p>
 <p>link : <a href="https://iconstore.co/">https://iconstore.co/</a></p>
@@ -2190,16 +2295,21 @@ html2canvas(element, opts);</code></pre>
             </a>
             🔹flaticon
           </h4><p>
-        <div id="_showpic_b9bf1d92" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_b9bf1d92" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_b9bf1d92" href=https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png class="hidepic" ></img>
         <script>
-            let funb9bf1d92 = function() {
-                document.getElementById('_pic_b9bf1d92').src = document.getElementById('_pic_b9bf1d92').getAttribute('href')
-                document.getElementById('_pic_b9bf1d92').classList = ['showpic']
-                document.getElementById('_showpic_b9bf1d92').removeEventListener('click', funb9bf1d92)
-                document.getElementById('_showpic_b9bf1d92').style.display = 'none'
+            let imgselfb9bf1d92 = document.getElementById('_pic_b9bf1d92')
+            function isInViewPortOfTwob9bf1d92 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfb9bf1d92.getBoundingClientRect() && imgselfb9bf1d92.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_b9bf1d92').src = document.getElementById('_pic_b9bf1d92').getAttribute('href')
+                    document.getElementById('_pic_b9bf1d92').classList = ['showpic']
+                    document.getElementById('_showpic_b9bf1d92').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwob9bf1d92)
+                }
             }
-            document.getElementById('_showpic_b9bf1d92').addEventListener('click', funb9bf1d92)
+            window.addEventListener('scroll', isInViewPortOfTwob9bf1d92)
         </script>
     </p>
 <p>link : <a href="https://www.flaticon.com/">https://www.flaticon.com/</a></p>
@@ -2210,16 +2320,21 @@ html2canvas(element, opts);</code></pre>
             </a>
             🔹Nucleo Icon管理工具
           </h4><p>
-        <div id="_showpic_b3b79d77" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_b3b79d77" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_b3b79d77" href=https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png class="hidepic" ></img>
         <script>
-            let funb3b79d77 = function() {
-                document.getElementById('_pic_b3b79d77').src = document.getElementById('_pic_b3b79d77').getAttribute('href')
-                document.getElementById('_pic_b3b79d77').classList = ['showpic']
-                document.getElementById('_showpic_b3b79d77').removeEventListener('click', funb3b79d77)
-                document.getElementById('_showpic_b3b79d77').style.display = 'none'
+            let imgselfb3b79d77 = document.getElementById('_pic_b3b79d77')
+            function isInViewPortOfTwob3b79d77 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfb3b79d77.getBoundingClientRect() && imgselfb3b79d77.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_b3b79d77').src = document.getElementById('_pic_b3b79d77').getAttribute('href')
+                    document.getElementById('_pic_b3b79d77').classList = ['showpic']
+                    document.getElementById('_showpic_b3b79d77').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwob3b79d77)
+                }
             }
-            document.getElementById('_showpic_b3b79d77').addEventListener('click', funb3b79d77)
+            window.addEventListener('scroll', isInViewPortOfTwob3b79d77)
         </script>
     </p>
 <p><a href="https://nucleoapp.com/">https://nucleoapp.com/</a></p>
@@ -2234,16 +2349,21 @@ html2canvas(element, opts);</code></pre>
 <p>介绍 : <a href="https://zhuanlan.zhihu.com/p/28400466">https://zhuanlan.zhihu.com/p/28400466</a></p>
 </blockquote>
 <p>
-        <div id="_showpic_d9d16863" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_d9d16863" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_d9d16863" href=https://user-images.githubusercontent.com/23525754/40038175-47ab3728-5843-11e8-8673-10bd2894ad70.png class="hidepic" ></img>
         <script>
-            let fund9d16863 = function() {
-                document.getElementById('_pic_d9d16863').src = document.getElementById('_pic_d9d16863').getAttribute('href')
-                document.getElementById('_pic_d9d16863').classList = ['showpic']
-                document.getElementById('_showpic_d9d16863').removeEventListener('click', fund9d16863)
-                document.getElementById('_showpic_d9d16863').style.display = 'none'
+            let imgselfd9d16863 = document.getElementById('_pic_d9d16863')
+            function isInViewPortOfTwod9d16863 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfd9d16863.getBoundingClientRect() && imgselfd9d16863.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_d9d16863').src = document.getElementById('_pic_d9d16863').getAttribute('href')
+                    document.getElementById('_pic_d9d16863').classList = ['showpic']
+                    document.getElementById('_showpic_d9d16863').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwod9d16863)
+                }
             }
-            document.getElementById('_showpic_d9d16863').addEventListener('click', fund9d16863)
+            window.addEventListener('scroll', isInViewPortOfTwod9d16863)
         </script>
     </p>
 
@@ -2262,42 +2382,57 @@ html2canvas(element, opts);</code></pre>
             </a>
             💬数据结构/算法可视化网站
           </h3><p>
-        <div id="_showpic_1338c43f" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_1338c43f" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_1338c43f" href=https://image.youyinnn.top/sorting-algorithms.png class="hidepic" ></img>
         <script>
-            let fun1338c43f = function() {
-                document.getElementById('_pic_1338c43f').src = document.getElementById('_pic_1338c43f').getAttribute('href')
-                document.getElementById('_pic_1338c43f').classList = ['showpic']
-                document.getElementById('_showpic_1338c43f').removeEventListener('click', fun1338c43f)
-                document.getElementById('_showpic_1338c43f').style.display = 'none'
+            let imgself1338c43f = document.getElementById('_pic_1338c43f')
+            function isInViewPortOfTwo1338c43f () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself1338c43f.getBoundingClientRect() && imgself1338c43f.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_1338c43f').src = document.getElementById('_pic_1338c43f').getAttribute('href')
+                    document.getElementById('_pic_1338c43f').classList = ['showpic']
+                    document.getElementById('_showpic_1338c43f').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo1338c43f)
+                }
             }
-            document.getElementById('_showpic_1338c43f').addEventListener('click', fun1338c43f)
+            window.addEventListener('scroll', isInViewPortOfTwo1338c43f)
         </script>
     <br><a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
 <p>
-        <div id="_showpic_1395da3c" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_1395da3c" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_1395da3c" href=https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png class="hidepic" ></img>
         <script>
-            let fun1395da3c = function() {
-                document.getElementById('_pic_1395da3c').src = document.getElementById('_pic_1395da3c').getAttribute('href')
-                document.getElementById('_pic_1395da3c').classList = ['showpic']
-                document.getElementById('_showpic_1395da3c').removeEventListener('click', fun1395da3c)
-                document.getElementById('_showpic_1395da3c').style.display = 'none'
+            let imgself1395da3c = document.getElementById('_pic_1395da3c')
+            function isInViewPortOfTwo1395da3c () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself1395da3c.getBoundingClientRect() && imgself1395da3c.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_1395da3c').src = document.getElementById('_pic_1395da3c').getAttribute('href')
+                    document.getElementById('_pic_1395da3c').classList = ['showpic']
+                    document.getElementById('_showpic_1395da3c').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo1395da3c)
+                }
             }
-            document.getElementById('_showpic_1395da3c').addEventListener('click', fun1395da3c)
+            window.addEventListener('scroll', isInViewPortOfTwo1395da3c)
         </script>
     <br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
 <p>
-        <div id="_showpic_56021a01" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_56021a01" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_56021a01" href=https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png class="hidepic" ></img>
         <script>
-            let fun56021a01 = function() {
-                document.getElementById('_pic_56021a01').src = document.getElementById('_pic_56021a01').getAttribute('href')
-                document.getElementById('_pic_56021a01').classList = ['showpic']
-                document.getElementById('_showpic_56021a01').removeEventListener('click', fun56021a01)
-                document.getElementById('_showpic_56021a01').style.display = 'none'
+            let imgself56021a01 = document.getElementById('_pic_56021a01')
+            function isInViewPortOfTwo56021a01 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself56021a01.getBoundingClientRect() && imgself56021a01.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_56021a01').src = document.getElementById('_pic_56021a01').getAttribute('href')
+                    document.getElementById('_pic_56021a01').classList = ['showpic']
+                    document.getElementById('_showpic_56021a01').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo56021a01)
+                }
             }
-            document.getElementById('_showpic_56021a01').addEventListener('click', fun56021a01)
+            window.addEventListener('scroll', isInViewPortOfTwo56021a01)
         </script>
     <br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
 
@@ -2314,40 +2449,55 @@ html2canvas(element, opts);</code></pre>
             </a>
             💬win10 自带录电脑音软件
           </h3><p>
-        <div id="_showpic_257b8207" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_257b8207" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_257b8207" href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="hidepic" ></img>
         <script>
-            let fun257b8207 = function() {
-                document.getElementById('_pic_257b8207').src = document.getElementById('_pic_257b8207').getAttribute('href')
-                document.getElementById('_pic_257b8207').classList = ['showpic']
-                document.getElementById('_showpic_257b8207').removeEventListener('click', fun257b8207)
-                document.getElementById('_showpic_257b8207').style.display = 'none'
+            let imgself257b8207 = document.getElementById('_pic_257b8207')
+            function isInViewPortOfTwo257b8207 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself257b8207.getBoundingClientRect() && imgself257b8207.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_257b8207').src = document.getElementById('_pic_257b8207').getAttribute('href')
+                    document.getElementById('_pic_257b8207').classList = ['showpic']
+                    document.getElementById('_showpic_257b8207').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo257b8207)
+                }
             }
-            document.getElementById('_showpic_257b8207').addEventListener('click', fun257b8207)
+            window.addEventListener('scroll', isInViewPortOfTwo257b8207)
         </script>
     <br>
-        <div id="_showpic_215ad473" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_215ad473" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_215ad473" href=https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png class="hidepic" ></img>
         <script>
-            let fun215ad473 = function() {
-                document.getElementById('_pic_215ad473').src = document.getElementById('_pic_215ad473').getAttribute('href')
-                document.getElementById('_pic_215ad473').classList = ['showpic']
-                document.getElementById('_showpic_215ad473').removeEventListener('click', fun215ad473)
-                document.getElementById('_showpic_215ad473').style.display = 'none'
+            let imgself215ad473 = document.getElementById('_pic_215ad473')
+            function isInViewPortOfTwo215ad473 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself215ad473.getBoundingClientRect() && imgself215ad473.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_215ad473').src = document.getElementById('_pic_215ad473').getAttribute('href')
+                    document.getElementById('_pic_215ad473').classList = ['showpic']
+                    document.getElementById('_showpic_215ad473').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo215ad473)
+                }
             }
-            document.getElementById('_showpic_215ad473').addEventListener('click', fun215ad473)
+            window.addEventListener('scroll', isInViewPortOfTwo215ad473)
         </script>
     <br>
-        <div id="_showpic_6d1b4848" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_6d1b4848" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_6d1b4848" href=https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png class="hidepic" ></img>
         <script>
-            let fun6d1b4848 = function() {
-                document.getElementById('_pic_6d1b4848').src = document.getElementById('_pic_6d1b4848').getAttribute('href')
-                document.getElementById('_pic_6d1b4848').classList = ['showpic']
-                document.getElementById('_showpic_6d1b4848').removeEventListener('click', fun6d1b4848)
-                document.getElementById('_showpic_6d1b4848').style.display = 'none'
+            let imgself6d1b4848 = document.getElementById('_pic_6d1b4848')
+            function isInViewPortOfTwo6d1b4848 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself6d1b4848.getBoundingClientRect() && imgself6d1b4848.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_6d1b4848').src = document.getElementById('_pic_6d1b4848').getAttribute('href')
+                    document.getElementById('_pic_6d1b4848').classList = ['showpic']
+                    document.getElementById('_showpic_6d1b4848').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo6d1b4848)
+                }
             }
-            document.getElementById('_showpic_6d1b4848').addEventListener('click', fun6d1b4848)
+            window.addEventListener('scroll', isInViewPortOfTwo6d1b4848)
         </script>
     </p>
 <p>然后打开win10自带的录音软件Voice Recorder</p>

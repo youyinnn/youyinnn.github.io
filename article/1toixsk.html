@@ -348,16 +348,21 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
 <p><strong>The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh</strong>. </p>
 <p>This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called <code>my-web</code> published at port <code>8080</code> on a three-node swarm would look:</p>
 <p>
-        <div id="_showpic_417af7" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_417af7" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_417af7" href=https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png class="hidepic" ></img>
         <script>
-            let fun417af7 = function() {
-                document.getElementById('_pic_417af7').src = document.getElementById('_pic_417af7').getAttribute('href')
-                document.getElementById('_pic_417af7').classList = ['showpic']
-                document.getElementById('_showpic_417af7').removeEventListener('click', fun417af7)
-                document.getElementById('_showpic_417af7').style.display = 'none'
+            let imgself417af7 = document.getElementById('_pic_417af7')
+            function isInViewPortOfTwo417af7 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself417af7.getBoundingClientRect() && imgself417af7.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_417af7').src = document.getElementById('_pic_417af7').getAttribute('href')
+                    document.getElementById('_pic_417af7').classList = ['showpic']
+                    document.getElementById('_showpic_417af7').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo417af7)
+                }
             }
-            document.getElementById('_showpic_417af7').addEventListener('click', fun417af7)
+            window.addEventListener('scroll', isInViewPortOfTwo417af7)
         </script>
     </p>
 

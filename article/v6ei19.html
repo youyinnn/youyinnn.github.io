@@ -139,16 +139,21 @@
 <li>Each of the 9 <code>3x3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without repetition.</li>
 </ol>
 <p>
-        <div id="_showpic_4da311a6" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_4da311a6" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_4da311a6" href=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png class="hidepic" ></img>
         <script>
-            let fun4da311a6 = function() {
-                document.getElementById('_pic_4da311a6').src = document.getElementById('_pic_4da311a6').getAttribute('href')
-                document.getElementById('_pic_4da311a6').classList = ['showpic']
-                document.getElementById('_showpic_4da311a6').removeEventListener('click', fun4da311a6)
-                document.getElementById('_showpic_4da311a6').style.display = 'none'
+            let imgself4da311a6 = document.getElementById('_pic_4da311a6')
+            function isInViewPortOfTwo4da311a6 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself4da311a6.getBoundingClientRect() && imgself4da311a6.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_4da311a6').src = document.getElementById('_pic_4da311a6').getAttribute('href')
+                    document.getElementById('_pic_4da311a6').classList = ['showpic']
+                    document.getElementById('_showpic_4da311a6').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo4da311a6)
+                }
             }
-            document.getElementById('_showpic_4da311a6').addEventListener('click', fun4da311a6)
+            window.addEventListener('scroll', isInViewPortOfTwo4da311a6)
         </script>
     </p>
 <p>A partially filled sudoku which is valid.</p>
@@ -243,29 +248,39 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
 </ol>
 <p>Empty cells are indicated by the character <code>&#39;.&#39;</code>.</p>
 <p>
-        <div id="_showpic_4da311a6" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_4da311a6" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_4da311a6" href=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png class="hidepic" ></img>
         <script>
-            let fun4da311a6 = function() {
-                document.getElementById('_pic_4da311a6').src = document.getElementById('_pic_4da311a6').getAttribute('href')
-                document.getElementById('_pic_4da311a6').classList = ['showpic']
-                document.getElementById('_showpic_4da311a6').removeEventListener('click', fun4da311a6)
-                document.getElementById('_showpic_4da311a6').style.display = 'none'
+            let imgself4da311a6 = document.getElementById('_pic_4da311a6')
+            function isInViewPortOfTwo4da311a6 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself4da311a6.getBoundingClientRect() && imgself4da311a6.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_4da311a6').src = document.getElementById('_pic_4da311a6').getAttribute('href')
+                    document.getElementById('_pic_4da311a6').classList = ['showpic']
+                    document.getElementById('_showpic_4da311a6').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo4da311a6)
+                }
             }
-            document.getElementById('_showpic_4da311a6').addEventListener('click', fun4da311a6)
+            window.addEventListener('scroll', isInViewPortOfTwo4da311a6)
         </script>
     <br>A sudoku puzzle...</p>
 <p>
-        <div id="_showpic_f30892c3" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_f30892c3" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_f30892c3" href=https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png class="hidepic" ></img>
         <script>
-            let funf30892c3 = function() {
-                document.getElementById('_pic_f30892c3').src = document.getElementById('_pic_f30892c3').getAttribute('href')
-                document.getElementById('_pic_f30892c3').classList = ['showpic']
-                document.getElementById('_showpic_f30892c3').removeEventListener('click', funf30892c3)
-                document.getElementById('_showpic_f30892c3').style.display = 'none'
+            let imgselff30892c3 = document.getElementById('_pic_f30892c3')
+            function isInViewPortOfTwof30892c3 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselff30892c3.getBoundingClientRect() && imgselff30892c3.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_f30892c3').src = document.getElementById('_pic_f30892c3').getAttribute('href')
+                    document.getElementById('_pic_f30892c3').classList = ['showpic']
+                    document.getElementById('_showpic_f30892c3').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwof30892c3)
+                }
             }
-            document.getElementById('_showpic_f30892c3').addEventListener('click', funf30892c3)
+            window.addEventListener('scroll', isInViewPortOfTwof30892c3)
         </script>
     <br>...and its solution numbers marked in red.</p>
 <p><strong>Note:</strong></p>

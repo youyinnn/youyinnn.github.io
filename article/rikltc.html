@@ -143,16 +143,21 @@
           </h3><p>基本上整个第二章说的都是<strong>运行时数据取区</strong>,，Java虚拟机在执行Java程序的时候,，会把它所管理的内存划分为若干个不同的数据区域</p>
 <p>这些数据区域有<strong>各自的用途</strong>以及<strong>各自的生命周期</strong>(创建和销毁策略)</p>
 <p>
-        <div id="_showpic_b47470db" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_b47470db" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_b47470db" href=https://image.youyinnn.top/jvmRuntimeDataArea2.png class="hidepic" ></img>
         <script>
-            let funb47470db = function() {
-                document.getElementById('_pic_b47470db').src = document.getElementById('_pic_b47470db').getAttribute('href')
-                document.getElementById('_pic_b47470db').classList = ['showpic']
-                document.getElementById('_showpic_b47470db').removeEventListener('click', funb47470db)
-                document.getElementById('_showpic_b47470db').style.display = 'none'
+            let imgselfb47470db = document.getElementById('_pic_b47470db')
+            function isInViewPortOfTwob47470db () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselfb47470db.getBoundingClientRect() && imgselfb47470db.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_b47470db').src = document.getElementById('_pic_b47470db').getAttribute('href')
+                    document.getElementById('_pic_b47470db').classList = ['showpic']
+                    document.getElementById('_showpic_b47470db').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwob47470db)
+                }
             }
-            document.getElementById('_showpic_b47470db').addEventListener('click', funb47470db)
+            window.addEventListener('scroll', isInViewPortOfTwob47470db)
         </script>
     </p>
 <p>我们得特别注意，这里我们再将<strong>JVM的运行时数据区</strong>划分为：<strong>线程共享数据区</strong>，<strong>线程私有数据区</strong></p>

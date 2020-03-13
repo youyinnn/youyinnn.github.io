@@ -205,16 +205,21 @@
 </li>
 <li><p>Take a look at the <code>visualizer</code></p>
 <p> 
-        <div id="_showpic_f3b2c4b4" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_f3b2c4b4" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_f3b2c4b4" href=https://image.youyinnn.top/20181129222014.png class="hidepic" ></img>
         <script>
-            let funf3b2c4b4 = function() {
-                document.getElementById('_pic_f3b2c4b4').src = document.getElementById('_pic_f3b2c4b4').getAttribute('href')
-                document.getElementById('_pic_f3b2c4b4').classList = ['showpic']
-                document.getElementById('_showpic_f3b2c4b4').removeEventListener('click', funf3b2c4b4)
-                document.getElementById('_showpic_f3b2c4b4').style.display = 'none'
+            let imgselff3b2c4b4 = document.getElementById('_pic_f3b2c4b4')
+            function isInViewPortOfTwof3b2c4b4 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselff3b2c4b4.getBoundingClientRect() && imgselff3b2c4b4.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_f3b2c4b4').src = document.getElementById('_pic_f3b2c4b4').getAttribute('href')
+                    document.getElementById('_pic_f3b2c4b4').classList = ['showpic']
+                    document.getElementById('_showpic_f3b2c4b4').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwof3b2c4b4)
+                }
             }
-            document.getElementById('_showpic_f3b2c4b4').addEventListener('click', funf3b2c4b4)
+            window.addEventListener('scroll', isInViewPortOfTwof3b2c4b4)
         </script>
     </p>
 <p> and you can also visit the port:4000 to visit the Flask web app.</p>

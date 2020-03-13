@@ -161,16 +161,21 @@
           </h5><p><code>c{precision}</code><br><code>logger{precision}</code></p>
 <p>用例：</p>
 <p>
-        <div id="_showpic_fcc550d6" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_fcc550d6" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_fcc550d6" href=https://image.youyinnn.top/0c7bcdb7e018e47007e1f94164a2b626.png class="hidepic" ></img>
         <script>
-            let funfcc550d6 = function() {
-                document.getElementById('_pic_fcc550d6').src = document.getElementById('_pic_fcc550d6').getAttribute('href')
-                document.getElementById('_pic_fcc550d6').classList = ['showpic']
-                document.getElementById('_showpic_fcc550d6').removeEventListener('click', funfcc550d6)
-                document.getElementById('_showpic_fcc550d6').style.display = 'none'
+            let imgselffcc550d6 = document.getElementById('_pic_fcc550d6')
+            function isInViewPortOfTwofcc550d6 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgselffcc550d6.getBoundingClientRect() && imgselffcc550d6.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_fcc550d6').src = document.getElementById('_pic_fcc550d6').getAttribute('href')
+                    document.getElementById('_pic_fcc550d6').classList = ['showpic']
+                    document.getElementById('_showpic_fcc550d6').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwofcc550d6)
+                }
             }
-            document.getElementById('_showpic_fcc550d6').addEventListener('click', funfcc550d6)
+            window.addEventListener('scroll', isInViewPortOfTwofcc550d6)
         </script>
     </p>
 
@@ -189,16 +194,21 @@
           </h5><p><code>d{pattern} &amp; date{pattern}</code></p>
 <p>用例：</p>
 <p>
-        <div id="_showpic_6227df12" class="showpicbtn">点击显示图片 >></div>
+        <div id="_showpic_6227df12" class="showpicbtn">正在显示图片 >></div>
         <img id="_pic_6227df12" href=https://image.youyinnn.top/782b42701d03650c07a92766558d225f.png class="hidepic" ></img>
         <script>
-            let fun6227df12 = function() {
-                document.getElementById('_pic_6227df12').src = document.getElementById('_pic_6227df12').getAttribute('href')
-                document.getElementById('_pic_6227df12').classList = ['showpic']
-                document.getElementById('_showpic_6227df12').removeEventListener('click', fun6227df12)
-                document.getElementById('_showpic_6227df12').style.display = 'none'
+            let imgself6227df12 = document.getElementById('_pic_6227df12')
+            function isInViewPortOfTwo6227df12 () {
+                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                const top = imgself6227df12.getBoundingClientRect() && imgself6227df12.getBoundingClientRect().top
+                if (top  <= viewPortHeight + 300) {
+                    document.getElementById('_pic_6227df12').src = document.getElementById('_pic_6227df12').getAttribute('href')
+                    document.getElementById('_pic_6227df12').classList = ['showpic']
+                    document.getElementById('_showpic_6227df12').style.display = 'none'
+                    window.removeEventListener('scroll', isInViewPortOfTwo6227df12)
+                }
             }
-            document.getElementById('_showpic_6227df12').addEventListener('click', fun6227df12)
+            window.addEventListener('scroll', isInViewPortOfTwo6227df12)
         </script>
     </p>
 
