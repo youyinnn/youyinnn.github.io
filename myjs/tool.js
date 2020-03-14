@@ -568,7 +568,27 @@ function arrtoform(arr) {
 function setPopPanel() {
     let p = c('div')
     p.id = '_popmsg'
-    p.style.cssText = 'cursor: pointer;user-select: none;z-index: 0;background-color: #383d41;line-height: 2.5rem;height: 2.5rem;bottom: 2rem;position: fixed;margin: auto;color: whitesmoke;text-align: center;font-size: 17px;padding: 0 1.5rem;left: 50%;transform: translateX(-50%) scale(0);transition: all .3s;opacity: 0;'
+    p.style.cssText = `
+        cursor: pointer;
+        user-select: none;
+        z-index: 0;
+        background-color: #383d41;
+        line-height: 2.5rem;
+        bottom: 2rem;
+        position: fixed;
+        margin: auto;color: whitesmoke;
+        text-align: center;
+        font-size: 17px;
+        padding: 0 1.5rem;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        transition: all .3s;
+        opacity: 0;
+        flex-wrap: wrap;
+        align-items: stretch;
+        display: flex;
+        height: auto;
+    `
     appendc($('body')[0], p)
 }
 
