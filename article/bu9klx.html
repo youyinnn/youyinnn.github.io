@@ -250,7 +250,7 @@
         <img id="_pic_776bfe38" href=https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180710172525.png class="hidepic" ></img>
         <script>
             let imgself776bfe38 = document.getElementById('_pic_776bfe38')
-            function isInViewPortOfTwo776bfe38 () {
+            let isInViewPortOfTwo776bfe38 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself776bfe38.getBoundingClientRect() && imgself776bfe38.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -258,8 +258,10 @@
                     document.getElementById('_pic_776bfe38').classList = ['showpic']
                     document.getElementById('_showpic_776bfe38').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo776bfe38)
+                    isInViewPortOfTwo776bfe38 = null
                 }
             }
+            isInViewPortOfTwo776bfe38 ()
             window.addEventListener('scroll', isInViewPortOfTwo776bfe38)
         </script>
     </p>

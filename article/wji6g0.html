@@ -390,7 +390,7 @@ class AVLTree {
         <img id="_pic_fd500339" href=https://image.youyinnn.top/20180829110435.png class="hidepic" ></img>
         <script>
             let imgselffd500339 = document.getElementById('_pic_fd500339')
-            function isInViewPortOfTwofd500339 () {
+            let isInViewPortOfTwofd500339 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselffd500339.getBoundingClientRect() && imgselffd500339.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -398,8 +398,10 @@ class AVLTree {
                     document.getElementById('_pic_fd500339').classList = ['showpic']
                     document.getElementById('_showpic_fd500339').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwofd500339)
+                    isInViewPortOfTwofd500339 = null
                 }
             }
+            isInViewPortOfTwofd500339 ()
             window.addEventListener('scroll', isInViewPortOfTwofd500339)
         </script>
     </p>

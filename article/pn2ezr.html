@@ -299,7 +299,7 @@ Explanation: 342 + 465 = 807.</code></pre><p>
         <img id="_pic_92b068b7" href=https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg class="hidepic" ></img>
         <script>
             let imgself92b068b7 = document.getElementById('_pic_92b068b7')
-            function isInViewPortOfTwo92b068b7 () {
+            let isInViewPortOfTwo92b068b7 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself92b068b7.getBoundingClientRect() && imgself92b068b7.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -307,8 +307,10 @@ Explanation: 342 + 465 = 807.</code></pre><p>
                     document.getElementById('_pic_92b068b7').classList = ['showpic']
                     document.getElementById('_showpic_92b068b7').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo92b068b7)
+                    isInViewPortOfTwo92b068b7 = null
                 }
             }
+            isInViewPortOfTwo92b068b7 ()
             window.addEventListener('scroll', isInViewPortOfTwo92b068b7)
         </script>
     </p>

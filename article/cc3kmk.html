@@ -585,7 +585,7 @@ public class AnnotationTest extends HttpServlet
         <img id="_pic_ddb67bf6" href=https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/ServletAnnontationExp.png class="hidepic" ></img>
         <script>
             let imgselfddb67bf6 = document.getElementById('_pic_ddb67bf6')
-            function isInViewPortOfTwoddb67bf6 () {
+            let isInViewPortOfTwoddb67bf6 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfddb67bf6.getBoundingClientRect() && imgselfddb67bf6.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -593,8 +593,10 @@ public class AnnotationTest extends HttpServlet
                     document.getElementById('_pic_ddb67bf6').classList = ['showpic']
                     document.getElementById('_showpic_ddb67bf6').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoddb67bf6)
+                    isInViewPortOfTwoddb67bf6 = null
                 }
             }
+            isInViewPortOfTwoddb67bf6 ()
             window.addEventListener('scroll', isInViewPortOfTwoddb67bf6)
         </script>
     </p>

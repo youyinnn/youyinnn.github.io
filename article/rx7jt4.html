@@ -151,7 +151,7 @@
         <img id="_pic_f8631750" href=https://docs.docker.com/engine/images/engine-components-flow.png class="hidepic" ></img>
         <script>
             let imgselff8631750 = document.getElementById('_pic_f8631750')
-            function isInViewPortOfTwof8631750 () {
+            let isInViewPortOfTwof8631750 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselff8631750.getBoundingClientRect() && imgselff8631750.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -159,8 +159,10 @@
                     document.getElementById('_pic_f8631750').classList = ['showpic']
                     document.getElementById('_showpic_f8631750').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwof8631750)
+                    isInViewPortOfTwof8631750 = null
                 }
             }
+            isInViewPortOfTwof8631750 ()
             window.addEventListener('scroll', isInViewPortOfTwof8631750)
         </script>
     </p>
@@ -180,7 +182,7 @@
         <img id="_pic_d8c9695f" href=https://docs.docker.com/engine/images/architecture.svg class="hidepic" ></img>
         <script>
             let imgselfd8c9695f = document.getElementById('_pic_d8c9695f')
-            function isInViewPortOfTwod8c9695f () {
+            let isInViewPortOfTwod8c9695f = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfd8c9695f.getBoundingClientRect() && imgselfd8c9695f.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -188,8 +190,10 @@
                     document.getElementById('_pic_d8c9695f').classList = ['showpic']
                     document.getElementById('_showpic_d8c9695f').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwod8c9695f)
+                    isInViewPortOfTwod8c9695f = null
                 }
             }
+            isInViewPortOfTwod8c9695f ()
             window.addEventListener('scroll', isInViewPortOfTwod8c9695f)
         </script>
     </p>

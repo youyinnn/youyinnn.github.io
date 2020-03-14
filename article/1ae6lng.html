@@ -148,7 +148,7 @@
         <img id="_pic_2f5242e" href=https://docs.docker.com/storage/images/types-of-mounts-volume.png class="hidepic" ></img>
         <script>
             let imgself2f5242e = document.getElementById('_pic_2f5242e')
-            function isInViewPortOfTwo2f5242e () {
+            let isInViewPortOfTwo2f5242e = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself2f5242e.getBoundingClientRect() && imgself2f5242e.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -156,8 +156,10 @@
                     document.getElementById('_pic_2f5242e').classList = ['showpic']
                     document.getElementById('_showpic_2f5242e').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo2f5242e)
+                    isInViewPortOfTwo2f5242e = null
                 }
             }
+            isInViewPortOfTwo2f5242e ()
             window.addEventListener('scroll', isInViewPortOfTwo2f5242e)
         </script>
     </p>

@@ -311,7 +311,7 @@ static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         <img id="_pic_52e9084d" href=https://image.youyinnn.top/20180817154531.png class="hidepic" ></img>
         <script>
             let imgself52e9084d = document.getElementById('_pic_52e9084d')
-            function isInViewPortOfTwo52e9084d () {
+            let isInViewPortOfTwo52e9084d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself52e9084d.getBoundingClientRect() && imgself52e9084d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -319,8 +319,10 @@ static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
                     document.getElementById('_pic_52e9084d').classList = ['showpic']
                     document.getElementById('_showpic_52e9084d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo52e9084d)
+                    isInViewPortOfTwo52e9084d = null
                 }
             }
+            isInViewPortOfTwo52e9084d ()
             window.addEventListener('scroll', isInViewPortOfTwo52e9084d)
         </script>
     </p>
@@ -469,7 +471,7 @@ public HashMap() {
         <img id="_pic_28359cc4" href=https://image.youyinnn.top/20180817171145.png class="hidepic" ></img>
         <script>
             let imgself28359cc4 = document.getElementById('_pic_28359cc4')
-            function isInViewPortOfTwo28359cc4 () {
+            let isInViewPortOfTwo28359cc4 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself28359cc4.getBoundingClientRect() && imgself28359cc4.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -477,8 +479,10 @@ public HashMap() {
                     document.getElementById('_pic_28359cc4').classList = ['showpic']
                     document.getElementById('_showpic_28359cc4').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo28359cc4)
+                    isInViewPortOfTwo28359cc4 = null
                 }
             }
+            isInViewPortOfTwo28359cc4 ()
             window.addEventListener('scroll', isInViewPortOfTwo28359cc4)
         </script>
     </p>
@@ -751,7 +755,7 @@ static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
         <img id="_pic_c0f5bc18" href=https://image.youyinnn.top/20180818150455.png class="hidepic" ></img>
         <script>
             let imgselfc0f5bc18 = document.getElementById('_pic_c0f5bc18')
-            function isInViewPortOfTwoc0f5bc18 () {
+            let isInViewPortOfTwoc0f5bc18 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfc0f5bc18.getBoundingClientRect() && imgselfc0f5bc18.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -759,8 +763,10 @@ static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
                     document.getElementById('_pic_c0f5bc18').classList = ['showpic']
                     document.getElementById('_showpic_c0f5bc18').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoc0f5bc18)
+                    isInViewPortOfTwoc0f5bc18 = null
                 }
             }
+            isInViewPortOfTwoc0f5bc18 ()
             window.addEventListener('scroll', isInViewPortOfTwoc0f5bc18)
         </script>
     </p>

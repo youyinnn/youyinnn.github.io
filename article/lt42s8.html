@@ -154,7 +154,7 @@
         <img id="_pic_cec40ad1" href=https://docs.docker.com/storage/images/types-of-mounts.png class="hidepic" ></img>
         <script>
             let imgselfcec40ad1 = document.getElementById('_pic_cec40ad1')
-            function isInViewPortOfTwocec40ad1 () {
+            let isInViewPortOfTwocec40ad1 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfcec40ad1.getBoundingClientRect() && imgselfcec40ad1.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -162,8 +162,10 @@
                     document.getElementById('_pic_cec40ad1').classList = ['showpic']
                     document.getElementById('_showpic_cec40ad1').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwocec40ad1)
+                    isInViewPortOfTwocec40ad1 = null
                 }
             }
+            isInViewPortOfTwocec40ad1 ()
             window.addEventListener('scroll', isInViewPortOfTwocec40ad1)
         </script>
     </p>

@@ -141,7 +141,7 @@
         <img id="_pic_fd315b03" href=https://image.youyinnn.top/20191002162139.png class="hidepic" ></img>
         <script>
             let imgselffd315b03 = document.getElementById('_pic_fd315b03')
-            function isInViewPortOfTwofd315b03 () {
+            let isInViewPortOfTwofd315b03 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselffd315b03.getBoundingClientRect() && imgselffd315b03.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -149,8 +149,10 @@
                     document.getElementById('_pic_fd315b03').classList = ['showpic']
                     document.getElementById('_showpic_fd315b03').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwofd315b03)
+                    isInViewPortOfTwofd315b03 = null
                 }
             }
+            isInViewPortOfTwofd315b03 ()
             window.addEventListener('scroll', isInViewPortOfTwofd315b03)
         </script>
     </p>
@@ -201,7 +203,7 @@
         <img id="_pic_3417744" href=https://image.youyinnn.top/20191002162216.png class="hidepic" ></img>
         <script>
             let imgself3417744 = document.getElementById('_pic_3417744')
-            function isInViewPortOfTwo3417744 () {
+            let isInViewPortOfTwo3417744 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself3417744.getBoundingClientRect() && imgself3417744.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -209,8 +211,10 @@
                     document.getElementById('_pic_3417744').classList = ['showpic']
                     document.getElementById('_showpic_3417744').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo3417744)
+                    isInViewPortOfTwo3417744 = null
                 }
             }
+            isInViewPortOfTwo3417744 ()
             window.addEventListener('scroll', isInViewPortOfTwo3417744)
         </script>
     </p>

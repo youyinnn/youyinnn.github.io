@@ -147,7 +147,7 @@
         <img id="_pic_b47470db" href=https://image.youyinnn.top/jvmRuntimeDataArea2.png class="hidepic" ></img>
         <script>
             let imgselfb47470db = document.getElementById('_pic_b47470db')
-            function isInViewPortOfTwob47470db () {
+            let isInViewPortOfTwob47470db = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfb47470db.getBoundingClientRect() && imgselfb47470db.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -155,8 +155,10 @@
                     document.getElementById('_pic_b47470db').classList = ['showpic']
                     document.getElementById('_showpic_b47470db').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwob47470db)
+                    isInViewPortOfTwob47470db = null
                 }
             }
+            isInViewPortOfTwob47470db ()
             window.addEventListener('scroll', isInViewPortOfTwob47470db)
         </script>
     </p>

@@ -352,7 +352,7 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
         <img id="_pic_417af7" href=https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png class="hidepic" ></img>
         <script>
             let imgself417af7 = document.getElementById('_pic_417af7')
-            function isInViewPortOfTwo417af7 () {
+            let isInViewPortOfTwo417af7 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself417af7.getBoundingClientRect() && imgself417af7.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -360,8 +360,10 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
                     document.getElementById('_pic_417af7').classList = ['showpic']
                     document.getElementById('_showpic_417af7').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo417af7)
+                    isInViewPortOfTwo417af7 = null
                 }
             }
+            isInViewPortOfTwo417af7 ()
             window.addEventListener('scroll', isInViewPortOfTwo417af7)
         </script>
     </p>

@@ -143,7 +143,7 @@
         <img id="_pic_4da311a6" href=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png class="hidepic" ></img>
         <script>
             let imgself4da311a6 = document.getElementById('_pic_4da311a6')
-            function isInViewPortOfTwo4da311a6 () {
+            let isInViewPortOfTwo4da311a6 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself4da311a6.getBoundingClientRect() && imgself4da311a6.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -151,8 +151,10 @@
                     document.getElementById('_pic_4da311a6').classList = ['showpic']
                     document.getElementById('_showpic_4da311a6').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo4da311a6)
+                    isInViewPortOfTwo4da311a6 = null
                 }
             }
+            isInViewPortOfTwo4da311a6 ()
             window.addEventListener('scroll', isInViewPortOfTwo4da311a6)
         </script>
     </p>
@@ -252,7 +254,7 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
         <img id="_pic_4da311a6" href=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png class="hidepic" ></img>
         <script>
             let imgself4da311a6 = document.getElementById('_pic_4da311a6')
-            function isInViewPortOfTwo4da311a6 () {
+            let isInViewPortOfTwo4da311a6 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself4da311a6.getBoundingClientRect() && imgself4da311a6.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -260,8 +262,10 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
                     document.getElementById('_pic_4da311a6').classList = ['showpic']
                     document.getElementById('_showpic_4da311a6').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo4da311a6)
+                    isInViewPortOfTwo4da311a6 = null
                 }
             }
+            isInViewPortOfTwo4da311a6 ()
             window.addEventListener('scroll', isInViewPortOfTwo4da311a6)
         </script>
     <br>A sudoku puzzle...</p>
@@ -270,7 +274,7 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
         <img id="_pic_f30892c3" href=https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png class="hidepic" ></img>
         <script>
             let imgselff30892c3 = document.getElementById('_pic_f30892c3')
-            function isInViewPortOfTwof30892c3 () {
+            let isInViewPortOfTwof30892c3 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselff30892c3.getBoundingClientRect() && imgselff30892c3.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -278,8 +282,10 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
                     document.getElementById('_pic_f30892c3').classList = ['showpic']
                     document.getElementById('_showpic_f30892c3').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwof30892c3)
+                    isInViewPortOfTwof30892c3 = null
                 }
             }
+            isInViewPortOfTwof30892c3 ()
             window.addEventListener('scroll', isInViewPortOfTwof30892c3)
         </script>
     <br>...and its solution numbers marked in red.</p>

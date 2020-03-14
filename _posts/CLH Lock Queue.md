@@ -2,7 +2,7 @@
 title: CLH Lock Queue
 categories:
 - note
-- datastruct
+- data structure
 tags:
 - algorithm
 - CLH-Lock-Queue

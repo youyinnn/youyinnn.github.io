@@ -169,7 +169,7 @@
         <img id="_pic_ab0e77e" href=https://image.youyinnn.top/objectmemorypointer.png class="hidepic" ></img>
         <script>
             let imgselfab0e77e = document.getElementById('_pic_ab0e77e')
-            function isInViewPortOfTwoab0e77e () {
+            let isInViewPortOfTwoab0e77e = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfab0e77e.getBoundingClientRect() && imgselfab0e77e.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -177,8 +177,10 @@
                     document.getElementById('_pic_ab0e77e').classList = ['showpic']
                     document.getElementById('_showpic_ab0e77e').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoab0e77e)
+                    isInViewPortOfTwoab0e77e = null
                 }
             }
+            isInViewPortOfTwoab0e77e ()
             window.addEventListener('scroll', isInViewPortOfTwoab0e77e)
         </script>
     </p>
@@ -267,7 +269,7 @@
         <img id="_pic_93e39b01" href=https://image.youyinnn.top/jubingdangwen.png class="hidepic" ></img>
         <script>
             let imgself93e39b01 = document.getElementById('_pic_93e39b01')
-            function isInViewPortOfTwo93e39b01 () {
+            let isInViewPortOfTwo93e39b01 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself93e39b01.getBoundingClientRect() && imgself93e39b01.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -275,8 +277,10 @@
                     document.getElementById('_pic_93e39b01').classList = ['showpic']
                     document.getElementById('_showpic_93e39b01').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo93e39b01)
+                    isInViewPortOfTwo93e39b01 = null
                 }
             }
+            isInViewPortOfTwo93e39b01 ()
             window.addEventListener('scroll', isInViewPortOfTwo93e39b01)
         </script>
     </p>
@@ -292,7 +296,7 @@
         <img id="_pic_eb4d67ad" href=https://image.youyinnn.top/zhijiezhizhenfangwen.png class="hidepic" ></img>
         <script>
             let imgselfeb4d67ad = document.getElementById('_pic_eb4d67ad')
-            function isInViewPortOfTwoeb4d67ad () {
+            let isInViewPortOfTwoeb4d67ad = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfeb4d67ad.getBoundingClientRect() && imgselfeb4d67ad.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -300,8 +304,10 @@
                     document.getElementById('_pic_eb4d67ad').classList = ['showpic']
                     document.getElementById('_showpic_eb4d67ad').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoeb4d67ad)
+                    isInViewPortOfTwoeb4d67ad = null
                 }
             }
+            isInViewPortOfTwoeb4d67ad ()
             window.addEventListener('scroll', isInViewPortOfTwoeb4d67ad)
         </script>
     </p>

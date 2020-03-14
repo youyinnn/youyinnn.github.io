@@ -198,7 +198,7 @@ private double distanceOfTwoPoint(Point a, Point b) {
         <img id="_pic_ee1549c3" href=http://image.youyinnn.top/20190227202606.png class="hidepic" ></img>
         <script>
             let imgselfee1549c3 = document.getElementById('_pic_ee1549c3')
-            function isInViewPortOfTwoee1549c3 () {
+            let isInViewPortOfTwoee1549c3 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfee1549c3.getBoundingClientRect() && imgselfee1549c3.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -206,8 +206,10 @@ private double distanceOfTwoPoint(Point a, Point b) {
                     document.getElementById('_pic_ee1549c3').classList = ['showpic']
                     document.getElementById('_showpic_ee1549c3').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoee1549c3)
+                    isInViewPortOfTwoee1549c3 = null
                 }
             }
+            isInViewPortOfTwoee1549c3 ()
             window.addEventListener('scroll', isInViewPortOfTwoee1549c3)
         </script>
     </p>
