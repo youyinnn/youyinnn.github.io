@@ -770,7 +770,7 @@ INFO  : Base directory was modified
         <img id="_pic_3b24c291" href=https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/Jetty_Configuration_File_Relationships.png class="hidepic" ></img>
         <script>
             let imgself3b24c291 = document.getElementById('_pic_3b24c291')
-            function isInViewPortOfTwo3b24c291 () {
+            let isInViewPortOfTwo3b24c291 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself3b24c291.getBoundingClientRect() && imgself3b24c291.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -778,8 +778,10 @@ INFO  : Base directory was modified
                     document.getElementById('_pic_3b24c291').classList = ['showpic']
                     document.getElementById('_showpic_3b24c291').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo3b24c291)
+                    isInViewPortOfTwo3b24c291 = null
                 }
             }
+            isInViewPortOfTwo3b24c291 ()
             window.addEventListener('scroll', isInViewPortOfTwo3b24c291)
         </script>
     </p>

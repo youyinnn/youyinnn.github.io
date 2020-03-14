@@ -160,7 +160,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
         <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
         <script>
             let imgselfa29878ec = document.getElementById('_pic_a29878ec')
-            function isInViewPortOfTwoa29878ec () {
+            let isInViewPortOfTwoa29878ec = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfa29878ec.getBoundingClientRect() && imgselfa29878ec.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -168,8 +168,10 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
                     document.getElementById('_pic_a29878ec').classList = ['showpic']
                     document.getElementById('_showpic_a29878ec').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
+                    isInViewPortOfTwoa29878ec = null
                 }
             }
+            isInViewPortOfTwoa29878ec ()
             window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
         </script>
     </p>
@@ -188,7 +190,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>The answer is technically neither. <strong>According to the Java Virtual Machine Specification</strong>, the area for storing string literals is in the <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-5.html#jvms-5.1">runtime constant pool</a>. </p>
 <p><strong>The runtime constant pool</strong> memory area is allocated on a per-class or per-interface basis, so it&#39;s not tied to any object instances at all. </p>
 <p><strong>The runtime constant pool</strong> is a subset of the <em>method area</em> which <strong>&quot;stores per-class structures such as the runtime constant pool, field and method data, and the code for methods and constructors, including the special methods used in class and instance initialization and interface type initialization&quot;</strong>. </p>
-<p>The VM spec says that although the <em>method area</em> is <strong>logically part of the heap</strong>, it doesn&#39;t dictate that memory allocated in the method area be subject to garbage collection or other behaviors that would be associated with normal data structures allocated to the heap.</p>
+<p>The VM spec says that although the <em>method area</em> is <strong>logically part of the heap</strong>, it doesn&#39;t dictate that memory allocated in the method area be subject to garbage collection or other behaviors that would be associated with normal data structure allocated to the heap.</p>
 </blockquote>
 <p>String Pool是RT Constant Pool的一部分，而RT Constant Pool是<strong>方法区</strong>的一部分，虽然方法区也是Heap的一部分，但它的行为和Heap主区域不同；</p>
 <p>也有人说：</p>
@@ -242,7 +244,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
         <img id="_pic_b9872d5" href=https://image.youyinnn.top/20190302174113.png class="hidepic" ></img>
         <script>
             let imgselfb9872d5 = document.getElementById('_pic_b9872d5')
-            function isInViewPortOfTwob9872d5 () {
+            let isInViewPortOfTwob9872d5 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfb9872d5.getBoundingClientRect() && imgselfb9872d5.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -250,8 +252,10 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
                     document.getElementById('_pic_b9872d5').classList = ['showpic']
                     document.getElementById('_showpic_b9872d5').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwob9872d5)
+                    isInViewPortOfTwob9872d5 = null
                 }
             }
+            isInViewPortOfTwob9872d5 ()
             window.addEventListener('scroll', isInViewPortOfTwob9872d5)
         </script>
     </p>
@@ -316,7 +320,7 @@ System.out.println(s1 == s3);    // true</code></pre>
         <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
         <script>
             let imgselfa29878ec = document.getElementById('_pic_a29878ec')
-            function isInViewPortOfTwoa29878ec () {
+            let isInViewPortOfTwoa29878ec = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfa29878ec.getBoundingClientRect() && imgselfa29878ec.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -324,8 +328,10 @@ System.out.println(s1 == s3);    // true</code></pre>
                     document.getElementById('_pic_a29878ec').classList = ['showpic']
                     document.getElementById('_showpic_a29878ec').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
+                    isInViewPortOfTwoa29878ec = null
                 }
             }
+            isInViewPortOfTwoa29878ec ()
             window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
         </script>
     </p>

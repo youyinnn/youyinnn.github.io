@@ -141,7 +141,7 @@
         <img id="_pic_33032c4b" href=https://www.geeksforgeeks.org/wp-content/uploads/HashingDataStructure-min-768x384.png class="hidepic" ></img>
         <script>
             let imgself33032c4b = document.getElementById('_pic_33032c4b')
-            function isInViewPortOfTwo33032c4b () {
+            let isInViewPortOfTwo33032c4b = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself33032c4b.getBoundingClientRect() && imgself33032c4b.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -149,8 +149,10 @@
                     document.getElementById('_pic_33032c4b').classList = ['showpic']
                     document.getElementById('_showpic_33032c4b').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo33032c4b)
+                    isInViewPortOfTwo33032c4b = null
                 }
             }
+            isInViewPortOfTwo33032c4b ()
             window.addEventListener('scroll', isInViewPortOfTwo33032c4b)
         </script>
     </p>

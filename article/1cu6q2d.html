@@ -205,7 +205,7 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL</code></pre>
         <img id="_pic_718fce01" href=https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png class="hidepic" ></img>
         <script>
             let imgself718fce01 = document.getElementById('_pic_718fce01')
-            function isInViewPortOfTwo718fce01 () {
+            let isInViewPortOfTwo718fce01 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself718fce01.getBoundingClientRect() && imgself718fce01.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -213,8 +213,10 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL</code></pre>
                     document.getElementById('_pic_718fce01').classList = ['showpic']
                     document.getElementById('_showpic_718fce01').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo718fce01)
+                    isInViewPortOfTwo718fce01 = null
                 }
             }
+            isInViewPortOfTwo718fce01 ()
             window.addEventListener('scroll', isInViewPortOfTwo718fce01)
         </script>
     <br>Above is a 7 x 3 grid. How many possible unique paths are there?</p>
@@ -260,7 +262,7 @@ Output: 28</code></pre>
         <img id="_pic_718fce01" href=https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png class="hidepic" ></img>
         <script>
             let imgself718fce01 = document.getElementById('_pic_718fce01')
-            function isInViewPortOfTwo718fce01 () {
+            let isInViewPortOfTwo718fce01 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself718fce01.getBoundingClientRect() && imgself718fce01.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -268,8 +270,10 @@ Output: 28</code></pre>
                     document.getElementById('_pic_718fce01').classList = ['showpic']
                     document.getElementById('_showpic_718fce01').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo718fce01)
+                    isInViewPortOfTwo718fce01 = null
                 }
             }
+            isInViewPortOfTwo718fce01 ()
             window.addEventListener('scroll', isInViewPortOfTwo718fce01)
         </script>
     </p>

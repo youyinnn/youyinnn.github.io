@@ -148,7 +148,19 @@
           </h3><ul>
 <li><p>国内：</p>
 <ul>
-<li>搜狐的pv和go，但是都需要跨域</li>
+<li><p>搜狐</p>
+<ul>
+<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson">http://pv.sohu.com/cityjson</a></li>
+<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson?ie=utf-8">http://pv.sohu.com/cityjson?ie=utf-8</a></li>
+<li><a href="https://link.jianshu.com?t=http://txt.go.sohu.com/ip/soip">http://txt.go.sohu.com/ip/soip</a></li>
+</ul>
+<p>其中有一个支持https，但是有跨域问题，如果使用<code>&lt;script&gt;</code>标签解决跨域的话，它的代码是直接注入的，而不是返回的callback，而且因为没有正式的开放信息，只是搜出来的，不知道什么时候就下线了</p>
+</li>
+<li><p>某大佬个人维护的免费开放接口平台：<a href="https://github.com/MZCretin/RollToolsApi%EF%BC%8C%E6%9C%89https%EF%BC%8C%E6%9C%89%E8%B7%A8%E5%9F%9F%EF%BC%8C%E4%BD%86%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%98%AF%E4%B8%AA%E4%BA%BA%E7%BB%B4%E6%8A%A4%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%95%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%8C%E8%99%BD%E7%84%B6%E6%9C%89%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%91%E6%8E%A7%EF%BC%9B%E4%B9%9F%E6%98%AF%E7%AC%AC%E4%B8%80%E7%89%88%E8%B7%B3%E8%BD%ACipcheck">https://github.com/MZCretin/RollToolsApi，有https，有跨域，但是因为是个人维护，还是怕不稳定，虽然有小程序监控；也是第一版跳转ipcheck</a></p>
+</li>
+<li><p>百度地图开放API：<a href="http://lbs.baidu.com/index.php?title=webapi/ip-api">http://lbs.baidu.com/index.php?title=webapi/ip-api</a></p>
+<p>虽然跨域，但是好在有callback，不用怕注入，而且平台是正式开放的；虽然文档里没有callback的说明，我还是搜出来了，确实接口支持callback，这也是我现在使用的跳转ipcheck</p>
+</li>
 </ul>
 </li>
 <li><p>国外：</p>
@@ -183,7 +195,7 @@
         <img id="_pic_47dda41d" href=https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png class="hidepic" ></img>
         <script>
             let imgself47dda41d = document.getElementById('_pic_47dda41d')
-            function isInViewPortOfTwo47dda41d () {
+            let isInViewPortOfTwo47dda41d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself47dda41d.getBoundingClientRect() && imgself47dda41d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -191,8 +203,10 @@
                     document.getElementById('_pic_47dda41d').classList = ['showpic']
                     document.getElementById('_showpic_47dda41d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo47dda41d)
+                    isInViewPortOfTwo47dda41d = null
                 }
             }
+            isInViewPortOfTwo47dda41d ()
             window.addEventListener('scroll', isInViewPortOfTwo47dda41d)
         </script>
     </p>
@@ -217,7 +231,7 @@
         <img id="_pic_67d56b54" href=https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png class="hidepic" ></img>
         <script>
             let imgself67d56b54 = document.getElementById('_pic_67d56b54')
-            function isInViewPortOfTwo67d56b54 () {
+            let isInViewPortOfTwo67d56b54 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself67d56b54.getBoundingClientRect() && imgself67d56b54.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -225,8 +239,10 @@
                     document.getElementById('_pic_67d56b54').classList = ['showpic']
                     document.getElementById('_showpic_67d56b54').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo67d56b54)
+                    isInViewPortOfTwo67d56b54 = null
                 }
             }
+            isInViewPortOfTwo67d56b54 ()
             window.addEventListener('scroll', isInViewPortOfTwo67d56b54)
         </script>
     </p>
@@ -235,7 +251,7 @@
         <img id="_pic_21cbb2d8" href=https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png class="hidepic" ></img>
         <script>
             let imgself21cbb2d8 = document.getElementById('_pic_21cbb2d8')
-            function isInViewPortOfTwo21cbb2d8 () {
+            let isInViewPortOfTwo21cbb2d8 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself21cbb2d8.getBoundingClientRect() && imgself21cbb2d8.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -243,8 +259,10 @@
                     document.getElementById('_pic_21cbb2d8').classList = ['showpic']
                     document.getElementById('_showpic_21cbb2d8').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo21cbb2d8)
+                    isInViewPortOfTwo21cbb2d8 = null
                 }
             }
+            isInViewPortOfTwo21cbb2d8 ()
             window.addEventListener('scroll', isInViewPortOfTwo21cbb2d8)
         </script>
     </p>
@@ -263,7 +281,7 @@
         <img id="_pic_e94fd031" href=https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png class="hidepic" ></img>
         <script>
             let imgselfe94fd031 = document.getElementById('_pic_e94fd031')
-            function isInViewPortOfTwoe94fd031 () {
+            let isInViewPortOfTwoe94fd031 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfe94fd031.getBoundingClientRect() && imgselfe94fd031.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -271,8 +289,10 @@
                     document.getElementById('_pic_e94fd031').classList = ['showpic']
                     document.getElementById('_showpic_e94fd031').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoe94fd031)
+                    isInViewPortOfTwoe94fd031 = null
                 }
             }
+            isInViewPortOfTwoe94fd031 ()
             window.addEventListener('scroll', isInViewPortOfTwoe94fd031)
         </script>
     </p>
@@ -293,7 +313,7 @@
         <img id="_pic_36479894" href=https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png class="hidepic" ></img>
         <script>
             let imgself36479894 = document.getElementById('_pic_36479894')
-            function isInViewPortOfTwo36479894 () {
+            let isInViewPortOfTwo36479894 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself36479894.getBoundingClientRect() && imgself36479894.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -301,8 +321,10 @@
                     document.getElementById('_pic_36479894').classList = ['showpic']
                     document.getElementById('_showpic_36479894').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo36479894)
+                    isInViewPortOfTwo36479894 = null
                 }
             }
+            isInViewPortOfTwo36479894 ()
             window.addEventListener('scroll', isInViewPortOfTwo36479894)
         </script>
     </p>
@@ -1230,7 +1252,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_8ad89b50" href=https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png class="hidepic" ></img>
         <script>
             let imgself8ad89b50 = document.getElementById('_pic_8ad89b50')
-            function isInViewPortOfTwo8ad89b50 () {
+            let isInViewPortOfTwo8ad89b50 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself8ad89b50.getBoundingClientRect() && imgself8ad89b50.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1238,8 +1260,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_8ad89b50').classList = ['showpic']
                     document.getElementById('_showpic_8ad89b50').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo8ad89b50)
+                    isInViewPortOfTwo8ad89b50 = null
                 }
             }
+            isInViewPortOfTwo8ad89b50 ()
             window.addEventListener('scroll', isInViewPortOfTwo8ad89b50)
         </script>
     </p>
@@ -1257,7 +1281,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_602564a" href=https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png class="hidepic" ></img>
         <script>
             let imgself602564a = document.getElementById('_pic_602564a')
-            function isInViewPortOfTwo602564a () {
+            let isInViewPortOfTwo602564a = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself602564a.getBoundingClientRect() && imgself602564a.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1265,8 +1289,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_602564a').classList = ['showpic']
                     document.getElementById('_showpic_602564a').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo602564a)
+                    isInViewPortOfTwo602564a = null
                 }
             }
+            isInViewPortOfTwo602564a ()
             window.addEventListener('scroll', isInViewPortOfTwo602564a)
         </script>
     </p>
@@ -1308,7 +1334,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_5d357401" href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="hidepic" ></img>
         <script>
             let imgself5d357401 = document.getElementById('_pic_5d357401')
-            function isInViewPortOfTwo5d357401 () {
+            let isInViewPortOfTwo5d357401 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself5d357401.getBoundingClientRect() && imgself5d357401.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1316,8 +1342,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_5d357401').classList = ['showpic']
                     document.getElementById('_showpic_5d357401').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo5d357401)
+                    isInViewPortOfTwo5d357401 = null
                 }
             }
+            isInViewPortOfTwo5d357401 ()
             window.addEventListener('scroll', isInViewPortOfTwo5d357401)
         </script>
     </p>
@@ -1369,7 +1397,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_223fac6d" href=https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png class="hidepic" ></img>
         <script>
             let imgself223fac6d = document.getElementById('_pic_223fac6d')
-            function isInViewPortOfTwo223fac6d () {
+            let isInViewPortOfTwo223fac6d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself223fac6d.getBoundingClientRect() && imgself223fac6d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1377,8 +1405,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_223fac6d').classList = ['showpic']
                     document.getElementById('_showpic_223fac6d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo223fac6d)
+                    isInViewPortOfTwo223fac6d = null
                 }
             }
+            isInViewPortOfTwo223fac6d ()
             window.addEventListener('scroll', isInViewPortOfTwo223fac6d)
         </script>
     </p>
@@ -1398,7 +1428,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_39616b81" href=https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png class="hidepic" ></img>
         <script>
             let imgself39616b81 = document.getElementById('_pic_39616b81')
-            function isInViewPortOfTwo39616b81 () {
+            let isInViewPortOfTwo39616b81 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself39616b81.getBoundingClientRect() && imgself39616b81.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1406,8 +1436,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_39616b81').classList = ['showpic']
                     document.getElementById('_showpic_39616b81').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo39616b81)
+                    isInViewPortOfTwo39616b81 = null
                 }
             }
+            isInViewPortOfTwo39616b81 ()
             window.addEventListener('scroll', isInViewPortOfTwo39616b81)
         </script>
     <br>修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
@@ -1424,7 +1456,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_9a2020ba" href=https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png class="hidepic" ></img>
         <script>
             let imgself9a2020ba = document.getElementById('_pic_9a2020ba')
-            function isInViewPortOfTwo9a2020ba () {
+            let isInViewPortOfTwo9a2020ba = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself9a2020ba.getBoundingClientRect() && imgself9a2020ba.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1432,8 +1464,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_9a2020ba').classList = ['showpic']
                     document.getElementById('_showpic_9a2020ba').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo9a2020ba)
+                    isInViewPortOfTwo9a2020ba = null
                 }
             }
+            isInViewPortOfTwo9a2020ba ()
             window.addEventListener('scroll', isInViewPortOfTwo9a2020ba)
         </script>
     </p>
@@ -1449,7 +1483,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_25cac22d" href=https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png class="hidepic" ></img>
         <script>
             let imgself25cac22d = document.getElementById('_pic_25cac22d')
-            function isInViewPortOfTwo25cac22d () {
+            let isInViewPortOfTwo25cac22d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself25cac22d.getBoundingClientRect() && imgself25cac22d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1457,8 +1491,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_25cac22d').classList = ['showpic']
                     document.getElementById('_showpic_25cac22d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo25cac22d)
+                    isInViewPortOfTwo25cac22d = null
                 }
             }
+            isInViewPortOfTwo25cac22d ()
             window.addEventListener('scroll', isInViewPortOfTwo25cac22d)
         </script>
     </p>
@@ -1505,7 +1541,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_28778551" href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="hidepic" ></img>
         <script>
             let imgself28778551 = document.getElementById('_pic_28778551')
-            function isInViewPortOfTwo28778551 () {
+            let isInViewPortOfTwo28778551 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself28778551.getBoundingClientRect() && imgself28778551.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1513,8 +1549,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_28778551').classList = ['showpic']
                     document.getElementById('_showpic_28778551').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo28778551)
+                    isInViewPortOfTwo28778551 = null
                 }
             }
+            isInViewPortOfTwo28778551 ()
             window.addEventListener('scroll', isInViewPortOfTwo28778551)
         </script>
     </p>
@@ -1534,7 +1572,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_e85900b7" href=https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png class="hidepic" ></img>
         <script>
             let imgselfe85900b7 = document.getElementById('_pic_e85900b7')
-            function isInViewPortOfTwoe85900b7 () {
+            let isInViewPortOfTwoe85900b7 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfe85900b7.getBoundingClientRect() && imgselfe85900b7.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1542,8 +1580,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_e85900b7').classList = ['showpic']
                     document.getElementById('_showpic_e85900b7').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoe85900b7)
+                    isInViewPortOfTwoe85900b7 = null
                 }
             }
+            isInViewPortOfTwoe85900b7 ()
             window.addEventListener('scroll', isInViewPortOfTwoe85900b7)
         </script>
     </p>
@@ -1552,7 +1592,7 @@ observer.observe(article, options);</code></pre>
         <img id="_pic_c9bc5e64" href=https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png class="hidepic" ></img>
         <script>
             let imgselfc9bc5e64 = document.getElementById('_pic_c9bc5e64')
-            function isInViewPortOfTwoc9bc5e64 () {
+            let isInViewPortOfTwoc9bc5e64 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfc9bc5e64.getBoundingClientRect() && imgselfc9bc5e64.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1560,8 +1600,10 @@ observer.observe(article, options);</code></pre>
                     document.getElementById('_pic_c9bc5e64').classList = ['showpic']
                     document.getElementById('_showpic_c9bc5e64').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoc9bc5e64)
+                    isInViewPortOfTwoc9bc5e64 = null
                 }
             }
+            isInViewPortOfTwoc9bc5e64 ()
             window.addEventListener('scroll', isInViewPortOfTwoc9bc5e64)
         </script>
     </p>
@@ -1750,7 +1792,7 @@ $ nvm install 8</code></pre>
         <img id="_pic_a713b4db" href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="hidepic" ></img>
         <script>
             let imgselfa713b4db = document.getElementById('_pic_a713b4db')
-            function isInViewPortOfTwoa713b4db () {
+            let isInViewPortOfTwoa713b4db = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfa713b4db.getBoundingClientRect() && imgselfa713b4db.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1758,8 +1800,10 @@ $ nvm install 8</code></pre>
                     document.getElementById('_pic_a713b4db').classList = ['showpic']
                     document.getElementById('_showpic_a713b4db').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoa713b4db)
+                    isInViewPortOfTwoa713b4db = null
                 }
             }
+            isInViewPortOfTwoa713b4db ()
             window.addEventListener('scroll', isInViewPortOfTwoa713b4db)
         </script>
     </p>
@@ -1785,7 +1829,7 @@ $ nvm install 8</code></pre>
         <img id="_pic_a63ca3cf" href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="hidepic" ></img>
         <script>
             let imgselfa63ca3cf = document.getElementById('_pic_a63ca3cf')
-            function isInViewPortOfTwoa63ca3cf () {
+            let isInViewPortOfTwoa63ca3cf = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfa63ca3cf.getBoundingClientRect() && imgselfa63ca3cf.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1793,8 +1837,10 @@ $ nvm install 8</code></pre>
                     document.getElementById('_pic_a63ca3cf').classList = ['showpic']
                     document.getElementById('_showpic_a63ca3cf').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+                    isInViewPortOfTwoa63ca3cf = null
                 }
             }
+            isInViewPortOfTwoa63ca3cf ()
             window.addEventListener('scroll', isInViewPortOfTwoa63ca3cf)
         </script>
     </p>
@@ -1893,7 +1939,7 @@ $ nvm install 8</code></pre>
         <img id="_pic_40e20c09" href=https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png class="hidepic" ></img>
         <script>
             let imgself40e20c09 = document.getElementById('_pic_40e20c09')
-            function isInViewPortOfTwo40e20c09 () {
+            let isInViewPortOfTwo40e20c09 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself40e20c09.getBoundingClientRect() && imgself40e20c09.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1901,8 +1947,10 @@ $ nvm install 8</code></pre>
                     document.getElementById('_pic_40e20c09').classList = ['showpic']
                     document.getElementById('_showpic_40e20c09').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo40e20c09)
+                    isInViewPortOfTwo40e20c09 = null
                 }
             }
+            isInViewPortOfTwo40e20c09 ()
             window.addEventListener('scroll', isInViewPortOfTwo40e20c09)
         </script>
     </p>
@@ -1927,7 +1975,7 @@ $ nvm install 8</code></pre>
         <img id="_pic_cbf9cf14" href=https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png class="hidepic" ></img>
         <script>
             let imgselfcbf9cf14 = document.getElementById('_pic_cbf9cf14')
-            function isInViewPortOfTwocbf9cf14 () {
+            let isInViewPortOfTwocbf9cf14 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfcbf9cf14.getBoundingClientRect() && imgselfcbf9cf14.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -1935,8 +1983,10 @@ $ nvm install 8</code></pre>
                     document.getElementById('_pic_cbf9cf14').classList = ['showpic']
                     document.getElementById('_showpic_cbf9cf14').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwocbf9cf14)
+                    isInViewPortOfTwocbf9cf14 = null
                 }
             }
+            isInViewPortOfTwocbf9cf14 ()
             window.addEventListener('scroll', isInViewPortOfTwocbf9cf14)
         </script>
     </p>
@@ -2249,7 +2299,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_8d147368" href=https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png class="hidepic" ></img>
         <script>
             let imgself8d147368 = document.getElementById('_pic_8d147368')
-            function isInViewPortOfTwo8d147368 () {
+            let isInViewPortOfTwo8d147368 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself8d147368.getBoundingClientRect() && imgself8d147368.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2257,8 +2307,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_8d147368').classList = ['showpic']
                     document.getElementById('_showpic_8d147368').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo8d147368)
+                    isInViewPortOfTwo8d147368 = null
                 }
             }
+            isInViewPortOfTwo8d147368 ()
             window.addEventListener('scroll', isInViewPortOfTwo8d147368)
         </script>
     </p>
@@ -2274,7 +2326,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_cf350a78" href=https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png class="hidepic" ></img>
         <script>
             let imgselfcf350a78 = document.getElementById('_pic_cf350a78')
-            function isInViewPortOfTwocf350a78 () {
+            let isInViewPortOfTwocf350a78 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfcf350a78.getBoundingClientRect() && imgselfcf350a78.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2282,8 +2334,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_cf350a78').classList = ['showpic']
                     document.getElementById('_showpic_cf350a78').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwocf350a78)
+                    isInViewPortOfTwocf350a78 = null
                 }
             }
+            isInViewPortOfTwocf350a78 ()
             window.addEventListener('scroll', isInViewPortOfTwocf350a78)
         </script>
     </p>
@@ -2299,7 +2353,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_b9bf1d92" href=https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png class="hidepic" ></img>
         <script>
             let imgselfb9bf1d92 = document.getElementById('_pic_b9bf1d92')
-            function isInViewPortOfTwob9bf1d92 () {
+            let isInViewPortOfTwob9bf1d92 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfb9bf1d92.getBoundingClientRect() && imgselfb9bf1d92.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2307,8 +2361,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_b9bf1d92').classList = ['showpic']
                     document.getElementById('_showpic_b9bf1d92').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwob9bf1d92)
+                    isInViewPortOfTwob9bf1d92 = null
                 }
             }
+            isInViewPortOfTwob9bf1d92 ()
             window.addEventListener('scroll', isInViewPortOfTwob9bf1d92)
         </script>
     </p>
@@ -2324,7 +2380,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_b3b79d77" href=https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png class="hidepic" ></img>
         <script>
             let imgselfb3b79d77 = document.getElementById('_pic_b3b79d77')
-            function isInViewPortOfTwob3b79d77 () {
+            let isInViewPortOfTwob3b79d77 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfb3b79d77.getBoundingClientRect() && imgselfb3b79d77.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2332,8 +2388,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_b3b79d77').classList = ['showpic']
                     document.getElementById('_showpic_b3b79d77').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwob3b79d77)
+                    isInViewPortOfTwob3b79d77 = null
                 }
             }
+            isInViewPortOfTwob3b79d77 ()
             window.addEventListener('scroll', isInViewPortOfTwob3b79d77)
         </script>
     </p>
@@ -2353,7 +2411,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_d9d16863" href=https://user-images.githubusercontent.com/23525754/40038175-47ab3728-5843-11e8-8673-10bd2894ad70.png class="hidepic" ></img>
         <script>
             let imgselfd9d16863 = document.getElementById('_pic_d9d16863')
-            function isInViewPortOfTwod9d16863 () {
+            let isInViewPortOfTwod9d16863 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfd9d16863.getBoundingClientRect() && imgselfd9d16863.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2361,8 +2419,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_d9d16863').classList = ['showpic']
                     document.getElementById('_showpic_d9d16863').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwod9d16863)
+                    isInViewPortOfTwod9d16863 = null
                 }
             }
+            isInViewPortOfTwod9d16863 ()
             window.addEventListener('scroll', isInViewPortOfTwod9d16863)
         </script>
     </p>
@@ -2386,7 +2446,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_1338c43f" href=https://image.youyinnn.top/sorting-algorithms.png class="hidepic" ></img>
         <script>
             let imgself1338c43f = document.getElementById('_pic_1338c43f')
-            function isInViewPortOfTwo1338c43f () {
+            let isInViewPortOfTwo1338c43f = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself1338c43f.getBoundingClientRect() && imgself1338c43f.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2394,8 +2454,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_1338c43f').classList = ['showpic']
                     document.getElementById('_showpic_1338c43f').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo1338c43f)
+                    isInViewPortOfTwo1338c43f = null
                 }
             }
+            isInViewPortOfTwo1338c43f ()
             window.addEventListener('scroll', isInViewPortOfTwo1338c43f)
         </script>
     <br><a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
@@ -2404,7 +2466,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_1395da3c" href=https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png class="hidepic" ></img>
         <script>
             let imgself1395da3c = document.getElementById('_pic_1395da3c')
-            function isInViewPortOfTwo1395da3c () {
+            let isInViewPortOfTwo1395da3c = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself1395da3c.getBoundingClientRect() && imgself1395da3c.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2412,8 +2474,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_1395da3c').classList = ['showpic']
                     document.getElementById('_showpic_1395da3c').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo1395da3c)
+                    isInViewPortOfTwo1395da3c = null
                 }
             }
+            isInViewPortOfTwo1395da3c ()
             window.addEventListener('scroll', isInViewPortOfTwo1395da3c)
         </script>
     <br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
@@ -2422,7 +2486,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_56021a01" href=https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png class="hidepic" ></img>
         <script>
             let imgself56021a01 = document.getElementById('_pic_56021a01')
-            function isInViewPortOfTwo56021a01 () {
+            let isInViewPortOfTwo56021a01 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself56021a01.getBoundingClientRect() && imgself56021a01.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2430,8 +2494,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_56021a01').classList = ['showpic']
                     document.getElementById('_showpic_56021a01').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo56021a01)
+                    isInViewPortOfTwo56021a01 = null
                 }
             }
+            isInViewPortOfTwo56021a01 ()
             window.addEventListener('scroll', isInViewPortOfTwo56021a01)
         </script>
     <br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
@@ -2453,7 +2519,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_257b8207" href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="hidepic" ></img>
         <script>
             let imgself257b8207 = document.getElementById('_pic_257b8207')
-            function isInViewPortOfTwo257b8207 () {
+            let isInViewPortOfTwo257b8207 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself257b8207.getBoundingClientRect() && imgself257b8207.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2461,8 +2527,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_257b8207').classList = ['showpic']
                     document.getElementById('_showpic_257b8207').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo257b8207)
+                    isInViewPortOfTwo257b8207 = null
                 }
             }
+            isInViewPortOfTwo257b8207 ()
             window.addEventListener('scroll', isInViewPortOfTwo257b8207)
         </script>
     <br>
@@ -2470,7 +2538,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_215ad473" href=https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png class="hidepic" ></img>
         <script>
             let imgself215ad473 = document.getElementById('_pic_215ad473')
-            function isInViewPortOfTwo215ad473 () {
+            let isInViewPortOfTwo215ad473 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself215ad473.getBoundingClientRect() && imgself215ad473.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2478,8 +2546,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_215ad473').classList = ['showpic']
                     document.getElementById('_showpic_215ad473').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo215ad473)
+                    isInViewPortOfTwo215ad473 = null
                 }
             }
+            isInViewPortOfTwo215ad473 ()
             window.addEventListener('scroll', isInViewPortOfTwo215ad473)
         </script>
     <br>
@@ -2487,7 +2557,7 @@ html2canvas(element, opts);</code></pre>
         <img id="_pic_6d1b4848" href=https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png class="hidepic" ></img>
         <script>
             let imgself6d1b4848 = document.getElementById('_pic_6d1b4848')
-            function isInViewPortOfTwo6d1b4848 () {
+            let isInViewPortOfTwo6d1b4848 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself6d1b4848.getBoundingClientRect() && imgself6d1b4848.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -2495,8 +2565,10 @@ html2canvas(element, opts);</code></pre>
                     document.getElementById('_pic_6d1b4848').classList = ['showpic']
                     document.getElementById('_showpic_6d1b4848').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo6d1b4848)
+                    isInViewPortOfTwo6d1b4848 = null
                 }
             }
+            isInViewPortOfTwo6d1b4848 ()
             window.addEventListener('scroll', isInViewPortOfTwo6d1b4848)
         </script>
     </p>

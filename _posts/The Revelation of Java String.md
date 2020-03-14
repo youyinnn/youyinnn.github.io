@@ -56,7 +56,7 @@ String b = new String("hello");		// new an object
 >
 > **The runtime constant pool** is a subset of the *method area* which **"stores per-class structures such as the runtime constant pool, field and method data, and the code for methods and constructors, including the special methods used in class and instance initialization and interface type initialization"**. 
 >
-> The VM spec says that although the *method area* is **logically part of the heap**, it doesn't dictate that memory allocated in the method area be subject to garbage collection or other behaviors that would be associated with normal data structures allocated to the heap.
+> The VM spec says that although the *method area* is **logically part of the heap**, it doesn't dictate that memory allocated in the method area be subject to garbage collection or other behaviors that would be associated with normal data structure allocated to the heap.
 
 String Pool是RT Constant Pool的一部分，而RT Constant Pool是**方法区**的一部分，虽然方法区也是Heap的一部分，但它的行为和Heap主区域不同；
 

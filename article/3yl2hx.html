@@ -172,7 +172,7 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code></pre><p>和
         <img id="_pic_911b0ebd" href=http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png class="hidepic" ></img>
         <script>
             let imgself911b0ebd = document.getElementById('_pic_911b0ebd')
-            function isInViewPortOfTwo911b0ebd () {
+            let isInViewPortOfTwo911b0ebd = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself911b0ebd.getBoundingClientRect() && imgself911b0ebd.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -180,8 +180,10 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code></pre><p>和
                     document.getElementById('_pic_911b0ebd').classList = ['showpic']
                     document.getElementById('_showpic_911b0ebd').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo911b0ebd)
+                    isInViewPortOfTwo911b0ebd = null
                 }
             }
+            isInViewPortOfTwo911b0ebd ()
             window.addEventListener('scroll', isInViewPortOfTwo911b0ebd)
         </script>
     </p>

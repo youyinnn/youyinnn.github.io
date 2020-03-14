@@ -317,7 +317,7 @@ menu.append(new MenuItem({
         <img id="_pic_bd924ec9" href=https://image.youyinnn.top/20191014094639.png class="hidepic" ></img>
         <script>
             let imgselfbd924ec9 = document.getElementById('_pic_bd924ec9')
-            function isInViewPortOfTwobd924ec9 () {
+            let isInViewPortOfTwobd924ec9 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfbd924ec9.getBoundingClientRect() && imgselfbd924ec9.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -325,8 +325,10 @@ menu.append(new MenuItem({
                     document.getElementById('_pic_bd924ec9').classList = ['showpic']
                     document.getElementById('_showpic_bd924ec9').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwobd924ec9)
+                    isInViewPortOfTwobd924ec9 = null
                 }
             }
+            isInViewPortOfTwobd924ec9 ()
             window.addEventListener('scroll', isInViewPortOfTwobd924ec9)
         </script>
     </p>

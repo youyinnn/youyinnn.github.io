@@ -150,7 +150,7 @@
         <img id="_pic_5d02eacc" href=https://image.youyinnn.top/20191003170602.png class="hidepic" ></img>
         <script>
             let imgself5d02eacc = document.getElementById('_pic_5d02eacc')
-            function isInViewPortOfTwo5d02eacc () {
+            let isInViewPortOfTwo5d02eacc = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself5d02eacc.getBoundingClientRect() && imgself5d02eacc.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -158,8 +158,10 @@
                     document.getElementById('_pic_5d02eacc').classList = ['showpic']
                     document.getElementById('_showpic_5d02eacc').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo5d02eacc)
+                    isInViewPortOfTwo5d02eacc = null
                 }
             }
+            isInViewPortOfTwo5d02eacc ()
             window.addEventListener('scroll', isInViewPortOfTwo5d02eacc)
         </script>
     </p>

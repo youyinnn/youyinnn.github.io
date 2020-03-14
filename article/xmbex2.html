@@ -138,7 +138,7 @@
         <img id="_pic_fdf8b36d" href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="hidepic" ></img>
         <script>
             let imgselffdf8b36d = document.getElementById('_pic_fdf8b36d')
-            function isInViewPortOfTwofdf8b36d () {
+            let isInViewPortOfTwofdf8b36d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselffdf8b36d.getBoundingClientRect() && imgselffdf8b36d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -146,8 +146,10 @@
                     document.getElementById('_pic_fdf8b36d').classList = ['showpic']
                     document.getElementById('_showpic_fdf8b36d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
+                    isInViewPortOfTwofdf8b36d = null
                 }
             }
+            isInViewPortOfTwofdf8b36d ()
             window.addEventListener('scroll', isInViewPortOfTwofdf8b36d)
         </script>
     </p>
@@ -311,7 +313,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
         <img id="_pic_fdf8b36d" href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="hidepic" ></img>
         <script>
             let imgselffdf8b36d = document.getElementById('_pic_fdf8b36d')
-            function isInViewPortOfTwofdf8b36d () {
+            let isInViewPortOfTwofdf8b36d = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselffdf8b36d.getBoundingClientRect() && imgselffdf8b36d.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -319,8 +321,10 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
                     document.getElementById('_pic_fdf8b36d').classList = ['showpic']
                     document.getElementById('_showpic_fdf8b36d').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
+                    isInViewPortOfTwofdf8b36d = null
                 }
             }
+            isInViewPortOfTwofdf8b36d ()
             window.addEventListener('scroll', isInViewPortOfTwofdf8b36d)
         </script>
     </p>

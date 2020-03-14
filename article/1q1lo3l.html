@@ -215,7 +215,7 @@ $</code></pre>
         <img id="_pic_8f3564f4" href=https://image.youyinnn.top/ba4fa76eb64909e4d4959799cf130547.png class="hidepic" ></img>
         <script>
             let imgself8f3564f4 = document.getElementById('_pic_8f3564f4')
-            function isInViewPortOfTwo8f3564f4 () {
+            let isInViewPortOfTwo8f3564f4 = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself8f3564f4.getBoundingClientRect() && imgself8f3564f4.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -223,8 +223,10 @@ $</code></pre>
                     document.getElementById('_pic_8f3564f4').classList = ['showpic']
                     document.getElementById('_showpic_8f3564f4').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo8f3564f4)
+                    isInViewPortOfTwo8f3564f4 = null
                 }
             }
+            isInViewPortOfTwo8f3564f4 ()
             window.addEventListener('scroll', isInViewPortOfTwo8f3564f4)
         </script>
     </p>
@@ -233,7 +235,7 @@ $</code></pre>
         <img id="_pic_8dd6b1ea" href=https://image.youyinnn.top/6420ae86e552fa8e6e1b0f7282f28ca4.png class="hidepic" ></img>
         <script>
             let imgself8dd6b1ea = document.getElementById('_pic_8dd6b1ea')
-            function isInViewPortOfTwo8dd6b1ea () {
+            let isInViewPortOfTwo8dd6b1ea = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself8dd6b1ea.getBoundingClientRect() && imgself8dd6b1ea.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -241,8 +243,10 @@ $</code></pre>
                     document.getElementById('_pic_8dd6b1ea').classList = ['showpic']
                     document.getElementById('_showpic_8dd6b1ea').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo8dd6b1ea)
+                    isInViewPortOfTwo8dd6b1ea = null
                 }
             }
+            isInViewPortOfTwo8dd6b1ea ()
             window.addEventListener('scroll', isInViewPortOfTwo8dd6b1ea)
         </script>
     </p>

@@ -102,7 +102,7 @@ function imgscroll(href, title, text) {
         <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
         <script>
             let imgself${picId} = document.getElementById('_pic_${picId}')
-            function isInViewPortOfTwo${picId} () {
+            let isInViewPortOfTwo${picId} = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgself${picId}.getBoundingClientRect() && imgself${picId}.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -110,8 +110,10 @@ function imgscroll(href, title, text) {
                     document.getElementById('_pic_${picId}').classList = ['showpic']
                     document.getElementById('_showpic_${picId}').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwo${picId})
+                    isInViewPortOfTwo${picId} = null
                 }
             }
+            isInViewPortOfTwo${picId} ()
             window.addEventListener('scroll', isInViewPortOfTwo${picId})
         </script>
     `

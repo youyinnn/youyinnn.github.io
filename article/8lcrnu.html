@@ -212,7 +212,7 @@ void move(char source, int n, char target){
         <img id="_pic_a5d6bf2e" href=https://image.youyinnn.top/20180912111445.png class="hidepic" ></img>
         <script>
             let imgselfa5d6bf2e = document.getElementById('_pic_a5d6bf2e')
-            function isInViewPortOfTwoa5d6bf2e () {
+            let isInViewPortOfTwoa5d6bf2e = function () {
                 const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
                 const top = imgselfa5d6bf2e.getBoundingClientRect() && imgselfa5d6bf2e.getBoundingClientRect().top
                 if (top  <= viewPortHeight + 300) {
@@ -220,8 +220,10 @@ void move(char source, int n, char target){
                     document.getElementById('_pic_a5d6bf2e').classList = ['showpic']
                     document.getElementById('_showpic_a5d6bf2e').style.display = 'none'
                     window.removeEventListener('scroll', isInViewPortOfTwoa5d6bf2e)
+                    isInViewPortOfTwoa5d6bf2e = null
                 }
             }
+            isInViewPortOfTwoa5d6bf2e ()
             window.addEventListener('scroll', isInViewPortOfTwoa5d6bf2e)
         </script>
     </p>
