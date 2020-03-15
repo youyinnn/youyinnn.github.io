@@ -805,7 +805,7 @@ function showseries(abbrlink, ps) {
         if (it[1] === abbrlink) {
             adclass(sa, 'adis')
         } else {
-            sa.href = 'https://' + blog_repo + '/article/' + it[1] + '.html'
+            sa.href = location.origin + '/article/' + it[1] + '.html'
             sa.target = '_blank'
         }
         sa.innerText = it[0]
@@ -928,6 +928,7 @@ function handlemetadata(metadata) {
     $('#stat_article_count').html('<x style="color:#494b78;">' + (metadata.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> articles')
     $('#stat_cate_count').html('<x style="color:#494b78;">' + (all_cates.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> cates')
     $('#stat_tag_count').html('<x style="color:#494b78;">' + (all_tags.length || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') + '</x> tags')
+    $('#stat_last_update').html('<x style="color:#494b78;">' + dayjs(Number(sessionStorage.getItem('cacheversion'))).format('MMM-DD-YYYY, HH:mm') + '</x>')
     rstopaging(metadata.sort(sortarticlebycreatedate))
     let stgts = $('.stgt')
     let stgcs = $('.stgc')

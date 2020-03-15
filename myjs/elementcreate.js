@@ -22,7 +22,7 @@ function createarticlecard(item, pagebelong) {
     appendc(articlecard, articleshortmsg)
     appendc(articlecard, articlemore)
     appendc($('#pagebox-' + pagebelong)[0], articlecard)
-    $(`#article_short_msg_${item.abbrlink}`).html(item.short_contant)
+    $(`#article_short_msg_${item.abbrlink}`).html(item.short_content)
 }
 
 function createarticlehead(re) {
@@ -40,9 +40,9 @@ function createarticlehead(re) {
     adclass(sp1, 'font-weight-bold mr-2')
     adclass(sp5, 'font-weight-bold mr-2')
     adclass(sp6, 'mdcharlength')
-    sp1.innerHTML = 'Post:'
+    sp1.innerHTML = 'Posted at:'
     sp2.innerHTML = dayjs(re.date).format('MMM,DD YYYY') + '&nbsp;&nbsp;' + articlecarddate(dayjs(re.date))
-    sp5.innerHTML = '<br>Chars:' + re.char_count
+    sp5.innerHTML = '<br>Total chars: ' + re.char_count
     articletitle.innerHTML = title
     appendc(articletime, sp1)
     appendc(articletime, sp2)
