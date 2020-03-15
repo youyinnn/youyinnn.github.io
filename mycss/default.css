@@ -4,6 +4,7 @@
   --yfunction-color: #212529;
   --ydashed-color: #ccc;
   --yfont-minor-color: #9e9e9e;
+  --ybackground-color: whitesmoke;
 }
 
 *::selection {
@@ -57,7 +58,7 @@ html {
   backface-visibility: hidden;
   /* transform-style: preserve-3d;
   perspective: 1000; */
-  background-color: white !important;
+  background-color: var(--ybackground-color) !important;
 }
 
 body {
@@ -70,7 +71,11 @@ html {
 
 pre {
   border: none !important;
-  background-color: #f6f8fa !important;
+  background-color: #fff !important;
+}
+
+blockquote:hover, pre:hover, .copyrightbox:hover, img:hover{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
 }
 
 /*
