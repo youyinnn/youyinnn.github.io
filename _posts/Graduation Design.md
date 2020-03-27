@@ -1,7 +1,7 @@
 ---
 title: Graduation Design
 categories:
-  - 随笔
+  - essay
 comments: true
 date: 2018-11-2 21:56:10
 ---
