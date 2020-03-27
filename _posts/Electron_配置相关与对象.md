@@ -1,12 +1,6 @@
 ---
-title: Electron_配置相关与对象
-categories:
-  - note
-  - electron
-comments: true
-tags:
-  - electron
-series: electron
+title: Electron_配置相关与对象categories:  - note  - electroncomments: true
+tags:  - electronseries: electron
 date: 2019-10-10 09:03:21
 ---
 

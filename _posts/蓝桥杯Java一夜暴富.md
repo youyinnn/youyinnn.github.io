@@ -1,7 +1,7 @@
 ---
 title: 蓝桥杯Java一夜暴富
 categories:
-  - 随笔
+  - essay
 comments: false
 tags:
   - 蓝桥杯
