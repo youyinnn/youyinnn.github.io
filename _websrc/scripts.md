@@ -1741,3 +1741,24 @@ https://visualgo.net/zh
 <input type="text" oninput="value=value.replace(/[^\d]/g,'')">
 ```
 
+### :speech_balloon:图片禁止拖拽
+
+在对应标签中添加如下属性即可。
+
+```javascript
+oncontextmenu = "return false;" //禁止鼠标右键
+ondragstart = "return false;" //禁止鼠标拖动
+onselectstart = "return false;" //文字禁止鼠标选中
+onselect = "document.selection.empty();" //禁止复制文本
+```
+
+例如：
+
+```html
+<img src="img/logo.jpg" ondragstart="return false;" />
+```
+
+> 作者：祁月笑
+> 链接：https://www.imooc.com/article/20121?block_id=tuijian_wz
+> 来源：慕课网
+
