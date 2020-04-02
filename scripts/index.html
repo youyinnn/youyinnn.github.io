@@ -2605,6 +2605,22 @@ html2canvas(element, opts);</code></pre>
             💬input只允许输入数字
           </h3><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
 
+          <h3>
+            <a name="_root-💬图片禁止拖拽" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            💬图片禁止拖拽
+          </h3><p>在对应标签中添加如下属性即可。</p>
+<pre><code class="language-javascript">oncontextmenu = &quot;return false;&quot; //禁止鼠标右键
+ondragstart = &quot;return false;&quot; //禁止鼠标拖动
+onselectstart = &quot;return false;&quot; //文字禁止鼠标选中
+onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></pre>
+<p>例如：</p>
+<pre><code class="language-html">&lt;img src=&quot;img/logo.jpg&quot; ondragstart=&quot;return false;&quot; /&gt;</code></pre>
+<blockquote>
+<p>作者：祁月笑<br>链接：<a href="https://www.imooc.com/article/20121?block_id=tuijian_wz">https://www.imooc.com/article/20121?block_id=tuijian_wz</a><br>来源：慕课网</p>
+</blockquote>
+
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
         <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
