@@ -63,7 +63,7 @@ function new_render_md() {
         }
     })
     $('.katex').parent().addClass('katexp')
-    setimg()
+    setimgclicktofocus()
     highlightBlock()
     setTimeout(() => {
         rmclass(md, 'myhide')
@@ -680,50 +680,48 @@ function cgtopbut() {
     }
 }
 
-function setimg() {
+function setimgclicktofocus() {
     let articleimgs = $('.article img')
     articleimgs.attr('title', 'click to focus')
     articleimgs.bind('click', function() {
-        if (getclientw() > 700 && getclienth() > 700) {
-            let w = getclientw()
-            let h = getclienth()
-            let fixw = w * 0.85
-            let fixh = h * 0.85
-            let imgw = this.naturalWidth
-            let imgh = this.naturalHeight
-            let lg = fixh / imgh
-            if (imgh > h * 2) {
-                return
-            }
-            if (imgw * lg > fixw) {
-                lg = fixw / imgw
-            }
-            $('#md').attr('style', 'filter:blur(2px);')
-            let img = c('img')
-            let curtain = c('div')
-            curtain.style.height = getclienth() + 'px'
-            curtain.style.width = getclientw() + 'px'
-            adclass(curtain, 'curtain')
-            img.src = this.src
-            img.title = 'click to reduction'
-            if (imgw > w) {
-                img.style.width = '100%'
-            }
-            img.style.transform = 'scale(' + lg + ')'
-            adclass(img, 'imglg')
-            appendc(curtain, img)
-            appendc($('body')[0], curtain)
-            setTimeout(function() {
-                img.style.opacity = 1
-            }, 100);
-            $(curtain).bind('click', function() {
-                img.style.opacity = 0
-                setTimeout(function() {
-                    $('.curtain').remove()
-                    $('#md').attr('style', '')
-                }, 300);
-            })
+        let w = getclientw()
+        let h = getclienth()
+        let fixw = w * 0.85
+        let fixh = h * 0.85
+        let imgw = this.naturalWidth
+        let imgh = this.naturalHeight
+        let lg = fixh / imgh
+        if (imgh > h * 2) {
+            return
         }
+        if (imgw * lg > fixw) {
+            lg = fixw / imgw
+        }
+        $('#md').attr('style', 'filter:blur(2px);')
+        let img = c('img')
+        let curtain = c('div')
+        curtain.style.height = getclienth() + 'px'
+        curtain.style.width = getclientw() + 'px'
+        adclass(curtain, 'curtain')
+        img.src = this.src
+        img.title = 'click to reduction'
+        if (imgw > w) {
+            img.style.width = '100%'
+        }
+        img.style.transform = 'scale(' + lg + ')'
+        adclass(img, 'imglg')
+        appendc(curtain, img)
+        appendc($('body')[0], curtain)
+        setTimeout(function() {
+            img.style.opacity = 1
+        }, 100);
+        $(curtain).bind('click', function() {
+            img.style.opacity = 0
+            setTimeout(function() {
+                $('.curtain').remove()
+                $('#md').attr('style', '')
+            }, 300);
+        })
     })
 }
 

@@ -37,19 +37,14 @@
     padding: 5.1rem 0 0 0;
   }
 
-  #showmore {
-    top: 11rem;
-    font-size: 1rem;
+  #homepage-center{
+    margin-left: 10px;
   }
-
-  #toarticles {
-    top: 13rem;
-    font-size: 1rem;
-  }
-
+  #showmore,
+  #toarticles,
   #showhacknical {
-    top: 14rem;
     font-size: 1rem;
+    margin-left: 5px;
   }
 
   #sidetoccontainer {
@@ -418,20 +413,15 @@
   #topbar {
     height: 6rem;
   }
-
-  #showmore {
-    top: 13rem;
-    font-size: 1rem;
+  
+  #homepage-center{
+    margin-left: 10px;
   }
-
-  #toarticles {
-    top: 15rem;
-    font-size: 1rem;
-  }
-
+  #showmore,
+  #toarticles,
   #showhacknical {
-    top: 15rem;
     font-size: 1rem;
+    margin-left: 5px;
   }
 
   #hb {

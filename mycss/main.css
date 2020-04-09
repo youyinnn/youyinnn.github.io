@@ -180,7 +180,7 @@
 }
 
 #sidetoc a:hover {
-  background: rgb(151, 151, 151);
+  background: #eee;
 }
 
 #sidetoc a:active {
@@ -484,7 +484,8 @@
   background-color: var(--yfunction-color);
   width: 100%;
   text-align: center;
-  line-height: 36rem;
+  display: flex;
+  align-items: center;
   color: var(--yfont-minor-color);
   font-size: 4rem;
   transition: all .4s;
@@ -606,7 +607,7 @@
 }
 
 #toc:active {
-  transform: translateY(0.5rem);
+  transform: translateY(0.2rem);
 }
 
 #gohub:active {
@@ -666,46 +667,21 @@
   z-index: none;
 }
 
-#showmore {
-  cursor: pointer;
-  position: absolute;
-  height: 3rem;
-  line-height: 3rem;
-  font-size: 1.2rem;
-  width: 23rem;
-  top: 21rem;
-  transition: all .4s;
-  margin: auto;
-  left: 0;
-  right: 0;
+#homepage-center{
+  margin-left: 100px;
 }
 
-#showhacknical {
-  cursor: pointer;
-  position: absolute;
-  height: 3rem;
-  line-height: 3rem;
-  font-size: 1.2rem;
-  width: 23rem;
-  top: 24rem;
-  transition: all .4s;
-  margin: auto;
-  left: 0;
-  right: 0;
-}
-
+#showmore,
+#showhacknical,
 #toarticles {
+  text-align: left;
   cursor: pointer;
-  position: absolute;
   height: 3rem;
   line-height: 3rem;
   font-size: 1.2rem;
-  width: 23rem;
-  top: 27rem;
   transition: all .4s;
-  margin: auto;
-  left: 0;
-  right: 0;
+  margin-left: 40px;
+  width: 250px;
 }
 
 #showmore:hover,
@@ -978,7 +954,12 @@
 }
 
 .showarrow {
-  color: #5ac59c;
+  transition: color 2s, transform .4s;
+  color: #5ac5a5;
+}
+
+.showarrow a{
+  padding: 0 !important;
 }
 
 .showarrow a:before {
@@ -1203,8 +1184,9 @@ summary {
   margin-bottom: 1rem;
 }
 
-.markdown-body a{
-  color: #22a67b;
+.markdown-body a,
+.articleshortmsg a{
+  color: #6d99cc !important;
   font-weight: bold;
 }
 
@@ -1216,11 +1198,11 @@ summary {
   user-select: none;
   cursor: pointer;
   display: inline-block;
-  color: #22a67b;
+  color: #6d99cc;
 }
 
 .showpicbtn:hover {
-  color: rgb(0, 196, 196);
+  color: rgb(96, 64, 185);
 }
 
 .scripts *{

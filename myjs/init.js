@@ -45,6 +45,7 @@ $(function() {
         adclass(homepage, 'myshow')
         setgohub('My hub', 'https://github.com/' + username)
         showbbt()
+        $('#slogan-text').text('I\'M WAITING')
     } else if (pathname === '/about/') {
         changepagetitle('about | youyinnn')
         new_render_md()
@@ -124,7 +125,9 @@ $(function() {
             $(this).remove()
         }
     })
-
+    $('a, img').on('dragstart', function () {
+        return false
+    })
 })
 
 $.fn.extend({
