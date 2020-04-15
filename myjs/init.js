@@ -72,12 +72,14 @@ $(function() {
         changepagetitle('articles | youyinnn')
         get_articles()
     } else if (pathname.startsWith('/article/')) {
+        $(md).addClass('no-transit')
+        setTimeout(() => {
+            $(md).removeClass('no-transit')
+        }, 500);
         new_render_md()
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
         createarticlehead(metadata)
         changepagetitle(metadata.title)
-        // fade in the md panel
-        $(md).animateCss('fadeIn')
 
         // set parrow
         setarrow()
@@ -118,6 +120,7 @@ $(function() {
             $('.vcopy').html(`
                 Comment plugin: <a href="https://valine.js.org" target="_blank">Valine</a>
             `)
+            $($('.vrow')[1]).children().first().html('')
         }, 1000)
 
         seriesorderhandle(metadata.abbrlink, metadata.series,

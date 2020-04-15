@@ -774,7 +774,7 @@ function setarrow() {
         $(this).find('.panchorlink').css('opacity', '0')
     })
     $(window).scroll(function() {
-        let stop = window.scrollY - 10
+        let stop = window.scrollY - 40
         let sbotton = (window.scrollY + getclienth(0.90))
         for (let i = 0; i < arrows.length; i++) {
             let ofs = arrows[i].offsetTop
