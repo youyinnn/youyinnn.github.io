@@ -87,7 +87,7 @@ $(function() {
 
         let end = `
             <hr>
-            <div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;">
+            <div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 1rem 0;">
                 <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
                 <br>
                 Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/article/${metadata.abbrlink}.html</a>
@@ -96,12 +96,10 @@ $(function() {
                 <br>
                 2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.
             </div>
-            <br>
-            <div id="movebtn">
+            <div id="movebtn" class="mb-3">
                 <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-trigger="manual" data-placement="right" data-original-title="" >Next</button>
                 <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
             </div>
-            <hr>
             <div id="vcomments"></div>
             `
         $(md).append(end)
@@ -117,7 +115,10 @@ $(function() {
         })
         setTimeout(() => {
             $('.vwrap').addClass('shadow')
-        }, 1000);
+            $('.vcopy').html(`
+                Comment plugin: <a href="https://valine.js.org" target="_blank">Valine</a>
+            `)
+        }, 1000)
 
         seriesorderhandle(metadata.abbrlink, metadata.series,
             sessionStorage.getItem('pseries'),

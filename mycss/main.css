@@ -8,6 +8,7 @@
   border-radius: 0;
   margin-bottom: 0;
   transition: all 1.2s;
+  z-index: 999;
 }
 
 #topbar li {
