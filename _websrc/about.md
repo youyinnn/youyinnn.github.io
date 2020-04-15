@@ -13,7 +13,9 @@ The worst FeWeb developer in the universe.
 --------
 This blog is completely driven by: [GitHub pages](https://pages.github.com/).
 
-Post searching support: [Algolia](https://www.algolia.com/)
+Searching support: [Algolia](https://www.algolia.com/)
+
+Comment plugin: [Valine](https://valine.js.org/)
 
 Publishing my tech-articles, sharing my idea, keeping some scripts, todos and my personal resume.
 

@@ -112,7 +112,8 @@ $(function() {
             appKey: 'yrynpNAvYTsq3K6F9tWtWvgU',
             placeholder: 'Feel free to express your idea~',
             recordIP: true,
-            avatar: 'hide'
+            avatar: 'hide',
+            lang: 'en'
         })
         setTimeout(() => {
             $('.vwrap').addClass('shadow')
