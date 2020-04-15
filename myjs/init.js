@@ -110,7 +110,13 @@ $(function() {
             serverURLs: 'https://blogcomment.youyinnn.top',
             appId: 'BveJGLLsypBww2hn3mXgdHBg-gzGzoHsz',
             appKey: 'yrynpNAvYTsq3K6F9tWtWvgU',
+            placeholder: 'Feel free to express your idea~',
+            recordIP: true,
+            avatar: 'hide'
         })
+        setTimeout(() => {
+            $('.vwrap').addClass('shadow')
+        }, 1000);
 
         seriesorderhandle(metadata.abbrlink, metadata.series,
             sessionStorage.getItem('pseries'),

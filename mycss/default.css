@@ -167,6 +167,10 @@ td.hljs-ln-code {
   background-color: ghostwhite;
 }
 
+.veditor {
+  display: initial !important;
+}
+
 .myshow.article .card,
 .myshow.article .card-head,
 .myshow.article .card-body {
@@ -229,4 +233,25 @@ x {
 
 .katex-display{
   overflow: auto;
+}
+
+.shadow {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
+}
+
+.vbtn:hover {
+  color: rgb(72, 182, 154) !important;
+  border-color: rgb(72, 182, 154) !important;
+}
+
+.vinput:focus {
+  border-bottom-color: rgb(72, 182, 154) !important;
+}
+
+.vat {
+  color: rgb(72, 182, 154) !important;
+}
+
+.vat:hover {
+  color: rgb(54, 134, 114) !important;
 }
