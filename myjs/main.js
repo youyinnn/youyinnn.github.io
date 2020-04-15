@@ -46,19 +46,17 @@ function new_render_md() {
     var $root = $('html, body')
     $('.markdown-toc a').click(function() {
         let tzhref = $.attr(this, 'href')
-        if ($(md).hasClass('panelup')) {
+        $root.animate({
+            scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
+        }, 600)
+        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
                 scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
         }
-        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
-            $root.animate({
-                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 48
-            }, 600)
-        }
         if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
             $root.animate({
-                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15 - 96
+                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
         }
     })
@@ -659,14 +657,14 @@ function showtoc() {
 function hidetopbar() {
     if (getclientw() > 700) {
         adclass(topbar, 'hidetopbar')
-        adclass(md, 'panelup')
+        // adclass(md, 'panelup')
     }
 }
 
 function showtopbar() {
     if (getclientw() > 700) {
         rmclass(topbar, 'hidetopbar')
-        rmclass(md, 'panelup')
+        // rmclass(md, 'panelup')
     }
 }
 
