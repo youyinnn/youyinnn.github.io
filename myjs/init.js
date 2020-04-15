@@ -86,6 +86,7 @@ $(function() {
         jumpToAnchor()
 
         let end = `
+            <hr>
             <div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 2rem 0 1rem;">
                 <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
                 <br>
@@ -99,8 +100,17 @@ $(function() {
             <div id="movebtn">
                 <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-trigger="manual" data-placement="right" data-original-title="" >Next</button>
                 <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
-            </div>`
+            </div>
+            <hr>
+            <div id="vcomments"></div>
+            `
         $(md).append(end)
+        new Valine({
+            el: '#vcomments',
+            serverURLs: 'https://blogcomment.youyinnn.top',
+            appId: 'BveJGLLsypBww2hn3mXgdHBg-gzGzoHsz',
+            appKey: 'yrynpNAvYTsq3K6F9tWtWvgU',
+        })
 
         seriesorderhandle(metadata.abbrlink, metadata.series,
             sessionStorage.getItem('pseries'),
@@ -125,7 +135,7 @@ $(function() {
             $(this).remove()
         }
     })
-    $('a, img').on('dragstart', function () {
+    $('a, img').on('dragstart', function() {
         return false
     })
 })
