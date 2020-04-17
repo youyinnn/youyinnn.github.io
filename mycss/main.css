@@ -477,6 +477,11 @@
   font-size: 30px;
   width: 20px;
 }
+
+.articleshortmsg .saying-quote {
+  display: none;
+}
+
 .saying-left-quote {
   float: left;
 }
