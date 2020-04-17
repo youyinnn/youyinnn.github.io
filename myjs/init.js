@@ -131,7 +131,16 @@ $(function() {
 
         setTimeout(() => {
             hidetopbar()
-        }, 250);
+        }, 250)
+
+        // remove empty p tag
+        $('p').each((i, o) => {
+            let oo = $(o)
+            if (oo.text().trim().length === 0) {
+                oo.remove()
+            }
+        })
+
         showbbt()
         showtoc()
     }

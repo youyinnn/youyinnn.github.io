@@ -391,12 +391,10 @@
   width: 100%;
   padding: 0 0 1rem 0;
   border-bottom: 0.1rem var(--ydashed-color) dashed;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .onearticle>.articletitle {
-  /* font-size: 1.3rem;
-  font-weight: bold; */
   font-size: 2.3rem;
   font-weight: 100;
   padding: 1rem;
@@ -472,12 +470,18 @@
   text-align: center;
   padding: .5rem 1rem;
   background-color: #f8f9fa;
-  border-bottom: 2px black solid;
   font-size: 1rem;
 }
 
-.saying:hover {
-  border-radius: 2rem;
+.saying-quote {
+  font-size: 30px;
+  width: 20px;
+}
+.saying-left-quote {
+  float: left;
+}
+.saying-right-quote {
+  float: right;
 }
 
 #homepage {
@@ -987,83 +991,58 @@
   opacity: 0;
 }
 
-#series {
-  text-align: center;
-  position: fixed;
-  margin: auto;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  height: 132px;
-  width: 35px;
-  line-height: 32px;
-  word-wrap: break-word;
-  background-color: var(--ymain-color);
-  color: white;
-  z-index: 999;
-  transform: translateX(-43px);
-  cursor: pointer;
-}
-
-#series:hover {
-  background-color: var(--yminor-color);
-}
-
-#series:active {
-  background-color: var(--ymain-color);
-}
-
-.seriesshow {
-  transform: translateX(0px) !important;
-}
-
-#series button {
-  border-radius: 0;
-}
-
-#series span {
-  display: block;
-}
-
 #seriesbox {
-  text-align: center;
-  position: fixed;
-  margin: auto;
-  left: 36px;
-  top: 0;
-  bottom: 0;
-  background-color: #1d2124;
-  z-index: 888;
-  height: 132px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  transform: scaleX(0);
-  transform-origin: 0 100% 0;
-  transform-style: preserve-3d;
-  opacity: 0;
+  font-size: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  padding-bottom: .5rem;
+  transition: all .4s ease-in-out;
 }
 
-.seboxshow {
-  opacity: 1 !important;
-  transform: scaleX(1) !important;
+.seboxhide {
+  height: 0px !important;
+  padding: 0 !important;
 }
 
-#seriesbox a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  background-color: var(--ymain-color);
+#seriesbox>div {
   padding: 4px 8px;
-  height: 25%;
+  cursor: pointer;
+  color: #6d99cc !important;
+  background-color: #dfdfdf63;
 }
 
-#seriesbox a:hover {
-  background-color: var(--yminor-color);
+#seriesbox span {
+  padding-left: 8px;
+}
+
+#seriesbox>div:hover {
+  background-color: rgb(216, 215, 215);
+}
+
+.sa {
+  float: left;
+}
+.sdate {
+  float: right;
 }
 
 .adis {
-  background-color: #6c757d !important;
-  cursor: default;
+  background-color: rgb(216, 215, 215) !important;
+  border-left: #775ac5 4px solid !important;
+  cursor: default !important;
+}
+
+#series-btn{
+  font-size: 12px;
+  padding: 3px 6px;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+  background-color: rgb(235, 235, 235);
+}
+
+#series-btn:hover {
+  background-color: rgb(221, 221, 221);
 }
 
 .card-header {
