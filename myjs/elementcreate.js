@@ -28,6 +28,7 @@ function createarticlecard(item, pagebelong) {
 function createarticlehead(re) {
     let title = re.title
     let articlehead = c('div')
+    articlehead.id = 'articlehead'
     let articletitle = c('div')
     let articletime = c('div')
     let sp1 = c('span')

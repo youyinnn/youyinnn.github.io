@@ -794,25 +794,37 @@ function setarrow() {
 }
 
 function showseries(abbrlink, ps) {
+    $('#articlehead').after(`
+        <div id="series-btn" class="unselectable">Series (Click To Show All Articles)</div>
+        <div id="seriesbox" class="unselectable"></div>
+    `)
     let sb = $('#seriesbox')
     for (let i = 0; i < ps.length; i++) {
-        let sa = c('a')
+        let sadiv = c('div')
+        let sa = c('span')
         let it = ps[i].split('===')
-        if (it[1] === abbrlink) {
-            adclass(sa, 'adis')
-        } else {
-            sa.href = location.origin + '/article/' + it[1] + '.html'
-            sa.target = '_blank'
-        }
         sa.innerText = it[0]
-        appendc(sb[0], sa)
-    }
-    $('#series').addClass('seriesshow')
-    $('#series').bind('click', function() {
-        if (!hasclass(sb[0], 'seboxshow')) {
-            adclass(sb[0], 'seboxshow')
+        let sdate = c('div')
+        sdate.innerHTML = articlecarddate(dayjs(Number(it[2])))
+        adclass(sdate, 'sdate')
+        appendc(sadiv, sa)
+        appendc(sadiv, sdate)
+        appendc(sb[0], sadiv)        
+        if (it[1] === abbrlink) {
+            adclass(sadiv, 'adis')
         } else {
-            rmclass(sb[0], 'seboxshow')
+            $(sadiv).click(() => {
+                location.href = location.origin + '/article/' + it[1] + '.html'
+            })
+        }
+    }
+    sb.css('height', $('#seriesbox').css('height'))
+    sb.addClass('seboxhide')
+    $('#series-btn').bind('click', function() {
+        if (!hasclass(sb[0], 'seboxhide')) {
+            adclass(sb[0], 'seboxhide')
+        } else {
+            rmclass(sb[0], 'seboxhide')
         }
     })
 }

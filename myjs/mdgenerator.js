@@ -48,7 +48,7 @@ renderer.html = renderer.text = function(text) {
     }
 
     // render {% cq %} {% endcq %}
-    text = text.replace(/\{\% *cq *\%\}/gm, '<div class="saying mb-4">')
+    text = text.replace(/\{\% *cq *\%\}/gm, '<div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div>')
     text = text.replace(/\{\% *endcq *\%\}/gm, '</div>')
     return text
 }
@@ -146,7 +146,7 @@ for (pname of postsrs) {
                     item.ps = seriesForThisArticles = []
                     allSeries.push(item)
                 }
-                let ss = data.metadata.title + '===' + abbrlink
+                let ss = data.metadata.title + '===' + abbrlink + '===' + (new Date(data.metadata.date).getTime())
                 seriesForThisArticles.unshift(ss)
             }
             articlesMetadata.push(data.metadata)
@@ -165,7 +165,13 @@ for (m of articlesMetadata) {
     articlesOrder.push(m.title + '<=>' + m.abbrlink)
 }
 
-allSeries = yaml.dump(allSeries.reverse())
+for (ss of allSeries) {
+    ss.ps = ss.ps.sort((a, b) => {
+        return Number(a.split('===')[2]) - Number(b.split('===')[2])
+    })
+}
+
+allSeries = yaml.dump(allSeries)
 articlesMetadata = yaml.dump(articlesMetadata)
 
 let resourcesPath = path.join(__dirname, '..', 'resources')
