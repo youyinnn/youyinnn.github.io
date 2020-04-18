@@ -177,23 +177,30 @@
 <p>关于Java内存模型我们放到以后再说，总的来说，volatile生命了的变量，可以说任何对该变量的独写都是上了锁的，这种锁只针对改变量，是一种轻量级的锁</p>
 <p>共享变量是什么概念呢？我们知道，线程运行的时候，很多时候是使用自己创建的私有线程栈空间去操作数据的，那么每个线程都操作的自己的栈空间，导致同一个意义的值在不同的线程中可能有不同的值，所以volatile变量强制让线程只从共享内存的意义上去操作变量，保证了<strong>可见性</strong></p>
 <p>
-        <div id="_showpic_760599f4" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_760599f4" href=https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180717215051.png class="hidepic" ></img>
+        <div class="_showpic_760599f4 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180717215051.png class="_pic_760599f4 hidepic" picId="760599f4"></img>
         <script>
-            let imgself760599f4 = document.getElementById('_pic_760599f4')
-            let isInViewPortOfTwo760599f4 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself760599f4.getBoundingClientRect() && imgself760599f4.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_760599f4').src = document.getElementById('_pic_760599f4').getAttribute('href')
-                    document.getElementById('_pic_760599f4').classList = ['showpic']
-                    document.getElementById('_showpic_760599f4').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo760599f4)
-                    isInViewPortOfTwo760599f4 = null
+            {
+                let imgself760599f4s = document.getElementsByClassName('_pic_760599f4')
+                let showpicbtn760599f4s = document.getElementsByClassName('_showpic_760599f4')
+                let isInViewPortOfTwo760599f4 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself760599f4s[0].getBoundingClientRect() && imgself760599f4s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself760599f4s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo760599f4)
+                            isInViewPortOfTwo760599f4 = null
+                        }
+                        for (el of showpicbtn760599f4s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo760599f4 ()
+                window.addEventListener('scroll', isInViewPortOfTwo760599f4)
             }
-            isInViewPortOfTwo760599f4 ()
-            window.addEventListener('scroll', isInViewPortOfTwo760599f4)
         </script>
     </p>
 
@@ -319,23 +326,30 @@
 </blockquote>
 <p>引用书上的图来说明：</p>
 <p>
-        <div id="_showpic_187b82a6" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_187b82a6" href=https://image.youyinnn.top/monitor.png class="hidepic" ></img>
+        <div class="_showpic_187b82a6 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/monitor.png class="_pic_187b82a6 hidepic" picId="187b82a6"></img>
         <script>
-            let imgself187b82a6 = document.getElementById('_pic_187b82a6')
-            let isInViewPortOfTwo187b82a6 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself187b82a6.getBoundingClientRect() && imgself187b82a6.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_187b82a6').src = document.getElementById('_pic_187b82a6').getAttribute('href')
-                    document.getElementById('_pic_187b82a6').classList = ['showpic']
-                    document.getElementById('_showpic_187b82a6').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo187b82a6)
-                    isInViewPortOfTwo187b82a6 = null
+            {
+                let imgself187b82a6s = document.getElementsByClassName('_pic_187b82a6')
+                let showpicbtn187b82a6s = document.getElementsByClassName('_showpic_187b82a6')
+                let isInViewPortOfTwo187b82a6 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself187b82a6s[0].getBoundingClientRect() && imgself187b82a6s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself187b82a6s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo187b82a6)
+                            isInViewPortOfTwo187b82a6 = null
+                        }
+                        for (el of showpicbtn187b82a6s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo187b82a6 ()
+                window.addEventListener('scroll', isInViewPortOfTwo187b82a6)
             }
-            isInViewPortOfTwo187b82a6 ()
-            window.addEventListener('scroll', isInViewPortOfTwo187b82a6)
         </script>
     </p>
 <p>如图所示，<strong>监视器负责坚定的维护一个同步队列，所有尝试获取监视器而失败的线程，都会在该监视器维护的同步队列后面排队，直到被唤醒或者出现意外情况</strong></p>

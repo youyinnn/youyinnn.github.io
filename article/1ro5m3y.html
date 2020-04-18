@@ -132,23 +132,30 @@
             Topic &amp; Partition
           </h3><p>kafka中的Message以topic为分类去组织的，每个topic又可以分为不同的partition去存储：</p>
 <p>
-        <div id="_showpic_893f9370" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_893f9370" href=http://kafka.apache.org/20/images/log_anatomy.png class="hidepic" ></img>
+        <div class="_showpic_893f9370 showpicbtn">Loading images >></div>
+        <img href=http://kafka.apache.org/20/images/log_anatomy.png class="_pic_893f9370 hidepic" picId="893f9370"></img>
         <script>
-            let imgself893f9370 = document.getElementById('_pic_893f9370')
-            let isInViewPortOfTwo893f9370 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself893f9370.getBoundingClientRect() && imgself893f9370.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_893f9370').src = document.getElementById('_pic_893f9370').getAttribute('href')
-                    document.getElementById('_pic_893f9370').classList = ['showpic']
-                    document.getElementById('_showpic_893f9370').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo893f9370)
-                    isInViewPortOfTwo893f9370 = null
+            {
+                let imgself893f9370s = document.getElementsByClassName('_pic_893f9370')
+                let showpicbtn893f9370s = document.getElementsByClassName('_showpic_893f9370')
+                let isInViewPortOfTwo893f9370 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself893f9370s[0].getBoundingClientRect() && imgself893f9370s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself893f9370s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo893f9370)
+                            isInViewPortOfTwo893f9370 = null
+                        }
+                        for (el of showpicbtn893f9370s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo893f9370 ()
+                window.addEventListener('scroll', isInViewPortOfTwo893f9370)
             }
-            isInViewPortOfTwo893f9370 ()
-            window.addEventListener('scroll', isInViewPortOfTwo893f9370)
         </script>
     </p>
 <p>我们引用官方的Introduction中的一节，看官方是怎么解释的：</p>
@@ -187,23 +194,30 @@
 <p>其中offset为long型，MessageSize为int32，表示data有多大，data为message的具体内容。它的格式和Kafka通讯协议中介绍的MessageSet格式是一致。</p>
 <p>Partition的数据文件则包含了若干条上述格式的Message，按offset由小到大排列在一起。它的实现类为FileMessageSet，类图如下：</p>
 <p>
-        <div id="_showpic_20449ad4" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_20449ad4" href=https://image.youyinnn.top/20181107151441.png class="hidepic" ></img>
+        <div class="_showpic_20449ad4 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20181107151441.png class="_pic_20449ad4 hidepic" picId="20449ad4"></img>
         <script>
-            let imgself20449ad4 = document.getElementById('_pic_20449ad4')
-            let isInViewPortOfTwo20449ad4 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself20449ad4.getBoundingClientRect() && imgself20449ad4.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_20449ad4').src = document.getElementById('_pic_20449ad4').getAttribute('href')
-                    document.getElementById('_pic_20449ad4').classList = ['showpic']
-                    document.getElementById('_showpic_20449ad4').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo20449ad4)
-                    isInViewPortOfTwo20449ad4 = null
+            {
+                let imgself20449ad4s = document.getElementsByClassName('_pic_20449ad4')
+                let showpicbtn20449ad4s = document.getElementsByClassName('_showpic_20449ad4')
+                let isInViewPortOfTwo20449ad4 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself20449ad4s[0].getBoundingClientRect() && imgself20449ad4s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself20449ad4s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo20449ad4)
+                            isInViewPortOfTwo20449ad4 = null
+                        }
+                        for (el of showpicbtn20449ad4s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo20449ad4 ()
+                window.addEventListener('scroll', isInViewPortOfTwo20449ad4)
             }
-            isInViewPortOfTwo20449ad4 ()
-            window.addEventListener('scroll', isInViewPortOfTwo20449ad4)
         </script>
     </p>
 <p>它的主要方法如下：</p>
@@ -248,23 +262,30 @@
 <p>index文件中并没有为数据文件中的每条Message建立索引，而是采用了稀疏存储的方式，每隔一定字节的数据建立一条索引。这样避免了索引文件占用过多的空间，从而可以将索引文件保留在内存中。但缺点是没有建立索引的Message也不能一次定位到其在数据文件的位置，从而需要做一次顺序扫描，但是这次顺序扫描的范围就很小了。</p>
 <p>在Kafka中，索引文件的实现类为OffsetIndex，它的类图如下：</p>
 <p>
-        <div id="_showpic_3bd5c866" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_3bd5c866" href=https://image.youyinnn.top/20181107151802.png class="hidepic" ></img>
+        <div class="_showpic_3bd5c866 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20181107151802.png class="_pic_3bd5c866 hidepic" picId="3bd5c866"></img>
         <script>
-            let imgself3bd5c866 = document.getElementById('_pic_3bd5c866')
-            let isInViewPortOfTwo3bd5c866 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself3bd5c866.getBoundingClientRect() && imgself3bd5c866.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_3bd5c866').src = document.getElementById('_pic_3bd5c866').getAttribute('href')
-                    document.getElementById('_pic_3bd5c866').classList = ['showpic']
-                    document.getElementById('_showpic_3bd5c866').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo3bd5c866)
-                    isInViewPortOfTwo3bd5c866 = null
+            {
+                let imgself3bd5c866s = document.getElementsByClassName('_pic_3bd5c866')
+                let showpicbtn3bd5c866s = document.getElementsByClassName('_showpic_3bd5c866')
+                let isInViewPortOfTwo3bd5c866 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself3bd5c866s[0].getBoundingClientRect() && imgself3bd5c866s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself3bd5c866s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo3bd5c866)
+                            isInViewPortOfTwo3bd5c866 = null
+                        }
+                        for (el of showpicbtn3bd5c866s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo3bd5c866 ()
+                window.addEventListener('scroll', isInViewPortOfTwo3bd5c866)
             }
-            isInViewPortOfTwo3bd5c866 ()
-            window.addEventListener('scroll', isInViewPortOfTwo3bd5c866)
         </script>
     </p>
 <p>主要的方法有：</p>
@@ -281,66 +302,87 @@
           </h3><p>我们以几张图来总结一下Message是如何在Kafka中存储的，以及如何查找指定offset的Message的。</p>
 <p>Message是按照topic来组织，每个topic可以分成多个的partition，比如：有5个partition的名为为page_visits的topic的目录结构为：</p>
 <p>
-        <div id="_showpic_1cd587c" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_1cd587c" href=https://image.youyinnn.top/20181107151829.png class="hidepic" ></img>
+        <div class="_showpic_1cd587c showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20181107151829.png class="_pic_1cd587c hidepic" picId="1cd587c"></img>
         <script>
-            let imgself1cd587c = document.getElementById('_pic_1cd587c')
-            let isInViewPortOfTwo1cd587c = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself1cd587c.getBoundingClientRect() && imgself1cd587c.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_1cd587c').src = document.getElementById('_pic_1cd587c').getAttribute('href')
-                    document.getElementById('_pic_1cd587c').classList = ['showpic']
-                    document.getElementById('_showpic_1cd587c').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo1cd587c)
-                    isInViewPortOfTwo1cd587c = null
+            {
+                let imgself1cd587cs = document.getElementsByClassName('_pic_1cd587c')
+                let showpicbtn1cd587cs = document.getElementsByClassName('_showpic_1cd587c')
+                let isInViewPortOfTwo1cd587c = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself1cd587cs[0].getBoundingClientRect() && imgself1cd587cs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself1cd587cs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo1cd587c)
+                            isInViewPortOfTwo1cd587c = null
+                        }
+                        for (el of showpicbtn1cd587cs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo1cd587c ()
+                window.addEventListener('scroll', isInViewPortOfTwo1cd587c)
             }
-            isInViewPortOfTwo1cd587c ()
-            window.addEventListener('scroll', isInViewPortOfTwo1cd587c)
         </script>
     </p>
 <p>partition是分段的，每个段叫LogSegment，包括了一个数据文件和一个索引文件，下图是某个partition目录下的文件：</p>
 <p>
-        <div id="_showpic_c22fb765" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_c22fb765" href=https://image.youyinnn.top/20181107151557.png class="hidepic" ></img>
+        <div class="_showpic_c22fb765 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20181107151557.png class="_pic_c22fb765 hidepic" picId="c22fb765"></img>
         <script>
-            let imgselfc22fb765 = document.getElementById('_pic_c22fb765')
-            let isInViewPortOfTwoc22fb765 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfc22fb765.getBoundingClientRect() && imgselfc22fb765.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_c22fb765').src = document.getElementById('_pic_c22fb765').getAttribute('href')
-                    document.getElementById('_pic_c22fb765').classList = ['showpic']
-                    document.getElementById('_showpic_c22fb765').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoc22fb765)
-                    isInViewPortOfTwoc22fb765 = null
+            {
+                let imgselfc22fb765s = document.getElementsByClassName('_pic_c22fb765')
+                let showpicbtnc22fb765s = document.getElementsByClassName('_showpic_c22fb765')
+                let isInViewPortOfTwoc22fb765 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc22fb765s[0].getBoundingClientRect() && imgselfc22fb765s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc22fb765s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoc22fb765)
+                            isInViewPortOfTwoc22fb765 = null
+                        }
+                        for (el of showpicbtnc22fb765s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoc22fb765 ()
+                window.addEventListener('scroll', isInViewPortOfTwoc22fb765)
             }
-            isInViewPortOfTwoc22fb765 ()
-            window.addEventListener('scroll', isInViewPortOfTwoc22fb765)
         </script>
     </p>
 <p>可以看到，这个partition有4个LogSegment。</p>
 <p>借用博主<a href="http://blog.csdn.net/lizhitao/">@lizhitao</a>博客上的一张图来展示是如何查找Message的。</p>
 <p>
-        <div id="_showpic_be896ce1" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_be896ce1" href=https://image.youyinnn.top/20181107151736.png class="hidepic" ></img>
+        <div class="_showpic_be896ce1 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20181107151736.png class="_pic_be896ce1 hidepic" picId="be896ce1"></img>
         <script>
-            let imgselfbe896ce1 = document.getElementById('_pic_be896ce1')
-            let isInViewPortOfTwobe896ce1 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfbe896ce1.getBoundingClientRect() && imgselfbe896ce1.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_be896ce1').src = document.getElementById('_pic_be896ce1').getAttribute('href')
-                    document.getElementById('_pic_be896ce1').classList = ['showpic']
-                    document.getElementById('_showpic_be896ce1').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwobe896ce1)
-                    isInViewPortOfTwobe896ce1 = null
+            {
+                let imgselfbe896ce1s = document.getElementsByClassName('_pic_be896ce1')
+                let showpicbtnbe896ce1s = document.getElementsByClassName('_showpic_be896ce1')
+                let isInViewPortOfTwobe896ce1 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfbe896ce1s[0].getBoundingClientRect() && imgselfbe896ce1s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfbe896ce1s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwobe896ce1)
+                            isInViewPortOfTwobe896ce1 = null
+                        }
+                        for (el of showpicbtnbe896ce1s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwobe896ce1 ()
+                window.addEventListener('scroll', isInViewPortOfTwobe896ce1)
             }
-            isInViewPortOfTwobe896ce1 ()
-            window.addEventListener('scroll', isInViewPortOfTwobe896ce1)
         </script>
     </p>
 <p>比如要查找绝对offset为7的Message：</p>

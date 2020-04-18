@@ -147,23 +147,30 @@
             </a>
             微服务简介
           </h4><p>这次参加JavaOne2015最大的困难就是听Microservice相关的session，无论内容多么水，只要题目带microservice，必定报不上名，可见Microservice有多火。最喜欢其中一页。关于这个典故，可以参考<a href="%3Chttp://knowyourmeme.com/memes/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means">this</a>，此图适用于一切高大上的名字——技术有SOA，Agile，CLOUD，DevOps等等，古代有道，气，八卦等等。此类名词的最大特点就是 <strong>一解释就懂，一问就不知，一讨论就打架。</strong><br>
-        <div id="_showpic_f2ac91f" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_f2ac91f" href=http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png class="hidepic" ></img>
+        <div class="_showpic_f2ac91f showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png class="_pic_f2ac91f hidepic" picId="f2ac91f"></img>
         <script>
-            let imgselff2ac91f = document.getElementById('_pic_f2ac91f')
-            let isInViewPortOfTwof2ac91f = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselff2ac91f.getBoundingClientRect() && imgselff2ac91f.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_f2ac91f').src = document.getElementById('_pic_f2ac91f').getAttribute('href')
-                    document.getElementById('_pic_f2ac91f').classList = ['showpic']
-                    document.getElementById('_showpic_f2ac91f').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwof2ac91f)
-                    isInViewPortOfTwof2ac91f = null
+            {
+                let imgselff2ac91fs = document.getElementsByClassName('_pic_f2ac91f')
+                let showpicbtnf2ac91fs = document.getElementsByClassName('_showpic_f2ac91f')
+                let isInViewPortOfTwof2ac91f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselff2ac91fs[0].getBoundingClientRect() && imgselff2ac91fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselff2ac91fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwof2ac91f)
+                            isInViewPortOfTwof2ac91f = null
+                        }
+                        for (el of showpicbtnf2ac91fs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwof2ac91f ()
+                window.addEventListener('scroll', isInViewPortOfTwof2ac91f)
             }
-            isInViewPortOfTwof2ac91f ()
-            window.addEventListener('scroll', isInViewPortOfTwof2ac91f)
         </script>
     </p>
 <p>微服务的流行，Martin功不可没，这老头也是个奇人，特别擅长抽象归纳和制造概念，我觉的这就是最牛逼的markting啊，感觉这也是目前国人欠缺的能力。</p>
@@ -171,23 +178,30 @@
 <p>Martin Fowler是国际著名的OO专家，敏捷开发方法的创始人之一，现为ThoughtWorks公司的首席科学家.福勒（Martin Fowler），在面向对象分析设计、UML、模式、软件开发方法学、XP、重构等方面，都是世界顶级的专家，现为Thought Works公司的首席科学家。Thought Works是一家从事企业应用开发和集成的公司。早在20世纪80年代，Fowler就是使用对象技术构建多层企业应用的倡导者，他著有几本经典书籍：《企业应用架构模式》、《UML精粹》和《重构》等。—— 百度百科</p>
 </blockquote>
 <p>先来看看传统的web开发方式，通过对比比较容易理解什么是Microservice Architecture。和Microservice相对应的，这种方式一般被称为Monolithic（比较难传神的翻译）。所有的功能打包在一个WAR包里，基本没有外部依赖（除了容器），部署在一个JEE容器（Tomcat，JBoss，WebLogic）里，包含了DO/DAO，Service，UI等所有逻辑。<br>
-        <div id="_showpic_e485df0a" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_e485df0a" href=http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png class="hidepic" ></img>
+        <div class="_showpic_e485df0a showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png class="_pic_e485df0a hidepic" picId="e485df0a"></img>
         <script>
-            let imgselfe485df0a = document.getElementById('_pic_e485df0a')
-            let isInViewPortOfTwoe485df0a = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfe485df0a.getBoundingClientRect() && imgselfe485df0a.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_e485df0a').src = document.getElementById('_pic_e485df0a').getAttribute('href')
-                    document.getElementById('_pic_e485df0a').classList = ['showpic']
-                    document.getElementById('_showpic_e485df0a').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoe485df0a)
-                    isInViewPortOfTwoe485df0a = null
+            {
+                let imgselfe485df0as = document.getElementsByClassName('_pic_e485df0a')
+                let showpicbtne485df0as = document.getElementsByClassName('_showpic_e485df0a')
+                let isInViewPortOfTwoe485df0a = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfe485df0as[0].getBoundingClientRect() && imgselfe485df0as[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfe485df0as) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoe485df0a)
+                            isInViewPortOfTwoe485df0a = null
+                        }
+                        for (el of showpicbtne485df0as) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoe485df0a ()
+                window.addEventListener('scroll', isInViewPortOfTwoe485df0a)
             }
-            isInViewPortOfTwoe485df0a ()
-            window.addEventListener('scroll', isInViewPortOfTwoe485df0a)
         </script>
     </p>
 <p>Monolithic比较适合小项目，优点是：</p>
@@ -205,43 +219,57 @@
 <li>扩展性不够：无法满足高并发情况下的业务需求</li>
 </ul>
 <p>所以，现在主流的设计一般会采用Microservice Architecture，就是基于微服务的架构。简单来说， <strong>微服务的目的是有效的拆分应用，实现敏捷开发和部署</strong> 。<br>
-        <div id="_showpic_15717d74" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_15717d74" href=http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png class="hidepic" ></img>
+        <div class="_showpic_15717d74 showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png class="_pic_15717d74 hidepic" picId="15717d74"></img>
         <script>
-            let imgself15717d74 = document.getElementById('_pic_15717d74')
-            let isInViewPortOfTwo15717d74 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself15717d74.getBoundingClientRect() && imgself15717d74.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_15717d74').src = document.getElementById('_pic_15717d74').getAttribute('href')
-                    document.getElementById('_pic_15717d74').classList = ['showpic']
-                    document.getElementById('_showpic_15717d74').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo15717d74)
-                    isInViewPortOfTwo15717d74 = null
+            {
+                let imgself15717d74s = document.getElementsByClassName('_pic_15717d74')
+                let showpicbtn15717d74s = document.getElementsByClassName('_showpic_15717d74')
+                let isInViewPortOfTwo15717d74 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself15717d74s[0].getBoundingClientRect() && imgself15717d74s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself15717d74s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo15717d74)
+                            isInViewPortOfTwo15717d74 = null
+                        }
+                        for (el of showpicbtn15717d74s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo15717d74 ()
+                window.addEventListener('scroll', isInViewPortOfTwo15717d74)
             }
-            isInViewPortOfTwo15717d74 ()
-            window.addEventListener('scroll', isInViewPortOfTwo15717d74)
         </script>
     </p>
 <p>用《The art of scalability》一书里提到的scale cube比较容易理解如何拆分。你看，我们叫分库分表，别人总结成了scale cube，这就是抽象的能力啊，把复杂的东西用最简单的概念解释和总结。X轴代表运行多个负载均衡器之后运行的实例，Y轴代表将应用进一步分解为微服务（分库），数据量大时，还可以用Z轴将服务按数据分区（分表）<br>
-        <div id="_showpic_5110231e" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_5110231e" href=http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png class="hidepic" ></img>
+        <div class="_showpic_5110231e showpicbtn">Loading images >></div>
+        <img href=http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png class="_pic_5110231e hidepic" picId="5110231e"></img>
         <script>
-            let imgself5110231e = document.getElementById('_pic_5110231e')
-            let isInViewPortOfTwo5110231e = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself5110231e.getBoundingClientRect() && imgself5110231e.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_5110231e').src = document.getElementById('_pic_5110231e').getAttribute('href')
-                    document.getElementById('_pic_5110231e').classList = ['showpic']
-                    document.getElementById('_showpic_5110231e').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo5110231e)
-                    isInViewPortOfTwo5110231e = null
+            {
+                let imgself5110231es = document.getElementsByClassName('_pic_5110231e')
+                let showpicbtn5110231es = document.getElementsByClassName('_showpic_5110231e')
+                let isInViewPortOfTwo5110231e = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5110231es[0].getBoundingClientRect() && imgself5110231es[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5110231es) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo5110231e)
+                            isInViewPortOfTwo5110231e = null
+                        }
+                        for (el of showpicbtn5110231es) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo5110231e ()
+                window.addEventListener('scroll', isInViewPortOfTwo5110231e)
             }
-            isInViewPortOfTwo5110231e ()
-            window.addEventListener('scroll', isInViewPortOfTwo5110231e)
         </script>
     </p>
 
@@ -308,23 +336,30 @@
 </ul>
 <p>我的理解其实这个API Gateway可以有很多广义的实现办法，可以是一个软硬一体的盒子，也可以是一个简单的MVC框架，甚至是一个Node.js的服务端。他们最重要的作用是为前台（通常是移动应用）提供后台服务的聚合，提供一个统一的服务出口，解除他们之间的耦合，不过API Gateway也有可能成为单点故障点或者性能的瓶颈。</p>
 <p>一般用过Taobao Open Platform的就能很容易的体会，TAO就是这个API Gateway。<br>
-        <div id="_showpic_6ff35764" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_6ff35764" href=http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png class="hidepic" ></img>
+        <div class="_showpic_6ff35764 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png class="_pic_6ff35764 hidepic" picId="6ff35764"></img>
         <script>
-            let imgself6ff35764 = document.getElementById('_pic_6ff35764')
-            let isInViewPortOfTwo6ff35764 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself6ff35764.getBoundingClientRect() && imgself6ff35764.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_6ff35764').src = document.getElementById('_pic_6ff35764').getAttribute('href')
-                    document.getElementById('_pic_6ff35764').classList = ['showpic']
-                    document.getElementById('_showpic_6ff35764').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo6ff35764)
-                    isInViewPortOfTwo6ff35764 = null
+            {
+                let imgself6ff35764s = document.getElementsByClassName('_pic_6ff35764')
+                let showpicbtn6ff35764s = document.getElementsByClassName('_showpic_6ff35764')
+                let isInViewPortOfTwo6ff35764 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself6ff35764s[0].getBoundingClientRect() && imgself6ff35764s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself6ff35764s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo6ff35764)
+                            isInViewPortOfTwo6ff35764 = null
+                        }
+                        for (el of showpicbtn6ff35764s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo6ff35764 ()
+                window.addEventListener('scroll', isInViewPortOfTwo6ff35764)
             }
-            isInViewPortOfTwo6ff35764 ()
-            window.addEventListener('scroll', isInViewPortOfTwo6ff35764)
         </script>
     </p>
 
@@ -343,23 +378,30 @@
 <li>异步消息调用(Kafka, Notify, MetaQ)</li>
 </ul>
 <p>
-        <div id="_showpic_25f8a8ed" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_25f8a8ed" href=http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png class="hidepic" ></img>
+        <div class="_showpic_25f8a8ed showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png class="_pic_25f8a8ed hidepic" picId="25f8a8ed"></img>
         <script>
-            let imgself25f8a8ed = document.getElementById('_pic_25f8a8ed')
-            let isInViewPortOfTwo25f8a8ed = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself25f8a8ed.getBoundingClientRect() && imgself25f8a8ed.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_25f8a8ed').src = document.getElementById('_pic_25f8a8ed').getAttribute('href')
-                    document.getElementById('_pic_25f8a8ed').classList = ['showpic']
-                    document.getElementById('_showpic_25f8a8ed').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo25f8a8ed)
-                    isInViewPortOfTwo25f8a8ed = null
+            {
+                let imgself25f8a8eds = document.getElementsByClassName('_pic_25f8a8ed')
+                let showpicbtn25f8a8eds = document.getElementsByClassName('_showpic_25f8a8ed')
+                let isInViewPortOfTwo25f8a8ed = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself25f8a8eds[0].getBoundingClientRect() && imgself25f8a8eds[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself25f8a8eds) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo25f8a8ed)
+                            isInViewPortOfTwo25f8a8ed = null
+                        }
+                        for (el of showpicbtn25f8a8eds) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo25f8a8ed ()
+                window.addEventListener('scroll', isInViewPortOfTwo25f8a8ed)
             }
-            isInViewPortOfTwo25f8a8ed ()
-            window.addEventListener('scroll', isInViewPortOfTwo25f8a8ed)
         </script>
     </p>
 <p>一般同步调用比较简单，一致性强，但是容易出调用问题，性能体验上也会差些，特别是调用层次多的时候。RESTful和RPC的比较也是一个很有意思的话题。一般REST基于HTTP，更容易实现，更容易被接受，服务端实现技术也更灵活些，各个语言都能支持，同时能跨客户端，对客户端没有特殊的要求，只要封装了HTTP的SDK就能调用，所以相对使用的广一些。RPC也有自己的优点，传输协议更高效，安全更可控，特别在一个公司内部，如果有统一个的开发规范和统一的服务框架时，他的开发效率优势更明显些。就看各自的技术积累实际条件，自己的选择了。</p>
@@ -376,23 +418,30 @@
 <li>服务端做：优点是简单，所有服务对于前台调用方透明，一般在小公司在云服务上部署的应用采用的比较多。</li>
 </ul>
 <p>
-        <div id="_showpic_a9f83a6d" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_a9f83a6d" href=http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png class="hidepic" ></img>
+        <div class="_showpic_a9f83a6d showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png class="_pic_a9f83a6d hidepic" picId="a9f83a6d"></img>
         <script>
-            let imgselfa9f83a6d = document.getElementById('_pic_a9f83a6d')
-            let isInViewPortOfTwoa9f83a6d = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfa9f83a6d.getBoundingClientRect() && imgselfa9f83a6d.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_a9f83a6d').src = document.getElementById('_pic_a9f83a6d').getAttribute('href')
-                    document.getElementById('_pic_a9f83a6d').classList = ['showpic']
-                    document.getElementById('_showpic_a9f83a6d').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoa9f83a6d)
-                    isInViewPortOfTwoa9f83a6d = null
+            {
+                let imgselfa9f83a6ds = document.getElementsByClassName('_pic_a9f83a6d')
+                let showpicbtna9f83a6ds = document.getElementsByClassName('_showpic_a9f83a6d')
+                let isInViewPortOfTwoa9f83a6d = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa9f83a6ds[0].getBoundingClientRect() && imgselfa9f83a6ds[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa9f83a6ds) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoa9f83a6d)
+                            isInViewPortOfTwoa9f83a6d = null
+                        }
+                        for (el of showpicbtna9f83a6ds) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoa9f83a6d ()
+                window.addEventListener('scroll', isInViewPortOfTwoa9f83a6d)
             }
-            isInViewPortOfTwoa9f83a6d ()
-            window.addEventListener('scroll', isInViewPortOfTwoa9f83a6d)
         </script>
     </p>
 
@@ -410,23 +459,30 @@
 <li>降级（本地缓存）</li>
 </ul>
 <p>这些方法基本上都很明确通用，就不详细说明了。比如Netflix的Hystrix：<a href="https://github.com/Netflix/Hystrix">https://github.com/Netflix/Hystrix</a><br>
-        <div id="_showpic_3c0d3e96" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_3c0d3e96" href=http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png class="hidepic" ></img>
+        <div class="_showpic_3c0d3e96 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png class="_pic_3c0d3e96 hidepic" picId="3c0d3e96"></img>
         <script>
-            let imgself3c0d3e96 = document.getElementById('_pic_3c0d3e96')
-            let isInViewPortOfTwo3c0d3e96 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself3c0d3e96.getBoundingClientRect() && imgself3c0d3e96.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_3c0d3e96').src = document.getElementById('_pic_3c0d3e96').getAttribute('href')
-                    document.getElementById('_pic_3c0d3e96').classList = ['showpic']
-                    document.getElementById('_showpic_3c0d3e96').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo3c0d3e96)
-                    isInViewPortOfTwo3c0d3e96 = null
+            {
+                let imgself3c0d3e96s = document.getElementsByClassName('_pic_3c0d3e96')
+                let showpicbtn3c0d3e96s = document.getElementsByClassName('_showpic_3c0d3e96')
+                let isInViewPortOfTwo3c0d3e96 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself3c0d3e96s[0].getBoundingClientRect() && imgself3c0d3e96s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself3c0d3e96s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo3c0d3e96)
+                            isInViewPortOfTwo3c0d3e96 = null
+                        }
+                        for (el of showpicbtn3c0d3e96s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo3c0d3e96 ()
+                window.addEventListener('scroll', isInViewPortOfTwo3c0d3e96)
             }
-            isInViewPortOfTwo3c0d3e96 ()
-            window.addEventListener('scroll', isInViewPortOfTwo3c0d3e96)
         </script>
     </p>
 
@@ -445,23 +501,30 @@
 <li>数据调用</li>
 </ul>
 <p>
-        <div id="_showpic_1b36efdb" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_1b36efdb" href=http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png class="hidepic" ></img>
+        <div class="_showpic_1b36efdb showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png class="_pic_1b36efdb hidepic" picId="1b36efdb"></img>
         <script>
-            let imgself1b36efdb = document.getElementById('_pic_1b36efdb')
-            let isInViewPortOfTwo1b36efdb = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself1b36efdb.getBoundingClientRect() && imgself1b36efdb.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_1b36efdb').src = document.getElementById('_pic_1b36efdb').getAttribute('href')
-                    document.getElementById('_pic_1b36efdb').classList = ['showpic']
-                    document.getElementById('_showpic_1b36efdb').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo1b36efdb)
-                    isInViewPortOfTwo1b36efdb = null
+            {
+                let imgself1b36efdbs = document.getElementsByClassName('_pic_1b36efdb')
+                let showpicbtn1b36efdbs = document.getElementsByClassName('_showpic_1b36efdb')
+                let isInViewPortOfTwo1b36efdb = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself1b36efdbs[0].getBoundingClientRect() && imgself1b36efdbs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself1b36efdbs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo1b36efdb)
+                            isInViewPortOfTwo1b36efdb = null
+                        }
+                        for (el of showpicbtn1b36efdbs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo1b36efdb ()
+                window.addEventListener('scroll', isInViewPortOfTwo1b36efdb)
             }
-            isInViewPortOfTwo1b36efdb ()
-            window.addEventListener('scroll', isInViewPortOfTwo1b36efdb)
         </script>
     </p>
 <p>微服务的优点和缺点（或者说挑战）一样明显。</p>
@@ -489,23 +552,30 @@
 <ul>
 <li>对于大的互联网公司，微服务架构是血液，是习惯，每家公司都有自己的套路和架构，细节有不同，但是核心理念是通的。</li>
 <li>对于一般的公司而言，实践微服务有非常大的技术挑战，于是乎才有了这么多IT供应商考虑这里的商机。微服务比较适合未来有一定的扩展复杂度，且有很大用户增量预期的应用，说人话就是新兴的互联网公司。创业初期，不可能买大量的机器或者很贵的机器，但是又必须考虑应对成功后的巨量的用户，微服务架构成了最好的选择。<br>
-        <div id="_showpic_4e9bc008" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_4e9bc008" href=http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png class="hidepic" ></img>
+        <div class="_showpic_4e9bc008 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png class="_pic_4e9bc008 hidepic" picId="4e9bc008"></img>
         <script>
-            let imgself4e9bc008 = document.getElementById('_pic_4e9bc008')
-            let isInViewPortOfTwo4e9bc008 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself4e9bc008.getBoundingClientRect() && imgself4e9bc008.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_4e9bc008').src = document.getElementById('_pic_4e9bc008').getAttribute('href')
-                    document.getElementById('_pic_4e9bc008').classList = ['showpic']
-                    document.getElementById('_showpic_4e9bc008').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo4e9bc008)
-                    isInViewPortOfTwo4e9bc008 = null
+            {
+                let imgself4e9bc008s = document.getElementsByClassName('_pic_4e9bc008')
+                let showpicbtn4e9bc008s = document.getElementsByClassName('_showpic_4e9bc008')
+                let isInViewPortOfTwo4e9bc008 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself4e9bc008s[0].getBoundingClientRect() && imgself4e9bc008s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself4e9bc008s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo4e9bc008)
+                            isInViewPortOfTwo4e9bc008 = null
+                        }
+                        for (el of showpicbtn4e9bc008s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo4e9bc008 ()
+                window.addEventListener('scroll', isInViewPortOfTwo4e9bc008)
             }
-            isInViewPortOfTwo4e9bc008 ()
-            window.addEventListener('scroll', isInViewPortOfTwo4e9bc008)
         </script>
     </li>
 </ul>
@@ -517,43 +587,57 @@
             So What - 思考
           </h3><p>看到上面的图，不是不觉得特别的熟悉？其实我们N年前就用的滚瓜烂熟了好不好？裤子都拖了，你就给我看这个？</p>
 <p>
-        <div id="_showpic_72055665" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_72055665" href=https://camo.githubusercontent.com/e5151c52066f1dd92fbae7ed40f6cc0f0d410fa0/68747470733a2f2f7261772e6769746875622e636f6d2f4e6574666c69782f726563697065732d7273732f6d61737465722f696d616765732f526563697065735f5253532e706e67 class="hidepic" ></img>
+        <div class="_showpic_72055665 showpicbtn">Loading images >></div>
+        <img href=https://camo.githubusercontent.com/e5151c52066f1dd92fbae7ed40f6cc0f0d410fa0/68747470733a2f2f7261772e6769746875622e636f6d2f4e6574666c69782f726563697065732d7273732f6d61737465722f696d616765732f526563697065735f5253532e706e67 class="_pic_72055665 hidepic" picId="72055665"></img>
         <script>
-            let imgself72055665 = document.getElementById('_pic_72055665')
-            let isInViewPortOfTwo72055665 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself72055665.getBoundingClientRect() && imgself72055665.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_72055665').src = document.getElementById('_pic_72055665').getAttribute('href')
-                    document.getElementById('_pic_72055665').classList = ['showpic']
-                    document.getElementById('_showpic_72055665').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo72055665)
-                    isInViewPortOfTwo72055665 = null
+            {
+                let imgself72055665s = document.getElementsByClassName('_pic_72055665')
+                let showpicbtn72055665s = document.getElementsByClassName('_showpic_72055665')
+                let isInViewPortOfTwo72055665 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself72055665s[0].getBoundingClientRect() && imgself72055665s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself72055665s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo72055665)
+                            isInViewPortOfTwo72055665 = null
+                        }
+                        for (el of showpicbtn72055665s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo72055665 ()
+                window.addEventListener('scroll', isInViewPortOfTwo72055665)
             }
-            isInViewPortOfTwo72055665 ()
-            window.addEventListener('scroll', isInViewPortOfTwo72055665)
         </script>
     <br>from: <a href="https://github.com/Netflix/recipes-rss/wiki/Architecture">https://github.com/Netflix/recipes-rss/wiki/Architecture</a></p>
 <p>其实本来所谓的微服务就是对互联网在应用技术的一个总结归纳，IT厂商鼓吹所有概念无非是为了生意（business），SOA是，Cloud是，Microservice也是。下面玩笑很有意思的概括了这个情况（我加了第一条线，原图见<a href="http://blog.gardeviance.org/2012/07/adoption-cycles.html">这里</a>）<br>
-        <div id="_showpic_513b8eb5" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_513b8eb5" href=http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png class="hidepic" ></img>
+        <div class="_showpic_513b8eb5 showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png class="_pic_513b8eb5 hidepic" picId="513b8eb5"></img>
         <script>
-            let imgself513b8eb5 = document.getElementById('_pic_513b8eb5')
-            let isInViewPortOfTwo513b8eb5 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself513b8eb5.getBoundingClientRect() && imgself513b8eb5.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_513b8eb5').src = document.getElementById('_pic_513b8eb5').getAttribute('href')
-                    document.getElementById('_pic_513b8eb5').classList = ['showpic']
-                    document.getElementById('_showpic_513b8eb5').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo513b8eb5)
-                    isInViewPortOfTwo513b8eb5 = null
+            {
+                let imgself513b8eb5s = document.getElementsByClassName('_pic_513b8eb5')
+                let showpicbtn513b8eb5s = document.getElementsByClassName('_showpic_513b8eb5')
+                let isInViewPortOfTwo513b8eb5 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself513b8eb5s[0].getBoundingClientRect() && imgself513b8eb5s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself513b8eb5s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo513b8eb5)
+                            isInViewPortOfTwo513b8eb5 = null
+                        }
+                        for (el of showpicbtn513b8eb5s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo513b8eb5 ()
+                window.addEventListener('scroll', isInViewPortOfTwo513b8eb5)
             }
-            isInViewPortOfTwo513b8eb5 ()
-            window.addEventListener('scroll', isInViewPortOfTwo513b8eb5)
         </script>
     </p>
 <p>所以微服对我们的思考我觉得更多的是思维上的，对已微服务架构， <strong>技术上不是问题，意识比工具重要。</strong></p>
@@ -567,23 +651,30 @@
 </ul>
 <p>同时，对于开发同学，有这么多的中间件和强大的PE支持固然是好事，我们也需要深入去了解这些中间件背后的原理，知其然知其所以然，设想下，如果我们是一个小公司的CTO，离开的阿里的大环境，在有限的技术资源如何通过开源技术实施微服务？</p>
 <p>最后，一般提到微服务都离不开DevOps和Docker，理解微服务架构是核心，devops和docker是工具，是手段。下次在抽时间再学习整理下。<br>
-        <div id="_showpic_6d3c652" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_6d3c652" href=http://img2.tbcdn.cn/L1/461/1/2ada4ac057eaf561f8862572bf6327845c482ca7.png class="hidepic" ></img>
+        <div class="_showpic_6d3c652 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/2ada4ac057eaf561f8862572bf6327845c482ca7.png class="_pic_6d3c652 hidepic" picId="6d3c652"></img>
         <script>
-            let imgself6d3c652 = document.getElementById('_pic_6d3c652')
-            let isInViewPortOfTwo6d3c652 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself6d3c652.getBoundingClientRect() && imgself6d3c652.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_6d3c652').src = document.getElementById('_pic_6d3c652').getAttribute('href')
-                    document.getElementById('_pic_6d3c652').classList = ['showpic']
-                    document.getElementById('_showpic_6d3c652').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo6d3c652)
-                    isInViewPortOfTwo6d3c652 = null
+            {
+                let imgself6d3c652s = document.getElementsByClassName('_pic_6d3c652')
+                let showpicbtn6d3c652s = document.getElementsByClassName('_showpic_6d3c652')
+                let isInViewPortOfTwo6d3c652 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself6d3c652s[0].getBoundingClientRect() && imgself6d3c652s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself6d3c652s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo6d3c652)
+                            isInViewPortOfTwo6d3c652 = null
+                        }
+                        for (el of showpicbtn6d3c652s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo6d3c652 ()
+                window.addEventListener('scroll', isInViewPortOfTwo6d3c652)
             }
-            isInViewPortOfTwo6d3c652 ()
-            window.addEventListener('scroll', isInViewPortOfTwo6d3c652)
         </script>
     </p>
 <blockquote>

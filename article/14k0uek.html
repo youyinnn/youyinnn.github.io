@@ -144,44 +144,58 @@
             小层次
           </h4><p>首先我们得有一个前提，软件组中的一个小组在开发一个模块，这个模块由若干名成员开发，模块的成品标准已经定义好，模块也已经开发好第一版基础版，即可以投入小范围使用的版本，我们称这个版本为<strong>主模块版本</strong>。</p>
 <p>
-        <div id="_showpic_790c7df" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_790c7df" href=https://user-images.githubusercontent.com/23525754/39910988-3c8e44d0-552c-11e8-9b85-1606425a0330.png class="hidepic" ></img>
+        <div class="_showpic_790c7df showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39910988-3c8e44d0-552c-11e8-9b85-1606425a0330.png class="_pic_790c7df hidepic" picId="790c7df"></img>
         <script>
-            let imgself790c7df = document.getElementById('_pic_790c7df')
-            let isInViewPortOfTwo790c7df = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself790c7df.getBoundingClientRect() && imgself790c7df.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_790c7df').src = document.getElementById('_pic_790c7df').getAttribute('href')
-                    document.getElementById('_pic_790c7df').classList = ['showpic']
-                    document.getElementById('_showpic_790c7df').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo790c7df)
-                    isInViewPortOfTwo790c7df = null
+            {
+                let imgself790c7dfs = document.getElementsByClassName('_pic_790c7df')
+                let showpicbtn790c7dfs = document.getElementsByClassName('_showpic_790c7df')
+                let isInViewPortOfTwo790c7df = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself790c7dfs[0].getBoundingClientRect() && imgself790c7dfs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself790c7dfs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo790c7df)
+                            isInViewPortOfTwo790c7df = null
+                        }
+                        for (el of showpicbtn790c7dfs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo790c7df ()
+                window.addEventListener('scroll', isInViewPortOfTwo790c7df)
             }
-            isInViewPortOfTwo790c7df ()
-            window.addEventListener('scroll', isInViewPortOfTwo790c7df)
         </script>
     </p>
 <p>现在我们需要对这个模块进行改良和升级，假设为<strong>Module-A</strong>，我们对这此升级定好几个方向和目标，假设有<strong>Module-A-1、Module-A-2、Module-A-3…Module-A-n</strong>，每个成员负责一个小模块或者一个小目标<strong>Module-A-k</strong>，当成员完成小模块<strong>Module-A-k</strong>之后，就把小模块和小组开发的<strong>主模块版本</strong>进行<strong>合并与测试</strong>，<strong>如果测试通过</strong>，则合并的结果直接进行<strong>发布</strong>，并将这个结果更新为当前的<strong>主模块版本</strong>，而不用等待整体的<strong>Module-A</strong>的其他子任务完成之后，统一整合再发布。</p>
 <p>
-        <div id="_showpic_5d396890" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_5d396890" href=https://user-images.githubusercontent.com/23525754/39957078-2c57e780-561f-11e8-838f-81400c5db289.png class="hidepic" ></img>
+        <div class="_showpic_5d396890 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39957078-2c57e780-561f-11e8-838f-81400c5db289.png class="_pic_5d396890 hidepic" picId="5d396890"></img>
         <script>
-            let imgself5d396890 = document.getElementById('_pic_5d396890')
-            let isInViewPortOfTwo5d396890 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself5d396890.getBoundingClientRect() && imgself5d396890.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_5d396890').src = document.getElementById('_pic_5d396890').getAttribute('href')
-                    document.getElementById('_pic_5d396890').classList = ['showpic']
-                    document.getElementById('_showpic_5d396890').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo5d396890)
-                    isInViewPortOfTwo5d396890 = null
+            {
+                let imgself5d396890s = document.getElementsByClassName('_pic_5d396890')
+                let showpicbtn5d396890s = document.getElementsByClassName('_showpic_5d396890')
+                let isInViewPortOfTwo5d396890 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5d396890s[0].getBoundingClientRect() && imgself5d396890s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5d396890s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo5d396890)
+                            isInViewPortOfTwo5d396890 = null
+                        }
+                        for (el of showpicbtn5d396890s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo5d396890 ()
+                window.addEventListener('scroll', isInViewPortOfTwo5d396890)
             }
-            isInViewPortOfTwo5d396890 ()
-            window.addEventListener('scroll', isInViewPortOfTwo5d396890)
         </script>
     </p>
 

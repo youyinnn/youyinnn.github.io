@@ -792,7 +792,7 @@ function setarrow() {
 
 function showseries(abbrlink, ps, psname) {
     $('#articlehead').after(`
-        <div id="series-btn" class="unselectable">Series <span style="color:#6146cd">${psname}</span> (Click To Show All Articles)</div>
+        <div id="series-btn" class="unselectable">Series of <span style="color:#6146cd">${psname}</span> (Click To Show All Articles)</div>
         <div id="seriesbox" class="unselectable"></div>
     `)
     let sb = $('#seriesbox')

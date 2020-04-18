@@ -145,23 +145,30 @@
 <li>A command line interface (CLI) client (the <code>docker</code> command).</li>
 </ul>
 <p>
-        <div id="_showpic_f8631750" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_f8631750" href=https://docs.docker.com/engine/images/engine-components-flow.png class="hidepic" ></img>
+        <div class="_showpic_f8631750 showpicbtn">Loading images >></div>
+        <img href=https://docs.docker.com/engine/images/engine-components-flow.png class="_pic_f8631750 hidepic" picId="f8631750"></img>
         <script>
-            let imgselff8631750 = document.getElementById('_pic_f8631750')
-            let isInViewPortOfTwof8631750 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselff8631750.getBoundingClientRect() && imgselff8631750.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_f8631750').src = document.getElementById('_pic_f8631750').getAttribute('href')
-                    document.getElementById('_pic_f8631750').classList = ['showpic']
-                    document.getElementById('_showpic_f8631750').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwof8631750)
-                    isInViewPortOfTwof8631750 = null
+            {
+                let imgselff8631750s = document.getElementsByClassName('_pic_f8631750')
+                let showpicbtnf8631750s = document.getElementsByClassName('_showpic_f8631750')
+                let isInViewPortOfTwof8631750 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselff8631750s[0].getBoundingClientRect() && imgselff8631750s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselff8631750s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwof8631750)
+                            isInViewPortOfTwof8631750 = null
+                        }
+                        for (el of showpicbtnf8631750s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwof8631750 ()
+                window.addEventListener('scroll', isInViewPortOfTwof8631750)
             }
-            isInViewPortOfTwof8631750 ()
-            window.addEventListener('scroll', isInViewPortOfTwof8631750)
         </script>
     </p>
 <p>The CLI uses the Docker REST API to control or interact with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI.</p>
@@ -176,23 +183,30 @@
 <p>The Docker <em>client</em> talks to the Docker <em>daemon</em>, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon <em>can</em> run on the same system, or you can connect a Docker client to a remote Docker daemon. </p>
 <p><strong>The Docker client and daemon communicate using a REST API, over UNIX sockets or a network interface.</strong></p>
 <p>
-        <div id="_showpic_d8c9695f" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_d8c9695f" href=https://docs.docker.com/engine/images/architecture.svg class="hidepic" ></img>
+        <div class="_showpic_d8c9695f showpicbtn">Loading images >></div>
+        <img href=https://docs.docker.com/engine/images/architecture.svg class="_pic_d8c9695f hidepic" picId="d8c9695f"></img>
         <script>
-            let imgselfd8c9695f = document.getElementById('_pic_d8c9695f')
-            let isInViewPortOfTwod8c9695f = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfd8c9695f.getBoundingClientRect() && imgselfd8c9695f.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_d8c9695f').src = document.getElementById('_pic_d8c9695f').getAttribute('href')
-                    document.getElementById('_pic_d8c9695f').classList = ['showpic']
-                    document.getElementById('_showpic_d8c9695f').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwod8c9695f)
-                    isInViewPortOfTwod8c9695f = null
+            {
+                let imgselfd8c9695fs = document.getElementsByClassName('_pic_d8c9695f')
+                let showpicbtnd8c9695fs = document.getElementsByClassName('_showpic_d8c9695f')
+                let isInViewPortOfTwod8c9695f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfd8c9695fs[0].getBoundingClientRect() && imgselfd8c9695fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfd8c9695fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwod8c9695f)
+                            isInViewPortOfTwod8c9695f = null
+                        }
+                        for (el of showpicbtnd8c9695fs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwod8c9695f ()
+                window.addEventListener('scroll', isInViewPortOfTwod8c9695f)
             }
-            isInViewPortOfTwod8c9695f ()
-            window.addEventListener('scroll', isInViewPortOfTwod8c9695f)
         </script>
     </p>
 

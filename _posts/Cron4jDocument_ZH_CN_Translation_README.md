@@ -109,4 +109,4 @@ Make a donation
 >
 > 内容：doc第七到末节
 
-[正文](https://youyinnn.github.io/?panel=post&number=32)
+[正文](https://youyinnn.github.io/article/1ngl1pm.html)
