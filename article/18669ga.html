@@ -163,23 +163,30 @@
 <ol>
 <li><p><strong>选择内存分配并发问题的解决方案</strong></p>
 <p> 
-        <div id="_showpic_ab0e77e" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_ab0e77e" href=https://image.youyinnn.top/objectmemorypointer.png class="hidepic" ></img>
+        <div class="_showpic_ab0e77e showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/objectmemorypointer.png class="_pic_ab0e77e hidepic" picId="ab0e77e"></img>
         <script>
-            let imgselfab0e77e = document.getElementById('_pic_ab0e77e')
-            let isInViewPortOfTwoab0e77e = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfab0e77e.getBoundingClientRect() && imgselfab0e77e.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_ab0e77e').src = document.getElementById('_pic_ab0e77e').getAttribute('href')
-                    document.getElementById('_pic_ab0e77e').classList = ['showpic']
-                    document.getElementById('_showpic_ab0e77e').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoab0e77e)
-                    isInViewPortOfTwoab0e77e = null
+            {
+                let imgselfab0e77es = document.getElementsByClassName('_pic_ab0e77e')
+                let showpicbtnab0e77es = document.getElementsByClassName('_showpic_ab0e77e')
+                let isInViewPortOfTwoab0e77e = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfab0e77es[0].getBoundingClientRect() && imgselfab0e77es[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfab0e77es) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoab0e77e)
+                            isInViewPortOfTwoab0e77e = null
+                        }
+                        for (el of showpicbtnab0e77es) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoab0e77e ()
+                window.addEventListener('scroll', isInViewPortOfTwoab0e77e)
             }
-            isInViewPortOfTwoab0e77e ()
-            window.addEventListener('scroll', isInViewPortOfTwoab0e77e)
         </script>
     </p>
 <p> 如图的并发指针分配问题，我们解决这个问题有两种方式：</p>
@@ -263,23 +270,30 @@
             句柄访问
           </h5><p>如果使用这种方式，Java堆中会划分一块内存来作为<strong>句柄池</strong>，<strong>reference</strong>中存储的就是对象的<strong>句柄地址</strong>，句柄中包含了<strong>对象实例数据地址信息</strong>和<strong>类型实例数据地址信息</strong></p>
 <p>
-        <div id="_showpic_93e39b01" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_93e39b01" href=https://image.youyinnn.top/jubingdangwen.png class="hidepic" ></img>
+        <div class="_showpic_93e39b01 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/jubingdangwen.png class="_pic_93e39b01 hidepic" picId="93e39b01"></img>
         <script>
-            let imgself93e39b01 = document.getElementById('_pic_93e39b01')
-            let isInViewPortOfTwo93e39b01 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself93e39b01.getBoundingClientRect() && imgself93e39b01.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_93e39b01').src = document.getElementById('_pic_93e39b01').getAttribute('href')
-                    document.getElementById('_pic_93e39b01').classList = ['showpic']
-                    document.getElementById('_showpic_93e39b01').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo93e39b01)
-                    isInViewPortOfTwo93e39b01 = null
+            {
+                let imgself93e39b01s = document.getElementsByClassName('_pic_93e39b01')
+                let showpicbtn93e39b01s = document.getElementsByClassName('_showpic_93e39b01')
+                let isInViewPortOfTwo93e39b01 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself93e39b01s[0].getBoundingClientRect() && imgself93e39b01s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself93e39b01s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo93e39b01)
+                            isInViewPortOfTwo93e39b01 = null
+                        }
+                        for (el of showpicbtn93e39b01s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo93e39b01 ()
+                window.addEventListener('scroll', isInViewPortOfTwo93e39b01)
             }
-            isInViewPortOfTwo93e39b01 ()
-            window.addEventListener('scroll', isInViewPortOfTwo93e39b01)
         </script>
     </p>
 
@@ -290,23 +304,30 @@
             直接指针访问
           </h5><p>reference中存储的直接就是对象地址</p>
 <p>
-        <div id="_showpic_eb4d67ad" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_eb4d67ad" href=https://image.youyinnn.top/zhijiezhizhenfangwen.png class="hidepic" ></img>
+        <div class="_showpic_eb4d67ad showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/zhijiezhizhenfangwen.png class="_pic_eb4d67ad hidepic" picId="eb4d67ad"></img>
         <script>
-            let imgselfeb4d67ad = document.getElementById('_pic_eb4d67ad')
-            let isInViewPortOfTwoeb4d67ad = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfeb4d67ad.getBoundingClientRect() && imgselfeb4d67ad.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_eb4d67ad').src = document.getElementById('_pic_eb4d67ad').getAttribute('href')
-                    document.getElementById('_pic_eb4d67ad').classList = ['showpic']
-                    document.getElementById('_showpic_eb4d67ad').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoeb4d67ad)
-                    isInViewPortOfTwoeb4d67ad = null
+            {
+                let imgselfeb4d67ads = document.getElementsByClassName('_pic_eb4d67ad')
+                let showpicbtneb4d67ads = document.getElementsByClassName('_showpic_eb4d67ad')
+                let isInViewPortOfTwoeb4d67ad = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfeb4d67ads[0].getBoundingClientRect() && imgselfeb4d67ads[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfeb4d67ads) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoeb4d67ad)
+                            isInViewPortOfTwoeb4d67ad = null
+                        }
+                        for (el of showpicbtneb4d67ads) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoeb4d67ad ()
+                window.addEventListener('scroll', isInViewPortOfTwoeb4d67ad)
             }
-            isInViewPortOfTwoeb4d67ad ()
-            window.addEventListener('scroll', isInViewPortOfTwoeb4d67ad)
         </script>
     </p>
 <blockquote>

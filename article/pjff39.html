@@ -142,42 +142,56 @@
           </h3><p>微服务是最近非常火热的新概念，大家都在追，也都觉得很对，但是似乎没有很充足的理论基础说明这是正确的，给人的感觉是 <strong>不明觉厉</strong> 。前段时间看了Mike Amundsen <a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world">《远距离条件下的康威定律——分布式世界中实现团队构建》</a>（是Design RESTful API的作者）在InfoQ上的一个分享，觉得很有帮助，结合自己的一些思考，整理了该演讲的内容。</p>
 <p>可能出乎很多人意料之外的一个事实是，微服务很多核心理念其实在半个世纪前的一篇文章中就被阐述过了，而且这篇文章中的很多论点在软件开发飞速发展的这半个世纪中竟然一再被验证，这就是<a href="http://www.melconway.com/Home/Conways_Law.html">康威定律（Conway&#39;s Law）</a>。</p>
 <p>
-        <div id="_showpic_d4708e8f" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_d4708e8f" href=http://img1.tbcdn.cn/L1/461/1/3fa834ea8c880a97d00f187f67962a8218b16f22 class="hidepic" ></img>
+        <div class="_showpic_d4708e8f showpicbtn">Loading images >></div>
+        <img href=http://img1.tbcdn.cn/L1/461/1/3fa834ea8c880a97d00f187f67962a8218b16f22 class="_pic_d4708e8f hidepic" picId="d4708e8f"></img>
         <script>
-            let imgselfd4708e8f = document.getElementById('_pic_d4708e8f')
-            let isInViewPortOfTwod4708e8f = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfd4708e8f.getBoundingClientRect() && imgselfd4708e8f.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_d4708e8f').src = document.getElementById('_pic_d4708e8f').getAttribute('href')
-                    document.getElementById('_pic_d4708e8f').classList = ['showpic']
-                    document.getElementById('_showpic_d4708e8f').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwod4708e8f)
-                    isInViewPortOfTwod4708e8f = null
+            {
+                let imgselfd4708e8fs = document.getElementsByClassName('_pic_d4708e8f')
+                let showpicbtnd4708e8fs = document.getElementsByClassName('_showpic_d4708e8f')
+                let isInViewPortOfTwod4708e8f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfd4708e8fs[0].getBoundingClientRect() && imgselfd4708e8fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfd4708e8fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwod4708e8f)
+                            isInViewPortOfTwod4708e8f = null
+                        }
+                        for (el of showpicbtnd4708e8fs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwod4708e8f ()
+                window.addEventListener('scroll', isInViewPortOfTwod4708e8f)
             }
-            isInViewPortOfTwod4708e8f ()
-            window.addEventListener('scroll', isInViewPortOfTwod4708e8f)
         </script>
     
-        <div id="_showpic_84456196" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_84456196" href=http://img2.tbcdn.cn/L1/461/1/ad8ba09ed2350c2a8c2f067d80197e74aefcef8d class="hidepic" ></img>
+        <div class="_showpic_84456196 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/ad8ba09ed2350c2a8c2f067d80197e74aefcef8d class="_pic_84456196 hidepic" picId="84456196"></img>
         <script>
-            let imgself84456196 = document.getElementById('_pic_84456196')
-            let isInViewPortOfTwo84456196 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself84456196.getBoundingClientRect() && imgself84456196.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_84456196').src = document.getElementById('_pic_84456196').getAttribute('href')
-                    document.getElementById('_pic_84456196').classList = ['showpic']
-                    document.getElementById('_showpic_84456196').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo84456196)
-                    isInViewPortOfTwo84456196 = null
+            {
+                let imgself84456196s = document.getElementsByClassName('_pic_84456196')
+                let showpicbtn84456196s = document.getElementsByClassName('_showpic_84456196')
+                let isInViewPortOfTwo84456196 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself84456196s[0].getBoundingClientRect() && imgself84456196s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself84456196s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo84456196)
+                            isInViewPortOfTwo84456196 = null
+                        }
+                        for (el of showpicbtn84456196s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo84456196 ()
+                window.addEventListener('scroll', isInViewPortOfTwo84456196)
             }
-            isInViewPortOfTwo84456196 ()
-            window.addEventListener('scroll', isInViewPortOfTwo84456196)
         </script>
     </p>
 <p>在康威的这篇文章中，最有名的一句话就是：</p>
@@ -185,23 +199,30 @@
 <p>Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations. - Melvin Conway(1967)</p>
 </blockquote>
 <p>中文直译大概的意思就是：设计系统的组织，其产生的设计等同于组织之内、组织之间的沟通结构。看看下面的图片（来源于互联网，侵删），再想想Apple的产品、微软的产品设计，就能形象生动的理解这句话。<br>
-        <div id="_showpic_5c321b7b" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_5c321b7b" href=http://img2.tbcdn.cn/L1/461/1/74ab78cb5db601e5db68adf61e6dc58f437df4e0 class="hidepic" ></img>
+        <div class="_showpic_5c321b7b showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/74ab78cb5db601e5db68adf61e6dc58f437df4e0 class="_pic_5c321b7b hidepic" picId="5c321b7b"></img>
         <script>
-            let imgself5c321b7b = document.getElementById('_pic_5c321b7b')
-            let isInViewPortOfTwo5c321b7b = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself5c321b7b.getBoundingClientRect() && imgself5c321b7b.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_5c321b7b').src = document.getElementById('_pic_5c321b7b').getAttribute('href')
-                    document.getElementById('_pic_5c321b7b').classList = ['showpic']
-                    document.getElementById('_showpic_5c321b7b').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo5c321b7b)
-                    isInViewPortOfTwo5c321b7b = null
+            {
+                let imgself5c321b7bs = document.getElementsByClassName('_pic_5c321b7b')
+                let showpicbtn5c321b7bs = document.getElementsByClassName('_showpic_5c321b7b')
+                let isInViewPortOfTwo5c321b7b = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5c321b7bs[0].getBoundingClientRect() && imgself5c321b7bs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5c321b7bs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo5c321b7b)
+                            isInViewPortOfTwo5c321b7b = null
+                        }
+                        for (el of showpicbtn5c321b7bs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo5c321b7b ()
+                window.addEventListener('scroll', isInViewPortOfTwo5c321b7b)
             }
-            isInViewPortOfTwo5c321b7b ()
-            window.addEventListener('scroll', isInViewPortOfTwo5c321b7b)
         </script>
     </p>
 <p>用通俗的说法就是：组织形式等同系统设计。</p>
@@ -250,42 +271,56 @@
 </ul>
 <p>组织的沟通和系统设计之间的紧密联系，在很多别的领域有类似的阐述。对于复杂的系统，聊设计就离不开聊人与人的沟通，解决好人与人的沟通问题，才能有一个好的系统设计。相信几乎每个程序员都读过的《人月神话》（1975年，感觉都是老古董了，经典的就是经得起时间考验）里面许多观点都和这句话有异曲同工之妙。</p>
 <p>
-        <div id="_showpic_16f25d75" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_16f25d75" href=http://img2.tbcdn.cn/L1/461/1/8759732579d4193ef27df9011d252cf357562349 class="hidepic" ></img>
+        <div class="_showpic_16f25d75 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/8759732579d4193ef27df9011d252cf357562349 class="_pic_16f25d75 hidepic" picId="16f25d75"></img>
         <script>
-            let imgself16f25d75 = document.getElementById('_pic_16f25d75')
-            let isInViewPortOfTwo16f25d75 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself16f25d75.getBoundingClientRect() && imgself16f25d75.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_16f25d75').src = document.getElementById('_pic_16f25d75').getAttribute('href')
-                    document.getElementById('_pic_16f25d75').classList = ['showpic']
-                    document.getElementById('_showpic_16f25d75').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo16f25d75)
-                    isInViewPortOfTwo16f25d75 = null
+            {
+                let imgself16f25d75s = document.getElementsByClassName('_pic_16f25d75')
+                let showpicbtn16f25d75s = document.getElementsByClassName('_showpic_16f25d75')
+                let isInViewPortOfTwo16f25d75 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself16f25d75s[0].getBoundingClientRect() && imgself16f25d75s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself16f25d75s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo16f25d75)
+                            isInViewPortOfTwo16f25d75 = null
+                        }
+                        for (el of showpicbtn16f25d75s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo16f25d75 ()
+                window.addEventListener('scroll', isInViewPortOfTwo16f25d75)
             }
-            isInViewPortOfTwo16f25d75 ()
-            window.addEventListener('scroll', isInViewPortOfTwo16f25d75)
         </script>
     
-        <div id="_showpic_69a45dc9" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_69a45dc9" href=http://img2.tbcdn.cn/L1/461/1/fb215be9fe9232ccda1fc8817b4af6e8da6abcd0 class="hidepic" ></img>
+        <div class="_showpic_69a45dc9 showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/fb215be9fe9232ccda1fc8817b4af6e8da6abcd0 class="_pic_69a45dc9 hidepic" picId="69a45dc9"></img>
         <script>
-            let imgself69a45dc9 = document.getElementById('_pic_69a45dc9')
-            let isInViewPortOfTwo69a45dc9 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself69a45dc9.getBoundingClientRect() && imgself69a45dc9.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_69a45dc9').src = document.getElementById('_pic_69a45dc9').getAttribute('href')
-                    document.getElementById('_pic_69a45dc9').classList = ['showpic']
-                    document.getElementById('_showpic_69a45dc9').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo69a45dc9)
-                    isInViewPortOfTwo69a45dc9 = null
+            {
+                let imgself69a45dc9s = document.getElementsByClassName('_pic_69a45dc9')
+                let showpicbtn69a45dc9s = document.getElementsByClassName('_showpic_69a45dc9')
+                let isInViewPortOfTwo69a45dc9 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself69a45dc9s[0].getBoundingClientRect() && imgself69a45dc9s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself69a45dc9s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo69a45dc9)
+                            isInViewPortOfTwo69a45dc9 = null
+                        }
+                        for (el of showpicbtn69a45dc9s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo69a45dc9 ()
+                window.addEventListener('scroll', isInViewPortOfTwo69a45dc9)
             }
-            isInViewPortOfTwo69a45dc9 ()
-            window.addEventListener('scroll', isInViewPortOfTwo69a45dc9)
         </script>
     </p>
 <p>比如《人月神话》中最著名的一句话就是</p>
@@ -309,23 +344,30 @@
 <li>照面（casual）朋友: 150</li>
 </ul>
 <p>
-        <div id="_showpic_9bc8217a" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_9bc8217a" href=http://img2.tbcdn.cn/L1/461/1/a63beac73c8d217c71aba36c4a6e270a3fa18603 class="hidepic" ></img>
+        <div class="_showpic_9bc8217a showpicbtn">Loading images >></div>
+        <img href=http://img2.tbcdn.cn/L1/461/1/a63beac73c8d217c71aba36c4a6e270a3fa18603 class="_pic_9bc8217a hidepic" picId="9bc8217a"></img>
         <script>
-            let imgself9bc8217a = document.getElementById('_pic_9bc8217a')
-            let isInViewPortOfTwo9bc8217a = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself9bc8217a.getBoundingClientRect() && imgself9bc8217a.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_9bc8217a').src = document.getElementById('_pic_9bc8217a').getAttribute('href')
-                    document.getElementById('_pic_9bc8217a').classList = ['showpic']
-                    document.getElementById('_showpic_9bc8217a').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo9bc8217a)
-                    isInViewPortOfTwo9bc8217a = null
+            {
+                let imgself9bc8217as = document.getElementsByClassName('_pic_9bc8217a')
+                let showpicbtn9bc8217as = document.getElementsByClassName('_showpic_9bc8217a')
+                let isInViewPortOfTwo9bc8217a = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself9bc8217as[0].getBoundingClientRect() && imgself9bc8217as[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself9bc8217as) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo9bc8217a)
+                            isInViewPortOfTwo9bc8217a = null
+                        }
+                        for (el of showpicbtn9bc8217as) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo9bc8217a ()
+                window.addEventListener('scroll', isInViewPortOfTwo9bc8217a)
             }
-            isInViewPortOfTwo9bc8217a ()
-            window.addEventListener('scroll', isInViewPortOfTwo9bc8217a)
         </script>
     </p>
 <p>是不是和上面的沟通成本的数字很貌似有关联？是的，我们的大脑智力只能支持我们维系这么多的关系。（大家都知道这不是程序猿擅长的领域，在开发团队里，这个值应该更小，估计和猿差不多 -_-凸 ）</p>
@@ -348,42 +390,56 @@
 <p>Problem too complicated? Ignore details. Not enough resources?Give up features.</p>
 <pre><code>            --Eric Hollnagel (2009)</code></pre></blockquote>
 <p>
-        <div id="_showpic_72f986e4" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_72f986e4" href=http://img1.tbcdn.cn/L1/461/1/654425008b3a53442a77f32068302b44b51a32da class="hidepic" ></img>
+        <div class="_showpic_72f986e4 showpicbtn">Loading images >></div>
+        <img href=http://img1.tbcdn.cn/L1/461/1/654425008b3a53442a77f32068302b44b51a32da class="_pic_72f986e4 hidepic" picId="72f986e4"></img>
         <script>
-            let imgself72f986e4 = document.getElementById('_pic_72f986e4')
-            let isInViewPortOfTwo72f986e4 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself72f986e4.getBoundingClientRect() && imgself72f986e4.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_72f986e4').src = document.getElementById('_pic_72f986e4').getAttribute('href')
-                    document.getElementById('_pic_72f986e4').classList = ['showpic']
-                    document.getElementById('_showpic_72f986e4').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo72f986e4)
-                    isInViewPortOfTwo72f986e4 = null
+            {
+                let imgself72f986e4s = document.getElementsByClassName('_pic_72f986e4')
+                let showpicbtn72f986e4s = document.getElementsByClassName('_showpic_72f986e4')
+                let isInViewPortOfTwo72f986e4 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself72f986e4s[0].getBoundingClientRect() && imgself72f986e4s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself72f986e4s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo72f986e4)
+                            isInViewPortOfTwo72f986e4 = null
+                        }
+                        for (el of showpicbtn72f986e4s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo72f986e4 ()
+                window.addEventListener('scroll', isInViewPortOfTwo72f986e4)
             }
-            isInViewPortOfTwo72f986e4 ()
-            window.addEventListener('scroll', isInViewPortOfTwo72f986e4)
         </script>
     
-        <div id="_showpic_9727f50f" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_9727f50f" href=http://img1.tbcdn.cn/L1/461/1/78d32f9955e5deebd42ab75333e226fd52d6797f class="hidepic" ></img>
+        <div class="_showpic_9727f50f showpicbtn">Loading images >></div>
+        <img href=http://img1.tbcdn.cn/L1/461/1/78d32f9955e5deebd42ab75333e226fd52d6797f class="_pic_9727f50f hidepic" picId="9727f50f"></img>
         <script>
-            let imgself9727f50f = document.getElementById('_pic_9727f50f')
-            let isInViewPortOfTwo9727f50f = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself9727f50f.getBoundingClientRect() && imgself9727f50f.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_9727f50f').src = document.getElementById('_pic_9727f50f').getAttribute('href')
-                    document.getElementById('_pic_9727f50f').classList = ['showpic']
-                    document.getElementById('_showpic_9727f50f').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo9727f50f)
-                    isInViewPortOfTwo9727f50f = null
+            {
+                let imgself9727f50fs = document.getElementsByClassName('_pic_9727f50f')
+                let showpicbtn9727f50fs = document.getElementsByClassName('_showpic_9727f50f')
+                let isInViewPortOfTwo9727f50f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself9727f50fs[0].getBoundingClientRect() && imgself9727f50fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself9727f50fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo9727f50f)
+                            isInViewPortOfTwo9727f50f = null
+                        }
+                        for (el of showpicbtn9727f50fs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo9727f50f ()
+                window.addEventListener('scroll', isInViewPortOfTwo9727f50f)
             }
-            isInViewPortOfTwo9727f50f ()
-            window.addEventListener('scroll', isInViewPortOfTwo9727f50f)
         </script>
     </p>
 <p>系统越做越复杂，功能越来越多，外部市场的竞争越来越剧烈，投资人的期待越来越高。但人的智力是有上限的，即使再牛逼的人，融到钱再多也不一定招到足够多合适的人。对于一个巨复杂的系统，我们永远无法考虑周全。Eric认为，这个时候最好的解决办法竟然是——“破罐子破摔”。</p>
@@ -395,23 +451,30 @@
 </ul>
 <p>对于飞机这样的复杂系统，再牛逼的人也无法考虑到漏洞的方方面面，所以Eric建议放弃打造完美系统的想法，而是通过不断的试飞，发现问题，确保问题发生时，系统能自动复原即可，而不追求飞行系统的绝对正确和安全。</p>
 <p>下面的图很好的解释了这个过程：<br>
-        <div id="_showpic_ccf10555" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_ccf10555" href=http://img1.tbcdn.cn/L1/461/1/a7fab1b350cd8c03d5e9ddded183c7bda114c326 class="hidepic" ></img>
+        <div class="_showpic_ccf10555 showpicbtn">Loading images >></div>
+        <img href=http://img1.tbcdn.cn/L1/461/1/a7fab1b350cd8c03d5e9ddded183c7bda114c326 class="_pic_ccf10555 hidepic" picId="ccf10555"></img>
         <script>
-            let imgselfccf10555 = document.getElementById('_pic_ccf10555')
-            let isInViewPortOfTwoccf10555 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfccf10555.getBoundingClientRect() && imgselfccf10555.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_ccf10555').src = document.getElementById('_pic_ccf10555').getAttribute('href')
-                    document.getElementById('_pic_ccf10555').classList = ['showpic']
-                    document.getElementById('_showpic_ccf10555').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoccf10555)
-                    isInViewPortOfTwoccf10555 = null
+            {
+                let imgselfccf10555s = document.getElementsByClassName('_pic_ccf10555')
+                let showpicbtnccf10555s = document.getElementsByClassName('_showpic_ccf10555')
+                let isInViewPortOfTwoccf10555 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfccf10555s[0].getBoundingClientRect() && imgselfccf10555s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfccf10555s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoccf10555)
+                            isInViewPortOfTwoccf10555 = null
+                        }
+                        for (el of showpicbtnccf10555s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoccf10555 ()
+                window.addEventListener('scroll', isInViewPortOfTwoccf10555)
             }
-            isInViewPortOfTwoccf10555 ()
-            window.addEventListener('scroll', isInViewPortOfTwoccf10555)
         </script>
     <br>听着很耳熟不是吗？这不就是 <strong>持续集成</strong> 和敏捷开发吗？的确就是。</p>
 <p>另一方面，这和互联网公司维护的分布式系统的弹性设计也是一个道理。对于一个分布式系统，我们几乎永远不可能找到并修复所有的bug，单元测试覆盖1000%也没有用，错误流淌在分布式系统的血液里。解决方法不是消灭这些问题，而是容忍这些问题，在问题发生时，能自动回复，微服务组成的系统，每一个微服务都可能挂掉，这是常态，我们只有有足够的冗余和备份即可。即所谓的 <strong>弹性设计（Resilience）</strong> 或者叫高可用设计（High Availability）。</p>
@@ -429,63 +492,84 @@
 </li>
 </ul>
 <p>
-        <div id="_showpic_c807e581" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_c807e581" href=http://img1.tbcdn.cn/L1/461/1/3810f88633a55bdf59bb7757cedc827ab425538e class="hidepic" ></img>
+        <div class="_showpic_c807e581 showpicbtn">Loading images >></div>
+        <img href=http://img1.tbcdn.cn/L1/461/1/3810f88633a55bdf59bb7757cedc827ab425538e class="_pic_c807e581 hidepic" picId="c807e581"></img>
         <script>
-            let imgselfc807e581 = document.getElementById('_pic_c807e581')
-            let isInViewPortOfTwoc807e581 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfc807e581.getBoundingClientRect() && imgselfc807e581.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_c807e581').src = document.getElementById('_pic_c807e581').getAttribute('href')
-                    document.getElementById('_pic_c807e581').classList = ['showpic']
-                    document.getElementById('_showpic_c807e581').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoc807e581)
-                    isInViewPortOfTwoc807e581 = null
+            {
+                let imgselfc807e581s = document.getElementsByClassName('_pic_c807e581')
+                let showpicbtnc807e581s = document.getElementsByClassName('_showpic_c807e581')
+                let isInViewPortOfTwoc807e581 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc807e581s[0].getBoundingClientRect() && imgselfc807e581s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc807e581s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoc807e581)
+                            isInViewPortOfTwoc807e581 = null
+                        }
+                        for (el of showpicbtnc807e581s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoc807e581 ()
+                window.addEventListener('scroll', isInViewPortOfTwoc807e581)
             }
-            isInViewPortOfTwoc807e581 ()
-            window.addEventListener('scroll', isInViewPortOfTwoc807e581)
         </script>
     </p>
 <p>这是康威第一定律组织和设计间内在关系的一个具体应用。更直白的说，你想要什么样的系统，就搭建什么样的团队。如果你的团队分成前端团队，Java后台开发团队，DBA团队，运维团队，你的系统就会长成下面的样子：<br>
-        <div id="_showpic_cd2b35c7" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_cd2b35c7" href=http://img4.tbcdn.cn/L1/461/1/f4c2d4a8f8390ca6be19b54a524c8272aced3e34 class="hidepic" ></img>
+        <div class="_showpic_cd2b35c7 showpicbtn">Loading images >></div>
+        <img href=http://img4.tbcdn.cn/L1/461/1/f4c2d4a8f8390ca6be19b54a524c8272aced3e34 class="_pic_cd2b35c7 hidepic" picId="cd2b35c7"></img>
         <script>
-            let imgselfcd2b35c7 = document.getElementById('_pic_cd2b35c7')
-            let isInViewPortOfTwocd2b35c7 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfcd2b35c7.getBoundingClientRect() && imgselfcd2b35c7.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_cd2b35c7').src = document.getElementById('_pic_cd2b35c7').getAttribute('href')
-                    document.getElementById('_pic_cd2b35c7').classList = ['showpic']
-                    document.getElementById('_showpic_cd2b35c7').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwocd2b35c7)
-                    isInViewPortOfTwocd2b35c7 = null
+            {
+                let imgselfcd2b35c7s = document.getElementsByClassName('_pic_cd2b35c7')
+                let showpicbtncd2b35c7s = document.getElementsByClassName('_showpic_cd2b35c7')
+                let isInViewPortOfTwocd2b35c7 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfcd2b35c7s[0].getBoundingClientRect() && imgselfcd2b35c7s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfcd2b35c7s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwocd2b35c7)
+                            isInViewPortOfTwocd2b35c7 = null
+                        }
+                        for (el of showpicbtncd2b35c7s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwocd2b35c7 ()
+                window.addEventListener('scroll', isInViewPortOfTwocd2b35c7)
             }
-            isInViewPortOfTwocd2b35c7 ()
-            window.addEventListener('scroll', isInViewPortOfTwocd2b35c7)
         </script>
     </p>
 <p>相反，如果你的系统是按照业务边界划分的，大家按照一个业务目标去把自己的模块做出小系统，小产品的话，你的大系统就会长成下面的样子，即微服务的架构<br>
-        <div id="_showpic_ec46c73e" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_ec46c73e" href=http://img3.tbcdn.cn/L1/461/1/c827db7a12d730140d4c0e6947535e168902a73e class="hidepic" ></img>
+        <div class="_showpic_ec46c73e showpicbtn">Loading images >></div>
+        <img href=http://img3.tbcdn.cn/L1/461/1/c827db7a12d730140d4c0e6947535e168902a73e class="_pic_ec46c73e hidepic" picId="ec46c73e"></img>
         <script>
-            let imgselfec46c73e = document.getElementById('_pic_ec46c73e')
-            let isInViewPortOfTwoec46c73e = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfec46c73e.getBoundingClientRect() && imgselfec46c73e.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_ec46c73e').src = document.getElementById('_pic_ec46c73e').getAttribute('href')
-                    document.getElementById('_pic_ec46c73e').classList = ['showpic']
-                    document.getElementById('_showpic_ec46c73e').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoec46c73e)
-                    isInViewPortOfTwoec46c73e = null
+            {
+                let imgselfec46c73es = document.getElementsByClassName('_pic_ec46c73e')
+                let showpicbtnec46c73es = document.getElementsByClassName('_showpic_ec46c73e')
+                let isInViewPortOfTwoec46c73e = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfec46c73es[0].getBoundingClientRect() && imgselfec46c73es[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfec46c73es) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoec46c73e)
+                            isInViewPortOfTwoec46c73e = null
+                        }
+                        for (el of showpicbtnec46c73es) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoec46c73e ()
+                window.addEventListener('scroll', isInViewPortOfTwoec46c73e)
             }
-            isInViewPortOfTwoec46c73e ()
-            window.addEventListener('scroll', isInViewPortOfTwoec46c73e)
         </script>
     </p>
 <p>微服务的理念团队间应该是 <strong>inter-operate, not integrate</strong> 。inter-operate是定义好系统的边界和接口，在一个团队内全栈，让团队自治，原因就是因为如果团队按照这样的方式组建，将沟通的成本维持在系统内部，每个子系统就会更加内聚，彼此的依赖耦合能变弱，跨系统的沟通成本也就能降低。</p>

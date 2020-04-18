@@ -97,23 +97,30 @@ var originalImgFunc = renderer.image
 function imgscroll(href, title, text) {
     let picId = crc32(href).toString(16)
     return `
-        <div id="_showpic_${picId}" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_${picId}" href=${href} class="hidepic" ></img>
+        <div class="_showpic_${picId} showpicbtn">Loading images >></div>
+        <img href=${href} class="_pic_${picId} hidepic" picId="${picId}"></img>
         <script>
-            let imgself${picId} = document.getElementById('_pic_${picId}')
-            let isInViewPortOfTwo${picId} = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself${picId}.getBoundingClientRect() && imgself${picId}.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_${picId}').src = document.getElementById('_pic_${picId}').getAttribute('href')
-                    document.getElementById('_pic_${picId}').classList = ['showpic']
-                    document.getElementById('_showpic_${picId}').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo${picId})
-                    isInViewPortOfTwo${picId} = null
+            {
+                let imgself${picId}s = document.getElementsByClassName('_pic_${picId}')
+                let showpicbtn${picId}s = document.getElementsByClassName('_showpic_${picId}')
+                let isInViewPortOfTwo${picId} = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself${picId}s[0].getBoundingClientRect() && imgself${picId}s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself${picId}s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo${picId})
+                            isInViewPortOfTwo${picId} = null
+                        }
+                        for (el of showpicbtn${picId}s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo${picId} ()
+                window.addEventListener('scroll', isInViewPortOfTwo${picId})
             }
-            isInViewPortOfTwo${picId} ()
-            window.addEventListener('scroll', isInViewPortOfTwo${picId})
         </script>
     `
 }

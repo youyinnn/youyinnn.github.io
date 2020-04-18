@@ -267,23 +267,30 @@
 <p>The <em>java.lang.OutOfMemoryError: GC overhead limit exceeded</em> error is displayed when <strong>your application has exhausted pretty much all the available memory and GC has repeatedly failed to clean it</strong>.</p>
 </blockquote>
 <p>
-        <div id="_showpic_db1c7920" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_db1c7920" href=https://image.youyinnn.top/20190317135716.png class="hidepic" ></img>
+        <div class="_showpic_db1c7920 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190317135716.png class="_pic_db1c7920 hidepic" picId="db1c7920"></img>
         <script>
-            let imgselfdb1c7920 = document.getElementById('_pic_db1c7920')
-            let isInViewPortOfTwodb1c7920 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfdb1c7920.getBoundingClientRect() && imgselfdb1c7920.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_db1c7920').src = document.getElementById('_pic_db1c7920').getAttribute('href')
-                    document.getElementById('_pic_db1c7920').classList = ['showpic']
-                    document.getElementById('_showpic_db1c7920').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwodb1c7920)
-                    isInViewPortOfTwodb1c7920 = null
+            {
+                let imgselfdb1c7920s = document.getElementsByClassName('_pic_db1c7920')
+                let showpicbtndb1c7920s = document.getElementsByClassName('_showpic_db1c7920')
+                let isInViewPortOfTwodb1c7920 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfdb1c7920s[0].getBoundingClientRect() && imgselfdb1c7920s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfdb1c7920s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwodb1c7920)
+                            isInViewPortOfTwodb1c7920 = null
+                        }
+                        for (el of showpicbtndb1c7920s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwodb1c7920 ()
+                window.addEventListener('scroll', isInViewPortOfTwodb1c7920)
             }
-            isInViewPortOfTwodb1c7920 ()
-            window.addEventListener('scroll', isInViewPortOfTwodb1c7920)
         </script>
     </p>
 <p>其根本原因就是你写的程序创造出太多难以GC的对象了，导致GC效率非常低，于是GCor们都不干了；</p>
@@ -303,23 +310,30 @@
             4. Metaspace
           </h5><p>虽然永久代已经被无默认限制的Metaspace替代了，但是主机上Metaspace还是有限制的，它一样能被打爆，而且它被打爆的后果可能就是主机宕机，关于这个可以参考：<a href="https://link.jianshu.com/?t=http%3A%2F%2Fifeve.com%2Fjava-permgen-removed%2F">Java PermGen 去哪里了?</a></p>
 <p>
-        <div id="_showpic_801a8883" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_801a8883" href=https://image.youyinnn.top/20190317143413.png class="hidepic" ></img>
+        <div class="_showpic_801a8883 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190317143413.png class="_pic_801a8883 hidepic" picId="801a8883"></img>
         <script>
-            let imgself801a8883 = document.getElementById('_pic_801a8883')
-            let isInViewPortOfTwo801a8883 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself801a8883.getBoundingClientRect() && imgself801a8883.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_801a8883').src = document.getElementById('_pic_801a8883').getAttribute('href')
-                    document.getElementById('_pic_801a8883').classList = ['showpic']
-                    document.getElementById('_showpic_801a8883').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo801a8883)
-                    isInViewPortOfTwo801a8883 = null
+            {
+                let imgself801a8883s = document.getElementsByClassName('_pic_801a8883')
+                let showpicbtn801a8883s = document.getElementsByClassName('_showpic_801a8883')
+                let isInViewPortOfTwo801a8883 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself801a8883s[0].getBoundingClientRect() && imgself801a8883s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself801a8883s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo801a8883)
+                            isInViewPortOfTwo801a8883 = null
+                        }
+                        for (el of showpicbtn801a8883s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo801a8883 ()
+                window.addEventListener('scroll', isInViewPortOfTwo801a8883)
             }
-            isInViewPortOfTwo801a8883 ()
-            window.addEventListener('scroll', isInViewPortOfTwo801a8883)
         </script>
     </p>
 
@@ -330,23 +344,30 @@
             5. Unable to create new native thread
           </h5><p>JVM的线程也是需要消耗空间的，当你的线程过多而还在不断地申请线程的时候，OS对进程是会有默认的线程申请现在的，如果超过这个现在，OS就不会分配线程给你了，这时候就会报这个OOM，</p>
 <p>
-        <div id="_showpic_e382d32" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_e382d32" href=https://image.youyinnn.top/20190317144032.png class="hidepic" ></img>
+        <div class="_showpic_e382d32 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190317144032.png class="_pic_e382d32 hidepic" picId="e382d32"></img>
         <script>
-            let imgselfe382d32 = document.getElementById('_pic_e382d32')
-            let isInViewPortOfTwoe382d32 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfe382d32.getBoundingClientRect() && imgselfe382d32.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_e382d32').src = document.getElementById('_pic_e382d32').getAttribute('href')
-                    document.getElementById('_pic_e382d32').classList = ['showpic']
-                    document.getElementById('_showpic_e382d32').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoe382d32)
-                    isInViewPortOfTwoe382d32 = null
+            {
+                let imgselfe382d32s = document.getElementsByClassName('_pic_e382d32')
+                let showpicbtne382d32s = document.getElementsByClassName('_showpic_e382d32')
+                let isInViewPortOfTwoe382d32 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfe382d32s[0].getBoundingClientRect() && imgselfe382d32s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfe382d32s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoe382d32)
+                            isInViewPortOfTwoe382d32 = null
+                        }
+                        for (el of showpicbtne382d32s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoe382d32 ()
+                window.addEventListener('scroll', isInViewPortOfTwoe382d32)
             }
-            isInViewPortOfTwoe382d32 ()
-            window.addEventListener('scroll', isInViewPortOfTwoe382d32)
         </script>
     </p>
 <p>我们虽然可以增大这个限制，但我觉得你还是重新考虑一下优化你的程序，不要再给JVM甚至是OS压力了</p>
@@ -369,23 +390,30 @@
             </a>
             7. Requested array size exceeds VM limit
           </h5><p>
-        <div id="_showpic_df971d14" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_df971d14" href=https://image.youyinnn.top/20190317145042.png class="hidepic" ></img>
+        <div class="_showpic_df971d14 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190317145042.png class="_pic_df971d14 hidepic" picId="df971d14"></img>
         <script>
-            let imgselfdf971d14 = document.getElementById('_pic_df971d14')
-            let isInViewPortOfTwodf971d14 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfdf971d14.getBoundingClientRect() && imgselfdf971d14.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_df971d14').src = document.getElementById('_pic_df971d14').getAttribute('href')
-                    document.getElementById('_pic_df971d14').classList = ['showpic']
-                    document.getElementById('_showpic_df971d14').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwodf971d14)
-                    isInViewPortOfTwodf971d14 = null
+            {
+                let imgselfdf971d14s = document.getElementsByClassName('_pic_df971d14')
+                let showpicbtndf971d14s = document.getElementsByClassName('_showpic_df971d14')
+                let isInViewPortOfTwodf971d14 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfdf971d14s[0].getBoundingClientRect() && imgselfdf971d14s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfdf971d14s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwodf971d14)
+                            isInViewPortOfTwodf971d14 = null
+                        }
+                        for (el of showpicbtndf971d14s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwodf971d14 ()
+                window.addEventListener('scroll', isInViewPortOfTwodf971d14)
             }
-            isInViewPortOfTwodf971d14 ()
-            window.addEventListener('scroll', isInViewPortOfTwodf971d14)
         </script>
     </p>
 <p>请求数组长度过长，一般来说，数组长度限制是根据主机自身的可寻址限制不同而不同的，所以申请这么大的数组之前，首先考虑好是否需要这么多的空间；</p>
@@ -426,23 +454,30 @@
 <p>在早期的一些商用虚拟机，Java代码最初是通过解释器（<strong>Interpreter</strong>）解释执行的，它将代码翻译成JVM能读懂的字节码（<strong>bytecode</strong>），但是这些字节码要运行起来，JVM需要花费时间去解释，并且重复的热点代码可能会重复解释，于是为了提高效率，JIT就出现了</p>
 <p>Just In Time Compiler，即时编译器，它负责在JVM运行的时候对特定的代码进行编译<strong>（有针对性的优化编译）</strong>，将它们编译成机器码，下次再运行这段逻辑的时候，直接执行机器码，提高运行时效率，这项技术大大地提高了Java程序的运行速度</p>
 <p>
-        <div id="_showpic_5657a249" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_5657a249" href=https://image.youyinnn.top/20190305203935.png class="hidepic" ></img>
+        <div class="_showpic_5657a249 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190305203935.png class="_pic_5657a249 hidepic" picId="5657a249"></img>
         <script>
-            let imgself5657a249 = document.getElementById('_pic_5657a249')
-            let isInViewPortOfTwo5657a249 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself5657a249.getBoundingClientRect() && imgself5657a249.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_5657a249').src = document.getElementById('_pic_5657a249').getAttribute('href')
-                    document.getElementById('_pic_5657a249').classList = ['showpic']
-                    document.getElementById('_showpic_5657a249').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo5657a249)
-                    isInViewPortOfTwo5657a249 = null
+            {
+                let imgself5657a249s = document.getElementsByClassName('_pic_5657a249')
+                let showpicbtn5657a249s = document.getElementsByClassName('_showpic_5657a249')
+                let isInViewPortOfTwo5657a249 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5657a249s[0].getBoundingClientRect() && imgself5657a249s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5657a249s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo5657a249)
+                            isInViewPortOfTwo5657a249 = null
+                        }
+                        for (el of showpicbtn5657a249s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo5657a249 ()
+                window.addEventListener('scroll', isInViewPortOfTwo5657a249)
             }
-            isInViewPortOfTwo5657a249 ()
-            window.addEventListener('scroll', isInViewPortOfTwo5657a249)
         </script>
     </p>
 <p>需要声明的一点是，JIT只在运行时适当地编译部分运行频率很高的代码</p>

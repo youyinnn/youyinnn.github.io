@@ -138,23 +138,30 @@
             </a>
             操作流程
           </h3><p>
-        <div id="_showpic_c3b71faa" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_c3b71faa" href=https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg class="hidepic" ></img>
+        <div class="_showpic_c3b71faa showpicbtn">Loading images >></div>
+        <img href=https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg class="_pic_c3b71faa hidepic" picId="c3b71faa"></img>
         <script>
-            let imgselfc3b71faa = document.getElementById('_pic_c3b71faa')
-            let isInViewPortOfTwoc3b71faa = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfc3b71faa.getBoundingClientRect() && imgselfc3b71faa.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_c3b71faa').src = document.getElementById('_pic_c3b71faa').getAttribute('href')
-                    document.getElementById('_pic_c3b71faa').classList = ['showpic']
-                    document.getElementById('_showpic_c3b71faa').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoc3b71faa)
-                    isInViewPortOfTwoc3b71faa = null
+            {
+                let imgselfc3b71faas = document.getElementsByClassName('_pic_c3b71faa')
+                let showpicbtnc3b71faas = document.getElementsByClassName('_showpic_c3b71faa')
+                let isInViewPortOfTwoc3b71faa = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc3b71faas[0].getBoundingClientRect() && imgselfc3b71faas[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc3b71faas) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoc3b71faa)
+                            isInViewPortOfTwoc3b71faa = null
+                        }
+                        for (el of showpicbtnc3b71faas) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoc3b71faa ()
+                window.addEventListener('scroll', isInViewPortOfTwoc3b71faa)
             }
-            isInViewPortOfTwoc3b71faa ()
-            window.addEventListener('scroll', isInViewPortOfTwoc3b71faa)
         </script>
     </p>
 <p style="text-align: center;">图源：<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_4&index=3" target="_blank">微信文档</a></p>

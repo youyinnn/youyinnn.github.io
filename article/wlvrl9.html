@@ -141,23 +141,30 @@
           </h3><p>从我们熟悉的开始，堆内存大致可以分为三个区域，Young——新生代、Turned——老年代、PermGen——永久代</p>
 <p>其中新生代里又默认以8：1：1分为Eden：Survivor：Survivor</p>
 <p>
-        <div id="_showpic_41751fb0" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_41751fb0" href=https://image.youyinnn.top/20190318213039.png class="hidepic" ></img>
+        <div class="_showpic_41751fb0 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190318213039.png class="_pic_41751fb0 hidepic" picId="41751fb0"></img>
         <script>
-            let imgself41751fb0 = document.getElementById('_pic_41751fb0')
-            let isInViewPortOfTwo41751fb0 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself41751fb0.getBoundingClientRect() && imgself41751fb0.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_41751fb0').src = document.getElementById('_pic_41751fb0').getAttribute('href')
-                    document.getElementById('_pic_41751fb0').classList = ['showpic']
-                    document.getElementById('_showpic_41751fb0').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo41751fb0)
-                    isInViewPortOfTwo41751fb0 = null
+            {
+                let imgself41751fb0s = document.getElementsByClassName('_pic_41751fb0')
+                let showpicbtn41751fb0s = document.getElementsByClassName('_showpic_41751fb0')
+                let isInViewPortOfTwo41751fb0 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself41751fb0s[0].getBoundingClientRect() && imgself41751fb0s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself41751fb0s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo41751fb0)
+                            isInViewPortOfTwo41751fb0 = null
+                        }
+                        for (el of showpicbtn41751fb0s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo41751fb0 ()
+                window.addEventListener('scroll', isInViewPortOfTwo41751fb0)
             }
-            isInViewPortOfTwo41751fb0 ()
-            window.addEventListener('scroll', isInViewPortOfTwo41751fb0)
         </script>
     </p>
 
@@ -170,23 +177,30 @@
 <p>于是Eden空间进一步划分一个或者多个TLAB区域，并且保留一块公共区域，当TLAB空间不够分配对象的时候，会选择到公共区域继续分配，如果这里也没有空间了的话，那就会出发一次年轻代的GC，也就是<strong>Minor GC</strong></p>
 <p>这里有个GC的细节，也是之前没提到过的，我们说GC的基本操作是，扫描引用链，然后清除掉和根引用无关的对象，但是我们需要知道，对象之间的引用是可以跨代的，比如新生代对象可以挂在老年代对象上，所以一次直白的<strong>Reachability Analysis</strong>，可能会跨代进行</p>
 <p>
-        <div id="_showpic_3a06af5c" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_3a06af5c" href=https://image.youyinnn.top/20190318214251.png class="hidepic" ></img>
+        <div class="_showpic_3a06af5c showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190318214251.png class="_pic_3a06af5c hidepic" picId="3a06af5c"></img>
         <script>
-            let imgself3a06af5c = document.getElementById('_pic_3a06af5c')
-            let isInViewPortOfTwo3a06af5c = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself3a06af5c.getBoundingClientRect() && imgself3a06af5c.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_3a06af5c').src = document.getElementById('_pic_3a06af5c').getAttribute('href')
-                    document.getElementById('_pic_3a06af5c').classList = ['showpic']
-                    document.getElementById('_showpic_3a06af5c').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo3a06af5c)
-                    isInViewPortOfTwo3a06af5c = null
+            {
+                let imgself3a06af5cs = document.getElementsByClassName('_pic_3a06af5c')
+                let showpicbtn3a06af5cs = document.getElementsByClassName('_showpic_3a06af5c')
+                let isInViewPortOfTwo3a06af5c = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself3a06af5cs[0].getBoundingClientRect() && imgself3a06af5cs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself3a06af5cs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo3a06af5c)
+                            isInViewPortOfTwo3a06af5c = null
+                        }
+                        for (el of showpicbtn3a06af5cs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo3a06af5c ()
+                window.addEventListener('scroll', isInViewPortOfTwo3a06af5c)
             }
-            isInViewPortOfTwo3a06af5c ()
-            window.addEventListener('scroll', isInViewPortOfTwo3a06af5c)
         </script>
     </p>
 <p>但是这样做的话，<strong>分代GC</strong>就没有意义了，于是JVM在这里使用了一个小伎俩：<em>card-marking</em>，详细可以参考<a href="http://psy-lob-saw.blogspot.com/2014/10/the-jvm-write-barrier-card-marking.html">The JVM Write Barrier - Card Marking</a>，JVM用这个算法粗略地将Eden区的有可能有跨代引用的对象进行标记，然后把它们移到Survivor区，然后剩下的对象就容易清理掉了——是不是很眼熟？这就是<strong>标记-复制</strong>算法</p>
@@ -199,23 +213,30 @@
           </h4><p>紧接着Eden，是两个Survivor区，这两个区域也各自拥有姓名，<strong>&quot;from&quot;</strong>和<strong>&quot;to&quot;</strong>，前面也提到过了，其中一个区域应该总是空的，所以实际上Eden区能用的最大空间是分配的<strong>90%</strong></p>
 <p>当年轻代开始GC的时候，所有存活的年轻代会从Eden和from区域复制到to区域，有的年轻代对象也会从from区域直接分配到老年代，因为在这存活了15次，然后原先的from和to会互换身份；</p>
 <p>
-        <div id="_showpic_28908ba7" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_28908ba7" href=https://image.youyinnn.top/20190318223935.png class="hidepic" ></img>
+        <div class="_showpic_28908ba7 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190318223935.png class="_pic_28908ba7 hidepic" picId="28908ba7"></img>
         <script>
-            let imgself28908ba7 = document.getElementById('_pic_28908ba7')
-            let isInViewPortOfTwo28908ba7 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself28908ba7.getBoundingClientRect() && imgself28908ba7.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_28908ba7').src = document.getElementById('_pic_28908ba7').getAttribute('href')
-                    document.getElementById('_pic_28908ba7').classList = ['showpic']
-                    document.getElementById('_showpic_28908ba7').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo28908ba7)
-                    isInViewPortOfTwo28908ba7 = null
+            {
+                let imgself28908ba7s = document.getElementsByClassName('_pic_28908ba7')
+                let showpicbtn28908ba7s = document.getElementsByClassName('_showpic_28908ba7')
+                let isInViewPortOfTwo28908ba7 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself28908ba7s[0].getBoundingClientRect() && imgself28908ba7s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself28908ba7s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo28908ba7)
+                            isInViewPortOfTwo28908ba7 = null
+                        }
+                        for (el of showpicbtn28908ba7s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo28908ba7 ()
+                window.addEventListener('scroll', isInViewPortOfTwo28908ba7)
             }
-            isInViewPortOfTwo28908ba7 ()
-            window.addEventListener('scroll', isInViewPortOfTwo28908ba7)
         </script>
     </p>
 <p>再提一嘴，15次是默认值，可以用参数调整，然后大对象会更早的进入老年代，不受age限制，这个在前面也说过了</p>

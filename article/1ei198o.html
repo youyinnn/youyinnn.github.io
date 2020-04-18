@@ -144,23 +144,30 @@
 <p>优点巨多，这也是为什么开发中vm被container技术迅速淘汰的原因</p>
 </blockquote>
 <p>
-        <div id="_showpic_3f7094f5" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_3f7094f5" href=https://docs.docker.com/get-started/images/laurel-docker-containers.png class="hidepic" ></img>
+        <div class="_showpic_3f7094f5 showpicbtn">Loading images >></div>
+        <img href=https://docs.docker.com/get-started/images/laurel-docker-containers.png class="_pic_3f7094f5 hidepic" picId="3f7094f5"></img>
         <script>
-            let imgself3f7094f5 = document.getElementById('_pic_3f7094f5')
-            let isInViewPortOfTwo3f7094f5 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself3f7094f5.getBoundingClientRect() && imgself3f7094f5.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_3f7094f5').src = document.getElementById('_pic_3f7094f5').getAttribute('href')
-                    document.getElementById('_pic_3f7094f5').classList = ['showpic']
-                    document.getElementById('_showpic_3f7094f5').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo3f7094f5)
-                    isInViewPortOfTwo3f7094f5 = null
+            {
+                let imgself3f7094f5s = document.getElementsByClassName('_pic_3f7094f5')
+                let showpicbtn3f7094f5s = document.getElementsByClassName('_showpic_3f7094f5')
+                let isInViewPortOfTwo3f7094f5 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself3f7094f5s[0].getBoundingClientRect() && imgself3f7094f5s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself3f7094f5s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo3f7094f5)
+                            isInViewPortOfTwo3f7094f5 = null
+                        }
+                        for (el of showpicbtn3f7094f5s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo3f7094f5 ()
+                window.addEventListener('scroll', isInViewPortOfTwo3f7094f5)
             }
-            isInViewPortOfTwo3f7094f5 ()
-            window.addEventListener('scroll', isInViewPortOfTwo3f7094f5)
         </script>
     </p>
 
@@ -184,23 +191,30 @@
           </h4><p>A <strong>container</strong> runs <em>natively</em> on Linux and shares the kernel of the host machine with other containers. It runs a discrete process, taking no more memory than any other executable, making it lightweight.</p>
 <p>By contrast, a <strong>virtual machine</strong> (VM) runs a full-blown “guest” operating system with <em>virtual</em> access to host resources through a hypervisor. In general, VMs provide an environment with more resources than most applications need.</p>
 <p>
-        <div id="_showpic_7abdf313" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_7abdf313" href=https://image.youyinnn.top/img/20181116135034.png class="hidepic" ></img>
+        <div class="_showpic_7abdf313 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/img/20181116135034.png class="_pic_7abdf313 hidepic" picId="7abdf313"></img>
         <script>
-            let imgself7abdf313 = document.getElementById('_pic_7abdf313')
-            let isInViewPortOfTwo7abdf313 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself7abdf313.getBoundingClientRect() && imgself7abdf313.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_7abdf313').src = document.getElementById('_pic_7abdf313').getAttribute('href')
-                    document.getElementById('_pic_7abdf313').classList = ['showpic']
-                    document.getElementById('_showpic_7abdf313').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo7abdf313)
-                    isInViewPortOfTwo7abdf313 = null
+            {
+                let imgself7abdf313s = document.getElementsByClassName('_pic_7abdf313')
+                let showpicbtn7abdf313s = document.getElementsByClassName('_showpic_7abdf313')
+                let isInViewPortOfTwo7abdf313 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself7abdf313s[0].getBoundingClientRect() && imgself7abdf313s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself7abdf313s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo7abdf313)
+                            isInViewPortOfTwo7abdf313 = null
+                        }
+                        for (el of showpicbtn7abdf313s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo7abdf313 ()
+                window.addEventListener('scroll', isInViewPortOfTwo7abdf313)
             }
-            isInViewPortOfTwo7abdf313 ()
-            window.addEventListener('scroll', isInViewPortOfTwo7abdf313)
         </script>
     </p>
 

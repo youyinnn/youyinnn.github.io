@@ -170,23 +170,30 @@
             2.2.1 数据通信系统模型
           </h5><p>一个数据通信系统大致可以分为：<strong>源系统（发送端）</strong>、<strong>传输系统（传输线路）</strong>和<strong>目的系统（接受端、接收方）</strong></p>
 <p>
-        <div id="_showpic_ec78c98f" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_ec78c98f" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180705135038.png class="hidepic" ></img>
+        <div class="_showpic_ec78c98f showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180705135038.png class="_pic_ec78c98f hidepic" picId="ec78c98f"></img>
         <script>
-            let imgselfec78c98f = document.getElementById('_pic_ec78c98f')
-            let isInViewPortOfTwoec78c98f = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfec78c98f.getBoundingClientRect() && imgselfec78c98f.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_ec78c98f').src = document.getElementById('_pic_ec78c98f').getAttribute('href')
-                    document.getElementById('_pic_ec78c98f').classList = ['showpic']
-                    document.getElementById('_showpic_ec78c98f').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoec78c98f)
-                    isInViewPortOfTwoec78c98f = null
+            {
+                let imgselfec78c98fs = document.getElementsByClassName('_pic_ec78c98f')
+                let showpicbtnec78c98fs = document.getElementsByClassName('_showpic_ec78c98f')
+                let isInViewPortOfTwoec78c98f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfec78c98fs[0].getBoundingClientRect() && imgselfec78c98fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfec78c98fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoec78c98f)
+                            isInViewPortOfTwoec78c98f = null
+                        }
+                        for (el of showpicbtnec78c98fs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoec78c98f ()
+                window.addEventListener('scroll', isInViewPortOfTwoec78c98f)
             }
-            isInViewPortOfTwoec78c98f ()
-            window.addEventListener('scroll', isInViewPortOfTwoec78c98f)
         </script>
     </p>
 
@@ -242,23 +249,30 @@
 <li><strong>基带调制：</strong>仅对基带信号进行波形变换，使之能和信道特性相适应，这种调制是把数字信号转换为另一种形式的数字信号，所以一般叫基带调制为<strong>编码</strong></li>
 </ul>
 <p>
-        <div id="_showpic_b5de509c" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_b5de509c" href=https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180706133415.png class="hidepic" ></img>
+        <div class="_showpic_b5de509c showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E5%9B%BE%E7%89%8720180706133415.png class="_pic_b5de509c hidepic" picId="b5de509c"></img>
         <script>
-            let imgselfb5de509c = document.getElementById('_pic_b5de509c')
-            let isInViewPortOfTwob5de509c = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfb5de509c.getBoundingClientRect() && imgselfb5de509c.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_b5de509c').src = document.getElementById('_pic_b5de509c').getAttribute('href')
-                    document.getElementById('_pic_b5de509c').classList = ['showpic']
-                    document.getElementById('_showpic_b5de509c').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwob5de509c)
-                    isInViewPortOfTwob5de509c = null
+            {
+                let imgselfb5de509cs = document.getElementsByClassName('_pic_b5de509c')
+                let showpicbtnb5de509cs = document.getElementsByClassName('_showpic_b5de509c')
+                let isInViewPortOfTwob5de509c = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfb5de509cs[0].getBoundingClientRect() && imgselfb5de509cs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfb5de509cs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwob5de509c)
+                            isInViewPortOfTwob5de509c = null
+                        }
+                        for (el of showpicbtnb5de509cs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwob5de509c ()
+                window.addEventListener('scroll', isInViewPortOfTwob5de509c)
             }
-            isInViewPortOfTwob5de509c ()
-            window.addEventListener('scroll', isInViewPortOfTwob5de509c)
         </script>
     </p>
 <p>以上是<strong>常用</strong>的基带调制方式，用的多的就是曼切斯特编码，常用于传统的以太网，这里我们可以补充一下码元的理解，拿曼切斯特来举例的话，它用<strong>两个码元代表一个位</strong>，也就是<strong>10代表1，01代表0</strong>，这样做的做法是用于同步时钟</p>
@@ -266,23 +280,30 @@
 <li><strong>带通调制：</strong>需要使用<strong>载波（carrier）</strong>进行调制，把基带信号的频率搬到高频段，并转换为模拟信号</li>
 </ul>
 <p>
-        <div id="_showpic_28c5a973" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_28c5a973" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706160531.png class="hidepic" ></img>
+        <div class="_showpic_28c5a973 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706160531.png class="_pic_28c5a973 hidepic" picId="28c5a973"></img>
         <script>
-            let imgself28c5a973 = document.getElementById('_pic_28c5a973')
-            let isInViewPortOfTwo28c5a973 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself28c5a973.getBoundingClientRect() && imgself28c5a973.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_28c5a973').src = document.getElementById('_pic_28c5a973').getAttribute('href')
-                    document.getElementById('_pic_28c5a973').classList = ['showpic']
-                    document.getElementById('_showpic_28c5a973').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo28c5a973)
-                    isInViewPortOfTwo28c5a973 = null
+            {
+                let imgself28c5a973s = document.getElementsByClassName('_pic_28c5a973')
+                let showpicbtn28c5a973s = document.getElementsByClassName('_showpic_28c5a973')
+                let isInViewPortOfTwo28c5a973 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself28c5a973s[0].getBoundingClientRect() && imgself28c5a973s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself28c5a973s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo28c5a973)
+                            isInViewPortOfTwo28c5a973 = null
+                        }
+                        for (el of showpicbtn28c5a973s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo28c5a973 ()
+                window.addEventListener('scroll', isInViewPortOfTwo28c5a973)
             }
-            isInViewPortOfTwo28c5a973 ()
-            window.addEventListener('scroll', isInViewPortOfTwo28c5a973)
         </script>
     </p>
 <p>以上是<strong>基本</strong>的带同调制的方式</p>
@@ -293,23 +314,30 @@
             </a>
             2.3 信道复用技术
           </h5><p>
-        <div id="_showpic_f7d4020" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_f7d4020" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706163834.png class="hidepic" ></img>
+        <div class="_showpic_f7d4020 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706163834.png class="_pic_f7d4020 hidepic" picId="f7d4020"></img>
         <script>
-            let imgselff7d4020 = document.getElementById('_pic_f7d4020')
-            let isInViewPortOfTwof7d4020 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselff7d4020.getBoundingClientRect() && imgselff7d4020.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_f7d4020').src = document.getElementById('_pic_f7d4020').getAttribute('href')
-                    document.getElementById('_pic_f7d4020').classList = ['showpic']
-                    document.getElementById('_showpic_f7d4020').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwof7d4020)
-                    isInViewPortOfTwof7d4020 = null
+            {
+                let imgselff7d4020s = document.getElementsByClassName('_pic_f7d4020')
+                let showpicbtnf7d4020s = document.getElementsByClassName('_showpic_f7d4020')
+                let isInViewPortOfTwof7d4020 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselff7d4020s[0].getBoundingClientRect() && imgselff7d4020s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselff7d4020s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwof7d4020)
+                            isInViewPortOfTwof7d4020 = null
+                        }
+                        for (el of showpicbtnf7d4020s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwof7d4020 ()
+                window.addEventListener('scroll', isInViewPortOfTwof7d4020)
             }
-            isInViewPortOfTwof7d4020 ()
-            window.addEventListener('scroll', isInViewPortOfTwof7d4020)
         </script>
     </p>
 
@@ -323,45 +351,59 @@
 <li><strong>时分复用（Time Divition Multiplexing，TDM）：</strong>所有用户在不同时间占用同样的频带宽度，更有利于数字信号的传输</li>
 </ul>
 <p>
-        <div id="_showpic_11a7a3cd" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_11a7a3cd" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707164750.png class="hidepic" ></img>
+        <div class="_showpic_11a7a3cd showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707164750.png class="_pic_11a7a3cd hidepic" picId="11a7a3cd"></img>
         <script>
-            let imgself11a7a3cd = document.getElementById('_pic_11a7a3cd')
-            let isInViewPortOfTwo11a7a3cd = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgself11a7a3cd.getBoundingClientRect() && imgself11a7a3cd.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_11a7a3cd').src = document.getElementById('_pic_11a7a3cd').getAttribute('href')
-                    document.getElementById('_pic_11a7a3cd').classList = ['showpic']
-                    document.getElementById('_showpic_11a7a3cd').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwo11a7a3cd)
-                    isInViewPortOfTwo11a7a3cd = null
+            {
+                let imgself11a7a3cds = document.getElementsByClassName('_pic_11a7a3cd')
+                let showpicbtn11a7a3cds = document.getElementsByClassName('_showpic_11a7a3cd')
+                let isInViewPortOfTwo11a7a3cd = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself11a7a3cds[0].getBoundingClientRect() && imgself11a7a3cds[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself11a7a3cds) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwo11a7a3cd)
+                            isInViewPortOfTwo11a7a3cd = null
+                        }
+                        for (el of showpicbtn11a7a3cds) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwo11a7a3cd ()
+                window.addEventListener('scroll', isInViewPortOfTwo11a7a3cd)
             }
-            isInViewPortOfTwo11a7a3cd ()
-            window.addEventListener('scroll', isInViewPortOfTwo11a7a3cd)
         </script>
     </p>
 <p>从图片我们可以注意到，在频分复用的时候，非常占带宽，用户越多，带宽越大；在时分复用的时候，看似可以规律的使用一致的带宽，但是不一定所用用户在自己的时间里都发信息，这样可能就会有很多浪费，信道利用率很低。</p>
 <p><strong>统计时分复用（Statistic TDM，STDM）</strong>就是为了解决时分复用的这个问题，使用一个集中器，将同一段时间的数据集中起来：</p>
 <p>
-        <div id="_showpic_c1c71138" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_c1c71138" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707165324.png class="hidepic" ></img>
+        <div class="_showpic_c1c71138 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707165324.png class="_pic_c1c71138 hidepic" picId="c1c71138"></img>
         <script>
-            let imgselfc1c71138 = document.getElementById('_pic_c1c71138')
-            let isInViewPortOfTwoc1c71138 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfc1c71138.getBoundingClientRect() && imgselfc1c71138.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_c1c71138').src = document.getElementById('_pic_c1c71138').getAttribute('href')
-                    document.getElementById('_pic_c1c71138').classList = ['showpic']
-                    document.getElementById('_showpic_c1c71138').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoc1c71138)
-                    isInViewPortOfTwoc1c71138 = null
+            {
+                let imgselfc1c71138s = document.getElementsByClassName('_pic_c1c71138')
+                let showpicbtnc1c71138s = document.getElementsByClassName('_showpic_c1c71138')
+                let isInViewPortOfTwoc1c71138 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc1c71138s[0].getBoundingClientRect() && imgselfc1c71138s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc1c71138s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoc1c71138)
+                            isInViewPortOfTwoc1c71138 = null
+                        }
+                        for (el of showpicbtnc1c71138s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoc1c71138 ()
+                window.addEventListener('scroll', isInViewPortOfTwoc1c71138)
             }
-            isInViewPortOfTwoc1c71138 ()
-            window.addEventListener('scroll', isInViewPortOfTwoc1c71138)
         </script>
     </p>
 <p>但是STDM中集中器的使用前提是假定各个用户是<u><strong>间歇地工作</strong></u></p>
@@ -401,23 +443,30 @@
 </li>
 </ol>
 <p>
-        <div id="_showpic_eabe0c4a" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_eabe0c4a" href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707171300.png class="hidepic" ></img>
+        <div class="_showpic_eabe0c4a showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180707171300.png class="_pic_eabe0c4a hidepic" picId="eabe0c4a"></img>
         <script>
-            let imgselfeabe0c4a = document.getElementById('_pic_eabe0c4a')
-            let isInViewPortOfTwoeabe0c4a = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfeabe0c4a.getBoundingClientRect() && imgselfeabe0c4a.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_eabe0c4a').src = document.getElementById('_pic_eabe0c4a').getAttribute('href')
-                    document.getElementById('_pic_eabe0c4a').classList = ['showpic']
-                    document.getElementById('_showpic_eabe0c4a').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoeabe0c4a)
-                    isInViewPortOfTwoeabe0c4a = null
+            {
+                let imgselfeabe0c4as = document.getElementsByClassName('_pic_eabe0c4a')
+                let showpicbtneabe0c4as = document.getElementsByClassName('_showpic_eabe0c4a')
+                let isInViewPortOfTwoeabe0c4a = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfeabe0c4as[0].getBoundingClientRect() && imgselfeabe0c4as[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfeabe0c4as) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoeabe0c4a)
+                            isInViewPortOfTwoeabe0c4a = null
+                        }
+                        for (el of showpicbtneabe0c4as) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoeabe0c4a ()
+                window.addEventListener('scroll', isInViewPortOfTwoeabe0c4a)
             }
-            isInViewPortOfTwoeabe0c4a ()
-            window.addEventListener('scroll', isInViewPortOfTwoeabe0c4a)
         </script>
     </p>
 

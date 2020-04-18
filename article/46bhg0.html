@@ -154,23 +154,30 @@
 String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>我们当然也知道，a和b是两个不同的对象，因为a是直接引用String Pool的<strong>字面量</strong>，而b引用的是一个String对象，虽然这个String对象中的字面量实际上也是引用到String Pool</p>
 <p>
-        <div id="_showpic_a29878ec" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
+        <div class="_showpic_a29878ec showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190302153504.png class="_pic_a29878ec hidepic" picId="a29878ec"></img>
         <script>
-            let imgselfa29878ec = document.getElementById('_pic_a29878ec')
-            let isInViewPortOfTwoa29878ec = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfa29878ec.getBoundingClientRect() && imgselfa29878ec.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_a29878ec').src = document.getElementById('_pic_a29878ec').getAttribute('href')
-                    document.getElementById('_pic_a29878ec').classList = ['showpic']
-                    document.getElementById('_showpic_a29878ec').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
-                    isInViewPortOfTwoa29878ec = null
+            {
+                let imgselfa29878ecs = document.getElementsByClassName('_pic_a29878ec')
+                let showpicbtna29878ecs = document.getElementsByClassName('_showpic_a29878ec')
+                let isInViewPortOfTwoa29878ec = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa29878ecs[0].getBoundingClientRect() && imgselfa29878ecs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa29878ecs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
+                            isInViewPortOfTwoa29878ec = null
+                        }
+                        for (el of showpicbtna29878ecs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoa29878ec ()
+                window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
             }
-            isInViewPortOfTwoa29878ec ()
-            window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
         </script>
     </p>
 <p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121551&amp;idx=1&amp;sn=b14691e0daeca8d1283fc8a860732405&amp;chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&amp;scene=21#wechat_redirect">我终于搞清楚了和String有关的那点事儿。</a></p>
@@ -238,23 +245,30 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>Java中每一个类也是有一个Class对象去对应的，于是经过前面的铺垫我们可以归总一下，Java类对象，也就是所有的Class对象，是存放在PermGen的；</p>
 <p>于是他们的关系如图：</p>
 <p>
-        <div id="_showpic_b9872d5" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_b9872d5" href=https://image.youyinnn.top/20190302174113.png class="hidepic" ></img>
+        <div class="_showpic_b9872d5 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190302174113.png class="_pic_b9872d5 hidepic" picId="b9872d5"></img>
         <script>
-            let imgselfb9872d5 = document.getElementById('_pic_b9872d5')
-            let isInViewPortOfTwob9872d5 = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfb9872d5.getBoundingClientRect() && imgselfb9872d5.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_b9872d5').src = document.getElementById('_pic_b9872d5').getAttribute('href')
-                    document.getElementById('_pic_b9872d5').classList = ['showpic']
-                    document.getElementById('_showpic_b9872d5').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwob9872d5)
-                    isInViewPortOfTwob9872d5 = null
+            {
+                let imgselfb9872d5s = document.getElementsByClassName('_pic_b9872d5')
+                let showpicbtnb9872d5s = document.getElementsByClassName('_showpic_b9872d5')
+                let isInViewPortOfTwob9872d5 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfb9872d5s[0].getBoundingClientRect() && imgselfb9872d5s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfb9872d5s) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwob9872d5)
+                            isInViewPortOfTwob9872d5 = null
+                        }
+                        for (el of showpicbtnb9872d5s) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwob9872d5 ()
+                window.addEventListener('scroll', isInViewPortOfTwob9872d5)
             }
-            isInViewPortOfTwob9872d5 ()
-            window.addEventListener('scroll', isInViewPortOfTwob9872d5)
         </script>
     </p>
 <p>那么我们说既然都是对象，而且它们在GCor的眼里反正都是一样的，那为什么不将他们放在一起呢？为什么要将类对象放在PermGen呢？</p>
@@ -314,23 +328,30 @@ String s3 = new String(&quot;Hollis&quot;).intern();
 System.out.println(s1 == s2);    // false
 System.out.println(s1 == s3);    // true</code></pre>
 <p>
-        <div id="_showpic_a29878ec" class="showpicbtn">正在显示图片 >></div>
-        <img id="_pic_a29878ec" href=https://image.youyinnn.top/20190302153504.png class="hidepic" ></img>
+        <div class="_showpic_a29878ec showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20190302153504.png class="_pic_a29878ec hidepic" picId="a29878ec"></img>
         <script>
-            let imgselfa29878ec = document.getElementById('_pic_a29878ec')
-            let isInViewPortOfTwoa29878ec = function () {
-                const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                const top = imgselfa29878ec.getBoundingClientRect() && imgselfa29878ec.getBoundingClientRect().top
-                if (top  <= viewPortHeight + 300) {
-                    document.getElementById('_pic_a29878ec').src = document.getElementById('_pic_a29878ec').getAttribute('href')
-                    document.getElementById('_pic_a29878ec').classList = ['showpic']
-                    document.getElementById('_showpic_a29878ec').style.display = 'none'
-                    window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
-                    isInViewPortOfTwoa29878ec = null
+            {
+                let imgselfa29878ecs = document.getElementsByClassName('_pic_a29878ec')
+                let showpicbtna29878ecs = document.getElementsByClassName('_showpic_a29878ec')
+                let isInViewPortOfTwoa29878ec = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa29878ecs[0].getBoundingClientRect() && imgselfa29878ecs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa29878ecs) {
+                            el.src = el.getAttribute('href')
+                            el.classList = ['showpic']
+                            window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
+                            isInViewPortOfTwoa29878ec = null
+                        }
+                        for (el of showpicbtna29878ecs) {
+                            el.style.display = 'none'
+                        }
+                    }
                 }
+                isInViewPortOfTwoa29878ec ()
+                window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
             }
-            isInViewPortOfTwoa29878ec ()
-            window.addEventListener('scroll', isInViewPortOfTwoa29878ec)
         </script>
     </p>
 <p>由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
