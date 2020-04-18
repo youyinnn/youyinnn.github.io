@@ -29,7 +29,6 @@
 
   #homepage {
     top: 0;
-    line-height: 18.4rem;
     font-size: 3rem;
   }
 
@@ -86,7 +85,7 @@
     background-color: var(--yminor-color);
   }
 
-  .pagination {
+  #pnbox {
     bottom: 1rem;
     position: fixed;
     right: 6rem;
@@ -205,12 +204,6 @@
     padding-bottom: 3rem;
   }
 
-  #homepage {
-    top: 6rem;
-    line-height: 20rem;
-    font-size: 2rem;
-  }
-
   #loading {
     padding: 14rem 0 0 0;
   }
@@ -275,15 +268,12 @@
     margin-bottom: 2rem !important;
   }
 
-  .pagination {
+  #pnbox {
     position: fixed;
-    left: 0rem;
-    right: 0;
     bottom: 0;
-    transform: none;
-    top: inherit !important;
     margin: inherit;
     z-index: 300;
+    width: 100%;
   }
 
   .articleshortmsg {

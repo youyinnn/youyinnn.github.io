@@ -30,7 +30,9 @@ $(function() {
         $('#ifwrapper').removeClass('hacknical_hide')
         $('#gohub').text('Hide HackNical')
         $('#gohub').tooltip('disable')
-        $('#gohub').click((e) => {e.preventDefault()})
+        $('#gohub').click((e) => {
+            e.preventDefault()
+        })
         let oldhref = $('#gohub').attr('href')
         $('#gohub').attr('href', 'javascript:void(0);')
         $('#gohub').click(function() {
@@ -70,8 +72,8 @@ $(function() {
         }
     })
     $('*').bind('click', function() {
-        if (this.id === 'toc' 
-        || this.id === 'sidetoc') {
+        if (this.id === 'toc' ||
+            this.id === 'sidetoc') {
             return false
         }
         if (!$('#sidetoccontainer').hasClass('tochide')) {
@@ -107,12 +109,23 @@ $(function() {
         }
     })
     $(window).scroll(function() {
-        let scrollTo = $(window).scrollTop(),
+        let scrollTop = $(window).scrollTop(),
             docHeight = $(document).height(),
             windowHeight = $(window).height();
-        scrollPercent = (parseInt((scrollTo / (docHeight - windowHeight)) * 100)) + ' %';
+        scrollPercent = (parseInt((scrollTop / (docHeight - windowHeight)) * 100)) + ' %';
         percent.innerText = scrollPercent
 
+        // hidetopbar when scrollTop > 0
+        if (location.pathname.startsWith('/article/') ||
+            location.pathname.startsWith('/resume/') ||
+            location.pathname.startsWith('/scripts/') ||
+            location.pathname.startsWith('/todos/')) {
+            if (scrollTop === 0) {
+                showtopbar()
+            } else {
+                hidetopbar()
+            }
+        }
     })
     $('#percent').bind('click', function() {
         scrollToTop(800)

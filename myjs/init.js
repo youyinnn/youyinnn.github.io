@@ -103,6 +103,7 @@ $(function() {
                 <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
             </div>
             <div id="vcomments"></div>
+            <div id="footer">2017-${new Date().getFullYear()}</div>
             `
         $(md).append(end)
         new Valine({
@@ -128,10 +129,6 @@ $(function() {
             sessionStorage.getItem('pod'))
 
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_posts/' + metadata.title + '.md')
-
-        setTimeout(() => {
-            hidetopbar()
-        }, 250)
 
         // remove empty p tag
         $('p').each((i, o) => {

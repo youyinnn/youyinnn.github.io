@@ -16,7 +16,7 @@ function createarticlecard(item, pagebelong) {
     articleshortmsg.id = 'article_short_msg_' + item.abbrlink
     articlemore.innerHTML = 'Read more >>'
     articlemore.href = '/article/' + articletitle.abbrlink + '.html'
-    articletime.innerHTML = '# 创于 ' + articlecarddate(dayjs(item.date))
+    articletime.innerHTML = '# Created at ' + articlecarddate(dayjs(item.date))
     appendc(articlecard, articletitle)
     appendc(articlecard, articletime)
     appendc(articlecard, articleshortmsg)

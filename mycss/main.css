@@ -7,7 +7,6 @@
   background-color: var(--ymain-color);
   border-radius: 0;
   margin-bottom: 0;
-  transition: all 1.2s;
   z-index: 999;
 }
 
@@ -707,12 +706,39 @@
 }
 
 .pagination {
+  margin: auto;
+}
+
+#pnbox {
   z-index: 200;
   position: absolute;
-  left: 50%;
   text-align: center;
-  transform: translateX(-50%);
   margin: -3rem auto 1rem;
+  border-top: rgb(202, 202, 202) 1px solid;
+  max-width: 700px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background-color: whitesmoke;
+}
+
+.page-link{
+  border: none !important;
+  background-color: whitesmoke !important;
+  color: #555 !important;
+}
+
+.page-link:hover{
+  background-color: rgb(202, 202, 202) !important;
+}
+
+.page-link:active{
+  background-color: rgb(223, 223, 223) !important;
+}
+
+.page-item.active .page-link{
+  background-color: rgb(202, 202, 202) !important;
 }
 
 #articlesearch {
@@ -855,8 +881,10 @@
 }
 
 .hidetopbar p,
-.hidetopbar li {
-  transform: translateX(-100rem);
+.hidetopbar li,
+.hidetopbar li::before {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
 .panelup {
@@ -1014,6 +1042,7 @@
   cursor: pointer;
   color: #6d99cc !important;
   background-color: #dfdfdf63;
+  border-left: #dfdfdf63 4px solid;
 }
 
 #seriesbox span {
@@ -1194,7 +1223,7 @@ summary {
 }
 
 .markdown-body img{
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .article h1 {
@@ -1218,4 +1247,10 @@ summary {
 
 .no-transit * {
   transition: none !important;
+}
+
+#footer {
+  text-align: right;
+  font-size: .75em;
+  color: #999;
 }
