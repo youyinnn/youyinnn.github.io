@@ -477,6 +477,8 @@ function pagination() {
     for (let i = 1; i < pbs.length; i++) {
         adclass(pbs[i], 'pageboxhide')
     }
+    let pnbox = c('div')
+    pnbox.id = 'pnbox'
     let pn = c('ul')
     adclass(pn, 'pagination unselectable')
     adclass(pn, 'myhide')
@@ -486,7 +488,7 @@ function pagination() {
     adclass(first, 'page-item')
     let firstl = c('div')
     adclass(firstl, 'page-link')
-    firstl.innerText = 'F'
+    firstl.innerText = '<<'
     appendc(first, firstl)
     appendc(pn, first)
     $(first).bind('click', function(ev) {
@@ -523,12 +525,10 @@ function pagination() {
             }
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage - 1))[0], 'pageboxhide')
-            if ($('#pg-3').hasClass('active')) {
-                $('#pg-3').removeClass('active')
-                $('#pg-2').addClass('active')
-            } else if ($('#pg-2').hasClass('active')) {
-                $('#pg-2').removeClass('active')
-                $('#pg-1').addClass('active')
+            let nonum = Number($('.active')[0].id.split('-')[1])
+            if (nonum > 1) {
+                $('.active').removeClass('active')
+                $('#pg-' + (--nonum)).addClass('active')
             }
             nowpage--
             pageFlesh()
@@ -575,9 +575,11 @@ function pagination() {
                 $('#pg-1 > div')[0].innerText = parseInt($('#pg-1 > div')[0].innerText) + 1
                 $('#pg-2 > div')[0].innerText = parseInt($('#pg-2 > div')[0].innerText) + 1
                 $('#pg-3 > div')[0].innerText = parseInt($('#pg-3 > div')[0].innerText) + 1
-            } else {
-                rmclass($('.active')[0], 'active')
-                adclass($('#pg-' + (nowpage + 1))[0], 'active')
+            }
+            let nonum = Number($('.active')[0].id.split('-')[1])
+            if (nonum < 3) {
+                $('.active').removeClass('active')
+                $('#pg-' + (++nonum)).addClass('active')
             }
             adclass($('#pagebox-' + nowpage)[0], 'pageboxhide')
             rmclass($('#pagebox-' + (nowpage + 1))[0], 'pageboxhide')
@@ -591,7 +593,7 @@ function pagination() {
     adclass(last, 'page-item')
     let lastl = c('div')
     adclass(lastl, 'page-link')
-    lastl.innerText = 'L'
+    lastl.innerText = '>>'
     appendc(last, lastl)
     appendc(pn, last)
     $(last).bind('click', function(ev) {
@@ -611,7 +613,8 @@ function pagination() {
             pageFlesh()
         }
     })
-    appendc($('#pgboxbox')[0], pn)
+    appendc(pnbox, pn)
+    appendc($('#pgboxbox')[0], pnbox)
     setTimeout(function() {
         rmclass(pn, 'myhide')
     }, 100)
@@ -655,17 +658,11 @@ function showtoc() {
 }
 
 function hidetopbar() {
-    if (getclientw() > 700) {
-        adclass(topbar, 'hidetopbar')
-        // adclass(md, 'panelup')
-    }
+    adclass(topbar, 'hidetopbar')
 }
 
 function showtopbar() {
-    if (getclientw() > 700) {
-        rmclass(topbar, 'hidetopbar')
-        // rmclass(md, 'panelup')
-    }
+    rmclass(topbar, 'hidetopbar')
 }
 
 function cgtopbut() {
@@ -729,12 +726,12 @@ function daybefore(pastdayjs) {
     before /= 3600000
     if (before < 24) {
         if (before > now.hour()) {
-            return ' <x style="color:#46bbcd;">昨天</x>'
+            return ' <x style="color:#46bbcd;">yesterday</x>'
         } else {
-            return ' <x style="color:#46bbcd;">今天</x>'
+            return ' <x style="color:#46bbcd;">today</x>'
         }
     }
-    if (before > 24 && before < 48) return ' <x style="color:#46bbcd;">前天</x>'
+    if (before > 24 && before < 48) return ' <x style="color:#46bbcd;">2 days ago</x>'
     return Math.ceil(before / 24)
 }
 
@@ -744,7 +741,7 @@ function articlecarddate(pastdayjs) {
     if (Number.isNaN(daynumber)) {
         return daybeforers
     } else {
-        return ' <x style="color:#46bbcd;">' + daynumber + '天前</x>'
+        return ' <x style="color:#46bbcd;">' + daynumber + ' days ago</x>'
     }
 }
 
@@ -793,9 +790,9 @@ function setarrow() {
     })
 }
 
-function showseries(abbrlink, ps) {
+function showseries(abbrlink, ps, psname) {
     $('#articlehead').after(`
-        <div id="series-btn" class="unselectable">Series (Click To Show All Articles)</div>
+        <div id="series-btn" class="unselectable">Series <span style="color:#6146cd">${psname}</span> (Click To Show All Articles)</div>
         <div id="seriesbox" class="unselectable"></div>
     `)
     let sb = $('#seriesbox')
@@ -984,11 +981,9 @@ function handlemetadata(metadata) {
 function seriesorderhandle(abbrlink, psname, sbody, obody) {
     if (psname !== undefined) {
         let ses = yaml.load(sbody)
-        let ps
         for (let i = 0; i < ses.length; i++) {
             if (ses[i].se === psname) {
-                ps = ses[i].ps
-                showseries(abbrlink, ps)
+                showseries(abbrlink, ses[i].ps, psname)
                 break
             }
         }
