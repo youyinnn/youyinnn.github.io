@@ -85,12 +85,11 @@ Example coded with python:
 
 ``` python
 def trialdivision(n):
-    if (n == 1):
-        return True
+    if (n <= 1):
+        return False
     else:
         count = 2
-        end = math.sqrt(n)
-        while count <= end:
+        while count * count <= n:
             if n % count == 0:
                 return False
             count = count + 1
@@ -99,11 +98,11 @@ def trialdivision(n):
 
 #### Optimized solution - O(√n)
 
-Based on the fact that **every prime number can represented in form of 6n+1 or 6n-1 except 2 and 3**, where n is natural number.
+Based on the fact that **every prime number can represented in form of 6k+1 or 6k-1 except 2 and 3**, where n is natural number.
 
 ``` python
 def sixkopt(n):
-    if n == 1:
+    if n <= 1:
         return False
     if n <= 3:
         return True
@@ -152,6 +151,24 @@ The next number not yet crossed out in the list after 3 is 5; cross out every 5t
 The next number not yet crossed out in the list after 5 is 7; the next step would be to cross out every 7th number in the list after 7, but they are all already crossed out at this point, as these numbers (14, 21, 28) are also multiples of smaller primes **because 7 × 7 is greater than 30**. The numbers not crossed out at this point in the list are all the prime numbers below 30:
 
  2  3     5     7           11    13          17    19          23                29
+
+##### Implement - O(nlog(log(n)))
+
+``` python
+def SieveOfEratosthenes(n): 
+    # Create a boolean array "prime[0..n]" and initialize 
+    #  all entries it as true. A value in prime[i] will 
+    # finally be false if i is Not a prime, else true. 
+    prime = [True for i in range(n+1)] 
+    p = 2
+    while (p * p <= n): 
+        # If prime[p] is not changed, then it is a prime 
+        if (prime[p] == True): 
+            # Update all multiples of p 
+            for i in range(p * p, n+1, p): 
+                prime[i] = False
+        p += 1
+```
 
 ### Application
 
