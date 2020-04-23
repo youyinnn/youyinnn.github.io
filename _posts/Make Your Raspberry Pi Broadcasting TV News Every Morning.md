@@ -1,5 +1,5 @@
 ---
-title: Make you Raspberry Pi Broadcasting TV News Every Morning
+title: Make Your Raspberry Pi Broadcasting TV News Every Morning
 categories:
   - essay
 tags:
