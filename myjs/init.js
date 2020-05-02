@@ -58,7 +58,7 @@ $(function() {
     } else if (pathname === '/scripts/') {
         $('html').css('overflowY', 'initial')
         changepagetitle('scripts | youyinnn')
-        if (getclientw() >= 700) { 
+        if (getclientw() >= 700) {
             scriptblock()
         } else {
             showbbt()
@@ -66,8 +66,11 @@ $(function() {
         }
         new_render_md()
         showsidetoc()
-        $('#sidetoc').children().first().click()
-        $('#sidetoc').children().first().next().click()
+        setTimeout(() => {
+            $('#_toc_root').children().first().children().click()
+            $('#_toc_root').children().first().children().children().first().click()
+        }, 200);
+
         $(md).addClass('scripts')
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')
     } else if (pathname === '/todos/') {
@@ -148,6 +151,7 @@ $(function() {
 
         showbbt()
         showtocbtn()
+        showsidetoc()
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
