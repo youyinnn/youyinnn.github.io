@@ -25,44 +25,80 @@ function new_render_md(regular_toc) {
         })
     })
     let listhtml = ''
-    let selectheader = Boolean(regular_toc) ? 'h1, h2, h3, h4, h5, h6' : 'h2, h3'
-    for (el of $(selectheader)) {
-        let transferred = el.childNodes[1].name
-            .split('_root-')[1]
+    let selectheaderstr = Boolean(regular_toc) ? 'h1, h2, h3, h4, h5, h6' : 'h2, h3'
+    let selectheader = $(selectheaderstr)
+    $('#sidetoc').append(`
+        <ul id="_toc_root">
+        </ul>
+    `)
+
+    function limaker(text, id, tg) {
+        let transferred = text
             .trim()
             .replace(/>/gm, '&gt;')
             .replace(/</gm, '&lt;')
             .replace(/&/gm, '&amp;')
             .replace(/"/gm, '&quot;')
             .replace(/ /gm, '&nbsp;')
-        listhtml += `
-            <div class="toc-${el.tagName.toLowerCase()}" _target_sb="${el.id}">
-                <a hreff="${el.childNodes[1].name}">
-                    ${transferred}
-                </a>
-            </div>`
+        return `
+            <li class="toc-${tg.toLowerCase()}" _target_sb="${id}">
+                <a hreff="${text.trim()}">${transferred}</a>
+                <ul id="_toc_${id}" class="_toc_ul">
+                </ul>
+            </li>
+        `
+    }
+    for (let i = 0; i < selectheader.length; i++) {
+        let el = selectheader[i]
+        if (i === 0) {
+            $('#_toc_root').append(limaker(el.innerText, el.id, el.tagName))
+            el.setAttribute('roottocid', '_toc_root')
+        } else {
+            let pre = selectheader[i - 1]
+            if (el.tagName === pre.tagName) {
+                let preroottocid = pre.getAttribute('roottocid')
+                $(`#${preroottocid}`).append(limaker(el.innerText, el.id, el.tagName))
+                el.setAttribute('roottocid', preroottocid)
+            } else if (el.tagName < pre.tagName) {
+                while (pre.tagName < el.tagName) {
+                    pre = $(`#${pre.getAttribute('roottocid')}`)[0]
+                }
+                let preroottocid = pre.getAttribute('roottocid')
+                let prerootid = preroottocid.replace('_toc_', '')
+                $(`#${$(`#${prerootid}`)[0].getAttribute('roottocid')}`)
+                    .append(limaker(el.innerText, el.id, el.tagName))
+                el.setAttribute('roottocid', $(`#${prerootid}`)[0].getAttribute('roottocid'))
+            } else {
+                $(`#_toc_${pre.id}`).append(limaker(el.innerText, el.id, el.tagName))
+                el.setAttribute('roottocid', '_toc_' + pre.id)
+            }
+        }
     }
     $('#sidetoc').append(listhtml)
     var $root = $('html, body')
     if (Boolean(regular_toc) || getclientw() < 700) {
         $('.markdown-toc a').click(function() {
-            let tzhref = $.attr(this, 'hreff')
+            let tzhref = '_root-' + $.attr(this, 'hreff')
             $root.animate({
                 scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-            }, 600)
+            }, 200)
             if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
                 $root.animate({
                     scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-                }, 600)
+                }, 200)
             }
             if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
                 $root.animate({
                     scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 60
-                }, 600)
+                }, 200)
             }
         })
     } else if (getclientw() >= 700) {
         $('.markdown-toc .toc-h3').click(function() {
+
+            $('.tocactive').removeClass('tocactive')
+            $(this).addClass('tocactive')
+
             let tgsbid = this.getAttribute('_target_sb')
 
             let showsb = $('#md .show-script-block')
@@ -91,22 +127,28 @@ function new_render_md(regular_toc) {
                 }
             })
         })
-        $('#sidetoc .toc-h3').addClass('zip-tran')
+
+        $('#sidetoc').addClass('scripts-toc')
+        $('._toc_ul').addClass('myhide')
+        $('._toc_ul').each((i, e) => {
+            e.style.height = e.childElementCount * 22 + (e.childElementCount + 1) * 4 + 'px'
+        })
+
         let nowh2
-        $('#sidetoc .toc-h2').click(function() {
-            $('#sidetoc .no-zip-tran').addClass('zip-tran')
-            $('#sidetoc .no-zip-tran').removeClass('no-zip-tran')
-            if (nowh2 === this) {
-                nowh2 = undefined
+        $('#sidetoc .toc-h2>a').click(function(event) {
+            if (nowh2 === undefined) {
+                $(this).siblings('._toc_ul').removeClass('myhide')
+            } else if (nowh2 === this) {
+                if ($(this).siblings('._toc_ul').hasClass('myhide')) {
+                    $(this).siblings('._toc_ul').removeClass('myhide')
+                } else {
+                    $(this).siblings('._toc_ul').addClass('myhide')
+                }
             } else {
-                let h3 = $(this).next()
-                while (h3[0] !== undefined && h3[0].className === 'toc-h3 zip-tran') {
-                    h3.removeClass('zip-tran')
-                    h3.addClass('no-zip-tran')
-                    h3 = h3.next()
-                } 
-                nowh2 = this
+                $(nowh2).siblings('._toc_ul').addClass('myhide')
+                $(this).siblings('._toc_ul').removeClass('myhide')
             }
+            nowh2 = this
         })
     }
     $('.katex').parent().addClass('katexp')

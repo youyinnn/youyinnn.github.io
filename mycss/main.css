@@ -172,23 +172,35 @@
   margin: auto;
   top: 3rem;
   bottom: 0;
+  padding: 20px 20px 20px 0px !important;
+}
+
+#sidetoc li {
+  margin: 4px !important;
+}
+
+#sidetoc ul {
+  padding-left: 1.3rem;
+  overflow: hidden;
+}
+
+.scripts-toc ul {
+  list-style-type: none;
+}
+
+.tocactive {
+  background-color: rgb(212, 212, 212);
 }
 
 #sidetoc a {
-  transition: all .2s;
+  cursor: pointer;
   color: var(--ymain-color);
   text-decoration: none;
   width: 100%;
-  display: block;
-  padding-left: 7px;
-}
-
-#sidetoc a {
   position: relative;
   display: block;
-  padding: 0.4em;
-  text-decoration: none;
   transition: all 0.3s ease-out;
+  padding: 0 8px;
 }
 
 #sidetoc a:hover {
@@ -438,13 +450,13 @@
 }
 
 .myhide {
-  height: 0;
-  opacity: 0;
+  height: 0 !important;
+  opacity: 0 !important;
   z-index: -1 !important;
 }
 
 .myshow {
-  opacity: 1;
+  opacity: 1 !important;
   z-index: 201 !important;
 }
 
@@ -1316,7 +1328,7 @@ sb *:first-child {
 }
 
 sb img {
-  margin: auto !important;
+  margin: initial auto !important;
 }
 
 .hide-script-block {
