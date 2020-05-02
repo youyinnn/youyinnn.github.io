@@ -759,7 +759,9 @@ function showtopbar() {
 }
 
 function cgtopbut() {
-    if (hasclass(md, 'myshow')) {
+    if (location.pathname.startsWith('/article/') ||
+        location.pathname.startsWith('/resume/') ||
+        location.pathname.startsWith('/todos/')) {
         if (hasclass(topbar, 'hidetopbar')) {
             showtopbar()
         } else {
@@ -843,19 +845,19 @@ function setarrow() {
     let arrows = $('.parrow h1, .parrow h2, .parrow h6, .parrow h3, .parrow h4, .parrow h5')
     arrows.addClass('panchor')
     arrows.addClass('unselectable')
-    arrows.each(function(e, i) {
+    arrows.each(function(i, e) {
         let link = c('div')
         link.innerText = '+'
         adclass(link, 'panchorlink')
-        appendc(i, link)
-        let url = location.href + '#' + encodeURI($(i).find('a')[0].name)
-        $(i)[0].setAttribute('data-clipboard-text', url)
-        new ClipboardJS(this).on('success', function(e) {
+        appendc(e, link)
+        let url = location.href + '#' + encodeURI($(e).find('a')[0].name)
+        $(e)[0].setAttribute('data-clipboard-text', url)
+        new ClipboardJS(this).on('success', function(event) {
             popmsg('Copy link successed.')
-            e.clearSelection();
-        }).on('error', function(e) {
+            event.clearSelection();
+        }).on('error', function(event) {
             popmsg('Copy link failed.')
-            e.clearSelection();
+            event.clearSelection();
         })
     })
     arrows.mouseover(function() {
@@ -1172,7 +1174,7 @@ function scriptblock() {
             $(e).remove()
         }
     })
-    // $('#md script').remove()
+    $('#md script').remove()
     let cd = $('#md').children()
     let h3p
     let bhtml = ''

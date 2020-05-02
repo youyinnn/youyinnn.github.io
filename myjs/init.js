@@ -67,8 +67,26 @@ $(function() {
         new_render_md()
         showsidetoc()
         setTimeout(() => {
-            $('#_toc_root').children().first().children().click()
-            $('#_toc_root').children().first().children().children().first().click()
+            if (location.hash === '') {
+                $('#_toc_root').children().first().children().click()
+                $('#_toc_root').children().first().children().children().first().click()
+            } else {
+                let lh = location.hash.split('#')[1].split('_')
+                $(`[_target_sb=${lh[1]}]`).children().first().click()
+                $(`[_target_sb=${lh[0]}]`).click()
+            }
+            $('.scripts h3').each((i, e) => {
+                let root = $(`[_target_sb=${e.id}]`).parent().parent()
+                let url = location.origin + location.pathname + '#' + `${e.id}_${root[0].getAttribute('_target_sb')}`
+                $(e).attr('data-clipboard-text', url)
+                new ClipboardJS(e).on('success', function(event) {
+                    popmsg('Copy link successed.')
+                    event.clearSelection()
+                }).on('error', function(event) {
+                    popmsg('Copy link failed.')
+                    event.clearSelection()
+                })
+            })
         }, 200);
 
         $(md).addClass('scripts')

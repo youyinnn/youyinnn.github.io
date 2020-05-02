@@ -1360,9 +1360,20 @@ sb img {
 }
 
 .zip-tran {
+  user-select: none;
   display: none;
 }
 
 .no-zip-tran {
   display: block;
+  user-select: none;
+  cursor: pointer;
 }
+
+.no-zip-tran:hover {
+  background-color: #343a40 !important;
+}
+.no-zip-tran:active {
+  transform: translateY(2px);
+}
+
