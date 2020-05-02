@@ -119,7 +119,6 @@ function imgscroll(href, title, text) {
                         }
                     }
                 }
-                isInViewPortOfTwo${picId} ()
                 window.addEventListener('scroll', isInViewPortOfTwo${picId})
             }
         </script>

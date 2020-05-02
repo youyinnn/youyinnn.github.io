@@ -122,8 +122,10 @@ function new_render_md(regular_toc) {
                     let pics = $(`[picid=${e.getAttribute('picid')}]`)
                     pics.attr('src', pics.attr('href'))
                     pics.attr('shown', 'true')
-                    pics.removeClass('hidepic')
-                    $(`._showpic_${e.getAttribute('picid')}`).remove()
+                    pics.on('load', function(event) {
+                        pics.removeClass('hidepic')
+                        $(`._showpic_${e.getAttribute('picid')}`).remove()
+                    })
                 }
             })
         })
@@ -1170,7 +1172,7 @@ function scriptblock() {
             $(e).remove()
         }
     })
-    $('#md script').remove()
+    // $('#md script').remove()
     let cd = $('#md').children()
     let h3p
     let bhtml = ''

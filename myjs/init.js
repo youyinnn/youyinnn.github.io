@@ -151,7 +151,6 @@ $(function() {
 
         showbbt()
         showtocbtn()
-        showsidetoc()
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')
