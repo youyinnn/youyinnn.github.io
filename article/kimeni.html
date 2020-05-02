@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="c8d1f170">
             <a name="_root-对话框" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -148,7 +148,7 @@ console.log(dialog)</code></pre>
 <li>错误对话框</li>
 </ul>
 
-          <h4>
+          <h4 id="ec81af6a">
             <a name="_root-例子" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -181,7 +181,7 @@ $(&#39;#smsgboxdialog&#39;).click(() =&gt; {
     console.log(rs)
 })</code></pre>
 
-          <h3>
+          <h3 id="ed997d82">
             <a name="_root-菜单" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -192,7 +192,7 @@ $(&#39;#smsgboxdialog&#39;).click(() =&gt; {
 <p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
 <p>创建新菜单。</p>
 
-          <h4>
+          <h4 id="1a7cdf6c">
             <a name="_root-静态方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@ $(&#39;#smsgboxdialog&#39;).click(() =&gt; {
 <p>一般来说 <code>template</code>是一个<code>options</code>类型的数组，用于构建一个 <a href="https://electronjs.org/docs/api/menu-item">MenuItem</a>。使用情况可以在上文提及。</p>
 <p>You can also attach other fields to the element of the <code>template</code> and they will become properties of the constructed menu items.</p>
 
-          <h4>
+          <h4 id="ec81af6a">
             <a name="_root-例子" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -293,13 +293,13 @@ menu.append(new MenuItem({
     })]
 }))</code></pre>
 
-          <h3>
+          <h3 id="167dfff2">
             <a name="_root-任务栏" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             任务栏
           </h3>
-          <h4>
+          <h4 id="b2444bd9">
             <a name="_root-任务菜单" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -323,7 +323,7 @@ menu.append(new MenuItem({
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfbd924ec9s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwobd924ec9)
                             isInViewPortOfTwobd924ec9 = null
                         }
@@ -355,7 +355,7 @@ app.setUserTasks([
 app.setUserTasks([])</code></pre>
 <p>当你的应用关闭时，用户任务仍然会被显示，因此在你的应用被卸载之前，任务的图标和程序的路径必须是存在的。</p>
 
-          <h3>
+          <h3 id="99732a06">
             <a name="_root-托盘" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -408,7 +408,7 @@ app.on(&#39;ready&#39;, () =&gt; {
 </ul>
 <p>如果要在所有平台上保持完全相同的行为, 则不应依赖 <code>click</code> 事件, 并且始终将上下文菜单附加到任务栏图标。</p>
 
-          <h4>
+          <h4 id="14d9d6ff">
             <a name="_root-事件" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

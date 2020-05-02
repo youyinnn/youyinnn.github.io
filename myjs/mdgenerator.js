@@ -29,8 +29,9 @@ renderer.heading = function(text, level) {
     if (text.search('<a') > 0 || text.startsWith('<a')) {
         text = text.replace(/\<a href=".*"\>|<\/a>|<code>|<\/code>/g, '')
     }
+    let hid = crc32(text+level).toString(16)
     return `
-          <h${level}>
+          <h${level} id="${hid}">
             <a name="_root-${text}" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -109,7 +110,7 @@ function imgscroll(href, title, text) {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself${picId}s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo${picId})
                             isInViewPortOfTwo${picId} = null
                         }

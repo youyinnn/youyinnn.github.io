@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -136,7 +136,7 @@
 <p>我们需要深入的是<code>String</code>的内存问题，既然它是一成不变的，有一个对象是一个对象，那么JVM是如何减少内存的开销的？以及它引申出的一系列内存问题</p>
 <p>而我想写这篇文章的引子，则是<a href="https://github.com/hollischuang">Hollis前辈</a>的一篇：<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在for循环中使用&quot;+&quot;进行字符串拼接</a></p>
 
-          <h3>
+          <h3 id="c5dc9951">
             <a name="_root-Constant Pool &amp; Runtime Constant Pool" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -144,7 +144,7 @@
           </h3><p>关于常量池，它用于存放Java编译期生成的各种字面量和符号引用，于是每个Class文件都会有一个Constant Pool，具体的你可以通过<code>javap -v ClassName</code>一个类去看到；</p>
 <p>而在JVM装载class文件的时候，会读取Constant Pool里的内容到Runtime Constant Pool，而Runtime Constant Pool会在程序运行的时候动态产生新的常量；</p>
 
-          <h3>
+          <h3 id="3ae43aaa">
             <a name="_root-Literal" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -166,7 +166,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfa29878ecs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
                             isInViewPortOfTwoa29878ec = null
                         }
@@ -185,7 +185,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>在不同版本的JDK中，Java堆和字符串常量池之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。</p>
 </blockquote>
 
-          <h3>
+          <h3 id="9e2e2952">
             <a name="_root-String Pool" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -211,7 +211,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM；</p>
 <p>再提一句，在Java 8 HotSpot中，永久代被完全移除掉了，说移除也不完全准确，下面我们详细说这个事</p>
 
-          <h3>
+          <h3 id="f4bde0e">
             <a name="_root-PermGen ?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -226,7 +226,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <li><a href="https://blogs.oracle.com/jonthecollector/presenting-the-permanent-generation">Presenting The Permanent Genaration</a></li>
 </ul>
 
-          <h4>
+          <h4 id="b3d71ddc">
             <a name="_root-In Java 7" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -236,7 +236,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p><code>-XX:PermSize=N</code> -  sets the initial (and minimum size) of the Permanent Generation space.</p>
 <p><code>-XX:MaxPermSize=N</code>  -  sets the maximum size of the Permanent Generation space.</p>
 
-          <h4>
+          <h4 id="259db668">
             <a name="_root-What&#39;s More ?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -257,7 +257,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfb9872d5s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwob9872d5)
                             isInViewPortOfTwob9872d5 = null
                         }
@@ -276,7 +276,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>在更久以前，它俩确实是放在一起的，但是因为系统类和开发者写的自定义类的装载行为不一样，所以卸载行为变得很少发生，出于性能优化的考虑才推出了PermGen，效果也很显著；</p>
 <p>还有更多的细节，还是去参考上面放出的第二个原文连接</p>
 
-          <h4>
+          <h4 id="344f0113">
             <a name="_root-In Java 8" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -286,14 +286,14 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p><code>-XX:MaxMetaspaceSize=N</code>  - sets the maximum size of the Metaspace.</p>
 <p>有关Metaspace的特点，可以参考一个大神写的<a href="https://www.cnblogs.com/duanxz/p/3520829.html">文章</a>，以后我有时间也研究一下</p>
 
-          <h4>
+          <h4 id="526aca26">
             <a name="_root-So" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             So
           </h4><p>所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了</p>
 
-          <h3>
+          <h3 id="52606b15">
             <a name="_root-Syntactic Sugar" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -311,7 +311,7 @@ String s2 = &quot;1&quot;;
 String s3 = s2 + &quot;1&quot;;    // sb way
 System.out.println(s1 == s3); // false</code></pre>
 
-          <h3>
+          <h3 id="ae91501">
             <a name="_root-String.intern()" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -340,7 +340,7 @@ System.out.println(s1 == s3);    // true</code></pre>
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfa29878ecs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoa29878ec)
                             isInViewPortOfTwoa29878ec = null
                         }
@@ -356,7 +356,7 @@ System.out.println(s1 == s3);    // true</code></pre>
     </p>
 <p>由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
 
-          <h4>
+          <h4 id="8c186ad2">
             <a name="_root-Real Purpose Of String.intern()" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -396,7 +396,7 @@ public static void main(String[] args) throws Exception {
 }</code></pre>
 <p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过<code>intern</code>显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
 
-          <h3>
+          <h3 id="20570013">
             <a name="_root-Switch For String" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -446,14 +446,14 @@ public static void main(String[] args) throws Exception {
 <p>仔细看下可以发现，进行<code>switch</code>的实际是哈希值，然后通过使用equals方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。</p>
 <p>所以，<strong>其实swich只支持一种数据类型，那就是整型，其他数据类型都是转换成整型之后在使用switch的。</strong></p>
 
-          <h3>
+          <h3 id="fdc5c0f3">
             <a name="_root-Substring In Java6 &amp; Java7" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Substring In Java6 &amp; Java7
           </h3><p>简单一句话，6里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而7的方法会真正分配一个空间存储字串；</p>
 
-          <h3>
+          <h3 id="6e14b486">
             <a name="_root-Concating String" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

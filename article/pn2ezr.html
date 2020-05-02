@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="3c848844">
             <a name="_root-1. TwoSum(Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -137,7 +137,7 @@
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].</code></pre>
-          <h4>
+          <h4 id="945d66c5">
             <a name="_root-Ⅰ.Brute Force" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -153,7 +153,7 @@ return [0, 1].</code></pre>
     throw new IllegalArgumentException(&quot;No two sum solution&quot;);
 }</code></pre>
 
-          <h4>
+          <h4 id="29467087">
             <a name="_root-Ⅱ.Hashing" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -282,7 +282,7 @@ public int[] twoSum(int[] nums, int target) {
     return nums;
 }</code></pre>
 
-          <h3>
+          <h3 id="e51d44cd">
             <a name="_root-2. Add Two Number(Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -305,7 +305,7 @@ Explanation: 342 + 465 = 807.</code></pre><p>
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself92b068b7s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo92b068b7)
                             isInViewPortOfTwo92b068b7 = null
                         }
@@ -385,7 +385,7 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     return l1;
 }</code></pre>
 
-          <h3>
+          <h3 id="40f9251d">
             <a name="_root-3. Longest Substring(Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -402,7 +402,7 @@ Explanation: The answer is &quot;b&quot;, with the length of 1.</code></pre><p><
 Output: 3
 Explanation: The answer is &quot;wke&quot;, with the length of 3. 
              Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</code></pre>
-          <h4>
+          <h4 id="87b1f4cd">
             <a name="_root-ascii mapping" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -432,7 +432,7 @@ Explanation: The answer is &quot;wke&quot;, with the length of 3.
 </li>
 </ol>
 
-          <h3>
+          <h3 id="b79e66ab">
             <a name="_root-4. Median of Two Sorted Arrays(Hard)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -451,7 +451,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<strong>O(log (m+n))</strong>的解，说到已排好序、log级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数</p>
 <p>在此先给出容易想到但是不符合题意的解<strong>(n+m)/2</strong>解</p>
 
-          <h4>
+          <h4 id="9ecc509">
             <a name="_root-Ⅰ.a (n+m)/2 solution" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -499,7 +499,7 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
     }
 }</code></pre>
 
-          <h4>
+          <h4 id="5d3753ce">
             <a name="_root-Ⅱ. log(m+n) solution" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -507,7 +507,7 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
           </h4><p>对数级解非常不容易找出来，我觉得能解出来的都是数学家- -</p>
 <p>对数级解决方案有2种，一种是<strong>泛化为“findKth”问题</strong>，另一种是<strong>“分治法寻找perfect I”</strong></p>
 
-          <h5>
+          <h5 id="67ca17d7">
             <a name="_root-Perfect I" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -620,7 +620,7 @@ public void showCut(int[] arr, int cutIndex) {
     System.out.println(&quot;cut:&quot; + cutIndex + &quot; --&gt; &quot; + Arrays.toString(leftPart) + &quot; | &quot; + Arrays.toString(rightPart));
 }</code></pre>
 
-          <h3>
+          <h3 id="74d7442">
             <a name="_root-5. Longest Palindromic Substring" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -636,7 +636,7 @@ Output: &quot;bb&quot;</code></pre><p><strong>Example 3:</strong></p>
 Output: &quot;a&quot;</code></pre><p><strong>Example 4:</strong></p>
 <pre><code>Input: &quot;&quot;
 Output: &quot;&quot;</code></pre>
-          <h4>
+          <h4 id="2cf9f0f6">
             <a name="_root-60+ms Solution (Beat 33%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -685,7 +685,7 @@ public String longestPalindrome(String s) {
 }</code></pre>
 <p>解法的关键是do循环里面的<code>next = s.indexOf(nowC, next + 1)</code>，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -</p>
 
-          <h4>
+          <h4 id="6949d937">
             <a name="_root-7-10ms Solution (Beat 98%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -778,7 +778,7 @@ private boolean isPalindrome(char[] chars, int head, int tail) {
     return true;
 }</code></pre>
 
-          <h5>
+          <h5 id="33c4bd1f">
             <a name="_root-一点优化" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

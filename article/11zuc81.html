@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h2>
+          <h2 id="955d117d">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -146,7 +146,7 @@
 </li>
 </ul>
 
-          <h2>
+          <h2 id="181eacdc">
             <a name="_root-Electron Namespace" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -182,7 +182,7 @@ app.on(&#39;ready&#39;, () =&gt; {
   win.loadURL(&#39;https://github.com&#39;)
 })</code></pre>
 
-          <h2>
+          <h2 id="fa49f732">
             <a name="_root-Process" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -193,7 +193,7 @@ app.on(&#39;ready&#39;, () =&gt; {
 <p>在普通的浏览器中，web页面通常在沙盒环境中运行，并且无法访问操作系统的原生资源。 然而 Electron 的用户在 Node.js 的 API 支持下可以在页面中和操作系统进行一些底层交互。</p>
 </blockquote>
 
-          <h3>
+          <h3 id="3885fe1c">
             <a name="_root-Differences Between Main Process And Render Process" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -205,7 +205,7 @@ app.on(&#39;ready&#39;, () =&gt; {
 <p>Electron 还为开发原生桌面应用程序提供了一些额外的内置模块。 某些模块仅在主进程中可用, 有些仅在渲染进程 (web 页) 中可用, 而有些在这两个进程中都可以使用。</p>
 <p><strong>基本规则是: 如果一个模块是 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI </a>或底层系统相关的, 那么它应该只在主进程中可用。</strong></p>
 
-          <h3>
+          <h3 id="c7b5c781">
             <a name="_root-Communication Of Processes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -217,7 +217,7 @@ app.on(&#39;ready&#39;, () =&gt; {
 <li>页面间共享对象：可以暴露对象也可以通信</li>
 </ul>
 
-          <h4>
+          <h4 id="51040e68">
             <a name="_root-IPC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -259,7 +259,7 @@ $(&#39;#smessage&#39;).click(() =&gt; {
     console.log(ipcRenderer.sendSync(&#39;synchronous-message&#39;,&#39;s-ping&#39;))
 })</code></pre>
 
-          <h4>
+          <h4 id="193e467b">
             <a name="_root-Remote" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -285,7 +285,7 @@ console.log(app)</code></pre>
 <p>如果远程对象在渲染进程中泄露（例如存储在映射中，但从未释放），则主进程中的相应对象也将被泄漏，所以您应该非常小心，不要泄漏远程对象。</p>
 <p>但是，字符串和数字等主要值的类型是通过复制发送的。</p>
 
-          <h4>
+          <h4 id="c117ec64">
             <a name="_root-Sharing Object" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -311,13 +311,13 @@ require(&#39;electron&#39;).remote.getGlobal(&#39;sharedObject&#39;).somePropert
 // 在第二个页面中
 console.log(require(&#39;electron&#39;).remote.getGlobal(&#39;sharedObject&#39;).someProperty)</code></pre>
 
-          <h2>
+          <h2 id="def1785a">
             <a name="_root-Optional Function" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Optional Function
           </h2>
-          <h4>
+          <h4 id="3bc62f15">
             <a name="_root-Notification" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -333,7 +333,7 @@ myNotification.onclick = () =&gt; {
   console.log(&#39;通知被点击&#39;)
 }</code></pre>
 
-          <h4>
+          <h4 id="b9840a7e">
             <a name="_root-ProgressBar" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -349,7 +349,7 @@ $(&#39;#processbar&#39;).click(function () {
     win.setProgressBar(progress)
 })</code></pre>
 
-          <h4>
+          <h4 id="68f5cc3a">
             <a name="_root-Others" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

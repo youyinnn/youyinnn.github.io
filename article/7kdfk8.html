@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -143,7 +143,7 @@
 <li><strong>Lock API</strong>的使用以及和<code>synchronized</code>的区别</li>
 </ul>
 
-          <h3>
+          <h3 id="5d3f0954">
             <a name="_root-Lock 接口" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -253,7 +253,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tbody></table>
 <p>看了下上面的API，我们对于Lock和<code>synchronized</code>的区别就清楚了</p>
 
-          <h3>
+          <h3 id="af86a087">
             <a name="_root-队列同步器" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -272,14 +272,14 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </ul>
 <p><strong>锁和同步器很好地隔离了使用者和实现者锁关注的领域，又增强了锁的可操作性和降低了锁的实现难度</strong></p>
 
-          <h4>
+          <h4 id="804b002b">
             <a name="_root-接口与示例" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             接口与示例
           </h4><p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
 
-          <h5>
+          <h5 id="c957f9ea">
             <a name="_root-状态相关方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -291,7 +291,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 <li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
 </ul>
 
-          <h5>
+          <h5 id="d372d452">
             <a name="_root-同步器可重写的方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -325,7 +325,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tr>
 </tbody></table>
 
-          <h5>
+          <h5 id="43757738">
             <a name="_root-同步器提供的模板方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -376,7 +376,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tbody></table>
 <p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和是否、同步队列线程集合</p>
 
-          <h3>
+          <h3 id="8f5b4a8a">
             <a name="_root-尝试实现一个独占锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

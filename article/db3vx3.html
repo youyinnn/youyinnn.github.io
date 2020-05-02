@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -145,7 +145,7 @@
 </ul>
 <hr>
 
-          <h3>
+          <h3 id="37c80107">
             <a name="_root-关键字的解说" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -159,13 +159,13 @@
 <p><strong>关键字synchronized</strong>可以修饰方法或者同步块，它主要保证多线程在同一时刻，只能有一个线程处于同步块或者同步方法中，它保证了线程对变量访问的可见性和排他性。</p>
 </blockquote>
 
-          <h4>
+          <h4 id="5f741561">
             <a name="_root-volatile的含义、底层实现和使用" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             volatile的含义、底层实现和使用
           </h4>
-          <h5>
+          <h5 id="3f2d2429">
             <a name="_root-volatile的含义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -189,7 +189,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself760599f4s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo760599f4)
                             isInViewPortOfTwo760599f4 = null
                         }
@@ -204,7 +204,7 @@
         </script>
     </p>
 
-          <h5>
+          <h5 id="1b5c33c8">
             <a name="_root-底层实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -229,7 +229,7 @@
 <li>步骤1后，通过缓存一致性协议，让其他处理器的缓存行中的该值无效</li>
 </ol>
 
-          <h5>
+          <h5 id="df9f597b">
             <a name="_root-使用" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -250,14 +250,14 @@
     i = temp;</code></pre>
 <p>这样的两步操作有可能会引发线程安全问题，有可能就在这两行代码中间有多个线程进行操作，i可能变成了脏数据</p>
 
-          <h4>
+          <h4 id="74436109">
             <a name="_root-synchronized的含义、底层实现和使用" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             synchronized的含义、底层实现和使用
           </h4><p>对于这个关键字，在并发里也是非常重要了，在Java SE1.6之前，很多人把它称之为重量级锁，但是在1.6之后，很多情况下它变得不是那么重量了，为了减少获取锁和释放锁带来的性能消耗，Java SE1.6引入了<strong>偏向锁</strong>和<strong>轻量级锁</strong>，在本节中间会讨论锁的存储和升级</p>
 
-          <h5>
+          <h5 id="85013ba0">
             <a name="_root-synchronized的含义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -272,7 +272,7 @@
 <p>当一个线程视图要访问同步代码的时候，它首先要获得锁，<strong>退出锁范围或者抛出异常的时候，必须要释放锁</strong></p>
 </blockquote>
 
-          <h5>
+          <h5 id="1b5c33c8">
             <a name="_root-底层实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -281,7 +281,7 @@
 <p>代码块同步是使用<code>monitor.enter</code>和<code>monitor.exit</code>指令实现的，而方法同步虽然实现不一样，但是也可以用这样的方法去实现。</p>
 <p><code>monitor.enter</code>指令是在编译后插入到同步代码块的开始位置，而<code>monitor.exit</code>是插入到方法结束或者异常处，JVM要保证每个<code>monitor.enter</code>都要有<code>monitor.exit</code>和之匹配，任何对象都有一个monitor与之关联，当一个monitor被线程持有之后，它就会锁定，其他不相干的线程无法一同持有该锁</p>
 
-          <h5>
+          <h5 id="a98299d0">
             <a name="_root-Java中的锁到底是什么" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -338,7 +338,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself187b82a6s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo187b82a6)
                             isInViewPortOfTwo187b82a6 = null
                         }
@@ -357,7 +357,7 @@
 <p>所以优先级什么的，可以说是插队，意外情况比如抛异常可以说是中途离队</p>
 <p>于是我们需要清楚的认识：<strong>门可以有多个，但是锁只有一把，一把锁一条队！要使用这把锁，上一个锁持有者没释放锁之前，你就去排队吧！</strong></p>
 
-          <h5>
+          <h5 id="6f7a4d1b">
             <a name="_root-锁的升级和实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -365,7 +365,7 @@
           </h5><p>Java SE1.6以后，锁一共有四个状态，从低到高一共是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态</p>
 <p>这几个状态会根据竞争的激烈情况逐渐升级，但是要注意：<u>锁可以升级但是不能降级</u></p>
 
-          <h6>
+          <h6 id="d5a39e67">
             <a name="_root-偏向锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -380,7 +380,7 @@
 <li>还可以用JVM参数来关闭偏向锁，那么程序默认都会使用轻量级锁</li>
 </ol>
 
-          <h6>
+          <h6 id="2dc3de21">
             <a name="_root-轻量级锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -395,7 +395,7 @@
 <p>书里有一张图描述了膨胀的过程，我简单总结一下：两个线程AB分别访问同步块，同时尝试<u><strong>分配栈空间、复制Mark Word到栈</strong></u>，加入线程A比B快，则线程A成功<u><strong>使用CAS操作将Mark Word替换为轻量级锁，并执行同步块；</strong></u>此时线程B<u><strong>尝试自旋获取锁，一段时间后未果，将锁修改为重量级锁，线程B阻塞；</strong></u>再回去看线程A，线程A执行完同步语句块之后，<u><strong>尝试CAS替换会Mark Word，但是已经被线程B修改了，所以失败，线程A释放锁并唤醒线程B</strong></u>；线程B重新竞争同步语句块；</p>
 <p>在线程B<strong>自旋失败，打算膨胀的那一刻起，锁就已经升级了！</strong></p>
 
-          <h5>
+          <h5 id="a34947f5">
             <a name="_root-锁的优缺点对比" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -429,14 +429,14 @@
 </tr>
 </tbody></table>
 
-          <h5>
+          <h5 id="12ab71f2">
             <a name="_root-Synchronized关键字使用须知" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Synchronized关键字使用须知
           </h5><p>上面说了很多原理性的东西，现在.....我们还是来说原理，现在主要是说一些该关键字的使用的注意事项</p>
 
-          <h6>
+          <h6 id="59b2d57d">
             <a name="_root-1. 脏读的情况" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -446,7 +446,7 @@
 <p>比如我们的一个线程意图是将<strong>A（1，2，3）</strong>更新为<strong>A（4，5，6）</strong>的，虽然更新操作实现了同步，同一时刻只能保证一个程序对数据进行更新，但是读取操作没有进行同步，有可能有更新操作更新到一部分的时候<strong>A（4，5，3）</strong>，数据被错误地读取到了，这个脏读值是无效的</p>
 <p>如何避免脏读？<strong>保证读取方法也被包含在同步块中或者方法本身就是同步方法，最重要的一点是，读取方法和更新方法所面向的监视器得的同一个监视器！不要排错队了！</strong></p>
 
-          <h6>
+          <h6 id="1abc2fc9">
             <a name="_root-2. 锁重入" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -475,42 +475,42 @@ synchronized public void c(){
 }</code></pre>
 <p>为什么可以说这种锁重入是有意义的呢？我觉得也没什么意义，一旦某个线程拿到a方法的执行权之后，该对象下所有的同步方法，是无法被其他线程调用的，这里的意义只是，abc三个方法需求的是同一个锁，也就是三个门用的是同一把钥匙，你既然已经拿到钥匙了，那么三个门你想怎么开就怎么开</p>
 
-          <h6>
+          <h6 id="b6c71b9a">
             <a name="_root-3. 有异常 则放锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             3. 有异常 则放锁
           </h6><p>基本的机制，贯彻整个同步知识，但是容易忽略掉</p>
 
-          <h6>
+          <h6 id="c886299a">
             <a name="_root-4. 代码块之间的同步性" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             4. 代码块之间的同步性
           </h6><p>在使用同步块的情况下，如果有多个同步块持有的是同一个锁，在其中一个同步块被访问的时候，该锁就被该线程持有了，那么该锁的同步块无法被其他线程锁访问，说白了：<strong>钥匙只有一把！谁拿到钥匙，谁开锁进门！</strong></p>
 
-          <h6>
+          <h6 id="fb331c26">
             <a name="_root-5. 对象的同步方法之间的同步性" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             5. 对象的同步方法之间的同步性
           </h6><p>多个线程调用同一对象中不同的同步方法或者synchronized(this)方法块的时候，多线程的调用效果是同步的，因为：<strong>拿的是一把锁，排的是一条队！</strong></p>
 
-          <h6>
+          <h6 id="d967f890">
             <a name="_root-6. Class锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             6. Class锁
           </h6><p>Class锁可以对改类的所有对象实例起同步作用，基于上述反复强调的原理，<u>同步synchronized（class）代码块的作用和synchronized static方法的作用是一样的</u></p>
 
-          <h6>
+          <h6 id="f3b43772">
             <a name="_root-7. 常量池对象作为锁的注意事项" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             7. 常量池对象作为锁的注意事项
           </h6><p>String因为有常量池去管理，所以有可能两个变量引用的是同一个String常量对象，尽量不要使用String直接量作为锁，宁可new一个作为锁</p>
 
-          <h5>
+          <h5 id="539d9496">
             <a name="_root-Volatile和Synchronized的对比" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -542,7 +542,7 @@ synchronized public void c(){
 </tbody></table>
 <p>然而对于synchronizrd<strong>可以间接保证数据可见性</strong>，暂时需要找个合适的方法去验证</p>
 
-          <h5>
+          <h5 id="ff8ae745">
             <a name="_root-关于synchronized间接保证数据同步性的问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -586,7 +586,7 @@ class ThreadB extends Thread {
     }</code></pre>
 <p>需要注意的是，这里AB线程虽然用的是同一个对象，但是因为线程私有栈的原因，每个线程虽然用的是同一个对象去调用方法，但是对象中的值在各自线程中有自己的副本，所以B线程置否了<code>continueRun</code>变量，但是线程A并不知道这个情况，除非<strong>B置否的变量被同步到共享内存，而线程A放弃自己的副本值，采用共享内存的值</strong></p>
 
-          <h6>
+          <h6 id="cd77e552">
             <a name="_root-空闲CPU同步内存？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -598,7 +598,7 @@ class ThreadB extends Thread {
 </blockquote>
 <p>所以，当我们的线程在沉睡了10ms的时候，CPU就有空闲时间去进行内存同步了，于是就有了线程A看见了线程B置否了变量</p>
 
-          <h6>
+          <h6 id="9bcbaba">
             <a name="_root-无意义的synchronized块保证同步内存？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

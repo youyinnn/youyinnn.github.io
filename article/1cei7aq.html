@@ -126,7 +126,7 @@
     <div id="md" class="myhide markdown-body editormd-html-preview">
         <p><span id="top"></span></p>
 
-          <h3>
+          <h3 id="ba87d91c">
             <a name="_root-Ⅳ. Jetty开发指南-23.Jetty和Maven" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -168,7 +168,7 @@
 <hr>
 <p><span id="23jetty和maven"></span></p>
 
-          <h3>
+          <h3 id="d112aad5">
             <a name="_root-23、Jetty和Maven" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -181,7 +181,7 @@
 </ul>
 <p><span id="231使用maven"></span></p>
 
-          <h4>
+          <h4 id="3d1b7a5a">
             <a name="_root-23.1、使用Maven" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -201,7 +201,7 @@
 <p>首先我们来看一个非常简单的java应用的HelloWorld，它嵌入了Jetty。然后看一个简单的web应用，它使用<code>jetty-maven-plugin</code>来加快了开发周期。</p>
 <p><span id="2311使用maven做嵌入式jetty开发"></span></p>
 
-          <h5>
+          <h5 id="b1d23c0d">
             <a name="_root-23.1.1、使用Maven做嵌入式Jetty开发" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -213,7 +213,7 @@
 &gt; mkdir -p src/main/java/org/example</code></pre><br>
 
 
-          <h6>
+          <h6 id="4ac98888">
             <a name="_root-23.1.1.1、创建HelloWorld类" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -254,7 +254,7 @@ public class HelloWorld extends AbstractHandler
 }</code></pre><br>
 
 
-          <h6>
+          <h6 id="1907ff16">
             <a name="_root-23.1.1.2、创建POM文件" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -303,7 +303,7 @@ public class HelloWorld extends AbstractHandler
 &lt;/project&gt;</code></pre><br>
 
 
-          <h6>
+          <h6 id="b447510f">
             <a name="_root-23.1.1.3、构建和运行嵌入式HelloWorld" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -335,7 +335,7 @@ public class HelloWorld extends AbstractHandler
 [INFO] ------------------------------------------------------------------------</code></pre><p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="2321使用maven开发标准的wabapp"></span></p>
 
-          <h5>
+          <h5 id="be698fba">
             <a name="_root-23.1.2、使用Maven开发标准的WebApp" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -347,7 +347,7 @@ public class HelloWorld extends AbstractHandler
 &gt; mkdir -p src/main/webapp/WEB-INF</code></pre><br>
 
 
-          <h6>
+          <h6 id="c7241f1d">
             <a name="_root-23.1.2.1、创建一个Servlet" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -391,7 +391,7 @@ public class HelloServlet extends HttpServlet
 &lt;/web-app&gt;</code></pre><br>
 
 
-          <h6>
+          <h6 id="ce13bab3">
             <a name="_root-23.1.2.2、创建POM" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -434,7 +434,7 @@ public class HelloServlet extends HttpServlet
 &lt;/project&gt;</code></pre><br>
 
 
-          <h6>
+          <h6 id="f6a59195">
             <a name="_root-23.1.2.3、构建和运行Web项目" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -442,7 +442,7 @@ public class HelloServlet extends HttpServlet
           </h6><p>现在你可以同时构建和运行web应用，不需要把项目组装成一个war，你只需要使用<code>jetty-maven-plugin</code>提供的命令就可以了：</p>
 <pre><code>&gt; mvn jetty:run</code></pre><p>然后你可以在<code>http://localhost:8080/hello</code>地址中看到静态和动态的内容。</p>
 
-          <h6>
+          <h6 id="c5335bf1">
             <a name="_root-23.1.2.4、创建一个war文件" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -453,7 +453,7 @@ public class HelloServlet extends HttpServlet
 <hr>
 <p><span id="232配置jetty的maven插件"></span></p>
 
-          <h4>
+          <h4 id="9a8a0cb2">
             <a name="_root-23.2、配置Jetty的Maven插件" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -486,7 +486,7 @@ public class HelloServlet extends HttpServlet
 
 <p><span id="2321快速开始"></span></p>
 
-          <h5>
+          <h5 id="a653076f">
             <a name="_root-23.2.1、快速开始" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -507,7 +507,7 @@ public class HelloServlet extends HttpServlet
 <p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="2322支持目标"></span></p>
 
-          <h5>
+          <h5 id="a7fff474">
             <a name="_root-23.2.2、支持目标" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -518,7 +518,7 @@ public class HelloServlet extends HttpServlet
 <pre><code>mvn jetty:help -Ddetail=true -Dgoal= &lt;goal name&gt;</code></pre><p><a href="#top">回到顶部</a><br><br></p>
 <p><span id="2323配置jetty容器"></span></p>
 
-          <h5>
+          <h5 id="bb06f24e">
             <a name="_root-23.2.3、配置Jetty容器" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -650,7 +650,7 @@ public class HelloServlet extends HttpServlet
 <hr>
 <p><span id="233jetty-maven插件的文档扫描"></span></p>
 
-          <h4>
+          <h4 id="3c4d1454">
             <a name="_root-23.3、Jetty Maven插件的文件扫描" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -659,7 +659,7 @@ public class HelloServlet extends HttpServlet
 <hr>
 <p><span id="234jetty-jspc-maven插件"></span></p>
 
-          <h4>
+          <h4 id="6684c2a2">
             <a name="_root-23.4、Jetty Jspc Maven插件" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

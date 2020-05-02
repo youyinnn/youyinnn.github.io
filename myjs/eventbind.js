@@ -76,7 +76,7 @@ $(function() {
             this.id === 'sidetoc') {
             return false
         }
-        if (!$('#sidetoccontainer').hasClass('tochide')) {
+        if (!$('#sidetoccontainer').hasClass('tochide') && !location.pathname.startsWith('/scripts/')) {
             hidesidetoc()
         }
     })
@@ -118,7 +118,6 @@ $(function() {
         // hidetopbar when scrollTop > 0
         if (location.pathname.startsWith('/article/') ||
             location.pathname.startsWith('/resume/') ||
-            location.pathname.startsWith('/scripts/') ||
             location.pathname.startsWith('/todos/')) {
             if (scrollTop === 0) {
                 showtopbar()

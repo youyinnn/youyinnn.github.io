@@ -125,19 +125,19 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="75e66719">
             <a name="_root-Collection接口" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Collection接口
           </h3>
-          <h3>
+          <h3 id="d6f5163">
             <a name="_root-源代码解读" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             源代码解读
           </h3>
-          <h4>
+          <h4 id="a450c2dd">
             <a name="_root-头部" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -148,19 +148,19 @@
 <p>头部继承了<code>Iterable&lt;E&gt;</code>接口, 对, 这里要注意是extends一个接口, 为什么是extends, 我们去看<code>Iterable&lt;E&gt;</code>接口里到底有啥, <a href="https://youyinnn.github.io/?to=post&amp;number=44">跳转文章</a>.</p>
 <p>所以我们知道, Collection继承了这个<code>接口</code>就代表着它拥有了容器内元素可迭代访问的功能.</p>
 
-          <h4>
+          <h4 id="327a072f">
             <a name="_root-方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             方法
           </h4>
-          <h5>
+          <h5 id="90e50b2a">
             <a name="_root-查询操作 Query Operations" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             查询操作 Query Operations
           </h5>
-          <h6>
+          <h6 id="8fa25a9">
             <a name="_root-size()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -176,7 +176,7 @@
 <p>注意返回值是int</p>
 </blockquote>
 
-          <h6>
+          <h6 id="6d80b509">
             <a name="_root-isEmpty()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -186,7 +186,7 @@
 <p>略</p>
 </blockquote>
 
-          <h6>
+          <h6 id="f3892b95">
             <a name="_root-contains(Object o)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -196,7 +196,7 @@
 <p>略</p>
 </blockquote>
 
-          <h6>
+          <h6 id="f1e23fc0">
             <a name="_root-iterator()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -206,7 +206,7 @@
 <p>略</p>
 </blockquote>
 
-          <h6>
+          <h6 id="3a3bf587">
             <a name="_root-toArray()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -218,7 +218,7 @@
      */
     Object[] toArray();</code></pre>
 
-          <h6>
+          <h6 id="43db240c">
             <a name="_root-toArray(T[] a)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -234,13 +234,13 @@
      */
     &lt;T&gt; T[] toArray(T[] a);</code></pre>
 
-          <h5>
+          <h5 id="1172102">
             <a name="_root-修改操作 Modification Operations" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             修改操作 Modification Operations
           </h5>
-          <h6>
+          <h6 id="30873286">
             <a name="_root-add(E e)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -259,7 +259,7 @@
 <p>接口毕竟是接口, 注释中明确了实现这个方法的很多限制.</p>
 </blockquote>
 
-          <h6>
+          <h6 id="a74f1def">
             <a name="_root-remove(Object o)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -272,13 +272,13 @@
      */
     boolean remove(Object o);</code></pre>
 
-          <h5>
+          <h5 id="a4029721">
             <a name="_root-数量级操作 Bulk Operations" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             数量级操作 Bulk Operations
           </h5>
-          <h6>
+          <h6 id="4c177b91">
             <a name="_root-containsAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -288,7 +288,7 @@
      */
     boolean containsAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6>
+          <h6 id="db577fb3">
             <a name="_root-addAll(Collection&lt;? extends E&gt; c)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -308,7 +308,7 @@
      */
     boolean addAll(Collection&lt;? extends E&gt; c);</code></pre>
 
-          <h6>
+          <h6 id="60ca9654">
             <a name="_root-removeAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -319,7 +319,7 @@
      */
     boolean removeAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6>
+          <h6 id="e89269dc">
             <a name="_root-removeIf(Predicate&lt;? super E&gt; filter)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -345,7 +345,7 @@
         return removed;
     }</code></pre>
 
-          <h6>
+          <h6 id="f3d3c204">
             <a name="_root-retainAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -356,7 +356,7 @@
      */
     boolean retainAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6>
+          <h6 id="f851576e">
             <a name="_root-clear()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -366,13 +366,13 @@
 <p>略</p>
 </blockquote>
 
-          <h5>
+          <h5 id="6cf867bf">
             <a name="_root-比较和散列 Comparison and hashing" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             比较和散列 Comparison and hashing
           </h5>
-          <h6>
+          <h6 id="e0b026e1">
             <a name="_root-equals(Object o)方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -382,7 +382,7 @@
 <p>略</p>
 </blockquote>
 
-          <h6>
+          <h6 id="70dc10d8">
             <a name="_root-hashCode()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -392,7 +392,7 @@
 <p>略</p>
 </blockquote>
 
-          <h6>
+          <h6 id="d44f536e">
             <a name="_root-spliterator()方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -411,19 +411,19 @@
         return Spliterators.spliterator(this, 0);
     }</code></pre>
 
-          <h4>
+          <h4 id="3e29790c">
             <a name="_root-疑问" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             疑问
           </h4>
-          <h5>
+          <h5 id="533e88e2">
             <a name="_root-Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?
           </h5>
-          <h5>
+          <h5 id="dd373f5f">
             <a name="_root-Q2: spliterator()方法的作用是什么?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

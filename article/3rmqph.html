@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="6bd1cea8">
             <a name="_root-前提" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -143,7 +143,7 @@
 <p>其中过程实在是无比繁杂，而且表现非常烂，整个博客非常依赖<strong>github</strong>和<strong>github api</strong>，然后还<strong>依赖域名服务器</strong>，有段事件备案挂了，直接钩子停工。</p>
 <p>然后一咬牙，改！基本需求如下：</p>
 
-          <h4>
+          <h4 id="32e13e9b">
             <a name="_root-现在是什么样" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -159,7 +159,7 @@
 <li>搜索依赖第三方</li>
 </ol>
 
-          <h4>
+          <h4 id="c71c908">
             <a name="_root-想变成什么样" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -180,13 +180,13 @@
 </li>
 </ol>
 
-          <h3>
+          <h3 id="111271d6">
             <a name="_root-博客内容的处理" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             博客内容的处理
           </h3>
-          <h4>
+          <h4 id="de0fd06e">
             <a name="_root-静态化" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -206,7 +206,7 @@
 </ol>
 <p>这样，博客目前除了评论之外的所有数据都是<strong>静态化</strong>的，由本地生成，然后推上去部署就行了。</p>
 
-          <h4>
+          <h4 id="302edfef">
             <a name="_root-动态资源的生成以及导入的处理" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -282,7 +282,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
     importJsAfterLoad()
 })</code></pre>
 
-          <h3>
+          <h3 id="e490b08d">
             <a name="_root-去掉的东西" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -294,13 +294,13 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
 <li>github api，速度是真的慢，静态化就没必要用它了</li>
 </ul>
 
-          <h3>
+          <h3 id="f244649c">
             <a name="_root-新操作" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             新操作
           </h3>
-          <h4>
+          <h4 id="bedeac34">
             <a name="_root-动态插入&lt;script&gt;标签" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -328,13 +328,13 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
 &lt;/html&gt;</code></pre>
 <p>要更新JS资源的话 就更改<code>scriptlist.js</code>的内容就行了</p>
 
-          <h4>
+          <h4 id="42f7fa53">
             <a name="_root-固定唯一ID生成——CRC技术" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             固定唯一ID生成——CRC技术
           </h4>
-          <h5>
+          <h5 id="39ccd5fa">
             <a name="_root-什么是CRC？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -344,7 +344,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
 </blockquote>
 <p>感觉和MD5、SHA算法差不多，都是生成唯一串做数据校验，但是CRC的计算方式不一样、安全性比前两者小、计算效率高，而且CRC值比前两者的Hash值要简短很多，<a href="https://yq.aliyun.com/articles/233027">参考</a>。</p>
 
-          <h5>
+          <h5 id="be10344f">
             <a name="_root-为什么要生成唯一ID？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -367,13 +367,13 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
 </li>
 </ol>
 
-          <h4>
+          <h4 id="8157ef52">
             <a name="_root-IP检测跳转Gitee" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             IP检测跳转Gitee
           </h4>
-          <h5>
+          <h5 id="86981962">
             <a name="_root-寻找免费公共接口" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -434,7 +434,7 @@ load(&#39;https://api.map.baidu.com/location/ip?ak=12345&amp;callback=cb&#39;, {
 </li>
 </ul>
 
-          <h5>
+          <h5 id="f88905f0">
             <a name="_root-Github Pages Build的坑" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -136,7 +136,7 @@
 <li>Java 中的引用类型详解以其应用场景</li>
 </ol>
 
-          <h3>
+          <h3 id="d9b5cad">
             <a name="_root-Pass-By-Value Or Pass-By-Reference ?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -179,7 +179,7 @@ foo(myDog);</code></pre>
 <p>从始至终请记住，<code>myDog</code>是一个pointer，它从始至终只指向了<strong>0x42</strong>，它还是原来那条一无是处的狗，只不过在<code>//1</code>的时候被人改了名字而已；</p>
 <p>至于<code>someDog</code>，它只是一个容易变心的指针而已，所以方法内外的<code>myDog</code>和<code>someDog</code>，它们是两个世界的指针，谁也不会真正影响到谁变心；</p>
 
-          <h3>
+          <h3 id="4a3d063e">
             <a name="_root-Reference Type" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -189,7 +189,7 @@ foo(myDog);</code></pre>
 <p>作者：Xurtle<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/xlinsist/article/details/57089288">https://blog.csdn.net/xlinsist/article/details/57089288</a> </p>
 </blockquote>
 
-          <h4>
+          <h4 id="15c9b4ab">
             <a name="_root-Strong reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -199,7 +199,7 @@ foo(myDog);</code></pre>
 // some work
 a = null;    // ‘xixi’ which means 0x42 is now available for GC</code></pre>
 
-          <h4>
+          <h4 id="9941775">
             <a name="_root-Soft reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -237,7 +237,7 @@ a = null;    // ‘xixi’ which means 0x42 is now available for GC</code></pre>
 }</code></pre>
 <p>可以看到，我们每次都尝试获取软引用对象，如果它为null，证明它是第一次访问或者被GC清理掉了</p>
 
-          <h4>
+          <h4 id="5220dc58">
             <a name="_root-Weak reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -249,7 +249,7 @@ System.out.println(sr.get()); // hello
 System.gc();                  // 通知JVM的gc进行垃圾回收
 System.out.println(sr.get()); // might be null</code></pre>
 
-          <h4>
+          <h4 id="20a9faf8">
             <a name="_root-Phantom reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -331,7 +331,7 @@ private static void printRQ() {
 }</code></pre>
 <p>那么上一句说到的不可达状态如何验证？狗对象的Person字段相关被注释掉了，如果解开注释之后，即使全局q对象已经设置为null，但是人对象还有狗对象去引用，人对象还是处于可达状态的，所以第二次<code>printRQ</code>方法依旧是没有任何对象入队</p>
 
-          <h3>
+          <h3 id="5d001821">
             <a name="_root-Reference Abstract Class &amp; ReferenceQueue" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -342,7 +342,7 @@ private static void printRQ() {
 <p>上节已经说过虚引用和引用队列的关系了，它必须指定一个引用队列，软引用和弱引用可以选择性地和引用队列合作</p>
 <p>以下参考自<a href="https://juejin.im/entry/5b28f605f265da59942344d4">java 源码系列 - 带你读懂 Reference 和 ReferenceQueue</a></p>
 
-          <h4>
+          <h4 id="38fbfa7f">
             <a name="_root-Reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -355,14 +355,14 @@ private static void printRQ() {
 <li>Inactive就是最终的状态，不能再变为其它状态。</li>
 </ul>
 
-          <h4>
+          <h4 id="f4826181">
             <a name="_root-ReferenceQueue" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             ReferenceQueue
           </h4><p>引用队列，在检测到适当的<strong>可到达性更改</strong>后，垃圾回收器将已注册的引用对象添加到队列中，ReferenceQueue实现了入队（enqueue）和出队（poll），还有remove操作，内部元素head就是泛型的Reference。</p>
 
-          <h4>
+          <h4 id="3e97bad8">
             <a name="_root-Sample" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -387,7 +387,7 @@ private static void printRQ() {
 }</code></pre>
 <p>我们很容易就想到，<code>reference</code>和<code>reference1</code>是同一个对象，而且这段代码也揭示了一个事实：<strong>匿名对象都是虚引用</strong></p>
 
-          <h3>
+          <h3 id="26845fc6">
             <a name="_root-Conclusion" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

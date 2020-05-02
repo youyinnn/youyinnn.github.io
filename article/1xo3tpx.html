@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -142,13 +142,13 @@
 </ul>
 <hr>
 
-          <h3>
+          <h3 id="7c9466b">
             <a name="_root-JMM基础" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             JMM基础
           </h3>
-          <h4>
+          <h4 id="cbddd190">
             <a name="_root-并发编程的两个关键问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -185,7 +185,7 @@
 </ul>
 <p>而Java的并发采用的是<strong>共享内存模型</strong>，所以同步是显示的，可能比线程通信好好懂一些</p>
 
-          <h4>
+          <h4 id="e032c27b">
             <a name="_root-JMM内存模型抽象结构" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -203,7 +203,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself89ee04f0s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo89ee04f0)
                             isInViewPortOfTwo89ee04f0 = null
                         }
@@ -226,7 +226,7 @@
 <li>线程B从主内存中读取共享变量来更新自己的该共享变量的副本</li>
 </ol>
 
-          <h4>
+          <h4 id="9b86dc3d">
             <a name="_root-从源代码到指令序列的重排序" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -272,7 +272,7 @@
 </tbody></table>
 <p>最后一个屏障是全能型的屏障，它拥有前三个屏障所有的功能，但是执行这个屏障的开销会很大，因为要把缓冲区中所有的数据内容都刷到主存中去</p>
 
-          <h5>
+          <h5 id="13bea374">
             <a name="_root-数据依赖性" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -284,7 +284,7 @@
 <li>并且要注意的是，数据依赖性仅针对<strong>单个处理器中执行的指令序列和单个线程中执行的操作</strong>，对于多处理器和多线程情况的数据依赖性不被编译器和处理器考虑！</li>
 </ul>
 
-          <h5>
+          <h5 id="8081a76">
             <a name="_root-as-if-serial语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -299,14 +299,14 @@
 <p>但是在多线程程序中，对存在控制依赖的操作进行重排序，可能会改变执行的结果，因为JMM没有保证</p>
 </blockquote>
 
-          <h4>
+          <h4 id="89ddec52">
             <a name="_root-happens-before关系和JMM的设计意图" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             happens-before关系和JMM的设计意图
           </h4><p>Happens Before是JMM最核心的概念，理解Happens Before就理解了JMM的管理机制。</p>
 
-          <h5>
+          <h5 id="fb6e78dc">
             <a name="_root-JMM的设计" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -331,7 +331,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfd2cf499ds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwod2cf499d)
                             isInViewPortOfTwod2cf499d = null
                         }
@@ -355,7 +355,7 @@
 <p>举两个例子，如果编译器经过细致的分析过后，判定一个锁只会被一个线程单独访问，那么这个锁可以被消除；</p>
 <p>如果编译器经过细致的分析过后，认定一个volatila变量只会被单线程访问，那么编译器可以把这个变量当作普通变量去对待；</p>
 
-          <h5>
+          <h5 id="7bb38720">
             <a name="_root-happens-before关系是什么？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -383,7 +383,7 @@
 <li>as-if-before让程序员以为他们写的单线程程序是按照顺序执行的，happens-before关系让程序员以为他们写的正确同步的多线程程序是按照happens-before指定的顺序去执行的</li>
 </ul>
 
-          <h5>
+          <h5 id="8727c138">
             <a name="_root-happens-before规则" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -398,13 +398,13 @@
 <li><strong>join()规则：</strong>如果线程A执行操作<code>ThreadB.join()</code>并成功返回，那么线程B中的任意操作 happens-before于线程A从<code>ThreadB.join()</code>操作成功返回</li>
 </ol>
 
-          <h5>
+          <h5 id="d4bbcfe1">
             <a name="_root-happens-before应用例子" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             happens-before应用例子
           </h5>
-          <h6>
+          <h6 id="45935517">
             <a name="_root-程序顺序规则" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -422,13 +422,13 @@ double area = pi * r * r; // C</code></pre>
 </blockquote>
 <p>这里1和2允许重排序，但是不改变3的结果，因为pi和r谁先被初始化都无所谓，只要不改变area的结果就好</p>
 
-          <h4>
+          <h4 id="b3f15232">
             <a name="_root-volatile的内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             volatile的内存语义
           </h4>
-          <h5>
+          <h5 id="dad783fb">
             <a name="_root-特性" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -471,7 +471,7 @@ double area = pi * r * r; // C</code></pre>
 <li>原子性保证：对volatile变量的读写操作具有原子性，但是volatile++这种复合操作一定不具有原子性</li>
 </ul>
 
-          <h5>
+          <h5 id="b484aa4a">
             <a name="_root-从happens-before关系看volatile的写-读" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -523,13 +523,13 @@ class V{
 <p>具体为什么，我们看下一节如何解释volatile的写-读的内存语义！</p>
 <p>我也尝试过去验证这些结论的反面，但是很遗憾的是，很有可能由于<strong>“CPU一旦空闲就刷共享内存（JVM尽可能的给你保证共享变量同步）”</strong>的原因，即使你不读取同一个volatile变量，甚至你不读取任何volatile变量，a的值也是999，在这样的情况下，不能说书上的结论有误，只能说这应该是两个不同的机制去做同一件事。</p>
 
-          <h5>
+          <h5 id="f66da822">
             <a name="_root-volatile写-读的内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             volatile写-读的内存语义
           </h5>
-          <h6>
+          <h6 id="31c64b47">
             <a name="_root-写volatile变量内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -550,7 +550,7 @@ class V{
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself9c160d20s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo9c160d20)
                             isInViewPortOfTwo9c160d20 = null
                         }
@@ -566,7 +566,7 @@ class V{
     </p>
 <p>线程A在写flag变量之后，本地内存A中被线程更新过的两个共享变量被更新到主内存中。此时本地内存A和主内存中的变量的值是一致的。</p>
 
-          <h6>
+          <h6 id="63503a7f">
             <a name="_root-读volatile内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -587,7 +587,7 @@ class V{
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself66aabe0bs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo66aabe0b)
                             isInViewPortOfTwo66aabe0b = null
                         }
@@ -609,13 +609,13 @@ class V{
 <li><strong>线程A写一个volatile变量，随后线程B读取volatile变量，实际上是线程A通过主内存向线程B发消息！</strong></li>
 </ol>
 
-          <h4>
+          <h4 id="26865691">
             <a name="_root-锁的内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             锁的内存语义
           </h4>
-          <h5>
+          <h5 id="98d293ab">
             <a name="_root-从happens-before关系看锁的释放和获取" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -642,7 +642,7 @@ class V{
 <p>线程A释放了锁之后，随后线程B获取同一个锁，根据传递的来的<code>2 happens-before 5</code>，A在释放锁之前的所有可变共享变量，在线程B获取同一个锁之后立即对线程B可见。</p>
 </blockquote>
 
-          <h5>
+          <h5 id="20471e19">
             <a name="_root-锁的释放和获取的内存语义" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -652,7 +652,7 @@ class V{
 <li><strong>释放锁</strong>：JMM建本地内存中的值刷到主内存中（和<strong>volatile写</strong>一样）</li>
 </ul>
 
-          <h5>
+          <h5 id="a0bcb374">
             <a name="_root-锁的内存语义的实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

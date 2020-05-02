@@ -134,14 +134,14 @@
 <p>这个世界上没有纯文本, 如果你想要读出它, 就要知道它的编码.</p>
 </blockquote>
 
-          <h1>
+          <h1 id="77cedfa1">
             <a name="_root-基本概念" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             基本概念
           </h1><p>首先我们要说明一些关于字符编码的基本概念, 有了这些概念的理解阅读后面的内容才不费劲~. 由于我默认将文章的受众定位成了有计算机科学基础的学生, 所以最基本的概念就直接一笔带过了.</p>
 
-          <h2>
+          <h2 id="f325d3b6">
             <a name="_root-位" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -149,7 +149,7 @@
           </h2><p>就是我们熟知的比特(Bit), 也是二进制位, 因此有0和1两个值. Bit是<code>Binary digit</code>的缩写.</p>
 <p>是计算机用来表示信息的最小单位.</p>
 
-          <h2>
+          <h2 id="8729f6b7">
             <a name="_root-字节, 字, 字长" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -168,7 +168,7 @@
 <p>刚刚就说了, 一个位的表示能力有限, 所以我们想到使用字节, 而对于最小单位的字节来说, 仍然不能充分发挥计算机的运算能力, 所以对于计算机来说, 更高效处理的单位长度其实是<strong>字</strong>的长度, 也就是<strong>字长</strong>. 这也就是上面说的视具体操作系统位数决定的. 其实这样说不精确, 甚至说不是很对. 因为字长实际上是<strong>由CPU对外的总线宽度决定</strong>的, 它决定了CPU一次处理的数据的实际比特位.</p>
 <p>所以, 64位的CPU可以使用32位的操作系统, 但是这样不会发挥出它应有的性能.</p>
 
-          <h2>
+          <h2 id="aa6e62c4">
             <a name="_root-字符集" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -184,14 +184,14 @@
 </ul>
 <p>只有字符集没有什么卵用.</p>
 
-          <h2>
+          <h2 id="85ee4c77">
             <a name="_root-编码&amp;解码" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             编码&amp;解码
           </h2><p>这个很好理解了,就是将信息从一种格式转换成为另外一种格式.</p>
 
-          <h2>
+          <h2 id="9ced974e">
             <a name="_root-字符编码" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -199,7 +199,7 @@
           </h2><p>编码, 刚刚说了, 就是格式之间的转换, 而计算机中的字符编码, 就是将字符转换(或者说映射)成为二进制数的过程. 这样, 我们就可以在计算机中方便的表示, 存储, 处理, 以及在网络中传输字符信息了.</p>
 <p>这也是一种抽象.</p>
 
-          <h2>
+          <h2 id="4245599f">
             <a name="_root-代码页" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -212,7 +212,7 @@
 <p>但是仔细看一下, 它是在<strong>描述</strong>字符集, 就是说根据具体的情况, 代码页可能会对字符集做一定的扩展, 在早期计算机还没有出现图形界面的时候, IBM称呼BIOS所支持的字符集位代码页, 而由于该代码页是烧录在显卡上的, 所以也被称为是OEM代码页.</p>
 <p>正因为此, 每个厂商有自己的代码页, 所以代码页也叫做”内码表”. 当我们想要知道一个二进制字节是什么字符的时候, 就要去根据系统设置的代码页去<strong>查表</strong>. 所以, 只有在操作系统的层面上, 我们才说代码页这个概念.</p>
 
-          <h2>
+          <h2 id="d6a2dfcd">
             <a name="_root-字符编码模型" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -249,7 +249,7 @@
 </blockquote>
 <p>现在我们慢慢展开说一下这四个等级.</p>
 
-          <h3>
+          <h3 id="6af39752">
             <a name="_root-1. 抽象字符表 ACR" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -258,7 +258,7 @@
 <p>这里我们所说的抽象字符是不具有的<strong>字形</strong>的, 所以才说是抽象的.</p>
 <p>稍稍总结一下ACR的三个特点: <strong>无序</strong>, <strong>封闭和开放</strong>, <strong>字符不具有具体的字形</strong>.</p>
 
-          <h3>
+          <h3 id="9a4b2493">
             <a name="_root-2. 编号字符集 CCS" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -267,7 +267,7 @@
 <p>回到上面的码点这个概念, 并不是说码点的数量和抽象字符的数量(编号)是一致的, 这是因为在我们的CCS中, 还存在了非字符码点和保留码点. 不仅如此, 多个码点可能还对应这同一个字符, 比如: <code>\u51c9</code>与<code>\uf979</code>的这两个码点是同一个字符“凉”(<strong>注意, 这并不是不是汉字liáng, 这是一个字符.</strong>). 更多的例子可以在这里查询到: <a href="http://www.unicode.org/charts/PDF/UF900.pdf">CJK兼容-F900-F921</a>. 还有, 例如上面的注音符号, 他就是由多个码点表示的, 由基本符号的a加上注音符号.</p>
 <p>最后稍微注意, 这里我们说的是<strong>编号</strong>, 而非编码. 这是两个截然不同的概念. 其实这一步和计算机丁点关系都没有, 因为没有涉及到下面说的字符编码方式和字符编码模式.</p>
 
-          <h3>
+          <h3 id="8d312c7e">
             <a name="_root-3. 字符编码方式 CEF" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -278,7 +278,7 @@
 <p>到这里你就更加清楚了, CEF其实就是字符编码标准的实现方式. 例如: UTF(Unicode/UCS Transformation Format)-8, UTF-16, UTF-32就是Unicode的编码方式.</p>
 <p>上面的说法似曾相识吧! 很多博客, 网站都是这么说的. 其实也勉勉强强可以这么理解.</p>
 
-          <h3>
+          <h3 id="365e3ae">
             <a name="_root-4. 字符编码模式 CES" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -286,7 +286,7 @@
           </h3><p>终于到了这一级别, 在这一个级别, 就会将物理层面上的具体实现纳入考虑. 包括对各种不同的硬件平台与操作系统设计上的差异考虑. 在这一层, 码元序列就会转换成为<strong>字节序列</strong>.</p>
 <p>由于太具体了, 所以我们就把这一部分的内容丢到后面吧.</p>
 
-          <h1>
+          <h1 id="693c313e">
             <a name="_root-历史的车轮 — 编码史" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -298,7 +298,7 @@
 <p>学生：“EBCDIC！”</p>
 </blockquote>
 
-          <h2>
+          <h2 id="15f32921">
             <a name="_root-ASCII" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -313,7 +313,7 @@
 </ul>
 <p>这里的转换很简单, 不存在什么编码算法, 也没有什么码元序列和字节序列的转换. ASCII字符集标准就是ISO/IEC-646标准.</p>
 
-          <h2>
+          <h2 id="2f6e0d22">
             <a name="_root-EASCII" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -322,14 +322,14 @@
 <p>多出来的那128个就是最高位置1的结果, 表示出来的符号包括表格符号、计算符号、希腊字母和特殊的拉丁符号.</p>
 <p>不过这一个标准也很少使用了, 这是因为后来ISO制定和发布了著名的ISO-8859系列标准.</p>
 
-          <h2>
+          <h2 id="6dd9ee7">
             <a name="_root-ISO-8859" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             ISO-8859
           </h2><p>这个和上面的两个就不一样了, ISO/IEC-8859是一套标准, 一共包含从ISO-8859-1到ISO-8859-16, 除去已经被废弃的ISO-8859-12, 总共有15个标准. 这些标准涵盖了欧洲各国使用的字符, 甚至包括一些外来语. 而且每一个具体的标准都只是用了扩展ASCII的<code>0xA0-0xFF</code>, 即160-255这96个编码.</p>
 
-          <h2>
+          <h2 id="f25cc9d8">
             <a name="_root-GB系列" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -337,7 +337,7 @@
           </h2><p>渐渐地, 计算机发展到了亚洲地区. 于是自然, 需要想个办法来表示这些亚洲地区文字. 以汉字为例, 汉字的表示和英语不同, 鉴于其表示的特殊性和复杂性, 中国相关部门设计了GB系列编码, GB就是国标的汉语拼音的缩写, 国家标准的意思. GB的编码规则向下兼容ASCII, 如果一个字节是0-127, 那么就字节的含义还是ASCII制定的含义. 但是当出现ASCII单字节和GB多字节混合使用的时候, 就要先将GB编码的最高位设置成1, 以防止冲突.</p>
 <p>对了, <strong>凡是GB系列的编码, 都是符合ISO-8859标准的.</strong></p>
 
-          <h3>
+          <h3 id="10263987">
             <a name="_root-GB2312" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -345,7 +345,7 @@
           </h3><p>这是最早的中文国家标准, 诞生于1980年. 目前GB2312仍然被广泛使用, 它一共包括了6763个汉字, 还收录了包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母在内的682个字符.GB2312-1980通过 这6763个汉字已经足够日常使用. GB2312的编码方法和EASCII类似, 都是使用ASCII不使用最高位, 它规定所有的汉字必须大于127, 然后<strong>必须</strong>和原本ASCII一起结合使用, 正因为此, 他不能兼容EASCII的扩展部分.</p>
 <p>由于当时的计算机仍然是终端和文本模式的时代, 而每个字符都是一个小点阵, 占8个像素宽, 而汉字并不适合这样展示, 所以又出现了全角和半角的区别. 全角的标点符号和半角的标点符号在中文输入法下是一样的, 而在英文输入法中, 半角标点的宽度就是全角的一半大小. 关于全角半角, 我们在后面还会提到.</p>
 
-          <h3>
+          <h3 id="f413297e">
             <a name="_root-GB13000 / GBK" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -357,7 +357,7 @@
 <p>由于汉字的数量实在是太庞大了, 而一些人名, 古汉语, 生僻字都没有被包括在GB2312标准中, 所以同一年(1993), GBK, (即国家标准扩展的汉语拼音缩写)被定义, 尽管这个时候这并不是官方的标准, 但微软已经在Windows 95中实现了GBK的代码页(cp936). 由于Windows的广泛使用, 使得GBK成为了当时的事实标准. 于是, 在1995年, 国家发布GBK1.0规范, 对于cp936做了轻微的扩展. 但是目前的状态是, cp936就等同于GBK, 尽管GBK比cp936多出95个字符. IANA也把cp936作为GBK的别名.</p>
 <p>GBK不同于GB2312, 汉字依然从127开始, 但是不要求使用原来的ASCII的比特位, 这样才能表示更多的字符.</p>
 
-          <h3>
+          <h3 id="7d09a30f">
             <a name="_root-GB18030" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -365,7 +365,7 @@
           </h3><p>这个是目前最新的国家标准, 制定于2000年, 以取代GBK.在2005年, 国家对GB18030进行了补充, 在GBK的基础上增加了CJK.</p>
 <p>微软也对GB18030制定了代码页(CP54936), 不过, 在(Windows7)系统的设置中并不能找到这个代码页, 只不过在Command Line中可以进行切换.</p>
 
-          <h3>
+          <h3 id="4bd03270">
             <a name="_root-GB系列的编码方式(以GB2312为例)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -400,7 +400,7 @@
 <p>现在我们就解释了GB系列的编码方式, 接下来就来回答一下上面的疑问: 为什么要避开那20H个. 说来也简单, 其实上面也已经解释了, 原本我们可以直接保留所有的ASCII编码的, 也就是直接从128开始编码, 但是考虑到全角和半角的英文字符, 所以GB2312就把这些重新进行编码加入到双字节编码的队列中. 而不可打印的控制字符, 也就是那20H, 32个就进行了保留, 这就是避开的原因.</p>
 <p>最后我们再把外码和字形码说一下: 最简单的理解方式, 我们再输入的时候使用的代码就是<strong>外码</strong>, 例如五笔输入法, 拼音输入法这些, 规定的代码就是外码. 而<strong>字形码</strong>可以简单的理解成是我们的字体, 也即是具体的<strong>显示形状</strong>.</p>
 
-          <h2>
+          <h2 id="85410a2e">
             <a name="_root-Big5" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -413,7 +413,7 @@
 <p>所以, 你也可以不严谨的说: ANSI是系统的默认编码方式, 不过这个也是会依靠系统语言而改变的. 另外只有Windows中存在这样的说法.</p>
 </blockquote>
 
-          <h2>
+          <h2 id="aec20cb7">
             <a name="_root-Unicode" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -454,7 +454,7 @@
 <p>我们回到之前说的UCS字符集, 这个玩意其实有两个组成: UCS-2和UCS-4, 他们分别定义2字节和4字节的码点编号, 其中UCS-2和我们的BMP是对应关系, 它们保持一致. <strong>注意: UCS-2和UCS-4不是字符编码方式, 也不能把他们和UTF-16和UTF-32画等号, UCS和Unicode字符集一样, 也是可以使用多种方式对字符编号进行编码的.</strong></p>
 <p>再说到具体的编码方式之前, 我们要先来说一个超级重要的概念 — <strong>字节序</strong></p>
 
-          <h3>
+          <h3 id="6c0e6572">
             <a name="_root-字节序" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -467,7 +467,7 @@
 <p>其实说到底, 如果我们的计算机是按照字节为单位来处理数据的话, 就不存在这么复杂的概念了, 因为处理数据的单位是单个字节, 有什么大端小端关系? 当然也是没有什么顺序的了. 但是问题就是计算机处理数据是按照数据类型来的, 而这些数据类型是多字节数据类型, 而一旦把多个单字节当做一个整体处理, 就必定会牵扯到排列顺序的问题.</p>
 <p>那么现在就来具体的说一下大端序和小端序吧:</p>
 
-          <h4>
+          <h4 id="d8ed5838">
             <a name="_root-大端序" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -485,7 +485,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself4c007a8as) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo4c007a8a)
                             isInViewPortOfTwo4c007a8a = null
                         }
@@ -501,7 +501,7 @@
     </p>
 <p>看图就觉得很清晰, 而且很符合正常的读写习惯, 也即是按照顺序把字节填充进去.</p>
 
-          <h4>
+          <h4 id="35232a6">
             <a name="_root-小端序" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -519,7 +519,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself65ba330as) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo65ba330a)
                             isInViewPortOfTwo65ba330a = null
                         }
@@ -535,7 +535,7 @@
     </p>
 <p>小端序就是反过来的, 字节头位于内存地址的高位, 而尾部位于低位.</p>
 
-          <h4>
+          <h4 id="ec1b9eab">
             <a name="_root-中端序" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -553,7 +553,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself482b1ae9s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo482b1ae9)
                             isInViewPortOfTwo482b1ae9 = null
                         }
@@ -570,7 +570,7 @@
 <p>而具体是什么序, 取决于软件层面操作系统和硬件层面的CPU. 一般来说, 大部分的操作系统(NT, Linux)都是小端序的, 而且Intel X86架构的CPU也都是小端序的, 但例如Power PC这样的架构就是大端序的, 而且Mac OS X也是大端序的.</p>
 <p>这样的话, 就很麻烦, 尤其是对于那些设计系统的工程师, 以及一些做跨平台, 异构应用的编写人员就不可避免的考虑到字节序的问题.</p>
 
-          <h3>
+          <h3 id="9b3c0770">
             <a name="_root-Unicode的CEF" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -583,7 +583,7 @@
 <p>至于具体是怎么样进行编码的, 我们在下面一个部分来说. (以UTF-8为重点, 毕竟使用最为广泛, 至于UTF-32暂不讨论)</p>
 <p>你可能会说, 我还听说过<code>UTF-7</code>, <code>UTF-1</code>这些, 怎么上面没有提到呢? 实际上, <code>UTF-1</code>其实就是<code>UTF-8</code>的退役前身. 目前已经不再是Unicode的标准, 而<code>UTF-7</code>是为了电子邮件而设计的, 目前是<code>deprecated</code>的状态, 不再是Unicode的标准, 作为信息RFC存在.</p>
 
-          <h4>
+          <h4 id="3e5998ff">
             <a name="_root-UTF-8和本不应存在的BOM" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -601,7 +601,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself6a796d31s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo6a796d31)
                             isInViewPortOfTwo6a796d31 = null
                         }
@@ -668,14 +668,14 @@
 <pre><code>5c0101 11004e0100 1110</code></pre><p>OK! 我们来吧剔除之后的比特拼起来:</p>
 <pre><code>0101 1100 0100 1110</code></pre><p>和码点对比, 当当当! 恭喜你得到了<strong>屎</strong>!</p>
 
-          <h4>
+          <h4 id="737463e2">
             <a name="_root-UTF-16" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             UTF-16
           </h4><p>略 ( 而且UTF-16的编码算法还是挺复杂的… )</p>
 
-          <h3>
+          <h3 id="b4577241">
             <a name="_root-BOM和Unix的矛盾" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -690,7 +690,7 @@
 <p>另外, BOM的加入对于文本流式的处理变得麻烦, Linux是很强调<strong>流</strong>这个概念的.</p>
 <p>一个最典型的例子, 在Windows上使用notepad默认编码编写的C源程序, 在Mac OS X或者Linux/Unix上使用gcc去编译的时候, 会因为出现非法字符而编译失败.</p>
 
-          <h1>
+          <h1 id="db312ecf">
             <a name="_root-参考资料" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

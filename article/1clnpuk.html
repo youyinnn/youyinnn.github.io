@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -134,7 +134,7 @@
 <p>这篇我们但是这几个方法不能直接去用，因为这些方法都<strong>过期了</strong>！下面就着Java官方的文档解释，说说为什么过期这几个方法，以及贴出官方给的模板方法去实现这几个过期方法，具体的实现会在后面有例子</p>
 <hr>
 
-          <h4>
+          <h4 id="11a548f4">
             <a name="_root-中断线程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -148,7 +148,7 @@
 </ul>
 <p>这么看来，如果要在线程任务中间去停止线程，只能使用<strong>interrupt方法</strong>，但是这个方法也<strong>不是说停就停</strong>的</p>
 
-          <h5>
+          <h5 id="d2939cc8">
             <a name="_root-interrupt()" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -169,7 +169,7 @@
     interrupt0();
 }</code></pre>
 
-          <h5>
+          <h5 id="67df3ca2">
             <a name="_root-判断线程中断" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -191,7 +191,7 @@ private native boolean isInterrupted(boolean ClearInterrupted);</code></pre>
 <p>可以看到，<strong>interrupted()</strong>其实也是调用的<strong>本地方法isInterrupted(boolean clearInterrupted)</strong>，而且是<strong>当前线程（currendThread）去调用</strong>，所以这个方法是静态方法，而<strong>isInterrupted()</strong>同样也是调用<strong>本地方法isInterrupted(boolean clearInterrupted)</strong>，只是这个调用是通过this去调用的</p>
 <p>还需要注意的是，<strong>interrupted()会清楚中断标识，而isInterrupted()不会</strong></p>
 
-          <h5>
+          <h5 id="69413996">
             <a name="_root-有效中断的方法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -250,7 +250,7 @@ public void testEffectedInterrupt() throws InterruptedException {
 <p>关于怎么写stop、suspend、resume方法的代码贴在后面</p>
 </blockquote>
 
-          <h5>
+          <h5 id="8aab38c0">
             <a name="_root-关于stop()强制停止" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -295,14 +295,14 @@ public void run() {
 <p>以保证它尽可能及时地发出中断异常</p>
 </blockquote>
 
-          <h5>
+          <h5 id="d594d80c">
             <a name="_root-在sleep()里中断线程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             在sleep()里中断线程
           </h5><p>没什么说的，<strong>sleep()</strong>的调用需要捕获中断异常，如果在<strong>sleep()</strong>的过程中中断异常的话，就会抛出<strong>中断异常</strong>，在<strong>catch语句块中处理中断的后续逻辑</strong>就好了，<strong><u>请一定要在catch块中做出中断处理！！！（原因见sleep的注意事项）</u></strong></p>
 
-          <h4>
+          <h4 id="fd3bb71b">
             <a name="_root-暂停/恢复线程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -330,7 +330,7 @@ Public void mousePressed(MouseEvent e) {
 }</code></pre>
 <p>上面这样的程序就会出现死锁倾向，<strong>自己暂停自己，自己又怎么能恢复自己呢？</strong>所以官方给出的解决代码是</p>
 
-          <h5>
+          <h5 id="edc5371d">
             <a name="_root-官方“恢复”代码" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -371,7 +371,7 @@ Public void mousePressed(MouseEvent e) {
 }</code></pre>
 <p>这样一来，我们得保证<strong>threadSuspended</strong>也得是<strong>线程安全</strong>的，我们可以用<strong>volatile</strong>关键字去修饰它</p>
 
-          <h5>
+          <h5 id="1ed10a4a">
             <a name="_root-官方”暂停“代码" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -395,7 +395,7 @@ public void run() {
     }
 }</code></pre>
 
-          <h4>
+          <h4 id="eeca0f61">
             <a name="_root-实例" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

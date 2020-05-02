@@ -125,20 +125,20 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="55d19b5c">
             <a name="_root-Tess login on Jenkins" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Tess login on Jenkins
           </h3>
-          <h4>
+          <h4 id="27ef088b">
             <a name="_root-Use tess with Rheos tess-base agent" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Use tess with Rheos tess-base agent
           </h4><p>Assume that you are at &quot;Job Configure&quot; panel now.</p>
 
-          <h5>
+          <h5 id="fd3b5cb9">
             <a name="_root-Configure Agent" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -146,13 +146,13 @@
           </h5><p>In order to use tess <strong>effectively and legally</strong>, we should check <strong>&quot;Restrict where this project can be run&quot;</strong> on <strong>&quot;Job Notifications&quot;</strong> and select <code>tess-builder-numsg</code>, this is a image for tess-user that build from <strong><em>Rheos team</em></strong>, it prepared every thing we need for tess.</p>
 <p>The configuration of this agent is at Jenkins: <strong>[Manage Jenkins(系统管理)] -&gt; [Configure System(系统设置)]-&gt;[Cloud(云)]-&gt;[Kubernetes]-&gt;[images]</strong> , named <strong>&quot;tess-builder-numsg&quot;</strong></p>
 
-          <h5>
+          <h5 id="5170ffa6">
             <a name="_root-Configure &quot;Parameterized Build(参数化构建过程)&quot;" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Configure &quot;Parameterized Build(参数化构建过程)&quot;
           </h5>
-          <h6>
+          <h6 id="a769366e">
             <a name="_root-For production cluster login" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -166,20 +166,20 @@
 </ol>
 </blockquote>
 
-          <h6>
+          <h6 id="a2203b81">
             <a name="_root-For non-production cluster login" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             For non-production cluster login
           </h6><p>We can use <code>--password</code> option of tess to login tess to non-production cluster, so we just need three parameters: <code>tess_username</code>,<code>tess_cluster</code>, <code>corp_passord</code></p>
 
-          <h5>
+          <h5 id="35e998a6">
             <a name="_root-Configure Build Execute Shell" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Configure Build Execute Shell
           </h5>
-          <h6>
+          <h6 id="35445b56">
             <a name="_root-For production cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -188,7 +188,7 @@
 ./tess-login.sh ${tess_username}  ${tess_cluster}  ${tess_pin} ${tess_yubikey_token_twice}
 # your work with tess</code></pre>
 
-          <h6>
+          <h6 id="70c72625">
             <a name="_root-For non-production cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -197,13 +197,13 @@
 ./tess-login.sh ${tess_username} ${corp_password} ${tess_cluster}
 # your work with tess</code></pre>
 
-          <h5>
+          <h5 id="ac4d0aec">
             <a name="_root-For production cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             For production cluster
           </h5>
-          <h6>
+          <h6 id="3fa39c02">
             <a name="_root-tess-login.sh" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -229,7 +229,7 @@ echo &quot;token 2: $tess_yubikey_token_2&quot;
 # combine $tess_pin and $tess_yubikey_token_1
 expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubikey_token_1 $tess_yubikey_token_2</code></pre>
 
-          <h6>
+          <h6 id="413099cf">
             <a name="_root-tess-login-by-expect.sh" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -237,13 +237,13 @@ expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubik
           </h6><p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/prod/tess-login-by-expect.sh">tess-login-by-expect.sh</a></p>
 <p>You can also find it <a href="2.-Prepare-expect-on-your-image">below</a>.</p>
 
-          <h5>
+          <h5 id="e9ce779f">
             <a name="_root-For non-production cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             For non-production cluster
           </h5>
-          <h6>
+          <h6 id="3fa39c02">
             <a name="_root-tess-login.sh" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -257,21 +257,21 @@ server=$3
 
 expect tess-login-by-expect.sh $server $username $corp_password</code></pre>
 
-          <h6>
+          <h6 id="413099cf">
             <a name="_root-tess-login-by-expect.sh" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             tess-login-by-expect.sh
           </h6><p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/qa/tess-login-by-expect.sh">tess-login-by-expect.sh</a></p>
 
-          <h4>
+          <h4 id="b3ee084b">
             <a name="_root-If you want to build our own agent for tess" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             If you want to build our own agent for tess
           </h4><p>Please make sure the agent environment contains the following two requirements for using tess <strong>effectively and legally</strong>.</p>
 
-          <h5>
+          <h5 id="5d182478">
             <a name="_root-1. Prepare the appropriate version of Tess client on your image" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -288,7 +288,7 @@ expect tess-login-by-expect.sh $server $username $corp_password</code></pre>
 <p>each verification require an <strong>YubiKey Token</strong>, though it&#39;s the way they did after version <code>release-0.29.x</code>, before this version, the old version of tess client use just one <strong>YubiKey Token</strong>, so it&#39;s invalid for access the production cluster at present.</p>
 </blockquote>
 
-          <h6>
+          <h6 id="aed5a7d9">
             <a name="_root-How to upgrade tess client" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -299,7 +299,7 @@ expect tess-login-by-expect.sh $server $username $corp_password</code></pre>
 <pre><code class="language-bash">$ tess install release-0.33.5</code></pre>
 <p>and your should add tess to <code>$PATH</code> for good.</p>
 
-          <h5>
+          <h5 id="96296e46">
             <a name="_root-2. Prepare <code>expect</code> on your image" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -343,7 +343,7 @@ expect eof</code></pre>
 <p>Then you could run it on your shell script:</p>
 <pre><code class="language-bash">expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubikey_token_1 $tess_yubikey_token_2</code></pre>
 
-          <h4>
+          <h4 id="fcb269bd">
             <a name="_root-Installation" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
