@@ -218,6 +218,16 @@
     bottom: 2.35rem;
   }
 
+  #md.scripts h2, #md.scripts h3 {
+    position: initial !important;
+    padding: 1rem 0 !important;
+    margin: initial !important;
+    background-color: initial;
+    color: initial;
+    font-size: 16px !important;
+    font-weight: initial;
+  }
+
   #sidetoc ul {
     margin-bottom: 0;
   }

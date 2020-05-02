@@ -37,16 +37,16 @@ function new_render_md(regular_toc) {
             .replace(/ /gm, '&nbsp;')
         listhtml += `
             <div class="toc-${el.tagName.toLowerCase()}" _target_sb="${el.id}">
-                <a>
+                <a hreff="${el.childNodes[1].name}">
                     ${transferred}
                 </a>
             </div>`
     }
     $('#sidetoc').append(listhtml)
     var $root = $('html, body')
-    if (Boolean(regular_toc)) {
+    if (Boolean(regular_toc) || getclientw() < 700) {
         $('.markdown-toc a').click(function() {
-            let tzhref = $.attr(this, 'href')
+            let tzhref = $.attr(this, 'hreff')
             $root.animate({
                 scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
@@ -57,11 +57,11 @@ function new_render_md(regular_toc) {
             }
             if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
                 $root.animate({
-                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
+                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 60
                 }, 600)
             }
         })
-    } else {
+    } else if (getclientw() >= 700) {
         $('.markdown-toc .toc-h3').click(function() {
             let tgsbid = this.getAttribute('_target_sb')
 
@@ -91,25 +91,24 @@ function new_render_md(regular_toc) {
                 }
             })
         })
+        $('#sidetoc .toc-h3').addClass('zip-tran')
+        let nowh2
+        $('#sidetoc .toc-h2').click(function() {
+            $('#sidetoc .no-zip-tran').addClass('zip-tran')
+            $('#sidetoc .no-zip-tran').removeClass('no-zip-tran')
+            if (nowh2 === this) {
+                nowh2 = undefined
+            } else {
+                let h3 = $(this).next()
+                while (h3[0] !== undefined && h3[0].className === 'toc-h3 zip-tran') {
+                    h3.removeClass('zip-tran')
+                    h3.addClass('no-zip-tran')
+                    h3 = h3.next()
+                } 
+                nowh2 = this
+            }
+        })
     }
-    $('#sidetoc .toc-h3').addClass('zip-tran')
-
-    let nowh2
-    $('#sidetoc .toc-h2').click(function() {
-        $('#sidetoc .no-zip-tran').addClass('zip-tran')
-        $('#sidetoc .no-zip-tran').removeClass('no-zip-tran')
-        if (nowh2 === this) {
-            nowh2 = undefined
-        } else {
-            let h3 = $(this).next()
-            while (h3[0] !== undefined && h3[0].className === 'toc-h3 zip-tran') {
-                h3.removeClass('zip-tran')
-                h3.addClass('no-zip-tran')
-                h3 = h3.next()
-            } 
-            nowh2 = this
-        }
-    })
     $('.katex').parent().addClass('katexp')
     setimgclicktofocus()
     highlightBlock()

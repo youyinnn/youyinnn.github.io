@@ -58,7 +58,12 @@ $(function() {
     } else if (pathname === '/scripts/') {
         $('html').css('overflowY', 'initial')
         changepagetitle('scripts | youyinnn')
-        scriptblock()
+        if (getclientw() >= 700) { 
+            scriptblock()
+        } else {
+            showbbt()
+            showtocbtn()
+        }
         new_render_md()
         showsidetoc()
         $('#sidetoc').children().first().click()
