@@ -118,6 +118,7 @@ $(function() {
         // hidetopbar when scrollTop > 0
         if (location.pathname.startsWith('/article/') ||
             location.pathname.startsWith('/resume/') ||
+            location.pathname.startsWith('/scripts/') ||
             location.pathname.startsWith('/todos/')) {
             if (scrollTop === 0) {
                 showtopbar()
