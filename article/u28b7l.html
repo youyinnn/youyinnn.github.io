@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -137,7 +137,7 @@
 <p>绝大部分转自：<a href="http://orchome.com">http://orchome.com</a></p>
 <hr>
 
-          <h3>
+          <h3 id="ddb3eaf6">
             <a name="_root-简单说明什么是kafka" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -145,7 +145,7 @@
           </h3><p>Apache kafka是消息中间件的一种，我发现很多人不知道消息中间件是什么，在开始学习之前，我这边就先简单的解释一下什么是消息中间件，只是粗略的讲解，目前kafka已经可以做<code>更多</code>的事情。</p>
 <p>举个例子，生产者消费者，生产者生产鸡蛋，消费者消费鸡蛋，生产者生产一个鸡蛋，消费者就消费一个鸡蛋，假设消费者消费鸡蛋的时候噎住了（系统宕机了），生产者还在生产鸡蛋，那新生产的鸡蛋就丢失了。再比如生产者很强劲（大交易量的情况），生产者1秒钟生产100个鸡蛋，消费者1秒钟只能吃50个鸡蛋，那要不了一会，消费者就吃不消了（消息堵塞，最终导致系统超时），消费者拒绝再吃了，”鸡蛋“又丢失了，这个时候我们放个篮子在它们中间，生产出来的鸡蛋都放到篮子里，消费者去篮子里拿鸡蛋，这样鸡蛋就不会丢失了，都在篮子里，而这个篮子就是”kafka“。<br>鸡蛋其实就是“数据流”，系统之间的交互都是通过“数据流”来传输的（就是tcp、http什么的），也称为报文，也叫“消息”。<br>消息队列满了，其实就是篮子满了，”鸡蛋“ 放不下了，那赶紧多放几个篮子，其实就是kafka的扩容。<br>各位现在知道kafka是干什么的了吧，它就是那个&quot;篮子&quot;。</p>
 
-          <h3>
+          <h3 id="e8e69972">
             <a name="_root-kafka名词解释" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -159,7 +159,7 @@
 </ul>
 <p>大家一定要学会抽象的去思考，上面只是属于业务的角度，如果从技术角度，topic标签实际就是队列，生产者把所有“鸡蛋（消息）”都放到对应的队列里了，消费者到指定的队列里取。</p>
 
-          <h3>
+          <h3 id="7dd2beda">
             <a name="_root-Kafka作为一个分布式的流平台，这到底意味着什么？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -171,7 +171,7 @@
 <li>在消息流发生时处理它们。</li>
 </ol>
 
-          <h4>
+          <h4 id="ba062514">
             <a name="_root-什么是kakfa的优势？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -183,7 +183,7 @@
 </ol>
 <p>要了解kafka是如何做这些事情的，让我们从下到上深入探讨kafka的能力。</p>
 
-          <h4>
+          <h4 id="336fe207">
             <a name="_root-首先几个概念：" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -194,7 +194,7 @@
 <li>每个消息（也叫记录<strong>record</strong>，我习惯叫消息）是由一个key，一个value和时间戳构成。</li>
 </ol>
 
-          <h4>
+          <h4 id="441d07d6">
             <a name="_root-kafka有四个核心API：" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -218,7 +218,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselff85350acs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwof85350ac)
                             isInViewPortOfTwof85350ac = null
                         }
@@ -234,41 +234,41 @@
     </p>
 <p>Client和Server之间的通讯，是通过一条简单、高性能并且和开发语言无关的<a href="https://kafka.apache.org/protocol.html">TCP协议</a>。并且该协议保持与老版本的兼容。Kafka提供了Java Client（客户端）。除了Java Client外，还有非常多的<a href="https://cwiki.apache.org/confluence/display/KAFKA/Clients">其它编程语言的Client</a>。</p>
 
-          <h3>
+          <h3 id="f01f2bd8">
             <a name="_root-首先来了解一下Kafka所使用的基本术语：" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             首先来了解一下Kafka所使用的基本术语：
           </h3>
-          <h4>
+          <h4 id="7ee2973c">
             <a name="_root-Topic" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Topic
           </h4><p>Kafka将消息种子(Feed)分门别类，每一类的消息称之为一个主题(Topic).</p>
 
-          <h4>
+          <h4 id="feb5632d">
             <a name="_root-Producer" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Producer
           </h4><p>发布消息的对象称之为主题生产者(Kafka topic producer)</p>
 
-          <h4>
+          <h4 id="d43d77c7">
             <a name="_root-Consumer" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Consumer
           </h4><p>订阅消息并处理发布的消息的种子的对象称之为主题消费者(consumers)</p>
 
-          <h4>
+          <h4 id="8df66170">
             <a name="_root-Broker" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Broker
           </h4><p>已发布的消息保存在一组服务器中，称之为Kafka集群。集群中的每一个服务器都是一个代理(Broker). 消费者可以订阅一个或多个主题（topic），并从Broker拉数据，从而消费这些已发布的消息。</p>
 
-          <h3>
+          <h3 id="27b57773">
             <a name="_root-主题和日志  (Topic和Log)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -288,7 +288,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself893f9370s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo893f9370)
                             isInViewPortOfTwo893f9370 = null
                         }
@@ -316,7 +316,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself61a3a2a9s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo61a3a2a9)
                             isInViewPortOfTwo61a3a2a9 = null
                         }
@@ -331,28 +331,28 @@
         </script>
     </p>
 
-          <h3>
+          <h3 id="135c919d">
             <a name="_root-分布式(Distribution)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             分布式(Distribution)
           </h3><p>Log的分区（partition）被分布到集群中的多个服务器上。每个服务器处理它分到的分区（partition）。 根据配置每个分区（partition）还可以复制到其它服务器作为备份容错。 每个分区（partition）有一个leader，零或多个follower。Leader处理此分区（partition）的所有的读写请求，而follower被动的复制数据。如果leader宕机，其它的一个follower会被推举为新的leader。 一台服务器可能同时是一个分区（partition）的leader，另一个分区（partition）的follower。 这样可以平衡负载，避免所有的请求都只让一台或者某几台服务器处理。</p>
 
-          <h3>
+          <h3 id="b13536ce">
             <a name="_root-Geo-Replication(异地数据同步技术)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Geo-Replication(异地数据同步技术)
           </h3><p><strong>Kafka MirrorMaker</strong>为群集提供<code>geo-replication</code>支持。借助<code>MirrorMaker</code>，消息可以跨多个数据中心或云区域进行复制。 您可以在active/passive场景中用于备份和恢复; 或者在active/passive方案中将数据置于更接近用户的位置，或数据本地化。</p>
 
-          <h3>
+          <h3 id="80b914ac">
             <a name="_root-生产者(Producers)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             生产者(Producers)
           </h3><p>生产者往某个Topic上发布消息。生产者也负责选择发布到Topic上的哪一个分区（partition）。最简单的方式从分区（partition）列表中轮流选择。也可以根据某种算法依照权重选择分区（partition）。开发者负责如何选择分区（partition）的算法。</p>
 
-          <h3>
+          <h3 id="b31eadce">
             <a name="_root-消费者(Consumers)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -370,7 +370,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself4a0fd17es) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo4a0fd17e)
                             isInViewPortOfTwo4a0fd17e = null
                         }
@@ -387,7 +387,7 @@
 <p>2个kafka集群托管4个分区（partition）（P0-P3），2个消费者组，消费组A有2个消费者实例，消费组B有4个。</p>
 <p>正像传统的消息系统一样，Kafka保证消息的顺序不变。 再详细扯几句。传统的队列模型保持消息，并且保证它们的先后顺序不变。但是， 尽管服务器保证了消息的顺序，消息还是异步的发送给各个消费者，消费者收到消息的先后顺序不能保证了。这也意味着并行消费将不能保证消息的先后顺序。用过传统的消息系统的同学肯定清楚，消息的顺序处理很让人头痛。如果只让一个消费者处理消息，又违背了并行处理的初衷。 在这一点上Kafka做的更好，尽管并没有完全解决上述问题。 Kafka采用了一种分而治之的策略：分区（partition）。 因为Topic分区（partition）中消息只能由消费者组中的唯一一个消费者处理，所以消息肯定是按照先后顺序进行处理的。但是它也仅仅是保证Topic的一个分区（partition）顺序处理，不能保证跨分区（partition）的消息先后处理顺序。 所以，如果你想要顺序的处理Topic的所有消息，那就只提供一个分区（partition）。</p>
 
-          <h3>
+          <h3 id="4d5511d7">
             <a name="_root-Kafka的保证(Guarantees)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -399,13 +399,13 @@
 </ul>
 <p>有关这些保证的更多详细信息，请参见文档的设计部分。</p>
 
-          <h3>
+          <h3 id="b84962d2">
             <a name="_root-kafka作为一个消息系统" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             kafka作为一个消息系统
           </h3>
-          <h4>
+          <h4 id="8e607225">
             <a name="_root-Kafka的流与传统企业消息系统相比的概念如何？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -414,7 +414,7 @@
 <p>kafka中消费者组有两个概念：<code>队列</code>：消费者组（consumer group）允许同名的消费者组成员瓜分处理。<code>发布订阅</code>：允许你广播消息给多个消费者组（不同名）。</p>
 <p>kafka的每个topic都具有这两种模式。</p>
 
-          <h4>
+          <h4 id="104a9b13">
             <a name="_root-kafka有比传统的消息系统更强的顺序保证。" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -422,7 +422,7 @@
           </h4><p>传统的消息系统按顺序保存数据，如果多个消费者从队列消费，则服务器按存储的顺序发送消息，但是，尽管服务器按顺序发送，消息异步传递到消费者，因此消息可能乱序到达消费者。这意味着消息存在并行消费的情况，顺序就无法保证。消息系统常常通过仅设1个消费者来解决这个问题，但是这意味着没用到并行处理。</p>
 <p>kafka做的更好。通过并行topic的parition —— kafka提供了顺序保证和负载均衡。每个partition仅由同一个消费者组中的一个消费者消费到。并确保消费者是该partition的唯一消费者，并按顺序消费数据。每个topic有多个分区（partition），则需要对多个消费者做负载均衡，但请注意，<code>相同的消费者组中不能有比分区（partition）更多的消费者，否则多出的消费者一直处于空等待，不会收到消息</code>。</p>
 
-          <h3>
+          <h3 id="e800dfa">
             <a name="_root-kafka作为一个存储系统" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -432,7 +432,7 @@
 <p>kafka的磁盘结构 - 无论你服务器上有50KB或50TB，执行是相同的。</p>
 <p>client来控制读取数据的位置。你还可以认为kafka是一种专用于高性能，低延迟，提交日志存储，复制，和传播特殊用途的<code>分布式文件系统</code>。</p>
 
-          <h3>
+          <h3 id="a8e97a7e">
             <a name="_root-kafka的流处理" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -443,7 +443,7 @@
 <p>此工具有助于解决此类应用程序面临的难题：处理无序数据，在代码更改时重新处理输入，执行有状态计算等。</p>
 <p>Sterams API在Kafka中的核心：使用producer和consumer API作为输入，利用Kafka做状态存储，使用相同的<strong>组机制（group mechanism）</strong>在stream处理器实例之间进行容错保障。</p>
 
-          <h3>
+          <h3 id="b5946551">
             <a name="_root-拼在一起" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

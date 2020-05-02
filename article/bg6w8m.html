@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h4>
+          <h4 id="c2993dc7">
             <a name="_root-小声BB" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -147,13 +147,13 @@
 </ul>
 <hr>
 
-          <h4>
+          <h4 id="9e3dd7b7">
             <a name="_root-术语" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             术语
           </h4>
-          <h5>
+          <h5 id="9ee9ce16">
             <a name="_root-ASL（Average Search Length）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -170,13 +170,13 @@
 <p>$$\dfrac{3}{4} (n + 1)$$</p>
 <hr>
 
-          <h4>
+          <h4 id="5444c982">
             <a name="_root-元素查找算法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             元素查找算法
           </h4>
-          <h5>
+          <h5 id="ee0d6202">
             <a name="_root-顺序查找（Sequential Search）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -189,7 +189,7 @@
 }</code></pre>
 <p>不解释，时间复杂度：<strong>O(n)，ASL(ss) =（n + 1）/ 2</strong></p>
 
-          <h5>
+          <h5 id="df10e587">
             <a name="_root-二分查找/折半查找（Binary Search）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@
 <p>以上为动态二分查找，也就是如果找不到结果，就返回元素要插入位置的负数；一般的查找，找不到元素就返回-1；</p>
 <p>时间复杂度为<strong>O(logn)</strong></p>
 
-          <h6>
+          <h6 id="267d7aea">
             <a name="_root-二分的ASL计算" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -240,14 +240,14 @@
 <p>则平均查找长度即为：（1 + <strong>2 * 2</strong> + <strong>3 * 4</strong> + <strong>4 * 5</strong>）/ 12 = 37/12 = 3.0833 即为 A、3.1</p>
 </blockquote>
 
-          <h5>
+          <h5 id="27c47f33">
             <a name="_root-分块查找/索引查找（Block Search/Index Search）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             分块查找/索引查找（Block Search/Index Search）
           </h5><blockquote>
 
-          <h4>
+          <h4 id="a04ef540">
             <a name="_root-简介" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -256,7 +256,7 @@
 <p>折半查找虽然具有很好的性能，但其前提条件时线性表顺序存储而且按照关键码排序，这一前提条件在结点树很大且表元素动态变化时是难以满足的。而顺序查找可以解决表元素动态变化的要求，但查找效率很低。如果既要保持对线性表的查找具有较快的速度，又要能够满足表元素动态变化的要求，则可采用分块查找的方法。</p>
 <p>当增加或减少节以及节点的关键码改变时，只需将该节点调整到所在的块即可。在空间复杂性上，分块查找的主要代价是增加了一个辅助数组。</p>
 
-          <h4>
+          <h4 id="2ec1a283">
             <a name="_root-方法描述" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -267,7 +267,7 @@
 <li>该块中最大的元素</li>
 </ul>
 
-          <h4>
+          <h4 id="4626bbc2">
             <a name="_root-性能分析" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -283,14 +283,14 @@
 </blockquote>
 <hr>
 
-          <h4>
+          <h4 id="618baf9c">
             <a name="_root-字符串匹配" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             字符串匹配
           </h4><p>问题：给定一个n长度的字符串（text），一个m（m&lt;=n）长度的串（pattern），从text中找匹配pattern的字串</p>
 
-          <h5>
+          <h5 id="16544070">
             <a name="_root-蛮力法" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -320,7 +320,7 @@
 <p>这时候就会做一些徒劳工，<strong>你要把主串中前面比较过的元素再和匹配串从头到尾进行一次比较</strong></p>
 <p>因此就需要找到一个方法，记录好每次的已知条件，不再做徒劳的事情，于是就有了KMP算法</p>
 
-          <h5>
+          <h5 id="f91b87c4">
             <a name="_root-KMP" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -340,7 +340,7 @@
 </ul>
 </blockquote>
 
-          <h6>
+          <h6 id="32d32983">
             <a name="_root-next" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -376,7 +376,7 @@
 </ol>
 </blockquote>
 
-          <h6>
+          <h6 id="6de91b02">
             <a name="_root-kmp" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -442,7 +442,7 @@
 }</code></pre>
 <p>这里主要是<code>line：18-20</code>：在保证剩余串长还可以有效比对的情况下，还要保证移位后也能在长度内有效比对</p>
 
-          <h6>
+          <h6 id="336f875a">
             <a name="_root-nextVal" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -950,7 +950,7 @@
 <p><a href="https://www.nowcoder.com/profile/1105774/myFollowings/detail/6106514%EF%BC%88%E7%AC%AC%E4%B8%80%E6%9D%A1%E5%9B%9E%E7%AD%94%EF%BC%89">https://www.nowcoder.com/profile/1105774/myFollowings/detail/6106514（第一条回答）</a></p>
 </blockquote>
 
-          <h6>
+          <h6 id="32532b0d">
             <a name="_root-表示法注意事项" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -963,7 +963,7 @@
 </ul>
 <hr>
 
-          <h4>
+          <h4 id="31c91a7e">
             <a name="_root-引用、参考" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

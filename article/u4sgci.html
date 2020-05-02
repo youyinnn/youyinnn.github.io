@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -149,7 +149,7 @@
 </ul>
 </blockquote>
 
-          <h3>
+          <h3 id="cb8c7193">
             <a name="_root-SynchronizedQueue" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -224,13 +224,13 @@
 <p>疑问解决：看完后面的shared节点的获取过程之后，我们就能知道，在同步状态足够的情况下，unpark是会传递下去的</p>
 </blockquote>
 
-          <h4>
+          <h4 id="529ecebe">
             <a name="_root-Exclusive acquire &amp; release" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Exclusive acquire &amp; release
           </h4>
-          <h5>
+          <h5 id="6d13c799">
             <a name="_root-acquire" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -243,7 +243,7 @@
 }</code></pre>
 <p>在获取同步状态的时候，首先调用<code>tryAcquire(int arg)</code>方法，这个方法是我们需要实现的模板方法之一，我们需要保证该方法能够线程安全地获取同步状态，方法尝试获取一次同步状态，如果获取成功，则<code>acquire(int arg)</code>方法结束；如果获取失败，首先调用<code>addWaiter</code>方法将获取同步状态失败的线程构建为Node结点（Node.EXCLUSIVE），然后加入到队尾，最后调用<code>acquireQueued</code>方法，让这个结点以“死循环”的方式不断获取同步状态<strong>（实际上也就循环了2次，之后就会被park掉）</strong>，若是获取失败，则阻塞结点持有的线程，等到结点被前驱结点唤醒的时候（一般是前驱结点已经获取到同步状态并且打算释放了的时候），或者阻塞线程被中断了的时候</p>
 
-          <h5>
+          <h5 id="d882867c">
             <a name="_root-addWaiter" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -265,7 +265,7 @@
 <p>如注释所说，Node.EXCLUSIVE是独占式结点，Node.SHARED是共享式结点，我其实很好奇为什么要用Node对象来表示结点的mode，也许在后面的共享式结点中有什么出彩的操作吧，后面再继续研究这个事</p>
 <p>注释里也说了，line：10-17行只是一个<code>enq</code>的快速版本，如果是第一个要addWaiter的结点，这时候AQS里面的tail是为null的；如果AQS里已经有tail了，那么可以在这段代码中尝试快速设置tail（如注释中所说）</p>
 
-          <h5>
+          <h5 id="f62b293">
             <a name="_root-enq" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -329,7 +329,7 @@ else {
 
 <p>这时候的<code>new Node()</code>是没有什么意义的，然后入队结点还系着获取同步状态失败的线程，后面如果再有入队的结点的话，就直接走else，尝试不断地将新入队结点设置为tail，直到成功的时候才返回，虽然<code>enq</code>的返回值没有被用到</p>
 
-          <h5>
+          <h5 id="4d67a9ec">
             <a name="_root-aquireQueued" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -464,7 +464,7 @@ behead(left)-&gt;exit(right)
 exit-&gt;e</code></pre>
 <p><em>流程图可以知道里的线条还需要注意一个，‘线程进入等待状态’到‘前驱是头节点’这里，意义是：线程被中断或者前驱结点被释放</em></p>
 
-          <h5>
+          <h5 id="e7290074">
             <a name="_root-release" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -480,14 +480,14 @@ exit-&gt;e</code></pre>
 }</code></pre>
 <p>方法执行的时候，会唤醒头节点的后继结点，然后在自旋中的后继结点会有机会获取到同步状态，然后进行上面的流程图；</p>
 
-          <h4>
+          <h4 id="e607218e">
             <a name="_root-Shared acquire &amp; release" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Shared acquire &amp; release
           </h4><p>共享式的源码阅读真是<strong>一道大坎</strong>，网上的要么没说到重点，要么一通胡说，而且网上的版本大多都是1.7的，虽然相较1.8，也仅仅在<code>setHeadAndPropagate</code>中某处多了2个condition，但就是这个方法都没人能搞清楚到底<strong>“propagate”</strong>的含义是什么，甚至我觉得1.8多的那2个condition是用来迫不得已去修1.7时留下来的bug才加上去的，<em>Daug Lea</em>前辈的思想确实精巧高深</p>
 
-          <h5>
+          <h5 id="48c2910f">
             <a name="_root-tryAcquireShared" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -531,7 +531,7 @@ exit-&gt;e</code></pre>
 <p>这里说支持3种情况，但是老爷子自己在写的时候也没太多想，实际上运用当作一般只支持负数代表不成功，非负数代表成功，所以和boolean没什么区别- -</p>
 </blockquote>
 
-          <h5>
+          <h5 id="a2a6d3a8">
             <a name="_root-acquireShared" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -665,7 +665,7 @@ private void doReleaseShared() {
 </li>
 </ol>
 
-          <h5>
+          <h5 id="207d69ac">
             <a name="_root-releaseShared" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -679,7 +679,7 @@ private void doReleaseShared() {
 }</code></pre>
 <p><code>doReleaseShared</code>在这里体现出的含义是：确保同步状态被<strong>线程安全地释放（归还）</strong>，可以看到，方法内部通过CAS加循环的方式做这个确保，因为释放操作会同时来自多个线程</p>
 
-          <h3>
+          <h3 id="26845fc6">
             <a name="_root-Conclusion" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

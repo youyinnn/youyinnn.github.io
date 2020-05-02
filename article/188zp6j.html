@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="585ee04e">
             <a name="_root-大声BB" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -134,7 +134,7 @@
 <p>决心做一个地痞，至少下次看到一个DP不会再被它DP</p>
 <hr>
 
-          <h3>
+          <h3 id="af4785de">
             <a name="_root-什么是DP？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -143,13 +143,13 @@
 <p>在DP的思想当中：如果问题是由交叠的子问题构成的，我们就可以用DP去解决这个问题。一般这样的子问题出现在对给定问题的求解<strong>递推关系</strong>中，这个<strong>递推关系</strong>中包含了相同类型的更小子问题的解<strong>（已经解出来了的）</strong>。</p>
 <p>DP建议我们，与其对交叠子问题一次次的求解，还不如将每个子问题的解记录在<strong>一张表</strong>中，这样就可以在表中直接得到原始问题的解。</p>
 
-          <h3>
+          <h3 id="a9e88f3d">
             <a name="_root-DP怎么操作？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             DP怎么操作？
           </h3>
-          <h4>
+          <h4 id="84fc9a7a">
             <a name="_root-斐波那契引例" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -174,7 +174,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfc4539200s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoc4539200)
                             isInViewPortOfTwoc4539200 = null
                         }
@@ -203,7 +203,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself2966169es) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo2966169e)
                             isInViewPortOfTwo2966169e = null
                         }
@@ -248,14 +248,14 @@
 }</code></pre>
 <p>在这样的情况下，既不需要<strong>O(n)</strong>的空间，又可以保持<strong>O(n)</strong>的时间</p>
 
-          <h4>
+          <h4 id="690dcc78">
             <a name="_root-分析这个引例" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             分析这个引例
           </h4><p>通过这个小小的斐波那契，我们经历了从：<strong>递归法</strong>——<strong>备忘录</strong>——<strong>动态规划</strong>等三个阶段，在这个过程中，我们不断得将无意义的计算精简下来，将我们的思维由自顶向下，往前索取子问题的解，转变为自底向上，拿着子问题的解去找原问题的解，从整表的备忘录，到两个变量足矣运算的效率；</p>
 
-          <h4>
+          <h4 id="459151d3">
             <a name="_root-DP要素" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -268,7 +268,7 @@
 <p>但是，仅仅做到到以上3要素，顶多只是个递归level，动态规划真正的精髓在于：<strong>减少无用功，利用已做工，权衡时空效率</strong></p>
 <p>我们来练习一下新的题目</p>
 
-          <h4>
+          <h4 id="a32e0a5">
             <a name="_root-练习：上台阶" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -295,13 +295,13 @@
 }</code></pre>
 <hr>
 
-          <h3>
+          <h3 id="f258ca01">
             <a name="_root-DP练习" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             DP练习
           </h3>
-          <h4>
+          <h4 id="91a214ec">
             <a name="_root-1：国王和金矿" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -518,7 +518,7 @@ private void dig(int[] g, int[] gw, int w){
     System.out.println(Arrays.toString(nowResult));
 }</code></pre>
 
-          <h5>
+          <h5 id="c94a37de">
             <a name="_root-从金矿再分析一下DP" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -562,7 +562,7 @@ private void dig(int[] g, int[] gw, int w){
 <p>其实这只是一道简单的数学问题，DP和w的数量成正比，递归只和m有关</p>
 <p>所以一种算法并不是完美适合一道题，要根据场景去选择算法</p>
 
-          <h6>
+          <h6 id="5545d250">
             <a name="_root-递归实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -589,7 +589,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
     return nowResult;
 }</code></pre>
 
-          <h4>
+          <h4 id="19c71a99">
             <a name="_root-2：最大子序列和" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -605,7 +605,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 </blockquote>
 <p>这是一道既简单又复杂的DP，因为这道题咋一眼看去，实在是不好分析DP的3要素，边界无法确定，谁都有可能是边界，最优子结构无法确定，多长多短都不清楚，有可能解是在序列的前半部分，有可能在后半部分，有可能是在中间，子结构都没出来，更别说状态转移方程了</p>
 
-          <h5>
+          <h5 id="a441d229">
             <a name="_root-暴力解O(n^2)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -628,7 +628,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 <p>从<code>i=0，num[i]=-2</code>开始考虑，然后第二层for循环就是计算（-2+1）、（-2+1+-3）、（-2+1+-3+4）....即以-2开头的子序列和都算过一次了，然后将以-2开头的所有子序列和中最大的那个当作当前i循环轮次最大的rSum，然后取最大的rSum为max</p>
 <p>也就是说，这是一种从序列<strong>开头</strong>往后考虑的暴力解，时间复杂度为<strong>O(n^2)</strong></p>
 
-          <h5>
+          <h5 id="f6b5448f">
             <a name="_root-看似简单" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -637,7 +637,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 <p>但是这道题根本无从下手递归，因为我固化了思维：<strong>解答不一定是在最后，可以在任何地方，所以不知道从哪开始递</strong>，所以我不能代入递归的思想去求解</p>
 <p>但是我们先不看答案可能在哪里，本质上说，我们处理序列的过程依然是一个从一端到另一端，<strong>这也是一个传递的过程！</strong>至于答案在哪，我们在边传递的时候，<strong>就边比较边记录就好了！</strong></p>
 
-          <h5>
+          <h5 id="1e870bca">
             <a name="_root-转变思维到可传递" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -666,7 +666,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
     return max;
 }</code></pre>
 
-          <h5>
+          <h5 id="9db50489">
             <a name="_root-递归？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -674,13 +674,13 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
           </h5><p>这道题也有一种递归的解法，基本思想就是，答案的位置只有3种可能性：序列的前半部分、序列的后半部分、前半部分的后面一点加上后半部分的前面一点，我们递归左右两部分然后再算中间；</p>
 <p>这种实现最后可以做出证明，效率是<strong>O(nlogn)</strong>，但是实现比较难理解</p>
 
-          <h5>
+          <h5 id="e351e5cd">
             <a name="_root-题目变种" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             题目变种
           </h5>
-          <h6>
+          <h6 id="b20b4714">
             <a name="_root-2.1：挑菜问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -712,7 +712,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 </ul>
 <p>再更新，不解了这道题，这是道傻逼题；</p>
 
-          <h4>
+          <h4 id="c401ac5d">
             <a name="_root-3：机器人走方格" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -778,7 +778,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 <p>DP</p>
 <p>这道题是我第一道按照经典的DP三连的方法独立做出来的，稍微和头3例不同点，但是模式几乎一模一样，但是因为有2个输入，所以递归法的时间复杂度暂时先不好推，但是DP的时间复杂度是<strong>O(xy)</strong>，空间是<strong>O(2x)</strong></p>
 
-          <h4>
+          <h4 id="62ff1732">
             <a name="_root-4：币值最大化问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -815,7 +815,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 </ol>
 <p>这么来说的话，一目了然了吧？其中f1代表的是F(n-1)，f2代表F(n-2)</p>
 
-          <h4>
+          <h4 id="979edd2">
             <a name="_root-5：硬币找零问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -854,7 +854,7 @@ private int[] dig3(int[] g, int[] gw, int w, int m) {
 }</code></pre>
 <p>可以看到，我们的fn是申请的n+1个空间，为什么？因为我们要严格对齐自然数和题意，防止逻辑错乱，比如说你真的不能偷懒去用<code>fn[0]</code>去代表<code>F(1)</code></p>
 
-          <h4>
+          <h4 id="d2258ac5">
             <a name="_root-6：硬币收集问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -908,7 +908,7 @@ private static int collectionDp(int[][] coinMap) {
     return fn;
 }</code></pre>
 
-          <h4>
+          <h4 id="34d080b8">
             <a name="_root-7： 背包问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -943,7 +943,7 @@ private static int collectionDp(int[][] coinMap) {
     return next[w];
 }</code></pre>
 
-          <h3>
+          <h3 id="342c800c">
             <a name="_root-参考：" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

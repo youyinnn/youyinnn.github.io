@@ -1,10 +1,10 @@
 ## :star: API相关
 
-### :speech_balloon: 一些开放的API
+###  一些开放的API
 
 [github repo public-apis](https://github.com/public-apis/public-apis)
 
-### :speech_balloon:用来查询IP的API
+### 用来查询IP的API
 
 - 国内：
   
@@ -29,14 +29,14 @@
 
 ## :star: Java相关
 
-### :speech_balloon:Java8系列文章
+### Java8系列文章
 
 
 http://www.importnew.com/11908.html
 
 
 
-### :speech_balloon:牛客 HttpServletRequest. getParameter
+### 牛客 HttpServletRequest. getParameter
 
 
 ![image](https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png)
@@ -45,14 +45,14 @@ http://www.importnew.com/11908.html
 
 
 
-### :speech_balloon:Java Spliterator
+### Java Spliterator
 
 
 参考1: https://segmentfault.com/q/1010000007087438
 参考2: https://blog.csdn.net/lh513828570/article/details/56673804
 
 
-### :speech_balloon:牛客 Integer的拆箱装箱
+### 牛客 Integer的拆箱装箱
 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png)
@@ -63,7 +63,7 @@ http://www.importnew.com/11908.html
 - valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用
 
 
-### :speech_balloon:牛客 getDeclaredMethods()的范围
+### 牛客 getDeclaredMethods()的范围
 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png)
@@ -77,7 +77,7 @@ Doc:
 
 
 
-### :speech_balloon:牛客 sleep()和wait()
+### 牛客 sleep()和wait()
 
 
 ![image](https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png)
@@ -102,7 +102,7 @@ Doc:
 5. wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。
 
 
-### :speech_balloon:Java static方法中的变量是否存在线程安全问题
+### Java static方法中的变量是否存在线程安全问题
 
 我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
 
@@ -130,7 +130,7 @@ hello方法会不会有多线程安全问题呢？没有！
 > 注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！
 
 
-### :speech_balloon:Java多线程参考
+### Java多线程参考
 
 
 https://www.cnblogs.com/yjd_hycf_space/p/7526608.html
@@ -138,7 +138,7 @@ http://www.importnew.com/21136.html
 http://www.importnew.com/21089.html
 
 
-### :speech_balloon:Java字符串压缩
+### Java字符串压缩
 
 
 ``` java
@@ -218,7 +218,7 @@ public class StringCompress {
 参考：https://blog.csdn.net/isea533/article/details/8199848
 
 
-### :speech_balloon:Servlet和CGI的区别
+### Servlet和CGI的区别
 
 1. 定义：
 
@@ -285,7 +285,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 转自：https://www.cnblogs.com/MuyouSome/p/3938203.html
 
 
-### :speech_balloon:Java HashMap好文
+### Java HashMap好文
 
 
 源码解析：
@@ -298,7 +298,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 - https://blog.csdn.net/u012512634/article/details/72735183
 
 
-### :speech_balloon:fastjson 转时间
+### fastjson 转时间
 
 
 在field上加注解，比如转ISO格式的时间
@@ -307,7 +307,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 ```
 
 
-### :speech_balloon:sun.misc.Unsafe
+### sun.misc.Unsafe
 
 
 - http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
@@ -315,19 +315,19 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 - https://blog.csdn.net/lvbaolin123/article/details/80527598
 
 
-### :speech_balloon:Java String pool
+### Java String pool
 
 
 [Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
 
 
-### :speech_balloon:Java 静态内部类和非静态内部类
+### Java 静态内部类和非静态内部类
 
 
 [Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
 
 
-### :speech_balloon:bridge method
+### bridge method
 
 
 - https://cn.aliyun.com/jiaocheng/330720.html
@@ -336,7 +336,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 - https://www.jianshu.com/p/250030ea9b28
 
 
-### :speech_balloon:finally & return
+### finally & return
 
 
 - https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
@@ -344,7 +344,7 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 ## :star: JS代码相关 
 
-### :speech_balloon:JS 获取元素样式
+### JS 获取元素样式
 
 
 ``` javascript
@@ -365,7 +365,7 @@ function getStyle(obj, styleName) {
 ```
 
 
-### :speech_balloon:JS 事件绑定兼容
+### JS 事件绑定兼容
 
 
 ``` javascript
@@ -401,7 +401,7 @@ function bindev(obj, eventStr, callback) {
 ```
 
 
-### :speech_balloon:JS 滚动动画
+### JS 滚动动画
 
 
 ``` javascript
@@ -416,7 +416,7 @@ $('#md').animate({
 ```
 
 
-### :speech_balloon:JS 滚动动画改进
+### JS 滚动动画改进
 
 
 ``` javascript
@@ -434,7 +434,7 @@ function scrolltoelement(elementid) {
 ```
 
 
-### :speech_balloon:JS 检测页面滚动代码
+### JS 检测页面滚动代码
 
 
 ``` JavaScript
@@ -448,7 +448,7 @@ $(window).scroll(function () {
 ```
 
 
-### :speech_balloon:JS 小数
+### JS 小数
 
   
 
@@ -467,7 +467,7 @@ num = num.toFixed(2); // 输出结果为 2.45
 ```
 
 
-### :speech_balloon:JS CSS 动态添加动画效果
+### JS CSS 动态添加动画效果
 
   
 
@@ -491,7 +491,7 @@ num = num.toFixed(2); // 输出结果为 2.45
 ```
 
 
-### :speech_balloon:JS 控制聚焦/失焦事件
+### JS 控制聚焦/失焦事件
 
   
 
@@ -505,7 +505,7 @@ num = num.toFixed(2); // 输出结果为 2.45
 ```
 
 
-### :speech_balloon:AJAX设置请求超时
+### AJAX设置请求超时
 
   
 
@@ -531,7 +531,7 @@ var ajaxTimeoutTest = $.ajax({
 函数写在complete中，因为无论success还是error，complete函数都会执行。
 
 
-### :speech_balloon:[Async](https://github.com/caolan/async)
+### [Async](https://github.com/caolan/async)
 
   
 
@@ -542,7 +542,7 @@ var ajaxTimeoutTest = $.ajax({
 [中文文档](https://blog.csdn.net/marujunyy/article/details/8695205)
 
 
-### :speech_balloon:JS 刷新页面
+### JS 刷新页面
 
 
 #### :small_blue_diamond:手动 reload
@@ -557,7 +557,7 @@ location.reload();
 ```
 
 
-### :speech_balloon:JS获取图片原始尺寸
+### JS获取图片原始尺寸
 
 
 
@@ -569,7 +569,7 @@ HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片�
 ```
 
 
-### :speech_balloon:JQuery的高级选择器
+### JQuery的高级选择器
 
   
 
@@ -590,7 +590,7 @@ jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.fi
 ```
 
 
-### :speech_balloon:js取消事件冒泡
+### js取消事件冒泡
 
   
 
@@ -604,7 +604,7 @@ $("form").bind("submit", function() {
 https://www.cnblogs.com/wangking/p/6113024.html#
 
 
-### :speech_balloon:JS判断字符串中是否含有Emoji表情
+### JS判断字符串中是否含有Emoji表情
 
 
 如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
@@ -651,7 +651,7 @@ function isEmojiCharacter(substring) {
 引自： https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&fps=1
 
 
-### :speech_balloon:Javascript使用字符串作为函数调用语句去调用
+### Javascript使用字符串作为函数调用语句去调用
 
   
 
@@ -666,7 +666,7 @@ eval(str+"()");//执行func_abc()函数
 引自：https://blog.csdn.net/qq_26222859/article/details/75285784
 
 
-### :speech_balloon:JS 数组排序
+### JS 数组排序
 
   
 
@@ -685,7 +685,7 @@ console.log(arr.sort(compare));
 ```
 
 
-### :speech_balloon:JS 判断浏览器类型
+### JS 判断浏览器类型
 
 
 ie那段参考自：https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html
@@ -736,7 +736,7 @@ function isChrome() {
 ```
 
 
-### :speech_balloon:JavaScript 解除xhr获取header的限制
+### JavaScript 解除xhr获取header的限制
 
   
 
@@ -745,7 +745,7 @@ http://www.ruanyifeng.com/blog/2016/04/cors.html
 需要后端的配合
 
 
-### :speech_balloon:JS锚点跳转动画
+### JS锚点跳转动画
 
   
 
@@ -765,7 +765,7 @@ http://www.ruanyifeng.com/blog/2016/04/cors.html
 ```
 
 
-### :speech_balloon:JS 监听元素任何变化
+### JS 监听元素任何变化
 
 
 [mutationobserver](http://javascript.ruanyifeng.com/dom/mutationobserver.html)
@@ -786,13 +786,13 @@ observer.observe(article, options);
 ```
 
 
-### :speech_balloon:JQuery UI 拖拽
+### JQuery UI 拖拽
 
 
 https://www.runoob.com/jqueryui/example-draggable.html
 
 
-### :speech_balloon:JQuery GIF播放/暂停 JS-GIF库
+### JQuery GIF播放/暂停 JS-GIF库
 
 
 https://www.lanrenzhijia.com/pic/3719.html
@@ -801,7 +801,7 @@ https://github.com/buzzfeed/libgif-js
 
 ## :star: CSS相关
 
-### :speech_balloon:CSS media设备适配样式设置
+### CSS media设备适配样式设置
 
 
 ``` css
@@ -817,13 +817,13 @@ https://github.com/buzzfeed/libgif-js
 ```
 
 
-### :speech_balloon:CSS 动画库animate.css
+### CSS 动画库animate.css
 
 
 介绍博客 : https://www.cnblogs.com/2050/p/3409129.html
 
 
-### :speech_balloon:CSS 去除按钮选中蓝色边框
+### CSS 去除按钮选中蓝色边框
 
 
 ``` css
@@ -839,7 +839,7 @@ https://github.com/buzzfeed/libgif-js
 [参考](https://blog.csdn.net/qq_26222859/article/details/51516011)
 
 
-### :speech_balloon:CSS 元素失焦/虚化滤镜
+### CSS 元素失焦/虚化滤镜
 
 
 ``` css
@@ -850,7 +850,7 @@ https://github.com/buzzfeed/libgif-js
 
 
 
-### :speech_balloon:CSS 文字换行
+### CSS 文字换行
 
 
 强制不换行
@@ -878,7 +878,7 @@ div{
 ```
 
 
-### :speech_balloon:CSS placeholder居位设置
+### CSS placeholder居位设置
 
 
 ``` css
@@ -902,7 +902,7 @@ div{
 ```
 
 
-### :speech_balloon:CSS 文字超过元素长度显示省略号
+### CSS 文字超过元素长度显示省略号
 
 
 
@@ -916,7 +916,7 @@ div{
 ```
 
 
-### :speech_balloon:CSS 变量设置和获取
+### CSS 变量设置和获取
 
 
 #### :small_blue_diamond:设置
@@ -947,7 +947,7 @@ a {
 参考 : http://www.ruanyifeng.com/blog/2017/05/css-variables.html
 
 
-### :speech_balloon:CSS 元素垂直/水平居中的骚操作
+### CSS 元素垂直/水平居中的骚操作
 
 
 > 垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;
@@ -972,7 +972,7 @@ a {
 参考自知乎 : https://www.zhihu.com/question/24822927
 
 
-### :speech_balloon:CSS3 瀑布布局
+### CSS3 瀑布布局
 
 
 三列瀑布
@@ -989,13 +989,13 @@ a {
 ```
 
 
-### :speech_balloon:CSS 将DIV画成直角三角形
+### CSS 将DIV画成直角三角形
 
 
 教程: https://www.cnblogs.com/v-weiwang/p/5057588.html
 
 
-### :speech_balloon:CSS自定义滚动条样式
+### CSS自定义滚动条样式
 
 
 https://segmentfault.com/a/1190000012800450
@@ -1018,7 +1018,7 @@ https://segmentfault.com/a/1190000012800450
 ```
 
 
-### :speech_balloon:CSS inline-block 垂直居中
+### CSS inline-block 垂直居中
 
 
 https://www.cnblogs.com/olafff/p/5103775.html
@@ -1028,7 +1028,7 @@ https://www.cnblogs.com/hutuzhu/p/4450850.html
 
 ## :star: JS工具/框架相关
 
-### :speech_balloon:React Native 
+### React Native 
 
 
 > 可以做桌面应用
@@ -1036,7 +1036,7 @@ https://www.cnblogs.com/hutuzhu/p/4450850.html
 网址: https://proton-native.js.org/#/
 
 
-### :speech_balloon:Layui
+### Layui
 
 
 > 给后端用的前端框架
@@ -1044,7 +1044,7 @@ https://www.cnblogs.com/hutuzhu/p/4450850.html
 [官网](http://www.layui.com)
 
 
-### :speech_balloon:wangEditor 轻量级前端富文本编辑器
+### wangEditor 轻量级前端富文本编辑器
 
 
 ![image](https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png)
@@ -1052,7 +1052,7 @@ https://www.cnblogs.com/hutuzhu/p/4450850.html
 [官网](http://www.wangeditor.com/)
 
 
-### :speech_balloon:KaTeX 最快的数学公式渲染库
+### KaTeX 最快的数学公式渲染库
 
 
 官方link : https://khan.github.io/KaTeX/function-support.html
@@ -1062,20 +1062,20 @@ editor.md的Demo : http://pandao.github.io/editor.md/examples/katex.html
 ![image](https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png)
 
 
-### :speech_balloon:JQuery 日期选择控件
+### JQuery 日期选择控件
 
 
 网站：https://xdsoft.net/jqplugins/datetimepicker/
 
 
-### :speech_balloon:JS 数据可视化
+### JS 数据可视化
 
 
 有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
 https://www.zhihu.com/question/19929609/answer/383055223
 
 
-### :speech_balloon:windows下调试iOS网页设备
+### windows下调试iOS网页设备
 
 
 https://www.jianshu.com/p/73715ee54712
@@ -1083,7 +1083,7 @@ https://www.jianshu.com/p/73715ee54712
 
 ## :star: 杂文/问题/乱说/黑科技/技巧
 
-### :speech_balloon:关于 github oauth app
+### 关于 github oauth app
 
 
 ![image](https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png)
@@ -1091,7 +1091,7 @@ https://www.jianshu.com/p/73715ee54712
 [reference.](https://github.com/timqian/my-notes/issues/9)
 
 
-### :speech_balloon:代码高亮的的坑
+### 代码高亮的的坑
 
 
 > editor.md的preview页 + highlight.js
@@ -1125,8 +1125,8 @@ https://www.jianshu.com/p/73715ee54712
 1. 首先不引用lib下的prettify.min.js文件
 2. 修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染
 
-![image](https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png)
-修改完之后, 这样就不会在pre和code上添加pretty的类了
+   ![image](https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png)
+   修改完之后, 这样就不会在pre和code上添加pretty的类了
 
 ##### :small_orange_diamond:2. css覆盖
 因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)
@@ -1142,7 +1142,7 @@ https://www.jianshu.com/p/73715ee54712
 ![image](https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png)
 
 
-### :speech_balloon:cmd相关
+### cmd相关
 
 
 #### :small_blue_diamond:教程
@@ -1156,7 +1156,7 @@ https://www.jianshu.com/p/73715ee54712
 [link](http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf)
 
 
-### :speech_balloon:关于 CI
+### 关于 CI
 
 
 #### :small_blue_diamond:示意图
@@ -1168,7 +1168,7 @@ https://www.jianshu.com/p/73715ee54712
 >对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。
 
 
-### :speech_balloon:GitHub API response 条数pagination限制
+### GitHub API response 条数pagination限制
 
 
 GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:
@@ -1182,7 +1182,7 @@ GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者
 我现在的blog所有的comments请求都是9999
 
 
-### :speech_balloon:一顿操作 node.js安装
+### 一顿操作 node.js安装
 
 
 #### :small_blue_diamond:安装nvm
@@ -1220,7 +1220,7 @@ https://i5ting.github.io/How-to-learn-node-correctly/#10302
 https://blog.csdn.net/jingtian678/article/details/78422760
 
 
-### :speech_balloon:Regex 匹配换行符/匹配尾部空格
+### Regex 匹配换行符/匹配尾部空格
 
 
 ``` regex
@@ -1232,7 +1232,7 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 ```
 
 
-### :speech_balloon:对IoC/DI的理解
+### 对IoC/DI的理解
 
 
 #### :small_blue_diamond:Ioc—Inverse  of Control
@@ -1274,7 +1274,7 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 [参考](https://blog.csdn.net/qq_22654611/article/details/52606960)
 
 
-### :speech_balloon:对于游戏来说 怎么选择TCP和UDP?
+### 对于游戏来说 怎么选择TCP和UDP?
 
 
 - 如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。
@@ -1286,7 +1286,7 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 转自: http://blog.jobbole.com/64638/
 
 
-### :speech_balloon:OOP三大特性
+### OOP三大特性
 
 
 #### :small_blue_diamond:封装优点：
@@ -1318,7 +1318,7 @@ https://blog.csdn.net/jingtian678/article/details/78422760
 参考: https://www.cnblogs.com/hysum/p/7100874.html#_label1
 
 
-### :speech_balloon:BitMap
+### BitMap
 
 
 http://blog.51cto.com/zengzhaozheng/1404108
@@ -1327,7 +1327,7 @@ http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html
 编程珠玑
 
 
-### :speech_balloon:MySQL用户管理
+### MySQL用户管理
 
 
 https://www.cnblogs.com/gavin110-lgy/p/5773981.html
@@ -1335,7 +1335,7 @@ https://www.cnblogs.com/clsn/p/8047028.html
 
 
 
-### :speech_balloon:在Windows的右键菜单上增加新建自定义类型文件的选项
+### 在Windows的右键菜单上增加新建自定义类型文件的选项
 
 
 ![image](https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png)
@@ -1343,7 +1343,7 @@ https://www.cnblogs.com/clsn/p/8047028.html
 https://www.cnblogs.com/zhengye/articles/2304925.html
 
 
-### :speech_balloon:关于引用奥森图标一类的i标签失效的问题
+### 关于引用奥森图标一类的i标签失效的问题
 
 
 路径也排查过了 文件也排查过了 也没报错 为什么呢？
@@ -1353,7 +1353,7 @@ https://www.cnblogs.com/zhengye/articles/2304925.html
 千万要想想是不是全局font-family的问题！！！
 
 
-### :speech_balloon:git做用户的全局配置的文件夹在哪？
+### git做用户的全局配置的文件夹在哪？
 
 
 放在你家
@@ -1363,7 +1363,7 @@ https://www.cnblogs.com/zhengye/articles/2304925.html
 如图可以配置别名
 
 
-### :speech_balloon:贪心算法和动态规划的区别
+### 贪心算法和动态规划的区别
 
 
 > 贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。
@@ -1375,13 +1375,13 @@ https://www.cnblogs.com/zhengye/articles/2304925.html
 引自：https://www.cnblogs.com/codeskiller/p/6477181.html
 
 
-### :speech_balloon:三种静态查找算法：顺序、二分/折半、索引/分块查找
+### 三种静态查找算法：顺序、二分/折半、索引/分块查找
 
 
 文章：https://blog.csdn.net/u011489043/article/details/78683856
 
 
-### :speech_balloon:MySQL自己更新自己
+### MySQL自己更新自己
 
 
 https://www.cnblogs.com/jeffen/p/7016547.html
@@ -1389,20 +1389,20 @@ https://www.cnblogs.com/jeffen/p/7016547.html
 mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表
 
 
-### :speech_balloon:算法：并查集
+### 算法：并查集
 
 
 https://blog.csdn.net/C20180630/article/details/57074623
 https://blog.csdn.net/u013546077/article/details/64509038
 
 
-### :speech_balloon:正则表达式 密码强度
+### 正则表达式 密码强度
 
 
 https://www.cnblogs.com/cexm/p/7737538.html
 
 
-### :speech_balloon:文件头魔数 判断文件类型
+### 文件头魔数 判断文件类型
 
 
 https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
@@ -1414,7 +1414,7 @@ https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
 https://www.garykessler.net/library/file_sigs.html
 
 
-### :speech_balloon:xss攻击和Java处理xss
+### xss攻击和Java处理xss
 
 
 https://www.cnblogs.com/digdeep/p/4695348.html
@@ -1427,7 +1427,7 @@ https://github.com/jhy/jsoup
 https://jsxss.com/zh/index.html
 
 
-### :speech_balloon:微服务/集群/分布式
+### 微服务/集群/分布式
 
 
 #### :small_blue_diamond:微服务好文
@@ -1448,7 +1448,7 @@ https://www.zhihu.com/question/20004877/answer/61025046
 https://www.cnblogs.com/aspirant/p/5697807.html
 
 
-### :speech_balloon:什么是/为什么要Tracing？Opentracing的入门铺垫
+### 什么是/为什么要Tracing？Opentracing的入门铺垫
 
 
 ![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)
@@ -1464,7 +1464,7 @@ Tutorials:
 https://github.com/yurishkuro/opentracing-tutorial/tree/master/java
 
 
-### :speech_balloon:什么是/为什么要DevOps？
+### 什么是/为什么要DevOps？
 
 
 ![image](https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png)
@@ -1472,7 +1472,7 @@ https://github.com/yurishkuro/opentracing-tutorial/tree/master/java
 https://www.cnblogs.com/liufei1983/p/7152013.html
 
 
-### :speech_balloon:Spring生命周期详解好文
+### Spring生命周期详解好文
 
 
 https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0
@@ -1480,7 +1480,7 @@ https://blog.csdn.net/fuzhongmin05/article/details/73389779
 https://blog.csdn.net/qq_23473123/article/details/76610052
 
 
-### :speech_balloon:html2canvas 页面输出为canvas
+### html2canvas 页面输出为canvas
 
 
 超级棒的插件：
@@ -1498,7 +1498,7 @@ html2canvas(element, opts);
 ```
 
 
-### :speech_balloon:k8s
+### k8s
 
 
 #### :small_blue_diamond:好文
@@ -1517,13 +1517,13 @@ html2canvas(element, opts);
 
 
 
-### :speech_balloon:docker
+### docker
 
 
 介绍与入门：http://www.dockone.io/article/8350
 
 
-### :speech_balloon:Shell
+### Shell
 
 
 #### :small_blue_diamond:expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）
@@ -1554,7 +1554,7 @@ html2canvas(element, opts);
 - https://www.cnblogs.com/jinxiao-pu/p/9131057.html
 
 
-### :speech_balloon:Linux
+### Linux
 
 
 #### :small_blue_diamond:工具
@@ -1578,13 +1578,13 @@ html2canvas(element, opts);
 - https://blog.csdn.net/yessharing/article/details/55806090
 
 
-### :speech_balloon:chrome插件开发
+### chrome插件开发
 
 
 https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83
 
 
-### :speech_balloon:gRPC & protobuf & Swagger
+### gRPC & protobuf & Swagger
 
 
 - [Grpc+Grpc Gateway实践三 Swagger了解一下](https://segmentfault.com/a/1190000013513469)
@@ -1593,25 +1593,25 @@ https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%8
 - [grpc-gateway：grpc转换为http协议对外提供服务](https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html)
 
 
-### :speech_balloon:Database Client
+### Database Client
 
 
 [15个windows上好用的client](https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows)
 
 
-### :speech_balloon:linux 换行符
+### linux 换行符
 
 
 https://blog.csdn.net/mulangren1988/article/details/54316783
 
 
-### :speech_balloon:带空格文件名参数传递 xargs
+### 带空格文件名参数传递 xargs
 
 
 https://blog.csdn.net/u011085172/article/details/77771173
 
 
-### :speech_balloon:GraphQL 一种用于 API 的查询语言
+### GraphQL 一种用于 API 的查询语言
 
 
 > GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 
@@ -1626,20 +1626,20 @@ https://blog.csdn.net/u011085172/article/details/77771173
 > 要构建一个graphql需要的成本太大了 还不如restful来的快
 
 
-### :speech_balloon:排序算法图解博客
+### 排序算法图解博客
 
 看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
 
 
 ## :star: 网站/软件
 
-### :speech_balloon:一个素材网站 devianart
+### 一个素材网站 devianart
 
 
 https://www.deviantart.com/
 
 
-### :speech_balloon:icon相关 素材站/软件
+### icon相关 素材站/软件
 
 
 #### :small_blue_diamond:阿里巴巴矢量图标库
@@ -1667,7 +1667,7 @@ link : https://www.flaticon.com/
 https://nucleoapp.com/
 
 
-### :speech_balloon:软件推介 : cmder
+### 软件推介 : cmder
 
 
 > 一个高颜值功能强大的的windows终端管理器
@@ -1685,7 +1685,7 @@ https://nucleoapp.com/
 所以我们下载full, 解压在`C:\Program Files`, 可以发现整个软件大概250MB, 我们从软件目录下的`C:\Program Files\cmder\vendor`中删去`git-for-windows`文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.
 
 
-### :speech_balloon:数据结构/算法可视化网站
+### 数据结构/算法可视化网站
 
 
 ![aa](https://image.youyinnn.top/sorting-algorithms.png)
@@ -1699,13 +1699,13 @@ https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 https://visualgo.net/zh
 
 
-### :speech_balloon:经纬度行政区域查询API
+### 经纬度行政区域查询API
 
 
 [home](http://jwd.funnyapi.com/#/index)
 
 
-### :speech_balloon:win10 自带录电脑音软件
+### win10 自带录电脑音软件
 
 
 
@@ -1718,7 +1718,7 @@ https://visualgo.net/zh
 
 ## :star: HTML/H5
 
-### :speech_balloon:textarea的字数限制
+### textarea的字数限制
 
 
 ``` html
@@ -1734,14 +1734,14 @@ https://visualgo.net/zh
 事实上，有了maxLength属性，textarea的输入就已经会有限制了
 
 
-### :speech_balloon:input只允许输入数字
+### input只允许输入数字
 
 
 ``` html
 <input type="text" oninput="value=value.replace(/[^\d]/g,'')">
 ```
 
-### :speech_balloon:图片禁止拖拽
+### 图片禁止拖拽
 
 在对应标签中添加如下属性即可。
 

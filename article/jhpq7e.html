@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="f5f47e69">
             <a name="_root-对象分代和朝生夕灭" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -159,13 +159,13 @@
 <p>实际上，选择不同的<strong>Collector</strong>对内存的分配是有关联的，甚至可能根据情况的不同而变化，<strong>Collector</strong>相关的概念，后面有时间再说</p>
 <p>本篇主要总结一下算法回收的基本思想，以及在《深入理解Java虚拟机中》提到了几条最普遍的内存分配规则</p>
 
-          <h3>
+          <h3 id="3249ce12">
             <a name="_root-垃圾回收的基本算法思想" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             垃圾回收的基本算法思想
           </h3>
-          <h4>
+          <h4 id="e50bb1c3">
             <a name="_root-1. Mark-Sweep" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -192,7 +192,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself4d61082fs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo4d61082f)
                             isInViewPortOfTwo4d61082f = null
                         }
@@ -207,7 +207,7 @@
         </script>
     </p>
 
-          <h4>
+          <h4 id="14c983ac">
             <a name="_root-2. Mark-Copy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -230,7 +230,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself89b8b2ccs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo89b8b2cc)
                             isInViewPortOfTwo89b8b2cc = null
                         }
@@ -247,7 +247,7 @@
 <p>这样的方法有牺牲一块空间的代价，最初的做法是对半分，但是因为对象的朝生夕死，所以存活的对象其实并不多，HotSpot虚拟机的做法是：<strong>将内存区分成8：1：1的Eden：Survivor：Survivor区，每次只使用Eden和其中一块Survivor，当GC发生的时候，将Eden和使用的Survivor中存活的对象分配到另一个Survivor中，然后清理掉前面两个区域</strong></p>
 <p>也就是说，实际上HotSpot可用的内存是分配内存的<strong>90%</strong></p>
 
-          <h4>
+          <h4 id="1da0ec95">
             <a name="_root-3. Mark-Compact" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -267,7 +267,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself97cff7a1s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo97cff7a1)
                             isInViewPortOfTwo97cff7a1 = null
                         }
@@ -282,7 +282,7 @@
         </script>
     </p>
 
-          <h3>
+          <h3 id="1588d62e">
             <a name="_root-存活判断" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -290,7 +290,7 @@
           </h3><p>GC要工作的时候，它要如何判断对象是否已经死亡呢？通过什么来界定对象死亡呢？从技术层面来说，系统中没有任何一个地方要引用到这个对象，那么可以判定这个对象已经废弃了，这时候就具备了回收的条件了</p>
 <p>问题是怎么判断对象是否废弃呢？常见有两种方法：引用计数、可达性分析</p>
 
-          <h4>
+          <h4 id="475dad85">
             <a name="_root-Reference Count" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -298,7 +298,7 @@
           </h4><p>比较简单，对象自己管理一个counter，当有地方引用对象的时候，counter+1，断开引用了就-1，当进行GC的时候，只要对象的counter不为0，就不回收这个对象。</p>
 <p>实际上，这个方法确实简单高效，很多主流应用都使用它去做引用计数，但是Java里面却不这么做，因为它只是半个解决方案，比如说，当A和B两个对象互相引用的时候，除此之外没有其他地方用到这两个对象，这就形成了一个引用闭环，counter都是1，是垃圾却无法回收。</p>
 
-          <h4>
+          <h4 id="74a0bc9c">
             <a name="_root-Reachability Analysis" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -318,7 +318,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself773feb32s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo773feb32)
                             isInViewPortOfTwo773feb32 = null
                         }
@@ -364,13 +364,13 @@
 </ul>
 <p><a href="https://www.ibm.com/support/knowledgecenter/en/SS3KLZ/com.ibm.java.diagnostics.memory.analyzer.doc/gcroots.html">reference</a></p>
 
-          <h3>
+          <h3 id="1761ad60">
             <a name="_root-HotSpot算法实现" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             HotSpot算法实现
           </h3>
-          <h4>
+          <h4 id="f5c08a57">
             <a name="_root-枚举根节点" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -391,7 +391,7 @@
 <p><a href="https://blog.csdn.net/tales522/article/details/80874325">https://blog.csdn.net/tales522/article/details/80874325</a> </p>
 </blockquote>
 
-          <h4>
+          <h4 id="b04be66b">
             <a name="_root-安全点" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -405,7 +405,7 @@
 <li>为安全点加一个标志（中断），线程执行的时候会轮询当前指令是否有标志，如果有就停下来</li>
 </ul>
 
-          <h4>
+          <h4 id="3bf15029">
             <a name="_root-安全区" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -415,7 +415,7 @@
 <p>当线程进入安全区的时候，会标识自己<strong>已经进入安全区</strong>，在GC过程中，虚拟机先不处理这些自我标识的线程，等到其他线程处理完之后，再来处理这些进入安全区的线程</p>
 <p>处理过程：让线程要离开安全区的时候，会检查<strong>系统是否完成了GC Roots的枚举或者已经完成了GC</strong>，如果没有，则需要等待前面的操作完成了，线程才能安全离开</p>
 
-          <h3>
+          <h3 id="6044cf65">
             <a name="_root-基本内存分配规则" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

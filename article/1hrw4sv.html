@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="3fbd77bd">
             <a name="_root-21. Merge Two Sorted Lists(Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -134,7 +134,7 @@
 <p><strong>Example:</strong></p>
 <pre><code>Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
 Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</code></pre>
-          <h4>
+          <h4 id="b0b68890">
             <a name="_root-Brute Force(Beat 90.65%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -170,7 +170,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</code></pre>
 <p>大致思想是以第一条链为参照，做插入排序，分别用l1，l2做now指针</p>
 <p>链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原head的基础上，加一个pre，再标识now，然后迭代两个指针</p>
 
-          <h3>
+          <h3 id="76d8c6de">
             <a name="_root-22. Generate Parentheses" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -188,7 +188,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</code></pre>
 <p>可惜的是，这样的思路我并没有坚持下去，后面在评论区，高分解果然也是一样的思路，只不过不同的是，它用更算法逻辑的思路去解释这件事：<strong>有选择地递归</strong></p>
 <p>非常遗憾的是，高分解用<strong>backtracing</strong>去解释这种思路，但是他并不是回溯，因为它没有走进死胡同，再折返回去，而是每次都选择正确的道路</p>
 
-          <h4>
+          <h4 id="352aab55">
             <a name="_root-Rightfully Recursion" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -215,7 +215,7 @@ private List&lt;String&gt; get(List&lt;String&gt; ans, String str, int open, int
     return ans;
 }</code></pre>
 
-          <h3>
+          <h3 id="b28d60da">
             <a name="_root-23. Merge K Sorted Lists(Hard)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -233,7 +233,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</code></pre><p>做这题的�
 <p>当时只能说出分段排序，然后被面试官继续问怎么分段，然后又扯用索引，现在回来一想，归并是个多么美妙的算法</p>
 <p>以归并的思想来看这道题，根本不算难题</p>
 
-          <h4>
+          <h4 id="3fd01a00">
             <a name="_root-Merge Sort(Beat 100%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -287,7 +287,7 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     return head;
 }</code></pre>
 
-          <h3>
+          <h3 id="d5a19248">
             <a name="_root-24. Swap Nodes In Pairs(Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -296,7 +296,7 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 <p>You may <strong>not</strong> modify the values in the list&#39;s nodes, only nodes itself may be changed.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.</code></pre>
-          <h4>
+          <h4 id="bd5824db">
             <a name="_root-Brute Force(Beat 100%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -329,7 +329,7 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 }</code></pre>
 <p>没难度的，指针做好就行</p>
 
-          <h3>
+          <h3 id="3acedc8">
             <a name="_root-25. Reverse Nodes In K-Group(Hard)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -346,7 +346,7 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 <li>You may not alter the values in the list&#39;s nodes, only nodes itself may be changed.</li>
 </ul>
 
-          <h4>
+          <h4 id="d6175de1">
             <a name="_root-Brute Force (Beat 99.32%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -140,7 +140,7 @@
 </ul>
 <p>分析完之后你会发现，原来算法可以这么美妙😃</p>
 
-          <h3>
+          <h3 id="fe10ab4a">
             <a name="_root-Jump Game" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -156,7 +156,7 @@ Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</cod
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.:</code></pre>
-          <h4>
+          <h4 id="9418e596">
             <a name="_root-1. Backtracking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -189,7 +189,7 @@ private boolean backtracking(int[] nums, int now) {
 <li>Space complexity : <strong>O(n)</strong>. Recursion requires additional memory for the stack frames. </li>
 </ul>
 
-          <h4>
+          <h4 id="4e7c82ed">
             <a name="_root-2. Memorization: DP Top-down" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -281,7 +281,7 @@ private boolean backtracking(int[] nums, int now) {
 </ul>
 <p>送算减少了很多的回溯了，时间复杂度也从2的n次方降到n的2次方了，这回提交到Leetcode，打了11.11%</p>
 
-          <h4>
+          <h4 id="3945c3b3">
             <a name="_root-3. Memorization: DP Bottom-up" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -324,7 +324,7 @@ public class Solution {
 </ul>
 <p>我们又优化了一下DP，这次打了30.77%，似乎还不错，再看看能不能再有什么优化的地方</p>
 
-          <h4>
+          <h4 id="bcfc086">
             <a name="_root-4. Refine The DP" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -346,7 +346,7 @@ public class Solution {
 }</code></pre>
 <p>这次打了34.76%，别看和上面的没提升多少，相比之下这已经减少了1倍以上的耗时了，我们似乎已经达到了这道题DP的极限了，再靠DP的思维已经无法再进行优化了，这时候我告诉你，差一步你就能将这个DP转为线性解法，你可能会崩溃</p>
 
-          <h4>
+          <h4 id="d4ee57aa">
             <a name="_root-5. Greedy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -397,7 +397,7 @@ public class Solution {
     return lastPos == 0;
 }</code></pre>
 
-          <h3>
+          <h3 id="71847fd8">
             <a name="_root-Jump Game II" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -410,7 +410,7 @@ public class Solution {
 Output: 2
 Explanation: The minimum number of jumps to reach the last index is 2.
     Jump 1 step from index 0 to 1, then 3 steps to the last index.</code></pre>
-          <h4>
+          <h4 id="6cc9381b">
             <a name="_root-1. Backtracking - O(2^n)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -436,7 +436,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
 }</code></pre>
 <p>不用多想，时间复杂度爆掉了</p>
 
-          <h4>
+          <h4 id="b0df4e79">
             <a name="_root-2. DP Bottom-up - O (n^2)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -461,7 +461,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
     return dp[0];
 }</code></pre>
 
-          <h4>
+          <h4 id="5dc338ca">
             <a name="_root-3. BFS - O (n)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -494,7 +494,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
     return jump;
 }</code></pre>
 
-          <h3>
+          <h3 id="fd3f1d11">
             <a name="_root-Edit Distance" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -521,7 +521,7 @@ inention -&gt; enention (replace &#39;i&#39; with &#39;e&#39;)
 enention -&gt; exention (replace &#39;n&#39; with &#39;x&#39;)
 exention -&gt; exection (replace &#39;n&#39; with &#39;c&#39;)
 exection -&gt; execution (insert &#39;u&#39;)</code></pre>
-          <h4>
+          <h4 id="8aff0a2b">
             <a name="_root-DP Top-down" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -591,7 +591,7 @@ base case：
     return dp[word1.length()][word2.length()];
 }</code></pre>
 
-          <h4>
+          <h4 id="d483efbb">
             <a name="_root-DP Bottom-up + Backtracking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

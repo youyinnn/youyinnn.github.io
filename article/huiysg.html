@@ -130,7 +130,7 @@
 <!-- more -->
 
 
-          <h3>
+          <h3 id="cb7772ba">
             <a name="_root-元字符的解释" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -142,7 +142,7 @@
 </ul>
 <hr>
 
-          <h4>
+          <h4 id="bf008492">
             <a name="_root-行的起始和结束" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -161,13 +161,13 @@
 <p>这两个符号的特殊之处就在于，它们匹配的只是位置，而不是特定的文本。</p>
 <hr>
 
-          <h4>
+          <h4 id="a9a994a0">
             <a name="_root-字符组" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             字符组
           </h4>
-          <h5>
+          <h5 id="b182233b">
             <a name="_root-匹配若干字符之一" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -179,7 +179,7 @@
 <p>还可以在字符组里面使用普通文本[_.!?]可以匹配下划线或者点或者感叹号或者问号。</p>
 <p><strong>需要注意的是：只有在字符组内部，并且能够表示特定范围含义，比如1到9，a到z这样的范围，连字符才是元字符，在其他情况下它只能匹配普通的连字符号。而在字符组内的问号和点号则是匹配一般的符号，它们在组内不是元字符，在组外是元字符。这有点像正常语言中，某个单词在不同的语境中有不同的解释一样，我私称这样的情况为<code>语境分意</code></strong></p>
 
-          <h5>
+          <h5 id="b4b9db9e">
             <a name="_root-排除型字符组" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -192,7 +192,7 @@
 <p>因此我们知道：一个字符组，即使是排除型的字符组，也必须匹配一个字符。</p>
 </blockquote>
 
-          <h5>
+          <h5 id="9ed265f6">
             <a name="_root-点号匹配任意字符" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -200,13 +200,13 @@
           </h5><p>元字符<code>.</code>是用来匹配任意字符的字符组的简便写法，注意是<strong>字符组</strong>的便捷写法。如果我们要搜索03/19/76、03-19-76、03.19.76，一般的的做法是写<code>03[-/.]19[-/.]76</code>来让字符组匹配一个减号或者斜杠或者英文句号，我们也可以这样写<code>03.19.76</code>。这里又出现<strong>语境分意</strong>的情况了，<code>.</code>在字符组内外的含义不同，而<code>-</code>在字符组内的位置不同语义也不同，如果写成<code>[.-/]</code>，则是用来表示范围的，这里需要特别留心。</p>
 <hr>
 
-          <h4>
+          <h4 id="47329061">
             <a name="_root-多选结构" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             多选结构
           </h4>
-          <h5>
+          <h5 id="c62ae078">
             <a name="_root-匹配任意子表达式" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@
 <p>在表达式<code>gr(a|e)y</code>中，括号是必须的，如果没有括号，<code>gre|ay</code>就变成了匹配<code>gre</code>或者<code>ay</code>了。<strong>多选结构可以包含很多字符，但是不能超过括号的界限。</strong> 再举一个例子：<code>(Fir|1)st [Ss]treet</code>可以匹配<code>First Street</code>、<code>First street</code>、<code>1st Street</code>、<code>1st street</code>等。</p>
 <p>再一次强调，多选结构和字符组的区别是：<strong>字符组只能匹配一个字符，但是多选结构可以匹配多个字符！</strong></p>
 
-          <h4>
+          <h4 id="aacbab91">
             <a name="_root-可选项元素" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

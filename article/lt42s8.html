@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -140,7 +140,7 @@
 </ul>
 <p>If you’re running Docker on Linux you can also use a <em>tmpfs mount</em>.</p>
 
-          <h3>
+          <h3 id="b30fa4b4">
             <a name="_root-Choose the right type of mount" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -160,7 +160,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfcec40ad1s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwocec40ad1)
                             isInViewPortOfTwocec40ad1 = null
                         }
@@ -197,13 +197,13 @@
 </li>
 </ul>
 
-          <h3>
+          <h3 id="8ed45596">
             <a name="_root-Use case" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Use case
           </h3>
-          <h4>
+          <h4 id="ecd99d97">
             <a name="_root-For volumes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -215,7 +215,7 @@
 <li>When you <strong>need to back up, restore, or migrate data</strong> from one Docker host to another, volumes are a better choice. You can stop containers using the volume, then back up the volume’s directory (such as <code>/var/lib/docker/volumes/&lt;volume-name&gt;</code>).</li>
 </ul>
 
-          <h4>
+          <h4 id="68ecd316">
             <a name="_root-For bind mounts" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -232,14 +232,14 @@
 </li>
 </ul>
 
-          <h4>
+          <h4 id="b6ed7b46">
             <a name="_root-For tmpfs mounts" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             For tmpfs mounts
           </h4><p><code>tmpfs</code> mounts are best used for cases when you do not want the data to persist either on the host machine or within the container. This may be for security reasons or to protect the performance of the container when your application needs to write a large volume of non-persistent state data.</p>
 
-          <h3>
+          <h3 id="9c2816ef">
             <a name="_root-💎Tips for using bind mounts or volumes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -250,7 +250,7 @@
 <li>If you mount a <strong>bind mount or non-empty volume</strong> into a directory in the container in which some files or directories exist, these files or directories are obscured by the mount.</li>
 </ul>
 
-          <h3>
+          <h3 id="26845fc6">
             <a name="_root-Conclusion" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

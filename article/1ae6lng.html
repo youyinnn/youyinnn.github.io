@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -154,7 +154,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself2f5242es) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo2f5242e)
                             isInViewPortOfTwo2f5242e = null
                         }
@@ -172,7 +172,7 @@
 <p>Volumes use <code>rprivate</code> bind propagation, and bind propagation is not configurable for volumes.</p>
 </blockquote>
 
-          <h3>
+          <h3 id="ff54d4fe">
             <a name="_root-Use volumes with <code>-v</code> and <code>--mount</code> flag" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -203,7 +203,7 @@
 <p>At this article, I just show the <code>--mount</code> flag.</p>
 </blockquote>
 
-          <h3>
+          <h3 id="a1caf4d1">
             <a name="_root-Create and manage volumes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -233,7 +233,7 @@
 </li>
 </ul>
 
-          <h3>
+          <h3 id="8ed45596">
             <a name="_root-Use case" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -241,7 +241,7 @@
           </h3><p>If you start a container with a volume that does not yet exist, Docker creates the volume for you. The following example mounts the volume <code>myvol2</code> into <code>/app/</code> in the container.</p>
 <p>The <code>-v</code> and <code>--mount</code> examples below produce the same result. You can’t run them both unless you remove the <code>devtest</code> container and the <code>myvol2</code> volume after running the first one.</p>
 
-          <h4>
+          <h4 id="83a6e1d8">
             <a name="_root-Start with container" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -271,7 +271,7 @@ $ docker container rm devtest
 
 $ docker volume rm myvol2</code></pre>
 
-          <h4>
+          <h4 id="8afb37aa">
             <a name="_root-Start with service" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -292,7 +292,7 @@ ID                  NAME                IMAGE               NODE                
 <pre><code class="language-bash">$ docker service rm devtest-service</code></pre>
 <p>Removing the service does not remove any volumes created by the service. Volume removal is a separate step.</p>
 
-          <h4>
+          <h4 id="6867f24c">
             <a name="_root-Populate a volume using a container" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -311,7 +311,7 @@ $ docker container rm nginxtest
 
 $ docker volume rm nginx-vol</code></pre>
 
-          <h4>
+          <h4 id="ce0a4031">
             <a name="_root-Read-only" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -322,7 +322,7 @@ $ docker volume rm nginx-vol</code></pre>
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
   nginx:latest</code></pre>
 
-          <h3>
+          <h3 id="7e9b8576">
             <a name="_root-Other case" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

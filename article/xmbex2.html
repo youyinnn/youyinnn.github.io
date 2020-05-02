@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="6eeef492">
             <a name="_root-51. N-Queens(Hard)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -144,7 +144,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselffdf8b36ds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
                             isInViewPortOfTwofdf8b36d = null
                         }
@@ -174,7 +174,7 @@ Output: [
   &quot;.Q..&quot;]
 ]
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.</code></pre>
-          <h4>
+          <h4 id="7a32f6b7">
             <a name="_root-Rough Backtracking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -187,7 +187,7 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 <p>于是为了做到这一步，大概会花n * n的时间</p>
 <p>然后用回溯去做每一颗棋子的下棋判断，直观+回溯的考虑的话，确实是这样的，但是这题我们可以用一种更聪明的方式去解决；</p>
 
-          <h4>
+          <h4 id="51b476fd">
             <a name="_root-Smart Backtracking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -240,7 +240,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
     }
 }</code></pre>
 
-          <h4>
+          <h4 id="b4d213ef">
             <a name="_root-Elegant Backtracking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -307,7 +307,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
     }
 }</code></pre>
 
-          <h3>
+          <h3 id="b6a2de25">
             <a name="_root-52.N-QueensII(Hard)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -326,7 +326,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselffdf8b36ds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwofdf8b36d)
                             isInViewPortOfTwofdf8b36d = null
                         }
@@ -356,7 +356,7 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
   &quot;...Q&quot;,
   &quot;.Q..&quot;]
 ]</code></pre>
-          <h4>
+          <h4 id="3bd5346f">
             <a name="_root-Solution I" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -403,7 +403,7 @@ private boolean valid(List&lt;String&gt; cb, int x, int y) {
     return true;
 }</code></pre>
 
-          <h4>
+          <h4 id="b411b57e">
             <a name="_root-Solution II" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -436,7 +436,7 @@ private void backtracking(int n, int row) {
     }
 }</code></pre>
 
-          <h3>
+          <h3 id="2a2661e3">
             <a name="_root-53. Maximun SubArray(Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -448,7 +448,7 @@ Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow up:</strong></p>
 <p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
 
-          <h4>
+          <h4 id="13dd55ef">
             <a name="_root-DP" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -463,7 +463,7 @@ Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow u
     return max;
 }</code></pre>
 
-          <h3>
+          <h3 id="73ecdd5a">
             <a name="_root-54. Spiral Matrix(Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -484,7 +484,7 @@ Output: [1,2,3,6,9,8,7,4,5]</code></pre><p><strong>Example 2:</strong></p>
   [9,10,11,12]
 ]
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]</code></pre>
-          <h4>
+          <h4 id="9ba030a0">
             <a name="_root-Brute Force" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -573,7 +573,7 @@ private int nextRange(int i) {
     return i + 1 &lt; 4 ? i + 1 : 0;
 }</code></pre>
 
-          <h3>
+          <h3 id="dde45d99">
             <a name="_root-55.Jump Game(Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -590,7 +590,7 @@ Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.</code></pre><p>这题就不多解释了，在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
 
-          <h4>
+          <h4 id="13dd55ef">
             <a name="_root-DP" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -610,7 +610,7 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
     return can[0];
 }</code></pre>
 
-          <h4>
+          <h4 id="979792b9">
             <a name="_root-Greedy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

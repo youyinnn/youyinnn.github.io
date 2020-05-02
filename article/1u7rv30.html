@@ -125,14 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Introduction
           </h3><p>我们对Lock和AQS有了一定的了解了之后，可以尝试着接触一些Lock+AQS的基本实现了，本篇会了解到最基本的同步组件<code>ReentrantLock</code>和<code>ReentrantReadWriteLock</code>，前者提供了排他锁的实现，并且支持重入，后者在前者的基础上，支持锁的分级，写锁排他读锁共享。特别的，重入锁的获取还有公平和非公平之分，我们先从这部分入手。</p>
 
-          <h4>
+          <h4 id="a54a5ee">
             <a name="_root-Fair Lock &amp; Nonfair Lock" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -142,7 +142,7 @@
 <p>说明：虽然非公平锁可能会造成“饥饿”情况，但是大多数情况下还是非公平锁用的多，因为公平锁在释放锁又再获取锁的时候，总是会<strong>切换线程</strong>，而非公平锁一段时间内很可能总是那一个线程不停放锁持锁，<strong>线程切换的开销小就意味着——吞吐量大</strong></p>
 <p>再说多一点，公平性和非公平性是<strong>“针对未入队结点”</strong>和<strong>“已入队结点”</strong>而言，上一篇文章已经提到过，队列中的结点都是公平获取锁的，遵从FIFO，至于具体的体现，继续往下读，读到FairSync的<code>tryAcquire</code>和<code>hasQueuedPredecessors</code>方法就知道了</p>
 
-          <h4>
+          <h4 id="d3b7ceda">
             <a name="_root-ReentrantLock" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -308,7 +308,7 @@ static final class FairSync extends Sync {
 </li>
 </ol>
 
-          <h5>
+          <h5 id="2e8d59c4">
             <a name="_root-Real meaning of &quot;fair&quot;" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -320,7 +320,7 @@ static final class FairSync extends Sync {
 </ul>
 <p>所以不要误解非公平锁的情况下，后排队的结点线程也能很<strong>“不公平”</strong>地比先排队的结点线程先获得同步状态，这是不可能的；</p>
 
-          <h4>
+          <h4 id="e99414ec">
             <a name="_root-ReentrantReadWriteLock" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -361,7 +361,7 @@ static final class FairSync extends Sync {
 </tr>
 </tbody></table>
 
-          <h5>
+          <h5 id="1e8ba163">
             <a name="_root-Read Write State Design" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -385,7 +385,7 @@ static final class FairSync extends Sync {
 <p>通过位运算，假设当前同步状态值为S，那么写状态就等于S &amp; 0x0000FFFF（高16位清零），读状态等于S &gt;&gt;&gt; 16（无符号补位0右移16位）</p>
 <p>当写状态要增加1的时候，直接S + 1，当读状态要增加1的是，直接S + 0x00010000就行</p>
 
-          <h5>
+          <h5 id="8b5c222f">
             <a name="_root-Structure" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -411,7 +411,7 @@ static final class FairSync extends Sync {
 }</code></pre>
 <p>这是重入读写锁的整体结构，可以看到ReentrantReadWriteLock仅仅只是实现了ReadWriteLock接口而已，这个接口仅定义了获取ReadLock和WriteLock的方法，真正的锁实现是<code>ReentrantReadWriteLock.ReadLock</code>和<code>ReentrantReadWriteLock.WriteLock</code>，而这两个锁实现，用的是同一个<code>Sync</code>实例，<code>Sync</code>实例即实现了AQS的公平锁或者非公平锁</p>
 
-          <h5>
+          <h5 id="57694f90">
             <a name="_root-Fair &amp; NonFair" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -442,7 +442,7 @@ static final class FairSync extends Sync {
 }</code></pre>
 <p>如果队列中的第一个等待结点明显是是独占式锁的结点的话，就返回true，两个方法连起来的意思是，如果队列中的第一个结点是写锁（独占锁）的话，读锁应该被Block住</p>
 
-          <h5>
+          <h5 id="cbb26554">
             <a name="_root-Sync in ReentrantReadWriteLock" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -586,7 +586,7 @@ private transient int firstReaderHoldCount;</code></pre>
 <li><code>tryReadLock</code>：和<code>tryAcquire</code>相比仅仅少了<code>readerShouldBlock</code></li>
 </ul>
 
-          <h5>
+          <h5 id="80ffda47">
             <a name="_root-ReadLock &amp; WriteLock in ReentrantReadWirteLock" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

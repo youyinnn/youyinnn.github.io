@@ -128,7 +128,7 @@
 <p>转载自：<a href="http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/">http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/</a></p>
 </blockquote>
 
-          <h3>
+          <h3 id="9fa48d54">
             <a name="_root-Understanding the nodejs&#39; event loop" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -147,7 +147,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselffd315b03s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwofd315b03)
                             isInViewPortOfTwofd315b03 = null
                         }
@@ -170,14 +170,14 @@
 <p>The second basis thesis is that thread-per-connection is memory-expensive: [e.g. that graph everyone showns about Apache sucking up memory compared to Nginx]</p>
 <p>Apache is multithreaded: it spawns a <a href="http://httpd.apache.org/docs/2.0/mod/worker.html">thread per request</a> (or <a href="http://httpd.apache.org/docs/2.0/mod/prefork.html">process</a>, it depends on the conf). You can see how that overhead eats up memory as the number of concurrent connections increases and more threads are needed to serve multiple simulataneous clients. Nginx and Node.js are not multithreaded, because threads and processes carry a heavy memory cost. They are single-threaded, but event-based. This eliminates the overhead created by thousands of threads/processes by handling many connections in a single thread.</p>
 
-          <h3>
+          <h3 id="b25bf473">
             <a name="_root-<strong>Node.js keeps a single thread for your code...</strong>" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             <strong>Node.js keeps a single thread for your code...</strong>
           </h3><p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &amp;lt; now + 1000) { // do nothing }</code></p>
 
-          <h3>
+          <h3 id="7c30bea4">
             <a name="_root-<strong>...however, everything runs in parallel except your code</strong>" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -195,7 +195,7 @@
     }
 );</code></pre><p>If you do that in one request, other requests can be processed just fine while the database is running it&#39;s sleep.</p>
 
-          <h3>
+          <h3 id="19a97cbe">
             <a name="_root-Why is this good? When do we go from sync to async/parallel execution?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself3417744s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo3417744)
                             isInViewPortOfTwo3417744 = null
                         }
@@ -236,7 +236,7 @@
 <p><strong>Internal implementation</strong></p>
 <p><a href="https://github.com/ry/node/tree/master/deps">Internally</a>, node.js relies on <a href="http://software.schmorp.de/pkg/libev.html">libev</a> to provide the event loop, which is supplemented by <a href="http://software.schmorp.de/pkg/libeio.html">libeio</a> which uses pooled threads to provide asynchronous I/O. To learn even more, have a look at the <a href="http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod">libev documentation</a>.</p>
 
-          <h3>
+          <h3 id="1cdcd5df">
             <a name="_root-So how do we do async in Node.js?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

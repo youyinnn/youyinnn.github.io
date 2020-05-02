@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="5cfda864">
             <a name="_root-小声BB" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -134,7 +134,7 @@
 <p>其中红黑树更是在HashMap中大展身手，肯定要研究一下为什么他们要用到RBT</p>
 <hr>
 
-          <h3>
+          <h3 id="89c1d359">
             <a name="_root-AVL" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -150,7 +150,7 @@
 </blockquote>
 <p>大部分的BST操作都会在<strong>O(h)</strong>的效率内完成，但是一旦树有倾斜，就会变成<strong>O(n)</strong>的效率，AVL通过旋转来保持平衡防止树倾斜，使得所有操作都在<strong>O(logn)</strong>的效率内完成；因为AVL的高度始终都是<strong>O(logn)</strong>；</p>
 
-          <h4>
+          <h4 id="ea24b7c">
             <a name="_root-和BST有何异同？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -198,13 +198,13 @@ T2   T3                           T3   T4</code></pre></li>
 </li>
 </ul>
 
-          <h4>
+          <h4 id="cb315841">
             <a name="_root-结构与过程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             结构与过程
           </h4>
-          <h5>
+          <h5 id="e05a12fc">
             <a name="_root-结点结构" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -239,7 +239,7 @@ class AVLTree {
     // ...
 }</code></pre>
 
-          <h5>
+          <h5 id="f1f9b735">
             <a name="_root-右旋" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -262,7 +262,7 @@ class AVLTree {
  x             =====&gt;              y
   \                          /
    T2                        T2</code></pre>
-          <h5>
+          <h5 id="b1d02a07">
             <a name="_root-左旋" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -286,7 +286,7 @@ class AVLTree {
     /                      \
    T2                      T2</code></pre><p>其他双旋操作都是基于这两个基本操作来搞的；</p>
 
-          <h5>
+          <h5 id="3aa07ac0">
             <a name="_root-插入" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -348,21 +348,21 @@ class AVLTree {
 </li>
 </ol>
 
-          <h5>
+          <h5 id="59aabdc">
             <a name="_root-删除操作" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             删除操作
           </h5><p>这个更为复杂点，就先不分析了；</p>
 
-          <h4>
+          <h4 id="c45485c2">
             <a name="_root-效率" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             效率
           </h4><p>插入、查找、删除均为<strong>O(logn)</strong></p>
 
-          <h4>
+          <h4 id="2bd05e5b">
             <a name="_root-参考" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -373,7 +373,7 @@ class AVLTree {
 </blockquote>
 <hr>
 
-          <h3>
+          <h3 id="f4234397">
             <a name="_root-红黑树" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -396,7 +396,7 @@ class AVLTree {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselffd500339s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwofd500339)
                             isInViewPortOfTwofd500339 = null
                         }
@@ -429,7 +429,7 @@ class AVLTree {
 <p>如果场景中查询操作更多，那还是选AVL-T吧；</p>
 <p>但是也因为如此，RBT的平衡是用概念去描述的，而非像AVL-T一样可以用高度差去量化平衡，所以RBT的实现稍微复杂和难懂一些；</p>
 
-          <h5>
+          <h5 id="988d0d96">
             <a name="_root-插入简要分析" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

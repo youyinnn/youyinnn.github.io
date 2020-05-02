@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fc98c2af">
             <a name="_root-Service" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -152,7 +152,7 @@
 <p>于是我们可以用<code>docker-compose.yaml</code>去组织一个service，这是投入生产环境时候的正确做法</p>
 </blockquote>
 
-          <h3>
+          <h3 id="80c333fc">
             <a name="_root-<code>docker-compose.yml</code>" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -186,7 +186,7 @@ networks:
 <li>Define the <code>webnet</code> network with the default settings (which is a load-balanced overlay network).</li>
 </ul>
 
-          <h3>
+          <h3 id="743e178a">
             <a name="_root-Deploy a load-balanced app" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@ Creating service getstartedlab_web</code></pre>
 <p>Tasks also show up if you just list all the containers on your system, though that is not filtered by service:</p>
 <pre><code class="language-bash">$ docker container ls -q</code></pre>
 
-          <h3>
+          <h3 id="2bd184cd">
             <a name="_root-Scale the app" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -225,7 +225,7 @@ Creating service getstartedlab_web</code></pre>
 <pre><code>docker stack deploy -c docker-compose.yml getstartedlab</code></pre><p>Docker performs an in-place update, no need to tear the stack down first or kill any containers.</p>
 <p>Now, re-run <code>docker container ls -q</code> to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.</p>
 
-          <h3>
+          <h3 id="2fa32edc">
             <a name="_root-Take down the app and the swarm" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -243,7 +243,7 @@ Creating service getstartedlab_web</code></pre>
 <p><strong>Note</strong>: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using <a href="https://docs.docker.com/docker-cloud/">Docker Cloud</a>, or on any hardware or cloud provider you choose with <a href="https://www.docker.com/enterprise-edition">Docker Enterprise Edition</a>.</p>
 </blockquote>
 
-          <h3>
+          <h3 id="a50984d0">
             <a name="_root-Compose file Reference" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

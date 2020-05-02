@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="aa91a04f">
             <a name="_root-Introductions" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -144,7 +144,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfccb54ba7s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoccb54ba7)
                             isInViewPortOfTwoccb54ba7 = null
                         }
@@ -161,13 +161,13 @@
 <p>Jenkins的默认UI也有点丑，还不如官网的UI好看</p>
 <p>但是不影响这玩意的强大表现</p>
 
-          <h3>
+          <h3 id="b65ea435">
             <a name="_root-Installation on CentOS" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Installation on CentOS
           </h3>
-          <h4>
+          <h4 id="fad00c11">
             <a name="_root-Fetch yum repo" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -180,7 +180,7 @@
 <li><code>sudo yum install jenkins</code></li>
 </ul>
 
-          <h4>
+          <h4 id="67e3adb7">
             <a name="_root-Installation of Java" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -189,7 +189,7 @@
 <pre><code class="language-bash">$ sudo yum install java</code></pre>
 <p><strong>Note:</strong> If running CentOS, ensure you follow the <a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava">guide below</a>.</p>
 
-          <h4>
+          <h4 id="e827ec74">
             <a name="_root-Start/Stop" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -201,7 +201,7 @@
 <p><strong>Note:</strong> if you get the following error message, ensure that Java has been installed:</p>
 <pre><code class="language-bash">Starting jenkins (via systemctl):  Job `for` jenkins.service failed. See `&#39;systemctl status jenkins.service&#39;` and `&#39;journalctl -xn&#39;` `for` details.[FAILED]</code></pre>
 
-          <h4>
+          <h4 id="a361751d">
             <a name="_root-What does this package do?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -222,7 +222,7 @@
 </ul>
 </blockquote>
 
-          <h4>
+          <h4 id="54c0e641">
             <a name="_root-More: change Jenkins run as with root" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -238,14 +238,14 @@ $ chown -R root:root /var/log/jenkins</code></pre>
 <pre><code class="language-bash">$ service jenkins restart</code></pre>
 <p>这样我们就给jenkins设置了root权限，我们再运行shell脚本就不会提示权限问题了。</p>
 
-          <h4>
+          <h4 id="db365cd5">
             <a name="_root-Wiki" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Wiki
           </h4><p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
 
-          <h3>
+          <h3 id="3c4e040c">
             <a name="_root-Create your first pipline by using github repo as branch source" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -271,7 +271,7 @@ $ chown -R root:root /var/log/jenkins</code></pre>
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself9c3a58d0s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo9c3a58d0)
                             isInViewPortOfTwo9c3a58d0 = null
                         }
@@ -311,7 +311,7 @@ pipeline {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself126c96bds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo126c96bd)
                             isInViewPortOfTwo126c96bd = null
                         }

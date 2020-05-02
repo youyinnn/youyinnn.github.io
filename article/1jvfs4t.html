@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -164,7 +164,7 @@
 </tbody></table>
 <p>实际上还有其他搭配，但是这些搭配要么是不支持了，要么是不实用了，所以接下来我们只关注这四种</p>
 
-          <h3>
+          <h3 id="790f0115">
             <a name="_root-Serial GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -174,13 +174,13 @@
 <p>所以这个收集器并不能利用多核CPU的优势，它在工作的时候就只会使用一个CPU，要开启这个收集器，需要在JVM启动的时候加上一行参数：</p>
 <pre><code>java -XX:+UseSerialGC com.mypackage.MyClass</code></pre><p>选择这个收集器的话，最好是在JVM只运行小几百兆的堆内存的时候，并且运行在单核机器上的时候才好，因为大半数的服务端机器都会有很高的配置，如果使用<strong>串行</strong>收集的话，意味着你的系统没有发挥最大的机器性能</p>
 
-          <h4>
+          <h4 id="cd8ca102">
             <a name="_root-GC Log" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             GC Log
           </h4>
-          <h5>
+          <h5 id="ff499e68">
             <a name="_root-Minor GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -232,7 +232,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfe740dec3s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoe740dec3)
                             isInViewPortOfTwoe740dec3 = null
                         }
@@ -248,7 +248,7 @@
     </p>
 <p>从快照结果中我们可以看出年轻代的对象要么被清理掉了，要么存活下来进入S2了，要么被promoted到了老年代</p>
 
-          <h5>
+          <h5 id="4f74527c">
             <a name="_root-Full GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -298,7 +298,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself4c84ff9bs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo4c84ff9b)
                             isInViewPortOfTwo4c84ff9b = null
                         }
@@ -313,7 +313,7 @@
         </script>
     </p>
 
-          <h3>
+          <h3 id="119acbb2">
             <a name="_root-Parallel GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -351,7 +351,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselff2b5d1ces) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwof2b5d1ce)
                             isInViewPortOfTwof2b5d1ce = null
                         }
@@ -379,7 +379,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself3af028a3s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo3af028a3)
                             isInViewPortOfTwo3af028a3 = null
                         }
@@ -394,7 +394,7 @@
         </script>
     </p>
 
-          <h3>
+          <h3 id="e7eecad9">
             <a name="_root-Concurrent Mark and Sweep（CMS）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -408,13 +408,13 @@
 <p>你可以用下面这行参数来启动它</p>
 <pre><code>java -XX:+UseConcMarkSweepGC com.mypackages.MyExecutableClass</code></pre><p>如果你的目的是为了减少延迟的话，那么<strong>CMS</strong>在多核环境下是一个很好的选择，但是由于它会占用程序之外的额外资源，所以它会削弱系统的整体吞吐量</p>
 
-          <h4>
+          <h4 id="cd8ca102">
             <a name="_root-GC Log" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             GC Log
           </h4>
-          <h5>
+          <h5 id="ff499e68">
             <a name="_root-Minor GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -432,7 +432,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselff2b5d1ces) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwof2b5d1ce)
                             isInViewPortOfTwof2b5d1ce = null
                         }
@@ -447,7 +447,7 @@
         </script>
     </p>
 
-          <h5>
+          <h5 id="4f74527c">
             <a name="_root-Full GC" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -465,7 +465,7 @@
 2015-05-26T16:23:08.485-0200: 65.589: [CMS-concurrent-reset-start]
 2015-05-26T16:23:08.497-0200: 65.601: [CMS-concurrent-reset: 0.012/0.012 secs] [Times: user=0.01 sys=0.00, real=0.01 secs]</code></pre><p>CMS的<strong>Full GC</strong>有点讲头，它分为7个阶段</p>
 
-          <h6>
+          <h6 id="bdda34ff">
             <a name="_root-Phase 1: Initial Mark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -484,7 +484,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself22ea304s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo22ea304)
                             isInViewPortOfTwo22ea304 = null
                         }
@@ -499,7 +499,7 @@
         </script>
     </p>
 
-          <h6>
+          <h6 id="48f234a0">
             <a name="_root-Phase 2: Concurrent Mark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -518,7 +518,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself3f4e8ab4s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo3f4e8ab4)
                             isInViewPortOfTwo3f4e8ab4 = null
                         }
@@ -533,7 +533,7 @@
         </script>
     </p>
 
-          <h6>
+          <h6 id="68a83a23">
             <a name="_root-Phase 3: Concurrent Preclean" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -552,7 +552,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfbd1e1d65s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwobd1e1d65)
                             isInViewPortOfTwobd1e1d65 = null
                         }
@@ -580,7 +580,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself807e34d5s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo807e34d5)
                             isInViewPortOfTwo807e34d5 = null
                         }
@@ -596,7 +596,7 @@
     </p>
 <p>额外的，在这个阶段中还会进行一些内部处理，为最后的<strong>重标记（Remark Phase）</strong>阶段做准备</p>
 
-          <h6>
+          <h6 id="a626b117">
             <a name="_root-Phase 4: Concurrent Abortable Preclean" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -604,7 +604,7 @@
           </h6><p>这个阶段还是<strong>并发阶段</strong>，这个阶段的目标是尽可能地减少整个回收工作中最后一次大暂停的重标记阶段的工作量，这个阶段所用的时间取决于很多因素，因为它仅仅只是迭代地去做同一个事情，但是打断它的迭代的因素有很多种</p>
 <p>所以这个阶段对即将到来的大暂停阶段影响非常大，而且这个阶段有很多<strong>配置项</strong>和<strong>失败模式</strong></p>
 
-          <h6>
+          <h6 id="1b17f605">
             <a name="_root-Phase 5: Final Remark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -613,7 +613,7 @@
 <p>通常来说CMS会试着在<strong>年轻代尽可能空着</strong>的情况下执行这次<strong>Final Remark</strong>，目的是消除不断出现大暂停的情况发生</p>
 <p>在5个Marking阶段之后，老年代中的所有存活对象都已经被标记好了，这时候GCor们就会开始干活，用Sweep的方式<strong>清除（reclaim）</strong>掉所有无用的对象</p>
 
-          <h6>
+          <h6 id="32c46bf7">
             <a name="_root-Phase 6: Concurrent Sweep" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -632,7 +632,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself46328501s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo46328501)
                             isInViewPortOfTwo46328501 = null
                         }
@@ -647,7 +647,7 @@
         </script>
     </p>
 
-          <h6>
+          <h6 id="97c18ab1">
             <a name="_root-Phase 7: Concurrent Reset" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -657,7 +657,7 @@
 <p>而在这个需求上，它很好地完成它了的工作</p>
 <p>但是它还是有一定的缺点的，其中最需要注意的是它会在一定程度上造成老年代的碎片空间，而且它还缺乏对暂停的预测判断，这点在堆比较大的时候会很明显</p>
 
-          <h3>
+          <h3 id="c09c8a4d">
             <a name="_root-G1 – Garbage First" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -681,7 +681,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself15a68c85s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo15a68c85)
                             isInViewPortOfTwo15a68c85 = null
                         }
@@ -709,7 +709,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselff7ae05c4s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwof7ae05c4)
                             isInViewPortOfTwof7ae05c4 = null
                         }
@@ -729,7 +729,7 @@
 </ol>
 <p>要使用G1收集器，可以包含参数：</p>
 <pre><code>java -XX:+UseG1GC com.mypackages.MyExecutableClass</code></pre>
-          <h4>
+          <h4 id="42a9bf62">
             <a name="_root-Evacuation Pause: Full Young" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -738,7 +738,7 @@
 <p>当年轻代被填满的时候，应用程序线程被停止了，然后年轻代区中的存活对象被复制到Survivor区，或者一个未被使用但是即将称为Servivor区域的自由区域</p>
 <p>这个过程叫做<strong>撤离（Evacuation）</strong>，然后这个阶段的工作就和前面介绍过的一类年轻代收集器差不太多，但是整个撤离阶段的log相当大<strong>（rather large）</strong>，<a href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations#evacuation-pause-fully-young">原文</a>有详细的log分析，我这里就不展开了</p>
 
-          <h4>
+          <h4 id="14e6afd1">
             <a name="_root-Concurrent Marking" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -753,14 +753,14 @@
 <p>G1的并发标记过程的触发时机是堆区域整体被占用足够大的时候，默认情况下是45%，但你可以用JVM参数调它</p>
 <p>和CMS一样，G1的并发标记过程有好几个阶段它们之中有些可以并发进行，有些则需要大暂停</p>
 
-          <h5>
+          <h5 id="24d36545">
             <a name="_root-Phase 1: Initial Mark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Phase 1: Initial Mark
           </h5><p>这个阶段会标记所有<strong>GC Root</strong>能够摸到的对象，和CMS不同的是，CMS需要额外来一次大暂停，但是G1的这个阶段是捎带在撤离暂停之后的，所以它的开销非常小</p>
 
-          <h5>
+          <h5 id="5eafe065">
             <a name="_root-Phase 2: Root Region Scan" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -768,7 +768,7 @@
           </h5><p>这个阶段会标记所有从<strong>Root Region</strong>能reach到的存活对象，比如说一些非空的区域，我们必须得在标记环节的中期就进行收集，因为如果我们在后面的<strong>并发标记</strong>阶段的时候进行对象移动的话，可能会造成一些不可控的问题，所以这个阶段会在下一次撤离暂停开始之前完成，如果撤离暂停得提前开始的话，它会提前终止正在进行的<strong>Root Region Scan</strong>，然后等这次撤离暂停结束</p>
 <p>在现在的实现中，Root Region是Survivor区，它们属于年轻代区的一部分，并且下次撤离暂停中<strong>一定会被回收</strong></p>
 
-          <h5>
+          <h5 id="619e542">
             <a name="_root-Phase 3: Concurrent Mark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -777,7 +777,7 @@
 <p>为了保证<strong>“事前快照（Snapshot-At-The-Beginning）”</strong>的出现，G1 GC要求对对象图的并发更新得是应用程序的线程来断开引用的时候才有效</p>
 <p>要完成这个事情，还是要有一个<strong>预写屏障（pre-wirte barriers）</strong>,它的功能在于无论什么时候你要写一个数据，只要并发标记处于激活状态，它都会存储之前的引用关系在一个交日志流的地方</p>
 
-          <h5>
+          <h5 id="2321654b">
             <a name="_root-Phase 4: Remark" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -786,7 +786,7 @@
 <p>而对于G1来说，它会短暂地停止应用程序线程和停止并发更新日志流，并且做完日志流剩余的工作，然后标记完剩下的没有被标记的存活对象</p>
 <p>这个阶段也会执行一些可选的清理回收工作，比如引用的处理和类的卸载</p>
 
-          <h5>
+          <h5 id="ecb16605">
             <a name="_root-Phase 5: Cleanup" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -794,7 +794,7 @@
           </h5><p>最后一个阶段为即将到来的撤离暂停做准备，对堆内存中所有的存活对象进行计数，并且将这些区域按照期望的GC效率高低进行排序，它还会做一些内部工作比如标记一些内部状态，为了下一次的并发标记做准备</p>
 <p>最后再提一点，包含非存活对象的区域在这个阶段都会被清理掉，但是这个阶段中有些部分是并发的比如说回收一些空区域和一些活跃度比较高的区域；也会有要求大暂停的区域</p>
 
-          <h4>
+          <h4 id="2d481a2e">
             <a name="_root-Evacuation Pause: Mixd" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -820,7 +820,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself9f941c2cs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo9f941c2c)
                             isInViewPortOfTwo9f941c2c = null
                         }
@@ -848,7 +848,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself2db4c03cs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo2db4c03c)
                             isInViewPortOfTwo2db4c03c = null
                         }
@@ -876,7 +876,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself997b73f1s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo997b73f1)
                             isInViewPortOfTwo997b73f1 = null
                         }
@@ -893,7 +893,7 @@
 <p>为了维护一个记忆集合，<strong>后写屏障（post-write barrier）</strong>会在一个数据被写入的时候出现。如果一个跨区域引用关系出现了，有关系的引用之间会被记录在各自的记忆集合中。为了减少这个写屏障的开销，放置记录在记忆集合中的这个过程是异步的，并且还有其他的优化功能</p>
 <p>但归结起来就是写屏障会在写数据的时候往本地缓存中放置一个<strong>脏卡（dirty card）</strong>，脏卡的概念可以结合之前说的，然后特定的GC线程会找到这个卡然后将之记录在相关的记忆集合中</p>
 
-          <h4>
+          <h4 id="deb561ea">
             <a name="_root-Summary" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

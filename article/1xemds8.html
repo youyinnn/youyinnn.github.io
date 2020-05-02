@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="6be9ea42">
             <a name="_root-Preface" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -138,7 +138,7 @@
 <li>tools to control the volume and the screen&#39;s display (save battery)</li>
 </ul>
 
-          <h3>
+          <h3 id="a5c1de59">
             <a name="_root-Make the pi connecting to the world" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -146,7 +146,7 @@
           </h3><p>There&#39;s a lot of choices for using SSR on Linux os, check  <a href="https://github.com/shadowsocks">here</a>, but many of them were banned and deleted their documents.</p>
 <p>Luckily, there still some tutorials showing how to implement it on Linux.  (<a href="%5Bhttps://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779%5D(https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779)">reference1</a><a href="https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477">reference2</a>)</p>
 
-          <h4>
+          <h4 id="fcb269bd">
             <a name="_root-Installation" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -155,7 +155,7 @@
 <pre><code class="language-bash">sudo apt-get install python-pip python-m2crypto
 sudo pip install shadowsocks</code></pre>
 
-          <h4>
+          <h4 id="70248dc2">
             <a name="_root-Config File" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -183,21 +183,21 @@ sudo pip install shadowsocks</code></pre>
 <li>workers: process number</li>
 </ol>
 
-          <h4>
+          <h4 id="d64a004d">
             <a name="_root-Startup ss server" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Startup ss server
           </h4><pre><code class="language-bash">ssserver -c /etc/shadowsocks.json</code></pre>
 
-          <h4>
+          <h4 id="9908dbce">
             <a name="_root-Startup ss client" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Startup ss client
           </h4><pre><code class="language-bash">sslocal -c /etc/shadowsocks.json</code></pre>
 
-          <h4>
+          <h4 id="31ac3d71">
             <a name="_root-Openssl Problem" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -217,14 +217,14 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 <p>Reference: <a href="%5Bhttps://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/%5D(https://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/)">here</a></p>
 <p>Find <code>/site-packages/shadowsocks/crypto/openssl.py</code> according to your <code>error log</code> and edit it: change all <code>EVP_CIPHER_CTX_cleanup()</code> into  <code>EVP_CIPHER_CTX_reset()</code>, there are two places needed to handle.</p>
 
-          <h4>
+          <h4 id="d8b0f24c">
             <a name="_root-Proxy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Proxy
           </h4><p>Since ss client is using SOCKS5 protocol, we can&#39;t use it directly or easily in Linux os as Windows os does, so we have to proxy turn the protocol into HTTP.</p>
 
-          <h5>
+          <h5 id="bdd07298">
             <a name="_root-Polipo" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -266,7 +266,7 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 </li>
 </ul>
 
-          <h5>
+          <h5 id="83737e71">
             <a name="_root-Privoxy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -275,7 +275,7 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 <p><a href="http://www.privoxy.org/">Privoxy</a> is a filtering proxy for the HTTP protocol, frequently used in combination with <a href="https://wiki.archlinux.org/index.php/Tor">Tor</a>. Privoxy is a web proxy with advanced filtering capabilities for protecting privacy, filtering web page content, managing cookies, controlling access, and removing ads, banners, pop-ups, etc. It supports both stand-alone systems and multi-user networks.</p>
 <p><a href="https://www.cnblogs.com/hongdada/p/10787924.html">A tutorials</a></p>
 
-          <h4>
+          <h4 id="5a8c7741">
             <a name="_root-Chromium with SwitchyOmega" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -300,7 +300,7 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 </tr>
 </tbody></table>
 
-          <h3>
+          <h3 id="4fe68404">
             <a name="_root-Implement" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -313,7 +313,7 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 <li>zoom in the video</li>
 </ol>
 
-          <h4>
+          <h4 id="6f0328b6">
             <a name="_root-Step 1: tv.sh" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -331,7 +331,7 @@ then
 fi</code></pre>
 <p>Open <code>bash /../tv.sh open</code> and play <code>bash /../tv.sh play</code></p>
 
-          <h4>
+          <h4 id="83913848">
             <a name="_root-Step 2: mouse.py" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -344,7 +344,7 @@ x,y = 970, 575
 m.move(x,y)
 m.click(x,y)</code></pre>
 
-          <h4>
+          <h4 id="4f5b6a48">
             <a name="_root-Step 3: cron" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -357,7 +357,7 @@ m.click(x,y)</code></pre>
 <p>A GUI Package for crontab is recommended: <a href="https://github.com/alseambusher/crontab-ui">crontab-gui</a></p>
 <p>Please notice that we set env value of <code>DISPLAY</code> at line 1 is because if we want to open and gui app with crontab.</p>
 
-          <h4>
+          <h4 id="6b4f5bd9">
             <a name="_root-More" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="e25a21eb">
             <a name="_root-Introduction" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -135,7 +135,7 @@
 <p>And when we deploy a service, we use <code>docker swarm init</code> to prepare for it.</p>
 <p>Now let&#39;s learn what is swarm and how to setup a cluster with <strong>docker-machine</strong>.</p>
 
-          <h3>
+          <h3 id="cb46bf81">
             <a name="_root-Swarm" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -153,7 +153,7 @@
 </ul>
 <p>You instruct the swarm manager to use these strategies <strong>in the Compose file</strong>, just like the one you have already been using.</p>
 
-          <h4>
+          <h4 id="dad4c037">
             <a name="_root-Swarm manager" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -170,7 +170,7 @@
 
     3.other nodes can &quot;join&quot; the swarm and became &quot;worker&quot; to work for the &quot;manager&quot;,
     &quot;manager&quot; certainly can manage it&#39;s &quot;workers&quot;</code></pre>
-          <h3>
+          <h3 id="b3b0eefa">
             <a name="_root-Setup your swarm with virtual machines" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -182,7 +182,7 @@
 </blockquote>
 <p>So, how can we setup a swarm with multiple machine for just practice ? Several real machine ? No, you could create some virtual machine by <code>docker-machine</code>. Then use the as a node of swarm.</p>
 
-          <h4>
+          <h4 id="8401de43">
             <a name="_root-Install VirtualBox" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -195,7 +195,7 @@
 <li><a href="http://rpm.pbone.net/">pbone</a></li>
 </ul>
 
-          <h4>
+          <h4 id="2586170c">
             <a name="_root-Install docker-machine" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -221,7 +221,7 @@
 </ol>
 <p>Reference: <a href="https://docs.docker.com/machine/install-machine/#install-machine-directly">https://docs.docker.com/machine/install-machine/#install-machine-directly</a></p>
 
-          <h4>
+          <h4 id="fae57154">
             <a name="_root-Create virtual machines" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -238,7 +238,7 @@ NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCK
 myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
 myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce</code></pre>
 
-          <h4>
+          <h4 id="527523ae">
             <a name="_root-Initalize the swarm and add nodes" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -257,7 +257,7 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run &#39;docker swarm join-token manager&#39; and follow the instructions.</code></pre>
 <blockquote>
 
-          <h5>
+          <h5 id="b8fd6036">
             <a name="_root-Ports 2377 and 2376" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -267,7 +267,7 @@ To add a manager to this swarm, run &#39;docker swarm join-token manager&#39; an
 </blockquote>
 <blockquote>
 
-          <h5>
+          <h5 id="5de55a40">
             <a name="_root-Having trouble using SSH? Try the --native-ssh flag" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -286,7 +286,7 @@ ID                            HOSTNAME            STATUS              AVAILABILI
 brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
 rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader</code></pre><blockquote>
 
-          <h5>
+          <h5 id="5eb9099c">
             <a name="_root-Leaving a swarm" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -294,7 +294,7 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
           </h5><p>If you want to start over, you can run <code>docker swarm leave</code> from each node.</p>
 </blockquote>
 
-          <h3>
+          <h3 id="158d02ea">
             <a name="_root-Deploy your app on the swarm cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -302,7 +302,7 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
           </h3><p><strong>The hard part is over.</strong> Now you just repeat the process you used in <a href="https://docs.docker.com/get-started/part3/">part 3</a> to deploy on your new swarm. </p>
 <p><strong>Just remember that only swarm managers like <code>myvm1</code> execute Docker commands; workers are just for capacity.</strong></p>
 
-          <h4>
+          <h4 id="9ab8d276">
             <a name="_root-Two ways to talk to your vms" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -313,7 +313,7 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
 <p>The commands to configure your shell differ depending on whether you are Mac, Linux, or Windows, so examples of each are shown on the tabs below.</p>
 <p>To more details, refer to: <a href="https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager</a></p>
 
-          <h4>
+          <h4 id="61f1029e">
             <a name="_root-Deploy" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -335,7 +335,7 @@ acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myv
 36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
 q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          </code></pre>
 
-          <h3>
+          <h3 id="b5c9a23">
             <a name="_root-Accessing your cluster" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -358,7 +358,7 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself417af7s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo417af7)
                             isInViewPortOfTwo417af7 = null
                         }
@@ -373,7 +373,7 @@ q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myv
         </script>
     </p>
 
-          <h3>
+          <h3 id="6e20345f">
             <a name="_root-Enough for now" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

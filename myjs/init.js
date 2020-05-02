@@ -48,26 +48,29 @@ $(function() {
         $('#slogan-text').text('I\'M WAITING')
     } else if (pathname === '/about/') {
         changepagetitle('about | youyinnn')
-        new_render_md()
+        new_render_md(true)
     } else if (pathname === '/resume/') {
         changepagetitle('resume | youyinnn')
-        new_render_md()
+        new_render_md(true)
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/resume.md')
         showbbt()
-        showtoc()
+        showtocbtn()
     } else if (pathname === '/scripts/') {
+        $('html').css('overflowY', 'initial')
         changepagetitle('scripts | youyinnn')
-        $(md).addClass('scripts')
+        scriptblock()
         new_render_md()
+        showsidetoc()
+        $('#sidetoc').children().first().click()
+        $('#sidetoc').children().first().next().click()
+        $(md).addClass('scripts')
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')
-        showbbt()
-        showtoc()
     } else if (pathname === '/todos/') {
         changepagetitle('scripts | youyinnn')
-        new_render_md()
+        new_render_md(true)
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/todos.md')
         showbbt()
-        showtoc()
+        showtocbtn()
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
         get_articles()
@@ -76,7 +79,7 @@ $(function() {
         setTimeout(() => {
             $(md).removeClass('no-transit')
         }, 500);
-        new_render_md()
+        new_render_md(true)
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
         createarticlehead(metadata)
         changepagetitle(metadata.title)
@@ -139,7 +142,7 @@ $(function() {
         })
 
         showbbt()
-        showtoc()
+        showtocbtn()
     }
     $('.em-svg').on('mouseover', function() {
         $(this).animateCss('pulse')

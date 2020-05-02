@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -135,13 +135,13 @@
 <p>本分享即尝试介绍微服务架构的一些实施细节和要求，探询微服务架构的由来，并最终提供我们团队内部的一些实践总结，希望对大家有帮助。</p>
 </blockquote>
 
-          <h3>
+          <h3 id="59de1713">
             <a name="_root-WHAT - 什么是微服务" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             WHAT - 什么是微服务
           </h3>
-          <h4>
+          <h4 id="bb286bcc">
             <a name="_root-微服务简介" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -159,7 +159,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselff2ac91fs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwof2ac91f)
                             isInViewPortOfTwof2ac91f = null
                         }
@@ -190,7 +190,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfe485df0as) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoe485df0a)
                             isInViewPortOfTwoe485df0a = null
                         }
@@ -231,7 +231,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself15717d74s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo15717d74)
                             isInViewPortOfTwo15717d74 = null
                         }
@@ -258,7 +258,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself5110231es) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo5110231e)
                             isInViewPortOfTwo5110231e = null
                         }
@@ -273,7 +273,7 @@
         </script>
     </p>
 
-          <h4>
+          <h4 id="6cbaf16d">
             <a name="_root-微服务的具体特征" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -301,7 +301,7 @@
 </ul>
 <p>关于微服务的更多理论基础，可以参考<a href="https://yq.aliyun.com/articles/8611">康威定律</a>。</p>
 
-          <h4>
+          <h4 id="5fb9e78f">
             <a name="_root-SOA vs Microservice" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -309,7 +309,7 @@
           </h4><p>除了Smart endpoints and dumb pipes都很容易理解对吗？相信很多人都会问一个问题，这是不是就是SOA换了个概念，挂羊头卖狗肉啊，有说法把Microservice叫成Lightway SOA。也有很多传统砖家跳出来说Microservice就是SOA。其实Martin也没否认SOA和Microservice的关系。</p>
 <p>我个人理解，Microservice是SOA的传承，但一个最本质的区别就在于Smart endpoints and dumb pipes，或者说是真正的分布式的、去中心化的。Smart endpoints and dumb pipes本质就是去ESB，把所有的“思考”逻辑包括路由、消息解析等放在服务内部（Smart endpoints），去掉一个大一统的ESB，服务间轻（dumb pipes）通信，是比SOA更彻底的拆分。</p>
 
-          <h3>
+          <h3 id="c2e33636">
             <a name="_root-HOW - 怎么具体实践微服务" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -322,7 +322,7 @@
 <li>服务挂了怎么办？</li>
 </ul>
 
-          <h4>
+          <h4 id="283f11b1">
             <a name="_root-客户端如何访问这些服务？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -348,7 +348,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself6ff35764s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo6ff35764)
                             isInViewPortOfTwo6ff35764 = null
                         }
@@ -363,7 +363,7 @@
         </script>
     </p>
 
-          <h4>
+          <h4 id="1e1ec57">
             <a name="_root-服务之间如何通信？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -390,7 +390,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself25f8a8eds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo25f8a8ed)
                             isInViewPortOfTwo25f8a8ed = null
                         }
@@ -407,7 +407,7 @@
 <p>一般同步调用比较简单，一致性强，但是容易出调用问题，性能体验上也会差些，特别是调用层次多的时候。RESTful和RPC的比较也是一个很有意思的话题。一般REST基于HTTP，更容易实现，更容易被接受，服务端实现技术也更灵活些，各个语言都能支持，同时能跨客户端，对客户端没有特殊的要求，只要封装了HTTP的SDK就能调用，所以相对使用的广一些。RPC也有自己的优点，传输协议更高效，安全更可控，特别在一个公司内部，如果有统一个的开发规范和统一的服务框架时，他的开发效率优势更明显些。就看各自的技术积累实际条件，自己的选择了。</p>
 <p>而异步消息的方式在分布式系统中有特别广泛的应用，他既能减低调用服务之间的耦合，又能成为调用之间的缓冲，确保消息积压不会冲垮被调用方，同时能保证调用方的服务体验，继续干自己该干的活，不至于被后台性能拖慢。不过需要付出的代价是一致性的减弱，需要接受数据最终一致性；还有就是后台服务一般要实现幂等性，因为消息发送出于性能的考虑一般会有重复（保证消息的被收到且仅收到一次对性能是很大的考验）；最后就是必须引入一个独立的broker，如果公司内部没有技术积累，对broker分布式管理也是一个很大的挑战。</p>
 
-          <h4>
+          <h4 id="f71bb683">
             <a name="_root-这么多服务，怎么找?" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -430,7 +430,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfa9f83a6ds) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoa9f83a6d)
                             isInViewPortOfTwoa9f83a6d = null
                         }
@@ -445,7 +445,7 @@
         </script>
     </p>
 
-          <h4>
+          <h4 id="4e54f0c3">
             <a name="_root-这么多服务，服务挂了怎么办？" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -471,7 +471,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself3c0d3e96s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo3c0d3e96)
                             isInViewPortOfTwo3c0d3e96 = null
                         }
@@ -486,7 +486,7 @@
         </script>
     </p>
 
-          <h4>
+          <h4 id="fda1316b">
             <a name="_root-WHY - 微服务的应用" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -513,7 +513,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself1b36efdbs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo1b36efdb)
                             isInViewPortOfTwo1b36efdb = null
                         }
@@ -564,7 +564,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself4e9bc008s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo4e9bc008)
                             isInViewPortOfTwo4e9bc008 = null
                         }
@@ -580,7 +580,7 @@
     </li>
 </ul>
 
-          <h3>
+          <h3 id="cb755304">
             <a name="_root-So What - 思考" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -599,7 +599,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself72055665s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo72055665)
                             isInViewPortOfTwo72055665 = null
                         }
@@ -626,7 +626,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself513b8eb5s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo513b8eb5)
                             isInViewPortOfTwo513b8eb5 = null
                         }
@@ -663,7 +663,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself6d3c652s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo6d3c652)
                             isInViewPortOfTwo6d3c652 = null
                         }

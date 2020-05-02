@@ -125,20 +125,20 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="783b7f29">
             <a name="_root-HotSpot虚拟机对象内存" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             HotSpot虚拟机对象内存
           </h3><p>深入讨论HotSpot虚拟机在Java堆中的对象分配、内存布局和对象访问的过程</p>
 
-          <h4>
+          <h4 id="bc9f22cb">
             <a name="_root-对象创建流程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             对象创建流程
           </h4>
-          <h5>
+          <h5 id="577e0ad6">
             <a name="_root-过程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -175,7 +175,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfab0e77es) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoab0e77e)
                             isInViewPortOfTwoab0e77e = null
                         }
@@ -206,13 +206,13 @@
 </li>
 </ol>
 
-          <h4>
+          <h4 id="601b9354">
             <a name="_root-对象内存布局" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             对象内存布局
           </h4>
-          <h5>
+          <h5 id="a03cb4d7">
             <a name="_root-划分" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -223,7 +223,7 @@
 <li>对齐填充（Padding）</li>
 </ul>
 
-          <h5>
+          <h5 id="afe6dbdb">
             <a name="_root-1. 对象头（Header）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -241,21 +241,21 @@
 </li>
 </ul>
 
-          <h5>
+          <h5 id="4dde8c47">
             <a name="_root-2. 实例数据（Instance Data）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             2. 实例数据（Instance Data）
           </h5><p>这一部分是对象真正存储的<strong>有效信息</strong>，也是在程序代码中锁定义的各种类型的字段内容，包括继承下来的信息</p>
 
-          <h5>
+          <h5 id="3e7c1704">
             <a name="_root-3. 对齐填充（Padding）" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             3. 对齐填充（Padding）
           </h5><p>这部分不是必然的实现，也没有特殊含义，但是由于HotSpot VM的自动内存管理系统要求<strong>对象起始地址必须是8字节的整倍数</strong>，一个对象内存分配完之后，并不一定占8字节的整倍数空间，所以填充一些空间以补齐8字节整倍数，保证下一个对象内存分配的起始位置是8字节整倍数</p>
 
-          <h4>
+          <h4 id="ad3949b5">
             <a name="_root-对象访问定位" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -263,7 +263,7 @@
           </h4><p><strong>Java程序通过虚拟机栈上的reference数据来操作堆上的具体对象（重点）</strong></p>
 <p>JVM规范<strong>只说了reference是一个指向对象的引用，但是没有说怎么引用</strong>，所以对象访问方式还是取决于虚拟机的实现，主流的实现有<strong>句柄访问</strong>和<strong>直接指针访问</strong>两种</p>
 
-          <h5>
+          <h5 id="62c86512">
             <a name="_root-句柄访问" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -282,7 +282,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself93e39b01s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo93e39b01)
                             isInViewPortOfTwo93e39b01 = null
                         }
@@ -297,7 +297,7 @@
         </script>
     </p>
 
-          <h5>
+          <h5 id="9d5c943c">
             <a name="_root-直接指针访问" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -316,7 +316,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfeb4d67ads) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoeb4d67ad)
                             isInViewPortOfTwoeb4d67ad = null
                         }
@@ -351,7 +351,7 @@
 </ol>
 </blockquote>
 
-          <h5>
+          <h5 id="297e9abf">
             <a name="_root-两种方式的对比" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

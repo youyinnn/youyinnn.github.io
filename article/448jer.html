@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="48efe729">
             <a name="_root-26. Remove Duplicated From Sorted Array(Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -155,7 +155,7 @@ for (int i = 0; i &lt; len; i++) {
     print(nums[i]);
 }</code></pre>
 
-          <h4>
+          <h4 id="9ba030a0">
             <a name="_root-Brute Force" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -177,7 +177,7 @@ for (int i = 0; i &lt; len; i++) {
     return len;
 }</code></pre>
 
-          <h3>
+          <h3 id="73037785">
             <a name="_root-27. Remove Element(Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -201,7 +201,7 @@ It doesn&#39;t matter what values are set beyond the returned length.</code></pr
 <p>Confused why the returned value is an integer but your answer is an array?</p>
 <p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
 
-          <h4>
+          <h4 id="9ba030a0">
             <a name="_root-Brute Force" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -216,7 +216,7 @@ It doesn&#39;t matter what values are set beyond the returned length.</code></pr
     return len;
 }</code></pre>
 
-          <h3>
+          <h3 id="fe4dba08">
             <a name="_root-28. Implement strStr() (Easy)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -232,7 +232,7 @@ Output: -1</code></pre><p><strong>Clarification:</strong></p>
 <p>For the purpose of this problem, we will return 0 when <code>needle</code> is an empty string. This is consistent to C&#39;s <a href="http://www.cplusplus.com/reference/cstring/strstr/">strstr()</a> and Java&#39;s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)">indexOf()</a>.</p>
 <p>这题其实就是字符串匹配，所以没什么多说的，要么暴力解要么kmp，比较遗憾的是，Leetcode的case不够多，于是暴力解的Runtime居然比KMP解的Runtime还要快</p>
 
-          <h4>
+          <h4 id="902f9859">
             <a name="_root-Brute Force - O(n * m)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -255,7 +255,7 @@ Output: -1</code></pre><p><strong>Clarification:</strong></p>
     return -1;
 }</code></pre>
 
-          <h4>
+          <h4 id="e23271fa">
             <a name="_root-KMP - O(n + m)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -309,7 +309,7 @@ public int[] nextVal(char[] p) {
     return nextVal;
 }</code></pre>
 
-          <h3>
+          <h3 id="ff5d75c6">
             <a name="_root-29. Divide Two Integer (Medium)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -330,7 +330,7 @@ Output: -2</code></pre><p><strong>Note:</strong></p>
 <p>不能用乘除符号、不能用Long，行吧，用位运算试试，两倍两倍地运算，总比暴力一个一个的减要快多了</p>
 <p>但是怎么说，这题也是垃圾题，500+👍，2700+的👎</p>
 
-          <h4>
+          <h4 id="59ae7092">
             <a name="_root-Bit operation (Beat 100%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -357,7 +357,7 @@ public int div(int divid, int divis){
     return q + div(divid - prevSum, divis);
 }</code></pre>
 
-          <h3>
+          <h3 id="c3acd543">
             <a name="_root-30. Substring with Concatenation of All Words(Hard !!)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -387,7 +387,7 @@ Output: []</code></pre><p>这题，变态难，首先words能全排列出n！种
 <p>于是我们处理问题的关键就在于，如何<strong>避免重复的单词对比而滑动窗口</strong></p>
 <p>其实我自己想是已经想到了频数记录，然后滑动窗口了，但是我只能i++地滑动窗口，效率慢了许多，先放上我的解</p>
 
-          <h4>
+          <h4 id="4f1c7ae0">
             <a name="_root-My Solution (550+ms Beat 9.0%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -444,7 +444,7 @@ Output: []</code></pre><p>这题，变态难，首先words能全排列出n！种
     return ans;
 }</code></pre>
 
-          <h4>
+          <h4 id="32f6c0ca">
             <a name="_root-Elegant Solution (9ms Beat 99.6%)" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

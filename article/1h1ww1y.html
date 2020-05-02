@@ -125,7 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3>
+          <h3 id="fccefbaf">
             <a name="_root-前言" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -139,13 +139,13 @@
 <p>暂时只有这些概念，如果有什么提前概念我会继续补充</p>
 <hr>
 
-          <h3>
+          <h3 id="7b0476dc">
             <a name="_root-关键概念说明" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             关键概念说明
           </h3>
-          <h4>
+          <h4 id="b529dc36">
             <a name="_root-临界区" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -153,14 +153,14 @@
           </h4><p>在操作系统的解释上，临界区代表的是<strong>“不允许多个进程访问的资源叫临界资源，而访问临界资源的代码段叫临界区”</strong></p>
 <p>而在这里，我们可以笼统地说：<strong>锁包括的范围就是临界区，临界区的资源需要保证内存可见性，需要对所有线程任何时刻都保持一致性</strong></p>
 
-          <h4>
+          <h4 id="91a18d32">
             <a name="_root-排他锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             排他锁
           </h4><p>也就是独占式锁，一旦一个线程获取到了这个锁而单独进入临界区，其他线程在拿锁线程没放锁之前只能在锁外阻塞。</p>
 
-          <h4>
+          <h4 id="93a09165">
             <a name="_root-共享式锁" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -180,7 +180,7 @@
 </ul>
 </blockquote>
 
-          <h4>
+          <h4 id="da413927">
             <a name="_root-Java对象头" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -188,27 +188,27 @@
           </h4><p>用于存储Java对象的一些控制信息，在并发的过程中，锁的记录会经常性地和对象头中的一些标志位打交道，特别是在使用synchronized关键字的时候，具体的位置是放在对象头的<strong>Mark Word</strong>内容当中</p>
 <p>所以对于Java来说，synchronized用的锁是存在<strong>Java对象头</strong>里的，这部分就不细说了</p>
 
-          <h3>
+          <h3 id="c00cab7b">
             <a name="_root-CAS操作" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             CAS操作
           </h3>
-          <h5>
+          <h5 id="15378b5e">
             <a name="_root-什么是CAS" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             什么是CAS
           </h5><p>CAS即<strong>Compare And Swap</strong>，比较并交换，它的思想是输入两个值，一个旧值（期望的操作前的值）和一个替换旧值的新值，在操作期间先比较旧值和新值，看是否发生了变化，如果<strong>没有变化</strong>才将旧值换成新值，如果发生了变化则不替换</p>
 
-          <h5>
+          <h5 id="a2c3c15f">
             <a name="_root-什么是原子性" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             什么是原子性
           </h5><p>原子（atomic）的本意是“不能被分割的最小粒子”，而原子操作就是“不可被中断的一个或者一系列操作”，但是在多处理器中实现原子操作是有点困难的</p>
 
-          <h5>
+          <h5 id="aba4ab3b">
             <a name="_root-处理器如何实现原子操作" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -219,14 +219,14 @@
 <li><strong>锁缓存：</strong>参考缓存一致性</li>
 </ul>
 
-          <h5>
+          <h5 id="36c06637">
             <a name="_root-Java中的CAS" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             Java中的CAS
           </h5><p>Java SE1.5开始，JDK并发包就提供了一些原子操作的更新器，比如<code>AtomicBoolean</code>、<code>AtomicInteger</code>、<code>AtomicLong</code>等，这些原子包装类还提供了原子的自增自减等方法</p>
 
-          <h5>
+          <h5 id="8fdc5a5">
             <a name="_root-CAS的三大问题" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -237,7 +237,7 @@
 <li><strong>只能保证一个变量的原子值：</strong>如果要对多个变量同时保证原子操作，有两种方式，一种是将多个变量聚合成一个变量，第二个是通过锁操作</li>
 </ol>
 
-          <h5>
+          <h5 id="cebd277">
             <a name="_root-CAS和Java中锁的关系" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>

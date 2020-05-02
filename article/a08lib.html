@@ -128,7 +128,7 @@
 <p>惊！仅用前端技术就可以打造跨平台桌面应用！</p>
 <p></div></p>
 
-          <h3>
+          <h3 id="1ee19ae5">
             <a name="_root-快速入门" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -150,7 +150,7 @@
 <p>原官网也支持中文！中文网的内容有缺失！</p>
 <p>所以我们可以正式开始了！</p>
 
-          <h3>
+          <h3 id="62c57345">
             <a name="_root-安装" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -168,14 +168,14 @@
 <pre><code class="language-cpp">registry=https://registry.npm.taobao.org
 electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre>
 
-          <h3>
+          <h3 id="99c0be8d">
             <a name="_root-基本概念" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
             基本概念
           </h3><hr>
 
-          <h4>
+          <h4 id="bda6f2b4">
             <a name="_root-主进程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -184,7 +184,7 @@ electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre
 <p>在 <code>Electron</code> 里，运行 <code>package.json</code> 里 <code>main</code> 脚本的进程被称为主进程。在主进程运行的脚本可以以创建 web 页面的形式展示 GUI。</p>
 </blockquote>
 
-          <h4>
+          <h4 id="e2d75238">
             <a name="_root-渲染进程" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -194,7 +194,7 @@ electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre
 <p>在一般浏览器中，网页通常会在沙盒环境下运行，并且不允许访问原生资源。然而，<code>Electron</code> 用户拥有在网页中调用 <code>Node.js</code> 的 <code>APIs</code> 的能力，可以与底层操作系统直接交互。</p>
 </blockquote>
 
-          <h4>
+          <h4 id="663cdd48">
             <a name="_root-主进程与渲染进程的区别" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -206,7 +206,7 @@ electron_mirror=&quot;https://npm.taobao.org/mirrors/electron/&quot;</code></pre
 <p>在 <code>Electron</code>，我们提供几种方法用于主进程和渲染进程之间的通讯。像 <code>ipcRenderer</code> 和 <code>ipcMain</code> 模块用于发送消息， <code>remote</code> 模块用于 <code>RPC</code> 方式通讯。这些内容都可以在一个 FAQ 中查看 <a href="https://electron.org.cn/doc/faq.html#how-to-share-data-between-web-pages">how to share data between web pages</a>。</p>
 </blockquote>
 
-          <h3>
+          <h3 id="447c300f">
             <a name="_root-HelloWorld" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -294,7 +294,7 @@ app.on(&#39;activate&#39;, () =&gt; {
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
-          <h3>
+          <h3 id="5cdf0799">
             <a name="_root-Run HelloWorld" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -325,7 +325,7 @@ app.on(&#39;activate&#39;, () =&gt; {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfe1eea3ccs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoe1eea3cc)
                             isInViewPortOfTwoe1eea3cc = null
                         }
@@ -353,7 +353,7 @@ app.on(&#39;activate&#39;, () =&gt; {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgselfed182102s) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwoed182102)
                             isInViewPortOfTwoed182102 = null
                         }
@@ -381,7 +381,7 @@ app.on(&#39;activate&#39;, () =&gt; {
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself24a8511fs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo24a8511f)
                             isInViewPortOfTwo24a8511f = null
                         }

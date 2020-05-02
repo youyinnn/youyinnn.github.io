@@ -3,7 +3,7 @@ var searchtext
 var totalpages
 var nowpage = 1
 
-function new_render_md() {
+function new_render_md(regular_toc) {
     $('#md').addClass('article')
     let as = $('#md a')
     for (let i = 0; i < as.length; i++) {
@@ -25,7 +25,8 @@ function new_render_md() {
         })
     })
     let listhtml = ''
-    for (el of $('h1, h2, h3, h4, h5, h6')) {
+    let selectheader = Boolean(regular_toc) ? 'h1, h2, h3, h4, h5, h6' : 'h2, h3'
+    for (el of $(selectheader)) {
         let transferred = el.childNodes[1].name
             .split('_root-')[1]
             .trim()
@@ -34,30 +35,79 @@ function new_render_md() {
             .replace(/&/gm, '&amp;')
             .replace(/"/gm, '&quot;')
             .replace(/ /gm, '&nbsp;')
-
         listhtml += `
-            <div class="toc-${el.tagName.toLowerCase()}">
-                <a href="${el.childNodes[1].name}">
+            <div class="toc-${el.tagName.toLowerCase()}" _target_sb="${el.id}">
+                <a>
                     ${transferred}
                 </a>
             </div>`
     }
     $('#sidetoc').append(listhtml)
     var $root = $('html, body')
-    $('.markdown-toc a').click(function() {
-        let tzhref = $.attr(this, 'href')
-        $root.animate({
-            scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-        }, 600)
-        if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
+    if (Boolean(regular_toc)) {
+        $('.markdown-toc a').click(function() {
+            let tzhref = $.attr(this, 'href')
             $root.animate({
                 scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
             }, 600)
-        }
-        if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
-            $root.animate({
-                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-            }, 600)
+            if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
+                $root.animate({
+                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
+                }, 600)
+            }
+            if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
+                $root.animate({
+                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
+                }, 600)
+            }
+        })
+    } else {
+        $('.markdown-toc .toc-h3').click(function() {
+            let tgsbid = this.getAttribute('_target_sb')
+
+            let showsb = $('#md .show-script-block')
+            showsb.removeClass('show-script-block')
+            showsb.addClass('hide-script-block')
+
+            let tgsb = $(`#_sb_${tgsbid}`)
+            tgsb.removeClass('hide-script-block')
+            tgsb.addClass('show-script-block')
+
+            let showh3 = $('#md .no-zip-tran')
+            showh3.removeClass('no-zip-tran')
+            showh3.addClass('zip-tran')
+
+            let tgsbh3 = tgsb.prev('h3')
+            tgsbh3.removeClass('zip-tran')
+            tgsbh3.addClass('no-zip-tran')
+
+            tgsb.find('img').each((i, e) => {
+                if (e.getAttribute('shown') !== 'true') {
+                    let pics = $(`[picid=${e.getAttribute('picid')}]`)
+                    pics.attr('src', pics.attr('href'))
+                    pics.attr('shown', 'true')
+                    pics.removeClass('hidepic')
+                    $(`._showpic_${e.getAttribute('picid')}`).remove()
+                }
+            })
+        })
+    }
+    $('#sidetoc .toc-h3').addClass('zip-tran')
+
+    let nowh2
+    $('#sidetoc .toc-h2').click(function() {
+        $('#sidetoc .no-zip-tran').addClass('zip-tran')
+        $('#sidetoc .no-zip-tran').removeClass('no-zip-tran')
+        if (nowh2 === this) {
+            nowh2 = undefined
+        } else {
+            let h3 = $(this).next()
+            while (h3[0] !== undefined && h3[0].className === 'toc-h3 zip-tran') {
+                h3.removeClass('zip-tran')
+                h3.addClass('no-zip-tran')
+                h3 = h3.next()
+            } 
+            nowh2 = this
         }
     })
     $('.katex').parent().addClass('katexp')
@@ -652,7 +702,7 @@ function showbbt() {
     $('#bbt').removeClass('myhide')
 }
 
-function showtoc() {
+function showtocbtn() {
     $('#toc')[0].style.display = 'inline-block'
     $('#toc').removeClass('myhide')
 }
@@ -806,7 +856,7 @@ function showseries(abbrlink, ps, psname) {
         adclass(sdate, 'sdate')
         appendc(sadiv, sa)
         appendc(sadiv, sdate)
-        appendc(sb[0], sadiv)        
+        appendc(sb[0], sadiv)
         if (it[1] === abbrlink) {
             adclass(sadiv, 'adis')
         } else {
@@ -1067,4 +1117,45 @@ function getmetadatafromabbrlink(abbrlink) {
     return articlesMetadate.find((v) => {
         return v.abbrlink === abbrlink
     })
+}
+
+function scriptblock() {
+    $('#md').addClass('fixmd')
+    $('#md').find('h2, h3').addClass('zip-tran')
+    $('#sidetoccontainer').addClass('fixtoc')
+
+    $('p').each((i, e) => {
+        if (e.innerText.trim() === '') {
+            $(e).remove()
+        }
+    })
+    $('#md script').remove()
+    let cd = $('#md').children()
+    let h3p
+    let bhtml = ''
+
+    function wrapblock() {
+        $(`[_script_block=${h3p.id}]`).remove()
+        $(h3p).after(`
+            <sb class="hide-script-block" id="_sb_${h3p.id}">
+                ${bhtml}
+            </sb>
+        `)
+    }
+    cd.each((i, e) => {
+        if (e.tagName === 'H3') {
+            if (bhtml !== '') {
+                wrapblock()
+            }
+            bhtml = ''
+            h3p = e
+        } else if (e.tagName !== 'H2') {
+            if (h3p !== undefined) {
+                let ee = $(e)
+                ee.attr('_script_block', h3p.id)
+                bhtml += e.outerHTML
+            }
+        }
+    })
+    wrapblock()
 }

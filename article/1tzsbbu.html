@@ -128,7 +128,7 @@
 <p>翻译自官方文档</p>
 <p></div></p>
 
-          <h2>
+          <h2 id="3d10aa7d">
             <a name="_root-Writing Middleware" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -156,7 +156,7 @@
                     if (top  <= viewPortHeight + 300) {
                         for (el of imgself5d02eaccs) {
                             el.src = el.getAttribute('href')
-                            el.classList = ['showpic']
+                            el.classList.add('showpic')
                             window.removeEventListener('scroll', isInViewPortOfTwo5d02eacc)
                             isInViewPortOfTwo5d02eacc = null
                         }
@@ -171,7 +171,7 @@
         </script>
     </p>
 
-          <h3>
+          <h3 id="1ba10272">
             <a name="_root-Example:  Middleware function myLogger" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -201,7 +201,7 @@ app.listen(3000)</code></pre>
 <p>中间件加载的顺序很重要：先加载的中间件其方法先被执行。</p>
 <p>如果<code>myLogger</code>是在“路由到根路径”之后加载的话，那么任何请求都不会访问到它，因为根路径路由周期已经结束了。</p>
 
-          <h3>
+          <h3 id="2aae19b2">
             <a name="_root-Example: Middleware function requestTime" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
@@ -230,7 +230,7 @@ app.get(&#39;/&#39;, function (req, res) {
 
 app.listen(3000)</code></pre>
 
-          <h3>
+          <h3 id="c4ebc8c1">
             <a name="_root-Configurable middleware" class="reference-link" target="_blank">
               <span class="header-link"></span>
             </a>
