@@ -11,6 +11,7 @@ const dayjs = require('dayjs')
 let postsPath = path.join(__dirname, '..', '_posts')
 let htmlPath = path.join(__dirname, '..', 'index.html')
 
+// transfer file to another file with handleFunc
 function file2file(set) {
     let sourceStr = fs.readFileSync(set.sourceFilePath, {
         encoding: 'utf-8'
@@ -125,7 +126,7 @@ function imgscroll(href, title, text) {
     `
 }
 
-const articleDataExtract = require('./artricles-data-extract')
+const articleDataExtract = require('../myjs/artricles-data-extract')
 
 renderer.image = imgscroll
 for (pname of postsrs) {
