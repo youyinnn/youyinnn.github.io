@@ -99,6 +99,8 @@ $(function() {
         showtocbtn()
     } else if (pathname === '/articles/') {
         changepagetitle('articles | youyinnn')
+        let client = algoliasearch('31EZJEFZDH', 'b48e8af8c156bc2c932f4ad2e112c38b');
+        index = client.initIndex('blog');
         get_articles()
     } else if (pathname.startsWith('/article/')) {
         $(md).addClass('no-transit')
