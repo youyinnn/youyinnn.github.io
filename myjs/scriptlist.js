@@ -1,6 +1,6 @@
 var before = [
     'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js',
-    'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js',
+    'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js',
 ]
 
 for (let i = 0; i < resourcesList.length; i++) {

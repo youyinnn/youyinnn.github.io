@@ -309,20 +309,22 @@ function searcharticle(text) {
     if (text !== '') {
         text = text.replace(/\s/gm, '')
         let rs = new Set()
-        index.search(text, function(err, context) {
-            for (let i = 0; i < context.hits.length; i++) {
-                rs.add(context.hits[i].number)
+        index.search(text).then(({
+            hits
+        }) => {
+            for (let i = 0; i < hits.length; i++) {
+                rs.add(hits[i].objectID)
             }
             // handle rs
             if (filter_articles_cache.length === 0) {
                 for (let i = 0; i < articles_cache.length; i++) {
-                    if (rs.has(articles_cache[i].number)) {
+                    if (rs.has(articles_cache[i].abbrlink)) {
                         articlesearchrs.push(articles_cache[i])
                     }
                 }
             } else {
                 for (let i = 0; i < filter_articles_cache.length; i++) {
-                    if (rs.has(filter_articles_cache[i].number)) {
+                    if (rs.has(filter_articles_cache[i].abbrlink)) {
                         articlesearchrs.push(filter_articles_cache[i])
                     }
                 }
@@ -338,6 +340,9 @@ function searcharticle(text) {
                 rstopaging(articlesearchrs)
                 articlesearchrs = new Array()
             }
+        }).catch(function(err) {
+            console.err(err)
+            popmsg('Search faild.')
         })
     } else {
         cleansearch()
