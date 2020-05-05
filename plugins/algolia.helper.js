@@ -28,22 +28,47 @@ for (pn of postfilenames) {
 const algoliasearch = require('algoliasearch');
 
 function saveAllRecords(set) {
-    const client = algoliasearch(set.appId, set.apiKey);
-    const index = client.initIndex(set.index);
-
-    index.saveObjects(records).then(({
-        objectIDs
+    let rs
+    let client
+    let index
+    client = algoliasearch(set.appId, set.apiKey)
+    client.listIndices().then(({
+        items
     }) => {
-        return {
-            code: 'success',
-            objectIDs: objectIDs
+        if (items.find(i => i.name === set.index) !== undefined) {
+            index = client.initIndex(set.index);
+            index.saveObjects(records).then(({
+                objectIDs
+            }) => {
+                console.log(JSON.stringify({
+                    code: 'successed',
+                    objectIDs: objectIDs
+                }))
+            }).catch(function(err) {
+                console.error(JSON.stringify({
+                    code: 'failed',
+                    error: err
+                }))
+            })
+        } else {
+            console.error(JSON.stringify({
+                code: 'failed',
+                error: {
+                    name: 'IndexError',
+                    message: 'No Such Index In Your Application'
+                }
+            }))
         }
     }).catch(function(err) {
-        return {
-            code: 'error',
-            err: err
-        }
+        console.error(JSON.stringify({
+            code: 'failed',
+            error: err
+        }))
     })
 }
 
-module.exports.saveAllRecords = saveAllRecords
+saveAllRecords({
+    appId: process.argv[2],
+    apiKey: process.argv[3],
+    index: process.argv[4],
+})
