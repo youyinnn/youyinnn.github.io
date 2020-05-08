@@ -217,40 +217,30 @@ public class StringCompress {
 
 参考：https://blog.csdn.net/isea533/article/details/8199848
 
-
 ### Servlet和CGI的区别
+
+#### CGI (Common Gateway Interface 公共网关接口)
 
 1. 定义：
 
-CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
-
- 
+   CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
 
 2. 功能：
 
-绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。
-
- 
+   绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。
 
 3. 运行环境：
 
-CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。
-
- 
+   CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。
 
 4. CGI处理步骤：
 
-　　⑴通过Internet把用户请求送到服务器。
+   1. 通过Internet把用户请求送到服务器。
+   2. 服务器接收用户请求并交给CGI程序处理。
+   3. CGI程序把处理结果传送给服务器。
+   4. 服务器把结果送回到用户。
 
-　　⑵服务器接收用户请求并交给CGI程序处理。
-
-　　⑶CGI程序把处理结果传送给服务器。
-
-　　⑷服务器把结果送回到用户。
-
- 
-
- 
+#### Servlet
 
 Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。
 
@@ -258,28 +248,18 @@ Servlet是一种服务器端的Java应用程序，具有独立于平台和协议
 
  
 
- 
+#### Java Servlet与CGI的比较
 
-Java Servlet与CGI (Common Gateway Interface 公共网关接口)的比较:
+与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。
 
-　　与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。
+在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。
 
-　　在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。
-
-　　在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。
-
- 
-
+在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。
 　　* 方便 　
-
 　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。
-
 　　* 功能强大
-
 　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。
-
 　　* 可移植性好
-
 Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。
 
 转自：https://www.cnblogs.com/MuyouSome/p/3938203.html
@@ -756,12 +736,12 @@ http://www.ruanyifeng.com/blog/2016/04/cors.html
 
 因此我们就根据name去索引锚点
 ``` javascript
-    var $root = $('html, body')
-    $('.markdown-toc a').click(function() {
-        $root.animate({
-            scrollTop: $('[name="xxx"]').offset().top
-        }, 600)
-    })
+var $root = $('html, body')
+$('.markdown-toc a').click(function() {
+    $root.animate({
+        scrollTop: $('[name="xxx"]').offset().top
+    }, 600)
+})
 ```
 
 
@@ -1004,17 +984,21 @@ https://segmentfault.com/a/1190000012800450
 
 下面这个是coding的滚动条样式：
 ``` css
-  *::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 8px;
-    height: 8px; }
-  *::-webkit-scrollbar-track {
+    height: 8px; 
+}
+*::-webkit-scrollbar-track {
     background-color: rgba(216, 221, 228, 0.3);
-    border-radius: 10px; }
-  *::-webkit-scrollbar-thumb {
+    border-radius: 10px; 
+}
+*::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #76808e; }
-  *::-webkit-scrollbar-thumb:window-inactive {
-    background: #d8dde4; }
+    background: #76808e; 
+}
+*::-webkit-scrollbar-thumb:window-inactive {
+    background: #d8dde4; 
+}
 ```
 
 
@@ -1110,9 +1094,9 @@ https://www.jianshu.com/p/73715ee54712
 
 
 ``` js
-  $('pre, pre code').each(function(i, block) {
+$('pre, pre code').each(function(i, block) {
     hljs.highlightBlock(block);
-  });
+});
 ```
 
 #### :small_blue_diamond:2. editor的默认md code渲染和highlight.js渲染冲突问题

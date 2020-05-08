@@ -5,13 +5,13 @@
 
 
 > **姓：** 黄
-> **年龄：** 22
+> **年龄：** 23
 > **性别：** 男
 > **邮箱：** youyinnn@gmail.com
 > **Github：** https://github.com/youyinnn
 > **博客：** https://youyinnn.github.io
-> **电子简历：** https://youyinnn.github.io/?to=resume
-> **本科：** 中南民族大学19年应届生
+> **电子简历：** https://youyinnn.github.io/resume/
+> **本科：** [中南民族大学](http://www.scuec.edu.cn/s/1/t/560/main.htm) 19年应届生
 > **求职意向：** Java后端开发
 
 
@@ -70,15 +70,14 @@
 
 
 
-#### 前端部分 
+#### 其他语言 
 
-
-
-- 熟悉**HTML**/**CSS**基本语法
-- 了解**JavaScript**基本语法(深层次的就不知道了，比如原型链之类的)
-- 会用**JQuery**、会写点**Ajax**
-- 会用**Bootstrap4**
-
+- **Front-End**
+  - 熟悉**HTML**/**CSS**基本语法
+  - 了解**JavaScript**基本语法(深层次的就不知道了，比如原型链之类的)
+  - 会用**JQuery**、**Ajax**、会**vue**、会**nodejs**
+  - 会用**Bootstrap4**
+- **Python**
 
 
 ### 三. 在校项目经历

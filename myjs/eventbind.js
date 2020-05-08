@@ -108,6 +108,11 @@ $(function() {
             $('#all_tags').addClass('myhide')
         }
     })
+
+    $('#cates_tree_body').css('height', ($(window).height() - 48 - 8 - 38 - 6 - 8 - 38 - 156 - 8) + 'px')
+    $(window).resize(() => {
+        $('#cates_tree_body').css('height', ($(window).height() - 48 - 8 - 38 - 6 - 8 - 38 - 156 - 8) + 'px')
+    })
     $(window).scroll(function() {
         let scrollTop = $(window).scrollTop(),
             docHeight = $(document).height(),
