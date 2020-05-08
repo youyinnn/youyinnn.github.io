@@ -27,6 +27,13 @@
   - [freegeoip](https://freegeoip.app/) 还行 免费https 每小时1万5的请求 比下面的快
   - [ipinfo](https://ipinfo.io/developers#https-ssl) https免费 速度慢点
 
+### 英语相关API
+
+#### 语法检查
+
+- [Ginger](https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&utm_source=link&utm_campaign=api_documentation)
+- [Grammarly](https://www.grammarly.com/)
+
 ## :star: Java相关
 
 ### Java8系列文章
