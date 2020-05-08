@@ -500,37 +500,48 @@
               <span class="header-link"></span>
             </a>
             Servlet和CGI的区别
-          </h3><ol>
-<li>定义：</li>
-</ol>
+          </h3>
+          <h4 id="61a5f5d2">
+            <a name="_root-CGI (Common Gateway Interface 公共网关接口)" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            CGI (Common Gateway Interface 公共网关接口)
+          </h4><ol>
+<li><p>定义：</p>
 <p>CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。</p>
-<ol start="2">
-<li>功能：</li>
-</ol>
+</li>
+<li><p>功能：</p>
 <p>绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。</p>
-<ol start="3">
-<li>运行环境：</li>
-</ol>
+</li>
+<li><p>运行环境：</p>
 <p>CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。</p>
-<ol start="4">
-<li>CGI处理步骤：</li>
+</li>
+<li><p>CGI处理步骤：</p>
+<ol>
+<li>通过Internet把用户请求送到服务器。</li>
+<li>服务器接收用户请求并交给CGI程序处理。</li>
+<li>CGI程序把处理结果传送给服务器。</li>
+<li>服务器把结果送回到用户。</li>
 </ol>
-<p>　　⑴通过Internet把用户请求送到服务器。</p>
-<p>　　⑵服务器接收用户请求并交给CGI程序处理。</p>
-<p>　　⑶CGI程序把处理结果传送给服务器。</p>
-<p>　　⑷服务器把结果送回到用户。</p>
-<p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
+</li>
+</ol>
+
+          <h4 id="276f89c">
+            <a name="_root-Servlet" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Servlet
+          </h4><p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
 <p>工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。</p>
-<p>Java Servlet与CGI (Common Gateway Interface 公共网关接口)的比较:</p>
-<p>　　与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
-<p>　　在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。</p>
-<p>　　在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。</p>
-<p>　　* 方便 　</p>
-<p>　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。</p>
-<p>　　* 功能强大</p>
-<p>　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。</p>
-<p>　　* 可移植性好</p>
-<p>Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。</p>
+
+          <h4 id="3fd957ba">
+            <a name="_root-Java Servlet与CGI的比较" class="reference-link" target="_blank">
+              <span class="header-link"></span>
+            </a>
+            Java Servlet与CGI的比较
+          </h4><p>与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
+<p>在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。</p>
+<p>在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。<br>　　* 方便 　<br>　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。<br>　　* 功能强大<br>　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。<br>　　* 可移植性好<br>Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。</p>
 <p>转自：<a href="https://www.cnblogs.com/MuyouSome/p/3938203.html">https://www.cnblogs.com/MuyouSome/p/3938203.html</a></p>
 
           <h3 id="9b2c2d07">
@@ -993,12 +1004,12 @@ function isChrome() {
           </h3><p>一般我们的锚点都长这样</p>
 <pre><code class="language-html">&lt;a name=&quot;xxx&quot; class=&quot;reference-link&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;</code></pre>
 <p>因此我们就根据name去索引锚点</p>
-<pre><code class="language-javascript">    var $root = $(&#39;html, body&#39;)
-    $(&#39;.markdown-toc a&#39;).click(function() {
-        $root.animate({
-            scrollTop: $(&#39;[name=&quot;xxx&quot;]&#39;).offset().top
-        }, 600)
-    })</code></pre>
+<pre><code class="language-javascript">var $root = $(&#39;html, body&#39;)
+$(&#39;.markdown-toc a&#39;).click(function() {
+    $root.animate({
+        scrollTop: $(&#39;[name=&quot;xxx&quot;]&#39;).offset().top
+    }, 600)
+})</code></pre>
 
           <h3 id="74ce5d81">
             <a name="_root-JS 监听元素任何变化" class="reference-link" target="_blank">
@@ -1224,17 +1235,21 @@ observer.observe(article, options);</code></pre>
           </h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
 <p>特效是不会无故无效的，检查一下是不是开了inline</p>
 <p>下面这个是coding的滚动条样式：</p>
-<pre><code class="language-css">  *::-webkit-scrollbar {
+<pre><code class="language-css">*::-webkit-scrollbar {
     width: 8px;
-    height: 8px; }
-  *::-webkit-scrollbar-track {
+    height: 8px; 
+}
+*::-webkit-scrollbar-track {
     background-color: rgba(216, 221, 228, 0.3);
-    border-radius: 10px; }
-  *::-webkit-scrollbar-thumb {
+    border-radius: 10px; 
+}
+*::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #76808e; }
-  *::-webkit-scrollbar-thumb:window-inactive {
-    background: #d8dde4; }</code></pre>
+    background: #76808e; 
+}
+*::-webkit-scrollbar-thumb:window-inactive {
+    background: #d8dde4; 
+}</code></pre>
 
           <h3 id="49362e2b">
             <a name="_root-CSS inline-block 垂直居中" class="reference-link" target="_blank">
@@ -1429,9 +1444,9 @@ observer.observe(article, options);</code></pre>
           </h5><blockquote>
 <p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong><br>解决: 把pre也一起选中就好了</p>
 </blockquote>
-<pre><code class="language-js">  $(&#39;pre, pre code&#39;).each(function(i, block) {
+<pre><code class="language-js">$(&#39;pre, pre code&#39;).each(function(i, block) {
     hljs.highlightBlock(block);
-  });</code></pre>
+});</code></pre>
 
           <h4 id="55caa9a3">
             <a name="_root-🔹2. editor的默认md code渲染和highlight.js渲染冲突问题" class="reference-link" target="_blank">
