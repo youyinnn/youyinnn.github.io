@@ -37,6 +37,10 @@
   font-size: 14px;
 }
 
+#cates_tree_body::-webkit-scrollbar {
+  width: 2px !important;
+}
+
 #cates_tree_head,
 #blog_statistic_head {
   height: 38px;
@@ -174,6 +178,10 @@
   padding: 20px 20px 20px 0px !important;
 }
 
+#sidetoc::-webkit-scrollbar {
+  width: 2px !important;
+}
+
 #sidetoc li {
   margin: 4px !important;
 }
@@ -233,7 +241,6 @@
 }
 
 .articlehead {
-  text-align: center;
   color: rgb(83, 87, 90);
   margin: 0.9rem auto;
   transition: all .3s ease-in-out;
@@ -283,12 +290,13 @@
   overflow: hidden !important;
   font-size: 14px !important;
   font-weight: normal !important;
+  margin: 8px 0;
 }
 
 .articleshortmsg * {
   margin: 8px 0 !important;
   font-size: 14px !important;
-  font-weight: normal !important;
+  font-weight: 100 !important;
 }
 
 .articleshortmsg .saying {
@@ -317,7 +325,6 @@
 .articlemore {
   color: rgb(46, 46, 46);
   text-decoration: none;
-  margin-top: 8px;
   display: inline-block;
   font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
@@ -363,13 +370,15 @@
 
 .articletitle {
   width: 100%;
+  word-break: keep-all;
   word-wrap: break-word;
-  word-break: break-all;
+  white-space: pre-wrap;
   text-decoration: none;
   transition: all .2s;
   font-weight: 500;
   font-size: 1rem;
   display: inline-block;
+  line-height: 40px;
 }
 
 .articletime {
@@ -408,7 +417,6 @@
 } */
 .onearticle {
   width: 100%;
-  padding: 0 0 1rem 0;
   border-bottom: 0.1rem var(--ydashed-color) dashed;
   margin-bottom: .5rem;
 }
@@ -416,7 +424,6 @@
 .onearticle>.articletitle {
   font-size: 2.3rem;
   font-weight: 100;
-  padding: 1rem;
 }
 
 .onearticle>.articletitle:active {
@@ -1057,6 +1064,7 @@
 .seboxhide {
   height: 0px !important;
   padding: 0 !important;
+  overflow: hidden !important;
 }
 
 #seriesbox>div {
@@ -1135,7 +1143,7 @@
 .copyrightbox {
   padding: 1.5rem;
   background-color: #ff00000f;
-  border-left: solid #c01f1f 4px;
+  border-left: solid #c01f1f 2px;
   margin-bottom: 1rem;
 }
 
@@ -1314,7 +1322,7 @@ sb {
 }
 
 sb pre {
-  background-color: whitesmoke !important;
+  background-color: #f5f5f566 !important;
 }
 
 sb *:last-child {
@@ -1377,3 +1385,14 @@ sb img {
   transform: translateY(2px);
 }
 
+.showconsole {
+  font-size: 12px;
+  padding: 1px 4px;
+  user-select: none;
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+.showconsole:hover {
+  background-color: rgb(199, 199, 199);
+}

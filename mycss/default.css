@@ -23,8 +23,8 @@
 }
 
 *::-webkit-scrollbar {
-  width: 7px;
-  height: 5px;
+  width: 6px;
+  height: 2px;
 }
 
 *::-webkit-scrollbar-track {
@@ -71,7 +71,9 @@ html {
 
 pre {
   border: none !important;
-  background-color: #fff !important;
+  background-color: #f8f9fa !important;
+  border-left: 2px #17a2b8 solid !important;
+  border-radius: 0 !important;
 }
 
 .markdown-body blockquote:hover, 
@@ -163,7 +165,7 @@ td.hljs-ln-code {
   padding-left: initial !important;
   padding: 10px !important;
   font-size: 15px !important;
-  border-left-color: #66c77d !important;
+  border-left: 2px #66c77d solid !important;
   background-color: ghostwhite;
 }
 

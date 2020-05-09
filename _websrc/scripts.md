@@ -856,7 +856,7 @@ div{
 }
 ```
 
-强制英文单词断行
+强制英文单词断开换行
 
 ``` css
 div{
@@ -864,6 +864,15 @@ div{
 }
 ```
 
+英文单词不断开换行
+
+``` css
+div {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+```
 
 ### CSS placeholder居位设置
 

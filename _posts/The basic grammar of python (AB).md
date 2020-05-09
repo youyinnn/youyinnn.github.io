@@ -1,5 +1,5 @@
 ---
-title: The basic grammar of python AB
+title: The basic grammar of python (AB)
 categories:
   - note
   - python

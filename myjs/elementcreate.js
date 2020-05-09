@@ -26,29 +26,45 @@ function createarticlecard(item, pagebelong) {
 }
 
 function createarticlehead(re) {
+    console.log(re)
     let title = re.title
     let articlehead = c('div')
     articlehead.id = 'articlehead'
     let articletitle = c('div')
     let articletime = c('div')
+    articletime.style = 'padding: 2rem 0 1rem;'
     let sp1 = c('span')
     let sp2 = c('span')
+    let sp3 = c('span')
+    let sp33 = c('span')
+    let sp4 = c('span')
+    let sp44 = c('span')
     let sp5 = c('span')
-    let sp6 = c('span')
+    let sp55 = c('span')
     adclass(articlehead, 'articlehead onearticle')
     adclass(articletitle, 'articletitle')
     adclass(articletime, 'articletime')
     adclass(sp1, 'font-weight-bold mr-2')
+    adclass(sp3, 'font-weight-bold mr-2')
+    adclass(sp4, 'font-weight-bold mr-2')
     adclass(sp5, 'font-weight-bold mr-2')
-    adclass(sp6, 'mdcharlength')
     sp1.innerHTML = 'Posted at:'
     sp2.innerHTML = dayjs(re.date).format('MMM,DD YYYY') + '&nbsp;&nbsp;' + articlecarddate(dayjs(re.date))
-    sp5.innerHTML = '<br>Total chars: ' + re.char_count
+    sp3.innerHTML = '<br>Categories: '
+    sp33.innerHTML = '' + re.categories
+    sp4.innerHTML = '<br>Tags: '
+    sp44.innerHTML = '' + re.tags
+    sp5.innerHTML = '<br>Total chars: '
+    sp55.innerHTML = '' + re.char_count
     articletitle.innerHTML = title
     appendc(articletime, sp1)
     appendc(articletime, sp2)
+    appendc(articletime, sp3)
+    appendc(articletime, sp33)
+    appendc(articletime, sp4)
+    appendc(articletime, sp44)
     appendc(articletime, sp5)
-    appendc(articletime, sp6)
+    appendc(articletime, sp55)
     appendc(articlehead, articletitle)
     appendc(articlehead, articletime)
     md.prepend(articlehead)

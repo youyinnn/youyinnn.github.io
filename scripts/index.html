@@ -1125,9 +1125,15 @@ observer.observe(article, options);</code></pre>
     word-wrap: break-word; 
     word-break: normal; 
 }</code></pre>
-<p>强制英文单词断行</p>
+<p>强制英文单词断开换行</p>
 <pre><code class="language-css">div{
     word-break:break-all;
+}</code></pre>
+<p>英文单词不断开换行</p>
+<pre><code class="language-css">div {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }</code></pre>
 
           <h3 id="c7a79f21">

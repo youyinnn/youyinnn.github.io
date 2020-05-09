@@ -152,7 +152,6 @@ Menu.setApplicationMenu(menu)
 ```
 右键菜单
 ``` javascript
-
 // 自定义右键菜单
 const menu = new Menu()
 menu.append(new MenuItem({

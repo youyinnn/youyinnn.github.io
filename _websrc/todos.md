@@ -1,8 +1,10 @@
-> The greatest equation in the world
-
 $$E=mc^2$$
 
 ----
+
+> vscode 可以完全替代
+
+<del>
 
 ### Tiny Java IDE
 
@@ -17,3 +19,7 @@ $$E=mc^2$$
 - 比如学习源码的时候，每次都要等庞大的IDEA启动
 - 比如写算法题的时候，仅仅只是小几个类加一个main程序，你还要启动IDEA...
 - 比如我想练习一些Java8的特性，要启动IDEA....
+
+</del>
+
+---
