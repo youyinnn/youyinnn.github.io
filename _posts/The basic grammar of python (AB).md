@@ -287,6 +287,56 @@ print('#....ASdas..asad##..dadkjl....##...#'.lstrip('.#'))
 print('#....ASdas..asad##..dadkjl....##...#'.rstrip('.#'))
 ```
 
+``` console
+spam eggs
+spam eggs
+dosn't
+str asd number 123
+b
+d
+c
+abc
+Options:
+    -a      all
+    -c      clean
+Show the index of a string like 'Python'
+    +---+---+---+---+---+---+
+    | P | y | t | h | o | n |
+    +---+---+---+---+---+---+
+      0   1   2   3   4   5   6
+     -6  -5  -4  -3  -2  -1
+hmmmmmm
+True
+4
+Hello
+HELLO
+asd
+HELLO
+  HELLO   
+---HELLO---
+HELLO------
+------HELLO
+2
+-1
+7
+True
+True
+True
+True
+aseeea
+aseeda
+True
+['a', 'b', 'c']
+['a', 'b,c']
+['asd', 'aasd', 'aasda']
+['asd\n', 'aasd\n', 'aasda\r']
+ASdas..asad##..dadkjl
+ASdas..asad##..dadkjl....##...#
+#....ASdas..asad##..dadkjl
+```
+
+
+
 ##### Format
 
 ``` python
@@ -385,6 +435,17 @@ print(re.split(r'[a-z]', 'adas123fd12d123', flags=re.IGNORECASE))
 # replace
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE))
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE, count=1))
+```
+
+``` console
+<re.Match object; span=(4, 7), match='doh'>
+<re.Match object; span=(4, 7), match='doh'>
+['doh', 'dog']
+<re.Match object; span=(4, 7), match='doh'>
+<re.Match object; span=(11, 14), match='dog'>
+['', '', '', '', '123', '', '12', '123']
+You & Me, Me & You.
+You & Me, Me And You.
 ```
 
 

@@ -549,6 +549,51 @@ print(&#39;asd\naasd\naasda\r&#39;.splitlines(keepends=True))
 print(&#39;#....ASdas..asad##..dadkjl....##...#&#39;.strip(&#39;.#&#39;))
 print(&#39;#....ASdas..asad##..dadkjl....##...#&#39;.lstrip(&#39;.#&#39;))
 print(&#39;#....ASdas..asad##..dadkjl....##...#&#39;.rstrip(&#39;.#&#39;))</code></pre>
+<pre><code class="language-console">spam eggs
+spam eggs
+dosn&#39;t
+str asd number 123
+b
+d
+c
+abc
+Options:
+    -a      all
+    -c      clean
+Show the index of a string like &#39;Python&#39;
+    +---+---+---+---+---+---+
+    | P | y | t | h | o | n |
+    +---+---+---+---+---+---+
+      0   1   2   3   4   5   6
+     -6  -5  -4  -3  -2  -1
+hmmmmmm
+True
+4
+Hello
+HELLO
+asd
+HELLO
+  HELLO   
+---HELLO---
+HELLO------
+------HELLO
+2
+-1
+7
+True
+True
+True
+True
+aseeea
+aseeda
+True
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+[&#39;a&#39;, &#39;b,c&#39;]
+[&#39;asd&#39;, &#39;aasd&#39;, &#39;aasda&#39;]
+[&#39;asd\n&#39;, &#39;aasd\n&#39;, &#39;aasda\r&#39;]
+ASdas..asad##..dadkjl
+ASdas..asad##..dadkjl....##...#
+#....ASdas..asad##..dadkjl</code></pre>
 
           <h5 id="5dbe6705">
             <a name="_root-Format" class="reference-link" target="_blank">
@@ -648,6 +693,14 @@ print(re.split(r&#39;[a-z]&#39;, &#39;adas123fd12d123&#39;, flags=re.IGNORECASE)
 # replace
 print(re.sub(r&#39;and&#39;, &#39;&amp;&#39;, &#39;You And Me, Me And You.&#39;, flags=re.IGNORECASE))
 print(re.sub(r&#39;and&#39;, &#39;&amp;&#39;, &#39;You And Me, Me And You.&#39;, flags=re.IGNORECASE, count=1))</code></pre>
+<pre><code class="language-console">&lt;re.Match object; span=(4, 7), match=&#39;doh&#39;&gt;
+&lt;re.Match object; span=(4, 7), match=&#39;doh&#39;&gt;
+[&#39;doh&#39;, &#39;dog&#39;]
+&lt;re.Match object; span=(4, 7), match=&#39;doh&#39;&gt;
+&lt;re.Match object; span=(11, 14), match=&#39;dog&#39;&gt;
+[&#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;123&#39;, &#39;&#39;, &#39;12&#39;, &#39;123&#39;]
+You &amp; Me, Me &amp; You.
+You &amp; Me, Me And You.</code></pre>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
