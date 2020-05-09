@@ -39,7 +39,7 @@ $(function() {
     if (location.search === '?fromgithub=true') {
         popmsg('国内访问 已跳转到Coding Pages')
     }
-    if (pathname === '/') {
+    if (pathname === '/' || pathname === '/index.html') {
         hidesidetoc()
         rmclass(homepage, 'myhide')
         adclass(homepage, 'myshow')
@@ -120,7 +120,7 @@ $(function() {
 
         let end = `
             <hr>
-            <div class="copyrightbox" style="padding: 1rem;background-color: #ff00000f;border-left: solid #c01f1f 4px;margin: 1rem 0;">
+            <div class="copyrightbox">
                 <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
                 <br>
                 Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/article/${metadata.abbrlink}.html</a>

@@ -60,14 +60,15 @@ function new_render_md(regular_toc) {
                 $(`#${preroottocid}`).append(limaker(el.innerText, el.id, el.tagName))
                 el.setAttribute('roottocid', preroottocid)
             } else if (el.tagName < pre.tagName) {
-                while (pre.tagName < el.tagName) {
-                    pre = $(`#${pre.getAttribute('roottocid')}`)[0]
+                while (pre.tagName > el.tagName) {
+                    if (pre.getAttribute('roottocid') === '_toc_root') {
+                        break
+                    }
+                    pre = $(`#${pre.getAttribute('roottocid').replace('_toc_', '')}`)[0]
                 }
-                let preroottocid = pre.getAttribute('roottocid')
-                let prerootid = preroottocid.replace('_toc_', '')
-                $(`#${$(`#${prerootid}`)[0].getAttribute('roottocid')}`)
-                    .append(limaker(el.innerText, el.id, el.tagName))
-                el.setAttribute('roottocid', $(`#${prerootid}`)[0].getAttribute('roottocid'))
+                let roottocid = pre.getAttribute('roottocid')
+                $(`#${roottocid}`).append(limaker(el.innerText, el.id, el.tagName))
+                el.setAttribute('roottocid', roottocid)
             } else {
                 $(`#_toc_${pre.id}`).append(limaker(el.innerText, el.id, el.tagName))
                 el.setAttribute('roottocid', '_toc_' + pre.id)
@@ -156,11 +157,23 @@ function new_render_md(regular_toc) {
     $('.katex').parent().addClass('katexp')
     setimgclicktofocus()
     highlightBlock()
+    $('.language-console').each((i, e) => {
+        $(e).parent().addClass('seboxhide')
+        $(e).parent().before(`
+            <div class="showconsole">Show output &gt;&gt;&gt;</div>
+        `)
+    })
+    $('.showconsole').click(function() {
+        $(this).next().removeClass('seboxhide')
+        $(this).next().css('border-left', 'none !important;')
+        console.log($(this).next())
+        $(this).remove()
+    })
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
         $(md).animateCss('fadeIn')
-    }, 200);
+    }, 200)
 }
 
 function highlightBlock() {
@@ -747,12 +760,16 @@ function cleansearch() {
 }
 
 function showbbt() {
-    $('#bbt').removeClass('myhide')
+    setTimeout(() => {
+        $('#bbt').removeClass('myhide')
+    }, 400)
 }
 
 function showtocbtn() {
-    $('#toc')[0].style.display = 'inline-block'
-    $('#toc').removeClass('myhide')
+    setTimeout(() => {
+        $('#toc')[0].style.display = 'inline-block'
+        $('#toc').removeClass('myhide')
+    }, 400)
 }
 
 function hidetopbar() {
@@ -826,9 +843,9 @@ function daybefore(pastdayjs) {
     before /= 3600000
     if (before < 24) {
         if (before > now.hour()) {
-            return ' <x style="color:#46bbcd;">yesterday</x>'
+            return ' <x style="color:#46bbcd;">Yesterday</x>'
         } else {
-            return ' <x style="color:#46bbcd;">today</x>'
+            return ' <x style="color:#46bbcd;">Today</x>'
         }
     }
     if (before > 24 && before < 48) return ' <x style="color:#46bbcd;">2 days ago</x>'

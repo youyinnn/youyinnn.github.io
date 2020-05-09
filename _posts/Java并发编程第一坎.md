@@ -375,7 +375,7 @@ public class WaitTest {
 
 输出：
 
-``` con
+``` console
 T1 got locak A
 T2 sleep 3 seconds
 T1 got locak B
