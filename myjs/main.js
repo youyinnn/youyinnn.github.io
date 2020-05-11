@@ -316,14 +316,41 @@ function getdocwithnohexofrontmatter(text) {
 
 var pcbl_timeout_period = 24 * 60 * 60 * 1000
 
+function searchprocessbarshow() {
+    $('#searchprocessbar').addClass('opshow')
+    $('#spb-out').addClass('spb-outter-animate')
+    $('#spb-in').addClass('spb-inner-animate')
+}
+
+let searchrscountshowclear
+function searchprocessbarhide() {
+    $('#searchprocessbar').removeClass('opshow')
+    $('#spb-out').removeClass('spb-outter-animate')
+    $('#spb-in').removeClass('spb-inner-animate')
+    $('#searchrscount').addClass('opshow')
+    clearTimeout(searchrscountshowclear)
+    searchrscountshowclear = setTimeout(() => {
+        $('#searchrscount').removeClass('opshow')
+    }, 5000)
+}
+
+$('#searchrscount').text('3 hits matching in 4ms')
+
 function searcharticle(text) {
+    searchprocessbarshow()
     // search
     if (text !== '') {
+        let start = new Date().getTime()
         text = text.replace(/\s/gm, '')
         let rs = new Set()
-        index.search(text).then(({
-            hits
+        index.search(text, {
+            typoTolerance: false
+        }).then(({
+            hits,nbHits
         }) => {
+            let finish = new Date().getTime()
+            $('#searchrscount').text(`${nbHits} hits matching in ${finish - start} ms`)
+            searchprocessbarhide()
             for (let i = 0; i < hits.length; i++) {
                 rs.add(hits[i].objectID)
             }
@@ -566,6 +593,7 @@ function rstopaging(articles) {
     highlightBlock()
     window.totalpages = totalpages
     rmclass(pageboxbox, 'myhide')
+    adclass(pageboxbox, 'animate__animated animate__fadeIn')
     pagination()
 }
 
@@ -576,7 +604,6 @@ function scrollToTop(interval) {
 }
 
 function pagination() {
-
     function pageFlesh() {
         scrollToTop(300)
         $('#pagebox-' + nowpage).addClass('animate__animated animate__fadeInDown')
@@ -731,8 +758,10 @@ function pagination() {
 }
 
 function cleansearch() {
+    searchprocessbarhide()
     $('#pgboxbox').remove()
     $('.pagination').remove()
+    $('#searchrscount').removeClass('opshow')
     if (filter_articles_cache.length !== 0) {
         rstopaging(filter_articles_cache)
     } else {

@@ -99,7 +99,11 @@
     </div>
     <div id="docpanel" class="myhide new_font">
         <div id="articlesearch" class="input-group">
-            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search with keywords (algolia)">
+            <div id="searchprocessbar">
+                <div id="spb-out" class="spb-outter-animate"></div>
+                <div id="spb-in" class="spb-inner-animate"></div>
+            </div>
             <div class="input-group-append">
                 <button id="cleanbut" class="btn btn-light" type="button" title="clear search">cls</button>
                 <button id="categories" class="btn btn-light" type="button">cates</button>
@@ -107,6 +111,7 @@
                 <button id="articlesearchbut" class="btn btn-light" type="button" title="search">sch</button>
             </div>
         </div>
+        <div id="searchrscount" class="unselectable"></div>
         <div class="tgs myhide" id="all_cates">
             <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
             <br>
