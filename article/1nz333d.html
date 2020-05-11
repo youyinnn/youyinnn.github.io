@@ -125,30 +125,15 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="d8503e48">
-            <a name="_root-Chapter2-物理层" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Chapter2-物理层
-          </h3><p>物理层是计网体系结构中的最下面一层，本章主要介绍：</p>
+          <h3 id="d8503e48">Chapter2-物理层</h3><p>物理层是计网体系结构中的最下面一层，本章主要介绍：</p>
 <ol>
 <li>物理层的基本任务</li>
 <li>几种常用的信道复用技术</li>
 <li>几种常用的宽带接入技术</li>
 </ol>
 
-          <h4 id="6b4d1de8">
-            <a name="_root-2.1 物理层基本概念" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.1 物理层基本概念
-          </h4>
-          <h5 id="4fdc351c">
-            <a name="_root-物理层的主要任务" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            物理层的主要任务
-          </h5><p>物理层的主要任务是确定与传输媒体的接口有关的一些特性：</p>
+          <h4 id="6b4d1de8">2.1 物理层基本概念</h4>
+          <h5 id="4fdc351c">物理层的主要任务</h5><p>物理层的主要任务是确定与传输媒体的接口有关的一些特性：</p>
 <ol>
 <li><strong>机械特性：</strong>指明接口所用界掀起的形状和尺寸、引脚数目和排列、固定和锁定装置。平时常见的各种规格的接插件都有严格的标准化规定。</li>
 <li><strong>电气特性：</strong>指明在接口电缆的各条线上出现的电压的范围。</li>
@@ -157,18 +142,8 @@
 <li><strong>传输方式转换：</strong>计算机内部大多采用<strong>并行传输</strong>，但是数据通信线路上一般都是<strong>串行传输（处于经济上的考虑）</strong>，所以需要转换。</li>
 </ol>
 
-          <h4 id="cfb8dafd">
-            <a name="_root-2.2 数据通信基本知识" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.2 数据通信基本知识
-          </h4>
-          <h5 id="5bbb5db6">
-            <a name="_root-2.2.1 数据通信系统模型" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.2.1 数据通信系统模型
-          </h5><p>一个数据通信系统大致可以分为：<strong>源系统（发送端）</strong>、<strong>传输系统（传输线路）</strong>和<strong>目的系统（接受端、接收方）</strong></p>
+          <h4 id="cfb8dafd">2.2 数据通信基本知识</h4>
+          <h5 id="5bbb5db6">2.2.1 数据通信系统模型</h5><p>一个数据通信系统大致可以分为：<strong>源系统（发送端）</strong>、<strong>传输系统（传输线路）</strong>和<strong>目的系统（接受端、接收方）</strong></p>
 <p>
         <div class="_showpic_ec78c98f showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180705135038.png class="_pic_ec78c98f hidepic" picId="ec78c98f"></img>
@@ -196,12 +171,7 @@
         </script>
     </p>
 
-          <h6 id="fdd82ae2">
-            <a name="_root-常用术语" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            常用术语
-          </h6><ul>
+          <h6 id="fdd82ae2">常用术语</h6><ul>
 <li><p><strong>源点：</strong>源点设备要产生传输的数据，例如计算器键盘输入的字符，计算机产生输出的数字比特流</p>
 </li>
 <li><p><strong>发送器：</strong>源点产生的数字比特流要通过发送器<strong>编码</strong>之后才能够在传输系统中传输。典型的发送器就是<strong>调制器</strong></p>
@@ -225,12 +195,7 @@
 </li>
 </ul>
 
-          <h5 id="b0f3547">
-            <a name="_root-2.2.2 信道基本概念" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.2.2 信道基本概念
-          </h5><p>首先要明确：<strong>“信道”</strong>指的是<u>向<strong>某一方向</strong>传送信息的媒体</u>，所以一般一条通信电路往往包含一条<strong>发送信道</strong>和<strong>一条接收信道</strong>。</p>
+          <h5 id="b0f3547">2.2.2 信道基本概念</h5><p>首先要明确：<strong>“信道”</strong>指的是<u>向<strong>某一方向</strong>传送信息的媒体</u>，所以一般一条通信电路往往包含一条<strong>发送信道</strong>和<strong>一条接收信道</strong>。</p>
 <p>从信道的交互方式来看，可以有一下三种基本的交互方式：</p>
 <ol>
 <li><strong>单工通信</strong>，只有一个方向且没有反方向的交互。无线电广播或有线电广播以及电视广播就属于这种。</li>
@@ -239,12 +204,7 @@
 </ol>
 <p>来自信源的信号通常称为<strong>基带信号</strong>，但是基带信号大多包含有较多的<strong>低频成分</strong>，甚至有直流成分，<u>而许多信道并不能传输这种低频成分或者直流成分</u>，为了解决这个问题，所以<strong>必须对基带信号进行调制（modulation）</strong>。</p>
 
-          <h6 id="320d89ac">
-            <a name="_root-调制" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            调制
-          </h6><ul>
+          <h6 id="320d89ac">调制</h6><ul>
 <li><strong>基带调制：</strong>仅对基带信号进行波形变换，使之能和信道特性相适应，这种调制是把数字信号转换为另一种形式的数字信号，所以一般叫基带调制为<strong>编码</strong></li>
 </ul>
 <p>
@@ -305,12 +265,7 @@
     </p>
 <p>以上是<strong>基本</strong>的带同调制的方式</p>
 
-          <h5 id="cd847381">
-            <a name="_root-2.3 信道复用技术" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.3 信道复用技术
-          </h5><p>
+          <h5 id="cd847381">2.3 信道复用技术</h5><p>
         <div class="_showpic_f7d4020 showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/TIM%E6%88%AA%E5%9B%BE20180706163834.png class="_pic_f7d4020 hidepic" picId="f7d4020"></img>
         <script>
@@ -337,12 +292,7 @@
         </script>
     </p>
 
-          <h6 id="c752e0ba">
-            <a name="_root-2.3.1 频分复用、时分复用和统计时分复用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.3.1 频分复用、时分复用和统计时分复用
-          </h6><ul>
+          <h6 id="c752e0ba">2.3.1 频分复用、时分复用和统计时分复用</h6><ul>
 <li><strong>频分复用（Frequency Divition Multiplexing，FDM）：</strong>所有用户在同一时间占用不同的带宽资源（这里的带宽是指频率带宽而不是发送速率）</li>
 <li><strong>时分复用（Time Divition Multiplexing，TDM）：</strong>所有用户在不同时间占用同样的频带宽度，更有利于数字信号的传输</li>
 </ul>
@@ -402,19 +352,9 @@
     </p>
 <p>但是STDM中集中器的使用前提是假定各个用户是<u><strong>间歇地工作</strong></u></p>
 
-          <h6 id="943b19fc">
-            <a name="_root-2.3.2 波分复用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.3.2 波分复用
-          </h6><p>波分复用（Wavelength DM，WDM）即光的频分复用</p>
+          <h6 id="943b19fc">2.3.2 波分复用</h6><p>波分复用（Wavelength DM，WDM）即光的频分复用</p>
 
-          <h6 id="94aecd4b">
-            <a name="_root-2.3.3 码分复用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.3.3 码分复用
-          </h6><p><strong>码分复用（Code Division Multiplexing，CDM）</strong>又叫做<strong>码分多址（Code Division Multiple Access，CDMA）</strong>，每个用户可以在同样的频带进行通信，由于<u><strong>各用户使用经过特殊挑选的不同码型，因此各用户之间并不会干扰</strong></u>。</p>
+          <h6 id="94aecd4b">2.3.3 码分复用</h6><p><strong>码分复用（Code Division Multiplexing，CDM）</strong>又叫做<strong>码分多址（Code Division Multiple Access，CDMA）</strong>，每个用户可以在同样的频带进行通信，由于<u><strong>各用户使用经过特殊挑选的不同码型，因此各用户之间并不会干扰</strong></u>。</p>
 <p>CDMA已被广泛使用在民用移动通信中，采用码分多址的好处：</p>
 <ul>
 <li>提高通信的话音质量和数据传输可靠性</li>

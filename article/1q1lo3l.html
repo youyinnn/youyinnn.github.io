@@ -128,12 +128,7 @@
 <p>EXE什么的，看着就忍不住要双击它！</p>
 <p></div></p>
 
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><hr>
+          <h3 id="e25a21eb">Introduction</h3><hr>
 <p>首先介绍一下Electron打包应用的方式：</p>
 <ul>
 <li>打包成asar分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging">详情见</a>。</li>
@@ -148,12 +143,7 @@
 </ul>
 <p>用打包工具进行打包比较傻瓜式，两年前的时候，我用过packager，但是现在不知道为啥不好使了，老卡住，然后我转试builder。</p>
 
-          <h2 id="f4ce0d71">
-            <a name="_root-electron-packager" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            electron-packager
-          </h2><p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
+          <h2 id="f4ce0d71">electron-packager</h2><p>根据项目readme的说明，首先得安装electron-packager的模块：</p>
 <pre><code class="language-shell">npm insatll electron-packager -g</code></pre>
 <p>对还是全局安装 不要怂。</p>
 <p>要打包你的项目，你只需要运行下面格式的命令：</p>
@@ -264,12 +254,7 @@ $</code></pre>
 <p>至此我们的HelloWorld的打包就完成了，可以发现虽然我们只是一个简单的html，但是整个包的大小却有131M，这是因为它还包含了chrome微引擎和其他的环境文件。</p>
 <p><em>参考：<a href="https://electronjs.org/docs/tutorial/application-distribution">https://electronjs.org/docs/tutorial/application-distribution</a></em><br><em>参考：<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">https://github.com/electron-userland/electron-packager/blob/master/docs/api.md</a></em><br><em>参考：<a href="http://blog.csdn.net/a1170201028/article/details/59108126">http://blog.csdn.net/a1170201028/article/details/59108126</a></em></p>
 
-          <h2 id="ec63c0a5">
-            <a name="_root-electron-builder" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            electron-builder
-          </h2><ol>
+          <h2 id="ec63c0a5">electron-builder</h2><ol>
 <li><p>Specify the standard fields in the application <code>package.json</code> — <a href="https://www.electron.build/configuration/configuration#Metadata-name">name</a>, <code>description</code>, <code>version</code> and <a href="https://docs.npmjs.com/files/package.json#people-fields-author-contributors">author</a>.</p>
 </li>
 <li><p>Specify the <a href="https://www.electron.build/configuration/configuration#configuration">build</a> configuration in the <code>package.json</code> as follows:</p>

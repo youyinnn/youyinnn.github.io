@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="fccefbaf">
-            <a name="_root-前言" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            前言
-          </h3><p>本<strong>系列</strong>文章主要是为Java并发入门做铺垫，集中清点：</p>
+          <h3 id="fccefbaf">前言</h3><p>本<strong>系列</strong>文章主要是为Java并发入门做铺垫，集中清点：</p>
 <ul>
 <li><strong>Thread的基本概念</strong></li>
 <li><strong>生命周期</strong></li>
@@ -161,41 +156,21 @@
 </ul>
 <hr>
 
-          <h3 id="96201de0">
-            <a name="_root-Thread基本概念" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Thread基本概念
-          </h3><p><strong>程序(program)：</strong>是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码，静态对象</p>
+          <h3 id="96201de0">Thread基本概念</h3><p><strong>程序(program)：</strong>是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码，静态对象</p>
 <p><strong>进程(process)：</strong>是程序的一次执行过程，或是正在运行的一个程序。动态过程：有它自身的产生、存在和消亡的过程。程序是静态的，进程是动态的</p>
 <p><strong>线程(thread)：</strong>进程可进一步细化为线程，是一个程序内部的一条执行路径。若一个程序可同一时间执行多个线程，就是支持多线程的</p>
 <p>Java语言的JVM允许程序运行多个线程，它通过java.lang.Thread类来实现。</p>
 
-          <h4 id="431481a7">
-            <a name="_root-进程和线程的区别" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            进程和线程的区别
-          </h4><p>一个进程包含多个线程，线程是进程的一个子任务</p>
+          <h4 id="431481a7">进程和线程的区别</h4><p>一个进程包含多个线程，线程是进程的一个子任务</p>
 
-          <h4 id="f012ae55">
-            <a name="_root-Java的线程优先级" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java的线程优先级
-          </h4><p>优先级的意义就是优先级越高，越有可能先获得CPU资源，或者更多的CPU资源</p>
+          <h4 id="f012ae55">Java的线程优先级</h4><p>优先级的意义就是优先级越高，越有可能先获得CPU资源，或者更多的CPU资源</p>
 <p>特点：</p>
 <ul>
 <li><strong>继承性：</strong>子线程持有和父线程一样的优先级</li>
 <li><strong>概率性：</strong>高优先级仅仅是提高获取资源的概率，而不是绝对优先，换句话说，JVM只是把你设置的优先级作为参考，实际执行还是看JVM自己的选择，大部分情况下JVM都会参考你的优先级</li>
 </ul>
 
-          <h4 id="5c5f3041">
-            <a name="_root-守护线程（Daemon Thread）" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            守护线程（Daemon Thread）
-          </h4><p>从我的理解来看，线程的分类可以根据线程的服务对象来分为：</p>
+          <h4 id="5c5f3041">守护线程（Daemon Thread）</h4><p>从我的理解来看，线程的分类可以根据线程的服务对象来分为：</p>
 <ul>
 <li><strong>用户线程：</strong>直接为业务服务的线程</li>
 <li><strong>守护线程：</strong>直接为线程服务的线程或者间接为业务服务的线程</li>
@@ -206,12 +181,7 @@
 <p>守护线程典型的代表就是GC，当程序里面没有用户线程了，也就没有垃圾回收的必要了，执行GC的线程自动销毁。</p>
 </blockquote>
 
-          <h3 id="319f60ee">
-            <a name="_root-生命周期" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            生命周期
-          </h3><table>
+          <h3 id="319f60ee">生命周期</h3><table>
 <thead>
 <tr>
 <th align="left">状态名称</th>
@@ -270,29 +240,14 @@
         </script>
     </p>
 
-          <h3 id="4d807567">
-            <a name="_root-线程创建与使用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            线程创建与使用
-          </h3>
-          <h4 id="8ff5c406">
-            <a name="_root-创建" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            创建
-          </h4><p><strong>线程的实现方法：</strong></p>
+          <h3 id="4d807567">线程创建与使用</h3>
+          <h4 id="8ff5c406">创建</h4><p><strong>线程的实现方法：</strong></p>
 <ol>
 <li>继承Thread类</li>
 <li>实现Runnable接口并实现run()方法</li>
 </ol>
 
-          <h5 id="5887955e">
-            <a name="_root-方式1：继承Thread类" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            方式1：继承Thread类
-          </h5><pre><code class="language-java">public class testThread {
+          <h5 id="5887955e">方式1：继承Thread类</h5><pre><code class="language-java">public class testThread {
     public static void main(String[] args) {
         //3、创建子类独对象
         SubThread subThread = new SubThread();
@@ -314,12 +269,7 @@ class SubThread extends Thread{
     }
 }</code></pre>
 
-          <h5 id="7800f47f">
-            <a name="_root-方式2：实现Runnable接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            方式2：实现Runnable接口
-          </h5><pre><code class="language-java">public class testImplRunnable {
+          <h5 id="7800f47f">方式2：实现Runnable接口</h5><pre><code class="language-java">public class testImplRunnable {
     public static void main(String[] args) {
         PrintNumber printNumber = new PrintNumber();
         //启动线程 执行Thread对象构造时传入的对象的run方法
@@ -341,28 +291,13 @@ class PrintNumber implements Runnable{
     }
 }</code></pre>
 
-          <h5 id="297e9abf">
-            <a name="_root-两种方式的对比" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            两种方式的对比
-          </h5><ul>
+          <h5 id="297e9abf">两种方式的对比</h5><ul>
 <li><strong>继承方式</strong>让类在继承上面的选择受限，<strong>接口实现方式</strong>则很随意</li>
 <li><strong>继承方式</strong>让类拥有一些<strong>线程内建的方法</strong>例如<code>yield()</code>，<strong>接口实现方式</strong>则没有</li>
 </ul>
 
-          <h4 id="a89869ed">
-            <a name="_root-使用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            使用
-          </h4>
-          <h5 id="dad0bdec">
-            <a name="_root-currentThread()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            currentThread()方法
-          </h5><p>这个方法获取正在调用当前代码段的线程的<strong>线程对象</strong>，获取到线程对象，我们可以获取线程的<strong>名字、状态、ID号、线程优先级、是否处于终端、是否处于活动状态</strong>等信息，这些API在后面我们会一个个讲到</p>
+          <h4 id="a89869ed">使用</h4>
+          <h5 id="dad0bdec">currentThread()方法</h5><p>这个方法获取正在调用当前代码段的线程的<strong>线程对象</strong>，获取到线程对象，我们可以获取线程的<strong>名字、状态、ID号、线程优先级、是否处于终端、是否处于活动状态</strong>等信息，这些API在后面我们会一个个讲到</p>
 <pre><code class="language-java">@Test
 public void testCurr(){
     System.out.println(Thread.currentThread().getName()); //main
@@ -371,19 +306,9 @@ public void testCurr(){
     System.out.println(Thread.currentThread().getPriority()); //5
 }</code></pre>
 
-          <h5 id="c4fcbde7">
-            <a name="_root-isAlive()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            isAlive()方法
-          </h5><p>作用是判断当前线程是否<strong>存活</strong>，这个存活的界定是：<strong>如果线程处于正在运行或者准备开始运行的状态，则判定线程存活</strong></p>
+          <h5 id="c4fcbde7">isAlive()方法</h5><p>作用是判断当前线程是否<strong>存活</strong>，这个存活的界定是：<strong>如果线程处于正在运行或者准备开始运行的状态，则判定线程存活</strong></p>
 
-          <h5 id="b3c69907">
-            <a name="_root-sleep()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            sleep()方法
-          </h5><p>让当前线程睡上<strong>n毫秒</strong></p>
+          <h5 id="b3c69907">sleep()方法</h5><p>让当前线程睡上<strong>n毫秒</strong></p>
 <pre><code class="language-java">@Test
 public void testSleep() throws InterruptedException {
     Runnable sleep = () -&gt; {
@@ -420,21 +345,11 @@ sleep done
 NEW  sleepThread</code></pre>
 <p>可以看到，执行<strong>sleep.run</strong>方法的确实是<strong>main线程</strong>，而且整个程序在输出第一行的时候，是睡了10秒再输出接下来的，然后我们的<strong>sleepThread</strong>也是没有运行，还是处于<strong>NEW状态</strong></p>
 
-          <h6 id="479c457a">
-            <a name="_root-注意" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            注意
-          </h6><blockquote>
+          <h6 id="479c457a">注意</h6><blockquote>
 <p>在线程的<strong>sleep</strong>的过程中，如果调用了线程的中断方法<code>interrupt()</code>，则在sleep代码处会抛出<code>InterruptedException</code>异常，这个异常会<strong>清除线程的中断标识</strong>，所以你之前调用<code>interrupt()</code>方法设置的中断标识可能没用了，也就是说，如果要在有<strong>sleep</strong>代码的线程中使用中断标识去有效地进行终端操作的话，那么<code>catch(){}</code>语句块里就不能什么也不做，必须在<code>catch(){}</code>中有中断的逻辑，否则可能达不到中断的效果。</p>
 </blockquote>
 
-          <h5 id="82a824fc">
-            <a name="_root-join()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            join()方法
-          </h5><p>在当前线程中调用<code>someThread.join()</code>方法，就是暂停当前线程，启动someThread，只有当someThread执行完毕或者这个方法会被<code>interrupt()</code>打断，而抛出中断异常。</p>
+          <h5 id="82a824fc">join()方法</h5><p>在当前线程中调用<code>someThread.join()</code>方法，就是暂停当前线程，启动someThread，只有当someThread执行完毕或者这个方法会被<code>interrupt()</code>打断，而抛出中断异常。</p>
 <p><code>join()</code>还有<code>join(long timeout)</code>，其内部实现如：</p>
 <pre><code class="language-java">public final synchronized void join(long millis) throws InterruptedException {
     long base = System.currentTimeMillis();
@@ -459,32 +374,12 @@ NEW  sleepThread</code></pre>
 }</code></pre>
 <p>可以看到，join方法就是如果本线程还存活，就无限等待自己，给别的线程让出机会</p>
 
-          <h5 id="29d6ef98">
-            <a name="_root-yield()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            yield()方法
-          </h5><p>这个方法的作用是<strong>放弃当前的CPU资源</strong>，将它让给其他的任务去占用CPU执行，<strong>但是放弃的时间不确定，有可能刚一放弃，马上就抢回来了，有点不要脸！</strong></p>
+          <h5 id="29d6ef98">yield()方法</h5><p>这个方法的作用是<strong>放弃当前的CPU资源</strong>，将它让给其他的任务去占用CPU执行，<strong>但是放弃的时间不确定，有可能刚一放弃，马上就抢回来了，有点不要脸！</strong></p>
 
-          <h5 id="b944b2d1">
-            <a name="_root-getState()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            getState()方法
-          </h5><p>获取一个State对象，表示当前线程的生命周期</p>
+          <h5 id="b944b2d1">getState()方法</h5><p>获取一个State对象，表示当前线程的生命周期</p>
 
-          <h3 id="a8d39efa">
-            <a name="_root-Object方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Object方法
-          </h3>
-          <h4 id="6769ec80">
-            <a name="_root-wait(long timeout)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            wait(long timeout)
-          </h4><p>作用是使当前执行代码的<strong>线程（as T）</strong>进入等待状态，由于<code>wait()</code>方法是Object类的方法，用来将<strong>当前线程（T）</strong>置入“等待队列”中。所以需要显式地使用<strong>synchronized</strong>块包裹起来，在synchronized块中再次获取<strong>该锁（调用<code>wait()</code>的对象的对象锁，as OL）</strong>，才能调用<code>wait()</code>方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
+          <h3 id="a8d39efa">Object方法</h3>
+          <h4 id="6769ec80">wait(long timeout)</h4><p>作用是使当前执行代码的<strong>线程（as T）</strong>进入等待状态，由于<code>wait()</code>方法是Object类的方法，用来将<strong>当前线程（T）</strong>置入“等待队列”中。所以需要显式地使用<strong>synchronized</strong>块包裹起来，在synchronized块中再次获取<strong>该锁（调用<code>wait()</code>的对象的对象锁，as OL）</strong>，才能调用<code>wait()</code>方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
 <p>调用<code>wait()</code>方法之后，当前线程<strong>马上（从wait那一行开始马上放锁，而不是直到退出sync块）</strong>释放<strong>该锁（OL）</strong>，并进入等待队列<strong>（对象锁对应对象的等待队列）</strong>，此时线程进入suspend状态</p>
 <p>如果timeout设置为0的话则没有超时时间，一直等到notify</p>
 <p>若要<strong>线程T</strong>从<code>wait()</code>中返回：</p>
@@ -626,12 +521,7 @@ T3 released lockB</code></pre>
 </li>
 </ul>
 
-          <h4 id="1f5647d8">
-            <a name="_root-notify()" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            notify()
-          </h4><p>唤醒在该对象<strong>等待队列</strong>中的一个等待线程，在队列中等待的线程是被<strong>随机选取</strong>唤醒的，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
+          <h4 id="1f5647d8">notify()</h4><p>唤醒在该对象<strong>等待队列</strong>中的一个等待线程，在队列中等待的线程是被<strong>随机选取</strong>唤醒的，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
 <p>被唤醒的线程会和其他线程一样，在同样的情况下一起竞争该<strong>对象的同步锁（as OL）</strong></p>
 <blockquote>
 <p>细节说明：</p>
@@ -648,20 +538,10 @@ T3 released lockB</code></pre>
 </ul>
 <p>否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
 
-          <h4 id="a3164266">
-            <a name="_root-notifyAll()" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            notifyAll()
-          </h4><p>唤醒在该对象<strong>等待队列</strong>中的所有等待线程，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
+          <h4 id="a3164266">notifyAll()</h4><p>唤醒在该对象<strong>等待队列</strong>中的所有等待线程，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
 <p>被唤醒的所有线程会和其他线程一样，在同样的情况下一起竞争该<strong>对象的同步锁（as OL）</strong></p>
 
-          <h4 id="fba275b2">
-            <a name="_root-讨论一下wait的风险" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            讨论一下wait的风险
-          </h4><p>这是在几个月前顺丰科技面试的时候，一面面试官问我的问题，当时我没答上，因为当时准备的很不充分，连wait和sleep的区别都没看，估计是因为这个原因，面试官以为又摸到我的上限了，顺丰科技还是挺想去的</p>
+          <h4 id="fba275b2">讨论一下wait的风险</h4><p>这是在几个月前顺丰科技面试的时候，一面面试官问我的问题，当时我没答上，因为当时准备的很不充分，连wait和sleep的区别都没看，估计是因为这个原因，面试官以为又摸到我的上限了，顺丰科技还是挺想去的</p>
 <p>今天看了一下wait和notify之后，感觉能回答出这个问题了</p>
 <ol>
 <li>因为wait并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong></li>

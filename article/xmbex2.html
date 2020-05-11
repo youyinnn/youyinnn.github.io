@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="6eeef492">
-            <a name="_root-51. N-Queens(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            51. N-Queens(Hard)
-          </h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+          <h3 id="6eeef492">51. N-Queens(Hard)</h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p>
         <div class="_showpic_fdf8b36d showpicbtn">Loading images >></div>
         <img href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="_pic_fdf8b36d hidepic" picId="fdf8b36d"></img>
@@ -173,12 +168,7 @@ Output: [
   &quot;.Q..&quot;]
 ]
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.</code></pre>
-          <h4 id="7a32f6b7">
-            <a name="_root-Rough Backtracking" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Rough Backtracking
-          </h4><p>要打这题，首先得做好下棋的一步关键的那一步：判断该位置是否能下，于是对于<strong>一张完整的棋盘</strong>来说，我们每下一步之前，就需要判断：</p>
+          <h4 id="7a32f6b7">Rough Backtracking</h4><p>要打这题，首先得做好下棋的一步关键的那一步：判断该位置是否能下，于是对于<strong>一张完整的棋盘</strong>来说，我们每下一步之前，就需要判断：</p>
 <ol>
 <li>同行同列是否有棋子；</li>
 <li>对角线是否有棋子；</li>
@@ -186,12 +176,7 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 <p>于是为了做到这一步，大概会花n * n的时间</p>
 <p>然后用回溯去做每一颗棋子的下棋判断，直观+回溯的考虑的话，确实是这样的，但是这题我们可以用一种更聪明的方式去解决；</p>
 
-          <h4 id="51b476fd">
-            <a name="_root-Smart Backtracking" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Smart Backtracking
-          </h4><p>首先我们的判断步骤，不需要遍历整张<code>n*n</code>的棋盘，我们也不需要事先准备好整张棋盘，如果我们把每一步棋当成一行去填补棋盘，第一行是一个棋子，第二行是第二个棋子，于是</p>
+          <h4 id="51b476fd">Smart Backtracking</h4><p>首先我们的判断步骤，不需要遍历整张<code>n*n</code>的棋盘，我们也不需要事先准备好整张棋盘，如果我们把每一步棋当成一行去填补棋盘，第一行是一个棋子，第二行是第二个棋子，于是</p>
 <ul>
 <li>当我们下第<code>i</code>个棋子的时候，只需要判断前面的<code>0~i-1</code>行棋盘就好了；</li>
 <li>关于对角线，我们也不必遍历整行，因为对角线的位置可以根据行差算出来，比如要插入第<code>i</code>行第<code>j</code>列的时候，需要判断上面<code>i-1</code>行的对角线的话，比如第2行在该行的对角线理论上为<code>j + i - 2</code>或者<code>j - (i - 2)</code>；</li>
@@ -239,12 +224,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
     }
 }</code></pre>
 
-          <h4 id="b4d213ef">
-            <a name="_root-Elegant Backtracking" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Elegant Backtracking
-          </h4><p>很遗憾的是，我们上面再聪明再接近线性的判断效率，其实还是抵不过常数级的，所以我们上面的优化过后的code也仅是打到43.6%，我们再来整理一下我们的<strong>valid</strong>函数：</p>
+          <h4 id="b4d213ef">Elegant Backtracking</h4><p>很遗憾的是，我们上面再聪明再接近线性的判断效率，其实还是抵不过常数级的，所以我们上面的优化过后的code也仅是打到43.6%，我们再来整理一下我们的<strong>valid</strong>函数：</p>
 <ul>
 <li>同列不能下；</li>
 <li>左右对角线不能下；</li>
@@ -306,12 +286,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
     }
 }</code></pre>
 
-          <h3 id="b6a2de25">
-            <a name="_root-52.N-QueensII(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            52.N-QueensII(Hard)
-          </h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+          <h3 id="b6a2de25">52.N-QueensII(Hard)</h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p>
         <div class="_showpic_fdf8b36d showpicbtn">Loading images >></div>
         <img href=https://assets.leetcode.com/uploads/2018/10/12/8-queens.png class="_pic_fdf8b36d hidepic" picId="fdf8b36d"></img>
@@ -354,12 +329,7 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
   &quot;...Q&quot;,
   &quot;.Q..&quot;]
 ]</code></pre>
-          <h4 id="3bd5346f">
-            <a name="_root-Solution I" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution I
-          </h4><p>没什么，就改一改上一题而已</p>
+          <h4 id="3bd5346f">Solution I</h4><p>没什么，就改一改上一题而已</p>
 <pre><code class="language-java">int ans = 0;
 
 public int totalNQueens(int n) {
@@ -401,12 +371,7 @@ private boolean valid(List&lt;String&gt; cb, int x, int y) {
     return true;
 }</code></pre>
 
-          <h4 id="b411b57e">
-            <a name="_root-Solution II" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution II
-          </h4><pre><code class="language-java">int ans = 0;
+          <h4 id="b411b57e">Solution II</h4><pre><code class="language-java">int ans = 0;
 boolean[] colSet, drSet, dlSet;
 
 public int totalNQueens(int n) {
@@ -434,24 +399,14 @@ private void backtracking(int n, int row) {
     }
 }</code></pre>
 
-          <h3 id="2a2661e3">
-            <a name="_root-53. Maximun SubArray(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            53. Maximun SubArray(Easy)
-          </h3><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+          <h3 id="2a2661e3">53. Maximun SubArray(Easy)</h3><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [-2,1,-3,4,-1,2,1,-5,4],
 Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow up:</strong></p>
 <p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
 
-          <h4 id="13dd55ef">
-            <a name="_root-DP" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP
-          </h4><p>不多说，在<a href="https://youyinnn.github.io/?to=post&amp;number=63">地痞</a>有分析过的</p>
+          <h4 id="13dd55ef">DP</h4><p>不多说，在<a href="https://youyinnn.github.io/?to=post&amp;number=63">地痞</a>有分析过的</p>
 <pre><code class="language-java">public int maxSubArray(int[] nums) {
     int rMax = 0, max = Integer.MIN_VALUE;
     for (int current: nums) {
@@ -461,12 +416,7 @@ Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow u
     return max;
 }</code></pre>
 
-          <h3 id="73ecdd5a">
-            <a name="_root-54. Spiral Matrix(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            54. Spiral Matrix(Medium)
-          </h3><p>Given a matrix of <em>m</em> x <em>n</em> elements (<em>m</em> rows, <em>n</em> columns), return all elements of the matrix in spiral order.</p>
+          <h3 id="73ecdd5a">54. Spiral Matrix(Medium)</h3><p>Given a matrix of <em>m</em> x <em>n</em> elements (<em>m</em> rows, <em>n</em> columns), return all elements of the matrix in spiral order.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input:
 [
@@ -482,12 +432,7 @@ Output: [1,2,3,6,9,8,7,4,5]</code></pre><p><strong>Example 2:</strong></p>
   [9,10,11,12]
 ]
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]</code></pre>
-          <h4 id="9ba030a0">
-            <a name="_root-Brute Force" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Brute Force
-          </h4><p>hmmmmm，强打就完事了，怎么强打呢？四个关键点：</p>
+          <h4 id="9ba030a0">Brute Force</h4><p>hmmmmm，强打就完事了，怎么强打呢？四个关键点：</p>
 <ol>
 <li><p>起点</p>
 <blockquote>
@@ -571,12 +516,7 @@ private int nextRange(int i) {
     return i + 1 &lt; 4 ? i + 1 : 0;
 }</code></pre>
 
-          <h3 id="dde45d99">
-            <a name="_root-55.Jump Game(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            55.Jump Game(Medium)
-          </h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+          <h3 id="dde45d99">55.Jump Game(Medium)</h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
 <p>Each element in the array represents your maximum jump length at that position.</p>
 <p>Determine if you are able to reach the last index.</p>
 <p><strong>Example 1:</strong></p>
@@ -588,12 +528,7 @@ Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.</code></pre><p>这题就不多解释了，在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
 
-          <h4 id="13dd55ef">
-            <a name="_root-DP" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP
-          </h4><pre><code class="language-java">public boolean canJump(int[] nums) {
+          <h4 id="13dd55ef">DP</h4><pre><code class="language-java">public boolean canJump(int[] nums) {
     boolean[] can = new boolean[nums.length];
     can[nums.length - 1] = true;
     for (int i = nums.length - 2; i &gt;= 0; i--) {
@@ -608,12 +543,7 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
     return can[0];
 }</code></pre>
 
-          <h4 id="979792b9">
-            <a name="_root-Greedy" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Greedy
-          </h4><pre><code class="language-java">public boolean canJump(int[] nums) {
+          <h4 id="979792b9">Greedy</h4><pre><code class="language-java">public boolean canJump(int[] nums) {
     int last = nums.length - 1;
     for (int i = nums.length - 2; i &gt;= 0; i--) {
         if (i + nums[i] &gt;= last) {

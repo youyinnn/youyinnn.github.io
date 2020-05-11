@@ -125,24 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="3c848844">
-            <a name="_root-1. TwoSum(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            1. TwoSum(Easy)
-          </h3><p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
+          <h3 id="3c848844">1. TwoSum(Easy)</h3><p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
 <p>You may assume that each input would have <strong>exactly</strong> one solution, and you may not use the <em>same</em> element twice.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given nums = [2, 7, 11, 15], target = 9,
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].</code></pre>
-          <h4 id="945d66c5">
-            <a name="_root-Ⅰ.Brute Force" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Ⅰ.Brute Force
-          </h4><pre><code class="language-java">public int[] twoSum(int[] nums, int target) {
+          <h4 id="945d66c5">Ⅰ.Brute Force</h4><pre><code class="language-java">public int[] twoSum(int[] nums, int target) {
     for (int i = 0; i &lt; nums.length; i++) {
         for (int j = i + 1; j &lt; nums.length; j++) {
             if (nums[j] == target - nums[i]) {
@@ -153,12 +143,7 @@ return [0, 1].</code></pre>
     throw new IllegalArgumentException(&quot;No two sum solution&quot;);
 }</code></pre>
 
-          <h4 id="29467087">
-            <a name="_root-Ⅱ.Hashing" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Ⅱ.Hashing
-          </h4><p>Of all other Java solution with they call “hashing”, they just using JDK’s provided implementation, and it’s not a friendly solution for those who are not coding with Java.</p>
+          <h4 id="29467087">Ⅱ.Hashing</h4><p>Of all other Java solution with they call “hashing”, they just using JDK’s provided implementation, and it’s not a friendly solution for those who are not coding with Java.</p>
 <p>And as I thinking about, it’s shit code that you are using <strong>a non-classic structure</strong> like <strong>“HashMap”, “ArrayList”</strong> and so on.</p>
 <p>It’s ok that you using JDK’s implementation like <strong>“LinkedList”, “Stack”</strong> because their basic function were all implemented in the accepted ordinary way.</p>
 <p>But using a structure like <strong>“HashMap”, “ArrayList”</strong>, it’s totally cheating because the algorithm inside them <strong>is not your work</strong>, and you probably don’t know how to implement <strong>HashMap’s</strong> treeify operation or <strong>ArrayList’s</strong> grow operation.</p>
@@ -282,12 +267,7 @@ public int[] twoSum(int[] nums, int target) {
     return nums;
 }</code></pre>
 
-          <h3 id="e51d44cd">
-            <a name="_root-2. Add Two Number(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2. Add Two Number(Medium)
-          </h3><p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong> and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+          <h3 id="e51d44cd">2. Add Two Number(Medium)</h3><p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong> and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
 <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
@@ -384,12 +364,7 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     return l1;
 }</code></pre>
 
-          <h3 id="40f9251d">
-            <a name="_root-3. Longest Substring(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            3. Longest Substring(Medium)
-          </h3><p>Given a string, find the length of the <strong>longest substring</strong> without repeating characters.</p>
+          <h3 id="40f9251d">3. Longest Substring(Medium)</h3><p>Given a string, find the length of the <strong>longest substring</strong> without repeating characters.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: &quot;abcabcbb&quot;
 Output: 3 
@@ -401,12 +376,7 @@ Explanation: The answer is &quot;b&quot;, with the length of 1.</code></pre><p><
 Output: 3
 Explanation: The answer is &quot;wke&quot;, with the length of 3. 
              Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</code></pre>
-          <h4 id="87b1f4cd">
-            <a name="_root-ascii mapping" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ascii mapping
-          </h4><p>官方给出的解法，官方还给出了用HashMap和HashSet去解的</p>
+          <h4 id="87b1f4cd">ascii mapping</h4><p>官方给出的解法，官方还给出了用HashMap和HashSet去解的</p>
 <p><strong>ascii mapping</strong>这样的解法虽然知道<strong>第一目的</strong>是用ascii映射数组去记录上一次重复出现char的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的i、j已经完全没有灵魂了，难以理解</p>
 <pre><code class="language-java">public class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -431,12 +401,7 @@ Explanation: The answer is &quot;wke&quot;, with the length of 3.
 </li>
 </ol>
 
-          <h3 id="b79e66ab">
-            <a name="_root-4. Median of Two Sorted Arrays(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            4. Median of Two Sorted Arrays(Hard)
-          </h3><p>There are two sorted arrays <strong>nums1</strong> and <strong>nums2</strong> of size m and n respectively.</p>
+          <h3 id="b79e66ab">4. Median of Two Sorted Arrays(Hard)</h3><p>There are two sorted arrays <strong>nums1</strong> and <strong>nums2</strong> of size m and n respectively.</p>
 <p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
 <p>You may assume <strong>nums1</strong> and <strong>nums2</strong> cannot be both empty.</p>
 <p><strong>Example 1:</strong></p>
@@ -450,12 +415,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<strong>O(log (m+n))</strong>的解，说到已排好序、log级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数</p>
 <p>在此先给出容易想到但是不符合题意的解<strong>(n+m)/2</strong>解</p>
 
-          <h4 id="9ecc509">
-            <a name="_root-Ⅰ.a (n+m)/2 solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Ⅰ.a (n+m)/2 solution
-          </h4><p>分别从两个数组中取最小的数，然后取到两数组长度中位之后，自然就找到中位数了</p>
+          <h4 id="9ecc509">Ⅰ.a (n+m)/2 solution</h4><p>分别从两个数组中取最小的数，然后取到两数组长度中位之后，自然就找到中位数了</p>
 <pre><code class="language-java">public double findMedianSortedArrays(int[] nums1, int[] nums2) {
     if (nums1.length &lt; nums2.length) {
         return findMedianSortedArrays(nums2, nums1);
@@ -498,20 +458,10 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
     }
 }</code></pre>
 
-          <h4 id="5d3753ce">
-            <a name="_root-Ⅱ. log(m+n) solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Ⅱ. log(m+n) solution
-          </h4><p>对数级解非常不容易找出来，我觉得能解出来的都是数学家- -</p>
+          <h4 id="5d3753ce">Ⅱ. log(m+n) solution</h4><p>对数级解非常不容易找出来，我觉得能解出来的都是数学家- -</p>
 <p>对数级解决方案有2种，一种是<strong>泛化为“findKth”问题</strong>，另一种是<strong>“分治法寻找perfect I”</strong></p>
 
-          <h5 id="67ca17d7">
-            <a name="_root-Perfect I" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Perfect I
-          </h5><p>官方给出的<a href="https://leetcode.com/problems/median-of-two-sorted-arrays/solution/">solution</a>就是它，为了解这个问题，首先我们从统计学上去了解一下什么是<strong>Medium</strong></p>
+          <h5 id="67ca17d7">Perfect I</h5><p>官方给出的<a href="https://leetcode.com/problems/median-of-two-sorted-arrays/solution/">solution</a>就是它，为了解这个问题，首先我们从统计学上去了解一下什么是<strong>Medium</strong></p>
 <blockquote>
 <p>Dividing a set into two equal length subsets, that one subset is always greater than the other.</p>
 <p>它将原集合分成等长的两个子集，其中一个子集中的任意元素总是大于另一个子集中的任意元素</p>
@@ -619,12 +569,7 @@ public void showCut(int[] arr, int cutIndex) {
     System.out.println(&quot;cut:&quot; + cutIndex + &quot; --&gt; &quot; + Arrays.toString(leftPart) + &quot; | &quot; + Arrays.toString(rightPart));
 }</code></pre>
 
-          <h3 id="74d7442">
-            <a name="_root-5. Longest Palindromic Substring" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            5. Longest Palindromic Substring
-          </h3><p>Given a string <strong>s</strong>, find the longest palindromic substring in <strong>s</strong>. You may assume that the maximum length of <strong>s</strong> is 1000.</p>
+          <h3 id="74d7442">5. Longest Palindromic Substring</h3><p>Given a string <strong>s</strong>, find the longest palindromic substring in <strong>s</strong>. You may assume that the maximum length of <strong>s</strong> is 1000.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: &quot;babad&quot;
 Output: &quot;bab&quot;
@@ -635,12 +580,7 @@ Output: &quot;bb&quot;</code></pre><p><strong>Example 3:</strong></p>
 Output: &quot;a&quot;</code></pre><p><strong>Example 4:</strong></p>
 <pre><code>Input: &quot;&quot;
 Output: &quot;&quot;</code></pre>
-          <h4 id="2cf9f0f6">
-            <a name="_root-60+ms Solution (Beat 33%)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            60+ms Solution (Beat 33%)
-          </h4><p>因为String <strong>s</strong>是一个char数组，我们以遍历这个数组为基础，当我们在位置<code>i</code>碰到一个char的时候，就找它下一次出现的位置<code>j</code>，那么我们就可以继续数组子序列<code>[i, j]</code>是否是回文串，由此找到一个可能的解；然后再以<code>j+1</code>开始，再找下一个<code>j</code>，于是代码可以是：</p>
+          <h4 id="2cf9f0f6">60+ms Solution (Beat 33%)</h4><p>因为String <strong>s</strong>是一个char数组，我们以遍历这个数组为基础，当我们在位置<code>i</code>碰到一个char的时候，就找它下一次出现的位置<code>j</code>，那么我们就可以继续数组子序列<code>[i, j]</code>是否是回文串，由此找到一个可能的解；然后再以<code>j+1</code>开始，再找下一个<code>j</code>，于是代码可以是：</p>
 <pre><code class="language-java">public boolean isPalindrome(char[] src, int begin, int end) {
     while(begin &lt; end) {
         if(src[begin++] != src[end--]) {
@@ -684,12 +624,7 @@ public String longestPalindrome(String s) {
 }</code></pre>
 <p>解法的关键是do循环里面的<code>next = s.indexOf(nowC, next + 1)</code>，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -</p>
 
-          <h4 id="6949d937">
-            <a name="_root-7-10ms Solution (Beat 98%)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            7-10ms Solution (Beat 98%)
-          </h4><p>我们换个思路，关于next的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的end字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来<strong>猜</strong>出下标</p>
+          <h4 id="6949d937">7-10ms Solution (Beat 98%)</h4><p>我们换个思路，关于next的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的end字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来<strong>猜</strong>出下标</p>
 <p>我们倒着来看（为什么倒着？后面解释），对于每个<code>i &gt; 0</code>，都有很多种可能说在<code>s[i]</code>就是一组回文数的end，那么这个可能性由什么去缩小？由一个<strong>既定的长度len</strong>来决定，我们倒着来看的话，<code>s[i - len + 1]</code>到<code>s[i]</code>之间的<strong>len</strong>长度子串如果是回文数的话，我们就马上找到了一组可能的解</p>
 <p>那么这个<strong>既定的len</strong>怎么求？我们可以发现这个<strong>len</strong>最终就是我们想要的结果字串的长度，所以我们不妨从0开始，在序列<strong>至少有一个字符</strong>的时候，<strong>要找到比原len更长的解的话，我们的len需要再往前吃1位或者2位数字</strong>，如果还是要保持原<strong>len</strong>的话，是求不出解的，比如最开始<code>end = i = 0</code>的时候<code>start = i - len + 1 = 1</code>，这是无解</p>
 <p>以<code>&quot;abcba&quot;</code>为例</p>
@@ -777,12 +712,7 @@ private boolean isPalindrome(char[] chars, int head, int tail) {
     return true;
 }</code></pre>
 
-          <h5 id="33c4bd1f">
-            <a name="_root-一点优化" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            一点优化
-          </h5><p>观察表中最后一行以及<code>isPalindrome</code>函数可以发现，判断<code>abcba</code>是否为回文串的时候，重复判断了<code>bcb</code>，而它已经在上一次被判断过了，于是我们可以将start和end提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断</p>
+          <h5 id="33c4bd1f">一点优化</h5><p>观察表中最后一行以及<code>isPalindrome</code>函数可以发现，判断<code>abcba</code>是否为回文串的时候，重复判断了<code>bcb</code>，而它已经在上一次被判断过了，于是我们可以将start和end提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断</p>
 <p>在回文数判断函数中补上：</p>
 <pre><code class="language-java">private int start, end;
 private boolean isPalindrome(char[] chars, int head, int tail) {

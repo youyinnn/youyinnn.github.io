@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="5a8dbf85">
-            <a name="_root-Topic &amp; Partition" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Topic &amp; Partition
-          </h3><p>kafka中的Message以topic为分类去组织的，每个topic又可以分为不同的partition去存储：</p>
+          <h3 id="5a8dbf85">Topic &amp; Partition</h3><p>kafka中的Message以topic为分类去组织的，每个topic又可以分为不同的partition去存储：</p>
 <p>
         <div class="_showpic_893f9370 showpicbtn">Loading images >></div>
         <img href=http://kafka.apache.org/20/images/log_anatomy.png class="_pic_893f9370 hidepic" picId="893f9370"></img>
@@ -175,12 +170,7 @@
 <p>首先，它们允许日志扩展到超出适合单个服务器的大小。每个单独的分区必须适合托管它的服务器，但主题可能有许多分区，因此它可以处理任意数量的数据。</p>
 <p>其次，它们充当了并行性的单位，更多是因为这个原因！</p>
 
-          <h3 id="8576123a">
-            <a name="_root-Partition" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Partition
-          </h3><p>上面从大方向上介绍了Message的存储是如何work的，我们再来关注一下存储的细节</p>
+          <h3 id="8576123a">Partition</h3><p>上面从大方向上介绍了Message的存储是如何work的，我们再来关注一下存储的细节</p>
 <p>Partition中的每条Message由offset来表示它在这个partition中的偏移量，这个offset不是该Message在partition数据文件中的实际存储位置，而是逻辑上一个值，它唯一确定了partition中的一条Message。因此，可以认为offset是partition中Message的id。partition中的每条Message包含了以下三个属性：</p>
 <ul>
 <li><p>offset</p>
@@ -238,20 +228,10 @@
 </blockquote>
 <p>那Kafka是如何解决查找效率的的问题呢？有两大法宝：1) 分段 2) 索引。</p>
 
-          <h4 id="2ae22d6d">
-            <a name="_root-数据文件的分段" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            数据文件的分段
-          </h4><p>Kafka解决查询效率的手段之一是将数据文件分段，比如有100条Message，它们的offset是从0到99。</p>
+          <h4 id="2ae22d6d">数据文件的分段</h4><p>Kafka解决查询效率的手段之一是将数据文件分段，比如有100条Message，它们的offset是从0到99。</p>
 <p>假设将数据文件分成5段，第一段为0-19，第二段为20-39，以此类推，每段放在一个单独的数据文件里面，数据文件以该段中最小的offset命名。这样在查找指定offset的Message的时候，用二分查找就可以定位到该Message在哪个段中。</p>
 
-          <h4 id="8478f87c">
-            <a name="_root-为数据文件建索引" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            为数据文件建索引
-          </h4><p>数据文件分段使得可以在一个较小的数据文件中查找对应offset的Message了，但是这依然需要顺序扫描才能找到对应offset的Message。</p>
+          <h4 id="8478f87c">为数据文件建索引</h4><p>数据文件分段使得可以在一个较小的数据文件中查找对应offset的Message了，但是这依然需要顺序扫描才能找到对应offset的Message。</p>
 <p>为了进一步提高查找的效率，Kafka为每个分段后的数据文件建立了索引文件，文件名与数据文件的名字是一样的，只是文件扩展名为.index。</p>
 <p>索引文件中包含若干个索引条目，每个条目表示数据文件中一条Message的索引。索引包含两个部分（均为4个字节的数字），分别为相对offset和position。</p>
 <p>相对offset：因为数据文件分段以后，每个数据文件的起始offset不为0，相对offset表示这条Message相对于其所属数据文件中最小的offset的大小。</p>
@@ -291,12 +271,7 @@
 <li>lookup, 用二分查找的方式去查找小于或等于给定offset的最大的那个offset</li>
 </ul>
 
-          <h3 id="8297b247">
-            <a name="_root-小结" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            小结
-          </h3><p>我们以几张图来总结一下Message是如何在Kafka中存储的，以及如何查找指定offset的Message的。</p>
+          <h3 id="8297b247">小结</h3><p>我们以几张图来总结一下Message是如何在Kafka中存储的，以及如何查找指定offset的Message的。</p>
 <p>Message是按照topic来组织，每个topic可以分成多个的partition，比如：有5个partition的名为为page_visits的topic的目录结构为：</p>
 <p>
         <div class="_showpic_1cd587c showpicbtn">Loading images >></div>

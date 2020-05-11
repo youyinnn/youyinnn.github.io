@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="aa91a04f">
-            <a name="_root-Introductions" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introductions
-          </h3><p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
+          <h3 id="aa91a04f">Introductions</h3><p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
 <p>
         <div class="_showpic_ccb54ba7 showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/img/20181119145558.png class="_pic_ccb54ba7 hidepic" picId="ccb54ba7"></img>
@@ -160,18 +155,8 @@
 <p>Jenkins的默认UI也有点丑，还不如官网的UI好看</p>
 <p>但是不影响这玩意的强大表现</p>
 
-          <h3 id="b65ea435">
-            <a name="_root-Installation on CentOS" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Installation on CentOS
-          </h3>
-          <h4 id="fad00c11">
-            <a name="_root-Fetch yum repo" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Fetch yum repo
-          </h4><p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
+          <h3 id="b65ea435">Installation on CentOS</h3>
+          <h4 id="fad00c11">Fetch yum repo</h4><p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
 <p>There is also <a href="http://pkg.jenkins-ci.org/redhat-stable/">a LTS YUM repository</a> for the <a href="https://wiki.jenkins.io/display/JENKINS/LTS+Release+Line">LTS Release Line</a></p>
 <ul>
 <li><code>sudo wget -O /etc/yum.repos.d/jenkins.repo</code> <code>http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo</code></li>
@@ -179,33 +164,18 @@
 <li><code>sudo yum install jenkins</code></li>
 </ul>
 
-          <h4 id="67e3adb7">
-            <a name="_root-Installation of Java" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Installation of Java
-          </h4><p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
+          <h4 id="67e3adb7">Installation of Java</h4><p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
 <pre><code class="language-bash">$ sudo yum install java</code></pre>
 <p><strong>Note:</strong> If running CentOS, ensure you follow the <a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava">guide below</a>.</p>
 
-          <h4 id="e827ec74">
-            <a name="_root-Start/Stop" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Start/Stop
-          </h4><ul>
+          <h4 id="e827ec74">Start/Stop</h4><ul>
 <li><code>sudo service jenkins start/stop/restart</code></li>
 <li><code>sudo chkconfig jenkins on</code></li>
 </ul>
 <p><strong>Note:</strong> if you get the following error message, ensure that Java has been installed:</p>
 <pre><code class="language-bash">Starting jenkins (via systemctl):  Job `for` jenkins.service failed. See `&#39;systemctl status jenkins.service&#39;` and `&#39;journalctl -xn&#39;` `for` details.[FAILED]</code></pre>
 
-          <h4 id="a361751d">
-            <a name="_root-What does this package do?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            What does this package do?
-          </h4><ul>
+          <h4 id="a361751d">What does this package do?</h4><ul>
 <li>Jenkins will be launched as a daemon on startup. See <code>/etc/init.d/jenkins</code> for more details.</li>
 <li>The &#39;<code>jenkins</code>&#39; user is created to run this service. If you change this to a different user via the config file, you must change the owner of /var/log/jenkins, /var/lib/jenkins, and /var/cache/jenkins.</li>
 <li>Log file will be placed in <code>/var/log/jenkins/jenkins.log</code>. Check this file if you are troubleshooting Jenkins.</li>
@@ -221,12 +191,7 @@
 </ul>
 </blockquote>
 
-          <h4 id="54c0e641">
-            <a name="_root-More: change Jenkins run as with root" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            More: change Jenkins run as with root
-          </h4><p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
+          <h4 id="54c0e641">More: change Jenkins run as with root</h4><p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
 <p>1) <code>vim /etc/sysconfig/jenkins</code></p>
 <p>2) 找到JENKINS_USER改为 “root”:</p>
 <pre><code>JENKINS_USER=&quot;root&quot;</code></pre><p>3)然后更改Jenkins home，webroot和日志的所有权：</p>
@@ -237,19 +202,9 @@ $ chown -R root:root /var/log/jenkins</code></pre>
 <pre><code class="language-bash">$ service jenkins restart</code></pre>
 <p>这样我们就给jenkins设置了root权限，我们再运行shell脚本就不会提示权限问题了。</p>
 
-          <h4 id="db365cd5">
-            <a name="_root-Wiki" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Wiki
-          </h4><p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
+          <h4 id="db365cd5">Wiki</h4><p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
 
-          <h3 id="3c4e040c">
-            <a name="_root-Create your first pipline by using github repo as branch source" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Create your first pipline by using github repo as branch source
-          </h3><p>To get started quickly with Pipeline:</p>
+          <h3 id="3c4e040c">Create your first pipline by using github repo as branch source</h3><p>To get started quickly with Pipeline:</p>
 <ol>
 <li>Copy one of the <a href="https://jenkins.io/doc/pipeline/tour/hello-world/#examples">examples below</a> into your repository and name it <code>Jenkinsfile</code></li>
 <li>Click the <strong>New Item</strong> menu within Jenkins </li>

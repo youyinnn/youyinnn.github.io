@@ -125,36 +125,16 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="fccefbaf">
-            <a name="_root-前言" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            前言
-          </h3><p>这篇记录下从今天开始，复习到、新遇到的所有算法题</p>
+          <h3 id="fccefbaf">前言</h3><p>这篇记录下从今天开始，复习到、新遇到的所有算法题</p>
 <ul>
 <li>栈相关</li>
 <li>数学逻辑相关</li>
 </ul>
 <hr>
 
-          <h4 id="c41e55a0">
-            <a name="_root-栈相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            栈相关
-          </h4>
-          <h5 id="24bc1b27">
-            <a name="_root-汉诺塔（递归方法）" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            汉诺塔（递归方法）
-          </h5>
-          <h6 id="97c4a731">
-            <a name="_root-C语言实现" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            C语言实现
-          </h6><pre><code class="language-c">void hanoi(int n, char source, char help, char target) {
+          <h4 id="c41e55a0">栈相关</h4>
+          <h5 id="24bc1b27">汉诺塔（递归方法）</h5>
+          <h6 id="97c4a731">C语言实现</h6><pre><code class="language-c">void hanoi(int n, char source, char help, char target) {
     // 讲塔座上按照直径大小自上而下编号为1到n的n个圆盘按规则搬到塔座target上，help做辅助塔
     if (n == 1) {
         move(source, 1, target);
@@ -174,18 +154,8 @@ void move(char source, int n, char target){
 </blockquote>
 <hr>
 
-          <h4 id="c9b33bc1">
-            <a name="_root-数学逻辑相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            数学逻辑相关
-          </h4>
-          <h5 id="43b39703">
-            <a name="_root-有理数的循环节" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            有理数的循环节
-          </h5><blockquote>
+          <h4 id="c9b33bc1">数学逻辑相关</h4>
+          <h5 id="43b39703">有理数的循环节</h5><blockquote>
 <p>两次看到这题，第一次是在某年蓝桥杯上，第二次就是昨天（2018年9月10日）的快手笔试。如出一辙，分码未写。</p>
 <p>1/7 = 0.142857142... 是个无限循环小数。任何有理数都可以表示为无限循环小数的形式。本题目要求即是：给出一个数字的循环小数表示法。</p>
 <p>例如：</p>
@@ -235,12 +205,7 @@ void move(char source, int n, char target){
 <p>比如1/4，余数是1，<code>(1*10)%4=2</code>，再继续<code>(2*10)%4=0</code>，算到0就可以截止了</p>
 <p>1/7，余数是1，<code>(1*10)%7=3</code>，<code>(3*10)%7=2</code>，<code>(2*10)%7=6</code>，<code>(6*10)%7=4</code>，<code>(4*10)%7=5``(5*10)%7=1</code>，又碰到一样的余数了，说明下一轮得到的商之前是已经求出来过的，所以已经找到循环节了；</p>
 
-          <h6 id="697991c6">
-            <a name="_root-Java实现" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java实现
-          </h6><pre><code class="language-java">// resulet : k.(m1m2m3m4...mn)
+          <h6 id="697991c6">Java实现</h6><pre><code class="language-java">// resulet : k.(m1m2m3m4...mn)
 private static String getRepetend(int a, int b) {
     int k = a / b;
     a = a % b;

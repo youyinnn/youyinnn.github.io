@@ -125,52 +125,22 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="6be9ea42">
-            <a name="_root-Preface" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Preface
-          </h3><p>Prime number is important for computer science, especially in cryptography such as <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">public-key cryptography</a>, which relies on the difficulty of <a href="https://en.wikipedia.org/wiki/Integer_factorization">factoring</a> large numbers into their prime factors.</p>
+          <h3 id="6be9ea42">Preface</h3><p>Prime number is important for computer science, especially in cryptography such as <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">public-key cryptography</a>, which relies on the difficulty of <a href="https://en.wikipedia.org/wiki/Integer_factorization">factoring</a> large numbers into their prime factors.</p>
 <p>So I planed to summarize some concepts and algorithm of prime number.</p>
 
-          <h3 id="f93806f9">
-            <a name="_root-Basic Concepts" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Basic Concepts
-          </h3>
-          <h4 id="27372cdd">
-            <a name="_root-Prime number/Composite number" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Prime number/Composite number
-          </h4><p>A <strong>prime number</strong> (or a <strong>prime</strong>) is a <a href="https://en.wikipedia.org/wiki/Natural_number">natural number</a> greater than 1 that cannot be formed by multiplying two smaller natural numbers.</p>
+          <h3 id="f93806f9">Basic Concepts</h3>
+          <h4 id="27372cdd">Prime number/Composite number</h4><p>A <strong>prime number</strong> (or a <strong>prime</strong>) is a <a href="https://en.wikipedia.org/wiki/Natural_number">natural number</a> greater than 1 that cannot be formed by multiplying two smaller natural numbers.</p>
 <p>A natural number greater than 1 that is not prime is called a <a href="https://en.wikipedia.org/wiki/Composite_number">composite number</a>.</p>
 <p>For exmple, 5 is a prime number because it can only be divided by 1 and 5 itself, but 6 can be divided by 1, 6, 2, 3.</p>
 
-          <h4 id="e2b16215">
-            <a name="_root-Factor Number/Divisor number" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Factor Number/Divisor number
-          </h4><p>In <a href="https://en.wikipedia.org/wiki/Mathematics">mathematics</a>, a <strong>divisor</strong> of an <a href="https://en.wikipedia.org/wiki/Integer">integer</a><strong><em>n</em></strong>, also called a <strong>factor</strong> of <strong><em>n</em></strong>, is an integer<strong><em>m</em></strong> that may be multiplied by some integer to produce<strong><em>n</em></strong>.</p>
+          <h4 id="e2b16215">Factor Number/Divisor number</h4><p>In <a href="https://en.wikipedia.org/wiki/Mathematics">mathematics</a>, a <strong>divisor</strong> of an <a href="https://en.wikipedia.org/wiki/Integer">integer</a><strong><em>n</em></strong>, also called a <strong>factor</strong> of <strong><em>n</em></strong>, is an integer<strong><em>m</em></strong> that may be multiplied by some integer to produce<strong><em>n</em></strong>.</p>
 <p>In this case, one also says that<strong><em>n</em></strong> is a <strong>multiple</strong> of <strong><em>m</em></strong>. An integer<strong><em>n</em></strong> is <strong>divisible</strong> by another integer<strong><em>m</em></strong> if<strong><em>m</em></strong> is a divisor of<strong><em>n</em></strong>; this implies dividing<strong><em>n</em></strong> by<strong><em>m</em></strong> leaves no remainder.</p>
 <p>7 can be divided by 2 and 3 but leaves 1 as remainder.</p>
 <p>6 can be divided by 2 and 3 but leaves 0 as remainder.</p>
 
-          <h4 id="ad2d6740">
-            <a name="_root-Primality test" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Primality test
-          </h4><p>A simple but slow method of checking the primality of a given number <strong><em>n</em></strong>, called <a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a>, tests whether <strong><em>n</em></strong> is a multiple of any integer between 2 and <strong><em>√n</em></strong>. Faster algorithms include the <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">Miller–Rabin primality test</a>, which is fast but has a small chance of error, and the <a href="https://en.wikipedia.org/wiki/AKS_primality_test">AKS primality test</a>, which always produces the correct answer in <a href="https://en.wikipedia.org/wiki/Polynomial_time">polynomial time</a> but is too slow to be practical. Particularly fast methods are available for numbers of special forms, such as <a href="https://en.wikipedia.org/wiki/Mersenne_number">Mersenne numbers</a>. As of December 2018 the <a href="https://en.wikipedia.org/wiki/Largest_known_prime_number">largest known prime number</a> has 24,862,048 <a href="https://en.wikipedia.org/wiki/Numerical_digit">decimal digits</a>.</p>
+          <h4 id="ad2d6740">Primality test</h4><p>A simple but slow method of checking the primality of a given number <strong><em>n</em></strong>, called <a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a>, tests whether <strong><em>n</em></strong> is a multiple of any integer between 2 and <strong><em>√n</em></strong>. Faster algorithms include the <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">Miller–Rabin primality test</a>, which is fast but has a small chance of error, and the <a href="https://en.wikipedia.org/wiki/AKS_primality_test">AKS primality test</a>, which always produces the correct answer in <a href="https://en.wikipedia.org/wiki/Polynomial_time">polynomial time</a> but is too slow to be practical. Particularly fast methods are available for numbers of special forms, such as <a href="https://en.wikipedia.org/wiki/Mersenne_number">Mersenne numbers</a>. As of December 2018 the <a href="https://en.wikipedia.org/wiki/Largest_known_prime_number">largest known prime number</a> has 24,862,048 <a href="https://en.wikipedia.org/wiki/Numerical_digit">decimal digits</a>.</p>
 
-          <h4 id="c9495e25">
-            <a name="_root-Interesting fact of prime number" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Interesting fact of prime number
-          </h4><blockquote>
+          <h4 id="c9495e25">Interesting fact of prime number</h4><blockquote>
 <p>From <a href="https://www.geeksforgeeks.org/prime-numbers/">geeksforgeeks</a></p>
 </blockquote>
 <ol>
@@ -197,18 +167,8 @@ an-1 % n = 1 </code></pre></li>
 </li>
 </ol>
 
-          <h3 id="f288dde7">
-            <a name="_root-Primality Test" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Primality Test
-          </h3>
-          <h4 id="f271312f">
-            <a name="_root-Trial division - O(√n)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Trial division - O(√n)
-          </h4><p>The simplest primality test is <em><a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a></em>: Given an input number <em>n</em>, check whether any prime integer <em>m</em> from 2 to <strong><em>√n</em></strong> evenly <a href="https://en.wikipedia.org/wiki/Divisibility">divides</a> <em>n</em> (the division leaves no <a href="https://en.wikipedia.org/wiki/Remainder">remainder</a>). If <em>n</em> is divisible by any <em>m</em> then <em>n</em> is <a href="https://en.wikipedia.org/wiki/Composite_number">composite</a>, otherwise it is <a href="https://en.wikipedia.org/wiki/Prime_number">prime</a>.</p>
+          <h3 id="f288dde7">Primality Test</h3>
+          <h4 id="f271312f">Trial division - O(√n)</h4><p>The simplest primality test is <em><a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a></em>: Given an input number <em>n</em>, check whether any prime integer <em>m</em> from 2 to <strong><em>√n</em></strong> evenly <a href="https://en.wikipedia.org/wiki/Divisibility">divides</a> <em>n</em> (the division leaves no <a href="https://en.wikipedia.org/wiki/Remainder">remainder</a>). If <em>n</em> is divisible by any <em>m</em> then <em>n</em> is <a href="https://en.wikipedia.org/wiki/Composite_number">composite</a>, otherwise it is <a href="https://en.wikipedia.org/wiki/Prime_number">prime</a>.</p>
 <p>Example coded with python:</p>
 <pre><code class="language-python">def trialdivision(n):
     if (n &lt;= 1):
@@ -221,12 +181,7 @@ an-1 % n = 1 </code></pre></li>
             count = count + 1
         return True</code></pre>
 
-          <h4 id="90465163">
-            <a name="_root-Optimized solution - O(√n)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Optimized solution - O(√n)
-          </h4><p>Based on the fact that <strong>every prime number can represented in form of 6k+1 or 6k-1 except 2 and 3</strong>, where n is natural number.</p>
+          <h4 id="90465163">Optimized solution - O(√n)</h4><p>Based on the fact that <strong>every prime number can represented in form of 6k+1 or 6k-1 except 2 and 3</strong>, where n is natural number.</p>
 <pre><code class="language-python">def sixkopt(n):
     if n &lt;= 1:
         return False
@@ -243,12 +198,7 @@ an-1 % n = 1 </code></pre></li>
         k = k + 6
     return True</code></pre>
 
-          <h4 id="47d3da7f">
-            <a name="_root-Sieve of Eratosthenes" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Sieve of Eratosthenes
-          </h4><img src="https://image.youyinnn.top/Sieve_of_Eratosthenes_animation.gif" style="clear:right;float:right;margin-left:1rem;">
+          <h4 id="47d3da7f">Sieve of Eratosthenes</h4><img src="https://image.youyinnn.top/Sieve_of_Eratosthenes_animation.gif" style="clear:right;float:right;margin-left:1rem;">
 
 <p>In <a href="https://en.wikipedia.org/wiki/Mathematics">mathematics</a>, the <strong>sieve of Eratosthenes</strong> is an ancient <a href="https://en.wikipedia.org/wiki/Algorithm">algorithm</a> for finding all <a href="https://en.wikipedia.org/wiki/Prime_number">prime numbers</a> up to any given limit.</p>
 <p>It does so by iteratively marking as <a href="https://en.wikipedia.org/wiki/Composite_number">composite</a> (i.e., not prime) the multiples of each prime, starting with the first prime number, 2. The multiples of a given prime are generated as a sequence of numbers starting from that prime, with <a href="https://en.wikipedia.org/wiki/Arithmetic_progression">constant difference between them</a> that is equal to that prime. This is the sieve&#39;s key distinction from using <a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a> to sequentially test each candidate number for divisibility by each prime.</p>
@@ -266,12 +216,7 @@ an-1 % n = 1 </code></pre></li>
 <p>The next number not yet crossed out in the list after 5 is 7; the next step would be to cross out every 7th number in the list after 7, but they are all already crossed out at this point, as these numbers (14, 21, 28) are also multiples of smaller primes <strong>because 7 × 7 is greater than 30</strong>. The numbers not crossed out at this point in the list are all the prime numbers below 30:</p>
 <p> 2  3     5     7           11    13          17    19          23                29</p>
 
-          <h5 id="be646e02">
-            <a name="_root-Implement - O(nlog(log(n)))" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Implement - O(nlog(log(n)))
-          </h5><pre><code class="language-python">def SieveOfEratosthenes(n): 
+          <h5 id="be646e02">Implement - O(nlog(log(n)))</h5><pre><code class="language-python">def SieveOfEratosthenes(n): 
     # Create a boolean array &quot;prime[0..n]&quot; and initialize 
     #  all entries it as true. A value in prime[i] will 
     # finally be false if i is Not a prime, else true. 
@@ -285,29 +230,14 @@ an-1 % n = 1 </code></pre></li>
                 prime[i] = False
         p += 1</code></pre>
 
-          <h3 id="9924fc98">
-            <a name="_root-Application" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Application
-          </h3>
-          <h4 id="51b498e9">
-            <a name="_root-Prime factor decomposition/Prime factorization" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Prime factor decomposition/Prime factorization
-          </h4><p>Given a composite integer <strong><em>n</em></strong>, the task of providing one (or all) prime factors is referred to as <em>factorization</em> of <strong><em>n</em></strong>. It is significantly more difficult than primality testing, and although many factorization algorithms are known, they are slower than the fastest primality testing methods. Trial division and <a href="https://en.wikipedia.org/wiki/Pollard&#39;s_rho_algorithm">Pollard&#39;s rho algorithm</a> can be used to find very small factors of <strong><em>n</em></strong>, and <a href="https://en.wikipedia.org/wiki/Elliptic_curve_factorization">elliptic curve factorization</a> can be effective when <strong><em>n</em></strong> has factors of moderate size. Methods suitable for arbitrary large numbers that do not depend on the size of its factors include the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic sieve</a> and <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieve</a>. </p>
+          <h3 id="9924fc98">Application</h3>
+          <h4 id="51b498e9">Prime factor decomposition/Prime factorization</h4><p>Given a composite integer <strong><em>n</em></strong>, the task of providing one (or all) prime factors is referred to as <em>factorization</em> of <strong><em>n</em></strong>. It is significantly more difficult than primality testing, and although many factorization algorithms are known, they are slower than the fastest primality testing methods. Trial division and <a href="https://en.wikipedia.org/wiki/Pollard&#39;s_rho_algorithm">Pollard&#39;s rho algorithm</a> can be used to find very small factors of <strong><em>n</em></strong>, and <a href="https://en.wikipedia.org/wiki/Elliptic_curve_factorization">elliptic curve factorization</a> can be effective when <strong><em>n</em></strong> has factors of moderate size. Methods suitable for arbitrary large numbers that do not depend on the size of its factors include the <a href="https://en.wikipedia.org/wiki/Quadratic_sieve">quadratic sieve</a> and <a href="https://en.wikipedia.org/wiki/General_number_field_sieve">general number field sieve</a>. </p>
 <p>As with primality testing, there are also factorization algorithms that require their input to have a special form, including the <a href="https://en.wikipedia.org/wiki/Special_number_field_sieve">special number field sieve</a>. As of December 2019 the <a href="https://en.wikipedia.org/wiki/Integer_factorization_records">largest number known to have been factored</a> by a general-purpose algorithm is <a href="https://en.wikipedia.org/wiki/RSA-240">RSA-240</a>, which has 240 decimal digits (795 bits) and is the product of two large primes.</p>
 <p>Several <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">public-key cryptography</a> algorithms, such as <a href="https://en.wikipedia.org/wiki/RSA_(algorithm)">RSA</a> and the <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie–Hellman key exchange</a>, are based on large prime numbers (2048-<a href="https://en.wikipedia.org/wiki/Bit">bit</a> primes are common). </p>
 <p>RSA relies on the assumption that it is much easier (that is, more efficient) to perform the multiplication of two (large) numbers <strong><em>x</em></strong> and <strong><em>y</em></strong> than to calculate <strong><em>x</em></strong> and <strong><em>y</em></strong> (assumed <a href="https://en.wikipedia.org/wiki/Coprime">coprime</a>) if only the product is known. The Diffie–Hellman key exchange relies on the fact that there are efficient algorithms for <a href="https://en.wikipedia.org/wiki/Modular_exponentiation">modular exponentiation</a> (computing <strong><em>a^b mod c</em></strong>), while the reverse operation (the <a href="https://en.wikipedia.org/wiki/Discrete_logarithm">discrete logarithm</a>) is thought to be a hard problem.</p>
 <p>Prime numbers are frequently used for <a href="https://en.wikipedia.org/wiki/Hash_table">hash tables</a>. For instance the original method of Carter and Wegman for <a href="https://en.wikipedia.org/wiki/Universal_hashing">universal hashing</a> was based on computing <a href="https://en.wikipedia.org/wiki/Hash_function">hash functions</a> by choosing random <a href="https://en.wikipedia.org/wiki/Linear_function">linear functions</a> modulo large prime numbers. Carter and Wegman generalized this method to <a href="https://en.wikipedia.org/wiki/K-independent_hashing"><strong><em>k</em></strong>-independent hashing</a> by using higher-degree polynomials, again modulo large primes.  As well as in the hash function, prime numbers are used for the hash table size in <a href="https://en.wikipedia.org/wiki/Quadratic_probing">quadratic probing</a> based hash tables to ensure that the probe sequence covers the whole table.</p>
 
-          <h3 id="a69f6fdc">
-            <a name="_root-Reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Reference
-          </h3><p><a href="https://www.geeksforgeeks.org/prime-numbers/">https://www.geeksforgeeks.org/prime-numbers/</a></p>
+          <h3 id="a69f6fdc">Reference</h3><p><a href="https://www.geeksforgeeks.org/prime-numbers/">https://www.geeksforgeeks.org/prime-numbers/</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Prime_number">https://en.wikipedia.org/wiki/Prime_number</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Primality_test">https://en.wikipedia.org/wiki/Primality_test</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</a></p>

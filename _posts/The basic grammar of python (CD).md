@@ -335,9 +335,9 @@ Arguments: spam eggs
 
 
 
-### D
+## D
 
-#### Modules
+### Modules
 
 Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a *module*; definitions from a module can be ***imported*** into other modules or into the *main* module.
 
@@ -376,7 +376,7 @@ Or we can just run it as a command line script:
 python fibo.py 10
 ```
 
-##### Import
+#### Import
 
 ``` python
 # import as object
@@ -402,7 +402,7 @@ fibonacci(10)
 from fibo import *
 ```
 
-##### Module Search Path
+#### Module Search Path
 
 When a module named `fibo` is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named `fibo.py` in a list of directories given by the variable [`sys.path`](https://docs.python.org/3/library/sys.html#sys.path). [`sys.path`](https://docs.python.org/3/library/sys.html#sys.path) is initialized from these locations:
 
@@ -410,7 +410,7 @@ When a module named `fibo` is imported, the interpreter first searches for a bui
 - [`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH) (a list of directory names, with the same syntax as the shell variable `PATH`).
 - The installation-dependent default.
 
-##### In Packages
+#### In Packages
 
 Here’s a possible structure for your package (expressed in terms of a hierarchical filesystem):
 
@@ -446,7 +446,7 @@ import sound.effects.echo as echo
 echo.makesound()
 ```
 
-###### Import * From Packages
+##### Import * From Packages
 
 For example, the file `sound/effects/__init__.py` could contain the following code:
 

@@ -128,12 +128,7 @@
 <p>翻译自官方文档</p>
 <p></div></p>
 
-          <h2 id="3d10aa7d">
-            <a name="_root-Writing Middleware" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Writing Middleware
-          </h2><p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
+          <h2 id="3d10aa7d">Writing Middleware</h2><p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
 <p>中间件能够完成以下事情：</p>
 <ul>
 <li>Execute any code.</li>
@@ -170,12 +165,7 @@
         </script>
     </p>
 
-          <h3 id="1ba10272">
-            <a name="_root-Example:  Middleware function myLogger" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Example:  Middleware function myLogger
-          </h3><p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
+          <h3 id="1ba10272">Example:  Middleware function myLogger</h3><p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
 <pre><code class="language-javascript">var myLogger = function (req, res, next) {
   console.log(&#39;LOGGED&#39;)
   next()
@@ -200,12 +190,7 @@ app.listen(3000)</code></pre>
 <p>中间件加载的顺序很重要：先加载的中间件其方法先被执行。</p>
 <p>如果<code>myLogger</code>是在“路由到根路径”之后加载的话，那么任何请求都不会访问到它，因为根路径路由周期已经结束了。</p>
 
-          <h3 id="2aae19b2">
-            <a name="_root-Example: Middleware function requestTime" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Example: Middleware function requestTime
-          </h3><p>我们创建一个记录请求时间的中间件：</p>
+          <h3 id="2aae19b2">Example: Middleware function requestTime</h3><p>我们创建一个记录请求时间的中间件：</p>
 <pre><code class="language-javascript">var requestTime = function (req, res, next) {
   req.requestTime = Date.now()
   next()
@@ -229,12 +214,7 @@ app.get(&#39;/&#39;, function (req, res) {
 
 app.listen(3000)</code></pre>
 
-          <h3 id="c4ebc8c1">
-            <a name="_root-Configurable middleware" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Configurable middleware
-          </h3><p>如果你需要你的中间件可以配置的话，那么你可以这样做：</p>
+          <h3 id="c4ebc8c1">Configurable middleware</h3><p>如果你需要你的中间件可以配置的话，那么你可以这样做：</p>
 <p>File: <code>my-middleware.js</code></p>
 <pre><code class="language-javascript">module.exports = function(options) {
   return function(req, res, next) {

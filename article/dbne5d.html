@@ -125,24 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="111f5fe1">
-            <a name="_root-31. Next Permutation(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            31. Next Permutation(Medium)
-          </h3><p>Implement <strong>next permutation</strong>, which rearranges numbers into the lexicographically next greater permutation of numbers.</p>
+          <h3 id="111f5fe1">31. Next Permutation(Medium)</h3><p>Implement <strong>next permutation</strong>, which rearranges numbers into the lexicographically next greater permutation of numbers.</p>
 <p>If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).</p>
 <p>The replacement must be <strong>in-place</strong> and use only constant extra memory.</p>
 <p>Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.</p>
 <pre><code>1,2,3` → `1,3,2`
 `3,2,1` → `1,2,3`
 `1,1,5` → `1,5,1</code></pre>
-          <h4 id="2944baa3">
-            <a name="_root-From Back(7ms)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            From Back(7ms)
-          </h4><p>不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列1 2 3 4，往后的序列是</p>
+          <h4 id="2944baa3">From Back(7ms)</h4><p>不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列1 2 3 4，往后的序列是</p>
 <pre><code>1 2 3 4  ┌→ 2 1 3 4  ┌→ 3 1 2 4  ┌→ 4 1 2 3
 1 2 4 3  |  2 1 4 3  |  3 1 4 2  |  4 1 3 2
 1 3 2 4  |  2 3 1 4  |  3 2 1 4  |  4 2 1 3
@@ -182,12 +172,7 @@ private int findTheBiggerOne(int[] nums, int start, int end, int target) {
     return start;
 }</code></pre>
 
-          <h3 id="cb3d2344">
-            <a name="_root-32. Longest Valid Parentheses(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            32. Longest Valid Parentheses(Hard)
-          </h3><p>Given a string containing just the characters <code>&#39;(&#39;</code> and <code>&#39;)&#39;</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
+          <h3 id="cb3d2344">32. Longest Valid Parentheses(Hard)</h3><p>Given a string containing just the characters <code>&#39;(&#39;</code> and <code>&#39;)&#39;</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: &quot;(()&quot;
 Output: 2
@@ -196,12 +181,7 @@ Explanation: The longest valid parentheses substring is &quot;()&quot;</code></p
 Output: 4
 Explanation: The longest valid parentheses substring is &quot;()()&quot;</code></pre><p>这题，本来还想用找<strong>Q5最长回文数</strong>的套路去做的，不行，而且这题有更简单的方法</p>
 
-          <h4 id="13dd55ef">
-            <a name="_root-DP" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP
-          </h4><p>想不到吧？这题居然可以dp，牛皮吧？根据官方给的solution，我优化了代码，以一种更简单的方式去用dp解这道题，我们先看几个例子：</p>
+          <h4 id="13dd55ef">DP</h4><p>想不到吧？这题居然可以dp，牛皮吧？根据官方给的solution，我优化了代码，以一种更简单的方式去用dp解这道题，我们先看几个例子：</p>
 <pre><code class="language-java">1.假如我们有：
                 ( ) ( )
     -------------------
@@ -278,12 +258,7 @@ before match:       0 0     0 4
     return maxMatch;
 }</code></pre>
 
-          <h3 id="339b7937">
-            <a name="_root-33. Search in Rotated sorted Array (Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            33. Search in Rotated sorted Array (Medium)
-          </h3><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
+          <h3 id="339b7937">33. Search in Rotated sorted Array (Medium)</h3><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
 <p>(i.e., <code>[0,1,2,4,5,6,7]</code> might become <code>[4,5,6,7,0,1,2]</code>).</p>
 <p>You are given a target value to search. If found in the array return its index, otherwise return <code>-1</code>.</p>
 <p>You may assume no duplicate exists in the array.</p>
@@ -293,19 +268,9 @@ before match:       0 0     0 4
 Output: 4</code></pre><p><strong>Example 2:</strong></p>
 <pre><code>Input: nums = [4,5,6,7,0,1,2], target = 3
 Output: -1</code></pre>
-          <h4 id="66c3e55a">
-            <a name="_root-Find The Rotate Pivot With Binary- O(logn)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Find The Rotate Pivot With Binary- O(logn)
-          </h4><p>这题唯一的技巧就是，如何找到被轴转过的有序数组的轴，找到轴就能对轴两边进行二分法了</p>
+          <h4 id="66c3e55a">Find The Rotate Pivot With Binary- O(logn)</h4><p>这题唯一的技巧就是，如何找到被轴转过的有序数组的轴，找到轴就能对轴两边进行二分法了</p>
 
-          <h5 id="ffa69656">
-            <a name="_root-Find Pivot" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Find Pivot
-          </h5><p>精髓，真的很直白的技巧，这也可以作为<strong>“找到被轴转过的有序数组的轴”</strong>的题解</p>
+          <h5 id="ffa69656">Find Pivot</h5><p>精髓，真的很直白的技巧，这也可以作为<strong>“找到被轴转过的有序数组的轴”</strong>的题解</p>
 <pre><code class="language-java">private int findPivot(int[] nums) {
     int low = 0, high = nums.length - 1, mid;
     while (low &lt; high) {
@@ -319,12 +284,7 @@ Output: -1</code></pre>
     return low;
 }</code></pre>
 
-          <h5 id="fe9f50fd">
-            <a name="_root-With Pivot" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            With Pivot
-          </h5><pre><code class="language-java">public int search(int[] nums, int target) {
+          <h5 id="fe9f50fd">With Pivot</h5><pre><code class="language-java">public int search(int[] nums, int target) {
     if (nums.length == 0) {
         return -1;
     }
@@ -343,12 +303,7 @@ Output: -1</code></pre>
     return rs &lt; 0 ? -1 : rs;
 }</code></pre>
 
-          <h3 id="29034c07">
-            <a name="_root-34. Find First And Last Position Of Element In Sorted Array" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            34. Find First And Last Position Of Element In Sorted Array
-          </h3><p>Given an array of integers <code>nums</code> sorted in ascending order, find the starting and ending position of a given <code>target</code> value.</p>
+          <h3 id="29034c07">34. Find First And Last Position Of Element In Sorted Array</h3><p>Given an array of integers <code>nums</code> sorted in ascending order, find the starting and ending position of a given <code>target</code> value.</p>
 <p>Your algorithm&#39;s runtime complexity must be in the order of <em>O</em>(log <em>n</em>).</p>
 <p>If the target is not found in the array, return <code>[-1, -1]</code>.</p>
 <p><strong>Example 1:</strong></p>
@@ -379,12 +334,7 @@ Output: [-1,-1]</code></pre><pre><code class="language-java">public int[] search
 }</code></pre>
 <p>不多说</p>
 
-          <h3 id="b56240c">
-            <a name="_root-35. Search Insert Position(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            35. Search Insert Position(Easy)
-          </h3><p>Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
+          <h3 id="b56240c">35. Search Insert Position(Easy)</h3><p>Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
 <p>You may assume no duplicates in the array.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: [1,3,5,6], 5

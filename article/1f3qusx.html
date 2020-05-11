@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="15ab87c3">
-            <a name="_root-What is HashTable" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            What is HashTable
-          </h3><p>Of all structure we learn before like &quot;array&quot; or &quot;stack&quot;, the element&#39;s position on their structure is not absolute, it&#39;s uncertain which means there is no pattern on it.  </p>
+          <h3 id="15ab87c3">What is HashTable</h3><p>Of all structure we learn before like &quot;array&quot; or &quot;stack&quot;, the element&#39;s position on their structure is not absolute, it&#39;s uncertain which means there is no pattern on it.  </p>
 <p>So the searching operation was always base on &quot;comparing&quot;,  the searching efficiency of them were dependence on the times they perform compare.</p>
 <p>In a perfect situation is that we don&#39;t want to do any comparing opts, them we grape the element at once. So we need something to record the relationship between key value and the place where it store. Then next time we seek a key, we would able to use this relationship to grape it immediately.</p>
 <p>We define the relationship as <strong>&quot;Hash&quot;</strong>.</p>
@@ -162,12 +157,7 @@
     </p>
 <p>And we will discuss two aspect of it: <strong>&quot;Hash Method&quot;</strong> &amp; <strong>&quot;Collision Handle&quot;</strong></p>
 
-          <h3 id="adbc61f3">
-            <a name="_root-Hash Method" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Hash Method
-          </h3><p>There are many ways to hash, and we better know what is a good hash method before we code it.</p>
+          <h3 id="adbc61f3">Hash Method</h3><p>There are many ways to hash, and we better know what is a good hash method before we code it.</p>
 <p>A good hash method will mapping any key to a un-used place, which means there is no collision for all elements. The probability of it is all with the same. We call it <strong>Uniform Hash Method</strong>.</p>
 <p><strong>Capture information on key</strong></p>
 <p>$$H(key) = key$$</p>
@@ -176,12 +166,7 @@
 <p>$$H(key) = | key |\mod rank$$</p>
 <p>Assume thay our hash-table&#39;s length is <strong>rank</strong>, with this way, we could always get a rightful index of it.</p>
 
-          <h3 id="adf619c8">
-            <a name="_root-Collision Handle" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Collision Handle
-          </h3><p>Since a hash function gets us a small number for a big key, there is possibility that two keys result in same value. The situation where a newly inserted key maps to an already occupied slot in hash table is called collision and must be handled using some collision handling technique. Following are the ways to handle collisions:</p>
+          <h3 id="adf619c8">Collision Handle</h3><p>Since a hash function gets us a small number for a big key, there is possibility that two keys result in same value. The situation where a newly inserted key maps to an already occupied slot in hash table is called collision and must be handled using some collision handling technique. Following are the ways to handle collisions:</p>
 <ul>
 <li><p><strong>Chaining:</strong>The idea is to make each cell of hash table point to a linked list of records that have same hash function value. Chaining is simple, but requires additional memory outside the table.</p>
 <p>  Like JDK&#39;s <code>HashMap</code>, link nodes when meet collision.</p>
@@ -197,12 +182,7 @@
 </li>
 </ul>
 
-          <h3 id="7e388c9b">
-            <a name="_root-Practice" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Practice
-          </h3><pre><code class="language-java">public interface HashableInteger {
+          <h3 id="7e388c9b">Practice</h3><pre><code class="language-java">public interface HashableInteger {
     int hash(int key);
     int collisionHandle(int key);
     void setHashTable(int[] originSequence);
@@ -210,12 +190,7 @@
     void showTable();
 }</code></pre>
 
-          <h4 id="6d9d7c8b">
-            <a name="_root-Linear Detection HashTable" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Linear Detection HashTable
-          </h4><pre><code class="language-java">public class LdHashTable implements HashableInteger {
+          <h4 id="6d9d7c8b">Linear Detection HashTable</h4><pre><code class="language-java">public class LdHashTable implements HashableInteger {
     private Integer[] table;
     public LdHashTable(int[] originSeq) {setHashTable(originSeq);}
 

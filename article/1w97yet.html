@@ -128,12 +128,7 @@
 <p>转载自：<a href="http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/">http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/</a></p>
 </blockquote>
 
-          <h3 id="9fa48d54">
-            <a name="_root-Understanding the nodejs&#39; event loop" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Understanding the nodejs&#39; event loop
-          </h3><p>The first basic thesis of node.js is that I/O is expensive:</p>
+          <h3 id="9fa48d54">Understanding the nodejs&#39; event loop</h3><p>The first basic thesis of node.js is that I/O is expensive:</p>
 <p>
         <div class="_showpic_fd315b03 showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/20191002162139.png class="_pic_fd315b03 hidepic" picId="fd315b03"></img>
@@ -169,19 +164,9 @@
 <p>The second basis thesis is that thread-per-connection is memory-expensive: [e.g. that graph everyone showns about Apache sucking up memory compared to Nginx]</p>
 <p>Apache is multithreaded: it spawns a <a href="http://httpd.apache.org/docs/2.0/mod/worker.html">thread per request</a> (or <a href="http://httpd.apache.org/docs/2.0/mod/prefork.html">process</a>, it depends on the conf). You can see how that overhead eats up memory as the number of concurrent connections increases and more threads are needed to serve multiple simulataneous clients. Nginx and Node.js are not multithreaded, because threads and processes carry a heavy memory cost. They are single-threaded, but event-based. This eliminates the overhead created by thousands of threads/processes by handling many connections in a single thread.</p>
 
-          <h3 id="b25bf473">
-            <a name="_root-<strong>Node.js keeps a single thread for your code...</strong>" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <strong>Node.js keeps a single thread for your code...</strong>
-          </h3><p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &amp;lt; now + 1000) { // do nothing }</code></p>
+          <h3 id="b25bf473"><strong>Node.js keeps a single thread for your code...</strong></h3><p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &amp;lt; now + 1000) { // do nothing }</code></p>
 
-          <h3 id="7c30bea4">
-            <a name="_root-<strong>...however, everything runs in parallel except your code</strong>" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <strong>...however, everything runs in parallel except your code</strong>
-          </h3><p>There is no way of making code run in parallel within a single request. However, all I/O is evented and asynchronous, so the following won&#39;t block the server: [codesyntax lang=&quot;javascript&quot;]</p>
+          <h3 id="7c30bea4"><strong>...however, everything runs in parallel except your code</strong></h3><p>There is no way of making code run in parallel within a single request. However, all I/O is evented and asynchronous, so the following won&#39;t block the server: [codesyntax lang=&quot;javascript&quot;]</p>
 <pre><code> c.query(
    &#39;SELECT SLEEP(20);&#39;,
    function (err, results, fields) {
@@ -194,12 +179,7 @@
     }
 );</code></pre><p>If you do that in one request, other requests can be processed just fine while the database is running it&#39;s sleep.</p>
 
-          <h3 id="19a97cbe">
-            <a name="_root-Why is this good? When do we go from sync to async/parallel execution?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Why is this good? When do we go from sync to async/parallel execution?
-          </h3><p>Having synchronous execution is good, because it simplifies writing code (compared to threads, where concurrency issues have a tendency to result in WTFs).</p>
+          <h3 id="19a97cbe">Why is this good? When do we go from sync to async/parallel execution?</h3><p>Having synchronous execution is good, because it simplifies writing code (compared to threads, where concurrency issues have a tendency to result in WTFs).</p>
 <p>In node.js, you aren&#39;t supposed to worry about what happens in the backend: just use callbacks when you are doing I/O; and you are guaranteed that your code is never interrupted and that doing I/O will not block other requests without having to incur the costs of thread/process per request (e.g. memory overhead in Apache).</p>
 <p>Having asynchronous I/O is good, because I/O is more expensive than most code and we should be doing something better than just waiting for I/O.</p>
 <p>
@@ -234,12 +214,7 @@
 <p><strong>Internal implementation</strong></p>
 <p><a href="https://github.com/ry/node/tree/master/deps">Internally</a>, node.js relies on <a href="http://software.schmorp.de/pkg/libev.html">libev</a> to provide the event loop, which is supplemented by <a href="http://software.schmorp.de/pkg/libeio.html">libeio</a> which uses pooled threads to provide asynchronous I/O. To learn even more, have a look at the <a href="http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod">libev documentation</a>.</p>
 
-          <h3 id="1cdcd5df">
-            <a name="_root-So how do we do async in Node.js?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            So how do we do async in Node.js?
-          </h3><p>Tim Caswell describes the patterns in his <a href="http://creationix.com/jsconf.pdf">excellent presentation</a></p>
+          <h3 id="1cdcd5df">So how do we do async in Node.js?</h3><p>Tim Caswell describes the patterns in his <a href="http://creationix.com/jsconf.pdf">excellent presentation</a></p>
 <ul>
 <li>First-class functions. E.g. we pass around functions as data, shuffle them around and execute them when needed.</li>
 <li>Function composition. Also known as having anonymous functions or closures that are executed after something happens in the evented I/O.</li>

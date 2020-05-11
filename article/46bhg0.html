@@ -125,31 +125,16 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>Java中的<code>String</code>其实有很多东西可以深入的，比如最快拼接效率，比如常量池，比如老生常谈的<code>==</code>问题</p>
+          <h3 id="e25a21eb">Introduction</h3><p>Java中的<code>String</code>其实有很多东西可以深入的，比如最快拼接效率，比如常量池，比如老生常谈的<code>==</code>问题</p>
 <p>研究它们的时候我们始终要记住，<code>String</code>是不可变的<strong>（immutable）</strong></p>
 <p>还有比如它的本质是一个<code>char[]</code>数组这些事实就简单带过了</p>
 <p>我们需要深入的是<code>String</code>的内存问题，既然它是一成不变的，有一个对象是一个对象，那么JVM是如何减少内存的开销的？以及它引申出的一系列内存问题</p>
 <p>而我想写这篇文章的引子，则是<a href="https://github.com/hollischuang">Hollis前辈</a>的一篇：<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在for循环中使用&quot;+&quot;进行字符串拼接</a></p>
 
-          <h3 id="c5dc9951">
-            <a name="_root-Constant Pool &amp; Runtime Constant Pool" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Constant Pool &amp; Runtime Constant Pool
-          </h3><p>关于常量池，它用于存放Java编译期生成的各种字面量和符号引用，于是每个Class文件都会有一个Constant Pool，具体的你可以通过<code>javap -v ClassName</code>一个类去看到；</p>
+          <h3 id="c5dc9951">Constant Pool &amp; Runtime Constant Pool</h3><p>关于常量池，它用于存放Java编译期生成的各种字面量和符号引用，于是每个Class文件都会有一个Constant Pool，具体的你可以通过<code>javap -v ClassName</code>一个类去看到；</p>
 <p>而在JVM装载class文件的时候，会读取Constant Pool里的内容到Runtime Constant Pool，而Runtime Constant Pool会在程序运行的时候动态产生新的常量；</p>
 
-          <h3 id="3ae43aaa">
-            <a name="_root-Literal" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Literal
-          </h3><p>我们知道String有两种创建的方式：</p>
+          <h3 id="3ae43aaa">Literal</h3><p>我们知道String有两种创建的方式：</p>
 <pre><code class="language-java">String a = &quot;hello&quot;;        // literal
 String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>我们当然也知道，a和b是两个不同的对象，因为a是直接引用String Pool的<strong>字面量</strong>，而b引用的是一个String对象，虽然这个String对象中的字面量实际上也是引用到String Pool</p>
@@ -184,12 +169,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>在不同版本的JDK中，Java堆和字符串常量池之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。</p>
 </blockquote>
 
-          <h3 id="9e2e2952">
-            <a name="_root-String Pool" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            String Pool
-          </h3><p>那么问题来了，我之前确实知道有String Pool这玩意，那么它到底在哪里？堆还是栈？StackOverFlow上面有一段很有意思的问答：<a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">where does javas string constant pool live? the heap or the stack?</a></p>
+          <h3 id="9e2e2952">String Pool</h3><p>那么问题来了，我之前确实知道有String Pool这玩意，那么它到底在哪里？堆还是栈？StackOverFlow上面有一段很有意思的问答：<a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">where does javas string constant pool live? the heap or the stack?</a></p>
 <blockquote>
 <p>The answer is technically neither. <strong>According to the Java Virtual Machine Specification</strong>, the area for storing string literals is in the <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-5.html#jvms-5.1">runtime constant pool</a>. </p>
 <p><strong>The runtime constant pool</strong> memory area is allocated on a per-class or per-interface basis, so it&#39;s not tied to any object instances at all. </p>
@@ -210,12 +190,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM；</p>
 <p>再提一句，在Java 8 HotSpot中，永久代被完全移除掉了，说移除也不完全准确，下面我们详细说这个事</p>
 
-          <h3 id="f4bde0e">
-            <a name="_root-PermGen ?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            PermGen ?
-          </h3><p>嗯哼，问题又来了，之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？</p>
+          <h3 id="f4bde0e">PermGen ?</h3><p>嗯哼，问题又来了，之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？</p>
 <blockquote>
 <p>PermGen is an abbreviation for Permanent Generation and it’s a special heap space which is separate from the main Java heap where JVM keeps track of metadata of the classes which have been loaded.</p>
 </blockquote>
@@ -225,22 +200,12 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <li><a href="https://blogs.oracle.com/jonthecollector/presenting-the-permanent-generation">Presenting The Permanent Genaration</a></li>
 </ul>
 
-          <h4 id="b3d71ddc">
-            <a name="_root-In Java 7" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            In Java 7
-          </h4><p>永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串常量池还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；</p>
+          <h4 id="b3d71ddc">In Java 7</h4><p>永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串常量池还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；</p>
 <p>当我们需要调整这一片的大小的时候，JVM会将它和Heap主part的调整大小操作一起进行，通常会引发一次<strong>Full GC</strong>，这样的操作非常昂贵，特别是如果程序装载类信息过多的时候，JVM会考虑增大PermGen Space，从而引发<strong>Full GC</strong>，于是我们启动程序的时候也会变得很慢，所以我们加上启动参数，调整PermGen的默认初始化大小和最大可用空间：</p>
 <p><code>-XX:PermSize=N</code> -  sets the initial (and minimum size) of the Permanent Generation space.</p>
 <p><code>-XX:MaxPermSize=N</code>  -  sets the maximum size of the Permanent Generation space.</p>
 
-          <h4 id="259db668">
-            <a name="_root-What&#39;s More ?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            What&#39;s More ?
-          </h4><p>Java中每个对象都是一个类的示例，JVM管理这些对象并将它们存放在Heap中；</p>
+          <h4 id="259db668">What&#39;s More ?</h4><p>Java中每个对象都是一个类的示例，JVM管理这些对象并将它们存放在Heap中；</p>
 <p>Java中每一个类也是有一个Class对象去对应的，于是经过前面的铺垫我们可以归总一下，Java类对象，也就是所有的Class对象，是存放在PermGen的；</p>
 <p>于是他们的关系如图：</p>
 <p>
@@ -274,29 +239,14 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>在更久以前，它俩确实是放在一起的，但是因为系统类和开发者写的自定义类的装载行为不一样，所以卸载行为变得很少发生，出于性能优化的考虑才推出了PermGen，效果也很显著；</p>
 <p>还有更多的细节，还是去参考上面放出的第二个原文连接</p>
 
-          <h4 id="344f0113">
-            <a name="_root-In Java 8" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            In Java 8
-          </h4><p>PermGen Space被一个新的区域替代——Metaspace，它和前者的不同之处就在于：它并不限制默认的最大可用空间，虽然你也可以自行设置：</p>
+          <h4 id="344f0113">In Java 8</h4><p>PermGen Space被一个新的区域替代——Metaspace，它和前者的不同之处就在于：它并不限制默认的最大可用空间，虽然你也可以自行设置：</p>
 <p><code>-XX:MetaspaceSize=N</code>  - sets the initial (and minimum size) of the Metaspace.</p>
 <p><code>-XX:MaxMetaspaceSize=N</code>  - sets the maximum size of the Metaspace.</p>
 <p>有关Metaspace的特点，可以参考一个大神写的<a href="https://www.cnblogs.com/duanxz/p/3520829.html">文章</a>，以后我有时间也研究一下</p>
 
-          <h4 id="526aca26">
-            <a name="_root-So" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            So
-          </h4><p>所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了</p>
+          <h4 id="526aca26">So</h4><p>所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了</p>
 
-          <h3 id="52606b15">
-            <a name="_root-Syntactic Sugar" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Syntactic Sugar
-          </h3><p>参考自：<a href="https://www.experts-exchange.com/articles/17406/String-concatenation-in-Java-syntactic-sugar-versus-efficiency.html">String concatenation in Java: syntactic sugar versus efficiency</a></p>
+          <h3 id="52606b15">Syntactic Sugar</h3><p>参考自：<a href="https://www.experts-exchange.com/articles/17406/String-concatenation-in-Java-syntactic-sugar-versus-efficiency.html">String concatenation in Java: syntactic sugar versus efficiency</a></p>
 <p>Java provides two main ways to perform string concatenation and one of them could cause you some trouble. The first one most of us encounter is the <strong>+</strong> operator, where doing something like <strong>String value = &quot;Hello &quot; + &quot;world&quot;;</strong> results in a string with the value <strong>&quot;Hello world&quot;</strong>. Most of the time, developers don&#39;t immediately learn that the <strong>+</strong> operator is just <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> that the compiler turns into <strong>StringBuilder</strong> operations, that being the other main way one can concatenate strings in Java.</p>
 <p>Just about every time the compiler encounters a <strong>+ operator</strong> that has <strong>String objects</strong> or literals as its arguments, it translates that code into a three-step sequence of operations:</p>
 <ol>
@@ -309,12 +259,7 @@ String s2 = &quot;1&quot;;
 String s3 = s2 + &quot;1&quot;;    // sb way
 System.out.println(s1 == s3); // false</code></pre>
 
-          <h3 id="ae91501">
-            <a name="_root-String.intern()" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            String.intern()
-          </h3><p><a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">转自</a></p>
+          <h3 id="ae91501">String.intern()</h3><p><a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">转自</a></p>
 <p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期像运行时常量池中增加常量。那就是<code>String</code>的<code>intern</code>方法。</p>
 <p>当一个<code>String</code>实例调用<code>intern()</code>方法时，JVM会查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
 <p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用。</strong></p>
@@ -353,12 +298,7 @@ System.out.println(s1 == s3);    // true</code></pre>
     </p>
 <p>由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
 
-          <h4 id="8c186ad2">
-            <a name="_root-Real Purpose Of String.intern()" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Real Purpose Of String.intern()
-          </h4><p>不知道，你有没有发现，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，其实<code>intern</code>是多余的？</p>
+          <h4 id="8c186ad2">Real Purpose Of String.intern()</h4><p>不知道，你有没有发现，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，其实<code>intern</code>是多余的？</p>
 <p>因为就算不用<code>intern</code>，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才会用到intern呢?</p>
 <p>在解释这个之前，我们先来看下以下代码：</p>
 <pre><code class="language-java">String s1 = &quot;Hollis&quot;;
@@ -393,12 +333,7 @@ public static void main(String[] args) throws Exception {
 }</code></pre>
 <p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过<code>intern</code>显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
 
-          <h3 id="20570013">
-            <a name="_root-Switch For String" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Switch For String
-          </h3><p>还是先上代码：</p>
+          <h3 id="20570013">Switch For String</h3><p>还是先上代码：</p>
 <pre><code class="language-java">public class switchDemoString {
     public static void main(String[] args) {
         String str = &quot;world&quot;;
@@ -443,19 +378,9 @@ public static void main(String[] args) throws Exception {
 <p>仔细看下可以发现，进行<code>switch</code>的实际是哈希值，然后通过使用equals方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。</p>
 <p>所以，<strong>其实swich只支持一种数据类型，那就是整型，其他数据类型都是转换成整型之后在使用switch的。</strong></p>
 
-          <h3 id="fdc5c0f3">
-            <a name="_root-Substring In Java6 &amp; Java7" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Substring In Java6 &amp; Java7
-          </h3><p>简单一句话，6里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而7的方法会真正分配一个空间存储字串；</p>
+          <h3 id="fdc5c0f3">Substring In Java6 &amp; Java7</h3><p>简单一句话，6里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而7的方法会真正分配一个空间存储字串；</p>
 
-          <h3 id="6e14b486">
-            <a name="_root-Concating String" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Concating String
-          </h3><p>终于来到我们的引子了</p>
+          <h3 id="6e14b486">Concating String</h3><p>终于来到我们的引子了</p>
 <p>一般来说，我们可以直接使用<code>+</code>去拼接，对于字面量而言，首先就可以直接+起来</p>
 <p>但是要注意的是，对于String对象之间而言，<code>+</code>是Java中的语法糖，前面我们有一段反编译就知道，编译后其实是<code>StringBuilder.append()</code></p>
 <pre><code class="language-java">String a = &quot;xixi&quot;;

@@ -125,27 +125,12 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h4 id="2b3c69a1">
-            <a name="_root-ArrayList类" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ArrayList类
-          </h4><p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
+          <h4 id="2b3c69a1">ArrayList类</h4><p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
 <p>这个计划搁置了很久，大概有15天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习offer有没有已经不重要了，<strong>剑指秋招！</strong></p>
 <p>为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近1小时手撸了一个ArrayList的自实现，再搭配源码来看<strong>自己在基础方法上有哪些没考虑到的点</strong>，以及<strong>实际投入使用的ArrayList到底优秀在哪里</strong></p>
 
-          <h4 id="6b7220e">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h4>
-          <h5 id="420551b">
-            <a name="_root-类头" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            类头
-          </h5><pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+          <h4 id="6b7220e">源码</h4>
+          <h5 id="420551b">类头</h5><pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
         implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
 {
     //...
@@ -154,12 +139,7 @@
 <p>我们顺着<code>AbstractList</code>往里摸，一直到最后我们发现，还有<strong>Collection接口和Iterable接口</strong>，这两个接口加上<strong>List接口</strong>为我们提供了非常重要的集合接口规范</p>
 <p>然后我们往下看</p>
 
-          <h5 id="b439b12c">
-            <a name="_root-成员变量" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            成员变量
-          </h5><p>ArrayList这个类的成员变量并不复杂</p>
+          <h5 id="b439b12c">成员变量</h5><p>ArrayList这个类的成员变量并不复杂</p>
 <pre><code class="language-java">// 这是默认的容器长度
 private static final int DEFAULT_CAPACITY = 10;
 
@@ -186,12 +166,7 @@ private int size;</code></pre>
 <pre><code class="language-java">protected transient int modCount = 0;</code></pre>
 <p>这个值记录着List的<strong>结构被改变的次数</strong>，结构改变指的是<strong>任何会影响到size的操作</strong><br>因为这些改动，可能会<strong>扰乱容器结构</strong>，而导致迭代过程会出现错误的结果<br>这个变量会在迭代器中去补充一些逻辑，比如非法的修改会扰乱迭代过程，则<strong>会抛出异常</strong><br>如果子类也要用到这个变量，要求<strong>每一个可能改动容器结构的操作都需要调用一次这个变量</strong></p>
 
-          <h5 id="9c2058b6">
-            <a name="_root-构造方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            构造方法
-          </h5><p>总共有三个，我们只关心前两个就好了</p>
+          <h5 id="9c2058b6">构造方法</h5><p>总共有三个，我们只关心前两个就好了</p>
 <pre><code class="language-java">public ArrayList(int initialCapacity) {
     if (initialCapacity &gt; 0) {
         this.elementData = new Object[initialCapacity];
@@ -207,19 +182,9 @@ public ArrayList() {
 }</code></pre>
 <p>这里给出了我们的两个常量<strong>EMPTY_ELEMENTDATA</strong>和<strong>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</strong>的去处，在我的自实现里，<strong>无论是哪种方法我都选择了new出数组对象</strong>，而这里还会有点偷懒，如果没有指定容量的话，则并不会<strong>new Object[DEFAULT_CAPACITY]</strong>，等到真正要加入元素的时候，才创建对象，这在下面add方法的时候会看到</p>
 
-          <h5 id="96855997">
-            <a name="_root-成员方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            成员方法
-          </h5><p>接下来我们进入成员方法部分</p>
+          <h5 id="96855997">成员方法</h5><p>接下来我们进入成员方法部分</p>
 
-          <h6 id="f51ddde9">
-            <a name="_root-trimToSize" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            trimToSize
-          </h6><pre><code class="language-java">public void trimToSize() {
+          <h6 id="f51ddde9">trimToSize</h6><pre><code class="language-java">public void trimToSize() {
     modCount++;
     if (size &lt; elementData.length) {
         elementData = (size == 0)
@@ -236,12 +201,7 @@ public ArrayList() {
 <p>并且<strong>修剪</strong>操作会访问<strong>modCount</strong>变量，意味着这告诉容器的<strong>迭代器</strong>，这个修剪方法可能会<strong>扰乱迭代过程</strong></p>
 <p>在修剪的时候，我们看到了这样的一个方法：<strong>Arrays.copyOf(elementData, size)</strong></p>
 
-          <h6 id="8ac2a651">
-            <a name="_root-Arrays.copyOf" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Arrays.copyOf
-          </h6><pre><code class="language-java">public static &lt;T&gt; T[] copyOf(T[] original, int newLength) {
+          <h6 id="8ac2a651">Arrays.copyOf</h6><pre><code class="language-java">public static &lt;T&gt; T[] copyOf(T[] original, int newLength) {
     return (T[]) copyOf(original, newLength, original.getClass());
 }
 
@@ -255,12 +215,7 @@ public static &lt;T,U&gt; T[] copyOf(U[] original, int newLength, Class&lt;? ext
 }</code></pre>
 <p>重点是<strong>line：10</strong>，整个方法是按照<strong>源数组的长度（original.length）</strong>以及<strong>新长度（newLength）</strong>的最小值去复制数组的</p>
 
-          <h6 id="e5e65103">
-            <a name="_root-ensureCapacity" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ensureCapacity
-          </h6><pre><code class="language-java">public void ensureCapacity(int minCapacity) {
+          <h6 id="e5e65103">ensureCapacity</h6><pre><code class="language-java">public void ensureCapacity(int minCapacity) {
     int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
         ? 0
         : DEFAULT_CAPACITY;
@@ -292,12 +247,7 @@ public static &lt;T,U&gt; T[] copyOf(U[] original, int newLength, Class&lt;? ext
 }</code></pre>
 <p>除了会改变容器结构，我们还得注意：当<strong>允许的最小容量（minCapacity）</strong>大于<strong>当前容器容量（elementData.length）</strong>的时候，这个时候我们就需要进行<strong>溢出考虑(overflow-conscious)</strong>了</p>
 
-          <h6 id="c049c2e2">
-            <a name="_root-grow" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            grow
-          </h6><pre><code class="language-java">private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+          <h6 id="c049c2e2">grow</h6><pre><code class="language-java">private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
 private void grow(int minCapacity) {
     // overflow-conscious code
@@ -330,12 +280,7 @@ private void grow(int minCapacity) {
 <p>这里我就有个疑问了，<strong>-8的意义在哪里？一开始就定义到最大值不就好了？</strong></p>
 <p>考虑完新容量之后，开始使用<strong>Arrays.copyOf</strong>来扩展容量<strong>（grow line：12）</strong></p>
 
-          <h6 id="a8e80449">
-            <a name="_root-contains和indexOf" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            contains和indexOf
-          </h6><pre><code class="language-java">public boolean contains(Object o) {
+          <h6 id="a8e80449">contains和indexOf</h6><pre><code class="language-java">public boolean contains(Object o) {
     return indexOf(o) &gt;= 0;
 }
 
@@ -353,12 +298,7 @@ public int indexOf(Object o) {
 }</code></pre>
 <p>和自实现不同的是，这里<strong>contains调用的是indexOf的实现</strong>，而且<strong>indexOf</strong>还允许<strong>查找到第一个null元素在哪里</strong>，这是我在自实现里没考虑过的</p>
 
-          <h6 id="28006047">
-            <a name="_root-get和set" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            get和set
-          </h6><pre><code class="language-java">E elementData(int index) {
+          <h6 id="28006047">get和set</h6><pre><code class="language-java">E elementData(int index) {
     return (E) elementData[index];
 }
 
@@ -381,12 +321,7 @@ public E set(int index, E element) {
 }</code></pre>
 <p>首先看<strong>get&amp;set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
 
-          <h6 id="900d3863">
-            <a name="_root-add1" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            add1
-          </h6><p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
+          <h6 id="900d3863">add1</h6><p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
 <pre><code class="language-java">public boolean add(E e) {
     ensureCapacityInternal(size + 1);  // Increments modCount!!
     elementData[size++] = e;
@@ -494,12 +429,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 <p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
 <hr>
 
-          <h6 id="bb206ba0">
-            <a name="_root-add2" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            add2
-          </h6><pre><code class="language-java">public void add(int index, E element) {
+          <h6 id="bb206ba0">add2</h6><pre><code class="language-java">public void add(int index, E element) {
     rangeCheckForAdd(index);
 
     ensureCapacityInternal(size + 1);  // Increments modCount!!
@@ -514,12 +444,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 }</code></pre>
 <p>对于<strong>index</strong>的限定：<strong>不能在载量之外，也不能小于0</strong>，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多</p>
 
-          <h6 id="f47eb27e">
-            <a name="_root-remove1" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            remove1
-          </h6><pre><code class="language-java">public E remove(int index) {
+          <h6 id="f47eb27e">remove1</h6><pre><code class="language-java">public E remove(int index) {
     rangeCheck(index);
 
     modCount++;
@@ -536,12 +461,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 <p>基本都是常规操作，但是！这里的<strong>line：11</strong>是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写<strong>elementData[--size] = null</strong>这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，<strong>将这个对象的引用摘除，好让GC管管这个被删除的元素</strong></p>
 <p>这就是真正投入使用的容器，要考虑到的事情，<strong>为用户尽可能地提高时间和空间效率！</strong></p>
 
-          <h6 id="df53e1bd">
-            <a name="_root-remove2" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            remove2
-          </h6><pre><code class="language-java">public boolean remove(Object o) {
+          <h6 id="df53e1bd">remove2</h6><pre><code class="language-java">public boolean remove(Object o) {
     if (o == null) {
         for (int index = 0; index &lt; size; index++)
             if (elementData[index] == null) {
@@ -567,12 +487,7 @@ private void fastRemove(int index) {
 }</code></pre>
 <p>常规，我在想为什么remove1里的代码不用<strong>fastRemove</strong>，这两段完全是一摸一样的</p>
 
-          <h6 id="f43e6ed0">
-            <a name="_root-clear" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            clear
-          </h6><pre><code class="language-java">public void clear() {
+          <h6 id="f43e6ed0">clear</h6><pre><code class="language-java">public void clear() {
     modCount++;
 
     // clear to let GC do its work
@@ -595,12 +510,7 @@ private void fastRemove(int index) {
 <p>但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的<strong>更好的实现</strong>，那么我还得在内存中再申请<strong>30w个元素长度的数组空间</strong>，虽然看上去，我好像马上就<strong>摘除了原elementData的引用</strong>，但实际上，原<strong>elementData</strong>的数组数据仍然会在内存中停留一段时间，<strong>等待下一次GC并且GC选择回收它</strong></p>
 <p>上面只是我的推测，实际GC是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧</p>
 
-          <h6 id="91ed0528">
-            <a name="_root-removeAll和retainAll" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            removeAll和retainAll
-          </h6><p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
+          <h6 id="91ed0528">removeAll和retainAll</h6><p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
 <pre><code class="language-java">public boolean removeAll(Collection&lt;?&gt; c) {
     Objects.requireNonNull(c);
     return batchRemove(c, false);

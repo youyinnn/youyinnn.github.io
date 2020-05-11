@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="447c300f">
-            <a name="_root-HelloWorld" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            HelloWorld
-          </h3><p>昨天的小米笔试题: <strong>请用Lambda写一个将int数组[1,2,3]转换为String数组[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</strong></p>
+          <h3 id="447c300f">HelloWorld</h3><p>昨天的小米笔试题: <strong>请用Lambda写一个将int数组[1,2,3]转换为String数组[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</strong></p>
 <p>当时没写完整，就这个为例作为开始吧, 完整代码如下:</p>
 <pre><code class="language-java">  int[] si = {1, 2, 3};
   Function&lt;int[], String[]&gt; f = (int[] ar) -&gt; {
@@ -143,28 +138,13 @@
   System.out.println(Arrays.toString(f.apply(si)));</code></pre>
 <p>看不懂是不是?看不懂就对了,Lambda是一个语法糖,它的语法你得看得懂,才知道上面的代码干了什么.</p>
 
-          <h3 id="4a348ef6">
-            <a name="_root-语法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            语法
-          </h3>
-          <h4 id="d03a62a4">
-            <a name="_root-要点1-函数式接口的支持" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            要点1-函数式接口的支持
-          </h4><blockquote>
+          <h3 id="4a348ef6">语法</h3>
+          <h4 id="d03a62a4">要点1-函数式接口的支持</h4><blockquote>
 <p>语法必须要函数式接口的支持, 函数式接口: <strong>即接口中只有一个抽象方法</strong>.一般需要<code>@FunctionalInterface</code>注解修饰类.</p>
 <p>我们称这个唯一的抽象方法为, <strong>函数方法</strong></p>
 </blockquote>
 
-          <h4 id="2e694de6">
-            <a name="_root-要点2-箭头语法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            要点2-箭头语法
-          </h4><p>函数式写法格式, 分<strong>左右两边</strong>:</p>
+          <h4 id="2e694de6">要点2-箭头语法</h4><p>函数式写法格式, 分<strong>左右两边</strong>:</p>
 <pre><code class="language-lambda">  (param1, param2, ...) -&gt; {statement1;statement2;...;};</code></pre>
 <ul>
 <li><p><strong>左边-参数列表</strong>-方法要传递的参数:</p>
@@ -181,12 +161,7 @@
 </li>
 </ul>
 
-          <h4 id="55ed613e">
-            <a name="_root-要点3-参数列表类型和返回值类型" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            要点3-参数列表类型和返回值类型
-          </h4><p>我们的lambda表达式, 最终还是得被一个<strong>函数式接口</strong>所引用, 我们的表达式可能有<strong>参数列表</strong>, 可能有<strong>返回值</strong>, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口</p>
+          <h4 id="55ed613e">要点3-参数列表类型和返回值类型</h4><p>我们的lambda表达式, 最终还是得被一个<strong>函数式接口</strong>所引用, 我们的表达式可能有<strong>参数列表</strong>, 可能有<strong>返回值</strong>, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口</p>
 <pre><code class="language-java">@FunctionalInterface
 interface MyFunction&lt;T, R&gt; {
     /**
@@ -211,12 +186,7 @@ interface MyFunction&lt;T, R&gt; {
             Main.&lt;Person, Integer&gt;invokeGet(p1, p2, (ax, bx) -&gt; ax.getName().length() + bx.getName().length());</code></pre>
 <p>那么这里为什么可以省略? 因为我<code>invokeGet</code>的时候, 传进去的<strong>t1, t2</strong>是<strong>p1, p2</strong>, 所以<strong>T类型</strong>被补充为<strong>Person类型</strong>, 而对于返回值类型, 因为我们这里的方法体实现就一句话, 所以<strong>{}</strong>省略了, <strong>return</strong> 也省略了, 返回值类型就是语句<code>ax.getName().length() + bx.getName().length()</code>所运算出的类型.</p>
 
-          <h4 id="d35f88ca">
-            <a name="_root-代码示例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            代码示例
-          </h4><pre><code class="language-java">public class Main{
+          <h4 id="d35f88ca">代码示例</h4><pre><code class="language-java">public class Main{
 
     /**
      * 语法格式一: 无参 无返回值
@@ -294,12 +264,7 @@ interface MyFunction&lt;T, R&gt; {
     }
 }</code></pre>
 
-          <h3 id="f84befb1">
-            <a name="_root-五大核心函数式接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            五大核心函数式接口
-          </h3><p>前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的<strong>五大核心函数式接口</strong>, 这样的函数式接口在Java8中到处都是.</p>
+          <h3 id="f84befb1">五大核心函数式接口</h3><p>前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的<strong>五大核心函数式接口</strong>, 这样的函数式接口在Java8中到处都是.</p>
 <p>所以说了解这<strong>五大核心函数式接口</strong>到底能干什么, 这点是非常重要的.</p>
 <p>首先看看我写的笔试题的未完整版是什么样子的:</p>
 <pre><code class="language-java">  Function f = (int[] arr) -&gt; {
@@ -321,18 +286,8 @@ interface MyFunction&lt;T, R&gt; {
   System.out.println(Arrays.toString(f.apply(si)));</code></pre>
 <p>这和完整版相比, 缺少的是<code>Function</code>类后面的泛型定义, 所以这段代码是过不了的, 了解一下<strong>五大核心函数式接口</strong>,</p>
 
-          <h4 id="65ddf4e7">
-            <a name="_root-Consumer<T> 消费型接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Consumer<T> 消费型接口
-          </h4>
-          <h5 id="71b01298">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h5><pre><code class="language-java">@FunctionalInterface
+          <h4 id="65ddf4e7">Consumer<T> 消费型接口</h4>
+          <h5 id="71b01298">源码</h5><pre><code class="language-java">@FunctionalInterface
 public interface Consumer&lt;T&gt; {
 
     void accept(T t);
@@ -343,27 +298,12 @@ public interface Consumer&lt;T&gt; {
     }
 }</code></pre>
 
-          <h5 id="889bfb14">
-            <a name="_root-函数方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            函数方法
-          </h5><pre><code class="language-java">    void accept(T t);</code></pre>
+          <h5 id="889bfb14">函数方法</h5><pre><code class="language-java">    void accept(T t);</code></pre>
 <p>消费型接口, 意思就是<strong>&quot;只进不出&quot;</strong>的表现, 所以我们看到方法并没有<strong>返回值类型</strong></p>
 
-          <h5 id="be954b92">
-            <a name="_root-默认方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            默认方法
-          </h5><p>这个方法相当于将两个<code>Consumer</code>函数组合在了一起, 形成一个新的<code>Consumer</code>函数, after函数在源函数之后执行, 相当于一个<strong>&quot;后置函数&quot;</strong></p>
+          <h5 id="be954b92">默认方法</h5><p>这个方法相当于将两个<code>Consumer</code>函数组合在了一起, 形成一个新的<code>Consumer</code>函数, after函数在源函数之后执行, 相当于一个<strong>&quot;后置函数&quot;</strong></p>
 
-          <h5 id="9b88847c">
-            <a name="_root-示例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            示例
-          </h5><pre><code class="language-java">    @Test
+          <h5 id="9b88847c">示例</h5><pre><code class="language-java">    @Test
     public void testConsumer(){
         Person p1 = new Person(&quot;abc&quot;, 12);
         Person p2 = new Person(&quot;uiop&quot;, 13);
@@ -383,54 +323,24 @@ Age is : 13
 Name is : abc
 Age is : 12</code></pre>
 
-          <h4 id="67b9c1bb">
-            <a name="_root-Supplier<T> 供给型接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Supplier<T> 供给型接口
-          </h4>
-          <h5 id="71b01298">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h5><pre><code class="language-java">@FunctionalInterface
+          <h4 id="67b9c1bb">Supplier<T> 供给型接口</h4>
+          <h5 id="71b01298">源码</h5><pre><code class="language-java">@FunctionalInterface
 public interface Supplier&lt;T&gt; {
     T get();
 }</code></pre>
 
-          <h5 id="889bfb14">
-            <a name="_root-函数方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            函数方法
-          </h5><pre><code class="language-java">    T get();</code></pre>
+          <h5 id="889bfb14">函数方法</h5><pre><code class="language-java">    T get();</code></pre>
 <p><strong>&quot;有出没进&quot;</strong>, 供给型的函数接口.</p>
 
-          <h5 id="9b88847c">
-            <a name="_root-示例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            示例
-          </h5><pre><code class="language-java">@Test
+          <h5 id="9b88847c">示例</h5><pre><code class="language-java">@Test
 public void testSupplier(){
     Supplier&lt;Person&gt; supplier = () -&gt; new Person();
     Person person = supplier.get();
     System.out.println(person);
 }</code></pre>
 
-          <h4 id="d760a731">
-            <a name="_root-Function&lt;T, R&gt; 函数型接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Function&lt;T, R&gt; 函数型接口
-          </h4>
-          <h5 id="71b01298">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h5><pre><code class="language-java">@FunctionalInterface
+          <h4 id="d760a731">Function&lt;T, R&gt; 函数型接口</h4>
+          <h5 id="71b01298">源码</h5><pre><code class="language-java">@FunctionalInterface
 public interface Function&lt;T, R&gt; {
 
     R apply(T t);
@@ -450,34 +360,14 @@ public interface Function&lt;T, R&gt; {
     }
 }</code></pre>
 
-          <h5 id="889bfb14">
-            <a name="_root-函数方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            函数方法
-          </h5><pre><code class="language-java">    R apply(T t);</code></pre>
+          <h5 id="889bfb14">函数方法</h5><pre><code class="language-java">    R apply(T t);</code></pre>
 <p>就像一个函数, <strong>&quot;有进有出&quot;</strong></p>
 
-          <h5 id="be954b92">
-            <a name="_root-默认方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            默认方法
-          </h5><p><code>andThen</code>方法我们在消费型接口的时候已经介绍过了, 然后<code>compose</code>方法和这个方法差不多, 只不过这个方法是在源函数之前执行, 相当于是一个<strong>&quot;前置函数&quot;</strong></p>
+          <h5 id="be954b92">默认方法</h5><p><code>andThen</code>方法我们在消费型接口的时候已经介绍过了, 然后<code>compose</code>方法和这个方法差不多, 只不过这个方法是在源函数之前执行, 相当于是一个<strong>&quot;前置函数&quot;</strong></p>
 
-          <h5 id="6d7beffa">
-            <a name="_root-静态方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            静态方法
-          </h5><p>这个方法暂时还没摸到有什么作用</p>
+          <h5 id="6d7beffa">静态方法</h5><p>这个方法暂时还没摸到有什么作用</p>
 
-          <h5 id="9b88847c">
-            <a name="_root-示例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            示例
-          </h5><pre><code class="language-java">@Test
+          <h5 id="9b88847c">示例</h5><pre><code class="language-java">@Test
 public void testFunction(){
     Person person = new Person();
     Function&lt;Person, Person&gt; function = (ps) -&gt; {
@@ -501,18 +391,8 @@ nothing change~
 after
 Person{name=&#39;xixi&#39;, age=15}</code></pre>
 
-          <h4 id="5014f71b">
-            <a name="_root-Predicate<T> 条件预测型接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Predicate<T> 条件预测型接口
-          </h4>
-          <h5 id="71b01298">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h5><pre><code class="language-java">@FunctionalInterface
+          <h4 id="5014f71b">Predicate<T> 条件预测型接口</h4>
+          <h5 id="71b01298">源码</h5><pre><code class="language-java">@FunctionalInterface
 public interface Predicate&lt;T&gt; {
 
     boolean test(T t);
@@ -538,27 +418,12 @@ public interface Predicate&lt;T&gt; {
     }
 }</code></pre>
 
-          <h5 id="889bfb14">
-            <a name="_root-函数方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            函数方法
-          </h5><pre><code class="language-java">    boolean test(T t);</code></pre>
+          <h5 id="889bfb14">函数方法</h5><pre><code class="language-java">    boolean test(T t);</code></pre>
 <p>给个T, 返回个布尔值</p>
 
-          <h4 id="c9927b04">
-            <a name="_root-默认方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            默认方法
-          </h4><p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
+          <h4 id="c9927b04">默认方法</h4><p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
 
-          <h4 id="4b37cf1a">
-            <a name="_root-Comparator<T> 比较器接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Comparator<T> 比较器接口
-          </h4><p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是<strong>&quot;四大核心函数式接口&quot;</strong>的, 这个我放在第五个, 因为这个接口里的方法有很有价值. </p>
+          <h4 id="4b37cf1a">Comparator<T> 比较器接口</h4><p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是<strong>&quot;四大核心函数式接口&quot;</strong>的, 这个我放在第五个, 因为这个接口里的方法有很有价值. </p>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
