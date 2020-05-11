@@ -5,6 +5,7 @@ categories:
   - python
 tags:
   - python
+  - grammar
 series: Python Note
 date: 2020-5-8 17:0:15
 ---
@@ -205,8 +206,6 @@ print("spam eggs")
 # \ can be used to escape quotes
 print("dosn\'t")
 
-# format  '' % (v1, v2, ...)
-print("str %s number %d" % ('asd', 123))
 # index
 word = "abcd"
 print(word[1])
@@ -286,6 +285,8 @@ print('#....ASdas..asad##..dadkjl....##...#'.strip('.#'))
 print('#....ASdas..asad##..dadkjl....##...#'.lstrip('.#'))
 print('#....ASdas..asad##..dadkjl....##...#'.rstrip('.#'))
 ```
+
+Output:
 
 ``` console
 spam eggs
@@ -385,6 +386,7 @@ print('{0:*>20.2%}'.format(i))
 print('{0:>20.10%}'.format(i))
 print('{0:.10%}'.format(i))
 ```
+Output:
 
 ``` console
 1-2-3
@@ -436,7 +438,7 @@ print(re.split(r'[a-z]', 'adas123fd12d123', flags=re.IGNORECASE))
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE))
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE, count=1))
 ```
-
+Output:
 ``` console
 <re.Match object; span=(4, 7), match='doh'>
 <re.Match object; span=(4, 7), match='doh'>
