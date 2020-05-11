@@ -172,7 +172,7 @@ function new_render_md(regular_toc) {
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
-        $(md).animateCss('fadeIn')
+        $(md).addClass('animate__animated animate__fadeIn')
     }, 200)
 }
 
@@ -579,8 +579,8 @@ function scrollToTop(interval) {
 function pagination() {
 
     function pageFlesh() {
-        scrollToTop(0)
-        $('#pagebox-' + nowpage).animateCss('fadeInDown')
+        scrollToTop(300)
+        $('#pagebox-' + nowpage).addClass('animate__animated animate__fadeInDown')
     }
 
     nowpage = 1
@@ -1088,8 +1088,10 @@ function handlemetadata(metadata) {
             filter()
         })
     }
-    rmclass(docpanel, 'myhide')
-    adclass(docpanel, 'myshow')
+    setTimeout(() => {
+        rmclass(docpanel, 'myhide')
+        adclass(docpanel, 'myshow')
+    }, 100)
     rmclass(articles_side_panel, 'myhide')
     adclass(articles_side_panel, 'myshow')
     $('#blog_statistic_body').removeClass('myhide')

@@ -87,7 +87,7 @@ function get_article(number) {
             hideloading()
 
             // fade in the md panel
-            $(md).animateCss('fadeIn')
+            $(md).addClass('animate__animated animate__fadeIn')
 
             // set parrow
             setarrow()

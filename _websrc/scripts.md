@@ -34,6 +34,666 @@
 - [Ginger](https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&utm_source=link&utm_campaign=api_documentation)
 - [Grammarly](https://www.grammarly.com/)
 
+
+## :star: 杂文/问题/乱说/黑科技/技巧
+
+### 关于 github oauth app
+
+
+![image](https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png)
+
+[reference.](https://github.com/timqian/my-notes/issues/9)
+
+
+### 代码高亮的的坑
+
+
+> editor.md的preview页 + highlight.js
+
+#### :small_blue_diamond:1. highlight.js 的坑
+
+##### :small_orange_diamond:highlight.js无效问题
+
+> **hub主页上的highlight.js文件是用不了的!!!**
+> 解决: 去[官网主页]()上查看源码下载, 也可以在博客仓库里找到`highlight-site-pack.js`文件
+
+##### :small_orange_diamond:始终只能渲染code而无法渲染pre的问题
+
+> **readme里给的选择器只能选中pre下的code(眼戳没注意...)**
+> 解决: 把pre也一起选中就好了
+
+
+``` js
+$('pre, pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+});
+```
+
+#### :small_blue_diamond:2. editor的默认md code渲染和highlight.js渲染冲突问题
+
+![image](https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png)
+
+如图用的atom-one-dark, 但是背景还是白色的...
+
+##### :small_orange_diamond:1. editor渲染禁用
+1. 首先不引用lib下的prettify.min.js文件
+2. 修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染
+
+   ![image](https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png)
+   修改完之后, 这样就不会在pre和code上添加pretty的类了
+
+##### :small_orange_diamond:2. css覆盖
+因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)
+
+注释一部分editormd.preview.css:
+
+![image](https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png)
+
+我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.
+
+#### :small_blue_diamond:结果
+
+![image](https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png)
+
+
+### cmd相关
+
+
+#### :small_blue_diamond:教程
+- 扫盲：https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/
+- 常用cmd：https://blog.csdn.net/hanzheng260561728/article/details/51558990
+
+#### :small_blue_diamond:微软开放命令行文档
+
+>  cmd文档/doc文档/command line
+
+[link](http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf)
+
+
+### 关于 CI
+
+
+#### :small_blue_diamond:示意图
+
+![image](https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png)
+
+>文章 [The Product Managers’ Guide to Continuous Delivery and DevOps](https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/)
+>
+>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。
+
+
+### GitHub API response 条数pagination限制
+
+
+GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:
+
+![image](https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png)
+
+![image](https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png)
+
+参考: https://developer.github.com/v3/#pagination
+
+我现在的blog所有的comments请求都是9999
+
+
+### 一顿操作 node.js安装
+
+
+#### :small_blue_diamond:安装nvm
+
+1. 首先去 https://github.com/coreybutler/nvm-windows 下载最新的release版本 然后安装即可
+
+#### :small_blue_diamond:使用mvn安装nodejs的多版本
+
+``` bash
+$ nvm install 0.10
+$ nvm install 4
+$ nvm install 6
+$ nvm install 8
+```
+
+#### :small_blue_diamond:安装全局npm
+
+可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入
+
+``` bash
+mvn use 8
+```
+比如上面先use了8版本的node
+
+然后再安装全局npm, 不然你找不到npm的环境
+
+------------
+
+Linux下安装nvm
+
+看得懂就行啦：https://github.com/creationix/nvm#git-install
+
+参考: 
+https://i5ting.github.io/How-to-learn-node-correctly/#10302
+https://blog.csdn.net/jingtian678/article/details/78422760
+
+
+### Regex 匹配换行符/匹配尾部空格
+
+
+``` regex
+([\s\S]*)
+```
+
+``` regex
+\s*$
+```
+
+
+### 对IoC/DI的理解
+
+
+#### :small_blue_diamond:Ioc—Inverse  of Control
+
+**即“控制反转”，不是什么技术，而是一种设计思想**。在Java开发中，**Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。** 
+
+深入分析一下：
+
+- 谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；**谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。**
+- 为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？**因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。**
+
+**举例说明**
+
+“常规的是，我们程序员**手动new**来给程序的**Service对象**提供所**依赖的DAO对象**，而现在是程序通过IoC容器自己提供**DAO对象**给**Service对象**。”
+
+#### :small_blue_diamond:DI—Dependency Injection
+
+**即“依赖注入”**：**组件之间依赖关系**由容器在运行期决定，形象的说，即**由容器动态的将某个依赖关系注入到组件之中**。
+
+**依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。**通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 
+
+深入分析一下：
+
+- 谁依赖于谁：当然是**应用程序依赖于IoC容器**；
+- 为什么需要依赖：**应用程序需要IoC容器来提供对象需要的外部资源**；
+- 谁注入谁：很明显是**IoC容器注入应用程序某个对象，应用程序依赖的对象**；
+- 注入了什么：就是**注入某个对象所需要的外部资源（包括对象、资源、常量数据）**。
+
+**举例说明**
+
+“**Service对象**依赖于**DAO对象**，IoC容器通过**注解和反射机制**来**注入（Injected）**用户在配置文件中配置好的DAO对象到**Service对象**的对应属性中。”
+
+#### :small_blue_diamond:两者关系
+
+**IoC和DI**由什么**关系**呢？其实它们**是同一个概念的不同角度描述**，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 
+
+我的理解是：**IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现**。
+
+[参考](https://blog.csdn.net/qq_22654611/article/details/52606960)
+
+
+### 对于游戏来说 怎么选择TCP和UDP?
+
+
+- 如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。
+
+- 如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。
+
+- 如果客户端和服务器都可以独立发包，而且无法忍受延迟（比如：大多数的多人动作类游戏，一些MMO类游戏），那么使用UDP吧。
+
+转自: http://blog.jobbole.com/64638/
+
+
+### OOP三大特性
+
+
+#### :small_blue_diamond:封装优点：
+
+- **安全：** 只能通过规定的方法访问数据 
+- **隐藏细节：** 隐藏类的实例细节，方便修改和实现
+
+#### :small_blue_diamond:继承优点：
+
+- **代码复用**
+
+#### :small_blue_diamond:多态主要表现：
+
+- **引用多态**　　　
+
+  - 父类的引用可以指向本类的对象；
+  - 父类的引用可以指向子类的对象；
+
+- **方法多态**
+
+  根据上述创建的两个对象：本类对象和子类对象，同样都是父类的引用，当我们指向不同的对象时，它们调用的方法也是多态的。
+
+  - 创建本类对象时，调用的方法为本类方法；
+
+  - 创建子类对象时，调用的方法为子类重写的方法或者继承的方法；
+
+  **注意： 继承是多态的基础。**
+
+参考: https://www.cnblogs.com/hysum/p/7100874.html#_label1
+
+
+### BitMap
+
+
+http://blog.51cto.com/zengzhaozheng/1404108
+https://blog.csdn.net/hguisu/article/details/7880288
+http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html
+编程珠玑
+
+
+### MySQL用户管理
+
+
+https://www.cnblogs.com/gavin110-lgy/p/5773981.html
+https://www.cnblogs.com/clsn/p/8047028.html
+
+
+
+### 在Windows的右键菜单上增加新建自定义类型文件的选项
+
+
+![image](https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png)
+
+https://www.cnblogs.com/zhengye/articles/2304925.html
+
+
+### 关于引用奥森图标一类的i标签失效的问题
+
+
+路径也排查过了 文件也排查过了 也没报错 为什么呢？
+
+因为......
+
+千万要想想是不是全局font-family的问题！！！
+
+
+### git做用户的全局配置的文件夹在哪？
+
+
+放在你家
+
+![image](https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png)
+
+如图可以配置别名
+
+
+### 贪心算法和动态规划的区别
+
+
+> 贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。
+>
+> 分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 
+>
+> 动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 
+
+引自：https://www.cnblogs.com/codeskiller/p/6477181.html
+
+
+### 三种静态查找算法：顺序、二分/折半、索引/分块查找
+
+
+文章：https://blog.csdn.net/u011489043/article/details/78683856
+
+
+### MySQL自己更新自己
+
+
+https://www.cnblogs.com/jeffen/p/7016547.html
+
+mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表
+
+
+### 算法：并查集
+
+
+https://blog.csdn.net/C20180630/article/details/57074623
+https://blog.csdn.net/u013546077/article/details/64509038
+
+
+### 正则表达式 密码强度
+
+
+https://www.cnblogs.com/cexm/p/7737538.html
+
+
+### 文件头魔数 判断文件类型
+
+
+https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
+
+但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt
+而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数
+
+魔数列表参考如下：
+https://www.garykessler.net/library/file_sigs.html
+
+
+### xss攻击和Java处理xss
+
+
+https://www.cnblogs.com/digdeep/p/4695348.html
+https://blog.csdn.net/woniumenga/article/details/47323829#
+
+Java的html解析器
+https://github.com/jhy/jsoup
+
+前端xss处理：
+https://jsxss.com/zh/index.html
+
+
+### 微服务/集群/分布式
+
+
+#### :small_blue_diamond:微服务好文
+
+[学习springboot看这一篇就够了](https://blog.csdn.net/ityouknow/article/details/80490926) 看它的微服务启蒙3篇
+
+#### :small_blue_diamond:集群和分布式
+> 小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群
+>
+> 作者：张鹏飞
+> 链接：https://www.zhihu.com/question/20004877/answer/112124929
+> 来源：知乎
+> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+参考：
+https://blog.csdn.net/cutesource/article/details/5811914
+https://www.zhihu.com/question/20004877/answer/61025046
+https://www.cnblogs.com/aspirant/p/5697807.html
+
+
+### 什么是/为什么要Tracing？Opentracing的入门铺垫
+
+
+![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)
+
+好文：https://yq.aliyun.com/articles/514488
+
+#### :small_blue_diamond:这个Gitbook爆炸推【Opentracing的中文文档翻译】：
+
+https://wu-sheng.gitbooks.io/opentracing-io/content/
+
+Tutorials:
+
+https://github.com/yurishkuro/opentracing-tutorial/tree/master/java
+
+
+### 什么是/为什么要DevOps？
+
+
+![image](https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png)
+
+https://www.cnblogs.com/liufei1983/p/7152013.html
+
+
+### Spring生命周期详解好文
+
+
+https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0
+https://blog.csdn.net/fuzhongmin05/article/details/73389779
+https://blog.csdn.net/qq_23473123/article/details/76610052
+
+
+### html2canvas 页面输出为canvas
+
+
+超级棒的插件：
+教程和踩坑：https://segmentfault.com/a/1190000011478657
+hub：https://github.com/niklasvh/html2canvas
+
+#### :small_blue_diamond:生成的canvas没有图片的坑：
+
+要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
+开启html2canvas的useCORS配置项。即作如下设置： 
+
+``` javascript
+var opts = {useCORS: true};
+html2canvas(element, opts);
+```
+
+
+### k8s
+
+
+#### :small_blue_diamond:好文
+- 概念：http://www.dockone.io/article/8341?cmd=redirect&arubalp=12345
+- 简要介绍：http://www.dockone.io/article/8328
+- 10分钟核心概念了解：http://www.dockone.io/article/932
+
+#### :small_blue_diamond:中文文档
+- 设计理念（概念介绍）：http://docs.kubernetes.org.cn/249.html
+
+#### :small_blue_diamond:配置
+- k8s的Dashboard：http://blog.51cto.com/ylw6006/2113542
+- yaml：
+    - sample: https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
+    - offical reference: https://kubernetes.io/docs/reference/ see the api
+
+
+
+### docker
+
+
+介绍与入门：http://www.dockone.io/article/8350
+
+
+### Shell
+
+
+#### :small_blue_diamond:expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）
+- https://www.jianshu.com/p/70556b1ce932
+- https://www.cnblogs.com/lzrabbit/p/4298794.html
+- https://www.jellythink.com/archives/373
+
+#### :small_blue_diamond:set 设置你shell脚本的运行配置
+- https://www.cnblogs.com/liduanjun/p/3536996.html
+
+#### :small_blue_diamond:read 在shell里面读取新的字符
+- http://www.runoob.com/linux/linux-comm-read.html
+
+#### :small_blue_diamond:wc 计算字数
+- http://www.runoob.com/linux/linux-comm-wc.html
+
+#### :small_blue_diamond:cut 字符串切割
+- https://www.jb51.net/article/41872.htm
+
+#### :small_blue_diamond:shell脚本sudo外部输入密码
+- https://blog.csdn.net/qq_23587541/article/details/82841489
+
+#### :small_blue_diamond:./和sh执行脚本的区别：
+- `./`需要执行权限，使用脚本文件中第一行`#!`指定的shell（解释器）来执行命令（譬如常见的/bin/bash），不指定系统会调用默认shell程序
+- `sh`不需要执行权限，是使用`sh`这个shell执行命令，是个软链接，它可能是一个任意的shell，通常默认是`bash shel`，用type命令可以查看
+
+#### :small_blue_diamond:nohup使用详解
+- https://www.cnblogs.com/jinxiao-pu/p/9131057.html
+
+
+### Linux
+
+
+#### :small_blue_diamond:工具
+- fzf：https://www.colabug.com/4062481.html
+
+#### :small_blue_diamond:设置
+- 修改终端提示符：https://www.cnblogs.com/xiaofeiIDO/p/8037331.html
+- 环境变量：https://www.cnblogs.com/haore147/p/3633116.html
+
+#### :small_blue_diamond:命令
+- 命令大全：http://man.linuxde.net/
+- 一些巨棒的命令替代：https://linux.cn/article-10171-1.html
+
+#### :small_blue_diamond:CentOS
+##### :small_orange_diamond:yum详解
+- http://www.cnblogs.com/vathe/p/6736094.html
+
+#### :small_blue_diamond:Ubuntu
+##### :small_orange_diamond:apt-get详解
+- https://blog.csdn.net/sinat_31206523/article/details/78138822
+- https://blog.csdn.net/yessharing/article/details/55806090
+
+
+### chrome插件开发
+
+
+https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83
+
+
+### gRPC & protobuf & Swagger
+
+
+- [Grpc+Grpc Gateway实践三 Swagger了解一下](https://segmentfault.com/a/1190000013513469)
+- [google protobuf安装与使用](https://www.cnblogs.com/luoxn28/p/5303517.html)
+- [protobuf](https://github.com/protocolbuffers/protobuf)
+- [grpc-gateway：grpc转换为http协议对外提供服务](https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html)
+
+
+### Database Client
+
+
+[15个windows上好用的client](https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows)
+
+
+### linux 换行符
+
+
+https://blog.csdn.net/mulangren1988/article/details/54316783
+
+
+### 带空格文件名参数传递 xargs
+
+
+https://blog.csdn.net/u011085172/article/details/77771173
+
+
+### GraphQL 一种用于 API 的查询语言
+
+
+> GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 
+>
+> GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。
+
+中文网 : [官网](http://graphql.cn/)
+引子 : [segmentfault](https://segmentfault.com/a/1190000006132986)
+知乎专栏 : [面向未来的API —— GitHub GraphQL API 使用介绍](https://zhuanlan.zhihu.com/p/28077095)
+
+> 2018年11月16日 10点04分
+> 要构建一个graphql需要的成本太大了 还不如restful来的快
+
+
+### 排序算法图解博客
+
+看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
+
+
+## :star: 网站/软件/技术
+
+### 一个素材网站 devianart
+
+
+https://www.deviantart.com/
+
+
+### icon相关 素材站/软件
+
+
+#### :small_blue_diamond:阿里巴巴矢量图标库
+
+![image](https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png)
+
+link : http://iconfont.cn/
+
+#### :small_blue_diamond:iconstroe
+
+![image](https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png)
+
+link : https://iconstore.co/
+
+#### :small_blue_diamond:flaticon
+
+![image](https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png)
+
+link : https://www.flaticon.com/
+
+#### :small_blue_diamond:Nucleo Icon管理工具
+
+![image](https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png)
+
+https://nucleoapp.com/
+
+
+### 软件推介 : cmder
+
+
+> 一个高颜值功能强大的的windows终端管理器
+> 
+> 介绍 : https://zhuanlan.zhihu.com/p/28400466
+
+![image](https://user-images.githubusercontent.com/23525754/40038175-47ab3728-5843-11e8-8673-10bd2894ad70.png)
+
+#### :small_blue_diamond:Tips:
+
+软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.
+
+但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.
+
+所以我们下载full, 解压在`C:\Program Files`, 可以发现整个软件大概250MB, 我们从软件目录下的`C:\Program Files\cmder\vendor`中删去`git-for-windows`文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.
+
+
+### 数据结构/算法可视化网站
+
+
+![aa](https://image.youyinnn.top/sorting-algorithms.png)
+https://www.toptal.com/developers/sorting-algorithms
+
+
+![image](https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png)
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
+![image](https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png)
+https://visualgo.net/zh
+
+
+### 经纬度行政区域查询API
+
+
+[home](http://jwd.funnyapi.com/#/index)
+
+
+### win10 自带录电脑音软件
+
+
+
+![jEHdM1ZoRC](https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg)
+![image](https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png)
+![image](https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png)
+
+然后打开win10自带的录音软件Voice Recorder
+
+
+
+### Protobuf
+
+#### What are protocol buffers?
+
+Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the "old" format.
+
+#### Why not just use XML?
+
+Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:
+
+- are simpler
+- are 3 to 10 times smaller
+- are 20 to 100 times faster
+- are less ambiguous
+- generate data access classes that are easier to use programmatically
+
+#### References
+
+- [深入Protobuf](https://www.jianshu.com/p/a24c88c0526a)
+- [ProtoBuf试用与JSON的比较](https://www.jianshu.com/p/b4b51b99e218)
+- [在python中使用ProtocolBuffers](https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw)
+- [Google Docs](https://developers.google.com/protocol-buffers/docs/overview)
+
 ## :star: Java相关
 
 ### Java8系列文章
@@ -1079,641 +1739,6 @@ https://www.zhihu.com/question/19929609/answer/383055223
 
 
 https://www.jianshu.com/p/73715ee54712
-
-
-## :star: 杂文/问题/乱说/黑科技/技巧
-
-### 关于 github oauth app
-
-
-![image](https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png)
-
-[reference.](https://github.com/timqian/my-notes/issues/9)
-
-
-### 代码高亮的的坑
-
-
-> editor.md的preview页 + highlight.js
-
-#### :small_blue_diamond:1. highlight.js 的坑
-
-##### :small_orange_diamond:highlight.js无效问题
-
-> **hub主页上的highlight.js文件是用不了的!!!**
-> 解决: 去[官网主页]()上查看源码下载, 也可以在博客仓库里找到`highlight-site-pack.js`文件
-
-##### :small_orange_diamond:始终只能渲染code而无法渲染pre的问题
-
-> **readme里给的选择器只能选中pre下的code(眼戳没注意...)**
-> 解决: 把pre也一起选中就好了
-
-
-``` js
-$('pre, pre code').each(function(i, block) {
-    hljs.highlightBlock(block);
-});
-```
-
-#### :small_blue_diamond:2. editor的默认md code渲染和highlight.js渲染冲突问题
-
-![image](https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png)
-
-如图用的atom-one-dark, 但是背景还是白色的...
-
-##### :small_orange_diamond:1. editor渲染禁用
-1. 首先不引用lib下的prettify.min.js文件
-2. 修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染
-
-   ![image](https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png)
-   修改完之后, 这样就不会在pre和code上添加pretty的类了
-
-##### :small_orange_diamond:2. css覆盖
-因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)
-
-注释一部分editormd.preview.css:
-
-![image](https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png)
-
-我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.
-
-#### :small_blue_diamond:结果
-
-![image](https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png)
-
-
-### cmd相关
-
-
-#### :small_blue_diamond:教程
-- 扫盲：https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/
-- 常用cmd：https://blog.csdn.net/hanzheng260561728/article/details/51558990
-
-#### :small_blue_diamond:微软开放命令行文档
-
->  cmd文档/doc文档/command line
-
-[link](http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf)
-
-
-### 关于 CI
-
-
-#### :small_blue_diamond:示意图
-
-![image](https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png)
-
->文章 [The Product Managers’ Guide to Continuous Delivery and DevOps](https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/)
->
->对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。
-
-
-### GitHub API response 条数pagination限制
-
-
-GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:
-
-![image](https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png)
-
-![image](https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png)
-
-参考: https://developer.github.com/v3/#pagination
-
-我现在的blog所有的comments请求都是9999
-
-
-### 一顿操作 node.js安装
-
-
-#### :small_blue_diamond:安装nvm
-
-1. 首先去 https://github.com/coreybutler/nvm-windows 下载最新的release版本 然后安装即可
-
-#### :small_blue_diamond:使用mvn安装nodejs的多版本
-
-``` bash
-$ nvm install 0.10
-$ nvm install 4
-$ nvm install 6
-$ nvm install 8
-```
-
-#### :small_blue_diamond:安装全局npm
-
-可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入
-
-``` bash
-mvn use 8
-```
-比如上面先use了8版本的node
-
-然后再安装全局npm, 不然你找不到npm的环境
-
-------------
-
-Linux下安装nvm
-
-看得懂就行啦：https://github.com/creationix/nvm#git-install
-
-参考: 
-https://i5ting.github.io/How-to-learn-node-correctly/#10302
-https://blog.csdn.net/jingtian678/article/details/78422760
-
-
-### Regex 匹配换行符/匹配尾部空格
-
-
-``` regex
-([\s\S]*)
-```
-
-``` regex
-\s*$
-```
-
-
-### 对IoC/DI的理解
-
-
-#### :small_blue_diamond:Ioc—Inverse  of Control
-
-**即“控制反转”，不是什么技术，而是一种设计思想**。在Java开发中，**Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。** 
-
-深入分析一下：
-
-- 谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；**谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。**
-- 为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？**因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。**
-
-**举例说明**
-
-“常规的是，我们程序员**手动new**来给程序的**Service对象**提供所**依赖的DAO对象**，而现在是程序通过IoC容器自己提供**DAO对象**给**Service对象**。”
-
-#### :small_blue_diamond:DI—Dependency Injection
-
-**即“依赖注入”**：**组件之间依赖关系**由容器在运行期决定，形象的说，即**由容器动态的将某个依赖关系注入到组件之中**。
-
-**依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。**通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 
-
-深入分析一下：
-
-- 谁依赖于谁：当然是**应用程序依赖于IoC容器**；
-- 为什么需要依赖：**应用程序需要IoC容器来提供对象需要的外部资源**；
-- 谁注入谁：很明显是**IoC容器注入应用程序某个对象，应用程序依赖的对象**；
-- 注入了什么：就是**注入某个对象所需要的外部资源（包括对象、资源、常量数据）**。
-
-**举例说明**
-
-“**Service对象**依赖于**DAO对象**，IoC容器通过**注解和反射机制**来**注入（Injected）**用户在配置文件中配置好的DAO对象到**Service对象**的对应属性中。”
-
-#### :small_blue_diamond:两者关系
-
-**IoC和DI**由什么**关系**呢？其实它们**是同一个概念的不同角度描述**，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 
-
-我的理解是：**IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现**。
-
-[参考](https://blog.csdn.net/qq_22654611/article/details/52606960)
-
-
-### 对于游戏来说 怎么选择TCP和UDP?
-
-
-- 如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。
-
-- 如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。
-
-- 如果客户端和服务器都可以独立发包，而且无法忍受延迟（比如：大多数的多人动作类游戏，一些MMO类游戏），那么使用UDP吧。
-
-转自: http://blog.jobbole.com/64638/
-
-
-### OOP三大特性
-
-
-#### :small_blue_diamond:封装优点：
-
-- **安全：** 只能通过规定的方法访问数据 
-- **隐藏细节：** 隐藏类的实例细节，方便修改和实现
-
-#### :small_blue_diamond:继承优点：
-
-- **代码复用**
-
-#### :small_blue_diamond:多态主要表现：
-
-- **引用多态**　　　
-
-  - 父类的引用可以指向本类的对象；
-  - 父类的引用可以指向子类的对象；
-
-- **方法多态**
-
-  根据上述创建的两个对象：本类对象和子类对象，同样都是父类的引用，当我们指向不同的对象时，它们调用的方法也是多态的。
-
-  - 创建本类对象时，调用的方法为本类方法；
-
-  - 创建子类对象时，调用的方法为子类重写的方法或者继承的方法；
-
-  **注意： 继承是多态的基础。**
-
-参考: https://www.cnblogs.com/hysum/p/7100874.html#_label1
-
-
-### BitMap
-
-
-http://blog.51cto.com/zengzhaozheng/1404108
-https://blog.csdn.net/hguisu/article/details/7880288
-http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html
-编程珠玑
-
-
-### MySQL用户管理
-
-
-https://www.cnblogs.com/gavin110-lgy/p/5773981.html
-https://www.cnblogs.com/clsn/p/8047028.html
-
-
-
-### 在Windows的右键菜单上增加新建自定义类型文件的选项
-
-
-![image](https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png)
-
-https://www.cnblogs.com/zhengye/articles/2304925.html
-
-
-### 关于引用奥森图标一类的i标签失效的问题
-
-
-路径也排查过了 文件也排查过了 也没报错 为什么呢？
-
-因为......
-
-千万要想想是不是全局font-family的问题！！！
-
-
-### git做用户的全局配置的文件夹在哪？
-
-
-放在你家
-
-![image](https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png)
-
-如图可以配置别名
-
-
-### 贪心算法和动态规划的区别
-
-
-> 贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。
->
-> 分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 
->
-> 动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 
-
-引自：https://www.cnblogs.com/codeskiller/p/6477181.html
-
-
-### 三种静态查找算法：顺序、二分/折半、索引/分块查找
-
-
-文章：https://blog.csdn.net/u011489043/article/details/78683856
-
-
-### MySQL自己更新自己
-
-
-https://www.cnblogs.com/jeffen/p/7016547.html
-
-mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表
-
-
-### 算法：并查集
-
-
-https://blog.csdn.net/C20180630/article/details/57074623
-https://blog.csdn.net/u013546077/article/details/64509038
-
-
-### 正则表达式 密码强度
-
-
-https://www.cnblogs.com/cexm/p/7737538.html
-
-
-### 文件头魔数 判断文件类型
-
-
-https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1
-
-但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt
-而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数
-
-魔数列表参考如下：
-https://www.garykessler.net/library/file_sigs.html
-
-
-### xss攻击和Java处理xss
-
-
-https://www.cnblogs.com/digdeep/p/4695348.html
-https://blog.csdn.net/woniumenga/article/details/47323829#
-
-Java的html解析器
-https://github.com/jhy/jsoup
-
-前端xss处理：
-https://jsxss.com/zh/index.html
-
-
-### 微服务/集群/分布式
-
-
-#### :small_blue_diamond:微服务好文
-
-[学习springboot看这一篇就够了](https://blog.csdn.net/ityouknow/article/details/80490926) 看它的微服务启蒙3篇
-
-#### :small_blue_diamond:集群和分布式
-> 小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群
->
-> 作者：张鹏飞
-> 链接：https://www.zhihu.com/question/20004877/answer/112124929
-> 来源：知乎
-> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-参考：
-https://blog.csdn.net/cutesource/article/details/5811914
-https://www.zhihu.com/question/20004877/answer/61025046
-https://www.cnblogs.com/aspirant/p/5697807.html
-
-
-### 什么是/为什么要Tracing？Opentracing的入门铺垫
-
-
-![image](https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png)
-
-好文：https://yq.aliyun.com/articles/514488
-
-#### :small_blue_diamond:这个Gitbook爆炸推【Opentracing的中文文档翻译】：
-
-https://wu-sheng.gitbooks.io/opentracing-io/content/
-
-Tutorials:
-
-https://github.com/yurishkuro/opentracing-tutorial/tree/master/java
-
-
-### 什么是/为什么要DevOps？
-
-
-![image](https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png)
-
-https://www.cnblogs.com/liufei1983/p/7152013.html
-
-
-### Spring生命周期详解好文
-
-
-https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0
-https://blog.csdn.net/fuzhongmin05/article/details/73389779
-https://blog.csdn.net/qq_23473123/article/details/76610052
-
-
-### html2canvas 页面输出为canvas
-
-
-超级棒的插件：
-教程和踩坑：https://segmentfault.com/a/1190000011478657
-hub：https://github.com/niklasvh/html2canvas
-
-#### :small_blue_diamond:生成的canvas没有图片的坑：
-
-要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
-开启html2canvas的useCORS配置项。即作如下设置： 
-
-``` javascript
-var opts = {useCORS: true};
-html2canvas(element, opts);
-```
-
-
-### k8s
-
-
-#### :small_blue_diamond:好文
-- 概念：http://www.dockone.io/article/8341?cmd=redirect&arubalp=12345
-- 简要介绍：http://www.dockone.io/article/8328
-- 10分钟核心概念了解：http://www.dockone.io/article/932
-
-#### :small_blue_diamond:中文文档
-- 设计理念（概念介绍）：http://docs.kubernetes.org.cn/249.html
-
-#### :small_blue_diamond:配置
-- k8s的Dashboard：http://blog.51cto.com/ylw6006/2113542
-- yaml：
-    - sample: https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
-    - offical reference: https://kubernetes.io/docs/reference/ see the api
-
-
-
-### docker
-
-
-介绍与入门：http://www.dockone.io/article/8350
-
-
-### Shell
-
-
-#### :small_blue_diamond:expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）
-- https://www.jianshu.com/p/70556b1ce932
-- https://www.cnblogs.com/lzrabbit/p/4298794.html
-- https://www.jellythink.com/archives/373
-
-#### :small_blue_diamond:set 设置你shell脚本的运行配置
-- https://www.cnblogs.com/liduanjun/p/3536996.html
-
-#### :small_blue_diamond:read 在shell里面读取新的字符
-- http://www.runoob.com/linux/linux-comm-read.html
-
-#### :small_blue_diamond:wc 计算字数
-- http://www.runoob.com/linux/linux-comm-wc.html
-
-#### :small_blue_diamond:cut 字符串切割
-- https://www.jb51.net/article/41872.htm
-
-#### :small_blue_diamond:shell脚本sudo外部输入密码
-- https://blog.csdn.net/qq_23587541/article/details/82841489
-
-#### :small_blue_diamond:./和sh执行脚本的区别：
-- `./`需要执行权限，使用脚本文件中第一行`#!`指定的shell（解释器）来执行命令（譬如常见的/bin/bash），不指定系统会调用默认shell程序
-- `sh`不需要执行权限，是使用`sh`这个shell执行命令，是个软链接，它可能是一个任意的shell，通常默认是`bash shel`，用type命令可以查看
-
-#### :small_blue_diamond:nohup使用详解
-- https://www.cnblogs.com/jinxiao-pu/p/9131057.html
-
-
-### Linux
-
-
-#### :small_blue_diamond:工具
-- fzf：https://www.colabug.com/4062481.html
-
-#### :small_blue_diamond:设置
-- 修改终端提示符：https://www.cnblogs.com/xiaofeiIDO/p/8037331.html
-- 环境变量：https://www.cnblogs.com/haore147/p/3633116.html
-
-#### :small_blue_diamond:命令
-- 命令大全：http://man.linuxde.net/
-- 一些巨棒的命令替代：https://linux.cn/article-10171-1.html
-
-#### :small_blue_diamond:CentOS
-##### :small_orange_diamond:yum详解
-- http://www.cnblogs.com/vathe/p/6736094.html
-
-#### :small_blue_diamond:Ubuntu
-##### :small_orange_diamond:apt-get详解
-- https://blog.csdn.net/sinat_31206523/article/details/78138822
-- https://blog.csdn.net/yessharing/article/details/55806090
-
-
-### chrome插件开发
-
-
-https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83
-
-
-### gRPC & protobuf & Swagger
-
-
-- [Grpc+Grpc Gateway实践三 Swagger了解一下](https://segmentfault.com/a/1190000013513469)
-- [google protobuf安装与使用](https://www.cnblogs.com/luoxn28/p/5303517.html)
-- [protobuf](https://github.com/protocolbuffers/protobuf)
-- [grpc-gateway：grpc转换为http协议对外提供服务](https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html)
-
-
-### Database Client
-
-
-[15个windows上好用的client](https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows)
-
-
-### linux 换行符
-
-
-https://blog.csdn.net/mulangren1988/article/details/54316783
-
-
-### 带空格文件名参数传递 xargs
-
-
-https://blog.csdn.net/u011085172/article/details/77771173
-
-
-### GraphQL 一种用于 API 的查询语言
-
-
-> GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 
->
-> GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。
-
-中文网 : [官网](http://graphql.cn/)
-引子 : [segmentfault](https://segmentfault.com/a/1190000006132986)
-知乎专栏 : [面向未来的API —— GitHub GraphQL API 使用介绍](https://zhuanlan.zhihu.com/p/28077095)
-
-> 2018年11月16日 10点04分
-> 要构建一个graphql需要的成本太大了 还不如restful来的快
-
-
-### 排序算法图解博客
-
-看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
-
-
-## :star: 网站/软件
-
-### 一个素材网站 devianart
-
-
-https://www.deviantart.com/
-
-
-### icon相关 素材站/软件
-
-
-#### :small_blue_diamond:阿里巴巴矢量图标库
-
-![image](https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png)
-
-link : http://iconfont.cn/
-
-#### :small_blue_diamond:iconstroe
-
-![image](https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png)
-
-link : https://iconstore.co/
-
-#### :small_blue_diamond:flaticon
-
-![image](https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png)
-
-link : https://www.flaticon.com/
-
-#### :small_blue_diamond:Nucleo Icon管理工具
-
-![image](https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png)
-
-https://nucleoapp.com/
-
-
-### 软件推介 : cmder
-
-
-> 一个高颜值功能强大的的windows终端管理器
-> 
-> 介绍 : https://zhuanlan.zhihu.com/p/28400466
-
-![image](https://user-images.githubusercontent.com/23525754/40038175-47ab3728-5843-11e8-8673-10bd2894ad70.png)
-
-#### :small_blue_diamond:Tips:
-
-软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.
-
-但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.
-
-所以我们下载full, 解压在`C:\Program Files`, 可以发现整个软件大概250MB, 我们从软件目录下的`C:\Program Files\cmder\vendor`中删去`git-for-windows`文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.
-
-
-### 数据结构/算法可视化网站
-
-
-![aa](https://image.youyinnn.top/sorting-algorithms.png)
-https://www.toptal.com/developers/sorting-algorithms
-
-
-![image](https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png)
-https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
-
-![image](https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png)
-https://visualgo.net/zh
-
-
-### 经纬度行政区域查询API
-
-
-[home](http://jwd.funnyapi.com/#/index)
-
-
-### win10 自带录电脑音软件
-
-
-
-![jEHdM1ZoRC](https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg)
-![image](https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png)
-![image](https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png)
-
-然后打开win10自带的录音软件Voice Recorder
 
 
 ## :star: HTML/H5

@@ -26,7 +26,6 @@ function createarticlecard(item, pagebelong) {
 }
 
 function createarticlehead(re) {
-    console.log(re)
     let title = re.title
     let articlehead = c('div')
     articlehead.id = 'articlehead'
@@ -105,51 +104,6 @@ function showhexometadata(hexometadata) {
         }
     }
     appendc(md, metadatapanel)
-}
-
-function createtodo(issuesbody, re) {
-    let todohead = c('div')
-    todohead.innerHTML = '<i class="em-svg em-card_index"></i>  Todo List'
-    adclass(todohead, 'todohead unselectable')
-    appendc(md, todohead)
-    let fulltext = '\r\n' + issuesbody + '\r\n'
-    for (let i = re.length - 1; i >= 0; --i) {
-        let head = re[i].created_at
-        let text = re[i].body
-        fulltext += '<div class="card todo-card" id="search-' + (re.length - i - 1) + '"> <div class="card-header todo-head"> <span style="font-weight:bold;">ToDo <a href=" ' + re[i].html_url + '" target="_blank">#' + (re.length - i - 1) + '</a> created at: </span> <p style="margin:0; text-align: right">' + dayjs(head).format('MMM,DD YYYY') + articlecarddate(dayjs(head).set('hour', dayjs(head).hour() - 8)) + ' </p> </div> <div class="card-body todo-body"> <p class="card-text todo-text">\r\n' + text + '\r\n</p> </div> </div><br>'
-    }
-    $(md).animateCss('fadeIn')
-    searchshowandrendermd(fulltext, re.length)
-}
-
-function createscript(issuesbody, re) {
-    let scripthead = c('div')
-    scripthead.innerHTML = '<i class="em-svg em-card_file_box"></i>  Script Base'
-    adclass(scripthead, 'todohead unselectable')
-    appendc(md, scripthead)
-    let fulltext = '\r\n' + issuesbody + '\r\n'
-    for (let i = 0; i < re.length; ++i) {
-        let head = re[i].created_at
-        let text = re[i].body
-        fulltext += `<div class="card" id="search-${i}"><div class="card-header"><span style="font-weight:bold;">Script <a href="${re[i].html_url}" target="_blank">#${i}</a> created at: </span>${dayjs(head).format('MMM,DD YYYY') + articlecarddate(dayjs(head).set('hour', dayjs(head).hour() - 8))}</div><div class="card-body">${'\r\n\r\n' + text + '\r\n\r\n'}</div></div><br>`
-    }
-    $(md).animateCss('fadeIn')
-    searchshowandrendermd(fulltext, re.length)
-}
-
-function createegg(issuesbody, re) {
-    let egghead = c('div')
-    egghead.innerHTML = '<i class="em-svg em-clown_face"></i>  E GGgG gGGG Gggg ggGG'
-    adclass(egghead, 'todohead unselectable')
-    appendc(md, egghead)
-    let fulltext = '\r\n' + issuesbody + '\r\n'
-    for (let i = 0; i < re.length; ++i) {
-        let head = re[i].created_at
-        let text = re[i].body
-        fulltext += '<div class="card" id="search-' + i + '"><div class="card-header"><span style="font-weight:bold;">Egg <a href=" ' + re[i].html_url + '" target="_blank">#' + i + '</a> created at: </span>' + dayjs(head).format('MMM,DD YYYY') + '</div><div class="card-body"> <p class="card-text">\r\n' + text + '\r\n</p></div></div><br>'
-    }
-    $(md).animateCss('fadeIn')
-    searchshowandrendermd(fulltext, re.length)
 }
 
 function searchshowandrendermd(fulltext, relength) {
