@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>我们先分析Leetcode的55题，是从45题Jump Game II 跳过来的，因为这题比II要简单一点，只需要判断序列是否能jump到终点就行，而45题是要找最小的jump次数；</p>
+          <h3 id="e25a21eb">Introduction</h3><p>我们先分析Leetcode的55题，是从45题Jump Game II 跳过来的，因为这题比II要简单一点，只需要判断序列是否能jump到终点就行，而45题是要找最小的jump次数；</p>
 <p>为什么这题要拿出篇幅来分析？因为这题包含了很多东西： </p>
 <ul>
 <li><strong>纯回溯</strong></li>
@@ -140,12 +135,7 @@
 </ul>
 <p>分析完之后你会发现，原来算法可以这么美妙😃</p>
 
-          <h3 id="fe10ab4a">
-            <a name="_root-Jump Game" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Jump Game
-          </h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+          <h3 id="fe10ab4a">Jump Game</h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
 <p>Each element in the array represents your maximum jump length at that position.</p>
 <p><strong>Determine if you are able to reach the last index.</strong></p>
 <p><strong>Example 1:</strong></p>
@@ -156,12 +146,7 @@ Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</cod
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.:</code></pre>
-          <h4 id="9418e596">
-            <a name="_root-1. Backtracking" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            1. Backtracking
-          </h4><p>无论是I还是II，我最开始只能想到的就是回溯法，而回溯法用于解这两题是会炸的，因为时间复杂度和递归栈太多了，单作为DP的第一步，我们还是先把回溯写出来</p>
+          <h4 id="9418e596">1. Backtracking</h4><p>无论是I还是II，我最开始只能想到的就是回溯法，而回溯法用于解这两题是会炸的，因为时间复杂度和递归栈太多了，单作为DP的第一步，我们还是先把回溯写出来</p>
 <pre><code class="language-java">public boolean canJump(int[] nums) {
     return backtracking(nums, 0);
 }
@@ -189,12 +174,7 @@ private boolean backtracking(int[] nums, int now) {
 <li>Space complexity : <strong>O(n)</strong>. Recursion requires additional memory for the stack frames. </li>
 </ul>
 
-          <h4 id="4e7c82ed">
-            <a name="_root-2. Memorization: DP Top-down" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2. Memorization: DP Top-down
-          </h4><p>也许你已经意识到了，我们仅仅是想知道每一个位置是否能跳到最后一格而已，但是某个位置可能会有从不同地方跳过来的，如果第一次跳过来的时候，这时候肯定不知道这个位置能不能到达，然后从这个位置继续往下跳的时候就能回溯出一个结果来，如果我们将这个结果记录下来的话，那么第二次有从其他地方跳过来的时候，我们就知道这个位置往下走到底是个什么结果，这样就不必再继续往下跳然后等回溯了；</p>
+          <h4 id="4e7c82ed">2. Memorization: DP Top-down</h4><p>也许你已经意识到了，我们仅仅是想知道每一个位置是否能跳到最后一格而已，但是某个位置可能会有从不同地方跳过来的，如果第一次跳过来的时候，这时候肯定不知道这个位置能不能到达，然后从这个位置继续往下跳的时候就能回溯出一个结果来，如果我们将这个结果记录下来的话，那么第二次有从其他地方跳过来的时候，我们就知道这个位置往下走到底是个什么结果，这样就不必再继续往下跳然后等回溯了；</p>
 <p>于是我们将每个位置的回溯结果记忆化：能到终点代表<strong><em>GOOD</em></strong>、不能到终点代表<strong><em>BAD</em></strong>、没尝试过代表<strong><em>UNKNOWN</em></strong></p>
 <p>比如Leetcode上的例子：</p>
 <p>An example of a memorization table for input array <code>nums = [2, 4, 2, 1, 0, 2, 0]</code> can be seen in the diagram below. We write <strong>G</strong> for a <em>GOOD</em> position and <strong>B</strong> for a <em>BAD</em> one. We can see that we cannot start from indices 2, 3 or 4 and eventually reach last index (6), but we can do that from indices 0, 1, 5 and (trivially) 6.</p>
@@ -281,12 +261,7 @@ private boolean backtracking(int[] nums, int now) {
 </ul>
 <p>送算减少了很多的回溯了，时间复杂度也从2的n次方降到n的2次方了，这回提交到Leetcode，打了11.11%</p>
 
-          <h4 id="3945c3b3">
-            <a name="_root-3. Memorization: DP Bottom-up" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            3. Memorization: DP Bottom-up
-          </h4><p>上篇练习过挺多DP的，但是都没仔细研究过<strong>自顶向下</strong>和<strong>自底向上</strong>，正好借这题来分析分析</p>
+          <h4 id="3945c3b3">3. Memorization: DP Bottom-up</h4><p>上篇练习过挺多DP的，但是都没仔细研究过<strong>自顶向下</strong>和<strong>自底向上</strong>，正好借这题来分析分析</p>
 <p>我们的问题，若是要从一头到另一头，比如这一题，需要从起点跳到终点，然后从终点回溯回来（也许是跳到了之前回溯好了的结果），这样才能知道结果，形式化的想象一下，我们主动地发送请求到服务端，然后服务端返回结果，这是一个过去/回来的过程；</p>
 <p>如果我们能直接从服务端返回结果，那么就少花一半以上的effort，也就是说，我们可以从终点直接往回走！</p>
 <p>因为我们起点部分的点的结果，都是从终点附近的后半段点的结果递归回来的，我们这样做是提前从后半段算回结果</p>
@@ -324,12 +299,7 @@ public class Solution {
 </ul>
 <p>我们又优化了一下DP，这次打了30.77%，似乎还不错，再看看能不能再有什么优化的地方</p>
 
-          <h4 id="bcfc086">
-            <a name="_root-4. Refine The DP" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            4. Refine The DP
-          </h4><p>如果我们减负去很多题目以外的概念的话，我们将会得到一个很简单的Memo模型：和自底向上一样，只不过我们不需要考虑什么<strong><em>UNKNOWN</em></strong></p>
+          <h4 id="bcfc086">4. Refine The DP</h4><p>如果我们减负去很多题目以外的概念的话，我们将会得到一个很简单的Memo模型：和自底向上一样，只不过我们不需要考虑什么<strong><em>UNKNOWN</em></strong></p>
 <pre><code class="language-java">public boolean canJump(int[] nums) {
     boolean[] can = new boolean[nums.length];
     can[nums.length - 1] = true;
@@ -346,12 +316,7 @@ public class Solution {
 }</code></pre>
 <p>这次打了34.76%，别看和上面的没提升多少，相比之下这已经减少了1倍以上的耗时了，我们似乎已经达到了这道题DP的极限了，再靠DP的思维已经无法再进行优化了，这时候我告诉你，差一步你就能将这个DP转为线性解法，你可能会崩溃</p>
 
-          <h4 id="d4ee57aa">
-            <a name="_root-5. Greedy" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            5. Greedy
-          </h4><p>从上面的DP我们可以发现，每当我们的到达一个新的位置（i）的时候，它就会往后找，找到一个GOOD就break掉，于是我们就认为这个新位置也是GOOD，而这个被找到的GOOD，就是当前新位置能reach到的第一个GOOD，因为一旦reach到这个GOOD，那么其他case就不比再考虑了，所以我们才break；</p>
+          <h4 id="d4ee57aa">5. Greedy</h4><p>从上面的DP我们可以发现，每当我们的到达一个新的位置（i）的时候，它就会往后找，找到一个GOOD就break掉，于是我们就认为这个新位置也是GOOD，而这个被找到的GOOD，就是当前新位置能reach到的第一个GOOD，因为一旦reach到这个GOOD，那么其他case就不比再考虑了，所以我们才break；</p>
 <table>
 <thead>
 <tr>
@@ -397,12 +362,7 @@ public class Solution {
     return lastPos == 0;
 }</code></pre>
 
-          <h3 id="71847fd8">
-            <a name="_root-Jump Game II" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Jump Game II
-          </h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+          <h3 id="71847fd8">Jump Game II</h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
 <p>Each element in the array represents your maximum jump length at that position.</p>
 <p>Your goal is to reach the last index in the minimum number of jumps.</p>
 <p><strong>Example:</strong></p>
@@ -410,12 +370,7 @@ public class Solution {
 Output: 2
 Explanation: The minimum number of jumps to reach the last index is 2.
     Jump 1 step from index 0 to 1, then 3 steps to the last index.</code></pre>
-          <h4 id="6cc9381b">
-            <a name="_root-1. Backtracking - O(2^n)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            1. Backtracking - O(2^n)
-          </h4><p>不多BB</p>
+          <h4 id="6cc9381b">1. Backtracking - O(2^n)</h4><p>不多BB</p>
 <pre><code class="language-java">public int jump(int[] nums) {
     return dfs(nums, 0, 0, Integer.MAX_VALUE);
 }
@@ -436,12 +391,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
 }</code></pre>
 <p>不用多想，时间复杂度爆掉了</p>
 
-          <h4 id="b0df4e79">
-            <a name="_root-2. DP Bottom-up - O (n^2)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2. DP Bottom-up - O (n^2)
-          </h4><pre><code class="language-java">public int jump(int[] nums) {
+          <h4 id="b0df4e79">2. DP Bottom-up - O (n^2)</h4><pre><code class="language-java">public int jump(int[] nums) {
     int[] dp = new int[nums.length];
     for (int i = nums.length - 2; i &gt;= 0; i--) {
         // one jump to the end
@@ -461,12 +411,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
     return dp[0];
 }</code></pre>
 
-          <h4 id="5dc338ca">
-            <a name="_root-3. BFS - O (n)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            3. BFS - O (n)
-          </h4><p>参考自：<a href="https://leetcode.com/problems/jump-game-ii/discuss/18019/10-lines-C%252B%252B-(16ms)-Python-BFS-Solutions-with-Explanations">10-lines C++ (16ms) / Python BFS Solutions with Explanations</a></p>
+          <h4 id="5dc338ca">3. BFS - O (n)</h4><p>参考自：<a href="https://leetcode.com/problems/jump-game-ii/discuss/18019/10-lines-C%252B%252B-(16ms)-Python-BFS-Solutions-with-Explanations">10-lines C++ (16ms) / Python BFS Solutions with Explanations</a></p>
 <p>如果我们仅观察步数的增长的话，我们其实能够把数组视为一棵以跳数来分层的数结构，这也是这道题能够用广度优先搜索来思考的关键点</p>
 <p>比如<code>nums = [2, 3, 1, 1, 4]</code>，第一层是我们的起点<code>2</code>，它能够到达的下一层数字有<code>3,1</code>，而<code>3,1</code>的下一跳能够到达的是<code>1,4</code>如此一来我们仅需要跳2层就能够到达终点了；</p>
 <p>再比如<code>nums = [2, 6, 5, 2, 3, 7, 4, 9, 8, 2, 1, 1]</code>，第一层<code>2</code>，第二层<code>6, 5</code>，第三层<code>2,3,7,4,9</code>，因为最多能从<code>i = 1, nums[1] = 6</code>跳到<code>nums[1 + 6] = nums[7] = 9</code>，然后第三层的第一个数必定是第二层结尾的下一个数，以此类推第四层<code>2, 1, 1</code></p>
@@ -494,12 +439,7 @@ private int dfs(int[] nums, int now, int jump, int minJump) {
     return jump;
 }</code></pre>
 
-          <h3 id="fd3f1d11">
-            <a name="_root-Edit Distance" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Edit Distance
-          </h3><p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
+          <h3 id="fd3f1d11">Edit Distance</h3><p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
 <p>You have the following 3 operations permitted on a word:</p>
 <ol>
 <li>Insert a character</li>
@@ -521,12 +461,7 @@ inention -&gt; enention (replace &#39;i&#39; with &#39;e&#39;)
 enention -&gt; exention (replace &#39;n&#39; with &#39;x&#39;)
 exention -&gt; exection (replace &#39;n&#39; with &#39;c&#39;)
 exection -&gt; execution (insert &#39;u&#39;)</code></pre>
-          <h4 id="8aff0a2b">
-            <a name="_root-DP Top-down" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP Top-down
-          </h4><p>这题，乍一看一脸懵逼，咋还有3种情况！咋还随便什么位置都能有这三种情况！怎么玩！用什么思路！</p>
+          <h4 id="8aff0a2b">DP Top-down</h4><p>这题，乍一看一脸懵逼，咋还有3种情况！咋还随便什么位置都能有这三种情况！怎么玩！用什么思路！</p>
 <p>思考几分钟后无果，果断去讨论区找思路，然后看到高评DP解，醍醐灌顶- -</p>
 <p>简单来说，虽然对比到有不同有<strong>33333333333333</strong>种情况，但是我们还是可以按照顺序来给两个word做一个矩阵，于是熟悉的操作就来了，</p>
 <pre><code class="language-java">a = ac, b = ae
@@ -591,12 +526,7 @@ base case：
     return dp[word1.length()][word2.length()];
 }</code></pre>
 
-          <h4 id="d483efbb">
-            <a name="_root-DP Bottom-up + Backtracking" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP Bottom-up + Backtracking
-          </h4><p>我们还可以用回溯的形式去计算dp，也就是说以自底向上的思路去求解</p>
+          <h4 id="d483efbb">DP Bottom-up + Backtracking</h4><p>我们还可以用回溯的形式去计算dp，也就是说以自底向上的思路去求解</p>
 <pre><code class="language-java">public int minDistance(String a, String b) {
     int[][] dp = new int[a.length() + 1][b.length() + 1];
     return dfs(a, b, a.length() - 1, b.length() - 1, dp);

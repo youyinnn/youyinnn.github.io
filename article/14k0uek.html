@@ -125,24 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="67a78c1e">
-            <a name="_root-什么是CI" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            什么是CI
-          </h3><p><strong>持续集成（Continuous integration）</strong> 不是什么新概念</p>
+          <h3 id="67a78c1e">什么是CI</h3><p><strong>持续集成（Continuous integration）</strong> 不是什么新概念</p>
 <blockquote>
 <p><em>持续集成是一种软件开发实践，即团队开发成员经常集成他们的工作，通过每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</em></p>
 </blockquote>
 <p>以上引自百度百科的定义。</p>
 <p>通俗来说，持续集成的操作很明确，我可以根据自己的实际开发经验，而分别从两个层次去说明：</p>
 
-          <h4 id="ec890c7">
-            <a name="_root-小层次" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            小层次
-          </h4><p>首先我们得有一个前提，软件组中的一个小组在开发一个模块，这个模块由若干名成员开发，模块的成品标准已经定义好，模块也已经开发好第一版基础版，即可以投入小范围使用的版本，我们称这个版本为<strong>主模块版本</strong>。</p>
+          <h4 id="ec890c7">小层次</h4><p>首先我们得有一个前提，软件组中的一个小组在开发一个模块，这个模块由若干名成员开发，模块的成品标准已经定义好，模块也已经开发好第一版基础版，即可以投入小范围使用的版本，我们称这个版本为<strong>主模块版本</strong>。</p>
 <p>
         <div class="_showpic_790c7df showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39910988-3c8e44d0-552c-11e8-9b85-1606425a0330.png class="_pic_790c7df hidepic" picId="790c7df"></img>
@@ -197,21 +187,11 @@
         </script>
     </p>
 
-          <h4 id="d577fa59">
-            <a name="_root-大层次" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            大层次
-          </h4><p>我们延续小层次的过程，软件成品标准已经定好，也有已经开发好可以投入小范围运行的<strong>主成品版本</strong>。</p>
+          <h4 id="d577fa59">大层次</h4><p>我们延续小层次的过程，软件成品标准已经定好，也有已经开发好可以投入小范围运行的<strong>主成品版本</strong>。</p>
 <p>现在我们需要开发一个新的<strong>Feature-A</strong>，这个<strong>Feature</strong>需要更新升级若干<strong>Modules</strong>，这样任务分配下去。每一个小组开发完一个模块<strong>Module-k</strong>之后，就会发布一个新的模块版本<strong>Module-K</strong>，我们把这个模块版本和<strong>主成品版本</strong>进行<strong>合并与测试</strong>，测试通过即将结果直接进行<strong>发布</strong>。并将这个结果更新为当前的<strong>主成品版本</strong>，而不用等待整体的<strong>Feature-A</strong>的其他子<strong>Module</strong>完成之后，统一整合再发布。</p>
 <p>从这两个层次来理解持续集成就非常简单了，一旦我们开发的新模块可以是可以稳定接入主程序/主模块的，我们就毫不犹豫地和主程序/模块合并与发布。</p>
 
-          <h3 id="e97bf69d">
-            <a name="_root-CI的目的" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CI的目的
-          </h3><ol>
+          <h3 id="e97bf69d">CI的目的</h3><ol>
 <li>是为了尽早地测试我们开发的部分在生产环境中的可靠性。</li>
 <li>减少整体返工的次数和成本。</li>
 <li>这也便于尽早发现新模块的BUG，避免整体集成之后的返工，也有利于准确定位BUG的出现的地方。</li>

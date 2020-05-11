@@ -125,19 +125,9 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e81ff1bf">
-            <a name="_root-Iterable接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Iterable接口
-          </h3><p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
+          <h3 id="e81ff1bf">Iterable接口</h3><p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
 
-          <h4 id="6b7220e">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h4><pre><code class="language-java">/**
+          <h4 id="6b7220e">源码</h4><pre><code class="language-java">/**
  * 实现这个接口, 意味着对象可以使用forEach循环进行操作
  */
 public interface Iterable&lt;T&gt; {
@@ -170,19 +160,9 @@ public interface Iterable&lt;T&gt; {
     }
 }</code></pre>
 
-          <h3 id="8d5c04e7">
-            <a name="_root-Iterator接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Iterator接口
-          </h3><p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
+          <h3 id="8d5c04e7">Iterator接口</h3><p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
 
-          <h4 id="6b7220e">
-            <a name="_root-源码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码
-          </h4><pre><code class="language-java">/**
+          <h4 id="6b7220e">源码</h4><pre><code class="language-java">/**
  * 源代码不多 所以去掉了很多注释就贴出来了
  */
 public interface Iterator&lt;E&gt; {
@@ -222,21 +202,11 @@ public interface Iterator&lt;E&gt; {
 }
 </code></pre>
 
-          <h4 id="b8ed6974">
-            <a name="_root-forEachRemaining引例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            forEachRemaining引例
-          </h4><blockquote>
+          <h4 id="b8ed6974">forEachRemaining引例</h4><blockquote>
 <p>待补充</p>
 </blockquote>
 
-          <h3 id="61c853ac">
-            <a name="_root-ListIterator" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ListIterator
-          </h3><p>比一般的迭代器要厉害 </p>
+          <h3 id="61c853ac">ListIterator</h3><p>比一般的迭代器要厉害 </p>
 <pre><code class="language-java">/**
  * 实现这个接口，意味着你的迭代器可以允许正向逆向地遍历list
  * 在过程中你甚至可以获取当前迭代的index，甚至是修改元素

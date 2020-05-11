@@ -125,19 +125,9 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="fccefbaf">
-            <a name="_root-前言" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            前言
-          </h3><p>2月份的时候，疫情原因，学校实验室和学院要开发一款帮助小区居民批量采购的小程序，实验室团队人手不足，说是少后台开发，所以我就上了，看着微信的文档还有学长的帮助，也就吭哧吭哧写上线了</p>
+          <h3 id="fccefbaf">前言</h3><p>2月份的时候，疫情原因，学校实验室和学院要开发一款帮助小区居民批量采购的小程序，实验室团队人手不足，说是少后台开发，所以我就上了，看着微信的文档还有学长的帮助，也就吭哧吭哧写上线了</p>
 
-          <h3 id="4a4b81b">
-            <a name="_root-操作流程" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            操作流程
-          </h3><p>
+          <h3 id="4a4b81b">操作流程</h3><p>
         <div class="_showpic_c3b71faa showpicbtn">Loading images >></div>
         <img href=https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg class="_pic_c3b71faa hidepic" picId="c3b71faa"></img>
         <script>
@@ -178,37 +168,17 @@
 <li><strong>商户后台</strong>处理支付结果，回写到数据库；</li>
 </ol>
 
-          <h3 id="d78e444e">
-            <a name="_root-后端" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            后端
-          </h3><p>后端项目参考：</p>
+          <h3 id="d78e444e">后端</h3><p>后端项目参考：</p>
 
-          <h4 id="98b76268">
-            <a name="_root-前置参考" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            前置参考
-          </h4><ul>
+          <h4 id="98b76268">前置参考</h4><ul>
 <li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1">请求参数参考</a></li>
 <li><a href="https://github.com/Wechat-Group/WxJava/wiki/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98">代码参考</a></li>
 <li><a href="https://github.com/binarywang/weixin-java-pay-demo/blob/5ea0ad02efb734751dce18eee35817af82c3ee13/src/main/java/com/github/binarywang/demo/wx/pay/controller/WxPayController.java#L106">官方Demo</a></li>
 <li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&amp;index=5">签名方式</a></li>
 </ul>
 
-          <h4 id="ba497bca">
-            <a name="_root-自己的实现" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            自己的实现
-          </h4>
-          <h5 id="66c8b3c9">
-            <a name="_root-获取5个参数和sign" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            获取5个参数和sign
-          </h5><p>下面这个接口完成了流程的2和3：</p>
+          <h4 id="ba497bca">自己的实现</h4>
+          <h5 id="66c8b3c9">获取5个参数和sign</h5><p>下面这个接口完成了流程的2和3：</p>
 <pre><code class="language-java">@PostMapping(&quot;/unifiedOrder&quot;)
 @ResponseBody
 public Object unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request, HttpServletRequest realReq) {
@@ -261,12 +231,7 @@ public Object unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request, HttpSe
     &quot;totalFee&quot;: 1000
 }</code></pre>
 
-          <h5 id="f788cffd">
-            <a name="_root-主动查询支付结果并回写" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            主动查询支付结果并回写
-          </h5><pre><code class="language-java">@GetMapping(&quot;/checkOrderPaymentState&quot;)
+          <h5 id="f788cffd">主动查询支付结果并回写</h5><pre><code class="language-java">@GetMapping(&quot;/checkOrderPaymentState&quot;)
 @ResponseBody
 public Object queryOrder(@RequestParam(required = false) String transactionId, @RequestParam String outTradeNo) {
     Map&lt;String, String&gt; result = new HashMap&lt;&gt;(8);
@@ -295,12 +260,7 @@ public Object queryOrder(@RequestParam(required = false) String transactionId, @
     return result;
 }</code></pre>
 
-          <h5 id="152959ea">
-            <a name="_root-提供给微信后台的notify接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            提供给微信后台的notify接口
-          </h5><pre><code class="language-java">@PostMapping(&quot;/notify/order&quot;)
+          <h5 id="152959ea">提供给微信后台的notify接口</h5><pre><code class="language-java">@PostMapping(&quot;/notify/order&quot;)
 public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
     final WxPayOrderNotifyResult notifyResult = this.wxService.parseOrderNotifyResult(xmlData);
     String outTradeNo = notifyResult.getOutTradeNo();
@@ -320,12 +280,7 @@ public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayEx
     }
 }</code></pre>
 
-          <h3 id="6594a8b5">
-            <a name="_root-后话" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            后话
-          </h3><p>需求简单，所以只用到了请求支付下单以及查询支付结果这两个接口，退款的接口什么的都没写，用了大概1天的时间调通，3天的时间完善上线</p>
+          <h3 id="6594a8b5">后话</h3><p>需求简单，所以只用到了请求支付下单以及查询支付结果这两个接口，退款的接口什么的都没写，用了大概1天的时间调通，3天的时间完善上线</p>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">

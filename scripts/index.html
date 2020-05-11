@@ -125,25 +125,10 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h2 id="2489d38e">
-            <a name="_root-⭐ API相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ API相关
-          </h2>
-          <h3 id="785cf12a">
-            <a name="_root-一些开放的API" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            一些开放的API
-          </h3><p><a href="https://github.com/public-apis/public-apis">github repo public-apis</a></p>
+          <h2 id="2489d38e">⭐ API相关</h2>
+          <h3 id="785cf12a">一些开放的API</h3><p><a href="https://github.com/public-apis/public-apis">github repo public-apis</a></p>
 
-          <h3 id="1adb6e15">
-            <a name="_root-用来查询IP的API" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            用来查询IP的API
-          </h3><ul>
+          <h3 id="1adb6e15">用来查询IP的API</h3><ul>
 <li><p>国内：</p>
 <ul>
 <li><p>搜狐</p>
@@ -170,34 +155,14 @@
 </li>
 </ul>
 
-          <h3 id="1acca55a">
-            <a name="_root-英语相关API" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            英语相关API
-          </h3>
-          <h4 id="5e9190b4">
-            <a name="_root-语法检查" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            语法检查
-          </h4><ul>
+          <h3 id="1acca55a">英语相关API</h3>
+          <h4 id="5e9190b4">语法检查</h4><ul>
 <li><a href="https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&amp;utm_source=link&amp;utm_campaign=api_documentation">Ginger</a></li>
 <li><a href="https://www.grammarly.com/">Grammarly</a></li>
 </ul>
 
-          <h2 id="f2bd5082">
-            <a name="_root-⭐ 杂文/问题/乱说/黑科技/技巧" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ 杂文/问题/乱说/黑科技/技巧
-          </h2>
-          <h3 id="5bc6c604">
-            <a name="_root-关于 github oauth app" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            关于 github oauth app
-          </h3><p>
+          <h2 id="f2bd5082">⭐ 杂文/问题/乱说/黑科技/技巧</h2>
+          <h3 id="5bc6c604">关于 github oauth app</h3><p>
         <div class="_showpic_5d357401 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="_pic_5d357401 hidepic" picId="5d357401"></img>
         <script>
@@ -225,48 +190,23 @@
     </p>
 <p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
 
-          <h3 id="6754e9a1">
-            <a name="_root-代码高亮的的坑" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            代码高亮的的坑
-          </h3><blockquote>
+          <h3 id="6754e9a1">代码高亮的的坑</h3><blockquote>
 <p>editor.md的preview页 + highlight.js</p>
 </blockquote>
 
-          <h4 id="894ee921">
-            <a name="_root-🔹1. highlight.js 的坑" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹1. highlight.js 的坑
-          </h4>
-          <h5 id="76e8bb30">
-            <a name="_root-🔸highlight.js无效问题" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸highlight.js无效问题
-          </h5><blockquote>
+          <h4 id="894ee921">🔹1. highlight.js 的坑</h4>
+          <h5 id="76e8bb30">🔸highlight.js无效问题</h5><blockquote>
 <p><strong>hub主页上的highlight.js文件是用不了的!!!</strong><br>解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
 </blockquote>
 
-          <h5 id="2edff174">
-            <a name="_root-🔸始终只能渲染code而无法渲染pre的问题" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸始终只能渲染code而无法渲染pre的问题
-          </h5><blockquote>
+          <h5 id="2edff174">🔸始终只能渲染code而无法渲染pre的问题</h5><blockquote>
 <p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong><br>解决: 把pre也一起选中就好了</p>
 </blockquote>
 <pre><code class="language-js">$(&#39;pre, pre code&#39;).each(function(i, block) {
     hljs.highlightBlock(block);
 });</code></pre>
 
-          <h4 id="55caa9a3">
-            <a name="_root-🔹2. editor的默认md code渲染和highlight.js渲染冲突问题" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹2. editor的默认md code渲染和highlight.js渲染冲突问题
-          </h4><p>
+          <h4 id="55caa9a3">🔹2. editor的默认md code渲染和highlight.js渲染冲突问题</h4><p>
         <div class="_showpic_223fac6d showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png class="_pic_223fac6d hidepic" picId="223fac6d"></img>
         <script>
@@ -294,12 +234,7 @@
     </p>
 <p>如图用的atom-one-dark, 但是背景还是白色的...</p>
 
-          <h5 id="7cac9f8d">
-            <a name="_root-🔸1. editor渲染禁用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸1. editor渲染禁用
-          </h5><ol>
+          <h5 id="7cac9f8d">🔸1. editor渲染禁用</h5><ol>
 <li><p>首先不引用lib下的prettify.min.js文件</p>
 </li>
 <li><p>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</p>
@@ -332,12 +267,7 @@
 </li>
 </ol>
 
-          <h5 id="73f06e5a">
-            <a name="_root-🔸2. css覆盖" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸2. css覆盖
-          </h5><p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
+          <h5 id="73f06e5a">🔸2. css覆盖</h5><p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
 <p>注释一部分editormd.preview.css:</p>
 <p>
         <div class="_showpic_9a2020ba showpicbtn">Loading images >></div>
@@ -367,12 +297,7 @@
     </p>
 <p>我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.</p>
 
-          <h4 id="54514708">
-            <a name="_root-🔹结果" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹结果
-          </h4><p>
+          <h4 id="54514708">🔹结果</h4><p>
         <div class="_showpic_25cac22d showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png class="_pic_25cac22d hidepic" picId="25cac22d"></img>
         <script>
@@ -399,44 +324,19 @@
         </script>
     </p>
 
-          <h3 id="c7a1d677">
-            <a name="_root-cmd相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            cmd相关
-          </h3>
-          <h4 id="18e94a8a">
-            <a name="_root-🔹教程" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹教程
-          </h4><ul>
+          <h3 id="c7a1d677">cmd相关</h3>
+          <h4 id="18e94a8a">🔹教程</h4><ul>
 <li>扫盲：<a href="https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/">https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/</a></li>
 <li>常用cmd：<a href="https://blog.csdn.net/hanzheng260561728/article/details/51558990">https://blog.csdn.net/hanzheng260561728/article/details/51558990</a></li>
 </ul>
 
-          <h4 id="c27616db">
-            <a name="_root-🔹微软开放命令行文档" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹微软开放命令行文档
-          </h4><blockquote>
+          <h4 id="c27616db">🔹微软开放命令行文档</h4><blockquote>
 <p> cmd文档/doc文档/command line</p>
 </blockquote>
 <p><a href="http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf">link</a></p>
 
-          <h3 id="48178f1e">
-            <a name="_root-关于 CI" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            关于 CI
-          </h3>
-          <h4 id="7617f642">
-            <a name="_root-🔹示意图" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹示意图
-          </h4><p>
+          <h3 id="48178f1e">关于 CI</h3>
+          <h4 id="7617f642">🔹示意图</h4><p>
         <div class="_showpic_28778551 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="_pic_28778551 hidepic" picId="28778551"></img>
         <script>
@@ -467,12 +367,7 @@
 <p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
 </blockquote>
 
-          <h3 id="f2c4def6">
-            <a name="_root-GitHub API response 条数pagination限制" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            GitHub API response 条数pagination限制
-          </h3><p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
+          <h3 id="f2c4def6">GitHub API response 条数pagination限制</h3><p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
 <p>
         <div class="_showpic_e85900b7 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png class="_pic_e85900b7 hidepic" picId="e85900b7"></img>
@@ -528,37 +423,17 @@
 <p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
 <p>我现在的blog所有的comments请求都是9999</p>
 
-          <h3 id="dbcbf656">
-            <a name="_root-一顿操作 node.js安装" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            一顿操作 node.js安装
-          </h3>
-          <h4 id="dddf4a18">
-            <a name="_root-🔹安装nvm" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹安装nvm
-          </h4><ol>
+          <h3 id="dbcbf656">一顿操作 node.js安装</h3>
+          <h4 id="dddf4a18">🔹安装nvm</h4><ol>
 <li>首先去 <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载最新的release版本 然后安装即可</li>
 </ol>
 
-          <h4 id="bceb6587">
-            <a name="_root-🔹使用mvn安装nodejs的多版本" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹使用mvn安装nodejs的多版本
-          </h4><pre><code class="language-bash">$ nvm install 0.10
+          <h4 id="bceb6587">🔹使用mvn安装nodejs的多版本</h4><pre><code class="language-bash">$ nvm install 0.10
 $ nvm install 4
 $ nvm install 6
 $ nvm install 8</code></pre>
 
-          <h4 id="27915b67">
-            <a name="_root-🔹安装全局npm" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹安装全局npm
-          </h4><p>可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入</p>
+          <h4 id="27915b67">🔹安装全局npm</h4><p>可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入</p>
 <pre><code class="language-bash">mvn use 8</code></pre>
 <p>比如上面先use了8版本的node</p>
 <p>然后再安装全局npm, 不然你找不到npm的环境</p>
@@ -567,26 +442,11 @@ $ nvm install 8</code></pre>
 <p>看得懂就行啦：<a href="https://github.com/creationix/nvm#git-install">https://github.com/creationix/nvm#git-install</a></p>
 <p>参考:<br><a href="https://i5ting.github.io/How-to-learn-node-correctly/#10302">https://i5ting.github.io/How-to-learn-node-correctly/#10302</a><br><a href="https://blog.csdn.net/jingtian678/article/details/78422760">https://blog.csdn.net/jingtian678/article/details/78422760</a></p>
 
-          <h3 id="596786e">
-            <a name="_root-Regex 匹配换行符/匹配尾部空格" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Regex 匹配换行符/匹配尾部空格
-          </h3><pre><code class="language-regex">([\s\S]*)</code></pre>
+          <h3 id="596786e">Regex 匹配换行符/匹配尾部空格</h3><pre><code class="language-regex">([\s\S]*)</code></pre>
 <pre><code class="language-regex">\s*$</code></pre>
 
-          <h3 id="6db5b3e9">
-            <a name="_root-对IoC/DI的理解" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            对IoC/DI的理解
-          </h3>
-          <h4 id="cf6426d0">
-            <a name="_root-🔹Ioc—Inverse  of Control" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹Ioc—Inverse  of Control
-          </h4><p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
+          <h3 id="6db5b3e9">对IoC/DI的理解</h3>
+          <h4 id="cf6426d0">🔹Ioc—Inverse  of Control</h4><p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
 <p>深入分析一下：</p>
 <ul>
 <li>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；<strong>谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</strong></li>
@@ -595,12 +455,7 @@ $ nvm install 8</code></pre>
 <p><strong>举例说明</strong></p>
 <p>“常规的是，我们程序员<strong>手动new</strong>来给程序的<strong>Service对象</strong>提供所<strong>依赖的DAO对象</strong>，而现在是程序通过IoC容器自己提供<strong>DAO对象</strong>给<strong>Service对象</strong>。”</p>
 
-          <h4 id="7662d172">
-            <a name="_root-🔹DI—Dependency Injection" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹DI—Dependency Injection
-          </h4><p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
+          <h4 id="7662d172">🔹DI—Dependency Injection</h4><p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
 <p><strong>依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。</strong>通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 </p>
 <p>深入分析一下：</p>
 <ul>
@@ -612,21 +467,11 @@ $ nvm install 8</code></pre>
 <p><strong>举例说明</strong></p>
 <p>“<strong>Service对象</strong>依赖于<strong>DAO对象</strong>，IoC容器通过<strong>注解和反射机制</strong>来<strong>注入（Injected）</strong>用户在配置文件中配置好的DAO对象到<strong>Service对象</strong>的对应属性中。”</p>
 
-          <h4 id="c3e76f9d">
-            <a name="_root-🔹两者关系" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹两者关系
-          </h4><p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
+          <h4 id="c3e76f9d">🔹两者关系</h4><p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
 <p>我的理解是：<strong>IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现</strong>。</p>
 <p><a href="https://blog.csdn.net/qq_22654611/article/details/52606960">参考</a></p>
 
-          <h3 id="fc10e7da">
-            <a name="_root-对于游戏来说 怎么选择TCP和UDP?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            对于游戏来说 怎么选择TCP和UDP?
-          </h3><ul>
+          <h3 id="fc10e7da">对于游戏来说 怎么选择TCP和UDP?</h3><ul>
 <li><p>如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。</p>
 </li>
 <li><p>如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。</p>
@@ -636,37 +481,17 @@ $ nvm install 8</code></pre>
 </ul>
 <p>转自: <a href="http://blog.jobbole.com/64638/">http://blog.jobbole.com/64638/</a></p>
 
-          <h3 id="83ea1ac7">
-            <a name="_root-OOP三大特性" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            OOP三大特性
-          </h3>
-          <h4 id="7aa9fb7c">
-            <a name="_root-🔹封装优点：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹封装优点：
-          </h4><ul>
+          <h3 id="83ea1ac7">OOP三大特性</h3>
+          <h4 id="7aa9fb7c">🔹封装优点：</h4><ul>
 <li><strong>安全：</strong> 只能通过规定的方法访问数据 </li>
 <li><strong>隐藏细节：</strong> 隐藏类的实例细节，方便修改和实现</li>
 </ul>
 
-          <h4 id="d47e673e">
-            <a name="_root-🔹继承优点：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹继承优点：
-          </h4><ul>
+          <h4 id="d47e673e">🔹继承优点：</h4><ul>
 <li><strong>代码复用</strong></li>
 </ul>
 
-          <h4 id="ebe72dd2">
-            <a name="_root-🔹多态主要表现：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹多态主要表现：
-          </h4><ul>
+          <h4 id="ebe72dd2">🔹多态主要表现：</h4><ul>
 <li><p><strong>引用多态</strong>　　　</p>
 <ul>
 <li>父类的引用可以指向本类的对象；</li>
@@ -686,26 +511,11 @@ $ nvm install 8</code></pre>
 </ul>
 <p>参考: <a href="https://www.cnblogs.com/hysum/p/7100874.html#_label1">https://www.cnblogs.com/hysum/p/7100874.html#_label1</a></p>
 
-          <h3 id="ddd59aa4">
-            <a name="_root-BitMap" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            BitMap
-          </h3><p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a><br><a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a><br>编程珠玑</p>
+          <h3 id="ddd59aa4">BitMap</h3><p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a><br><a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a><br>编程珠玑</p>
 
-          <h3 id="96abc5d3">
-            <a name="_root-MySQL用户管理" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            MySQL用户管理
-          </h3><p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a><br><a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
+          <h3 id="96abc5d3">MySQL用户管理</h3><p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a><br><a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
 
-          <h3 id="2894e654">
-            <a name="_root-在Windows的右键菜单上增加新建自定义类型文件的选项" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            在Windows的右键菜单上增加新建自定义类型文件的选项
-          </h3><p>
+          <h3 id="2894e654">在Windows的右键菜单上增加新建自定义类型文件的选项</h3><p>
         <div class="_showpic_a713b4db showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="_pic_a713b4db hidepic" picId="a713b4db"></img>
         <script>
@@ -733,21 +543,11 @@ $ nvm install 8</code></pre>
     </p>
 <p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
 
-          <h3 id="91d79d33">
-            <a name="_root-关于引用奥森图标一类的i标签失效的问题" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            关于引用奥森图标一类的i标签失效的问题
-          </h3><p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
+          <h3 id="91d79d33">关于引用奥森图标一类的i标签失效的问题</h3><p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
 <p>因为......</p>
 <p>千万要想想是不是全局font-family的问题！！！</p>
 
-          <h3 id="39836185">
-            <a name="_root-git做用户的全局配置的文件夹在哪？" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            git做用户的全局配置的文件夹在哪？
-          </h3><p>放在你家</p>
+          <h3 id="39836185">git做用户的全局配置的文件夹在哪？</h3><p>放在你家</p>
 <p>
         <div class="_showpic_a63ca3cf showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="_pic_a63ca3cf hidepic" picId="a63ca3cf"></img>
@@ -776,95 +576,40 @@ $ nvm install 8</code></pre>
     </p>
 <p>如图可以配置别名</p>
 
-          <h3 id="b746ec18">
-            <a name="_root-贪心算法和动态规划的区别" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            贪心算法和动态规划的区别
-          </h3><blockquote>
+          <h3 id="b746ec18">贪心算法和动态规划的区别</h3><blockquote>
 <p>贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。</p>
 <p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 </p>
 <p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 </p>
 </blockquote>
 <p>引自：<a href="https://www.cnblogs.com/codeskiller/p/6477181.html">https://www.cnblogs.com/codeskiller/p/6477181.html</a></p>
 
-          <h3 id="3e4f3c2d">
-            <a name="_root-三种静态查找算法：顺序、二分/折半、索引/分块查找" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            三种静态查找算法：顺序、二分/折半、索引/分块查找
-          </h3><p>文章：<a href="https://blog.csdn.net/u011489043/article/details/78683856">https://blog.csdn.net/u011489043/article/details/78683856</a></p>
+          <h3 id="3e4f3c2d">三种静态查找算法：顺序、二分/折半、索引/分块查找</h3><p>文章：<a href="https://blog.csdn.net/u011489043/article/details/78683856">https://blog.csdn.net/u011489043/article/details/78683856</a></p>
 
-          <h3 id="df55037a">
-            <a name="_root-MySQL自己更新自己" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            MySQL自己更新自己
-          </h3><p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
+          <h3 id="df55037a">MySQL自己更新自己</h3><p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
 <p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
 
-          <h3 id="986935f6">
-            <a name="_root-算法：并查集" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            算法：并查集
-          </h3><p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a><br><a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
+          <h3 id="986935f6">算法：并查集</h3><p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a><br><a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
 
-          <h3 id="8e4d57d6">
-            <a name="_root-正则表达式 密码强度" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            正则表达式 密码强度
-          </h3><p><a href="https://www.cnblogs.com/cexm/p/7737538.html">https://www.cnblogs.com/cexm/p/7737538.html</a></p>
+          <h3 id="8e4d57d6">正则表达式 密码强度</h3><p><a href="https://www.cnblogs.com/cexm/p/7737538.html">https://www.cnblogs.com/cexm/p/7737538.html</a></p>
 
-          <h3 id="db775422">
-            <a name="_root-文件头魔数 判断文件类型" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            文件头魔数 判断文件类型
-          </h3><p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
+          <h3 id="db775422">文件头魔数 判断文件类型</h3><p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
 <p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt<br>而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
 <p>魔数列表参考如下：<br><a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
 
-          <h3 id="fe6cfb4f">
-            <a name="_root-xss攻击和Java处理xss" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            xss攻击和Java处理xss
-          </h3><p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
+          <h3 id="fe6cfb4f">xss攻击和Java处理xss</h3><p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
 <p>Java的html解析器<br><a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
 <p>前端xss处理：<br><a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
 
-          <h3 id="fbc94e2d">
-            <a name="_root-微服务/集群/分布式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            微服务/集群/分布式
-          </h3>
-          <h4 id="cdd19350">
-            <a name="_root-🔹微服务好文" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹微服务好文
-          </h4><p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
+          <h3 id="fbc94e2d">微服务/集群/分布式</h3>
+          <h4 id="cdd19350">🔹微服务好文</h4><p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
 
-          <h4 id="9e52e389">
-            <a name="_root-🔹集群和分布式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹集群和分布式
-          </h4><blockquote>
+          <h4 id="9e52e389">🔹集群和分布式</h4><blockquote>
 <p>小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群</p>
 <p>作者：张鹏飞<br>链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
 <p>参考：<br><a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a><br><a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a><br><a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
 
-          <h3 id="895e5ab0">
-            <a name="_root-什么是/为什么要Tracing？Opentracing的入门铺垫" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            什么是/为什么要Tracing？Opentracing的入门铺垫
-          </h3><p>
+          <h3 id="895e5ab0">什么是/为什么要Tracing？Opentracing的入门铺垫</h3><p>
         <div class="_showpic_40e20c09 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png class="_pic_40e20c09 hidepic" picId="40e20c09"></img>
         <script>
@@ -892,21 +637,11 @@ $ nvm install 8</code></pre>
     </p>
 <p>好文：<a href="https://yq.aliyun.com/articles/514488">https://yq.aliyun.com/articles/514488</a></p>
 
-          <h4 id="57bbb73">
-            <a name="_root-🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：
-          </h4><p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
+          <h4 id="57bbb73">🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：</h4><p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
 <p>Tutorials:</p>
 <p><a href="https://github.com/yurishkuro/opentracing-tutorial/tree/master/java">https://github.com/yurishkuro/opentracing-tutorial/tree/master/java</a></p>
 
-          <h3 id="10874505">
-            <a name="_root-什么是/为什么要DevOps？" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            什么是/为什么要DevOps？
-          </h3><p>
+          <h3 id="10874505">什么是/为什么要DevOps？</h3><p>
         <div class="_showpic_cbf9cf14 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png class="_pic_cbf9cf14 hidepic" picId="cbf9cf14"></img>
         <script>
@@ -934,61 +669,26 @@ $ nvm install 8</code></pre>
     </p>
 <p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
 
-          <h3 id="d014e91b">
-            <a name="_root-Spring生命周期详解好文" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Spring生命周期详解好文
-          </h3><p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a><br><a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a><br><a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
+          <h3 id="d014e91b">Spring生命周期详解好文</h3><p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a><br><a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a><br><a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
 
-          <h3 id="478cc989">
-            <a name="_root-html2canvas 页面输出为canvas" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            html2canvas 页面输出为canvas
-          </h3><p>超级棒的插件：<br>教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a><br>hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
+          <h3 id="478cc989">html2canvas 页面输出为canvas</h3><p>超级棒的插件：<br>教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a><br>hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
 
-          <h4 id="29a099ee">
-            <a name="_root-🔹生成的canvas没有图片的坑：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹生成的canvas没有图片的坑：
-          </h4><p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。<br>开启html2canvas的useCORS配置项。即作如下设置： </p>
+          <h4 id="29a099ee">🔹生成的canvas没有图片的坑：</h4><p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。<br>开启html2canvas的useCORS配置项。即作如下设置： </p>
 <pre><code class="language-javascript">var opts = {useCORS: true};
 html2canvas(element, opts);</code></pre>
 
-          <h3 id="5cd95015">
-            <a name="_root-k8s" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            k8s
-          </h3>
-          <h4 id="23c63e8d">
-            <a name="_root-🔹好文" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹好文
-          </h4><ul>
+          <h3 id="5cd95015">k8s</h3>
+          <h4 id="23c63e8d">🔹好文</h4><ul>
 <li>概念：<a href="http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345">http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345</a></li>
 <li>简要介绍：<a href="http://www.dockone.io/article/8328">http://www.dockone.io/article/8328</a></li>
 <li>10分钟核心概念了解：<a href="http://www.dockone.io/article/932">http://www.dockone.io/article/932</a></li>
 </ul>
 
-          <h4 id="fe92a1e1">
-            <a name="_root-🔹中文文档" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹中文文档
-          </h4><ul>
+          <h4 id="fe92a1e1">🔹中文文档</h4><ul>
 <li>设计理念（概念介绍）：<a href="http://docs.kubernetes.org.cn/249.html">http://docs.kubernetes.org.cn/249.html</a></li>
 </ul>
 
-          <h4 id="8a09b8c6">
-            <a name="_root-🔹配置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹配置
-          </h4><ul>
+          <h4 id="8a09b8c6">🔹配置</h4><ul>
 <li>k8s的Dashboard：<a href="http://blog.51cto.com/ylw6006/2113542">http://blog.51cto.com/ylw6006/2113542</a></li>
 <li>yaml：<ul>
 <li>sample: <a href="https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/">https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/</a></li>
@@ -997,206 +697,86 @@ html2canvas(element, opts);</code></pre>
 </li>
 </ul>
 
-          <h3 id="c5470431">
-            <a name="_root-docker" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            docker
-          </h3><p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
+          <h3 id="c5470431">docker</h3><p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
 
-          <h3 id="a93797be">
-            <a name="_root-Shell" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Shell
-          </h3>
-          <h4 id="f9b792aa">
-            <a name="_root-🔹expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）
-          </h4><ul>
+          <h3 id="a93797be">Shell</h3>
+          <h4 id="f9b792aa">🔹expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）</h4><ul>
 <li><a href="https://www.jianshu.com/p/70556b1ce932">https://www.jianshu.com/p/70556b1ce932</a></li>
 <li><a href="https://www.cnblogs.com/lzrabbit/p/4298794.html">https://www.cnblogs.com/lzrabbit/p/4298794.html</a></li>
 <li><a href="https://www.jellythink.com/archives/373">https://www.jellythink.com/archives/373</a></li>
 </ul>
 
-          <h4 id="1af1271b">
-            <a name="_root-🔹set 设置你shell脚本的运行配置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹set 设置你shell脚本的运行配置
-          </h4><ul>
+          <h4 id="1af1271b">🔹set 设置你shell脚本的运行配置</h4><ul>
 <li><a href="https://www.cnblogs.com/liduanjun/p/3536996.html">https://www.cnblogs.com/liduanjun/p/3536996.html</a></li>
 </ul>
 
-          <h4 id="be00406a">
-            <a name="_root-🔹read 在shell里面读取新的字符" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹read 在shell里面读取新的字符
-          </h4><ul>
+          <h4 id="be00406a">🔹read 在shell里面读取新的字符</h4><ul>
 <li><a href="http://www.runoob.com/linux/linux-comm-read.html">http://www.runoob.com/linux/linux-comm-read.html</a></li>
 </ul>
 
-          <h4 id="6708f248">
-            <a name="_root-🔹wc 计算字数" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹wc 计算字数
-          </h4><ul>
+          <h4 id="6708f248">🔹wc 计算字数</h4><ul>
 <li><a href="http://www.runoob.com/linux/linux-comm-wc.html">http://www.runoob.com/linux/linux-comm-wc.html</a></li>
 </ul>
 
-          <h4 id="e2dbbfda">
-            <a name="_root-🔹cut 字符串切割" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹cut 字符串切割
-          </h4><ul>
+          <h4 id="e2dbbfda">🔹cut 字符串切割</h4><ul>
 <li><a href="https://www.jb51.net/article/41872.htm">https://www.jb51.net/article/41872.htm</a></li>
 </ul>
 
-          <h4 id="bd1fcaf5">
-            <a name="_root-🔹shell脚本sudo外部输入密码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹shell脚本sudo外部输入密码
-          </h4><ul>
+          <h4 id="bd1fcaf5">🔹shell脚本sudo外部输入密码</h4><ul>
 <li><a href="https://blog.csdn.net/qq_23587541/article/details/82841489">https://blog.csdn.net/qq_23587541/article/details/82841489</a></li>
 </ul>
 
-          <h4 id="5103baa9">
-            <a name="_root-🔹./和sh执行脚本的区别：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹./和sh执行脚本的区别：
-          </h4><ul>
+          <h4 id="5103baa9">🔹./和sh执行脚本的区别：</h4><ul>
 <li><code>./</code>需要执行权限，使用脚本文件中第一行<code>#!</code>指定的shell（解释器）来执行命令（譬如常见的/bin/bash），不指定系统会调用默认shell程序</li>
 <li><code>sh</code>不需要执行权限，是使用<code>sh</code>这个shell执行命令，是个软链接，它可能是一个任意的shell，通常默认是<code>bash shel</code>，用type命令可以查看</li>
 </ul>
 
-          <h4 id="6c74de23">
-            <a name="_root-🔹nohup使用详解" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹nohup使用详解
-          </h4><ul>
+          <h4 id="6c74de23">🔹nohup使用详解</h4><ul>
 <li><a href="https://www.cnblogs.com/jinxiao-pu/p/9131057.html">https://www.cnblogs.com/jinxiao-pu/p/9131057.html</a></li>
 </ul>
 
-          <h3 id="8c8fc6eb">
-            <a name="_root-Linux" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Linux
-          </h3>
-          <h4 id="eedbc56a">
-            <a name="_root-🔹工具" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹工具
-          </h4><ul>
+          <h3 id="8c8fc6eb">Linux</h3>
+          <h4 id="eedbc56a">🔹工具</h4><ul>
 <li>fzf：<a href="https://www.colabug.com/4062481.html">https://www.colabug.com/4062481.html</a></li>
 </ul>
 
-          <h4 id="a79484d1">
-            <a name="_root-🔹设置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹设置
-          </h4><ul>
+          <h4 id="a79484d1">🔹设置</h4><ul>
 <li>修改终端提示符：<a href="https://www.cnblogs.com/xiaofeiIDO/p/8037331.html">https://www.cnblogs.com/xiaofeiIDO/p/8037331.html</a></li>
 <li>环境变量：<a href="https://www.cnblogs.com/haore147/p/3633116.html">https://www.cnblogs.com/haore147/p/3633116.html</a></li>
 </ul>
 
-          <h4 id="9818116f">
-            <a name="_root-🔹命令" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹命令
-          </h4><ul>
+          <h4 id="9818116f">🔹命令</h4><ul>
 <li>命令大全：<a href="http://man.linuxde.net/">http://man.linuxde.net/</a></li>
 <li>一些巨棒的命令替代：<a href="https://linux.cn/article-10171-1.html">https://linux.cn/article-10171-1.html</a></li>
 </ul>
 
-          <h4 id="a845e46f">
-            <a name="_root-🔹CentOS" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹CentOS
-          </h4>
-          <h5 id="c1aae0d9">
-            <a name="_root-🔸yum详解" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸yum详解
-          </h5><ul>
+          <h4 id="a845e46f">🔹CentOS</h4>
+          <h5 id="c1aae0d9">🔸yum详解</h5><ul>
 <li><a href="http://www.cnblogs.com/vathe/p/6736094.html">http://www.cnblogs.com/vathe/p/6736094.html</a></li>
 </ul>
 
-          <h4 id="723ae51e">
-            <a name="_root-🔹Ubuntu" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹Ubuntu
-          </h4>
-          <h5 id="bfb5d88a">
-            <a name="_root-🔸apt-get详解" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸apt-get详解
-          </h5><ul>
+          <h4 id="723ae51e">🔹Ubuntu</h4>
+          <h5 id="bfb5d88a">🔸apt-get详解</h5><ul>
 <li><a href="https://blog.csdn.net/sinat_31206523/article/details/78138822">https://blog.csdn.net/sinat_31206523/article/details/78138822</a></li>
 <li><a href="https://blog.csdn.net/yessharing/article/details/55806090">https://blog.csdn.net/yessharing/article/details/55806090</a></li>
 </ul>
 
-          <h3 id="7be4b829">
-            <a name="_root-chrome插件开发" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            chrome插件开发
-          </h3><p><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83">https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83</a></p>
+          <h3 id="7be4b829">chrome插件开发</h3><p><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83">https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83</a></p>
 
-          <h3 id="8af636c5">
-            <a name="_root-gRPC &amp; protobuf &amp; Swagger" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            gRPC &amp; protobuf &amp; Swagger
-          </h3><ul>
+          <h3 id="8af636c5">gRPC &amp; protobuf &amp; Swagger</h3><ul>
 <li><a href="https://segmentfault.com/a/1190000013513469">Grpc+Grpc Gateway实践三 Swagger了解一下</a></li>
 <li><a href="https://www.cnblogs.com/luoxn28/p/5303517.html">google protobuf安装与使用</a></li>
 <li><a href="https://github.com/protocolbuffers/protobuf">protobuf</a></li>
 <li><a href="https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html">grpc-gateway：grpc转换为http协议对外提供服务</a></li>
 </ul>
 
-          <h3 id="4e9dfae9">
-            <a name="_root-Database Client" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Database Client
-          </h3><p><a href="https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows">15个windows上好用的client</a></p>
+          <h3 id="4e9dfae9">Database Client</h3><p><a href="https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows">15个windows上好用的client</a></p>
 
-          <h3 id="d0380fe">
-            <a name="_root-linux 换行符" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            linux 换行符
-          </h3><p><a href="https://blog.csdn.net/mulangren1988/article/details/54316783">https://blog.csdn.net/mulangren1988/article/details/54316783</a></p>
+          <h3 id="d0380fe">linux 换行符</h3><p><a href="https://blog.csdn.net/mulangren1988/article/details/54316783">https://blog.csdn.net/mulangren1988/article/details/54316783</a></p>
 
-          <h3 id="5df6c31e">
-            <a name="_root-带空格文件名参数传递 xargs" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            带空格文件名参数传递 xargs
-          </h3><p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
+          <h3 id="5df6c31e">带空格文件名参数传递 xargs</h3><p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
 
-          <h3 id="3a2aed49">
-            <a name="_root-GraphQL 一种用于 API 的查询语言" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            GraphQL 一种用于 API 的查询语言
-          </h3><blockquote>
+          <h3 id="3a2aed49">GraphQL 一种用于 API 的查询语言</h3><blockquote>
 <p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
 <p>GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
 </blockquote>
@@ -1205,38 +785,13 @@ html2canvas(element, opts);</code></pre>
 <p>2018年11月16日 10点04分<br>要构建一个graphql需要的成本太大了 还不如restful来的快</p>
 </blockquote>
 
-          <h3 id="d0da79da">
-            <a name="_root-排序算法图解博客" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            排序算法图解博客
-          </h3><p>看到的讲得还阔以的: <a href="https://www.cnblogs.com/chengxiao/category/880910.html">https://www.cnblogs.com/chengxiao/category/880910.html</a></p>
+          <h3 id="d0da79da">排序算法图解博客</h3><p>看到的讲得还阔以的: <a href="https://www.cnblogs.com/chengxiao/category/880910.html">https://www.cnblogs.com/chengxiao/category/880910.html</a></p>
 
-          <h2 id="3b94c0b">
-            <a name="_root-⭐ 网站/软件/技术" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ 网站/软件/技术
-          </h2>
-          <h3 id="ec9b6be2">
-            <a name="_root-一个素材网站 devianart" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            一个素材网站 devianart
-          </h3><p><a href="https://www.deviantart.com/">https://www.deviantart.com/</a></p>
+          <h2 id="3b94c0b">⭐ 网站/软件/技术</h2>
+          <h3 id="ec9b6be2">一个素材网站 devianart</h3><p><a href="https://www.deviantart.com/">https://www.deviantart.com/</a></p>
 
-          <h3 id="4cec0f22">
-            <a name="_root-icon相关 素材站/软件" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            icon相关 素材站/软件
-          </h3>
-          <h4 id="3c9d8dfc">
-            <a name="_root-🔹阿里巴巴矢量图标库" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹阿里巴巴矢量图标库
-          </h4><p>
+          <h3 id="4cec0f22">icon相关 素材站/软件</h3>
+          <h4 id="3c9d8dfc">🔹阿里巴巴矢量图标库</h4><p>
         <div class="_showpic_8d147368 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39858740-10f258c4-546a-11e8-88d2-0382dae3fc15.png class="_pic_8d147368 hidepic" picId="8d147368"></img>
         <script>
@@ -1264,12 +819,7 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p>link : <a href="http://iconfont.cn/">http://iconfont.cn/</a></p>
 
-          <h4 id="609c2bb4">
-            <a name="_root-🔹iconstroe" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹iconstroe
-          </h4><p>
+          <h4 id="609c2bb4">🔹iconstroe</h4><p>
         <div class="_showpic_cf350a78 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39858781-297796b6-546a-11e8-890d-eab6bb371b9d.png class="_pic_cf350a78 hidepic" picId="cf350a78"></img>
         <script>
@@ -1297,12 +847,7 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p>link : <a href="https://iconstore.co/">https://iconstore.co/</a></p>
 
-          <h4 id="21331655">
-            <a name="_root-🔹flaticon" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹flaticon
-          </h4><p>
+          <h4 id="21331655">🔹flaticon</h4><p>
         <div class="_showpic_b9bf1d92 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39859278-e8451b08-546b-11e8-9639-afb2357cd0e0.png class="_pic_b9bf1d92 hidepic" picId="b9bf1d92"></img>
         <script>
@@ -1330,12 +875,7 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p>link : <a href="https://www.flaticon.com/">https://www.flaticon.com/</a></p>
 
-          <h4 id="b40de1a5">
-            <a name="_root-🔹Nucleo Icon管理工具" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹Nucleo Icon管理工具
-          </h4><p>
+          <h4 id="b40de1a5">🔹Nucleo Icon管理工具</h4><p>
         <div class="_showpic_b3b79d77 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39859547-c42d88d0-546c-11e8-9d44-a16a5982fe89.png class="_pic_b3b79d77 hidepic" picId="b3b79d77"></img>
         <script>
@@ -1363,12 +903,7 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p><a href="https://nucleoapp.com/">https://nucleoapp.com/</a></p>
 
-          <h3 id="8f168c9d">
-            <a name="_root-软件推介 : cmder" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            软件推介 : cmder
-          </h3><blockquote>
+          <h3 id="8f168c9d">软件推介 : cmder</h3><blockquote>
 <p>一个高颜值功能强大的的windows终端管理器</p>
 <p>介绍 : <a href="https://zhuanlan.zhihu.com/p/28400466">https://zhuanlan.zhihu.com/p/28400466</a></p>
 </blockquote>
@@ -1399,21 +934,11 @@ html2canvas(element, opts);</code></pre>
         </script>
     </p>
 
-          <h4 id="c265dafc">
-            <a name="_root-🔹Tips:" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹Tips:
-          </h4><p>软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.</p>
+          <h4 id="c265dafc">🔹Tips:</h4><p>软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.</p>
 <p>但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.</p>
 <p>所以我们下载full, 解压在<code>C:\Program Files</code>, 可以发现整个软件大概250MB, 我们从软件目录下的<code>C:\Program Files\cmder\vendor</code>中删去<code>git-for-windows</code>文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.</p>
 
-          <h3 id="984c5a95">
-            <a name="_root-数据结构/算法可视化网站" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            数据结构/算法可视化网站
-          </h3><p>
+          <h3 id="984c5a95">数据结构/算法可视化网站</h3><p>
         <div class="_showpic_1338c43f showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/sorting-algorithms.png class="_pic_1338c43f hidepic" picId="1338c43f"></img>
         <script>
@@ -1492,19 +1017,9 @@ html2canvas(element, opts);</code></pre>
         </script>
     <br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
 
-          <h3 id="f6ac9c45">
-            <a name="_root-经纬度行政区域查询API" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            经纬度行政区域查询API
-          </h3><p><a href="http://jwd.funnyapi.com/#/index">home</a></p>
+          <h3 id="f6ac9c45">经纬度行政区域查询API</h3><p><a href="http://jwd.funnyapi.com/#/index">home</a></p>
 
-          <h3 id="124fa3d5">
-            <a name="_root-win10 自带录电脑音软件" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            win10 自带录电脑音软件
-          </h3><p>
+          <h3 id="124fa3d5">win10 自带录电脑音软件</h3><p>
         <div class="_showpic_257b8207 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="_pic_257b8207 hidepic" picId="257b8207"></img>
         <script>
@@ -1582,25 +1097,10 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p>然后打开win10自带的录音软件Voice Recorder</p>
 
-          <h3 id="c3636876">
-            <a name="_root-Protobuf" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Protobuf
-          </h3>
-          <h4 id="8837675c">
-            <a name="_root-What are protocol buffers?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            What are protocol buffers?
-          </h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
+          <h3 id="c3636876">Protobuf</h3>
+          <h4 id="8837675c">What are protocol buffers?</h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
 
-          <h4 id="bd060b79">
-            <a name="_root-Why not just use XML?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Why not just use XML?
-          </h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
+          <h4 id="bd060b79">Why not just use XML?</h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
 <ul>
 <li>are simpler</li>
 <li>are 3 to 10 times smaller</li>
@@ -1609,37 +1109,17 @@ html2canvas(element, opts);</code></pre>
 <li>generate data access classes that are easier to use programmatically</li>
 </ul>
 
-          <h4 id="8c0c55ad">
-            <a name="_root-References" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            References
-          </h4><ul>
+          <h4 id="8c0c55ad">References</h4><ul>
 <li><a href="https://www.jianshu.com/p/a24c88c0526a">深入Protobuf</a></li>
 <li><a href="https://www.jianshu.com/p/b4b51b99e218">ProtoBuf试用与JSON的比较</a></li>
 <li><a href="https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw">在python中使用ProtocolBuffers</a></li>
 <li><a href="https://developers.google.com/protocol-buffers/docs/overview">Google Docs</a></li>
 </ul>
 
-          <h2 id="83167573">
-            <a name="_root-⭐ Java相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ Java相关
-          </h2>
-          <h3 id="7605b6dd">
-            <a name="_root-Java8系列文章" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java8系列文章
-          </h3><p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
+          <h2 id="83167573">⭐ Java相关</h2>
+          <h3 id="7605b6dd">Java8系列文章</h3><p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
 
-          <h3 id="5dccfe4">
-            <a name="_root-牛客 HttpServletRequest. getParameter" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            牛客 HttpServletRequest. getParameter
-          </h3><p>
+          <h3 id="5dccfe4">牛客 HttpServletRequest. getParameter</h3><p>
         <div class="_showpic_47dda41d showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png class="_pic_47dda41d hidepic" picId="47dda41d"></img>
         <script>
@@ -1669,19 +1149,9 @@ html2canvas(element, opts);</code></pre>
 <p> 编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1</p>
 </blockquote>
 
-          <h3 id="2f59ba57">
-            <a name="_root-Java Spliterator" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java Spliterator
-          </h3><p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a><br>参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
+          <h3 id="2f59ba57">Java Spliterator</h3><p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a><br>参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
 
-          <h3 id="636d37aa">
-            <a name="_root-牛客 Integer的拆箱装箱" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            牛客 Integer的拆箱装箱
-          </h3><p>
+          <h3 id="636d37aa">牛客 Integer的拆箱装箱</h3><p>
         <div class="_showpic_67d56b54 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png class="_pic_67d56b54 hidepic" picId="67d56b54"></img>
         <script>
@@ -1738,12 +1208,7 @@ html2canvas(element, opts);</code></pre>
 <li>valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用</li>
 </ul>
 
-          <h3 id="c8d63049">
-            <a name="_root-牛客 getDeclaredMethods()的范围" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            牛客 getDeclaredMethods()的范围
-          </h3><p>
+          <h3 id="c8d63049">牛客 getDeclaredMethods()的范围</h3><p>
         <div class="_showpic_e94fd031 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png class="_pic_e94fd031 hidepic" picId="e94fd031"></img>
         <script>
@@ -1776,12 +1241,7 @@ html2canvas(element, opts);</code></pre>
 <p>including public, protected, default (package) access, and private methods, <strong>but excluding inherited methods</strong>.</p>
 </blockquote>
 
-          <h3 id="3f405a90">
-            <a name="_root-牛客 sleep()和wait()" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            牛客 sleep()和wait()
-          </h3><p>
+          <h3 id="3f405a90">牛客 sleep()和wait()</h3><p>
         <div class="_showpic_36479894 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png class="_pic_36479894 hidepic" picId="36479894"></img>
         <script>
@@ -1809,22 +1269,12 @@ html2canvas(element, opts);</code></pre>
     </p>
 <p><strong>Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行</strong></p>
 
-          <h5 id="73736d09">
-            <a name="_root-🔸共同点 ：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸共同点 ：
-          </h5><ol>
+          <h5 id="73736d09">🔸共同点 ：</h5><ol>
 <li>他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 </li>
 <li>wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException<br>如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。<br>需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 </li>
 </ol>
 
-          <h5 id="bf0a7aab">
-            <a name="_root-🔸不同点 ：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔸不同点 ：
-          </h5><ol>
+          <h5 id="bf0a7aab">🔸不同点 ：</h5><ol>
 <li><p>每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 </p>
 </li>
 <li><p>wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用</p>
@@ -1837,12 +1287,7 @@ html2canvas(element, opts);</code></pre>
 </li>
 </ol>
 
-          <h3 id="6f83359d">
-            <a name="_root-Java static方法中的变量是否存在线程安全问题" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java static方法中的变量是否存在线程安全问题
-          </h3><p>我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。</p>
+          <h3 id="6f83359d">Java static方法中的变量是否存在线程安全问题</h3><p>我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。</p>
 <p>那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。</p>
 <p>因为，在多线程中使用同一个静态方法时，每个线程使用各自的实例字段(instance field)的副本，而共享一个静态字段(static field)。所以说，如果该静态方法不去操作一个静态成员，只在方法内部使用实例字段(instance field)，不会引起安全性问题。但是，如果该静态方法操作了一个静态字段，则需要静态方法中采用互斥访问的方式进行安全处理。</p>
 <pre><code class="language-java">public class Test
@@ -1861,19 +1306,9 @@ html2canvas(element, opts);</code></pre>
 <p>注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！</p>
 </blockquote>
 
-          <h3 id="aba75350">
-            <a name="_root-Java多线程参考" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java多线程参考
-          </h3><p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a><br><a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a><br><a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
+          <h3 id="aba75350">Java多线程参考</h3><p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a><br><a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a><br><a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
 
-          <h3 id="5df1464c">
-            <a name="_root-Java字符串压缩" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java字符串压缩
-          </h3><pre><code class="language-java">public class StringCompress {
+          <h3 id="5df1464c">Java字符串压缩</h3><pre><code class="language-java">public class StringCompress {
     public static final byte[] compress(String paramString) {
         if (paramString == null)
             return null;
@@ -1946,18 +1381,8 @@ html2canvas(element, opts);</code></pre>
 }</code></pre>
 <p>参考：<a href="https://blog.csdn.net/isea533/article/details/8199848">https://blog.csdn.net/isea533/article/details/8199848</a></p>
 
-          <h3 id="2ff1cd53">
-            <a name="_root-Servlet和CGI的区别" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Servlet和CGI的区别
-          </h3>
-          <h4 id="61a5f5d2">
-            <a name="_root-CGI (Common Gateway Interface 公共网关接口)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CGI (Common Gateway Interface 公共网关接口)
-          </h4><ol>
+          <h3 id="2ff1cd53">Servlet和CGI的区别</h3>
+          <h4 id="61a5f5d2">CGI (Common Gateway Interface 公共网关接口)</h4><ol>
 <li><p>定义：</p>
 <p>CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。</p>
 </li>
@@ -1977,30 +1402,15 @@ html2canvas(element, opts);</code></pre>
 </li>
 </ol>
 
-          <h4 id="276f89c">
-            <a name="_root-Servlet" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Servlet
-          </h4><p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
+          <h4 id="276f89c">Servlet</h4><p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
 <p>工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。</p>
 
-          <h4 id="3fd957ba">
-            <a name="_root-Java Servlet与CGI的比较" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java Servlet与CGI的比较
-          </h4><p>与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
+          <h4 id="3fd957ba">Java Servlet与CGI的比较</h4><p>与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
 <p>在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。</p>
 <p>在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。<br>　　* 方便 　<br>　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。<br>　　* 功能强大<br>　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。<br>　　* 可移植性好<br>Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。</p>
 <p>转自：<a href="https://www.cnblogs.com/MuyouSome/p/3938203.html">https://www.cnblogs.com/MuyouSome/p/3938203.html</a></p>
 
-          <h3 id="9b2c2d07">
-            <a name="_root-Java HashMap好文" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java HashMap好文
-          </h3><p>源码解析：</p>
+          <h3 id="9b2c2d07">Java HashMap好文</h3><p>源码解析：</p>
 <ul>
 <li><a href="https://www.cnblogs.com/xrq730/p/5030920.html">https://www.cnblogs.com/xrq730/p/5030920.html</a></li>
 <li><a href="http://www.importnew.com/20386.html">http://www.importnew.com/20386.html</a></li>
@@ -2012,72 +1422,32 @@ html2canvas(element, opts);</code></pre>
 <li><a href="https://blog.csdn.net/u012512634/article/details/72735183">https://blog.csdn.net/u012512634/article/details/72735183</a></li>
 </ul>
 
-          <h3 id="36c1a7da">
-            <a name="_root-fastjson 转时间" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            fastjson 转时间
-          </h3><p>在field上加注解，比如转ISO格式的时间</p>
+          <h3 id="36c1a7da">fastjson 转时间</h3><p>在field上加注解，比如转ISO格式的时间</p>
 <pre><code class="language-java">@JSONField(format=&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss&#39;Z&#39;&quot;)</code></pre>
 
-          <h3 id="bde36895">
-            <a name="_root-sun.misc.Unsafe" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            sun.misc.Unsafe
-          </h3><ul>
+          <h3 id="bde36895">sun.misc.Unsafe</h3><ul>
 <li><a href="http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/">http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/</a></li>
 <li><a href="https://blog.csdn.net/anLA_/article/details/78631026">https://blog.csdn.net/anLA_/article/details/78631026</a></li>
 <li><a href="https://blog.csdn.net/lvbaolin123/article/details/80527598">https://blog.csdn.net/lvbaolin123/article/details/80527598</a></li>
 </ul>
 
-          <h3 id="939cbccb">
-            <a name="_root-Java String pool" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java String pool
-          </h3><p><a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">Where does Java&#39;s String constant pool live, the heap or the stack?</a></p>
+          <h3 id="939cbccb">Java String pool</h3><p><a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">Where does Java&#39;s String constant pool live, the heap or the stack?</a></p>
 
-          <h3 id="11fbb3ea">
-            <a name="_root-Java 静态内部类和非静态内部类" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java 静态内部类和非静态内部类
-          </h3><p><a href="https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones">Why prefer non-static inner classes over static ones?</a></p>
+          <h3 id="11fbb3ea">Java 静态内部类和非静态内部类</h3><p><a href="https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones">Why prefer non-static inner classes over static ones?</a></p>
 
-          <h3 id="52bd989c">
-            <a name="_root-bridge method" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            bridge method
-          </h3><ul>
+          <h3 id="52bd989c">bridge method</h3><ul>
 <li><a href="https://cn.aliyun.com/jiaocheng/330720.html">https://cn.aliyun.com/jiaocheng/330720.html</a></li>
 <li><a href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods">https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods</a></li>
 <li><a href="https://www.cnblogs.com/zsg88/p/7588929.html">https://www.cnblogs.com/zsg88/p/7588929.html</a></li>
 <li><a href="https://www.jianshu.com/p/250030ea9b28">https://www.jianshu.com/p/250030ea9b28</a></li>
 </ul>
 
-          <h3 id="c9c59767">
-            <a name="_root-finally &amp; return" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            finally &amp; return
-          </h3><ul>
+          <h3 id="c9c59767">finally &amp; return</h3><ul>
 <li><a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></li>
 </ul>
 
-          <h2 id="2e6281e7">
-            <a name="_root-⭐ JS代码相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ JS代码相关
-          </h2>
-          <h3 id="e56333e6">
-            <a name="_root-JS 获取元素样式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 获取元素样式
-          </h3><pre><code class="language-javascript">/*
+          <h2 id="2e6281e7">⭐ JS代码相关</h2>
+          <h3 id="e56333e6">JS 获取元素样式</h3><pre><code class="language-javascript">/*
   此方法兼容IE
   获取元素的样式：
     参数1：元素
@@ -2092,12 +1462,7 @@ function getStyle(obj, styleName) {
   }
 }</code></pre>
 
-          <h3 id="31f5dddc">
-            <a name="_root-JS 事件绑定兼容" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 事件绑定兼容
-          </h3><pre><code class="language-javascript">/*
+          <h3 id="31f5dddc">JS 事件绑定兼容</h3><pre><code class="language-javascript">/*
   事件绑定兼容
   首先要注意：
     addEventListener() 方法中的this是我们绑定的事件
@@ -2127,12 +1492,7 @@ function bindev(obj, eventStr, callback) {
   }
 }</code></pre>
 
-          <h3 id="a8e120f2">
-            <a name="_root-JS 滚动动画" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 滚动动画
-          </h3><pre><code class="language-javascript">/*
+          <h3 id="a8e120f2">JS 滚动动画</h3><pre><code class="language-javascript">/*
   md的滚动条
   去到id为elementid的元素位置
   速度是 500
@@ -2141,12 +1501,7 @@ $(&#39;#md&#39;).animate({
   scrollTop: $(&#39;#elementid&#39;).offset().top
 }, 500);</code></pre>
 
-          <h3 id="386ecdf">
-            <a name="_root-JS 滚动动画改进" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 滚动动画改进
-          </h3><pre><code class="language-javascript">/*
+          <h3 id="386ecdf">JS 滚动动画改进</h3><pre><code class="language-javascript">/*
   防止到了位置之后再滚动到该元素 而offset改变
 */
 function scrolltoelement(elementid) {
@@ -2158,12 +1513,7 @@ function scrolltoelement(elementid) {
   }, 500);
 }</code></pre>
 
-          <h3 id="3ac1cc36">
-            <a name="_root-JS 检测页面滚动代码" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 检测页面滚动代码
-          </h3><pre><code class="language-JavaScript">$(window).scroll(function () {
+          <h3 id="3ac1cc36">JS 检测页面滚动代码</h3><pre><code class="language-JavaScript">$(window).scroll(function () {
   var scrollTo = $(window).scrollTop(),
   docHeight = $(document).height(),
   windowHeight = $(window).height();
@@ -2171,12 +1521,7 @@ function scrolltoelement(elementid) {
   percent.innerText = scrollPercent
 })</code></pre>
 
-          <h3 id="f386f62d">
-            <a name="_root-JS 小数" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 小数
-          </h3><ol>
+          <h3 id="f386f62d">JS 小数</h3><ol>
 <li><p>丢弃小数部分,保留整数部分 <code>parseInt(7/2)</code> </p>
 </li>
 <li><p>向上取整,有小数就整数部分加1 <code>Math.ceil(7/2)</code></p>
@@ -2191,12 +1536,7 @@ num = num.toFixed(2); // 输出结果为 2.45</code></pre>
 </li>
 </ol>
 
-          <h3 id="58f57d8f">
-            <a name="_root-JS CSS 动态添加动画效果" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS CSS 动态添加动画效果
-          </h3><pre><code class="language-javascript">  $(&#39;#searchtext&#39;).addClass(&#39;getnothing&#39;)
+          <h3 id="58f57d8f">JS CSS 动态添加动画效果</h3><pre><code class="language-javascript">  $(&#39;#searchtext&#39;).addClass(&#39;getnothing&#39;)
   setTimeout(function () {
     $(&#39;#searchtext&#39;).removeClass(&#39;getnothing&#39;)
   }, 1100)</code></pre>
@@ -2210,24 +1550,14 @@ num = num.toFixed(2); // 输出结果为 2.45</code></pre>
   }
 }</code></pre>
 
-          <h3 id="31f85e50">
-            <a name="_root-JS 控制聚焦/失焦事件" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 控制聚焦/失焦事件
-          </h3><pre><code class="language-js">  $(&#39;#searchtext&#39;).focus(function () {
+          <h3 id="31f85e50">JS 控制聚焦/失焦事件</h3><pre><code class="language-js">  $(&#39;#searchtext&#39;).focus(function () {
     $(&#39;#scriptsearcher&#39;)[0].style.opacity = &#39;1&#39;
   })
   $(&#39;#searchtext&#39;).blur(function () {
     $(&#39;#scriptsearcher&#39;)[0].style.opacity = &#39;0.3&#39;
   })</code></pre>
 
-          <h3 id="5e7342ba">
-            <a name="_root-AJAX设置请求超时" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            AJAX设置请求超时
-          </h3><pre><code class="language-js">var ajaxTimeoutTest = $.ajax({
+          <h3 id="5e7342ba">AJAX设置请求超时</h3><pre><code class="language-js">var ajaxTimeoutTest = $.ajax({
 　　url:&#39;&#39;,  //请求的URL
 　　timeout : 1000, //超时时间设置，单位毫秒
 　　type : &#39;get&#39;,  //请求方式，get或post
@@ -2245,53 +1575,23 @@ num = num.toFixed(2); // 输出结果为 2.45</code></pre>
 });</code></pre>
 <p>函数写在complete中，因为无论success还是error，complete函数都会执行。</p>
 
-          <h3 id="6ecab23b">
-            <a name="_root-Async" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Async
-          </h3><blockquote>
+          <h3 id="6ecab23b">Async</h3><blockquote>
 <p>JS Ajax JQ 同步请求库</p>
 </blockquote>
 <p><a href="https://segmentfault.com/q/1010000005789740">来源</a></p>
 <p><a href="https://blog.csdn.net/marujunyy/article/details/8695205">中文文档</a></p>
 
-          <h3 id="73bc63f6">
-            <a name="_root-JS 刷新页面" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 刷新页面
-          </h3>
-          <h4 id="440ec73c">
-            <a name="_root-🔹手动 reload" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹手动 reload
-          </h4><pre><code class="language-js">location.reload();</code></pre>
+          <h3 id="73bc63f6">JS 刷新页面</h3>
+          <h4 id="440ec73c">🔹手动 reload</h4><pre><code class="language-js">location.reload();</code></pre>
 
-          <h4 id="4e562348">
-            <a name="_root-🔹自动定时刷新" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹自动定时刷新
-          </h4><p>页面自动刷新：把如下代码加入<head>区域中</p>
+          <h4 id="4e562348">🔹自动定时刷新</h4><p>页面自动刷新：把如下代码加入<head>区域中</p>
 <pre><code class="language-js">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&gt;</code></pre>
 
-          <h3 id="7f4ae2eb">
-            <a name="_root-JS获取图片原始尺寸" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS获取图片原始尺寸
-          </h3><p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
+          <h3 id="7f4ae2eb">JS获取图片原始尺寸</h3><p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
 <pre><code class="language-javascript">   let imgw = this.naturalWidth
    let imgh = this.naturalHeight</code></pre>
 
-          <h3 id="183db2f1">
-            <a name="_root-JQuery的高级选择器" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JQuery的高级选择器
-          </h3><pre><code class="language-javascript">jQuery.parent(expr)           //找父元素
+          <h3 id="183db2f1">JQuery的高级选择器</h3><pre><code class="language-javascript">jQuery.parent(expr)           //找父元素
 jQuery.parents(expr)          //找到所有祖先元素，不限于父元素
 jQuery.children(expr)        //查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙
 jQuery.contents()            //查找下面的所有内容，包括节点和文本。
@@ -2305,23 +1605,13 @@ jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.fi
                                筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
                                $(&quot;p&quot;).find(&quot;span&quot;)是从元素开始找，等于$(&quot;p span&quot;) */</code></pre>
 
-          <h3 id="76a8a4de">
-            <a name="_root-js取消事件冒泡" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            js取消事件冒泡
-          </h3><pre><code class="language-javascript">$(&quot;form&quot;).bind(&quot;submit&quot;, function() { 
+          <h3 id="76a8a4de">js取消事件冒泡</h3><pre><code class="language-javascript">$(&quot;form&quot;).bind(&quot;submit&quot;, function() { 
 　　　　return false;
 　　 }
 )</code></pre>
 <p><a href="https://www.cnblogs.com/wangking/p/6113024.html#">https://www.cnblogs.com/wangking/p/6113024.html#</a></p>
 
-          <h3 id="7d38bc67">
-            <a name="_root-JS判断字符串中是否含有Emoji表情" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS判断字符串中是否含有Emoji表情
-          </h3><p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题<br>原因如下：</p>
+          <h3 id="7d38bc67">JS判断字符串中是否含有Emoji表情</h3><p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题<br>原因如下：</p>
 <blockquote>
 <p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。<br>引自：<a href="https://blog.csdn.net/wang704987562/article/details/54093979">https://blog.csdn.net/wang704987562/article/details/54093979</a></p>
 </blockquote>
@@ -2361,24 +1651,14 @@ jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.fi
 }</code></pre>
 <p>引自： <a href="https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1">https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1</a></p>
 
-          <h3 id="bfeba059">
-            <a name="_root-Javascript使用字符串作为函数调用语句去调用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Javascript使用字符串作为函数调用语句去调用
-          </h3><pre><code class="language-javascript">function func_abc(){
+          <h3 id="bfeba059">Javascript使用字符串作为函数调用语句去调用</h3><pre><code class="language-javascript">function func_abc(){
   alert(&#39;a&#39;);
 }
 var str = &quot;func_abc&quot;;
 eval(str+&quot;()&quot;);//执行func_abc()函数</code></pre>
 <p>引自：<a href="https://blog.csdn.net/qq_26222859/article/details/75285784">https://blog.csdn.net/qq_26222859/article/details/75285784</a></p>
 
-          <h3 id="ccac24c8">
-            <a name="_root-JS 数组排序" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 数组排序
-          </h3><pre><code class="language-javascript">var arr = [23, 9, 4, 78, 3];
+          <h3 id="ccac24c8">JS 数组排序</h3><pre><code class="language-javascript">var arr = [23, 9, 4, 78, 3];
 var compare = function (x, y) {//比较函数
     if (x &lt; y) {
         return -1;
@@ -2390,12 +1670,7 @@ var compare = function (x, y) {//比较函数
 }
 console.log(arr.sort(compare));    </code></pre>
 
-          <h3 id="4f50ce2f">
-            <a name="_root-JS 判断浏览器类型" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 判断浏览器类型
-          </h3><p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
+          <h3 id="4f50ce2f">JS 判断浏览器类型</h3><p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
 <pre><code class="language-javascript">var userAgent = navigator.userAgent;
 var isOpera = userAgent.indexOf(&quot;Opera&quot;) &gt; -1;
 
@@ -2439,20 +1714,10 @@ function isChrome() {
     return userAgent.indexOf(&quot;Chrome&quot;) &gt; -1
 }</code></pre>
 
-          <h3 id="ce9a464">
-            <a name="_root-JavaScript 解除xhr获取header的限制" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JavaScript 解除xhr获取header的限制
-          </h3><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+          <h3 id="ce9a464">JavaScript 解除xhr获取header的限制</h3><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
 <p>需要后端的配合</p>
 
-          <h3 id="38727d80">
-            <a name="_root-JS锚点跳转动画" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS锚点跳转动画
-          </h3><p>一般我们的锚点都长这样</p>
+          <h3 id="38727d80">JS锚点跳转动画</h3><p>一般我们的锚点都长这样</p>
 <pre><code class="language-html">&lt;a name=&quot;xxx&quot; class=&quot;reference-link&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;</code></pre>
 <p>因此我们就根据name去索引锚点</p>
 <pre><code class="language-javascript">var $root = $(&#39;html, body&#39;)
@@ -2462,12 +1727,7 @@ $(&#39;.markdown-toc a&#39;).click(function() {
     }, 600)
 })</code></pre>
 
-          <h3 id="74ce5d81">
-            <a name="_root-JS 监听元素任何变化" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 监听元素任何变化
-          </h3><p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a><br><a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
+          <h3 id="74ce5d81">JS 监听元素任何变化</h3><p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a><br><a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
 <pre><code class="language-javascript">let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
 let observer = new MutationObserver(function(mutationList) {
     setTimeout(function() {
@@ -2481,32 +1741,12 @@ let options = {
 };
 observer.observe(article, options);</code></pre>
 
-          <h3 id="76320e1d">
-            <a name="_root-JQuery UI 拖拽" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JQuery UI 拖拽
-          </h3><p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
+          <h3 id="76320e1d">JQuery UI 拖拽</h3><p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
 
-          <h3 id="82211645">
-            <a name="_root-JQuery GIF播放/暂停 JS-GIF库" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JQuery GIF播放/暂停 JS-GIF库
-          </h3><p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a><br><a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
+          <h3 id="82211645">JQuery GIF播放/暂停 JS-GIF库</h3><p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a><br><a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
 
-          <h2 id="f48a1295">
-            <a name="_root-⭐ CSS相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ CSS相关
-          </h2>
-          <h3 id="fcdf37c">
-            <a name="_root-CSS media设备适配样式设置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS media设备适配样式设置
-          </h3><pre><code class="language-css">/* 
+          <h2 id="f48a1295">⭐ CSS相关</h2>
+          <h3 id="fcdf37c">CSS media设备适配样式设置</h3><pre><code class="language-css">/* 
   针对iphone5 等320px的宽做出调整
 */
 @media screen and (max-width: 320px){
@@ -2516,19 +1756,9 @@ observer.observe(article, options);</code></pre>
   }
 }</code></pre>
 
-          <h3 id="f3a01765">
-            <a name="_root-CSS 动画库animate.css" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 动画库animate.css
-          </h3><p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
+          <h3 id="f3a01765">CSS 动画库animate.css</h3><p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
 
-          <h3 id="33cb2bb">
-            <a name="_root-CSS 去除按钮选中蓝色边框" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 去除按钮选中蓝色边框
-          </h3><pre><code class="language-css">.className {
+          <h3 id="33cb2bb">CSS 去除按钮选中蓝色边框</h3><pre><code class="language-css">.className {
   border: none;
 }
 
@@ -2537,21 +1767,11 @@ observer.observe(article, options);</code></pre>
 }</code></pre>
 <p><a href="https://blog.csdn.net/qq_26222859/article/details/51516011">参考</a></p>
 
-          <h3 id="29c6ab2d">
-            <a name="_root-CSS 元素失焦/虚化滤镜" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 元素失焦/虚化滤镜
-          </h3><pre><code class="language-css">#idname{
+          <h3 id="29c6ab2d">CSS 元素失焦/虚化滤镜</h3><pre><code class="language-css">#idname{
    filter : blur(2px);
 }</code></pre>
 
-          <h3 id="6d2dccd6">
-            <a name="_root-CSS 文字换行" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 文字换行
-          </h3><p>强制不换行</p>
+          <h3 id="6d2dccd6">CSS 文字换行</h3><p>强制不换行</p>
 <pre><code class="language-css">div{
     white-space:nowrap;
 }</code></pre>
@@ -2571,12 +1791,7 @@ observer.observe(article, options);</code></pre>
     white-space: pre-wrap;
 }</code></pre>
 
-          <h3 id="c7a79f21">
-            <a name="_root-CSS placeholder居位设置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS placeholder居位设置
-          </h3><pre><code class="language-css">/* placeholder居中 */
+          <h3 id="c7a79f21">CSS placeholder居位设置</h3><pre><code class="language-css">/* placeholder居中 */
 #postsearchtext:-moz-placeholder
 {
   text-align: center;
@@ -2594,30 +1809,15 @@ observer.observe(article, options);</code></pre>
     text-align: center;
 }</code></pre>
 
-          <h3 id="7d05a88c">
-            <a name="_root-CSS 文字超过元素长度显示省略号" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 文字超过元素长度显示省略号
-          </h3><pre><code class="language-css">div{
+          <h3 id="7d05a88c">CSS 文字超过元素长度显示省略号</h3><pre><code class="language-css">div{
   width: 75%;
   overflow:hidden; 
   white-space:nowrap; 
   text-overflow:ellipsis;
 }</code></pre>
 
-          <h3 id="2ebdce57">
-            <a name="_root-CSS 变量设置和获取" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 变量设置和获取
-          </h3>
-          <h4 id="a79484d1">
-            <a name="_root-🔹设置" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹设置
-          </h4><pre><code class="language-css">:root{
+          <h3 id="2ebdce57">CSS 变量设置和获取</h3>
+          <h4 id="a79484d1">🔹设置</h4><pre><code class="language-css">:root{
   --main-color: #4d4e53;
   --main-bg: rgb(255, 255, 255);
   --logo-border-color: rebeccapurple;
@@ -2631,23 +1831,13 @@ observer.observe(article, options);</code></pre>
   --margin-top: calc(2vh + 20px);
 }</code></pre>
 
-          <h4 id="5f8a827d">
-            <a name="_root-🔹引用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            🔹引用
-          </h4><pre><code class="language-css">a {
+          <h4 id="5f8a827d">🔹引用</h4><pre><code class="language-css">a {
   color: var(--foo);
   text-decoration-color: var(--bar);
 }</code></pre>
 <p>参考 : <a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></p>
 
-          <h3 id="ed565198">
-            <a name="_root-CSS 元素垂直/水平居中的骚操作" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 元素垂直/水平居中的骚操作
-          </h3><blockquote>
+          <h3 id="ed565198">CSS 元素垂直/水平居中的骚操作</h3><blockquote>
 <p>垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;</p>
 </blockquote>
 <pre><code class="language-css">#sidetoccontainer {
@@ -2662,12 +1852,7 @@ observer.observe(article, options);</code></pre>
 }</code></pre>
 <p>参考自知乎 : <a href="https://www.zhihu.com/question/24822927">https://www.zhihu.com/question/24822927</a></p>
 
-          <h3 id="7bec9ad2">
-            <a name="_root-CSS3 瀑布布局" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS3 瀑布布局
-          </h3><p>三列瀑布</p>
+          <h3 id="7bec9ad2">CSS3 瀑布布局</h3><p>三列瀑布</p>
 <pre><code class="language-css">.con {
   column-count: 3;
 }
@@ -2677,19 +1862,9 @@ observer.observe(article, options);</code></pre>
   width: 100%;
 }</code></pre>
 
-          <h3 id="2bb92814">
-            <a name="_root-CSS 将DIV画成直角三角形" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS 将DIV画成直角三角形
-          </h3><p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
+          <h3 id="2bb92814">CSS 将DIV画成直角三角形</h3><p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
 
-          <h3 id="99626f0b">
-            <a name="_root-CSS自定义滚动条样式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS自定义滚动条样式
-          </h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
+          <h3 id="99626f0b">CSS自定义滚动条样式</h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
 <p>特效是不会无故无效的，检查一下是不是开了inline</p>
 <p>下面这个是coding的滚动条样式：</p>
 <pre><code class="language-css">*::-webkit-scrollbar {
@@ -2708,46 +1883,21 @@ observer.observe(article, options);</code></pre>
     background: #d8dde4; 
 }</code></pre>
 
-          <h3 id="49362e2b">
-            <a name="_root-CSS inline-block 垂直居中" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            CSS inline-block 垂直居中
-          </h3><p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
+          <h3 id="49362e2b">CSS inline-block 垂直居中</h3><p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
 <p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html">https://www.cnblogs.com/hutuzhu/p/4450850.html</a></p>
 
-          <h2 id="abef3deb">
-            <a name="_root-⭐ JS工具/框架相关" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ JS工具/框架相关
-          </h2>
-          <h3 id="43261fef">
-            <a name="_root-React Native" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            React Native
-          </h3><blockquote>
+          <h2 id="abef3deb">⭐ JS工具/框架相关</h2>
+          <h3 id="43261fef">React Native</h3><blockquote>
 <p>可以做桌面应用</p>
 </blockquote>
 <p>网址: <a href="https://proton-native.js.org/#/">https://proton-native.js.org/#/</a></p>
 
-          <h3 id="22e8c11c">
-            <a name="_root-Layui" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Layui
-          </h3><blockquote>
+          <h3 id="22e8c11c">Layui</h3><blockquote>
 <p>给后端用的前端框架</p>
 </blockquote>
 <p><a href="http://www.layui.com">官网</a></p>
 
-          <h3 id="b8c736ca">
-            <a name="_root-wangEditor 轻量级前端富文本编辑器" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            wangEditor 轻量级前端富文本编辑器
-          </h3><p>
+          <h3 id="b8c736ca">wangEditor 轻量级前端富文本编辑器</h3><p>
         <div class="_showpic_8ad89b50 showpicbtn">Loading images >></div>
         <img href=https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png class="_pic_8ad89b50 hidepic" picId="8ad89b50"></img>
         <script>
@@ -2775,12 +1925,7 @@ observer.observe(article, options);</code></pre>
     </p>
 <p><a href="http://www.wangeditor.com/">官网</a></p>
 
-          <h3 id="8ae5ab14">
-            <a name="_root-KaTeX 最快的数学公式渲染库" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            KaTeX 最快的数学公式渲染库
-          </h3><p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
+          <h3 id="8ae5ab14">KaTeX 最快的数学公式渲染库</h3><p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
 <p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
 <p>
         <div class="_showpic_602564a showpicbtn">Loading images >></div>
@@ -2809,39 +1954,14 @@ observer.observe(article, options);</code></pre>
         </script>
     </p>
 
-          <h3 id="618a1fd3">
-            <a name="_root-JQuery 日期选择控件" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JQuery 日期选择控件
-          </h3><p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
+          <h3 id="618a1fd3">JQuery 日期选择控件</h3><p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
 
-          <h3 id="4e143e42">
-            <a name="_root-JS 数据可视化" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            JS 数据可视化
-          </h3><p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎<br><a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
+          <h3 id="4e143e42">JS 数据可视化</h3><p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎<br><a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
 
-          <h3 id="47b224f">
-            <a name="_root-windows下调试iOS网页设备" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            windows下调试iOS网页设备
-          </h3><p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
+          <h3 id="47b224f">windows下调试iOS网页设备</h3><p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
 
-          <h2 id="49d1ee3d">
-            <a name="_root-⭐ HTML/H5" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ⭐ HTML/H5
-          </h2>
-          <h3 id="f0b8c0fc">
-            <a name="_root-textarea的字数限制" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            textarea的字数限制
-          </h3><pre><code class="language-html">&lt;textarea 
+          <h2 id="49d1ee3d">⭐ HTML/H5</h2>
+          <h3 id="f0b8c0fc">textarea的字数限制</h3><pre><code class="language-html">&lt;textarea 
   rows=&quot;5&quot;  
   maxlength=&quot;200&quot; 
   onchange=&quot;this.value=this.value.substring(0, 200)&quot; 
@@ -2850,19 +1970,9 @@ observer.observe(article, options);</code></pre>
 &lt;/textarea&gt;</code></pre>
 <p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
 
-          <h3 id="a98d310b">
-            <a name="_root-input只允许输入数字" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            input只允许输入数字
-          </h3><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
+          <h3 id="a98d310b">input只允许输入数字</h3><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
 
-          <h3 id="63eb696d">
-            <a name="_root-图片禁止拖拽" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            图片禁止拖拽
-          </h3><p>在对应标签中添加如下属性即可。</p>
+          <h3 id="63eb696d">图片禁止拖拽</h3><p>在对应标签中添加如下属性即可。</p>
 <pre><code class="language-javascript">oncontextmenu = &quot;return false;&quot; //禁止鼠标右键
 ondragstart = &quot;return false;&quot; //禁止鼠标拖动
 onselectstart = &quot;return false;&quot; //文字禁止鼠标选中

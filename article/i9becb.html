@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="8cd7a7ca">
-            <a name="_root-71. SimplifyPath(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            71. SimplifyPath(Medium)
-          </h3><p>Given an <strong>absolute path</strong> for a file (Unix-style), simplify it. Or in other words, convert it to the <strong>canonical path</strong>.</p>
+          <h3 id="8cd7a7ca">71. SimplifyPath(Medium)</h3><p>Given an <strong>absolute path</strong> for a file (Unix-style), simplify it. Or in other words, convert it to the <strong>canonical path</strong>.</p>
 <p>In a UNIX-style file system, a period <code>.</code> refers to the current directory. Furthermore, a double period <code>..</code> moves the directory up a level. For more information, see: <a href="https://www.linuxnix.com/abslute-path-vs-relative-path-in-linuxunix/">Absolute path vs relative path in Linux/Unix</a></p>
 <p>Note that the returned canonical path must always begin with a slash <code>/</code>, and there must be only a single slash <code>/</code> between two directory names. The last directory name (if it exists) <strong>must not</strong> end with a trailing <code>/</code>. Also, the canonical path must be the <strong>shortest</strong> string representing the absolute path.</p>
 <p><strong>Example 1:</strong></p>
@@ -149,12 +144,7 @@ Output: &quot;/c&quot;</code></pre><p><strong>Example 5:</strong></p>
 Output: &quot;/c&quot;</code></pre><p><strong>Example 6:</strong></p>
 <pre><code>Input: &quot;/a//b////c/d//././/..&quot;
 Output: &quot;/a/b/c&quot;</code></pre>
-          <h4 id="79a0e46c">
-            <a name="_root-Iterate" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Iterate
-          </h4><p>以<code>/</code>为单位截出name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的name，最后依次遍历队列，组成path</p>
+          <h4 id="79a0e46c">Iterate</h4><p>以<code>/</code>为单位截出name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的name，最后依次遍历队列，组成path</p>
 <pre><code class="language-java">public String simplifyPath(String path) {
     StringBuilder sb = new StringBuilder(&quot;/&quot;);
     LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
@@ -185,12 +175,7 @@ Output: &quot;/a/b/c&quot;</code></pre>
     return sb.toString();
 }</code></pre>
 
-          <h3 id="85c7b53f">
-            <a name="_root-72. Edit Distance(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            72. Edit Distance(Hard)
-          </h3><p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
+          <h3 id="85c7b53f">72. Edit Distance(Hard)</h3><p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
 <p>You have the following 3 operations permitted on a word:</p>
 <ol>
 <li>Insert a character</li>
@@ -212,12 +197,7 @@ inention -&gt; enention (replace &#39;i&#39; with &#39;e&#39;)
 enention -&gt; exention (replace &#39;n&#39; with &#39;x&#39;)
 exention -&gt; exection (replace &#39;n&#39; with &#39;c&#39;)
 exection -&gt; execution (insert &#39;u&#39;)</code></pre>
-          <h4 id="13dd55ef">
-            <a name="_root-DP" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DP
-          </h4><p>针对这题的分析在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中</p>
+          <h4 id="13dd55ef">DP</h4><p>针对这题的分析在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中</p>
 <pre><code class="language-java">public int minDistance(String word1, String word2) {
     int[][] dp = new int[word1.length() + 1][word2.length() + 1];
     for (int i = 0; i &lt;= word1.length(); i++) {
@@ -247,12 +227,7 @@ exection -&gt; execution (insert &#39;u&#39;)</code></pre>
     return dp[word1.length()][word2.length()];
 }</code></pre>
 
-          <h4 id="f1071b26">
-            <a name="_root-DFS" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            DFS
-          </h4><pre><code class="language-java">public int minDistance2(String a, String b) {
+          <h4 id="f1071b26">DFS</h4><pre><code class="language-java">public int minDistance2(String a, String b) {
     int[][] dp = new int[a.length() + 1][b.length() + 1];
     return dfs(a, b, a.length() - 1, b.length() - 1, dp);
 }
@@ -279,12 +254,7 @@ private int dfs(String a, String b, int i, int j, int[][] dp) {
     return dp[i][j];
 }</code></pre>
 
-          <h3 id="9cca8b3e">
-            <a name="_root-73. Set Matrix Zeros(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            73. Set Matrix Zeros(Medium)
-          </h3><p>Given a <em>m</em> x <em>n</em> matrix, if an element is 0, set its entire row and column to 0. Do it <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>.</p>
+          <h3 id="9cca8b3e">73. Set Matrix Zeros(Medium)</h3><p>Given a <em>m</em> x <em>n</em> matrix, if an element is 0, set its entire row and column to 0. Do it <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: 
 [
@@ -316,12 +286,7 @@ Output:
 <li>Could you devise a constant space solution?</li>
 </ul>
 
-          <h4 id="9ba030a0">
-            <a name="_root-Brute Force" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Brute Force
-          </h4><p>这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做</p>
+          <h4 id="9ba030a0">Brute Force</h4><p>这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做</p>
 <pre><code class="language-java">public void setZeroes(int[][] matrix) {
     boolean[] rowZ = new boolean[matrix.length];
     boolean[] colZ = new boolean[matrix[0].length];
@@ -345,12 +310,7 @@ Output:
     }
 }</code></pre>
 
-          <h3 id="d9255176">
-            <a name="_root-74. Search a 2D Matrix(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            74. Search a 2D Matrix(Medium)
-          </h3><p>Write an efficient algorithm that searches for a value in an <em>m</em> x <em>n</em> matrix. This matrix has the following properties:</p>
+          <h3 id="d9255176">74. Search a 2D Matrix(Medium)</h3><p>Write an efficient algorithm that searches for a value in an <em>m</em> x <em>n</em> matrix. This matrix has the following properties:</p>
 <ul>
 <li>Integers in each row are sorted from left to right.</li>
 <li>The first integer of each row is greater than the last integer of the previous row.</li>
@@ -372,12 +332,7 @@ matrix = [
 ]
 target = 13
 Output: false</code></pre>
-          <h4 id="4ca736c2">
-            <a name="_root-Binary" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Binary
-          </h4><p>没什么好说的</p>
+          <h4 id="4ca736c2">Binary</h4><p>没什么好说的</p>
 <pre><code class="language-java">public boolean searchMatrix(int[][] matrix, int target) {
     if (matrix.length == 0 || matrix[0].length == 0) {
         return false;
@@ -400,12 +355,7 @@ Output: false</code></pre>
     return false;
 }</code></pre>
 
-          <h3 id="7f20422">
-            <a name="_root-75. Sort Colors(Medium)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            75. Sort Colors(Medium)
-          </h3><p>Given an array with <em>n</em> objects colored red, white or blue, sort them <strong>in-place</strong> so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
+          <h3 id="7f20422">75. Sort Colors(Medium)</h3><p>Given an array with <em>n</em> objects colored red, white or blue, sort them <strong>in-place</strong> so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
 <p>Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.</p>
 <p><strong>Note:</strong> You are not suppose to use the library&#39;s sort function for this problem.</p>
 <p><strong>Example:</strong></p>
@@ -416,12 +366,7 @@ Output: [0,0,1,1,2,2]</code></pre><p><strong>Follow up:</strong></p>
 <li>Could you come up with a one-pass algorithm using only constant space?</li>
 </ul>
 
-          <h4 id="4af2fa6f">
-            <a name="_root-Two-pass Counting Sort" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Two-pass Counting Sort
-          </h4><p>关于计数排序，<a href="https://youyinnn.github.io/?to=post&amp;number=42#_root-CountingSort">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
+          <h4 id="4af2fa6f">Two-pass Counting Sort</h4><p>关于计数排序，<a href="https://youyinnn.github.io/?to=post&amp;number=42#_root-CountingSort">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
 <pre><code class="language-java">public void sortColors(int[] nums) {
     int[] count = new int[3];
     for (int color : nums) {

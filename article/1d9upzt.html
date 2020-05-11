@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>二维坐标中有一堆点集，记为P，假设P中至少有2个点，那么求出P中距离最近的两个点；</p>
+          <h3 id="e25a21eb">Introduction</h3><p>二维坐标中有一堆点集，记为P，假设P中至少有2个点，那么求出P中距离最近的两个点；</p>
 <p>首先为了问题准备好点和求两点距离的方法，其中如果两点距离的输入只有一个点，那么它的距离代表无穷大，它表示没有解</p>
 <pre><code class="language-java">class Point {
     double x;
@@ -157,12 +152,7 @@ private double distanceOfTwoPoint(Point a, Point b) {
     return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 }</code></pre>
 
-          <h4 id="596bf37">
-            <a name="_root-Brute Force - O(n^2)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Brute Force - O(n^2)
-          </h4><p>枚举，没什么说的</p>
+          <h4 id="596bf37">Brute Force - O(n^2)</h4><p>枚举，没什么说的</p>
 <pre><code class="language-java">public Point[] shortestDistance(Point[] set) {
     Point[] ans = new Point[2];
     double get = Double.MAX_VALUE;
@@ -179,12 +169,7 @@ private double distanceOfTwoPoint(Point a, Point b) {
     return ans;
 }</code></pre>
 
-          <h4 id="a1c1ef4c">
-            <a name="_root-Divide And Conque - O(nlogn)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Divide And Conque - O(nlogn)
-          </h4><p>利用分治法的思想，我们将点集分为三种情况：</p>
+          <h4 id="a1c1ef4c">Divide And Conque - O(nlogn)</h4><p>利用分治法的思想，我们将点集分为三种情况：</p>
 <ol>
 <li><p>点数小于等于二时：直接计算，求该两点之间的距离。 </p>
 </li>
@@ -300,12 +285,7 @@ private double distanceOfTwoPoint(Point a, Point b) {
     return ans;
 }</code></pre>
 
-          <h4 id="ac01675">
-            <a name="_root-Conclution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Conclution
-          </h4><p>解法如果不知道<strong>那个事实</strong>的话，一般人是想不到的，而且还有更优化的理论，能把6个点缩为4个点，具体的引用可以<a href="https://blog.csdn.net/sinat_35678407/article/details/82874216">参考</a></p>
+          <h4 id="ac01675">Conclution</h4><p>解法如果不知道<strong>那个事实</strong>的话，一般人是想不到的，而且还有更优化的理论，能把6个点缩为4个点，具体的引用可以<a href="https://blog.csdn.net/sinat_35678407/article/details/82874216">参考</a></p>
 <p>反正在解法中，无论是规模减半还是合并子问题，算法都只需要线性的时间，而对P的排序我们可以选择一个<strong>O(nlogn)</strong>的算法，那么整体的算法效率也将是这个值，这也是该问题的最优效率</p>
 <p>这也是这个问题很tricky的地方，关于排序，我自己选择是经过我自己优化的短几行的堆排序，它的效率正好是<strong>O(nlogn)</strong>：</p>
 <pre><code class="language-java">public Point[] sortByX(Point[] set) {
@@ -329,12 +309,7 @@ private double distanceOfTwoPoint(Point a, Point b) {
     return set;
 }</code></pre>
 
-          <h4 id="8b95e273">
-            <a name="_root-Test Case" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Test Case
-          </h4><pre><code class="language-java">private Point[] set = {
+          <h4 id="8b95e273">Test Case</h4><pre><code class="language-java">private Point[] set = {
         new Point(0, 0),
         new Point(0.5, 2),
         new Point(1, 1),

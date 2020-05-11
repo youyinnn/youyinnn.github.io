@@ -126,36 +126,16 @@
     <div id="md" class="myhide markdown-body editormd-html-preview">
         <p>Flow control syntax, Function definition, Data structures of python.</p>
 
-          <h2 id="525a5fb9">
-            <a name="_root-C" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            C
-          </h2>
-          <h3 id="7a692751">
-            <a name="_root-Flow Control" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Flow Control
-          </h3>
-          <h4 id="5b69bf6">
-            <a name="_root-<code>if</code> statement" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <code>if</code> statement
-          </h4><pre><code class="language-python">if x &gt; 0:
+          <h2 id="525a5fb9">C</h2>
+          <h3 id="7a692751">Flow Control</h3>
+          <h4 id="5b69bf6"><code>if</code> statement</h4><pre><code class="language-python">if x &gt; 0:
     print(&#39;x &gt; 0&#39;)
 elif x == 0: 
     print(&#39;x = 0&#39;)
 else:
     print(&#39;x &lt; 0&#39;)</code></pre>
 
-          <h4 id="d3b6e418">
-            <a name="_root-<code>for</code> statement" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <code>for</code> statement
-          </h4><p>Example:</p>
+          <h4 id="d3b6e418"><code>for</code> statement</h4><p>Example:</p>
 <pre><code class="language-python">array = [1, 2, 3, 4]
 for i in array:
     print(i)
@@ -185,12 +165,7 @@ clt = {&#39;a&#39;: &#39;b&#39;, &#39;c&#39;: &#39;d&#39;}
 for key, val in clt.items():
     print(key, val)</code></pre>
 
-          <h4 id="9a37eead">
-            <a name="_root-<code>pass</code> statement" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <code>pass</code> statement
-          </h4><p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:</p>
+          <h4 id="9a37eead"><code>pass</code> statement</h4><p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:</p>
 <pre><code class="language-python">while True:
     pass  # Busy-wait for keyboard interrupt (Ctrl+C)</code></pre>
 <p>This is commonly used for creating minimal classes:</p>
@@ -200,18 +175,8 @@ for key, val in clt.items():
 <pre><code class="language-python">def initlog(*args):
     pass   # Remember to implement this!</code></pre>
 
-          <h3 id="b781ee3f">
-            <a name="_root-Function" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Function
-          </h3>
-          <h4 id="20741448">
-            <a name="_root-Define One" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Define One
-          </h4><p>We must define a function with <code>def</code> keyword:</p>
+          <h3 id="b781ee3f">Function</h3>
+          <h4 id="20741448">Define One</h4><p>We must define a function with <code>def</code> keyword:</p>
 <pre><code class="language-python"># fibonacci series to an arbitary boundary
 def fib(n):
     a, b = 0, 1
@@ -233,12 +198,7 @@ def fib2(n):
 rs = fib2(2000)
 print(rs)</code></pre>
 
-          <h4 id="bbfce8fd">
-            <a name="_root-Default Argument Values" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Default Argument Values
-          </h4><pre><code class="language-python"># default arg values
+          <h4 id="bbfce8fd">Default Argument Values</h4><pre><code class="language-python"># default arg values
 def ask(name, age=10, gender=&#39;male&#39;):
     print(name, age, gender)
 
@@ -264,12 +224,7 @@ Julia 10 female
 [1, 2, 3]
 [0, 4]</code></pre>
 
-          <h4 id="cdd2f301">
-            <a name="_root-Special Area Of Parameters" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Special Area Of Parameters
-          </h4><p>Take a look on this:</p>
+          <h4 id="cdd2f301">Special Area Of Parameters</h4><p>Take a look on this:</p>
 <pre><code class="language-python">def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
       -----------    ----------     ----------
         |               /                  |
@@ -297,12 +252,7 @@ Julia 10 female
 <li>For an API, use positional-only to prevent breaking API changes if the parameter’s name is modified in the future.</li>
 </ul>
 
-          <h4 id="162f9e66">
-            <a name="_root-Keyword Arguments" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Keyword Arguments
-          </h4><p>Functions can also be called using <a href="https://docs.python.org/3/glossary.html#term-keyword-argument">keyword arguments</a> of the form <code>kwarg=value</code>. For instance, the following function:</p>
+          <h4 id="162f9e66">Keyword Arguments</h4><p>Functions can also be called using <a href="https://docs.python.org/3/glossary.html#term-keyword-argument">keyword arguments</a> of the form <code>kwarg=value</code>. For instance, the following function:</p>
 <pre><code class="language-python">def parrot(voltage, state=&#39;a stiff&#39;, action=&#39;voom&#39;, type=&#39;Norwegian Blue&#39;):
     print(&quot;-- This parrot wouldn&#39;t&quot;, action, end=&#39; &#39;)
     print(&quot;if you put&quot;, voltage, &quot;volts through it.&quot;)
@@ -322,12 +272,7 @@ parrot(110, voltage=220)     # duplicate value for the same argument
 parrot(actor=&#39;John Cleese&#39;)  # unknown keyword argument</code></pre>
 <p>In a function call, keyword arguments must follow positional arguments. All the keyword arguments passed must match one of the arguments accepted by the function (e.g. <code>actor</code> is not a valid argument for the <code>parrot</code> function), and their order is not important. This also includes non-optional arguments (e.g. <code>parrot(voltage=1000)</code> is valid too). No argument may receive a value more than once.</p>
 
-          <h4 id="4b1a2a1">
-            <a name="_root-Packing Arguments" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Packing Arguments
-          </h4><p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter. </p>
+          <h4 id="4b1a2a1">Packing Arguments</h4><p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter. </p>
 <p>This may be combined with a formal parameter of the form <code>*name</code> (described in the next subsection) which receives a <a href="https://docs.python.org/3/tutorial/datastructures.html#tut-tuples">tuple</a> <strong>containing the positional arguments</strong> beyond the formal parameter list. (<code>*name</code> must occur before <code>**name</code>.) </p>
 <p>For example, if we define a function like this:</p>
 <pre><code class="language-python">def cheeseshop(kind, *arguments, **keywords):
@@ -359,12 +304,7 @@ client : John Cleese
 sketch : Cheese Shop Sketch</code></pre>
 <p>Note that the order in which the keyword arguments are printed is guaranteed to match the order in which they were provided in the function call.</p>
 
-          <h4 id="307c19d7">
-            <a name="_root-Unpacking Arguments" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Unpacking Arguments
-          </h4><p>Pass a list with <code>*</code> operator:</p>
+          <h4 id="307c19d7">Unpacking Arguments</h4><p>Pass a list with <code>*</code> operator:</p>
 <pre><code class="language-python">&gt;&gt;&gt; list(range(3, 6))            # normal call with separate arguments
 [3, 4, 5]
 &gt;&gt;&gt; args = [3, 6]
@@ -380,12 +320,7 @@ sketch : Cheese Shop Sketch</code></pre>
 &gt;&gt;&gt; parrot(**d)
 -- This parrot wouldn&#39;t VOOM if you put four million volts through it. E&#39;s bleedin&#39; demised !</code></pre>
 
-          <h4 id="62953547">
-            <a name="_root-Function Annotation" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Function Annotation
-          </h4><p><a href="https://docs.python.org/3/glossary.html#term-function-annotation">Annotations</a> are stored in the <code>__annotations__</code> attribute of the function as a dictionary and have no effect on any other part of the function.</p>
+          <h4 id="62953547">Function Annotation</h4><p><a href="https://docs.python.org/3/glossary.html#term-function-annotation">Annotations</a> are stored in the <code>__annotations__</code> attribute of the function as a dictionary and have no effect on any other part of the function.</p>
 <p><strong>Parameter annotations</strong> are defined by a colon(<code>:</code>) after the parameter name, followed by an expression evaluating to the value of the annotation.</p>
 <p><strong>Return annotations</strong> are defined by a literal <code>-&gt;</code>, followed by an expression, between the parameter list and the colon denoting the end of the <a href="https://docs.python.org/3/reference/compound_stmts.html#def"><code>def</code></a> statement.</p>
 <p>The following example has a positional argument, a keyword argument, and the return value annotated:</p>
@@ -399,18 +334,8 @@ Annotations: {&#39;ham&#39;: &lt;class &#39;str&#39;&gt;, &#39;return&#39;: &lt;
 Arguments: spam eggs
 &#39;spam and eggs&#39;</code></pre>
 
-          <h3 id="6a1cf9e8">
-            <a name="_root-D" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            D
-          </h3>
-          <h4 id="1259895a">
-            <a name="_root-Modules" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Modules
-          </h4><p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <strong><em>imported</em></strong> into other modules or into the <em>main</em> module.</p>
+          <h2 id="1d1bc97e">D</h2>
+          <h3 id="8c3d1cf9">Modules</h3><p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <strong><em>imported</em></strong> into other modules or into the <em>main</em> module.</p>
 <p>Before that, we should introduce a global variable  named <code>__name__</code> which can be used to identify whether a <code>.py</code> file is <strong>run directly</strong> from command line or <strong>is imported</strong> to other file as a module.</p>
 <p>For example, say we got a file named <code>fibo.py</code>:</p>
 <pre><code class="language-python">print(&#39;name in fibo&#39;, __name__) # will print &#39;fibo&#39; when imported as a module
@@ -434,12 +359,7 @@ def fibo(n):
 <p>Or we can just run it as a command line script:</p>
 <pre><code class="language-bash">python fibo.py 10</code></pre>
 
-          <h5 id="28973025">
-            <a name="_root-Import" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Import
-          </h5><pre><code class="language-python"># import as object
+          <h4 id="5f9000b3">Import</h4><pre><code class="language-python"># import as object
 import fibo # this will import an object named &#39;fibo&#39; which file name is &#39;fibo.py&#39;
 # usage
 fibo.fibo(10)
@@ -461,24 +381,14 @@ fibonacci(10)
 # import all function
 from fibo import *</code></pre>
 
-          <h5 id="d0e7ade2">
-            <a name="_root-Module Search Path" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Module Search Path
-          </h5><p>When a module named <code>fibo</code> is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named <code>fibo.py</code> in a list of directories given by the variable <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a>. <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> is initialized from these locations:</p>
+          <h4 id="a7e09d74">Module Search Path</h4><p>When a module named <code>fibo</code> is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named <code>fibo.py</code> in a list of directories given by the variable <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a>. <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> is initialized from these locations:</p>
 <ul>
 <li>The directory containing the input script (or the current directory when no file is specified).</li>
 <li><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH"><code>PYTHONPATH</code></a> (a list of directory names, with the same syntax as the shell variable <code>PATH</code>).</li>
 <li>The installation-dependent default.</li>
 </ul>
 
-          <h5 id="3380cbc8">
-            <a name="_root-In Packages" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            In Packages
-          </h5><p>Here’s a possible structure for your package (expressed in terms of a hierarchical filesystem):</p>
+          <h4 id="4487fb5e">In Packages</h4><p>Here’s a possible structure for your package (expressed in terms of a hierarchical filesystem):</p>
 <pre><code class="language-python">sound/                          Top-level package
       __init__.py               Initialize the sound package
       formats/                  Subpackage for file format conversions
@@ -502,12 +412,7 @@ from fibo import *</code></pre>
 <pre><code class="language-python">import sound.effects.echo as echo
 echo.makesound()</code></pre>
 
-          <h6 id="70dc168b">
-            <a name="_root-Import * From Packages" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Import * From Packages
-          </h6><p>For example, the file <code>sound/effects/__init__.py</code> could contain the following code:</p>
+          <h5 id="e9d54731">Import * From Packages</h5><p>For example, the file <code>sound/effects/__init__.py</code> could contain the following code:</p>
 <pre><code class="language-python">__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]
 
 def do():

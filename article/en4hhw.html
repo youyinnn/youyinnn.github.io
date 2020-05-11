@@ -131,18 +131,8 @@
 
 <hr>
 
-          <h3 id="1e9b4fca">
-            <a name="_root-准备工作" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            准备工作
-          </h3>
-          <h4 id="44c92591">
-            <a name="_root-Maven依赖" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Maven依赖
-          </h4><pre><code class="language-xml">&lt;dependencies&gt;
+          <h3 id="1e9b4fca">准备工作</h3>
+          <h4 id="44c92591">Maven依赖</h4><pre><code class="language-xml">&lt;dependencies&gt;
   &lt;dependency&gt;
     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
     &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
@@ -156,12 +146,7 @@
 &lt;/dependencies&gt;</code></pre>
 <p>认准这俩依赖</p>
 
-          <h4 id="fc574ea0">
-            <a name="_root-默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)
-          </h4><p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
+          <h4 id="fc574ea0">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4><p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
 <pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;configuration status=&quot;OFF&quot;&gt;
     &lt;appenders&gt;
@@ -176,12 +161,7 @@
     &lt;/loggers&gt;
 &lt;/configuration&gt;</code></pre>
 
-          <h4 id="d4c5d785">
-            <a name="_root-HelloWord" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            HelloWord
-          </h4><pre><code class="language-java">public class Main {
+          <h4 id="d4c5d785">HelloWord</h4><pre><code class="language-java">public class Main {
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
         logger.trace(&quot;trace level&quot;);
@@ -194,12 +174,7 @@
 }</code></pre>
 <hr>
 
-          <h3 id="773fe804">
-            <a name="_root-运行HelloWorld" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            运行HelloWorld
-          </h3><p>运行上面的代码之后会出现如下的log</p>
+          <h3 id="773fe804">运行HelloWorld</h3><p>运行上面的代码之后会出现如下的log</p>
 <pre><code class="language-cmd">13:34:41.070 [main] ERROR mylog - error level
 13:34:41.072 [main] FATAL mylog - fatal level</code></pre>
 <p>你会很奇怪，为什么我们写了这么多log，却只出现两行log信息，我们去看看我们的配置文件：</p>

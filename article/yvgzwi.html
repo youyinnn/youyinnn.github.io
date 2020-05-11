@@ -131,12 +131,7 @@
 
 <p><a href="https://logging.apache.org/log4j/2.x/manual/layouts.html">Layouts</a>里提到了许多种Layout方式，我最常用的是PatternLayout。</p>
 
-          <h3 id="8d958db4">
-            <a name="_root-Pattern Layout 模式输出" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Pattern Layout 模式输出
-          </h3><p>是一种通过pattern字符串来配置的灵活的输出方式。</p>
+          <h3 id="8d958db4">Pattern Layout 模式输出</h3><p>是一种通过pattern字符串来配置的灵活的输出方式。</p>
 <p>属性：</p>
 <ul>
 <li>charset：string：所使用的字符集</li>
@@ -145,18 +140,8 @@
 <li>footer：string：这是一个可选项....</li>
 </ul>
 
-          <h4 id="f785e692">
-            <a name="_root-Patterns" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Patterns
-          </h4>
-          <h5 id="3361bb5e">
-            <a name="_root-Logger Name模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Logger Name模式
-          </h5><p><code>c{precision}</code><br><code>logger{precision}</code></p>
+          <h4 id="f785e692">Patterns</h4>
+          <h5 id="3361bb5e">Logger Name模式</h5><p><code>c{precision}</code><br><code>logger{precision}</code></p>
 <p>用例：</p>
 <p>
         <div class="_showpic_fcc550d6 showpicbtn">Loading images >></div>
@@ -185,19 +170,9 @@
         </script>
     </p>
 
-          <h4 id="db00d17a">
-            <a name="_root-Class模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Class模式
-          </h4><p><code>C{precision}</code><br><code>class{precision}</code></p>
+          <h4 id="db00d17a">Class模式</h4><p><code>C{precision}</code><br><code>class{precision}</code></p>
 
-          <h5 id="1942c898">
-            <a name="_root-Date模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Date模式
-          </h5><p><code>d{pattern} &amp; date{pattern}</code></p>
+          <h5 id="1942c898">Date模式</h5><p><code>d{pattern} &amp; date{pattern}</code></p>
 <p>用例：</p>
 <p>
         <div class="_showpic_6227df12 showpicbtn">Loading images >></div>
@@ -226,68 +201,23 @@
         </script>
     </p>
 
-          <h4 id="febf9150">
-            <a name="_root-Line模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Line模式
-          </h4><p><code>%L</code>：输出报出issue的logger的行数<br><code>%l</code>：输出更详细的行数信息</p>
+          <h4 id="febf9150">Line模式</h4><p><code>%L</code>：输出报出issue的logger的行数<br><code>%l</code>：输出更详细的行数信息</p>
 
-          <h4 id="83f69bd9">
-            <a name="_root-Message信息模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Message信息模式
-          </h4><p><code>%msg</code>：输出logger的信息</p>
+          <h4 id="83f69bd9">Message信息模式</h4><p><code>%msg</code>：输出logger的信息</p>
 
-          <h4 id="76a65949">
-            <a name="_root-Method模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Method模式
-          </h4><p><code>%M</code>：输出logger所在的方法</p>
+          <h4 id="76a65949">Method模式</h4><p><code>%M</code>：输出logger所在的方法</p>
 
-          <h4 id="c8711d27">
-            <a name="_root-n模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            n模式
-          </h4><p><code>%n</code>：输出系统支持的行分隔符，比如<code>\n</code>或者<code>\r\n</code></p>
+          <h4 id="c8711d27">n模式</h4><p><code>%n</code>：输出系统支持的行分隔符，比如<code>\n</code>或者<code>\r\n</code></p>
 
-          <h4 id="31077f71">
-            <a name="_root-N模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            N模式
-          </h4><p><code>%N</code>：输出调用Log事件时的:<code>System.nanoTime()</code></p>
+          <h4 id="31077f71">N模式</h4><p><code>%N</code>：输出调用Log事件时的:<code>System.nanoTime()</code></p>
 
-          <h4 id="d9900497">
-            <a name="_root-pid模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            pid模式
-          </h4><p><code>%pid</code>：输出程序的pid</p>
+          <h4 id="d9900497">pid模式</h4><p><code>%pid</code>：输出程序的pid</p>
 
-          <h4 id="75db299b">
-            <a name="_root-level模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            level模式
-          </h4><p><code>p|level{level=label, level=label, ...}</code>：指定每个级别的别名<br><code>p|level{lowerCase=true|false}</code>：指定级别是否小写</p>
+          <h4 id="75db299b">level模式</h4><p><code>p|level{level=label, level=label, ...}</code>：指定每个级别的别名<br><code>p|level{lowerCase=true|false}</code>：指定级别是否小写</p>
 
-          <h4 id="e126ef4">
-            <a name="_root-Thread模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Thread模式
-          </h4><p><code>%t</code>:  输出调用Log事件时所处的线程名<br><code>%tid</code>:  输出调用Log事件时所处的线程id</p>
+          <h4 id="e126ef4">Thread模式</h4><p><code>%t</code>:  输出调用Log事件时所处的线程名<br><code>%tid</code>:  输出调用Log事件时所处的线程id</p>
 
-          <h4 id="76e57bb5">
-            <a name="_root-Context模式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Context模式
-          </h4><p><code>%X{key[,key2...]}</code>: 输出存在ThreadContext里的键所对应的值</p>
+          <h4 id="76e57bb5">Context模式</h4><p><code>%X{key[,key2...]}</code>: 输出存在ThreadContext里的键所对应的值</p>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">

@@ -125,47 +125,17 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="75e66719">
-            <a name="_root-Collection接口" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Collection接口
-          </h3>
-          <h3 id="d6f5163">
-            <a name="_root-源代码解读" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源代码解读
-          </h3>
-          <h4 id="a450c2dd">
-            <a name="_root-头部" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            头部
-          </h4><pre><code class="language-java">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+          <h3 id="75e66719">Collection接口</h3>
+          <h3 id="d6f5163">源代码解读</h3>
+          <h4 id="a450c2dd">头部</h4><pre><code class="language-java">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
   //...
 }</code></pre>
 <p>头部继承了<code>Iterable&lt;E&gt;</code>接口, 对, 这里要注意是extends一个接口, 为什么是extends, 我们去看<code>Iterable&lt;E&gt;</code>接口里到底有啥, <a href="https://youyinnn.github.io/?to=post&amp;number=44">跳转文章</a>.</p>
 <p>所以我们知道, Collection继承了这个<code>接口</code>就代表着它拥有了容器内元素可迭代访问的功能.</p>
 
-          <h4 id="327a072f">
-            <a name="_root-方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            方法
-          </h4>
-          <h5 id="90e50b2a">
-            <a name="_root-查询操作 Query Operations" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            查询操作 Query Operations
-          </h5>
-          <h6 id="8fa25a9">
-            <a name="_root-size()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            size()方法
-          </h6><pre><code class="language-java">    /**
+          <h4 id="327a072f">方法</h4>
+          <h5 id="90e50b2a">查询操作 Query Operations</h5>
+          <h6 id="8fa25a9">size()方法</h6><pre><code class="language-java">    /**
      * (1) 返回容器中存储元素的个数,
      * (2) 注意如果容器存储元素的数量超过了Integer.MAX_VALUE, 则该方法会仅返回Integer.MAX_VALUE.
      *
@@ -176,54 +146,29 @@
 <p>注意返回值是int</p>
 </blockquote>
 
-          <h6 id="6d80b509">
-            <a name="_root-isEmpty()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            isEmpty()方法
-          </h6><pre><code class="language-java">    boolean isEmpty();</code></pre>
+          <h6 id="6d80b509">isEmpty()方法</h6><pre><code class="language-java">    boolean isEmpty();</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h6 id="f3892b95">
-            <a name="_root-contains(Object o)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            contains(Object o)方法
-          </h6><pre><code class="language-java">    boolean contains(Object o);</code></pre>
+          <h6 id="f3892b95">contains(Object o)方法</h6><pre><code class="language-java">    boolean contains(Object o);</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h6 id="f1e23fc0">
-            <a name="_root-iterator()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            iterator()方法
-          </h6><pre><code class="language-java">    Iterator&lt;E&gt; iterator();</code></pre>
+          <h6 id="f1e23fc0">iterator()方法</h6><pre><code class="language-java">    Iterator&lt;E&gt; iterator();</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h6 id="3a3bf587">
-            <a name="_root-toArray()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            toArray()方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="3a3bf587">toArray()方法</h6><pre><code class="language-java">    /**
      * (1)返回一个包含集合所有元素的Object[]数组, 这个数组的元素顺序和迭代器迭代访问的顺序一致.
      * (2)这个方法返回的数组是安全的, 也就是一个new出来的数组, 里面的元素和源集合里的元素没有任何引用关系, 换句话说, 修改数组或者集合任何一方都不会影响彼此. 
      * (3)这个方法被视为数组和集合的转换方法之一.
      */
     Object[] toArray();</code></pre>
 
-          <h6 id="43db240c">
-            <a name="_root-toArray(T[] a)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            toArray(T[] a)方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="43db240c">toArray(T[] a)方法</h6><pre><code class="language-java">    /**
      * (1)返回一个包含集合所有元素的指定运行时T类型的数组.
      * (2)如果数组的类型和容量适合改容器元素, 则将容器元素从数组0号位依次放置(覆盖数组该位置原值).
      * (3)如果类型不匹配, 则抛出@throws ArrayStoreException.
@@ -234,18 +179,8 @@
      */
     &lt;T&gt; T[] toArray(T[] a);</code></pre>
 
-          <h5 id="1172102">
-            <a name="_root-修改操作 Modification Operations" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            修改操作 Modification Operations
-          </h5>
-          <h6 id="30873286">
-            <a name="_root-add(E e)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            add(E e)方法
-          </h6><pre><code class="language-java">    /**
+          <h5 id="1172102">修改操作 Modification Operations</h5>
+          <h6 id="30873286">add(E e)方法</h6><pre><code class="language-java">    /**
      * (1)这个方法不是必须要实现的.
      * (2)保证集合包含了特定的元素, 那么当集合的内容发生改变的时候, 方法返回true; 当集合不允许包含重复元素的时候, 这个方法返回false.
      * (3)支持这个方法的集合类需要明确地在文档中指出添加元素的条件限制, 比如在特定的情况下, 集合不允许添加null元素, 甚至还会强行限制添加元素的类型.
@@ -259,12 +194,7 @@
 <p>接口毕竟是接口, 注释中明确了实现这个方法的很多限制.</p>
 </blockquote>
 
-          <h6 id="a74f1def">
-            <a name="_root-remove(Object o)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            remove(Object o)
-          </h6><pre><code class="language-java">    /**
+          <h6 id="a74f1def">remove(Object o)</h6><pre><code class="language-java">    /**
      * (1)这个方法不是必须实现的.
      * (2)从集合中移除特定的一个元素, 移除规则需符合(o==null ? e==null : o.equals(e)), 如果有元素被移除, 则方法返回true.
      * 
@@ -272,28 +202,13 @@
      */
     boolean remove(Object o);</code></pre>
 
-          <h5 id="a4029721">
-            <a name="_root-数量级操作 Bulk Operations" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            数量级操作 Bulk Operations
-          </h5>
-          <h6 id="4c177b91">
-            <a name="_root-containsAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            containsAll(Collection&lt;?&gt; c)方法
-          </h6><pre><code class="language-java">    /**
+          <h5 id="a4029721">数量级操作 Bulk Operations</h5>
+          <h6 id="4c177b91">containsAll(Collection&lt;?&gt; c)方法</h6><pre><code class="language-java">    /**
      * (1)如果源集合里包含指定集合里的所有元素, 则返回true.
      */
     boolean containsAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6 id="db577fb3">
-            <a name="_root-addAll(Collection&lt;? extends E&gt; c)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            addAll(Collection&lt;? extends E&gt; c)方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="db577fb3">addAll(Collection&lt;? extends E&gt; c)方法</h6><pre><code class="language-java">    /**
      * (1)这个方法不是必须实现的
      * (2)文档原句: 
      *  The behavior of this operation is undefined if the 
@@ -308,23 +223,13 @@
      */
     boolean addAll(Collection&lt;? extends E&gt; c);</code></pre>
 
-          <h6 id="60ca9654">
-            <a name="_root-removeAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            removeAll(Collection&lt;?&gt; c)方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="60ca9654">removeAll(Collection&lt;?&gt; c)方法</h6><pre><code class="language-java">    /**
      * (1)这个方法不是必须实现的.
      * (2)移除源集合中所有和c集合共有的元素.
      */
     boolean removeAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6 id="e89269dc">
-            <a name="_root-removeIf(Predicate&lt;? super E&gt; filter)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            removeIf(Predicate&lt;? super E&gt; filter)方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="e89269dc">removeIf(Predicate&lt;? super E&gt; filter)方法</h6><pre><code class="language-java">    /**
      * (1)自1.8.
      * (2)移除集合中满足特定陈述(predicate)的元素.
      * 
@@ -345,59 +250,29 @@
         return removed;
     }</code></pre>
 
-          <h6 id="f3d3c204">
-            <a name="_root-retainAll(Collection&lt;?&gt; c)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            retainAll(Collection&lt;?&gt; c)方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="f3d3c204">retainAll(Collection&lt;?&gt; c)方法</h6><pre><code class="language-java">    /**
      * (1)这个方法不是必须实现的.
      * (2)保留源集合中和c集合共有的元素.
      */
     boolean retainAll(Collection&lt;?&gt; c);</code></pre>
 
-          <h6 id="f851576e">
-            <a name="_root-clear()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            clear()方法
-          </h6><pre><code class="language-java">    void clear();</code></pre>
+          <h6 id="f851576e">clear()方法</h6><pre><code class="language-java">    void clear();</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h5 id="6cf867bf">
-            <a name="_root-比较和散列 Comparison and hashing" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            比较和散列 Comparison and hashing
-          </h5>
-          <h6 id="e0b026e1">
-            <a name="_root-equals(Object o)方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            equals(Object o)方法
-          </h6><pre><code class="language-java">    boolean equals(Object o);</code></pre>
+          <h5 id="6cf867bf">比较和散列 Comparison and hashing</h5>
+          <h6 id="e0b026e1">equals(Object o)方法</h6><pre><code class="language-java">    boolean equals(Object o);</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h6 id="70dc10d8">
-            <a name="_root-hashCode()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            hashCode()方法
-          </h6><pre><code class="language-java">    boolean hashCode();</code></pre>
+          <h6 id="70dc10d8">hashCode()方法</h6><pre><code class="language-java">    boolean hashCode();</code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
 
-          <h6 id="d44f536e">
-            <a name="_root-spliterator()方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            spliterator()方法
-          </h6><pre><code class="language-java">    /**
+          <h6 id="d44f536e">spliterator()方法</h6><pre><code class="language-java">    /**
      * (1)自1.8.
      * (2)返回一个Spliterators对象
      * (3)若要实现该方法, 需要记录好子迭代器的特征值. 如果子迭代器记录的是Spliterator.SIZED 
@@ -411,24 +286,9 @@
         return Spliterators.spliterator(this, 0);
     }</code></pre>
 
-          <h4 id="3e29790c">
-            <a name="_root-疑问" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            疑问
-          </h4>
-          <h5 id="533e88e2">
-            <a name="_root-Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?
-          </h5>
-          <h5 id="dd373f5f">
-            <a name="_root-Q2: spliterator()方法的作用是什么?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Q2: spliterator()方法的作用是什么?
-          </h5>
+          <h4 id="3e29790c">疑问</h4>
+          <h5 id="533e88e2">Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?</h5>
+          <h5 id="dd373f5f">Q2: spliterator()方法的作用是什么?</h5>
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
         <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">

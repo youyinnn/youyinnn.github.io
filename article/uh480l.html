@@ -125,29 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>本篇主要介绍Docker里面Containers的概念，以及它的定义</p>
+          <h3 id="e25a21eb">Introduction</h3><p>本篇主要介绍Docker里面Containers的概念，以及它的定义</p>
 <p>还有就是如何分享你创建的Containers到hub上面</p>
 <p>需要注意的是，containers的定义其实就是image的定义</p>
 <p>以及说到了docker run了两个option<code>-p</code>和<code>-d</code></p>
 
-          <h3 id="ceedb35e">
-            <a name="_root-Define a container with Dockerfile" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Define a container with Dockerfile
-          </h3><p><code>Dockerfile</code> defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this <code>Dockerfile</code> behaves exactly the same wherever it runs.</p>
+          <h3 id="ceedb35e">Define a container with Dockerfile</h3><p><code>Dockerfile</code> defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this <code>Dockerfile</code> behaves exactly the same wherever it runs.</p>
 
-          <h4 id="725e290f">
-            <a name="_root-Dockerfile" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Dockerfile
-          </h4><p>Create an empty directory. Change directories (<code>cd</code>) into the new directory, create a file called <code>Dockerfile</code>, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.</p>
+          <h4 id="725e290f">Dockerfile</h4><p>Create an empty directory. Change directories (<code>cd</code>) into the new directory, create a file called <code>Dockerfile</code>, copy-and-paste the following content into that file, and save it. Take note of the comments that explain each statement in your new Dockerfile.</p>
 <pre><code class="language-dockerfile"># Use an official Python runtime as a parent image
 FROM python:2.7-slim
 
@@ -170,26 +155,11 @@ ENV NAME World
 CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre>
 <p>This <code>Dockerfile</code> refers to a couple of files we haven’t created yet, namely <code>app.py</code> and <code>requirements.txt</code>. Let’s create those next.</p>
 
-          <h4 id="e0cc9237">
-            <a name="_root-The App itself" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            The App itself
-          </h4><p>Create two more files, <code>requirements.txt</code> and <code>app.py</code>, and put them in the same folder with the <code>Dockerfile</code>. This completes our app, which as you can see is quite simple. When the above <code>Dockerfile</code> is built into an image, <code>app.py</code> and <code>requirements.txt</code> is present because of that <code>Dockerfile</code>’s <code>COPY</code> command, and the output from <code>app.py</code> is accessible over HTTP thanks to the <code>EXPOSE</code>command.</p>
+          <h4 id="e0cc9237">The App itself</h4><p>Create two more files, <code>requirements.txt</code> and <code>app.py</code>, and put them in the same folder with the <code>Dockerfile</code>. This completes our app, which as you can see is quite simple. When the above <code>Dockerfile</code> is built into an image, <code>app.py</code> and <code>requirements.txt</code> is present because of that <code>Dockerfile</code>’s <code>COPY</code> command, and the output from <code>app.py</code> is accessible over HTTP thanks to the <code>EXPOSE</code>command.</p>
 
-          <h5 id="27b5ae96">
-            <a name="_root-<code>requirements.txt</code>" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <code>requirements.txt</code>
-          </h5><pre><code>Flask
+          <h5 id="27b5ae96"><code>requirements.txt</code></h5><pre><code>Flask
 Redis</code></pre>
-          <h5 id="ffe25717">
-            <a name="_root-<code>app.py</code>" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            <code>app.py</code>
-          </h5><pre><code class="language-python">from flask import Flask
+          <h5 id="ffe25717"><code>app.py</code></h5><pre><code class="language-python">from flask import Flask
 from redis import Redis, RedisError
 import os
 import socket
@@ -222,12 +192,7 @@ if __name__ == &quot;__main__&quot;:
 <p><strong>Notice</strong>: For quick start and practice, I didn&#39;t install the Redis library on my build.</p>
 </blockquote>
 
-          <h4 id="b324a8b3">
-            <a name="_root-Build the app" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Build the app
-          </h4><p>We are ready to build the app. Make sure you are still at the top level of your new directory. Here’s what <code>ls</code> should show:</p>
+          <h4 id="b324a8b3">Build the app</h4><p>We are ready to build the app. Make sure you are still at the top level of your new directory. Here’s what <code>ls</code> should show:</p>
 <pre><code class="language-bash">$ ls
 Dockerfile        app.py            requirements.txt</code></pre>
 <p>Now run the build command. This creates a Docker image, which we’re going to tag using <code>-t</code> so it has a friendly name.</p>
@@ -238,62 +203,27 @@ Dockerfile        app.py            requirements.txt</code></pre>
 REPOSITORY            TAG                 IMAGE ID
 hello-hj             latest              326387cea398</code></pre>
 
-          <h4 id="b964135d">
-            <a name="_root-Run the app" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Run the app
-          </h4>
-          <h5 id="f10d3e86">
-            <a name="_root-run on the frontground" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            run on the frontground
-          </h5><p>Run the app, mapping your machine’s port 4000 to the container’s published port 80 using <code>-p</code>:</p>
+          <h4 id="b964135d">Run the app</h4>
+          <h5 id="f10d3e86">run on the frontground</h5><p>Run the app, mapping your machine’s port 4000 to the container’s published port 80 using <code>-p</code>:</p>
 <pre><code>docker run -p 4000:80 hello-hj</code></pre><p>You should see a message that Python is serving your app at <code>http://0.0.0.0:80</code>. But that message is coming from inside the container, which doesn’t know you mapped port 80 of that container to 4000, making the correct URL <code>http://localhost:4000</code>.</p>
 <p>Go to that URL in a web browser to see the display content served up on a web page.</p>
 
-          <h5 id="502b3411">
-            <a name="_root-run on the background" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            run on the background
-          </h5><p>Now let’s run the app in the background, in detached mode:</p>
+          <h5 id="502b3411">run on the background</h5><p>Now let’s run the app in the background, in detached mode:</p>
 <pre><code>docker run -d -p 4000:80 hello-hj</code></pre><p>You get the long container ID for your app and then are kicked back to your terminal. Your container is running in the background. You can also see the abbreviated container ID with <code>docker container ls</code> (and both work interchangeably when running commands):</p>
 <pre><code class="language-bash">$ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED
 1fa4ab2cf395        hello-hj       &quot;python app.py&quot;     28 seconds ago</code></pre>
 <p>Notice that <code>CONTAINER ID</code> matches what’s on <code>http://localhost:4000</code>.</p>
 
-          <h5 id="56d93cd0">
-            <a name="_root-stop an container" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            stop an container
-          </h5><p>Now use <code>docker container stop</code> to end the process, using the <code>CONTAINER ID</code>, like so:</p>
+          <h5 id="56d93cd0">stop an container</h5><p>Now use <code>docker container stop</code> to end the process, using the <code>CONTAINER ID</code>, like so:</p>
 <pre><code class="language-bash">docker container stop 1fa4ab2cf395</code></pre>
 
-          <h3 id="30618911">
-            <a name="_root-Share your image to the hub" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Share your image to the hub
-          </h3>
-          <h4 id="8e8b2925">
-            <a name="_root-Log in with your Docker ID" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Log in with your Docker ID
-          </h4><p>If you don’t have a Docker account, sign up for one at <a href="https://hub.docker.com/">hub.docker.com</a>. Make note of your username.</p>
+          <h3 id="30618911">Share your image to the hub</h3>
+          <h4 id="8e8b2925">Log in with your Docker ID</h4><p>If you don’t have a Docker account, sign up for one at <a href="https://hub.docker.com/">hub.docker.com</a>. Make note of your username.</p>
 <p>Log in to the Docker public registry on your local machine.</p>
 <pre><code class="language-bash">$ docker login</code></pre>
 
-          <h4 id="10e56e2d">
-            <a name="_root-Tag the image" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Tag the image
-          </h4><p>The notation for associating a local image with a repository on a registry is <code>username/repository:tag</code>. The tag is optional, but recommended, since it is the mechanism that registries use to give Docker images a version. Give the repository and tag meaningful names for the context, such as <code>get-started:part2</code>. This puts the image in the <code>get-started</code> repository and tag it as <code>part2</code>.</p>
+          <h4 id="10e56e2d">Tag the image</h4><p>The notation for associating a local image with a repository on a registry is <code>username/repository:tag</code>. The tag is optional, but recommended, since it is the mechanism that registries use to give Docker images a version. Give the repository and tag meaningful names for the context, such as <code>get-started:part2</code>. This puts the image in the <code>get-started</code> repository and tag it as <code>part2</code>.</p>
 <p>Now, put it all together to tag the image. Run <code>docker tag image</code> with your username, repository, and tag names so that the image uploads to your desired destination. The syntax of the command is:</p>
 <pre><code class="language-bash">docker tag image username/repository:tag</code></pre>
 <p>For example:</p>
@@ -307,21 +237,11 @@ youyinnn/getstarted   tag1                27caa1c952f6        2 days ago        
 python                2.7-slim            804b0a01ea83        4 weeks ago         120MB
 hello-world           latest              4ab4c602aa5e        2 months ago        1.84kB</code></pre>
 
-          <h4 id="a1b82acc">
-            <a name="_root-Publish the image" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Publish the image
-          </h4><p>Upload your tagged image to the repository:</p>
+          <h4 id="a1b82acc">Publish the image</h4><p>Upload your tagged image to the repository:</p>
 <pre><code class="language-bash">docker push username/repository:tag</code></pre>
 <p>Once complete, the results of this upload are publicly available. If you log in to <a href="https://hub.docker.com/">Docker Hub</a>, you see the new image there, with its pull command.</p>
 
-          <h4 id="c419d1ed">
-            <a name="_root-Pull and run the image from the remote repository" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Pull and run the image from the remote repository
-          </h4><p>From now on, you can use <code>docker run</code> and run your app on any machine with this command:</p>
+          <h4 id="c419d1ed">Pull and run the image from the remote repository</h4><p>From now on, you can use <code>docker run</code> and run your app on any machine with this command:</p>
 <pre><code class="language-bash">docker run -p 4000:80 username/repository:tag</code></pre>
 <p>If the image isn’t available locally on the machine, Docker pulls it from the repository.</p>
 <pre><code class="language-bash">$ docker run -p 4000:80 youyinnn/getstarted:tag1 
@@ -339,12 +259,7 @@ Status: Downloaded newer image for youyinnn/getstarted:tag1
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)</code></pre>
 <p>No matter where <code>docker run</code> executes, it pulls your image, along with Python and all the dependencies from <code>requirements.txt</code>, and runs your code. It all travels together in a neat little package, and you don’t need to install anything on the host machine for Docker to run it.</p>
 
-          <h3 id="13ef94c6">
-            <a name="_root-Dockerfile reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Dockerfile reference
-          </h3><p>Docker can build images automatically by reading the instructions from a <code>Dockerfile</code>. A <code>Dockerfile</code> is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession.</p>
+          <h3 id="13ef94c6">Dockerfile reference</h3><p>Docker can build images automatically by reading the instructions from a <code>Dockerfile</code>. A <code>Dockerfile</code> is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession.</p>
 <p>For more information,  please refer to: <strong><a href="https://docs.docker.com/engine/reference/builder/#usage">https://docs.docker.com/engine/reference/builder/#usage</a></strong></p>
 
     </div>

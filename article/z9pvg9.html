@@ -125,12 +125,7 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="54695786">
-            <a name="_root-66.Plus One(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            66.Plus One(Easy)
-          </h3><p>Given a <strong>non-empty</strong> array of digits representing a non-negative integer, plus one to the integer.</p>
+          <h3 id="54695786">66.Plus One(Easy)</h3><p>Given a <strong>non-empty</strong> array of digits representing a non-negative integer, plus one to the integer.</p>
 <p>The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.</p>
 <p>You may assume the integer does not contain any leading zero, except the number 0 itself.</p>
 <p><strong>Example 1:</strong></p>
@@ -140,12 +135,7 @@ Explanation: The array represents the integer 123.</code></pre><p><strong>Exampl
 <pre><code>Input: [4,3,2,1]
 Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.</code></pre>
-          <h4 id="60d9a1ee">
-            <a name="_root-Solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution
-          </h4><p>处理carry的题目我们前面碰的多了，熟能生巧</p>
+          <h4 id="60d9a1ee">Solution</h4><p>处理carry的题目我们前面碰的多了，熟能生巧</p>
 <pre><code class="language-java">public int[] plusOne(int[] digits) {
     boolean carry = true;
     for (int i = digits.length - 1; i &gt;= 0; i--) {
@@ -168,24 +158,14 @@ Explanation: The array represents the integer 4321.</code></pre>
     }
 }</code></pre>
 
-          <h3 id="9fa7771d">
-            <a name="_root-67.Add Binary(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            67.Add Binary(Easy)
-          </h3><p>Given two binary strings, return their sum (also a binary string).</p>
+          <h3 id="9fa7771d">67.Add Binary(Easy)</h3><p>Given two binary strings, return their sum (also a binary string).</p>
 <p>The input strings are both <strong>non-empty</strong> and contains only characters <code>1</code> or <code>0</code>.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: a = &quot;11&quot;, b = &quot;1&quot;
 Output: &quot;100&quot;</code></pre><p><strong>Example 2:</strong></p>
 <pre><code>Input: a = &quot;1010&quot;, b = &quot;1011&quot;
 Output: &quot;10101&quot;</code></pre>
-          <h4 id="60d9a1ee">
-            <a name="_root-Solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution
-          </h4><p>和<a href="https://youyinnn.github.io/?to=post&amp;number=111#_root-43.%20Multiply%20Strings(Medium)">MultiplyString</a>一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理</p>
+          <h4 id="60d9a1ee">Solution</h4><p>和<a href="https://youyinnn.github.io/?to=post&amp;number=111#_root-43.%20Multiply%20Strings(Medium)">MultiplyString</a>一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理</p>
 <pre><code class="language-java">public String addBinary(String a, String b) {
     if (a.length() &lt; b.length()) {
         return addBinary(b, a);
@@ -235,12 +215,7 @@ Output: &quot;10101&quot;</code></pre>
     return sb.toString();
 }</code></pre>
 
-          <h3 id="3e932a58">
-            <a name="_root-68.Text Justification(Hard)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            68.Text Justification(Hard)
-          </h3><p>Given an array of words and a width <em>maxWidth</em>, format the text such that each line has exactly <em>maxWidth</em>characters and is fully (left and right) justified.</p>
+          <h3 id="3e932a58">68.Text Justification(Hard)</h3><p>Given an array of words and a width <em>maxWidth</em>, format the text such that each line has exactly <em>maxWidth</em>characters and is fully (left and right) justified.</p>
 <p>You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces <code>&#39; &#39;</code> when necessary so that each line has exactly <em>maxWidth</em> characters.</p>
 <p>Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.</p>
 <p>For the last line of text, it should be left justified and no <strong>extra</strong> space is inserted between words.</p>
@@ -285,12 +260,7 @@ Output:
   &quot;everything  else  we&quot;,
   &quot;do                  &quot;
 ]</code></pre>
-          <h4 id="60d9a1ee">
-            <a name="_root-Solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution
-          </h4><p>这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的</p>
+          <h4 id="60d9a1ee">Solution</h4><p>这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的</p>
 <p>首先我们要来看一下标准解的条件：</p>
 <ul>
 <li>每一行尽可能的吃能吃的单词；（Greedy）</li>
@@ -360,12 +330,7 @@ private String blank(int length) {
     return new String(new char[length]).replace(&#39;\0&#39;, &#39; &#39;);
 }</code></pre>
 
-          <h3 id="b0577789">
-            <a name="_root-69.Sqrt(x) (Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            69.Sqrt(x) (Easy)
-          </h3><p>Implement <code>int sqrt(int x)</code>.</p>
+          <h3 id="b0577789">69.Sqrt(x) (Easy)</h3><p>Implement <code>int sqrt(int x)</code>.</p>
 <p>Compute and return the square root of <em>x</em>, where <em>x</em> is guaranteed to be a non-negative integer.</p>
 <p>Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.</p>
 <p><strong>Example 1:</strong></p>
@@ -375,12 +340,7 @@ Output: 2</code></pre><p><strong>Example 2:</strong></p>
 Output: 2
 Explanation: The square root of 8 is 2.82842..., and since 
              the decimal part is truncated, 2 is returned.</code></pre>
-          <h4 id="4ca736c2">
-            <a name="_root-Binary" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Binary
-          </h4><p>这题虽然是简单题，但我也还是在弯路上走了很久</p>
+          <h4 id="4ca736c2">Binary</h4><p>这题虽然是简单题，但我也还是在弯路上走了很久</p>
 <p>题目给到提示了：</p>
 <ol>
 <li><strong>Try exploring all integers.</strong></li>
@@ -407,12 +367,7 @@ Explanation: The square root of 8 is 2.82842..., and since
     return low &gt; x / low ? low - 1 : low;
 }</code></pre>
 
-          <h3 id="8985cc09">
-            <a name="_root-70.ClimbingStairs(Easy)" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            70.ClimbingStairs(Easy)
-          </h3><p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
+          <h3 id="8985cc09">70.ClimbingStairs(Easy)</h3><p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
 <p><strong>Note:</strong> Given <em>n</em> will be a positive integer.</p>
 <p><strong>Example 1:</strong></p>
@@ -427,12 +382,7 @@ Explanation: There are three ways to climb to the top.
 1. 1 step + 1 step + 1 step
 2. 1 step + 2 steps
 3. 2 steps + 1 step</code></pre>
-          <h4 id="60d9a1ee">
-            <a name="_root-Solution" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Solution
-          </h4><pre><code class="language-java">public int climbStairs(int n) {
+          <h4 id="60d9a1ee">Solution</h4><pre><code class="language-java">public int climbStairs(int n) {
     int a = 1, b = 0;
     int ans = 0;
     for (int i = 1; i &lt;= n; i++) {

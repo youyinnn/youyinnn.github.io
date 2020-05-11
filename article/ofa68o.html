@@ -125,24 +125,14 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="fccefbaf">
-            <a name="_root-前言" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            前言
-          </h3><p>一言难尽 直接开始吧 时间有限 就不一一解读接口了</p>
+          <h3 id="fccefbaf">前言</h3><p>一言难尽 直接开始吧 时间有限 就不一一解读接口了</p>
 <p>这篇是逐行级别的<code>HashMap</code>的<strong>“基础操作”</strong>源码解读，仅仅分析一些核心的<strong>单元素基础操作（CRUD）</strong>，尽可能从大框架思路去分析实现思路，一些太细的变量和无关操作，就不分析太多了</p>
 <p>本篇因为时间和精力有限，也跳过了一些很底层的分析如hash计算，比特位计算等，网上还有好多大神对于这个分析的比我好得多</p>
 <p><strong>多元素操作如<code>putAll</code></strong>以及一些克隆和序列化的操作的话，就不分析了</p>
 <p>开篇即是对于作者实现笔记的解读，你可能觉得就是一篇源码英文翻译，但是到后面到了方法的时候，每行都是根据自己的理解去解读的，如果您有其他的看法，可以留言讨论。</p>
 <hr>
 
-          <h3 id="a072b854">
-            <a name="_root-Document介绍" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Document介绍
-          </h3><blockquote>
+          <h3 id="a072b854">Document介绍</h3><blockquote>
 <p>基于哈希表实现的<code>Map</code>接口。这个实现提供了所有可选的映射操作，并允许空值和空键。(HashMap类大致相当于Hashtable，但它是非同步的，并且允许为空。)这个类不保证映射的顺序；特别地，它不能保证顺序会随时间保持不变（也就是说顺序可能会在其他的操作中被改变）。</p>
 <p>这个实现为基本操作（<code>get</code>和<code>put</code>）提供了恒定时间的性能，假设哈希函数将元素适当地分散在各个桶（ <strong>buckets，存储元素的结构，后文用仓位描述这个概念</strong> ）中。对集合视图的遍历迭代所花费的时间，与<code>HashMap</code>实例的 <strong>“容量（capacity）”</strong> 及其 <strong>大小（键-值映射数）</strong> 成比例。因此，如果迭代性能很重要，那么不要将初始容量设置得太高（或者负载系数太低），这是非常重要的。</p>
 <p><code>HashMap</code>实例有两个影响其性能的参数：初始容量 <strong>（initial capacity）</strong> 和负载因子<strong>（load factor）</strong>。容量是哈希表中的桶数<strong>（箱子数）</strong>，初始容量只是创建哈希表时的容量。负载因子是在哈希表的容量自动增加之前，哈希表被允许达到的最大容量的度量<strong>（阈值）</strong>。当哈希表中的条目数量超过负载因子和当前容量的乘积时，哈希表就会被重新哈希(也就是说，重新构建内部数据结构)，这样哈希表的容量大约是原来的两倍。</p>
@@ -150,39 +140,19 @@
 <p>如果要将许多映射（键值对）存储在<code>HashMap</code>实例中，那么使用足够大的容量创建映射将使映射存储的效率更高，而不是让它根据需要执行自动重哈希以增长表。注意，使用具有相同<code>hashCode()</code>的多个键确实会降低任何散列表的性能。为了改善影响，当键具有可比性时，这个类可以使用键之间的比较顺序来帮助断开连接（避免hash冲突）。</p>
 </blockquote>
 
-          <h3 id="d8d8492b">
-            <a name="_root-作者给的实现提示" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            作者给的实现提示
-          </h3>
-          <h4 id="21cf46bd">
-            <a name="_root-1.关于整体结构" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            1.关于整体结构
-          </h4><blockquote>
+          <h3 id="d8d8492b">作者给的实现提示</h3>
+          <h4 id="21cf46bd">1.关于整体结构</h4><blockquote>
 <p>这个map实现，在一般的情况下就像是一个个由哈希表（<strong>hash table</strong>）组织起来的箱子一样，但是当这些箱子的数量变得非常大（非常大如何衡量？）的时候，它会用树结点（<strong>TreeNode</strong>）结构去替换箱子的结构，每个结构和<code>java.util.TreeMap</code>很相似。</p>
 <p>类中大部分的方法都是在一般的情况下考虑的（<strong>table method</strong>），你可以把它想象成当作一堆普通箱子一样使用，但是在合适的情况下（可能只是简单的判断结构是否<code>instanceof</code>一个Node）会将转接到<strong>TreeNode</strong>结构下可用的方法（<strong>tree method</strong>），这时候你需要讲每个箱子当成一棵树去对待。</p>
 <p><strong>TreeNode</strong>结构下的这些箱子可能会被遍历或者有别的用途，但是在这个<strong>TreeNode</strong>结构里的箱子数量越来越多的情况下，依旧支持以理想的速度进行快速查找操作。然而，考虑到map中绝大多数的箱子结构都是一般的结构，那么检查这些树结构箱子的操作就可能在表方法（<strong>table method</strong>）进行的过程中被延迟执行。</p>
 </blockquote>
 
-          <h4 id="b6934351">
-            <a name="_root-2.关于Tree Bins" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2.关于Tree Bins
-          </h4><blockquote>
+          <h4 id="b6934351">2.关于Tree Bins</h4><blockquote>
 <p> 树箱子（<strong>Tree bins</strong>，箱子都是<strong>TreeNode</strong>结构）的顺序首先由元素的hashCode（哈希码）决定，但是在有关联的情况下，如果两个元素实现了同一个<code>class C implements Comparable&lt;C&gt;</code>接口的话，那么它们的顺序由实现了的比较方法决定（我们保守地通过反射去验证this对象来检查泛型--详情见<code>comparableClassFor</code>方法）。</p>
 <p> 树箱子的增加比较复杂但是绝对值得，最坏的情况下也有<strong>O(logn)</strong>效率，但是操作要求键（KEYS）必须有唯一的哈希（hashs）或者有序性保证，因此，在一些意外情况或者<code>hashCode()</code>方法实现得太烂，也就是一些键（KEYS）共享一个hashCode的情况下，只要它们还能互相比较，性能会慢慢退化。（如果这些办法都没有被采用，我们可能会在两倍的时间效率或者空间效率上进行比较元素，这是在没有预防措施的情况下。但是这样的情况只会在菜鸟程序员的身上才有可能发生，因为程序已经够慢了，再慢一点也没差）</p>
 </blockquote>
 
-          <h4 id="c6ba601a">
-            <a name="_root-3.TreeNode结构带来的性能" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            3.TreeNode结构带来的性能
-          </h4><blockquote>
+          <h4 id="c6ba601a">3.TreeNode结构带来的性能</h4><blockquote>
 <p>因为 <strong>TreeNodes</strong> 结构一般都是普通结点大小的两倍左右大，我们仅仅是在当箱子装了足够的结点的时候，为了保证能够继续使用才使用这个结构（看<code>TREEIFY_THRESHOLD</code>，树化阈值）。而且当他们的数量变小的时候（移除操作或者恢复大小的操作）它们会变回一般的箱子结构。</p>
 <p>在使用分布良好的用户实现的哈希码的时候，很少使用树箱子结构。</p>
 <p>理想情况中，如果哈希码的实现能保证随机性，那么容器中的节点分布频率遵循<a href="http://en.wikipedia.org/wiki/Poisson_distribution">泊松分布</a>，默认调整大小的参数平均约为 <strong>0.5</strong> ，阈值为 <strong>0.75</strong> ，虽然由于方差较大，会适当调整分布粒度。（这个意思大致是说，保持容器的载量是容器的容量的 <strong>0.5~0.75</strong> 之间，接近 <strong>0.75</strong> 就需要考虑容器扩容）</p>
@@ -211,23 +181,13 @@
 <p>树箱的根通常是它的第一个节点。然而，有时（当前的实现，仅在<code>Iterator.remove</code>方法上出现这个情况），根可能会在其他地方，但可以通过<code>TreeNode.root()</code>方法恢复父节点跟随。</p>
 </blockquote>
 
-          <h4 id="9a9de4f0">
-            <a name="_root-4.其他的细节" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            4.其他的细节
-          </h4><blockquote>
+          <h4 id="9a9de4f0">4.其他的细节</h4><blockquote>
 <p>所有适用的内部方法都接受哈希码作为参数（通常由public方法提供），允许它们可以在不重新计算用户实现的哈希码的情况下相互调用。大多数内部方法也接受一个“tab”参数，这个参数通常是当前的表，但可能是新表或旧表调整或转换。</p>
 <p>当箱子（bin）列表被树化、分割或未树化时，我们保留它们具有相同的相对访问 / 遍历顺序（例如：字段、后一个结点）以更好地保存局部，并稍微保留简化调用的分割和遍历的函数调用<code>iterator.remove</code>。当在插入时使用比较器时，保持一次全部排序（或这里要求的最接近的排序）以达到重新平衡，我们将类和标识码进行比较，以作为一个权衡的选择。</p>
 <p><strong>普通模式</strong>和<strong>树模式</strong>之间的使用和转换是有点复杂的，可以参考<code>LinkedHashMap</code>。看到其中是在<strong>插入</strong>时调用<strong>hook方法</strong>，允许<code>LinkedHashMap</code>内部进行<strong>删除操作</strong>和<strong>访问操作</strong>，否则保持这些机制独立性。（这也要求将map实例传递给一些实用程序方法，而这可能会创建一些新的节点。）</p>
 </blockquote>
 
-          <h3 id="f8461fbf">
-            <a name="_root-static final成员变量" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            static final成员变量
-          </h3><pre><code class="language-java">// 默认的初始化容器容量 一开始就是16个
+          <h3 id="f8461fbf">static final成员变量</h3><pre><code class="language-java">// 默认的初始化容器容量 一开始就是16个
 static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
 
 // 最大的容量 
@@ -255,12 +215,7 @@ static final int UNTREEIFY_THRESHOLD = 6;
 // 这个值至少为4 * TREEIFY_THRESHOLD 以避免调整大小和树化阈值之间的冲突
 static final int MIN_TREEIFY_CAPACITY = 64;</code></pre>
 
-          <h3 id="e2565b71">
-            <a name="_root-内部类：链箱子——结点" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            内部类：链箱子——结点
-          </h3><pre><code class="language-java">/**
+          <h3 id="e2565b71">内部类：链箱子——结点</h3><pre><code class="language-java">/**
  * Basic hash bin node, used for most entries.  (See below for
  * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
  */
@@ -331,18 +286,8 @@ static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         </script>
     </p>
 
-          <h3 id="84184acf">
-            <a name="_root-静态方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            静态方法
-          </h3>
-          <h4 id="36dd98e4">
-            <a name="_root-hash" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            hash
-          </h4><pre><code class="language-java">// 计算key.hashCode()，并将(XORs)的高比特位分散到低比特位 以减少hash冲突
+          <h3 id="84184acf">静态方法</h3>
+          <h4 id="36dd98e4">hash</h4><pre><code class="language-java">// 计算key.hashCode()，并将(XORs)的高比特位分散到低比特位 以减少hash冲突
 // 应用了一种转换 将高比特的影响向下传播
 // 比特传播的速度 效用和质量之间存在权衡
 static final int hash(Object key) {
@@ -350,34 +295,19 @@ static final int hash(Object key) {
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
 }</code></pre>
 
-          <h4 id="88846189">
-            <a name="_root-comparableClassFor" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            comparableClassFor
-          </h4><pre><code class="language-java">// 如果x实现了比较器接口就返回x的Class对象 不然就返回null
+          <h4 id="88846189">comparableClassFor</h4><pre><code class="language-java">// 如果x实现了比较器接口就返回x的Class对象 不然就返回null
 static Class&lt;?&gt; comparableClassFor(Object x) {
     //...
 }</code></pre>
 
-          <h4 id="538e3387">
-            <a name="_root-compareComparables" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            compareComparables
-          </h4><pre><code class="language-java">// 返回两个可比较对象的比较结果
+          <h4 id="538e3387">compareComparables</h4><pre><code class="language-java">// 返回两个可比较对象的比较结果
 @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;}) // for cast to Comparable
 static int compareComparables(Class&lt;?&gt; kc, Object k, Object x) {
     return (x == null || x.getClass() != kc ? 0 :
             ((Comparable)k).compareTo(x));
 }</code></pre>
 
-          <h4 id="ecfc30af">
-            <a name="_root-tableSizeFor" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            tableSizeFor
-          </h4><pre><code class="language-java">// 无论给什么容量 总是调整为比他大的2的若干次幂大大小 最大不超过MAXIMUM_CAPACITY
+          <h4 id="ecfc30af">tableSizeFor</h4><pre><code class="language-java">// 无论给什么容量 总是调整为比他大的2的若干次幂大大小 最大不超过MAXIMUM_CAPACITY
 static final int tableSizeFor(int cap) {
     int n = cap - 1;
     n |= n &gt;&gt;&gt; 1;
@@ -388,12 +318,7 @@ static final int tableSizeFor(int cap) {
     return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
 }</code></pre>
 
-          <h3 id="5d5a1419">
-            <a name="_root-成员变量" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            成员变量
-          </h3><pre><code class="language-java">// 表
+          <h3 id="5d5a1419">成员变量</h3><pre><code class="language-java">// 表
 // 以一个Node&lt;K,V&gt;数组来表示一张表的第一层结构 我称这个数组为“主仓”
 // 刚初始化的时候首先使用的表 在有必要的时候会重新计算容量
 // 表的长度总是2的任意次幂 （某些情况下也可以是0）
@@ -416,19 +341,9 @@ int threshold;
 // 当前哈希表的负载因子
 final float loadFactor;</code></pre>
 
-          <h3 id="ad927a55">
-            <a name="_root-构造函数" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            构造函数
-          </h3><p>本来不打算分析构造函数的，但是检查文章的时候发现，构造函数也有点东西，构造函数有4个，放map的那个就忽略了，先看无参的：</p>
+          <h3 id="ad927a55">构造函数</h3><p>本来不打算分析构造函数的，但是检查文章的时候发现，构造函数也有点东西，构造函数有4个，放map的那个就忽略了，先看无参的：</p>
 
-          <h4 id="ae9116f5">
-            <a name="_root-无参" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            无参
-          </h4><pre><code class="language-java">/**
+          <h4 id="ae9116f5">无参</h4><pre><code class="language-java">/**
  * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity
  * (16) and the default load factor (0.75).
  */
@@ -437,21 +352,11 @@ public HashMap() {
 }</code></pre>
 <p>函数就只指定了一个默认的负载因子，其他的参数会在<code>resize()</code>方法做出，往下看就知道了；</p>
 
-          <h4 id="611c78fc">
-            <a name="_root-有参1" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            有参1
-          </h4><pre><code class="language-java">public HashMap(int initialCapacity) {
+          <h4 id="611c78fc">有参1</h4><pre><code class="language-java">public HashMap(int initialCapacity) {
     this(initialCapacity, DEFAULT_LOAD_FACTOR);
 }</code></pre>
 
-          <h4 id="4a312b3f">
-            <a name="_root-有参2" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            有参2
-          </h4><pre><code class="language-java">public HashMap(int initialCapacity, float loadFactor) {
+          <h4 id="4a312b3f">有参2</h4><pre><code class="language-java">public HashMap(int initialCapacity, float loadFactor) {
     if (initialCapacity &lt; 0)
         throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
                                            initialCapacity);
@@ -465,12 +370,7 @@ public HashMap() {
 }</code></pre>
 <p>这里其他的都不重要，关键看<code>line:11</code>，其实我们指定初始容量并是直接的给表指定长度，而是直接指定阈值大小，因为我指定1000容量的容器，肯定是计划好能一次性不扩容地装1000个，读后面你会发现，hashmap你是不会装满的，到了它容量的75%（默认情况下）它就会扩容，因为它要留一大部分的空间来防止hash冲突；</p>
 
-          <h3 id="22bb35f4">
-            <a name="_root-结构剧透！" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            结构剧透！
-          </h3><p>
+          <h3 id="22bb35f4">结构剧透！</h3><p>
         <div class="_showpic_28359cc4 showpicbtn">Loading images >></div>
         <img href=https://image.youyinnn.top/20180817171145.png class="_pic_28359cc4 hidepic" picId="28359cc4"></img>
         <script>
@@ -500,29 +400,14 @@ public HashMap() {
 <p>每hash到的元素都会首先被放到<strong>主仓</strong>对应下标的位置上去，我私称每个下标对应的位置为一个<strong>仓位（position）</strong>，每一个<strong>箱子（也就是每一个结点）</strong>经过hash散列后，如果分到同一个仓位中，将在这个仓位上组织成链表，我私称这个链表为<strong>链箱群（linked bins）</strong>，如果<strong>链箱群</strong>长度达到树化阈值，那么这条<strong>链箱群</strong>就会树化为树结构，我私称这个树结构为<strong>树箱群（tree bins）</strong>。<strong>链箱群</strong>和<strong>树箱群</strong>我统称为<strong>箱群结构（bins structure）</strong></p>
 <p>所以我们找元素的时候有这么一件事：<strong>hashCode找仓位，equals找箱子！</strong></p>
 
-          <h3 id="7fe6fca2">
-            <a name="_root-成员方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            成员方法
-          </h3>
-          <h4 id="a34e512a">
-            <a name="_root-get" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            get
-          </h4><pre><code class="language-java">// 多的没什么好说 关键是引出getNode方法
+          <h3 id="7fe6fca2">成员方法</h3>
+          <h4 id="a34e512a">get</h4><pre><code class="language-java">// 多的没什么好说 关键是引出getNode方法
 public V get(Object key) {
     Node&lt;K,V&gt; e;
     return (e = getNode(hash(key), key)) == null ? null : e.value;
 }</code></pre>
 
-          <h5 id="7350631e">
-            <a name="_root-getNode" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            getNode
-          </h5><pre><code class="language-java">final Node&lt;K,V&gt; getNode(int hash, Object key) {
+          <h5 id="7350631e">getNode</h5><pre><code class="language-java">final Node&lt;K,V&gt; getNode(int hash, Object key) {
     Node&lt;K,V&gt;[] tab; 
     Node&lt;K,V&gt; first, e; 
     int n; K k;
@@ -561,32 +446,17 @@ public V get(Object key) {
 </blockquote>
 <p>所以新容量就是1024！</p>
 
-          <h4 id="d6f701a8">
-            <a name="_root-containsKey" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            containsKey
-          </h4><pre><code class="language-java">public boolean containsKey(Object key) {
+          <h4 id="d6f701a8">containsKey</h4><pre><code class="language-java">public boolean containsKey(Object key) {
     return getNode(hash(key), key) != null;
 }</code></pre>
 <p>不解释了</p>
 
-          <h4 id="72a69d7c">
-            <a name="_root-put" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            put
-          </h4><pre><code class="language-java">// 引putVal
+          <h4 id="72a69d7c">put</h4><pre><code class="language-java">// 引putVal
 public V put(K key, V value) {
     return putVal(hash(key), key, value, false, true);
 }</code></pre>
 
-          <h5 id="1e31c4c9">
-            <a name="_root-putVal" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            putVal
-          </h5><pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+          <h5 id="1e31c4c9">putVal</h5><pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                boolean evict) {
     Node&lt;K,V&gt;[] tab; 
     Node&lt;K,V&gt; p; 
@@ -647,12 +517,7 @@ public V put(K key, V value) {
 <p>后面还注意到有<code>afterNodeAccess</code>和<code>afterNodeInsertion</code>两个方法，这两个方法在<code>HashMap</code>中没有实现，是给<code>LinkedHashMap</code>去实现的，在这里我们不必关心；</p>
 <p>最后调整主仓，如果主仓size大于阈值就执行<code>resize()</code>方法；</p>
 
-          <h6 id="c8a845fe">
-            <a name="_root-resize" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            resize
-          </h6><pre><code class="language-java">// 这个方法很关键 用于调整主仓的大小
+          <h6 id="c8a845fe">resize</h6><pre><code class="language-java">// 这个方法很关键 用于调整主仓的大小
 // 要么是初始化一个主仓 要么将主仓扩至2倍大
 // 如果旧主仓是null 那就分配一个和根据阈值做参考的主仓
 // 否则的话 使用2的次幂值去调整容量 元素要么在原来的位置 要么在新的表中有2的次幂的偏移量
@@ -734,12 +599,7 @@ final Node&lt;K,V&gt;[] resize() {
 <li><code>line:33</code>：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有<code>TreeNode</code>对象调用的<code>split</code>方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如<strong>逆树化一个树箱群</strong></li>
 </ol>
 
-          <h6 id="b541ee">
-            <a name="_root-树箱子——大名鼎鼎的红黑树" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            树箱子——大名鼎鼎的红黑树
-          </h6><p>这方法里面的一些树操作细节，得先了解清楚<strong>树箱子</strong>的结构，才好继续分析，所以这里先插播一下，了解一下<strong>树箱子</strong>的结构</p>
+          <h6 id="b541ee">树箱子——大名鼎鼎的红黑树</h6><p>这方法里面的一些树操作细节，得先了解清楚<strong>树箱子</strong>的结构，才好继续分析，所以这里先插播一下，了解一下<strong>树箱子</strong>的结构</p>
 <pre><code class="language-java">static final class TreeNode&lt;K,V&gt; extends LinkedHashMap.Entry&lt;K,V&gt; {
     TreeNode&lt;K,V&gt; parent;  // red-black tree links
     TreeNode&lt;K,V&gt; left;
@@ -788,12 +648,7 @@ static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
     </p>
 <p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和HashMap无关，就忽略了，而且我认为这里有点<strong>设计过度</strong>，<strong>有了prev和next，为什么还要before和after？</strong></p>
 
-          <h6 id="2fa17b6a">
-            <a name="_root-treeifyBin" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            treeifyBin
-          </h6><p>不管怎么说，我们还是开始分析树化方法：</p>
+          <h6 id="2fa17b6a">treeifyBin</h6><p>不管怎么说，我们还是开始分析树化方法：</p>
 <pre><code class="language-java">// 树化这个hash仓位上的箱群
 final void treeifyBin(Node&lt;K,V&gt;[] tab, int hash) {
     int n, index; Node&lt;K,V&gt; e;
@@ -833,24 +688,14 @@ final void treeifyBin(Node&lt;K,V&gt;[] tab, int hash) {
 </blockquote>
 <p>这里要特别留心！<strong>树化过后的箱群，还保有原来的链箱群的prev和next的关系！为了方便直接在prev和next的关系上直接进行逆树化！</strong></p>
 
-          <h4 id="d507ab89">
-            <a name="_root-remove" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            remove
-          </h4><p>同理引出removeNode</p>
+          <h4 id="d507ab89">remove</h4><p>同理引出removeNode</p>
 <pre><code class="language-java">public V remove(Object key) {
     Node&lt;K,V&gt; e;
     return (e = removeNode(hash(key), key, null, false, true)) == null ?
         null : e.value;
 }</code></pre>
 
-          <h5 id="c0003b6">
-            <a name="_root-removeNode" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            removeNode
-          </h5><pre><code class="language-java">final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
+          <h5 id="c0003b6">removeNode</h5><pre><code class="language-java">final Node&lt;K,V&gt; removeNode(int hash, Object key, Object value,
                            boolean matchValue, boolean movable) {
     Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, index;
     if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
@@ -900,12 +745,7 @@ final void treeifyBin(Node&lt;K,V&gt;[] tab, int hash) {
 <p>值得注意的是，<code>line:28</code>的<code>removeTreeNode</code>方法会导致：<strong>逆树化</strong>，也就是说树箱群已经小于逆树化的阈值了，这时候就要让<strong>树箱群</strong>逆树化为<strong>链箱群</strong></p>
 <p>至于逆树化也非常简单，因为树化的时候还保留<strong>prev</strong>和<strong>next</strong>关系，所以直接顺着<strong>next</strong>去替换结点结构就行了</p>
 
-          <h3 id="e3a4b131">
-            <a name="_root-总结" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            总结
-          </h3><p>主要也是好好了解了一下<code>HashMap</code>在存储结构上的特点，再细致的性能方面的分析，目前还没精力研究，其他方法比如<code>containsValue(Object value)</code>、<code>remove(Object key, Object value)</code>、<code>replace(K key, V oldValue, V newValue)</code>，处理思路都大同小异</p>
+          <h3 id="e3a4b131">总结</h3><p>主要也是好好了解了一下<code>HashMap</code>在存储结构上的特点，再细致的性能方面的分析，目前还没精力研究，其他方法比如<code>containsValue(Object value)</code>、<code>remove(Object key, Object value)</code>、<code>replace(K key, V oldValue, V newValue)</code>，处理思路都大同小异</p>
 <p>本篇关键分析了如下几点：</p>
 <ul>
 <li>HashMap的存储条件</li>
@@ -923,12 +763,7 @@ final void treeifyBin(Node&lt;K,V&gt;[] tab, int hash) {
 <p><strong>扩容阈值（threshold）：</strong>这个值默认是容量的0.75倍，最好也是容量的0.75倍，当容器载量超过这个值的时候，比如1024的0.75，容器就需要<code>resize()</code>扩容两倍；</p>
 <p><strong>负载因子（load factor）：</strong>默认是0.75，它表示HashMap能在当前容量高效工作的最大载量和容量值比，载量和容量之比如果达到负载因子，那么就需要扩容</p>
 
-          <h3 id="bbc7371a">
-            <a name="_root-源码分析好文索引" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            源码分析好文索引
-          </h3><ul>
+          <h3 id="bbc7371a">源码分析好文索引</h3><ul>
 <li>JDK1.7HashMap分析：<a href="https://www.cnblogs.com/xrq730/p/5030920.html">https://www.cnblogs.com/xrq730/p/5030920.html</a></li>
 <li>JDK1.8HashMap分析：<a href="http://www.importnew.com/20386.html">http://www.importnew.com/20386.html</a></li>
 </ul>

@@ -125,21 +125,11 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="5cfda864">
-            <a name="_root-小声BB" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            小声BB
-          </h3><p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
+          <h3 id="5cfda864">小声BB</h3><p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
 <p>其中红黑树更是在HashMap中大展身手，肯定要研究一下为什么他们要用到RBT</p>
 <hr>
 
-          <h3 id="89c1d359">
-            <a name="_root-AVL" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            AVL
-          </h3><p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
+          <h3 id="89c1d359">AVL</h3><p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
 <p>曰：<strong>二叉结构，元素可比，左小右大，仅此而已</strong></p>
 <p>然后再BB一句为什么有了BST之后，又要研究AVL树：在极端的情况下，一组大小有序的数据插入BST，那么就会生成一条线而不是一棵树，这样对于树的操作就完全退化成链表操作，举例说查找操作从二分法的效率变成了顺序查找</p>
 <p>大部分时候我们使用一棵树，更重要的是要用到他的查找操作，而不是插入或者删除操作</p>
@@ -150,12 +140,7 @@
 </blockquote>
 <p>大部分的BST操作都会在<strong>O(h)</strong>的效率内完成，但是一旦树有倾斜，就会变成<strong>O(n)</strong>的效率，AVL通过旋转来保持平衡防止树倾斜，使得所有操作都在<strong>O(logn)</strong>的效率内完成；因为AVL的高度始终都是<strong>O(logn)</strong>；</p>
 
-          <h4 id="ea24b7c">
-            <a name="_root-和BST有何异同？" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            和BST有何异同？
-          </h4><ul>
+          <h4 id="ea24b7c">和BST有何异同？</h4><ul>
 <li><p><strong>结点：</strong>AVL树的每一个结点中有一个字段用于存储平衡因子（average factor），这个平衡因子用于记录该结点的左子树高度和右子树高度之差，用以表示这棵树本身是否<strong>平衡</strong>，于是这个平衡因子的取值在一棵合法的AVL数中的每个节点上只可能取值为：-1，0，1；</p>
 </li>
 <li><p><strong>平衡状态：</strong>保证树上的每个结点的平衡因子都只在<strong>[-1，1]</strong>之间，一旦达到+2或者-2，就需要通过选旋转操作来保持平衡；</p>
@@ -198,18 +183,8 @@ T2   T3                           T3   T4</code></pre></li>
 </li>
 </ul>
 
-          <h4 id="cb315841">
-            <a name="_root-结构与过程" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            结构与过程
-          </h4>
-          <h5 id="e05a12fc">
-            <a name="_root-结点结构" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            结点结构
-          </h5><p>结构比较简单，左右两子和平衡高度</p>
+          <h4 id="cb315841">结构与过程</h4>
+          <h5 id="e05a12fc">结点结构</h5><p>结构比较简单，左右两子和平衡高度</p>
 <pre><code class="language-java">class Node {
     int key, height;
     Node left, right;
@@ -239,12 +214,7 @@ class AVLTree {
     // ...
 }</code></pre>
 
-          <h5 id="f1f9b735">
-            <a name="_root-右旋" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            右旋
-          </h5><pre><code class="language-java">Node rightRotate(Node y) {
+          <h5 id="f1f9b735">右旋</h5><pre><code class="language-java">Node rightRotate(Node y) {
     Node x = y.left;
     Node T2 = x.right;
     // Perform rotation
@@ -262,12 +232,7 @@ class AVLTree {
  x             =====&gt;              y
   \                          /
    T2                        T2</code></pre>
-          <h5 id="b1d02a07">
-            <a name="_root-左旋" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            左旋
-          </h5><pre><code class="language-java">Node leftRotate(Node x) {
+          <h5 id="b1d02a07">左旋</h5><pre><code class="language-java">Node leftRotate(Node x) {
     Node y = x.right;
     Node T2 = y.left;
     // Perform rotation
@@ -286,12 +251,7 @@ class AVLTree {
     /                      \
    T2                      T2</code></pre><p>其他双旋操作都是基于这两个基本操作来搞的；</p>
 
-          <h5 id="3aa07ac0">
-            <a name="_root-插入" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            插入
-          </h5><pre><code class="language-java">Node insert(Node node, int key) {
+          <h5 id="3aa07ac0">插入</h5><pre><code class="language-java">Node insert(Node node, int key) {
     /* 1.  Perform the normal BST insertion */
     if (node == null)
         return (new Node(key));
@@ -348,37 +308,17 @@ class AVLTree {
 </li>
 </ol>
 
-          <h5 id="59aabdc">
-            <a name="_root-删除操作" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            删除操作
-          </h5><p>这个更为复杂点，就先不分析了；</p>
+          <h5 id="59aabdc">删除操作</h5><p>这个更为复杂点，就先不分析了；</p>
 
-          <h4 id="c45485c2">
-            <a name="_root-效率" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            效率
-          </h4><p>插入、查找、删除均为<strong>O(logn)</strong></p>
+          <h4 id="c45485c2">效率</h4><p>插入、查找、删除均为<strong>O(logn)</strong></p>
 
-          <h4 id="2bd05e5b">
-            <a name="_root-参考" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            参考
-          </h4><blockquote>
+          <h4 id="2bd05e5b">参考</h4><blockquote>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a></p>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-2-deletion/">https://www.geeksforgeeks.org/avl-tree-set-2-deletion/</a></p>
 </blockquote>
 <hr>
 
-          <h3 id="f4234397">
-            <a name="_root-红黑树" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            红黑树
-          </h3><p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
+          <h3 id="f4234397">红黑树</h3><p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
 <p><strong>1)</strong> 每点非红即黑</p>
 <p><strong>2)</strong> 根结点必定黑</p>
 <p><strong>3)</strong> 红结点若有子节点，这俩子节点必定是黑色（有直接关系的两结点不能同时都是红色）</p>
@@ -428,12 +368,7 @@ class AVLTree {
 <p>如果场景中查询操作更多，那还是选AVL-T吧；</p>
 <p>但是也因为如此，RBT的平衡是用概念去描述的，而非像AVL-T一样可以用高度差去量化平衡，所以RBT的实现稍微复杂和难懂一些；</p>
 
-          <h5 id="988d0d96">
-            <a name="_root-插入简要分析" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            插入简要分析
-          </h5><p>在做插入分析之前，我们再说两件事：</p>
+          <h5 id="988d0d96">插入简要分析</h5><p>在做插入分析之前，我们再说两件事：</p>
 <ol>
 <li><strong>插入的结点一开始就把他当成一个红色结点来插入；（为什么？因为当成黑色结点插入必然会违背rule4）</strong></li>
 <li><strong>NULL结点虽然不做考虑，但是可以视为是黑色结点；</strong></li>

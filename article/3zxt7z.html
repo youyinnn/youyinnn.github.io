@@ -130,19 +130,9 @@
 <!-- more -->
 
 
-          <h3 id="c27cbcc9">
-            <a name="_root-Lookups" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Lookups
-          </h3><p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
+          <h3 id="c27cbcc9">Lookups</h3><p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
 
-          <h4 id="2380b990">
-            <a name="_root-ContextMap Lookup" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ContextMap Lookup
-          </h4><p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
+          <h4 id="2380b990">ContextMap Lookup</h4><p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
 <p><strong>引用方法：<code>$${ctx:KEY}</code></strong></p>
 <p>代码中写：</p>
 <pre><code class="language-java">ThreadContext.put(&quot;aaa&quot;, &quot;bbb&quot;);</code></pre>
@@ -151,32 +141,17 @@
 <p>输出：</p>
 <pre><code class="language-console">bbb  log4j2test.Main 19 15:20:07.859 [main] INFO  - info level</code></pre>
 
-          <h4 id="183795a3">
-            <a name="_root-Date Lookup" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Date Lookup
-          </h4><p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
+          <h4 id="183795a3">Date Lookup</h4><p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
 <p><strong>引用方法：<code>$${date:SimpleDateFormat}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;PatternLayout pattern=&quot;$${ctx:aaa} $${date:HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
 
-          <h4 id="2dc4883e">
-            <a name="_root-Environment Lookup" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Environment Lookup
-          </h4><p>输出系统中的环境变量，无论是全局变量文件<code>/etc/profile</code>中的，还是运行时定义的变量。</p>
+          <h4 id="2dc4883e">Environment Lookup</h4><p>输出系统中的环境变量，无论是全局变量文件<code>/etc/profile</code>中的，还是运行时定义的变量。</p>
 <p><strong>引用方法：<code>$${env:KEY}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;PatternLayout pattern=&quot;$${env:USER} [%t] %-5level - %msg%n&quot; /&gt;</code></pre>
 
-          <h4 id="a81fc78c">
-            <a name="_root-Java Lookup" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Java Lookup
-          </h4><p>输出一些JVM信息：</p>
+          <h4 id="a81fc78c">Java Lookup</h4><p>输出一些JVM信息：</p>
 <ul>
 <li>version：Java版本</li>
 <li>rentime：Java运行时版本信息</li>
@@ -191,12 +166,7 @@
   &lt;Pattern&gt;%d %m%n&lt;/Pattern&gt;
 &lt;/PatternLayout&gt;</code></pre>
 
-          <h4 id="c08cb4e2">
-            <a name="_root-System Properties Lookup" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            System Properties Lookup
-          </h4><p>获取系统属性的值</p>
+          <h4 id="c08cb4e2">System Properties Lookup</h4><p>获取系统属性的值</p>
 <p><strong>引用方法：<code>$${sys:KEY}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="language-xml">&lt;Appenders&gt;

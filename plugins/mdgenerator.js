@@ -32,12 +32,7 @@ renderer.heading = function(text, level) {
     }
     let hid = crc32(text+level).toString(16)
     return `
-          <h${level} id="${hid}">
-            <a name="_root-${text}" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ${text}
-          </h${level}>`;
+          <h${level} id="${hid}">${text}</h${level}>`;
 }
 renderer.html = renderer.text = function(text) {
     // convert emoji

@@ -125,23 +125,13 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>本篇主要内容：</p>
+          <h3 id="e25a21eb">Introduction</h3><p>本篇主要内容：</p>
 <ol>
 <li>Java 到底是值传递还是引用传递</li>
 <li>Java 中的引用类型详解以其应用场景</li>
 </ol>
 
-          <h3 id="d9b5cad">
-            <a name="_root-Pass-By-Value Or Pass-By-Reference ?" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Pass-By-Value Or Pass-By-Reference ?
-          </h3><p>Java中的所有传递都是值传递，并不存在所谓的引用传递</p>
+          <h3 id="d9b5cad">Pass-By-Value Or Pass-By-Reference ?</h3><p>Java中的所有传递都是值传递，并不存在所谓的引用传递</p>
 <p>要理解这个问题的关键在于：</p>
 <pre><code class="language-java">Dog myDog;</code></pre>
 <p>其中的<code>myDog</code>并不是真正的Dog对象，而是一个<em>pointer</em>，这个指针可以指向一个Dog对象</p>
@@ -179,32 +169,17 @@ foo(myDog);</code></pre>
 <p>从始至终请记住，<code>myDog</code>是一个pointer，它从始至终只指向了<strong>0x42</strong>，它还是原来那条一无是处的狗，只不过在<code>//1</code>的时候被人改了名字而已；</p>
 <p>至于<code>someDog</code>，它只是一个容易变心的指针而已，所以方法内外的<code>myDog</code>和<code>someDog</code>，它们是两个世界的指针，谁也不会真正影响到谁变心；</p>
 
-          <h3 id="4a3d063e">
-            <a name="_root-Reference Type" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Reference Type
-          </h3><p>之前在JVM学习的时候学过几种引用的含义，这里再引用一些<a href="https://blog.csdn.net/xlinsist/article/details/57089288">参考</a>，深入了解一下</p>
+          <h3 id="4a3d063e">Reference Type</h3><p>之前在JVM学习的时候学过几种引用的含义，这里再引用一些<a href="https://blog.csdn.net/xlinsist/article/details/57089288">参考</a>，深入了解一下</p>
 <blockquote>
 <p>作者：Xurtle<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/xlinsist/article/details/57089288">https://blog.csdn.net/xlinsist/article/details/57089288</a> </p>
 </blockquote>
 
-          <h4 id="15c9b4ab">
-            <a name="_root-Strong reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Strong reference
-          </h4><p>显式写出来的引用就是它，除非显式引用断开了否则就回收它，而这背后JVM正是直接通过可达性判断来回收的，每个强引用的对象都能通过可达性判断；</p>
+          <h4 id="15c9b4ab">Strong reference</h4><p>显式写出来的引用就是它，除非显式引用断开了否则就回收它，而这背后JVM正是直接通过可达性判断来回收的，每个强引用的对象都能通过可达性判断；</p>
 <pre><code class="language-java">String a = new String(&quot;xixi&quot;);    // ’xixi‘ is at 0x42
 // some work
 a = null;    // ‘xixi’ which means 0x42 is now available for GC</code></pre>
 
-          <h4 id="9941775">
-            <a name="_root-Soft reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Soft reference
-          </h4><p>它引用的对象只有在内存不足时<strong>且没有强引用同时引用这个对象的时候</strong>，才会被回收，也即是在下次OOM之前，JVM一定会清理掉所有的<strong>soft reference</strong></p>
+          <h4 id="9941775">Soft reference</h4><p>它引用的对象只有在内存不足时<strong>且没有强引用同时引用这个对象的时候</strong>，才会被回收，也即是在下次OOM之前，JVM一定会清理掉所有的<strong>soft reference</strong></p>
 <p>虽然GCor们已经很努力地在工作了，但是我们作为Java开发，也不能为所欲为，不当的代码会造成冗余的对象，变成GCor们无法清理的垃圾，甚至造成内存泄漏问题</p>
 <p>我们来看一段代码：</p>
 <pre><code class="language-java">public class LeakyChecksum {
@@ -237,24 +212,14 @@ a = null;    // ‘xixi’ which means 0x42 is now available for GC</code></pre>
 }</code></pre>
 <p>可以看到，我们每次都尝试获取软引用对象，如果它为null，证明它是第一次访问或者被GC清理掉了</p>
 
-          <h4 id="5220dc58">
-            <a name="_root-Weak reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Weak reference
-          </h4><p>被声明为弱引用的对象，<strong>如果没有强引用同时引用这个对象</strong>，那么它只能存活到下一次GC之前</p>
+          <h4 id="5220dc58">Weak reference</h4><p>被声明为弱引用的对象，<strong>如果没有强引用同时引用这个对象</strong>，那么它只能存活到下一次GC之前</p>
 <pre><code class="language-java">WeakReference&lt;String&gt; sr = new WeakReference&lt;String&gt;(new String(&quot;hello&quot;));
 
 System.out.println(sr.get()); // hello
 System.gc();                  // 通知JVM的gc进行垃圾回收
 System.out.println(sr.get()); // might be null</code></pre>
 
-          <h4 id="20a9faf8">
-            <a name="_root-Phantom reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Phantom reference
-          </h4><p><strong>Phantom References</strong>与上面的几个引用存在很大的不同，至少上面的<code>Reference</code> 对象通过它们的<code>get()</code> 方法可以获取到它们所引用的对象，但是，<code>PhantomReference</code> 的只会返回<code>null</code>，因为虚引用的意义不在于get到引用，而在于<strong>它能提醒我们哪些对象不应该继续存在了</strong></p>
+          <h4 id="20a9faf8">Phantom reference</h4><p><strong>Phantom References</strong>与上面的几个引用存在很大的不同，至少上面的<code>Reference</code> 对象通过它们的<code>get()</code> 方法可以获取到它们所引用的对象，但是，<code>PhantomReference</code> 的只会返回<code>null</code>，因为虚引用的意义不在于get到引用，而在于<strong>它能提醒我们哪些对象不应该继续存在了</strong></p>
 <p><a href="https://blog.csdn.net/xlinsist/article/details/57089288">这篇里</a>说：<em>“Phantom reference 的唯一作用就是它可以监测到对象的死亡，即，当你的对象真正从内存中移除时，指向这个对象的<code>PhantomReference</code> 就会被加入到队列中”</em></p>
 <p>这句话其实后半句有误，应该是<em>“这个被回收对象生前所引用的虚引用对象会被加入到*</em>引用队列*<em>中”</em>才对</p>
 <p>关于<strong>引用队列</strong>，具体是什么，我们下节再细说，先来整理一下虚引用到底有什么神通</p>
@@ -331,23 +296,13 @@ private static void printRQ() {
 }</code></pre>
 <p>那么上一句说到的不可达状态如何验证？狗对象的Person字段相关被注释掉了，如果解开注释之后，即使全局q对象已经设置为null，但是人对象还有狗对象去引用，人对象还是处于可达状态的，所以第二次<code>printRQ</code>方法依旧是没有任何对象入队</p>
 
-          <h3 id="5d001821">
-            <a name="_root-Reference Abstract Class &amp; ReferenceQueue" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Reference Abstract Class &amp; ReferenceQueue
-          </h3><p>上面提到的4种引用类型中的后3种，在Java中其实都是<code>Reference</code>的子类实现，并且<code>Reference</code>和<code>ReferenceQueue</code>的关系很密切</p>
+          <h3 id="5d001821">Reference Abstract Class &amp; ReferenceQueue</h3><p>上面提到的4种引用类型中的后3种，在Java中其实都是<code>Reference</code>的子类实现，并且<code>Reference</code>和<code>ReferenceQueue</code>的关系很密切</p>
 <p>其实我感觉虚引用的作用可以人为替代，比如上文的人和狗的关系，只要狗没有强引用，那么人没了狗也就没了</p>
 <p>所以更多的时候，虚引用是用来监听虚引用的参照对象是否被GC掉了</p>
 <p>上节已经说过虚引用和引用队列的关系了，它必须指定一个引用队列，软引用和弱引用可以选择性地和引用队列合作</p>
 <p>以下参考自<a href="https://juejin.im/entry/5b28f605f265da59942344d4">java 源码系列 - 带你读懂 Reference 和 ReferenceQueue</a></p>
 
-          <h4 id="38fbfa7f">
-            <a name="_root-Reference" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Reference
-          </h4><p>主要是负责内存的一个状态，当然它还和java虚拟机，垃圾回收器打交道。Reference类首先把内存分为4种状态Active，Pending，Enqueued，Inactive。</p>
+          <h4 id="38fbfa7f">Reference</h4><p>主要是负责内存的一个状态，当然它还和java虚拟机，垃圾回收器打交道。Reference类首先把内存分为4种状态Active，Pending，Enqueued，Inactive。</p>
 <ul>
 <li>Active，一般来说内存一开始被分配的状态都是 Active，</li>
 <li>Pending 大概是指快要被放进队列的对象，也就是马上要回收的对象，</li>
@@ -355,19 +310,9 @@ private static void printRQ() {
 <li>Inactive就是最终的状态，不能再变为其它状态。</li>
 </ul>
 
-          <h4 id="f4826181">
-            <a name="_root-ReferenceQueue" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            ReferenceQueue
-          </h4><p>引用队列，在检测到适当的<strong>可到达性更改</strong>后，垃圾回收器将已注册的引用对象添加到队列中，ReferenceQueue实现了入队（enqueue）和出队（poll），还有remove操作，内部元素head就是泛型的Reference。</p>
+          <h4 id="f4826181">ReferenceQueue</h4><p>引用队列，在检测到适当的<strong>可到达性更改</strong>后，垃圾回收器将已注册的引用对象添加到队列中，ReferenceQueue实现了入队（enqueue）和出队（poll），还有remove操作，内部元素head就是泛型的Reference。</p>
 
-          <h4 id="3e97bad8">
-            <a name="_root-Sample" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Sample
-          </h4><pre><code class="language-java">public static void main(String[] args) throws InterruptedException {
+          <h4 id="3e97bad8">Sample</h4><pre><code class="language-java">public static void main(String[] args) throws InterruptedException {
     ReferenceQueue queue = new ReferenceQueue();
 
     // 创建弱引用，此时状态为Active，并且Reference.pending为空
@@ -387,12 +332,7 @@ private static void printRQ() {
 }</code></pre>
 <p>我们很容易就想到，<code>reference</code>和<code>reference1</code>是同一个对象，而且这段代码也揭示了一个事实：<strong>匿名对象都是虚引用</strong></p>
 
-          <h3 id="26845fc6">
-            <a name="_root-Conclusion" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Conclusion
-          </h3><p>有效地利用3种引用类型，可以帮助我们提高GC效率，防止OOM</p>
+          <h3 id="26845fc6">Conclusion</h3><p>有效地利用3种引用类型，可以帮助我们提高GC效率，防止OOM</p>
 <p>在Java中也有许多应用实例，比如有<code>WeakHashMap</code>等等，他在<code>ThreadLocal</code>里就运用到了，以后有空再研究</p>
 
     </div>

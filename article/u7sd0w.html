@@ -125,23 +125,13 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="e25a21eb">
-            <a name="_root-Introduction" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Introduction
-          </h3><p>At the part of &quot;Container&quot;, we&#39;ve know we can define a <code>docker-compose.yaml</code> to deploy a service on our swarm so it can run on multiple machine.</p>
+          <h3 id="e25a21eb">Introduction</h3><p>At the part of &quot;Container&quot;, we&#39;ve know we can define a <code>docker-compose.yaml</code> to deploy a service on our swarm so it can run on multiple machine.</p>
 <p>As we practice before, our service just contains one container: a python app that provide web service with Flask.</p>
 <p>But did you remember that sentence ? <strong>Services are really just &quot;Containers in Production&quot;</strong></p>
 <p>So we can define multiple containers in one service !!! Sounds nice isn&#39;t it ?</p>
 <p>This is what they call <strong>&quot;a Stack&quot;</strong>, and that sounds very confused.</p>
 
-          <h3 id="c758ab90">
-            <a name="_root-Stack" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            Stack
-          </h3><p>A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. </p>
+          <h3 id="c758ab90">Stack</h3><p>A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. </p>
 <p>A single stack is capable of defining and coordinating the functionality of an entire application (though very complex applications may want to use multiple stacks).</p>
 <p>We&#39;ve been technically work with stack while we deploy a Composefile with <code>docker stack deploy</code>. But that was a single service stack running on a single host, which is not usually what takes place in production. Here, you can take what you’ve learned, make multiple services relate to each other, and run them on multiple machines.</p>
 <blockquote>
@@ -232,12 +222,7 @@
 </li>
 </ol>
 
-          <h3 id="37609b27">
-            <a name="_root-A preview of persist data from docker container to host" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            A preview of persist data from docker container to host
-          </h3><p>There still a section about <strong>&quot;Persist data&quot;</strong> on offical doc, it show us how to create a redis service and presist data from container&#39;s inside filesystem to host filesystem. We will just take a look for the compose file and explain it&#39;s usage.</p>
+          <h3 id="37609b27">A preview of persist data from docker container to host</h3><p>There still a section about <strong>&quot;Persist data&quot;</strong> on offical doc, it show us how to create a redis service and presist data from container&#39;s inside filesystem to host filesystem. We will just take a look for the compose file and explain it&#39;s usage.</p>
 <pre><code class="language-yaml">version: &quot;3&quot;
 services:
   web:

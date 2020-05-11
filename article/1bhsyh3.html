@@ -132,12 +132,7 @@
 </blockquote>
 <p>根据这篇文章，我又自己写了一个例子，来说明为什么方法引用可以是一个更加简洁的lambda：</p>
 
-          <h4 id="d7049de0">
-            <a name="_root-引例" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            引例
-          </h4><pre><code class="language-java">public class methodReferences {
+          <h4 id="d7049de0">引例</h4><pre><code class="language-java">public class methodReferences {
 
     //标准FI
     interface methodReferencesFI{
@@ -177,18 +172,8 @@
 <p>但是在JAVA8中，还可以直接通过方法引用来简写lambda表达式中已经存在的方法。</p>
 <pre><code class="language-java">Arrays.sort(stringsArray, String::compareToIgnoreCase);</code></pre>
 
-          <h4 id="573d3230">
-            <a name="_root-四种方法引用的形式" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            四种方法引用的形式
-          </h4>
-          <h5 id="8b10a1c">
-            <a name="_root-1. 引用某个对象的实例方法：" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            1. 引用某个对象的实例方法：
-          </h5><pre><code class="language-java">class ComparisonProvider{
+          <h4 id="573d3230">四种方法引用的形式</h4>
+          <h5 id="8b10a1c">1. 引用某个对象的实例方法：</h5><pre><code class="language-java">class ComparisonProvider{
             public int compareByName(Person a,Person b){
                 return a.getName().compareTo(b.getName());
             }
@@ -230,26 +215,11 @@ Arrays.sort(persons, provider::compareByAge);</code></pre>
     而方法引用更直接：
     Arrays.sort(persons, provider::compareByAge);</code></pre>
 
-          <h5 id="2e3a0f02">
-            <a name="_root-2. 引用特定类的类型对象的实例方法" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            2. 引用特定类的类型对象的实例方法
-          </h5><p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
+          <h5 id="2e3a0f02">2. 引用特定类的类型对象的实例方法</h5><p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
 
-          <h5 id="4621016a">
-            <a name="_root-3. 构造函数的引用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            3. 构造函数的引用
-          </h5><p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
+          <h5 id="4621016a">3. 构造函数的引用</h5><p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
 
-          <h5 id="5c9f1d16">
-            <a name="_root-4. 静态方法引用" class="reference-link" target="_blank">
-              <span class="header-link"></span>
-            </a>
-            4. 静态方法引用
-          </h5><p>格式<code>Class::static_method</code></p>
+          <h5 id="5c9f1d16">4. 静态方法引用</h5><p>格式<code>Class::static_method</code></p>
 <p>到这里方法引用总算是粗略的过了一遍，但是回想前面这一路学习下来，我还是有一个地方，不是很理解。</p>
 <pre><code class="language-java">    //这也是静态方法引用
     personlist.forEach(System.out::println);</code></pre>

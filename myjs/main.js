@@ -42,7 +42,7 @@ function new_render_md(regular_toc) {
             .replace(/ /gm, '&nbsp;')
         return `
             <li class="toc-${tg.toLowerCase()}" _target_sb="${id}">
-                <a hreff="${text.trim()}">${transferred}</a>
+                <a hreff="${id}">${transferred}</a>
                 <ul id="_toc_${id}" class="_toc_ul">
                 </ul>
             </li>
@@ -79,19 +79,19 @@ function new_render_md(regular_toc) {
     var $root = $('html, body')
     if (Boolean(regular_toc) || getclientw() < 700) {
         $('.markdown-toc a').click(function() {
-            let tzhref = '_root-' + $.attr(this, 'hreff')
+            let tzhref = $.attr(this, 'hreff')
             $root.animate({
-                scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-            }, 200)
+                scrollTop: $('#' + tzhref).offset().top - 15
+            }, 400)
             if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
                 $root.animate({
-                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 15
-                }, 200)
+                    scrollTop: $('#' + tzhref).offset().top - 15
+                }, 400)
             }
             if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
                 $root.animate({
-                    scrollTop: $('[name="' + tzhref.trim() + '"]').offset().top - 60
-                }, 200)
+                    scrollTop: $('#' + tzhref).offset().top - 60
+                }, 400)
             }
         })
     } else if (getclientw() >= 700) {
@@ -166,7 +166,6 @@ function new_render_md(regular_toc) {
     $('.showconsole').click(function() {
         $(this).next().removeClass('seboxhide')
         $(this).next().css('border-left', 'none !important;')
-        console.log($(this).next())
         $(this).remove()
     })
     setTimeout(() => {
@@ -872,7 +871,7 @@ function setarrow() {
         link.innerText = '+'
         adclass(link, 'panchorlink')
         appendc(e, link)
-        let url = location.href + '#' + encodeURI($(e).find('a')[0].name)
+        let url = location.href + '#' + encodeURI($(e)[0].id)
         $(e)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(event) {
             popmsg('Copy link successed.')
