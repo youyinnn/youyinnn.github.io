@@ -26,6 +26,8 @@ Change Log
 
 2020-05-04: algolia search
 
+2020-04-15: valine comment plugin
+
 2020-03-12: redirect url to gitee pages when visit from china region
 
 2020-03-09: start to remove issues-based idea, staticize the entire site
