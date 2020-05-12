@@ -495,7 +495,7 @@
 
 .saying {
   text-align: center;
-  padding: .5rem 1rem;
+  padding: .5rem 1rem 1rem;
   background-color: #f8f9fa;
   font-size: 1rem;
 }
@@ -1309,7 +1309,7 @@
 }
 
 #movebtn {
-  top: 2.5rem;
+  height: 24px;
 }
 
 #movebtn button {
@@ -1512,4 +1512,8 @@ sb img {
 
 .showconsole:hover {
   background-color: rgb(199, 199, 199);
+}
+
+#vcomments {
+  animation-delay: .3s;
 }

@@ -2,8 +2,9 @@ var searchone = 0
 var searchtext
 var totalpages
 var nowpage = 1
+var $root = $('html, body')
 
-function new_render_md(regular_toc) {
+function new_render_md(regular_toc, abbrlink) {
     $('#md').addClass('article')
     let as = $('#md a')
     for (let i = 0; i < as.length; i++) {
@@ -76,23 +77,10 @@ function new_render_md(regular_toc) {
         }
     }
     $('#sidetoc').append(listhtml)
-    var $root = $('html, body')
     if (Boolean(regular_toc) || getclientw() < 700) {
         $('.markdown-toc a').click(function() {
             let tzhref = $.attr(this, 'hreff')
-            $root.animate({
-                scrollTop: $('#' + tzhref).offset().top - 15
-            }, 400)
-            if (getstyle(topbar, 'height') === '48px' && !hasclass(topbar, 'hidetopbar')) {
-                $root.animate({
-                    scrollTop: $('#' + tzhref).offset().top - 15
-                }, 400)
-            }
-            if (getstyle(topbar, 'height') === '96px' && !hasclass(topbar, 'hidetopbar')) {
-                $root.animate({
-                    scrollTop: $('#' + tzhref).offset().top - 60
-                }, 400)
-            }
+            scrollToHead(tzhref)
         })
     } else if (getclientw() >= 700) {
         $('.markdown-toc .toc-h3').click(function() {
@@ -168,11 +156,54 @@ function new_render_md(regular_toc) {
         $(this).next().css('border-left', 'none !important;')
         $(this).remove()
     })
+
+    if (Boolean(abbrlink)) {
+        let end = `
+        <hr>
+        <div class="copyrightbox">
+            <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
+            <br>
+            Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/article/${abbrlink}.html</a>
+            <hr>
+            1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[<a href="javascript:void(0);">https://github.com/youyinnn</a>].
+            <br>
+            2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.
+        </div>
+        <div id="movebtn" class="mb-5">
+            <button id="nextarticlebtn" class="btn btn-dark disabled" style="float: left" data-toggle="tooltip" data-trigger="manual" data-placement="right" data-original-title="" >Next</button>
+            <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
+        </div>
+        <div id="vcomments"></div>
+        <div id="footer">2017-${new Date().getFullYear()}</div>
+        `
+        $(md).append(end)
+    }
+
     setTimeout(() => {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
         $(md).addClass('animate__animated animate__fadeIn')
     }, 200)
+}
+
+function get_articles() {
+    $('#pgboxbox').remove()
+    $('.treenode').remove()
+    $('.stgt.btn').remove()
+    all_cates = new Array()
+    all_tags = new Array()
+    $('#blog_statistic_body').addClass('myhide')
+    // from localStorage
+    let pcbl = sessionStorage.getItem('pcbl')
+    handlemetadata(yaml.load(pcbl))
+}
+
+function scrollToHead(id) {
+    if (id.trim() !== '') {
+        $root.animate({
+            scrollTop: $('#' + id).offset().top - 15
+        }, 400)
+    }
 }
 
 function highlightBlock() {
@@ -205,77 +236,6 @@ function showsidetoc() {
     if (getclientw() < 700) {
         md.style.filter = 'blur(2px)'
     }
-}
-
-function searchscript(text) {
-    if (searchtext !== text) {
-        searchone = 0
-    }
-    searchtext = text
-    // for last flag
-    if (text === '#l' || text === '#last') {
-        $('html,body').animate({
-            scrollTop: $('#search-' + (searchcount - 1)).offset().top - 52
-        }, 600);
-        return
-    }
-    // for number flag
-    if (text.search(/#[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?/g) !== -1) {
-        let searchid = '#search-' + text.split('#')[1]
-        let search = $(searchid)
-        if (search[0] !== undefined) {
-            $('html,body').animate({
-                scrollTop: search.offset().top - 52
-            }, 600);
-            return
-        }
-    } else {
-        // search context
-        text = text.split('-i,')
-        let isi = true
-        if (text.length > 1) {
-            isi = false
-            text = text[1]
-        } else {
-            text = text[0]
-        }
-        text = text.replace(/ /g, '')
-        let keywords = text.split(',')
-        for (let i = 0; i < keywords.length; i++) {
-            if (isi) {
-                keywords[i] = new RegExp(keywords[i], 'gi')
-            } else {
-                keywords[i] = new RegExp(keywords[i], 'g')
-            }
-        }
-        for (let i = searchone; i < searchcount; i++) {
-            let search = $('#search-' + i)
-            let scripttext = search[0].innerText
-            let get = true
-            for (let j = 0; j < keywords.length; j++) {
-                get = scripttext.search(keywords[j]) === -1 ? get && false : get && true
-            }
-            if (get) {
-                searchone = i + 1
-                $('html,body').animate({
-                    scrollTop: $('#' + search[0].id).offset().top - 52
-                }, 600, 'swing');
-                searchbut.innerText = 'Get #' + i
-                clearTimeout(window.scc)
-                window.scc = setTimeout(function() {
-                    searchbut.innerText = 'Search'
-                }, 1500, 'swing')
-                return
-            }
-        }
-    }
-    $('#searchtext').addClass('getnothing')
-    searchbut.innerText = 'No get'
-    setTimeout(function() {
-        searchbut.innerText = 'Search'
-        $('#searchtext').removeClass('getnothing')
-    }, 1000, 'swing')
-    searchone = 0
 }
 
 function setgohub(text, href) {
@@ -323,6 +283,7 @@ function searchprocessbarshow() {
 }
 
 let searchrscountshowclear
+
 function searchprocessbarhide() {
     $('#searchprocessbar').removeClass('opshow')
     $('#spb-out').removeClass('spb-outter-animate')
@@ -346,10 +307,9 @@ function searcharticle(text) {
         index.search(text, {
             typoTolerance: false
         }).then(({
-            hits,nbHits
+            hits,
+            nbHits
         }) => {
-            let finish = new Date().getTime()
-            $('#searchrscount').text(`${nbHits} hits matching in ${finish - start} ms`)
             searchprocessbarhide()
             for (let i = 0; i < hits.length; i++) {
                 rs.add(hits[i].objectID)
@@ -368,6 +328,8 @@ function searcharticle(text) {
                     }
                 }
             }
+            let finish = new Date().getTime()
+            $('#searchrscount').text(`${articlesearchrs.length} hits matching in ${finish - start} ms`)
             if (articlesearchrs.length === 0) {
                 $('#articlesearchtext').addClass('getnothing')
                 setTimeout(function() {
@@ -489,6 +451,7 @@ function catetagclick(catetag, isfilter, clicknode) {
     }
     scrollToTop(0)
     highlightBlock()
+    $('#articlesearchtext').val('')
 }
 
 function catetreenodeclick(catenode, isfilter, clicktag) {
@@ -900,7 +863,7 @@ function setarrow() {
         link.innerText = '+'
         adclass(link, 'panchorlink')
         appendc(e, link)
-        let url = location.href + '#' + encodeURI($(e)[0].id)
+        let url = location.origin + location.pathname + '#' + encodeURI($(e)[0].id)
         $(e)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(event) {
             popmsg('Copy link successed.')
@@ -1057,7 +1020,7 @@ function handlemetadata(metadata) {
         metadata[i].body = null
         if (metadata[i].tags !== undefined) {
             for (let j = 0; j < metadata[i].tags.length; j++) {
-                metadata[i].tags[j] = metadata[i].tags[j].toLowerCase()
+                metadata[i].tags[j] = metadata[i].tags[j]
             }
         }
         articlesmetadatahandle(metadata[i])
@@ -1155,10 +1118,12 @@ function seriesorderhandle(abbrlink, psname, sbody, obody) {
         let pretitle = prearr[0]
         let preabbrlink = prearr[1]
         $('#nextarticlebtn').attr('data-original-title', pretitle)
-        $('#nextarticlebtn').tooltip('show')
         $('#nextarticlebtn').click(function() {
             location = '/article/' + preabbrlink + '.html'
         })
+        setTimeout(() => {
+            $('#nextarticlebtn').tooltip('show')
+        }, 500);
     }
     if (nextindex === articleorder.length) {
         $('#prearticlebtn').removeClass('btn-dark')
@@ -1169,10 +1134,12 @@ function seriesorderhandle(abbrlink, psname, sbody, obody) {
         let nexttitle = nextarr[0]
         let nextabbrlink = nextarr[1]
         $('#prearticlebtn').attr('data-original-title', nexttitle)
-        $('#prearticlebtn').tooltip('show')
         $('#prearticlebtn').click(function() {
             location = '/article/' + nextabbrlink + '.html'
         })
+        setTimeout(() => {
+            $('#prearticlebtn').tooltip('show')
+        }, 500)
     }
 }
 

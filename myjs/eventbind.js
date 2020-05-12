@@ -71,14 +71,19 @@ $(function() {
             hidesidetoc()
         }
     })
-    $('*').bind('click', function() {
+    $('*').bind('click', function(event) {
         if (this.id === 'toc' ||
-            this.id === 'sidetoc') {
+            this.id === 'sidetoc' ||
+            this.id === 'tags') {
             return false
         }
         if (!$('#sidetoccontainer').hasClass('tochide') && !location.pathname.startsWith('/scripts/')) {
             hidesidetoc()
         }
+        if (!$('#all_tags').hasClass('myhide') && location.pathname.startsWith('/articles/')) {
+            $('#all_tags').addClass('myhide')
+        }
+        event.stopPropagation()
     })
     $('#searchtext').bind('keyup', 'return', function() {
         searchscript(this.value)
@@ -113,12 +118,14 @@ $(function() {
     $(window).resize(() => {
         $('#cates_tree_body').css('height', ($(window).height() - 48 - 8 - 38 - 6 - 8 - 38 - 156 - 8) + 'px')
     })
+    var valineCreated = false
     $(window).scroll(function() {
         let scrollTop = $(window).scrollTop(),
             docHeight = $(document).height(),
             windowHeight = $(window).height();
-        scrollPercent = (parseInt((scrollTop / (docHeight - windowHeight)) * 100)) + ' %';
-        percent.innerText = scrollPercent
+        let scrollPercent = parseInt((scrollTop / (docHeight - windowHeight)) * 100)
+        scrollPercentText = (scrollPercent) + ' %';
+        percent.innerText = scrollPercentText
 
         // hidetopbar when scrollTop > 0
         if (location.pathname.startsWith('/article/') ||
@@ -130,6 +137,26 @@ $(function() {
             } else {
                 hidetopbar()
             }
+        }
+
+        if (!valineCreated && scrollPercent === 99) {
+            new Valine({
+                el: '#vcomments',
+                serverURLs: 'https://blogcomment.youyinnn.top',
+                appId: 'BveJGLLsypBww2hn3mXgdHBg-gzGzoHsz',
+                appKey: 'yrynpNAvYTsq3K6F9tWtWvgU',
+                placeholder: 'Feel free to express your idea~',
+                recordIP: true,
+                avatar: 'hide',
+                lang: 'en'
+            })
+            $('.vwrap').addClass('shadow')
+            $('.vpower').html(`
+                comment plugin: <a href="https://valine.js.org" target="_blank">Valine</a>
+            `)
+            $($('.vrow')[1]).children().first().html('')
+            $('#vcomments').addClass('animate__animated animate__fadeIn')
+            valineCreated = true
         }
     })
     $('#percent').bind('click', function() {
