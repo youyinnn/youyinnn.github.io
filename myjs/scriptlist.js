@@ -19,7 +19,7 @@ var after = [
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js',
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
-    'https://cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js',
+    'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
     
     '/myjs/tool.js',
     '/myjs/githubapi.js',

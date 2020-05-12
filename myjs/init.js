@@ -36,6 +36,8 @@ $(function() {
     }
     get_friendlinked()
     let pathname = location.pathname
+    var hash = location.hash
+    location.hash = ''
     if (location.search === '?fromgithub=true') {
         popmsg('国内访问 已跳转到Coding Pages')
     }
@@ -106,9 +108,10 @@ $(function() {
         $(md).addClass('no-transit')
         setTimeout(() => {
             $(md).removeClass('no-transit')
+            scrollToHead(hash.replace('#', ''))
         }, 500);
-        new_render_md(true)
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
+        new_render_md(true, metadata.abbrlink)
         createarticlehead(metadata)
         changepagetitle(metadata.title)
 
@@ -117,43 +120,6 @@ $(function() {
 
         // jump to anchro according to the url's hash
         jumpToAnchor()
-
-        let end = `
-            <hr>
-            <div class="copyrightbox">
-                <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
-                <br>
-                Articles address: <a href="javascript:void(0);">https://youyinnn.github.io/article/${metadata.abbrlink}.html</a>
-                <hr>
-                1. All articles on this blog was powered by <span style="font-weight:bold;">youyinnn</span>@[<a href="javascript:void(0);">https://github.com/youyinnn</a>].
-                <br>
-                2. For reprint please contact the author@[<a href="mailto:youyinnn@gmail.com">youyinnn@gmail.com</a>] or comment below.
-            </div>
-            <div id="movebtn" class="mb-3">
-                <button id="nextarticlebtn" class="btn btn-dark disabled" data-toggle="tooltip" data-trigger="manual" data-placement="right" data-original-title="" >Next</button>
-                <button id="prearticlebtn" class="btn btn-dark disabled" style="float: right" data-trigger="manual" data-toggle="tooltip" data-placement="left" data-original-title="">Previous</button>
-            </div>
-            <div id="vcomments"></div>
-            <div id="footer">2017-${new Date().getFullYear()}</div>
-            `
-        $(md).append(end)
-        new Valine({
-            el: '#vcomments',
-            serverURLs: 'https://blogcomment.youyinnn.top',
-            appId: 'BveJGLLsypBww2hn3mXgdHBg-gzGzoHsz',
-            appKey: 'yrynpNAvYTsq3K6F9tWtWvgU',
-            placeholder: 'Feel free to express your idea~',
-            recordIP: true,
-            avatar: 'hide',
-            lang: 'en'
-        })
-        setTimeout(() => {
-            $('.vwrap').addClass('shadow')
-            $('.vcopy').html(`
-                Comment plugin: <a href="https://valine.js.org" target="_blank">Valine</a>
-            `)
-            $($('.vrow')[1]).children().first().html('')
-        }, 1000)
 
         seriesorderhandle(metadata.abbrlink, metadata.series,
             sessionStorage.getItem('pseries'),

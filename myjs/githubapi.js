@@ -41,18 +41,6 @@ function urlhandle(url) {
     }
 }
 
-function get_articles() {
-    $('#pgboxbox').remove()
-    $('.treenode').remove()
-    $('.stgt.btn').remove()
-    all_cates = new Array()
-    all_tags = new Array()
-    $('#blog_statistic_body').addClass('myhide')
-    // from localStorage
-    let pcbl = sessionStorage.getItem('pcbl')
-    handlemetadata(yaml.load(pcbl))
-}
-
 function get_article(number) {
     let url = api_url + '/repos/' + username + '/' + blog_repo + '/issues/' + number
     sendget(urlhandle(url), function(re) {
