@@ -26,6 +26,7 @@ var articlesod = false
 var searchcount
 var cachedcleaner
 var cachedcleanerLock = false
+var hash = location.hash
 
 var index
 
@@ -36,7 +37,6 @@ $(function() {
     }
     get_friendlinked()
     let pathname = location.pathname
-    var hash = location.hash
     location.hash = ''
     if (location.search === '?fromgithub=true') {
         popmsg('国内访问 已跳转到Coding Pages')
@@ -108,7 +108,6 @@ $(function() {
         $(md).addClass('no-transit')
         setTimeout(() => {
             $(md).removeClass('no-transit')
-            scrollToHead(hash.replace('#', ''))
         }, 500);
         let metadata = getmetadatafromabbrlink(pathname.split('/')[2].split('.html')[0])
         new_render_md(true, metadata.abbrlink)

@@ -183,6 +183,7 @@ function new_render_md(regular_toc, abbrlink) {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
         $(md).addClass('animate__animated animate__fadeIn')
+        scrollToHead(hash.replace('#', ''))
     }, 200)
 }
 

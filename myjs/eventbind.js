@@ -83,7 +83,7 @@ $(function() {
         if (!$('#all_tags').hasClass('myhide') && location.pathname.startsWith('/articles/')) {
             $('#all_tags').addClass('myhide')
         }
-        event.stopPropagation()
+        // event.stopPropagation()
     })
     $('#searchtext').bind('keyup', 'return', function() {
         searchscript(this.value)
