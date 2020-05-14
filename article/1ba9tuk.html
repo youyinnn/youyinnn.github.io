@@ -170,6 +170,14 @@ clt = {&#39;a&#39;: &#39;b&#39;, &#39;c&#39;: &#39;d&#39;}
 for key, val in clt.items():
     print(key, val)</code></pre>
 
+          <h4 id="c1c2407"><code>while</code> statement</h4><pre><code class="language-python">while True:
+    num = input(&#39;Please enter a number bigger than 10&#39;)
+    if (num &lt;= 10):
+        print(&#39;Too small!&#39;)
+    else：
+        print(&#39;Number is:&#39;, num)
+        break</code></pre>
+
           <h4 id="9a37eead"><code>pass</code> statement</h4><p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:</p>
 <pre><code class="language-python">while True:
     pass  # Busy-wait for keyboard interrupt (Ctrl+C)</code></pre>

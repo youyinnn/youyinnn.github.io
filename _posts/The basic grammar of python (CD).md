@@ -28,6 +28,8 @@ else:
     print('x < 0')
 ```
 
+
+
 #### `for` statement
 
 Example:
@@ -73,6 +75,22 @@ for key, val in clt.items():
 
 
 
+#### `while` statement
+
+``` python
+while True:
+    num = input('Please enter a number bigger than 10')
+    if (num <= 10):
+        print('Too small!')
+    else：
+    	print('Number is:', num)
+        break
+```
+
+
+
+
+
 #### `pass` statement
 
 The [`pass`](https://docs.python.org/3/reference/simple_stmts.html#pass) statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:
@@ -95,6 +113,8 @@ Another place [`pass`](https://docs.python.org/3/reference/simple_stmts.html#pas
 def initlog(*args):
     pass   # Remember to implement this!
 ```
+
+
 
 
 

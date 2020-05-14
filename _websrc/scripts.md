@@ -587,6 +587,10 @@ https://blog.csdn.net/u011085172/article/details/77771173
 
 ## :star: 网站/软件/技术
 
+### 100多个实用的Javascript代码片段
+
+https://1loc.dev/
+
 ### 一个素材网站 devianart
 
 

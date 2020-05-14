@@ -56,7 +56,19 @@ $(function() {
         new_render_md(true)
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/resume.md')
         showbbt()
-        showtocbtn()
+        showtocbtn(true)
+        $(md).css('margin', '0')
+        $(md).css('maxWidth', 'initial')
+        $(md).css('width',
+            Number($('html').css('width').replace('px', '')) -
+            Number($('#sidetoc').css('width').replace('px', '')) + 'px'
+        )
+        $(window).resize(function() {
+            $(md).css('width',
+                Number($('html').css('width').replace('px', '')) -
+                Number($('#sidetoc').css('width').replace('px', '')) + 'px'
+            )
+        })
     } else if (pathname === '/scripts/') {
         $('html').css('overflowY', 'initial')
         changepagetitle('scripts | youyinnn')
