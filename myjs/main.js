@@ -757,10 +757,13 @@ function showbbt() {
     }, 400)
 }
 
-function showtocbtn() {
+function showtocbtn(open) {
     setTimeout(() => {
         $('#toc')[0].style.display = 'inline-block'
         $('#toc').removeClass('myhide')
+        if (Boolean(open)) {
+            $('#toc').click()
+        }
     }, 400)
 }
 
