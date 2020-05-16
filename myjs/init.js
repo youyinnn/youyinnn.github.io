@@ -26,7 +26,16 @@ var articlesod = false
 var searchcount
 var cachedcleaner
 var cachedcleanerLock = false
-var hash = location.hash
+var hash = ''
+
+if (location.search !== '') {
+    let params = location.search.replace('?','').split('&')
+    for (p of params) {
+        if (p.startsWith('hash=')) {
+            hash = p.substring(5)
+        }
+    }
+}
 
 var index
 
@@ -37,7 +46,6 @@ $(function() {
     }
     get_friendlinked()
     let pathname = location.pathname
-    location.hash = ''
     if (location.search === '?fromgithub=true') {
         popmsg('国内访问 已跳转到Coding Pages')
     }
@@ -81,17 +89,17 @@ $(function() {
         new_render_md()
         showsidetoc()
         setTimeout(() => {
-            if (location.hash === '') {
+            if (hash === '') {
                 $('#_toc_root').children().first().children().click()
                 $('#_toc_root').children().first().children().children().first().click()
             } else {
-                let lh = location.hash.split('#')[1].split('_')
+                let lh = hash.split('_')
                 $(`[_target_sb=${lh[1]}]`).children().first().click()
                 $(`[_target_sb=${lh[0]}]`).click()
             }
             $('.scripts h3').each((i, e) => {
                 let root = $(`[_target_sb=${e.id}]`).parent().parent()
-                let url = location.origin + location.pathname + '#' + `${e.id}_${root[0].getAttribute('_target_sb')}`
+                let url = location.origin + location.pathname + '?hash=' + `${e.id}_${root[0].getAttribute('_target_sb')}`
                 $(e).attr('data-clipboard-text', url)
                 new ClipboardJS(e).on('success', function(event) {
                     popmsg('Copy link successed.')

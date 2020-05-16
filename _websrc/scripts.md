@@ -1,4 +1,4 @@
-## :star: API相关
+## :star: Open API
 
 ###  一些开放的API
 
@@ -34,6 +34,1195 @@
 - [Ginger](https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&utm_source=link&utm_campaign=api_documentation)
 - [Grammarly](https://www.grammarly.com/)
 
+
+## :star: Java
+
+### Java8系列文章
+
+
+http://www.importnew.com/11908.html
+
+
+
+### 牛客 HttpServletRequest. getParameter
+
+
+![image](https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png)
+
+>  编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1
+
+
+
+### Java Spliterator
+
+
+参考1: https://segmentfault.com/q/1010000007087438
+参考2: https://blog.csdn.net/lh513828570/article/details/56673804
+
+
+### 牛客 Integer的拆箱装箱
+
+
+![image](https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png)
+
+![image](https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png)
+
+- 基本数据类型和包装类==比较的时候, 基本数据类型会拆箱, 所以是值比较
+- valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用
+
+
+### 牛客 getDeclaredMethods()的范围
+
+
+![image](https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png)
+
+Doc:
+> public Method[] getDeclaredMethods()
+>
+> Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, 
+>
+> including public, protected, default (package) access, and private methods, **but excluding inherited methods**.
+
+
+
+### 牛客 sleep()和wait()
+
+
+![image](https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png)
+
+**Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行**
+
+##### :small_orange_diamond:共同点 ： 
+1. 他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 
+2. wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException
+如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
+需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 
+
+##### :small_orange_diamond:不同点 ：  
+1. 每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 
+
+2. wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用
+
+3. sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常 
+
+4. sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。
+
+5. wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。
+
+
+### Java static方法中的变量是否存在线程安全问题
+
+我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
+
+那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。
+
+因为，在多线程中使用同一个静态方法时，每个线程使用各自的实例字段(instance field)的副本，而共享一个静态字段(static field)。所以说，如果该静态方法不去操作一个静态成员，只在方法内部使用实例字段(instance field)，不会引起安全性问题。但是，如果该静态方法操作了一个静态字段，则需要静态方法中采用互斥访问的方式进行安全处理。
+
+``` java
+public class Test
+{
+   public static String hello(String str)
+   {
+       String tmp = "";
+       tmp = tmp + str;
+       return tmp;
+   }
+}
+```
+hello方法会不会有多线程安全问题呢？没有！
+
+> 静态方法如果没有使用静态变量，则没有线程安全问题。
+>
+> 为什么呢？因为静态方法内声明的变量，每个线程调用时，都会新创建一份，而不会共用一个存储单元。比如这里的tmp,每个线程都会创建自己的一份，因此不会有线程安全问题。
+>
+> 注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！
+
+
+### Java多线程参考
+
+
+https://www.cnblogs.com/yjd_hycf_space/p/7526608.html
+http://www.importnew.com/21136.html
+http://www.importnew.com/21089.html
+
+
+### Java字符串压缩
+
+
+``` java
+public class StringCompress {
+	public static final byte[] compress(String paramString) {
+		if (paramString == null)
+			return null;
+		ByteArrayOutputStream byteArrayOutputStream = null;
+		ZipOutputStream zipOutputStream = null;
+		byte[] arrayOfByte;
+		try {
+			byteArrayOutputStream = new ByteArrayOutputStream();
+			zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
+			zipOutputStream.putNextEntry(new ZipEntry("0"));
+			zipOutputStream.write(paramString.getBytes());
+			zipOutputStream.closeEntry();
+			arrayOfByte = byteArrayOutputStream.toByteArray();
+		} catch (IOException localIOException5) {
+			arrayOfByte = null;
+		} finally {
+			if (zipOutputStream != null)
+				try {
+					zipOutputStream.close();
+				} catch (IOException localIOException6) {
+			}
+			if (byteArrayOutputStream != null)
+				try {
+					byteArrayOutputStream.close();
+				} catch (IOException localIOException7) {
+			}
+		}
+		return arrayOfByte;
+	}
+ 
+	@SuppressWarnings("unused")
+	public static final String decompress(byte[] paramArrayOfByte) {
+		if (paramArrayOfByte == null)
+			return null;
+		ByteArrayOutputStream byteArrayOutputStream = null;
+		ByteArrayInputStream byteArrayInputStream = null;
+		ZipInputStream zipInputStream = null;
+		String str;
+		try {
+			byteArrayOutputStream = new ByteArrayOutputStream();
+			byteArrayInputStream = new ByteArrayInputStream(paramArrayOfByte);
+			zipInputStream = new ZipInputStream(byteArrayInputStream);
+			ZipEntry localZipEntry = zipInputStream.getNextEntry();
+			byte[] arrayOfByte = new byte[1024];
+			int i = -1;
+			while ((i = zipInputStream.read(arrayOfByte)) != -1)
+				byteArrayOutputStream.write(arrayOfByte, 0, i);
+			str = byteArrayOutputStream.toString();
+		} catch (IOException localIOException7) {
+			str = null;
+		} finally {
+			if (zipInputStream != null)
+				try {
+					zipInputStream.close();
+				} catch (IOException localIOException8) {
+				}
+			if (byteArrayInputStream != null)
+				try {
+					byteArrayInputStream.close();
+				} catch (IOException localIOException9) {
+				}
+			if (byteArrayOutputStream != null)
+				try {
+					byteArrayOutputStream.close();
+				} catch (IOException localIOException10) {
+			}
+		}
+		return str;
+	}
+}
+```
+
+参考：https://blog.csdn.net/isea533/article/details/8199848
+
+### Servlet和CGI的区别
+
+#### CGI (Common Gateway Interface 公共网关接口)
+
+1. 定义：
+
+   CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
+
+2. 功能：
+
+   绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。
+
+3. 运行环境：
+
+   CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。
+
+4. CGI处理步骤：
+
+   1. 通过Internet把用户请求送到服务器。
+   2. 服务器接收用户请求并交给CGI程序处理。
+   3. CGI程序把处理结果传送给服务器。
+   4. 服务器把结果送回到用户。
+
+#### Servlet
+
+Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。
+
+工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。
+
+ 
+
+#### Java Servlet与CGI的比较
+
+与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。
+
+在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。
+
+在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。
+　　* 方便 　
+　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。
+　　* 功能强大
+　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。
+　　* 可移植性好
+Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。
+
+转自：https://www.cnblogs.com/MuyouSome/p/3938203.html
+
+
+### Java HashMap好文
+
+
+源码解析：
+- https://www.cnblogs.com/xrq730/p/5030920.html
+- http://www.importnew.com/20386.html
+
+面试总结：
+- https://www.cnblogs.com/lchzls/p/6714474.html
+- https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&utm_campaign=client_share&app=news_article&utm_source=mobile_qq&iid=5056005857&utm_medium=toutiao_ios
+- https://blog.csdn.net/u012512634/article/details/72735183
+
+
+### fastjson 转时间
+
+
+在field上加注解，比如转ISO格式的时间
+``` java
+@JSONField(format="yyyy-MM-dd'T'HH:mm:ss'Z'")
+```
+
+
+### sun.misc.Unsafe
+
+
+- http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
+- https://blog.csdn.net/anLA_/article/details/78631026
+- https://blog.csdn.net/lvbaolin123/article/details/80527598
+
+
+### Java String pool
+
+
+[Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
+
+
+### Java 静态内部类和非静态内部类
+
+
+[Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
+
+
+### bridge method
+
+
+- https://cn.aliyun.com/jiaocheng/330720.html
+- https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods
+- https://www.cnblogs.com/zsg88/p/7588929.html
+- https://www.jianshu.com/p/250030ea9b28
+
+
+### finally & return
+
+
+- https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
+
+
+## :star: JS
+
+### JS 获取元素样式
+
+
+``` javascript
+/*
+  此方法兼容IE
+  获取元素的样式：
+    参数1：元素
+    参数2：样式名
+*/
+function getStyle(obj, styleName) {
+  var cs = obj.currentStyle
+  if (cs === undefined) {
+    return getComputedStyle(obj, null)[styleName]
+  } else {
+    return cs[styleName]
+  }
+}
+```
+
+
+### JS 事件绑定兼容
+
+
+``` javascript
+/*
+  事件绑定兼容
+  首先要注意：
+    addEventListener() 方法中的this是我们绑定的事件
+    attachedEvent() 方法中的this是window
+
+  参数：
+    1、obj 要绑定的对象
+    2、eventStr 绑定事件 (不要on)
+    3、callback 回调函数
+*/
+function bindev(obj, eventStr, callback) {
+  if (obj.addEventListener) {
+    // 兼容大部分浏览器
+    obj.addEventListener(eventStr, callback, false)
+  } else {
+    /*
+      this是谁由调用方式决定
+      由于attachEvent()的默认this是window
+      为了统一this
+      我们可以用下面的方式来指定this
+      callback.apply(obj);
+    */
+    // IE
+    obj.attachEvent('on' + eventStr, function () {
+      callback.apply(obj)
+    })
+  }
+}
+```
+
+
+### JS 滚动动画
+
+
+``` javascript
+/*
+  md的滚动条
+  去到id为elementid的元素位置
+  速度是 500
+*/
+$('#md').animate({
+  scrollTop: $('#elementid').offset().top
+}, 500);
+```
+
+
+### JS 滚动动画改进
+
+
+``` javascript
+/*
+  防止到了位置之后再滚动到该元素 而offset改变
+*/
+function scrolltoelement(elementid) {
+  if ($('#' + elementid)[0].oset === undefined) {
+    $('#' + elementid)[0].oset = $('#' + elementid).offset().top
+  }
+  $('#md').animate({
+    scrollTop: $('#' + elementid)[0].oset
+  }, 500);
+}
+```
+
+
+### JS 检测页面滚动代码
+
+
+``` JavaScript
+$(window).scroll(function () {
+  var scrollTo = $(window).scrollTop(),
+  docHeight = $(document).height(),
+  windowHeight = $(window).height();
+  scrollPercent = (scrollTo / (docHeight-windowHeight)) * 100;
+  percent.innerText = scrollPercent
+})
+```
+
+
+### JS 小数
+
+  
+
+1. 丢弃小数部分,保留整数部分 `parseInt(7/2)` 
+
+2. 向上取整,有小数就整数部分加1 `Math.ceil(7/2) `
+
+3. 四舍五入 `Math.round(7/2) `
+
+4. 向下取整 `Math.floor(7/2)`
+
+5. 四舍五入 保留位数：
+``` javascript
+var num =2.446242342;
+num = num.toFixed(2); // 输出结果为 2.45
+```
+
+
+### JS CSS 动态添加动画效果
+
+  
+
+``` javascript
+  $('#searchtext').addClass('getnothing')
+  setTimeout(function () {
+    $('#searchtext').removeClass('getnothing')
+  }, 1100)
+```
+
+``` css
+.getnothing{
+  animation: getnothing 1s;
+}
+
+@keyframes getnothing{
+  50% {
+    background-color: rgba(247, 117, 117, 0.534);
+  }
+}
+```
+
+
+### JS 控制聚焦/失焦事件
+
+  
+
+``` js
+  $('#searchtext').focus(function () {
+    $('#scriptsearcher')[0].style.opacity = '1'
+  })
+  $('#searchtext').blur(function () {
+    $('#scriptsearcher')[0].style.opacity = '0.3'
+  })
+```
+
+
+### AJAX设置请求超时
+
+  
+
+``` js
+var ajaxTimeoutTest = $.ajax({
+　　url:'',  //请求的URL
+　　timeout : 1000, //超时时间设置，单位毫秒
+　　type : 'get',  //请求方式，get或post
+　　data :{},  //请求所传参数，json格式
+　　dataType:'json',//返回的数据格式
+　　success:function(data){ //请求成功的回调函数
+　　　　alert("成功");
+　　},
+　　complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
+ 　　　　　 ajaxTimeoutTest.abort();
+　　　　　  alert("超时");
+　　　　}
+　　}
+});
+```
+
+函数写在complete中，因为无论success还是error，complete函数都会执行。
+
+
+### [Async](https://github.com/caolan/async)
+
+  
+
+> JS Ajax JQ 同步请求库
+
+[来源](https://segmentfault.com/q/1010000005789740)
+
+[中文文档](https://blog.csdn.net/marujunyy/article/details/8695205)
+
+
+### JS 刷新页面
+
+
+#### :small_blue_diamond:手动 reload
+``` js
+location.reload();
+```
+
+#### :small_blue_diamond:自动定时刷新
+页面自动刷新：把如下代码加入<head>区域中
+``` js
+<meta http-equiv="refresh" content="5">
+```
+
+
+### JS获取图片原始尺寸
+
+
+
+HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高
+
+``` javascript
+   let imgw = this.naturalWidth
+   let imgh = this.naturalHeight
+```
+
+
+### JQuery的高级选择器
+
+  
+
+``` javascript
+jQuery.parent(expr)           //找父元素
+jQuery.parents(expr)          //找到所有祖先元素，不限于父元素
+jQuery.children(expr)        //查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙
+jQuery.contents()            //查找下面的所有内容，包括节点和文本。
+jQuery.prev()                //查找上一个兄弟节点，不是所有的兄弟节点
+jQuery.prevAll()             //查找所有之前的兄弟节点
+jQuery.next()                //查找下一个兄弟节点，不是所有的兄弟节点
+jQuery.nextAll()             //查找所有之后的兄弟节点
+jQuery.siblings()            //查找兄弟节点，不分前后
+jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.filter(expr)是从初始的
+                               jQuery对象集合中筛选出一部分，而jQuery.find()的返回结果，不会有初始集中
+                               筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
+                               $("p").find("span")是从元素开始找，等于$("p span") */
+```
+
+
+### js取消事件冒泡
+
+  
+
+``` javascript
+$("form").bind("submit", function() { 
+　　　　return false;
+　　 }
+)
+```
+
+https://www.cnblogs.com/wangking/p/6113024.html#
+
+
+### JS判断字符串中是否含有Emoji表情
+
+
+如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
+原因如下：
+> 本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
+引自：https://blog.csdn.net/wang704987562/article/details/54093979
+
+JS判断：
+``` javascript
+function isEmojiCharacter(substring) {  
+    for ( var i = 0; i < substring.length; i++) {  
+        var hs = substring.charCodeAt(i);  
+        if (0xd800 <= hs && hs <= 0xdbff) {  
+            if (substring.length > 1) {  
+                var ls = substring.charCodeAt(i + 1);  
+                var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;  
+                if (0x1d000 <= uc && uc <= 0x1f77f) {  
+                    return true;  
+                }  
+            }  
+        } else if (substring.length > 1) {  
+            var ls = substring.charCodeAt(i + 1);  
+            if (ls == 0x20e3) {  
+                return true;  
+            }  
+        } else {  
+            if (0x2100 <= hs && hs <= 0x27ff) {  
+                return true;  
+            } else if (0x2B05 <= hs && hs <= 0x2b07) {  
+                return true;  
+            } else if (0x2934 <= hs && hs <= 0x2935) {  
+                return true;  
+            } else if (0x3297 <= hs && hs <= 0x3299) {  
+                return true;  
+            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030  
+                    || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b  
+                    || hs == 0x2b50) {  
+                return true;  
+            }  
+        }  
+    }  
+}
+```
+引自： https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&fps=1
+
+
+### Javascript使用字符串作为函数调用语句去调用
+
+  
+
+``` javascript
+function func_abc(){
+  alert('a');
+}
+var str = "func_abc";
+eval(str+"()");//执行func_abc()函数
+```
+
+引自：https://blog.csdn.net/qq_26222859/article/details/75285784
+
+
+### JS 数组排序
+
+  
+
+``` javascript
+var arr = [23, 9, 4, 78, 3];
+var compare = function (x, y) {//比较函数
+    if (x < y) {
+        return -1;
+    } else if (x > y) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+console.log(arr.sort(compare));    
+```
+
+
+### JS 判断浏览器类型
+
+
+ie那段参考自：https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html
+
+``` javascript 
+var userAgent = navigator.userAgent;
+var isOpera = userAgent.indexOf("Opera") > -1;
+
+function ievertion() {
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
+    var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+    if (isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        if (fIEVersion == 7) {
+            return 7;
+        } else if (fIEVersion == 8) {
+            return 8;
+        } else if (fIEVersion == 9) {
+            return 9;
+        } else if (fIEVersion == 10) {
+            return 10;
+        } else {
+            return 6; //IE版本<=7
+        }
+    } else if (isEdge) {
+        return 'edge'; //edge
+    } else if (isIE11) {
+        return 11; //IE11  
+    } else {
+        return -1; //不是ie浏览器
+    }
+}
+
+function isSafari() {
+    return userAgent.indexOf("Safari") > -1
+}
+
+function isFF() {
+    return userAgent.indexOf("Firefox") > -1
+}
+
+function isChrome() {
+    return userAgent.indexOf("Chrome") > -1
+}
+```
+
+
+### JavaScript 解除xhr获取header的限制
+
+  
+
+http://www.ruanyifeng.com/blog/2016/04/cors.html
+
+需要后端的配合
+
+
+### JS锚点跳转动画
+
+  
+
+一般我们的锚点都长这样
+``` html
+<a name="xxx" class="reference-link" target="_blank"></a>
+```
+
+因此我们就根据name去索引锚点
+``` javascript
+var $root = $('html, body')
+$('.markdown-toc a').click(function() {
+    $root.animate({
+        scrollTop: $('[name="xxx"]').offset().top
+    }, 600)
+})
+```
+
+
+### JS 监听元素任何变化
+
+
+[mutationobserver](http://javascript.ruanyifeng.com/dom/mutationobserver.html)
+[csdn blog](https://blog.csdn.net/u010419337/article/details/81474311)
+``` javascript
+let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+let observer = new MutationObserver(function(mutationList) {
+    setTimeout(function() {
+        // handle change
+    }, 250);
+})
+let article = $('#docpanel')[0]
+let options = {
+    'attributes': true,
+    'attributeOldValue': true
+};
+observer.observe(article, options);
+```
+
+
+### JQuery UI 拖拽
+
+
+https://www.runoob.com/jqueryui/example-draggable.html
+
+
+### JQuery GIF播放/暂停 JS-GIF库
+
+
+https://www.lanrenzhijia.com/pic/3719.html
+https://github.com/buzzfeed/libgif-js
+
+
+## :star: CSS
+
+### CSS media设备适配样式设置
+
+
+``` css
+/* 
+  针对iphone5 等320px的宽做出调整
+*/
+@media screen and (max-width: 320px){
+  .friendcard {
+    margin: 0 auto;
+    width: 15rem;
+  }
+}
+```
+
+
+### CSS 动画库animate.css
+
+
+介绍博客 : https://www.cnblogs.com/2050/p/3409129.html
+
+
+### CSS 去除按钮选中蓝色边框
+
+
+``` css
+.className {
+  border: none;
+}
+
+.className:focus{
+  outline: none;
+}
+```
+
+[参考](https://blog.csdn.net/qq_26222859/article/details/51516011)
+
+
+### CSS 元素失焦/虚化滤镜
+
+
+``` css
+#idname{
+   filter : blur(2px);
+}
+```
+
+
+
+### CSS 文字换行
+
+
+强制不换行
+``` css
+div{
+    white-space:nowrap;
+}
+```
+
+自动换行
+
+``` css
+div{ 
+    word-wrap: break-word; 
+    word-break: normal; 
+}
+```
+
+强制英文单词断开换行
+
+``` css
+div{
+    word-break:break-all;
+}
+```
+
+英文单词不断开换行
+
+``` css
+div {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+```
+
+### CSS placeholder居位设置
+
+
+``` css
+/* placeholder居中 */
+#postsearchtext:-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext:-ms-input-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-webkit-input-placeholder
+{
+    text-align: center;
+}
+```
+
+
+### CSS 文字超过元素长度显示省略号
+
+
+
+``` css
+div{
+  width: 75%;
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+}
+```
+
+
+### CSS 变量设置和获取
+
+
+#### :small_blue_diamond:设置
+``` css 
+:root{
+  --main-color: #4d4e53;
+  --main-bg: rgb(255, 255, 255);
+  --logo-border-color: rebeccapurple;
+
+  --header-height: 68px;
+  --content-padding: 10px 20px;
+
+  --base-line-height: 1.428571429;
+  --transition-duration: .35s;
+  --external-link: "external link";
+  --margin-top: calc(2vh + 20px);
+}
+```
+
+#### :small_blue_diamond:引用
+``` css
+a {
+  color: var(--foo);
+  text-decoration-color: var(--bar);
+}
+```
+
+参考 : http://www.ruanyifeng.com/blog/2017/05/css-variables.html
+
+
+### CSS 元素垂直/水平居中的骚操作
+
+
+> 垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;
+
+``` css
+#sidetoccontainer {
+  position: (不知道);
+  margin: auto;
+  bottom: 0;
+  top: 0;
+}
+```
+
+如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上
+
+``` css
+#father {
+   transform:translate(0,0)
+}
+```
+
+参考自知乎 : https://www.zhihu.com/question/24822927
+
+
+### CSS3 瀑布布局
+
+
+三列瀑布
+
+``` css
+.con {
+  column-count: 3;
+}
+
+.todo-card {
+  float: left;
+  width: 100%;
+}
+```
+
+
+### CSS 将DIV画成直角三角形
+
+
+教程: https://www.cnblogs.com/v-weiwang/p/5057588.html
+
+
+### CSS自定义滚动条样式
+
+
+https://segmentfault.com/a/1190000012800450
+
+特效是不会无故无效的，检查一下是不是开了inline
+
+下面这个是coding的滚动条样式：
+``` css
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+}
+*::-webkit-scrollbar-track {
+    background-color: rgba(216, 221, 228, 0.3);
+    border-radius: 10px; 
+}
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #76808e; 
+}
+*::-webkit-scrollbar-thumb:window-inactive {
+    background: #d8dde4; 
+}
+```
+
+
+### CSS inline-block 垂直居中
+
+
+https://www.cnblogs.com/olafff/p/5103775.html
+
+https://www.cnblogs.com/hutuzhu/p/4450850.html
+
+## :star: HTML/H5
+
+### textarea的字数限制
+
+
+``` html
+<textarea 
+  rows="5"  
+  maxlength="200" 
+  onchange="this.value=this.value.substring(0, 200)" 
+  onkeydown="this.value=this.value.substring(0, 200)" 
+  onkeyup="this.value=this.value.substring(0, 200)">
+</textarea>
+```
+
+事实上，有了maxLength属性，textarea的输入就已经会有限制了
+
+
+### input只允许输入数字
+
+
+``` html
+<input type="text" oninput="value=value.replace(/[^\d]/g,'')">
+```
+
+### 图片禁止拖拽
+
+在对应标签中添加如下属性即可。
+
+```javascript
+oncontextmenu = "return false;" //禁止鼠标右键
+ondragstart = "return false;" //禁止鼠标拖动
+onselectstart = "return false;" //文字禁止鼠标选中
+onselect = "document.selection.empty();" //禁止复制文本
+```
+
+例如：
+
+```html
+<img src="img/logo.jpg" ondragstart="return false;" />
+```
+
+> 作者：祁月笑
+> 链接：https://www.imooc.com/article/20121?block_id=tuijian_wz
+> 来源：慕课网
+
+## :star: JS/Node.js库
+
+### React Native 
+
+
+> 可以做桌面应用
+
+网址: https://proton-native.js.org/#/
+
+
+### Layui
+
+
+> 给后端用的前端框架
+
+[官网](http://www.layui.com)
+
+
+### wangEditor 轻量级前端富文本编辑器
+
+
+![image](https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png)
+
+[官网](http://www.wangeditor.com/)
+
+
+### KaTeX 最快的数学公式渲染库
+
+
+官方link : https://khan.github.io/KaTeX/function-support.html
+
+editor.md的Demo : http://pandao.github.io/editor.md/examples/katex.html
+
+![image](https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png)
+
+
+### JQuery 日期选择控件
+
+
+网站：https://xdsoft.net/jqplugins/datetimepicker/
+
+
+### JS 数据可视化
+
+有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
+https://www.zhihu.com/question/19929609/answer/383055223
+
+
+
+### JS工具库 lodash
+
+https://www.lodashjs.com/
+
+是一个一致性、模块化、高性能的 JavaScript 实用工具库。
+
+#### 为什么要用lodash？
+
+Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：
+
+- 遍历 array、object 和 string
+- 对值进行操作和检测
+- 创建符合功能的函数
+
+### Express
+
+https://www.expressjs.com.cn/
+
+基于 Node.js 平台，快速、开放、极简的 Web 开发框架。
+
+### systeminformation
+
+> Lightweight collection of 40+ functions to retrieve detailed hardware, system and OS information. For Linux, macOS, partial Windows, FreeBSD, OpenBSD, NetBSD and SunOS support
+
+https://systeminformation.io/
+
+### websocket - Node.js
+
+> Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
+
+https://github.com/websockets/ws
+
+### jieba中文分词 - Node.js
+
+#### 介绍
+
+`NodeJieba`是"结巴"中文分词的 Node.js 版本实现， 由[CppJieba](https://github.com/yanyiwu/cppjieba.git)提供底层分词算法实现， 是兼具高性能和易用性两者的 Node.js 中文分词组件。
+
+#### 特点
+
+- 词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。
+- 底层算法实现是C++，性能高效。
+- 支持多种分词算法，各种分词算法见[CppJieba](https://github.com/yanyiwu/cppjieba.git)的README.md介绍。
+- 支持动态补充词库。
+
+对实现细节感兴趣的请看如下博文：
+
+- [Node.js的C++扩展初体验之NodeJieba](http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html)
+- [由NodeJieba谈谈Node.js异步实现](http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html)
+
+https://github.com/yanyiwu/nodejieba
+
+### 文件变动检查库 chokidar
+
+https://github.com/paulmillr/chokidar
+
+#### Why？
+
+Node.js `fs.watch`:
+
+- Doesn't report filenames on MacOS.
+- Doesn't report events at all when using editors like Sublime on MacOS.
+- Often reports events twice.
+- Emits most changes as `rename`.
+- Does not provide an easy way to recursively watch file trees.
+
+Node.js `fs.watchFile`:
+
+- Almost as bad at event handling.
+- Also does not provide any recursive watching.
+- Results in high CPU utilization.
+
+Chokidar resolves these problems.
+
+Initially made for **[Brunch](https://brunch.io/)** (an ultra-swift web app build tool), it is now used in [Microsoft's Visual Studio Code](https://github.com/microsoft/vscode), [gulp](https://github.com/gulpjs/gulp/), [karma](https://karma-runner.github.io/), [PM2](https://github.com/Unitech/PM2), [browserify](http://browserify.org/), [webpack](https://webpack.github.io/), [BrowserSync](https://www.browsersync.io/), and [many others](https://www.npmjs.com/browse/depended/chokidar). It has proven itself in production environments.
+
+### 命令行执行库 execa
+
+https://github.com/sindresorhus/execa
+
+#### Why？
+
+This package improves [`child_process`](https://nodejs.org/api/child_process.html) methods with:
+
+- Promise interface.
+- [Strips the final newline](https://github.com/sindresorhus/execa#stripfinalnewline) from the output so you don't have to do `stdout.trim()`.
+- Supports [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) binaries cross-platform.
+- [Improved Windows support.](https://github.com/IndigoUnited/node-cross-spawn#why)
+- Higher max buffer. 100 MB instead of 200 KB.
+- [Executes locally installed binaries by name.](https://github.com/sindresorhus/execa#preferlocal)
+- [Cleans up spawned processes when the parent process dies.](https://github.com/sindresorhus/execa#cleanup)
+- [Get interleaved output](https://github.com/sindresorhus/execa#all) from `stdout` and `stderr` similar to what is printed on the terminal. [*(Async only)*](https://github.com/sindresorhus/execa#execasyncfile-arguments-options)
+- [Can specify file and arguments as a single string without a shell](https://github.com/sindresorhus/execa#execacommandcommand-options)
+- More descriptive errors.
+
+### nodemon
+
+https://github.com/remy/nodemon
+
+> nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+>
+> nodemon does **not** require *any* additional changes to your code or method of development. nodemon is a replacement wrapper for `node`. To use `nodemon`, replace the word `node` on the command line when executing your script.
 
 ## :star: 杂文/问题/乱说/黑科技/技巧
 
@@ -584,6 +1773,11 @@ https://blog.csdn.net/u011085172/article/details/77771173
 
 看到的讲得还阔以的: https://www.cnblogs.com/chengxiao/category/880910.html
 
+### windows下调试iOS网页设备
+
+
+https://www.jianshu.com/p/73715ee54712
+
 
 ## :star: 网站/软件/技术
 
@@ -697,1097 +1891,3 @@ Protocol buffers have many advantages over XML for serializing structured data. 
 - [ProtoBuf试用与JSON的比较](https://www.jianshu.com/p/b4b51b99e218)
 - [在python中使用ProtocolBuffers](https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw)
 - [Google Docs](https://developers.google.com/protocol-buffers/docs/overview)
-
-## :star: Java相关
-
-### Java8系列文章
-
-
-http://www.importnew.com/11908.html
-
-
-
-### 牛客 HttpServletRequest. getParameter
-
-
-![image](https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png)
-
->  编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1
-
-
-
-### Java Spliterator
-
-
-参考1: https://segmentfault.com/q/1010000007087438
-参考2: https://blog.csdn.net/lh513828570/article/details/56673804
-
-
-### 牛客 Integer的拆箱装箱
-
-
-![image](https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png)
-
-![image](https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png)
-
-- 基本数据类型和包装类==比较的时候, 基本数据类型会拆箱, 所以是值比较
-- valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用
-
-
-### 牛客 getDeclaredMethods()的范围
-
-
-![image](https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png)
-
-Doc:
-> public Method[] getDeclaredMethods()
->
-> Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, 
->
-> including public, protected, default (package) access, and private methods, **but excluding inherited methods**.
-
-
-
-### 牛客 sleep()和wait()
-
-
-![image](https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png)
-
-**Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行**
-
-##### :small_orange_diamond:共同点 ： 
-1. 他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 
-2. wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException
-如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
-需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。 
-
-##### :small_orange_diamond:不同点 ：  
-1. 每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 
-
-2. wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用
-
-3. sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常 
-
-4. sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。
-
-5. wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。
-
-
-### Java static方法中的变量是否存在线程安全问题
-
-我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。
-
-那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。
-
-因为，在多线程中使用同一个静态方法时，每个线程使用各自的实例字段(instance field)的副本，而共享一个静态字段(static field)。所以说，如果该静态方法不去操作一个静态成员，只在方法内部使用实例字段(instance field)，不会引起安全性问题。但是，如果该静态方法操作了一个静态字段，则需要静态方法中采用互斥访问的方式进行安全处理。
-
-``` java
-public class Test
-{
-   public static String hello(String str)
-   {
-       String tmp = "";
-       tmp = tmp + str;
-       return tmp;
-   }
-}
-```
-hello方法会不会有多线程安全问题呢？没有！
-
-> 静态方法如果没有使用静态变量，则没有线程安全问题。
->
-> 为什么呢？因为静态方法内声明的变量，每个线程调用时，都会新创建一份，而不会共用一个存储单元。比如这里的tmp,每个线程都会创建自己的一份，因此不会有线程安全问题。
->
-> 注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！
-
-
-### Java多线程参考
-
-
-https://www.cnblogs.com/yjd_hycf_space/p/7526608.html
-http://www.importnew.com/21136.html
-http://www.importnew.com/21089.html
-
-
-### Java字符串压缩
-
-
-``` java
-public class StringCompress {
-	public static final byte[] compress(String paramString) {
-		if (paramString == null)
-			return null;
-		ByteArrayOutputStream byteArrayOutputStream = null;
-		ZipOutputStream zipOutputStream = null;
-		byte[] arrayOfByte;
-		try {
-			byteArrayOutputStream = new ByteArrayOutputStream();
-			zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
-			zipOutputStream.putNextEntry(new ZipEntry("0"));
-			zipOutputStream.write(paramString.getBytes());
-			zipOutputStream.closeEntry();
-			arrayOfByte = byteArrayOutputStream.toByteArray();
-		} catch (IOException localIOException5) {
-			arrayOfByte = null;
-		} finally {
-			if (zipOutputStream != null)
-				try {
-					zipOutputStream.close();
-				} catch (IOException localIOException6) {
-			}
-			if (byteArrayOutputStream != null)
-				try {
-					byteArrayOutputStream.close();
-				} catch (IOException localIOException7) {
-			}
-		}
-		return arrayOfByte;
-	}
- 
-	@SuppressWarnings("unused")
-	public static final String decompress(byte[] paramArrayOfByte) {
-		if (paramArrayOfByte == null)
-			return null;
-		ByteArrayOutputStream byteArrayOutputStream = null;
-		ByteArrayInputStream byteArrayInputStream = null;
-		ZipInputStream zipInputStream = null;
-		String str;
-		try {
-			byteArrayOutputStream = new ByteArrayOutputStream();
-			byteArrayInputStream = new ByteArrayInputStream(paramArrayOfByte);
-			zipInputStream = new ZipInputStream(byteArrayInputStream);
-			ZipEntry localZipEntry = zipInputStream.getNextEntry();
-			byte[] arrayOfByte = new byte[1024];
-			int i = -1;
-			while ((i = zipInputStream.read(arrayOfByte)) != -1)
-				byteArrayOutputStream.write(arrayOfByte, 0, i);
-			str = byteArrayOutputStream.toString();
-		} catch (IOException localIOException7) {
-			str = null;
-		} finally {
-			if (zipInputStream != null)
-				try {
-					zipInputStream.close();
-				} catch (IOException localIOException8) {
-				}
-			if (byteArrayInputStream != null)
-				try {
-					byteArrayInputStream.close();
-				} catch (IOException localIOException9) {
-				}
-			if (byteArrayOutputStream != null)
-				try {
-					byteArrayOutputStream.close();
-				} catch (IOException localIOException10) {
-			}
-		}
-		return str;
-	}
-}
-```
-
-参考：https://blog.csdn.net/isea533/article/details/8199848
-
-### Servlet和CGI的区别
-
-#### CGI (Common Gateway Interface 公共网关接口)
-
-1. 定义：
-
-   CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。
-
-2. 功能：
-
-   绝大多数的CGI程序被用来解释处理杰自表单的输入信息，并在服 务器产生相应的处理，或将相应的信息反馈给浏览器。CGI程序使 网页具有交互功能。
-
-3. 运行环境：
-
-   CGI程序在UNIX操作系统上CERN或NCSA格式的服务器上运行。 在其它操作系统（如：windows NT及windows95等）的服务器上 也广泛地使用CGI程序，同时它也适用于各种类型机器。
-
-4. CGI处理步骤：
-
-   1. 通过Internet把用户请求送到服务器。
-   2. 服务器接收用户请求并交给CGI程序处理。
-   3. CGI程序把处理结果传送给服务器。
-   4. 服务器把结果送回到用户。
-
-#### Servlet
-
-Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。
-
-工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。
-
- 
-
-#### Java Servlet与CGI的比较
-
-与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。
-
-在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。
-
-在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。
-　　* 方便 　
-　　Servlet提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等。
-　　* 功能强大
-　　在Servlet中，许多使用传统CGI程序很难完成的任务都可以轻松地完成。例如，Servlet能够直接和Web服务器交互，而普通的CGI程序不能。Servlet还能够在各个程序之间共享数据，使得数据库连接池之类的功能很容易实现。
-　　* 可移植性好
-Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。
-
-转自：https://www.cnblogs.com/MuyouSome/p/3938203.html
-
-
-### Java HashMap好文
-
-
-源码解析：
-- https://www.cnblogs.com/xrq730/p/5030920.html
-- http://www.importnew.com/20386.html
-
-面试总结：
-- https://www.cnblogs.com/lchzls/p/6714474.html
-- https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&utm_campaign=client_share&app=news_article&utm_source=mobile_qq&iid=5056005857&utm_medium=toutiao_ios
-- https://blog.csdn.net/u012512634/article/details/72735183
-
-
-### fastjson 转时间
-
-
-在field上加注解，比如转ISO格式的时间
-``` java
-@JSONField(format="yyyy-MM-dd'T'HH:mm:ss'Z'")
-```
-
-
-### sun.misc.Unsafe
-
-
-- http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
-- https://blog.csdn.net/anLA_/article/details/78631026
-- https://blog.csdn.net/lvbaolin123/article/details/80527598
-
-
-### Java String pool
-
-
-[Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
-
-
-### Java 静态内部类和非静态内部类
-
-
-[Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
-
-
-### bridge method
-
-
-- https://cn.aliyun.com/jiaocheng/330720.html
-- https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods
-- https://www.cnblogs.com/zsg88/p/7588929.html
-- https://www.jianshu.com/p/250030ea9b28
-
-
-### finally & return
-
-
-- https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
-
-
-## :star: JS代码相关 
-
-### JS 获取元素样式
-
-
-``` javascript
-/*
-  此方法兼容IE
-  获取元素的样式：
-    参数1：元素
-    参数2：样式名
-*/
-function getStyle(obj, styleName) {
-  var cs = obj.currentStyle
-  if (cs === undefined) {
-    return getComputedStyle(obj, null)[styleName]
-  } else {
-    return cs[styleName]
-  }
-}
-```
-
-
-### JS 事件绑定兼容
-
-
-``` javascript
-/*
-  事件绑定兼容
-  首先要注意：
-    addEventListener() 方法中的this是我们绑定的事件
-    attachedEvent() 方法中的this是window
-
-  参数：
-    1、obj 要绑定的对象
-    2、eventStr 绑定事件 (不要on)
-    3、callback 回调函数
-*/
-function bindev(obj, eventStr, callback) {
-  if (obj.addEventListener) {
-    // 兼容大部分浏览器
-    obj.addEventListener(eventStr, callback, false)
-  } else {
-    /*
-      this是谁由调用方式决定
-      由于attachEvent()的默认this是window
-      为了统一this
-      我们可以用下面的方式来指定this
-      callback.apply(obj);
-    */
-    // IE
-    obj.attachEvent('on' + eventStr, function () {
-      callback.apply(obj)
-    })
-  }
-}
-```
-
-
-### JS 滚动动画
-
-
-``` javascript
-/*
-  md的滚动条
-  去到id为elementid的元素位置
-  速度是 500
-*/
-$('#md').animate({
-  scrollTop: $('#elementid').offset().top
-}, 500);
-```
-
-
-### JS 滚动动画改进
-
-
-``` javascript
-/*
-  防止到了位置之后再滚动到该元素 而offset改变
-*/
-function scrolltoelement(elementid) {
-  if ($('#' + elementid)[0].oset === undefined) {
-    $('#' + elementid)[0].oset = $('#' + elementid).offset().top
-  }
-  $('#md').animate({
-    scrollTop: $('#' + elementid)[0].oset
-  }, 500);
-}
-```
-
-
-### JS 检测页面滚动代码
-
-
-``` JavaScript
-$(window).scroll(function () {
-  var scrollTo = $(window).scrollTop(),
-  docHeight = $(document).height(),
-  windowHeight = $(window).height();
-  scrollPercent = (scrollTo / (docHeight-windowHeight)) * 100;
-  percent.innerText = scrollPercent
-})
-```
-
-
-### JS 小数
-
-  
-
-1. 丢弃小数部分,保留整数部分 `parseInt(7/2)` 
-
-2. 向上取整,有小数就整数部分加1 `Math.ceil(7/2) `
-
-3. 四舍五入 `Math.round(7/2) `
-
-4. 向下取整 `Math.floor(7/2)`
-
-5. 四舍五入 保留位数：
-``` javascript
-var num =2.446242342;
-num = num.toFixed(2); // 输出结果为 2.45
-```
-
-
-### JS CSS 动态添加动画效果
-
-  
-
-``` javascript
-  $('#searchtext').addClass('getnothing')
-  setTimeout(function () {
-    $('#searchtext').removeClass('getnothing')
-  }, 1100)
-```
-
-``` css
-.getnothing{
-  animation: getnothing 1s;
-}
-
-@keyframes getnothing{
-  50% {
-    background-color: rgba(247, 117, 117, 0.534);
-  }
-}
-```
-
-
-### JS 控制聚焦/失焦事件
-
-  
-
-``` js
-  $('#searchtext').focus(function () {
-    $('#scriptsearcher')[0].style.opacity = '1'
-  })
-  $('#searchtext').blur(function () {
-    $('#scriptsearcher')[0].style.opacity = '0.3'
-  })
-```
-
-
-### AJAX设置请求超时
-
-  
-
-``` js
-var ajaxTimeoutTest = $.ajax({
-　　url:'',  //请求的URL
-　　timeout : 1000, //超时时间设置，单位毫秒
-　　type : 'get',  //请求方式，get或post
-　　data :{},  //请求所传参数，json格式
-　　dataType:'json',//返回的数据格式
-　　success:function(data){ //请求成功的回调函数
-　　　　alert("成功");
-　　},
-　　complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
- 　　　　　 ajaxTimeoutTest.abort();
-　　　　　  alert("超时");
-　　　　}
-　　}
-});
-```
-
-函数写在complete中，因为无论success还是error，complete函数都会执行。
-
-
-### [Async](https://github.com/caolan/async)
-
-  
-
-> JS Ajax JQ 同步请求库
-
-[来源](https://segmentfault.com/q/1010000005789740)
-
-[中文文档](https://blog.csdn.net/marujunyy/article/details/8695205)
-
-
-### JS 刷新页面
-
-
-#### :small_blue_diamond:手动 reload
-``` js
-location.reload();
-```
-
-#### :small_blue_diamond:自动定时刷新
-页面自动刷新：把如下代码加入<head>区域中
-``` js
-<meta http-equiv="refresh" content="5">
-```
-
-
-### JS获取图片原始尺寸
-
-
-
-HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高
-
-``` javascript
-   let imgw = this.naturalWidth
-   let imgh = this.naturalHeight
-```
-
-
-### JQuery的高级选择器
-
-  
-
-``` javascript
-jQuery.parent(expr)           //找父元素
-jQuery.parents(expr)          //找到所有祖先元素，不限于父元素
-jQuery.children(expr)        //查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙
-jQuery.contents()            //查找下面的所有内容，包括节点和文本。
-jQuery.prev()                //查找上一个兄弟节点，不是所有的兄弟节点
-jQuery.prevAll()             //查找所有之前的兄弟节点
-jQuery.next()                //查找下一个兄弟节点，不是所有的兄弟节点
-jQuery.nextAll()             //查找所有之后的兄弟节点
-jQuery.siblings()            //查找兄弟节点，不分前后
-jQuery.find(expr)            /*跟jQuery.filter(expr)完全不一样，jQuery.filter(expr)是从初始的
-                               jQuery对象集合中筛选出一部分，而jQuery.find()的返回结果，不会有初始集中
-                               筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
-                               $("p").find("span")是从元素开始找，等于$("p span") */
-```
-
-
-### js取消事件冒泡
-
-  
-
-``` javascript
-$("form").bind("submit", function() { 
-　　　　return false;
-　　 }
-)
-```
-
-https://www.cnblogs.com/wangking/p/6113024.html#
-
-
-### JS判断字符串中是否含有Emoji表情
-
-
-如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
-原因如下：
-> 本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
-引自：https://blog.csdn.net/wang704987562/article/details/54093979
-
-JS判断：
-``` javascript
-function isEmojiCharacter(substring) {  
-    for ( var i = 0; i < substring.length; i++) {  
-        var hs = substring.charCodeAt(i);  
-        if (0xd800 <= hs && hs <= 0xdbff) {  
-            if (substring.length > 1) {  
-                var ls = substring.charCodeAt(i + 1);  
-                var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;  
-                if (0x1d000 <= uc && uc <= 0x1f77f) {  
-                    return true;  
-                }  
-            }  
-        } else if (substring.length > 1) {  
-            var ls = substring.charCodeAt(i + 1);  
-            if (ls == 0x20e3) {  
-                return true;  
-            }  
-        } else {  
-            if (0x2100 <= hs && hs <= 0x27ff) {  
-                return true;  
-            } else if (0x2B05 <= hs && hs <= 0x2b07) {  
-                return true;  
-            } else if (0x2934 <= hs && hs <= 0x2935) {  
-                return true;  
-            } else if (0x3297 <= hs && hs <= 0x3299) {  
-                return true;  
-            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030  
-                    || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b  
-                    || hs == 0x2b50) {  
-                return true;  
-            }  
-        }  
-    }  
-}
-```
-引自： https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&fps=1
-
-
-### Javascript使用字符串作为函数调用语句去调用
-
-  
-
-``` javascript
-function func_abc(){
-  alert('a');
-}
-var str = "func_abc";
-eval(str+"()");//执行func_abc()函数
-```
-
-引自：https://blog.csdn.net/qq_26222859/article/details/75285784
-
-
-### JS 数组排序
-
-  
-
-``` javascript
-var arr = [23, 9, 4, 78, 3];
-var compare = function (x, y) {//比较函数
-    if (x < y) {
-        return -1;
-    } else if (x > y) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-console.log(arr.sort(compare));    
-```
-
-
-### JS 判断浏览器类型
-
-
-ie那段参考自：https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html
-
-``` javascript 
-var userAgent = navigator.userAgent;
-var isOpera = userAgent.indexOf("Opera") > -1;
-
-function ievertion() {
-    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
-    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
-    var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
-    if (isIE) {
-        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-        reIE.test(userAgent);
-        var fIEVersion = parseFloat(RegExp["$1"]);
-        if (fIEVersion == 7) {
-            return 7;
-        } else if (fIEVersion == 8) {
-            return 8;
-        } else if (fIEVersion == 9) {
-            return 9;
-        } else if (fIEVersion == 10) {
-            return 10;
-        } else {
-            return 6; //IE版本<=7
-        }
-    } else if (isEdge) {
-        return 'edge'; //edge
-    } else if (isIE11) {
-        return 11; //IE11  
-    } else {
-        return -1; //不是ie浏览器
-    }
-}
-
-function isSafari() {
-    return userAgent.indexOf("Safari") > -1
-}
-
-function isFF() {
-    return userAgent.indexOf("Firefox") > -1
-}
-
-function isChrome() {
-    return userAgent.indexOf("Chrome") > -1
-}
-```
-
-
-### JavaScript 解除xhr获取header的限制
-
-  
-
-http://www.ruanyifeng.com/blog/2016/04/cors.html
-
-需要后端的配合
-
-
-### JS锚点跳转动画
-
-  
-
-一般我们的锚点都长这样
-``` html
-<a name="xxx" class="reference-link" target="_blank"></a>
-```
-
-因此我们就根据name去索引锚点
-``` javascript
-var $root = $('html, body')
-$('.markdown-toc a').click(function() {
-    $root.animate({
-        scrollTop: $('[name="xxx"]').offset().top
-    }, 600)
-})
-```
-
-
-### JS 监听元素任何变化
-
-
-[mutationobserver](http://javascript.ruanyifeng.com/dom/mutationobserver.html)
-[csdn blog](https://blog.csdn.net/u010419337/article/details/81474311)
-``` javascript
-let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
-let observer = new MutationObserver(function(mutationList) {
-    setTimeout(function() {
-        // handle change
-    }, 250);
-})
-let article = $('#docpanel')[0]
-let options = {
-    'attributes': true,
-    'attributeOldValue': true
-};
-observer.observe(article, options);
-```
-
-
-### JQuery UI 拖拽
-
-
-https://www.runoob.com/jqueryui/example-draggable.html
-
-
-### JQuery GIF播放/暂停 JS-GIF库
-
-
-https://www.lanrenzhijia.com/pic/3719.html
-https://github.com/buzzfeed/libgif-js
-
-
-## :star: CSS相关
-
-### CSS media设备适配样式设置
-
-
-``` css
-/* 
-  针对iphone5 等320px的宽做出调整
-*/
-@media screen and (max-width: 320px){
-  .friendcard {
-    margin: 0 auto;
-    width: 15rem;
-  }
-}
-```
-
-
-### CSS 动画库animate.css
-
-
-介绍博客 : https://www.cnblogs.com/2050/p/3409129.html
-
-
-### CSS 去除按钮选中蓝色边框
-
-
-``` css
-.className {
-  border: none;
-}
-
-.className:focus{
-  outline: none;
-}
-```
-
-[参考](https://blog.csdn.net/qq_26222859/article/details/51516011)
-
-
-### CSS 元素失焦/虚化滤镜
-
-
-``` css
-#idname{
-   filter : blur(2px);
-}
-```
-
-
-
-### CSS 文字换行
-
-
-强制不换行
-``` css
-div{
-    white-space:nowrap;
-}
-```
-
-自动换行
-
-``` css
-div{ 
-    word-wrap: break-word; 
-    word-break: normal; 
-}
-```
-
-强制英文单词断开换行
-
-``` css
-div{
-    word-break:break-all;
-}
-```
-
-英文单词不断开换行
-
-``` css
-div {
-    word-break: keep-all;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}
-```
-
-### CSS placeholder居位设置
-
-
-``` css
-/* placeholder居中 */
-#postsearchtext:-moz-placeholder
-{
-  text-align: center;
-}
-#postsearchtext::-moz-placeholder
-{
-  text-align: center;
-}
-#postsearchtext:-ms-input-placeholder
-{
-  text-align: center;
-}
-#postsearchtext::-webkit-input-placeholder
-{
-    text-align: center;
-}
-```
-
-
-### CSS 文字超过元素长度显示省略号
-
-
-
-``` css
-div{
-  width: 75%;
-  overflow:hidden; 
-  white-space:nowrap; 
-  text-overflow:ellipsis;
-}
-```
-
-
-### CSS 变量设置和获取
-
-
-#### :small_blue_diamond:设置
-``` css 
-:root{
-  --main-color: #4d4e53;
-  --main-bg: rgb(255, 255, 255);
-  --logo-border-color: rebeccapurple;
-
-  --header-height: 68px;
-  --content-padding: 10px 20px;
-
-  --base-line-height: 1.428571429;
-  --transition-duration: .35s;
-  --external-link: "external link";
-  --margin-top: calc(2vh + 20px);
-}
-```
-
-#### :small_blue_diamond:引用
-``` css
-a {
-  color: var(--foo);
-  text-decoration-color: var(--bar);
-}
-```
-
-参考 : http://www.ruanyifeng.com/blog/2017/05/css-variables.html
-
-
-### CSS 元素垂直/水平居中的骚操作
-
-
-> 垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;
-
-``` css
-#sidetoccontainer {
-  position: (不知道);
-  margin: auto;
-  bottom: 0;
-  top: 0;
-}
-```
-
-如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上
-
-``` css
-#father {
-   transform:translate(0,0)
-}
-```
-
-参考自知乎 : https://www.zhihu.com/question/24822927
-
-
-### CSS3 瀑布布局
-
-
-三列瀑布
-
-``` css
-.con {
-  column-count: 3;
-}
-
-.todo-card {
-  float: left;
-  width: 100%;
-}
-```
-
-
-### CSS 将DIV画成直角三角形
-
-
-教程: https://www.cnblogs.com/v-weiwang/p/5057588.html
-
-
-### CSS自定义滚动条样式
-
-
-https://segmentfault.com/a/1190000012800450
-
-特效是不会无故无效的，检查一下是不是开了inline
-
-下面这个是coding的滚动条样式：
-``` css
-*::-webkit-scrollbar {
-    width: 8px;
-    height: 8px; 
-}
-*::-webkit-scrollbar-track {
-    background-color: rgba(216, 221, 228, 0.3);
-    border-radius: 10px; 
-}
-*::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #76808e; 
-}
-*::-webkit-scrollbar-thumb:window-inactive {
-    background: #d8dde4; 
-}
-```
-
-
-### CSS inline-block 垂直居中
-
-
-https://www.cnblogs.com/olafff/p/5103775.html
-
-https://www.cnblogs.com/hutuzhu/p/4450850.html
-
-
-## :star: JS工具/框架相关
-
-### React Native 
-
-
-> 可以做桌面应用
-
-网址: https://proton-native.js.org/#/
-
-
-### Layui
-
-
-> 给后端用的前端框架
-
-[官网](http://www.layui.com)
-
-
-### wangEditor 轻量级前端富文本编辑器
-
-
-![image](https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png)
-
-[官网](http://www.wangeditor.com/)
-
-
-### KaTeX 最快的数学公式渲染库
-
-
-官方link : https://khan.github.io/KaTeX/function-support.html
-
-editor.md的Demo : http://pandao.github.io/editor.md/examples/katex.html
-
-![image](https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png)
-
-
-### JQuery 日期选择控件
-
-
-网站：https://xdsoft.net/jqplugins/datetimepicker/
-
-
-### JS 数据可视化
-
-
-有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
-https://www.zhihu.com/question/19929609/answer/383055223
-
-
-### windows下调试iOS网页设备
-
-
-https://www.jianshu.com/p/73715ee54712
-
-
-## :star: HTML/H5
-
-### textarea的字数限制
-
-
-``` html
-<textarea 
-  rows="5"  
-  maxlength="200" 
-  onchange="this.value=this.value.substring(0, 200)" 
-  onkeydown="this.value=this.value.substring(0, 200)" 
-  onkeyup="this.value=this.value.substring(0, 200)">
-</textarea>
-```
-
-事实上，有了maxLength属性，textarea的输入就已经会有限制了
-
-
-### input只允许输入数字
-
-
-``` html
-<input type="text" oninput="value=value.replace(/[^\d]/g,'')">
-```
-
-### 图片禁止拖拽
-
-在对应标签中添加如下属性即可。
-
-```javascript
-oncontextmenu = "return false;" //禁止鼠标右键
-ondragstart = "return false;" //禁止鼠标拖动
-onselectstart = "return false;" //文字禁止鼠标选中
-onselect = "document.selection.empty();" //禁止复制文本
-```
-
-例如：
-
-```html
-<img src="img/logo.jpg" ondragstart="return false;" />
-```
-
-> 作者：祁月笑
-> 链接：https://www.imooc.com/article/20121?block_id=tuijian_wz
-> 来源：慕课网
-
