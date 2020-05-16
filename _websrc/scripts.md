@@ -1224,6 +1224,38 @@ https://github.com/remy/nodemon
 >
 > nodemon does **not** require *any* additional changes to your code or method of development. nodemon is a replacement wrapper for `node`. To use `nodemon`, replace the word `node` on the command line when executing your script.
 
+
+
+### pm2
+
+https://pm2.keymetrics.io/docs/usage/quick-start/
+
+> PM2 is a daemon process manager that will help you manage and keep your application online. 
+>
+> Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.
+
+#### Windows设置pm2开机启动服务
+
+https://www.jianshu.com/p/6cb523c0ced8
+
+https://www.npmjs.com/package/pm2-windows-service
+
+#### windows下fork模式弹出窗口问题
+
+https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292
+
+```javascript
+module.exports = {
+  apps : [{
+    name: 'winmon',
+    script: 'index.js',
+    watch: false,
+    instances  : 1,
+    exec_mode: 'cluster'
+  }],
+};
+```
+
 ## :star: 杂文/问题/乱说/黑科技/技巧
 
 ### 关于 github oauth app
