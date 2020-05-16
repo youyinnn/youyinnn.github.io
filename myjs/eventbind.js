@@ -77,7 +77,7 @@ $(function() {
             this.id === 'tags') {
             return false
         }
-        if (!$('#sidetoccontainer').hasClass('tochide') && !location.pathname.startsWith('/resume/')) {
+        if (!$('#sidetoccontainer').hasClass('tochide') && !location.pathname.startsWith('/resume/') && !location.pathname.startsWith('/scripts/')) {
             hidesidetoc()
         }
         if (!$('#all_tags').hasClass('myhide') && location.pathname.startsWith('/articles/')) {

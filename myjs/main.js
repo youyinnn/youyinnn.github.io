@@ -183,7 +183,9 @@ function new_render_md(regular_toc, abbrlink) {
         rmclass(md, 'myhide')
         adclass(md, 'myshow')
         $(md).addClass('animate__animated animate__fadeIn')
-        scrollToHead(hash.replace('#', ''))
+        if (!location.pathname.startsWith('/scripts/')) {
+            scrollToHead(hash.replace('#', ''))
+        }
     }, 200)
 }
 
@@ -867,7 +869,7 @@ function setarrow() {
         link.innerText = '+'
         adclass(link, 'panchorlink')
         appendc(e, link)
-        let url = location.origin + location.pathname + '#' + encodeURI($(e)[0].id)
+        let url = location.origin + location.pathname + '?hash=' + encodeURI($(e)[0].id)
         $(e)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(event) {
             popmsg('Copy link successed.')
