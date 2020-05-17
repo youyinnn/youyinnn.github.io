@@ -12,7 +12,9 @@ date: 2020-5-8 17:0:15
 
 
 
-This article is talking about some basic grammar rules of python, for quick search while I might use python.
+The series of \<Python Note\> is talking about some basic grammar rules of python, for quick search while I might use python.
+
+The first article will introduces  `print()` and `input()`, the comment syntax, variables assignment and some basic types in python.
 
 ## A
 
