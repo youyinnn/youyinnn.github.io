@@ -12,7 +12,7 @@ date: 2020-5-10 14:19:14
 
 
 
-Flow control syntax, Function definition, Data structures of python.
+Flow control syntax, Function definition, Modules.
 
 ## C
 
@@ -485,4 +485,3 @@ What's more, we can define function in `sound/effects/__init__.py`，file and us
 import sound.effects as effects
 effects.do()
 ```
-
