@@ -558,7 +558,7 @@ After global assignment: nonlocal spam
 In global scope: global spam</code></pre>
 <p>Note how the <em>local</em> assignment (which is default) didn’t change <em>scope_test*’s binding of *spam</em>. The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> assignment changed <em>scope_test*’s binding of *spam</em>, and the <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> assignment changed the module-level binding.</p>
 
-          <h4 id="3c55de80">Define A Class</h4><pre><code class="language-python">class Person:
+          <h4 id="1b7f2302">Defining A Class</h4><pre><code class="language-python">class Person:
     &quot;&quot;&quot;here is __doc__ content\
     &quot;&quot;&quot;
 
@@ -658,6 +658,40 @@ for c in Str(&#39;abcde&#39;):
     print(c, end=&#39; &#39;)
 print()
 # a b c d e</code></pre>
+
+          <h4 id="a8f3d403">Printing Instances</h4><p>Example:</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, name, age):
+        super().__init__()
+        self.__name = name
+        self.__age = age
+
+    def __repr__(self):
+        # we use json form so that it can be recreated in another application
+        return &#39;{{name: {}, age: {}}}&#39;.format(self.__name, self.__age)
+
+    def __str__(self):
+        return &#39;Person name: {}, age: {}&#39;.format(self.__name, self.__age)
+
+p = Person(&#39;Jack&#39;, 12)
+print(p)
+print(repr(p))</code></pre>
+<p>Output:</p>
+<pre><code class="language-console">Person name: Jack, age: 12
+{name: Jack, age: 12}</code></pre>
+<p>And if we remove the implementation of <code>__repr__()</code>, it will pinrt:</p>
+<pre><code class="language-console">Person name: Jack, age: 12
+&lt;__main__.Person object at 0x000001F84F086630&gt;</code></pre>
+<p>There are two ways in python that we can print a readable string of a instance -- to implement the <code>__repr__()</code> or <code>__str__()</code> .</p>
+<p>Technically, there is no different between these two methods, but we should follow some rules when we implement them:</p>
+<blockquote>
+<p>For <code>__repr__</code>:</p>
+<p>Called by the <a href="https://docs.python.org/3/library/functions.html#repr"><code>repr()</code></a> built-in function to compute the “official” string representation of an object. If at all possible, this should look like a valid Python expression that could be used to recreate an object with the same value (given an appropriate environment). If this is not possible, a string of the form <code>&lt;...some useful description...&gt;</code> should be returned. The return value must be a string object. If a class defines <a href="https://docs.python.org/3/reference/datamodel.html#object.__repr__"><code>__repr__()</code></a> but not <a href="https://docs.python.org/3/reference/datamodel.html#object.__str__"><code>__str__()</code></a>, then <a href="https://docs.python.org/3/reference/datamodel.html#object.__repr__"><code>__repr__()</code></a> is also used when an “informal” string representation of instances of that class is required.</p>
+</blockquote>
+<blockquote>
+<p>For <code>__str__</code>:</p>
+<p>Called by <a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str(object)</code></a> and the built-in functions <a href="https://docs.python.org/3/library/functions.html#format"><code>format()</code></a> and <a href="https://docs.python.org/3/library/functions.html#print"><code>print()</code></a> to compute the “informal” or nicely printable string representation of an object. The return value must be a <a href="https://docs.python.org/3/library/stdtypes.html#textseq">string</a> object.</p>
+</blockquote>
 
           <h4 id="bf23088a">More On Private Attributes</h4><p>It is clear that we set an attribute to private for safely visitation, but it make the attribute visitation syntactically more complicated.</p>
 <p>We can use <code>@property</code> and  <code>@attr.setter</code> decorators to make it simple. </p>

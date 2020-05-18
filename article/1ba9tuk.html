@@ -347,6 +347,65 @@ Annotations: {&#39;ham&#39;: &lt;class &#39;str&#39;&gt;, &#39;return&#39;: &lt;
 Arguments: spam eggs
 &#39;spam and eggs&#39;</code></pre>
 
+          <h4 id="16aa9f6b">Generator Function</h4><p>This part is a bit advancing, I recommend reading this after reading the <strong>(EF)</strong> chapter.</p>
+
+          <h5 id="8968caed">Generator Expression</h5><p>A generator expression is a compact generator notation in parentheses:</p>
+<pre><code class="language-python">generator_expression ::=  &quot;(&quot; expression comp_for &quot;)&quot;</code></pre>
+<p>In the part of Data Structures, we have learned creating a list by using expression:</p>
+<pre><code class="language-python">l = [x * 2 for x in range(3)]</code></pre>
+<p>Actually, it was generator expression that repersenting an iterating process which generate a list:</p>
+<pre><code class="language-python">g = (x * 2 for x in range(3))
+l = [g]</code></pre>
+<p>And it act like an iterator object:</p>
+<pre><code class="language-python">g = (x ** x for x in range(5))
+
+for i in range(6):
+    print(next(g))</code></pre>
+<p>Will get:</p>
+<pre><code class="language-console">1
+1
+4
+27
+256
+Traceback (most recent call last):
+  File &quot;/MyPython/practice/class/generator.py&quot;, line 24, in &lt;module&gt;
+    print(next(g))
+StopIteration</code></pre>
+
+          <h5 id="61a9cc98"><code>yield</code> statement</h5><p>We can turn a generator expression into a function by using <code>yield</code> statement:</p>
+<pre><code class="language-python">g = (x ** x for x in range(5))
+# is equivilant to 
+def g():
+    for i in range(5)
+        x = i ** i
+        yield x
+g = g() # it has to be call</code></pre>
+
+          <h6 id="d7595e6c">More Examples</h6><pre><code class="language-python">def f():
+    try:
+        yield 1
+        try:
+            yield 2
+            1/0
+            yield 3  # never get here
+        except ZeroDivisionError:
+            yield 4
+            yield 5
+            raise
+        except:
+            yield 6
+        yield 7     # the &quot;raise&quot; above stops this
+    except:
+        yield 8
+    yield 9
+    try:
+        x = 12
+    finally:
+       yield 10
+    yield 11
+print list(f()) # [1, 2, 4, 5, 8, 9, 10, 11]</code></pre>
+<p>refer to: <a href="https://www.python.org/dev/peps/pep-0255/#example">https://www.python.org/dev/peps/pep-0255/#example</a></p>
+
           <h2 id="1d1bc97e">D</h2>
           <h3 id="8c3d1cf9">Modules</h3><p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <strong><em>imported</em></strong> into other modules or into the <em>main</em> module.</p>
 <p>Before that, we should introduce a global variable  named <code>__name__</code> which can be used to identify whether a <code>.py</code> file is <strong>run directly</strong> from command line or <strong>is imported</strong> to other file as a module.</p>
