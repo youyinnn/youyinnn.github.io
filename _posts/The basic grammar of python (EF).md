@@ -455,7 +455,7 @@ Note how the *local* assignment (which is default) didn’t change *scope_test*�
 
 
 
-#### Define A Class
+#### Defining A Class
 
 ``` python
 class Person:
@@ -582,6 +582,57 @@ for c in Str('abcde'):
 print()
 # a b c d e
 ```
+
+#### Printing Instances
+
+Example:
+
+``` python
+class Person:
+    def __init__(self, name, age):
+        super().__init__()
+        self.__name = name
+        self.__age = age
+
+    def __repr__(self):
+        # we use json form so that it can be recreated in another application
+        return '{{name: {}, age: {}}}'.format(self.__name, self.__age)
+
+    def __str__(self):
+        return 'Person name: {}, age: {}'.format(self.__name, self.__age)
+
+p = Person('Jack', 12)
+print(p)
+print(repr(p))
+```
+
+Output:
+
+``` console
+Person name: Jack, age: 12
+{name: Jack, age: 12}
+```
+
+And if we remove the implementation of `__repr__()`, it will pinrt:
+
+``` console
+Person name: Jack, age: 12
+<__main__.Person object at 0x000001F84F086630>
+```
+
+There are two ways in python that we can print a readable string of a instance -- to implement the `__repr__()` or `__str__()` .
+
+Technically, there is no different between these two methods, but we should follow some rules when we implement them:
+
+> For `__repr__`:
+>
+> Called by the [`repr()`](https://docs.python.org/3/library/functions.html#repr) built-in function to compute the “official” string representation of an object. If at all possible, this should look like a valid Python expression that could be used to recreate an object with the same value (given an appropriate environment). If this is not possible, a string of the form `<...some useful description...>` should be returned. The return value must be a string object. If a class defines [`__repr__()`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) but not [`__str__()`](https://docs.python.org/3/reference/datamodel.html#object.__str__), then [`__repr__()`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) is also used when an “informal” string representation of instances of that class is required.
+
+> For `__str__`:
+>
+> Called by [`str(object)`](https://docs.python.org/3/library/stdtypes.html#str) and the built-in functions [`format()`](https://docs.python.org/3/library/functions.html#format) and [`print()`](https://docs.python.org/3/library/functions.html#print) to compute the “informal” or nicely printable string representation of an object. The return value must be a [string](https://docs.python.org/3/library/stdtypes.html#textseq) object.
+
+
 
 #### More On Private Attributes
 
@@ -759,4 +810,3 @@ try:
 finally:
     print('Goodbye, world!')
 ```
-

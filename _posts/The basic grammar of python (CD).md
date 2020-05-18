@@ -355,6 +355,98 @@ Arguments: spam eggs
 
 
 
+#### Generator Function
+
+This part is a bit advancing, I recommend reading this after reading the **(EF)** chapter.
+
+##### Generator Expression
+
+A generator expression is a compact generator notation in parentheses:
+
+```python
+generator_expression ::=  "(" expression comp_for ")"
+```
+
+In the part of Data Structures, we have learned creating a list by using expression:
+
+``` python
+l = [x * 2 for x in range(3)]
+```
+
+Actually, it was generator expression that repersenting an iterating process which generate a list:
+
+``` python
+g = (x * 2 for x in range(3))
+l = [g]
+```
+
+And it act like an iterator object:
+
+``` python
+g = (x ** x for x in range(5))
+
+for i in range(6):
+    print(next(g))
+```
+
+Will get:
+
+``` console
+1
+1
+4
+27
+256
+Traceback (most recent call last):
+  File "/MyPython/practice/class/generator.py", line 24, in <module>
+    print(next(g))
+StopIteration
+```
+
+##### `yield` statement
+
+We can turn a generator expression into a function by using `yield` statement:
+
+``` python
+g = (x ** x for x in range(5))
+# is equivilant to 
+def g():
+    for i in range(5)
+    	x = i ** i
+        yield x
+g = g() # it has to be call
+```
+
+###### More Examples
+
+``` python
+def f():
+    try:
+        yield 1
+        try:
+            yield 2
+            1/0
+            yield 3  # never get here
+        except ZeroDivisionError:
+            yield 4
+            yield 5
+            raise
+        except:
+            yield 6
+        yield 7     # the "raise" above stops this
+    except:
+        yield 8
+    yield 9
+    try:
+        x = 12
+    finally:
+       yield 10
+    yield 11
+print list(f()) # [1, 2, 4, 5, 8, 9, 10, 11]
+```
+
+refer to: https://www.python.org/dev/peps/pep-0255/#example
+
 ## D
 
 ### Modules
