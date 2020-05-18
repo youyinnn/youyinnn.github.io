@@ -5,30 +5,41 @@ const wordsegmentation = require('./wordsegmentation')
 const {
     crc32
 } = require('crc')
-const dayjs = require('dayjs')
 
 let postspath = path.join(__dirname, '..', '_posts')
 let postfilenames = fs.readdirSync(postspath)
 
 const tokws = wordsegmentation.rawStringToKeywords
+const tokwsfs = wordsegmentation.rawStringToKeywordsForSearch
 
-let records = []
-for (pn of postfilenames) {
-    let raw = fs.readFileSync(path.join(postspath, pn), {
-        encoding: 'utf-8'
-    })
-    records.push({
-        objectID: crc32(pn).toString(36),
-        title: pn,
-        keywords: tokws(raw),
-    })
+function getRecords(handle) {
+    var records = []
+    for (pn of postfilenames) {
+        let raw = fs.readFileSync(path.join(postspath, pn), {
+            encoding: 'utf-8'
+        })
+        records.push({
+            objectID: crc32(pn).toString(36),
+            title: pn,
+            keywords: handle(raw),
+        })
+    }
+    return records
+}
+
+function getKeywordRecords() {
+    return getRecords(tokws)
+}
+
+function getSearchKeywordRecords() {
+    return getRecords(tokwsfs)
 }
 
 // For the default version
 const algoliasearch = require('algoliasearch');
 
 function saveAllRecords(set) {
-    let rs
+    let records = getKeywordRecords()
     let client
     let index
     client = algoliasearch(set.appId, set.apiKey)
@@ -67,8 +78,13 @@ function saveAllRecords(set) {
     })
 }
 
-saveAllRecords({
-    appId: process.argv[2],
-    apiKey: process.argv[3],
-    index: process.argv[4],
-})
+if (process.argv.length > 2) {
+    saveAllRecords({
+        appId: process.argv[2],
+        apiKey: process.argv[3],
+        index: process.argv[4],
+    })
+}
+
+module.exports.getKeywordRecords = getKeywordRecords
+module.exports.getSearchKeywordRecords = getSearchKeywordRecords
