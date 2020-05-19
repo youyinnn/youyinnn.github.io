@@ -198,7 +198,7 @@ function get_articles() {
     $('#blog_statistic_body').addClass('myhide')
     // from localStorage
     let pcbl = sessionStorage.getItem('pcbl')
-    handlemetadata(yaml.load(pcbl))
+    handlemetadata(jsyaml.load(pcbl))
 }
 
 function scrollToHead(id) {
@@ -966,9 +966,9 @@ function syncreihandle2metadata(rei) {
         metadata.categories.push('unclassfied')
         metadata.comments = true
         metadata.date = rei.created_at
-        metadata = yaml.dump(metadata)
+        metadata = jsyaml.dump(metadata)
     }
-    metadata = yaml.load(metadata)
+    metadata = jsyaml.load(metadata)
     metadata.char_count = rei.body.length
     metadata.number = rei.number
     metadata.created_at = rei.created_at
@@ -1096,7 +1096,7 @@ function handlemetadata(metadata) {
 
 function seriesorderhandle(abbrlink, psname, sbody, obody) {
     if (psname !== undefined) {
-        let ses = yaml.load(sbody)
+        let ses = jsyaml.load(sbody)
         for (let i = 0; i < ses.length; i++) {
             if (ses[i].se === psname) {
                 showseries(abbrlink, ses[i].ps, psname)
@@ -1183,7 +1183,7 @@ function jumpToAnchor() {
 }
 
 function getmetadatafromabbrlink(abbrlink) {
-    let articlesMetadate = yaml.load(sessionStorage.getItem('pcbl'))
+    let articlesMetadate = jsyaml.load(sessionStorage.getItem('pcbl'))
     return articlesMetadate.find((v) => {
         return v.abbrlink === abbrlink
     })

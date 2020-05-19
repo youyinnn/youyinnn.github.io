@@ -120,7 +120,7 @@ function get_article(number) {
             })
         }, timeoutfunc)
         let url3 = api_url + '/repos/' + username + '/' + blog_repo + '/issues?labels=yconf&state=closed'
-        let psname = yaml.load(gethexofrontmatter(re.body)).series
+        let psname = jsyaml.load(gethexofrontmatter(re.body)).series
         let pseries = localStorage.getItem('pseries')
         let pod = localStorage.getItem('pod')
         if (pseries !== null && pod !== null) {
@@ -218,8 +218,8 @@ function get_all_articles(page, all) {
             }
 
             // dump obj to yaml
-            series = yaml.dump(series.reverse())
-            newarticlemetadata = yaml.dump(newarticlemetadata)
+            series = jsyaml.dump(series.reverse())
+            newarticlemetadata = jsyaml.dump(newarticlemetadata)
 
             // store article_cache
             localStorage.setItem('pcbl', JSON.stringify(pcbl))

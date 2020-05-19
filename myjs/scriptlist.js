@@ -12,12 +12,11 @@ for (let i = 0; i < resourcesList.length; i++) {
 }
 
 var after = [
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/jquery.hotkeys.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/bootstrap.bundle.min.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/dayjs.min.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/js/yaml.min.js',
-    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/lib/clipboard.js',
+    'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    'https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js',
+    'https://cdn.jsdelivr.net/npm/dayjs@1.8.27/dayjs.min.js',
+    'https://cdn.jsdelivr.net/npm/js-yaml@3.13.1/dist/js-yaml.min.js',
+    'https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
     'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
     
