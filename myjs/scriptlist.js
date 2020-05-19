@@ -7,7 +7,7 @@ for (let i = 0; i < resourcesList.length; i++) {
     if (location.hostname !== 'youyinnn.github.io') {
         resourcesList[i] = '/resources/' + resourcesList[i]
     } else {
-        resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/resources/' + resourcesList[i]
+        resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/' + resourcesList[i]
     }
 }
 
@@ -17,7 +17,7 @@ var after = [
     'https://cdn.jsdelivr.net/npm/dayjs@1.8.27/dayjs.min.js',
     'https://cdn.jsdelivr.net/npm/js-yaml@3.13.1/dist/js-yaml.min.js',
     'https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js',
-    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js',
+    'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js',
     'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
     
     '/myjs/tool.js',
