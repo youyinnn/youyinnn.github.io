@@ -20,6 +20,8 @@ var after = [
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js',
     'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
     
+    'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/jquery.hotkeys.js',
+    
     '/myjs/tool.js',
     '/myjs/githubapi.js',
     '/myjs/eventbind.js',
