@@ -872,7 +872,7 @@ function setarrow() {
         let url = location.origin + location.pathname + '?hash=' + encodeURI($(e)[0].id)
         $(e)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(event) {
-            popmsg('Copy link successed.')
+            popmsg('Copy link succeeded.')
             event.clearSelection();
         }).on('error', function(event) {
             popmsg('Copy link failed.')
@@ -1228,4 +1228,16 @@ function scriptblock() {
         }
     })
     wrapblock()
+}
+
+function get_friendlinked() {
+    let keys = Object.keys(friendslink)
+    for (key of keys) {
+        let ditem = c('a')
+        adclass(ditem, 'dropdown-item')
+        ditem.href = friendslink[key]
+        ditem.target = '_blank'
+        ditem.innerText = key.replace(/\n|\r\n/g, '')
+        appendc(fldd, ditem)
+    }
 }

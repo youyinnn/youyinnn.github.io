@@ -102,7 +102,7 @@ $(function() {
                 let url = location.origin + location.pathname + '?hash=' + `${e.id}_${root[0].getAttribute('_target_sb')}`
                 $(e).attr('data-clipboard-text', url)
                 new ClipboardJS(e).on('success', function(event) {
-                    popmsg('Copy link successed.')
+                    popmsg('Copy link succeeded.')
                     event.clearSelection()
                 }).on('error', function(event) {
                     popmsg('Copy link failed.')

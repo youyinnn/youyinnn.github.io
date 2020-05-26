@@ -52,7 +52,7 @@ function saveAllRecords(set) {
                 objectIDs
             }) => {
                 console.log(JSON.stringify({
-                    code: 'successed',
+                    code: 'succeeded',
                     objectIDs: objectIDs
                 }))
             }).catch(function(err) {
