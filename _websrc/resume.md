@@ -403,7 +403,7 @@
     - 重载页面
     - 运行script
 
-#### :star:6.[yexo](https://github.com/youyinnn/yexo)
+#### :star:6. [yexo](https://github.com/youyinnn/yexo)
 
 一个客户端，用于管理我的博客内容，基于git、Electron、Nodejs
 
@@ -414,7 +414,7 @@
 3. 发布script和todo
 4. 友链管理
 
-#### :star:7.[Wox.Plugin.NiceTranslator](https://github.com/youyinnn/Wox.Plugin.NiceTranslator)
+#### :star:7. [Wox.Plugin.NiceTranslator](https://github.com/youyinnn/Wox.Plugin.NiceTranslator)
 
 给Wox写的翻译插件：
 

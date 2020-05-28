@@ -28,6 +28,10 @@ var cachedcleaner
 var cachedcleanerLock = false
 var hash = ''
 
+
+var username = 'youyinnn'
+var blog_repo = username + '.github.io'
+
 if (location.search !== '') {
     let params = location.search.replace('?','').split('&')
     for (p of params) {
