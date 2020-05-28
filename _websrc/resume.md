@@ -403,6 +403,25 @@
     - 重载页面
     - 运行script
 
+#### :star:6.[yexo](https://github.com/youyinnn/yexo)
+
+一个客户端，用于管理我的博客内容，基于git、Electron、Nodejs
+
+功能有：
+
+1. 文章管理
+2. 分类、标签管理
+3. 发布script和todo
+4. 友链管理
+
+#### :star:7.[Wox.Plugin.NiceTranslator](https://github.com/youyinnn/Wox.Plugin.NiceTranslator)
+
+给Wox写的翻译插件：
+
+- Python写的
+- 中英文词典（用Python爬必应
+- 句子多国语言互译（用百度翻译API
+
 
 
 <p align="center" style="font-size: 1.2rem;font-weight: bold; ">感谢参阅 :heart: </p>

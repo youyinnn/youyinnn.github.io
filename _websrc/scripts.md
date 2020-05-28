@@ -1923,3 +1923,26 @@ Protocol buffers have many advantages over XML for serializing structured data. 
 - [ProtoBuf试用与JSON的比较](https://www.jianshu.com/p/b4b51b99e218)
 - [在python中使用ProtocolBuffers](https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw)
 - [Google Docs](https://developers.google.com/protocol-buffers/docs/overview)
+
+
+
+### CLU & TUI?
+
+#### Command-line Utilities
+
+- Accept arguments at invocation, execute, and terminate
+- Examples:`ls`,`grep`,`git`
+- Python's built-in argparse module or Click have this well covered
+
+#### Text User Interfaces
+
+- Full-screen applications more like a GUI but in a terminal
+- Examples: `vim`, `emacs`, `top`
+- Python's built-in curses module can be used for this.
+
+#### Python TUI Libaraies
+
+- [Python Prompt ToolKit](https://python-prompt-toolkit.readthedocs.io/en/stable/index.html)
+- [asciimatics](https://github.com/peterbrittain/asciimatics)
+- [Urwid](http://urwid.org/index.html#)
+
