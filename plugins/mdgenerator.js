@@ -73,6 +73,34 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     })
 }
 
+function mds2html(sourceFilePaths, outputFilePath, sourceMdStrHandleFunc) {
+    let sourceMdStr = ''
+    for (sourceFilePath of sourceFilePaths) {
+        sourceMdStr += fs.readFileSync(sourceFilePath, {
+            encoding: 'utf-8'
+        })
+
+        sourceMdStr += '\n'
+    }
+    if (html === undefined) {
+        html = fs.readFileSync(htmlPath, {
+            encoding: 'utf-8'
+        })
+    }
+    if (sourceMdStrHandleFunc !== undefined) {
+        sourceMdStr = sourceMdStrHandleFunc(sourceMdStr)
+    }
+    let htmlStr = marked(sourceMdStr, {
+        gfm: true,
+        breaks: true,
+        renderer: renderer
+    })
+    let html2 = html.split('{{% md %}}')
+    fs.writeFileSync(outputFilePath, html2[0] + htmlStr + html2[1], {
+        encoding: 'utf-8'
+    })
+}
+
 // articles 2 htm
 let postsrs = fs.readdirSync(postsPath)
 let articlesMetadata = new Array()
@@ -199,8 +227,16 @@ md2html(
 
 // scripts
 renderer.image = imgscroll
-md2html(
-    path.join(websrcPath, 'scripts.md'),
+
+scriptsDir = fs.readdirSync(path.join(websrcPath, 'scripts'))
+scriptsMds = []
+for (md of scriptsDir) {
+    if (md.endsWith('.md'))
+        scriptsMds.push(path.join(websrcPath, 'scripts', md))
+}
+
+mds2html(
+    scriptsMds,
     path.join(__dirname, '..', 'scripts', 'index.html')
 )
 renderer.image = originalImgFunc
