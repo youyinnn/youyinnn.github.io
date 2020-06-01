@@ -130,41 +130,169 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h2 id="901080fc">⭐ Open API</h2>
-          <h3 id="785cf12a">一些开放的API</h3><p><a href="https://github.com/public-apis/public-apis">github repo public-apis</a></p>
+          <h2 id="e0164eb1">⭐ CSS</h2>
+          <h3 id="fcdf37c">CSS media设备适配样式设置</h3><pre><code class="language-css">/* 
+  针对iphone5 等320px的宽做出调整
+*/
+@media screen and (max-width: 320px){
+  .friendcard {
+    margin: 0 auto;
+    width: 15rem;
+  }
+}</code></pre>
 
-          <h3 id="1adb6e15">用来查询IP的API</h3><ul>
-<li><p>国内：</p>
-<ul>
-<li><p>搜狐</p>
-<ul>
-<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson">http://pv.sohu.com/cityjson</a></li>
-<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson?ie=utf-8">http://pv.sohu.com/cityjson?ie=utf-8</a></li>
-<li><a href="https://link.jianshu.com?t=http://txt.go.sohu.com/ip/soip">http://txt.go.sohu.com/ip/soip</a></li>
-</ul>
-<p>其中有一个支持https，但是有跨域问题，如果使用<code>&lt;script&gt;</code>标签解决跨域的话，它的代码是直接注入的，而不是返回的callback，而且因为没有正式的开放信息，只是搜出来的，不知道什么时候就下线了</p>
-</li>
-<li><p>某大佬个人维护的免费开放接口平台：<a href="https://github.com/MZCretin/RollToolsApi%EF%BC%8C%E6%9C%89https%EF%BC%8C%E6%9C%89%E8%B7%A8%E5%9F%9F%EF%BC%8C%E4%BD%86%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%98%AF%E4%B8%AA%E4%BA%BA%E7%BB%B4%E6%8A%A4%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%95%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%8C%E8%99%BD%E7%84%B6%E6%9C%89%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%91%E6%8E%A7%EF%BC%9B%E4%B9%9F%E6%98%AF%E7%AC%AC%E4%B8%80%E7%89%88%E8%B7%B3%E8%BD%ACipcheck">https://github.com/MZCretin/RollToolsApi，有https，有跨域，但是因为是个人维护，还是怕不稳定，虽然有小程序监控；也是第一版跳转ipcheck</a></p>
-</li>
-<li><p>百度地图开放API：<a href="http://lbs.baidu.com/index.php?title=webapi/ip-api">http://lbs.baidu.com/index.php?title=webapi/ip-api</a></p>
-<p>虽然跨域，但是好在有callback，不用怕注入，而且平台是正式开放的；虽然文档里没有callback的说明，我还是搜出来了，确实接口支持callback，这也是我现在使用的跳转ipcheck</p>
-</li>
-</ul>
-</li>
-<li><p>国外：</p>
-<ul>
-<li><a href="https://ip-api.com/">ip-api</a> https要会员</li>
-<li><a href="https://freegeoip.app/">freegeoip</a> 还行 免费https 每小时1万5的请求 比下面的快</li>
-<li><a href="https://ipinfo.io/developers#https-ssl">ipinfo</a> https免费 速度慢点</li>
-</ul>
-</li>
-</ul>
+          <h3 id="f3a01765">CSS 动画库animate.css</h3><p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
 
-          <h3 id="1acca55a">英语相关API</h3>
-          <h4 id="5e9190b4">语法检查</h4><ul>
-<li><a href="https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&amp;utm_source=link&amp;utm_campaign=api_documentation">Ginger</a></li>
-<li><a href="https://www.grammarly.com/">Grammarly</a></li>
-</ul>
+          <h3 id="33cb2bb">CSS 去除按钮选中蓝色边框</h3><pre><code class="language-css">.className {
+  border: none;
+}
+
+.className:focus{
+  outline: none;
+}</code></pre>
+<p><a href="https://blog.csdn.net/qq_26222859/article/details/51516011">参考</a></p>
+
+          <h3 id="29c6ab2d">CSS 元素失焦/虚化滤镜</h3><pre><code class="language-css">#idname{
+   filter : blur(2px);
+}</code></pre>
+
+          <h3 id="6d2dccd6">CSS 文字换行</h3><p>强制不换行</p>
+<pre><code class="language-css">div{
+    white-space:nowrap;
+}</code></pre>
+<p>自动换行</p>
+<pre><code class="language-css">div{ 
+    word-wrap: break-word; 
+    word-break: normal; 
+}</code></pre>
+<p>强制英文单词断开换行</p>
+<pre><code class="language-css">div{
+    word-break:break-all;
+}</code></pre>
+<p>英文单词不断开换行</p>
+<pre><code class="language-css">div {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}</code></pre>
+
+          <h3 id="c7a79f21">CSS placeholder居位设置</h3><pre><code class="language-css">/* placeholder居中 */
+#postsearchtext:-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-moz-placeholder
+{
+  text-align: center;
+}
+#postsearchtext:-ms-input-placeholder
+{
+  text-align: center;
+}
+#postsearchtext::-webkit-input-placeholder
+{
+    text-align: center;
+}</code></pre>
+
+          <h3 id="7d05a88c">CSS 文字超过元素长度显示省略号</h3><pre><code class="language-css">div{
+  width: 75%;
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+}</code></pre>
+
+          <h3 id="2ebdce57">CSS 变量设置和获取</h3>
+          <h4 id="a79484d1">🔹设置</h4><pre><code class="language-css">:root{
+  --main-color: #4d4e53;
+  --main-bg: rgb(255, 255, 255);
+  --logo-border-color: rebeccapurple;
+
+  --header-height: 68px;
+  --content-padding: 10px 20px;
+
+  --base-line-height: 1.428571429;
+  --transition-duration: .35s;
+  --external-link: &quot;external link&quot;;
+  --margin-top: calc(2vh + 20px);
+}</code></pre>
+
+          <h4 id="5f8a827d">🔹引用</h4><pre><code class="language-css">a {
+  color: var(--foo);
+  text-decoration-color: var(--bar);
+}</code></pre>
+<p>参考 : <a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></p>
+
+          <h3 id="ed565198">CSS 元素垂直/水平居中的骚操作</h3><blockquote>
+<p>垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;</p>
+</blockquote>
+<pre><code class="language-css">#sidetoccontainer {
+  position: (不知道);
+  margin: auto;
+  bottom: 0;
+  top: 0;
+}</code></pre>
+<p>如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上</p>
+<pre><code class="language-css">#father {
+   transform:translate(0,0)
+}</code></pre>
+<p>参考自知乎 : <a href="https://www.zhihu.com/question/24822927">https://www.zhihu.com/question/24822927</a></p>
+
+          <h3 id="7bec9ad2">CSS3 瀑布布局</h3><p>三列瀑布</p>
+<pre><code class="language-css">.con {
+  column-count: 3;
+}
+
+.todo-card {
+  float: left;
+  width: 100%;
+}</code></pre>
+
+          <h3 id="2bb92814">CSS 将DIV画成直角三角形</h3><p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
+
+          <h3 id="99626f0b">CSS自定义滚动条样式</h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
+<p>特效是不会无故无效的，检查一下是不是开了inline</p>
+<p>下面这个是coding的滚动条样式：</p>
+<pre><code class="language-css">*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+}
+*::-webkit-scrollbar-track {
+    background-color: rgba(216, 221, 228, 0.3);
+    border-radius: 10px; 
+}
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #76808e; 
+}
+*::-webkit-scrollbar-thumb:window-inactive {
+    background: #d8dde4; 
+}</code></pre>
+
+          <h3 id="49362e2b">CSS inline-block 垂直居中</h3><p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
+<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html">https://www.cnblogs.com/hutuzhu/p/4450850.html</a></p>
+
+          <h2 id="eb50f8f3">⭐ HTML</h2>
+          <h3 id="f0b8c0fc">textarea的字数限制</h3><pre><code class="language-html">&lt;textarea 
+  rows=&quot;5&quot;  
+  maxlength=&quot;200&quot; 
+  onchange=&quot;this.value=this.value.substring(0, 200)&quot; 
+  onkeydown=&quot;this.value=this.value.substring(0, 200)&quot; 
+  onkeyup=&quot;this.value=this.value.substring(0, 200)&quot;&gt;
+&lt;/textarea&gt;</code></pre>
+<p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
+
+          <h3 id="a98d310b">input只允许输入数字</h3><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
+
+          <h3 id="63eb696d">图片禁止拖拽</h3><p>在对应标签中添加如下属性即可。</p>
+<pre><code class="language-javascript">oncontextmenu = &quot;return false;&quot; //禁止鼠标右键
+ondragstart = &quot;return false;&quot; //禁止鼠标拖动
+onselectstart = &quot;return false;&quot; //文字禁止鼠标选中
+onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></pre>
+<p>例如：</p>
+<pre><code class="language-html">&lt;img src=&quot;img/logo.jpg&quot; ondragstart=&quot;return false;&quot; /&gt;</code></pre>
+<blockquote>
+<p>作者：祁月笑<br>链接：<a href="https://www.imooc.com/article/20121?block_id=tuijian_wz">https://www.imooc.com/article/20121?block_id=tuijian_wz</a><br>来源：慕课网</p>
+</blockquote>
 
           <h2 id="5e71f39e">⭐ Java</h2>
           <h3 id="7605b6dd">Java8系列文章</h3><p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
@@ -496,6 +624,184 @@
 <li><a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></li>
 </ul>
 
+          <h2 id="cfc00906">⭐ JS&amp;Node.js库</h2>
+          <h3 id="43261fef">React Native</h3><blockquote>
+<p>可以做桌面应用</p>
+</blockquote>
+<p>网址: <a href="https://proton-native.js.org/#/">https://proton-native.js.org/#/</a></p>
+
+          <h3 id="22e8c11c">Layui</h3><blockquote>
+<p>给后端用的前端框架</p>
+</blockquote>
+<p><a href="http://www.layui.com">官网</a></p>
+
+          <h3 id="b8c736ca">wangEditor 轻量级前端富文本编辑器</h3><p>
+        <div class="_showpic_8ad89b50 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png class="_pic_8ad89b50 hidepic" picId="8ad89b50"></img>
+        <script>
+            {
+                let imgself8ad89b50s = document.getElementsByClassName('_pic_8ad89b50')
+                let showpicbtn8ad89b50s = document.getElementsByClassName('_showpic_8ad89b50')
+                let isInViewPortOfTwo8ad89b50 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself8ad89b50s[0].getBoundingClientRect() && imgself8ad89b50s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself8ad89b50s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo8ad89b50)
+                            isInViewPortOfTwo8ad89b50 = null
+                        }
+                        for (el of showpicbtn8ad89b50s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo8ad89b50)
+            }
+        </script>
+    </p>
+<p><a href="http://www.wangeditor.com/">官网</a></p>
+
+          <h3 id="8ae5ab14">KaTeX 最快的数学公式渲染库</h3><p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
+<p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
+<p>
+        <div class="_showpic_602564a showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png class="_pic_602564a hidepic" picId="602564a"></img>
+        <script>
+            {
+                let imgself602564as = document.getElementsByClassName('_pic_602564a')
+                let showpicbtn602564as = document.getElementsByClassName('_showpic_602564a')
+                let isInViewPortOfTwo602564a = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself602564as[0].getBoundingClientRect() && imgself602564as[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself602564as) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo602564a)
+                            isInViewPortOfTwo602564a = null
+                        }
+                        for (el of showpicbtn602564as) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo602564a)
+            }
+        </script>
+    </p>
+
+          <h3 id="618a1fd3">JQuery 日期选择控件</h3><p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
+
+          <h3 id="4e143e42">JS 数据可视化</h3><p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎<br><a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
+
+          <h3 id="478cc989">html2canvas 页面输出为canvas</h3><p>超级棒的插件：<br>教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a><br>hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
+
+          <h4 id="29a099ee">🔹生成的canvas没有图片的坑：</h4><p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。<br>开启html2canvas的useCORS配置项。即作如下设置： </p>
+<pre><code class="language-javascript">var opts = {useCORS: true};
+html2canvas(element, opts);</code></pre>
+
+          <h3 id="e19a33bb">JS工具库 lodash</h3><p><a href="https://www.lodashjs.com/">https://www.lodashjs.com/</a></p>
+<p>是一个一致性、模块化、高性能的 JavaScript 实用工具库。</p>
+
+          <h4 id="3fc3d751">为什么要用lodash？</h4><p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：</p>
+<ul>
+<li>遍历 array、object 和 string</li>
+<li>对值进行操作和检测</li>
+<li>创建符合功能的函数</li>
+</ul>
+
+          <h3 id="b265a9d9">Express</h3><p><a href="https://www.expressjs.com.cn/">https://www.expressjs.com.cn/</a></p>
+<p>基于 Node.js 平台，快速、开放、极简的 Web 开发框架。</p>
+
+          <h3 id="1847ccff">systeminformation</h3><blockquote>
+<p>Lightweight collection of 40+ functions to retrieve detailed hardware, system and OS information. For Linux, macOS, partial Windows, FreeBSD, OpenBSD, NetBSD and SunOS support</p>
+</blockquote>
+<p><a href="https://systeminformation.io/">https://systeminformation.io/</a></p>
+
+          <h3 id="3106e4cf">websocket - Node.js</h3><blockquote>
+<p>Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js</p>
+</blockquote>
+<p><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a></p>
+
+          <h3 id="653b6e40">jieba中文分词 - Node.js</h3>
+          <h4 id="f182458c">介绍</h4><p><code>NodeJieba</code>是&quot;结巴&quot;中文分词的 Node.js 版本实现， 由<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>提供底层分词算法实现， 是兼具高性能和易用性两者的 Node.js 中文分词组件。</p>
+
+          <h4 id="c2a93fb9">特点</h4><ul>
+<li>词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。</li>
+<li>底层算法实现是C++，性能高效。</li>
+<li>支持多种分词算法，各种分词算法见<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>的README.md介绍。</li>
+<li>支持动态补充词库。</li>
+</ul>
+<p>对实现细节感兴趣的请看如下博文：</p>
+<ul>
+<li><a href="http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html">Node.js的C++扩展初体验之NodeJieba</a></li>
+<li><a href="http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html">由NodeJieba谈谈Node.js异步实现</a></li>
+</ul>
+<p><a href="https://github.com/yanyiwu/nodejieba">https://github.com/yanyiwu/nodejieba</a></p>
+
+          <h3 id="b4c46fd8">文件变动检查库 chokidar</h3><p><a href="https://github.com/paulmillr/chokidar">https://github.com/paulmillr/chokidar</a></p>
+
+          <h4 id="fe4e33b4">Why？</h4><p>Node.js <code>fs.watch</code>:</p>
+<ul>
+<li>Doesn&#39;t report filenames on MacOS.</li>
+<li>Doesn&#39;t report events at all when using editors like Sublime on MacOS.</li>
+<li>Often reports events twice.</li>
+<li>Emits most changes as <code>rename</code>.</li>
+<li>Does not provide an easy way to recursively watch file trees.</li>
+</ul>
+<p>Node.js <code>fs.watchFile</code>:</p>
+<ul>
+<li>Almost as bad at event handling.</li>
+<li>Also does not provide any recursive watching.</li>
+<li>Results in high CPU utilization.</li>
+</ul>
+<p>Chokidar resolves these problems.</p>
+<p>Initially made for <strong><a href="https://brunch.io/">Brunch</a></strong> (an ultra-swift web app build tool), it is now used in <a href="https://github.com/microsoft/vscode">Microsoft&#39;s Visual Studio Code</a>, <a href="https://github.com/gulpjs/gulp/">gulp</a>, <a href="https://karma-runner.github.io/">karma</a>, <a href="https://github.com/Unitech/PM2">PM2</a>, <a href="http://browserify.org/">browserify</a>, <a href="https://webpack.github.io/">webpack</a>, <a href="https://www.browsersync.io/">BrowserSync</a>, and <a href="https://www.npmjs.com/browse/depended/chokidar">many others</a>. It has proven itself in production environments.</p>
+
+          <h3 id="1dac18ab">命令行执行库 execa</h3><p><a href="https://github.com/sindresorhus/execa">https://github.com/sindresorhus/execa</a></p>
+
+          <h4 id="fe4e33b4">Why？</h4><p>This package improves <a href="https://nodejs.org/api/child_process.html"><code>child_process</code></a> methods with:</p>
+<ul>
+<li>Promise interface.</li>
+<li><a href="https://github.com/sindresorhus/execa#stripfinalnewline">Strips the final newline</a> from the output so you don&#39;t have to do <code>stdout.trim()</code>.</li>
+<li>Supports <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> binaries cross-platform.</li>
+<li><a href="https://github.com/IndigoUnited/node-cross-spawn#why">Improved Windows support.</a></li>
+<li>Higher max buffer. 100 MB instead of 200 KB.</li>
+<li><a href="https://github.com/sindresorhus/execa#preferlocal">Executes locally installed binaries by name.</a></li>
+<li><a href="https://github.com/sindresorhus/execa#cleanup">Cleans up spawned processes when the parent process dies.</a></li>
+<li><a href="https://github.com/sindresorhus/execa#all">Get interleaved output</a> from <code>stdout</code> and <code>stderr</code> similar to what is printed on the terminal. <a href="https://github.com/sindresorhus/execa#execasyncfile-arguments-options"><em>(Async only)</em></a></li>
+<li><a href="https://github.com/sindresorhus/execa#execacommandcommand-options">Can specify file and arguments as a single string without a shell</a></li>
+<li>More descriptive errors.</li>
+</ul>
+
+          <h3 id="d1636061">nodemon</h3><p><a href="https://github.com/remy/nodemon">https://github.com/remy/nodemon</a></p>
+<blockquote>
+<p>nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.</p>
+<p>nodemon does <strong>not</strong> require <em>any</em> additional changes to your code or method of development. nodemon is a replacement wrapper for <code>node</code>. To use <code>nodemon</code>, replace the word <code>node</code> on the command line when executing your script.</p>
+</blockquote>
+
+          <h3 id="58d41294">pm2</h3><p><a href="https://pm2.keymetrics.io/docs/usage/quick-start/">https://pm2.keymetrics.io/docs/usage/quick-start/</a></p>
+<blockquote>
+<p>PM2 is a daemon process manager that will help you manage and keep your application online. </p>
+<p>Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.</p>
+</blockquote>
+
+          <h4 id="bc872767">Windows设置pm2开机启动服务</h4><p><a href="https://www.jianshu.com/p/6cb523c0ced8">https://www.jianshu.com/p/6cb523c0ced8</a></p>
+<p><a href="https://www.npmjs.com/package/pm2-windows-service">https://www.npmjs.com/package/pm2-windows-service</a></p>
+
+          <h4 id="56eb12c5">windows下fork模式弹出窗口问题</h4><p><a href="https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292">https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292</a></p>
+<pre><code class="language-javascript">module.exports = {
+  apps : [{
+    name: &#39;winmon&#39;,
+    script: &#39;index.js&#39;,
+    watch: false,
+    instances  : 1,
+    exec_mode: &#39;cluster&#39;
+  }],
+};</code></pre>
+
           <h2 id="f9a9b55f">⭐ JS</h2>
           <h3 id="e56333e6">JS 获取元素样式</h3><pre><code class="language-javascript">/*
   此方法兼容IE
@@ -795,371 +1101,51 @@ observer.observe(article, options);</code></pre>
 
           <h3 id="82211645">JQuery GIF播放/暂停 JS-GIF库</h3><p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a><br><a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
 
-          <h2 id="e0164eb1">⭐ CSS</h2>
-          <h3 id="fcdf37c">CSS media设备适配样式设置</h3><pre><code class="language-css">/* 
-  针对iphone5 等320px的宽做出调整
-*/
-@media screen and (max-width: 320px){
-  .friendcard {
-    margin: 0 auto;
-    width: 15rem;
-  }
-}</code></pre>
+          <h2 id="429273a2">⭐ MySQL</h2>
+          <h3 id="96abc5d3">MySQL用户管理</h3><p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a><br><a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
 
-          <h3 id="f3a01765">CSS 动画库animate.css</h3><p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
+          <h3 id="df55037a">MySQL自己更新自己</h3><p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
+<p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
 
-          <h3 id="33cb2bb">CSS 去除按钮选中蓝色边框</h3><pre><code class="language-css">.className {
-  border: none;
-}
+          <h2 id="901080fc">⭐ Open API</h2>
+          <h3 id="785cf12a">一些开放的API</h3><p><a href="https://github.com/public-apis/public-apis">github repo public-apis</a></p>
 
-.className:focus{
-  outline: none;
-}</code></pre>
-<p><a href="https://blog.csdn.net/qq_26222859/article/details/51516011">参考</a></p>
-
-          <h3 id="29c6ab2d">CSS 元素失焦/虚化滤镜</h3><pre><code class="language-css">#idname{
-   filter : blur(2px);
-}</code></pre>
-
-          <h3 id="6d2dccd6">CSS 文字换行</h3><p>强制不换行</p>
-<pre><code class="language-css">div{
-    white-space:nowrap;
-}</code></pre>
-<p>自动换行</p>
-<pre><code class="language-css">div{ 
-    word-wrap: break-word; 
-    word-break: normal; 
-}</code></pre>
-<p>强制英文单词断开换行</p>
-<pre><code class="language-css">div{
-    word-break:break-all;
-}</code></pre>
-<p>英文单词不断开换行</p>
-<pre><code class="language-css">div {
-    word-break: keep-all;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}</code></pre>
-
-          <h3 id="c7a79f21">CSS placeholder居位设置</h3><pre><code class="language-css">/* placeholder居中 */
-#postsearchtext:-moz-placeholder
-{
-  text-align: center;
-}
-#postsearchtext::-moz-placeholder
-{
-  text-align: center;
-}
-#postsearchtext:-ms-input-placeholder
-{
-  text-align: center;
-}
-#postsearchtext::-webkit-input-placeholder
-{
-    text-align: center;
-}</code></pre>
-
-          <h3 id="7d05a88c">CSS 文字超过元素长度显示省略号</h3><pre><code class="language-css">div{
-  width: 75%;
-  overflow:hidden; 
-  white-space:nowrap; 
-  text-overflow:ellipsis;
-}</code></pre>
-
-          <h3 id="2ebdce57">CSS 变量设置和获取</h3>
-          <h4 id="a79484d1">🔹设置</h4><pre><code class="language-css">:root{
-  --main-color: #4d4e53;
-  --main-bg: rgb(255, 255, 255);
-  --logo-border-color: rebeccapurple;
-
-  --header-height: 68px;
-  --content-padding: 10px 20px;
-
-  --base-line-height: 1.428571429;
-  --transition-duration: .35s;
-  --external-link: &quot;external link&quot;;
-  --margin-top: calc(2vh + 20px);
-}</code></pre>
-
-          <h4 id="5f8a827d">🔹引用</h4><pre><code class="language-css">a {
-  color: var(--foo);
-  text-decoration-color: var(--bar);
-}</code></pre>
-<p>参考 : <a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></p>
-
-          <h3 id="ed565198">CSS 元素垂直/水平居中的骚操作</h3><blockquote>
-<p>垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;</p>
-</blockquote>
-<pre><code class="language-css">#sidetoccontainer {
-  position: (不知道);
-  margin: auto;
-  bottom: 0;
-  top: 0;
-}</code></pre>
-<p>如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上</p>
-<pre><code class="language-css">#father {
-   transform:translate(0,0)
-}</code></pre>
-<p>参考自知乎 : <a href="https://www.zhihu.com/question/24822927">https://www.zhihu.com/question/24822927</a></p>
-
-          <h3 id="7bec9ad2">CSS3 瀑布布局</h3><p>三列瀑布</p>
-<pre><code class="language-css">.con {
-  column-count: 3;
-}
-
-.todo-card {
-  float: left;
-  width: 100%;
-}</code></pre>
-
-          <h3 id="2bb92814">CSS 将DIV画成直角三角形</h3><p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
-
-          <h3 id="99626f0b">CSS自定义滚动条样式</h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
-<p>特效是不会无故无效的，检查一下是不是开了inline</p>
-<p>下面这个是coding的滚动条样式：</p>
-<pre><code class="language-css">*::-webkit-scrollbar {
-    width: 8px;
-    height: 8px; 
-}
-*::-webkit-scrollbar-track {
-    background-color: rgba(216, 221, 228, 0.3);
-    border-radius: 10px; 
-}
-*::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #76808e; 
-}
-*::-webkit-scrollbar-thumb:window-inactive {
-    background: #d8dde4; 
-}</code></pre>
-
-          <h3 id="49362e2b">CSS inline-block 垂直居中</h3><p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
-<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html">https://www.cnblogs.com/hutuzhu/p/4450850.html</a></p>
-
-          <h2 id="49d1ee3d">⭐ HTML/H5</h2>
-          <h3 id="f0b8c0fc">textarea的字数限制</h3><pre><code class="language-html">&lt;textarea 
-  rows=&quot;5&quot;  
-  maxlength=&quot;200&quot; 
-  onchange=&quot;this.value=this.value.substring(0, 200)&quot; 
-  onkeydown=&quot;this.value=this.value.substring(0, 200)&quot; 
-  onkeyup=&quot;this.value=this.value.substring(0, 200)&quot;&gt;
-&lt;/textarea&gt;</code></pre>
-<p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
-
-          <h3 id="a98d310b">input只允许输入数字</h3><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
-
-          <h3 id="63eb696d">图片禁止拖拽</h3><p>在对应标签中添加如下属性即可。</p>
-<pre><code class="language-javascript">oncontextmenu = &quot;return false;&quot; //禁止鼠标右键
-ondragstart = &quot;return false;&quot; //禁止鼠标拖动
-onselectstart = &quot;return false;&quot; //文字禁止鼠标选中
-onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></pre>
-<p>例如：</p>
-<pre><code class="language-html">&lt;img src=&quot;img/logo.jpg&quot; ondragstart=&quot;return false;&quot; /&gt;</code></pre>
-<blockquote>
-<p>作者：祁月笑<br>链接：<a href="https://www.imooc.com/article/20121?block_id=tuijian_wz">https://www.imooc.com/article/20121?block_id=tuijian_wz</a><br>来源：慕课网</p>
-</blockquote>
-
-          <h2 id="dc90aaa3">⭐ JS/Node.js库</h2>
-          <h3 id="43261fef">React Native</h3><blockquote>
-<p>可以做桌面应用</p>
-</blockquote>
-<p>网址: <a href="https://proton-native.js.org/#/">https://proton-native.js.org/#/</a></p>
-
-          <h3 id="22e8c11c">Layui</h3><blockquote>
-<p>给后端用的前端框架</p>
-</blockquote>
-<p><a href="http://www.layui.com">官网</a></p>
-
-          <h3 id="b8c736ca">wangEditor 轻量级前端富文本编辑器</h3><p>
-        <div class="_showpic_8ad89b50 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png class="_pic_8ad89b50 hidepic" picId="8ad89b50"></img>
-        <script>
-            {
-                let imgself8ad89b50s = document.getElementsByClassName('_pic_8ad89b50')
-                let showpicbtn8ad89b50s = document.getElementsByClassName('_showpic_8ad89b50')
-                let isInViewPortOfTwo8ad89b50 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself8ad89b50s[0].getBoundingClientRect() && imgself8ad89b50s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself8ad89b50s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo8ad89b50)
-                            isInViewPortOfTwo8ad89b50 = null
-                        }
-                        for (el of showpicbtn8ad89b50s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo8ad89b50)
-            }
-        </script>
-    </p>
-<p><a href="http://www.wangeditor.com/">官网</a></p>
-
-          <h3 id="8ae5ab14">KaTeX 最快的数学公式渲染库</h3><p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
-<p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
-<p>
-        <div class="_showpic_602564a showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png class="_pic_602564a hidepic" picId="602564a"></img>
-        <script>
-            {
-                let imgself602564as = document.getElementsByClassName('_pic_602564a')
-                let showpicbtn602564as = document.getElementsByClassName('_showpic_602564a')
-                let isInViewPortOfTwo602564a = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself602564as[0].getBoundingClientRect() && imgself602564as[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself602564as) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo602564a)
-                            isInViewPortOfTwo602564a = null
-                        }
-                        for (el of showpicbtn602564as) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo602564a)
-            }
-        </script>
-    </p>
-
-          <h3 id="618a1fd3">JQuery 日期选择控件</h3><p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
-
-          <h3 id="4e143e42">JS 数据可视化</h3><p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎<br><a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
-
-          <h3 id="e19a33bb">JS工具库 lodash</h3><p><a href="https://www.lodashjs.com/">https://www.lodashjs.com/</a></p>
-<p>是一个一致性、模块化、高性能的 JavaScript 实用工具库。</p>
-
-          <h4 id="3fc3d751">为什么要用lodash？</h4><p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：</p>
+          <h3 id="1adb6e15">用来查询IP的API</h3><ul>
+<li><p>国内：</p>
 <ul>
-<li>遍历 array、object 和 string</li>
-<li>对值进行操作和检测</li>
-<li>创建符合功能的函数</li>
-</ul>
-
-          <h3 id="b265a9d9">Express</h3><p><a href="https://www.expressjs.com.cn/">https://www.expressjs.com.cn/</a></p>
-<p>基于 Node.js 平台，快速、开放、极简的 Web 开发框架。</p>
-
-          <h3 id="1847ccff">systeminformation</h3><blockquote>
-<p>Lightweight collection of 40+ functions to retrieve detailed hardware, system and OS information. For Linux, macOS, partial Windows, FreeBSD, OpenBSD, NetBSD and SunOS support</p>
-</blockquote>
-<p><a href="https://systeminformation.io/">https://systeminformation.io/</a></p>
-
-          <h3 id="3106e4cf">websocket - Node.js</h3><blockquote>
-<p>Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js</p>
-</blockquote>
-<p><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a></p>
-
-          <h3 id="653b6e40">jieba中文分词 - Node.js</h3>
-          <h4 id="f182458c">介绍</h4><p><code>NodeJieba</code>是&quot;结巴&quot;中文分词的 Node.js 版本实现， 由<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>提供底层分词算法实现， 是兼具高性能和易用性两者的 Node.js 中文分词组件。</p>
-
-          <h4 id="c2a93fb9">特点</h4><ul>
-<li>词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。</li>
-<li>底层算法实现是C++，性能高效。</li>
-<li>支持多种分词算法，各种分词算法见<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>的README.md介绍。</li>
-<li>支持动态补充词库。</li>
-</ul>
-<p>对实现细节感兴趣的请看如下博文：</p>
+<li><p>搜狐</p>
 <ul>
-<li><a href="http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html">Node.js的C++扩展初体验之NodeJieba</a></li>
-<li><a href="http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html">由NodeJieba谈谈Node.js异步实现</a></li>
+<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson">http://pv.sohu.com/cityjson</a></li>
+<li><a href="https://link.jianshu.com?t=http://pv.sohu.com/cityjson?ie=utf-8">http://pv.sohu.com/cityjson?ie=utf-8</a></li>
+<li><a href="https://link.jianshu.com?t=http://txt.go.sohu.com/ip/soip">http://txt.go.sohu.com/ip/soip</a></li>
 </ul>
-<p><a href="https://github.com/yanyiwu/nodejieba">https://github.com/yanyiwu/nodejieba</a></p>
-
-          <h3 id="b4c46fd8">文件变动检查库 chokidar</h3><p><a href="https://github.com/paulmillr/chokidar">https://github.com/paulmillr/chokidar</a></p>
-
-          <h4 id="fe4e33b4">Why？</h4><p>Node.js <code>fs.watch</code>:</p>
+<p>其中有一个支持https，但是有跨域问题，如果使用<code>&lt;script&gt;</code>标签解决跨域的话，它的代码是直接注入的，而不是返回的callback，而且因为没有正式的开放信息，只是搜出来的，不知道什么时候就下线了</p>
+</li>
+<li><p>某大佬个人维护的免费开放接口平台：<a href="https://github.com/MZCretin/RollToolsApi%EF%BC%8C%E6%9C%89https%EF%BC%8C%E6%9C%89%E8%B7%A8%E5%9F%9F%EF%BC%8C%E4%BD%86%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%98%AF%E4%B8%AA%E4%BA%BA%E7%BB%B4%E6%8A%A4%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%95%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%8C%E8%99%BD%E7%84%B6%E6%9C%89%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%91%E6%8E%A7%EF%BC%9B%E4%B9%9F%E6%98%AF%E7%AC%AC%E4%B8%80%E7%89%88%E8%B7%B3%E8%BD%ACipcheck">https://github.com/MZCretin/RollToolsApi，有https，有跨域，但是因为是个人维护，还是怕不稳定，虽然有小程序监控；也是第一版跳转ipcheck</a></p>
+</li>
+<li><p>百度地图开放API：<a href="http://lbs.baidu.com/index.php?title=webapi/ip-api">http://lbs.baidu.com/index.php?title=webapi/ip-api</a></p>
+<p>虽然跨域，但是好在有callback，不用怕注入，而且平台是正式开放的；虽然文档里没有callback的说明，我还是搜出来了，确实接口支持callback，这也是我现在使用的跳转ipcheck</p>
+</li>
+</ul>
+</li>
+<li><p>国外：</p>
 <ul>
-<li>Doesn&#39;t report filenames on MacOS.</li>
-<li>Doesn&#39;t report events at all when using editors like Sublime on MacOS.</li>
-<li>Often reports events twice.</li>
-<li>Emits most changes as <code>rename</code>.</li>
-<li>Does not provide an easy way to recursively watch file trees.</li>
+<li><a href="https://ip-api.com/">ip-api</a> https要会员</li>
+<li><a href="https://freegeoip.app/">freegeoip</a> 还行 免费https 每小时1万5的请求 比下面的快</li>
+<li><a href="https://ipinfo.io/developers#https-ssl">ipinfo</a> https免费 速度慢点</li>
 </ul>
-<p>Node.js <code>fs.watchFile</code>:</p>
-<ul>
-<li>Almost as bad at event handling.</li>
-<li>Also does not provide any recursive watching.</li>
-<li>Results in high CPU utilization.</li>
-</ul>
-<p>Chokidar resolves these problems.</p>
-<p>Initially made for <strong><a href="https://brunch.io/">Brunch</a></strong> (an ultra-swift web app build tool), it is now used in <a href="https://github.com/microsoft/vscode">Microsoft&#39;s Visual Studio Code</a>, <a href="https://github.com/gulpjs/gulp/">gulp</a>, <a href="https://karma-runner.github.io/">karma</a>, <a href="https://github.com/Unitech/PM2">PM2</a>, <a href="http://browserify.org/">browserify</a>, <a href="https://webpack.github.io/">webpack</a>, <a href="https://www.browsersync.io/">BrowserSync</a>, and <a href="https://www.npmjs.com/browse/depended/chokidar">many others</a>. It has proven itself in production environments.</p>
-
-          <h3 id="1dac18ab">命令行执行库 execa</h3><p><a href="https://github.com/sindresorhus/execa">https://github.com/sindresorhus/execa</a></p>
-
-          <h4 id="fe4e33b4">Why？</h4><p>This package improves <a href="https://nodejs.org/api/child_process.html"><code>child_process</code></a> methods with:</p>
-<ul>
-<li>Promise interface.</li>
-<li><a href="https://github.com/sindresorhus/execa#stripfinalnewline">Strips the final newline</a> from the output so you don&#39;t have to do <code>stdout.trim()</code>.</li>
-<li>Supports <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> binaries cross-platform.</li>
-<li><a href="https://github.com/IndigoUnited/node-cross-spawn#why">Improved Windows support.</a></li>
-<li>Higher max buffer. 100 MB instead of 200 KB.</li>
-<li><a href="https://github.com/sindresorhus/execa#preferlocal">Executes locally installed binaries by name.</a></li>
-<li><a href="https://github.com/sindresorhus/execa#cleanup">Cleans up spawned processes when the parent process dies.</a></li>
-<li><a href="https://github.com/sindresorhus/execa#all">Get interleaved output</a> from <code>stdout</code> and <code>stderr</code> similar to what is printed on the terminal. <a href="https://github.com/sindresorhus/execa#execasyncfile-arguments-options"><em>(Async only)</em></a></li>
-<li><a href="https://github.com/sindresorhus/execa#execacommandcommand-options">Can specify file and arguments as a single string without a shell</a></li>
-<li>More descriptive errors.</li>
+</li>
 </ul>
 
-          <h3 id="d1636061">nodemon</h3><p><a href="https://github.com/remy/nodemon">https://github.com/remy/nodemon</a></p>
-<blockquote>
-<p>nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.</p>
-<p>nodemon does <strong>not</strong> require <em>any</em> additional changes to your code or method of development. nodemon is a replacement wrapper for <code>node</code>. To use <code>nodemon</code>, replace the word <code>node</code> on the command line when executing your script.</p>
-</blockquote>
+          <h3 id="1acca55a">英语相关API</h3>
+          <h4 id="5e9190b4">语法检查</h4><ul>
+<li><a href="https://www.gingersoftware.com/ginger-api/documentations?utm_medium=email&amp;utm_source=link&amp;utm_campaign=api_documentation">Ginger</a></li>
+<li><a href="https://www.grammarly.com/">Grammarly</a></li>
+</ul>
 
-          <h3 id="58d41294">pm2</h3><p><a href="https://pm2.keymetrics.io/docs/usage/quick-start/">https://pm2.keymetrics.io/docs/usage/quick-start/</a></p>
-<blockquote>
-<p>PM2 is a daemon process manager that will help you manage and keep your application online. </p>
-<p>Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.</p>
-</blockquote>
+          <h3 id="f6ac9c45">经纬度行政区域查询API</h3><p><a href="http://jwd.funnyapi.com/#/index">home</a></p>
 
-          <h4 id="bc872767">Windows设置pm2开机启动服务</h4><p><a href="https://www.jianshu.com/p/6cb523c0ced8">https://www.jianshu.com/p/6cb523c0ced8</a></p>
-<p><a href="https://www.npmjs.com/package/pm2-windows-service">https://www.npmjs.com/package/pm2-windows-service</a></p>
-
-          <h4 id="56eb12c5">windows下fork模式弹出窗口问题</h4><p><a href="https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292">https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292</a></p>
-<pre><code class="language-javascript">module.exports = {
-  apps : [{
-    name: &#39;winmon&#39;,
-    script: &#39;index.js&#39;,
-    watch: false,
-    instances  : 1,
-    exec_mode: &#39;cluster&#39;
-  }],
-};</code></pre>
-
-          <h2 id="f2bd5082">⭐ 杂文/问题/乱说/黑科技/技巧</h2>
-          <h3 id="5bc6c604">关于 github oauth app</h3><p>
-        <div class="_showpic_5d357401 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="_pic_5d357401 hidepic" picId="5d357401"></img>
-        <script>
-            {
-                let imgself5d357401s = document.getElementsByClassName('_pic_5d357401')
-                let showpicbtn5d357401s = document.getElementsByClassName('_showpic_5d357401')
-                let isInViewPortOfTwo5d357401 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself5d357401s[0].getBoundingClientRect() && imgself5d357401s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself5d357401s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo5d357401)
-                            isInViewPortOfTwo5d357401 = null
-                        }
-                        for (el of showpicbtn5d357401s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo5d357401)
-            }
-        </script>
-    </p>
-<p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
-
+          <h2 id="eaeb06ee">⭐ 坑</h2>
           <h3 id="6754e9a1">代码高亮的的坑</h3><blockquote>
 <p>editor.md的preview页 + highlight.js</p>
 </blockquote>
@@ -1294,49 +1280,6 @@ onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></
         </script>
     </p>
 
-          <h3 id="c7a1d677">cmd相关</h3>
-          <h4 id="18e94a8a">🔹教程</h4><ul>
-<li>扫盲：<a href="https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/">https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/</a></li>
-<li>常用cmd：<a href="https://blog.csdn.net/hanzheng260561728/article/details/51558990">https://blog.csdn.net/hanzheng260561728/article/details/51558990</a></li>
-</ul>
-
-          <h4 id="c27616db">🔹微软开放命令行文档</h4><blockquote>
-<p> cmd文档/doc文档/command line</p>
-</blockquote>
-<p><a href="http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf">link</a></p>
-
-          <h3 id="48178f1e">关于 CI</h3>
-          <h4 id="7617f642">🔹示意图</h4><p>
-        <div class="_showpic_28778551 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="_pic_28778551 hidepic" picId="28778551"></img>
-        <script>
-            {
-                let imgself28778551s = document.getElementsByClassName('_pic_28778551')
-                let showpicbtn28778551s = document.getElementsByClassName('_showpic_28778551')
-                let isInViewPortOfTwo28778551 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself28778551s[0].getBoundingClientRect() && imgself28778551s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself28778551s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo28778551)
-                            isInViewPortOfTwo28778551 = null
-                        }
-                        for (el of showpicbtn28778551s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo28778551)
-            }
-        </script>
-    </p>
-<blockquote>
-<p>文章 <a href="https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/">The Product Managers’ Guide to Continuous Delivery and DevOps</a></p>
-<p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
-</blockquote>
-
           <h3 id="f2c4def6">GitHub API response 条数pagination限制</h3><p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
 <p>
         <div class="_showpic_e85900b7 showpicbtn">Loading images >></div>
@@ -1393,6 +1336,39 @@ onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></
 <p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
 <p>我现在的blog所有的comments请求都是9999</p>
 
+          <h3 id="5bc6c604">关于 github oauth app</h3><p>
+        <div class="_showpic_5d357401 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="_pic_5d357401 hidepic" picId="5d357401"></img>
+        <script>
+            {
+                let imgself5d357401s = document.getElementsByClassName('_pic_5d357401')
+                let showpicbtn5d357401s = document.getElementsByClassName('_showpic_5d357401')
+                let isInViewPortOfTwo5d357401 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5d357401s[0].getBoundingClientRect() && imgself5d357401s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5d357401s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo5d357401)
+                            isInViewPortOfTwo5d357401 = null
+                        }
+                        for (el of showpicbtn5d357401s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo5d357401)
+            }
+        </script>
+    </p>
+<p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
+
+          <h3 id="91d79d33">关于引用奥森图标一类的i标签失效的问题</h3><p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
+<p>因为......</p>
+<p>千万要想想是不是全局font-family的问题！！！</p>
+
+          <h2 id="1d073cb3">⭐ 技巧</h2>
           <h3 id="dbcbf656">一顿操作 node.js安装</h3>
           <h4 id="dddf4a18">🔹安装nvm</h4><ol>
 <li>首先去 <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载最新的release版本 然后安装即可</li>
@@ -1414,6 +1390,182 @@ $ nvm install 8</code></pre>
 
           <h3 id="596786e">Regex 匹配换行符/匹配尾部空格</h3><pre><code class="language-regex">([\s\S]*)</code></pre>
 <pre><code class="language-regex">\s*$</code></pre>
+
+          <h3 id="2894e654">在Windows的右键菜单上增加新建自定义类型文件的选项</h3><p>
+        <div class="_showpic_a713b4db showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="_pic_a713b4db hidepic" picId="a713b4db"></img>
+        <script>
+            {
+                let imgselfa713b4dbs = document.getElementsByClassName('_pic_a713b4db')
+                let showpicbtna713b4dbs = document.getElementsByClassName('_showpic_a713b4db')
+                let isInViewPortOfTwoa713b4db = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa713b4dbs[0].getBoundingClientRect() && imgselfa713b4dbs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa713b4dbs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoa713b4db)
+                            isInViewPortOfTwoa713b4db = null
+                        }
+                        for (el of showpicbtna713b4dbs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoa713b4db)
+            }
+        </script>
+    </p>
+<p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
+
+          <h3 id="39836185">git做用户的全局配置的文件夹在哪？</h3><p>放在你家</p>
+<p>
+        <div class="_showpic_a63ca3cf showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="_pic_a63ca3cf hidepic" picId="a63ca3cf"></img>
+        <script>
+            {
+                let imgselfa63ca3cfs = document.getElementsByClassName('_pic_a63ca3cf')
+                let showpicbtna63ca3cfs = document.getElementsByClassName('_showpic_a63ca3cf')
+                let isInViewPortOfTwoa63ca3cf = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa63ca3cfs[0].getBoundingClientRect() && imgselfa63ca3cfs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa63ca3cfs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+                            isInViewPortOfTwoa63ca3cf = null
+                        }
+                        for (el of showpicbtna63ca3cfs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+            }
+        </script>
+    </p>
+<p>如图可以配置别名</p>
+
+          <h3 id="fe6cfb4f">xss攻击和Java处理xss</h3><p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
+<p>Java的html解析器<br><a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
+<p>前端xss处理：<br><a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
+
+          <h3 id="47b224f">windows下调试iOS网页设备</h3><p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
+
+          <h3 id="5df6c31e">带空格文件名参数传递 xargs</h3><p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
+
+          <h3 id="124fa3d5">win10 自带录电脑音软件</h3><p>
+        <div class="_showpic_257b8207 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="_pic_257b8207 hidepic" picId="257b8207"></img>
+        <script>
+            {
+                let imgself257b8207s = document.getElementsByClassName('_pic_257b8207')
+                let showpicbtn257b8207s = document.getElementsByClassName('_showpic_257b8207')
+                let isInViewPortOfTwo257b8207 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself257b8207s[0].getBoundingClientRect() && imgself257b8207s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself257b8207s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo257b8207)
+                            isInViewPortOfTwo257b8207 = null
+                        }
+                        for (el of showpicbtn257b8207s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo257b8207)
+            }
+        </script>
+    <br>
+        <div class="_showpic_215ad473 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png class="_pic_215ad473 hidepic" picId="215ad473"></img>
+        <script>
+            {
+                let imgself215ad473s = document.getElementsByClassName('_pic_215ad473')
+                let showpicbtn215ad473s = document.getElementsByClassName('_showpic_215ad473')
+                let isInViewPortOfTwo215ad473 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself215ad473s[0].getBoundingClientRect() && imgself215ad473s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself215ad473s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo215ad473)
+                            isInViewPortOfTwo215ad473 = null
+                        }
+                        for (el of showpicbtn215ad473s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo215ad473)
+            }
+        </script>
+    <br>
+        <div class="_showpic_6d1b4848 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png class="_pic_6d1b4848 hidepic" picId="6d1b4848"></img>
+        <script>
+            {
+                let imgself6d1b4848s = document.getElementsByClassName('_pic_6d1b4848')
+                let showpicbtn6d1b4848s = document.getElementsByClassName('_showpic_6d1b4848')
+                let isInViewPortOfTwo6d1b4848 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself6d1b4848s[0].getBoundingClientRect() && imgself6d1b4848s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself6d1b4848s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo6d1b4848)
+                            isInViewPortOfTwo6d1b4848 = null
+                        }
+                        for (el of showpicbtn6d1b4848s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo6d1b4848)
+            }
+        </script>
+    </p>
+<p>然后打开win10自带的录音软件Voice Recorder</p>
+
+          <h2 id="99b1e892">⭐ 杂</h2>
+          <h3 id="48178f1e">关于 CI</h3>
+          <h4 id="7617f642">🔹示意图</h4><p>
+        <div class="_showpic_28778551 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="_pic_28778551 hidepic" picId="28778551"></img>
+        <script>
+            {
+                let imgself28778551s = document.getElementsByClassName('_pic_28778551')
+                let showpicbtn28778551s = document.getElementsByClassName('_showpic_28778551')
+                let isInViewPortOfTwo28778551 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself28778551s[0].getBoundingClientRect() && imgself28778551s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself28778551s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo28778551)
+                            isInViewPortOfTwo28778551 = null
+                        }
+                        for (el of showpicbtn28778551s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo28778551)
+            }
+        </script>
+    </p>
+<blockquote>
+<p>文章 <a href="https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/">The Product Managers’ Guide to Continuous Delivery and DevOps</a></p>
+<p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
+</blockquote>
 
           <h3 id="6db5b3e9">对IoC/DI的理解</h3>
           <h4 id="cf6426d0">🔹Ioc—Inverse  of Control</h4><p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
@@ -1481,94 +1633,9 @@ $ nvm install 8</code></pre>
 </ul>
 <p>参考: <a href="https://www.cnblogs.com/hysum/p/7100874.html#_label1">https://www.cnblogs.com/hysum/p/7100874.html#_label1</a></p>
 
-          <h3 id="ddd59aa4">BitMap</h3><p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a><br><a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a><br>编程珠玑</p>
-
-          <h3 id="96abc5d3">MySQL用户管理</h3><p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a><br><a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
-
-          <h3 id="2894e654">在Windows的右键菜单上增加新建自定义类型文件的选项</h3><p>
-        <div class="_showpic_a713b4db showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="_pic_a713b4db hidepic" picId="a713b4db"></img>
-        <script>
-            {
-                let imgselfa713b4dbs = document.getElementsByClassName('_pic_a713b4db')
-                let showpicbtna713b4dbs = document.getElementsByClassName('_showpic_a713b4db')
-                let isInViewPortOfTwoa713b4db = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgselfa713b4dbs[0].getBoundingClientRect() && imgselfa713b4dbs[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgselfa713b4dbs) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwoa713b4db)
-                            isInViewPortOfTwoa713b4db = null
-                        }
-                        for (el of showpicbtna713b4dbs) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwoa713b4db)
-            }
-        </script>
-    </p>
-<p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
-
-          <h3 id="91d79d33">关于引用奥森图标一类的i标签失效的问题</h3><p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
-<p>因为......</p>
-<p>千万要想想是不是全局font-family的问题！！！</p>
-
-          <h3 id="39836185">git做用户的全局配置的文件夹在哪？</h3><p>放在你家</p>
-<p>
-        <div class="_showpic_a63ca3cf showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="_pic_a63ca3cf hidepic" picId="a63ca3cf"></img>
-        <script>
-            {
-                let imgselfa63ca3cfs = document.getElementsByClassName('_pic_a63ca3cf')
-                let showpicbtna63ca3cfs = document.getElementsByClassName('_showpic_a63ca3cf')
-                let isInViewPortOfTwoa63ca3cf = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgselfa63ca3cfs[0].getBoundingClientRect() && imgselfa63ca3cfs[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgselfa63ca3cfs) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwoa63ca3cf)
-                            isInViewPortOfTwoa63ca3cf = null
-                        }
-                        for (el of showpicbtna63ca3cfs) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwoa63ca3cf)
-            }
-        </script>
-    </p>
-<p>如图可以配置别名</p>
-
-          <h3 id="b746ec18">贪心算法和动态规划的区别</h3><blockquote>
-<p>贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。</p>
-<p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 </p>
-<p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 </p>
-</blockquote>
-<p>引自：<a href="https://www.cnblogs.com/codeskiller/p/6477181.html">https://www.cnblogs.com/codeskiller/p/6477181.html</a></p>
-
-          <h3 id="3e4f3c2d">三种静态查找算法：顺序、二分/折半、索引/分块查找</h3><p>文章：<a href="https://blog.csdn.net/u011489043/article/details/78683856">https://blog.csdn.net/u011489043/article/details/78683856</a></p>
-
-          <h3 id="df55037a">MySQL自己更新自己</h3><p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
-<p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
-
-          <h3 id="986935f6">算法：并查集</h3><p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a><br><a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
-
-          <h3 id="8e4d57d6">正则表达式 密码强度</h3><p><a href="https://www.cnblogs.com/cexm/p/7737538.html">https://www.cnblogs.com/cexm/p/7737538.html</a></p>
-
           <h3 id="db775422">文件头魔数 判断文件类型</h3><p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
 <p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt<br>而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
 <p>魔数列表参考如下：<br><a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
-
-          <h3 id="fe6cfb4f">xss攻击和Java处理xss</h3><p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
-<p>Java的html解析器<br><a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
-<p>前端xss处理：<br><a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
 
           <h3 id="fbc94e2d">微服务/集群/分布式</h3>
           <h4 id="cdd19350">🔹微服务好文</h4><p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
@@ -1638,14 +1705,6 @@ $ nvm install 8</code></pre>
         </script>
     </p>
 <p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
-
-          <h3 id="d014e91b">Spring生命周期详解好文</h3><p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a><br><a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a><br><a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
-
-          <h3 id="478cc989">html2canvas 页面输出为canvas</h3><p>超级棒的插件：<br>教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a><br>hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
-
-          <h4 id="29a099ee">🔹生成的canvas没有图片的坑：</h4><p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。<br>开启html2canvas的useCORS配置项。即作如下设置： </p>
-<pre><code class="language-javascript">var opts = {useCORS: true};
-html2canvas(element, opts);</code></pre>
 
           <h3 id="5cd95015">k8s</h3>
           <h4 id="23c63e8d">🔹好文</h4><ul>
@@ -1731,20 +1790,12 @@ html2canvas(element, opts);</code></pre>
 <li><a href="https://blog.csdn.net/yessharing/article/details/55806090">https://blog.csdn.net/yessharing/article/details/55806090</a></li>
 </ul>
 
-          <h3 id="7be4b829">chrome插件开发</h3><p><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83">https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83</a></p>
-
           <h3 id="8af636c5">gRPC &amp; protobuf &amp; Swagger</h3><ul>
 <li><a href="https://segmentfault.com/a/1190000013513469">Grpc+Grpc Gateway实践三 Swagger了解一下</a></li>
 <li><a href="https://www.cnblogs.com/luoxn28/p/5303517.html">google protobuf安装与使用</a></li>
 <li><a href="https://github.com/protocolbuffers/protobuf">protobuf</a></li>
 <li><a href="https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html">grpc-gateway：grpc转换为http协议对外提供服务</a></li>
 </ul>
-
-          <h3 id="4e9dfae9">Database Client</h3><p><a href="https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows">15个windows上好用的client</a></p>
-
-          <h3 id="d0380fe">linux 换行符</h3><p><a href="https://blog.csdn.net/mulangren1988/article/details/54316783">https://blog.csdn.net/mulangren1988/article/details/54316783</a></p>
-
-          <h3 id="5df6c31e">带空格文件名参数传递 xargs</h3><p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
 
           <h3 id="3a2aed49">GraphQL 一种用于 API 的查询语言</h3><blockquote>
 <p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
@@ -1755,15 +1806,166 @@ html2canvas(element, opts);</code></pre>
 <p>2018年11月16日 10点04分<br>要构建一个graphql需要的成本太大了 还不如restful来的快</p>
 </blockquote>
 
+          <h3 id="c3636876">Protobuf</h3>
+          <h4 id="8837675c">What are protocol buffers?</h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
+
+          <h4 id="bd060b79">Why not just use XML?</h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
+<ul>
+<li>are simpler</li>
+<li>are 3 to 10 times smaller</li>
+<li>are 20 to 100 times faster</li>
+<li>are less ambiguous</li>
+<li>generate data access classes that are easier to use programmatically</li>
+</ul>
+
+          <h4 id="8c0c55ad">References</h4><ul>
+<li><a href="https://www.jianshu.com/p/a24c88c0526a">深入Protobuf</a></li>
+<li><a href="https://www.jianshu.com/p/b4b51b99e218">ProtoBuf试用与JSON的比较</a></li>
+<li><a href="https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw">在python中使用ProtocolBuffers</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/overview">Google Docs</a></li>
+</ul>
+
+          <h3 id="3e30697c">CLU &amp; TUI?</h3>
+          <h4 id="9bcdf5b">Command-line Utilities</h4><ul>
+<li>Accept arguments at invocation, execute, and terminate</li>
+<li>Examples:<code>ls</code>,<code>grep</code>,<code>git</code></li>
+<li>Python&#39;s built-in argparse module or Click have this well covered</li>
+</ul>
+
+          <h4 id="ef2f64d">Text User Interfaces</h4><ul>
+<li>Full-screen applications more like a GUI but in a terminal</li>
+<li>Examples: <code>vim</code>, <code>emacs</code>, <code>top</code></li>
+<li>Python&#39;s built-in curses module can be used for this.</li>
+</ul>
+
+          <h4 id="8913a85a">Python TUI Libaraies</h4><ul>
+<li><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/index.html">Python Prompt ToolKit</a></li>
+<li><a href="https://github.com/peterbrittain/asciimatics">asciimatics</a></li>
+<li><a href="http://urwid.org/index.html#">Urwid</a></li>
+</ul>
+
+          <h2 id="d4168f6">⭐ 算法</h2>
+          <h3 id="ddd59aa4">BitMap</h3><p><a href="http://blog.51cto.com/zengzhaozheng/1404108">http://blog.51cto.com/zengzhaozheng/1404108</a><br><a href="https://blog.csdn.net/hguisu/article/details/7880288">https://blog.csdn.net/hguisu/article/details/7880288</a><br><a href="http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html">http://www.ruanyifeng.com/blog/2015/09/git-bitmap.html</a><br>编程珠玑</p>
+
+          <h3 id="b746ec18">贪心算法和动态规划的区别</h3><blockquote>
+<p>贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。</p>
+<p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 </p>
+<p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 </p>
+</blockquote>
+<p>引自：<a href="https://www.cnblogs.com/codeskiller/p/6477181.html">https://www.cnblogs.com/codeskiller/p/6477181.html</a></p>
+
+          <h3 id="3e4f3c2d">三种静态查找算法：顺序、二分/折半、索引/分块查找</h3><p>文章：<a href="https://blog.csdn.net/u011489043/article/details/78683856">https://blog.csdn.net/u011489043/article/details/78683856</a></p>
+
+          <h3 id="986935f6">算法：并查集</h3><p><a href="https://blog.csdn.net/C20180630/article/details/57074623">https://blog.csdn.net/C20180630/article/details/57074623</a><br><a href="https://blog.csdn.net/u013546077/article/details/64509038">https://blog.csdn.net/u013546077/article/details/64509038</a></p>
+
+          <h2 id="6725d24f">⭐ 网站&amp;博客</h2>
+          <h3 id="c7a1d677">cmd相关</h3>
+          <h4 id="18e94a8a">🔹教程</h4><ul>
+<li>扫盲：<a href="https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/">https://lellansin.wordpress.com/2012/12/15/cmd%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80-%E6%89%AB%E7%9B%B2%E6%95%99%E7%A8%8B/</a></li>
+<li>常用cmd：<a href="https://blog.csdn.net/hanzheng260561728/article/details/51558990">https://blog.csdn.net/hanzheng260561728/article/details/51558990</a></li>
+</ul>
+
+          <h4 id="c27616db">🔹微软开放命令行文档</h4><blockquote>
+<p> cmd文档/doc文档/command line</p>
+</blockquote>
+<p><a href="http://download.microsoft.com/download/5/8/9/58911986-D4AD-4695-BF63-F734CD4DF8F2/ws-commands.pdf">link</a></p>
+
+          <h3 id="d014e91b">Spring生命周期详解好文</h3><p><a href="https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0">https://blog.csdn.net/lisongjia123/article/details/52091013?utm_source=blogxgwz0</a><br><a href="https://blog.csdn.net/fuzhongmin05/article/details/73389779">https://blog.csdn.net/fuzhongmin05/article/details/73389779</a><br><a href="https://blog.csdn.net/qq_23473123/article/details/76610052">https://blog.csdn.net/qq_23473123/article/details/76610052</a></p>
+
+          <h3 id="4e9dfae9">Database Client</h3><p><a href="https://www.slant.co/topics/53/~best-mysql-client-applications-for-windows">15个windows上好用的client</a></p>
+
           <h3 id="d0da79da">排序算法图解博客</h3><p>看到的讲得还阔以的: <a href="https://www.cnblogs.com/chengxiao/category/880910.html">https://www.cnblogs.com/chengxiao/category/880910.html</a></p>
 
-          <h3 id="47b224f">windows下调试iOS网页设备</h3><p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
+          <h3 id="d0380fe">linux 换行符</h3><p><a href="https://blog.csdn.net/mulangren1988/article/details/54316783">https://blog.csdn.net/mulangren1988/article/details/54316783</a></p>
 
-          <h2 id="3b94c0b">⭐ 网站/软件/技术</h2>
+          <h3 id="8e4d57d6">正则表达式 密码强度</h3><p><a href="https://www.cnblogs.com/cexm/p/7737538.html">https://www.cnblogs.com/cexm/p/7737538.html</a></p>
+
+          <h3 id="984c5a95">数据结构/算法可视化网站</h3><p>
+        <div class="_showpic_1338c43f showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/sorting-algorithms.png class="_pic_1338c43f hidepic" picId="1338c43f"></img>
+        <script>
+            {
+                let imgself1338c43fs = document.getElementsByClassName('_pic_1338c43f')
+                let showpicbtn1338c43fs = document.getElementsByClassName('_showpic_1338c43f')
+                let isInViewPortOfTwo1338c43f = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself1338c43fs[0].getBoundingClientRect() && imgself1338c43fs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself1338c43fs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo1338c43f)
+                            isInViewPortOfTwo1338c43f = null
+                        }
+                        for (el of showpicbtn1338c43fs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo1338c43f)
+            }
+        </script>
+    <br><a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
+<p>
+        <div class="_showpic_1395da3c showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png class="_pic_1395da3c hidepic" picId="1395da3c"></img>
+        <script>
+            {
+                let imgself1395da3cs = document.getElementsByClassName('_pic_1395da3c')
+                let showpicbtn1395da3cs = document.getElementsByClassName('_showpic_1395da3c')
+                let isInViewPortOfTwo1395da3c = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself1395da3cs[0].getBoundingClientRect() && imgself1395da3cs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself1395da3cs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo1395da3c)
+                            isInViewPortOfTwo1395da3c = null
+                        }
+                        for (el of showpicbtn1395da3cs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo1395da3c)
+            }
+        </script>
+    <br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
+<p>
+        <div class="_showpic_56021a01 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png class="_pic_56021a01 hidepic" picId="56021a01"></img>
+        <script>
+            {
+                let imgself56021a01s = document.getElementsByClassName('_pic_56021a01')
+                let showpicbtn56021a01s = document.getElementsByClassName('_showpic_56021a01')
+                let isInViewPortOfTwo56021a01 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself56021a01s[0].getBoundingClientRect() && imgself56021a01s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself56021a01s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo56021a01)
+                            isInViewPortOfTwo56021a01 = null
+                        }
+                        for (el of showpicbtn56021a01s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo56021a01)
+            }
+        </script>
+    <br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
+
           <h3 id="b6e3ae04">100多个实用的Javascript代码片段</h3><p><a href="https://1loc.dev/">https://1loc.dev/</a></p>
 
           <h3 id="ec9b6be2">一个素材网站 devianart</h3><p><a href="https://www.deviantart.com/">https://www.deviantart.com/</a></p>
 
+          <h3 id="7be4b829">chrome插件开发</h3><p><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83">https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83</a></p>
+
+          <h2 id="f5a9753f">⭐ 软件</h2>
           <h3 id="4cec0f22">icon相关 素材站/软件</h3>
           <h4 id="3c9d8dfc">🔹阿里巴巴矢量图标库</h4><p>
         <div class="_showpic_8d147368 showpicbtn">Loading images >></div>
@@ -1911,203 +2113,6 @@ html2canvas(element, opts);</code></pre>
           <h4 id="c265dafc">🔹Tips:</h4><p>软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.</p>
 <p>但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.</p>
 <p>所以我们下载full, 解压在<code>C:\Program Files</code>, 可以发现整个软件大概250MB, 我们从软件目录下的<code>C:\Program Files\cmder\vendor</code>中删去<code>git-for-windows</code>文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.</p>
-
-          <h3 id="984c5a95">数据结构/算法可视化网站</h3><p>
-        <div class="_showpic_1338c43f showpicbtn">Loading images >></div>
-        <img href=https://image.youyinnn.top/sorting-algorithms.png class="_pic_1338c43f hidepic" picId="1338c43f"></img>
-        <script>
-            {
-                let imgself1338c43fs = document.getElementsByClassName('_pic_1338c43f')
-                let showpicbtn1338c43fs = document.getElementsByClassName('_showpic_1338c43f')
-                let isInViewPortOfTwo1338c43f = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself1338c43fs[0].getBoundingClientRect() && imgself1338c43fs[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself1338c43fs) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo1338c43f)
-                            isInViewPortOfTwo1338c43f = null
-                        }
-                        for (el of showpicbtn1338c43fs) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo1338c43f)
-            }
-        </script>
-    <br><a href="https://www.toptal.com/developers/sorting-algorithms">https://www.toptal.com/developers/sorting-algorithms</a></p>
-<p>
-        <div class="_showpic_1395da3c showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/40883611-f49dc906-6733-11e8-822f-b3f441f11da7.png class="_pic_1395da3c hidepic" picId="1395da3c"></img>
-        <script>
-            {
-                let imgself1395da3cs = document.getElementsByClassName('_pic_1395da3c')
-                let showpicbtn1395da3cs = document.getElementsByClassName('_showpic_1395da3c')
-                let isInViewPortOfTwo1395da3c = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself1395da3cs[0].getBoundingClientRect() && imgself1395da3cs[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself1395da3cs) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo1395da3c)
-                            isInViewPortOfTwo1395da3c = null
-                        }
-                        for (el of showpicbtn1395da3cs) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo1395da3c)
-            }
-        </script>
-    <br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
-<p>
-        <div class="_showpic_56021a01 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/40886561-d4282520-676c-11e8-8312-223025512f6d.png class="_pic_56021a01 hidepic" picId="56021a01"></img>
-        <script>
-            {
-                let imgself56021a01s = document.getElementsByClassName('_pic_56021a01')
-                let showpicbtn56021a01s = document.getElementsByClassName('_showpic_56021a01')
-                let isInViewPortOfTwo56021a01 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself56021a01s[0].getBoundingClientRect() && imgself56021a01s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself56021a01s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo56021a01)
-                            isInViewPortOfTwo56021a01 = null
-                        }
-                        for (el of showpicbtn56021a01s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo56021a01)
-            }
-        </script>
-    <br><a href="https://visualgo.net/zh">https://visualgo.net/zh</a></p>
-
-          <h3 id="f6ac9c45">经纬度行政区域查询API</h3><p><a href="http://jwd.funnyapi.com/#/index">home</a></p>
-
-          <h3 id="124fa3d5">win10 自带录电脑音软件</h3><p>
-        <div class="_showpic_257b8207 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="_pic_257b8207 hidepic" picId="257b8207"></img>
-        <script>
-            {
-                let imgself257b8207s = document.getElementsByClassName('_pic_257b8207')
-                let showpicbtn257b8207s = document.getElementsByClassName('_showpic_257b8207')
-                let isInViewPortOfTwo257b8207 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself257b8207s[0].getBoundingClientRect() && imgself257b8207s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself257b8207s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo257b8207)
-                            isInViewPortOfTwo257b8207 = null
-                        }
-                        for (el of showpicbtn257b8207s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo257b8207)
-            }
-        </script>
-    <br>
-        <div class="_showpic_215ad473 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png class="_pic_215ad473 hidepic" picId="215ad473"></img>
-        <script>
-            {
-                let imgself215ad473s = document.getElementsByClassName('_pic_215ad473')
-                let showpicbtn215ad473s = document.getElementsByClassName('_showpic_215ad473')
-                let isInViewPortOfTwo215ad473 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself215ad473s[0].getBoundingClientRect() && imgself215ad473s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself215ad473s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo215ad473)
-                            isInViewPortOfTwo215ad473 = null
-                        }
-                        for (el of showpicbtn215ad473s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo215ad473)
-            }
-        </script>
-    <br>
-        <div class="_showpic_6d1b4848 showpicbtn">Loading images >></div>
-        <img href=https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png class="_pic_6d1b4848 hidepic" picId="6d1b4848"></img>
-        <script>
-            {
-                let imgself6d1b4848s = document.getElementsByClassName('_pic_6d1b4848')
-                let showpicbtn6d1b4848s = document.getElementsByClassName('_showpic_6d1b4848')
-                let isInViewPortOfTwo6d1b4848 = function () {
-                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
-                    const top = imgself6d1b4848s[0].getBoundingClientRect() && imgself6d1b4848s[0].getBoundingClientRect().top
-                    if (top  <= viewPortHeight + 300) {
-                        for (el of imgself6d1b4848s) {
-                            el.src = el.getAttribute('href')
-                            el.classList.add('showpic')
-                            window.removeEventListener('scroll', isInViewPortOfTwo6d1b4848)
-                            isInViewPortOfTwo6d1b4848 = null
-                        }
-                        for (el of showpicbtn6d1b4848s) {
-                            el.style.display = 'none'
-                        }
-                    }
-                }
-                window.addEventListener('scroll', isInViewPortOfTwo6d1b4848)
-            }
-        </script>
-    </p>
-<p>然后打开win10自带的录音软件Voice Recorder</p>
-
-          <h3 id="c3636876">Protobuf</h3>
-          <h4 id="8837675c">What are protocol buffers?</h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
-
-          <h4 id="bd060b79">Why not just use XML?</h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
-<ul>
-<li>are simpler</li>
-<li>are 3 to 10 times smaller</li>
-<li>are 20 to 100 times faster</li>
-<li>are less ambiguous</li>
-<li>generate data access classes that are easier to use programmatically</li>
-</ul>
-
-          <h4 id="8c0c55ad">References</h4><ul>
-<li><a href="https://www.jianshu.com/p/a24c88c0526a">深入Protobuf</a></li>
-<li><a href="https://www.jianshu.com/p/b4b51b99e218">ProtoBuf试用与JSON的比较</a></li>
-<li><a href="https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw">在python中使用ProtocolBuffers</a></li>
-<li><a href="https://developers.google.com/protocol-buffers/docs/overview">Google Docs</a></li>
-</ul>
-
-          <h3 id="3e30697c">CLU &amp; TUI?</h3>
-          <h4 id="9bcdf5b">Command-line Utilities</h4><ul>
-<li>Accept arguments at invocation, execute, and terminate</li>
-<li>Examples:<code>ls</code>,<code>grep</code>,<code>git</code></li>
-<li>Python&#39;s built-in argparse module or Click have this well covered</li>
-</ul>
-
-          <h4 id="ef2f64d">Text User Interfaces</h4><ul>
-<li>Full-screen applications more like a GUI but in a terminal</li>
-<li>Examples: <code>vim</code>, <code>emacs</code>, <code>top</code></li>
-<li>Python&#39;s built-in curses module can be used for this.</li>
-</ul>
-
-          <h4 id="8913a85a">Python TUI Libaraies</h4><ul>
-<li><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/index.html">Python Prompt ToolKit</a></li>
-<li><a href="https://github.com/peterbrittain/asciimatics">asciimatics</a></li>
-<li><a href="http://urwid.org/index.html#">Urwid</a></li>
-</ul>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
