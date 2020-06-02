@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/loadscripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/jump-1.3.js"></script>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/img/favicon.ico" />
+    <link rel="icon" href="/img/favicon.ico" type="image/ico"/>
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/resources/resources.js"></script>
+    <script src="/myjs/scriptlist.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg">🚀</button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <div id="homepage-center">
+            <div id="slogan">
+                <i id="wolf-logo" style="font-style: normal;" class="mr-4">🌑</i><span id="slogan-text"></span>
+            </div>
+            <div id="homepage-btn">
+                <div id="showmore"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; About Me & This Blog</div>
+                <div id="showhacknical"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Github Analysis</div>
+                <div id="toarticles"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Tech Articles</div>
+            </div>
+        </div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistics</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Online:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Chars:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Categories:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tags:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Last update:</td>
+                    <td style="text-align:left" id="stat_last_update"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search with keywords (algolia)">
+            <div id="searchprocessbar">
+                <div id="spb-out" class="spb-outter-animate"></div>
+                <div id="spb-in" class="spb-inner-animate"></div>
+            </div>
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-light" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-light" type="button">cates</button>
+                <button id="tags" class="btn btn-light" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-light" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div id="searchrscount" class="unselectable"></div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container markdown-toc"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>小心点，一不小心你就栽跟头了 👻</p>
+<p></div></p>
+
+          <h3 id="ce5ca89">你画我猜</h3><p>下面程序输出多少？</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    int i = 2;
+    i += i -= i *= i;
+    System.out.println(i);
+}</code></pre>
+<p>答案：0</p>
+
+          <h3 id="8348a1f4">你对Java运算符了解多少？</h3><ul>
+<li>你知道Java里有哪几种运算符嘛？</li>
+<li>你知道<code>-=</code>是算数运算符还是赋值运算符嘛？</li>
+<li>你知道是<code>|</code>和<code>||</code>到底哪个才是短路嘛？</li>
+<li>你知道怎么不用<code>*</code>或<code>/</code>做2的倍数的乘除运算嘛？</li>
+<li>你知道<code>&gt;&gt;</code>和<code>&gt;&gt;&gt;</code>有什么区别嘛？</li>
+<li>你知道<code>-1 &gt;&gt;&gt; 1 = 2147483647</code>怎么来的嘛？</li>
+<li>你知道<code>&lt;&lt;&lt;</code>代表什么意思嘛？</li>
+<li>你知道还有一种运算符它里面全是字母没有符号嘛？</li>
+<li>上面的问题你如果有一大半不会，那你还不觉得Java运算符里有阴谋吗？</li>
+</ul>
+
+          <h3 id="7c4d3004">运算符种类</h3>
+          <h4 id="22340036">算数运算符</h4><p>没得说，加减乘除模，+、-、*、/、%</p>
+
+          <h4 id="6e41c5fa">一元运算符</h4><ul>
+<li><strong>-，</strong>负号运算符</li>
+<li><strong>+，</strong>正号运算符（还有这玩意？你不知道吧？）</li>
+<li><strong>++，</strong>自加运算符，注意前后</li>
+<li><strong>--，</strong>自减运算符，注意前后</li>
+<li><strong>!，</strong>非运算符，用于逻辑语句改是非</li>
+</ul>
+
+          <h4 id="59649719">赋值运算符</h4><ul>
+<li><strong>=，</strong>就这一个</li>
+</ul>
+
+          <h4 id="222261df">复合赋值运算符</h4><ul>
+<li><strong>+=</strong>, for adding left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>-=</strong>, for subtracting left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>*=</strong>, for multiplying left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>/=</strong>, for dividing left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>^=</strong>, for raising power of left operand to right operand and assigning it to variable on the left.</li>
+<li><strong>%=</strong>, for assigning modulo of left operand with right operand and then assigning it to variable on the left.</li>
+</ul>
+<p>都不解释了，需要注意的是，赋值运算式这个表达式本身的结果是求出的值，因为要赋值，所以运算式的左边必须是一个变量，因为只有变量才能够赋值</p>
+<p>Leetcode有一道题：</p>
+<p>求 <code>1+2+...+n</code> ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
+<p>因为不能使用循环，所以就使用递归去记录乘积，因为不能使用判断语句，所以我们使用逻辑运算符去短路递归</p>
+<pre><code class="language-java">public int sumNums(int n) {
+    boolean f = n &gt; 0 &amp;&amp; (n += sumNums(n - 1)) &gt; 0;
+    return n;
+}</code></pre>
+<p>第二行<code>n += sumNums(n - 1)</code>是即赋值又求值，所以该表达式的值为<code>n + sumNums(n - 1)</code>，因此可以配合比较运算符求出布尔值</p>
+
+          <h4 id="2ed66a2f">关系运算符</h4><ul>
+<li><strong>== , Equal to :</strong> returns true of left hand side is equal to right hand side.</li>
+<li><strong>!= , Not Equal to :</strong> returns true of left hand side is not equal to right hand side.</li>
+<li><strong>&lt; , less than :</strong> returns true of left hand side is less than right hand side.</li>
+<li><strong>&lt;= , less than or equal to :</strong> returns true of left hand side is less than or equal to right hand side.</li>
+<li><strong>&gt; , Greater than :</strong> returns true of left hand side is greater than right hand side.</li>
+<li><strong>&gt;= , Greater than or equal to:</strong> returns true of left hand side is greater than or equal to right hand side.</li>
+</ul>
+
+          <h4 id="54c61ad2">逻辑运算符</h4><ul>
+<li>*<em>&amp;&amp; , *</em>短路与</li>
+<li><strong>|| ,</strong>短路或</li>
+<li><strong>&amp;，</strong>非短路与</li>
+<li><strong>|，</strong>非短路或</li>
+</ul>
+
+          <h4 id="c0173aba">三元运算符</h4><pre><code class="language-java">int i = 1 &gt; 2 ? 1 : 2;</code></pre>
+
+          <h4 id="6f1c24af">位运算符</h4><ul>
+<li><strong>&amp;，</strong>二进制和运算</li>
+<li><strong>|，</strong>二进制或运算</li>
+<li><strong>^，</strong>二进制异或预算</li>
+<li><strong>~，</strong>二进制逆运算</li>
+</ul>
+
+          <h4 id="7cb82851">位移运算符以及二进制补码位移规则</h4><ul>
+<li><strong>&lt;&lt; ,</strong>有符号左移，<strong>丢弃最高位，低位补0</strong> </li>
+<li><strong>&gt;&gt; , **有符号右移，</strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃** </li>
+<li><strong>&gt;&gt;&gt; ,</strong> 无符号左移，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </li>
+</ul>
+<pre><code class="language-java">@Test
+public void testShift(){
+    int a = 8;
+    int b = 7;
+    int c = -1;
+    System.out.println(a &gt;&gt; 1);
+    System.out.println(a &gt;&gt; 2);
+    System.out.println(b &lt;&lt; 1);
+    System.out.println(b &lt;&lt; 2);
+    System.out.println(c &gt;&gt; 1);
+    System.out.println(c &gt;&gt;&gt; 1);
+    System.out.println(c &gt;&gt;&gt; 2);
+}</code></pre>
+<pre><code class="language-console">4 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0100 -&gt; 8 / 2
+2 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0010 -&gt; 8 / 4
+14 // 0000 ... 0000 0111 -&gt; 0000 ... 0000 1110 -&gt; 7 * 2
+28 // 0000 ... 0000 0111 -&gt; 0000 ... 0001 1100 -&gt; 7 * 4
+-1 
+2147483647
+1073741823</code></pre>
+<p>上面的<strong>负数计算</strong>可能看不懂，我们先复习一下数的二进制表示</p>
+<p>以有符号数来说，数的二进制表示有<strong>原码表示法</strong>、<strong>补码表示法</strong>、<strong>移码表示法</strong>我们观察以下码表</p>
+<table>
+<thead>
+<tr>
+<th align="center">真值x（十进制）</th>
+<th align="center">真值x（二进制）</th>
+<th align="center">原码</th>
+<th align="center">反码（过渡）</th>
+<th align="center">补码</th>
+<th align="center">移码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-127</td>
+<td align="center">- 0111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td align="center">- 0000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 111 1110</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+</tr>
+<tr>
+<td align="center">+0</td>
+<td align="center">+ 0000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-0</td>
+<td align="center">- 0000 0000</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+1</td>
+<td align="center">+ 0000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+127</td>
+<td align="center">+ 0111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+</tr>
+</tbody></table>
+<p>所以对于<strong>-1</strong>，Java中的的int长度为32，一步步来</p>
+<p><strong>二进制真值表示：</strong>- 0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p><strong>二进制原码表示： ** **1</strong>000 0000 0000 0000 0000 0000 0000 0001</p>
+<p><strong>二进制反码表示： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1110</p>
+<p><strong>二进制补码表示： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>我们始终都得记住这一点，<strong>计算机中的负数都是用二进制补码存储的</strong>，所以负数的二进制运算也是基于补码来算的</p>
+<p><strong>所以：</strong></p>
+<ul>
+<li><p>当我们运算：<strong>-1 &gt;&gt; 1</strong> 的时候，<strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p><strong>得结果： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>去掉尾部多出来的1之后，整个补码表示的负数还是<strong>-1</strong></p>
+</li>
+<li><p>当我们运算：<strong>-1 &gt;&gt;&gt; 1</strong> 的时候，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **0</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^31 - 1 = 2147483648 - 1 = 2147483647</strong> 去计算</p>
+<p><strong>2147483647的补码正是0111 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：<strong>-1 &gt;&gt;&gt; 2</strong> </p>
+<p><strong>原补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p><strong>新补码： ** **0</strong>011 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">11</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>011 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^30 - 1 = 1073741824 - 1 = 1073741823</strong> 去计算</p>
+<p><strong>1073741823的补码正是0011 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：<strong>-9 &gt;&gt;&gt; 4</strong></p>
+<p><strong>有原码： ** **1</strong>000 0000 0000 0000 0000 0000 0000 1001</p>
+<p><strong>有反码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 0110</p>
+<p><strong>有补码： ** **1</strong>111 1111 1111 1111 1111 1111 1111 0111</p>
+<p><strong>新补码： ** **0</strong>000 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">0111</span> &lt;---去掉</p>
+<p><strong>得结果： ** **0</strong>000 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^28 - 1 = 268435456 - 1 = 268435455</strong> 去计算</p>
+<p><strong>268435455的补码正是0000 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+</ul>
+
+          <h4 id="6d9f7013">类型判断运算符</h4><p>使用格式：</p>
+<pre><code class="language-java">    object instanceof Class/SubClass/Interface</code></pre>
+
+          <h4 id="47478136">位运算符/位移运算符的使用场景</h4>
+          <h5 id="466fc172">2的次幂快速乘除运算</h5><p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
+
+          <h5 id="a0d69aa4">快速模2/奇偶判断（不要再只会x % 2 == 0啦）</h5><p>任意数与1取位与，结果为1则是奇数</p>
+<pre><code class="language-java">// x &amp; 1 等价于 x % 2
+System.out.println(3 &amp; 1); //1
+System.out.println(2 &amp; 1); //0</code></pre>
+
+          <h5 id="803fb747">快速两数交换/不用中间值</h5><pre><code class="language-java">int a = 999;
+int b = 888;
+a ^= b;
+b ^= a;
+a ^= b;
+System.out.println(a); // 888
+System.out.println(b); // 999</code></pre>
+
+          <h5 id="b3f34c9d">加密解密</h5><pre><code class="language-java">@Test
+public void testEncript(){
+    int plaintext = 0b00001111; // 0000 1111
+    int key =       0b01010101; // 0101 0101
+
+    //encription
+    int cipher = plaintext ^ key; // 0101 1010
+
+    //decription
+    int plaintext2 = cipher ^ key; // 0000 1111
+}</code></pre>
+
+          <h5 id="25f3f0c0">BitMask</h5><p>什么是BitMask？一般翻译为<strong>位掩码</strong>，是一种以高效、省空间的方式对<strong>状态（status）</strong>进行<strong>设置（set）、清零（clear）、检查（check）</strong>的位运算运用。</p>
+<p>比如我们在业务中<strong>某条记录</strong>需要记录16个<strong>A业务状态</strong>，也就是需要4个bit位来记录我们的<strong>A业务状态</strong>，假设我们这条记录还有其他<strong>业务的状态</strong>，我们选择记录的第<strong>5-8位</strong>来记录<strong>A业务状态</strong>，则可以假设有如下记录：</p>
+<p><strong>record：</strong>1001 <strong>0111</strong> 0010</p>
+<p>则中间的<strong>0111</strong>才是我们真正想要操作的记录位，我们可以用<strong>BitMask</strong>来操作：</p>
+<ul>
+<li>设置<strong>BitMask：</strong>0x0<strong>F</strong>0 -&gt; 0000 <strong>1111</strong> 0000</li>
+<li>对于<strong>检查（check）</strong>：<strong>record &amp; mask</strong></li>
+<li>对于<strong>清零（clear）</strong>：<strong>record &amp; ~mask</strong></li>
+<li>对于<strong>设置（set）</strong>：<strong>record &amp; ~mask | status binary code</strong></li>
+</ul>
+<pre><code class="language-java">@Test
+public void testBitMask(){
+    // Mask: 0000 1111 0000 -&gt; 0x0F0 -&gt; 240
+    int mask = 0x0F0;
+    // Record: 0111 0011 1111 -&gt; 0x73F -&gt; 1855
+    int record = 0x73F;
+    int status;
+    // check
+    status = record &amp; mask;
+    System.out.println(status); // 48 -&gt; 0000 0011 0000
+    // clear
+    status = record &amp; ~mask;
+    System.out.println(status); // 1807 -&gt; 0111 0000 1111
+    // set
+    status = record &amp; ~mask | 0x060;
+    System.out.println(status); // 1903 -&gt; 0111 0110 1111
+}</code></pre>
+
+          <h3 id="a474cf0e">BitMap算法</h3><p>类似于BitMask的思想，只不过BitMap是用于大量单一数据的状态，比如问题：</p>
+<p>给定范围<code>[1-10]</code>中取任意5个数字，再任意给一个数字n，判断这个数字是否被获取过。</p>
+<p>假设被取出的数字为<code>[5,7,1,9,3]</code>我们可以用一个数组表示范围内的数字，其中数组的元素占计算机中的1位：</p>
+<pre><code class="language-graph">┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐
+| 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 |
+└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘
+  0    1    2    3    4    5    6    7    8    9</code></pre>
+<p>而在Java中：</p>
+<table>
+<thead>
+<tr>
+<th>简单类型</th>
+<th>boolean</th>
+<th>byte</th>
+<th>char</th>
+<th>short</th>
+<th>Int</th>
+<th>long</th>
+<th>float</th>
+<th>double</th>
+<th>void</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二进制位数</td>
+<td>1</td>
+<td>8</td>
+<td>16</td>
+<td>16</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td>--</td>
+</tr>
+<tr>
+<td>封装器类</td>
+<td>Boolean</td>
+<td>Byte</td>
+<td>Character</td>
+<td>Short</td>
+<td>Integer</td>
+<td>Long</td>
+<td>Float</td>
+<td>Double</td>
+<td>Void</td>
+</tr>
+</tbody></table>
+<p>布尔类型符合数组要求，于是申请<code>boolean[] map = new boolean[10]</code>，然后进行后续操作</p>
+
+          <h4 id="94c9d245">题1：40亿</h4><p><strong>给40亿个不重复的Unsigned Int的整数，乱序，然后再给一个数，如何快速判断这个数是否在那40亿个数当中，要求内存限制2GB；</strong></p>
+<p>40亿个<strong>Unsigned Int</strong>的整数，如果放到内存， 那就是大约16G的空间：</p>
+<p>一个整型32bit，占4B，那么40亿个4B就是160亿B，</p>
+<p>$ 1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿 $</p>
+<p>而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
+<p>所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：</p>
+<p><code>boolean[] mapA = new boolean[Integer.MAX_VALUE])</code></p>
+<p><code>boolean[] mapB = new boolean[Integer.MAX_VALUE])</code></p>
+<p>mapA表示数据中值为<code>[0 ~ 2,147,483,647]</code>的数，mapB表示数据中值为<code>[2,147,483,648 ~ 4,294,967,295]</code>的数，然后读取整数进行下标对应，完成两个map之后，需要<code>O(n)</code>时间再加上文件IO的时间，而判断一个数是否存在就只需要<code>O(1)</code>的时间；</p>
+<p>拓展：</p>
+<p>IO时间怎么减少的思路：多线程，buff</p>
+<hr>
+<p><strong>参考</strong></p>
+<p><a href="https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators">https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators</a></p>
+<p><a href="http://www.52ij.com/jishu/102.html">http://www.52ij.com/jishu/102.html</a></p>
+<p><a href="https://segmentfault.com/q/1010000005850046">https://segmentfault.com/q/1010000005850046</a></p>
+<p><a href="https://blog.csdn.net/tangxiaoyin/article/details/80123142">https://blog.csdn.net/tangxiaoyin/article/details/80123142</a></p>
+<p><a href="https://www.cnblogs.com/wuyudong/p/bitmap.html">https://www.cnblogs.com/wuyudong/p/bitmap.html</a></p>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 ---
-title: Java运算符的阴谋论
+title: Java运算符知多少
 categories:
   - note
 comments: true
@@ -33,7 +33,7 @@ public static void main(String[] args) {
 
 答案：0
 
-### 为什么说阴谋论？
+### 你对Java运算符了解多少？
 
 - 你知道Java里有哪几种运算符嘛？
 - 你知道`-=`是算数运算符还是赋值运算符嘛？
@@ -80,7 +80,22 @@ public static void main(String[] args) {
 - **^=**, for raising power of left operand to right operand and assigning it to variable on the left.
 - **%=**, for assigning modulo of left operand with right operand and then assigning it to variable on the left.
 
-都不解释了
+都不解释了，需要注意的是，赋值运算式这个表达式本身的结果是求出的值，因为要赋值，所以运算式的左边必须是一个变量，因为只有变量才能够赋值
+
+Leetcode有一道题：
+
+求 `1+2+...+n` ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+
+因为不能使用循环，所以就使用递归去记录乘积，因为不能使用判断语句，所以我们使用逻辑运算符去短路递归
+
+``` java
+public int sumNums(int n) {
+    boolean f = n > 0 && (n += sumNums(n - 1)) > 0;
+    return n;
+}
+```
+
+第二行`n += sumNums(n - 1)`是即赋值又求值，所以该表达式的值为`n + sumNums(n - 1)`，因此可以配合比较运算符求出布尔值
 
 
 
@@ -242,7 +257,7 @@ public void testShift(){
 
 
 
-#### 位运/位移运算的使用场景
+#### 位运算符/位移运算符的使用场景
 
 ##### 2的次幂快速乘除运算
 
@@ -331,11 +346,53 @@ public void testBitMask(){
 
 
 
-##### BitMap算法
+### BitMap算法
 
-貌似是一个很强的东西，待更新
+类似于BitMask的思想，只不过BitMap是用于大量单一数据的状态，比如问题：
 
+给定范围`[1-10]`中取任意5个数字，再任意给一个数字n，判断这个数字是否被获取过。
 
+假设被取出的数字为`[5,7,1,9,3]`我们可以用一个数组表示范围内的数字，其中数组的元素占计算机中的1位：
+
+``` graph
+┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐
+| 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 |
+└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘
+  0    1    2    3    4    5    6    7    8    9
+```
+
+而在Java中：
+
+| 简单类型   | boolean | byte | char      | short | Int     | long | float | double | void |
+| ---------- | ------- | ---- | --------- | ----- | ------- | ---- | ----- | ------ | ---- |
+| 二进制位数 | 1       | 8    | 16        | 16    | 32      | 64   | 32    | 64     | --   |
+| 封装器类   | Boolean | Byte | Character | Short | Integer | Long | Float | Double | Void |
+
+布尔类型符合数组要求，于是申请`boolean[] map = new boolean[10]`，然后进行后续操作
+
+#### 题1：40亿
+
+**给40亿个不重复的Unsigned Int的整数，乱序，然后再给一个数，如何快速判断这个数是否在那40亿个数当中，要求内存限制2GB；**
+
+40亿个**Unsigned Int**的整数，如果放到内存， 那就是大约16G的空间：
+
+一个整型32bit，占4B，那么40亿个4B就是160亿B，
+
+$ 1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿 $
+
+而**Unsigned Int**的整数的取值范围是`[0 ~ 2^32-1]`，最大值是`4,294,967,295`，约42亿
+
+所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：
+
+`boolean[] mapA = new boolean[Integer.MAX_VALUE])`
+
+`boolean[] mapB = new boolean[Integer.MAX_VALUE])`
+
+mapA表示数据中值为`[0 ~ 2,147,483,647]`的数，mapB表示数据中值为`[2,147,483,648 ~ 4,294,967,295]`的数，然后读取整数进行下标对应，完成两个map之后，需要`O(n)`时间再加上文件IO的时间，而判断一个数是否存在就只需要`O(1)`的时间；
+
+拓展：
+
+IO时间怎么减少的思路：多线程，buff
 
 -----------
 
@@ -348,3 +405,5 @@ http://www.52ij.com/jishu/102.html
 https://segmentfault.com/q/1010000005850046
 
 https://blog.csdn.net/tangxiaoyin/article/details/80123142
+
+https://www.cnblogs.com/wuyudong/p/bitmap.html

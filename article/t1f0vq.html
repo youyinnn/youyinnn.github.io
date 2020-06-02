@@ -131,47 +131,43 @@
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
           <h3 id="96dd99db">6. ZigZag Conversion(Medium)</h3><p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
-<pre><code>P   A   H   N
+<pre><code class="language-graph">P   A   H   N
 A P L S I I G
-Y   I   R</code></pre><p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
+Y   I   R</code></pre>
+<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
 <p>Write the code that will take a string and make this conversion given a number of rows:</p>
 <pre><code>string convert(string s, int numRows);</code></pre><p><strong>Example 1:</strong></p>
-<pre><code>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 3
-Output: &quot;PAHNAPLSIIGYIR&quot;</code></pre><p><strong>Example 2:</strong></p>
-<pre><code>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 4
-Output: &quot;PINALSIGYAHRPI&quot;
-Explanation:
-
-P     I    N
-A   L S  I G
-Y A   H R
-P     I</code></pre><p>说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列</p>
+<blockquote>
+<p>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 3<br>Output: &quot;PAHNAPLSIIGYIR&quot;</p>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<p>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 4<br>Output: &quot;PINALSIGYAHRPI&quot;<br>Explanation:</p>
+<p>P     I    N<br>A   L S  I G<br>Y A   H R<br>P     I</p>
+</blockquote>
+<p>说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列</p>
 
           <h4 id="b6dc1a29">Logical Gap Beat(99.82%)</h4><p>这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：</p>
-<pre class="nhi">
-以26个字母序列为例：
+<pre><code class="language-graph">以26个字母序列为例：
 row=3
     A   E   I   M   Q   U   Y            00    04    08    12    16    20    24
-    B D F H J L N P R T V X Z     --->   01 03 05 07 09 11 13 15 17 19 21 23 25 
+    B D F H J L N P R T V X Z     ---&gt;   01 03 05 07 09 11 13 15 17 19 21 23 25 
     C   G   K   O   S   W                02    06    10    14    18    22
 ------------------------------------
 row=4
     A     G     M     S     Y            00      06       12       18       24
-    B   F H   L N   R T   X Z     --->   01   05 07    11 13    17 19    23 25
+    B   F H   L N   R T   X Z     ---&gt;   01   05 07    11 13    17 19    23 25
     C E   I K   O Q   U W                02 04   08 10    14 16    20 22 
     D     J     p     V                  03      09       15       21
 ------------------------------------
 row=5
     A       I       Q       Y            00        08          16          24
-    B     H J     P R     X Z     --->   01     07 09       15 17       23 25
+    B     H J     P R     X Z     ---&gt;   01     07 09       15 17       23 25
     C   G   K   O   S   W                02   06   10    14    18    22
     D F     L N     T V                  03 05     11 13       19 21
-    E       M       U                    04        12          20
-</pre>
-
+    E       M       U                    04        12          20</code></pre>
 <p>到这差不多就看出规律了，我们以一个<strong>V</strong>为单元，每次循环就处理这个V单元就好了，比如以row为3/5为例：</p>
-<pre class="nhi">
-row=3
+<pre><code class="language-graph">row=3
 A   E   I   M   Q   U   Y   00    | 04    | 08    | 12    | 16    | 20    | 24
 B D F H J L N P R T V X Z   01 03 | 05 07 | 09 11 | 13 15 | 17 19 | 21 23 | 25 
 C   G   K   O   S   W       02    | 06    | 10    | 14    | 18    | 22
@@ -181,9 +177,7 @@ A       I       Q       Y   00        | 08          | 16          | 24
 B     H J     P R     X Z   01     07 | 09       15 | 17       23 | 25
 C   G   K   O   S   W       02   06   | 10    14    | 18    22
 D F     L N     T V         03 05     | 11 13       | 19 21
-E       M       U           04        | 12          | 20
-</pre>
-
+E       M       U           04        | 12          | 20</code></pre>
 <p><strong>row=3时</strong></p>
 <ul>
 <li>第一行和最后一行之间有4个下标间距 （4 = (3 - 1) * 2）</li>
@@ -230,12 +224,18 @@ E       M       U           04        | 12          | 20
 
           <h3 id="d4c89ee3">7. Reverse Integer(Easy)</h3><p>Given a 32-bit signed integer, reverse digits of an integer.</p>
 <p><strong>Example 1:</strong></p>
-<pre><code>Input: 123
-Output: 321</code></pre><p><strong>Example 2:</strong></p>
-<pre><code>Input: -123
-Output: -321</code></pre><p><strong>Example 3:</strong></p>
-<pre><code>Input: 120
-Output: 21</code></pre><p><strong>Note:</strong><br>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+<blockquote>
+<p>Input: 123<br>Output: 321</p>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<p>Input: -123<br>Output: -321</p>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<p>Input: 120<br>Output: 21</p>
+</blockquote>
+<p><strong>Note:</strong><br>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
 
           <h4 id="dab7a080">Ⅰ. with string</h4><p>You can use only string but in java we have StringBuilder</p>
 <pre><code class="language-java">public int reverse(int x) {
@@ -274,73 +274,104 @@ Output: 21</code></pre><p><strong>Note:</strong><br>Assume we are dealing with a
     return ans;
 }</code></pre>
 
-          <h3 id="31ea3742">8. String To Integer(Medium)</h3><p>这题是傻逼题，vote第一的discuss就是喷它的，因为有太多的边角case</p>
-<pre><code class="language-java">public int myAtoi(String str) {
+          <h3 id="31ea3742">8. String To Integer(Medium)</h3><p>Implement <code>atoi</code>which converts a string to an integer.</p>
+<p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
+<p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
+<p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
+<p>If no valid conversion could be performed, a zero value is returned.</p>
+<p>Note:</p>
+<ul>
+<li>Only the space character &#39; &#39; is considered as whitespace character.</li>
+<li><strong>Assume we are dealing with an environment which could only store integers</strong> within the 32-bit signed integer range: [−231,  231 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.<br>Example 1:</li>
+</ul>
+<blockquote>
+<p>Input: &quot;42&quot;<br>Output: 42</p>
+</blockquote>
+<p>Example 2:</p>
+<blockquote>
+<p>Input: &quot;   -42&quot;<br>Output: -42<br>Explanation: The first non-whitespace character is &#39;-&#39;, which is the minus sign.<br>             Then take as many numerical digits as possible, which gets 42.</p>
+</blockquote>
+<p>Example 3:</p>
+<blockquote>
+<p>Input: &quot;4193 with words&quot;<br>Output: 4193<br>Explanation: Conversion stops at digit &#39;3&#39; as the next character is not a numerical digit.</p>
+</blockquote>
+<p>Example 4:</p>
+<blockquote>
+<p>Input: &quot;words and 987&quot;<br>Output: 0<br>Explanation: The first non-whitespace character is &#39;w&#39;, which is not a numerical<br>             digit or a +/- sign. Therefore no valid conversion could be performed.</p>
+</blockquote>
+<p>Example 5:</p>
+<blockquote>
+<p>Input: &quot;-91283472332&quot;<br>Output: -2147483648<br>Explanation: The number &quot;-91283472332&quot; is out of the range of a 32-bit signed integer.<br>             Thefore INT_MIN (−231) is returned.</p>
+</blockquote>
+<p>这题需要注意处理各种边角情况：</p>
+<ol>
+<li><p>全是空格符</p>
+</li>
+<li><p>空字符串</p>
+</li>
+<li><p>乘法溢出：因为每次加一位数字就需要将上一次的结果乘以10：</p>
+<p>整型的范围是<code>[-2147483648  ~ 2147483647]</code></p>
+<p>假设我们需要处理字符串<code>“2147483657”</code>，那么在处理最后一位数字<code>7</code>的时候，我们需要将上一次得到的结果<code>214748365</code>乘以10，得到<code>2147483650</code>，显然这时候这个数字已经大于<code>2147483647</code>了，不需要进行到加法就已经因为乘法而溢出了</p>
+</li>
+<li><p>加法溢出： 判断符号是否反转（整型的上下溢）</p>
+</li>
+</ol>
+<pre><code class="language-java">public int strToInt2(String str) {
+    if (str.length() == 0) return 0;
     int ans = 0;
-    char[] chars = str.toCharArray();
-    if (chars.length == 0) {
-        return 0;
+    char[] cArr = str.toCharArray();
+    int startIndex = 0;
+    // skip spaces
+    while (cArr[startIndex] == &#39; &#39;) {
+        startIndex++;
+        // all spaces
+        if (startIndex == cArr.length) return 0;
     }
-    int start = -1, end = 0;
-    for(int i = 0; i &lt; chars.length; i++) {
-        char now = chars[i];
-        if (start == -1) {
-            if (!Character.isWhitespace(now)) {
-                if (isNumber(now) || isSign(now)) {
-                    start = i;
-                } else {
-                    return ans;
-                }
+    int sign = 1;
+    if (cArr[startIndex] == &#39;-&#39;) {
+        sign = -1;
+        startIndex++;
+    } else if (cArr[startIndex] == &#39;+&#39;) {
+        sign = 1;
+        startIndex++;
+    }
+    while (startIndex &lt; cArr.length) {
+        if (cArr[startIndex] &gt;= &#39;0&#39; &amp;&amp; cArr[startIndex] &lt;= &#39;9&#39;) {
+            if (ans &gt; Integer.MAX_VALUE / 10 || ans &lt; Integer.MIN_VALUE / 10) {
+                // multiplication overflow
+                return sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
-        } else if (isNumber(now)) {
-            end = i;
+            ans = (ans * 10) + (sign * (cArr[startIndex] - &#39;0&#39;));
+            // addiction overflow
+            if (sign == -1 &amp;&amp; ans &gt; 0) {
+                return Integer.MIN_VALUE;
+            }
+            if (sign == 1 &amp;&amp; ans &lt; 0) {
+                return Integer.MAX_VALUE;
+            }
         } else {
-            end = i - 1;
-            break;
+            // not a number
+            return ans;
         }
+        startIndex++;
     }
-    if (start == -1 || start &gt; end) {
-        return 0;
-    }
-    int base = 1;
-    boolean negative = false;
-    if (isSign(chars[start])) {
-        if (chars[start] == &#39;-&#39;) {
-            negative = true;
-        }
-        start++;
-    }
-    for (int i = end; i &gt;= start; i--) {
-        ans += (char2Number(chars[i]) * base);
-        base *= 10;
-    }
-    if ((ans % 10 != char2Number(chars[end]) &amp;&amp; !isSign(chars[end])) ||
-            (base == 0 &amp;&amp; chars[start] != &#39;0&#39;)) {
-        return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-    }
-    return negative ? 0 - ans : ans;
-}
-
-public boolean isNumber(char c) {
-    return (c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;);
-}
-public boolean isSign(char c) {
-    return (c == &#39;-&#39; || c == &#39;+&#39;);
-}
-public int char2Number(char c) {
-    return c - &#39;0&#39;;
+    return ans;
 }</code></pre>
 
           <h3 id="116cdb55">9. Parlindrome Number(Easy)</h3><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
 <p><strong>Example 1:</strong></p>
-<pre><code>Input: 121
-Output: true</code></pre><p><strong>Example 2:</strong></p>
-<pre><code>Input: -121
-Output: false
-Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.</code></pre><p><strong>Example 3:</strong></p>
-<pre><code>Input: 10
-Output: false
-Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</code></pre><p><strong>Follow up:</strong></p>
+<blockquote>
+<p>Input: 121<br>Output: true</p>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<p>Input: -121<br>Output: false<br>Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.</p>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<p>Input: 10<br>Output: false<br>Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</p>
+</blockquote>
+<p><strong>Follow up:</strong></p>
 <p>Coud you solve it without converting the integer to a string?</p>
 
           <h4 id="261f70de">Ⅰ. slide window</h4><p>If we know the length of the number sequence, then we could easily pick up any single number on this sequence.</p>
@@ -404,30 +435,26 @@ We call 10000/100 as a 'base', it descide the position of the window.
 <li><code>p</code> could be empty and contains only lowercase letters <code>a-z</code>, and characters like <code>.</code> or <code>*</code>.</li>
 </ul>
 <p><strong>Example 1:</strong></p>
-<pre><code>Input:
-s = &quot;aa&quot;
-p = &quot;a&quot;
-Output: false
-Explanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.</code></pre><p><strong>Example 2:</strong></p>
-<pre><code>Input:
-s = &quot;aa&quot;
-p = &quot;a*&quot;
-Output: true
-Explanation: &#39;*&#39; means zero or more of the precedeng element, &#39;a&#39;. Therefore, by repeating &#39;a&#39; once, it becomes &quot;aa&quot;.</code></pre><p><strong>Example 3:</strong></p>
-<pre><code>Input:
-s = &quot;ab&quot;
-p = &quot;.*&quot;
-Output: true
-Explanation: &quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.</code></pre><p><strong>Example 4:</strong></p>
-<pre><code>Input:
-s = &quot;aab&quot;
-p = &quot;c*a*b&quot;
-Output: true
-Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches &quot;aab&quot;.</code></pre><p><strong>Example 5:</strong></p>
-<pre><code>Input:
-s = &quot;mississippi&quot;
-p = &quot;mis*is*p*.&quot;
-Output: false</code></pre>
+<blockquote>
+<p>Input:<br>s = &quot;aa&quot;<br>p = &quot;a&quot;<br>Output: false<br>Explanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.</p>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<p>Input:<br>s = &quot;aa&quot;<br>p = &quot;a*&quot;<br>Output: true<br>Explanation: &#39;*&#39; means zero or more of the precedeng element, &#39;a&#39;. Therefore, by repeating &#39;a&#39; once, it becomes &quot;aa&quot;.</p>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<p>Input:<br>s = &quot;ab&quot;<br>p = &quot;.*&quot;<br>Output: true<br>Explanation: &quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.</p>
+</blockquote>
+<p><strong>Example 4:</strong></p>
+<blockquote>
+<p>Input:<br>s = &quot;aab&quot;<br>p = &quot;c<em>a</em>b&quot;<br>Output: true<br>Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches &quot;aab&quot;.</p>
+</blockquote>
+<p><strong>Example 5:</strong></p>
+<blockquote>
+<p>Input:<br>s = &quot;mississippi&quot;<br>p = &quot;mis<em>is*p</em>.&quot;<br>Output: false</p>
+</blockquote>
+
           <h4 id="7c6215e5">Ⅰ. Recursion</h4><p>这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多</p>
 <p>我开始解的时候沉迷于线性解法，去遍历<code>pattern</code>字串，试图用多个<code>if-else</code>去覆盖到所有的case，但是失败了，因为线性解法去覆盖case的话，不太可能一次性写出所有的case就算真的让你写出来了话，花的时间也非常多</p>
 <p>那么怎么才能一阵见血呢？看你做题的sence了- -</p>

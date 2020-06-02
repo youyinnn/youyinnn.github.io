@@ -16,7 +16,7 @@ series: leetcode
 
 The string `"PAYPALISHIRING"` is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
 
-```
+```graph
 P   A   H   N
 A P L S I I G
 Y   I   R
@@ -32,23 +32,19 @@ string convert(string s, int numRows);
 
 **Example 1:**
 
-```
-Input: s = "PAYPALISHIRING", numRows = 3
-Output: "PAHNAPLSIIGYIR"
-```
+> Input: s = "PAYPALISHIRING", numRows = 3
+> Output: "PAHNAPLSIIGYIR"
 
 **Example 2:**
 
-```
-Input: s = "PAYPALISHIRING", numRows = 4
-Output: "PINALSIGYAHRPI"
-Explanation:
-
-P     I    N
-A   L S  I G
-Y A   H R
-P     I
-```
+> Input: s = "PAYPALISHIRING", numRows = 4
+> Output: "PINALSIGYAHRPI"
+> Explanation:
+>
+> P     I    N
+> A   L S  I G
+> Y A   H R
+> P     I
 
 说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列
 
@@ -56,7 +52,7 @@ P     I
 
 这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：
 
-<pre class="nhi">
+``` graph
 以26个字母序列为例：
 row=3
     A   E   I   M   Q   U   Y            00    04    08    12    16    20    24
@@ -75,11 +71,11 @@ row=5
     C   G   K   O   S   W                02   06   10    14    18    22
     D F     L N     T V                  03 05     11 13       19 21
     E       M       U                    04        12          20
-</pre>
+```
 
 到这差不多就看出规律了，我们以一个**V**为单元，每次循环就处理这个V单元就好了，比如以row为3/5为例：
 
-<pre class="nhi">
+``` graph
 row=3
 A   E   I   M   Q   U   Y   00    | 04    | 08    | 12    | 16    | 20    | 24
 B D F H J L N P R T V X Z   01 03 | 05 07 | 09 11 | 13 15 | 17 19 | 21 23 | 25 
@@ -91,7 +87,7 @@ B     H J     P R     X Z   01     07 | 09       15 | 17       23 | 25
 C   G   K   O   S   W       02   06   | 10    14    | 18    22
 D F     L N     T V         03 05     | 11 13       | 19 21
 E       M       U           04        | 12          | 20
-</pre>
+```
 
 **row=3时**
 
@@ -147,24 +143,18 @@ Given a 32-bit signed integer, reverse digits of an integer.
 
 **Example 1:**
 
-```
-Input: 123
-Output: 321
-```
+> Input: 123
+> Output: 321
 
 **Example 2:**
 
-```
-Input: -123
-Output: -321
-```
+> Input: -123
+> Output: -321
 
 **Example 3:**
 
-```
-Input: 120
-Output: 21
-```
+> Input: 120
+> Output: 21
 
 **Note:**
 Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
@@ -218,63 +208,109 @@ public int reverse(int x) {
 
 ### 8. String To Integer(Medium)
 
-这题是傻逼题，vote第一的discuss就是喷它的，因为有太多的边角case
+Implement `atoi `which converts a string to an integer.
+
+The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+
+The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+
+If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
+
+If no valid conversion could be performed, a zero value is returned.
+
+Note:
+
+- Only the space character ' ' is considered as whitespace character.
+- **Assume we are dealing with an environment which could only store integers** within the 32-bit signed integer range: [−231,  231 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.
+  Example 1:
+
+> Input: "42"
+> Output: 42
+
+Example 2:
+
+> Input: "   -42"
+> Output: -42
+> Explanation: The first non-whitespace character is '-', which is the minus sign.
+>              Then take as many numerical digits as possible, which gets 42.
+
+Example 3:
+
+>Input: "4193 with words"
+>Output: 4193
+>Explanation: Conversion stops at digit '3' as the next character is not a numerical digit.
+
+Example 4:
+
+> Input: "words and 987"
+> Output: 0
+> Explanation: The first non-whitespace character is 'w', which is not a numerical 
+>              digit or a +/- sign. Therefore no valid conversion could be performed.
+
+Example 5:
+
+> Input: "-91283472332"
+> Output: -2147483648
+> Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
+>              Thefore INT_MIN (−231) is returned.
+
+
+
+这题需要注意处理各种边角情况：
+
+1. 全是空格符
+
+2. 空字符串
+
+3. 乘法溢出：因为每次加一位数字就需要将上一次的结果乘以10：
+
+   整型的范围是`[-2147483648  ~ 2147483647]`
+
+   假设我们需要处理字符串`“2147483657”`，那么在处理最后一位数字`7`的时候，我们需要将上一次得到的结果`214748365`乘以10，得到`2147483650`，显然这时候这个数字已经大于`2147483647`了，不需要进行到加法就已经因为乘法而溢出了
+
+4. 加法溢出： 判断符号是否反转（整型的上下溢）
 
 ```java
-public int myAtoi(String str) {
+public int strToInt2(String str) {
+    if (str.length() == 0) return 0;
     int ans = 0;
-    char[] chars = str.toCharArray();
-    if (chars.length == 0) {
-        return 0;
+    char[] cArr = str.toCharArray();
+    int startIndex = 0;
+    // skip spaces
+    while (cArr[startIndex] == ' ') {
+        startIndex++;
+        // all spaces
+        if (startIndex == cArr.length) return 0;
     }
-    int start = -1, end = 0;
-    for(int i = 0; i < chars.length; i++) {
-        char now = chars[i];
-        if (start == -1) {
-            if (!Character.isWhitespace(now)) {
-                if (isNumber(now) || isSign(now)) {
-                    start = i;
-                } else {
-                    return ans;
-                }
+    int sign = 1;
+    if (cArr[startIndex] == '-') {
+        sign = -1;
+        startIndex++;
+    } else if (cArr[startIndex] == '+') {
+        sign = 1;
+        startIndex++;
+    }
+    while (startIndex < cArr.length) {
+        if (cArr[startIndex] >= '0' && cArr[startIndex] <= '9') {
+            if (ans > Integer.MAX_VALUE / 10 || ans < Integer.MIN_VALUE / 10) {
+                // multiplication overflow
+                return sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
-        } else if (isNumber(now)) {
-            end = i;
+            ans = (ans * 10) + (sign * (cArr[startIndex] - '0'));
+            // addiction overflow
+            if (sign == -1 && ans > 0) {
+                return Integer.MIN_VALUE;
+            }
+            if (sign == 1 && ans < 0) {
+                return Integer.MAX_VALUE;
+            }
         } else {
-            end = i - 1;
-            break;
+            // not a number
+            return ans;
         }
+        startIndex++;
     }
-    if (start == -1 || start > end) {
-        return 0;
-    }
-    int base = 1;
-    boolean negative = false;
-    if (isSign(chars[start])) {
-        if (chars[start] == '-') {
-            negative = true;
-        }
-        start++;
-    }
-    for (int i = end; i >= start; i--) {
-        ans += (char2Number(chars[i]) * base);
-        base *= 10;
-    }
-    if ((ans % 10 != char2Number(chars[end]) && !isSign(chars[end])) ||
-            (base == 0 && chars[start] != '0')) {
-        return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-    }
-    return negative ? 0 - ans : ans;
-}
-
-public boolean isNumber(char c) {
-    return (c >= '0' && c <= '9');
-}
-public boolean isSign(char c) {
-    return (c == '-' || c == '+');
-}
-public int char2Number(char c) {
-    return c - '0';
+    return ans;
 }
 ```
 
@@ -286,26 +322,20 @@ Determine whether an integer is a palindrome. An integer is a palindrome when it
 
 **Example 1:**
 
-```
-Input: 121
-Output: true
-```
+> Input: 121
+> Output: true
 
 **Example 2:**
 
-```
-Input: -121
-Output: false
-Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
-```
+> Input: -121
+> Output: false
+> Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
 
 **Example 3:**
 
-```
-Input: 10
-Output: false
-Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
-```
+> Input: 10
+> Output: false
+> Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
 **Follow up:**
 
@@ -392,52 +422,42 @@ The matching should cover the **entire** input string (not partial).
 
 **Example 1:**
 
-```
-Input:
-s = "aa"
-p = "a"
-Output: false
-Explanation: "a" does not match the entire string "aa".
-```
+> Input:
+> s = "aa"
+> p = "a"
+> Output: false
+> Explanation: "a" does not match the entire string "aa".
 
 **Example 2:**
 
-```
-Input:
-s = "aa"
-p = "a*"
-Output: true
-Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
-```
+> Input:
+> s = "aa"
+> p = "a*"
+> Output: true
+> Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
 
 **Example 3:**
 
-```
-Input:
-s = "ab"
-p = ".*"
-Output: true
-Explanation: ".*" means "zero or more (*) of any character (.)".
-```
+> Input:
+> s = "ab"
+> p = ".*"
+> Output: true
+> Explanation: ".*" means "zero or more (*) of any character (.)".
 
 **Example 4:**
 
-```
-Input:
-s = "aab"
-p = "c*a*b"
-Output: true
-Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches "aab".
-```
+> Input:
+> s = "aab"
+> p = "c*a*b"
+> Output: true
+> Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches "aab".
 
 **Example 5:**
 
-```
-Input:
-s = "mississippi"
-p = "mis*is*p*."
-Output: false
-```
+> Input:
+> s = "mississippi"
+> p = "mis*is*p*."
+> Output: false
 
 
 
