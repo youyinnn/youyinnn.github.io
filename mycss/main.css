@@ -322,6 +322,10 @@
   display: none;
 }
 
+.articleshortmsg pre {
+  padding: 10px;
+}
+
 .articlemore {
   color: rgb(46, 46, 46);
   text-decoration: none;

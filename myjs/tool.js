@@ -682,8 +682,8 @@ function panelmsg(html, closefunc) {
 
 $(document).ready(function() {
     setPopPanel()
-    setBarPanel()
-    setPanelPanel()
+    // setBarPanel()
+    // setPanelPanel()
 })
 
 function ajaxGetFile(url, ohyes, ohno, nonet) {

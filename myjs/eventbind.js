@@ -150,7 +150,6 @@ $(function() {
                 avatar: 'hide',
                 lang: 'en'
             })
-            $('.vwrap').addClass('shadow')
             $('.vpower').html(`
                 comment plugin: <a href="https://valine.js.org" target="_blank">Valine</a>
             `)
