@@ -378,8 +378,9 @@ public void testBitMask(){
 
 一个整型32bit，占4B，那么40亿个4B就是160亿B，
 
-$ 1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿 $
-
+$$
+1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿
+$$
 而**Unsigned Int**的整数的取值范围是`[0 ~ 2^32-1]`，最大值是`4,294,967,295`，约42亿
 
 所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：

@@ -150,14 +150,11 @@
           <h4 id="9e3dd7b7">术语</h4>
           <h5 id="9ee9ce16">ASL（Average Search Length）</h5><p>平均查找长度：为确定记录在查找表中的位置，需和给定值进行比较的关键字的个数的期望值；</p>
 <p>公式：</p>
-<p>$$ ASL = _{i=1}^{n \atop \sum} P_iC_i $$</p>
-<p>其中<strong><em>Pi</em></strong>为查找表中第<strong><em>i</em></strong>个记录的概率；<strong><em>Ci</em></strong>为找到表中关键字和给定值的第<strong><em>i</em></strong>个记录时，和给定值已进行比较的<strong>关键字个数</strong></p>
+<p>$$<br>ASL = _{i=1}^{n \atop \sum} P_iC_i<br>$$<br>其中<strong><em>Pi</em></strong>为查找表中第<strong><em>i</em></strong>个记录的概率；<strong><em>Ci</em></strong>为找到表中关键字和给定值的第<strong><em>i</em></strong>个记录时，和给定值已进行比较的<strong>关键字个数</strong></p>
 <p>假设有顺序查找，长度为n，假设每个记录查找的概率相等（无重复），即</p>
-<p>$$P_i = 1 / n$$</p>
-<p>则：</p>
-<p>$$ASL = (1 * 1 / n ) + (2 * 1 / n) + \dots + (n * 1 / n) = [1 / n * ( n * \dfrac{n + 1}{2})] = \dfrac{n + 1}{2}$$</p>
-<p>但是以上仅是查找成功的概率，如果查找成功和查找成功则这个概率是</p>
-<p>$$\dfrac{3}{4} (n + 1)$$</p>
+<p>$$<br>P_i = 1 / n<br>$$<br>则：</p>
+<p>$$<br>\begin{aligned}ASL &amp;= (1 * 1 / n ) + (2 * 1 / n) + \dots + (n * 1 / n) \\ &amp;= [1 / n * ( n * \dfrac{n + 1}{2})] = \dfrac{n + 1}{2} \end{aligned}<br>$$<br>但是以上仅是查找成功的概率，如果查找成功和查找成功则这个概率是</p>
+<p>$$<br>\dfrac{3}{4} (n + 1)<br>$$</p>
 <hr>
 
           <h4 id="5444c982">元素查找算法</h4>

@@ -449,8 +449,7 @@ public void testBitMask(){
           <h4 id="94c9d245">题1：40亿</h4><p><strong>给40亿个不重复的Unsigned Int的整数，乱序，然后再给一个数，如何快速判断这个数是否在那40亿个数当中，要求内存限制2GB；</strong></p>
 <p>40亿个<strong>Unsigned Int</strong>的整数，如果放到内存， 那就是大约16G的空间：</p>
 <p>一个整型32bit，占4B，那么40亿个4B就是160亿B，</p>
-<p>$ 1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿 $</p>
-<p>而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
+<p>$$<br>1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿<br>$$<br>而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
 <p>所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：</p>
 <p><code>boolean[] mapA = new boolean[Integer.MAX_VALUE])</code></p>
 <p><code>boolean[] mapB = new boolean[Integer.MAX_VALUE])</code></p>

@@ -33,14 +33,14 @@ A good hash method will mapping any key to a un-used place, which means there is
 
 **Capture information on key**
 
-$$H(key) = key$$
-
-$$H(key) = a \cdotp key + b​$$
+$$
+H(key) = key \\\\ H(key) = a \cdotp key + b
+$$
 
 **Mod**
-
-$$H(key) = | key |\mod rank$$
-
+$$
+H(key) = | key|\mod rank
+$$
 Assume thay our hash-table's length is **rank**, with this way, we could always get a rightful index of it.
 
 ### Collision Handle
