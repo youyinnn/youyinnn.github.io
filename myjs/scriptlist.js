@@ -1,5 +1,4 @@
 var before = [
-    'https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js',
     'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js',
 ]
 
@@ -19,9 +18,9 @@ var after = [
     'https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js',
     'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js',
     'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
-    
+
     'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/jquery.hotkeys.js',
-    
+
     '/myjs/tool.js',
     '/myjs/eventbind.js',
     '/myjs/elementcreate.js',
@@ -48,11 +47,11 @@ function importJsAfterLoad() {
         load(path, {
             async: false,
             attrs: map
-        },function (err, script) {
+        }, function(err, script) {
             console.debug(script.src)
         })
     }
-    
+
     // specially loading for KaXTex https://katex.org/docs/autorender.html
     map.integrity = 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz'
     map.crossorigin = 'anonymous'
@@ -65,12 +64,24 @@ function importJsAfterLoad() {
         async: false,
         attrs: map
     }, () => {
-        for (el of document.getElementsByClassName('markdown-body')) {
-            renderMathInElement(el)
+        for (el of document.getElementsByTagName('p')) {
+            if (el.innerHTML.match(/^\$\$.*\$\$$/) !== null) {
+                el.innerHTML = el.innerText
+                renderMathInElement(el)
+            } else {
+                let inp = el.innerHTML.match(/\$\$.*\$\$/)
+                if (inp !== null) {
+                    let e = el.innerText.match(/\$\$\s*.*\s*\$\$/)[0]
+                    let ehtml = '<span class="katex-display">' + katex.renderToString(e.substring(2, e.length - 2), {
+                        throwOnError: false
+                    }) + '</span>'
+                    el.innerHTML = el.innerHTML.replace(inp[0], ehtml)
+                }
+            }
         }
     })
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     importJsAfterLoad()
 })

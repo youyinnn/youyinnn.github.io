@@ -391,13 +391,13 @@ exection -> execution (insert 'u')
 
 
 
-#### DP Top-down
+#### DP Top-down For Edit Distance
 
 这题，乍一看一脸懵逼，咋还有3种情况！咋还随便什么位置都能有这三种情况！怎么玩！用什么思路！
 
 思考几分钟后无果，果断去讨论区找思路，然后看到高评DP解，醍醐灌顶- -
 
-简单来说，虽然对比到有不同有**33333333333333**种情况，但是我们还是可以按照顺序来给两个word做一个矩阵，于是熟悉的操作就来了，
+简单来说，虽然对比到有不同有**3**种情况，但是我们还是可以按照顺序来给两个word做一个矩阵，于是熟悉的操作就来了，
 
 ``` java
 a = ac, b = ae
@@ -505,3 +505,158 @@ private int dfs(String a, String b, int i, int j, int[][] dp) {
     return dp[i][j];
 }
 ```
+
+
+
+### New 21 Game
+
+Alice plays the following game, loosely based on the card game "21".
+
+Alice starts with 0 points, and draws numbers while she has less than K points.  During each draw, she gains an integer number of points randomly from the range [1, W], where W is an integer.  Each draw is independent and the outcomes have equal probabilities.
+
+Alice stops drawing numbers when she gets K or more points.  What is the probability that she has N or less points?
+
+Example 1:
+
+> Input: N = 10, K = 1, W = 10
+> Output: 1.00000
+> Explanation:  Alice gets a single card, then stops.
+
+Example 2:
+
+> Input: N = 6, K = 1, W = 10
+> Output: 0.60000
+> Explanation:  Alice gets a single card, then stops.
+> In 6 out of W = 10 possibilities, she is at or below N = 6 points.
+
+Example 3:
+
+> Input: N = 21, K = 17, W = 10
+> Output: 0.73278
+> Note:
+>
+> 0 <= K <= N <= 10000
+> 1 <= W <= 10000
+> Answers will be accepted as correct if they are within 10^-5 of the correct answer.
+> The judging time limit has been reduced for this question.
+
+#### DP Top-down For 21 Game
+
+这题刚上手确实过于难，看了官方题解后才能有比较清晰的了解。
+
+首先我们需要理解题中的3个值：
+
+- N值：获胜目标分，想要获胜的话，我们的积分就必须低于等于N；
+- K值：停抽分，一旦我们最后一手牌抽到再累积积分超过K值，就停止抽牌，否则必须再抽一张；
+- W值：牌面最大分值，我们抽牌能够获取【0~W】值的积分；
+- 起始积分：0分；
+
+然后我们再来分析例子：
+
+1. K为1，意味着我们最多只能抽一次牌，最多的积分只能为1~10分，总积分低于等于N值（10）的概率为100%；
+2. K为1，意味着我们最多只能抽一次牌，最多的积分只能为1~10分，总积分低于等于N值（6）的概率为60%；
+
+再来分析例3，K为17时，我们看最后只能抽一手牌的情况，也就是积分为16的时候，这时候我们最好一手抽出的积分情况为：
+
+``` graph
+┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐
+| ... ||  16 ||  17 ||  18 ||  19 ||  20 ||  21 ||  22 ||  23 ||  24 ||  25 ||  26 | <--- 总积分
+└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘
+                 1      1      1      1      1      0      0      0      0      0    <--- 是否获胜
+```
+
+于是我们可以知道在积分等于16的时候，获胜的概率：
+
+我们设*f(x)*，为积分为x的时候，获胜的概率，于是有
+
+$$
+\begin{aligned}
+f(16) &= \frac {1} {10} \cdotp (1 + 1+ 1+ 1+ 1 + 0 + 0 + 0 + 0 + 0) \\\\ 
+&= \frac {5} {10} = 0.5
+\end{aligned}
+$$
+
+并且：
+
+$$
+f(17) = f(18) = f(19)  = f(20)  = f(21)  = 1 \\\\  f(22) = f(23) = f(24)  = f(25)  = f(26)  = 0
+$$
+
+ 于是我们可以得到初步的状态转移方程：
+
+$$
+\begin{aligned} f(x) &= \frac {1} {W} \cdotp (f(x + 1) + f(x + 2) + \dotsb + f(x + W)) \\\\  f(x - 1) &= \frac {1} {W} \cdotp (f(x) + f(x + 1) + \dotsb + f(x + W - 1)) \\\\ \vdots \\\\ f(0) &= \frac {1} {W} \cdotp (f(1) + f(2) + \dotsb + f(W)) \end{aligned}
+$$
+
+到这里为止，其实我们已经能够写出题解了，但是我们要是以高中生的眼光来看上面的公式，我们不难发现，后一项和前一项的公式中其实有部分个结果是有重复的部分，*f(x)*和*f(x - 1)*中有重叠的*f(x + 1) + ... + f(x + W - 1))*，于是我们可以两式相减来简化一下：
+
+$$
+\begin{aligned} f(x) - f(x - 1) &= \frac {1} {W} \cdotp (\bcancel{f(x + 1)} + \bcancel{f(x + 2)} + \bcancel{\dotsb} + f(x + W)) \\\\ &\quad- \frac {1} {W} \cdotp (f(x) + \bcancel{f(x + 1)} + \bcancel{\dotsb} + \bcancel{f(x + W - 1)}) \\\\ &= \frac {1} {W} \cdotp (f(x + W) - f(x)) \end{aligned}
+$$
+
+于是有：
+
+$$
+f(x)  - f(x - 1)  = \frac {1} {W} \cdotp (f(x + W) - f(x))
+$$
+
+到这里有两个化简选择：
+
+1. 如果*f(x - 1)*右移：
+
+   $$
+   f(x) = \frac {1} {W} \cdotp (f(x + W) - f(x))  - f(x - 1)
+   $$
+
+   这样无法求解，因为我们是从后往前推到的转移公式，最终是要推导道*f(0)*，我们希望的是要有：
+
+   $$
+   f(x) = C \cdot f(x + 1) + k
+   $$
+
+   这样的公式，这样我们才能倒序循环，从后一项推出前一项的值，观察上面的化简式可以发现，式中有3个高一项的值，一个矮一项的值，我们把高的都放右边，矮的单独放左边，于是有第二种化简
+
+2. *f(x - 1)*右移后，原式右边左移，最后左右翻转一下：
+$$
+   \begin{aligned} f(x - 1) &= f(x) -  \frac {1} {W} \cdotp (f(x + W) - f(x)) \\\\ f(x) &= f(x + 1) -  \frac {1} {W} \cdotp (f(x + 1 + W) - f(x + 1)) \end{aligned}
+   $$
+
+上式就是我们最终得出的简化的通项公式，然后我们兴高采烈地写出题解：
+
+``` java
+public double new21Game(int n, int k, int w) {
+    if (k == 0) return 1.0;
+    double[] dp = new double[k + w + 1];
+    for (int i = k; i <= k + w - 1 && i <= n; i++) {
+        dp[i] = 1.0;
+    }
+    for (int i = k - 1; i >= 0; i--) {
+        dp[i] = dp[i + 1] - (dp[i + w + 1] - dp[i + 1]) / w;
+    }
+    return dp[0];
+}
+```
+
+结果爆炸，这到底是为什么呢？演算一下，我们发现*dp[16]*居然算出1.1000000，显然和事实的0.5不符，我们假设化简后通项公式不适用于*dp[K-1]*，那么我们需要先计算好这个值，再从*dp[K-2]*，开始去尝试，那么*dp[K-1]*等于多少呢？
+
+我们在得到16分的时候，距离21分还有10张牌里有5种赢的可能，那就是21-16+1，也就是*N-K+1*，而如果说这时候W等于3，那么就最多只有3张牌里有3种赢的机会，所以我们可以得出公式：
+$$
+f(K - 1) = \frac {1} {W} \cdot min(N-K+1, W)
+$$
+于是我们最终的代码为：
+
+``` java
+public double new21Game(int n, int k, int w) {
+    if (k == 0) return 1.0;
+    double[] dp = new double[k + w + 1];
+    for (int i = k; i <= k + w - 1 && i <= n; i++) {
+        dp[i] = 1.0;
+    }
+    dp[k - 1] = 1.0 * Math.min(n - k + 1, w) / w;
+    for (int i = k - 2; i >= 0; i--) {
+        dp[i] = dp[i + 1] - (dp[i + w + 1] - dp[i + 1]) / w;
+    }
+    return dp[0];
+}
+```
+
