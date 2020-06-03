@@ -43,7 +43,7 @@
   margin: 0;
   padding: 0;
   transition: all .3s;
-  /* font-family: 'trebuchet MS', 'Microsoft YaHei' !important; */
+  font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji ;
 }
 
 body,
@@ -91,6 +91,10 @@ pre {
 a code{
   margin: 0 !important;
   padding: 0 !important;
+}
+
+td code, a code, p code, ul code {
+  font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji !important;
 }
 
 /*
@@ -147,7 +151,6 @@ td.hljs-ln-numbers {
   padding-right: 10px !important;
   /* your custom style here */
   color: #66686b !important;
-  font-family: Roboto Mono, Source Sans Pro, Monaco, courier, monospace !important;
   width: 20px;
 }
 
@@ -165,7 +168,7 @@ td.hljs-ln-code {
 .editormd-preview-container blockquote {
   padding-left: initial !important;
   padding: 10px !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
   border-left: 2px #66c77d solid !important;
   background-color: ghostwhite;
 }
@@ -199,6 +202,11 @@ x {
   background-color: #44556817;
 }
 
+.markdown-body pre {
+  font-size: 13px !important;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace !important;
+}
+
 .tooltip-inner {
   max-width: 500px !important;
 }
@@ -230,7 +238,6 @@ x {
 #md,
 .markdown-body,
 .new_font {
-  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
 }
 
