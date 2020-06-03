@@ -466,9 +466,9 @@ inention -&gt; enention (replace &#39;i&#39; with &#39;e&#39;)
 enention -&gt; exention (replace &#39;n&#39; with &#39;x&#39;)
 exention -&gt; exection (replace &#39;n&#39; with &#39;c&#39;)
 exection -&gt; execution (insert &#39;u&#39;)</code></pre>
-          <h4 id="8aff0a2b">DP Top-down</h4><p>这题，乍一看一脸懵逼，咋还有3种情况！咋还随便什么位置都能有这三种情况！怎么玩！用什么思路！</p>
+          <h4 id="4800a877">DP Top-down For Edit Distance</h4><p>这题，乍一看一脸懵逼，咋还有3种情况！咋还随便什么位置都能有这三种情况！怎么玩！用什么思路！</p>
 <p>思考几分钟后无果，果断去讨论区找思路，然后看到高评DP解，醍醐灌顶- -</p>
-<p>简单来说，虽然对比到有不同有<strong>33333333333333</strong>种情况，但是我们还是可以按照顺序来给两个word做一个矩阵，于是熟悉的操作就来了，</p>
+<p>简单来说，虽然对比到有不同有<strong>3</strong>种情况，但是我们还是可以按照顺序来给两个word做一个矩阵，于是熟悉的操作就来了，</p>
 <pre><code class="language-java">a = ac, b = ae
 
      j = 0 1
@@ -557,6 +557,90 @@ private int dfs(String a, String b, int i, int j, int[][] dp) {
         }
     }
     return dp[i][j];
+}</code></pre>
+
+          <h3 id="552cc9d1">New 21 Game</h3><p>Alice plays the following game, loosely based on the card game &quot;21&quot;.</p>
+<p>Alice starts with 0 points, and draws numbers while she has less than K points.  During each draw, she gains an integer number of points randomly from the range [1, W], where W is an integer.  Each draw is independent and the outcomes have equal probabilities.</p>
+<p>Alice stops drawing numbers when she gets K or more points.  What is the probability that she has N or less points?</p>
+<p>Example 1:</p>
+<blockquote>
+<p>Input: N = 10, K = 1, W = 10<br>Output: 1.00000<br>Explanation:  Alice gets a single card, then stops.</p>
+</blockquote>
+<p>Example 2:</p>
+<blockquote>
+<p>Input: N = 6, K = 1, W = 10<br>Output: 0.60000<br>Explanation:  Alice gets a single card, then stops.<br>In 6 out of W = 10 possibilities, she is at or below N = 6 points.</p>
+</blockquote>
+<p>Example 3:</p>
+<blockquote>
+<p>Input: N = 21, K = 17, W = 10<br>Output: 0.73278<br>Note:</p>
+<p>0 &lt;= K &lt;= N &lt;= 10000<br>1 &lt;= W &lt;= 10000<br>Answers will be accepted as correct if they are within 10^-5 of the correct answer.<br>The judging time limit has been reduced for this question.</p>
+</blockquote>
+
+          <h4 id="244c0fb7">DP Top-down For 21 Game</h4><p>这题刚上手确实过于难，看了官方题解后才能有比较清晰的了解。</p>
+<p>首先我们需要理解题中的3个值：</p>
+<ul>
+<li>N值：获胜目标分，想要获胜的话，我们的积分就必须低于等于N；</li>
+<li>K值：停抽分，一旦我们最后一手牌抽到再累积积分超过K值，就停止抽牌，否则必须再抽一张；</li>
+<li>W值：牌面最大分值，我们抽牌能够获取【0~W】值的积分；</li>
+<li>起始积分：0分；</li>
+</ul>
+<p>然后我们再来分析例子：</p>
+<ol>
+<li>K为1，意味着我们最多只能抽一次牌，最多的积分只能为1~10分，总积分低于等于N值（10）的概率为100%；</li>
+<li>K为1，意味着我们最多只能抽一次牌，最多的积分只能为1~10分，总积分低于等于N值（6）的概率为60%；</li>
+</ol>
+<p>再来分析例3，K为17时，我们看最后只能抽一手牌的情况，也就是积分为16的时候，这时候我们最好一手抽出的积分情况为：</p>
+<pre><code class="language-graph">┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐┌-----┐
+| ... ||  16 ||  17 ||  18 ||  19 ||  20 ||  21 ||  22 ||  23 ||  24 ||  25 ||  26 | &lt;--- 总积分
+└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘└-----┘
+                 1      1      1      1      1      0      0      0      0      0    &lt;--- 是否获胜</code></pre>
+<p>于是我们可以知道在积分等于16的时候，获胜的概率：</p>
+<p>我们设<em>f(x)</em>，为积分为x的时候，获胜的概率，于是有</p>
+<p>$$<br>\begin{aligned}<br>f(16) &amp;= \frac {1} {10} \cdotp (1 + 1+ 1+ 1+ 1 + 0 + 0 + 0 + 0 + 0) \\<br>&amp;= \frac {5} {10} = 0.5<br>\end{aligned}<br>$$</p>
+<p>并且：</p>
+<p>$$<br>f(17) = f(18) = f(19)  = f(20)  = f(21)  = 1 \\  f(22) = f(23) = f(24)  = f(25)  = f(26)  = 0<br>$$</p>
+<p> 于是我们可以得到初步的状态转移方程：</p>
+<p>$$<br>\begin{aligned} f(x) &amp;= \frac {1} {W} \cdotp (f(x + 1) + f(x + 2) + \dotsb + f(x + W)) \\  f(x - 1) &amp;= \frac {1} {W} \cdotp (f(x) + f(x + 1) + \dotsb + f(x + W - 1)) \\ \vdots \\ f(0) &amp;= \frac {1} {W} \cdotp (f(1) + f(2) + \dotsb + f(W)) \end{aligned}<br>$$</p>
+<p>到这里为止，其实我们已经能够写出题解了，但是我们要是以高中生的眼光来看上面的公式，我们不难发现，后一项和前一项的公式中其实有部分个结果是有重复的部分，<em>f(x)</em>和<em>f(x - 1)</em>中有重叠的<em>f(x + 1) + ... + f(x + W - 1))</em>，于是我们可以两式相减来简化一下：</p>
+<p>$$<br>\begin{aligned} f(x) - f(x - 1) &amp;= \frac {1} {W} \cdotp (\bcancel{f(x + 1)} + \bcancel{f(x + 2)} + \bcancel{\dotsb} + f(x + W)) \\ &amp;\quad- \frac {1} {W} \cdotp (f(x) + \bcancel{f(x + 1)} + \bcancel{\dotsb} + \bcancel{f(x + W - 1)}) \\ &amp;= \frac {1} {W} \cdotp (f(x + W) - f(x)) \end{aligned}<br>$$</p>
+<p>于是有：</p>
+<p>$$<br>f(x)  - f(x - 1)  = \frac {1} {W} \cdotp (f(x + W) - f(x))<br>$$</p>
+<p>到这里有两个化简选择：</p>
+<ol>
+<li><p>如果<em>f(x - 1)</em>右移：</p>
+<p>$$<br>f(x) = \frac {1} {W} \cdotp (f(x + W) - f(x))  - f(x - 1)<br>$$</p>
+<p>这样无法求解，因为我们是从后往前推到的转移公式，最终是要推导道<em>f(0)</em>，我们希望的是要有：</p>
+<p>$$<br>f(x) = C \cdot f(x + 1) + k<br>$$</p>
+<p>这样的公式，这样我们才能倒序循环，从后一项推出前一项的值，观察上面的化简式可以发现，式中有3个高一项的值，一个矮一项的值，我们把高的都放右边，矮的单独放左边，于是有第二种化简</p>
+</li>
+<li><p><em>f(x - 1)</em>右移后，原式右边左移，最后左右翻转一下：<br>$$<br>\begin{aligned} f(x - 1) &amp;= f(x) -  \frac {1} {W} \cdotp (f(x + W) - f(x)) \\ f(x) &amp;= f(x + 1) -  \frac {1} {W} \cdotp (f(x + 1 + W) - f(x + 1)) \end{aligned}<br>$$</p>
+</li>
+</ol>
+<p>上式就是我们最终得出的简化的通项公式，然后我们兴高采烈地写出题解：</p>
+<pre><code class="language-java">public double new21Game(int n, int k, int w) {
+    if (k == 0) return 1.0;
+    double[] dp = new double[k + w + 1];
+    for (int i = k; i &lt;= k + w - 1 &amp;&amp; i &lt;= n; i++) {
+        dp[i] = 1.0;
+    }
+    for (int i = k - 1; i &gt;= 0; i--) {
+        dp[i] = dp[i + 1] - (dp[i + w + 1] - dp[i + 1]) / w;
+    }
+    return dp[0];
+}</code></pre>
+<p>结果爆炸，这到底是为什么呢？演算一下，我们发现<em>dp[16]</em>居然算出1.1000000，显然和事实的0.5不符，我们假设化简后通项公式不适用于<em>dp[K-1]</em>，那么我们需要先计算好这个值，再从<em>dp[K-2]</em>，开始去尝试，那么<em>dp[K-1]</em>等于多少呢？</p>
+<p>我们在得到16分的时候，距离21分还有10张牌里有5种赢的可能，那就是21-16+1，也就是<em>N-K+1</em>，而如果说这时候W等于3，那么就最多只有3张牌里有3种赢的机会，所以我们可以得出公式：<br>$$<br>f(K - 1) = \frac {1} {W} \cdot min(N-K+1, W)<br>$$<br>于是我们最终的代码为：</p>
+<pre><code class="language-java">public double new21Game(int n, int k, int w) {
+    if (k == 0) return 1.0;
+    double[] dp = new double[k + w + 1];
+    for (int i = k; i &lt;= k + w - 1 &amp;&amp; i &lt;= n; i++) {
+        dp[i] = 1.0;
+    }
+    dp[k - 1] = 1.0 * Math.min(n - k + 1, w) / w;
+    for (int i = k - 2; i &gt;= 0; i--) {
+        dp[i] = dp[i + 1] - (dp[i + w + 1] - dp[i + 1]) / w;
+    }
+    return dp[0];
 }</code></pre>
 
     </div>

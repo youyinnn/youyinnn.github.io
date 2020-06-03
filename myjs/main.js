@@ -162,7 +162,15 @@ function new_render_md(regular_toc, abbrlink) {
             nowh2 = this
         })
     }
-    $('.katex').parent().addClass('katexp')
+    $('.katex-display').addClass('katexp')
+    let ktxdisplay = $('.katex-display').next()
+    if (ktxdisplay.length > 0) {
+        for (jq of ktxdisplay) {
+            if (jq.tagName === 'BR') {
+                $(jq).remove()
+            }
+        }
+    }
     setimgclicktofocus()
     highlightBlock()
     $('.language-console').each((i, e) => {
