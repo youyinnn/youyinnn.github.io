@@ -69,13 +69,14 @@ function importJsAfterLoad() {
                 el.innerHTML = el.innerText
                 renderMathInElement(el)
             } else {
-                let inp = el.innerHTML.match(/\$\$.*\$\$/)
-                if (inp !== null) {
-                    let e = el.innerText.match(/\$\$\s*.*\s*\$\$/)[0]
+                let inp = el.innerHTML.match(/\$\$[^$]*\$\$/)
+                while (inp !== null) {
+                    let e = el.innerText.match(/\$\$[^$]*\$\$/)[0]
                     let ehtml = '<span class="katex-display">' + katex.renderToString(e.substring(2, e.length - 2), {
                         throwOnError: false
                     }) + '</span>'
                     el.innerHTML = el.innerHTML.replace(inp[0], ehtml)
+                    inp = el.innerHTML.match(/\$\$[^$]*\$\$/)
                 }
             }
         }
