@@ -222,7 +222,7 @@
   width: 65%;
   transition: transform 1.5s;
   margin: auto;
-  font-size: 16px;
+  font-size: 14px;
   background-color: var(--ybackground-color);
   max-width: 1000px;
   padding-bottom: 6rem;
@@ -422,7 +422,7 @@
 } */
 .onearticle {
   width: 100%;
-  border-bottom: 0.1rem var(--ydashed-color) dashed;
+  /* border-bottom: 0.1rem var(--ydashed-color) dashed; */
   margin-bottom: .5rem;
 }
 
@@ -1141,7 +1141,6 @@
 
 .showarrow {
   transition: color .7s, transform .4s;
-  color: #5ac5a5;
 }
 
 .showarrow a {
@@ -1155,6 +1154,7 @@
 .panchor {
   display: table;
   cursor: pointer;
+  font-weight: 500 !important;
 }
 
 .panchor:hover {
@@ -1385,24 +1385,22 @@ summary {
   margin-bottom: 1rem;
 }
 
-.article h1 {
-  font-size: 24px !important;
+.article h1, 
+.article h2, 
+.article h3, 
+.article h4, 
+.article h5, 
+.article h6 {
+  margin-top: 10px !important;
+  margin-bottom: 5px !important;
 }
 
-.article h2 {
-  font-size: 22px !important;
+a code {
+  background: inherit !important;
 }
 
-.article h3 {
-  font-size: 20px !important;
-}
-
-.article h4 {
-  font-size: 18px !important;
-}
-
-.article h5 {
-  font-size: 16px !important;
+.headhr {
+  margin: 5px 0 10px !important;
 }
 
 .no-transit * {

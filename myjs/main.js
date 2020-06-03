@@ -33,6 +33,26 @@ function new_render_md(regular_toc, abbrlink) {
         </ul>
     `)
 
+    if (Boolean(regular_toc)) {
+        let h1s = $('h1')
+        let h2s = $('h2')
+        let h3s = $('h3')
+        let h4s = $('h4')
+        let addhr
+        if (h1s.length > 0) {
+            addhr = h1s
+        } else if (h2s.length > 0) {
+            addhr = h2s
+        } else if (h3s.length > 0) {
+            addhr = h3s
+        } else if (h4s.length > 0) {
+            addhr = h4s
+        }
+        addhr.after(`
+            <hr class="headhr">
+        `)
+    }
+
     function limaker(text, id, tg) {
         let transferred = text
             .trim()
@@ -159,7 +179,7 @@ function new_render_md(regular_toc, abbrlink) {
 
     if (Boolean(abbrlink)) {
         let end = `
-        <hr>
+        <br>
         <div class="copyrightbox">
             <span style="font-weight:bold;font-size:18px;">Copyright Notices:</span>
             <br>
