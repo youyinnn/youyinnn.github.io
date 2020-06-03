@@ -427,7 +427,7 @@ public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 >  假设长度为m的A集合有随机一个**cut**出现在下标i的位置，那么有**m + 1**种可能的**cut（0 ~ m）**
 >
 >  ```nhi
->         left_A             |        right_A
+>   left_A                   |  right_A
 >   A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 >  ```
 >
@@ -440,16 +440,16 @@ public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 >  类似地，对B我们可以：
 >
 >  ```nhi
->         left_B             |        right_B
->   B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+>  left_B                   |        right_B
+>  B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 >  ```
 >
 >  A、B连在一起看，我们得出：
 >
 >  ```nhi
->         left_part          |        right_part
->   A[0], A[1], ..., A[i-1]  | A[i], A[i+1], ..., A[m-1]
->   B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+>  left_part                |        right_part
+>  A[0], A[1], ..., A[i-1]  | A[i], A[i+1], ..., A[m-1]
+>  B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 >  ```
 >  如果我们可以找到如下**两个条件**：
 >

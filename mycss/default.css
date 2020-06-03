@@ -43,7 +43,6 @@
   margin: 0;
   padding: 0;
   transition: all .3s;
-  font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji ;
 }
 
 body,
@@ -93,7 +92,7 @@ a code{
   padding: 0 !important;
 }
 
-td code, a code, p code, ul code {
+p, p > code, .new_font {
   font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji !important;
 }
 

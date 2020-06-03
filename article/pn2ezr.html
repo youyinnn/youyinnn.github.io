@@ -474,7 +474,7 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
 <p>然后我们再了解一个<strong>切（Cut）</strong>的概念：</p>
 <blockquote>
 <p> 假设长度为m的A集合有随机一个<strong>cut</strong>出现在下标i的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
-<pre><code class="language-nhi">        left_A             |        right_A
+<pre><code class="language-nhi">  left_A                   |  right_A
   A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]</code></pre>
 <p> 其中：</p>
 <ul>
@@ -482,10 +482,10 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
 </li>
 <li><p>when i = 0, <strong>left_A</strong> is empty, and when i = m, <strong>right_A</strong> is empty</p>
 <p>类似地，对B我们可以：</p>
-<pre><code class="language-nhi">     left_B             |        right_B
+<pre><code class="language-nhi">left_B                   |        right_B
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
 <p>A、B连在一起看，我们得出：</p>
-<pre><code class="language-nhi">     left_part          |        right_part
+<pre><code class="language-nhi">left_part                |        right_part
 A[0], A[1], ..., A[i-1]  | A[i], A[i+1], ..., A[m-1]
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
 <p>如果我们可以找到如下<strong>两个条件</strong>：</p>
