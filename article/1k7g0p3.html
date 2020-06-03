@@ -348,12 +348,12 @@
           <h5 id="db529969">3. 吞吐量</h5><p>吞吐量（throughput）表示在单位时间内通过某个网络的实际的数据量。</p>
 
           <h5 id="2c554d7">4. 时延</h5><p>（1）发送时延，是主机或者路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特开始算起，到该帧的最后一个比特发送完毕所需要的时间。</p>
-<p>$$TransmissionDelay = \dfrac{DataBitLength(bit)}{BitRate(bit/s)}$$</p>
+<p>$$<br>TransmissionDelay = \dfrac{DataBitLength(bit)}{BitRate(bit/s)}<br>$$</p>
 <blockquote>
 <p> 数据帧长度 / 速率</p>
 </blockquote>
 <p>（2）传播时延，是电磁波在信道中传播一定距离需要花的时间。</p>
-<p>$$PropagationDelay = \dfrac{ChannelLength(m)}{ElectWaveSpeedRate(m/s)}$$</p>
+<p>$$<br>PropagationDelay = \dfrac{ChannelLength(m)}{ElectWaveSpeedRate(m/s)}<br>$$</p>
 <blockquote>
 <p>信道长度 / 电磁波在信道上的传播速率</p>
 </blockquote>
@@ -361,13 +361,11 @@
 <p>（3）处理时延，主机或者路由器在给帧做加工工作的时候，或者查找目的地接口的时候，需要的处理时间。</p>
 <p>（4）排队时延，分组在网络传输中，要经过许多路由器，路由器一次处理的分组数量有限，一般会有一个排队机制，先来的先处理，后来的在队尾等候。</p>
 
-          <h5 id="2a35ac51">5. 时延带宽积（略）</h5><p>$$ DelayBandWidthProduct =  TransmissionDelay \times BandWidth$$</p>
+          <h5 id="2a35ac51">5. 时延带宽积（略）</h5><p>$$<br>DelayBandWidthProduct =  TransmissionDelay \times BandWidth<br>$$</p>
 
           <h5 id="5699fe2">6. 往返时间RTT</h5><p>Round-Trip Time是一个重要的指标，它代表了双向交互一次所需要的时间。比如，如果A向B发送数据，数据长度是100MB，发送速率是100 Mbit/s</p>
-<p>$$TranmissionDelay = \dfrac{DataBitLength}{BitRate} = \dfrac{100 \times 2^{20} \times 8}{100 \times 10^{6}} \thickapprox 8.39s$$</p>
-<p>如果B正确收完100MB的数据之后，就立即向A发送确认，假定A只有在收到B的确认信息后，才能继续向B发送数据。显然这需要等一个RTT的时间。如果RTT = 2s，那么有效数据率为：</p>
-<p>$$ EffectiveBitRate = \dfrac{DataBitLength}{TransmissionDelay + RTT} = \dfrac{100 \times 2^{20} \times 8}{8.39 + 2} \thickapprox 80.7Mbit/s$$</p>
-<p>可以看出，考虑上RTT之后，实际有效的速率会大受影响。</p>
+<p>$$<br>TranmissionDelay = \dfrac{DataBitLength}{BitRate} = \dfrac{100 \times 2^{20} \times 8}{100 \times 10^{6}} \thickapprox 8.39s<br>$$<br>如果B正确收完100MB的数据之后，就立即向A发送确认，假定A只有在收到B的确认信息后，才能继续向B发送数据。显然这需要等一个RTT的时间。如果RTT = 2s，那么有效数据率为：</p>
+<p>$$<br>EffectiveBitRate = \dfrac{DataBitLength}{TransmissionDelay + RTT} = \dfrac{100 \times 2^{20} \times 8}{8.39 + 2} \thickapprox 80.7Mbit/s<br>$$<br>可以看出，考虑上RTT之后，实际有效的速率会大受影响。</p>
 
           <h5 id="39732f3e">7. 利用率</h5><p>利用率有信道利用率和网络利用率两种：</p>
 <ul>
