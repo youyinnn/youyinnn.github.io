@@ -472,59 +472,65 @@ The median is (2 + 3)/2 = 2.5</code></pre><p>这道题难就难在要找到<stro
 <p>它将原集合分成等长的两个子集，其中一个子集中的任意元素总是大于另一个子集中的任意元素</p>
 </blockquote>
 <p>然后我们再了解一个<strong>切（Cut）</strong>的概念：</p>
-<blockquote>
-<p> 假设长度为m的A集合有随机一个<strong>cut</strong>出现在下标i的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
-<pre><code class="language-nhi">  left_A                   |  right_A
-  A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]</code></pre>
-<p> 其中：</p>
+<p>假设长度为m的A集合有随机一个<strong>cut</strong>出现在下标i的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
+<pre><code class="language-nhi">left_A                   |  right_A
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]</code></pre>
+<p>其中：</p>
 <ul>
 <li><p>len(left_A) = i, len(right_A) = m − i</p>
 </li>
 <li><p>when i = 0, <strong>left_A</strong> is empty, and when i = m, <strong>right_A</strong> is empty</p>
-<p>类似地，对B我们可以：</p>
-<pre><code class="language-nhi">left_B                   |        right_B
-B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
-<p>A、B连在一起看，我们得出：</p>
-<pre><code class="language-nhi">left_part                |        right_part
-A[0], A[1], ..., A[i-1]  | A[i], A[i+1], ..., A[m-1]
-B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
-<p>如果我们可以找到如下<strong>两个条件</strong>：</p>
 </li>
 </ul>
-<ol>
-<li><p><strong>len(left_part) = len(right_part)</strong></p>
-</li>
-<li><p><strong>max(left_part) ≤ min(right_part)</strong></p>
-<p>那么我们就等于将全集<strong>{A, B}</strong>分为<strong>等长</strong>的2部分，且左半部分中的元素总是比右半部分中的元素要小</p>
-<p>注意，<strong>等长</strong>概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定<strong>左集合比右集合多一个</strong>，所以奇数集合的中位数总是<strong>左集合中最大的那一个</strong></p>
-<p>这时候<strong>Medium</strong>可以由 <strong>(max(left_part) + min(right_part)) / 2</strong> 得出！也即我们若是找到了正确的切点，那么也就找到了<strong>Medium</strong></p>
-</li>
-</ol>
-</blockquote>
-<p>于是我们按照以下步骤进行切点的寻找：</p>
-<blockquote>
+<p>类似地，对B我们可以：</p>
+<pre><code class="language-nhi">left_B                   |  right_B
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
+<p>A、B连在一起看，我们得出：</p>
+<pre><code class="language-nhi">left_part                |  right_part
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]</code></pre>
+<p>对于总集长度为偶数时，如果我们可以找到如下<strong>两个条件</strong>：<br>$$<br>\begin{aligned}<br>1.\quad &amp;len(left\_part) = len(right\_part) \\<br>2.\quad &amp;max(left\_part) ≤ min(right\_part)<br>\end{aligned}<br>$$<br>那么我们就等于将全集<strong>{A, B}</strong>分为<strong>等长</strong>的2部分，且左半部分中的元素总是比右半部分中的元素要小</p>
+<p>此时集合的中位数为：<br>$$<br>Median = \frac {max(left\_part) + min(right\_part)} {2}<br>$$<br>对于总集长度为奇数时：<br>$$<br>\begin{aligned}<br>1.\quad &amp;len(left\_part) = len(right\_part) + 1 \\<br>2.\quad &amp;max(left\_part) ≤ min(right\_part)<br>\end{aligned}<br>$$<br>注意，<strong>等长</strong>概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定<strong>左集合比右集合多一个</strong>，所以奇数集合的中位数总是<strong>左集合中最大的那一个</strong></p>
+<p>此时集合的中位数为：<br>$$<br>Median = max(left\_part)<br>$$<br>于是我们按照以下步骤进行切点的寻找：</p>
 <ol>
 <li><p>总是以较短的集合作为A集合，以短集合的长度去寻找<strong>Cut</strong></p>
 </li>
-<li><p>设置<code>iMin=0</code>，<code>iMax=m</code>，在[iMin, iMax]中寻找cut</p>
+<li><p>设置<code>iMin=0</code>，<code>iMax=m</code>，在<code>[iMin, iMax]</code>中寻找<strong>Cut</strong></p>
 </li>
-<li><p><code>i</code>为A的cut，它等于<code>(iMin + iMax) / 2</code>; <code>j</code>为B的cut，它等于<code>(m + n + 1) / 2 -i</code></p>
+<li><p><code>i</code>为A的<strong>Cut</strong>，它等于<code>(iMin + iMax) / 2</code>; <code>j</code>为B的<strong>Cut</strong>，它等于<code>(m + n + 1) / 2 -i</code></p>
 </li>
 <li><p>现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有3种情况：</p>
 <ul>
-<li><p><code>B[j - 1] &lt;= A[i] &amp;&amp; A[i - 1] &gt;= B[j]</code></p>
-<p>  意味着满足了条件二了，<code>i</code>和<code>j</code>正是我们要找的<strong>切点</strong>，找到了切点，就判断全集长度的奇偶性，从而求出<strong>Medium</strong></p>
+<li><p><code>B[j - 1] &lt;= A[i] &amp;&amp; A[i - 1] &gt;= B[j]</code>：</p>
+<p>意味着满足了条件二了，<code>i</code>和<code>j</code>正是我们要找的<strong>切点</strong>，找到了切点，就判断全集长度的奇偶性，从而求出<strong>Medium</strong></p>
+<blockquote>
+<p>我们来分析一下：</p>
+<p>对于左边集合，我们需要找<code>maxLeft</code>，对于左边的集合来说，<code>i</code>和<code>j</code>任意一个切点如果顶到0下标了，那么左边集合最大值肯定在对方那里，比如<code>i</code>等于0的时候，左边集合最大的数字肯定在<code>B[j - 1]</code>处，如果两个切点都没顶格，那么有<code>maxLeft = Math.max(A[i-1], B[j-1])</code></p>
+<p>对于右边集合，同样如此，如果顶格（<code>i = m</code>或者<code>j = n</code>）了的话，右边集合的最小值肯定在对方那里，否则就取<code>minRight = Math.min(B[j], A[i])</code></p>
+<p>然后根据<code>m + n</code>的奇偶性求得中位数</p>
+</blockquote>
 </li>
-<li><p><code>B[j - 1] &gt;  A[i]</code>：</p>
-<p>  意味着<code>i</code>找小了，所以这时候将<code>iMin</code>加1，于是下一次<code>i</code>切点也会往后挪</p>
+<li><p>如果<code>i &lt; iMax</code>并且<code>A[i] &lt; B[j - 1]</code>：</p>
+<p>表示此时<code>i</code>还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着<code>i</code>找小了，所以这时候将<code>iMin</code>加1，这时：</p>
+<blockquote>
+<p><code>i</code>切点会往后挪，把<code>A[i]</code>退回左边集合，<code>j</code>相应地会往前挪，然后把<code>B[j - 1]</code>收进右边集合；</p>
+</blockquote>
 </li>
-<li><p><code>A[i-1] &gt; B[j]</code>：</p>
-<p>  意味着<code>i</code>找大了，这时候将<code>iMax</code>减1，于是下一次<code>i</code>切点也会往前挪</p>
+<li><p>如果<code>i &gt; iMin</code>并且<code>A[i-1] &gt; B[j]</code>：</p>
+<p>表示此时<code>i</code>还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着<code>i</code>找大了，这时候将<code>iMax</code>减1，这时：</p>
+<blockquote>
+<p><code>i</code>切点会往前挪，把<code>A[i - 1]</code>收进右边集合，<code>j</code>相应地会往后挪，把<code>B[j]</code>退回到左边集合；</p>
+</blockquote>
 </li>
 </ul>
 </li>
 </ol>
-</blockquote>
+<p>该题有两个需要注意的约定：</p>
+<ol>
+<li>奇数集合里面，约定<strong>左集合比右集合多一个</strong>；</li>
+<li>保证A集合长度要小于等于B集合；</li>
+</ol>
+<p>题解：</p>
 <pre><code class="language-java">public double findMedianSortedArrays(int[] A, int[] B) {
     int m = A.length;
     int n = B.length;
