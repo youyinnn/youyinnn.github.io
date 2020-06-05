@@ -31,7 +31,7 @@ date: 2019-04-05 13:11:00 +8
 
 ### Serial GC
 
-**Serail GC**使用[标记-复制](https://youyinnn.github.io/?to=post&number=77#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3-2.%20Mark-Copy)算法回收年轻代，使用[标记-整理]()算法回收老年代
+**Serail GC**使用[标记-复制](./jhpq7e.html?hash=14c983ac)算法回收年轻代，使用[标记-整理]()算法回收老年代
 
 和它的名字一样，串行收集器在这两个区域只能**串行地**收集，这两个区域的收集也会触发**大暂停**
 
@@ -131,7 +131,7 @@ Following snippet contains the information about a GC event cleaning the Young G
 
 ### Parallel GC
 
-**Parallel GC**使用[标记-复制](https://youyinnn.github.io/?to=post&number=77#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3-2.%20Mark-Copy)算法回收年轻代，使用[标记-整理]()算法回收老年代，这点两个收集器都一样
+**Parallel GC**使用[标记-复制](./jhpq7e.html?hash=14c983ac)算法回收年轻代，使用[标记-整理]()算法回收老年代，这点两个收集器都一样
 
 和它的名字一样，并行收集器在这两个区域可以**并行地**收集，开始工作前也会触发**大暂停**，说并行是指它会用多个线程同时进行垃圾回收，这样做会大大减少回收的耗时
 
@@ -241,7 +241,7 @@ CMS的**Full GC**有点讲头，它分为7个阶段
 
 ###### Phase 3: Concurrent Preclean
 
-这个阶段还是和应用程序并行的。虽然在上一个并发阶段里，有些引用被改变了，我们称这些对象为**“脏的（dirty）”**，如果出现这种情况的话，JVM会将包含这些脏对象的堆区域划出一个范围，称为**卡（card）**，这就是我们前面提到过的[卡标记（*card-marking*）](https://youyinnn.github.io/?to=post&number=109#Object%20Generation-Eden)
+这个阶段还是和应用程序并行的。虽然在上一个并发阶段里，有些引用被改变了，我们称这些对象为**“脏的（dirty）”**，如果出现这种情况的话，JVM会将包含这些脏对象的堆区域划出一个范围，称为**卡（card）**，这就是我们前面提到过的[卡标记（*card-marking*）](./wlvrl9.html?hash=76a3fb27)
 
 ![CMS dirty cards](https://plumbr.io/app/uploads/2015/06/g1-08.png)
 

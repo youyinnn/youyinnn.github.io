@@ -202,7 +202,7 @@ inention -&gt; enention (replace &#39;i&#39; with &#39;e&#39;)
 enention -&gt; exention (replace &#39;n&#39; with &#39;x&#39;)
 exention -&gt; exection (replace &#39;n&#39; with &#39;c&#39;)
 exection -&gt; execution (insert &#39;u&#39;)</code></pre>
-          <h4 id="13dd55ef">DP</h4><p>针对这题的分析在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中</p>
+          <h4 id="13dd55ef">DP</h4><p>针对这题的分析在<a href="./1flo1c0.html?hash=fd3f1d11">DP Again</a>中</p>
 <pre><code class="language-java">public int minDistance(String word1, String word2) {
     int[][] dp = new int[word1.length() + 1][word2.length() + 1];
     for (int i = 0; i &lt;= word1.length(); i++) {
@@ -371,7 +371,7 @@ Output: [0,0,1,1,2,2]</code></pre><p><strong>Follow up:</strong></p>
 <li>Could you come up with a one-pass algorithm using only constant space?</li>
 </ul>
 
-          <h4 id="4af2fa6f">Two-pass Counting Sort</h4><p>关于计数排序，<a href="https://youyinnn.github.io/?to=post&amp;number=42#_root-CountingSort">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
+          <h4 id="4af2fa6f">Two-pass Counting Sort</h4><p>关于计数排序，<a href="./1b0rp9e.html?hash=63d906b">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
 <pre><code class="language-java">public void sortColors(int[] nums) {
     int[] count = new int[3];
     for (int color : nums) {

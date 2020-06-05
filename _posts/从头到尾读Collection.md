@@ -22,7 +22,7 @@ public interface Collection<E> extends Iterable<E> {
   //...
 }
 ```
-头部继承了`Iterable<E>`接口, 对, 这里要注意是extends一个接口, 为什么是extends, 我们去看`Iterable<E>`接口里到底有啥, [跳转文章](https://youyinnn.github.io/?to=post&number=44).
+头部继承了`Iterable<E>`接口, 对, 这里要注意是extends一个接口, 为什么是extends, 我们去看`Iterable<E>`接口里到底有啥, [跳转文章](./1kakozs.html).
 
 所以我们知道, Collection继承了这个`接口`就代表着它拥有了容器内元素可迭代访问的功能.
 

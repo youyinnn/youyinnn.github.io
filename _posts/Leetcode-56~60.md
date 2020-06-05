@@ -203,7 +203,7 @@ Output:
 
 #### Solution
 
-有了[Spiral Matrix](https://youyinnn.github.io/?to=post&number=115#_root-54.%20Spiral%20Matrix(Medium))的经验，这题就很容易暴打出来了
+有了[Spiral Matrix](./xmbex2.html?hash=73ecdd5a)的经验，这题就很容易暴打出来了
 
 ```java
 public int[][] generateMatrix(int n) {

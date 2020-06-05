@@ -94,7 +94,7 @@ Output: "10101"
 
 #### Solution
 
-和[MultiplyString](https://youyinnn.github.io/?to=post&number=111#_root-43.%20Multiply%20Strings(Medium))一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理
+和[MultiplyString](./11z93zc.html?hash=22be3288)一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理
 
 ```java
 public String addBinary(String a, String b) {
