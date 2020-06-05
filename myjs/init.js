@@ -51,7 +51,11 @@ $(function() {
     get_friendlinked()
     let pathname = location.pathname
     if (location.search === '?fromgithub=true') {
-        popmsg('国内访问 已跳转到Coding Pages')
+        if (location.origin.search('gitee') > -1) {
+            popmsg('国内访问 已跳转到 Gitee Pages')
+        } else {
+            popmsg('国内访问 已跳转到 Coding Pages')
+        }
     }
     if (pathname === '/' || pathname === '/index.html') {
         hidesidetoc()
