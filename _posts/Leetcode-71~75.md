@@ -146,7 +146,7 @@ exection -> execution (insert 'u')
 
 #### DP
 
-针对这题的分析在[DP Again](https://youyinnn.github.io/?to=post&number=112)中
+针对这题的分析在[DP Again](./1flo1c0.html?hash=fd3f1d11)中
 
 ```java
 public int minDistance(String word1, String word2) {
@@ -379,7 +379,7 @@ Output: [0,0,1,1,2,2]
 
 #### Two-pass Counting Sort
 
-关于计数排序，[排序大礼包](https://youyinnn.github.io/?to=post&number=42#_root-CountingSort)的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机
+关于计数排序，[排序大礼包](./1b0rp9e.html?hash=63d906b)的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机
 
 ```java
 public void sortColors(int[] nums) {

@@ -29,7 +29,7 @@ date: 2019-03-18 20:46:00
 
 #### Eden
 
-在以前一篇[关于JVM的对象创建与访问](https://youyinnn.github.io/?to=post&number=70)里提到过的TLAB（Thead Local Allocatipn Buffer），它主要用于解决对象分配的时候需要先划定一些内存空间，一个内存空间仅允许一个线程进行操作，这样就可以避免用同步的**高耗时**代价去保证对象分配的正常进行
+在以前一篇[关于JVM的对象创建与访问](./18669ga.html)里提到过的TLAB（Thead Local Allocatipn Buffer），它主要用于解决对象分配的时候需要先划定一些内存空间，一个内存空间仅允许一个线程进行操作，这样就可以避免用同步的**高耗时**代价去保证对象分配的正常进行
 
 于是Eden空间进一步划分一个或者多个TLAB区域，并且保留一块公共区域，当TLAB空间不够分配对象的时候，会选择到公共区域继续分配，如果这里也没有空间了的话，那就会出发一次年轻代的GC，也就是**Minor GC**
 
@@ -61,7 +61,7 @@ date: 2019-03-18 20:46:00
 
 #### PermGen & Metaspace
 
-这两个就不再解释了，之前研究字符串的时候，有写过相关的：[The Revelation of Java String](https://youyinnn.github.io/?to=post&number=101)
+这两个就不再解释了，之前研究字符串的时候，有写过相关的：[The Revelation of Java String](./46bhg0.html)
 
 ### GC Events
 

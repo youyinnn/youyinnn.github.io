@@ -150,7 +150,7 @@
 </blockquote>
 
           <h3 id="cb8c7193">SynchronizedQueue</h3><p>同步器依赖内部实现的一个同步队列来完成<strong>同步状态的管理</strong>，当前线程获取同步状态失败的时候，同步器会将当前线程以及等待状态等信息构造成一个结点（Node）并将其加入到同步队列的尾部，<strong>同时阻塞当前线程</strong></p>
-<p>同步队列中的结点用来保存同步状态获取失败的线程引用、等待状态以及前驱和后继结点，我们来看一下Node结构，值得一提的是，Node的结构是CLH队列锁的一个变体，CLH队列锁是一种自旋锁，有兴趣可以参考<a href="https://youyinnn.github.io/?to=post&amp;number=92">这里</a>来学习一下，推荐学习Node之前看一下CLH队列锁</p>
+<p>同步队列中的结点用来保存同步状态获取失败的线程引用、等待状态以及前驱和后继结点，我们来看一下Node结构，值得一提的是，Node的结构是CLH队列锁的一个变体，CLH队列锁是一种自旋锁，有兴趣可以参考<a href="./vywf17.html">这里</a>来学习一下，推荐学习Node之前看一下CLH队列锁</p>
 <pre><code class="language-java">static final class Node {
     /** Marker to indicate a node is waiting in shared mode */
     static final Node SHARED = new Node();

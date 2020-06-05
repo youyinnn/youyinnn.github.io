@@ -602,4 +602,4 @@ public final boolean releaseShared(int arg) {
 特别是有的时候，即使是畅销书都不太会和你分析深一些的道理和结构逻辑，比如share部分就没太分析，网上也有许多同行尝试进行分析，但是也没讲出**Propagate**的真正含义
 
 ------
-[clh]: https://youyinnn.github.io/?to=post&number=92
+[clh]: ./vywf17.html

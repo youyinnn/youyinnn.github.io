@@ -123,7 +123,7 @@ Output: 28
 
 #### DP
 
-机器人走方格，有多少种走法题目，在[地痞](https://youyinnn.github.io/?to=post&number=63#DP%E7%BB%83%E4%B9%A0-3%EF%BC%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B5%B0%E6%96%B9%E6%A0%BC)解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好pre数组的结果
+机器人走方格，有多少种走法题目，在[地痞](./188zp6j.html?hash=c401ac5d)解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好pre数组的结果
 
 ```java
 public int uniquePaths(int m, int n) {
@@ -235,7 +235,7 @@ Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 
 #### DP
 
-曾经有一道题，[硬币收集问题](https://youyinnn.github.io/?to=post&number=63#DP%E7%BB%83%E4%B9%A0-6%EF%BC%9A%E7%A1%AC%E5%B8%81%E6%94%B6%E9%9B%86%E9%97%AE%E9%A2%98)，这个就相当于收集到的最小币值
+曾经有一道题，[硬币收集问题](./188zp6j.html?hash=d2258ac5)，这个就相当于收集到的最小币值
 
 ``` java
 public int minPathSum(int[][] grid) {

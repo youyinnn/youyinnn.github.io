@@ -122,7 +122,7 @@ private void backtracking(List<List<String>> ans, List<String> cb, int n, int ro
 
 同列的话，我们可以用一个n长度数组去记录，这个数组可以所有行共用；
 
-对角线的话，我们前面做[**MultiplyString**](https://youyinnn.github.io/?to=post&number=111#_root-43.%20Multiply%20Strings(Medium))，有想出来过一个对角线的技巧，于是这里我们也可以将所有的对角线压缩成一行：
+对角线的话，我们前面做[**MultiplyString**](./11z93zc.html?hash=22be3288)，有想出来过一个对角线的技巧，于是这里我们也可以将所有的对角线压缩成一行：
 
 ```
 对于一个4*4的棋盘：
@@ -314,7 +314,7 @@ If you have figured out the O(*n*) solution, try coding another solution using t
 
 #### DP
 
-不多说，在[地痞](https://youyinnn.github.io/?to=post&number=63)有分析过的
+不多说，在[地痞](./188zp6j.html)有分析过的
 
 ```java
 public int maxSubArray(int[] nums) {
@@ -479,7 +479,7 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.
 ```
 
-这题就不多解释了，在[DP Again](https://youyinnn.github.io/?to=post&number=112)中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -
+这题就不多解释了，在[DP Again](./1flo1c0.html)中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -
 
 #### DP
 

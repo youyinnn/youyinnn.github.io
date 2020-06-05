@@ -235,7 +235,7 @@ private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt;
 <li>左右对角线不能下；</li>
 </ul>
 <p>同列的话，我们可以用一个n长度数组去记录，这个数组可以所有行共用；</p>
-<p>对角线的话，我们前面做<a href="https://youyinnn.github.io/?to=post&amp;number=111#_root-43.%20Multiply%20Strings(Medium)"><strong>MultiplyString</strong></a>，有想出来过一个对角线的技巧，于是这里我们也可以将所有的对角线压缩成一行：</p>
+<p>对角线的话，我们前面做<a href="./11z93zc.html?hash=22be3288"><strong>MultiplyString</strong></a>，有想出来过一个对角线的技巧，于是这里我们也可以将所有的对角线压缩成一行：</p>
 <pre><code>对于一个4*4的棋盘：
 
 对于135°的右向对角线，我们可以将2维的压缩成
@@ -411,7 +411,7 @@ Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.</code></pre><p><strong>Follow up:</strong></p>
 <p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
 
-          <h4 id="13dd55ef">DP</h4><p>不多说，在<a href="https://youyinnn.github.io/?to=post&amp;number=63">地痞</a>有分析过的</p>
+          <h4 id="13dd55ef">DP</h4><p>不多说，在<a href="./188zp6j.html">地痞</a>有分析过的</p>
 <pre><code class="language-java">public int maxSubArray(int[] nums) {
     int rMax = 0, max = Integer.MIN_VALUE;
     for (int current: nums) {
@@ -531,7 +531,7 @@ Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</cod
 <pre><code>Input: [3,2,1,0,4]
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
-             jump length is 0, which makes it impossible to reach the last index.</code></pre><p>这题就不多解释了，在<a href="https://youyinnn.github.io/?to=post&amp;number=112">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
+             jump length is 0, which makes it impossible to reach the last index.</code></pre><p>这题就不多解释了，在<a href="./1flo1c0.html">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
 
           <h4 id="13dd55ef">DP</h4><pre><code class="language-java">public boolean canJump(int[] nums) {
     boolean[] can = new boolean[nums.length];

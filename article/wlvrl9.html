@@ -162,7 +162,7 @@
         </script>
     </p>
 
-          <h4 id="76a3fb27">Eden</h4><p>在以前一篇<a href="https://youyinnn.github.io/?to=post&amp;number=70">关于JVM的对象创建与访问</a>里提到过的TLAB（Thead Local Allocatipn Buffer），它主要用于解决对象分配的时候需要先划定一些内存空间，一个内存空间仅允许一个线程进行操作，这样就可以避免用同步的<strong>高耗时</strong>代价去保证对象分配的正常进行</p>
+          <h4 id="76a3fb27">Eden</h4><p>在以前一篇<a href="./18669ga.html">关于JVM的对象创建与访问</a>里提到过的TLAB（Thead Local Allocatipn Buffer），它主要用于解决对象分配的时候需要先划定一些内存空间，一个内存空间仅允许一个线程进行操作，这样就可以避免用同步的<strong>高耗时</strong>代价去保证对象分配的正常进行</p>
 <p>于是Eden空间进一步划分一个或者多个TLAB区域，并且保留一块公共区域，当TLAB空间不够分配对象的时候，会选择到公共区域继续分配，如果这里也没有空间了的话，那就会出发一次年轻代的GC，也就是<strong>Minor GC</strong></p>
 <p>这里有个GC的细节，也是之前没提到过的，我们说GC的基本操作是，扫描引用链，然后清除掉和根引用无关的对象，但是我们需要知道，对象之间的引用是可以跨代的，比如新生代对象可以挂在老年代对象上，所以一次直白的<strong>Reachability Analysis</strong>，可能会跨代进行</p>
 <p>
@@ -231,7 +231,7 @@
 <li>压缩这些存活对象，让他们尽量靠近彼此，靠近空间的开端；</li>
 </ul>
 
-          <h4 id="18a2af49">PermGen &amp; Metaspace</h4><p>这两个就不再解释了，之前研究字符串的时候，有写过相关的：<a href="https://youyinnn.github.io/?to=post&amp;number=101">The Revelation of Java String</a></p>
+          <h4 id="18a2af49">PermGen &amp; Metaspace</h4><p>这两个就不再解释了，之前研究字符串的时候，有写过相关的：<a href="./46bhg0.html">The Revelation of Java String</a></p>
 
           <h3 id="28dc6e9b">GC Events</h3>
           <h4 id="884eaefe">Minor GC</h4><p><strong>Minor GC</strong>发生在年轻代，它的概念和意图其实也就这么简单，但是还有一些细节需要我们了解一下：</p>

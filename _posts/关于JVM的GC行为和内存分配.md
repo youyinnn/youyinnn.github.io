@@ -201,5 +201,5 @@ GC要工作的时候，它要如何判断对象是否已经死亡呢？通过什
 3. **长期存活的对象进入老年代**：虚拟机会给对象定义一个Age计数器，对象在Eden区熬过一次**Minor GC**的话，age+1，并且进入Survivor区，每在Survivor熬过一次**Minor GC**，age就+1直到达到一定程度（默认15），就会进入老年代
 4. **同年龄对象若占空间超过一半直接进入老年代**：不用等到阈值年龄
 
-更详细的补充见[再谈对象分代和GC事件](https://youyinnn.github.io/?to=post&number=109#_root-Object%20Generation)
+更详细的补充见[再谈对象分代和GC事件](./wlvrl9.html?hash=93aa08bf)
 
