@@ -303,7 +303,7 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 <p><strong>Follow up:</strong></p>
 <p>Could you do this in one pass?</p>
 
-          <h4 id="8aed313d">Two Pass Solution (Beat 100%)</h4><pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+          <h4 id="8a224b08">Two Pass Solution</h4><pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode pre = head;
     int size = 1;
     while (pre.next != null) {
@@ -327,7 +327,7 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 }</code></pre>
 <p>没什么说的，one pass获得长度，two pass直接定位删除</p>
 
-          <h4 id="c301b577">One Pass Solution (Beat 100%)</h4><pre><code class="language-java">public ListNode removeNthFromEnd2(ListNode head, int n) {
+          <h4 id="db02c3f2">One Pass Solution</h4><pre><code class="language-java">public ListNode removeNthFromEnd2(ListNode head, int n) {
     ListNode pre = new ListNode(0), now = head, check;
     pre.next = head;
     if (head == null) {
@@ -357,6 +357,27 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     return head;
 }</code></pre>
 <p>遍历链，对每个结点都往后找n+1个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
+
+          <h4 id="e39e1833">One Pass Solution - Tow pointers</h4><p>从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。</p>
+<pre><code class="language-java">public ListNode removeNthFromEnd3(ListNode head, int n) {
+    if (head == null || head.next == null) return null;
+    ListNode p1 = head, p2 = head, pre = head;
+    while (p1 != null) {
+        if (n != 0) {
+            n--;
+        } else {
+            pre = p2;
+            p2 = p2.next;    
+        }
+        p1 = p1.next;
+    }
+    // 当长度为n的链表要求删除倒数第n个节点时，p2始终呆在头节点，所以直接返回头节点的next
+    if (p2 == head) {
+        return head.next;
+    }
+    pre.next = p2.next;
+    return head;
+}</code></pre>
 
           <h3 id="11824d81">20. Valid Parentheses</h3><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
 <p>An input string is valid if:</p>

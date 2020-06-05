@@ -217,7 +217,7 @@ Given *n* will always be valid.
 
 Could you do this in one pass?
 
-#### Two Pass Solution (Beat 100%)
+####  Two Pass Solution
 
 ```java
 public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -245,7 +245,7 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 ```
 没什么说的，one pass获得长度，two pass直接定位删除
 
-#### One Pass Solution (Beat 100%)
+#### One Pass Solution 
 
 ```java
 public ListNode removeNthFromEnd2(ListNode head, int n) {
@@ -280,6 +280,34 @@ public ListNode removeNthFromEnd2(ListNode head, int n) {
 ```
 
 遍历链，对每个结点都往后找n+1个结点记为**CHECK**，如果**CHECK**为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍
+
+#### One Pass Solution - Tow pointers
+
+从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。
+
+``` java
+public ListNode removeNthFromEnd3(ListNode head, int n) {
+    if (head == null || head.next == null) return null;
+    ListNode p1 = head, p2 = head, pre = head;
+    while (p1 != null) {
+        if (n != 0) {
+            n--;
+        } else {
+            pre = p2;
+            p2 = p2.next;    
+        }
+        p1 = p1.next;
+    }
+    // 当长度为n的链表要求删除倒数第n个节点时，p2始终呆在头节点，所以直接返回头节点的next
+    if (p2 == head) {
+        return head.next;
+    }
+    pre.next = p2.next;
+    return head;
+}
+```
+
+
 
 
 

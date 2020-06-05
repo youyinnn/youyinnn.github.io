@@ -744,7 +744,17 @@ function pagination() {
             pageFlesh()
         }
     })
+
+    let totalli = c('li')
+    totalli.id = 'lpg'
+    adclass(totalli, 'page-item disabled')
+    let totaldiv = c('div')
+    adclass(totaldiv, 'page-link')
+    totaldiv.innerText = 'All ' + totalpages + ' Pages'
+    appendc(totalli, totaldiv)
+    appendc(pn, totalli)
     appendc(pnbox, pn)
+
     appendc($('#pgboxbox')[0], pnbox)
     setTimeout(function() {
         rmclass(pn, 'myhide')
