@@ -483,7 +483,6 @@ function catetagclick(catetag, isfilter, clicknode) {
         catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
     }
     scrollToTop(0)
-    highlightBlock()
     $('#articlesearchtext').val('')
 }
 
@@ -586,7 +585,6 @@ function rstopaging(articles) {
             }
         })
     })
-    highlightBlock()
     window.totalpages = totalpages
     rmclass(pageboxbox, 'myhide')
     adclass(pageboxbox, 'animate__animated animate__fadeIn')
