@@ -1,13 +1,13 @@
 ---
 title: 再谈对象分代和GC事件
 categories:
-- note
-- thinking
-- GC
+  - java
+  - jvm
+  - memory
 tags:
-- gc
-- gc-event
-- generation-type
+  - gc
+  - gc-event
+  - generation-type
 date: 2019-03-18 20:46:00
 ---
 

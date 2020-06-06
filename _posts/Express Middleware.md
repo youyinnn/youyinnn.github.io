@@ -1,11 +1,11 @@
 ---
 title: Express Middleware
 categories:
-- note
-- nodejs
+  - front-end
+  - nodejs
 tags:
-- express
-- nodejs
+  - express
+  - nodejs
 series: express
 date: 2019-10-03 16:31:00
 ---

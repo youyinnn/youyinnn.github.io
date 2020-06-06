@@ -1,10 +1,10 @@
 ---
 title: Docker ConceptReview
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
+  - docker
 date: 2018-12-2 12:39:09
 series: docker
 ---

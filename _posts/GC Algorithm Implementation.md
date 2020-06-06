@@ -1,12 +1,12 @@
 ---
 title: GC Algorithm Implementation
 categories:
-- note
-- thinking
-- GC
+  - java
+  - jvm
+  - gc
 tags:
-- gc
-- gc-algorithm
+  - gc
+  - gc-algorithm
 date: 2019-04-05 13:11:00 +8
 ---
 

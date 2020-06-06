@@ -1,10 +1,10 @@
 ---
 title: Docker Stack
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
+  - docker
 date: 2018-11-29 16:46:00
 series: docker
 ---

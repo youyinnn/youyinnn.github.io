@@ -1,8 +1,8 @@
 ---
 title: Python - threading
 categories:
-  - note
   - python
+  - concurrency-p
 tags:
   - python
   - thread

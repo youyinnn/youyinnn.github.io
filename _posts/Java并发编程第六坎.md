@@ -1,8 +1,8 @@
 ---
 title: Java并发编程第六坎
 categories:
-  - note
-  - booknote
+  - java
+  - concurrency
   - 《艺术》与《技术》
 comments: true
 tags:

@@ -1,11 +1,10 @@
 ---
 title: Leetcode-11~15
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+  - leetcode
 date: 2019-02-27 21:42:00
 series: leetcode
 ---

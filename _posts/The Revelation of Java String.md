@@ -1,11 +1,12 @@
 ---
 title: The Revelation of Java String
 categories:
-- note
-- thinking
+  - java
+  - jvm
+  - memory
 tags:
-- java-string
-- string-pool
+  - java-string
+  - string-pool
 date: 2019-03-02 13:50:00
 ---
 

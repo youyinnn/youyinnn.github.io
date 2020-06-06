@@ -1,11 +1,10 @@
 ---
 title: Leetcode-21~25
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+  - leetcode
 date: 2019-03-06 21:17:00
 series: leetcode
 ---

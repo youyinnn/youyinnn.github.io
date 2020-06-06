@@ -1,13 +1,12 @@
 ---
 title: Leetcode-36~40
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
-- sudoku
-- combination-sum
+  - leetcode
+  - sudoku
+  - combination-sum
 date: 2019-03-20 19:46:00
 series: leetcode
 ---

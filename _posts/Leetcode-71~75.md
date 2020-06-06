@@ -1,13 +1,12 @@
 ---
 title: Leetcode-71~75
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
-- mysqrt
-- binary-question
+  - leetcode
+  - mysqrt
+  - binary-question
 date: 2019-04-04 15:35:00 +8
 series: leetcode
 ---

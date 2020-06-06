@@ -1,11 +1,10 @@
 ---
 title: Leetcode-61~65
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+  - leetcode
 date: 2019-04-02 14:18:00 +8
 series: leetcode
 ---

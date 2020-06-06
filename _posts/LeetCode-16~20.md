@@ -1,11 +1,10 @@
 ---
 title: Leetcode-16~20
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+ - leetcode
 date: 2019-03-06 20:13:00
 series: leetcode
 ---

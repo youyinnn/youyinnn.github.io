@@ -1,11 +1,10 @@
 ---
 title: Leetcode-1~5
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+ - leetcode
 date: 2019-02-02 19:51:00
 series: leetcode
 ---
@@ -499,7 +498,7 @@ $$
      > 对于右边集合，同样如此，如果顶格（`i = m`或者`j = n`）了的话，右边集合的最小值肯定在对方那里，否则就取`minRight = Math.min(B[j], A[i])`
   >
      > 然后根据`m + n`的奇偶性求得中位数
-   
+
    - 如果`i < iMax `并且`A[i] < B[j - 1]  `：
    
      表示此时`i`还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着`i`找小了，所以这时候将`iMin`加1，这时：

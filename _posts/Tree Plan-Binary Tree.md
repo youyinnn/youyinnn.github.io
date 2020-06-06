@@ -1,14 +1,14 @@
 ---
 title: Tree Plan-Binary Tree
 categories:
-- note
-- algorithm
+  - datastruct
+  - tree
 tags:
-- algorithm
-- binary-tree
-- tree
-- dfs
-- bfs
+  - algorithm
+  - binary-tree
+  - tree
+  - dfs
+  - bfs
 date: 2019-01-30 21:36:20
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: CLH Lock Queue
 categories:
-- note
-- data structure
+  - datastruct
+  - tree
 tags:
-- algorithm
-- CLH-Lock-Queue
+  - algorithm
+  - clh-lock-queue
 date: 2018-12-30 16:35:00
 ---
 

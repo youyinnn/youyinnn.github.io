@@ -271,11 +271,32 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 
 [Where does Java's String constant pool live, the heap or the stack?](https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack)
 
-
 ### Java 静态内部类和非静态内部类
 
-
 [Why prefer non-static inner classes over static ones?](https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones)
+
+> Joshua Bloch in Item 22 of his book "Effective Java Second Edition" tells when to use which kind of nested class and why. There are some quotes below:
+>
+> One common use of a static member class is as a public helper class, useful only in conjunction with its outer class. For example, consider an enum describing the operations supported by a calculator. The Operation enum should be a public static member class of the `Calculator` class. Clients of `Calculator` could then refer to operations using names like `Calculator.Operation.PLUS` and `Calculator.Operation.MINUS`.
+>
+> One common use of a nonstatic member class is to define an *Adapter* that allows an instance of the outer class to be viewed as an instance of some unrelated class. For example, implementations of the `Map` interface typically use nonstatic member classes to implement their *collection views*, which are returned by `Map`’s `keySet`, `entrySet`, and `values` methods. Similarly, implementations of the collection interfaces, such as `Set` and `List`, typically use nonstatic member classes to implement their iterators:
+>
+> ```
+> // Typical use of a nonstatic member class
+> public class MySet<E> extends AbstractSet<E> {
+>     ... // Bulk of the class omitted
+> 
+>     public Iterator<E> iterator() {
+>         return new MyIterator();
+>     }
+> 
+>     private class MyIterator implements Iterator<E> {
+>         ...
+>     }
+> }
+> ```
+>
+> If you declare a member class that does not require access to an enclosing instance, *always* put the `static` modifier in its declaration, making it a static rather than a nonstatic member class.
 
 
 ### bridge method

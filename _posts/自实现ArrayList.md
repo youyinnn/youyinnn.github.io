@@ -1,7 +1,8 @@
 ---
 title: 自实现ArrayList
 categories:
-  - note
+  - java
+  - collections-framework
 comments: true
 date: 2018-06-04 22:47:12
 tags:

@@ -1,7 +1,7 @@
 ---
 title: Electron_打包你的HelloWorld为exe
 categories:
-  - note
+  - front-end
   - electron
 comments: true
 tags:

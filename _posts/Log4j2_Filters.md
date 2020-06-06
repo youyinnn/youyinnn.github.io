@@ -1,9 +1,9 @@
 ---
 title: Log4j2_Filters
 categories:
-  - note
-  - toolslearning
-  - log4j2
+  - java
+  - lib
+  - log4j
 comments: true
 tags:
   - log4j2

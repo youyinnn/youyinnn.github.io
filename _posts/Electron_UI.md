@@ -1,7 +1,7 @@
 ---
 title: Electron_UI
 categories:
-  - note
+  - front-end
   - electron
 comments: true
 tags:

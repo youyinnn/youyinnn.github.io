@@ -1,14 +1,13 @@
 ---
 title: Leetcode-46~50
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
-- permutation
-- backtrack
-- mypow
+  - leetcode
+  - permutation
+  - backtrack
+  - mypow
 date: 2019-03-27 15:39:00 +8
 series: leetcode
 ---

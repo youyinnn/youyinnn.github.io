@@ -1,14 +1,14 @@
 ---
 title: Help GC A Favor & JIT Introduction
 categories:
-- note
-- thinking
-- GC
+  - java
+  - jvm
+  - gc
 tags:
-- JVM
-- GC
-- JIT
-- OOM
+  - JVM
+  - GC
+  - JIT
+  - OOM
 date: 2019-03-04 04:19:00
 ---
 

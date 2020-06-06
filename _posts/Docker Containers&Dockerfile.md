@@ -1,10 +1,10 @@
 ---
 title: Docker Containers&Dockerfile
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
+  - docker
 date: 2018-11-16 15:05:11
 series: docker
 ---

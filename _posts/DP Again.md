@@ -1,10 +1,10 @@
 ---
 title: DP Again
 categories:
-- note
-- algorithm
+  - algorithm
+  - dp
 tags:
-- dp
+  - dp
 date: 2019-03-22 14:14:00 +8
 ---
 
@@ -619,7 +619,7 @@ $$
 2. *f(x - 1)*右移后，原式右边左移，最后左右翻转一下：
 $$
    \begin{aligned} f(x - 1) &= f(x) -  \frac {1} {W} \cdotp (f(x + W) - f(x)) \\\\ f(x) &= f(x + 1) -  \frac {1} {W} \cdotp (f(x + 1 + W) - f(x + 1)) \end{aligned}
-   $$
+$$
 
 上式就是我们最终得出的简化的通项公式，然后我们兴高采烈地写出题解：
 

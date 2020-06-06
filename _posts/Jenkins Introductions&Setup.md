@@ -1,11 +1,11 @@
 ---
 title: Jenkins Introductions&Setup
 categories:
-- note
-- jenkins
+  - jenkins
+  - notes
 tags:
-- setup
-- jenkins
+  - setup
+  - jenkins
 date: 2018-11-19 14:51:00
 series: jenkins
 ---
