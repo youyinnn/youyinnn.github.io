@@ -1,2 +1,1 @@
-
-var resourcesList = ["friendslink.js","cache-19karma.js"]
+var resourcesList;if (location.pathname.startsWith('/articles/')) {resourcesList = ["friendslink.js","cache-bg5uce.js"];} else {resourcesList = ["friendslink.js"];}
