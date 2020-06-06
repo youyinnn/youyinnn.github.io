@@ -23,7 +23,7 @@ var after = [{
         }
     },
     {
-        url: 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js',
+        url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/bootstrap-just-popover.bundle.min.js',
         target: ['*'],
         attrs: {
             defer: true
@@ -31,49 +31,49 @@ var after = [{
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/dayjs@1.8.27/dayjs.min.js',
-        target: ['*'],
+        target: ['/articles/', '/article/'],
         attrs: {
             defer: true
         }
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/js-yaml@3.13.1/dist/js-yaml.min.js',
-        target: ['*'],
+        target: ['/articles/', '/article/'],
         attrs: {
             defer: true
         }
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js',
-        target: ['*'],
+        target: ['/article/', '/scripts/'],
         attrs: {
             defer: true
         }
     },
     {
         url: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js',
-        target: ['*'],
+        target: ['/article/', '/scripts/', '/todos/', '/resume/', '/about/'],
         attrs: {
             defer: true
         }
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
-        target: ['*'],
+        target: ['/article/'],
         attrs: {
             defer: true
         }
     },
     {
-        url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/jquery.hotkeys.js',
-        target: ['*'],
+        url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/jquery.hotkeys.min.js',
+        target: ['/articles/'],
         attrs: {
             defer: true
         }
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js',
-        target: ['*'],
+        target: ['/article/', '/scripts/', '/todos/'],
         attrs: {
             defer: true,
             integrity: 'sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz',
@@ -82,7 +82,7 @@ var after = [{
     },
     {
         url: 'https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js',
-        target: ['*'],
+        target: ['/article/', '/scripts/', '/todos/'],
         attrs: {
             defer: true,
             integrity: 'sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI',
@@ -149,7 +149,7 @@ var after = [{
 after = resourcesList.concat(after)
 
 function loadIfIsTarget(rs) {
-    if (rs.target.find(path => path === location.pathname || path === '*')) {
+    if (rs.target.find(path => location.pathname.startsWith(path) || path === '*')) {
         load(rs.url, {
             async: rs.async !== undefined ? rs.async : false,
             attrs: rs.attrs

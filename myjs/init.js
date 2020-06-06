@@ -58,7 +58,6 @@ $(function() {
         }
     }
     if (pathname === '/' || pathname === '/index.html') {
-
         hidesidetoc()
         rmclass(homepage, 'myhide')
         adclass(homepage, 'myshow')
@@ -165,11 +164,11 @@ $(function() {
 
         showbbt()
         showtocbtn()
+        $('[data-toggle="tooltip"]').tooltip()
     }
     $('.em-svg').on('mouseover', function() {
         $(this).addClass('animate__animated animate__pulse')
     })
-    $('[data-toggle="tooltip"]').tooltip()
 
     // remove null content code block
     $('code').each(function() {

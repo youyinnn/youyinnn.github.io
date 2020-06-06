@@ -85,18 +85,17 @@ $(function() {
         }
         // event.stopPropagation()
     })
-    $('#searchtext').bind('keyup', 'return', function() {
-        searchscript(this.value)
-    })
-    $('#articlesearchtext').bind('keyup', 'return', function() {
-        searcharticle(this.value)
-    })
-    $('#searchtext').bind('keyup', 'esc', function() {
-        this.value = ''
-    })
-    $('#articlesearchtext').bind('keyup', 'esc', function() {
-        this.value = ''
-    })
+    if (location.pathname.startsWith('/articles/')) {
+        $('#articlesearchtext').bind('keyup', 'return', function() {
+            searcharticle(this.value)
+        })
+        $('#searchtext').bind('keyup', 'esc', function() {
+            this.value = ''
+        })
+        $('#articlesearchtext').bind('keyup', 'esc', function() {
+            this.value = ''
+        })
+    }
     $('#categories').bind('click', function() {
         if ($('#all_cates').hasClass('myhide')) {
             $('#all_cates').removeClass('myhide')
@@ -139,7 +138,7 @@ $(function() {
             }
         }
 
-        if (!valineCreated && scrollPercent === 99) {
+        if (location.pathname.startsWith('/article/') && !valineCreated && scrollPercent === 99) {
             new Valine({
                 el: '#vcomments',
                 serverURLs: 'https://blogcomment.youyinnn.top',
