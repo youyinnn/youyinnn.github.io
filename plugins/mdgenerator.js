@@ -270,9 +270,12 @@ var resoucesList = [
     friendslinkfilename,
     cacheFileName
 ]
+var resoucesListWithoutCache = [
+    friendslinkfilename
+]
 
-fs.writeFileSync(path.join(resourcesPath, 'resources.js'), `
-var resourcesList = ${JSON.stringify(resoucesList)}`)
+fs.writeFileSync(path.join(resourcesPath, 'resources.js'), 
+`var resourcesList;if (location.pathname.startsWith('/articles/')) {resourcesList = ${JSON.stringify(resoucesList)};} else {resourcesList = ${JSON.stringify(resoucesListWithoutCache)};}`)
 
 
 // delete old cache file

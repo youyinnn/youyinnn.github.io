@@ -45,7 +45,7 @@ String b = new String("hello");		// new an object
 
 图引自[我终于搞清楚了和String有关的那点事儿。](https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect)
 
-> 在不同版本的JDK中，Java堆和字符串常量池之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。
+> 在不同版本的JDK中，Java堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。
 
 ### String Pool
 
@@ -74,13 +74,36 @@ String Pool是RT Constant Pool的一部分，而RT Constant Pool是**方法区**
 
 严格来说，String Pool的位置根据不同的JVM以及不同的JDK版本而变化，而在HotSpot中，7之前的StringPool确实是在永久代，但是7之后就将它从永久代移除掉了，被集中的String实际上在堆的主要部分分配；
 
-我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM；
+我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM
 
-再提一句，在Java 8 HotSpot中，永久代被完全移除掉了，说移除也不完全准确，下面我们详细说这个事
+在[Bealdung: Guide to Java String Pool](https://www.baeldung.com/java-string-pool#garbage-collection)中有提到过这个事
+
+> From Java 7 onwards, the Java String Pool is **stored in the *Heap* space, which is garbage collected** by the JVM*.* The advantage of this approach is the **reduced risk of *OutOfMemory* error** because unreferenced *Strings* will be removed from the pool, thereby releasing memory.
+
+并且从中我们得知，即使String Pool是在堆内存中，它自身也是有大小限制的，CG会根据这个大小限制去工作：
+
+> In Java 7, we have more detailed options to examine and expand/reduce the pool size. Let's see the two options for viewing the pool size:
+>
+> ```
+> -XX:+PrintFlagsFinal
+> -XX:+PrintStringTableStatistics
+> ```
+>
+> If we want to increase the pool size in terms of buckets, we can use the *StringTableSize* JVM option:
+>
+> ```
+> -XX:StringTableSize=``4901
+> ```
+>
+> Prior to Java 7u40, the default pool size was 1009 buckets but this value was subject to a few changes in more recent Java versions. To be precise, the default pool size from Java 7u40 until Java 11 was 60013 and now it increased to 65536.
+>
+> **Note that increasing the pool size will consume more memory but has the advantage of reducing the time required to insert the *Strings* into the table.**
+
+再提一句，在HotSpot的Java 8中，永久代被完全移除掉了，下面我们详细说这个事
 
 ### PermGen ?
 
-嗯哼，问题又来了，之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？
+之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？
 
 > PermGen is an abbreviation for Permanent Generation and it’s a special heap space which is separate from the main Java heap where JVM keeps track of metadata of the classes which have been loaded.
 
@@ -91,7 +114,7 @@ String Pool是RT Constant Pool的一部分，而RT Constant Pool是**方法区**
 
 #### In Java 7
 
-永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串常量池还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；
+永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串池（字符串表）还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；
 
 当我们需要调整这一片的大小的时候，JVM会将它和Heap主part的调整大小操作一起进行，通常会引发一次**Full GC**，这样的操作非常昂贵，特别是如果程序装载类信息过多的时候，JVM会考虑增大PermGen Space，从而引发**Full GC**，于是我们启动程序的时候也会变得很慢，所以我们加上启动参数，调整PermGen的默认初始化大小和最大可用空间：
 
@@ -129,7 +152,7 @@ PermGen Space被一个新的区域替代——Metaspace，它和前者的不同�
 
 #### So
 
-所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了
+所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了，于是这部分内存开销由直接内存承担，不属于JVM的一部分
 
 ### Syntactic Sugar
 
@@ -150,9 +173,7 @@ String s3 = s2 + "1";	// sb way
 System.out.println(s1 == s3); // false
 ```
 
-### String.intern() 
-
-[转自](https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/)
+### String.intern()
 
 **编译期**生成的各种**字面量**和**符号引用**是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期像运行时常量池中增加常量。那就是`String`的`intern`方法。
 
@@ -173,13 +194,15 @@ System.out.println(s1 == s3);	// true
 
 ![](https://image.youyinnn.top/20190302153504.png)
 
-由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。
+由于s1和s3都是字符串池（字符串表）中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。
 
 ####  Real Purpose Of String.intern()
 
-不知道，你有没有发现，在`String s3 = new String("Hollis").intern();`中，其实`intern`是多余的？
+其实，在`String s3 = new String("Hollis").intern();`中，`intern`是多余的。
 
-因为就算不用`intern`，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才会用到intern呢?
+因为就算不用`intern`，`"Hollis"`已经作为一个字面量在编译时就被加载到Class文件的常量池，进而加入到运行时常量池中，
+
+那么到底什么场景下才会用到intern呢?
 
 在解释这个之前，我们先来看下以下代码：
 
@@ -213,7 +236,7 @@ String s4 = "HollisChuang";
 
 这时候，对于那种可能经常使用的字符串，使用`intern`进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。
 
-如一美团点评团队的《深入解析String#intern》文中举的一个例子：
+如一美团点评团队的[《深入解析String#intern》](https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html)文中举的一个例子：
 
 ```java
 static final int MAX = 1000 * 10000;
@@ -226,12 +249,39 @@ public static void main(String[] args) throws Exception {
         DB_DATA[i] = random.nextInt();
     }
     for (int i = 0; i < MAX; i++) {
+        //arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length]));
          arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();
     }
 }
 ```
 
-在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过`intern`显示的将其加入常量池，这样可以减少很多字符串的重复创建。
+在以上代码中，我们明确的知道，会有很多**重复的相同的字符串**产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过`intern`显示的将其加入常量池，这样可以减少很多字符串的重复创建。
+
+文章种给出的测试结果：
+
+> 不使用 intern 的代码生成了1000w 个字符串，占用了大约640m 空间。 使用了 intern 的代码生成了1345个字符串，占用总空间 133k 左右。其实通过观察程序中只是用到了10个字符串，所以准确计算后应该是正好相差100w 倍。虽然例子有些极端，但确实能准确反应出 intern 使用后产生的巨大空间节省。
+>
+> 使用了 intern 方法后时间上有了一些增长。这是因为程序中每次都是用了 `new String` 后，然后又进行 intern 操作的耗时时间，这一点如果在内存空间充足的情况下确实是无法避免的，但我们平时使用时，内存空间肯定不是无限大的，不使用 intern 占用空间导致 jvm 垃圾回收的时间是要远远大于这点时间的。 毕竟这里使用了1000w次intern 才多出来1秒钟多的时间。
+
+但是不要盲目地使用这个方法，过多地使用这个方法在字符串变化量巨大的情况下会给字符串池（字符串表）带来压力。
+
+### new String()
+
+结合美团文章给出的错误案例，我们顺道说一下`new String()`的一个细节
+
+当我们的字符串对象是运行时创造的时候，比如：
+
+``` java
+String a = "Hello";
+String b = "World";
+String c = a + b;		// StringBuilder().append(a).append(b).toString()
+```
+
+最后的`toString()`其实就有`new String()`的操作但是我们来说说数据的内存分布情况：
+
+![](https://image.youyinnn.top/stringpool.png)
+
+我们可以知道，运行时产生的所有字符串的值都是存在堆的主内存区的，除非你调用`intern()`方法将它放进字符串池中，而美团给出的错误例子就是讲大量的不同值的字符串值放进字符串池，导致字符串池压力过大，从而性能降低。
 
 ### Switch For String
 
@@ -296,11 +346,11 @@ public class switchDemoString
 
 ### Concating String
 
-终于来到我们的引子了
+终于来到我们的引子了，大部分参考自[为什么阿里巴巴不建议在for循环中使用"+"进行字符串拼接](https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/)
 
 一般来说，我们可以直接使用`+`去拼接，对于字面量而言，首先就可以直接+起来
 
-但是要注意的是，对于String对象之间而言，`+`是Java中的语法糖，前面我们有一段反编译就知道，编译后其实是`StringBuilder.append()`
+但是要注意的是，对于String对象之间而言，`+`是Java中的语法糖，前面我们有一节提到过，编译后其实是`StringBuilder.append()`
 
 ``` java
 String a = "xixi";

@@ -48,9 +48,11 @@ function new_render_md(regular_toc, abbrlink) {
         } else if (h4s.length > 0) {
             addhr = h4s
         }
-        addhr.after(`
-            <hr class="headhr">
-        `)
+        if (addhr !== undefined) {
+            addhr.after(`
+                <hr class="headhr">
+            `)
+        }
     }
 
     function limaker(text, id, tg) {

@@ -58,6 +58,7 @@ $(function() {
         }
     }
     if (pathname === '/' || pathname === '/index.html') {
+
         hidesidetoc()
         rmclass(homepage, 'myhide')
         adclass(homepage, 'myshow')

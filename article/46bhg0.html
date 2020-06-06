@@ -171,7 +171,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
     </p>
 <p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121551&amp;idx=1&amp;sn=b14691e0daeca8d1283fc8a860732405&amp;chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&amp;scene=21#wechat_redirect">我终于搞清楚了和String有关的那点事儿。</a></p>
 <blockquote>
-<p>在不同版本的JDK中，Java堆和字符串常量池之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。</p>
+<p>在不同版本的JDK中，Java堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考Java虚拟机规范。</p>
 </blockquote>
 
           <h3 id="9e2e2952">String Pool</h3><p>那么问题来了，我之前确实知道有String Pool这玩意，那么它到底在哪里？堆还是栈？StackOverFlow上面有一段很有意思的问答：<a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">where does javas string constant pool live? the heap or the stack?</a></p>
@@ -192,10 +192,22 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p>And in Java 8 Hotspot, Permanent Generation has been completely removed.</p>
 </blockquote>
 <p>严格来说，String Pool的位置根据不同的JVM以及不同的JDK版本而变化，而在HotSpot中，7之前的StringPool确实是在永久代，但是7之后就将它从永久代移除掉了，被集中的String实际上在堆的主要部分分配；</p>
-<p>我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM；</p>
-<p>再提一句，在Java 8 HotSpot中，永久代被完全移除掉了，说移除也不完全准确，下面我们详细说这个事</p>
+<p>我认为这样做的目的是让GCor也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的PermGen Space的OOM</p>
+<p>在<a href="https://www.baeldung.com/java-string-pool#garbage-collection">Bealdung: Guide to Java String Pool</a>中有提到过这个事</p>
+<blockquote>
+<p>From Java 7 onwards, the Java String Pool is <strong>stored in the <em>Heap</em> space, which is garbage collected</strong> by the JVM<em>.</em> The advantage of this approach is the <strong>reduced risk of <em>OutOfMemory</em> error</strong> because unreferenced <em>Strings</em> will be removed from the pool, thereby releasing memory.</p>
+</blockquote>
+<p>并且从中我们得知，即使String Pool是在堆内存中，它自身也是有大小限制的，CG会根据这个大小限制去工作：</p>
+<blockquote>
+<p>In Java 7, we have more detailed options to examine and expand/reduce the pool size. Let&#39;s see the two options for viewing the pool size:</p>
+<pre><code>-XX:+PrintFlagsFinal
+-XX:+PrintStringTableStatistics</code></pre><p>If we want to increase the pool size in terms of buckets, we can use the <em>StringTableSize</em> JVM option:</p>
+<pre><code>-XX:StringTableSize=``4901</code></pre><p>Prior to Java 7u40, the default pool size was 1009 buckets but this value was subject to a few changes in more recent Java versions. To be precise, the default pool size from Java 7u40 until Java 11 was 60013 and now it increased to 65536.</p>
+<p><strong>Note that increasing the pool size will consume more memory but has the advantage of reducing the time required to insert the <em>Strings</em> into the table.</strong></p>
+</blockquote>
+<p>再提一句，在HotSpot的Java 8中，永久代被完全移除掉了，下面我们详细说这个事</p>
 
-          <h3 id="f4bde0e">PermGen ?</h3><p>嗯哼，问题又来了，之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？</p>
+          <h3 id="f4bde0e">PermGen ?</h3><p>之前了解到，方法区是永久代的所在地，那么Java 8 HotSpot中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？</p>
 <blockquote>
 <p>PermGen is an abbreviation for Permanent Generation and it’s a special heap space which is separate from the main Java heap where JVM keeps track of metadata of the classes which have been loaded.</p>
 </blockquote>
@@ -205,7 +217,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <li><a href="https://blogs.oracle.com/jonthecollector/presenting-the-permanent-generation">Presenting The Permanent Genaration</a></li>
 </ul>
 
-          <h4 id="b3d71ddc">In Java 7</h4><p>永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串常量池还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；</p>
+          <h4 id="b3d71ddc">In Java 7</h4><p>永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串池（字符串表）还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；</p>
 <p>当我们需要调整这一片的大小的时候，JVM会将它和Heap主part的调整大小操作一起进行，通常会引发一次<strong>Full GC</strong>，这样的操作非常昂贵，特别是如果程序装载类信息过多的时候，JVM会考虑增大PermGen Space，从而引发<strong>Full GC</strong>，于是我们启动程序的时候也会变得很慢，所以我们加上启动参数，调整PermGen的默认初始化大小和最大可用空间：</p>
 <p><code>-XX:PermSize=N</code> -  sets the initial (and minimum size) of the Permanent Generation space.</p>
 <p><code>-XX:MaxPermSize=N</code>  -  sets the maximum size of the Permanent Generation space.</p>
@@ -249,7 +261,7 @@ String b = new String(&quot;hello&quot;);        // new an object</code></pre>
 <p><code>-XX:MaxMetaspaceSize=N</code>  - sets the maximum size of the Metaspace.</p>
 <p>有关Metaspace的特点，可以参考一个大神写的<a href="https://www.cnblogs.com/duanxz/p/3520829.html">文章</a>，以后我有时间也研究一下</p>
 
-          <h4 id="526aca26">So</h4><p>所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了</p>
+          <h4 id="526aca26">So</h4><p>所以永久代的一部分被移到普通堆，剩下的用Metaspace Native Memory替代了，于是这部分内存开销由直接内存承担，不属于JVM的一部分</p>
 
           <h3 id="52606b15">Syntactic Sugar</h3><p>参考自：<a href="https://www.experts-exchange.com/articles/17406/String-concatenation-in-Java-syntactic-sugar-versus-efficiency.html">String concatenation in Java: syntactic sugar versus efficiency</a></p>
 <p>Java provides two main ways to perform string concatenation and one of them could cause you some trouble. The first one most of us encounter is the <strong>+</strong> operator, where doing something like <strong>String value = &quot;Hello &quot; + &quot;world&quot;;</strong> results in a string with the value <strong>&quot;Hello world&quot;</strong>. Most of the time, developers don&#39;t immediately learn that the <strong>+</strong> operator is just <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> that the compiler turns into <strong>StringBuilder</strong> operations, that being the other main way one can concatenate strings in Java.</p>
@@ -264,8 +276,7 @@ String s2 = &quot;1&quot;;
 String s3 = s2 + &quot;1&quot;;    // sb way
 System.out.println(s1 == s3); // false</code></pre>
 
-          <h3 id="ae91501">String.intern()</h3><p><a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">转自</a></p>
-<p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期像运行时常量池中增加常量。那就是<code>String</code>的<code>intern</code>方法。</p>
+          <h3 id="ae91501">String.intern()</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期像运行时常量池中增加常量。那就是<code>String</code>的<code>intern</code>方法。</p>
 <p>当一个<code>String</code>实例调用<code>intern()</code>方法时，JVM会查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
 <p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用。</strong></p>
 <p>比如：</p>
@@ -301,10 +312,11 @@ System.out.println(s1 == s3);    // true</code></pre>
             }
         </script>
     </p>
-<p>由于s1和s3都是字符串常量池中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
+<p>由于s1和s3都是字符串池（字符串表）中的字面量的引用，所以s1==s3。但是，s2的引用是堆中的对象，所以s2!=s1。</p>
 
-          <h4 id="8c186ad2">Real Purpose Of String.intern()</h4><p>不知道，你有没有发现，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，其实<code>intern</code>是多余的？</p>
-<p>因为就算不用<code>intern</code>，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才会用到intern呢?</p>
+          <h4 id="8c186ad2">Real Purpose Of String.intern()</h4><p>其实，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，<code>intern</code>是多余的。</p>
+<p>因为就算不用<code>intern</code>，<code>&quot;Hollis&quot;</code>已经作为一个字面量在编译时就被加载到Class文件的常量池，进而加入到运行时常量池中，</p>
+<p>那么到底什么场景下才会用到intern呢?</p>
 <p>在解释这个之前，我们先来看下以下代码：</p>
 <pre><code class="language-java">String s1 = &quot;Hollis&quot;;
 String s2 = &quot;Chuang&quot;;
@@ -322,7 +334,7 @@ String s4 = &quot;HollisChuang&quot;;</code></pre>
 <p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成<code>StringBuilder.append</code>，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
 <p>那么，有了这个特性了，<code>intern</code>就有用武之地了。<strong>那就是很多时候，我们在程序中用到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</strong></p>
 <p>这时候，对于那种可能经常使用的字符串，使用<code>intern</code>进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
-<p>如一美团点评团队的《深入解析String#intern》文中举的一个例子：</p>
+<p>如一美团点评团队的<a href="https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html">《深入解析String#intern》</a>文中举的一个例子：</p>
 <pre><code class="language-java">static final int MAX = 1000 * 10000;
 static final String[] arr = new String[MAX];
 
@@ -333,10 +345,51 @@ public static void main(String[] args) throws Exception {
         DB_DATA[i] = random.nextInt();
     }
     for (int i = 0; i &lt; MAX; i++) {
+        //arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length]));
          arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();
     }
 }</code></pre>
-<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过<code>intern</code>显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+<p>在以上代码中，我们明确的知道，会有很多<strong>重复的相同的字符串</strong>产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过<code>intern</code>显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+<p>文章种给出的测试结果：</p>
+<blockquote>
+<p>不使用 intern 的代码生成了1000w 个字符串，占用了大约640m 空间。 使用了 intern 的代码生成了1345个字符串，占用总空间 133k 左右。其实通过观察程序中只是用到了10个字符串，所以准确计算后应该是正好相差100w 倍。虽然例子有些极端，但确实能准确反应出 intern 使用后产生的巨大空间节省。</p>
+<p>使用了 intern 方法后时间上有了一些增长。这是因为程序中每次都是用了 <code>new String</code> 后，然后又进行 intern 操作的耗时时间，这一点如果在内存空间充足的情况下确实是无法避免的，但我们平时使用时，内存空间肯定不是无限大的，不使用 intern 占用空间导致 jvm 垃圾回收的时间是要远远大于这点时间的。 毕竟这里使用了1000w次intern 才多出来1秒钟多的时间。</p>
+</blockquote>
+<p>但是不要盲目地使用这个方法，过多地使用这个方法在字符串变化量巨大的情况下会给字符串池（字符串表）带来压力。</p>
+
+          <h3 id="a9265dae">new String()</h3><p>结合美团文章给出的错误案例，我们顺道说一下<code>new String()</code>的一个细节</p>
+<p>当我们的字符串对象是运行时创造的时候，比如：</p>
+<pre><code class="language-java">String a = &quot;Hello&quot;;
+String b = &quot;World&quot;;
+String c = a + b;        // StringBuilder().append(a).append(b).toString()</code></pre>
+<p>最后的<code>toString()</code>其实就有<code>new String()</code>的操作但是我们来说说数据的内存分布情况：</p>
+<p>
+        <div class="_showpic_222b9edf showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/stringpool.png class="_pic_222b9edf hidepic" picId="222b9edf"></img>
+        <script>
+            {
+                let imgself222b9edfs = document.getElementsByClassName('_pic_222b9edf')
+                let showpicbtn222b9edfs = document.getElementsByClassName('_showpic_222b9edf')
+                let isInViewPortOfTwo222b9edf = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself222b9edfs[0].getBoundingClientRect() && imgself222b9edfs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself222b9edfs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo222b9edf)
+                            isInViewPortOfTwo222b9edf = null
+                        }
+                        for (el of showpicbtn222b9edfs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo222b9edf)
+            }
+        </script>
+    </p>
+<p>我们可以知道，运行时产生的所有字符串的值都是存在堆的主内存区的，除非你调用<code>intern()</code>方法将它放进字符串池中，而美团给出的错误例子就是讲大量的不同值的字符串值放进字符串池，导致字符串池压力过大，从而性能降低。</p>
 
           <h3 id="20570013">Switch For String</h3><p>还是先上代码：</p>
 <pre><code class="language-java">public class switchDemoString {
@@ -385,9 +438,9 @@ public static void main(String[] args) throws Exception {
 
           <h3 id="fdc5c0f3">Substring In Java6 &amp; Java7</h3><p>简单一句话，6里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而7的方法会真正分配一个空间存储字串；</p>
 
-          <h3 id="6e14b486">Concating String</h3><p>终于来到我们的引子了</p>
+          <h3 id="6e14b486">Concating String</h3><p>终于来到我们的引子了，大部分参考自<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在for循环中使用&quot;+&quot;进行字符串拼接</a></p>
 <p>一般来说，我们可以直接使用<code>+</code>去拼接，对于字面量而言，首先就可以直接+起来</p>
-<p>但是要注意的是，对于String对象之间而言，<code>+</code>是Java中的语法糖，前面我们有一段反编译就知道，编译后其实是<code>StringBuilder.append()</code></p>
+<p>但是要注意的是，对于String对象之间而言，<code>+</code>是Java中的语法糖，前面我们有一节提到过，编译后其实是<code>StringBuilder.append()</code></p>
 <pre><code class="language-java">String a = &quot;xixi&quot;;
 String b = &quot;haha&quot;;
 
