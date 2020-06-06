@@ -1,7 +1,8 @@
 ---
 title: Java运算符知多少
 categories:
-  - note
+  - java
+  - grammar
 comments: true
 tags:
   - java

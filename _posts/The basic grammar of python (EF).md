@@ -1,8 +1,8 @@
 ---
 title: The basic grammar of python (EF)
 categories:
-  - note
   - python
+  - grammar-p
 tags:
   - python
   - grammar

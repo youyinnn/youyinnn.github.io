@@ -1,8 +1,8 @@
 ---
 title: 从头到尾读Iterable与Iterator
 categories:
-  - thinking
-  - 从头到尾读系列
+  - java
+  - collections-framework
 comments: true
 date: 2018-05-15 17:22:14
 tags:

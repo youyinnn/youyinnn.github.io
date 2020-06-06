@@ -1,11 +1,11 @@
 ---
 title: Docker Service&Composefile
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
-- compose-file
+  - docker
+  - compose-file
 date: 2018-11-27 12:19:02
 series: docker
 ---

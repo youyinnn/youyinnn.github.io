@@ -1,11 +1,10 @@
 ---
 title: Introductions of eBay Tess
 categories:
-- note
-- eBay
+  - eBay
 tags:
-- eBay
-- tess
+  - eBay
+  - tess
 date: 2018-11-15 16:18:00
 ---
 

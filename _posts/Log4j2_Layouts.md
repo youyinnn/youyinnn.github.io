@@ -1,13 +1,12 @@
 ---
 title: Log4j2_Layouts
 categories:
-  - note
-  - toolslearning
-  - log4j2
+  - java
+  - lib
+  - log4j
 comments: true
 tags:
   - log4j2
-  - learning
 date: 2017-12-08 14:39:16
 series: Log4j2
 ---

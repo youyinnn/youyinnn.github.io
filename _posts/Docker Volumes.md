@@ -1,11 +1,11 @@
 ---
 title: Docker Volumes
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
-- volume
+  - docker
+  - volume
 date: 2018-12-5 10:23:09
 series: docker
 ---

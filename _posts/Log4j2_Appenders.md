@@ -2,12 +2,11 @@
 title: Log4j2_Appenders
 comments: true
 tags:
-  - log4j2
-  - learning
+  - log4j
 categories:
-  - note
-  - toolslearning
-  - log4j2
+  - java
+  - lib
+  - log4j
 date: 2017-11-17 16:37:18
 series: Log4j2
 ---

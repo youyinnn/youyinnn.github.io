@@ -1,11 +1,10 @@
 ---
 title: Leetcode-41~45
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+  - leetcode
 date: 2019-03-20 20:03:00
 series: leetcode
 ---

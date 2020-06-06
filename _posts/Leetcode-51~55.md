@@ -1,13 +1,12 @@
 ---
 title: Leetcode-51~55
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
-- n-queens
-- backtrack
+  - leetcode
+  - n-queens
+  - backtrack
 date: 2019-03-30 10:57:00 +8
 series: leetcode
 ---

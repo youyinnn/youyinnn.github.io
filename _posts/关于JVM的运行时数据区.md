@@ -1,9 +1,9 @@
 ---
 title: 关于JVM的运行时数据区
 categories:
-  - note
-  - booknote
-  - 深入理解Java虚拟机
+  - java
+  - jvm
+  - memory
 comments: true
 date: 2018-06-02 22:48:00
 tags:

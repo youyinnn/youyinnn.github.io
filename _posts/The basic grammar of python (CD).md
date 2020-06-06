@@ -1,8 +1,8 @@
 ---
 title: The basic grammar of python (CD)
 categories:
-  - note
   - python
+  - grammar-p
 tags:
   - python
   - grammar

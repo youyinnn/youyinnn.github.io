@@ -1,7 +1,8 @@
 ---
 title: 初探Java8之lambda
 categories:
-  - thinking
+  - java
+  - grammar
 comments: true
 date: 2018-05-15 10:05:00
 tags:
@@ -26,7 +27,7 @@ tags:
 
     intlist.forEach((num)->System.out.println(num));
 ```
-​
+
 这里就有一个疑问：ArrayList为什么会有一个forEach()函数，而且传进去的变量是这样的形式？
 
 于是我向上找了`forEach()`方法的源码，发现这个方法是被定义在   `Iterable`接口里面的，接口里面为什么能定义方法？

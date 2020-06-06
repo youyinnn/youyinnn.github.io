@@ -1,12 +1,12 @@
 ---
 title: Docker Swarm&ClusterSetup
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
-- cluster
-- swarm
+  - docker
+  - cluster
+  - swarm
 date: 2018-11-28 21:06:03
 series: docker
 ---

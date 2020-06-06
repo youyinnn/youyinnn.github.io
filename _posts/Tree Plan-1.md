@@ -1,11 +1,11 @@
 ---
 title: Tree Plan-1
 categories:
-- note
-- algorithm
+  - datastruct
+  - tree
 tags:
-- algorithm
-- binary-tree
+  - algorithm
+  - binary-tree
 date: 2019-01-28 15:11:00
 ---
 

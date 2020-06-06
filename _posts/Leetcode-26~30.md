@@ -1,11 +1,10 @@
 ---
 title: Leetcode-26~30
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
+  - leetcode
 date: 2019-03-09 16:21:00
 series: leetcode
 ---

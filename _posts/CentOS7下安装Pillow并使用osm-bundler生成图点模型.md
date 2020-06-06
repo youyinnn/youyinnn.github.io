@@ -3,7 +3,6 @@ title: CentOS7下安装Pillow并使用osm-bundler生成图点模型
 categories:
   - note
   - project
-  - 17y-CollagesStudent-Creative-Project
 comments: true
 tags:
   - centos7

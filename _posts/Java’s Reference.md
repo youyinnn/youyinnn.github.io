@@ -1,11 +1,10 @@
 ---
 title: Java's Refernece
 categories:
-- note
-- thinking
-- GC
+  - java
+  - grammar
 tags:
-- reference-type
+  - reference-type
 date: 2019-03-02 21:08:00
 ---
 

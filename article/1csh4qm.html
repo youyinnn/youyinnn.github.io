@@ -159,8 +159,8 @@
         </script>
     </p>
 <p style="text-align: center;">图源：<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_4&index=3" target="_blank">微信文档</a></p>
+这个图其实过于细分，有的步骤可以简化：openId不必由**商户后台**发送请求来获取，**小程序方**可以直接发送openId过来。
 
-<p>这个图其实过于细分，有的步骤可以简化：openId不必由<strong>商户后台</strong>发送请求来获取，<strong>小程序方</strong>可以直接发送openId过来。</p>
 <ol>
 <li><strong>用户</strong>通过<strong>小程序</strong>发送<strong>“请求下单”</strong>的请求到<strong>商户后台</strong>；</li>
 <li><strong>商户后台</strong>调用微信官方依赖提供的接口，发送请求到<strong>微信后台</strong>（统一下单API），获取<code>prepay_id</code>；</li>

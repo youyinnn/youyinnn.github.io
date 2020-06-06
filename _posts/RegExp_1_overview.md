@@ -1,12 +1,10 @@
 ---
 title: RegExp_1_overview
 tags:
-  - learning
-  - RegExp
+  - regular-expression
 categories:
-  - note
-  - booknote
-  - 《Mastering Regular Expression(Third Edition)》
+  - booknotes
+  - Mastering Regular Expression
 comments: true
 date: 2017-11-17 00:00:56
 series: 《Mastering Regular Expression(Third Edition)》

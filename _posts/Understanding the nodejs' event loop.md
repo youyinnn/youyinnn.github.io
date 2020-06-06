@@ -1,9 +1,9 @@
 ---
 title: Understanding the nodejs' event loop
 categories:
-- reprinted
+  - reprinted
 tags:
-- nodejs
+  - nodejs
 date: 2019-10-02 15:47:20
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: 关于JVM的对象创建与访问
 categories:
-  - note
-  - booknote
-  - 深入理解Java虚拟机
+  - java
+  - jvm
+  - memory
 comments: true
 date: 2018-11-14 21:45:00
 tags:

@@ -1,11 +1,12 @@
 ---
 title: Express Routing
 categories:
-- note
-- nodejs
+  - front-end
+  - nodejs
+  - express
 tags:
-- express
-- nodejs
+  - express
+  - nodejs
 series: express
 date: 2019-10-03 13:38:00
 ---

@@ -1,12 +1,12 @@
 ---
 title: 地痞（DP）成长记
 categories:
-- note
-- algorithm
+  - algorithm
+  - dp
 comments: true
 tags:
-- algorithm
-- dp
+  - algorithm
+  - dp
 date: 2018-8-30 20:58:01
 ---
 

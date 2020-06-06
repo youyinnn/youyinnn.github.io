@@ -1,16 +1,16 @@
 ---
 title: AVL树和红黑树
 categories:
-- note
-- data structure
+  - datastruct
+  - tree
 comments: true
 date: 2018-08-27 15:05:00
 tags:
-- BST
-- AVL
-- RBT
-- algorithm
-- tree
+  - BST
+  - AVL
+  - RBT
+  - algorithm
+  - tree
 ---
 
 ### 小声BB

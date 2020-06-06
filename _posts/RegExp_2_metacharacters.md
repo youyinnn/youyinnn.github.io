@@ -1,13 +1,11 @@
 ---
 title: RegExp_2_metacharacters
 categories:
-  - note
-  - booknote
-  - 《Mastering Regular Expression(Third Edition)》
+  - booknotes
+  - Mastering Regular Expression
 comments: true
 tags:
-  - learning
-  - RegExp
+  - regular-expression
 date: 2017-11-17 00:02:06
 series: 《Mastering Regular Expression(Third Edition)》
 ---

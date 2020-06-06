@@ -1,7 +1,7 @@
 ---
 title: Electron_一个HelloWorld
 categories:
-  - note
+  - front-end
   - electron
 comments: true
 tags:

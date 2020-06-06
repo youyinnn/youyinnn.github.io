@@ -1,11 +1,11 @@
 ---
 title: Some Backtracking Problem In Leetcode
 categories:
-- note
-- leetcode
+  - algorithm
+  - backtracking
 tags:
-- leetcode
-- backtracking
+  - leetcode
+  - backtracking
 date: 2019-03-24 16:26:00 +8
 ---
 

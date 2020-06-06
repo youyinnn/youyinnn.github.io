@@ -1,11 +1,11 @@
 ---
 title: Docker Persist Data Overview
 categories:
-- note
-- docker
+  - docker
+  - notes
 tags:
-- docker
-- volume
+  - docker
+  - volume
 date: 2018-12-4 9:44:33
 series: docker
 ---

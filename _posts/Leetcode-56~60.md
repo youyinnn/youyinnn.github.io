@@ -1,13 +1,12 @@
 ---
 title: Leetcode-56~60
 categories:
-- note
-- algorithm
-- leetcode
+  - algorithm
+  - leetcode
 tags:
-- leetcode
-- n-queens
-- backtrack
+  - leetcode
+  - n-queens
+  - backtrack
 date: 2019-03-30 21:16:00 +8
 series: leetcode
 ---
