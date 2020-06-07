@@ -97,14 +97,6 @@ $(function() {
         new_render_md()
         showsidetoc()
         setTimeout(() => {
-            if (hash === '') {
-                $('#_toc_root').children().first().children().click()
-                $('#_toc_root').children().first().children().children().first().click()
-            } else {
-                let lh = hash.split('_')
-                $(`[_target_sb=${lh[1]}]`).children().first().click()
-                $(`[_target_sb=${lh[0]}]`).click()
-            }
             $('.scripts h3').each((i, e) => {
                 let root = $(`[_target_sb=${e.id}]`).parent().parent()
                 let url = location.origin + location.pathname + '?hash=' + `${e.id}_${root[0].getAttribute('_target_sb')}`
@@ -117,7 +109,22 @@ $(function() {
                     event.clearSelection()
                 })
             })
-        }, 200);
+        }, 200)
+
+        setTimeout(() => {
+            if (hash === '') {
+                $('#_toc_root').children().first().children().click()
+                setTimeout(() => {
+                    $('#_toc_root').children().first().children().children().first().click()
+                }, 400)
+            } else {
+                let lh = hash.split('_')
+                $(`[_target_sb=${lh[1]}]`).children().first().click()
+                setTimeout(() => {
+                    $(`[_target_sb=${lh[0]}]`).click()
+                }, 400)
+            }
+        }, 400);
 
         $(md).addClass('scripts')
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')

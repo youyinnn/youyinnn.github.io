@@ -307,9 +307,224 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 - https://www.cnblogs.com/zsg88/p/7588929.html
 - https://www.jianshu.com/p/250030ea9b28
 
-
 ### finally & return
 
+参考：https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
 
-- https://www.cnblogs.com/lanxuezaipiao/p/3440471.html
+> 1. **finally块的语句在try或catch中的return语句执行之后返回之前执行**
+>
+> 2. **finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值**
+>
+> 3. **若finally里也有return语句则覆盖try或catch中的return语句直接返回**
+
+
+
+### 动态代理
+
+#### JDK动态代理
+
+机制：**通过接口**
+
+流程：
+
+1. 被代理类`Subject`需要实现包含相应需要做代理处理的方法，这些方法来自被代理类实现的**若干接口**；
+2. 实例化一个`Subject`对象；
+3. 实现JDK的`InvocationHandler`接口，接口中进行业务代理，这部分逻辑在`invoke`方法中；
+4. 实例化一个`InvocationHandler`对象，并绑定`Subject`实例；
+5. 使用JDK的`Proxy.newProxyInstance(loader, interfaces, handler); `方法生成代理类；
+   1. JDK动态代理库通过**若干接口**方法名称锁定被代理类的相关方法；
+   2. JDK动态代理库通过字节码技术动态生成代理类，代理类重新定义了这些接口方法，并且调用`handler`对象；
+
+``` java
+interface AEvent{void ActionA();}
+//被代理类
+interface BEvent{void ActionB();}
+class Me implements AEvent ,BEvent{
+    @Override
+    public void ActionA() {System.out.println("事件A");}
+    @Override
+    public void ActionB() {System.out.println("事件B");}
+}
+class MyInvocationHandler implements InvocationHandler{
+    Object object;//实现了接口的被代理类的对象的声明 也是我们要代理的真实对象
+    //给被代理类的对象实例化
+    //返回代理类对象
+    public Object blind(Object o){
+        object = o;
+        return Proxy.newProxyInstance(object.getClass().getClassLoader(),
+                o.getClass().getInterfaces(),this);
+    }
+    //当通过代理类对象发起对被重写的方法的调用时 都会转化为对如下的invoke方法的调用
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        return method.invoke(object, args);
+    }
+}
+
+public class test_Dynamic_Proxy {
+    public static void main(String[] args) {
+        //创建一个实现了InvocationHandler方法的接口的类的对象
+        MyInvocationHandler handler = new MyInvocationHandler();
+        //被代理类对象
+        Me me = new Me();
+        //调用blind()方法 动态返回一个同样实现了real所在类实现的接口的Subject代理类的对象
+        Object object = handler.blind(me);
+        //subject就是代理类的对象
+        AEvent aEvent = (AEvent) object;
+        aEvent.ActionA();
+        System.out.println("----------------");
+        BEvent bEvent = (BEvent) handler.blind(me);
+        bEvent.ActionB();
+    }
+}
+```
+
+
+
+#### Cglib动态代理
+
+机制：**通过继承实现**
+
+流程：
+
+1. 实现`MethodInterceptor `，在里面的`intercept`方法进行代理业务；
+2. 获取Cglib的`Enhancer`对象，传入`SupperClass`，指定代理类，和`Callback`也就是一个`MethodInterceptor `实例；
+
+
+
+### 泛型约束和局限性
+
+1. 不能把基本数据类型当成类型参数，要用包装类；
+
+2. 运行时类型检查只适用于原视类型：
+
+   ``` java
+   if (a instanceOf AClass<BClass>) // 错误
+   if (a instanceOf AClass) // 只能检查原始类型
+   ```
+
+3. 不能`new`参数化类型数组：
+
+   ``` java
+   AClass<BClass>[] arr = new AClass<BClass>[10];	// 错误
+   ```
+
+   非要用数组结构，那就使用`ArrayList<AClass<BClass>> al = new ArrayList<>();`
+
+4. 但是给参数个数可变的方法传递泛型类型实例：
+
+   ``` java
+   public static <T> void addAll(Collection<T> coll, T... ts)
+   ```
+
+   但是编译器会发出警告，你可以使用`@SuppressWarnings("unchecked")`来压制它
+
+5. 不能在静态域或者方法中引用类型变量；
+
+   ``` java
+   public class AClass<T> {
+       private static T instance;
+       public static T getInstance() {
+           if (instance == null) //...
+           return instance;
+       }
+   }
+   ```
+
+
+
+### ClassLoader
+
+https://www.baeldung.com/java-classloaders
+
+#### **Bootstrap Class Loader**
+
+Java classes are loaded by an instance of *java.lang.ClassLoader*. However, class loaders are classes themselves. Hence, the question is, who loads the *java.lang.ClassLoader* itself*?*
+
+This is where the bootstrap or primordial class loader comes into the picture.
+
+It's mainly responsible for loading JDK internal classes, typically *rt.jar* and other core libraries located in *$JAVA_HOME/jre/lib directory*. Additionally, **Bootstrap class loader serves as a parent of all the other \*ClassLoader\* instances**.
+
+**This bootstrap class loader is part of the core JVM and is written in native code** as pointed out in the above example. Different platforms might have different implementations of this particular class loader.
+
+#### **Extension Class Loader**
+
+The **extension class loader is a child of the bootstrap class loader and takes care of loading the extensions of the standard core Java classes** so that it's available to all applications running on the platform.
+
+Extension class loader loads from the JDK extensions directory, usually *$JAVA_HOME/lib/ext* directory or any other directory mentioned in the *java.ext.dirs* system property.
+
+#### **System Class Loader**
+
+The system or application class loader, on the other hand, takes care of loading all the application level classes into the JVM. **It loads files found in the classpath environment variable, \*-classpath\* or \*-cp\* command line option**. Also, it's a child of Extensions classloader.
+
+
+
+### POJO & JavaBean
+
+When we talk about a POJO(**“Plain Old Java Object”**), what we're describing is a straightforward type with no references to any particular frameworks. **A POJO has no naming convention** for our properties and methods.
+
+**A JavaBean is still a POJO but introduces a strict set of rules around how we implement it:**
+
+- Access levels – our properties are private and we expose getters and setters
+- Method names – our getters and setters follow the *getX* and *setX* convention (in the case of a boolean, *isX* can be used for a getter)
+- Default Constructor – a no-argument constructor must be present so an instance can be created without providing arguments, for example during deserialization
+- Serializable – implementing the *Serializable* interface allows us to store the state
+
+
+
+### Finall 关键字
+
+- 修饰类：该类不能被继承；
+- 修饰方法：该方法不能被重载；
+- 修饰变量：该变量引用不能改变，并且必须在声明时就赋值，并且在编译时就已经赋值完毕，先于本类实例的构造方法；
+- 修饰方法参数：该参数在改方法内不能被改变引用；
+
+
+
+### 异常小记
+
+#### 分类
+
+```graph
+              ---> Throwable <--- 
+              |    (checked)    |
+              |                 |
+              |                 |
+       --> Exception          Error
+       |   (checked)       (unchecked)
+       |
+RuntimeException
+  (unchecked)
+```
+
+1. 受检异常
+2. 非受检异常/运行时异常
+3. 错误
+
+#### 受检异常
+
+Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（`try-catch`）
+
+- *IOException* – This exception is typically a way to say that something on the network, filesystem, or database failed.
+
+- *ServletException*
+
+#### 运行时异常
+
+运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用`try-catch`语句去处理他们
+
+- *ArrayIndexOutOfBoundsException* – this exception means that we tried to access a non-existent array index, like when trying to get index 5 from an array of length 3.
+- *ClassCastException –* this exception means that we tried to perform an illegal cast, like trying to convert a *String* into a *List*. We can usually avoid it by performing defensive *instanceof* checks before casting.
+- *IllegalArgumentException* – this exception is a generic way for us to say that one of the provided method or constructor parameters is invalid.
+- *IllegalStateException* – This exception is a generic way for us to say that our internal state, like the state of our object, is invalid.
+- *NullPointerException* – This exception means we tried to reference a *null* object. We can usually avoid it by either performing defensive *null* checks or by using *Optional.*
+- *NumberFormatException* – This exception means that we tried to convert a *String* into a number, but the string contained illegal characters, like trying to convert “5f3” into a number.
+
+#### 错误
+
+错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出
+
+- *StackOverflowError –* this exception means that the stack trace is too big. This can sometimes happen in massive applications; however, it usually means that we have some infinite recursion happening in our code.
+- *NoClassDefFoundError* – this exception means that a class failed to load either due to not being on the classpath or due to failure in static initialization.
+- *OutOfMemoryError* –  this exception means that the JVM doesn't have any more memory available to allocate for more objects. Sometimes, this is due to a memory leak.
 

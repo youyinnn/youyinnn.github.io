@@ -637,8 +637,174 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
 <li><a href="https://www.jianshu.com/p/250030ea9b28">https://www.jianshu.com/p/250030ea9b28</a></li>
 </ul>
 
-          <h3 id="c9c59767">finally &amp; return</h3><ul>
-<li><a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></li>
+          <h3 id="c9c59767">finally &amp; return</h3><p>参考：<a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></p>
+<blockquote>
+<ol>
+<li><p><strong>finally块的语句在try或catch中的return语句执行之后返回之前执行</strong></p>
+</li>
+<li><p><strong>finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值</strong></p>
+</li>
+<li><p><strong>若finally里也有return语句则覆盖try或catch中的return语句直接返回</strong></p>
+</li>
+</ol>
+</blockquote>
+
+          <h3 id="6a633537">动态代理</h3>
+          <h4 id="83033397">JDK动态代理</h4><p>机制：<strong>通过接口</strong></p>
+<p>流程：</p>
+<ol>
+<li>被代理类<code>Subject</code>需要实现包含相应需要做代理处理的方法，这些方法来自被代理类实现的<strong>若干接口</strong>；</li>
+<li>实例化一个<code>Subject</code>对象；</li>
+<li>实现JDK的<code>InvocationHandler</code>接口，接口中进行业务代理，这部分逻辑在<code>invoke</code>方法中；</li>
+<li>实例化一个<code>InvocationHandler</code>对象，并绑定<code>Subject</code>实例；</li>
+<li>使用JDK的<code>Proxy.newProxyInstance(loader, interfaces, handler);</code>方法生成代理类；<ol>
+<li>JDK动态代理库通过<strong>若干接口</strong>方法名称锁定被代理类的相关方法；</li>
+<li>JDK动态代理库通过字节码技术动态生成代理类，代理类重新定义了这些接口方法，并且调用<code>handler</code>对象；</li>
+</ol>
+</li>
+</ol>
+<pre><code class="language-java">interface AEvent{void ActionA();}
+//被代理类
+interface BEvent{void ActionB();}
+class Me implements AEvent ,BEvent{
+    @Override
+    public void ActionA() {System.out.println(&quot;事件A&quot;);}
+    @Override
+    public void ActionB() {System.out.println(&quot;事件B&quot;);}
+}
+class MyInvocationHandler implements InvocationHandler{
+    Object object;//实现了接口的被代理类的对象的声明 也是我们要代理的真实对象
+    //给被代理类的对象实例化
+    //返回代理类对象
+    public Object blind(Object o){
+        object = o;
+        return Proxy.newProxyInstance(object.getClass().getClassLoader(),
+                o.getClass().getInterfaces(),this);
+    }
+    //当通过代理类对象发起对被重写的方法的调用时 都会转化为对如下的invoke方法的调用
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        return method.invoke(object, args);
+    }
+}
+
+public class test_Dynamic_Proxy {
+    public static void main(String[] args) {
+        //创建一个实现了InvocationHandler方法的接口的类的对象
+        MyInvocationHandler handler = new MyInvocationHandler();
+        //被代理类对象
+        Me me = new Me();
+        //调用blind()方法 动态返回一个同样实现了real所在类实现的接口的Subject代理类的对象
+        Object object = handler.blind(me);
+        //subject就是代理类的对象
+        AEvent aEvent = (AEvent) object;
+        aEvent.ActionA();
+        System.out.println(&quot;----------------&quot;);
+        BEvent bEvent = (BEvent) handler.blind(me);
+        bEvent.ActionB();
+    }
+}</code></pre>
+
+          <h4 id="5888e85b">Cglib动态代理</h4><p>机制：<strong>通过继承实现</strong></p>
+<p>流程：</p>
+<ol>
+<li>实现<code>MethodInterceptor</code>，在里面的<code>intercept</code>方法进行代理业务；</li>
+<li>获取Cglib的<code>Enhancer</code>对象，传入<code>SupperClass</code>，指定代理类，和<code>Callback</code>也就是一个<code>MethodInterceptor</code>实例；</li>
+</ol>
+
+          <h3 id="efb55492">泛型约束和局限性</h3><ol>
+<li><p>不能把基本数据类型当成类型参数，要用包装类；</p>
+</li>
+<li><p>运行时类型检查只适用于原视类型：</p>
+<pre><code class="language-java">if (a instanceOf AClass&lt;BClass&gt;) // 错误
+if (a instanceOf AClass) // 只能检查原始类型</code></pre>
+</li>
+<li><p>不能<code>new</code>参数化类型数组：</p>
+<pre><code class="language-java">AClass&lt;BClass&gt;[] arr = new AClass&lt;BClass&gt;[10];    // 错误</code></pre>
+<p>非要用数组结构，那就使用<code>ArrayList&lt;AClass&lt;BClass&gt;&gt; al = new ArrayList&lt;&gt;();</code></p>
+</li>
+<li><p>但是给参数个数可变的方法传递泛型类型实例：</p>
+<pre><code class="language-java">public static &lt;T&gt; void addAll(Collection&lt;T&gt; coll, T... ts)</code></pre>
+<p>但是编译器会发出警告，你可以使用<code>@SuppressWarnings(&quot;unchecked&quot;)</code>来压制它</p>
+</li>
+<li><p>不能在静态域或者方法中引用类型变量；</p>
+<pre><code class="language-java">public class AClass&lt;T&gt; {
+    private static T instance;
+    public static T getInstance() {
+        if (instance == null) //...
+        return instance;
+    }
+}</code></pre>
+</li>
+</ol>
+
+          <h3 id="35e84e3f">ClassLoader</h3><p><a href="https://www.baeldung.com/java-classloaders">https://www.baeldung.com/java-classloaders</a></p>
+
+          <h4 id="644bac8e"><strong>Bootstrap Class Loader</strong></h4><p>Java classes are loaded by an instance of <em>java.lang.ClassLoader</em>. However, class loaders are classes themselves. Hence, the question is, who loads the <em>java.lang.ClassLoader</em> itself<em>?</em></p>
+<p>This is where the bootstrap or primordial class loader comes into the picture.</p>
+<p>It&#39;s mainly responsible for loading JDK internal classes, typically <em>rt.jar</em> and other core libraries located in <em>$JAVA_HOME/jre/lib directory</em>. Additionally, <strong>Bootstrap class loader serves as a parent of all the other *ClassLoader* instances</strong>.</p>
+<p><strong>This bootstrap class loader is part of the core JVM and is written in native code</strong> as pointed out in the above example. Different platforms might have different implementations of this particular class loader.</p>
+
+          <h4 id="6703f92f"><strong>Extension Class Loader</strong></h4><p>The <strong>extension class loader is a child of the bootstrap class loader and takes care of loading the extensions of the standard core Java classes</strong> so that it&#39;s available to all applications running on the platform.</p>
+<p>Extension class loader loads from the JDK extensions directory, usually <em>$JAVA_HOME/lib/ext</em> directory or any other directory mentioned in the <em>java.ext.dirs</em> system property.</p>
+
+          <h4 id="658ad928"><strong>System Class Loader</strong></h4><p>The system or application class loader, on the other hand, takes care of loading all the application level classes into the JVM. <strong>It loads files found in the classpath environment variable, *-classpath* or *-cp* command line option</strong>. Also, it&#39;s a child of Extensions classloader.</p>
+
+          <h3 id="5a7c98e6">POJO &amp; JavaBean</h3><p>When we talk about a POJO(<strong>“Plain Old Java Object”</strong>), what we&#39;re describing is a straightforward type with no references to any particular frameworks. <strong>A POJO has no naming convention</strong> for our properties and methods.</p>
+<p><strong>A JavaBean is still a POJO but introduces a strict set of rules around how we implement it:</strong></p>
+<ul>
+<li>Access levels – our properties are private and we expose getters and setters</li>
+<li>Method names – our getters and setters follow the <em>getX</em> and <em>setX</em> convention (in the case of a boolean, <em>isX</em> can be used for a getter)</li>
+<li>Default Constructor – a no-argument constructor must be present so an instance can be created without providing arguments, for example during deserialization</li>
+<li>Serializable – implementing the <em>Serializable</em> interface allows us to store the state</li>
+</ul>
+
+          <h3 id="9dcc98cf">Finall 关键字</h3><ul>
+<li>修饰类：该类不能被继承；</li>
+<li>修饰方法：该方法不能被重载；</li>
+<li>修饰变量：该变量引用不能改变，并且必须在声明时就赋值，并且在编译时就已经赋值完毕，先于本类实例的构造方法；</li>
+<li>修饰方法参数：该参数在改方法内不能被改变引用；</li>
+</ul>
+
+          <h3 id="261390d4">异常小记</h3>
+          <h4 id="a900eb29">分类</h4><pre><code class="language-graph">              ---&gt; Throwable &lt;--- 
+              |    (checked)    |
+              |                 |
+              |                 |
+       --&gt; Exception          Error
+       |   (checked)       (unchecked)
+       |
+RuntimeException
+  (unchecked)</code></pre>
+<ol>
+<li>受检异常</li>
+<li>非受检异常/运行时异常</li>
+<li>错误</li>
+</ol>
+
+          <h4 id="3aa12fb0">受检异常</h4><p>Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（<code>try-catch</code>）</p>
+<ul>
+<li><p><em>IOException</em> – This exception is typically a way to say that something on the network, filesystem, or database failed.</p>
+</li>
+<li><p><em>ServletException</em></p>
+</li>
+</ul>
+
+          <h4 id="f72c7c11">运行时异常</h4><p>运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用<code>try-catch</code>语句去处理他们</p>
+<ul>
+<li><em>ArrayIndexOutOfBoundsException</em> – this exception means that we tried to access a non-existent array index, like when trying to get index 5 from an array of length 3.</li>
+<li><em>ClassCastException –</em> this exception means that we tried to perform an illegal cast, like trying to convert a <em>String</em> into a <em>List</em>. We can usually avoid it by performing defensive <em>instanceof</em> checks before casting.</li>
+<li><em>IllegalArgumentException</em> – this exception is a generic way for us to say that one of the provided method or constructor parameters is invalid.</li>
+<li><em>IllegalStateException</em> – This exception is a generic way for us to say that our internal state, like the state of our object, is invalid.</li>
+<li><em>NullPointerException</em> – This exception means we tried to reference a <em>null</em> object. We can usually avoid it by either performing defensive <em>null</em> checks or by using <em>Optional.</em></li>
+<li><em>NumberFormatException</em> – This exception means that we tried to convert a <em>String</em> into a number, but the string contained illegal characters, like trying to convert “5f3” into a number.</li>
+</ul>
+
+          <h4 id="98710a97">错误</h4><p>错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出</p>
+<ul>
+<li><em>StackOverflowError –</em> this exception means that the stack trace is too big. This can sometimes happen in massive applications; however, it usually means that we have some infinite recursion happening in our code.</li>
+<li><em>NoClassDefFoundError</em> – this exception means that a class failed to load either due to not being on the classpath or due to failure in static initialization.</li>
+<li><em>OutOfMemoryError</em> –  this exception means that the JVM doesn&#39;t have any more memory available to allocate for more objects. Sometimes, this is due to a memory leak.</li>
 </ul>
 
           <h2 id="cfc00906">⭐ JS&amp;Node.js库</h2>

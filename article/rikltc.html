@@ -240,23 +240,19 @@
 </li>
 </ul>
 
-          <h5 id="12832d9d">运行时常量池（Runtime Constant Pool）</h5><p>它是方法区的一部分</p>
-<p>在Class文件中除了有类的版本、字段、方法、接口等描述信息，还有一项信息是常量池（Constant Pool Table），用于存放<strong>“编译期”生成的各种字面量和符号引用</strong>，这部分常量是运行之前就确定好了的，并且在类被加载后将这些信息<strong>转入</strong>运行时常量池存放</p>
-<ul>
-<li><p>但是有的常量并不一定是在编译器就确定好的，有可能是在系统运行的过程中才确定的，所以这部分常量就放置在运行时常量池中</p>
-</li>
-<li><p>以及编译期翻译出来的直接引用也存储在运行时常量池中</p>
-</li>
-</ul>
-
-          <h6 id="c9cab901">和Class文件常量池的区别</h6><ul>
-<li><strong>动态特性：</strong>并不要求常量只有在编译期才能产生，运行期间也可以放入新的常量到<strong>运行时常量池</strong>中</li>
-<li><strong>一个异常：</strong><code>OutOfMemoryError</code></li>
-</ul>
+          <h5 id="12832d9d">运行时常量池（Runtime Constant Pool）</h5><p>它是方法区的一部分，主要存储的东西有：</p>
+<ol>
+<li>在Class文件中除了有类的版本、字段、方法、接口等描述信息，还有一项信息是常量池（Constant Pool Table），用于存放<strong>“编译期”生成的各种字面量和符号引用</strong>，这部分常量是运行之前就确定好了的，并且在类被加载后将这些信息<strong>转入</strong>运行时常量池存放；</li>
+<li>系统运行的过程中才确定的常量；</li>
+<li>还有编译期翻译出来的直接引用；</li>
+<li>String类型、Integer、Double、Long、Float等类型的字面量常量；</li>
+</ol>
+<p>所以这里也会发生OOM</p>
 
           <h4 id="96eb66d0">* 6. 直接内存（Direct Memory）</h4>
           <h5 id="8685751a">介绍</h5><p>在NIO类的使用中，基于通道（Channel）和缓冲区（Buffer）的IO方式，它们使用的是<strong>Native函数库直接分配的堆外内存（注意是堆外）</strong>，这部分内存并不属于堆或者JVM的运行时数据区内存</p>
 <p>通过堆中的一个<strong>DirectByteBuffer对象</strong>来操作这块<strong>内存的引用</strong></p>
+<p>而在Java 8之后，这里又有一块区域被划分为Metaspace，替代原Permgen区的功能</p>
 
           <h5 id="59fe0caf">作用</h5><p>在某些场景中显著地提高性能，因为避免了<strong>Java堆</strong>和<strong>Native堆</strong>中来回复制数据</p>
 
