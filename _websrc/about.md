@@ -20,6 +20,10 @@ The worst FeWeb developer in the universe.
 Change Log
 
 ``` console
+2020-06-06: specifying scripts loading according certain location.pathname
+
+2020-06-05: move back to gitee pages...
+
 2020-05-11: upgrade animate.css to 4.0.0 
 
 2020-05-08: abandon the gitee pages due to the unstability of their services, move to coding pages

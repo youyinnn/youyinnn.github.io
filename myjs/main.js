@@ -5,6 +5,8 @@ var nowpage = 1
 var $root = $('html, body')
 
 function new_render_md(regular_toc, abbrlink) {
+    $('#docpanel').remove()
+    $('#articles_side_panel').remove()
     $('#md').addClass('article')
     let as = $('#md a')
     for (let i = 0; i < as.length; i++) {
@@ -102,7 +104,7 @@ function new_render_md(regular_toc, abbrlink) {
     if (Boolean(regular_toc) || getclientw() < 700) {
         $('.markdown-toc a').click(function() {
             let tzhref = $.attr(this, 'hreff')
-            scrollToHead(tzhref)
+            scrollToElement(tzhref)
         })
     } else if (getclientw() >= 700) {
         $('.markdown-toc .toc-h3').click(function() {
@@ -214,7 +216,7 @@ function new_render_md(regular_toc, abbrlink) {
         adclass(md, 'myshow')
         $(md).addClass('animate__animated animate__fadeIn')
         if (!location.pathname.startsWith('/scripts/')) {
-            scrollToHead(hash.replace('#', ''))
+            scrollToElement(hash.replace('#', ''))
         }
     }, 200)
 }
@@ -231,11 +233,11 @@ function get_articles() {
     handlemetadata(jsyaml.load(pcbl))
 }
 
-function scrollToHead(id) {
+function scrollToElement(id) {
     if (id.trim() !== '') {
         $root.animate({
             scrollTop: $('#' + id).offset().top - 15
-        }, 400)
+        }, 700, 'swing')
     }
 }
 
@@ -904,9 +906,13 @@ function setarrow() {
     arrows.addClass('unselectable')
     arrows.each(function(i, e) {
         let link = c('div')
+        let headblock = c('div')
         link.innerText = '+'
         adclass(link, 'panchorlink')
+        adclass(headblock, 'panchorheadblock')
+        headblock.style.height = e.clientHeight + 'px';
         appendc(e, link)
+        appendc(e, headblock)
         let url = location.origin + location.pathname + '?hash=' + encodeURI($(e)[0].id)
         $(e)[0].setAttribute('data-clipboard-text', url)
         new ClipboardJS(this).on('success', function(event) {

@@ -718,13 +718,13 @@
   font-size: 1.2rem;
   transition: all .4s;
   margin-left: 40px;
-  width: 250px;
+  width: 270px;
 }
 
 #showmore:hover,
 #toarticles:hover,
 #showhacknical:hover {
-  background-color: #dc35d90a;
+  background-color: #303030;
 }
 
 #showmore:active,
@@ -948,6 +948,7 @@
 .tocshow {
   opacity: 1;
   z-index: 203 !important;
+  transform: translateX(0%);
 }
 
 #loadingslogan {
@@ -1154,7 +1155,7 @@
 
 .panchor:hover {
   color: #3b5d75;
-  transform: translateX(10px);
+  transform: translateX(5px);
 }
 
 .panchorlink {
@@ -1166,6 +1167,47 @@
   line-height: 10px;
   transform: translateY(-.4em);
   opacity: 0;
+}
+
+h1 .panchorheadblock {
+  width: 9px;
+  left: -21px;
+}
+
+h2 .panchorheadblock {
+  width: 7px;
+  left: -19px;
+}
+
+h3 .panchorheadblock {
+  width: 5px;
+  left: -17px;
+}
+
+h4 .panchorheadblock {
+  width: 4px;
+  left: -16px;
+}
+
+h5 .panchorheadblock {
+  width: 3px;
+  left: -15px;
+}
+
+h6 .panchorheadblock {
+  width: 2px;
+  left: -14px;
+}
+
+.panchorheadblock {
+  background-color: #48b69a;
+  display: inline-block;
+  position: absolute;
+  border-radius: 100px;
+}
+
+.panchor:hover .panchorheadblock {
+  background-color: #3b5d75;
 }
 
 #seriesbox {
@@ -1440,7 +1482,7 @@ sb {
   display: block;
   overflow: hidden;
   padding: 1rem !important;
-  margin: 3.5rem 1rem 1rem;
+  margin: 3.5rem 1rem;
   left: 0;
   right: 0;
   background-color: white;
