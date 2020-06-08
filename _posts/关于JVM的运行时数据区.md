@@ -153,7 +153,7 @@ series: JVM
 
 通过堆中的一个**DirectByteBuffer对象**来操作这块**内存的引用**
 
-而在Java 8之后，这里又有一块区域被划分为Metaspace，替代原Permgen区的功能
+而在Java 8之后，这里又有一块区域被划分为Metaspace，承担原Perm Gen区的部分功能，存储类的元数据
 
 ##### 作用
 

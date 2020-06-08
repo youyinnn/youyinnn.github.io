@@ -93,7 +93,7 @@ Java堆用于存储对象实例，只需要不停的创建对象，并且保证G
 
 ##### Method Area & Constant Pool Overflow
 
-我们知道方法区也叫永久代（至少在Java 8之前是这么叫的），所以我们能够通过`-XX:PermSize`和`-XX:MaxPermSize`来调整方法区的大小
+我们知道方法区也叫永久代（至少在Java 8之前是这么叫的），所以在Java 8之前我们能够通过`-XX:PermSize`和`-XX:MaxPermSize`来调整方法区的大小
 
 - 运行时常量池在常量存放过多的时候会溢出，比如无限产生随机字符串；
 - 因为方法区用来存放类相关信息，所以我们只需要产生大量的类就可以造成方法区内存溢出；
@@ -140,7 +140,7 @@ new int[Integer.MAX_VALUE]
 
 ##### 4. Metaspace
 
-虽然永久代已经被无默认限制的Metaspace替代了，但是主机上Metaspace还是有限制的，它一样能被打爆，而且它被打爆的后果可能就是主机宕机，关于这个可以参考：[Java PermGen 去哪里了?](https://link.jianshu.com/?t=http%3A%2F%2Fifeve.com%2Fjava-permgen-removed%2F)
+虽然永久代已经被无默认限制的Metaspace替代了，但是主机上Metaspace还是有限制的，它一样能被打爆，而且它被打爆的后果可能就是主机宕机，关于这个可以参考：[Java PermGen 去哪里了?](http://ifeve.com/java-permgen-removed/)
 
 ![](https://image.youyinnn.top/20190317143413.png)
 
