@@ -252,7 +252,7 @@
           <h4 id="96eb66d0">* 6. 直接内存（Direct Memory）</h4>
           <h5 id="8685751a">介绍</h5><p>在NIO类的使用中，基于通道（Channel）和缓冲区（Buffer）的IO方式，它们使用的是<strong>Native函数库直接分配的堆外内存（注意是堆外）</strong>，这部分内存并不属于堆或者JVM的运行时数据区内存</p>
 <p>通过堆中的一个<strong>DirectByteBuffer对象</strong>来操作这块<strong>内存的引用</strong></p>
-<p>而在Java 8之后，这里又有一块区域被划分为Metaspace，替代原Permgen区的功能</p>
+<p>而在Java 8之后，这里又有一块区域被划分为Metaspace，承担原Perm Gen区的部分功能，存储类的元数据</p>
 
           <h5 id="59fe0caf">作用</h5><p>在某些场景中显著地提高性能，因为避免了<strong>Java堆</strong>和<strong>Native堆</strong>中来回复制数据</p>
 

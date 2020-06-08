@@ -784,30 +784,42 @@ RuntimeException
 
           <h4 id="3aa12fb0">受检异常</h4><p>Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（<code>try-catch</code>）</p>
 <ul>
-<li><p><em>IOException</em> – This exception is typically a way to say that something on the network, filesystem, or database failed.</p>
-</li>
-<li><p><em>ServletException</em></p>
-</li>
+<li><em>IOException</em> – this exception is typically a way to say that <strong>something on the network, filesystem, or database failed</strong>.</li>
+<li><em>ServletException</em></li>
+<li><em>ClassNotFoundException</em> - occurs when an application tries to <strong>load a class through its fully-qualified name</strong> and <strong>can not find its definition on the classpath</strong></li>
 </ul>
 
           <h4 id="f72c7c11">运行时异常</h4><p>运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用<code>try-catch</code>语句去处理他们</p>
 <ul>
-<li><em>ArrayIndexOutOfBoundsException</em> – this exception means that we tried to access a non-existent array index, like when trying to get index 5 from an array of length 3.</li>
-<li><em>ClassCastException –</em> this exception means that we tried to perform an illegal cast, like trying to convert a <em>String</em> into a <em>List</em>. We can usually avoid it by performing defensive <em>instanceof</em> checks before casting.</li>
-<li><em>IllegalArgumentException</em> – this exception is a generic way for us to say that one of the provided method or constructor parameters is invalid.</li>
-<li><em>IllegalStateException</em> – This exception is a generic way for us to say that our internal state, like the state of our object, is invalid.</li>
-<li><em>NullPointerException</em> – This exception means we tried to reference a <em>null</em> object. We can usually avoid it by either performing defensive <em>null</em> checks or by using <em>Optional.</em></li>
-<li><em>NumberFormatException</em> – This exception means that we tried to convert a <em>String</em> into a number, but the string contained illegal characters, like trying to convert “5f3” into a number.</li>
+<li><em>ArrayIndexOutOfBoundsException</em> – this exception means that we tried to <strong>access a non-existent array index</strong>, like when trying to get index 5 from an array of length 3.</li>
+<li><em>ClassCastException –</em> this exception means that we tried to perform <strong>an illegal cast</strong>, like trying to convert a <em>String</em> into a <em>List</em>. We can usually avoid it by performing defensive <em>instanceof</em> checks before casting.</li>
+<li><em>IllegalArgumentException</em> – this exception is a generic way for us to say that one of the provided method or constructor <strong>parameters is invalid</strong>.</li>
+<li><em>IllegalStateException</em> – This exception is a generic way for us to say that <strong>our internal state</strong>, like the state of our object, <strong>is invalid</strong>.</li>
+<li><em>NullPointerException</em> – This exception means we tried to <strong>reference a <em>null</em> object</strong>. We can usually avoid it by either performing defensive <em>null</em> checks or by using <em>Optional.</em></li>
+<li><em>NumberFormatException</em> – This exception means that we tried to <strong>convert a <em>String</em> into a number, but the string contained illegal</strong> characters, like trying to convert “5f3” into a number.</li>
 </ul>
 
           <h4 id="98710a97">错误</h4><p>错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出</p>
 <ul>
-<li><em>StackOverflowError –</em> this exception means that the stack trace is too big. This can sometimes happen in massive applications; however, it usually means that we have some infinite recursion happening in our code.</li>
-<li><em>NoClassDefFoundError</em> – this exception means that a class failed to load either due to not being on the classpath or due to failure in static initialization.</li>
-<li><em>OutOfMemoryError</em> –  this exception means that the JVM doesn&#39;t have any more memory available to allocate for more objects. Sometimes, this is due to a memory leak.</li>
+<li><em>StackOverflowError –</em> this exception means that the <strong>stack trace is too big</strong>. This can sometimes happen in massive applications; however, it usually means that we have some <strong>infinite recursion</strong> happening in our code.</li>
+<li><em>NoClassDefFoundError</em> – this exception means that a class failed to load either due to <strong>not being on the classpath</strong> or <strong>due to failure in static initialization</strong>.</li>
+<li><em>OutOfMemoryError</em> –  this exception means that the JVM doesn&#39;t have any more memory available to allocate for more objects. Sometimes, this is due to a <strong>memory leak</strong>.</li>
 </ul>
 
-          <h2 id="cfc00906">⭐ JS&amp;Node.js库</h2>
+          <h4 id="1abae223">ClassNotFoundException &amp; NoClassDefFoundError</h4><p>前者是受检异常，就是在编译时就没找到这个类，压根就没有加载进classpath里；</p>
+<p>后者是错误，是编译时没问题，运行时由于类在初始化静态内容的时候出错了，所以这个类也压根没被加载进运行时的classpath里；</p>
+
+          <h3 id="19e53ba8">Metaspace &amp; Method Area &amp; Perm Gen</h3><p>理一理这三个之间的关系：</p>
+<ul>
+<li>在JDK 7之前，方法区是<code>Perm Gen</code>的一部分；</li>
+<li>在JDK 7之前<code>interned-string</code>也就是平常说的字符串常量池是存储在<code>Perm Gen</code>的，由于<code>Perm Gen</code>的空间很小，所以经常被爆，于是Java 7先把字符串常量池移到了方法区；</li>
+<li>从JDK7开始<code>Perm Gen</code>的移除工作，贮存在<code>Perm Gen</code>的一部分数据已经转移到了Java Heap或者是Native Heap。但<code>Perm Gen</code>仍然存在于JDK7，并没有完全的移除：符号引用(Symbols)转移到了native heap；字面量(interned strings)转移到了java heap；类的静态变量(class statics)转移到了java heap；剥离到heap区的内容形成了<code>Method Area</code>；</li>
+<li><code>Perm Gen</code>在JDK8中被完全的移除了；</li>
+<li>在JDK 8后，classe metadata被存储在叫做<code>Metaspace</code>的native memory，在系统的直接内存中；</li>
+<li>在JDK 8后，<code>Method Area</code>承担的数据内容可参考：<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4</a>
+          <h2 id="cfc00906">⭐ JS&amp;Node.js库</h2></li>
+</ul>
+
           <h3 id="43261fef">React Native</h3><blockquote>
 <p>可以做桌面应用</p>
 </blockquote>

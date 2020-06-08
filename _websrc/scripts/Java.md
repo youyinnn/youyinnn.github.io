@@ -505,26 +505,44 @@ RuntimeException
 
 Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（`try-catch`）
 
-- *IOException* – This exception is typically a way to say that something on the network, filesystem, or database failed.
-
+- *IOException* – this exception is typically a way to say that **something on the network, filesystem, or database failed**.
 - *ServletException*
+- *ClassNotFoundException* - occurs when an application tries to **load a class through its fully-qualified name** and **can not find its definition on the classpath**
 
 #### 运行时异常
 
 运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用`try-catch`语句去处理他们
 
-- *ArrayIndexOutOfBoundsException* – this exception means that we tried to access a non-existent array index, like when trying to get index 5 from an array of length 3.
-- *ClassCastException –* this exception means that we tried to perform an illegal cast, like trying to convert a *String* into a *List*. We can usually avoid it by performing defensive *instanceof* checks before casting.
-- *IllegalArgumentException* – this exception is a generic way for us to say that one of the provided method or constructor parameters is invalid.
-- *IllegalStateException* – This exception is a generic way for us to say that our internal state, like the state of our object, is invalid.
-- *NullPointerException* – This exception means we tried to reference a *null* object. We can usually avoid it by either performing defensive *null* checks or by using *Optional.*
-- *NumberFormatException* – This exception means that we tried to convert a *String* into a number, but the string contained illegal characters, like trying to convert “5f3” into a number.
+- *ArrayIndexOutOfBoundsException* – this exception means that we tried to **access a non-existent array index**, like when trying to get index 5 from an array of length 3.
+- *ClassCastException –* this exception means that we tried to perform **an illegal cast**, like trying to convert a *String* into a *List*. We can usually avoid it by performing defensive *instanceof* checks before casting.
+- *IllegalArgumentException* – this exception is a generic way for us to say that one of the provided method or constructor **parameters is invalid**.
+- *IllegalStateException* – This exception is a generic way for us to say that **our internal state**, like the state of our object, **is invalid**.
+- *NullPointerException* – This exception means we tried to **reference a *null* object**. We can usually avoid it by either performing defensive *null* checks or by using *Optional.*
+- *NumberFormatException* – This exception means that we tried to **convert a *String* into a number, but the string contained illegal** characters, like trying to convert “5f3” into a number.
 
 #### 错误
 
 错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出
 
-- *StackOverflowError –* this exception means that the stack trace is too big. This can sometimes happen in massive applications; however, it usually means that we have some infinite recursion happening in our code.
-- *NoClassDefFoundError* – this exception means that a class failed to load either due to not being on the classpath or due to failure in static initialization.
-- *OutOfMemoryError* –  this exception means that the JVM doesn't have any more memory available to allocate for more objects. Sometimes, this is due to a memory leak.
+- *StackOverflowError –* this exception means that the **stack trace is too big**. This can sometimes happen in massive applications; however, it usually means that we have some **infinite recursion** happening in our code.
+- *NoClassDefFoundError* – this exception means that a class failed to load either due to **not being on the classpath** or **due to failure in static initialization**.
+- *OutOfMemoryError* –  this exception means that the JVM doesn't have any more memory available to allocate for more objects. Sometimes, this is due to a **memory leak**.
 
+#### ClassNotFoundException & NoClassDefFoundError
+
+前者是受检异常，就是在编译时就没找到这个类，压根就没有加载进classpath里；
+
+后者是错误，是编译时没问题，运行时由于类在初始化静态内容的时候出错了，所以这个类也压根没被加载进运行时的classpath里；
+
+
+
+### Metaspace & Method Area & Perm Gen
+
+理一理这三个之间的关系：
+
+- 在JDK 7之前，方法区是`Perm Gen`的一部分；
+- 在JDK 7之前`interned-string`也就是平常说的字符串常量池是存储在`Perm Gen`的，由于`Perm Gen`的空间很小，所以经常被爆，于是Java 7先把字符串常量池移到了方法区；
+- 从JDK7开始`Perm Gen`的移除工作，贮存在`Perm Gen`的一部分数据已经转移到了Java Heap或者是Native Heap。但`Perm Gen`仍然存在于JDK7，并没有完全的移除：符号引用(Symbols)转移到了native heap；字面量(interned strings)转移到了java heap；类的静态变量(class statics)转移到了java heap；剥离到heap区的内容形成了`Method Area`；
+- `Perm Gen`在JDK8中被完全的移除了；
+- 在JDK 8后，classe metadata被存储在叫做`Metaspace`的native memory，在系统的直接内存中；
+- 在JDK 8后，`Method Area`承担的数据内容可参考：https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4

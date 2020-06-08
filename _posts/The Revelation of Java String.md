@@ -114,7 +114,9 @@ String Pool是RT Constant Pool的一部分，而RT Constant Pool是**方法区**
 
 #### In Java 7
 
-永久代是之前JVM用来保留用于类加载的元数据的地方，并且PermGen Space是有默认的最大空间限制的，所以在7之前，字符串池（字符串表）还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；
+永久代是之前JVM用来保留用于类加载的元数据的地方，除此之外还存储所有的静态内容：静态方法、原始变量、静态对象的引用等等；它还存储了字节码、所有名称对应的数据、以及JIT的信息；最后就是字符串池也在这里；
+
+PermGen Space是有默认的最大空间限制的，所以在Java 7之前，字符串池（字符串表）还在PermGen Space的时候，万一字符串爆了，就会引发OOM；于是7就将String Pool移到main part of heap；
 
 当我们需要调整这一片的大小的时候，JVM会将它和Heap主part的调整大小操作一起进行，通常会引发一次**Full GC**，这样的操作非常昂贵，特别是如果程序装载类信息过多的时候，JVM会考虑增大PermGen Space，从而引发**Full GC**，于是我们启动程序的时候也会变得很慢，所以我们加上启动参数，调整PermGen的默认初始化大小和最大可用空间：
 
@@ -148,7 +150,7 @@ PermGen Space被一个新的区域替代——Metaspace，它和前者的不同�
 
 `-XX:MaxMetaspaceSize=N`  - sets the maximum size of the Metaspace.
 
-有关Metaspace的特点，可以参考一个大神写的[文章](https://www.cnblogs.com/duanxz/p/3520829.html)，以后我有时间也研究一下
+有关Metaspace的特点，可以参考一个大神写的[文章](https://www.cnblogs.com/duanxz/p/3520829.html)，以后我有时间也研究一下；或者还有一个参考[Metaspae in Java 8](http://java-latte.blogspot.com/2014/03/metaspace-in-java-8.html)
 
 #### So
 
