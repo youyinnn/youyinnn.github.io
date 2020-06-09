@@ -164,6 +164,55 @@ class PrintNumber implements Runnable{
 - **继承方式**让类在继承上面的选择受限，**接口实现方式**则很随意
 - **继承方式**让类拥有一些**线程内建的方法**例如`yield()`，**接口实现方式**则没有
 
+##### start() 和 run()的区别
+
+1. 是否创建新线程：
+
+   ``` java
+   public class testThread {
+       public static void main(String[] args) {
+           SubThread subThread = new SubThread();
+           // start方法  创建新线程    由新线程去调用run方法
+           subThread.start();
+           // run方法    并不启动新线程 由当前线程调用run方法
+           subThread.run();
+       }
+   }
+   class SubThread extends Thread{
+       @Override
+       public synchronized void start() {
+           super.start();
+           System.out.println(Thread.currentThread().getName() + " start");
+       }
+       @Override
+       public void run() {
+           for (int i = 0; i< 3 ; ++i){
+               System.out.println(Thread.currentThread().getName()+":线程方法");
+           }
+       }
+   }
+   ```
+   
+    Output:
+
+    ``` console
+main start
+   main:线程方法
+   Thread-0:线程方法
+   Thread-0:线程方法
+   Thread-0:线程方法
+   main:线程方法
+   main:线程方法
+    ```
+   
+2. start只能调用1次，而run可以调用无数次，就像调用一般的对象方法一样；
+
+3. start方法是Thread类实现的，而run方法是来自于Runnable接口的；
+
+4. 如果你重写了start方法，那么start方法中的当前线程是父线程，而不是新线程；
+
+
+
 #### 使用
 
 ##### currentThread()方法
@@ -290,6 +339,12 @@ public final synchronized void join(long millis) throws InterruptedException {
 #### wait(long timeout)
 
 作用是使当前执行代码的**线程（as T）**进入等待状态，由于`wait()`方法是Object类的方法，用来将**当前线程（T）**置入“等待队列”中。所以需要显式地使用**synchronized**块包裹起来，在synchronized块中再次获取**该锁（调用`wait()`的对象的对象锁，as OL）**，才能调用`wait()`方法，否则会抛出`java.lang.IllegalMonitorStateException`异常
+
+> 注意：
+>
+> 1. 只有线程在获取了该锁对象的锁之后（在该锁对象的synchronized块或者方法中），才能调用该对象的`wait()`方法，否则抛出异常；
+> 2. 在哪个锁对象上调用`wait()`方法，就释放哪个锁对象；
+> 3. 无论timeout为多少，总是需要等到该同步区域再次竞争到锁对象时才能解除等待，如果其他同步区域一直不放弃该锁对象，那么前同步区域也一直获取不到该锁对象；
 
 调用`wait()`方法之后，当前线程**马上（从wait那一行开始马上放锁，而不是直到退出sync块）**释放**该锁（OL）**，并进入等待队列**（对象锁对应对象的等待队列）**，此时线程进入suspend状态
 
@@ -467,5 +522,26 @@ T3 released lockB
 今天看了一下wait和notify之后，感觉能回答出这个问题了
 
 1. 因为wait并**不会释放线程占有的其他锁**，如果忽略掉这个问题的话，会隐形地制造一些**死锁**
+
+   ``` java
+   new Thread(() -> {
+       synchronized (lockA) {
+           synchronized (lockB) {
+               try {
+                   String lock = lockA;
+                   lock.wait(10000);
+               } catch (InterruptedException e) {}
+           }
+       }
+   }).start();
+   new Thread(() -> {
+       try {Thread.sleep(300);} catch (InterruptedException e) {}
+       synchronized (lockA) {
+           synchronized(lockB) {}
+       }
+   }).start();
+   ```
+
 2. 因为wait的唤醒机制还是重新去竞争锁，如果竞争不顺利的话，会一直返回不了**等待前的状态**，导致这个线程进入**饥饿状态**
+
 3. 同样的notify的唤醒是随机的，如果运气不好的话，线程会一直在等待队列中没有被选中，也进入了一种**饥饿状态**

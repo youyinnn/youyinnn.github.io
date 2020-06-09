@@ -301,6 +301,47 @@ class PrintNumber implements Runnable{
 <li><strong>继承方式</strong>让类拥有一些<strong>线程内建的方法</strong>例如<code>yield()</code>，<strong>接口实现方式</strong>则没有</li>
 </ul>
 
+          <h5 id="7deb404d">start() 和 run()的区别</h5><ol>
+<li><p>是否创建新线程：</p>
+<pre><code class="language-java">public class testThread {
+    public static void main(String[] args) {
+        SubThread subThread = new SubThread();
+        // start方法  创建新线程    由新线程去调用run方法
+        subThread.start();
+        // run方法    并不启动新线程 由当前线程调用run方法
+        subThread.run();
+    }
+}
+class SubThread extends Thread{
+    @Override
+    public synchronized void start() {
+        super.start();
+        System.out.println(Thread.currentThread().getName() + &quot; start&quot;);
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i&lt; 3 ; ++i){
+            System.out.println(Thread.currentThread().getName()+&quot;:线程方法&quot;);
+        }
+    }
+}</code></pre>
+<p> Output:</p>
+<pre><code class="language-console">main start
+main:线程方法
+Thread-0:线程方法
+Thread-0:线程方法
+Thread-0:线程方法
+main:线程方法
+main:线程方法</code></pre>
+</li>
+<li><p>start只能调用1次，而run可以调用无数次，就像调用一般的对象方法一样；</p>
+</li>
+<li><p>start方法是Thread类实现的，而run方法是来自于Runnable接口的；</p>
+</li>
+<li><p>如果你重写了start方法，那么start方法中的当前线程是父线程，而不是新线程；</p>
+</li>
+</ol>
+
           <h4 id="a89869ed">使用</h4>
           <h5 id="dad0bdec">currentThread()方法</h5><p>这个方法获取正在调用当前代码段的线程的<strong>线程对象</strong>，获取到线程对象，我们可以获取线程的<strong>名字、状态、ID号、线程优先级、是否处于终端、是否处于活动状态</strong>等信息，这些API在后面我们会一个个讲到</p>
 <pre><code class="language-java">@Test
@@ -385,6 +426,14 @@ NEW  sleepThread</code></pre>
 
           <h3 id="a8d39efa">Object方法</h3>
           <h4 id="6769ec80">wait(long timeout)</h4><p>作用是使当前执行代码的<strong>线程（as T）</strong>进入等待状态，由于<code>wait()</code>方法是Object类的方法，用来将<strong>当前线程（T）</strong>置入“等待队列”中。所以需要显式地使用<strong>synchronized</strong>块包裹起来，在synchronized块中再次获取<strong>该锁（调用<code>wait()</code>的对象的对象锁，as OL）</strong>，才能调用<code>wait()</code>方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>只有线程在获取了该锁对象的锁之后（在该锁对象的synchronized块或者方法中），才能调用该对象的<code>wait()</code>方法，否则抛出异常；</li>
+<li>在哪个锁对象上调用<code>wait()</code>方法，就释放哪个锁对象；</li>
+<li>无论timeout为多少，总是需要等到该同步区域再次竞争到锁对象时才能解除等待，如果其他同步区域一直不放弃该锁对象，那么前同步区域也一直获取不到该锁对象；</li>
+</ol>
+</blockquote>
 <p>调用<code>wait()</code>方法之后，当前线程<strong>马上（从wait那一行开始马上放锁，而不是直到退出sync块）</strong>释放<strong>该锁（OL）</strong>，并进入等待队列<strong>（对象锁对应对象的等待队列）</strong>，此时线程进入suspend状态</p>
 <p>如果timeout设置为0的话则没有超时时间，一直等到notify</p>
 <p>若要<strong>线程T</strong>从<code>wait()</code>中返回：</p>
@@ -549,9 +598,28 @@ T3 released lockB</code></pre>
           <h4 id="fba275b2">讨论一下wait的风险</h4><p>这是在几个月前顺丰科技面试的时候，一面面试官问我的问题，当时我没答上，因为当时准备的很不充分，连wait和sleep的区别都没看，估计是因为这个原因，面试官以为又摸到我的上限了，顺丰科技还是挺想去的</p>
 <p>今天看了一下wait和notify之后，感觉能回答出这个问题了</p>
 <ol>
-<li>因为wait并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong></li>
-<li>因为wait的唤醒机制还是重新去竞争锁，如果竞争不顺利的话，会一直返回不了<strong>等待前的状态</strong>，导致这个线程进入<strong>饥饿状态</strong></li>
-<li>同样的notify的唤醒是随机的，如果运气不好的话，线程会一直在等待队列中没有被选中，也进入了一种<strong>饥饿状态</strong></li>
+<li><p>因为wait并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong></p>
+<pre><code class="language-java">new Thread(() -&gt; {
+    synchronized (lockA) {
+        synchronized (lockB) {
+            try {
+                String lock = lockA;
+                lock.wait(10000);
+            } catch (InterruptedException e) {}
+        }
+    }
+}).start();
+new Thread(() -&gt; {
+    try {Thread.sleep(300);} catch (InterruptedException e) {}
+    synchronized (lockA) {
+        synchronized(lockB) {}
+    }
+}).start();</code></pre>
+</li>
+<li><p>因为wait的唤醒机制还是重新去竞争锁，如果竞争不顺利的话，会一直返回不了<strong>等待前的状态</strong>，导致这个线程进入<strong>饥饿状态</strong></p>
+</li>
+<li><p>同样的notify的唤醒是随机的，如果运气不好的话，线程会一直在等待队列中没有被选中，也进入了一种<strong>饥饿状态</strong></p>
+</li>
 </ol>
 
     </div>

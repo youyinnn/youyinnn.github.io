@@ -384,17 +384,11 @@ $$
 $$
 而**Unsigned Int**的整数的取值范围是`[0 ~ 2^32-1]`，最大值是`4,294,967,295`，约42亿
 
-所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：
+而在Java中，JDK也有可供使用的BitMap，叫做`BitSet`类，但是它只能存储0到`Integer.MAX_VALUE`也就是21亿多，所以我们可以使用Lucene提供的工具类`org.apache.lucene.util.LongBitSet`，它最大支持千亿量级的位图（具体应该是看机器配置）
 
-`boolean[] mapA = new boolean[Integer.MAX_VALUE])`
+我们设定一个43亿比特位的`LongBitSet`需要占用约520MB的内存
 
-`boolean[] mapB = new boolean[Integer.MAX_VALUE])`
-
-mapA表示数据中值为`[0 ~ 2,147,483,647]`的数，mapB表示数据中值为`[2,147,483,648 ~ 4,294,967,295]`的数，然后读取整数进行下标对应，完成两个map之后，需要`O(n)`时间再加上文件IO的时间，而判断一个数是否存在就只需要`O(1)`的时间；
-
-拓展：
-
-IO时间怎么减少的思路：多线程，buff
+不要想当然地说使用boolean数组，虽然一个boolean变量占1比特，但是除了要补位之外，boolean数组的内存占用大小可不是单只按照bit来计算的，一样是4Byte来计算，所以初始化一个`new boolean[Integer.MAX_VALUE - 2]`这样的事情不可取，经过测试，一个`new boolean[Integer.MAX_VALUE / 2]`的数组就需要1G内存，所以还是使用`BitSet`或者`LongBitSet`好
 
 -----------
 

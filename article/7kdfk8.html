@@ -172,7 +172,7 @@ finally { // 保证获取锁之后，最终能够被释放掉
 <td align="center">在指定的时间内获取到锁，否则从获取动作返回；</td>
 </tr>
 </tbody></table>
-<p>上面这三个点都有一些confuse的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用<code>synchronized</code>的时候的一个细节：<code>synchronized</code>与中断</p>
+<p>上面这三个点都有一些值得玩味的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用<code>synchronized</code>的时候的一个细节：<code>synchronized</code>与中断</p>
 <pre><code class="language-java">public static void main(String[] args) throws InterruptedException {
     String lockA = &quot;A&quot;;
     Thread t1 = new Thread(() -&gt; {
@@ -271,7 +271,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 <li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
 </ul>
 
-          <h5 id="d372d452">同步器可重写的方法</h5><table>
+          <h5 id="bc4111fc">实现同步器需要重写的方法</h5><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -321,7 +321,7 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tr>
 <tr>
 <td><code>void acquireShared(int arg)</code></td>
-<td>共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态</td>
+<td>共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态，该方法会调用重写的<code>tryAcquireShared</code>方法</td>
 </tr>
 <tr>
 <td><code>void acquireSharedInterruptibly(int arg)</code></td>
@@ -333,18 +333,18 @@ T2 Alive: true, isInterrupted: true, State: BLOCKED
 </tr>
 <tr>
 <td><code>boolean release(int arg)</code></td>
-<td>独占式释放同步状态，并唤醒在同步队列中等待的第一个线程</td>
+<td>独占式释放同步状态，并唤醒在同步队列中等待的第一个线程，该方法会调用重写的<code>tryRelease</code>方法</td>
 </tr>
 <tr>
 <td><code>boolean releaseShared(int arg)</code></td>
-<td>共享式释放同步状态</td>
+<td>共享式释放同步状态，该方法会调用重写的<code>tryReleaseShared</code>方法</td>
 </tr>
 <tr>
 <td><code>Collection&lt;Thread&gt; getQueuedThreads()</code></td>
 <td>获取等待在同步队列上的线程集合</td>
 </tr>
 </tbody></table>
-<p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和是否、同步队列线程集合</p>
+<p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和释放、同步队列线程集合</p>
 
           <h3 id="8f5b4a8a">尝试实现一个独占锁</h3><pre><code class="language-java">class Mutex implements Lock {
     static class Q extends AbstractQueuedSynchronizer {
