@@ -1569,3 +1569,22 @@ sb img {
 #vcomments {
   animation-delay: .3s;
 }
+
+.md-diagram-panel-preview {
+  background-color: rgba(89, 89, 89, 0.06);
+  padding: 20px;
+  border-left: 2px #6911797d solid;
+}
+
+.md-diagram-panel-preview svg {
+  max-width: 100% !important;
+  height: auto !important;
+  overflow: hidden;
+  position: relative;
+  top: -0.96875px;
+}
+
+.md-diagram-panel-preview svg,
+.md-diagram-panel-preview svg * {
+  transition: none !important;
+}

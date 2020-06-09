@@ -450,12 +450,9 @@ public void testBitMask(){
 <p>40亿个<strong>Unsigned Int</strong>的整数，如果放到内存， 那就是大约16G的空间：</p>
 <p>一个整型32bit，占4B，那么40亿个4B就是160亿B，</p>
 <p>$$<br>1G \approx 10^3MB \approx 10^6KB \approx 10^9B = 10亿<br>$$<br>而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
-<p>所以我们不能将所有数据都放进内存中，我们可以申请两个布尔类型数组：</p>
-<p><code>boolean[] mapA = new boolean[Integer.MAX_VALUE])</code></p>
-<p><code>boolean[] mapB = new boolean[Integer.MAX_VALUE])</code></p>
-<p>mapA表示数据中值为<code>[0 ~ 2,147,483,647]</code>的数，mapB表示数据中值为<code>[2,147,483,648 ~ 4,294,967,295]</code>的数，然后读取整数进行下标对应，完成两个map之后，需要<code>O(n)</code>时间再加上文件IO的时间，而判断一个数是否存在就只需要<code>O(1)</code>的时间；</p>
-<p>拓展：</p>
-<p>IO时间怎么减少的思路：多线程，buff</p>
+<p>而在Java中，JDK也有可供使用的BitMap，叫做<code>BitSet</code>类，但是它只能存储0到<code>Integer.MAX_VALUE</code>也就是21亿多，所以我们可以使用Lucene提供的工具类<code>org.apache.lucene.util.LongBitSet</code>，它最大支持千亿量级的位图（具体应该是看机器配置）</p>
+<p>我们设定一个43亿比特位的<code>LongBitSet</code>需要占用约520MB的内存</p>
+<p>不要想当然地说使用boolean数组，虽然一个boolean变量占1比特，但是除了要补位之外，boolean数组的内存占用大小可不是单只按照bit来计算的，一样是4Byte来计算，所以初始化一个<code>new boolean[Integer.MAX_VALUE - 2]</code>这样的事情不可取，经过测试，一个<code>new boolean[Integer.MAX_VALUE / 2]</code>的数组就需要1G内存，所以还是使用<code>BitSet</code>或者<code>LongBitSet</code>好</p>
 <hr>
 <p><strong>参考</strong></p>
 <p><a href="https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators">https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators</a></p>

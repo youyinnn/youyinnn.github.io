@@ -218,6 +218,49 @@ function new_render_md(regular_toc, abbrlink) {
         if (!location.pathname.startsWith('/scripts/')) {
             scrollToElement(hash.replace('#', ''))
         }
+        let flows = $('.language-flow')
+        function renderfc() {
+            try {
+                if (flowchart) {}
+                for (flowel of flows) {
+                    let id = '_fc' + new Date().getTime()
+                    $(flowel).parent().before(`
+                        <div id="${id}" class="md-diagram-panel-preview">
+                        </div>
+                    `)
+                    let chart = flowchart.parse(flowel.innerText)
+                    $(flowel).parent().remove()
+                    chart.drawSVG(id, {
+                        theme: "simple"
+                    });
+                }
+            } catch (e) {
+                console.info('Flowchart.js is not avaliable.');
+                console.debug(e);
+            }
+        }
+        if (flows.length > 0) {
+            let fcrs = [
+                {
+                    url: 'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
+                    target: ['/article/', '/todos/', '/scripts/'],
+                    attrs: {
+                        defer: true
+                    }
+                },
+                {
+                    url: 'https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.13.0/flowchart.min.js',
+                    target: ['/article/', '/todos/', '/scripts/'],
+                    attrs: {
+                        defer: true
+                    },
+                    callback: renderfc
+                }
+            ]
+            for (rs of fcrs) {
+                loadIfIsTarget(rs)
+            }
+        }
     }, 200)
 }
 

@@ -130,7 +130,8 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="fccefbaf">前言</h3><p>这回说说Java并发编程第四坎，最常用的<strong>volatile和synchronized关键字</strong>，这两个关键字是理解java同步编程的第一步，，特别是<strong>synchronized关键字</strong>在<em>《Java多线程编程核心技术》</em>中不经意的道出了<strong>线程同步的真谛之一：避免脏读</strong></p>
+          <h3 id="fccefbaf">前言</h3><p>这回说说Java并发编程第四坎，最常用的<strong>volatile和synchronized关键字</strong>，这两个关键字是理解java同步编程的第一步，特别是<strong>synchronized关键字</strong></p>
+<p>而在<em>《Java多线程编程核心技术》</em>的第2.1节中，作者不经意的道出了<strong>线程同步的真谛之一：避免脏读</strong></p>
 <ul>
 <li><strong>关键字的解说</strong><ul>
 <li><strong>volatile的含义、底层实现和使用</strong></li>
@@ -148,10 +149,10 @@
           <h3 id="37c80107">关键字的解说</h3><p>关键字的解说分别从三个方面进行，首先解释关键字的基本含义，然后上一些基本使用的代码，最后结合两本书来说说关键字的底层实现。</p>
 <p>以下两段摘自<em>《艺术》P96</em></p>
 <blockquote>
-<p><strong>关键字volatile</strong>可以用来修饰字段（成员变量），就是告知程序任何对该变量的访问均需要从共享内存中获取，而对它的改变必须同步刷新回共享内存，它能保证所有线程对变量的方位你的可见性。</p>
+<p><strong>关键字volatile</strong>可以用来修饰字段（成员变量），就是告知程序任何对该变量的访问均需要从共享内存中获取，而对它的改变必须同步刷新回共享内存，它能保证所有线程对变量访问的<strong>可见性</strong>。</p>
 </blockquote>
 <blockquote>
-<p><strong>关键字synchronized</strong>可以修饰方法或者同步块，它主要保证多线程在同一时刻，只能有一个线程处于同步块或者同步方法中，它保证了线程对变量访问的可见性和排他性。</p>
+<p><strong>关键字synchronized</strong>可以修饰方法或者同步块，它主要保证多线程在同一时刻，只能有一个线程处于同步块或者同步方法中，它保证了线程对变量访问的<strong>可见性</strong>和<strong>排他性</strong>。</p>
 </blockquote>
 
           <h4 id="5f741561">volatile的含义、底层实现和使用</h4>
@@ -159,7 +160,7 @@
 <p>Java语允许线程访问共享变量，为了确保共享变量可以被准确和一致地更新，线程应该确保通过<strong>排他锁</strong>单独获取这个变量。</p>
 </blockquote>
 <p>如果一个变量被声明为volatile，Java线程内存模型确保所有的线程看到这个变量的值是一致的。</p>
-<p>关于Java内存模型我们放到以后再说，总的来说，volatile生命了的变量，可以说任何对该变量的独写都是上了锁的，这种锁只针对改变量，是一种轻量级的锁</p>
+<p>关于Java内存模型我们放到以后再说，总的来说，使用<code>volatile</code>声明了的变量，可以说任何对该变量的读写都是上了锁的，这种锁只针对改变量，是一种轻量级的锁</p>
 <p>共享变量是什么概念呢？我们知道，线程运行的时候，很多时候是使用自己创建的私有线程栈空间去操作数据的，那么每个线程都操作的自己的栈空间，导致同一个意义的值在不同的线程中可能有不同的值，所以volatile变量强制让线程只从共享内存的意义上去操作变量，保证了<strong>可见性</strong></p>
 <p>
         <div class="_showpic_760599f4 showpicbtn">Loading images >></div>
@@ -208,7 +209,7 @@
 <li>步骤1后，通过缓存一致性协议，让其他处理器的缓存行中的该值无效</li>
 </ol>
 
-          <h5 id="df9f597b">使用</h5><p>volatile的使用非常简单，有volatile修饰的变量天然是一个临界资源，对于变量的赋值和访问天然上锁</p>
+          <h5 id="df9f597b">使用</h5><p>volatile的使用非常简单，有volatile修饰的变量天然是一个<strong>“受保护”</strong>的临界资源，对于变量的赋值和访问天然上锁</p>
 <pre><code class="language-java">    private volatile int mutex = 0;
     public void setMutex(int mutex){
         this.mutex = mutex;
@@ -362,14 +363,14 @@
 </tr>
 </tbody></table>
 
-          <h5 id="12ab71f2">Synchronized关键字使用须知</h5><p>上面说了很多原理性的东西，现在.....我们还是来说原理，现在主要是说一些该关键字的使用的注意事项</p>
+          <h4 id="65ac4164">Synchronized关键字使用须知</h4><p>上面说了很多原理性的东西，现在.....我们还是来说原理，现在主要是说一些该关键字的使用的注意事项</p>
 
-          <h6 id="59b2d57d">1. 脏读的情况</h6><p>什么是脏读？脏读就是程序读到了不完整的数据，这是<strong>读取操作没有同步处理的原因</strong></p>
+          <h5 id="c0bb84c7">1. 脏读的情况</h5><p>什么是脏读？脏读就是程序读到了不完整的数据，这是<strong>读取操作没有同步处理的原因</strong></p>
 <p>什么又是不完整的数据？也就是在一次原子的更新过程中，程序在更新过程还没有完成的时候就读取了整个数据</p>
 <p>比如我们的一个线程意图是将<strong>A（1，2，3）</strong>更新为<strong>A（4，5，6）</strong>的，虽然更新操作实现了同步，同一时刻只能保证一个程序对数据进行更新，但是读取操作没有进行同步，有可能有更新操作更新到一部分的时候<strong>A（4，5，3）</strong>，数据被错误地读取到了，这个脏读值是无效的</p>
 <p>如何避免脏读？<strong>保证读取方法也被包含在同步块中或者方法本身就是同步方法，最重要的一点是，读取方法和更新方法所面向的监视器得的同一个监视器！不要排错队了！</strong></p>
 
-          <h6 id="1abc2fc9">2. 锁重入</h6><p>锁重入的概念挺简单：</p>
+          <h5 id="83b57e73">2. 锁重入</h5><p>锁重入的概念挺简单：</p>
 <pre><code class="language-java">synchronized(obj a){
     // some code before
     synchronized(the same obj a){
@@ -393,17 +394,17 @@ synchronized public void c(){
 }</code></pre>
 <p>为什么可以说这种锁重入是有意义的呢？我觉得也没什么意义，一旦某个线程拿到a方法的执行权之后，该对象下所有的同步方法，是无法被其他线程调用的，这里的意义只是，abc三个方法需求的是同一个锁，也就是三个门用的是同一把钥匙，你既然已经拿到钥匙了，那么三个门你想怎么开就怎么开</p>
 
-          <h6 id="b6c71b9a">3. 有异常 则放锁</h6><p>基本的机制，贯彻整个同步知识，但是容易忽略掉</p>
+          <h5 id="2fce4a20">3. 有异常 则放锁</h5><p>基本的机制，贯彻整个同步知识，但是容易忽略掉</p>
 
-          <h6 id="c886299a">4. 代码块之间的同步性</h6><p>在使用同步块的情况下，如果有多个同步块持有的是同一个锁，在其中一个同步块被访问的时候，该锁就被该线程持有了，那么该锁的同步块无法被其他线程锁访问，说白了：<strong>钥匙只有一把！谁拿到钥匙，谁开锁进门！</strong></p>
+          <h5 id="518f7820">4. 代码块之间的同步性</h5><p>在使用同步块的情况下，如果有多个同步块持有的是同一个锁，在其中一个同步块被访问的时候，该锁就被该线程持有了，那么该锁的同步块无法被其他线程锁访问，说白了：<strong>钥匙只有一把！谁拿到钥匙，谁开锁进门！</strong></p>
 
-          <h6 id="fb331c26">5. 对象的同步方法之间的同步性</h6><p>多个线程调用同一对象中不同的同步方法或者synchronized(this)方法块的时候，多线程的调用效果是同步的，因为：<strong>拿的是一把锁，排的是一条队！</strong></p>
+          <h5 id="623a4d9c">5. 对象的同步方法之间的同步性</h5><p>多个线程调用同一对象中不同的同步方法或者synchronized(this)方法块的时候，多线程的调用效果是同步的，因为：<strong>拿的是一把锁，排的是一条队！</strong></p>
 
-          <h6 id="d967f890">6. Class锁</h6><p>Class锁可以对改类的所有对象实例起同步作用，基于上述反复强调的原理，<u>同步synchronized（class）代码块的作用和synchronized static方法的作用是一样的</u></p>
+          <h5 id="406ea92a">6. Class锁</h5><p>Class锁可以对改类的所有对象实例起同步作用，基于上述反复强调的原理，<u>同步synchronized（class）代码块的作用和synchronized static方法的作用是一样的</u></p>
 
-          <h6 id="f3b43772">7. 常量池对象作为锁的注意事项</h6><p>String因为有常量池去管理，所以有可能两个变量引用的是同一个String常量对象，尽量不要使用String直接量作为锁，宁可new一个作为锁</p>
+          <h5 id="6abd66c8">7. 常量池对象作为锁的注意事项</h5><p>String因为有常量池去管理，所以有可能两个变量引用的是同一个String常量对象，尽量不要使用String直接量作为锁，宁可new一个作为锁</p>
 
-          <h5 id="539d9496">Volatile和Synchronized的对比</h5><table>
+          <h4 id="249aa400">Volatile和Synchronized的对比</h4><table>
 <thead>
 <tr>
 <th align="center">关键字</th>
@@ -430,7 +431,7 @@ synchronized public void c(){
 </tbody></table>
 <p>然而对于synchronizrd<strong>可以间接保证数据可见性</strong>，暂时需要找个合适的方法去验证</p>
 
-          <h5 id="ff8ae745">关于synchronized间接保证数据同步性的问题</h5><p>首先我们准备一个类作为验证区：</p>
+          <h3 id="89f85fa5">* 关于synchronized间接保证数据同步性的问题</h3><p>首先我们准备一个类作为验证区：</p>
 <pre><code class="language-java">class BService {
     private boolean continueRun = true;
     public void runMethod() {
@@ -469,14 +470,14 @@ class ThreadB extends Thread {
     }</code></pre>
 <p>需要注意的是，这里AB线程虽然用的是同一个对象，但是因为线程私有栈的原因，每个线程虽然用的是同一个对象去调用方法，但是对象中的值在各自线程中有自己的副本，所以B线程置否了<code>continueRun</code>变量，但是线程A并不知道这个情况，除非<strong>B置否的变量被同步到共享内存，而线程A放弃自己的副本值，采用共享内存的值</strong></p>
 
-          <h6 id="cd77e552">空闲CPU同步内存？</h6><p>上面加粗的内容就是<strong>内存可见性</strong>的保证，在当前试验区类中，并没有做明显的保证线程安全的举措，但是当你运行程序你会发现，B线程是可以停止A线程的，这是为什么？我在一篇博客中看到了一个有意思的想法：</p>
+          <h4 id="2379847e">空闲CPU同步内存？</h4><p>上面加粗的内容就是<strong>内存可见性</strong>的保证，在当前试验区类中，并没有做明显的保证线程安全的举措，但是当你运行程序你会发现，B线程是可以停止A线程的，这是为什么？我在一篇博客中看到了一个有意思的想法：</p>
 <blockquote>
 <p>实际上，JVM对于现代的机器做了最大程度的优化，也就是说，最大程度的保障了线程和主存之间的及时的同步，也就是相当于虚拟机尽可能的帮我们加了个volatile，但是，当CPU被一直占用的时候，同步就会出现不及时，也就出现了后台线程一直不结束的情况。 </p>
 <p><em>参考：<a href="https://www.cnblogs.com/cookiezhi/p/5774583.html">https://www.cnblogs.com/cookiezhi/p/5774583.html</a></em></p>
 </blockquote>
 <p>所以，当我们的线程在沉睡了10ms的时候，CPU就有空闲时间去进行内存同步了，于是就有了线程A看见了线程B置否了变量</p>
 
-          <h6 id="9bcbaba">无意义的synchronized块保证同步内存？</h6><p>来看看为什么我不认同<em>《技术》</em>一书上说的<strong>“syn块具有同步功能”</strong>，首先上他所说的，没有内存可见的主体代码：</p>
+          <h4 id="e7b2db96">无意义的synchronized块保证同步内存？</h4><p>来看看为什么我不认同<em>《技术》</em>一书上说的<strong>“syn块具有同步功能”</strong>，首先上他所说的，没有内存可见的主体代码：</p>
 <pre><code class="language-java">public class BThreadTest {
     public static void main(String[] args) throws InterruptedException {
         BService service = new BService();

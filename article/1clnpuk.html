@@ -143,7 +143,7 @@
 </ul>
 <p>这么看来，如果要在线程任务中间去停止线程，只能使用<strong>interrupt方法</strong>，但是这个方法也<strong>不是说停就停</strong>的</p>
 
-          <h5 id="d2939cc8">interrupt()</h5><p>我们来看看方法的源码介绍，方法注释就不解释了，注释里主要说的是一些异常信息，其实这个方法的本质<strong>只是在当前线程中打了一个中断标志，并不是真正地停止线程！</strong></p>
+          <h5 id="d2939cc8">interrupt()</h5><p>我们来看看方法的源码介绍，方法注释就不解释了，注释里主要说的是一些异常信息，其实这个方法的本质<strong>只是在当前线程中打了一个中断标志，并不是真正地停止线程！</strong>我们看看源码：</p>
 <pre><code class="language-java">public void interrupt() {
     if (this != Thread.currentThread())
         checkAccess();
@@ -255,7 +255,7 @@ public void run() {
     }
 }</code></pre>
 <p>如代码里面所示，线程一旦开启，就进入到<strong>run()</strong>方法的<strong>while循环</strong>里面，<strong>while循环</strong>退出的点是<strong>blinker等于当前线程</strong>的时候，我们只需要简单的<strong>在外部将这个同步变量置空</strong>，这样线程就会<strong>结束while循环——方法结束——退出线程</strong>，达到暂停线程的效果</p>
-<p>但是这个方法还不够强，如果说，我们要让一个<strong>陷入长时间wait的线程中断的话（陷入wait就意味着线程卡在某个代码段那不继续往下执行了，而是等着抢资源）</strong>这个时候你就别指望说线程会跑到<strong>line：9</strong>去判断了</p>
+<p>但是这个方法还不够强，如果说，我们要让一个<strong>陷入长时间wait的线程（比方说在等待某个输入流）中断的话（陷入wait就意味着线程卡在某个代码段那不继续往下执行了，而是等着抢资源）</strong>这个时候你就别指望说线程会跑到<strong>line：9</strong>去判断了</p>
 <p>所以这里就该是我们的<strong>interrupt()方法</strong>登场了~</p>
 <p>官方称，<strong>interrupt()</strong>方法就是为了这一刻而诞生的，上述例子的<strong>blinker = null</strong>也是一种有效的<strong>“基于状态”的信号机制</strong>，<strong>interrupt()</strong>方法也差不多是这个概念，它甚至可以中断等待</p>
 <pre><code class="language-java">public void stop() {
@@ -264,13 +264,18 @@ public void run() {
     moribund.interrupt();
 }</code></pre>
 <blockquote>
-<p> 这个机制，对于在任何<strong>捕获到中断异常并且还没有准备好马上重新断言异常</strong>的方法来说很重要，我们常说<strong>宁可重新断言一个异常也不要抛出这个异常</strong>，因为重新抛出异常的做法并不总是好的</p>
+<p> 这个机制，对于在任何<strong>捕获到中断异常并且还没有准备好马上重新处理该异常</strong>的方法来说很重要，我们常说<strong>宁可处理掉这个新的异常也不要往上层抛这个异常</strong>，这样做回带来额外的麻烦</p>
 <p>如果一个方法捕获到了<strong>没有声明过的中断异常</strong>，你应该让这个线程<strong>再中断它自己一次</strong></p>
 <pre><code class="language-java">Thread.currentThread().interrupt();</code></pre>
 <p>以保证它尽可能及时地发出中断异常</p>
 </blockquote>
+<p>而在这节的最后，官方又提到了一个事情<em>“如果某个线程对<code>Thread.interrupt</code>没有反应怎么办？”</em></p>
+<p>在某些情况下，你可能将程序设计得很独特。比如说一个线程正在等待一个已知的socket资源，这时候你可以关闭这个socket来让这个线程马上从等待中返回。非常不幸的是，目前（JDK 8）还没有能够解决这种情况的技术。而且一旦某个线程不响应<code>Thread.interrupt</code>，那么它们也绝对不会响应<code>Thread.stop</code>。</p>
+<blockquote>
+<p>Such cases include deliberate denial-of-service attacks, and I/O operations for which thread.stop and thread.interrupt do not work properly.</p>
+</blockquote>
 
-          <h5 id="d594d80c">在sleep()里中断线程</h5><p>没什么说的，<strong>sleep()</strong>的调用需要捕获中断异常，如果在<strong>sleep()</strong>的过程中中断异常的话，就会抛出<strong>中断异常</strong>，在<strong>catch语句块中处理中断的后续逻辑</strong>就好了，<strong><u>请一定要在catch块中做出中断处理！！！（原因见sleep的注意事项）</u></strong></p>
+          <h5 id="d594d80c">在sleep()里中断线程</h5><p>没什么说的，<strong>sleep()</strong>的调用需要捕获中断异常，如果在<strong>sleep()</strong>的过程中中断异常的话，就会抛出<strong>中断异常</strong>，在<strong>catch语句块中处理中断的后续逻辑</strong>就好了，<strong><u>请一定要在catch块中做出中断处理！！！（原因见前一章的<a href="./bu9klx.html?hash=479c457a">sleep的注意</a>）</u></strong></p>
 
           <h4 id="fd3bb71b">暂停/恢复线程</h4><p>同样的，因为不安全，<strong>suspend()和resume()</strong>方法也都过期了，禁止使用，在和<strong>stop()</strong>被过期的官方介绍中同样介绍了原因：</p>
 <blockquote>
@@ -280,7 +285,7 @@ public void run() {
 <p>这种类型的死锁线程就是典型的<strong>“冻结”程序</strong></p>
 </blockquote>
 <p>官方也给出了安全实现暂停和恢复线程的示例：</p>
-<p>比如说，你的应用程序中包含这个鼠标点击事件的事件处理器，这个处理器会出发一个交<strong>blinker</strong>的线程</p>
+<p>比如说，你的应用程序中包含这个鼠标点击事件的事件处理器，这个处理器会触发一个叫<strong>blinker</strong>的线程</p>
 <pre><code class="language-java">private boolean threadSuspended;
 
 Public void mousePressed(MouseEvent e) {

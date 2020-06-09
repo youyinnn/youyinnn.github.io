@@ -56,7 +56,7 @@ finally { // 保证获取锁之后，最终能够被释放掉
 | 能够被中断地获取锁 | 和`synchronized`不同，线程在获取锁的过程中能够响应中断，当获取到锁的线程被中断的时候，中断异常会抛出，同时释放锁； |
 |      超时获取      |         在指定的时间内获取到锁，否则从获取动作返回；         |
 
-上面这三个点都有一些confuse的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用`synchronized`的时候的一个细节：`synchronized`与中断
+上面这三个点都有一些值得玩味的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用`synchronized`的时候的一个细节：`synchronized`与中断
 
 ```java
 public static void main(String[] args) throws InterruptedException {
@@ -150,7 +150,7 @@ Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来�
 - `setState()`：设置当前同步状态
 - `compareAndSetState()`用CAS设置同步状态，该方法保证设置动作的原子性
 
-##### 同步器可重写的方法
+##### 实现同步器需要重写的方法
 
 | 方法                                      | 描述                                                         |
 | ----------------------------------------- | ------------------------------------------------------------ |
@@ -167,14 +167,14 @@ Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来�
 | `void acquire(int arg)`                           | 独占式获取同步状态，如果同步状态获取成功，则从该方法返回，否则进入同步队列等待，该方法会调用重写的`tryAcquire`方法 |
 | `void acquireInterruptibly(int arg)`              | 和`acquire`相同，但是这个方法能够响应中断，当前线程如果没获取到同步状态而进入到同步队列中等待的时候，这时候中断这个线程，它就会从队列中退出并且抛出异常 |
 | `boolean tryAcquireNanos(int arg, long nanos)`    | 在`acquireInterruptibly`的基础上加了超时限制，如果在限时内获取到同步状态了就返回true，否则返回false |
-| `void acquireShared(int arg)`                     | 共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态 |
+| `void acquireShared(int arg)`                     | 共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态，该方法会调用重写的`tryAcquireShared`方法 |
 | `void acquireSharedInterruptibly(int arg)`        | 共享式可中断获取同步状态                                     |
 | `boolean acquireSharedNanos(ing arg, long nanos)` | 共享式可中断有超时获取同步状态，限时内获取到就返回true，否则返回false |
-| `boolean release(int arg)`                        | 独占式释放同步状态，并唤醒在同步队列中等待的第一个线程       |
-| `boolean releaseShared(int arg)`                  | 共享式释放同步状态                                           |
+| `boolean release(int arg)`                        | 独占式释放同步状态，并唤醒在同步队列中等待的第一个线程，该方法会调用重写的`tryRelease`方法 |
+| `boolean releaseShared(int arg)`                  | 共享式释放同步状态，该方法会调用重写的`tryReleaseShared`方法 |
 | `Collection<Thread> getQueuedThreads()`           | 获取等待在同步队列上的线程集合                               |
 
-可以看到，模板方法分为三类：独占式获取和释放、共享式获取和是否、同步队列线程集合
+可以看到，模板方法分为三类：独占式获取和释放、共享式获取和释放、同步队列线程集合
 
 ### 尝试实现一个独占锁
 

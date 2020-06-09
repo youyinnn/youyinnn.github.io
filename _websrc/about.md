@@ -20,6 +20,8 @@ The worst FeWeb developer in the universe.
 Change Log
 
 ``` console
+2020-06-09: flowchart.js support
+
 2020-06-06: specifying scripts loading according certain location.pathname
 
 2020-06-05: move back to gitee pages...

@@ -41,6 +41,8 @@ series: 并发
 
 同步器依赖内部实现的一个同步队列来完成**同步状态的管理**，当前线程获取同步状态失败的时候，同步器会将当前线程以及等待状态等信息构造成一个结点（Node）并将其加入到同步队列的尾部，**同时阻塞当前线程**
 
+#### Node
+
 同步队列中的结点用来保存同步状态获取失败的线程引用、等待状态以及前驱和后继结点，我们来看一下Node结构，值得一提的是，Node的结构是CLH队列锁的一个变体，CLH队列锁是一种自旋锁，有兴趣可以参考[这里][clh]来学习一下，推荐学习Node之前看一下CLH队列锁
 
 ```java
@@ -99,18 +101,18 @@ static final class Node {
 同步器拥有头节点head和尾结点tail，没有成功获取到同步状态的线程会称为结点加入到队列的尾部，其结构大概是：
 
 <pre class="nhi">
-    	 AQS        setHead(Node update)
-    -------------    /
-    |           |   /     Node         Node         Node         Node
-    |  { head }-|------&gt;{ prev }&lt;----{-prev }&lt;----{-prev }&lt;----{-prev }
-    |           |       { next-}----&gt;{ next-}----&gt;{ next-}----&gt;{ next }
-    |  { tail }-|-------------------------------------------------^
+    	 AQS          setHead(Node update)
+    ┏-----------┓       /
+    |           |     ┏---&gt;Node         Node         Node         Node
+    |  { head }-|-----┛  | prev |&lt;----|-prev |&lt;----|-prev |&lt;----|-prev |
+    |           |        | next-|----&gt;| next-|----&gt;| next-|----&gt;| next |
+    |  { tail }-|--------------------------------------------------^
     |           |        \
-    -------------      compareAndSetTail(Node expect, Node update)
+    ┗-----------┛      compareAndSetTail(Node expect, Node update)
 </pre>
 
 
-把**当前结点（刚获取同步状态失败的线程构成的结点）**到尾部的过程必须用CAS的方式去做，**保证每个并发加入的结点最终能够串行成队列**，它需要传入当前线程“认为”的尾结点和当前结点
+把**当前结点（刚获取同步状态失败的线程构成的结点）**放到尾部的过程必须用CAS的方式去做，**保证每个并发加入的结点最终能够串行成队列**，它需要传入当前线程“认为”的尾结点和当前结点
 
 同步队列也遵从FIFO，首节点是获取同步状态成功的结点，首节点线程在释放同步状态的时候，会唤醒后继结点，而后继结点会在**获取同步状态成功的那一刻**将自己设置为首节点，因为设置首节点的前提是**获取到同步状态**，<u>由于只有一个线程获取到同步状态</u>，所以设置首节点的方法并不需要使用CAS来保证，它只需要将首节点设置成原首节点的后继，并且断开原首节点的next引用即可
 
@@ -327,7 +329,7 @@ final boolean acquireQueued(final Node node, int arg) {
                                      node.prev=head && tryAcquire(arg)
     	 AQS       might get sync state             /
     -------------         /      ┌------v       ┌------v       ┌------v
-    |           |       Node     |     Node     |     Node     |   Node
+    |           |       Node     |     Node     |     Node     |     Node
     |  { head }-|----&gt;{ prev }&lt;--|---{-prev }&lt;--|---{-prev }&lt;--|---{-prev }
     |           |     { next-}---|--&gt;{ next-}---|--&gt;{ next-}---|--&gt;{ next }
     |  { tail }-|----------------|------|-------|------|-------|------^
@@ -337,8 +339,6 @@ final boolean acquireQueued(final Node node, int arg) {
      因为一次for循环中的shouldParkAfterFailedAcquire就已经把前驱设置为SIGNAL了，
      直到第二个结点称为新的头节点，并且unpark原来的第三个结点，以此...
 </pre>
-
-
 
 如结构里展示的一样，除了获取到同步状态的头节点之外，后面的结点都在排队park中，这个结论我已经debug过了，确实是这样的，**这样看来，排队中的各个结点线程它们之间获取锁的顺序，是“公平的”**，
 
