@@ -1,5 +1,5 @@
 ---
-title: The basic grammar of python (CD)
+title: The Basic Grammar Of Python (CD)
 categories:
   - python
   - grammar-p

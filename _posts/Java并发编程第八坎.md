@@ -29,27 +29,16 @@ series: 并发
 
 说明：虽然非公平锁可能会造成“饥饿”情况，但是大多数情况下还是非公平锁用的多，因为公平锁在释放锁又再获取锁的时候，总是会**切换线程**，而非公平锁一段时间内很可能总是那一个线程不停放锁持锁，**线程切换的开销小就意味着——吞吐量大**
 
-再说多一点，公平性和非公平性是**“针对未入队结点”**和**“已入队结点”**而言，上一篇文章已经提到过，队列中的结点都是公平获取锁的，遵从FIFO，至于具体的体现，继续往下读，读到FairSync的`tryAcquire`和`hasQueuedPredecessors`方法就知道了
+再说多一点，公平性和非公平性是**“针对未入队结点”**和**“已入队结点”**而言，上一篇文章已经提到过，**同步队列**中的结点都是公平获取锁的，遵从FIFO，至于具体的体现，继续往下读，读到FairSync的`tryAcquire`和`hasQueuedPredecessors`方法就知道了
 
 #### ReentrantLock
 
 重入锁可以通过构造器来决定公平机制，默认是非公平锁：
 
 ``` java
-/**
- * Creates an instance of {@code ReentrantLock}.
- * This is equivalent to using {@code ReentrantLock(false)}.
- */
 public ReentrantLock() {
     sync = new NonfairSync();
 }
-
-/**
- * Creates an instance of {@code ReentrantLock} with the
- * given fairness policy.
- *
- * @param fair {@code true} if this lock should use a fair ordering policy
- */
 public ReentrantLock(boolean fair) {
     sync = fair ? new FairSync() : new NonfairSync();
 }
@@ -58,24 +47,11 @@ public ReentrantLock(boolean fair) {
 ReentrantLock中有3个简单的内部类，`FairSync`/`NonfairSync`以及`Sync`，后者是前两个的父类，
 
 ``` java
-/**
- * Base of synchronization control for this lock. Subclassed
- * into fair and nonfair versions below. Uses AQS state to
- * represent the number of holds on the lock.
- */
 abstract static class Sync extends AbstractQueuedSynchronizer {
     private static final long serialVersionUID = -5179523762034025860L;
-
-    /**
-     * Performs {@link Lock#lock}. The main reason for subclassing
-     * is to allow fast path for nonfair version.
-     */
+    
     abstract void lock();
-
-    /**
-     * Performs non-fair tryLock.  tryAcquire is implemented in
-     * subclasses, but both need nonfair try for trylock method.
-     */
+    
     final boolean nonfairTryAcquire(int acquires) {
         final Thread current = Thread.currentThread();
         int c = getState();
@@ -116,21 +92,16 @@ abstract static class Sync extends AbstractQueuedSynchronizer {
 
 观察`nonfairTryAcquire`方法，当state为0的时候，代表没有线程获取到锁，但是同时可能有多个线程在竞争同步状态，所以使用CAS来设置state，设置成功的线程会设置AQS的独占线程为当前线程，此时state为1；下次再来的时候，如果是自己获取自己，那么现在的state加上aquire数量，设置为新的state，并且此时没有竞争，所以常规设置state即可；
 
+即在某一绝对时刻，如果state为0，任何线程都能够和同步队列中的头结点竞争state，一旦竞争到了就获取到了锁，不用入队；
+
 观察`tryRelease`方法，如果不是持锁线程掉用的话，则什么都不干，否则现在的state减去releases数量，直到为0的时候，才移除AQS的独占线程；
 
-再来看看`NonfairSync`
+再来看看`Sync`的子类之一：`NonfairSync`
 
 ``` java
-/**
- * Sync object for non-fair locks
- */
 static final class NonfairSync extends Sync {
     private static final long serialVersionUID = 7316153563782823691L;
 
-    /**
-     * Performs lock.  Try immediate barge, backing up to normal
-     * acquire on failure.
-     */
     final void lock() {
         if (compareAndSetState(0, 1))
             setExclusiveOwnerThread(Thread.currentThread());
@@ -144,14 +115,11 @@ static final class NonfairSync extends Sync {
 }
 ```
 
-非常简单的实现，并且在`lock`方法中会尝试一次快速地获取同步状态，获取到就贼赚，获取不到就乖乖`acquire` 去，`tryAcquire`则是直接调用父类提供的非公平`nonfairTryAcquire`
+非常简单的实现，并且在`lock`方法中会尝试一次快速地获取同步状态，获取到就贼赚，获取不到就乖乖`acquire` 去，`tryAcquire`则是直接调用父类提供的非公平`nonfairTryAcquire`，如果获取不到，下场一样是进入同步队列尾部排队
 
 最后是`FairSync`
 
 ``` java
-/**
- * Sync object for fair locks
- */
 static final class FairSync extends Sync {
     private static final long serialVersionUID = -3000897897090466540L;
 
@@ -159,10 +127,6 @@ static final class FairSync extends Sync {
         acquire(1);
     }
 
-    /**
-     * Fair version of tryAcquire.  Don't grant access unless
-     * recursive call or no waiters or is first.
-     */
     protected final boolean tryAcquire(int acquires) {
         final Thread current = Thread.currentThread();
         int c = getState();

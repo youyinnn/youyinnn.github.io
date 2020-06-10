@@ -1,5 +1,5 @@
 ---
-title: Python - threading
+title: Python - Threading
 categories:
   - python
   - concurrency-p
