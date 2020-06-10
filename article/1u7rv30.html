@@ -268,15 +268,16 @@ public ReentrantLock(boolean fair) {
 </ul>
 <p>所以不要误解非公平锁的情况下，后排队的结点线程也能很<strong>“不公平”</strong>地比先排队的结点线程先获得同步状态，这是不可能的；</p>
 
-          <h4 id="e99414ec">ReentrantReadWriteLock</h4><p>在Lock接口之前，我们使用等待通知的设计机制可以简单地实现一个读写场景，当写操作开始的时候，所有后续读写操作都进入等待，写操作完成之后，通知唤醒等待线程；基于这样的逻辑，才能避免脏读</p>
+          <h4 id="e99414ec">ReentrantReadWriteLock</h4><p>在Lock接口之前，我们使用等待通知的设计机制可以简单地实现一个读写场景，当写线程开始的时候，所有后续读写线程都进入等待，写操作完成之后，通知唤醒等待中的其他线程；而当有一个读线程在读取的时候，写线程进入等待；</p>
+<p>基于这样的逻辑，才能避免脏读</p>
 <p>所以读写锁的基本思想是：<strong>写锁的优先度高于读锁，可以多读，只能单写；</strong></p>
-<p><strong>换句话说，写锁是独占锁，读锁是共享锁</strong></p>
+<p><strong>换句话说，写锁是独占锁，读锁是共享锁</strong>，而上面说的<code>ReentrantLock</code>则是排他锁，在一般场景下，读写锁的性能会比排他锁好，因为绝大部分场景是读操作远多于写操作的；</p>
 <p>使用读写锁的时候，只需要在读操作的时候获取读锁，写操作的时候获取写锁就可以了，比<code>synchronized</code>关键字加等待通知方法更加简单明了</p>
 <p><code>ReentrantReadWirteLock</code>是读写锁的一种，其特性如：</p>
 <ul>
 <li>可重入</li>
 <li>公平性选择</li>
-<li>遵循获取写锁、获取读锁再释放写锁的顺序，写锁可降级</li>
+<li>遵循获取写锁、获取读锁再释放写锁的顺序，写锁可降级称为读锁</li>
 </ul>
 <p>另外它还提供了外部监控内部锁状态的方法：</p>
 <table>
@@ -533,6 +534,37 @@ public static class WriteLock implements Lock, java.io.Serializable {
 
     // 其余release、中断acquire、超时、状态相关方法略
 }</code></pre>
+
+          <h5 id="32367de4">Write Lock Degradation</h5><p>虽然写锁在被某一个线程持有的时候，其他线程的读锁请求和写锁请求都会被阻塞，但是同一线程的读写锁请求是不会被阻塞的；</p>
+<p>而读写锁中的<strong>锁降级</strong>是指：同一个线程在持有写锁的情况下，同时获取读锁，再释放写锁；</p>
+<p>这样做是<strong>保证数据可见性</strong>，因为当A线程在持有写锁的时候，这时候其他线程的读写操请求都会被阻塞，这时候A线程再获取读锁然后释放写锁，那么在A线程持有读锁的情况下，A线程最后一次修改过的数据就对其他线程可见（其他线程的读请求会被唤醒）</p>
+<pre><code class="language-java">readLock.unLock();
+writeLock.lock();
+try{
+    // update 
+    data.update();
+    readLock.lock();
+} finally {
+    writeLoce.unLock();
+}</code></pre>
+
+          <h3 id="26845fc6">Conclusion</h3><p>上一篇文章我们在分析<code>SynchronizedQueue</code>的时候同时也分析了共享式获取和释放等方法，这些方法就是就是给读写锁来实现写锁的</p>
+<p>关于重入锁和读写锁的原理方面，我觉得要注意以下几点：</p>
+<ol>
+<li><code>Lock</code>接口、<code>AbstractSynchronizedQueue</code>的关系；</li>
+<li>CAS更改State；</li>
+<li>同步队列的原理<ol>
+<li>结构；</li>
+<li>自旋、等待；</li>
+<li>共享式锁的<strong><em>Propagation</em></strong>；</li>
+</ol>
+</li>
+<li>锁重入的过程；</li>
+<li>公平/非公平的原理；</li>
+<li>读锁写锁的工作流程于应用设计；</li>
+<li>写锁的降级；</li>
+</ol>
+<p>虽然<em>《艺术》</em>书上没有关于读写锁的更多源码讲解，但是有了之前重入锁的讲解分析经历，还是能自己把读写锁的源码分析了一遍</p>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">

@@ -275,7 +275,7 @@ var resoucesListWithoutCache = [
 ]
 
 fs.writeFileSync(path.join(resourcesPath, 'resources.js'), 
-`var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ${JSON.stringify(resoucesList)};} else {resourcesList = ${JSON.stringify(resoucesListWithoutCache)};}`)
+`var articlesCount = ${postsrs.length}; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ${JSON.stringify(resoucesList)};} else {resourcesList = ${JSON.stringify(resoucesListWithoutCache)};}`)
 
 
 // delete old cache file
