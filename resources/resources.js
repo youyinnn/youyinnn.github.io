@@ -1,1 +1,1 @@
-var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-1gz9q16.js"];} else {resourcesList = ["friendslink.js"];}
+var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-ey9s1h.js"];} else {resourcesList = ["friendslink.js"];}
