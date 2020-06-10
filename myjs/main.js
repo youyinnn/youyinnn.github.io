@@ -219,6 +219,7 @@ function new_render_md(regular_toc, abbrlink) {
             scrollToElement(hash.replace('#', ''))
         }
         let flows = $('.language-flow')
+
         function renderfc() {
             try {
                 if (flowchart) {}
@@ -240,8 +241,7 @@ function new_render_md(regular_toc, abbrlink) {
             }
         }
         if (flows.length > 0) {
-            let fcrs = [
-                {
+            let fcrs = [{
                     url: 'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js',
                     target: ['/article/', '/todos/', '/scripts/'],
                     attrs: {
@@ -637,15 +637,19 @@ function rstopaging(articles) {
 }
 
 function scrollToTop(interval) {
-    $('html,body').animate({
+    $('html').animate({
         scrollTop: 0
     }, interval);
 }
 
 function pagination() {
     function pageFlesh() {
-        scrollToTop(300)
-        $('#pagebox-' + nowpage).addClass('animate__animated animate__fadeInDown')
+        if ($('html').scrollTop() > 0) {
+            scrollToTop(300)
+            $('#pagebox-' + nowpage).addClass('animate__animated animate__fadeInDown')
+        } else {
+            $('#pagebox-' + nowpage).addClass('animate__animated animate__fadeIn')
+        }
     }
 
     nowpage = 1
@@ -718,6 +722,7 @@ function pagination() {
         adclass(pg, 'page-item')
         let pgl = c('div')
         adclass(pgl, 'page-link')
+        pgl.style.width = '41px'
         pgl.innerHTML = i + 1
         if (i === 0) {
             adclass(pg, 'active')

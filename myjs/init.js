@@ -64,6 +64,7 @@ $(function() {
         setgohub('My hub', 'https://github.com/' + username)
         showbbt()
         $('#slogan-text').text('I\'M WAITING')
+        $('#toarticles').text($('#toarticles').text() + ` (${articlesCount} articles)`)
     } else if (pathname === '/about/') {
         changepagetitle('about | youyinnn')
         new_render_md(true)
