@@ -442,7 +442,7 @@ public V get(Object key) {
 <p>如果第一个箱子并不是要找的元素，且当前仓位不只一个箱子而是一个箱群，那么接下来就开始判断<strong>箱群结构</strong>，如果first是<strong>树箱</strong>，那么就用<strong>树结构的方法去查找结点</strong>，否则就是<strong>链箱群</strong>，接着就是中规中矩的链遍历，对比步骤和上面一致；</p>
 <p><strong>无论是树箱子还是链箱子的查找，都是<code>k == key || k.equals(key)</code>这样的比较句式！</strong></p>
 <p>注意到<code>line:8</code>有一句<code>(n - 1) &amp; hash</code>，这是将hash再映射到主仓的下标中，这也就解释了为什么会有<code>first.hash == hash</code>这样的语句，因为即使不同的hash也有可能映射到同一个仓位，下文的<code>hash &amp; (n - 1)</code>也是计算仓位的下标，二者没有区别；</p>
-<p>但是要注意的是，这样计算下标是有要求的，<strong>要求就是表容量必须是2的次幂，才能进行这样的运算</strong>，这也是为什么有静态方法<code>tableSizeFor</code>这个方法，比如说你指定初始化容量为1000，实际创建出来的表容量也是比1000大的2的次幂数即1024，我们配合有参1构造方法去解答，当我们最开始使用有参构造1的时候，只有<strong>threshold</strong>被赋值为比如说1000，然后到了<code>resize()</code>方法：</p>
+<p>但是要注意的是，这样计算下标是有要求的，<strong>要求就是表容量必须是2的次幂，才能进行这样的运算</strong>，这也是为什么有静态方法<code>tableSizeFor</code>这个方法，比如说你指定初始化容量为1000，实际创建出来的表容量也是比1000大的2的次幂数即1024，我们配合<strong>有参构造方法1</strong>去解答，当我们最开始使用<strong>有参构造方法1</strong>的时候，只有<strong>threshold</strong>被赋值为比如说1000，然后到了<code>resize()</code>方法：</p>
 <blockquote>
 <p>oldCap=0；</p>
 <p>oldThr = threshold = 1024；</p>
@@ -522,7 +522,8 @@ public V put(K key, V value) {
 <p>后面还注意到有<code>afterNodeAccess</code>和<code>afterNodeInsertion</code>两个方法，这两个方法在<code>HashMap</code>中没有实现，是给<code>LinkedHashMap</code>去实现的，在这里我们不必关心；</p>
 <p>最后调整主仓，如果主仓size大于阈值就执行<code>resize()</code>方法；</p>
 
-          <h6 id="c8a845fe">resize</h6><pre><code class="language-java">// 这个方法很关键 用于调整主仓的大小
+          <h6 id="5bdd6ca5">resize/rehash</h6><p>resize是HashMap的扩容方法，而rehash指的是扩容后旧表节点重新散列的过程</p>
+<pre><code class="language-java">// 这个方法很关键 用于调整主仓的大小
 // 要么是初始化一个主仓 要么将主仓扩至2倍大
 // 如果旧主仓是null 那就分配一个和根据阈值做参考的主仓
 // 否则的话 使用2的次幂值去调整容量 元素要么在原来的位置 要么在新的表中有2的次幂的偏移量
@@ -601,7 +602,7 @@ final Node&lt;K,V&gt;[] resize() {
 }</code></pre>
 <ol>
 <li><code>line:9-29</code>：这一阶段主要是确定新的阈值和新的容量，要么是原来的两倍，要么最大也大不过Integer的最大值</li>
-<li><code>line:33</code>：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有<code>TreeNode</code>对象调用的<code>split</code>方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如<strong>逆树化一个树箱群</strong></li>
+<li><code>line:33</code>：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有<code>TreeNode</code>对象调用的<code>split</code>方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如<strong>逆树化一个树箱群</strong>，这个待会就分析</li>
 </ol>
 
           <h6 id="b541ee">树箱子——大名鼎鼎的红黑树</h6><p>这方法里面的一些树操作细节，得先了解清楚<strong>树箱子</strong>的结构，才好继续分析，所以这里先插播一下，了解一下<strong>树箱子</strong>的结构</p>
@@ -651,7 +652,56 @@ static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
             }
         </script>
     </p>
-<p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和HashMap无关，就忽略了，而且我认为这里有点<strong>设计过度</strong>，<strong>有了prev和next，为什么还要before和after？</strong></p>
+<p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和HashMap无关，就忽略了，我认为这里是不想重新实现某些已有方法</p>
+
+          <h6 id="77b9af7c">split</h6><p>之前在说<strong>resize/rehash</strong>的时候，就有看到，在重新散列节点的时候，也就是旧节点从旧表搬运到新表的时候，如果该节点是一个树节点，那么它会直接调用split方法：</p>
+<pre><code class="language-java">final void split(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab, int index, int bit) {
+    TreeNode&lt;K,V&gt; b = this;
+    // Relink into lo and hi lists, preserving order
+    TreeNode&lt;K,V&gt; loHead = null, loTail = null;
+    TreeNode&lt;K,V&gt; hiHead = null, hiTail = null;
+    int lc = 0, hc = 0;
+    for (TreeNode&lt;K,V&gt; e = b, next; e != null; e = next) {
+        next = (TreeNode&lt;K,V&gt;)e.next;
+        e.next = null;
+        if ((e.hash &amp; bit) == 0) {
+            if ((e.prev = loTail) == null)
+                loHead = e;
+            else
+                loTail.next = e;
+            loTail = e;
+            ++lc;
+        }
+        else {
+            if ((e.prev = hiTail) == null)
+                hiHead = e;
+            else
+                hiTail.next = e;
+            hiTail = e;
+            ++hc;
+        }
+    }
+
+    if (loHead != null) {
+        if (lc &lt;= UNTREEIFY_THRESHOLD)
+            tab[index] = loHead.untreeify(map);
+        else {
+            tab[index] = loHead;
+            if (hiHead != null) // (else is already treeified)
+                loHead.treeify(tab);
+        }
+    }
+    if (hiHead != null) {
+        if (hc &lt;= UNTREEIFY_THRESHOLD)
+            tab[index + bit] = hiHead.untreeify(map);
+        else {
+            tab[index + bit] = hiHead;
+            if (loHead != null)
+                hiHead.treeify(tab);
+        }
+    }
+}</code></pre>
+<p>可以看到，该方法在保证结点顺序的情况下，将旧节点上的一颗树分为矮树和高树，划分的依据是<code>e.hash &amp; bit</code>，划分完之后，矮树保留在旧节点的原位，而高数则分配到原下标加上一个offset为旧表的长度的下标位置</p>
 
           <h6 id="2fa17b6a">treeifyBin</h6><p>不管怎么说，我们还是开始分析树化方法：</p>
 <pre><code class="language-java">// 树化这个hash仓位上的箱群
