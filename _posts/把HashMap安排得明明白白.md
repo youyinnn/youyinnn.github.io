@@ -366,7 +366,7 @@ final Node<K,V> getNode(int hash, Object key) {
 
 注意到`line:8`有一句`(n - 1) & hash`，这是将hash再映射到主仓的下标中，这也就解释了为什么会有`first.hash == hash`这样的语句，因为即使不同的hash也有可能映射到同一个仓位，下文的`hash & (n - 1)`也是计算仓位的下标，二者没有区别；
 
-但是要注意的是，这样计算下标是有要求的，**要求就是表容量必须是2的次幂，才能进行这样的运算**，这也是为什么有静态方法`tableSizeFor`这个方法，比如说你指定初始化容量为1000，实际创建出来的表容量也是比1000大的2的次幂数即1024，我们配合有参1构造方法去解答，当我们最开始使用有参构造1的时候，只有**threshold**被赋值为比如说1000，然后到了`resize()`方法：
+但是要注意的是，这样计算下标是有要求的，**要求就是表容量必须是2的次幂，才能进行这样的运算**，这也是为什么有静态方法`tableSizeFor`这个方法，比如说你指定初始化容量为1000，实际创建出来的表容量也是比1000大的2的次幂数即1024，我们配合**有参构造方法1**去解答，当我们最开始使用**有参构造方法1**的时候，只有**threshold**被赋值为比如说1000，然后到了`resize()`方法：
 
 > oldCap=0；
 >
@@ -467,7 +467,9 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 最后调整主仓，如果主仓size大于阈值就执行`resize()`方法；
 
-###### resize
+###### resize/rehash
+
+resize是HashMap的扩容方法，而rehash指的是扩容后旧表节点重新散列的过程
 
 ```java
 // 这个方法很关键 用于调整主仓的大小
@@ -549,7 +551,7 @@ final Node<K,V>[] resize() {
 }
 ```
 1. `line:9-29`：这一阶段主要是确定新的阈值和新的容量，要么是原来的两倍，要么最大也大不过Integer的最大值
-2. `line:33`：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有`TreeNode`对象调用的`split`方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如**逆树化一个树箱群**
+2. `line:33`：之后的代码主要就是元素的搬运工作了，值得注意的是这里面有`TreeNode`对象调用的`split`方法，可能会调整一些箱子的位置（并不是调整箱子所在的仓位）比如**逆树化一个树箱群**，这个待会就分析
 
 ###### 树箱子——大名鼎鼎的红黑树
 
@@ -585,7 +587,62 @@ static class Entry<K,V> extends HashMap.Node<K,V> {
 
 ![](https://image.youyinnn.top/20180818150455.png)
 
-这里应该还有**before**和**after**，但是和HashMap无关，就忽略了，而且我认为这里有点**设计过度**，**有了prev和next，为什么还要before和after？**
+这里应该还有**before**和**after**，但是和HashMap无关，就忽略了，我认为这里是不想重新实现某些已有方法
+
+###### split
+
+之前在说**resize/rehash**的时候，就有看到，在重新散列节点的时候，也就是旧节点从旧表搬运到新表的时候，如果该节点是一个树节点，那么它会直接调用split方法：
+
+``` java
+final void split(HashMap<K,V> map, Node<K,V>[] tab, int index, int bit) {
+    TreeNode<K,V> b = this;
+    // Relink into lo and hi lists, preserving order
+    TreeNode<K,V> loHead = null, loTail = null;
+    TreeNode<K,V> hiHead = null, hiTail = null;
+    int lc = 0, hc = 0;
+    for (TreeNode<K,V> e = b, next; e != null; e = next) {
+        next = (TreeNode<K,V>)e.next;
+        e.next = null;
+        if ((e.hash & bit) == 0) {
+            if ((e.prev = loTail) == null)
+                loHead = e;
+            else
+                loTail.next = e;
+            loTail = e;
+            ++lc;
+        }
+        else {
+            if ((e.prev = hiTail) == null)
+                hiHead = e;
+            else
+                hiTail.next = e;
+            hiTail = e;
+            ++hc;
+        }
+    }
+
+    if (loHead != null) {
+        if (lc <= UNTREEIFY_THRESHOLD)
+            tab[index] = loHead.untreeify(map);
+        else {
+            tab[index] = loHead;
+            if (hiHead != null) // (else is already treeified)
+                loHead.treeify(tab);
+        }
+    }
+    if (hiHead != null) {
+        if (hc <= UNTREEIFY_THRESHOLD)
+            tab[index + bit] = hiHead.untreeify(map);
+        else {
+            tab[index + bit] = hiHead;
+            if (loHead != null)
+                hiHead.treeify(tab);
+        }
+    }
+}
+```
+
+可以看到，该方法在保证结点顺序的情况下，将旧节点上的一颗树分为矮树和高树，划分的依据是`e.hash & bit`，划分完之后，矮树保留在旧节点的原位，而高数则分配到原下标加上一个offset为旧表的长度的下标位置
 
 ###### treeifyBin
 

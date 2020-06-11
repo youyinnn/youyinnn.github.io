@@ -598,7 +598,7 @@ T3 released lockB</code></pre>
           <h4 id="fba275b2">讨论一下wait的风险</h4><p>这是在几个月前顺丰科技面试的时候，一面面试官问我的问题，当时我没答上，因为当时准备的很不充分，连wait和sleep的区别都没看，估计是因为这个原因，面试官以为又摸到我的上限了，顺丰科技还是挺想去的</p>
 <p>今天看了一下wait和notify之后，感觉能回答出这个问题了</p>
 <ol>
-<li><p>因为wait并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong></p>
+<li><p>因为wait并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong>，当然，这属于<strong>设计上</strong>的问题</p>
 <pre><code class="language-java">new Thread(() -&gt; {
     synchronized (lockA) {
         synchronized (lockB) {
@@ -615,6 +615,9 @@ new Thread(() -&gt; {
         synchronized(lockB) {}
     }
 }).start();</code></pre>
+<p>当线程1放弃了LockA并且进入阻塞的情况下，线程B获取到了LockA并且在获取LockB的时候阻塞，然后线程A也进入了阻塞状态，因为要从wait返回的条件是竞争到LockA，而这时候LockA已经被别的线程获取了；</p>
+<p>在这种状态下，超时就无效了，发起中断也无效，因为发起中断只是打了标志，线程A仍然需要获取到LockA才能返回；</p>
+<p>而使用<code>Lock</code>API就能够很好地解决这个问题，因为它能够提供<strong>非阻塞式、有超时</strong>的获取锁获取不到就超时返回；</p>
 </li>
 <li><p>因为wait的唤醒机制还是重新去竞争锁，如果竞争不顺利的话，会一直返回不了<strong>等待前的状态</strong>，导致这个线程进入<strong>饥饿状态</strong></p>
 </li>
