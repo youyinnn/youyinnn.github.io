@@ -1,5 +1,5 @@
 ---
-title: Tree Plan-1
+title: Tree Introduction
 categories:
   - datastruct
   - tree

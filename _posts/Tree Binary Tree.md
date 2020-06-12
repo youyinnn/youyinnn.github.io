@@ -1,5 +1,5 @@
 ---
-title: Tree Plan-Binary Tree
+title: Tree Binary Tree
 categories:
   - datastruct
   - tree
