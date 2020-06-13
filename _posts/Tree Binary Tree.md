@@ -1,7 +1,7 @@
 ---
 title: Tree Binary Tree
 categories:
-  - datastruct
+  - data structures
   - tree
 tags:
   - algorithm

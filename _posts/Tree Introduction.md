@@ -1,7 +1,7 @@
 ---
 title: Tree Introduction
 categories:
-  - datastruct
+  - data structures
   - tree
 tags:
   - algorithm

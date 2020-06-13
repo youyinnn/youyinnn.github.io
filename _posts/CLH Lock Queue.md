@@ -1,8 +1,8 @@
 ---
 title: CLH Lock Queue
 categories:
-  - datastruct
-  - tree
+  - data structures
+  - list
 tags:
   - algorithm
   - clh-lock-queue

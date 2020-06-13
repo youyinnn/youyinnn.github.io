@@ -134,8 +134,7 @@
 <p><strong>在位性：</strong>算法排序是否要借助额外的内存空间，需要就不在位</p>
 
           <h3 id="fb0657e9">各数据对比</h3>
-          <h4 id="c2c7e041">基本数据</h4>
-          <h5 id="e8d1c849">小数据量</h5><table>
+          <h4 id="9fd6f8df">小数据量</h4><table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -180,7 +179,7 @@
 </tr>
 </tbody></table>
 
-          <h5 id="db907058">大数据量</h5><table>
+          <h4 id="ac9740ce">大数据量</h4><table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -216,78 +215,6 @@
 <td align="center">✖️</td>
 </tr>
 </tbody></table>
-
-          <h4 id="adcda8e0">场景表现（⚠️仅供参考！！！）</h4><table>
-<thead>
-<tr>
-<th align="center">算法</th>
-<th align="center">良序表现</th>
-<th align="center">乱序表现</th>
-<th align="center">逆序表现</th>
-<th align="center">部分重复</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">冒泡</td>
-<td align="center">第二</td>
-<td align="center">第六</td>
-<td align="center">第六</td>
-<td align="center">第六</td>
-</tr>
-<tr>
-<td align="center">选择</td>
-<td align="center"><strong>最差</strong></td>
-<td align="center"><strong>最差</strong></td>
-<td align="center"><strong>最差</strong></td>
-<td align="center"><strong>最差</strong></td>
-</tr>
-<tr>
-<td align="center">插入</td>
-<td align="center"><strong>最好</strong></td>
-<td align="center">第五</td>
-<td align="center">第五</td>
-<td align="center">第三</td>
-</tr>
-<tr>
-<td align="center">希尔</td>
-<td align="center">第三</td>
-<td align="center">第二</td>
-<td align="center"><strong>最好</strong></td>
-<td align="center"><strong>最好</strong></td>
-</tr>
-<tr>
-<td align="center">快速</td>
-<td align="center">第六</td>
-<td align="center">第四</td>
-<td align="center">第四</td>
-<td align="center">第五</td>
-</tr>
-<tr>
-<td align="center">归并</td>
-<td align="center">第四</td>
-<td align="center">第三</td>
-<td align="center">第三</td>
-<td align="center">第四</td>
-</tr>
-<tr>
-<td align="center">堆</td>
-<td align="center">第五</td>
-<td align="center"><strong>最好</strong></td>
-<td align="center">第二</td>
-<td align="center">第二</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>参考：<a href="https://www.toptal.com/developers/sorting-algorithms%EF%BC%88%E8%82%89%E7%9C%BC%E6%B5%8B%E9%87%8F%E3%80%81%E9%9A%BE%E5%85%8D%E6%9C%89%E8%AF%AF%EF%BC%89">https://www.toptal.com/developers/sorting-algorithms（肉眼测量、难免有误）</a></p>
-</blockquote>
-<ol>
-<li><strong>快排</strong>真的<strong>不咋地</strong>，性能不稳定，排序也不稳定，场景表现也不咋地</li>
-<li><strong>希尔</strong>确实不错，各场景表现综合<strong>第一</strong></li>
-<li><strong>选择</strong>是真的<strong>菜鸡</strong></li>
-<li><strong>随机</strong>情况下表现依次为：<strong>堆、希尔、归并、快排、插入、冒泡</strong></li>
-<li><strong>良序</strong>情况下表现依次为：<strong>插入、冒泡、希尔、归并、堆、快排</strong></li>
-<li><strong>逆序</strong>情况下表现依次为：<strong>希尔、堆、归并、快排、插入、冒泡</strong></li>
-</ol>
 <hr>
 
           <h3 id="beb7da16">BubbleSort</h3><blockquote>
@@ -531,7 +458,7 @@ private static void merge(int[] brr, int[] crr, int[] arr){
 <li><p>挖坑、左右指针、前后指针：<a href="https://blog.csdn.net/qq_36528114/article/details/78667034">https://blog.csdn.net/qq_36528114/article/details/78667034</a></p>
 </li>
 <li><p>单路、三路、双轴的简单实现和图片解析：<a href="https://rerun.me/2013/06/13/quicksorting-3-way-and-dual-pivot/">https://rerun.me/2013/06/13/quicksorting-3-way-and-dual-pivot/</a></p>
-<p>目前来说，实现最快的快排是双轴快排，它的表现非常好，再JDK7的时候，<code>Arrays.sort()</code>方法用的就是自实现的双轴快排<code>java.util.DualPivotQuicksort</code></p>
+<p>目前来说，实现最快的快排是双轴快排，它的表现非常好，在JDK7的时候，<code>Arrays.sort()</code>方法用的就是自实现的双轴快排<code>java.util.DualPivotQuicksort</code></p>
 <p>更多双轴快排的参考：</p>
 </li>
 <li><p><a href="http://www.it610.com/article/2141917.htm">双枢轴快排（JDK7快排）（译文）</a></p>
@@ -543,7 +470,7 @@ private static void merge(int[] brr, int[] crr, int[] arr){
 </ul>
 </blockquote>
 
-          <h4 id="e9514ad8">BothSideQuickSort</h4><pre><code class="language-java">public static void bothSideQuickSort(int[] arr, int left, int right) {
+          <h4 id="2200832d">BothSideQuickSort/DoublePointerQuickSort</h4><pre><code class="language-java">public static void bothSideQuickSort(int[] arr, int left, int right) {
     if (left &lt; right) {
         int s = partition(arr, left, right);
         bothSideQuickSort(arr, left, s - 1);
@@ -591,26 +518,30 @@ private static int partition(int[] arr, int left, int right) {
 <p>时间复杂度：都是<strong>O(n(logn))</strong></p>
 </blockquote>
 <pre><code class="language-java">public static void heapSort(int[] arr) {
-    // 逐渐减小堆规模 直到规模为1
-    for (int i = 0; i &lt; arr.length - 1; i++) {
-        int heapLength = arr.length - i;
-        int lastParentIndex = (heapLength - 2) / 2;
-        // 堆化
-        for (int j = lastParentIndex ; j &gt;= 0 ; --j) {
-            int leftChildIndex = j * 2 + 1;
-            int rightChileIndex = leftChildIndex + 1;
-            int bigChildIndex = leftChildIndex;
-            if (rightChileIndex &lt; heapLength
-                    &amp;&amp; arr[rightChileIndex] &gt; arr[leftChildIndex]) {
-                bigChildIndex = rightChileIndex;
-            }
-            if (arr[bigChildIndex] &gt; arr[j]) {
-                swap(arr, bigChildIndex, j);
-            }
-        }
-        // 删除最大键
-        swap(arr,0, heapLength - 1);
+    // 初始堆化
+    for (int i = arr.length / 2 - 1; i &gt;= 0; i--)
+        percDown(arr, i, arr.length);
+
+    // 删除顶、在堆化
+    for (int i = arr.length - 1; i &gt; 0; i--) {
+        swap(arr, 0, i);
+        percDown(arr, 0, i);
     }
+}
+
+public static void percDown(int[] arr, int hole, int nowSize) {
+    int child;
+    int tmp = arr[hole];
+    for (; hole * 2 + 1 &lt; nowSize; hole = child) {
+        child = hole * 2 + 1;
+        if (child != nowSize - 1 &amp;&amp; arr[child] &lt; arr[child + 1]) {
+            child++;
+        }
+        if (tmp &lt; arr[child]) {
+            arr[hole] = arr[child];
+        } else break;
+    }
+    arr[hole] = tmp;
 }</code></pre>
 <hr>
 
