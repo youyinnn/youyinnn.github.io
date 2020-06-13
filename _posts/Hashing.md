@@ -1,7 +1,7 @@
 ---
 title: Hashing
 categories:
-  - datastruct
+  - data structures
   - hash
 tags:
   - algorithm

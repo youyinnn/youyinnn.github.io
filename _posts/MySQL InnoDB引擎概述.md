@@ -208,7 +208,7 @@ Change Buffer可以理解为Insert Buffer的升级，它对更新操作都进行
 
 我们先来看看doublewrite的架构
 
-![](https://image.youyinnn.top/WeChat Screenshot_20200612112402.png)
+![](https://image.youyinnn.top/20200612112402.png)
 
 doublewrite由两部分组成：内存中的doublewrite buffer，另一部分是物理磁盘上共享表空间中连续的128页，大小都是2MB
 

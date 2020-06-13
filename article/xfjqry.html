@@ -337,7 +337,32 @@
           <h4 id="99d092d7">两次写（Doublewrite）</h4><p>主要是保证数据页的可靠性，当数据库在写操作的中间时候发生宕机，这种情况叫做分写失败</p>
 <p>我们之前了解过，重做日志中记录的是对该页的物理操作，但是如果这个页本身已经发生了损坏，再重做的意义就不大了，于是可用在<strong>应用重做日志之前</strong>，先准备一个页的副本，当写入失效的时候，先通过副本还原页，再进行重做，这就是<strong>两次写</strong>技术</p>
 <p>我们先来看看doublewrite的架构</p>
-<p>![](<a href="https://image.youyinnn.top/WeChat">https://image.youyinnn.top/WeChat</a> Screenshot_20200612112402.png)</p>
+<p>
+        <div class="_showpic_c3d98b8b showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20200612112402.png class="_pic_c3d98b8b hidepic" picId="c3d98b8b"></img>
+        <script>
+            {
+                let imgselfc3d98b8bs = document.getElementsByClassName('_pic_c3d98b8b')
+                let showpicbtnc3d98b8bs = document.getElementsByClassName('_showpic_c3d98b8b')
+                let isInViewPortOfTwoc3d98b8b = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc3d98b8bs[0].getBoundingClientRect() && imgselfc3d98b8bs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc3d98b8bs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoc3d98b8b)
+                            isInViewPortOfTwoc3d98b8b = null
+                        }
+                        for (el of showpicbtnc3d98b8bs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoc3d98b8b)
+            }
+        </script>
+    </p>
 <p>doublewrite由两部分组成：内存中的doublewrite buffer，另一部分是物理磁盘上共享表空间中连续的128页，大小都是2MB</p>
 <p>在对脏页刷新的时候，不直接写到磁盘，而是先将脏页复制到内存中的doublewrite buffer，然后通过该buffer分写两次，每次1MB顺序地写入共享表空间磁盘，然后马上调用fsync函数，同步磁盘</p>
 <p>在这个过程中，因为doublewrite页是连续的，所以写入过程是顺序的，执行非常快；写完doublewrite页之后，再将doublewrite buffer中的页写如各个表空间文件中；</p>
