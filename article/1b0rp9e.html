@@ -547,31 +547,12 @@ public static void percDown(int[] arr, int hole, int nowSize) {
 
           <h3 id="63d906b">CountingSort</h3><blockquote>
 <p>计数排序也是一种很有意思的算法，紫皮书上说到2种计数排序的思想，它是<strong>时空权衡</strong>思想的代表之一</p>
-<ul>
-<li><p>比较计数：是最直观的思想，针对待排序的每一个元素，算出列表中小于该元素值的元素<strong>个数</strong>，并把结果记录在一张表上，于是这个<strong>“个数”</strong>就是该元素在有序表中的位置。</p>
-  <pre class="nhi">
-  A[0..5]     62  31  84  96  19  47
-  counting     3   1   4   5   0   2
-  ----------------------------------
-  S[0..5]     19  31  47  62  84  96
-  explain：   比如有比62小的元素是2个，所以62应该在数组的2下标位置
-  </pre>
-</li>
-<li><p>分布计数：待排序列表中的元素假如都能映射到一个<strong>天然有序的集合</strong>里，我们只需要计算出所有待排序列表中的元素在有序集合中<strong>出现的次数</strong>，就能按照<strong>次数</strong>将待排序列表转换为有序列表。</p>
-  <pre class="nhi">
-  A[0..5]     13  11  12  13  12  12
-  map         11  12  13
-  counting     1   3   2
-  ----------------------------------
-  S[0..5]     11  12  12  12  13  13
-  explain：   比如11出现了1次，12出现了3次，13出现了2次，映射结果显而易见
-  </pre>
-
-</li>
-</ul>
-</blockquote>
-
-          <h4 id="c90c3e45">ComparisonCountingSort</h4><blockquote>
+<p>比较计数：是最直观的思想，针对待排序的每一个元素，算出列表中小于该元素值的元素<strong>个数</strong>，并把结果记录在一张表上，于是这个<strong>“个数”</strong>就是该元素在有序表中的位置。</p>
+<pre><code class="language-graph">A[0..5]     62  31  84  96  19  47
+counting     3   1   4   5   0   2
+----------------------------------
+S[0..5]     19  31  47  62  84  96
+explain：   比如有比62小的元素是2个，所以62应该在数组的2下标位置</code></pre>
 <p>时间复杂度：平方级</p>
 <p>空间复杂度：2n</p>
 <p>好处：算法使得键值移动次数最小化，直接放置键值</p>
@@ -596,7 +577,14 @@ public static void percDown(int[] arr, int hole, int nowSize) {
     return result;
 }</code></pre>
 
-          <h4 id="f9023a0c">DistributionCountingSort</h4><blockquote>
+          <h3 id="eb914193">BucketSort</h3><blockquote>
+<p>待排序列表中的元素假如都能映射到一个<strong>天然有序的集合</strong>里，我们只需要计算出所有待排序列表中的元素在有序集合中<strong>出现的次数</strong>，就能按照<strong>次数</strong>将待排序列表转换为有序列表</p>
+<pre><code class="language-java">A[0..5]     13  11  12  13  12  12
+map         11  12  13
+counting     1   3   2
+----------------------------------
+S[0..5]     11  12  12  12  13  13
+explain：   比如11出现了1次，12出现了3次，13出现了2次，映射结果显而易见</code></pre>
 <p>分布式计数的思想：</p>
 <ol>
 <li>需要知道待排序序列的范围：<strong>rank</strong></li>
@@ -610,7 +598,7 @@ public static void percDown(int[] arr, int hole, int nowSize) {
 <p>由于<strong>rank</strong>的原因，如果数据分布太散，可能会浪费很多空间，比如很多<strong>rank值</strong>根本就没有在待排序的序列中出现过；</p>
 <p>从这样来看的话，它的应用场景大致是：<strong>空间允许的情况下，能够线性时间地处理大量整数数据，最好是数据分布较为集中的情况下</strong></p>
 </blockquote>
-<pre><code class="language-java">public static int[] distributionCountingSort(int[] arr) {
+<pre><code class="language-java">public static int[] bucketSort(int[] arr) {
     int low = arr[0];
     int high = arr[0];
     // calculate rank
@@ -641,7 +629,7 @@ public static void percDown(int[] arr, int hole, int nowSize) {
     return result;
 }</code></pre>
 
-          <h4 id="aca3f2af">DistributionCountingSort2</h4><blockquote>
+          <h3 id="1d24ec65">BucketSort2</h3><blockquote>
 <p>再补充一个场景限制，现有实现的分布式计数排序<strong>无法表达整数以外的特性</strong>，比如稳定性</p>
 <p>比方说我有一组元素<strong>[3, 2, 2, 1]</strong>, 其中有两个2，第一个设为2a，后者2b，其他排序完成之后，能够表达出2a或者2b是否还在原来的<strong>相对位置</strong>，但是现在的分布率图，是无状态的，最终的结果仅是<code>result[i] = index + low</code>算出的，比如2元素的计数是<strong>2</strong>，这个<strong>2</strong>无法区分到底是2a还是2b</p>
 <p>有一个方法是用queue数组来存储分布率，所以上面的序列的分布率可以为：</p>
@@ -650,7 +638,7 @@ public static void percDown(int[] arr, int hole, int nowSize) {
 <p>关键的是：<strong>它保持了稳定性，结果中的元素还是原来的元素，而不是新算出来的元素</strong></p>
 <p>⚠️需要注意的是，这个实现里的<strong>c</strong>，可能会很致命，如果序列的<strong>rank</strong>比较大的话，会造成<strong>更多</strong>的空间成本</p>
 </blockquote>
-<pre><code class="language-java">public static int[] distributionCountingSort2(int[] arr) {
+<pre><code class="language-java">public static int[] bucketSort2(int[] arr) {
     int low = arr[0];
     int high = arr[0];
     // calculate rank
