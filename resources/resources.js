@@ -1,1 +1,1 @@
-var articlesCount = 115; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-q1dqsp.js"];} else {resourcesList = ["friendslink.js"];}
+var articlesCount = 116; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-1ri59g9.js"];} else {resourcesList = ["friendslink.js"];}
