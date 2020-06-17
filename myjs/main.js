@@ -2,7 +2,7 @@ var searchone = 0
 var searchtext
 var totalpages
 var nowpage = 1
-var $root = $('html, body')
+var $root
 
 function new_render_md(regular_toc, abbrlink) {
     $('#docpanel').remove()
@@ -277,6 +277,9 @@ function get_articles() {
 }
 
 function scrollToElement(id) {
+    if ($root === undefined) {
+        $root = $('html, body')
+    }
     if (id.trim() !== '') {
         $root.animate({
             scrollTop: $('#' + id).offset().top - 15
