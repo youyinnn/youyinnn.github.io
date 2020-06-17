@@ -13,7 +13,12 @@ var before = [{
                 target: ['*']
             }
         }
+        // resources js loading
         for (rs of resourcesList) {
+            loadIfIsTarget(rs)
+        }
+        // after before js loading
+        for (rs of after) {
             loadIfIsTarget(rs)
         }
     }
@@ -191,13 +196,3 @@ function loadIfIsTarget(rs) {
         })
     }
 }
-
-function importJsAfterLoad() {
-    for (rs of after) {
-        loadIfIsTarget(rs)
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    importJsAfterLoad()
-})
