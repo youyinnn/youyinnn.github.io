@@ -2,8 +2,8 @@
 @import './main.css';
 @import './media.css';
 
-@import 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/css/bootstrap.min.min.css';
-@import 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/css/editormd.preview.min.min.css';
+@import 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/css/bootstrap.min.css';
+@import 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/css/editormd.preview.min.css';
 
 @import 'https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@9-18-stable/src/styles/github-gist.min.css';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css';
