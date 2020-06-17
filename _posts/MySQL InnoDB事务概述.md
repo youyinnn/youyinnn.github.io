@@ -8,7 +8,7 @@ tags:
   - db-transaction
   - mvcc
 series: 《MySQL技术内幕：InnoDB存储引擎》笔记
-date: 2020-6-17 14:45:26
+date: 2020-6-16 14:45:26
 ---
 
 
