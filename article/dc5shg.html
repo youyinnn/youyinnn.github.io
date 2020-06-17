@@ -14,7 +14,6 @@
     <link rel="icon" href="/img/favicon.ico" type="image/ico"/>
     <link rel="stylesheet" href="/mycss/style.css">
 
-    <script src="/resources/resources.js"></script>
     <script src="/myjs/scriptlist.js"></script>
 </head>
 
@@ -130,7 +129,8 @@
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
         
-          <h3 id="7fa34206">概述</h3><p>我们能够轻易地想到，对数据库的数据进行操作的时候，为了保证数据一致性和持久性，我们会对这些操作上锁，但数据库中并不只有这些情况会上锁，其他地方也会有锁，比如缓冲池中页的增删改查的时候</p>
+          <h3 id="7fa34206">概述</h3><p>本篇主要介绍InnoDB中的锁，以及它与隔离级别之间的关系。从锁的算法、锁的等级、锁解决的问题来为MySQL的InnoDB锁做一个概述</p>
+<p>我们能够轻易地想到，对数据库的数据进行操作的时候，为了保证数据一致性和持久性，我们会对这些操作上锁，但数据库中并不只有这些情况会上锁，其他地方也会有锁，比如缓冲池中页的增删改查的时候</p>
 <p>而不同引擎、不同数据库对锁的实现和支持都是不一样的，比如MyISAM只支持表锁，在并发情况下的随机写操作性能就会差点，除非是插入到数据页的底部，那稍微并发性能高点</p>
 <p>而InnoDB的并发效率会好很多，它提供了非锁定读，行锁等锁粒度细的支持</p>
 
@@ -163,28 +163,28 @@
 <td align="center">✔️</td>
 <td align="center">✔️</td>
 <td align="center">✔️</td>
-<td align="center">:x:</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td align="center">IX</td>
 <td align="center">✔️</td>
 <td align="center">✔️</td>
-<td align="center">:x:</td>
-<td align="center">:x:</td>
+<td align="center">​✖️​</td>
+<td align="center">​✖️​</td>
 </tr>
 <tr>
 <td align="center">S</td>
 <td align="center">✔️</td>
-<td align="center">:x:</td>
+<td align="center">​✖️​</td>
 <td align="center">✔️</td>
-<td align="center">:x:</td>
+<td align="center">​✖️​</td>
 </tr>
 <tr>
 <td align="center">X</td>
-<td align="center">:x:</td>
-<td align="center">:x:</td>
-<td align="center">:x:</td>
-<td align="center">:x:</td>
+<td align="center">​✖️​</td>
+<td align="center">​✖️​</td>
+<td align="center">​✖️​</td>
+<td align="center">​✖️​</td>
 </tr>
 </tbody></table>
 

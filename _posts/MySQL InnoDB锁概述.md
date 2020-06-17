@@ -12,13 +12,9 @@ date: 2020-6-17 10:8:55
 
 
 
-
-
-
-
-
-
 ### 概述
+
+本篇主要介绍InnoDB中的锁，以及它与隔离级别之间的关系。从锁的算法、锁的等级、锁解决的问题来为MySQL的InnoDB锁做一个概述
 
 我们能够轻易地想到，对数据库的数据进行操作的时候，为了保证数据一致性和持久性，我们会对这些操作上锁，但数据库中并不只有这些情况会上锁，其他地方也会有锁，比如缓冲池中页的增删改查的时候
 
@@ -46,12 +42,12 @@ InnoDB支持行级的读写锁：
 
 行锁表锁之间的兼容性：
 
-|      |         IS         |         IX         |         S          |  X   |
-| :--: | :----------------: | :----------------: | :----------------: | :--: |
-|  IS  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :x:  |
-|  IX  | :heavy_check_mark: | :heavy_check_mark: |        :x:         | :x:  |
-|  S   | :heavy_check_mark: |        :x:         | :heavy_check_mark: | :x:  |
-|  X   |        :x:         |        :x:         |        :x:         | :x:  |
+|      |         IS         |         IX         |         S          |            X             |
+| :--: | :----------------: | :----------------: | :----------------: | :----------------------: |
+|  IS  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_multiplication_x: |
+|  IX  | :heavy_check_mark: | :heavy_check_mark: |        ​:heavy_multiplication_x:​         |           ​:heavy_multiplication_x:​            |
+|  S   | :heavy_check_mark: |        ​:heavy_multiplication_x:​         | :heavy_check_mark: |           ​:heavy_multiplication_x:​            |
+|  X   |        ​:heavy_multiplication_x:​         |        ​:heavy_multiplication_x:​         |        ​:heavy_multiplication_x:​         |           ​:heavy_multiplication_x:​            |
 
 #### 一致性非锁定读
 

@@ -1,23 +1,42 @@
 var before = [{
-    url: 'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js',
-    target: ['/articles/']
+    url: hoturl('../resources/resources.js'),
+    target: ['*'],
+    callback: () => {
+        for (let i = 0; i < resourcesList.length; i++) {
+            if (location.hostname !== 'youyinnn.github.io') {
+                resourcesList[i] = '/resources/' + resourcesList[i]
+            } else {
+                resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/' + resourcesList[i]
+            }
+            resourcesList[i] = {
+                url: resourcesList[i],
+                target: ['*']
+            }
+        }
+        for (rs of resourcesList) {
+            loadIfIsTarget(rs)
+        }
+    }
 }, ]
 
-for (let i = 0; i < resourcesList.length; i++) {
-    if (location.hostname !== 'youyinnn.github.io') {
-        resourcesList[i] = '/resources/' + resourcesList[i]
-    } else {
-        resourcesList[i] = 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/resources/' + resourcesList[i]
-    }
-    resourcesList[i] = {
-        url: resourcesList[i],
-        target: ['*']
+function importJsBeforeLoad() {
+    for (rs of before) {
+        loadIfIsTarget(rs)
     }
 }
+
+importJsBeforeLoad()
 
 var after = [{
         url: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
         target: ['*'],
+        attrs: {
+            defer: true
+        }
+    },
+    {
+        url: 'https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js',
+        target: ['/articles/'],
         attrs: {
             defer: true
         }
@@ -146,11 +165,14 @@ var after = [{
     }
 ]
 
-after = resourcesList.concat(after)
+function hoturl(url) {
+    return url + '?hot=' + new Date().getTime()
+}
 
 function loadIfIsTarget(rs) {
     if (rs.target.find(path => location.pathname.startsWith(path) || path === '*')) {
-        load(rs.url, {
+        let url = Boolean(rs.hot) ? hoturl(rs.url) : rs.url
+        load(url, {
             async: rs.async !== undefined ? rs.async : false,
             attrs: rs.attrs
         }, (err, script) => {
@@ -169,14 +191,6 @@ function loadIfIsTarget(rs) {
         })
     }
 }
-
-function importJsBeforeLoad() {
-    for (rs of before) {
-        loadIfIsTarget(rs)
-    }
-}
-
-importJsBeforeLoad()
 
 function importJsAfterLoad() {
     for (rs of after) {
