@@ -1,0 +1,311 @@
+
+          <h2 class="zip-tran"id="e6f94112">杂</h2>
+          <h3 class="zip-tran"id="48178f1e">关于 CI</h3><sb class="hide-script-block">
+          <h4 id="7617f642">🔹示意图</h4><p>
+        <div class="_showpic_28778551 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png class="_pic_28778551 hidepic" picId="28778551"></img>
+        <script>
+            {
+                let imgself28778551s = document.getElementsByClassName('_pic_28778551')
+                let showpicbtn28778551s = document.getElementsByClassName('_showpic_28778551')
+                let isInViewPortOfTwo28778551 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself28778551s[0].getBoundingClientRect() && imgself28778551s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself28778551s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo28778551)
+                            isInViewPortOfTwo28778551 = null
+                        }
+                        for (el of showpicbtn28778551s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo28778551)
+            }
+        </script>
+    </p>
+<blockquote>
+<p>文章 <a href="https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/">The Product Managers’ Guide to Continuous Delivery and DevOps</a></p>
+<p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
+</blockquote>
+
+          </sb><h3 class="zip-tran"id="6db5b3e9">对IoC/DI的理解</h3><sb class="hide-script-block">
+          <h4 id="cf6426d0">🔹Ioc—Inverse  of Control</h4><p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
+<p>深入分析一下：</p>
+<ul>
+<li>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；<strong>谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</strong></li>
+<li>为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？<strong>因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</strong></li>
+</ul>
+<p><strong>举例说明</strong></p>
+<p>“常规的是，我们程序员<strong>手动new</strong>来给程序的<strong>Service对象</strong>提供所<strong>依赖的DAO对象</strong>，而现在是程序通过IoC容器自己提供<strong>DAO对象</strong>给<strong>Service对象</strong>。”</p>
+
+          <h4 id="7662d172">🔹DI—Dependency Injection</h4><p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
+<p><strong>依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。</strong>通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 </p>
+<p>深入分析一下：</p>
+<ul>
+<li>谁依赖于谁：当然是<strong>应用程序依赖于IoC容器</strong>；</li>
+<li>为什么需要依赖：<strong>应用程序需要IoC容器来提供对象需要的外部资源</strong>；</li>
+<li>谁注入谁：很明显是<strong>IoC容器注入应用程序某个对象，应用程序依赖的对象</strong>；</li>
+<li>注入了什么：就是<strong>注入某个对象所需要的外部资源（包括对象、资源、常量数据）</strong>。</li>
+</ul>
+<p><strong>举例说明</strong></p>
+<p>“<strong>Service对象</strong>依赖于<strong>DAO对象</strong>，IoC容器通过<strong>注解和反射机制</strong>来<strong>注入（Injected）</strong>用户在配置文件中配置好的DAO对象到<strong>Service对象</strong>的对应属性中。”</p>
+
+          <h4 id="c3e76f9d">🔹两者关系</h4><p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
+<p>我的理解是：<strong>IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现</strong>。</p>
+<p><a href="https://blog.csdn.net/qq_22654611/article/details/52606960">参考</a></p>
+
+          </sb><h3 class="zip-tran"id="fc10e7da">对于游戏来说 怎么选择TCP和UDP?</h3><sb class="hide-script-block"><ul>
+<li><p>如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。</p>
+</li>
+<li><p>如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。</p>
+</li>
+<li><p>如果客户端和服务器都可以独立发包，而且无法忍受延迟（比如：大多数的多人动作类游戏，一些MMO类游戏），那么使用UDP吧。</p>
+</li>
+</ul>
+<p>转自: <a href="http://blog.jobbole.com/64638/">http://blog.jobbole.com/64638/</a></p>
+
+          </sb><h3 class="zip-tran"id="83ea1ac7">OOP三大特性</h3><sb class="hide-script-block">
+          <h4 id="7aa9fb7c">🔹封装优点：</h4><ul>
+<li><strong>安全：</strong> 只能通过规定的方法访问数据 </li>
+<li><strong>隐藏细节：</strong> 隐藏类的实例细节，方便修改和实现</li>
+</ul>
+
+          <h4 id="d47e673e">🔹继承优点：</h4><ul>
+<li><strong>代码复用</strong></li>
+</ul>
+
+          <h4 id="ebe72dd2">🔹多态主要表现：</h4><ul>
+<li><p><strong>引用多态</strong>　　　</p>
+<ul>
+<li>父类的引用可以指向本类的对象；</li>
+<li>父类的引用可以指向子类的对象；</li>
+</ul>
+</li>
+<li><p><strong>方法多态</strong></p>
+<p>根据上述创建的两个对象：本类对象和子类对象，同样都是父类的引用，当我们指向不同的对象时，它们调用的方法也是多态的。</p>
+<ul>
+<li><p>创建本类对象时，调用的方法为本类方法；</p>
+</li>
+<li><p>创建子类对象时，调用的方法为子类重写的方法或者继承的方法；</p>
+</li>
+</ul>
+<p><strong>注意： 继承是多态的基础。</strong></p>
+</li>
+</ul>
+<p>参考: <a href="https://www.cnblogs.com/hysum/p/7100874.html#_label1">https://www.cnblogs.com/hysum/p/7100874.html#_label1</a></p>
+
+          </sb><h3 class="zip-tran"id="db775422">文件头魔数 判断文件类型</h3><sb class="hide-script-block"><p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
+<p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt<br>而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
+<p>魔数列表参考如下：<br><a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
+
+          </sb><h3 class="zip-tran"id="fbc94e2d">微服务/集群/分布式</h3><sb class="hide-script-block">
+          <h4 id="cdd19350">🔹微服务好文</h4><p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
+
+          <h4 id="9e52e389">🔹集群和分布式</h4><blockquote>
+<p>小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群</p>
+<p>作者：张鹏飞<br>链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<p>参考：<br><a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a><br><a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a><br><a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
+
+          </sb><h3 class="zip-tran"id="895e5ab0">什么是/为什么要Tracing？Opentracing的入门铺垫</h3><sb class="hide-script-block"><p>
+        <div class="_showpic_40e20c09 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png class="_pic_40e20c09 hidepic" picId="40e20c09"></img>
+        <script>
+            {
+                let imgself40e20c09s = document.getElementsByClassName('_pic_40e20c09')
+                let showpicbtn40e20c09s = document.getElementsByClassName('_showpic_40e20c09')
+                let isInViewPortOfTwo40e20c09 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself40e20c09s[0].getBoundingClientRect() && imgself40e20c09s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself40e20c09s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo40e20c09)
+                            isInViewPortOfTwo40e20c09 = null
+                        }
+                        for (el of showpicbtn40e20c09s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo40e20c09)
+            }
+        </script>
+    </p>
+<p>好文：<a href="https://yq.aliyun.com/articles/514488">https://yq.aliyun.com/articles/514488</a></p>
+
+          <h4 id="57bbb73">🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：</h4><p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
+<p>Tutorials:</p>
+<p><a href="https://github.com/yurishkuro/opentracing-tutorial/tree/master/java">https://github.com/yurishkuro/opentracing-tutorial/tree/master/java</a></p>
+
+          </sb><h3 class="zip-tran"id="10874505">什么是/为什么要DevOps？</h3><sb class="hide-script-block"><p>
+        <div class="_showpic_cbf9cf14 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png class="_pic_cbf9cf14 hidepic" picId="cbf9cf14"></img>
+        <script>
+            {
+                let imgselfcbf9cf14s = document.getElementsByClassName('_pic_cbf9cf14')
+                let showpicbtncbf9cf14s = document.getElementsByClassName('_showpic_cbf9cf14')
+                let isInViewPortOfTwocbf9cf14 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfcbf9cf14s[0].getBoundingClientRect() && imgselfcbf9cf14s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfcbf9cf14s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwocbf9cf14)
+                            isInViewPortOfTwocbf9cf14 = null
+                        }
+                        for (el of showpicbtncbf9cf14s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwocbf9cf14)
+            }
+        </script>
+    </p>
+<p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
+
+          </sb><h3 class="zip-tran"id="5cd95015">k8s</h3><sb class="hide-script-block">
+          <h4 id="23c63e8d">🔹好文</h4><ul>
+<li>概念：<a href="http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345">http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345</a></li>
+<li>简要介绍：<a href="http://www.dockone.io/article/8328">http://www.dockone.io/article/8328</a></li>
+<li>10分钟核心概念了解：<a href="http://www.dockone.io/article/932">http://www.dockone.io/article/932</a></li>
+</ul>
+
+          <h4 id="fe92a1e1">🔹中文文档</h4><ul>
+<li>设计理念（概念介绍）：<a href="http://docs.kubernetes.org.cn/249.html">http://docs.kubernetes.org.cn/249.html</a></li>
+</ul>
+
+          <h4 id="8a09b8c6">🔹配置</h4><ul>
+<li>k8s的Dashboard：<a href="http://blog.51cto.com/ylw6006/2113542">http://blog.51cto.com/ylw6006/2113542</a></li>
+<li>yaml：<ul>
+<li>sample: <a href="https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/">https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/</a></li>
+<li>offical reference: <a href="https://kubernetes.io/docs/reference/">https://kubernetes.io/docs/reference/</a> see the api</li>
+</ul>
+</li>
+</ul>
+
+          </sb><h3 class="zip-tran"id="c5470431">docker</h3><sb class="hide-script-block"><p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
+
+          </sb><h3 class="zip-tran"id="a93797be">Shell</h3><sb class="hide-script-block">
+          <h4 id="f9b792aa">🔹expect 让你的shell可以处理交互命令（如自动ssh远程登陆另一台主机）</h4><ul>
+<li><a href="https://www.jianshu.com/p/70556b1ce932">https://www.jianshu.com/p/70556b1ce932</a></li>
+<li><a href="https://www.cnblogs.com/lzrabbit/p/4298794.html">https://www.cnblogs.com/lzrabbit/p/4298794.html</a></li>
+<li><a href="https://www.jellythink.com/archives/373">https://www.jellythink.com/archives/373</a></li>
+</ul>
+
+          <h4 id="1af1271b">🔹set 设置你shell脚本的运行配置</h4><ul>
+<li><a href="https://www.cnblogs.com/liduanjun/p/3536996.html">https://www.cnblogs.com/liduanjun/p/3536996.html</a></li>
+</ul>
+
+          <h4 id="be00406a">🔹read 在shell里面读取新的字符</h4><ul>
+<li><a href="http://www.runoob.com/linux/linux-comm-read.html">http://www.runoob.com/linux/linux-comm-read.html</a></li>
+</ul>
+
+          <h4 id="6708f248">🔹wc 计算字数</h4><ul>
+<li><a href="http://www.runoob.com/linux/linux-comm-wc.html">http://www.runoob.com/linux/linux-comm-wc.html</a></li>
+</ul>
+
+          <h4 id="e2dbbfda">🔹cut 字符串切割</h4><ul>
+<li><a href="https://www.jb51.net/article/41872.htm">https://www.jb51.net/article/41872.htm</a></li>
+</ul>
+
+          <h4 id="bd1fcaf5">🔹shell脚本sudo外部输入密码</h4><ul>
+<li><a href="https://blog.csdn.net/qq_23587541/article/details/82841489">https://blog.csdn.net/qq_23587541/article/details/82841489</a></li>
+</ul>
+
+          <h4 id="5103baa9">🔹./和sh执行脚本的区别：</h4><ul>
+<li><code>./</code>需要执行权限，使用脚本文件中第一行<code>#!</code>指定的shell（解释器）来执行命令（譬如常见的/bin/bash），不指定系统会调用默认shell程序</li>
+<li><code>sh</code>不需要执行权限，是使用<code>sh</code>这个shell执行命令，是个软链接，它可能是一个任意的shell，通常默认是<code>bash shel</code>，用type命令可以查看</li>
+</ul>
+
+          <h4 id="6c74de23">🔹nohup使用详解</h4><ul>
+<li><a href="https://www.cnblogs.com/jinxiao-pu/p/9131057.html">https://www.cnblogs.com/jinxiao-pu/p/9131057.html</a></li>
+</ul>
+
+          </sb><h3 class="zip-tran"id="8c8fc6eb">Linux</h3><sb class="hide-script-block">
+          <h4 id="eedbc56a">🔹工具</h4><ul>
+<li>fzf：<a href="https://www.colabug.com/4062481.html">https://www.colabug.com/4062481.html</a></li>
+</ul>
+
+          <h4 id="a79484d1">🔹设置</h4><ul>
+<li>修改终端提示符：<a href="https://www.cnblogs.com/xiaofeiIDO/p/8037331.html">https://www.cnblogs.com/xiaofeiIDO/p/8037331.html</a></li>
+<li>环境变量：<a href="https://www.cnblogs.com/haore147/p/3633116.html">https://www.cnblogs.com/haore147/p/3633116.html</a></li>
+</ul>
+
+          <h4 id="9818116f">🔹命令</h4><ul>
+<li>命令大全：<a href="http://man.linuxde.net/">http://man.linuxde.net/</a></li>
+<li>一些巨棒的命令替代：<a href="https://linux.cn/article-10171-1.html">https://linux.cn/article-10171-1.html</a></li>
+</ul>
+
+          <h4 id="a845e46f">🔹CentOS</h4>
+          <h5 id="c1aae0d9">🔸yum详解</h5><ul>
+<li><a href="http://www.cnblogs.com/vathe/p/6736094.html">http://www.cnblogs.com/vathe/p/6736094.html</a></li>
+</ul>
+
+          <h4 id="723ae51e">🔹Ubuntu</h4>
+          <h5 id="bfb5d88a">🔸apt-get详解</h5><ul>
+<li><a href="https://blog.csdn.net/sinat_31206523/article/details/78138822">https://blog.csdn.net/sinat_31206523/article/details/78138822</a></li>
+<li><a href="https://blog.csdn.net/yessharing/article/details/55806090">https://blog.csdn.net/yessharing/article/details/55806090</a></li>
+</ul>
+
+          </sb><h3 class="zip-tran"id="8af636c5">gRPC &amp; protobuf &amp; Swagger</h3><sb class="hide-script-block"><ul>
+<li><a href="https://segmentfault.com/a/1190000013513469">Grpc+Grpc Gateway实践三 Swagger了解一下</a></li>
+<li><a href="https://www.cnblogs.com/luoxn28/p/5303517.html">google protobuf安装与使用</a></li>
+<li><a href="https://github.com/protocolbuffers/protobuf">protobuf</a></li>
+<li><a href="https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html">grpc-gateway：grpc转换为http协议对外提供服务</a></li>
+</ul>
+
+          </sb><h3 class="zip-tran"id="3a2aed49">GraphQL 一种用于 API 的查询语言</h3><sb class="hide-script-block"><blockquote>
+<p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
+<p>GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+</blockquote>
+<p>中文网 : <a href="http://graphql.cn/">官网</a><br>引子 : <a href="https://segmentfault.com/a/1190000006132986">segmentfault</a><br>知乎专栏 : <a href="https://zhuanlan.zhihu.com/p/28077095">面向未来的API —— GitHub GraphQL API 使用介绍</a></p>
+<blockquote>
+<p>2018年11月16日 10点04分<br>要构建一个graphql需要的成本太大了 还不如restful来的快</p>
+</blockquote>
+
+          </sb><h3 class="zip-tran"id="c3636876">Protobuf</h3><sb class="hide-script-block">
+          <h4 id="8837675c">What are protocol buffers?</h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
+
+          <h4 id="bd060b79">Why not just use XML?</h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
+<ul>
+<li>are simpler</li>
+<li>are 3 to 10 times smaller</li>
+<li>are 20 to 100 times faster</li>
+<li>are less ambiguous</li>
+<li>generate data access classes that are easier to use programmatically</li>
+</ul>
+
+          <h4 id="8c0c55ad">References</h4><ul>
+<li><a href="https://www.jianshu.com/p/a24c88c0526a">深入Protobuf</a></li>
+<li><a href="https://www.jianshu.com/p/b4b51b99e218">ProtoBuf试用与JSON的比较</a></li>
+<li><a href="https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw">在python中使用ProtocolBuffers</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/overview">Google Docs</a></li>
+</ul>
+
+          </sb><h3 class="zip-tran"id="3e30697c">CLU &amp; TUI?</h3><sb class="hide-script-block">
+          <h4 id="9bcdf5b">Command-line Utilities</h4><ul>
+<li>Accept arguments at invocation, execute, and terminate</li>
+<li>Examples:<code>ls</code>,<code>grep</code>,<code>git</code></li>
+<li>Python&#39;s built-in argparse module or Click have this well covered</li>
+</ul>
+
+          <h4 id="ef2f64d">Text User Interfaces</h4><ul>
+<li>Full-screen applications more like a GUI but in a terminal</li>
+<li>Examples: <code>vim</code>, <code>emacs</code>, <code>top</code></li>
+<li>Python&#39;s built-in curses module can be used for this.</li>
+</ul>
+
+          <h4 id="8913a85a">Python TUI Libaraies</h4><ul>
+<li><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/index.html">Python Prompt ToolKit</a></li>
+<li><a href="https://github.com/peterbrittain/asciimatics">asciimatics</a></li>
+<li><a href="http://urwid.org/index.html#">Urwid</a></li>
+</ul>
+</sb>

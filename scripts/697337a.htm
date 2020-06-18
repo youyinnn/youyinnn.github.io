@@ -1,0 +1,24 @@
+
+          <h2 class="zip-tran"id="697337a">HTML</h2>
+          <h3 class="zip-tran"id="f0b8c0fc">textarea的字数限制</h3><sb class="hide-script-block"><pre><code class="language-html">&lt;textarea 
+  rows=&quot;5&quot;  
+  maxlength=&quot;200&quot; 
+  onchange=&quot;this.value=this.value.substring(0, 200)&quot; 
+  onkeydown=&quot;this.value=this.value.substring(0, 200)&quot; 
+  onkeyup=&quot;this.value=this.value.substring(0, 200)&quot;&gt;
+&lt;/textarea&gt;</code></pre>
+<p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
+
+          </sb><h3 class="zip-tran"id="a98d310b">input只允许输入数字</h3><sb class="hide-script-block"><pre><code class="language-html">&lt;input type=&quot;text&quot; oninput=&quot;value=value.replace(/[^\d]/g,&#39;&#39;)&quot;&gt;</code></pre>
+
+          </sb><h3 class="zip-tran"id="63eb696d">图片禁止拖拽</h3><sb class="hide-script-block"><p>在对应标签中添加如下属性即可。</p>
+<pre><code class="language-javascript">oncontextmenu = &quot;return false;&quot; //禁止鼠标右键
+ondragstart = &quot;return false;&quot; //禁止鼠标拖动
+onselectstart = &quot;return false;&quot; //文字禁止鼠标选中
+onselect = &quot;document.selection.empty();&quot; //禁止复制文本</code></pre>
+<p>例如：</p>
+<pre><code class="language-html">&lt;img src=&quot;img/logo.jpg&quot; ondragstart=&quot;return false;&quot; /&gt;</code></pre>
+<blockquote>
+<p>作者：祁月笑<br>链接：<a href="https://www.imooc.com/article/20121?block_id=tuijian_wz">https://www.imooc.com/article/20121?block_id=tuijian_wz</a><br>来源：慕课网</p>
+</blockquote>
+</sb>

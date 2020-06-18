@@ -1,4 +1,4 @@
-## :star: MySQL
+## MySQL
 
 ### 数据库三范式
 

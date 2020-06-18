@@ -1,4 +1,4 @@
-## :star: Open API
+## Open API
 
 ###  一些开放的API
 

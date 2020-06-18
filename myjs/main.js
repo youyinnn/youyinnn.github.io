@@ -65,6 +65,9 @@ function new_render_md(regular_toc, abbrlink) {
             .replace(/&/gm, '&amp;')
             .replace(/"/gm, '&quot;')
             .replace(/ /gm, '&nbsp;')
+        if (tg.toLowerCase() === 'h2') {
+            transferred = '⭐ ' + transferred
+        }
         return `
             <li class="toc-${tg.toLowerCase()}" _target_sb="${id}">
                 <a hreff="${id}">${transferred}</a>
@@ -108,7 +111,6 @@ function new_render_md(regular_toc, abbrlink) {
         })
     } else if (getclientw() >= 700) {
         $('.markdown-toc .toc-h3').click(function() {
-
             $('.tocactive').removeClass('tocactive')
             $(this).addClass('tocactive')
 
@@ -118,7 +120,7 @@ function new_render_md(regular_toc, abbrlink) {
             showsb.removeClass('show-script-block')
             showsb.addClass('hide-script-block')
 
-            let tgsb = $(`#_sb_${tgsbid}`)
+            let tgsb = $(`#${tgsbid}`).next()
             tgsb.removeClass('hide-script-block')
             tgsb.addClass('show-script-block')
 
@@ -151,6 +153,10 @@ function new_render_md(regular_toc, abbrlink) {
 
         let nowh2
         $('#sidetoc .toc-h2>a').click(function(event) {
+            if(!Boolean(this.getAttribute('got'))) {
+                getScriptsHtm(this.getAttribute('hreff'))
+                this.setAttribute('got', true)
+            }
             if (nowh2 === undefined) {
                 $(this).siblings('._toc_ul').removeClass('myhide')
             } else if (nowh2 === this) {
@@ -1285,9 +1291,6 @@ function getmetadatafromabbrlink(abbrlink) {
 }
 
 function scriptblock() {
-    $('#md').addClass('fixmd')
-    $('#md').find('h2, h3').addClass('zip-tran')
-    $('#sidetoccontainer').addClass('fixtoc')
 
     $('p').each((i, e) => {
         if (e.innerText.trim() === '') {
@@ -1298,7 +1301,6 @@ function scriptblock() {
     let cd = $('#md').children()
     let h3p
     let bhtml = ''
-
     function wrapblock() {
         $(`[_script_block=${h3p.id}]`).remove()
         $(h3p).after(`
@@ -1323,6 +1325,16 @@ function scriptblock() {
         }
     })
     wrapblock()
+}
+
+function getScriptsHtm(secondHeader) {
+    $.ajax({
+        type: 'get',
+        url: `/scripts/${secondHeader}.htm?hot=${sessionStorage.getItem('cacheversion')}`,
+        success: (rs) => {
+            $('#md').append(rs)
+        }
+    })
 }
 
 function get_friendlinked() {

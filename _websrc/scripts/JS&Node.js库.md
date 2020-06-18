@@ -1,4 +1,4 @@
-## :star: JS&Node.js库
+## JS&Node.js库
 
 ### React Native 
 

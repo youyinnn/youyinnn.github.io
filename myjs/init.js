@@ -88,29 +88,18 @@ $(function() {
         })
     } else if (pathname === '/scripts/') {
         $('html').css('overflowY', 'initial')
+        $('#sidetoc').css('sidetoc', 'scroll')
         changepagetitle('scripts | youyinnn')
         if (getclientw() >= 700) {
-            scriptblock()
+            $('#md').addClass('fixmd')
+            $('#sidetoccontainer').addClass('fixtoc')
         } else {
             showbbt()
             showtocbtn()
         }
         new_render_md()
         showsidetoc()
-        setTimeout(() => {
-            $('.scripts h3').each((i, e) => {
-                let root = $(`[_target_sb=${e.id}]`).parent().parent()
-                let url = location.origin + location.pathname + '?hash=' + `${e.id}_${root[0].getAttribute('_target_sb')}`
-                $(e).attr('data-clipboard-text', url)
-                new ClipboardJS(e).on('success', function(event) {
-                    popmsg('Copy link succeeded.')
-                    event.clearSelection()
-                }).on('error', function(event) {
-                    popmsg('Copy link failed.')
-                    event.clearSelection()
-                })
-            })
-        }, 200)
+        $('#md').html('')
 
         setTimeout(() => {
             if (hash === '') {
