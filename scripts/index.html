@@ -1296,6 +1296,121 @@ observer.observe(article, options);</code></pre>
           <h3 id="82211645">JQuery GIF播放/暂停 JS-GIF库</h3><p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a><br><a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
 
           <h2 id="429273a2">⭐ MySQL</h2>
+          <h3 id="3d23ec13">数据库三范式</h3><p><strong>第一范式（1NF）</strong></p>
+<p>数据表中的每一列，必须是不可拆分的最小单元，也即必须保证列的原子性；</p>
+<p><strong>第二范式（2NF）</strong></p>
+<p>满足<strong><em>1NF</em></strong>要求的所有列，每个非主键列都必须完全依赖域主键，目的是为了消除<strong>部分依赖</strong>；</p>
+<p>举例：</p>
+<p>比如有课程分数表（学号，姓名，系名，系主任，课名，分数）</p>
+<p>我们得知学号和课名能唯一确定一个分数，但是还有其他冗余数据：<strong>姓名、系名、系主任</strong></p>
+<p>于是有函数依赖关系：</p>
+<p>
+        <div class="_showpic_18d6dd94 showpicbtn">Loading images >></div>
+        <img href=https://pic2.zhimg.com/80/51e2689ac9416a91800e63101bee9db7_1440w.jpg class="_pic_18d6dd94 hidepic" picId="18d6dd94"></img>
+        <script>
+            {
+                let imgself18d6dd94s = document.getElementsByClassName('_pic_18d6dd94')
+                let showpicbtn18d6dd94s = document.getElementsByClassName('_showpic_18d6dd94')
+                let isInViewPortOfTwo18d6dd94 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself18d6dd94s[0].getBoundingClientRect() && imgself18d6dd94s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself18d6dd94s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo18d6dd94)
+                            isInViewPortOfTwo18d6dd94 = null
+                        }
+                        for (el of showpicbtn18d6dd94s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo18d6dd94)
+            }
+        </script>
+    </p>
+<p>这一步完成以后，可以得到，表3的码只有一个，就是<strong>（学号、课名）</strong>。</p>
+<p>第二步：<br>主属性有两个：<strong>学号</strong> 与 <strong>课名</strong></p>
+<p>第三步：<br>非主属性有四个：<strong>姓名</strong>、<strong>系名</strong>、<strong>系主任</strong>、<strong>分数</strong></p>
+<p><strong>第四步：</strong><br>对于<strong>（学号，课名） → 姓名</strong>，有 <strong>学号 → 姓名</strong>，存在非主属性 <strong>姓名</strong> 对码<strong>（学号，课名）</strong>的部分函数依赖。<br>对于<strong>（学号，课名） → 系名</strong>，有 <strong>学号 → 系名</strong>，存在非主属性 系<strong>名</strong> 对码<strong>（学号，课名）</strong>的部分函数依赖。<br>对于<strong>（学号，课名） → 系主任</strong>，有 <strong>学号 → 系主任</strong>，存在非主属性  对码<strong>（学号，课名）</strong>的部分函数依赖。</p>
+<p>所以表3存在非主属性对于码的部分函数依赖，最高只符合1NF的要求，不符合2NF的要求。</p>
+<p>为了让表3符合2NF的要求，我们必须消除这些部分函数依赖，只有一个办法，就是将大数据表拆分成两个或者更多个更小的数据表，在拆分的过程中，要达到更高一级范式的要求，这个过程叫做”模式分解“。模式分解的方法不是唯一的，以下是其中一种方法：<br>选课（学号，课名，分数）<br>学生（学号，姓名，系名，系主任）</p>
+<p>我们先来判断以下，<strong>选课</strong>表与<strong>学生</strong>表，是否符合了2NF的要求？</p>
+<p>对于<strong>选课</strong>表，其码是<strong>（学号，课名）</strong>，主属性是<strong>学号</strong>和<strong>课名</strong>，非主属性是<strong>分数</strong>，<strong>学号</strong>确定，并不能唯一确定<strong>分数</strong>，<strong>课名</strong>确定，也不能唯一确定<strong>分数</strong>，所以不存在非主属性<strong>分数</strong>对于码 <strong>（学号，课名）</strong>的部分函数依赖，所以此表符合2NF的要求。</p>
+<p>对于<strong>学生</strong>表，其码是<strong>学号，</strong>主属性是<strong>学号</strong>，非主属性是<strong>姓名、系名</strong>和<strong>系主任</strong>，因为码只有一个属性，所以不可能存在非主属性对于码 的部分函数依赖，所以此表符合2NF的要求。</p>
+<p>下图表示了模式分解以后的新的函数依赖关系</p>
+<p>
+        <div class="_showpic_fe5d3563 showpicbtn">Loading images >></div>
+        <img href=https://pic1.zhimg.com/50/2f4b4a887f6a61674a49d03d79e3fe17_hd.jpg class="_pic_fe5d3563 hidepic" picId="fe5d3563"></img>
+        <script>
+            {
+                let imgselffe5d3563s = document.getElementsByClassName('_pic_fe5d3563')
+                let showpicbtnfe5d3563s = document.getElementsByClassName('_showpic_fe5d3563')
+                let isInViewPortOfTwofe5d3563 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselffe5d3563s[0].getBoundingClientRect() && imgselffe5d3563s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselffe5d3563s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwofe5d3563)
+                            isInViewPortOfTwofe5d3563 = null
+                        }
+                        for (el of showpicbtnfe5d3563s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwofe5d3563)
+            }
+        </script>
+    </p>
+<p><strong>第三范式（3NF）</strong></p>
+<p>满足<strong><em>2NF</em></strong>的同时，消除非主属性对于主键的<strong>传递依赖</strong>；</p>
+<p>举例：</p>
+<p>对于<strong>选课</strong>表，主码为（学号，课名），主属性为<strong>学号</strong>和<strong>课名，</strong>非主属性只有一个，为分数，不可能存在传递函数依赖，所以<strong>选课</strong>表的设计，符合3NF的要求。</p>
+<p>对于<strong>学生</strong>表，主码为<strong>学号</strong>，主属性为<strong>学号</strong>，非主属性为<strong>姓名</strong>、<strong>系名</strong>和<strong>系主任</strong>。因为 学号 → 系名，同时 系名 → 系主任，所以存在非主属性<strong>系主任</strong>对于码<strong>学号</strong>的传递函数依赖，所以<strong>学生</strong>表的设计，不符合3NF的要求。。</p>
+<p>为了让数据表设计达到3NF，我们必须进一步进行模式分解为以下形式：<br>选课（学号，课名，分数）<br>学生（学号，姓名，系名）<br>系（系名，系主任）</p>
+<p>
+        <div class="_showpic_97b18306 showpicbtn">Loading images >></div>
+        <img href=https://pic4.zhimg.com/50/5b20707ff3d9afb51ef7bfda726c3e34_hd.jpg class="_pic_97b18306 hidepic" picId="97b18306"></img>
+        <script>
+            {
+                let imgself97b18306s = document.getElementsByClassName('_pic_97b18306')
+                let showpicbtn97b18306s = document.getElementsByClassName('_showpic_97b18306')
+                let isInViewPortOfTwo97b18306 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself97b18306s[0].getBoundingClientRect() && imgself97b18306s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself97b18306s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo97b18306)
+                            isInViewPortOfTwo97b18306 = null
+                        }
+                        for (el of showpicbtn97b18306s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo97b18306)
+            }
+        </script>
+    </p>
+<p>再来分析：</p>
+<p>对于<strong>选课</strong>表，符合3NF的要求，之前已经分析过了。</p>
+<p>对于<strong>学生</strong>表，码为<strong>学号</strong>，主属性为<strong>学号</strong>，非主属性为<strong>系名</strong>，不可能存在非主属性对于码的传递函数依赖，所以符合3NF的要求。</p>
+<p>对于<strong>系</strong>表，码为<strong>系名</strong>，主属性为<strong>系名</strong>，非主属性为<strong>系主任</strong>，不可能存在非主属性对于码的传递函数依赖（至少要有三个属性才可能存在传递函数依赖关系），所以符合3NF的要求</p>
+<p><strong>为什么需要遵循范式？</strong></p>
+<ul>
+<li>减少数据冗余；</li>
+<li>避免插入异常、修改异常、删除异常；</li>
+</ul>
+<blockquote>
+<p>作者：刘慰<br>链接：<a href="https://www.zhihu.com/question/24696366/answer/29189700">https://www.zhihu.com/question/24696366/answer/29189700</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+
           <h3 id="96abc5d3">MySQL用户管理</h3><pre><code class="language-sql">// 查看所有用户
 use mysql;
 select * from user;
@@ -1393,9 +1508,15 @@ set password = Password(&#39;new password&#39;);</code></pre>
 <li>格式也不同，二进制日志是一种逻辑日志，它记录的是操作的SQL语句，而重做日志是物理格式日志，记录的是对每个页的修改；所以重做日志比二进制日志的恢复速度快很多</li>
 <li>写入磁盘的时间点不同，二进制日志只在<strong>事务提交完成后</strong>做一次写入，而重做日志会在事务<strong>进行中</strong>不断地写入；</li>
 </ol>
+<p>日志格式：</p>
+<ul>
+<li>STATEMENT：记录原生的SQL语句；</li>
+<li>ROW：记录表的更改情况；</li>
+<li>MIXED：一般使用STATEMENT，一些情况下会使用ROW格式；</li>
+</ul>
 
           <h5 id="35634934">InnoDB存储引擎文件</h5><ul>
-<li>表空间文件：InnoDB将存储的数据按照表空间进行存放；</li>
+<li>表空间文件：InnoDB将存储的数据按照表空间进行存放，<strong>需要注意的是，这里还存放着undo log文件</strong>；</li>
 <li>重做日志文件：记录了对于InnoDB引擎的事务日志；不同的操作有不同个重做日志格式；一般数据库里只会有两个重做日志文件，而且是循环使用的，一个写满了再换另一个；重做日志文件不能设置地太大，否则数据恢复会很长时间，也不能太小，否则会频繁切换重做日志，而且会频繁触发<strong><em>checkpoint</em></strong>导致性能抖动；</li>
 </ul>
 
@@ -1433,15 +1554,15 @@ set password = Password(&#39;new password&#39;);</code></pre>
         </script>
     </p>
 <p>所有数据都被存放在一个空间中，称为<strong>表空间</strong>，而表空间又由<strong>段（segment）、区（extent）、页（page）</strong>组成</p>
-<p>**表空间</p>
+<p><strong>表空间</strong></p>
 <p>表空间是InnoDB存储引擎的最高层，所有数据都存放在表空间，默认情况下只有一个共享表空间，如果用参数配置了<code>innodb_file_per_table</code>，那么每张表内的数据可以单独放在一个表空间内</p>
 <p>每张表的单独表空间只存放数据、索引、插入缓冲Bitmap页，而其他的数据如回滚信息、插入缓冲索引页、系统事务信息、二次写缓冲等还是存放在原来的共享表空间里</p>
-<p>**段</p>
+<p><strong>段</strong></p>
 <p>表空间由段组成，常见的段有数据段、索引段、回滚段</p>
 <p>由于InnoDB的存储引擎表是由索引组织的，所以数据即索引，索引即数据，这点在B+树上的体现为：数据段为B+树的子叶节点，索引段为B+树的非索引节点</p>
-<p>**区</p>
+<p><strong>区</strong></p>
 <p>区由连续的页组成，每个区的大小都是1MB，且为了保证页的连续性，引擎每次都会申请4个以上的区，默认情况下，一页有16KB，于是一个区有64张连续的页；</p>
-<p>**页</p>
+<p><strong>页</strong></p>
 <p>页的默认大小为16KB，但也可以通过配置来调整</p>
 <p>常见的页类型有：</p>
 <ul>
@@ -1454,7 +1575,7 @@ set password = Password(&#39;new password&#39;);</code></pre>
 <li>未压缩的二进制大对象页；</li>
 <li>已压缩的二进制大对象页；</li>
 </ul>
-<p>**行</p>
+<p><strong>行</strong></p>
 <p>InnoDB引擎是面向行的，每页最多允许存放7992行记录；</p>
 
           <h3 id="b5cbb0c3">InnoDB约束类型&amp;概念</h3><p>关系型数据库系统和文件系统的一个区别是，关系型数据库本身能保证数据的完整性，不需要程序控制</p>
@@ -1481,7 +1602,7 @@ set password = Password(&#39;new password&#39;);</code></pre>
     primiary key (id),
     unique key (name)
 );</code></pre>
-<p>**约束和索引的区别</p>
+<p><strong>约束和索引的区别</strong></p>
 <p>约束是逻辑上的概念，用来保证数据完整性，而索引是数据结构，不仅有逻辑概念，还代表着物理存储方式</p>
 
           <h3 id="b79440c">触发器概念</h3><p>MySQL5.1之后，触发器的实现已经稳定，我们可以使用其来对数据进行约束，<strong>触发器的作用是在执行INSERT、UPDATE、DELETE操作的之前和之后自动调用SQL命令或者存储过程</strong></p>
@@ -1534,6 +1655,103 @@ set password = Password(&#39;new password&#39;);</code></pre>
 </ol>
 <p>数据库对死锁的处理实现了各种<strong>死锁检测</strong>和<strong>死锁超时</strong>，越复杂的系统，比如InnoDB，越能检测到死锁的循环依赖，并立即返回一个错误；或者当等待锁时机过长的时候，放弃锁请求，但是一般不这样做；</p>
 <p>InnoDB的处理是：<strong>将持有最少行级排他锁的事务进行回滚</strong></p>
+
+          <h3 id="b730636c">MySQL备份</h3><p>备份的分类如果按照<strong>备份方法</strong>可以分为：</p>
+<ul>
+<li><p>Hot Backup</p>
+<p>在数据库运行期间直接备份，对正在运行的数据库没有任何影响；</p>
+<blockquote>
+<p>使用MySQL官方提供的热备工具<code>ibbackup</code>，其优点:</p>
+<ul>
+<li>不需要停机，在线备份，也不阻塞任何语句；</li>
+<li>性能好，其本质是复制<strong>数据库文件</strong>和<strong>重做日志</strong>；</li>
+<li>支持压缩；</li>
+<li>支持跨平台</li>
+</ul>
+</blockquote>
+</li>
+<li><p>Cold Backup</p>
+<p>在数据库停机的情况下备份，这种备份最简单，一般只需要直接复制数据库数据的物理文件即可；</p>
+<blockquote>
+<p>优点：</p>
+<ul>
+<li>备份简单，直接复制文件；</li>
+<li>恢复简单，直接复制到指定位置即可；</li>
+<li>恢复速度快，不需要执行任何语句和建立任何索引；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>物理文件通常比逻辑备份文件大很多；</li>
+<li>不一定总是能跨平台；</li>
+</ul>
+</blockquote>
+</li>
+<li><p>Warm Backup</p>
+<p>在数据库运行期间备份，但是会影响是数据库，比如会请求一些加锁操作；</p>
+</li>
+</ul>
+<p>按照备份<strong>文件格式</strong>可以分为：</p>
+<ul>
+<li><p>逻辑备份</p>
+<p>一般是复制SQL语句；</p>
+</li>
+<li><p>裸文件备份</p>
+<p>直接复制数据库的物理数据文件，恢复的时间比逻辑备份短很多；</p>
+</li>
+</ul>
+<p>按照备份<strong>文件内容</strong>又可以分为：</p>
+<ul>
+<li><p>完全备份</p>
+<p>对整个数据集进行备份；</p>
+</li>
+<li><p>增量备份</p>
+<p>在上传完全备份的几次上，对更改的数据进行备份；</p>
+</li>
+<li><p>日志备份</p>
+<p>对数据库的二进制日志的备份，通常根据这个文件进行重放（replay）来完成数据库的恢复；</p>
+</li>
+</ul>
+
+          <h3 id="80e59eaa">MySQL复制</h3><p><strong>复制（Replication）</strong>是MySQL提供的一种高可用高性能的解决方案，在大型应用中是必不可少的，其步骤为：</p>
+<ol>
+<li>主库需要记录二进制日志文件；</li>
+<li>备库将主库的二进制日志文件复制到自己的<strong>中继日志（Replay Log）</strong>；</li>
+<li>备库重放中继日志；</li>
+</ol>
+<p>
+        <div class="_showpic_b6aea8ce showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20200618165816.png class="_pic_b6aea8ce hidepic" picId="b6aea8ce"></img>
+        <script>
+            {
+                let imgselfb6aea8ces = document.getElementsByClassName('_pic_b6aea8ce')
+                let showpicbtnb6aea8ces = document.getElementsByClassName('_showpic_b6aea8ce')
+                let isInViewPortOfTwob6aea8ce = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfb6aea8ces[0].getBoundingClientRect() && imgselfb6aea8ces[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfb6aea8ces) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwob6aea8ce)
+                            isInViewPortOfTwob6aea8ce = null
+                        }
+                        for (el of showpicbtnb6aea8ces) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwob6aea8ce)
+            }
+        </script>
+    </p>
+
+          <h4 id="494047bc">复制要解决的问题</h4><ol>
+<li>数据分布</li>
+<li>负载均衡</li>
+<li>备份</li>
+<li>高可用性和故障切换</li>
+<li>MySQL升级测试</li>
+</ol>
 
           <h2 id="901080fc">⭐ Open API</h2>
           <h3 id="785cf12a">一些开放的API</h3><p><a href="https://github.com/public-apis/public-apis">github repo public-apis</a></p>
