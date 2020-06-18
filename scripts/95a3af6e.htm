@@ -1,0 +1,224 @@
+
+          <h2 class="zip-tran"id="95a3af6e">坑</h2>
+          <h3 class="zip-tran"id="6754e9a1">代码高亮的的坑</h3><sb class="hide-script-block"><blockquote>
+<p>editor.md的preview页 + highlight.js</p>
+</blockquote>
+
+          <h4 id="894ee921">🔹1. highlight.js 的坑</h4>
+          <h5 id="76e8bb30">🔸highlight.js无效问题</h5><blockquote>
+<p><strong>hub主页上的highlight.js文件是用不了的!!!</strong><br>解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
+</blockquote>
+
+          <h5 id="2edff174">🔸始终只能渲染code而无法渲染pre的问题</h5><blockquote>
+<p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong><br>解决: 把pre也一起选中就好了</p>
+</blockquote>
+<pre><code class="language-js">$(&#39;pre, pre code&#39;).each(function(i, block) {
+    hljs.highlightBlock(block);
+});</code></pre>
+
+          <h4 id="55caa9a3">🔹2. editor的默认md code渲染和highlight.js渲染冲突问题</h4><p>
+        <div class="_showpic_223fac6d showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png class="_pic_223fac6d hidepic" picId="223fac6d"></img>
+        <script>
+            {
+                let imgself223fac6ds = document.getElementsByClassName('_pic_223fac6d')
+                let showpicbtn223fac6ds = document.getElementsByClassName('_showpic_223fac6d')
+                let isInViewPortOfTwo223fac6d = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself223fac6ds[0].getBoundingClientRect() && imgself223fac6ds[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself223fac6ds) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo223fac6d)
+                            isInViewPortOfTwo223fac6d = null
+                        }
+                        for (el of showpicbtn223fac6ds) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo223fac6d)
+            }
+        </script>
+    </p>
+<p>如图用的atom-one-dark, 但是背景还是白色的...</p>
+
+          <h5 id="7cac9f8d">🔸1. editor渲染禁用</h5><ol>
+<li><p>首先不引用lib下的prettify.min.js文件</p>
+</li>
+<li><p>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</p>
+<p>
+        <div class="_showpic_39616b81 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png class="_pic_39616b81 hidepic" picId="39616b81"></img>
+        <script>
+            {
+                let imgself39616b81s = document.getElementsByClassName('_pic_39616b81')
+                let showpicbtn39616b81s = document.getElementsByClassName('_showpic_39616b81')
+                let isInViewPortOfTwo39616b81 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself39616b81s[0].getBoundingClientRect() && imgself39616b81s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself39616b81s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo39616b81)
+                            isInViewPortOfTwo39616b81 = null
+                        }
+                        for (el of showpicbtn39616b81s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo39616b81)
+            }
+        </script>
+    <br>修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
+</li>
+</ol>
+
+          <h5 id="73f06e5a">🔸2. css覆盖</h5><p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
+<p>注释一部分editormd.preview.css:</p>
+<p>
+        <div class="_showpic_9a2020ba showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png class="_pic_9a2020ba hidepic" picId="9a2020ba"></img>
+        <script>
+            {
+                let imgself9a2020bas = document.getElementsByClassName('_pic_9a2020ba')
+                let showpicbtn9a2020bas = document.getElementsByClassName('_showpic_9a2020ba')
+                let isInViewPortOfTwo9a2020ba = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself9a2020bas[0].getBoundingClientRect() && imgself9a2020bas[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself9a2020bas) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo9a2020ba)
+                            isInViewPortOfTwo9a2020ba = null
+                        }
+                        for (el of showpicbtn9a2020bas) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo9a2020ba)
+            }
+        </script>
+    </p>
+<p>我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.</p>
+
+          <h4 id="54514708">🔹结果</h4><p>
+        <div class="_showpic_25cac22d showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png class="_pic_25cac22d hidepic" picId="25cac22d"></img>
+        <script>
+            {
+                let imgself25cac22ds = document.getElementsByClassName('_pic_25cac22d')
+                let showpicbtn25cac22ds = document.getElementsByClassName('_showpic_25cac22d')
+                let isInViewPortOfTwo25cac22d = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself25cac22ds[0].getBoundingClientRect() && imgself25cac22ds[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself25cac22ds) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo25cac22d)
+                            isInViewPortOfTwo25cac22d = null
+                        }
+                        for (el of showpicbtn25cac22ds) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo25cac22d)
+            }
+        </script>
+    </p>
+
+          </sb><h3 class="zip-tran"id="f2c4def6">GitHub API response 条数pagination限制</h3><sb class="hide-script-block"><p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
+<p>
+        <div class="_showpic_e85900b7 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png class="_pic_e85900b7 hidepic" picId="e85900b7"></img>
+        <script>
+            {
+                let imgselfe85900b7s = document.getElementsByClassName('_pic_e85900b7')
+                let showpicbtne85900b7s = document.getElementsByClassName('_showpic_e85900b7')
+                let isInViewPortOfTwoe85900b7 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfe85900b7s[0].getBoundingClientRect() && imgselfe85900b7s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfe85900b7s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoe85900b7)
+                            isInViewPortOfTwoe85900b7 = null
+                        }
+                        for (el of showpicbtne85900b7s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoe85900b7)
+            }
+        </script>
+    </p>
+<p>
+        <div class="_showpic_c9bc5e64 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png class="_pic_c9bc5e64 hidepic" picId="c9bc5e64"></img>
+        <script>
+            {
+                let imgselfc9bc5e64s = document.getElementsByClassName('_pic_c9bc5e64')
+                let showpicbtnc9bc5e64s = document.getElementsByClassName('_showpic_c9bc5e64')
+                let isInViewPortOfTwoc9bc5e64 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfc9bc5e64s[0].getBoundingClientRect() && imgselfc9bc5e64s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfc9bc5e64s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoc9bc5e64)
+                            isInViewPortOfTwoc9bc5e64 = null
+                        }
+                        for (el of showpicbtnc9bc5e64s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoc9bc5e64)
+            }
+        </script>
+    </p>
+<p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
+<p>我现在的blog所有的comments请求都是9999</p>
+
+          </sb><h3 class="zip-tran"id="5bc6c604">关于 github oauth app</h3><sb class="hide-script-block"><p>
+        <div class="_showpic_5d357401 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png class="_pic_5d357401 hidepic" picId="5d357401"></img>
+        <script>
+            {
+                let imgself5d357401s = document.getElementsByClassName('_pic_5d357401')
+                let showpicbtn5d357401s = document.getElementsByClassName('_showpic_5d357401')
+                let isInViewPortOfTwo5d357401 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself5d357401s[0].getBoundingClientRect() && imgself5d357401s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself5d357401s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo5d357401)
+                            isInViewPortOfTwo5d357401 = null
+                        }
+                        for (el of showpicbtn5d357401s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo5d357401)
+            }
+        </script>
+    </p>
+<p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
+
+          </sb><h3 class="zip-tran"id="91d79d33">关于引用奥森图标一类的i标签失效的问题</h3><sb class="hide-script-block"><p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
+<p>因为......</p>
+<p>千万要想想是不是全局font-family的问题！！！</p>
+</sb>

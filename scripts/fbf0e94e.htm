@@ -1,0 +1,167 @@
+
+          <h2 class="zip-tran"id="fbf0e94e">技巧</h2>
+          <h3 class="zip-tran"id="dbcbf656">一顿操作 node.js安装</h3><sb class="hide-script-block">
+          <h4 id="dddf4a18">🔹安装nvm</h4><ol>
+<li>首先去 <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载最新的release版本 然后安装即可</li>
+</ol>
+
+          <h4 id="bceb6587">🔹使用mvn安装nodejs的多版本</h4><pre><code class="language-bash">$ nvm install 0.10
+$ nvm install 4
+$ nvm install 6
+$ nvm install 8</code></pre>
+
+          <h4 id="27915b67">🔹安装全局npm</h4><p>可以看到这里安装了4种版本的nodejs, 每个版本都带有自己的npm, 如果要特定使用npm, 则需要先输入</p>
+<pre><code class="language-bash">mvn use 8</code></pre>
+<p>比如上面先use了8版本的node</p>
+<p>然后再安装全局npm, 不然你找不到npm的环境</p>
+<hr>
+<p>Linux下安装nvm</p>
+<p>看得懂就行啦：<a href="https://github.com/creationix/nvm#git-install">https://github.com/creationix/nvm#git-install</a></p>
+<p>参考:<br><a href="https://i5ting.github.io/How-to-learn-node-correctly/#10302">https://i5ting.github.io/How-to-learn-node-correctly/#10302</a><br><a href="https://blog.csdn.net/jingtian678/article/details/78422760">https://blog.csdn.net/jingtian678/article/details/78422760</a></p>
+
+          </sb><h3 class="zip-tran"id="596786e">Regex 匹配换行符/匹配尾部空格</h3><sb class="hide-script-block"><pre><code class="language-regex">([\s\S]*)</code></pre>
+<pre><code class="language-regex">\s*$</code></pre>
+
+          </sb><h3 class="zip-tran"id="2894e654">在Windows的右键菜单上增加新建自定义类型文件的选项</h3><sb class="hide-script-block"><p>
+        <div class="_showpic_a713b4db showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/41817005-31258a84-77c5-11e8-9b36-eb7b089def71.png class="_pic_a713b4db hidepic" picId="a713b4db"></img>
+        <script>
+            {
+                let imgselfa713b4dbs = document.getElementsByClassName('_pic_a713b4db')
+                let showpicbtna713b4dbs = document.getElementsByClassName('_showpic_a713b4db')
+                let isInViewPortOfTwoa713b4db = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa713b4dbs[0].getBoundingClientRect() && imgselfa713b4dbs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa713b4dbs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoa713b4db)
+                            isInViewPortOfTwoa713b4db = null
+                        }
+                        for (el of showpicbtna713b4dbs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoa713b4db)
+            }
+        </script>
+    </p>
+<p><a href="https://www.cnblogs.com/zhengye/articles/2304925.html">https://www.cnblogs.com/zhengye/articles/2304925.html</a></p>
+
+          </sb><h3 class="zip-tran"id="39836185">git做用户的全局配置的文件夹在哪？</h3><sb class="hide-script-block"><p>放在你家</p>
+<p>
+        <div class="_showpic_a63ca3cf showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/42872368-59d80c52-8aaf-11e8-8b4a-5f176dbb4d36.png class="_pic_a63ca3cf hidepic" picId="a63ca3cf"></img>
+        <script>
+            {
+                let imgselfa63ca3cfs = document.getElementsByClassName('_pic_a63ca3cf')
+                let showpicbtna63ca3cfs = document.getElementsByClassName('_showpic_a63ca3cf')
+                let isInViewPortOfTwoa63ca3cf = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselfa63ca3cfs[0].getBoundingClientRect() && imgselfa63ca3cfs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselfa63ca3cfs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+                            isInViewPortOfTwoa63ca3cf = null
+                        }
+                        for (el of showpicbtna63ca3cfs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwoa63ca3cf)
+            }
+        </script>
+    </p>
+<p>如图可以配置别名</p>
+
+          </sb><h3 class="zip-tran"id="fe6cfb4f">xss攻击和Java处理xss</h3><sb class="hide-script-block"><p><a href="https://www.cnblogs.com/digdeep/p/4695348.html">https://www.cnblogs.com/digdeep/p/4695348.html</a><br><a href="https://blog.csdn.net/woniumenga/article/details/47323829#">https://blog.csdn.net/woniumenga/article/details/47323829#</a></p>
+<p>Java的html解析器<br><a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
+<p>前端xss处理：<br><a href="https://jsxss.com/zh/index.html">https://jsxss.com/zh/index.html</a></p>
+
+          </sb><h3 class="zip-tran"id="47b224f">windows下调试iOS网页设备</h3><sb class="hide-script-block"><p><a href="https://www.jianshu.com/p/73715ee54712">https://www.jianshu.com/p/73715ee54712</a></p>
+
+          </sb><h3 class="zip-tran"id="5df6c31e">带空格文件名参数传递 xargs</h3><sb class="hide-script-block"><p><a href="https://blog.csdn.net/u011085172/article/details/77771173">https://blog.csdn.net/u011085172/article/details/77771173</a></p>
+
+          </sb><h3 class="zip-tran"id="124fa3d5">win10 自带录电脑音软件</h3><sb class="hide-script-block"><p>
+        <div class="_showpic_257b8207 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551960-fd9bdf80-2a2c-11ea-8049-f9293a6e6198.jpg class="_pic_257b8207 hidepic" picId="257b8207"></img>
+        <script>
+            {
+                let imgself257b8207s = document.getElementsByClassName('_pic_257b8207')
+                let showpicbtn257b8207s = document.getElementsByClassName('_showpic_257b8207')
+                let isInViewPortOfTwo257b8207 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself257b8207s[0].getBoundingClientRect() && imgself257b8207s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself257b8207s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo257b8207)
+                            isInViewPortOfTwo257b8207 = null
+                        }
+                        for (el of showpicbtn257b8207s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo257b8207)
+            }
+        </script>
+    <br>
+        <div class="_showpic_215ad473 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551963-08567480-2a2d-11ea-9d24-d08dc2e83ef6.png class="_pic_215ad473 hidepic" picId="215ad473"></img>
+        <script>
+            {
+                let imgself215ad473s = document.getElementsByClassName('_pic_215ad473')
+                let showpicbtn215ad473s = document.getElementsByClassName('_showpic_215ad473')
+                let isInViewPortOfTwo215ad473 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself215ad473s[0].getBoundingClientRect() && imgself215ad473s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself215ad473s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo215ad473)
+                            isInViewPortOfTwo215ad473 = null
+                        }
+                        for (el of showpicbtn215ad473s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo215ad473)
+            }
+        </script>
+    <br>
+        <div class="_showpic_6d1b4848 showpicbtn">Loading images >></div>
+        <img href=https://user-images.githubusercontent.com/23525754/71551979-8a469d80-2a2d-11ea-82c1-be60e4bca1e3.png class="_pic_6d1b4848 hidepic" picId="6d1b4848"></img>
+        <script>
+            {
+                let imgself6d1b4848s = document.getElementsByClassName('_pic_6d1b4848')
+                let showpicbtn6d1b4848s = document.getElementsByClassName('_showpic_6d1b4848')
+                let isInViewPortOfTwo6d1b4848 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself6d1b4848s[0].getBoundingClientRect() && imgself6d1b4848s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself6d1b4848s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo6d1b4848)
+                            isInViewPortOfTwo6d1b4848 = null
+                        }
+                        for (el of showpicbtn6d1b4848s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo6d1b4848)
+            }
+        </script>
+    </p>
+<p>然后打开win10自带的录音软件Voice Recorder</p>
+</sb>

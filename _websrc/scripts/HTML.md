@@ -1,4 +1,4 @@
-## :star: HTML
+## HTML
 
 ### textarea的字数限制
 

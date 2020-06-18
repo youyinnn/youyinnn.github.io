@@ -1,4 +1,4 @@
-## :star: Java
+## Java
 
 ### Java8系列文章
 

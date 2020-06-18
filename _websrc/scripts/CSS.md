@@ -1,4 +1,4 @@
-## :star: CSS
+## CSS
 
 ### CSS media设备适配样式设置
 
