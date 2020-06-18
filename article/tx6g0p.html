@@ -216,6 +216,11 @@
             }
         </script>
     </p>
+<p>分布式事务采用<strong>两段式提交（two-phase commit）</strong>：</p>
+<ul>
+<li>第一阶段：所有参与事务的节点都进入准备状态（PREPARE），并通知事务管理器；</li>
+<li>第二阶段：事务管理器告诉资源管理器执行COMMIT还是ROLLBACK，待所有节点都发出同意消息之后，再最终COMMIT或者ROLLBACK；</li>
+</ul>
 
           <h3 id="c7bd84f3">事务的实现</h3><p>事务的隔离性由锁来实现，而原子性、一致性、持久性由事务来保持</p>
 <ul>
@@ -228,20 +233,22 @@
 <li>内存中的重做日志缓冲（redo log buffer）；</li>
 <li>文件中的重做日志文件（redo log file）；</li>
 </ol>
-<p>InnoDB为了能保证事务的理论特性，通过<strong><em>Force Log at Commit</em></strong>机制实现事务的持久性，在事务提交的时候，必须先把该事务的所有<strong>“日志”</strong>写入到<strong>重做日志文件</strong>中，然后再真正执行COMIMIT</p>
+<p>InnoDB为了能保证事务的理论特性，通过<strong><em>Force Log At Commit</em></strong>机制实现事务的持久性，在事务提交的时候，必须先把该事务的所有<strong>“日志”</strong>写入到<strong>重做日志文件</strong>中，然后再真正执行COMIMIT</p>
 <p>这里的<strong>“日志”</strong>由两部分组成，一是redo log，二是undo log；</p>
 <p>为了确保重做日志的及时性和有效性，当要把日志从缓冲写到文件系统后，引擎都要调用一次主机系统的fsync操作，由于这个操作依赖磁盘性能，所以事务也依赖磁盘性能，所以数据库整体就依赖磁盘性能；</p>
 
           <h4 id="6127d7b7">Undo</h4>
-          <h5 id="59fe0caf">作用</h5><p>重做日志记录了事务的行为，可以很好地重做页；但是事务还需要回滚操作，这时候就会需要undo，在数据要修改的时候，引擎不仅会产生redo，还会产生一定量的undo，这样如果某条语句失败了，或者用户可以主动地调用回滚，将数据滚回之前的样子</p>
-<p>于是，<strong>“回滚”</strong>是undo第一个要做的事</p>
+          <h5 id="8655c535">支持回滚</h5><p>重做日志记录了事务的行为，可以很好地重做页；但是事务还需要回滚操作，这时候就会需要undo，在数据要修改的时候，引擎不仅会产生redo，还会产生一定量的undo，这样如果某条语句失败了，或者用户可以主动地调用回滚，将数据滚回之前的样子</p>
+<p>于是，<strong>“回滚”是undo第一个要做的事</strong></p>
 <p>redo存放在重做日志文件中，而undo是存在数据库内部的一个特殊段（segment）中，这个undo段位于共享表空间里</p>
 <p>需要注意的是：undo并非用于将数据库<strong>物理地</strong>恢复到事务之前的样子，实际上undo是逻辑日志，它将数据<strong>逻辑地</strong>恢复到原来的样子；我们可以理解为：</p>
 <blockquote>
 <p>你怎么改的哪些东西，就怎么改哪些东西回去，而不是将整个页都改回原来的样子</p>
 </blockquote>
 <p>因为只有这样，你才能不会影响到其他线程的事务</p>
-<p><strong>undo还有一个作用是MVCC</strong>，MVCC的实现是通过undo来完成的，当读取一条被锁定的记录的时候，不会阻塞在此而是通过undo来读取之前的行版本信息，实现<strong>非锁定读</strong></p>
+
+          <h5 id="3981f141">支持MVCC</h5><p><strong>undo还有一个作用是MVCC</strong></p>
+<p>MVCC的实现是通过undo来完成的，当读取一条被锁定的记录的时候，不会阻塞在此而是通过undo来读取之前的行版本信息，实现<strong>非锁定读</strong></p>
 <p>最后，undo的执行也会产生redo log，因为它页需要持久性保护</p>
 <p>那么undo究竟在干嘛？当事务提交的时候，<strong>引擎会为undo机制做以下两件事</strong>：</p>
 <ol>
@@ -249,6 +256,23 @@
 <li>判断undo log所在页释放可以重用，以供下个事务使用；</li>
 </ol>
 <p>事务提交后不会马上删除undo log和相关undo log页，因为可能还有其他事务需要这个undo的版本，所以undo的删除页交由purge线程来判断</p>
+<blockquote>
+<p>什么是MVCC？</p>
+<p>MVCC其实并不是一个标准，但是大多数数据库或者引擎都实现了它，可以简单将其理解为<strong>行级锁</strong>的一个变种，但它在很多情况下都避免了对行加锁因此开销小，阻塞率低</p>
+<p>其基本思路是，所有操作后都会保留一个快照，事务的执行以快照版本为准，也就是说，无论一个需要时间的事务执行期间该记录被修改了多少次，该事务始终只看到该记录在该事务开始之前的样子，除非该事务自己修改了这个记录；所以根据事务开始的时机的不同，它看到的表数据可能不一样，但是一旦事务开启之后，它只能看到唯一一个版本的数据</p>
+<p>每个引擎对这个机制的实现不同，InnoDB的行为如下：</p>
+<ul>
+<li><p>select</p>
+<ol>
+<li>只查找版本早于当前事务版本的数据，保证事务读取的<strong>行</strong>：要么是事务开始前已经存在的，要么是事务自身修改或者拆入过的；</li>
+<li>行的删除版本要么未定义，要么大于当前事务版本号，保证事务读取到的行在事务开始之前未被删除；</li>
+</ol>
+</li>
+<li><p>insert/delete/update</p>
+<p>都是对<strong>该行</strong>的版本号进行改动</p>
+</li>
+</ul>
+</blockquote>
 
           <h5 id="7f996988">purge线程</h5><p>那么怎么决定什么样的undo log要删除呢？我们先来了解以下undo log的分类：</p>
 <ul>
@@ -277,6 +301,12 @@
 
           <h4 id="bbd03b2d">实现问题</h4><p>对于<strong>InnoDB</strong>，由于其提供了MVCC而解决了<strong>不可重复读、幻读等问题，同时还提高了并发性能</strong>；所以在其REPEATABLE READ（可重复读）级别下也能完整地支持事务ACID，于是其默认的级别也就是这个；</p>
 <p>对于其他引擎，甚至是其他数据库，都不一定会支持所有隔离级别，也不会严格按照标准实现</p>
+
+          <h4 id="e0e3e54f">MVCC的行为</h4><p>对于MVCC，不同隔离级别的快照读取的方式不同：</p>
+<ul>
+<li>READ COMMITTED：总是读取最新的一份快照；</li>
+<li>REPEATEABLE READ：总是读取事务开始时的快照版本；</li>
+</ul>
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
