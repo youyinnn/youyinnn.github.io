@@ -133,8 +133,14 @@ $(function() {
             location.pathname.startsWith('/todos/')) {
             if (scrollTop === 0) {
                 showtopbar()
+                if ($('#sidetoc').css('top') === '48px') {
+                    $('#sidetoc').css('top', '96px')
+                }
             } else {
                 hidetopbar()
+                if ($('#sidetoc').css('top') === '96px') {
+                    $('#sidetoc').css('top', '48px')
+                }
             }
         }
 

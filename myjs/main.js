@@ -104,12 +104,12 @@ function new_render_md(regular_toc, abbrlink) {
         }
     }
     $('#sidetoc').append(listhtml)
-    if (Boolean(regular_toc) || getclientw() < 700) {
+    if (Boolean(regular_toc)) {
         $('.markdown-toc a').click(function() {
             let tzhref = $.attr(this, 'hreff')
             scrollToElement(tzhref)
         })
-    } else if (getclientw() >= 700) {
+    } else {
         $('.markdown-toc .toc-h3').click(function() {
             $('.tocactive').removeClass('tocactive')
             $(this).addClass('tocactive')
@@ -805,7 +805,7 @@ function pagination() {
     })
 
     let totalli = c('li')
-    totalli.id = 'lpg'
+    totalli.id = 'ttp'
     adclass(totalli, 'page-item disabled')
     let totaldiv = c('div')
     adclass(totaldiv, 'page-link')
