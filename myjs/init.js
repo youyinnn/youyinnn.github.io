@@ -93,30 +93,34 @@ $(function() {
         if (getclientw() >= 700) {
             $('#md').addClass('fixmd')
             $('#sidetoccontainer').addClass('fixtoc')
+            new_render_md()
+            showsidetoc()
+            $('#md').html('')
+    
+            setTimeout(() => {
+                if (hash === '') {
+                    $('#_toc_root').children().first().children().click()
+                    setTimeout(() => {
+                        $('#_toc_root').children().first().children().children().first().click()
+                    }, 400)
+                } else {
+                    let lh = hash.split('_')
+                    $(`[_target_sb=${lh[1]}]`).children().first().click()
+                    setTimeout(() => {
+                        $(`[_target_sb=${lh[0]}]`).click()
+                    }, 400)
+                }
+            }, 400);
+    
+            $(md).addClass('scripts')
         } else {
             showbbt()
-            showtocbtn()
+            rmclass(homepage, 'myhide')
+            adclass(homepage, 'myshow')
+            $('#homepage-btn').remove()
+            $('#wolf-logo').remove()
+            $('#slogan-text').html('Scripts page<br>is unavailable<br>at small screen')
         }
-        new_render_md()
-        showsidetoc()
-        $('#md').html('')
-
-        setTimeout(() => {
-            if (hash === '') {
-                $('#_toc_root').children().first().children().click()
-                setTimeout(() => {
-                    $('#_toc_root').children().first().children().children().first().click()
-                }, 400)
-            } else {
-                let lh = hash.split('_')
-                $(`[_target_sb=${lh[1]}]`).children().first().click()
-                setTimeout(() => {
-                    $(`[_target_sb=${lh[0]}]`).click()
-                }, 400)
-            }
-        }, 400);
-
-        $(md).addClass('scripts')
         setgohub('Go hub', 'https://github.com/youyinnn/youyinnn.github.io/blob/master/_websrc/scripts.md')
     } else if (pathname === '/todos/') {
         changepagetitle('scripts | youyinnn')

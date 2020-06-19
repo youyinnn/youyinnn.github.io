@@ -1578,3 +1578,7 @@ sb img {
 .md-diagram-panel-preview svg * {
   transition: none !important;
 }
+
+#_toc_root {
+  cursor: pointer;
+}

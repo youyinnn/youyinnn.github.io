@@ -122,7 +122,7 @@
   iphone7/X 竖屏
 */
 
-@media screen and (max-height: 812px) and (max-width: 515px) {
+@media screen and (max-height: 812px) and (max-width: 320px) {
   .tooltip{
     display: none !important;
   }
@@ -215,7 +215,29 @@
 
   #sidetoc {
     border-left: none;
-    bottom: 2.35rem;
+    top: 6rem;
+  }
+
+  #homepage-center {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 !important;
+  }
+  
+  #ttp {
+    display: none;
+  }
+
+  #slogan {
+    width: 100%;
+  }
+
+  #homepage-btn {
+    padding-left: 1rem;
+  }
+
+  #homepage-btn > div {
+    font-size: 15px;
   }
 
   #md.scripts h2, #md.scripts h3 {
