@@ -74,7 +74,8 @@ $(function() {
     $('*').bind('click', function(event) {
         if (this.id === 'toc' ||
             this.id === 'sidetoc' ||
-            this.id === 'tags') {
+            this.id === 'tags' ||
+            this.id === 'hb') {
             return false
         }
         if (!$('#sidetoccontainer').hasClass('tochide') && !location.pathname.startsWith('/resume/') && !location.pathname.startsWith('/scripts/')) {
@@ -133,7 +134,7 @@ $(function() {
             location.pathname.startsWith('/todos/')) {
             if (scrollTop === 0) {
                 showtopbar()
-                if ($('#sidetoc').css('top') === '48px') {
+                if ($('#bbt').css('right') === '0px' && $('#sidetoc').css('top') === '48px') {
                     $('#sidetoc').css('top', '96px')
                 }
             } else {

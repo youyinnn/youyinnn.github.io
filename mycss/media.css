@@ -37,7 +37,7 @@
   }
 
   #homepage-center{
-    margin-left: 10px;
+    margin: auto;
   }
   #showmore,
   #toarticles,
@@ -122,7 +122,7 @@
   iphone7/X 竖屏
 */
 
-@media screen and (max-height: 812px) and (max-width: 320px) {
+@media screen and (max-height: 812px) and (max-width: 515px) {
   .tooltip{
     display: none !important;
   }
