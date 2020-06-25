@@ -456,4 +456,54 @@ set password = Password(&#39;new password&#39;);</code></pre>
 <li>高可用性和故障切换</li>
 <li>MySQL升级测试</li>
 </ol>
+
+          </sb><h3 class="zip-tran"id="63a50369">Select count细节</h3><sb class="hide-script-block">
+          <h4 id="49a3df0f">函数用法</h4><p>
+        <div class="_showpic_150ad66 showpicbtn">Loading images >></div>
+        <img href=http://47.103.216.138/wp-content/uploads/2019/10/15709530990912-1.jpg class="_pic_150ad66 hidepic" picId="150ad66"></img>
+        <script>
+            {
+                let imgself150ad66s = document.getElementsByClassName('_pic_150ad66')
+                let showpicbtn150ad66s = document.getElementsByClassName('_showpic_150ad66')
+                let isInViewPortOfTwo150ad66 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself150ad66s[0].getBoundingClientRect() && imgself150ad66s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself150ad66s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo150ad66)
+                            isInViewPortOfTwo150ad66 = null
+                        }
+                        for (el of showpicbtn150ad66s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo150ad66)
+            }
+        </script>
+    </p>
+<ol>
+<li>COUNT(expr) ，返回SELECT语句检索的行中expr的值不为NULL的数量。结果是一个BIGINT值。</li>
+<li>如果查询结果没有命中任何记录，则返回0</li>
+<li>但是，值得注意的是，<code>COUNT(*)</code> 的统计结果中，会<strong>包含</strong>值为NULL的行数。</li>
+</ol>
+
+          <h4 id="3100c3e5">相关问题</h4><ol>
+<li><p>为什么《阿里巴巴Java开发手册》中强制要求不让使用 <code>COUNT(列名)</code>或 <code>COUNT(常量)</code>来替代 <code>COUNT(*)</code>呢？</p>
+<blockquote>
+<p>不要使用 <code>count(列名)</code>或 <code>count(常量)</code>来替代 <code>count(*)</code>，<code>count(*)</code>是 SQL92 定义的标 准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。 说明：<code>count(*)</code>会统计值为 NULL 的行，而 <code>count(列名)</code>不会统计此列为 NULL 值的行。</p>
+</blockquote>
+</li>
+<li><p><code>COUNT(列名)</code>、<code>COUNT(常量)</code>和<code>COUNT(*)</code>之间的区别</p>
+<blockquote>
+<ol>
+<li><code>COUNT(常量)</code> 和 <code>COUNT(*)</code>表示的是直接查询符合条件的数据库表的行数。而<code>COUNT(列名)</code>表示的是查询符合条件的列的值不为NULL的行数；</li>
+<li>对于<code>COUNT(1)</code>和<code>COUNT(*)</code>，MySQL的优化是完全一样的，根本不存在谁比谁快；</li>
+<li><code>COUNT(字段)</code>多了一个步骤就是判断所查询的字段是否为NULL，所以他的性能要比<code>COUNT(*)</code>慢；</li>
+</ol>
+</blockquote>
+</li>
+</ol>
 </sb>
