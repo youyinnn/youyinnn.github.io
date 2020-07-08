@@ -100,60 +100,62 @@ There are two way we could use to implement it: **1) loop with stack; 2) recursi
 
 And we omit the recursion solusion here.
 
-**Pre-Order**
+###### **Pre-Order**
 
 ```java
-public void preOrderTraversalWithStack(Node root) {
-    Stack<Node> s = new Stack<>();
-    Node tmp = root;
-    while (tmp != null || !s.empty()) {
-        if(tmp != null) {
-            s.push(tmp);
-            result.add(tmp.val);	// visit node
-            tmp = tmp.left;
-        } else {
-            tmp = s.pop().right;
-        }
+public List<Integer> preorderTraversal(TreeNode root) {
+    LinkedList<Integer> ans = new LinkedList<>();
+    if (root == null) return ans;
+    Stack<TreeNode> s = new Stack<>();
+    s.push(root);
+    while (!s.isEmpty()) {
+        TreeNode tmp = s.pop();
+        ans.add(tmp.val);
+
+        if (tmp.right != null) s.push(tmp.right);
+        if (tmp.left  != null) s.push(tmp.left);
     }
+    return ans;
 }
 ```
 
-**In Order**
+###### **In Order**
 
 ```java
-public void inOrderTraversalWithStack(Node root) {
-    Stack<Node> s = new Stack<>();
-    Node tmp = root;
-    while (tmp != null || !s.empty()) {
+public List<Integer> inorderTraversal(TreeNode root) {
+    LinkedList<Integer> ans = new LinkedList<>();
+    Stack<TreeNode> s = new Stack<>();
+    TreeNode tmp = root;
+    while (tmp != null || !s.isEmpty()) {
         if (tmp != null) {
             s.push(tmp);
             tmp = tmp.left;
         } else {
             tmp = s.pop();
-            result.add(tmp.val);
+            ans.add(tmp.val);
             tmp = tmp.right;
         }
     }
+    return ans;
 }
 ```
 
-**Post Order**
+###### **Post Order**
 
 ```java
-public void postOrderTraversalWithStack(Node root) {
-    Stack<Node> s = new Stack<>();
-    Node tmp = root;
-    while (tmp != null || !s.empty()) {
-        if (tmp != null) {
-            s.push(tmp);
-            // Reverse the process of pre-order
-            // result is a queue
-            result.addFirst(tmp.val);
-            tmp = tmp.right;
-        } else {
-            tmp = s.pop().left;
-        }
+public List<Integer> postorderTraversal(TreeNode root) {
+    Stack<TreeNode> s = new Stack<>();
+    LinkedList<Integer> ans = new LinkedList<>();
+    if (root == null) return ans;
+    s.push(root);
+    while (!s.isEmpty()) {
+        TreeNode tmp = s.pop();
+        ans.addFirst(tmp.val);
+
+        if (tmp.left  != null) s.push(tmp.left);
+        if (tmp.right != null) s.push(tmp.right);
     }
+    return ans;
 }
 ```
 
