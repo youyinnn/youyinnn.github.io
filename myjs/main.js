@@ -248,14 +248,14 @@ function new_render_md(regular_toc, abbrlink) {
         }
         if (flows.length > 0) {
             let fcrs = [{
-                    url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/raphael-2.3.0.min.js',
+                    url: 'https://cdn.jsdelivr.net/npm/raphael@2.3.0/raphael.min.js',
                     target: ['/article/', '/todos/', '/scripts/'],
                     attrs: {
                         defer: true
                     }
                 },
                 {
-                    url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/flowchart-1.13.0.min.js',
+                    url: 'https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/lib/my-flowchart-1.13.0.min.js',
                     target: ['/article/', '/todos/', '/scripts/'],
                     attrs: {
                         defer: true
