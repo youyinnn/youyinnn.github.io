@@ -428,6 +428,95 @@ private static void merge(int[] brr, int[] crr, int[] arr){
         arr[aIndex++] = brr[bIndex++];
     }
 }</code></pre>
+
+          <h4 id="5d9db465">空间优化版本</h4><pre><code class="language-java">public void sort(int[] nums) {
+    int[] tmp = new int[nums.length];
+    mergeSort(nums, tmp, 0, nums.length - 1);
+}
+
+public void mergeSort(int[] arr, int[] tmp, int start, int end) {
+    if (start &gt;= end) return;
+
+    int mid = start + (end - start) / 2;
+
+    mergeSort(arr, tmp, start,   mid);
+    mergeSort(arr, tmp, mid + 1, end);
+
+    // 前后数组已经有序了 可以直接返回
+    if (arr[mid] &lt;= arr[mid + 1]) return;
+
+    int bi = start,   bEnd = mid;
+    int ci = mid + 1, cEnd = end;
+    int ti = start;
+    while (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
+        if (arr[bi] &lt;= arr[ci]) {
+            tmp[ti++] = arr[bi++];
+        } else {
+            tmp[ti++] = arr[ci++];
+        }
+    }
+    while (bi &lt;= bEnd) {
+        tmp[ti++] = arr[bi++];
+    }
+    while (ci &lt;= cEnd) {
+        tmp[ti++] = arr[ci++];
+    }
+
+    // 将排序结果刷到arr上
+    for (ti = start; ti &lt;= end; ti++) {
+        arr[ti] = tmp[ti];
+    }
+}</code></pre>
+
+          <h4 id="31b274b8">排序索引数组版本</h4><p>为什么需要索引数组？参考：<a href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/">https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/</a></p>
+<p><strong>一个元素在算法的执行过程中位置发生变化，我们还想定位它</strong>，这样的场景就可以使用索引数组：</p>
+<blockquote>
+<p>“原始数组” 不变，用于比较两个元素的大小，真正位置变换的是 “索引数组”。</p>
+</blockquote>
+<pre><code class="language-java">int[] tmp;
+int[] index;
+
+public void sortArrayForIndex(int[] nums) {
+    tmp   = new int[nums.length];
+    index = new int[nums.length];
+    for (int i = 0; i &lt; nums.length; i++) {
+        index[i] = i;
+    }
+    mergeSortForIndex(nums, 0, nums.length - 1);
+}
+
+public void mergeSortForIndex(int[] arr, int start, int end) {
+    if (start &gt;= end)
+        return;
+    int mid = start + (end - start &gt;&gt; 1);
+
+    int bi = start,   bEnd = mid;
+    int ci = mid + 1, cEnd = end;
+
+    mergeSortForIndex(arr, bi, bEnd);
+    mergeSortForIndex(arr, ci, cEnd);
+
+    if (arr[index[mid]] &lt;= arr[index[mid + 1]]) return;
+
+    for (int i = start; i &lt;= end; i++) {
+        tmp[i] = index[i];
+    }
+
+    int ii = start;
+    while (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
+        if (arr[tmp[bi]] &lt;= arr[tmp[ci]]) {
+            index[ii++] = tmp[bi++];
+        } else {
+            index[ii++] = tmp[ci++];
+        }
+    }
+    while (bi &lt;= bEnd) {
+        index[ii++] = tmp[bi++];
+    }
+    while (ci &lt;= cEnd) {
+        index[ii++] = tmp[ci++];
+    }
+}</code></pre>
 <hr>
 
           <h3 id="a7a1227f">QuickSort</h3><blockquote>
