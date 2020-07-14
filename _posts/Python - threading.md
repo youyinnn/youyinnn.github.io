@@ -2,7 +2,7 @@
 title: Python - Threading
 categories:
   - python
-  - concurrency-p
+  - concurrency
 tags:
   - python
   - thread
