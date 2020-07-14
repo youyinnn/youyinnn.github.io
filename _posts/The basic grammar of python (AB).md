@@ -2,7 +2,7 @@
 title: The Basic Grammar Of Python (AB)
 categories:
   - python
-  - grammar-p
+  - grammar
 tags:
   - python
   - grammar

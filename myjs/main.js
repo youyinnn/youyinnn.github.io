@@ -440,9 +440,13 @@ function searcharticle(text) {
 function articlesmetadatahandle(articlemetadata) {
     let articlecache = articlemetadata
     if (articlecache.categories !== undefined) {
+        let cid = ''
+        let pid = ''
         for (let i = 0; i < articlecache.categories.length; i++) {
             // handle cates_tree_body
-            let cate = b64.encode(articlecache.categories[i], true)
+            pid = cid
+            cid += articlecache.categories[i]
+            let cate = b64.encode(cid, true)
             if ($('#' + cate + '_treenode').length === 0) {
                 let node = c('li')
                 node.id = cate + '_treenode'
@@ -450,7 +454,7 @@ function articlesmetadatahandle(articlemetadata) {
                 let noa = c('div')
                 noa.innerText = articlecache.categories[i]
                 $(noa).bind('click', function(event) {
-                    catetreenodeclick(this, true, true)
+                    catetreenodeclick(this, true)
                 })
                 appendc(node, noa)
                 // root category add on cates_tree_body directly
@@ -458,7 +462,7 @@ function articlesmetadatahandle(articlemetadata) {
                     appendliwithorder(cates_tree_body, node)
                 } else {
                     // if not find parent root element and add child element
-                    let parentnodeid = b64.encode(articlecache.categories[i - 1], true)
+                    let parentnodeid = b64.encode(pid, true)
                     appendliwithorder($('#' + parentnodeid + '_treenode')[0], node)
                 }
             }
@@ -507,7 +511,7 @@ function appendliwithorder(parentelement, newchildelement) {
     $(parentelement).append(newchildelement)
 }
 
-function catetagclick(catetag, isfilter, clicknode) {
+function catetagclick(catetag, isfilter) {
     let stgcs = $('.stgc')
     let stgts = $('.stgt')
     if (hasclass(catetag, 'btn-light')) {
@@ -533,26 +537,28 @@ function catetagclick(catetag, isfilter, clicknode) {
     if (isfilter) {
         filter()
     }
-    if (clicknode) {
-        catetreenodeclick($('#' + b64.encode(catetag.innerText, true) + '_treenode').children('div')[0], false, false)
-    }
     scrollToTop(0)
     $('#articlesearchtext').val('')
 }
 
-function catetreenodeclick(catenode, isfilter, clicktag) {
+function catetreenodeclick(catenode, isfilter) {
+    let decodeC = b64.decode(catenode.parentNode.id.split('_')[0]);
     if (!hasclass(catenode, 'adisable')) {
         filter_articles_cache = new Array()
         if (!catenode.asel) {
             catenode.asel = true
             $('#cates_tree_body div').addClass('adisable')
             rmclass(catenode, 'adisable')
+            let pid = ''
             for (let k = 0; k < articles_cache.length; k++) {
+                let tmp = pid
                 for (let l = 0; l < articles_cache[k].categories.length; l++) {
-                    if (articles_cache[k].categories[l] === catenode.innerText) {
+                    pid += articles_cache[k].categories[l]
+                    if (pid === decodeC) {
                         filter_articles_cache.push(articles_cache[k])
                     }
                 }
+                pid = tmp
             }
             $('.stgt').attr('disabled', true)
         } else {
@@ -562,9 +568,6 @@ function catetreenodeclick(catenode, isfilter, clicktag) {
         }
         if (isfilter) {
             filter()
-        }
-        if (clicktag) {
-            catetagclick($('#' + b64.encode(catenode.innerText, true) + '_catetag')[0], false, false)
         }
     }
     scrollToTop(0)
@@ -1154,7 +1157,7 @@ function handlemetadata(metadata) {
     let stgcs = $('.stgc')
     for (let i = 0; i < stgcs.length; i++) {
         $(stgcs[i]).bind('click', function(event) {
-            catetagclick(this, true, true)
+            catetagclick(this, true)
         })
     }
     for (let i = 0; i < stgts.length; i++) {
