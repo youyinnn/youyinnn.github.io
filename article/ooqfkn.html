@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="baidu-site-verification" content="l09YSIpJQW" />
+    <meta name="referrer" content="origin">
+    <title>blog | youyinnn</title>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/loadscripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/jump-1.4.js"></script>
+    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/img/favicon.ico" />
+    <link rel="icon" href="/img/favicon.ico" type="image/ico"/>
+    <link rel="stylesheet" href="/mycss/style.css">
+
+    <script src="/myjs/scriptlist.js"></script>
+</head>
+
+<body>
+
+    <ol id="topbar" class="breadcrumb unselectable new_font">
+        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
+            <button id="egg" class="egg">🚀</button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
+        <li class="breadcrumb-item">
+            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+        </li>
+        <li class="breadcrumb-item">
+            <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
+        </li>
+        <li class="breadcrumb-item dropdown">
+            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
+            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
+        </li>
+
+        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
+
+        </div>
+    </ol>
+
+    <div id="homepage" class="unselectable new_font myhide">
+        <div id="homepage-center">
+            <div id="slogan">
+                <i id="wolf-logo" style="font-style: normal;" class="mr-4">🌑</i><span id="slogan-text"></span>
+            </div>
+            <div id="homepage-btn">
+                <div id="showmore"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; About Me & This Blog</div>
+                <div id="showhacknical"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Github Analysis</div>
+                <div id="toarticles"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Tech Articles</div>
+            </div>
+        </div>
+        <div id="ifwrapper" class="hacknical_hide">
+            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="articles_side_panel" class="unselectable myhide new_font">
+        <div id="cates_tree_head">Article Categories</div>
+        <div id="cates_tree_body"></div>
+        <div id="blog_statistic_head">Blog Statistics</div>
+        <table id="blog_statistic_body" class="myhide">
+            <tbody>
+                <tr>
+                    <td style="text-align:right">Online:</td>
+                    <td style="text-align:left" id="stat_running"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Article:</td>
+                    <td style="text-align:left" id="stat_article_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Chars:</td>
+                    <td style="text-align:left" id="stat_typein"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Categories:</td>
+                    <td style="text-align:left" id="stat_cate_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Tags:</td>
+                    <td style="text-align:left" id="stat_tag_count"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Last update:</td>
+                    <td style="text-align:left" id="stat_last_update"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="docpanel" class="myhide new_font">
+        <div id="articlesearch" class="input-group">
+            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search with keywords (algolia)">
+            <div id="searchprocessbar">
+                <div id="spb-out" class="spb-outter-animate"></div>
+                <div id="spb-in" class="spb-inner-animate"></div>
+            </div>
+            <div class="input-group-append">
+                <button id="cleanbut" class="btn btn-light" type="button" title="clear search">cls</button>
+                <button id="categories" class="btn btn-light" type="button">cates</button>
+                <button id="tags" class="btn btn-light" type="button" title="all tags">tags</button>
+                <button id="articlesearchbut" class="btn btn-light" type="button" title="search">sch</button>
+            </div>
+        </div>
+        <div id="searchrscount" class="unselectable"></div>
+        <div class="tgs myhide" id="all_cates">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
+            <br>
+        </div>
+        <div class="tgs myhide" id="all_tags">
+            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
+            <br>
+        </div>
+    </div>
+
+    <div id="sidetoccontainer" class="tochide unselectable new_font">
+        <div id="block">
+            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+        </div>
+        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container markdown-toc"></div>
+    </div>
+    <div id="md" class="myhide markdown-body editormd-html-preview">
+        <p>本篇主要介绍一个用于字符串前后缀快速搜索的数据结构——前缀树，这篇也是在Leetcode里的一个数据结构<a href="https://leetcode-cn.com/explore/learn/card/trie/">专题</a>，专题里已经把前缀树的实现方式以及实际应用都介绍了一下，这里稍微整理一下这个专题</p>
+<p>关于前缀树的概念，可以参考：<a href="https://leetcode-cn.com/explore/learn/card/trie/165/introduction-to-trie/641/">什么是前缀树？</a></p>
+<p>关于前缀树的表示，可以参考：<a href="https://leetcode-cn.com/explore/learn/card/trie/165/introduction-to-trie/642/">如何表示一个前缀树？</a></p>
+<p>我们一般使用数组的方式去表示前缀树，虽然它会多占用一些空间，但是在查找的执行效率上，要比HashMap快上不少</p>
+
+          <h3 id="852fce0b">数组实现</h3><p>我们假定场景单词只有26个小写字母：</p>
+<pre><code class="language-java">class Trie {
+    private boolean isEnd   = false;
+    private Trie[] children = new Trie[26];
+    public Trie() {}
+
+    // 录入单词
+    public void insert(String word) {
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                cur.children[cn] = new Trie();
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = true;
+    }
+
+    // 是否存在某个单词
+    public boolean search(String word) {
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                return false;
+            }
+            cur = cur.children[cn];
+        }
+        return cur.isEnd;
+    }
+
+    // 是否存在某个前缀
+    public boolean startsWith(String prefix) {
+        Trie cur = this;
+        for (char c: prefix.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                return false;
+            }
+            cur = cur.children[cn];
+        }
+        return true;
+    }
+}</code></pre>
+
+          <h3 id="97cbb527">相关题目</h3>
+          <h4 id="e4d217d">记录权值 - Map Sum Pairs</h4><p>实现一个 MapSum 类里的两个方法，<code>insert</code> 和 <code>sum</code>。</p>
+<p>对于方法 <code>insert</code>，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。如果键已经存在，那么原来的键值对将被替代成新的键值对。</p>
+<p>对于方法 <code>sum</code>，你将得到一个表示前缀的字符串，你需要返回所有以该前缀开头的键的值的总和。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: insert(&quot;apple&quot;, 3), 输出: Null
+输入: sum(&quot;ap&quot;), 输出: 3
+输入: insert(&quot;app&quot;, 2), 输出: Null
+输入: sum(&quot;ap&quot;), 输出: 5</code></pre><p>这题的关键就是要在<strong>每个缀点</strong>上都记录<strong>权值</strong>，所以我们设计的前缀树要同时支持<strong>权值</strong>记录，这里稍微要注意的是已存在键的<strong>权值</strong>的替换，我们的<code>search</code>方法返回的是该前缀的<strong>最后一个缀点</strong>，以便获取该前缀的旧<strong>权值</strong></p>
+<pre><code class="language-java">class Trie {
+    public boolean isEnd = false;
+    public int sum = 0;
+    public Trie[] children = new Trie[26];
+    public Trie() {}
+
+    public void insert(String word, int sum) {
+        // 搜索出该前缀是否已经存在
+        Trie oldTrie = search(word);
+        boolean addOn = oldTrie == null;
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                cur.children[cn] = new Trie();
+            }
+            if (addOn) {
+                // 如果是新的前缀 那么就直接在原权值上加
+                cur.children[cn].sum += sum;
+            } else {
+                // 如果是已存在的前缀 那么需要减去旧的权值 然后再加上新的权值
+                cur.children[cn].sum = cur.children[cn].sum - oldTrie.sum + sum;
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = true;
+    }
+
+    public Trie search(String word) {
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                return null;
+            }
+            cur = cur.children[cn];
+        }
+        return cur.isEnd ? cur : null;
+    }
+
+    public int getSum(String prefix) {
+        Trie cur = this;
+        for (char c: prefix.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                return 0;
+            } else {
+                cur = cur.children[cn];
+            }
+        }
+        return cur.sum;
+    }
+}</code></pre>
+
+          <h4 id="97357309">查询前缀 - 单词替换</h4><p>在英语中，我们有一个叫做 <code>词根</code>(root)的概念，它可以跟着其他一些词组成另一个较长的单词——我们称这个词为 <code>继承词</code>(successor)。例如，词根<code>an</code>，跟随着单词 <code>other</code>(其他)，可以形成新的单词 <code>another</code>(另一个)。</p>
+<p>现在，给定一个由许多词根组成的词典和一个句子。你需要将句子中的所有<code>继承词</code>用<code>词根</code>替换掉。如果<code>继承词</code>有许多可以形成它的<code>词根</code>，则用最短的词根替换它。</p>
+<p>你需要输出替换之后的句子。</p>
+<p><strong>示例：</strong></p>
+<pre><code>输入：dict(词典) = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;] sentence(句子) = &quot;the cattle was rattled by the battery&quot;
+输出：&quot;the cat was rat by the bat&quot;</code></pre><p><strong>提示：</strong></p>
+<ul>
+<li>输入只包含小写字母。</li>
+<li><code>1 &lt;= dict.length &lt;= 1000</code></li>
+<li><code>1 &lt;= dict[i].length &lt;= 100</code></li>
+<li>1 &lt;= 句中词语数 &lt;= 1000</li>
+<li>1 &lt;= 句中词语长度 &lt;= 1000</li>
+</ul>
+<p>这题首先把字典录入到前缀树，然后根据构造的前缀树，查询所有输入单词的前缀然后替换即可</p>
+<pre><code class="language-java">class Solution {
+    public String replaceWords(List&lt;String&gt; dict, String sentence) {
+        if (sentence.length() &lt;= 1) return sentence;
+
+        Trie trie = new Trie();
+        for (String word: dict) {
+            trie.insert(word);
+        }
+
+        String[] words = sentence.split(&quot; &quot;);
+
+        StringBuilder sb = new StringBuilder(&quot;&quot;);
+        for (String word: words) {
+            // 搜索前缀长度
+            int length = trie.getPrefix(word);
+            if (length == 0) length = word.length();
+            sb.append(word.substring(0, length)).append(&quot; &quot;);
+        }
+        return sb.deleteCharAt(sb.length() - 1).toString();
+    }
+}
+
+class Trie {
+    public boolean isEnd  = false;
+    public Trie[] children = new Trie[26]; 
+    public Trie() {}
+    public void insert(String word) {
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null) {
+                cur.children[cn] = new Trie();
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = true;
+    }
+
+    // 返回前缀的长度
+    public int getPrefix(String word) {
+        Trie cur = this;
+        int length = 0;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.children[cn] == null || cur.isEnd) {
+                // 如果已经到底了 说明当前缀点就是最短的前缀
+                break;
+            }
+            cur = cur.children[cn];
+            length++;
+        }
+        return cur.isEnd ? length : 0;
+    }
+}</code></pre>
+
+          <h4 id="bc68871b">有通配符 - 添加与搜索单词</h4><p>设计一个支持以下两种操作的数据结构：</p>
+<pre><code>void addWord(word)
+bool search(word)</code></pre><p>search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 <code>.</code> 或 <code>a-z</code> 。 <code>.</code> 可以表示任何一个字母。</p>
+<p><strong>示例:</strong></p>
+<pre><code>addWord(&quot;bad&quot;)
+addWord(&quot;dad&quot;)
+addWord(&quot;mad&quot;)
+search(&quot;pad&quot;) -&gt; false
+search(&quot;bad&quot;) -&gt; true
+search(&quot;.ad&quot;) -&gt; true
+search(&quot;b..&quot;) -&gt; true</code></pre><p><strong>说明:</strong></p>
+<p>你可以假设所有单词都是由小写字母 <code>a-z</code> 组成的。</p>
+<p>这题的关键就是处理通配符，对于像<code>b.a</code>，<code>b..</code>这样的用例，每当遇到<code>.</code>的时候，我们就需要遍历当前缀点的所有子缀点，比如实例上能构造前缀树：</p>
+<p>
+        <div class="_showpic_fe7babdb showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20200714132901.png class="_pic_fe7babdb hidepic" picId="fe7babdb"></img>
+        <script>
+            {
+                let imgselffe7babdbs = document.getElementsByClassName('_pic_fe7babdb')
+                let showpicbtnfe7babdbs = document.getElementsByClassName('_showpic_fe7babdb')
+                let isInViewPortOfTwofe7babdb = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgselffe7babdbs[0].getBoundingClientRect() && imgselffe7babdbs[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgselffe7babdbs) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwofe7babdb)
+                            isInViewPortOfTwofe7babdb = null
+                        }
+                        for (el of showpicbtnfe7babdbs) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwofe7babdb)
+            }
+        </script>
+    </p>
+<p>当我们搜索到第一个缀点b的子缀点的时候，发现是通配符，于是我们需要遍历b的所有有效子缀点<code>(trie != null)</code>来搜索后续的字符所以我们的<code>search</code>方法可以修改为</p>
+<pre><code class="language-java">public static boolean search(String word, Trie root, int begin) {
+    Trie cur = root;
+    for (int i = begin; i &lt; word.length(); i++) {
+        char c = word.charAt(i);
+        if (c == &#39;.&#39;) {
+            // 遍历当前子缀点，并从当前子缀点继续搜索
+            for (Trie t: cur.next) {
+                if (t != null &amp;&amp; search(word, t, i + 1)) return true;
+            }
+            return false;
+        } else {
+            // 正常的搜索
+            int cn = c - &#39;a&#39;;
+            if (cur.next[cn] == null) {
+                return false;
+            } else {
+                cur = cur.next[cn];
+            }
+        }
+    }
+    return cur.isEnd;
+}</code></pre>
+
+          <h4 id="ddb09c5b">深度回溯 -  单词搜索 II</h4><p>给定一个二维网格 <strong>board</strong> 和一个字典中的单词列表 <strong>words</strong>，找出所有同时在二维网格和字典中出现的单词。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</p>
+<p><strong>示例:</strong></p>
+<pre><code>输入: 
+words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =
+[
+  [&#39;o&#39;,&#39;a&#39;,&#39;a&#39;,&#39;n&#39;],
+  [&#39;e&#39;,&#39;t&#39;,&#39;a&#39;,&#39;e&#39;],
+  [&#39;i&#39;,&#39;h&#39;,&#39;k&#39;,&#39;r&#39;],
+  [&#39;i&#39;,&#39;f&#39;,&#39;l&#39;,&#39;v&#39;]
+]
+
+输出: [&quot;eat&quot;,&quot;oath&quot;]</code></pre><p><strong>说明:</strong><br>你可以假设所有输入都由小写字母 <code>a-z</code> 组成。</p>
+<p>本体就在<strong>二维数组上进行深度优先</strong>再运用上<strong>前缀树的缀点进行回溯</strong>，难度不大，关键是要优化到99%</p>
+<pre><code class="language-java">class Solution {
+
+    int[][] direction = {
+        {0, 1},
+        {0,-1},
+        {1, 0},
+        {-1,0}
+    };
+
+    int m;
+    int n;
+    int wc;
+
+    public List&lt;String&gt; findWords(char[][] board, String[] words) {
+        Trie trie = new Trie();
+        wc = words.length;
+        for (String word: words) {
+            trie.insert(word);
+        }
+        m = board.length;
+        List&lt;String&gt; ans = new ArrayList&lt;&gt;();
+        if (m == 0) return ans;
+        n = board[0].length;
+        if (n == 0) return ans;
+
+        for (int row = 0; row &lt; m; row++) {
+            for (int col = 0; col &lt; n; col++) {
+                // 优化4：一旦字典找满了 则后面的搜索就没必要做了 因为答案是不重复记录
+                if (ans.size() &lt; wc) {
+                    back(board, row, col, trie, ans);
+                }
+            }
+        }
+        return ans;
+    }
+
+    public void back(char[][] board, int row, int col, Trie trie, List&lt;String&gt; ans) {
+        // 优化3：直接使用缀点去进行查询 快速剪枝
+        Trie t = trie.next[board[row][col] -&#39;a&#39;];
+        if (t != null) {
+            if (t.word != null &amp;&amp; !t.visited) {
+                ans.add(t.word);
+                t.visited = true;
+            }
+            char tmp = board[row][col];
+            board[row][col] = &#39;#&#39;;
+            for (int[] d: direction) {
+                int newRow = row + d[0];
+                int newCol = col + d[1];
+
+                if (newRow &lt; 0 || newRow &gt;= m || newCol &lt; 0 || newCol &gt;= n) continue;
+                if (board[newRow][newCol] == &#39;#&#39;) continue;
+
+                back(board, newRow, newCol, t, ans);
+            }
+            board[row][col] = tmp;
+        }
+    }
+}
+
+class Trie {
+    public Trie[]  next    = new Trie[26];
+    // 优化1：单词记录在最后一个缀点上，这样就不用在回溯的时候用StringBuilder去一个个记录字符
+    public String  word    = null;
+    // 优化2：使用一个布尔值去记录这个答案是否被访问过了，以达到答案去重的目的
+    public boolean visited = false;
+
+    public void insert(String word) {
+        Trie cur = this;
+        for (char c: word.toCharArray()) {
+            int cn = c - &#39;a&#39;;
+            if (cur.next[cn] == null) {
+                cur.next[cn] = new Trie();
+            }
+            cur = cur.next[cn];
+        }
+        cur.word = word;
+    }
+}</code></pre>
+
+          <h4 id="9911e16f">有后缀树 -  恢复空格</h4><p>哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子<code>&quot;I reset the computer. It still didn’t boot!&quot;</code>已经变成了<code>&quot;iresetthecomputeritstilldidntboot&quot;</code>。在处理标点符号和大小写之前，你得先把它断成词语。</p>
+<p>当然了，你有一本厚厚的词典<code>dictionary</code>，不过，有些词没在词典里。假设文章用<code>sentence</code>表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。</p>
+<p><strong>注意：</strong>本题相对原题稍作改动，只需返回未识别的字符数</p>
+<p><strong>示例：</strong></p>
+<pre><code>输入：
+dictionary = [&quot;looked&quot;,&quot;just&quot;,&quot;like&quot;,&quot;her&quot;,&quot;brother&quot;]
+sentence = &quot;jesslookedjustliketimherbrother&quot;
+输出： 7
+解释： 断句后为&quot;jess looked just like tim her brother&quot;，共7个未识别字符。</code></pre><p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= len(sentence) &lt;= 1000</code></li>
+<li><code>dictionary</code>中总字符数不超过 150000。</li>
+<li>你可以认为<code>dictionary</code>和<code>sentence</code>中只包含小写字母。</li>
+</ul>
+<p>
+        <div class="_showpic_8309a905 showpicbtn">Loading images >></div>
+        <img href=https://image.youyinnn.top/20200714144233.gif class="_pic_8309a905 hidepic" picId="8309a905"></img>
+        <script>
+            {
+                let imgself8309a905s = document.getElementsByClassName('_pic_8309a905')
+                let showpicbtn8309a905s = document.getElementsByClassName('_showpic_8309a905')
+                let isInViewPortOfTwo8309a905 = function () {
+                    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
+                    const top = imgself8309a905s[0].getBoundingClientRect() && imgself8309a905s[0].getBoundingClientRect().top
+                    if (top  <= viewPortHeight + 300) {
+                        for (el of imgself8309a905s) {
+                            el.src = el.getAttribute('href')
+                            el.classList.add('showpic')
+                            window.removeEventListener('scroll', isInViewPortOfTwo8309a905)
+                            isInViewPortOfTwo8309a905 = null
+                        }
+                        for (el of showpicbtn8309a905s) {
+                            el.style.display = 'none'
+                        }
+                    }
+                }
+                window.addEventListener('scroll', isInViewPortOfTwo8309a905)
+            }
+        </script>
+    </p>
+<p>刚开思考的时候，确实是正向思考的，录入了一颗前缀树，但是这样的坏处是，无法在n^2的时间内很好地进行单词的划分与判断，所以参考了一下官方给的思路，构造一颗后缀树，从后缀往前摸，不得不说这个思路确实很漂亮</p>
+<p>而且这里还运用到了动态规划，申请了n+1长度的数组<code>dp</code>，<code>dp[i]</code>表示前 <code>i</code> 个字符最少的未识别的字符数量，从前往后计算 dp值</p>
+<p>考虑转移方程，每次转移的时候我们考虑第 <code>j(j &lt;= i)</code>个到第 <code>i</code> 个字符组成的子串 <code>sentence[j−1⋯i−1]</code>（注意字符串下标从 0 开始）是否能在词典中找到，如果能找到的话按照定义转移方程为：</p>
+<p>$$<br>dp[i]=min(dp[i],\enspace dp[j−1])<br>$$<br>否则没有找到的话我们可以复用 \textit{dp}[i-1]dp[i−1] 的状态再加上当前未被识别的第 ii 个字符，因此此时 \textit{dp}dp 值为<br>$$<br>dp[i]=dp[i−1]+1<br>$$<br>dp的取值过程在动图里已经展示了</p>
+<pre><code class="language-java">class Solution {
+    /**
+     * 参考官方解答
+     */
+    public int respace(String[] dictionary, String sentence) {
+        if (sentence.length() == 0) return 0;
+        BackTrie backtrie = new BackTrie();
+        for (String word: dictionary) {
+            backtrie.insert(word);
+        }
+        int length = sentence.length();
+        int[] dp = new int[length + 1];
+        dp[0] = 0;
+        for (int i = 1; i &lt;= length; i++) {
+            dp[i] = dp[i - 1] + 1;
+
+            BackTrie cur = backtrie;
+            for (int j = i - 1; j &gt;= 0; j--) {
+                if (dp[i] == 0) {
+                    break;
+                }
+                int cn = sentence.charAt(j) - &#39;a&#39;;
+                if (cur.next[cn] == null) {
+                    break;
+                } else if (cur.next[cn].isEnd) {
+                    dp[i] = Math.min(dp[i], dp[j]);
+                }
+                // 一旦是某个单词的后缀 就往前摸
+                cur = cur.next[cn];
+            }
+        }
+        return dp[length];
+    }
+}
+
+/**
+ * 后缀树
+ */
+class BackTrie {
+
+    public boolean isEnd = false; 
+    public BackTrie[] next;
+
+    public BackTrie() {
+        next = new BackTrie[26];
+    }
+
+    public void insert(String word) {
+        BackTrie cur = this;
+        for (int i = word.length() - 1; i &gt;= 0; i--) {
+            int cn = word.charAt(i) - &#39;a&#39;;
+            if (cur.next[cn] == null) {
+                cur.next[cn] = new BackTrie();
+            }
+            cur = cur.next[cn];
+        }
+        cur.isEnd = true;
+    }
+}</code></pre>
+
+    </div>
+    <div id="scriptsearcher" class="myhide input-group new_font">
+        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
+        <div class="input-group-append">
+            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
+        </div>
+    </div>
+
+    <div id="bbt" class="myhide new_font">
+        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
+        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+    </div>
+
+    <div id="share_png_panel" class="myhide">
+        <div id="share_curtain"></div>
+        <div id="png_box"></div>
+        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+    </div>
+
+</body>
+
+</html>
