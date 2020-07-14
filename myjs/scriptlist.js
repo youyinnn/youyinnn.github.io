@@ -50,7 +50,10 @@ loadJsAfterDOMLoaded(() => {
 })
 
 function hoturl(url) {
-    return url + '?hot=' + new Date().getTime()
+    let month = (new Date().getMonth() + 1)
+    let tenMinutes = Math.trunc(new Date().getMinutes() / 10) * 10;
+    let time = new Date().getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' +  (new Date().getDate()) + 'T' + new Date().getHours() + ':' + tenMinutes + ':00'
+    return url + '?hot=' + new Date(time).getTime()
 }
 
 function loadIfIsTarget(rs) {
