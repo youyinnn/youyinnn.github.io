@@ -2,11 +2,15 @@ $$E=mc^2$$
 
 ----
 
-> vscode 可以完全替代
-
 <del>
 
 ### Tiny Java IDE
+
+<del>
+
+> vscode 可以完全替代
+
+<del>
 
 想开发一个Java IDE 主要feature：
 - 方便阅读源码
@@ -23,3 +27,10 @@ $$E=mc^2$$
 </del>
 
 ---
+
+
+
+### 2020.09.13
+
+- yexo Mac support
+- github profile readme repo automatically update;
