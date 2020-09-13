@@ -6,7 +6,7 @@ $$E=mc^2$$
 
 ### Tiny Java IDE
 
-<del>
+</del>
 
 > vscode 可以完全替代
 
