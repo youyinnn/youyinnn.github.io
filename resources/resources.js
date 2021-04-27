@@ -1,1 +1,1 @@
-sessionStorage.setItem('cacheversion', 1618840455180); var articlesCount = 120; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-1h43jl0.js"];} else {resourcesList = ["friendslink.js"];}
+sessionStorage.setItem('cacheversion', 1619526122290); var articlesCount = 120; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-x7jmkj.js"];} else {resourcesList = ["friendslink.js"];}
