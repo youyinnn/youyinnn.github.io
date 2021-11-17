@@ -504,3 +504,18 @@ InnoDB的处理是：**将持有最少行级排他锁的事务进行回滚**
    > 2. 对于`COUNT(1)`和`COUNT(*)`，MySQL的优化是完全一样的，根本不存在谁比谁快；
    > 3. `COUNT(字段)`多了一个步骤就是判断所查询的字段是否为NULL，所以他的性能要比`COUNT(*)`慢；
 
+
+
+
+
+### MySQL内存占用太大
+
+```
+performance_schema_max_table_instances=400
+table_definition_cache=400
+table_open_cache=256
+performance_schema = off
+```
+
+
+

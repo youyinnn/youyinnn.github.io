@@ -450,7 +450,21 @@ https://www.runoob.com/jqueryui/example-draggable.html
 
 ### JQuery GIF播放/暂停 JS-GIF库
 
-
 https://www.lanrenzhijia.com/pic/3719.html
 https://github.com/buzzfeed/libgif-js
+
+
+
+### 打开新网页
+
+``` js
+function openInNewTab(url) {
+ window.open(url, '_blank').focus();
+}
+
+//or just
+window.open(url, '_blank').focus();
+```
+
+
 

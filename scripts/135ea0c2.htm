@@ -147,4 +147,87 @@
           <h4 id="c265dafc">🔹Tips:</h4><p>软件有mini版本, 还有full版本, 前者8MB, 后者100多MB, full其实就是比mini多了git, 但是我们之前肯定就都有git的.</p>
 <p>但是最好不要用mini, 因为mini会有一些权限的问题, 启动的时候必须要管理员权限, 否则没有权限备份它的配置文件, 这样很坑, 都不能放开机启动, 但是full的版本可以不需要管理员权限就启动.</p>
 <p>所以我们下载full, 解压在<code>C:\Program Files</code>, 可以发现整个软件大概250MB, 我们从软件目录下的<code>C:\Program Files\cmder\vendor</code>中删去<code>git-for-windows</code>文件夹, 发现这个文件夹就占了230+MB, 删去了之后对软件没有任何的影响.</p>
+
+          </sb><h3 class="zip-tran"id="999847a3">Htop</h3><sb class="hide-script-block"><p><a href="https://www.jianshu.com/p/5629e331f58d">https://www.jianshu.com/p/5629e331f58d</a></p>
+<p>1.首先，在CentOS 7上启用epel版本。</p>
+<pre><code class="language-bash">[root@hk-fa ~]# yum -y install epel-release
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyuncs.com
+ * epel: mirrors.aliyuncs.com
+ * extras: mirrors.aliyuncs.com
+ * updates: mirrors.aliyuncs.com
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package epel-release.noarch 0:7-9 will be installed
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+==============================================================================================================================================================================================================================================================================
+ Package                                                                Arch                                                             Version                                                         Repository                                                      Size
+==============================================================================================================================================================================================================================================================================
+Installing:
+ epel-release                                                           noarch                                                           7-9                                                             epel                                                            14 k
+
+Transaction Summary
+==============================================================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 14 k
+Installed size: 24 k
+Downloading packages:
+epel-release-7-9.noarch.rpm                                                                                                                                                                                                                            |  14 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : epel-release-7-9.noarch                                                                                                                                                                                                                                    1/1 
+warning: /etc/yum.repos.d/epel.repo created as /etc/yum.repos.d/epel.repo.rpmnew
+  Verifying  : epel-release-7-9.noarch                                                                                                                                                                                                                                    1/1 
+
+Installed:
+  epel-release.noarch 0:7-9                                                                                                                                                                                                                                                   
+
+Complete!</code></pre>
+<p>2.使用yum install命令安装CentOS htop</p>
+<pre><code class="language-bash">[root@hk-fa ~]# yum -y install htop
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyuncs.com
+ * epel: mirrors.aliyuncs.com
+ * extras: mirrors.aliyuncs.com
+ * updates: mirrors.aliyuncs.com
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package htop.x86_64 0:2.0.2-1.el7 will be installed
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+==============================================================================================================================================================================================================================================================================
+ Package                                                        Arch                                                             Version                                                                 Repository                                                      Size
+==============================================================================================================================================================================================================================================================================
+Installing:
+ htop                                                           x86_64                                                           2.0.2-1.el7                                                             epel                                                            98 k
+
+Transaction Summary
+==============================================================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 98 k
+Installed size: 207 k
+Downloading packages:
+htop-2.0.2-1.el7.x86_64.rpm                                                                                                                                                                                                                            |  98 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : htop-2.0.2-1.el7.x86_64                                                                                                                                                                                                                                    1/1 
+  Verifying  : htop-2.0.2-1.el7.x86_64                                                                                                                                                                                                                                    1/1 
+
+Installed:
+  htop.x86_64 0:2.0.2-1.el7                                                                                                                                                                                                                                                   
+
+Complete!</code></pre>
 </sb>
