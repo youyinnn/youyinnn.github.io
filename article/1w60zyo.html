@@ -1,134 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="baidu-site-verification" content="l09YSIpJQW" />
-    <meta name="referrer" content="origin">
+    <meta name="referrer" content="origin" />
     <title>blog | youyinnn</title>
     <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/loadscripts.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/myjs/jump-1.4.js"></script> -->
-    <link rel="bookmark" href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/img/favicon.ico" />
-    <link rel="icon" href="/img/favicon.ico" type="image/ico"/>
-    <link rel="stylesheet" href="/mycss/style.css">
+    <link
+      rel="bookmark"
+      href="https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@latest/img/favicon.ico"
+    />
+    <link rel="icon" href="/img/favicon.ico" type="image/ico" />
+    <link rel="stylesheet" href="/mycss/style.css" />
 
     <script src="/myjs/scriptlist.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <ol id="topbar" class="breadcrumb unselectable new_font">
-        <p style="color:rgb(214, 214, 214); padding-right: 1rem;">
-            <button id="egg" class="egg">🚀</button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;</p>
-        <li class="breadcrumb-item">
-            <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
-        </li>
-        <li class="breadcrumb-item">
-            <spen id="articlesbut" href="javaScript:void(0)" class="ah">-articles</spen>
-        </li>
-        <li class="breadcrumb-item">
-            <spen id="scriptbut" href="javaScript:void(0)" class="ah">-scripts</spen>
-        </li>
-        <li class="breadcrumb-item">
-            <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
-        </li>
-        <li class="breadcrumb-item">
+      <p style="color: rgb(214, 214, 214); padding-right: 1rem">
+        <button id="egg" class="egg">🚀</button>&nbsp;&nbsp;&nbsp;&nbsp;&gt;
+      </p>
+      <li class="breadcrumb-item">
+        <spen id="homebut" href="javaScript:void(0)" class="ah">-home</spen>
+      </li>
+      <li class="breadcrumb-item">
+        <spen id="articlesbut" href="javaScript:void(0)" class="ah"
+          >-articles</spen
+        >
+      </li>
+      <li class="breadcrumb-item">
+        <spen id="scriptbut" href="javaScript:void(0)" class="ah"
+          >-scripts</spen
+        >
+      </li>
+      <li class="breadcrumb-item">
+        <spen id="todobut" href="javaScript:void(0)" class="ah">-todos</spen>
+      </li>
+      <!-- <li class="breadcrumb-item">
             <spen id="resumebut" href="javaScript:void(0)" class="ah">-resume</spen>
-        </li>
-        <li class="breadcrumb-item dropdown">
-            <spen href="javaScript:void(0)" class="ah" role="button" id="friendlinkedbut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-friends</spen>
-            <div id="fldd" class="dropdown-menu" aria-labelledby="friendlinkedbut" style="border-radius: initial;"></div>
-        </li>
+        </li> -->
+      <li class="breadcrumb-item dropdown">
+        <spen
+          href="javaScript:void(0)"
+          class="ah"
+          role="button"
+          id="friendlinkedbut"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >-friends</spen
+        >
+        <div
+          id="fldd"
+          class="dropdown-menu"
+          aria-labelledby="friendlinkedbut"
+          style="border-radius: initial"
+        ></div>
+      </li>
 
-        <div id="hb" data-toggle="tooltip" data-placement="bottom" title="show/hide TopBar">
-
-        </div>
+      <div
+        id="hb"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="show/hide TopBar"
+      ></div>
     </ol>
 
     <div id="homepage" class="unselectable new_font myhide">
-        <div id="homepage-center">
-            <div id="slogan">
-                <i id="wolf-logo" style="font-style: normal;" class="mr-4">🌑</i><span id="slogan-text"></span>
-            </div>
-            <div id="homepage-btn">
-                <div id="showmore"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; About Me & This Blog</div>
-                <div id="showhacknical"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Github Analysis</div>
-                <div id="toarticles"> &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Tech Articles</div>
-            </div>
+      <div id="homepage-center">
+        <div id="slogan">
+          <i id="wolf-logo" style="font-style: normal" class="mr-4">🌑</i
+          ><span id="slogan-text"></span>
         </div>
-        <div id="ifwrapper" class="hacknical_hide">
-            <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+        <div id="homepage-btn">
+          <div id="showmore">
+            &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; About Me & This
+            Blog
+          </div>
+          <div id="showhacknical">
+            &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Github
+            Analysis
+          </div>
+          <div id="toarticles">
+            &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp; My Tech
+            Articles
+          </div>
         </div>
+      </div>
+      <div id="ifwrapper" class="hacknical_hide">
+        <iframe id="hacknical_github_analysis" frameborder="0"></iframe>
+      </div>
     </div>
 
     <div id="articles_side_panel" class="unselectable myhide new_font">
-        <div id="cates_tree_head">Article Categories</div>
-        <div id="cates_tree_body"></div>
-        <div id="blog_statistic_head">Blog Statistics</div>
-        <table id="blog_statistic_body" class="myhide">
-            <tbody>
-                <tr>
-                    <td style="text-align:right">Online:</td>
-                    <td style="text-align:left" id="stat_running"></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">Article:</td>
-                    <td style="text-align:left" id="stat_article_count"></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">Chars:</td>
-                    <td style="text-align:left" id="stat_typein"></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">Categories:</td>
-                    <td style="text-align:left" id="stat_cate_count"></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">Tags:</td>
-                    <td style="text-align:left" id="stat_tag_count"></td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">Last update:</td>
-                    <td style="text-align:left" id="stat_last_update"></td>
-                </tr>
-            </tbody>
-        </table>
+      <div id="cates_tree_head">Article Categories</div>
+      <div id="cates_tree_body"></div>
+      <div id="blog_statistic_head">Blog Statistics</div>
+      <table id="blog_statistic_body" class="myhide">
+        <tbody>
+          <tr>
+            <td style="text-align: right">Online:</td>
+            <td style="text-align: left" id="stat_running"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right">Article:</td>
+            <td style="text-align: left" id="stat_article_count"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right">Chars:</td>
+            <td style="text-align: left" id="stat_typein"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right">Categories:</td>
+            <td style="text-align: left" id="stat_cate_count"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right">Tags:</td>
+            <td style="text-align: left" id="stat_tag_count"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right">Last update:</td>
+            <td style="text-align: left" id="stat_last_update"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div id="docpanel" class="myhide new_font">
-        <div id="articlesearch" class="input-group">
-            <input id="articlesearchtext" type="text" class="form-control" autocomplete="off" placeholder="search with keywords (algolia)">
-            <div id="searchprocessbar">
-                <div id="spb-out" class="spb-outter-animate"></div>
-                <div id="spb-in" class="spb-inner-animate"></div>
-            </div>
-            <div class="input-group-append">
-                <button id="cleanbut" class="btn btn-light" type="button" title="clear search">cls</button>
-                <button id="categories" class="btn btn-light" type="button">cates</button>
-                <button id="tags" class="btn btn-light" type="button" title="all tags">tags</button>
-                <button id="articlesearchbut" class="btn btn-light" type="button" title="search">sch</button>
-            </div>
+      <div id="articlesearch" class="input-group">
+        <input
+          id="articlesearchtext"
+          type="text"
+          class="form-control"
+          autocomplete="off"
+          placeholder="search with keywords (algolia)"
+        />
+        <div id="searchprocessbar">
+          <div id="spb-out" class="spb-outter-animate"></div>
+          <div id="spb-in" class="spb-inner-animate"></div>
         </div>
-        <div id="searchrscount" class="unselectable"></div>
-        <div class="tgs myhide" id="all_cates">
-            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All categories:</span>
-            <br>
+        <div class="input-group-append">
+          <button
+            id="cleanbut"
+            class="btn btn-light"
+            type="button"
+            title="clear search"
+          >
+            cls
+          </button>
+          <button id="categories" class="btn btn-light" type="button">
+            cates
+          </button>
+          <button
+            id="tags"
+            class="btn btn-light"
+            type="button"
+            title="all tags"
+          >
+            tags
+          </button>
+          <button
+            id="articlesearchbut"
+            class="btn btn-light"
+            type="button"
+            title="search"
+          >
+            sch
+          </button>
         </div>
-        <div class="tgs myhide" id="all_tags">
-            <span style="font-size: 1rem; font-weight: bold ; padding: 6px;">All tags:</span>
-            <br>
-        </div>
+      </div>
+      <div id="searchrscount" class="unselectable"></div>
+      <div class="tgs myhide" id="all_cates">
+        <span style="font-size: 1rem; font-weight: bold; padding: 6px"
+          >All categories:</span
+        >
+        <br />
+      </div>
+      <div class="tgs myhide" id="all_tags">
+        <span style="font-size: 1rem; font-weight: bold; padding: 6px"
+          >All tags:</span
+        >
+        <br />
+      </div>
     </div>
 
     <div id="sidetoccontainer" class="tochide unselectable new_font">
-        <div id="block">
-            <div id="percent" data-toggle="tooltip" data-placement="bottom" title="return to the top">0%</div>
+      <div id="block">
+        <div
+          id="percent"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="return to the top"
+        >
+          0%
         </div>
-        <div id="sidetoc" class="unselectable markdown-body editormd-preview-container markdown-toc"></div>
+      </div>
+      <div
+        id="sidetoc"
+        class="
+          unselectable
+          markdown-body
+          editormd-preview-container
+          markdown-toc
+        "
+      ></div>
     </div>
     <div id="md" class="myhide markdown-body editormd-html-preview">
-        <blockquote>
+      <blockquote>
 <p>转自：<a href="https://yaoxuannn.com/2017/12/12/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%AC%94%E8%AE%B0/">yaoxuannn-字符编码笔记</a></p>
 </blockquote>
 <p>想来想去终于决定写一个关于计算机字符编码的笔记了( 应该说终于愿意去学了..(๑•ᴗ•๑)), 原本的目的只是搞清楚Unicode的, 考虑到字符编码问题是一个有趣, 在开发中经常会遇到并且稍微有点麻烦和棘手的问题, 但是在网络上却很难找到将这个说的比较细致和成体系的文章, 所以我决定倾尽精力去写这篇笔记, 我会尽量的去查资料和参考他人的文章和博客, 将关于计算机编码的问题捣鼓清楚.</p>
@@ -540,23 +624,46 @@
 
     </div>
     <div id="scriptsearcher" class="myhide input-group new_font">
-        <input id="searchtext" type="text" class="form-control" placeholder="keywords" autocomplete="off">
-        <div class="input-group-append">
-            <button id="searchbut" class="btn btn-dark" type="button">Search</button>
-        </div>
+      <input
+        id="searchtext"
+        type="text"
+        class="form-control"
+        placeholder="keywords"
+        autocomplete="off"
+      />
+      <div class="input-group-append">
+        <button id="searchbut" class="btn btn-dark" type="button">
+          Search
+        </button>
+      </div>
     </div>
 
     <div id="bbt" class="myhide new_font">
-        <a id="toc" style="display: none;" class="myhide" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" title="show/hide Toc">Toc</a>
-        <a id="gohub" href="#" target="_blank" data-toggle="tooltip" data-placement="bottom" title="view this at github">unuse</a>
+      <a
+        id="toc"
+        style="display: none"
+        class="myhide"
+        href="javascript:void(0);"
+        data-toggle="tooltip"
+        data-placement="left"
+        title="show/hide Toc"
+        >Toc</a
+      >
+      <a
+        id="gohub"
+        href="#"
+        target="_blank"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="view this at github"
+        >unuse</a
+      >
     </div>
 
     <div id="share_png_panel" class="myhide">
-        <div id="share_curtain"></div>
-        <div id="png_box"></div>
-        <button id="share_png_paned_close" class="btn btn-dark">Close</button>
+      <div id="share_curtain"></div>
+      <div id="png_box"></div>
+      <button id="share_png_paned_close" class="btn btn-dark">Close</button>
     </div>
-
-</body>
-
+  </body>
 </html>
