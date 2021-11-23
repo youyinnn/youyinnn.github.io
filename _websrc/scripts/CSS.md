@@ -237,3 +237,8 @@ https://www.cnblogs.com/olafff/p/5103775.html
 
 https://www.cnblogs.com/hutuzhu/p/4450850.html
 
+
+
+### Scroll snap 滚动贴合
+
+https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type
