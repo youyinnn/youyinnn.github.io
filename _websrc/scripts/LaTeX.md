@@ -119,3 +119,14 @@ It might located at:
 14. [Fancyhdr and scrreprt](https://tex.stackexchange.com/questions/161439/fancyhdr-and-scrreprt) header on scrreprt
 
 15. [Text alignment on top with multirow command](https://tex.stackexchange.com/questions/74108/text-alignment-on-top-with-multirow-command)
+
+16. [Cross-Reference with custom text](https://tex.stackexchange.com/questions/70143/cross-reference-with-custom-text)
+
+17.  [Center column with specifying width in table (tabular enviroment)?](https://tex.stackexchange.com/questions/5017/center-column-with-specifying-width-in-table-tabular-enviroment)
+
+18. [\newcommand argument confusion](https://tex.stackexchange.com/questions/117358/newcommand-argument-confusion)
+
+19. [Why does \\ not return a new line in an equation?](https://tex.stackexchange.com/questions/194236/why-does-not-return-a-new-line-in-an-equation)
+
+15. 
+
