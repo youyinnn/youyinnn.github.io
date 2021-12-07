@@ -68,6 +68,26 @@ https://www.cnblogs.com/Survivalist/p/11297938.html
 - http://www.cnblogs.com/vathe/p/6736094.html
 - [执行 yum 相关命令总是卡住，ctrl+c 也退出不了](https://www.cnblogs.com/wholj/p/11031220.html)
 
+##### LC_CTYPE
+
+On a freshly installed CentOS 7 machine, I got the following notice when I SSH’d into the server.
+
+```
+warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+```
+
+The fix is pretty straight-forward. On the server (not your client), edit the file `/etc/environment` and add the following lines.
+
+(You’ll need root privileges to do this)
+
+```
+$ cat /etc/environment
+LANG=en_US.utf-8
+LC_ALL=en_US.utf-8
+```
+
+Log out & back in and you should notice the warning message is gone.
+
 #### Ubuntu
 
 ##### apt-get 详解
@@ -80,3 +100,6 @@ https://www.cnblogs.com/Survivalist/p/11297938.html
 1. 通过**nvm**
 
    https://nodejs.org/en/download/package-manager/#nvm
+
+
+
