@@ -1,0 +1,276 @@
+
+          <h3 id="e25a21eb">Introduction</h3><blockquote>
+<p>事前吐槽：<em>Doug Lea</em>老爷子的注释可真难读，也许是我英语太菜鸡了- -（本来还挺自信的，现在哭着学英语）</p>
+</blockquote>
+<p>接下来我们进入Java并发编程的一个崭新的阶段</p>
+<p>前面我们对于锁的实现和同步的编程，都是基于<code>synchronized</code>关键字的实现，现在开始接触到的，是Java并发包中提供的锁相关的API，首先可以了解到的是，我们可以通过API的方式去实现<strong>“获取锁”</strong>和<strong>“释放锁”</strong>，从而更灵活的去进行并发编程</p>
+<p>至此，以后我们再谈起<strong>“Java中的锁”</strong>，它可能指的是多个意义上的，讨论之前先要明确一个方向：</p>
+<ul>
+<li><code>synchronized</code>/<code>volatile</code>关键字的使用</li>
+<li>锁的几种<strong>等级</strong>和区别</li>
+<li>锁的几种<strong>类型</strong>和使用场景</li>
+<li><strong>Lock API</strong>的使用以及和<code>synchronized</code>的区别</li>
+</ul>
+
+          <h3 id="5d3f0954">Lock 接口</h3><p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
+<p>它提供了同步功能，需要使用者<strong>显式</strong>地去获取锁和释放锁：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">Lock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReentrantLock</span>();
+lock.lock();
+<span class="hljs-keyword">try</span> {}
+<span class="hljs-keyword">finally</span> { <span class="hljs-comment">// 保证获取锁之后，最终能够被释放掉</span>
+    lock.unlock();
+}
+</code></pre>
+<p>虽然不比关键字便捷，但是它的使用非常灵活，不一定要先获取锁才能够释放锁，拥有了更方便的可操作性、可中断性和<strong>超时获取锁</strong>等关键字不具备的特点</p>
+<table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">非阻塞获取锁</td>
+<td align="center">无论有没有获取成功，都会从获取动作返回；</td>
+</tr>
+<tr>
+<td align="center">能够被中断地获取锁</td>
+<td align="center">和<code>synchronized</code>不同，线程在获取锁的过程中能够响应中断，当获取到锁的线程被中断的时候，中断异常会抛出，同时释放锁；</td>
+</tr>
+<tr>
+<td align="center">超时获取</td>
+<td align="center">在指定的时间内获取到锁，否则从获取动作返回；</td>
+</tr>
+</tbody></table>
+<p>上面这三个点都有一些值得玩味的地方，我们一一去解开，首先我们看第二点，我们先来验证一下之前使用<code>synchronized</code>的时候的一个细节：<code>synchronized</code>与中断</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException {
+    <span class="hljs-type">String</span> <span class="hljs-variable">lockA</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;A&quot;</span>;
+    <span class="hljs-type">Thread</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+        <span class="hljs-keyword">synchronized</span> (lockA) {
+            System.out.println(<span class="hljs-string">&quot;T1 get LockA&quot;</span>);
+            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+            }
+        }
+    });
+    Thread t2= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+        <span class="hljs-keyword">try</span> {
+            TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(<span class="hljs-string">&quot;T2 trying to get LockA&quot;</span>);
+        <span class="hljs-keyword">synchronized</span> (lockA) {
+            System.out.println(<span class="hljs-string">&quot;T2 get LockA&quot;</span>);
+        }
+    });
+    t1.start();
+    t2.start();
+    TimeUnit.SECONDS.sleep(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">while</span> (t2.isAlive() &amp;&amp; t1.isAlive()) {
+        TimeUnit.MILLISECONDS.sleep(<span class="hljs-number">300</span>);
+        <span class="hljs-keyword">if</span> (!t1.isInterrupted()) {t1.interrupt();}
+        <span class="hljs-keyword">if</span> (!t2.isInterrupted()) {t2.interrupt();}
+        System.out.println(<span class="hljs-string">&quot;T1 Alive: &quot;</span> + t1.isAlive() + <span class="hljs-string">&quot;, isInterrupted: &quot;</span> + t1.isInterrupted() + <span class="hljs-string">&quot;, State: &quot;</span> + t1.getState());
+        System.out.println(<span class="hljs-string">&quot;T2 Alive: &quot;</span> + t2.isAlive() + <span class="hljs-string">&quot;, isInterrupted: &quot;</span> + t2.isInterrupted() + <span class="hljs-string">&quot;, State: &quot;</span> + t2.getState());
+    }
+}
+</code></pre>
+<pre><code class="hljs language-java">T1 get LockA
+T2 trying to get LockA
+T1 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hljs-literal">true</span>, State: RUNNABLE
+T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hljs-literal">true</span>, State: BLOCKED
+T1 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hljs-literal">true</span>, State: RUNNABLE
+T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hljs-literal">true</span>, State: BLOCKED
+<span class="hljs-comment">// ....</span>
+</code></pre>
+<p>我们发现，在<code>synchronized</code>的过程中，T2是等待获取锁被BLOCKED住的线程，这时候是无法响应中断的，<strong>即使线程的已经打了中断标志！</strong>而在T1中，是可以根据中断标志去响应中断的，或者能够短睡眠去响应中断异常；</p>
+<p>也就是，在<code>synchronized</code>外面BLOCKED住的线程：<strong>只能是阻塞；无法被中断；没有超时；</strong></p>
+<p>而Lock就更为灵活</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void lock()</td>
+<td>等阻塞获取锁，获取到锁之后，从该方法返回；否则一直在该方法中等待（此时线程的状态是WATING）</td>
+</tr>
+<tr>
+<td>void lockInterruptibly() <code>throws InterruptedException</code></td>
+<td>可中断地获取锁，在锁的获取过程中，其它线程可以中断这个过程</td>
+</tr>
+<tr>
+<td>boolean tryLock()</td>
+<td>非阻塞式地获取锁，如果获取成功，则返回true，获取失败，则返回false</td>
+</tr>
+<tr>
+<td>boolean tryLock(long time, TimeUnit unit) <code>throws InterruptedException</code></td>
+<td>超时获取：若在限定时间内获取到锁，则返回true；若获取过程中被中断，则抛出异常；若超时，则返回false</td>
+</tr>
+<tr>
+<td>void unlock()</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>Condition newCondition()</td>
+<td>获取等待通知组件，改组件和当前的锁绑定，当前线程只有获取到锁了，才能调用改组件的<code>wait()</code>方法</td>
+</tr>
+</tbody></table>
+<p>看了下上面的API，我们对于Lock和<code>synchronized</code>的区别就清楚了</p>
+
+          <h3 id="af86a087">队列同步器</h3><p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
+<p><strong>原理：</strong>它使用一个int成员变量来表示<strong>同步状态（state）</strong>，对锁的获取其实就是对该state的获取，对于同步状态的获取和改变，同步器提供了线程安全的方法；另外它还通过一个内置的FIFO的队列来完成资源获取线程的排队。</p>
+<blockquote>
+<p><strong>同步状态</strong>的概念，如果学过操作系统的都知道，在PV问题中会有一个值来代表当前可以访问临界资源的资格，这里的同步状态大概也是这么个意思</p>
+<p>基本上state如果是0就代表无法获取，如果大于0就代表能够获取一次，比如说如果现在AQS的state是2，你还能acquire2次，每次acquire(1)，因为是只有1个线程在acquire嘛，等到state不够了的时候，就开始排队了</p>
+</blockquote>
+<p>同步器的使用主要是通过<strong>继承</strong>的方式，实现Lock API的时候，推荐同时在里面写一个静态内部类来实现同步器，同步器没有实现任何同步接口，仅是定义了若干同步状态的获取和释放方法来提供自定义组件去使用，并且同步器支持独占式和共享式的实现，所以它可以为多种不同的同步组件去服务（<code>ReentrantLock</code>、<code>ReentrantReadWriteLock</code>、<code>CountDownLatch</code>）</p>
+<p>它和Lock的关系就像前后端的关系一样：</p>
+<ul>
+<li>Lock是面向锁使用者的，它定义了使用者所需要的锁的方法，隐藏了实现细节</li>
+<li>同步器是面向锁实现者的，它简化了锁的实现，屏蔽了同步状态管理、线程排队、等待和唤醒等底层操作</li>
+</ul>
+<p><strong>锁和同步器很好地隔离了使用者和实现者锁关注的领域，又增强了锁的可操作性和降低了锁的实现难度</strong></p>
+
+          <h4 id="804b002b">接口与示例</h4><p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
+
+          <h5 id="c957f9ea">状态相关方法</h5><p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
+<ul>
+<li><code>getState()</code>：获取同步状态</li>
+<li><code>setState()</code>：设置当前同步状态</li>
+<li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
+</ul>
+
+          <h5 id="bc4111fc">实现同步器需要重写的方法</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>protected boolean tryAccquire(int arg)</code></td>
+<td>独占式获取同步状态，这个方法需要查询同步状态是否符合预期，然后再使用CAS设置新的同步状态</td>
+</tr>
+<tr>
+<td><code>protected boolean tryRelease(int arg)</code></td>
+<td>独占式释放同步状态</td>
+</tr>
+<tr>
+<td><code>protected int tryAcquireShared(int arg)</code></td>
+<td>共享式获取同步状态，若返回大于0的值则表示获取成功，否则获取失败</td>
+</tr>
+<tr>
+<td><code>protected int tryReleaseShared(int arg)</code></td>
+<td>共享式释放同步状态</td>
+</tr>
+<tr>
+<td><code>protected boolean isHeldExclusively()</code></td>
+<td>当前同步器是否在独占模式下被线程占用，一般用来表示是否被当前线程独占</td>
+</tr>
+</tbody></table>
+
+          <h5 id="43757738">同步器提供的模板方法</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void acquire(int arg)</code></td>
+<td>独占式获取同步状态，如果同步状态获取成功，则从该方法返回，否则进入同步队列等待，该方法会调用重写的<code>tryAcquire</code>方法</td>
+</tr>
+<tr>
+<td><code>void acquireInterruptibly(int arg)</code></td>
+<td>和<code>acquire</code>相同，但是这个方法能够响应中断，当前线程如果没获取到同步状态而进入到同步队列中等待的时候，这时候中断这个线程，它就会从队列中退出并且抛出异常</td>
+</tr>
+<tr>
+<td><code>boolean tryAcquireNanos(int arg, long nanos)</code></td>
+<td>在<code>acquireInterruptibly</code>的基础上加了超时限制，如果在限时内获取到同步状态了就返回true，否则返回false</td>
+</tr>
+<tr>
+<td><code>void acquireShared(int arg)</code></td>
+<td>共享式获取同步状态，也就是同一时间允许有多个线程获取到同步状态，该方法会调用重写的<code>tryAcquireShared</code>方法</td>
+</tr>
+<tr>
+<td><code>void acquireSharedInterruptibly(int arg)</code></td>
+<td>共享式可中断获取同步状态</td>
+</tr>
+<tr>
+<td><code>boolean acquireSharedNanos(ing arg, long nanos)</code></td>
+<td>共享式可中断有超时获取同步状态，限时内获取到就返回true，否则返回false</td>
+</tr>
+<tr>
+<td><code>boolean release(int arg)</code></td>
+<td>独占式释放同步状态，并唤醒在同步队列中等待的第一个线程，该方法会调用重写的<code>tryRelease</code>方法</td>
+</tr>
+<tr>
+<td><code>boolean releaseShared(int arg)</code></td>
+<td>共享式释放同步状态，该方法会调用重写的<code>tryReleaseShared</code>方法</td>
+</tr>
+<tr>
+<td><code>Collection&lt;Thread&gt; getQueuedThreads()</code></td>
+<td>获取等待在同步队列上的线程集合</td>
+</tr>
+</tbody></table>
+<p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和释放、同步队列线程集合</p>
+
+          <h3 id="8f5b4a8a">尝试实现一个独占锁</h3><pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Mutex</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span> {
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Q</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractQueuedSynchronizer</span> {
+        <span class="hljs-comment">// 查看是否处于占用状态</span>
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-keyword">protected</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isHeldExclusively</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> getState() == <span class="hljs-number">1</span>;}
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAcquire</span><span class="hljs-params">(<span class="hljs-type">int</span> acquire)</span> {
+            <span class="hljs-comment">// 状态为0的时候获取锁</span>
+            <span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, acquire)) {
+                setExclusiveOwnerThread(Thread.currentThread());
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-keyword">protected</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryRelease</span><span class="hljs-params">(<span class="hljs-type">int</span> release)</span> {
+            <span class="hljs-keyword">if</span> (getState() == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalMonitorStateException</span>();
+            }
+            <span class="hljs-comment">// 释放锁并将状态设置为0</span>
+            setExclusiveOwnerThread(<span class="hljs-literal">null</span>);
+            setState(<span class="hljs-number">0</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-comment">// 返回一个Condition对象 每一个conditionObject都包含了一个condition队列</span>
+        Condition <span class="hljs-title function_">newCondition</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConditionObject</span>();}
+        <span class="hljs-comment">// 返回当前持有本锁的线程对象</span>
+        <span class="hljs-keyword">public</span> Thread <span class="hljs-title function_">getOwnerThread</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> getExclusiveOwnerThread();}
+    }
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Q</span> <span class="hljs-variable">q</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Q</span>();
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> {q.acquire(<span class="hljs-number">1</span>);}
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lockInterruptibly</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException {
+        q.acquireInterruptibly(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryLock</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> q.tryAcquire(<span class="hljs-number">1</span>);}
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryLock</span><span class="hljs-params">(<span class="hljs-type">long</span> time, TimeUnit unit)</span> <span class="hljs-keyword">throws</span> InterruptedException {
+        <span class="hljs-keyword">return</span> q.tryAcquireNanos(<span class="hljs-number">1</span>, unit.toNanos(time));
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unlock</span><span class="hljs-params">()</span> {q.release(<span class="hljs-number">1</span>);}
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Condition <span class="hljs-title function_">newCondition</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> q.newCondition();}
+    <span class="hljs-comment">// 可以额外附加的实现</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isLocked</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> q.isHeldExclusively();}
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasQueuedThreads</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> q.hasQueuedThreads();}
+    <span class="hljs-keyword">public</span> Thread <span class="hljs-title function_">getExclusiveOwnerThread</span><span class="hljs-params">()</span> {<span class="hljs-keyword">return</span> q.getOwnerThread();}
+}
+</code></pre>
+<p>我们要实现一个Mutex，首先实现<code>Lock</code>接口，然后写一个内部类并继承<code>AbstractQueuedSynchronizer</code>，在Mutex中实例化一个同步器对象，并把同步器对象的方法代理为，Lock接口的方法的实现</p>
+<p>值得注意的是，<code>AbstractQueuedSynchronizer</code>类本身就提供了很多方法作为实现同步组件的有力工具，比如在<code>tryAcquire(int acquire)</code>方法的实现里，就用到了<code>compareAndSetState</code>尝试设置同步状态，并且如果设置成功的话，就代表当前线程已经获取到该锁了，随后就把当前线程和该同步器进行绑定，即通过<code>setExclusiveOwnerThread</code>方法将该线程设置为锁的持有者</p>
+<p>其他诸如获取Queue中的线程集合、判断是锁是否被锁上、获取锁的持有线程等等这些方法，都能通过同步器提供的方法去灵活实现，在这样灵活的同步器的帮助下，能够实现符合很多场景的同步组件</p>
+<p>最后，我们还注意到有一个<code>newCondition</code>方法，这个方法返回的对象有什么用，我们以后再慢慢研究</p>

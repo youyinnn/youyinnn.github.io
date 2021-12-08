@@ -1,4 +1,6 @@
-<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div><br>前言：之前留下的17大创项目总得做点什么，马上就要结题了，我们做的AR留影需要将用户照下来的照片生成点云然后合成模型。由此Escnqh[link:gayhub]找到了使用PIL+osm-bundler的解决方案。<br></div></p>
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div>
+前言：之前留下的17大创项目总得做点什么，马上就要结题了，我们做的AR留影需要将用户照下来的照片生成点云然后合成模型。由此Escnqh[link:gayhub]找到了使用PIL+osm-bundler的解决方案。
+</div></p>
 <!-- more -->
 
 
@@ -35,7 +37,7 @@
 
           <h4 id="a620006e">安装pip</h4><p>自己看：<a href="https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers">https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers</a></p>
 <p>然后需要更新一下pip</p>
-<pre><code class="language-bash">pip install -U pip
+<pre><code class="hljs language-bash">pip install -U pip
 </code></pre>
 
           <h4 id="e033ec9d">安装Pillow</h4><p>Installation页：<a href="http://pillow.readthedocs.io/en/latest/installation.html">http://pillow.readthedocs.io/en/latest/installation.html</a></p>
@@ -44,53 +46,53 @@
 <p>开发Pillow的团队在hub的depends文件夹下提供了这些库在各种系统下的安装脚本，我们选择fedora_23.sh的脚本(fedora是RedHat)，但是不要运行这个脚本，我们看它对应的package需要安装哪些就好。</p>
 <p><img src="https://image.youyinnn.top/3aef0a673e1639aec3272e205b934971.png" alt="fedora"></p>
 <p>如图最下面一行，在centos下就可以执行：</p>
-<pre><code class="language-bash">yum install libtiff-devel libjpeg-devel zlib-devel freetype-devel  lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter  tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel
+<pre><code class="hljs language-bash">yum install libtiff-devel libjpeg-devel zlib-devel freetype-devel  lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter  tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel
 </code></pre>
 <p><img src="https://image.youyinnn.top/5e3b4f30ce74fefbc7e2ebfcccb76543.png" alt="yum"></p>
 <p>这些我都安装过了，其中丢失的python3-tkinter在centos下没有那就不用管了。</p>
 <p>这些库安装完之后，我们就可以安装Pillow了：</p>
-<pre><code class="language-bash">pip install Pillow
+<pre><code class="hljs language-bash">pip install Pillow
 </code></pre>
 <p>安装完Pillow我们来验证一下，我们写一个test.py脚本：</p>
-<pre><code class="language-python">from PIL import Image
-picPath = &#39;./card.jpg&#39;
+<pre><code class="hljs language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+picPath = <span class="hljs-string">&#x27;./card.jpg&#x27;</span>
 
-im = Image.open(picPath)
-print im.getbbox()
+im = Image.<span class="hljs-built_in">open</span>(picPath)
+<span class="hljs-built_in">print</span> im.getbbox()
 </code></pre>
 <p>和脚本一起有一个card.jpg文件，我们使用Pillow来分析这个文件，执行：</p>
-<pre><code class="language-bash">python test.py
+<pre><code class="hljs language-bash">python test.py
 </code></pre>
 <p>分析出了数据：</p>
-<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# python test.py
+<pre><code class="hljs language-bash">[root@VM_16_214_centos youyinnn]<span class="hljs-comment"># python test.py</span>
 (0, 0, 564, 738)
-[root@VM_16_214_centos youyinnn]#
+[root@VM_16_214_centos youyinnn]<span class="hljs-comment">#</span>
 </code></pre>
 <p>说明已经安装成功！</p>
 
           <h4 id="bc65a79d">安装BLAS库</h4><p>我们要使用PPT，除了PIL之外，还需要两个重要组件，其中一个便是 BLAS (libblas3gf, libblas-dev) 。</p>
 <p>就不介绍了，直接开始安装，在centos下的安装比较奇葩，因为PPT官网给的包名什么的都是apt有的，有的可能yum下没有，所以我们需要选择合适的库：</p>
 <p>首先把blas安装了：</p>
-<pre><code class="language-bash">yum install blas
+<pre><code class="hljs language-bash">yum install blas
 </code></pre>
 <p>以上命令在我的主机上会安装&quot;blas-3.4.2-8.el7.x86_64&quot;：</p>
-<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# yum install blas
+<pre><code class="hljs language-bash">[root@VM_16_214_centos youyinnn]<span class="hljs-comment"># yum install blas</span>
 Loaded plugins: fastestmirror, langpacks
-Repository epel is listed more than once in the configuration
+Repository epel is listed more than once <span class="hljs-keyword">in</span> the configuration
 Loading mirror speeds from cached hostfile
 Package blas-3.4.2-8.el7.x86_64 already installed and latest version
-Nothing to do
-[root@VM_16_214_centos youyinnn]#
+Nothing to <span class="hljs-keyword">do</span>
+[root@VM_16_214_centos youyinnn]<span class="hljs-comment">#</span>
 </code></pre>
 <p>它主要提供一下三个lib：</p>
-<pre><code class="language-bash">/usr/lib64/libblas.so.3
+<pre><code class="hljs language-bash">/usr/lib64/libblas.so.3
 /usr/lib64/libblas.so.3.4
 /usr/lib64/libblas.so.3.4.2
 </code></pre>
 <p>然后search一下blas：</p>
-<pre><code class="language-bash">[root@VM_16_214_centos youyinnn]# yum search blas
+<pre><code class="hljs language-bash">[root@VM_16_214_centos youyinnn]<span class="hljs-comment"># yum search blas</span>
 Loaded plugins: fastestmirror, langpacks
-Repository epel is listed more than once in the configuration
+Repository epel is listed more than once <span class="hljs-keyword">in</span> the configuration
 Loading mirror speeds from cached hostfile
 ==================================================================================== N/S matched: blas ====================================================================================
 blas-devel.i686 : BLAS development libraries
@@ -101,43 +103,44 @@ blas64-devel.x86_64 : BLAS development libraries
 blas64-static.x86_64 : BLAS static libraries (64bit INTEGER)
 ...
 
-[root@VM_16_214_centos youyinnn]#
+[root@VM_16_214_centos youyinnn]<span class="hljs-comment">#</span>
 </code></pre>
 <p>得出的结果比较多，我们需要选择安装“blas-devel”，至于是否是64位系统的选择，就看你自己的机子了。</p>
 <p>安装的“blas-devel”提供下面这个lib：</p>
-<pre><code class="language-bash">/usr/lib64/libblas.so
+<pre><code class="hljs language-bash">/usr/lib64/libblas.so
 </code></pre>
 <p>PPT还需要安装的是“libblas3gf”，但是这个玩意centos没有，好在我找到了对应的一个rpm：<a href="https://altlinux.pkgs.org/sisyphus/classic-x86_64/libblas3gf-3.9.2-alt1.x86_64.rpm.html">https://altlinux.pkgs.org/sisyphus/classic-x86_64/libblas3gf-3.9.2-alt1.x86_64.rpm.html</a></p>
 <p>所以我们要下载这个文件，然后使用rpm来安装它！</p>
 <p>安装完了之后我们可以得到这个关键的lib：</p>
-<pre><code class="language-bash">/usr/lib64/libblas.so.3gf
+<pre><code class="hljs language-bash">/usr/lib64/libblas.so.3gf
 /usr/lib64/libblas.so.3gf.0
 </code></pre>
 <p>然后我们BLAS就安装完成了！</p>
 
           <h4 id="6646888">安装LAPACK库</h4><p>LAPACK库需要安装：LAPACK (liblapack3gf, liblapack-dev)</p>
 <p>直接yum：</p>
-<pre><code class="language-bash">yum install lapack
+<pre><code class="hljs language-bash">yum install lapack
 </code></pre>
 <p>会安装：</p>
-<pre><code class="language-bash">[root@VM_16_214_centos linux]# yum install lapack
+<pre><code class="hljs language-bash">[root@VM_16_214_centos linux]<span class="hljs-comment"># yum install lapack</span>
 Loaded plugins: fastestmirror, langpacks
-Repository epel is listed more than once in the configuration
+Repository epel is listed more than once <span class="hljs-keyword">in</span> the configuration
 Loading mirror speeds from cached hostfile
 Package lapack-3.4.2-8.el7.x86_64 already installed and latest version
-Nothing to do
-[root@VM_16_214_centos linux]#
+Nothing to <span class="hljs-keyword">do</span>
+[root@VM_16_214_centos linux]<span class="hljs-comment">#</span>
 </code></pre>
 <p>它提供了：</p>
-<pre><code class="language-bash">/usr/lib64/liblapack.so.3
+<pre><code class="hljs language-bash">/usr/lib64/liblapack.so.3
 /usr/lib64/liblapack.so.3.4
 /usr/lib64/liblapack.so.3.4.2
 /usr/lib64/liblapacke.so.3
 /usr/lib64/liblapacke.so.3.4
 /usr/lib64/liblapacke.so.3.4.2
 </code></pre>
-<p>然后安装liblapack3gf，这里巨坑的是，liblapack3gf只有Debian系统有，连rpm都没有，开始是想把deb<br>文件转成rpm文件的，直到后来Escnqh输入了一行玄学指令：</p>
-<pre><code class="language-bash">ln -s /usr/lib64/liblapack.so.3 /usr/lib64/liblapack.so.3gf
+<p>然后安装liblapack3gf，这里巨坑的是，liblapack3gf只有Debian系统有，连rpm都没有，开始是想把deb
+文件转成rpm文件的，直到后来Escnqh输入了一行玄学指令：</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">ln</span> -s /usr/lib64/liblapack.so.3 /usr/lib64/liblapack.so.3gf
 </code></pre>
 <p>直接用liblapack.so.3伪装成liblapack.so.3gf（- -）...</p>
 <p>最后liblapack-dev我反正没安装，后面好像也能跑出模型- -</p>

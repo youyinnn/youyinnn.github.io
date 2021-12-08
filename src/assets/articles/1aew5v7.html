@@ -1,0 +1,139 @@
+
+          <h3 id="98f8fa23">Basic Algorithm In Binary Tree</h3>
+          <h4 id="281516c0">Traverse</h4><p>A Tree is typically traversed in two ways:</p>
+<ul>
+<li>Breadth First Traversal (Or Level Order Traversal)</li>
+<li>Depth First Traversals<ul>
+<li>Inorder Traversal (Left-Root-Right)</li>
+<li>Preorder Traversal (Root-Left-Right)</li>
+<li>Postorder Traversal (Left-Right-Root)</li>
+</ul>
+</li>
+</ul>
+<pre><code>            1
+          /   \
+         2     3
+       /  \
+      4    5
+
+BFS and DFSs of above Tree
+Breadth First Traversal : 1 2 3 4 5
+Depth First Traversals:
+      Preorder  : 1 2 4 5 3 
+      Inorder   : 4 2 5 1 3 
+      Postorder : 4 5 2 3 1
+</code></pre>
+<p><strong>Is there any difference in terms of Time Complexity?</strong>
+All four traversals require <strong>O(n)</strong> time as they visit every node exactly once.</p>
+<p><strong>Is there any difference in terms of Extra Space?</strong>
+There is difference in terms of extra space required.</p>
+<ol>
+<li>Extra Space required for <strong>Level Order</strong> Traversal is <strong>O(w) where w is maximum width</strong> of Binary Tree. In level order traversal, <strong>queue</strong> one by one stores nodes of different level.</li>
+<li>Extra Space required for <strong>Depth First</strong> Traversals is <strong>O(h) where h is maximum height</strong> of Binary Tree. In Depth First Traversals, <strong>stack</strong> (or function call stack) stores all ancestors of a node.</li>
+</ol>
+<p><em><strong>It is evident from above points that extra space required for Level order traversal is likely to be more when tree is more balanced and extra space for Depth First Traversal is likely to be more when tree is less balanced.</strong></em></p>
+<p><strong>How to Pick One?</strong></p>
+<ol>
+<li><p>Extra Space can be one factor (Explained above)</p>
+</li>
+<li><p>Depth First Traversals are typically recursive and recursive code requires function call overheads.</p>
+</li>
+<li><p>The most important points is:</p>
+<blockquote>
+<p><strong>BFS starts visiting nodes from root while DFS starts visiting nodes from leaves.</strong> </p>
+<p>So if our problem is to search something that is more likely to closer to root, we would prefer BFS. And if the target node is close to a leaf, we would prefer DFS.</p>
+</blockquote>
+</li>
+</ol>
+
+          <h5 id="366a6ede">BFS(BreathFirstSearch)</h5><p><strong>Idea:</strong></p>
+<ol>
+<li>need a <strong>queue</strong></li>
+<li>need root node, and add it into queue</li>
+<li>loop this while queue is not empty:<ol>
+<li>dequeue the queue head as tmp</li>
+<li>print tmp&#39;s value;</li>
+<li>enqueue tmp&#39;s children(left first then right);</li>
+</ol>
+</li>
+</ol>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">breathFirstTraversal</span><span class="hljs-params">(Node root)</span> {
+    LinkedList&lt;Node&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    q.add(root);
+    <span class="hljs-keyword">while</span> (!q.isEmpty()) {
+        <span class="hljs-type">Node</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> q.poll();
+        System.out.print(tmp.val + <span class="hljs-string">&quot; &quot;</span>);
+        <span class="hljs-keyword">if</span> (tmp.left != <span class="hljs-literal">null</span>) {
+            q.add(tmp.left);
+        }
+        <span class="hljs-keyword">if</span> (tmp.right != <span class="hljs-literal">null</span>) {
+            q.add(tmp.right);
+        }
+    }
+}
+</code></pre>
+
+          <h5 id="32d7db40">DFS(DepthFirstSearch)</h5><p>With the different position of root&#39;s visit, their 3 types of DFS: <strong>pre-order</strong>, <strong>in-order</strong>, <strong>post-order</strong>.</p>
+<p>There are two way we could use to implement it: <strong>1) loop with stack; 2) recursion</strong></p>
+<p>And we omit the recursion solusion here.</p>
+
+          <h6 id="993bd64d"><strong>Pre-Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+    LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ans;
+    Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
+    s.push(root);
+    <span class="hljs-keyword">while</span> (!s.isEmpty()) {
+        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> s.pop();
+        ans.add(tmp.val);
+
+        <span class="hljs-keyword">if</span> (tmp.right != <span class="hljs-literal">null</span>) s.push(tmp.right);
+        <span class="hljs-keyword">if</span> (tmp.left  != <span class="hljs-literal">null</span>) s.push(tmp.left);
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h6 id="8dcb2ed0"><strong>In Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+    LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
+    <span class="hljs-type">TreeNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> root;
+    <span class="hljs-keyword">while</span> (tmp != <span class="hljs-literal">null</span> || !s.isEmpty()) {
+        <span class="hljs-keyword">if</span> (tmp != <span class="hljs-literal">null</span>) {
+            s.push(tmp);
+            tmp = tmp.left;
+        } <span class="hljs-keyword">else</span> {
+            tmp = s.pop();
+            ans.add(tmp.val);
+            tmp = tmp.right;
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h6 id="677fb254"><strong>Post Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+    Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
+    LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ans;
+    s.push(root);
+    <span class="hljs-keyword">while</span> (!s.isEmpty()) {
+        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> s.pop();
+        ans.addFirst(tmp.val);
+
+        <span class="hljs-keyword">if</span> (tmp.left  != <span class="hljs-literal">null</span>) s.push(tmp.left);
+        <span class="hljs-keyword">if</span> (tmp.right != <span class="hljs-literal">null</span>) s.push(tmp.right);
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h4 id="1bb8917">Insertion in level order</h4><p><strong>Idea:</strong> Traverse tree with level order, find a node which didn&#39;t have two child, insert the new node at here with level order.</p>
+<pre>
+tree: 
+        10                                    10
+      /    \            insert 3            /    \
+    11      9           -------&gt;          11      9
+      \    /                             /  \    /
+       7  15                            3    7  15
+</pre>
+

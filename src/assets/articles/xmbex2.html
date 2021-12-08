@@ -33,44 +33,44 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 <li>关于对角线，我们也不必遍历整行，因为对角线的位置可以根据行差算出来，比如要插入第<code>i</code>行第<code>j</code>列的时候，需要判断上面<code>i-1</code>行的对角线的话，比如第2行在该行的对角线理论上为<code>j + i - 2</code>或者<code>j - (i - 2)</code>；</li>
 </ul>
 <p>于是我们的判断方法为：</p>
-<pre><code class="language-java">private boolean valid(List&lt;String&gt; cb, int x, int y) {
-    for (int rowIndex = 0; rowIndex &lt; x; rowIndex++) {
-        char[] row = cb.get(rowIndex).toCharArray();
-        if (row[y] == &#39;Q&#39;) {
-            return false;
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">valid</span><span class="hljs-params">(List&lt;String&gt; cb, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">rowIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; rowIndex &lt; x; rowIndex++) {
+        <span class="hljs-type">char</span>[] row = cb.get(rowIndex).toCharArray();
+        <span class="hljs-keyword">if</span> (row[y] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        int gap = x - rowIndex;
-        if (y + gap &lt; row.length &amp;&amp; row[y + gap] == &#39;Q&#39;) {
-            return false;
+        <span class="hljs-type">int</span> <span class="hljs-variable">gap</span> <span class="hljs-operator">=</span> x - rowIndex;
+        <span class="hljs-keyword">if</span> (y + gap &lt; row.length &amp;&amp; row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        if (y - gap &gt;= 0 &amp;&amp; row[y - gap] == &#39;Q&#39;) {
-            return false;
+        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
-    return true;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
 </code></pre>
 <p>这样来说会将判断方法的效率基本提到线性，于是加上回溯：</p>
-<pre><code class="language-java">char[] css;
+<pre><code class="hljs language-java"><span class="hljs-type">char</span>[] css;
 
-public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) {
-    css = new char[n];
-    List&lt;List&lt;String&gt;&gt; ans = new ArrayList&lt;&gt;();
-    backtracking(ans, new ArrayList&lt;&gt;(), n, 0);
-    return ans;
+<span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">solveNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    css = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n];
+    List&lt;List&lt;String&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    backtracking(ans, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), n, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> ans;
 }
 
-private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb, int n, int row) {
-    if (row == n) {
-        ans.add(new ArrayList&lt;&gt;(cb));
-    } else {
-        for (int i = 0; i &lt; n; i++) {
-            if (valid(cb, row, i)) {
-                Arrays.fill(css, &#39;.&#39;);
-                css[i] = &#39;Q&#39;;
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> row)</span> {
+    <span class="hljs-keyword">if</span> (row == n) {
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(cb));
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) {
+            <span class="hljs-keyword">if</span> (valid(cb, row, i)) {
+                Arrays.fill(css, <span class="hljs-string">&#x27;.&#x27;</span>);
+                css[i] = <span class="hljs-string">&#x27;Q&#x27;</span>;
                 cb.add(String.valueOf(css));
-                backtracking(ans, cb, n, row + 1);
-                cb.remove(cb.size() - 1);
+                backtracking(ans, cb, n, row + <span class="hljs-number">1</span>);
+                cb.remove(cb.size() - <span class="hljs-number">1</span>);
             }
         }
     }
@@ -112,31 +112,31 @@ i = 0   0   1   2   3          1  1  1
     dli = col - row + n      --&gt; dlSet: 1 2 3 4 5 6 7
 </code></pre>
 <p>于是这两行就能在代表整个棋盘的左右对角线，<strong>通过规律可以发现，对角线压缩数组的长度不会超过2n</strong>，于是我们的程序可以在线性的时间内判断对角线和列的棋位是否合法了：</p>
-<pre><code class="language-java">public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) {
-    List&lt;List&lt;String&gt;&gt; ans = new ArrayList&lt;&gt;();
-    backtracking(ans, new ArrayList&lt;&gt;(), new boolean[n], new boolean[n * 2], new boolean[n * 2], n, 0);
-    return ans;
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">solveNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    List&lt;List&lt;String&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    backtracking(ans, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n], <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n * <span class="hljs-number">2</span>], <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n * <span class="hljs-number">2</span>], n, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> ans;
 }
 
-private void backtracking(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb,
-                           boolean[] colSet, boolean[] dlSet, boolean[] drSet, int n, int row) {
-    if (row == n) {
-        ans.add(new ArrayList&lt;&gt;(cb));
-    } else {
-        for (int col = 0; col &lt; n; col++) {
-            int dli = col - row + n;
-            int dri = col + row;
-            if (colSet[col] || dlSet[dli] || drSet[dri]) {
-                continue;
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; ans, List&lt;String&gt; cb,
+                           <span class="hljs-type">boolean</span>[] colSet, <span class="hljs-type">boolean</span>[] dlSet, <span class="hljs-type">boolean</span>[] drSet, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> row)</span> {
+    <span class="hljs-keyword">if</span> (row == n) {
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(cb));
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; col &lt; n; col++) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">dli</span> <span class="hljs-operator">=</span> col - row + n;
+            <span class="hljs-type">int</span> <span class="hljs-variable">dri</span> <span class="hljs-operator">=</span> col + row;
+            <span class="hljs-keyword">if</span> (colSet[col] || dlSet[dli] || drSet[dri]) {
+                <span class="hljs-keyword">continue</span>;
             }
-            colSet[col] = dlSet[dli] = drSet[dri] =  true;
-            char[] css = new char[n];
-            Arrays.fill(css, &#39;.&#39;);
-            css[col] = &#39;Q&#39;;
+            colSet[col] = dlSet[dli] = drSet[dri] =  <span class="hljs-literal">true</span>;
+            <span class="hljs-type">char</span>[] css = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n];
+            Arrays.fill(css, <span class="hljs-string">&#x27;.&#x27;</span>);
+            css[col] = <span class="hljs-string">&#x27;Q&#x27;</span>;
             cb.add(String.valueOf(css));
-            backtracking(ans, cb, colSet, dlSet, drSet, n, row + 1);
-            cb.remove(cb.size() - 1);
-            colSet[col] = dlSet[dli] = drSet[dri] =  false;
+            backtracking(ans, cb, colSet, dlSet, drSet, n, row + <span class="hljs-number">1</span>);
+            cb.remove(cb.size() - <span class="hljs-number">1</span>);
+            colSet[col] = dlSet[dli] = drSet[dri] =  <span class="hljs-literal">false</span>;
         }
     }
 }
@@ -163,72 +163,72 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
 </code></pre>
 
           <h4 id="3bd5346f">Solution I</h4><p>没什么，就改一改上一题而已</p>
-<pre><code class="language-java">int ans = 0;
+<pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
 
-public int totalNQueens(int n) {
-    backtracking(new ArrayList&lt;&gt;(), n, 0);
-    return ans;
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">totalNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    backtracking(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), n, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> ans;
 }
 
-private void backtracking(List&lt;String&gt; cb, int n, int row) {
-    if (row == n) {
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(List&lt;String&gt; cb, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> row)</span> {
+    <span class="hljs-keyword">if</span> (row == n) {
         ans++;
-    } else {
-        for (int i = 0; i &lt; n; i++) {
-            if (valid(cb, row, i)) {
-                char[] css = new char[n];
-                Arrays.fill(css, &#39;.&#39;);
-                css[i] = &#39;Q&#39;;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) {
+            <span class="hljs-keyword">if</span> (valid(cb, row, i)) {
+                <span class="hljs-type">char</span>[] css = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n];
+                Arrays.fill(css, <span class="hljs-string">&#x27;.&#x27;</span>);
+                css[i] = <span class="hljs-string">&#x27;Q&#x27;</span>;
                 cb.add(String.valueOf(css));
-                backtracking(cb, n, row + 1);
-                cb.remove(cb.size() - 1);
+                backtracking(cb, n, row + <span class="hljs-number">1</span>);
+                cb.remove(cb.size() - <span class="hljs-number">1</span>);
             }
         }
     }
 }
 
-private boolean valid(List&lt;String&gt; cb, int x, int y) {
-    for (int rowIndex = 0; rowIndex &lt; x; rowIndex++) {
-        char[] row = cb.get(rowIndex).toCharArray();
-        if (row[y] == &#39;Q&#39;) {
-            return false;
+<span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">valid</span><span class="hljs-params">(List&lt;String&gt; cb, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">rowIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; rowIndex &lt; x; rowIndex++) {
+        <span class="hljs-type">char</span>[] row = cb.get(rowIndex).toCharArray();
+        <span class="hljs-keyword">if</span> (row[y] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        int gap = x - rowIndex;
-        if (y + gap &lt; row.length &amp;&amp; row[y + gap] == &#39;Q&#39;) {
-            return false;
+        <span class="hljs-type">int</span> <span class="hljs-variable">gap</span> <span class="hljs-operator">=</span> x - rowIndex;
+        <span class="hljs-keyword">if</span> (y + gap &lt; row.length &amp;&amp; row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        if (y - gap &gt;= 0 &amp;&amp; row[y - gap] == &#39;Q&#39;) {
-            return false;
+        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
-    return true;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
 </code></pre>
 
-          <h4 id="b411b57e">Solution II</h4><pre><code class="language-java">int ans = 0;
-boolean[] colSet, drSet, dlSet;
+          <h4 id="b411b57e">Solution II</h4><pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+<span class="hljs-type">boolean</span>[] colSet, drSet, dlSet;
 
-public int totalNQueens(int n) {
-    colSet = new boolean[n];
-    drSet = new boolean[n * 2];
-    dlSet = new boolean[n * 2];
-    backtracking(n, 0);
-    return ans;
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">totalNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    colSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n];
+    drSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n * <span class="hljs-number">2</span>];
+    dlSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n * <span class="hljs-number">2</span>];
+    backtracking(n, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> ans;
 }
 
-private void backtracking(int n, int row) {
-    if (row == n) {
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> row)</span> {
+    <span class="hljs-keyword">if</span> (row == n) {
         ans++;
-    } else {
-        for (int col = 0; col &lt; n; col++) {
-            int dli = col - row + n;
-            int dri = col + row;
-            if (colSet[col] || drSet[dri] || dlSet[dli]) {
-                continue;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; col &lt; n; col++) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">dli</span> <span class="hljs-operator">=</span> col - row + n;
+            <span class="hljs-type">int</span> <span class="hljs-variable">dri</span> <span class="hljs-operator">=</span> col + row;
+            <span class="hljs-keyword">if</span> (colSet[col] || drSet[dri] || dlSet[dli]) {
+                <span class="hljs-keyword">continue</span>;
             }
-            colSet[col] = drSet[dri] = dlSet[dli] = true;
-            backtracking(n, row + 1);
-            colSet[col] = drSet[dri] = dlSet[dli] = false;
+            colSet[col] = drSet[dri] = dlSet[dli] = <span class="hljs-literal">true</span>;
+            backtracking(n, row + <span class="hljs-number">1</span>);
+            colSet[col] = drSet[dri] = dlSet[dli] = <span class="hljs-literal">false</span>;
         }
     }
 }
@@ -244,13 +244,13 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 <p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
 
           <h4 id="13dd55ef">DP</h4><p>不多说，在<a href="./188zp6j.html">地痞</a>有分析过的</p>
-<pre><code class="language-java">public int maxSubArray(int[] nums) {
-    int rMax = 0, max = Integer.MIN_VALUE;
-    for (int current: nums) {
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxSubArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">rMax</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, max = Integer.MIN_VALUE;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> current: nums) {
         rMax = Math.max(current, current + rMax);
         max = Math.max(max, rMax);
     }
-    return max;
+    <span class="hljs-keyword">return</span> max;
 }
 </code></pre>
 
@@ -314,52 +314,52 @@ Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 </li>
 </ol>
 <p>于是代码为：</p>
-<pre><code class="language-java">public List&lt;Integer&gt; spiralOrder(int[][] matrix) {
-    LinkedList&lt;Integer&gt; ans = new LinkedList&lt;&gt;();
-    if (matrix.length == 0) {
-        return ans;
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">spiralOrder</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> {
+    LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-keyword">if</span> (matrix.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> ans;
     }
-    int[] range = new int[]{matrix[0].length - 1, matrix.length - 1, 0, 1};
-    int[] point = new int[]{0, 0};
-    int rangeIndex = 0;
-    ans.add(matrix[0][0]);
-    while (ans.size() &lt; matrix.length * matrix[0].length) {
-        int nowRange = range[rangeIndex];
-        if (rangeIndex == 0) {
-            for (int i = point[1] + 1; i &lt;= nowRange; i++) {
-                ans.add(matrix[point[0]][i]);
+    <span class="hljs-type">int</span>[] range = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]{matrix[<span class="hljs-number">0</span>].length - <span class="hljs-number">1</span>, matrix.length - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>};
+    <span class="hljs-type">int</span>[] point = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]{<span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+    <span class="hljs-type">int</span> <span class="hljs-variable">rangeIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    ans.add(matrix[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">while</span> (ans.size() &lt; matrix.length * matrix[<span class="hljs-number">0</span>].length) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">nowRange</span> <span class="hljs-operator">=</span> range[rangeIndex];
+        <span class="hljs-keyword">if</span> (rangeIndex == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>; i &lt;= nowRange; i++) {
+                ans.add(matrix[point[<span class="hljs-number">0</span>]][i]);
             }
-            point[1] = nowRange;
-            range[rangeIndex] -= 1;
+            point[<span class="hljs-number">1</span>] = nowRange;
+            range[rangeIndex] -= <span class="hljs-number">1</span>;
         }
-        if (rangeIndex == 1){
-            for (int i = point[0] + 1; i &lt;= nowRange; i++) {
-                ans.add(matrix[i][point[1]]);
+        <span class="hljs-keyword">if</span> (rangeIndex == <span class="hljs-number">1</span>){
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>; i &lt;= nowRange; i++) {
+                ans.add(matrix[i][point[<span class="hljs-number">1</span>]]);
             }
-            point[0] = nowRange;
-            range[rangeIndex] -= 1;
+            point[<span class="hljs-number">0</span>] = nowRange;
+            range[rangeIndex] -= <span class="hljs-number">1</span>;
         }
-        if (rangeIndex == 2) {
-            for (int i = point[1] - 1; i &gt;= nowRange; i--) {
-                ans.add(matrix[point[0]][i]);
+        <span class="hljs-keyword">if</span> (rangeIndex == <span class="hljs-number">2</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>; i &gt;= nowRange; i--) {
+                ans.add(matrix[point[<span class="hljs-number">0</span>]][i]);
             }
-            point[1] = nowRange;
-            range[rangeIndex] += 1;
+            point[<span class="hljs-number">1</span>] = nowRange;
+            range[rangeIndex] += <span class="hljs-number">1</span>;
         }
-        if (rangeIndex == 3) {
-            for (int i = point[0] - 1; i &gt;= nowRange; i--) {
-                ans.add(matrix[i][point[1]]);
+        <span class="hljs-keyword">if</span> (rangeIndex == <span class="hljs-number">3</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">0</span>] - <span class="hljs-number">1</span>; i &gt;= nowRange; i--) {
+                ans.add(matrix[i][point[<span class="hljs-number">1</span>]]);
             }
-            point[0] = nowRange;
-            range[rangeIndex] += 1;
+            point[<span class="hljs-number">0</span>] = nowRange;
+            range[rangeIndex] += <span class="hljs-number">1</span>;
         }
         rangeIndex = nextRange(rangeIndex);
     }
-    return ans;
+    <span class="hljs-keyword">return</span> ans;
 }
 
-private int nextRange(int i) {
-    return i + 1 &lt; 4 ? i + 1 : 0;
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">nextRange</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span> {
+    <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span> &lt; <span class="hljs-number">4</span> ? i + <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;
 }
 </code></pre>
 
@@ -379,29 +379,29 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
 </code></pre>
 <p>这题就不多解释了，在<a href="./1flo1c0.html">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
 
-          <h4 id="13dd55ef">DP</h4><pre><code class="language-java">public boolean canJump(int[] nums) {
-    boolean[] can = new boolean[nums.length];
-    can[nums.length - 1] = true;
-    for (int i = nums.length - 2; i &gt;= 0; i--) {
-        int steps = nums[i];
-        for (int j = i + 1; j &lt; nums.length &amp;&amp; j &lt;= i + steps; j++) {
-            if  (can[j]) {
-                can[i] = true;
-                break;
+          <h4 id="13dd55ef">DP</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">boolean</span>[] can = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[nums.length];
+    can[nums.length - <span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">steps</span> <span class="hljs-operator">=</span> nums[i];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length &amp;&amp; j &lt;= i + steps; j++) {
+            <span class="hljs-keyword">if</span>  (can[j]) {
+                can[i] = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">break</span>;
             }
         }
     }
-    return can[0];
+    <span class="hljs-keyword">return</span> can[<span class="hljs-number">0</span>];
 }
 </code></pre>
 
-          <h4 id="979792b9">Greedy</h4><pre><code class="language-java">public boolean canJump(int[] nums) {
-    int last = nums.length - 1;
-    for (int i = nums.length - 2; i &gt;= 0; i--) {
-        if (i + nums[i] &gt;= last) {
+          <h4 id="979792b9">Greedy</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+        <span class="hljs-keyword">if</span> (i + nums[i] &gt;= last) {
             last = i;
         }
     }
-    return last == 0;
+    <span class="hljs-type">return</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span>;
 }
 </code></pre>

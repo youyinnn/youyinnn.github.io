@@ -1,0 +1,345 @@
+
+          <h3 id="3fbd77bd">21. Merge Two Sorted Lists(Easy)</h3><p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code></pre>
+
+          <h4 id="b0b68890">Brute Force(Beat 90.65%)</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
+    <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span> || l2 == <span class="hljs-literal">null</span>) {
+        <span class="hljs-type">return</span> <span class="hljs-variable">l1</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? l2 : l1;
+    }
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
+    pre.next = l1;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">head</span> <span class="hljs-operator">=</span> l1;
+    <span class="hljs-comment">// use l1 l2 as pointers</span>
+    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> &amp;&amp; l1 != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">if</span> (l2.val &lt; l1.val) {
+            pre.next = l2;
+            l2 = l2.next;
+            pre.next.next = l1;
+            <span class="hljs-comment">// if l2 is little than head</span>
+            <span class="hljs-comment">// then it become a new head</span>
+            <span class="hljs-keyword">if</span> (head == l1) {
+                head = pre.next;
+            }
+        }
+        pre = pre.next;
+        l1 = pre.next;
+    }
+    <span class="hljs-comment">// the rest of l2 were all bigger than l1</span>
+    <span class="hljs-keyword">if</span> (l2 != <span class="hljs-literal">null</span>) {
+        pre.next = l2;
+    }
+    <span class="hljs-keyword">return</span> head;
+}
+</code></pre>
+<p>大致思想是以第一条链为参照，做插入排序，分别用l1，l2做now指针</p>
+<p>链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原head的基础上，加一个pre，再标识now，然后迭代两个指针</p>
+
+          <h3 id="76d8c6de">22. Generate Parentheses</h3><p>Given <em>n</em> pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+<p>For example, given <em>n</em> = 3, a solution set is:</p>
+<pre><code>[
+  &quot;((()))&quot;,
+  &quot;(()())&quot;,
+  &quot;(())()&quot;,
+  &quot;()(())&quot;,
+  &quot;()()()&quot;
+]
+</code></pre>
+<p>这道题我自己想的时候，想到了很多方法，比如<strong>填坑</strong>，但是填坑怎么处理对称重复的解我实在是想不出，然后又想到了一种<strong>欠债</strong>法，比如我们把开口和闭口分开，有两个债主分别管理两种债务，开口符号出现一个就代表欠一次债，闭口也是；而其中的要求就是，之前的欠债计算中，闭口欠债绝对不能比开口欠债多，这样后面的解才合法</p>
+<p>也就是在创造序列的时候，最后一个序列必须是闭口，最后一个还债的必须是闭口，不是闭口的不考虑</p>
+<p>可惜的是，这样的思路我并没有坚持下去，后面在评论区，高分解果然也是一样的思路，只不过不同的是，它用更算法逻辑的思路去解释这件事：<strong>有选择地递归</strong></p>
+<p>非常遗憾的是，高分解用<strong>backtracing</strong>去解释这种思路，但是他并不是回溯，因为它没有走进死胡同，再折返回去，而是每次都选择正确的道路</p>
+
+          <h4 id="352aab55">Rightfully Recursion</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">generateParenthesis</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    LinkedList&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-keyword">return</span> get(ans, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span> ,n);
+}
+
+<span class="hljs-keyword">private</span> List&lt;String&gt; <span class="hljs-title function_">get</span><span class="hljs-params">(List&lt;String&gt; ans, String str, <span class="hljs-type">int</span> open, <span class="hljs-type">int</span> close, <span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-keyword">if</span> (str.length() == n * <span class="hljs-number">2</span>) {
+        <span class="hljs-comment">// means we reach the end</span>
+        ans.add(str);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// one rightful path</span>
+        <span class="hljs-keyword">if</span> (open &lt; n) {
+            get(ans, str + <span class="hljs-string">&quot;(&quot;</span>, open + <span class="hljs-number">1</span>, close, n);
+        }
+        <span class="hljs-comment">// another rightful path</span>
+        <span class="hljs-keyword">if</span> (close &lt; open) {
+            get(ans, str + <span class="hljs-string">&quot;)&quot;</span>, open, close + <span class="hljs-number">1</span>, n);
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h3 id="b28d60da">23. Merge K Sorted Lists(Hard)</h3><p>Merge <em>k</em> sorted linked lists and return it as one sorted list. Analyze and describe its complexity.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input:
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+</code></pre>
+<p>做这题的时候，我有很多种思路，一步步网上打才发现，原来大道至简，用归并排序才是王道，真的不要怕使用递归，栈不深的情况下，递归是一个很高效的算法</p>
+<p>写上面那句话的时候突然灵机一想，想到两个月前面试里被面试官问道：若干日志文件，每个日子文件里的日志按照时间顺序打的，怎么合并成一个有序日志文件</p>
+<p>当时只能说出分段排序，然后被面试官继续问怎么分段，然后又扯用索引，现在回来一想，归并是个多么美妙的算法</p>
+<p>以归并的思想来看这道题，根本不算难题</p>
+
+          <h4 id="3fd01a00">Merge Sort(Beat 100%)</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">mergeKLists</span><span class="hljs-params">(ListNode[] lists)</span> {
+    <span class="hljs-keyword">return</span> mergeKLists(lists, <span class="hljs-number">0</span>, lists.length - <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-comment">// merge sort</span>
+<span class="hljs-keyword">private</span> ListNode <span class="hljs-title function_">mergeKLists</span><span class="hljs-params">(ListNode[] lists, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> end - start + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (lists.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (length == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> lists[start];
+    }
+    <span class="hljs-keyword">if</span> (length == <span class="hljs-number">2</span>) {
+        <span class="hljs-keyword">return</span> mergeTwoLists(lists[start], lists[end]);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (length / <span class="hljs-number">2</span>) + start;
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> mergeKLists(lists, start, mid);
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> mergeKLists(lists, mid + <span class="hljs-number">1</span>, end);
+        <span class="hljs-keyword">return</span> mergeTwoLists(right, left);
+    }
+}
+
+<span class="hljs-comment">// 用到之前的合并2个有序List</span>
+<span class="hljs-keyword">private</span> ListNode <span class="hljs-title function_">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
+    <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span> || l2 == <span class="hljs-literal">null</span>) {
+        <span class="hljs-type">return</span> <span class="hljs-variable">l1</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? l2 : l1;
+    }
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
+    pre.next = l1;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">head</span> <span class="hljs-operator">=</span> l1;
+    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> &amp;&amp; l1 != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">if</span> (l2.val &lt; l1.val) {
+            pre.next = l2;
+            l2 = l2.next;
+            pre.next.next = l1;
+            <span class="hljs-keyword">if</span> (head == l1) {
+                head = pre.next;
+            }
+        }
+        pre = pre.next;
+        l1 = pre.next;
+    }
+    <span class="hljs-keyword">if</span> (l2 != <span class="hljs-literal">null</span>) {
+        pre.next = l2;
+    }
+    <span class="hljs-keyword">return</span> head;
+}
+</code></pre>
+
+          <h3 id="d5a19248">24. Swap Nodes In Pairs(Medium)</h3><p>Given a linked list, swap every two adjacent nodes and return its head.</p>
+<p>You may <strong>not</strong> modify the values in the list&#39;s nodes, only nodes itself may be changed.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+</code></pre>
+
+          <h4 id="bd5824db">Brute Force(Beat 100%)</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">swapPairs</span><span class="hljs-params">(ListNode head)</span> {
+    <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (head.next == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> head;
+    }
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span> head.next;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
+    pre.next = head;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> pre.next;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> now.next;
+    <span class="hljs-keyword">while</span> (next != <span class="hljs-literal">null</span>) {
+        pre.next = next;
+        now.next = next.next;
+        next.next = now;
+        
+        pre = now;
+        now = pre.next;
+        <span class="hljs-keyword">if</span> (now == <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">break</span>;
+        }
+        next = now.next;
+    }
+    <span class="hljs-keyword">return</span> newHead;
+}
+</code></pre>
+<p>没难度的，指针做好就行</p>
+
+          <h3 id="3acedc8">25. Reverse Nodes In K-Group(Hard)</h3><p>Given a linked list, reverse the nodes of a linked list <em>k</em> at a time and return its modified list.</p>
+<p><em>k</em> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <em>k</em> then left-out nodes in the end should remain as it is.</p>
+<p><strong>Example:</strong></p>
+<p>Given this linked list: <code>1-&gt;2-&gt;3-&gt;4-&gt;5</code></p>
+<p>For <em>k</em> = 2, you should return: <code>2-&gt;1-&gt;4-&gt;3-&gt;5</code></p>
+<p>For <em>k</em> = 3, you should return: <code>3-&gt;2-&gt;1-&gt;4-&gt;5</code></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Only constant extra memory is allowed.</li>
+<li>You may not alter the values in the list&#39;s nodes, only nodes itself may be changed.</li>
+</ul>
+
+          <h4 id="d6175de1">Brute Force (Beat 99.32%)</h4><p>这题，做出来了就是成功了，基本上思路就是直观的暴力解，解题的难点在于，如何处理指针</p>
+<p>做链表题的时候始终要记住一句话：<strong>Keep tracking the pointer</strong></p>
+<p>跟踪指针到最后，你就赢了</p>
+<p>我们的思路很简单，首先从头开始，每k个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去</p>
+<p>要做到这件事，首先我们得做到逆转一段链表，这件事也没什么技巧，hmmmmm，好吧还是有点东西的，我总是喜欢分治法+递归，我已经爱上了这种简单直接的做法了</p>
+<p>上公式：<code>reverse(2 -&gt; 3 -&gt; 4 -&gt; 5) = reverse ( reverse (2 -&gt; 3) -&gt; reverse(3 -&gt; 4))</code>，于是所有的逆转都变成了两个结点链表的逆转，而且为了更简单地做到这件事，我还用一个数据结构来表示一条链，记录它的头和尾，以更好地接上两个链</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Segment</span> {
+    ListNode head;
+    ListNode tail;
+
+    Segment(ListNode head, ListNode tail) {
+        <span class="hljs-built_in">this</span>.head = head;
+        <span class="hljs-built_in">this</span>.tail = tail;
+    }
+}
+<span class="hljs-keyword">private</span> Segment <span class="hljs-title function_">reverse</span><span class="hljs-params">(ListNode head)</span> {
+    <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> head;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> head.next;
+    <span class="hljs-keyword">if</span> (b == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Segment</span>(head, head);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (b.next == <span class="hljs-literal">null</span>) {
+        b.next = a;
+        a.next = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Segment</span>(b, a);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> b.next;
+        b.next = <span class="hljs-literal">null</span>;
+        <span class="hljs-type">Segment</span> <span class="hljs-variable">leftSeg</span> <span class="hljs-operator">=</span> reverse(a);
+        <span class="hljs-type">Segment</span> <span class="hljs-variable">rightSeg</span> <span class="hljs-operator">=</span> reverse(right);
+        <span class="hljs-comment">// reconnect two seg</span>
+        rightSeg.tail.next = leftSeg.head;
+        <span class="hljs-comment">// reassign seg tail cause we connect a new list after it</span>
+        rightSeg.tail = leftSeg.tail;
+        <span class="hljs-keyword">return</span> rightSeg;
+    }
+}
+</code></pre>
+<p>那么接下来：我们用4个指针，来对原链进行分段逆转，大致思路如下：</p>
+<pre><code>               head (ignore this)
+                 ↓
+origin list:     1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+assume k is: 3
+
+assign some pointer：
+
+1. nowPre: the pre node of this segment
+2. nowHead: the head node of this segment
+3. tmp: the head of next segment
+4. tmpPre: the pre node of tmp node, it also the tail node of the reversed segment
+
+        newHead -&gt; NULL
+                             
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+               ↗     ↑
+           tmpPre    tmp
+                      ↑
+                    nowHead
+                    
+这是初始状态，我们开始移动tmp和tmpPre：
+
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   nowHead tmpPre    tmp
+
+于是这时候我们可以将链看成是三段：
+1. nowPre之前的结点是一段；           记为A段
+2. nowHead到tmpPre的结点是一段；    记为B段
+3. tmp之后的结点是一段；               记为C段
+
+这时候可以看出，我们要逆转的段是第二段，于是先断开BC之间的连接：
+
+        nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3       4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗        ↑
+                   nowHead tmpPre      tmp
+                   
+这时候逆转B段（注意原来的nowPre、tmpPre、nowHead也会变的）：
+
+                   nowPre → 0
+                            ↓
+                  3 -&gt; 2 -&gt; 1           4 -&gt; 5 -&gt; 6 -&gt; NULL
+                  ↑         ↑           ↑
+               tmpPre    nowHead       tmp
+               
+然后nowHead.next = tmp，就可以接上BC段：
+
+                       nowPre → 0
+                                ↓
+                      3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   tmpPre  nowHead  tmp
+               
+再nowPre.next = tmpPre，纠正AB段：
+
+        nowPre → 0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                      ↑       ↗     ↑
+                   tmpPre  nowHead  tmp
+               
+最后调整指针，为下一次处理做准备（若是第一次处理，则newHead必定为空，则可以指定newHead）：
+1. newHead = reverseSegment.head
+2. nowPre = nowHead
+3. nowHead = tmp
+4. tmpPre = nowPre
+
+               newHead
+                  ↓
+             0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
+                            ↑    ↑
+                       nowPre    tmp
+                            ↑    ↑
+                       tmpPre    nowHead
+</code></pre>
+<p>于是代码：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">reverseKGroup</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> k)</span> {
+    <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> head;
+    }
+    <span class="hljs-type">ListNode</span>
+            <span class="hljs-variable">nowPre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>),
+            tmp = head,
+            newHead = <span class="hljs-literal">null</span>,
+            nowHead, tmpPre;
+    nowPre.next = tmp;
+
+    <span class="hljs-keyword">while</span> (tmp != <span class="hljs-literal">null</span>) {
+        nowHead = tmp;
+        tmpPre = nowPre;
+        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (count &lt; k &amp;&amp; tmp != <span class="hljs-literal">null</span>) {
+            tmp = tmp.next;
+            tmpPre = tmpPre.next;
+            count++;
+        }
+        <span class="hljs-keyword">if</span> (count == k) {
+            <span class="hljs-comment">// disconnected two part</span>
+            tmpPre.next = <span class="hljs-literal">null</span>;
+            <span class="hljs-comment">// reverse segment</span>
+            <span class="hljs-type">Segment</span> <span class="hljs-variable">reverse</span> <span class="hljs-operator">=</span> reverse(nowHead);
+            <span class="hljs-keyword">if</span> (newHead == <span class="hljs-literal">null</span>) {
+                newHead = reverse.head;
+            }
+            <span class="hljs-comment">// reconnected part B &amp; C</span>
+            nowHead.next = tmp;
+            <span class="hljs-comment">// reconnected part A &amp; B</span>
+            nowPre.next = tmpPre;
+            <span class="hljs-comment">// reassign the nowPre</span>
+            nowPre = nowHead;
+        }
+    }
+    <span class="hljs-comment">// when k is bigger than list length then newHead will be null</span>
+    <span class="hljs-comment">// so just return head</span>
+    <span class="hljs-type">return</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? head : newHead; 
+}
+</code></pre>

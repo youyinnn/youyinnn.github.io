@@ -1,0 +1,129 @@
+
+          <h3 id="ea3c040d">Tess</h3>
+          <h4 id="663aaee4">0. What is Tess?</h4><p>Tess.IO is eBay’s cluster manager, with a vision of ensuring a world-class <strong>build, ship and run</strong> experience for eBay’s applications at scale, while ensuring high efficiency, security, and agility to the developers. Tess.IO leverages Kubernetes under its hood. Kubernetes (commonly referred to as “k8s”) is an open source container cluster manager that aims to provide a “platform for automating deployment, scaling, and operations of application containers across clusters of hosts.”</p>
+<p>Tess makes DevOps a breeze.</p>
+<blockquote>
+<p>So, you don&#39;t have to setup k8s or docker on your server anymore.</p>
+<p>Tess is not an new tech, it&#39;s a plus-version of k8s cli with eBay&#39;s own way.</p>
+</blockquote>
+
+          <h4 id="3ed01c62">0.1. Further Reading</h4><p>To best introduce topics, the following instructions suggest a way of consuming this documentation such that topics build upon previous topics.</p>
+<p>First, you’ll want to understand what Tess.IO is. For this, read the <a href="https://tess.io/userdocs/getting-start/intro">Introduction</a>. Next, you’ll want to set up your machine with the necessary tools and configuration to talk to Tess.IO. For this, read <a href="https://tess.io/userdocs/getting-start/setup">Setup</a>. Finally, you’ll want to run the <a href="https://tess.io/userdocs/getting-start/hello-world">Hello World</a> example.</p>
+<p>From here, you can branch out depending on your needs. Consider starting with <a href="https://tess.io/userdocs/getting-start/models">Model Workloads</a> followed by <a href="https://tess.io/userdocs/getting-start/build-and-deploy">Build and Deploy</a>.</p>
+<p>For a better understanding of Kubernetes we recommend reading the following documentation:</p>
+<ul>
+<li>Core Kubernetes <a href="https://kubernetes.io/docs/home">documentation</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/object-management-kubectl/declarative-config/">Declarative</a> configuration files</li>
+<li>Kubernetes <a href="https://github.com/kubernetes/examples">examples</a>.</li>
+<li>Kubernetes <a href="https://www.youtube.com/playlist?list=PLIivdWyY5sqL3xfXz5xJvwzFW_tlQB_GB">best practices</a>.</li>
+</ul>
+<blockquote>
+<p>I strongly recommends Tess user would have basic knowledge of k8s, otherwise you will get some trouble and you don&#39;t event know how to fix it.</p>
+<p>Anyway, keep learning.</p>
+</blockquote>
+
+          <h4 id="4590496">1. Setup Tess on your server</h4><p>Follow the instructions of <a href="https://tess.io/userdocs/getting-start/setup/">setup</a>.</p>
+
+          <h4 id="781da9e3">2. Finish your helloworld</h4><p>Follow the instructions of <a href="https://tess.io/userdocs/getting-start/hello-world/">helloworld</a>.</p>
+
+          <h5 id="70a11ed4">2.1 Why does my application&#39;s creations are always failed?</h5><p>Try</p>
+<pre><code class="hljs language-bash">$ tskb get application tesshjapp -o yaml
+</code></pre>
+<p>and</p>
+<pre><code class="hljs language-bash">apiVersion: ebay/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: 2018-11-13T08:46:53Z
+  labels:
+    account.tess.io/name: jhuang9
+  name: tesshjapp
+  resourceVersion: <span class="hljs-string">&quot;1527349281&quot;</span>
+  selfLink: /apis/ebay/v1alpha1/applications/tesshjapp
+  uid: ab51990f-e720-11e8-8642-74dbd180c0ec
+spec:
+  appType:
+    category: web
+    <span class="hljs-built_in">type</span>: generic
+  owner: jhuang9
+status:
+  conditions:
+  - lastProbeTime: 2018-11-13T08:47:24Z
+    lastTransitionTime: 2018-11-13T08:47:24Z
+    message: Error querying escalation owner name manager Owner not found <span class="hljs-keyword">for</span> the
+      given user - jhuang9
+    reason: MissingEscalationOwner
+    status: <span class="hljs-string">&quot;True&quot;</span>
+    <span class="hljs-built_in">type</span>: Failed
+  phase: Failed
+  startTime: 2018-11-13T08:47:24Z
+</code></pre>
+<p>It seems like your account is &quot;MissingEscalationOwner&quot;</p>
+<p><img src="https://image.youyinnn.top/img/20181115155241.png" alt=""></p>
+<p>As Tess member said, we can create Application using -f option to create app with file:</p>
+<pre><code class="hljs language-bash">$ tskb create -f app.yaml
+</code></pre>
+<p>and the app.yaml file may look like:</p>
+<pre><code class="hljs language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps.tess.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Application</span>
+<span class="hljs-attr">metadata:</span>
+ <span class="hljs-attr">labels:</span>
+   <span class="hljs-attr">account.tess.io/name:</span> <span class="hljs-string">accountName</span>
+ <span class="hljs-attr">name:</span> <span class="hljs-string">applicationName</span>
+<span class="hljs-attr">spec:</span>
+ <span class="hljs-attr">appType:</span>
+   <span class="hljs-attr">category:</span> <span class="hljs-string">web</span>
+   <span class="hljs-attr">type:</span> <span class="hljs-string">generic</span>
+ <span class="hljs-attr">escalationOwner:</span> <span class="hljs-string">manager</span>
+ <span class="hljs-attr">owner:</span> <span class="hljs-string">appOwner</span>
+</code></pre>
+
+          <h4 id="9be7ade8">3. Learn the main concepts of Tess Model</h4><p><a href="https://tess.io/userdocs/models/">Tess Model</a></p>
+
+          <h4 id="1269b508">4. Now, get to work!</h4><p>You&#39;ve got enough knowledge to move to k8s/prometheus/grafana.</p>
+<p>This is not the end, it just a beginning.</p>
+<p>Here&#39;s some tips:</p>
+<ol>
+<li><p>work with namespace at the most of time</p>
+</li>
+<li><p>use tess to get help, It does give a lot of help</p>
+<pre><code class="hljs language-bash">$ tess
+Tess CLI Version: {<span class="hljs-string">&quot;Experimental&quot;</span>:<span class="hljs-string">&quot;true&quot;</span>,<span class="hljs-string">&quot;Major&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;Minor&quot;</span>:<span class="hljs-string">&quot;8+&quot;</span>,<span class="hljs-string">&quot;Tess Release&quot;</span>:<span class="hljs-string">&quot;release-0.33.2&quot;</span>}
+Fetching released Tess CLI versions...
+** New version release-0.33.5 available. Please use `tess version list` to get the released versions.
+Client Version: version.Info{Major:<span class="hljs-string">&quot;1&quot;</span>, Minor:<span class="hljs-string">&quot;8+&quot;</span>, GitVersion:<span class="hljs-string">&quot;v0.0.0-master+<span class="hljs-variable">$Format</span>:%h$&quot;</span>, GitCommit:<span class="hljs-string">&quot;<span class="hljs-variable">$Format</span>:%H$&quot;</span>, GitTreeState:<span class="hljs-string">&quot;&quot;</span>, BuildDate:<span class="hljs-string">&quot;1970-01-01T00:00:00Z&quot;</span>, GoVersion:<span class="hljs-string">&quot;go1.9.6&quot;</span>, Compiler:<span class="hljs-string">&quot;gc&quot;</span>, Platform:<span class="hljs-string">&quot;linux/amd64&quot;</span>}
+
+Tess CLI is currently an alpha offering. Functionalities are subject to be changed based on customer feedback and
+product direction. 
+
+  * We are on slack: https://tessio.slack.com
+
+Commands to initialize tess
+  login       Login to Tess
+  init        Initialize Tess workspace
+
+Commands to manipulate kube objects
+  kubectl     kubectl controls the Kubernetes cluster manager
+
+Commands to manipulate <span class="hljs-built_in">groups</span>/applications/accounts
+  get         Display one or many resources
+  annotate    Update the annotations on a resource
+  create      Create a resource by filename or stdin
+  delete      Delete resources by filenames, stdin, resources and names, or by resources and label selector
+  describe    Show details of a specific resource or group of resources
+  edit        Edit a resource on the server
+  label       Update the labels on a resource
+  replace     Replace a resource by filename or stdin
+
+Other Commands:
+  clusters    List Tess clusters
+  <span class="hljs-built_in">help</span>        Help about any <span class="hljs-built_in">command</span>
+  install     Install specified Tess CLI version
+  status      Print the cluster and user account information
+  version     Print the client and server version information
+
+Use <span class="hljs-string">&quot;tess &lt;command&gt; --help&quot;</span> <span class="hljs-keyword">for</span> more information about a given <span class="hljs-built_in">command</span>.
+Use <span class="hljs-string">&quot;tess options&quot;</span> <span class="hljs-keyword">for</span> a list of global command-line options (applies to all commands).
+</code></pre>
+</li>
+</ol>
+<hr>

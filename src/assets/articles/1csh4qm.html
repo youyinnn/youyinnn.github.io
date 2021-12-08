@@ -1,0 +1,136 @@
+
+          <h3 id="fccefbaf">前言</h3><p>2月份的时候，疫情原因，学校实验室和学院要开发一款帮助小区居民批量采购的小程序，实验室团队人手不足，说是少后台开发，所以我就上了，看着微信的文档还有学长的帮助，也就吭哧吭哧写上线了</p>
+
+          <h3 id="4a4b81b">操作流程</h3><p><img src="https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg" alt="小程序支付时序图"></p>
+<p style="text-align: center;">图源：<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_4&index=3" target="_blank">微信文档</a></p>
+这个图其实过于细分，有的步骤可以简化：openId不必由**商户后台**发送请求来获取，**小程序方**可以直接发送openId过来。
+
+<ol>
+<li><strong>用户</strong>通过<strong>小程序</strong>发送<strong>“请求下单”</strong>的请求到<strong>商户后台</strong>；</li>
+<li><strong>商户后台</strong>调用微信官方依赖提供的接口，发送请求到<strong>微信后台</strong>（统一下单API），获取<code>prepay_id</code>；</li>
+<li><strong>商户后台</strong>生成签名，返回5个参数和sign；</li>
+<li><strong>小程序</strong>获取到正常的5个参数和sign之后，调用JS的SDK中的支付API，<strong>用户</strong>界面拉起支付，支付成功；</li>
+</ol>
+<p>这个图展示的部分就这么多，但是我们还需要操作后续的业务，就是用户在<strong>小程序</strong>支付之后，发送一个请求把支付结果告诉到<strong>商户后台</strong>，这样<strong>商户后台</strong>才能够即使回写这个订单的支付状态到商户自己的数据库中，虽然<strong>微信后台</strong>会推送支付结果给<strong>商户后台</strong>，但是微信<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_7">不保证及时性以及请求必达</a>，所以我们需要靠自己强制回写。</p>
+<ol start="5">
+<li>支付成功/失败后，<strong>小程序</strong>都需要强制发送支付结果到<strong>商户后台</strong>；</li>
+<li><strong>商户后台</strong>处理支付结果，回写到数据库；</li>
+</ol>
+
+          <h3 id="d78e444e">后端</h3><p>后端项目参考：</p>
+
+          <h4 id="98b76268">前置参考</h4><ul>
+<li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1">请求参数参考</a></li>
+<li><a href="https://github.com/Wechat-Group/WxJava/wiki/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98">代码参考</a></li>
+<li><a href="https://github.com/binarywang/weixin-java-pay-demo/blob/5ea0ad02efb734751dce18eee35817af82c3ee13/src/main/java/com/github/binarywang/demo/wx/pay/controller/WxPayController.java#L106">官方Demo</a></li>
+<li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&amp;index=5">签名方式</a></li>
+</ul>
+
+          <h4 id="ba497bca">自己的实现</h4>
+          <h5 id="66c8b3c9">获取5个参数和sign</h5><p>下面这个接口完成了流程的2和3：</p>
+<pre><code class="hljs language-java"><span class="hljs-meta">@PostMapping(&quot;/unifiedOrder&quot;)</span>
+<span class="hljs-meta">@ResponseBody</span>
+<span class="hljs-keyword">public</span> Object <span class="hljs-title function_">unifiedOrder</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> WxPayUnifiedOrderRequest request, HttpServletRequest realReq)</span> {
+    request.setAppid(WeChatConfigParam.WX_LOGIN_APPID);
+    request.setMchId(WeChatConfigParam.WX_PAY_MCHID);
+    request.setBody(WeChatConfigParam.WX_PAY_BODY);
+    request.setTradeType(WeChatConfigParam.WX_PAY_TRADE_TYPE);
+    request.setNotifyUrl(WeChatConfigParam.WX_PAY_NOTIFY_URL);
+    request.setSpbillCreateIp(IpUtil.getIpAddr(realReq));
+
+    Map&lt;String, String&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(<span class="hljs-number">8</span>);
+    <span class="hljs-comment">// 获取 prepay_id</span>
+    <span class="hljs-type">WxPayUnifiedOrderResult</span> <span class="hljs-variable">wxPayUnifiedOrderResult</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">try</span> {
+        wxPayUnifiedOrderResult = <span class="hljs-built_in">this</span>.wxService.unifiedOr1zzder(request);
+        result.put(<span class="hljs-string">&quot;returnCode&quot;</span>, wxPayUnifiedOrderResult.getReturnCode());
+        result.put(<span class="hljs-string">&quot;returnMsg&quot;</span>, wxPayUnifiedOrderResult.getReturnMsg());
+        <span class="hljs-keyword">if</span> (wxPayUnifiedOrderResult.getReturnCode().equalsIgnoreCase(WeChatConfigParam.WX_PAY_SUCCESS_FLAG) &amp;&amp;
+                wxPayUnifiedOrderResult.getResultCode().equalsIgnoreCase(WeChatConfigParam.WX_PAY_SUCCESS_FLAG)) {
+            <span class="hljs-comment">// 利用prepay_id 签MD5</span>
+            <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> WeChatConfigParam.WX_PAY_MCHKEY;
+            <span class="hljs-type">String</span> <span class="hljs-variable">appId</span> <span class="hljs-operator">=</span> WeChatConfigParam.WX_LOGIN_APPID;
+            <span class="hljs-type">long</span> <span class="hljs-variable">timeStamp</span> <span class="hljs-operator">=</span> System.currentTimeMillis() / <span class="hljs-number">1000</span>;
+            <span class="hljs-type">String</span> <span class="hljs-variable">nonceStr</span> <span class="hljs-operator">=</span> DigestUtils.md5Hex(UUID.randomUUID().toString());
+            <span class="hljs-type">String</span> <span class="hljs-variable">packageStr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;prepay_id=&quot;</span> + wxPayUnifiedOrderResult.getPrepayId();
+            <span class="hljs-type">String</span> <span class="hljs-variable">sign</span> <span class="hljs-operator">=</span> DigestUtils.md5Hex(<span class="hljs-string">&quot;appId=&quot;</span> + appId + <span class="hljs-string">&quot;&amp;nonceStr=&quot;</span> + nonceStr + <span class="hljs-string">&quot;&amp;package=&quot;</span> + packageStr + <span class="hljs-string">&quot;&amp;signType=MD5&amp;timeStamp=&quot;</span> + timeStamp + <span class="hljs-string">&quot;&amp;key=&quot;</span> + key);
+            result.put(<span class="hljs-string">&quot;appId&quot;</span>, appId);
+            result.put(<span class="hljs-string">&quot;timeStamp&quot;</span>, timeStamp + <span class="hljs-string">&quot;&quot;</span>);
+            result.put(<span class="hljs-string">&quot;nonceStr&quot;</span>, nonceStr);
+            result.put(<span class="hljs-string">&quot;package&quot;</span>, packageStr);
+            result.put(<span class="hljs-string">&quot;signType&quot;</span>, <span class="hljs-string">&quot;MD5&quot;</span>);
+            result.put(<span class="hljs-string">&quot;paySign&quot;</span>, sign);
+        }
+        result.put(<span class="hljs-string">&quot;resultCode&quot;</span>, wxPayUnifiedOrderResult.getResultCode());
+    } <span class="hljs-keyword">catch</span> (WxPayException e) {
+        result.put(<span class="hljs-string">&quot;returnCode&quot;</span>, e.getReturnCode());
+        result.put(<span class="hljs-string">&quot;returnMsg&quot;</span>, e.getReturnMsg());
+        result.put(<span class="hljs-string">&quot;resultCode&quot;</span>, e.getResultCode());
+        result.put(<span class="hljs-string">&quot;errCode&quot;</span>, e.getErrCode());
+        result.put(<span class="hljs-string">&quot;errCodeDes&quot;</span>, e.getErrCodeDes());
+    }
+
+    <span class="hljs-comment">// 直接返回result给前端 前端根据result直接调起支付API</span>
+    <span class="hljs-keyword">return</span> result;
+}
+</code></pre>
+<p>这里需要和前端约定好，前端发送请求的时候只需要带上3个参数：</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+    “outTradeNo”<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;openId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;totalFee&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1000</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+
+          <h5 id="f788cffd">主动查询支付结果并回写</h5><pre><code class="hljs language-java"><span class="hljs-meta">@GetMapping(&quot;/checkOrderPaymentState&quot;)</span>
+<span class="hljs-meta">@ResponseBody</span>
+<span class="hljs-keyword">public</span> Object <span class="hljs-title function_">queryOrder</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(required = false)</span> String transactionId, <span class="hljs-meta">@RequestParam</span> String outTradeNo)</span> {
+    Map&lt;String, String&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(<span class="hljs-number">8</span>);
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-type">WxPayOrderQueryResult</span> <span class="hljs-variable">wxPayOrderQueryResult</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.wxService.queryOrder(transactionId, outTradeNo);
+        <span class="hljs-type">Oder</span> <span class="hljs-variable">od</span> <span class="hljs-operator">=</span> orderService.getOrderByOId(Integer.parseInt(outTradeNo));
+
+        <span class="hljs-comment">// 仅在该情况下主动更新数据库的支付状态</span>
+        <span class="hljs-comment">// 1. 该订单在数据库存在； 2. 该订单的支付状态在数据库为未支付； 3. 该订单的支付状态在微信数据库为已支付</span>
+        <span class="hljs-keyword">if</span> (od != <span class="hljs-literal">null</span>
+                &amp;&amp; od.getPaymentStatus() == <span class="hljs-number">0</span>
+                &amp;&amp; wxPayOrderQueryResult.getTradeState().equalsIgnoreCase(WeChatConfigParam.WX_PAY_SUCCESS_FLAG)) {
+            <span class="hljs-keyword">if</span> (orderService.updateOrderPaymentStatusByOid(od.getOid()) == <span class="hljs-number">1</span>) {
+                result.put(<span class="hljs-string">&quot;resultMsg&quot;</span>, <span class="hljs-string">&quot;UPDATE_SUCCESS&quot;</span>);
+            } <span class="hljs-keyword">else</span> {
+                result.put(<span class="hljs-string">&quot;resultMsg&quot;</span>, <span class="hljs-string">&quot;UPDATE_FAIL&quot;</span>);
+            }
+        } <span class="hljs-keyword">else</span> {
+            result.put(<span class="hljs-string">&quot;resultMsg&quot;</span>, <span class="hljs-string">&quot;UNABLE_TO_UPDATE&quot;</span>);
+        }
+    } <span class="hljs-keyword">catch</span> (WxPayException e) {
+        log.warn(<span class="hljs-string">&quot;No such pay order with oid:&quot;</span> + outTradeNo);
+        result.put(<span class="hljs-string">&quot;resultMsg&quot;</span>, <span class="hljs-string">&quot;NO_SUCH_PAYMENT_ORDER_IN_WECHAT&quot;</span>);
+        <span class="hljs-keyword">return</span> result;
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+</code></pre>
+
+          <h5 id="152959ea">提供给微信后台的notify接口</h5><pre><code class="hljs language-java"><span class="hljs-meta">@PostMapping(&quot;/notify/order&quot;)</span>
+<span class="hljs-keyword">public</span> String <span class="hljs-title function_">parseOrderNotifyResult</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> String xmlData)</span> <span class="hljs-keyword">throws</span> WxPayException {
+    <span class="hljs-keyword">final</span> <span class="hljs-type">WxPayOrderNotifyResult</span> <span class="hljs-variable">notifyResult</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.wxService.parseOrderNotifyResult(xmlData);
+    <span class="hljs-type">String</span> <span class="hljs-variable">outTradeNo</span> <span class="hljs-operator">=</span> notifyResult.getOutTradeNo();
+    <span class="hljs-type">Oder</span> <span class="hljs-variable">od</span> <span class="hljs-operator">=</span> orderService.getOrderByOId(Integer.parseInt(outTradeNo));
+    <span class="hljs-comment">// 从数据库获取该订单的总金额 单位为 ‘元’ 乘以100转为 ‘分’</span>
+    <span class="hljs-type">Float</span> <span class="hljs-variable">totalPrice</span> <span class="hljs-operator">=</span> od.getTotalPrice() * <span class="hljs-number">100</span>;
+    <span class="hljs-comment">// 微信后台通知的支付结果中的交易金额 单位为 ‘分’</span>
+    <span class="hljs-type">Float</span> <span class="hljs-variable">totalFee</span> <span class="hljs-operator">=</span> Float.valueOf(notifyResult.getTotalFee());
+    <span class="hljs-keyword">if</span> (totalFee.equals(totalPrice)) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">updateCount</span>  <span class="hljs-operator">=</span> orderService.updateOrderPaymentStatusByOid(od.getOid());
+        <span class="hljs-keyword">if</span> (updateCount != <span class="hljs-number">1</span>){
+            <span class="hljs-keyword">return</span> WxPayNotifyResponse.success(WeChatConfigParam.WX_PAY_FAIL_FLAG);
+        }
+        <span class="hljs-keyword">return</span> WxPayNotifyResponse.success(WeChatConfigParam.WX_PAY_SUCCESS_FLAG);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> WxPayNotifyResponse.success(WeChatConfigParam.WX_PAY_FAIL_FLAG);
+    }
+}
+</code></pre>
+
+          <h3 id="6594a8b5">后话</h3><p>需求简单，所以只用到了请求支付下单以及查询支付结果这两个接口，退款的接口什么的都没写，用了大概1天的时间调通，3天的时间完善上线</p>

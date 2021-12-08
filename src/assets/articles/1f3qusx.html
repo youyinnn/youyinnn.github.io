@@ -1,0 +1,122 @@
+
+          <h3 id="15ab87c3">What is HashTable</h3><p>Of all structure we learn before like &quot;array&quot; or &quot;stack&quot;, the element&#39;s position on their structure is not absolute, it&#39;s uncertain which means there is no pattern on it.  </p>
+<p>So the searching operation was always base on &quot;comparing&quot;,  the searching efficiency of them were dependence on the times they perform compare.</p>
+<p>In a perfect situation is that we don&#39;t want to do any comparing opts, them we grape the element at once. So we need something to record the relationship between key value and the place where it store. Then next time we seek a key, we would able to use this relationship to grape it immediately.</p>
+<p>We define the relationship as <strong>&quot;Hash&quot;</strong>.</p>
+<p><img src="https://www.geeksforgeeks.org/wp-content/uploads/HashingDataStructure-min-768x384.png" alt="hashing ds"></p>
+<p>And we will discuss two aspect of it: <strong>&quot;Hash Method&quot;</strong> &amp; <strong>&quot;Collision Handle&quot;</strong></p>
+
+          <h3 id="adbc61f3">Hash Method</h3><p>There are many ways to hash, and we better know what is a good hash method before we code it.</p>
+<p>A good hash method will mapping any key to a un-used place, which means there is no collision for all elements. The probability of it is all with the same. We call it <strong>Uniform Hash Method</strong>.</p>
+<p><strong>Capture information on key</strong></p>
+<p>$$
+H(key) = key \\ H(key) = a \cdotp key + b
+$$</p>
+<p><strong>Mod</strong>
+$$
+H(key) = | key|\mod rank
+$$
+Assume thay our hash-table&#39;s length is <strong>rank</strong>, with this way, we could always get a rightful index of it.</p>
+
+          <h3 id="adf619c8">Collision Handle</h3><p>Since a hash function gets us a small number for a big key, there is possibility that two keys result in same value. The situation where a newly inserted key maps to an already occupied slot in hash table is called collision and must be handled using some collision handling technique. Following are the ways to handle collisions:</p>
+<ul>
+<li><p>**Chaining:**The idea is to make each cell of hash table point to a linked list of records that have same hash function value. Chaining is simple, but requires additional memory outside the table.</p>
+<p>  Like JDK&#39;s <code>HashMap</code>, link nodes when meet collision.</p>
+</li>
+<li><p><strong>Open Addressing:</strong> In open addressing, all elements are stored in the hash table itself. Each table entry contains either a record or NIL. When searching for an element, we one by one examine table slots until the desired element is found or it is clear that the element is not in the table.</p>
+<p>  We need a offset to avoid the collision:</p>
+<ol>
+<li>Linear Detection：[1，2，3，4，┈，m - 1] <strong>forward</strong>, [-1，-2，-3，-4，┈，0] <strong>backward</strong></li>
+<li>Quadratic Linear Detection：1^2, -1^2, 2^2, -2^2, 3^2 ┈</li>
+</ol>
+</li>
+<li><p><strong>Re-Hashing:</strong> set multiple stage for hash method, hash util no collision</p>
+</li>
+</ul>
+
+          <h3 id="7e388c9b">Practice</h3><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">HashableInteger</span> {
+    <span class="hljs-type">int</span> <span class="hljs-title function_">hash</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span>;
+    <span class="hljs-type">int</span> <span class="hljs-title function_">collisionHandle</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setHashTable</span><span class="hljs-params">(<span class="hljs-type">int</span>[] originSequence)</span>;
+    <span class="hljs-type">int</span> <span class="hljs-title function_">seek</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">showTable</span><span class="hljs-params">()</span>;
+}
+</code></pre>
+
+          <h4 id="6d9d7c8b">Linear Detection HashTable</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LdHashTable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HashableInteger</span> {
+    <span class="hljs-keyword">private</span> Integer[] table;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">LdHashTable</span><span class="hljs-params">(<span class="hljs-type">int</span>[] originSeq)</span> {setHashTable(originSeq);}
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hash</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
+        <span class="hljs-keyword">return</span> Math.abs(key) % table.length;
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">collisionHandle</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
+        <span class="hljs-keyword">return</span> linearDetection(key, <span class="hljs-literal">false</span>);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setHashTable</span><span class="hljs-params">(<span class="hljs-type">int</span>[] originalSeq)</span> {
+        <span class="hljs-comment">// table&#x27;s rank is double</span>
+        <span class="hljs-built_in">this</span>.table = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[originalSeq.length &lt;&lt; <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : originalSeq) {
+            <span class="hljs-comment">// detection the right place the key should set on hash table</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">place</span> <span class="hljs-operator">=</span> collisionHandle(key);
+            table[place] = key;
+        }
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">seek</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
+        <span class="hljs-keyword">return</span> linearDetection(key, <span class="hljs-literal">true</span>);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">showTable</span><span class="hljs-params">()</span> {
+        System.out.println(Arrays.toString(table));
+    }
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">linearDetection</span><span class="hljs-params">(<span class="hljs-type">int</span> key, <span class="hljs-type">boolean</span> seek)</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">hash</span> <span class="hljs-operator">=</span> hash(key);
+        <span class="hljs-comment">// detect key&#x27;s position in hash table at once hash()</span>
+        <span class="hljs-keyword">if</span> (!seek &amp;&amp; table[hash] == <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">return</span> hash;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash] == <span class="hljs-literal">null</span>) {
+            <span class="hljs-comment">// no match found</span>
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash] == key) {
+            <span class="hljs-comment">// match key</span>
+            <span class="hljs-keyword">return</span> hash;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// collsion handle with linear detection</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">offset</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+            <span class="hljs-type">boolean</span> <span class="hljs-variable">after</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+            <span class="hljs-comment">// linear detect forward</span>
+            <span class="hljs-keyword">while</span> (hash + offSet &lt; table.length) {
+                <span class="hljs-keyword">if</span> (!seek &amp;&amp; table[hash + offSet] == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">break</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash + offSet] == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash + offSet] == key) {
+                    <span class="hljs-keyword">return</span> hash + offSet;
+                }
+                offSet++;
+            }
+            <span class="hljs-comment">// liner detect backward</span>
+            <span class="hljs-keyword">if</span> (hash + offSet == table.length) {
+                offSet = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">while</span> (hash - offSet &gt;= <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">if</span> (!seek &amp;&amp; table[hash - offSet] == <span class="hljs-literal">null</span>) {
+                        <span class="hljs-keyword">break</span>;
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash - offSet] == <span class="hljs-literal">null</span>) {
+                        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek &amp;&amp; table[hash - offSet] == key) {
+                        <span class="hljs-keyword">return</span> hash + offSet;
+                    }
+                    offSet++;
+                }
+            } <span class="hljs-keyword">else</span> {
+                after = <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-keyword">return</span> after ? hash + offSet : hash - offSet;
+        }
+    }
+}
+</code></pre>

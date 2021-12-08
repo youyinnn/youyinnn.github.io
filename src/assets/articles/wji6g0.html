@@ -64,47 +64,47 @@ T2   T3                           T3   T4
 
           <h4 id="cb315841">结构与过程</h4>
           <h5 id="e05a12fc">结点结构</h5><p>结构比较简单，左右两子和平衡高度</p>
-<pre><code class="language-java">class Node {
-    int key, height;
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {
+    <span class="hljs-type">int</span> key, height;
     Node left, right;
-    Node(int d) {
+    Node(<span class="hljs-type">int</span> d) {
         key = d;
-        height = 1;
+        height = <span class="hljs-number">1</span>;
     }
 }
-class AVLTree {
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AVLTree</span> {
     Node root;
-    // A utility function to get the height of the tree
-    int height(Node N) {
-        if (N == null)
-            return 0;
-        return N.height;
+    <span class="hljs-comment">// A utility function to get the height of the tree</span>
+    <span class="hljs-type">int</span> <span class="hljs-title function_">height</span><span class="hljs-params">(Node N)</span> {
+        <span class="hljs-keyword">if</span> (N == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> N.height;
     }
-    // A utility function to get maximum of two integers
-    int max(int a, int b) {
-        return (a &gt; b) ? a : b;
+    <span class="hljs-comment">// A utility function to get maximum of two integers</span>
+    <span class="hljs-type">int</span> <span class="hljs-title function_">max</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> {
+        <span class="hljs-keyword">return</span> (a &gt; b) ? a : b;
     }
-    // Get Balance factor of node N
-    int getBalance(Node N) {
-        if (N == null)
-            return 0;
-        return height(N.left) - height(N.right);
+    <span class="hljs-comment">// Get Balance factor of node N</span>
+    <span class="hljs-type">int</span> <span class="hljs-title function_">getBalance</span><span class="hljs-params">(Node N)</span> {
+        <span class="hljs-keyword">if</span> (N == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> height(N.left) - height(N.right);
     }
-    // ...
+    <span class="hljs-comment">// ...</span>
 }
 </code></pre>
 
-          <h5 id="f1f9b735">右旋</h5><pre><code class="language-java">Node rightRotate(Node y) {
-    Node x = y.left;
-    Node T2 = x.right;
-    // Perform rotation
+          <h5 id="f1f9b735">右旋</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">rightRotate</span><span class="hljs-params">(Node y)</span> {
+    <span class="hljs-type">Node</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> y.left;
+    <span class="hljs-type">Node</span> <span class="hljs-variable">T2</span> <span class="hljs-operator">=</span> x.right;
+    <span class="hljs-comment">// Perform rotation</span>
     x.right = y;
     y.left = T2;
-    // Update heights
-    y.height = max(height(y.left), height(y.right)) + 1;
-    x.height = max(height(x.left), height(x.right)) + 1;
-    // Return new root
-    return x;
+    <span class="hljs-comment">// Update heights</span>
+    y.height = max(height(y.left), height(y.right)) + <span class="hljs-number">1</span>;
+    x.height = max(height(x.left), height(x.right)) + <span class="hljs-number">1</span>;
+    <span class="hljs-comment">// Return new root</span>
+    <span class="hljs-keyword">return</span> x;
 }
 </code></pre>
 <pre><code>// 图示
@@ -115,17 +115,17 @@ class AVLTree {
    T2                        T2
 </code></pre>
 
-          <h5 id="b1d02a07">左旋</h5><pre><code class="language-java">Node leftRotate(Node x) {
-    Node y = x.right;
-    Node T2 = y.left;
-    // Perform rotation
+          <h5 id="b1d02a07">左旋</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">leftRotate</span><span class="hljs-params">(Node x)</span> {
+    <span class="hljs-type">Node</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> x.right;
+    <span class="hljs-type">Node</span> <span class="hljs-variable">T2</span> <span class="hljs-operator">=</span> y.left;
+    <span class="hljs-comment">// Perform rotation</span>
     y.left = x;
     x.right = T2;
-    //  Update heights
-    x.height = max(height(x.left), height(x.right)) + 1;
-    y.height = max(height(y.left), height(y.right)) + 1;
-    // Return new root
-    return y;
+    <span class="hljs-comment">//  Update heights</span>
+    x.height = max(height(x.left), height(x.right)) + <span class="hljs-number">1</span>;
+    y.height = max(height(y.left), height(y.right)) + <span class="hljs-number">1</span>;
+    <span class="hljs-comment">// Return new root</span>
+    <span class="hljs-keyword">return</span> y;
 }
 </code></pre>
 <pre><code>// 图示
@@ -137,50 +137,50 @@ class AVLTree {
 </code></pre>
 <p>其他双旋操作都是基于这两个基本操作来搞的；</p>
 
-          <h5 id="3aa07ac0">插入</h5><pre><code class="language-java">Node insert(Node node, int key) {
-    /* 1.  Perform the normal BST insertion */
-    if (node == null)
-        return (new Node(key));
-    if (key &lt; node.key)
+          <h5 id="3aa07ac0">插入</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">insert</span><span class="hljs-params">(Node node, <span class="hljs-type">int</span> key)</span> {
+    <span class="hljs-comment">/* 1.  Perform the normal BST insertion */</span>
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(key));
+    <span class="hljs-keyword">if</span> (key &lt; node.key)
         node.left = insert(node.left, key);
-    else if (key &gt; node.key)
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; node.key)
         node.right = insert(node.right, key);
-    else // Duplicate keys not allowed
-        return node;
+    <span class="hljs-keyword">else</span> <span class="hljs-comment">// Duplicate keys not allowed</span>
+        <span class="hljs-keyword">return</span> node;
  
-    /* 2. Update height of this ancestor node */
-    node.height = 1 + max(height(node.left),
+    <span class="hljs-comment">/* 2. Update height of this ancestor node */</span>
+    node.height = <span class="hljs-number">1</span> + max(height(node.left),
                           height(node.right));
  
-    /* 3. Get the balance factor of this ancestor
+    <span class="hljs-comment">/* 3. Get the balance factor of this ancestor
           node to check whether this node became
-          unbalanced */
-    int balance = getBalance(node);
+          unbalanced */</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">balance</span> <span class="hljs-operator">=</span> getBalance(node);
  
-    // If this node becomes unbalanced, then there
-    // are 4 cases 
-    // Left Left Case
-    if (balance &gt; 1 &amp;&amp; key &lt; node.left.key)
-        return rightRotate(node);
+    <span class="hljs-comment">// If this node becomes unbalanced, then there</span>
+    <span class="hljs-comment">// are 4 cases </span>
+    <span class="hljs-comment">// Left Left Case</span>
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &lt; node.left.key)
+        <span class="hljs-keyword">return</span> rightRotate(node);
  
-    // Right Right Case
-    if (balance &lt; -1 &amp;&amp; key &gt; node.right.key)
-        return leftRotate(node);
+    <span class="hljs-comment">// Right Right Case</span>
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &gt; node.right.key)
+        <span class="hljs-keyword">return</span> leftRotate(node);
  
-    // Left Right Case
-    if (balance &gt; 1 &amp;&amp; key &gt; node.left.key) {
+    <span class="hljs-comment">// Left Right Case</span>
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &gt; node.left.key) {
         node.left = leftRotate(node.left);
-        return rightRotate(node);
+        <span class="hljs-keyword">return</span> rightRotate(node);
     }
  
-    // Right Left Case
-    if (balance &lt; -1 &amp;&amp; key &lt; node.right.key) {
+    <span class="hljs-comment">// Right Left Case</span>
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &lt; node.right.key) {
         node.right = rightRotate(node.right);
-        return leftRotate(node);
+        <span class="hljs-keyword">return</span> leftRotate(node);
     }
  
-    /* return the (unchanged) node pointer */
-    return node;
+    <span class="hljs-comment">/* return the (unchanged) node pointer */</span>
+    <span class="hljs-keyword">return</span> node;
 }
 </code></pre>
 <p>我们来分析一下实现，我们插入一个新键，也许会破坏树的平衡，所以在插入操作完毕之后，我们就需要调整树平衡，由于实现中的插入是通过递归去实现的，<strong>所以递归路径上就记录了每一个经过的父节点</strong>，于是等我们从插入点最近的不平衡点开始回溯的时候，同时执行平衡性判断，然后依次通过旋转去调整<strong>回去路上</strong>每个点的平衡，以达到回到根节点的时候，整棵树就是平衡的；一下是几个关键点：</p>

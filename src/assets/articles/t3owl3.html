@@ -1,0 +1,508 @@
+<p>The series of &lt;Python Note&gt; is talking about some basic grammar rules of python, for quick search while I might use python.</p>
+<p>The first article will introduces  <code>print()</code> and <code>input()</code>, the comment syntax, variables assignment and some basic types in python.</p>
+
+          <h2 id="606c3d3b">A</h2>
+          <h3 id="a11f0928">Method: print() &amp; input()</h3><p>Example:</p>
+<pre><code class="hljs language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;NI&#x27;</span>, <span class="hljs-string">&#x27;Hao&#x27;</span>) <span class="hljs-comment"># NI HAO</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;1 + 3 =&#x27;</span>, <span class="hljs-number">1</span> + <span class="hljs-number">3</span>) <span class="hljs-comment"># 1 + 3 = 4</span>
+name = <span class="hljs-built_in">input</span>() <span class="hljs-comment"># type jack</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;name was signed as: &#x27;</span> + name) <span class="hljs-comment"># name was signed as:  jack</span>
+</code></pre>
+
+          <h4 id="c8d5388">print()</h4><p><code>print</code>(*<em>objects</em>, <em>sep=&#39; &#39;</em>, <em>end=&#39;\n&#39;</em>, <em>file=sys.stdout</em>, <em>flush=False</em>)</p>
+<p>Print <em>objects</em> to the text stream <em>file</em>, separated by <em>sep</em> and followed by <em>end</em>. <em>sep</em>, <em>end</em>, <em>file</em> and <em>flush</em>, if present, must be given as keyword arguments.</p>
+<pre><code class="hljs language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;NI&#x27;</span>, <span class="hljs-string">&#x27;Hao&#x27;</span>, sep=<span class="hljs-string">&#x27;-&#x27;</span>, end=<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># NI HAO</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;1 + 3 =&#x27;</span>, <span class="hljs-number">1</span> + <span class="hljs-number">3</span>) <span class="hljs-comment"># NI HAO1 + 3 = 4</span>
+</code></pre>
+
+          <h4 id="fcee7af2">input()</h4><p><code>input</code>([<em>prompt</em>])</p>
+<p>If the <em>prompt</em> argument is present, it is written to standard output without a trailing newline. The function then reads a line from input, converts it to a string (stripping a trailing newline), and returns that. When EOF is read, <a href="https://docs.python.org/3/library/exceptions.html#EOFError"><code>EOFError</code></a> is raised. Example:</p>
+<pre><code>&gt;&gt;&gt; s = input(&#x27;--&gt; &#x27;)  
+--&gt; Monty Python&#x27;s Flying Circus
+&gt;&gt;&gt; s  
+&quot;Monty Python&#x27;s Flying Circus&quot;
+</code></pre>
+
+          <h3 id="d034b5ec">Comment</h3><pre><code class="hljs language-python"><span class="hljs-comment"># single line</span>
+<span class="hljs-string">&#x27;&#x27;&#x27; multi-line 
+xixi = 123
+haha = 456
+&#x27;&#x27;&#x27;</span>
+</code></pre>
+
+          <h3 id="a0b8fe5f">Variables Assignment</h3><pre><code class="hljs language-python"><span class="hljs-comment"># assignment</span>
+var = <span class="hljs-string">&#x27;123&#x27;</span>
+var2, var3 = <span class="hljs-string">&#x27;123&#x27;</span>, <span class="hljs-number">456</span>
+
+<span class="hljs-comment"># delete reference</span>
+<span class="hljs-keyword">del</span> var
+<span class="hljs-comment"># call print(var) will raise NameError: name &#x27;var&#x27; is not defined</span>
+</code></pre>
+
+          <h2 id="4b416ef8">B</h2>
+          <h3 id="b78c1b73">Basic Types</h3>
+          <h4 id="4923158c">Boolean</h4>
+          <h5 id="8a153dc4">Truth Value Testing</h5><p><strong>Any object can be tested for truth value</strong>, for use in an <a href="https://docs.python.org/3/reference/compound_stmts.html#if"><code>if</code></a> or <a href="https://docs.python.org/3/reference/compound_stmts.html#while"><code>while</code></a> condition or as operand of the Boolean operations below.</p>
+<p>By default, an object <strong>is considered <code>true</code></strong> unless its class defines either a <a href="https://docs.python.org/3/reference/datamodel.html#object.__bool__"><code>__bool__()</code></a> method that returns <code>False</code> or a <a href="https://docs.python.org/3/reference/datamodel.html#object.__len__"><code>__len__()</code></a> method that returns zero, when called with the object. [<a href="https://docs.python.org/3/library/stdtypes.html#id12">1</a>]</p>
+<p>Here are most of the built-in objects considered  <strong><code>false</code></strong>:</p>
+<ul>
+<li>constants defined to be false: <code>None</code> and <code>False</code>.</li>
+<li>zero of any numeric type: <code>0</code>, <code>0.0</code>, <code>0j</code>, <code>Decimal(0)</code>, <code>Fraction(0, 1)</code></li>
+<li>empty sequences and collections: <code>&#39;&#39;</code>, <code>()</code>, <code>[]</code>, <code>{}</code>, <code>set()</code>, <code>range(0)</code></li>
+</ul>
+<p>Operations and built-in functions that have a Boolean result always return <code>0</code> or <code>False</code> for false and <code>1</code> or <code>True</code> for true, unless otherwise stated. (Important exception: the Boolean operations <code>or</code> and <code>and</code> always return one of their operands.)</p>
+
+          <h5 id="360fb7de">Operators</h5><pre><code class="hljs language-python">x <span class="hljs-keyword">or</span> y <span class="hljs-comment"># if x is false, then y, else x</span>
+x <span class="hljs-keyword">and</span> y <span class="hljs-comment"># if x is false, then x, else y</span>
+<span class="hljs-keyword">not</span> x <span class="hljs-comment"># if x is false, then True, else False</span>
+</code></pre>
+
+          <h5 id="ae2cc747">Comparisons</h5><p>There are eight comparison operations in Python. They all have the same priority (which is higher than that of the Boolean operations). Comparisons <strong>can be chained</strong> arbitrarily like <code>x &lt; y &lt;= z</code> which equivalent to <code>x &lt; y and y &lt;= z</code>, except that <em>y</em> is evaluated only once (but in both cases <em>z</em> is not evaluated at all when <code>x &lt; y</code> is found to be false).</p>
+<p>This table summarizes the comparison operations:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;</code></td>
+<td align="left">strictly less than</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;=</code></td>
+<td align="left">less than or equal</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;</code></td>
+<td align="left">strictly greater than</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;=</code></td>
+<td align="left">greater than or equal</td>
+</tr>
+<tr>
+<td align="left"><code>==</code></td>
+<td align="left">equal</td>
+</tr>
+<tr>
+<td align="left"><code>!=</code></td>
+<td align="left">not equal</td>
+</tr>
+<tr>
+<td align="left"><code>is</code></td>
+<td align="left">object identity</td>
+</tr>
+<tr>
+<td align="left"><code>is not</code></td>
+<td align="left">negated object identity</td>
+</tr>
+</tbody></table>
+<p>Any object can be compared with those operators when defining <code>__lt__()</code>,<code>__le__()</code>,<code>__eq__()</code>,<code>__ne__()</code>, <code>__gt__()</code>,<code>__ge__()</code> methods. </p>
+<p>These are the so-called “rich comparison” methods. The correspondence between operator symbols and method names is as follows: <code>x&lt;y</code> calls <code>x.__lt__(y)</code>, <code>x&lt;=y</code> calls <code>x.__le__(y)</code>, <code>x==y</code> calls <code>x.__eq__(y)</code>, <code>x!=y</code> calls <code>x.__ne__(y)</code>, <code>x&gt;y</code> calls <code>x.__gt__(y)</code>, and <code>x&gt;=y</code> calls <code>x.__ge__(y)</code>.</p>
+<p>Example:</p>
+<pre><code class="hljs language-python"><span class="hljs-meta">@total_ordering</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_is_valid_operand</span>(<span class="hljs-params">self, other</span>):
+        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">hasattr</span>(other, <span class="hljs-string">&quot;lastname&quot;</span>) <span class="hljs-keyword">and</span>
+                <span class="hljs-built_in">hasattr</span>(other, <span class="hljs-string">&quot;firstname&quot;</span>))
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__eq__</span>(<span class="hljs-params">self, other</span>):
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._is_valid_operand(other):
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">NotImplemented</span>
+        <span class="hljs-keyword">return</span> ((self.lastname.lower(), self.firstname.lower()) ==
+                (other.lastname.lower(), other.firstname.lower()))
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__lt__</span>(<span class="hljs-params">self, other</span>):
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._is_valid_operand(other):
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">NotImplemented</span>
+        <span class="hljs-keyword">return</span> ((self.lastname.lower(), self.firstname.lower()) &lt;
+                (other.lastname.lower(), other.firstname.lower()))
+</code></pre>
+
+          <h4 id="9bc100ab">Numeric Types</h4><p>The constructors <a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a>, <a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a>, and <a href="https://docs.python.org/3/library/functions.html#complex"><code>complex()</code></a> can be used to produce numbers of a specific type.</p>
+<p>All numeric types (except complex) support the following operations (for priorities of the operations, see <a href="https://docs.python.org/3/reference/expressions.html#operator-summary">Operator precedence</a>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operation</th>
+<th align="left">Result</th>
+<th align="left">Notes</th>
+<th align="left">Full documentation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>x + y</code></td>
+<td align="left">sum of <em>x</em> and <em>y</em></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>x - y</code></td>
+<td align="left">difference of <em>x</em> and <em>y</em></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>x * y</code></td>
+<td align="left">product of <em>x</em> and <em>y</em></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>x / y</code></td>
+<td align="left">quotient of <em>x</em> and <em>y</em></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>x // y</code></td>
+<td align="left">floored quotient of <em>x</em> and <em>y</em></td>
+<td align="left">(1)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>x % y</code></td>
+<td align="left">remainder of <code>x / y</code></td>
+<td align="left">(2)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>-x</code></td>
+<td align="left"><em>x</em> negated</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>+x</code></td>
+<td align="left"><em>x</em> unchanged</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>abs(x)</code></td>
+<td align="left">absolute value or magnitude of <em>x</em></td>
+<td align="left"></td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#abs"><code>abs()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>int(x)</code></td>
+<td align="left"><em>x</em> converted to integer</td>
+<td align="left">(3)(6)</td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>float(x)</code></td>
+<td align="left"><em>x</em> converted to floating point</td>
+<td align="left">(4)(6)</td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>complex(re, im)</code></td>
+<td align="left">a complex number with real part <em>re</em>, imaginary part <em>im</em>. <em>im</em> defaults to zero.</td>
+<td align="left">(6)</td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>c.conjugate()</code></td>
+<td align="left">conjugate of the complex number <em>c</em></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>divmod(x, y)</code></td>
+<td align="left">the pair <code>(x // y, x % y)</code></td>
+<td align="left">(2)</td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#divmod"><code>divmod()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>pow(x, y)</code></td>
+<td align="left"><em>x</em> to the power <em>y</em></td>
+<td align="left">(5)</td>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#pow"><code>pow()</code></a></td>
+</tr>
+<tr>
+<td align="left"><code>x ** y</code></td>
+<td align="left"><em>x</em> to the power <em>y</em></td>
+<td align="left">(5)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Notes:</p>
+<ol>
+<li><p>Also referred to as integer division. The resultant value is a whole integer, though the result’s type is not necessarily int. The result is always rounded towards minus infinity: <code>1//2</code> is <code>0</code>, <code>(-1)//2</code> is <code>-1</code>, <code>1//(-2)</code> is <code>-1</code>, and <code>(-1)//(-2)</code> is <code>0</code>.</p>
+</li>
+<li><p>Not for complex numbers. Instead convert to floats using <a href="https://docs.python.org/3/library/functions.html#abs"><code>abs()</code></a> if appropriate.</p>
+</li>
+<li><p>Conversion from floating point to integer may round or truncate as in C; see functions <a href="https://docs.python.org/3/library/math.html#math.floor"><code>math.floor()</code></a> and <a href="https://docs.python.org/3/library/math.html#math.ceil"><code>math.ceil()</code></a> for well-defined conversions.</p>
+</li>
+<li><p>float also accepts the strings “nan” and “inf” with an optional prefix “+” or “-” for Not a Number (NaN) and positive or negative infinity.</p>
+</li>
+<li><p>Python defines <code>pow(0, 0)</code> and <code>0 ** 0</code> to be <code>1</code>, as is common for programming languages.</p>
+</li>
+<li><p>The numeric literals accepted include the digits <code>0</code> to <code>9</code> or any Unicode equivalent (code points with the <code>Nd</code> property).</p>
+<p>See <a href="http://www.unicode.org/Public/12.1.0/ucd/extracted/DerivedNumericType.txt">http://www.unicode.org/Public/12.1.0/ucd/extracted/DerivedNumericType.txt</a> for a complete list of code points with the <code>Nd</code> property.</p>
+</li>
+</ol>
+<p>All <a href="https://docs.python.org/3/library/numbers.html#numbers.Real"><code>numbers.Real</code></a> types (<a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a> and <a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a>) also include the following operations:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operation</th>
+<th align="left">Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://docs.python.org/3/library/math.html#math.trunc"><code>math.trunc(x)</code></a></td>
+<td align="left"><em>x</em> truncated to <a href="https://docs.python.org/3/library/numbers.html#numbers.Integral"><code>Integral</code></a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://docs.python.org/3/library/functions.html#round"><strong><code>round(x[, n])</code></strong></a></td>
+<td align="left"><em>x</em> rounded to <em>n</em> digits, rounding half to even. If <em>n</em> is omitted, it defaults to 0.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://docs.python.org/3/library/math.html#math.floor"><code>math.floor(x)</code></a></td>
+<td align="left">the greatest <a href="https://docs.python.org/3/library/numbers.html#numbers.Integral"><code>Integral</code></a> &lt;= <em>x</em></td>
+</tr>
+<tr>
+<td align="left"><a href="https://docs.python.org/3/library/math.html#math.ceil"><code>math.ceil(x)</code></a></td>
+<td align="left">the least <a href="https://docs.python.org/3/library/numbers.html#numbers.Integral"><code>Integral</code></a> &gt;= <em>x</em></td>
+</tr>
+</tbody></table>
+
+          <h4 id="939f875a">String</h4>
+          <h5 id="28ba2401">Basic Usage</h5><pre><code class="hljs language-python"><span class="hljs-comment"># single quotes</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;spam eggs&#x27;</span>)
+<span class="hljs-comment"># double quotes</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;spam eggs&quot;</span>)
+<span class="hljs-comment"># \ can be used to escape quotes</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;dosn\&#x27;t&quot;</span>)
+
+<span class="hljs-comment"># index</span>
+word = <span class="hljs-string">&quot;abcd&quot;</span>
+<span class="hljs-built_in">print</span>(word[<span class="hljs-number">1</span>])
+<span class="hljs-comment"># range</span>
+<span class="hljs-built_in">print</span>(word[-<span class="hljs-number">1</span>])
+<span class="hljs-built_in">print</span>(word[<span class="hljs-number">2</span>:<span class="hljs-number">3</span>])
+<span class="hljs-built_in">print</span>(word[:<span class="hljs-number">3</span>])
+
+<span class="hljs-comment"># span multiple line with triple quotes &#x27;&#x27;&#x27;... &#x27;&#x27;&#x27; or &quot;&quot;&quot;...&quot;&quot;&quot;</span>
+<span class="hljs-comment"># backslash can prevent newline when placed at the end of the line</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;&#x27;\
+Options: 
+    -a      all
+    -c      clean\
+&#x27;&#x27;&#x27;</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;&#x27;\
+Show the index of a string like \&#x27;Python\&#x27;
+    +---+---+---+---+---+---+
+    | P | y | t | h | o | n |
+    +---+---+---+---+---+---+
+      0   1   2   3   4   5   6
+     -6  -5  -4  -3  -2  -1\
+&#x27;&#x27;&#x27;</span>)
+
+<span class="hljs-comment"># operator &#x27;+&#x27; and &#x27;*&#x27;</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;h&#x27;</span> +  <span class="hljs-number">2</span> * <span class="hljs-string">&#x27;mmm&#x27;</span>)
+
+<span class="hljs-comment"># operator &#x27;in&#x27; to see if a substr is contained in a sting</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;xi&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;awpfasdxidapdpw&#x27;</span>)
+
+<span class="hljs-comment"># built-in function len()</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(<span class="hljs-string">&#x27;1234&#x27;</span>))
+
+<span class="hljs-comment"># method</span>
+<span class="hljs-comment">## capitalize / lower / upper the str</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello&#x27;</span>.capitalize())
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello&#x27;</span>.upper())
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;ASD&#x27;</span>.lower())
+<span class="hljs-comment">## centered / left justify / right justify the str with width</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;HELLO&#x27;</span>.center(<span class="hljs-number">2</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;HELLO&#x27;</span>.center(<span class="hljs-number">10</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;HELLO&#x27;</span>.center(<span class="hljs-number">11</span>, <span class="hljs-string">&#x27;-&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;HELLO&#x27;</span>.ljust(<span class="hljs-number">11</span>, <span class="hljs-string">&#x27;-&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;HELLO&#x27;</span>.rjust(<span class="hljs-number">11</span>, <span class="hljs-string">&#x27;-&#x27;</span>))
+
+<span class="hljs-comment">## find and return the lowest index</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello&#x27;</span>.find(<span class="hljs-string">&#x27;ll&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello&#x27;</span>.find(<span class="hljs-string">&#x27;lel&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hellohello&#x27;</span>.rfind(<span class="hljs-string">&#x27;llo&#x27;</span>))
+
+<span class="hljs-comment">## index similar to find() but raise ValueError when the substr is not found</span>
+<span class="hljs-comment"># print(&#x27;hello&#x27;.index(&#x27;lel&#x27;))</span>
+<span class="hljs-comment"># print(&#x27;hello&#x27;.rindex(&#x27;lel&#x27;))</span>
+
+<span class="hljs-comment">## isalnum() / isalpha()</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;1123&#x27;</span>.isalnum())
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;aasd&#x27;</span>.isalpha())
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;   &#x27;</span>.isspace())
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;132&#x27;</span>.isnumeric())
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;asddda&#x27;</span>.replace(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;asddda&#x27;</span>.replace(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-number">2</span>))
+
+<span class="hljs-comment">## endswith / startswith</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;asd&#x27;</span>.endswith(<span class="hljs-string">&#x27;d&#x27;</span>))
+
+<span class="hljs-comment">## split</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;a,b,c&#x27;</span>.split(<span class="hljs-string">&#x27;,&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;a,b,c&#x27;</span>.split(<span class="hljs-string">&#x27;,&#x27;</span>, maxsplit=<span class="hljs-number">1</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;asd\naasd\naasda\r&#x27;</span>.splitlines())
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;asd\naasd\naasda\r&#x27;</span>.splitlines(keepends=<span class="hljs-literal">True</span>))
+
+<span class="hljs-comment">## strip remove certain characters from the sides of a string</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;#....ASdas..asad##..dadkjl....##...#&#x27;</span>.strip(<span class="hljs-string">&#x27;.#&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;#....ASdas..asad##..dadkjl....##...#&#x27;</span>.lstrip(<span class="hljs-string">&#x27;.#&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;#....ASdas..asad##..dadkjl....##...#&#x27;</span>.rstrip(<span class="hljs-string">&#x27;.#&#x27;</span>))
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs language-console">spam eggs
+spam eggs
+dosn&#x27;t
+str asd number 123
+b
+d
+c
+abc
+Options:
+    -a      all
+    -c      clean
+Show the index of a string like &#x27;Python&#x27;
+    +---+---+---+---+---+---+
+    | P | y | t | h | o | n |
+    +---+---+---+---+---+---+
+      0   1   2   3   4   5   6
+     -6  -5  -4  -3  -2  -1
+hmmmmmm
+True
+4
+Hello
+HELLO
+asd
+HELLO
+  HELLO   
+---HELLO---
+HELLO------
+------HELLO
+2
+-1
+7
+True
+True
+True
+True
+aseeea
+aseeda
+True
+[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]
+[&#x27;a&#x27;, &#x27;b,c&#x27;]
+[&#x27;asd&#x27;, &#x27;aasd&#x27;, &#x27;aasda&#x27;]
+[&#x27;asd\n&#x27;, &#x27;aasd\n&#x27;, &#x27;aasda\r&#x27;]
+ASdas..asad##..dadkjl
+ASdas..asad##..dadkjl....##...#
+<span class="hljs-meta">#</span><span class="language-bash">....ASdas..asad<span class="hljs-comment">##..dadkjl</span></span>
+</code></pre>
+
+          <h5 id="5dbe6705">Format</h5><pre><code class="hljs language-python"><span class="hljs-comment"># fill with index</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{}-{}-{}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{0}-{2}-{1}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
+
+<span class="hljs-comment"># fill by values: add &#x27;f&#x27; flag before quotes</span>
+a = <span class="hljs-string">&#x27;xixi&#x27;</span>
+b = <span class="hljs-string">&#x27;haha&#x27;</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;<span class="hljs-subst">{a}</span> <span class="hljs-subst">{b}</span>&#x27;</span>)
+
+<span class="hljs-comment"># fill with keys</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{a} {b}&#x27;</span>.<span class="hljs-built_in">format</span>(a=<span class="hljs-string">&#x27;xixi&#x27;</span>, b=<span class="hljs-string">&#x27;haha&#x27;</span>))
+
+<span class="hljs-comment"># fill with dict&#x27;s key</span>
+d = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string">&#x27;xixi&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-string">&#x27;haha&#x27;</span>}
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{a} {b}&#x27;</span>.<span class="hljs-built_in">format</span>(**d))
+
+<span class="hljs-comment"># fill with attributes</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, x, y</span>):
+        self.x, self.y = x, y
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Point({me.x}, {me.y})&#x27;</span>.<span class="hljs-built_in">format</span>(me = self)
+
+<span class="hljs-built_in">print</span>(Point(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))
+
+<span class="hljs-comment"># aligning string</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:&gt;30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:&lt;30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:^30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:-^30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:*^30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{:*&lt;30}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;align&#x27;</span>))
+
+<span class="hljs-comment"># converting the value between different base</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;int:{0:d} hex:{0:x} oct:{0:o} bin:{0:b}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">10</span>))
+<span class="hljs-comment">## with prefix</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;int:{0:d} hex:{0:#x} oct:{0:#o} bin:{0:#b}&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">10</span>))
+
+<span class="hljs-comment"># expressing percentage</span>
+i = <span class="hljs-number">1</span> / <span class="hljs-number">3</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{0:&gt;20.2%}&#x27;</span>.<span class="hljs-built_in">format</span>(i)) <span class="hljs-comment"># align and percentage</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{0:*&gt;20.2%}&#x27;</span>.<span class="hljs-built_in">format</span>(i))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{0:&gt;20.10%}&#x27;</span>.<span class="hljs-built_in">format</span>(i))
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;{0:.10%}&#x27;</span>.<span class="hljs-built_in">format</span>(i))
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs language-console">1-2-3
+1-3-2
+xixi haha
+xixi haha
+xixi haha
+Point(3, 4)
+                         align
+align
+            align
+------------align-------------
+************align*************
+align*************************
+int:10 hex:a oct:12 bin:1010
+int:10 hex:0xa oct:0o12 bin:0b1010
+              33.33%
+**************33.33%
+      33.3333333333%
+33.3333333333%
+</code></pre>
+
+          <h5 id="f8ee01ce">Regex</h5><pre><code class="hljs language-python"><span class="hljs-comment"># compile a regular expression pattern into a regular expression object </span>
+<span class="hljs-keyword">import</span> re
+
+<span class="hljs-built_in">str</span> = <span class="hljs-string">&#x27;aasddohwawddogasads&#x27;</span>
+
+<span class="hljs-comment"># use regular expression object </span>
+po = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;do[gh]&#x27;</span>)
+<span class="hljs-built_in">print</span>(po.search(<span class="hljs-built_in">str</span>))
+
+<span class="hljs-comment"># use re directly</span>
+<span class="hljs-built_in">print</span>(re.search(<span class="hljs-string">r&#x27;do[gh]&#x27;</span>, <span class="hljs-built_in">str</span>))
+
+<span class="hljs-comment"># return all matching substr as list</span>
+<span class="hljs-built_in">print</span>(re.findall(<span class="hljs-string">r&#x27;do[gh]&#x27;</span>, <span class="hljs-built_in">str</span>))
+
+<span class="hljs-comment"># return all matching Match Object as list</span>
+<span class="hljs-keyword">for</span> rs <span class="hljs-keyword">in</span> re.finditer(<span class="hljs-string">r&#x27;do[gh]&#x27;</span>, <span class="hljs-built_in">str</span>):
+    <span class="hljs-built_in">print</span>(rs)
+
+<span class="hljs-comment"># split str</span>
+<span class="hljs-built_in">print</span>(re.split(<span class="hljs-string">r&#x27;[a-z]&#x27;</span>, <span class="hljs-string">&#x27;adas123fd12d123&#x27;</span>, flags=re.IGNORECASE))
+
+<span class="hljs-comment"># replace</span>
+<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&amp;&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE))
+<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&amp;&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE, count=<span class="hljs-number">1</span>))
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs language-console">&lt;re.Match object; span=(4, 7), match=&#x27;doh&#x27;&gt;
+&lt;re.Match object; span=(4, 7), match=&#x27;doh&#x27;&gt;
+[&#x27;doh&#x27;, &#x27;dog&#x27;]
+&lt;re.Match object; span=(4, 7), match=&#x27;doh&#x27;&gt;
+&lt;re.Match object; span=(11, 14), match=&#x27;dog&#x27;&gt;
+[&#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;123&#x27;, &#x27;&#x27;, &#x27;12&#x27;, &#x27;123&#x27;]
+You &amp; Me, Me &amp; You.
+You &amp; Me, Me And You.
+</code></pre>

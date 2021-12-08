@@ -1,0 +1,120 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>其实必要的时候使用<code>git commit -m &quot;xxxxx&quot;</code>也木有关系 但你也别每条都这样写</p>
+<p></div></p>
+<!-- more -->
+
+<p>好久没更博了，最近一直在疯狂的推<a href="https://github.com/DomBro96/dataimport">数据快速导入</a>的项目，推的使用在使用git做一些fix和optimize等工作，经常会进行版本回退和msg查阅，看看我昨天晚上到底干了些什么。</p>
+<p>然后发现我特么看不懂前一天晚上写的什么鬼msg，这时候才觉得，有一个良好的commit习惯是多么重要！</p>
+<p>之前有转过一篇：<a href="https://youyinnn.github.io/post/ce7091ac.html">5 Useful Tips For A Better Commit Message</a></p>
+<p>按照这篇文章，我自己给我自己的commit msg做个规范。</p>
+
+          <h3 id="9ac1b61a">第一行</h3><p>使用规定的标识符表明当次commit一共做了哪些工作,不同的提示符使用空格<code> </code>分隔，提示符规定如下（持续补充）：</p>
+<p>我把一次工作的标识符分“动作”、“对象”两部分描述：</p>
+<ul>
+<li><p>可能的动作前缀有：</p>
+<ul>
+<li><p>基本操作前缀：</p>
+<blockquote>
+<p><code>ADD</code>：Add 增加
+<code>DEL</code>：Delete 删除
+<code>IMP</code>：Improve 改进
+<code>MG</code>：Merge 合并
+<code>MOD</code>：Modifie 修改
+<code>CPL</code>：Complete 完成</p>
+</blockquote>
+</li>
+<li><p>其他操作前缀：</p>
+<blockquote>
+<p><code>RN</code>：Rename 重命名
+<code>MOV</code>：Move 移动
+<code>CRE</code>：Create 创造
+<code>AMD</code>：Amend 修正
+<code>SUP</code>：Supplement 补充
+<code>RM</code>：Remove 移除</p>
+</blockquote>
+</li>
+<li><p>独立动作：</p>
+<blockquote>
+<p><code>INIT</code>：Initialized Repository 初始化仓库
+<code>RELEASE</code>：Release a Version 发布一个版本
+<code>TODO</code>：Todo List 增加TODO
+<code>TOFUNC</code>：提取重复代码为方法增加代码重用
+<code>FIXBUG</code>：Fix Bug 修复BUG
+<code>RPBUG</code>：Report Bug 通报BUG
+<code>SAYING</code>：Saying 有话要说</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>可能的对象有：</p>
+<ul>
+<li><p>业务之内的对象：</p>
+<blockquote>
+<p><code>FEAT</code>：Feature 某个功能
+<code>MODU</code>：Module 某个模块
+<code>FUNC</code>：Function 某个函数
+<code>CODE</code>：Code 某段代码
+<code>CONT</code>：Content 某种内容
+<code>ANNO</code>：Annotation 某些注释</p>
+</blockquote>
+</li>
+<li><p>业务之外的对象：</p>
+<blockquote>
+<p><code>CONF</code>：Config 配置文件
+<code>DEP</code>：Dependences 依赖配置
+<code>POM</code>：POM文件
+<code>README</code>：Readme文件
+<code>IGNORE</code>：gitignore文件
+<code>FILE</code>：File
+<code>STRUCT</code>：Project Structure 项目结构</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>所以我commit的第一行会是这样的：</p>
+<pre><code class="hljs language-vim">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE
+</code></pre>
+<p>这表示我当次commit完成了：</p>
+<blockquote>
+<p><em>我在完成一个<code>新功能</code>的同时还<code>发现了一个BUG</code>顺便<code>封装了之前写的重复的代码为函数</code>提高了代码重用率接着<code>修复了之前发现的一些BUG</code>最后还<code>修改了一下ignore文件</code>！</em></p>
+</blockquote>
+
+          <h3 id="12f9fa10">第二行</h3><p>得是一个空行</p>
+
+          <h3 id="97d1d46b">第三行</h3><p>开始按照第一行的写下的工作标识符顺序分条进行简要说明，一般来说，简单而清晰表达即可。但是有以下规定：</p>
+<ul>
+<li>以工作标识符加冒号占一行。</li>
+<li>如有当前工作有多个要点，必须有序得分条说明。</li>
+<li>每条说明文字必须要指明改动源与改动目的。</li>
+<li>当commit多个文件时，涉及代码改动的每条说明文字的最后一个字符必须以一个tab键进行制表空格；然后写上<code>//fileName.fileSuffix</code>来表明当前这条改动的工作是在哪个文件上进行的；如有必要，可在文件名后面加上<code>(12-67)</code>表明改动的行段；如涉及多个文件，则文件之间以空格分隔。</li>
+<li>每个工作说明完之后必须空一行，最后一个工作除外。</li>
+<li>全英文标点符号，即使有中文说明；说明行末不加任何标点符号，即使是英文句号。</li>
+<li>FIX后面必须加上对应<code>RPBUG</code>的版本号（如果是以前的commit中report的BUG的话，如果是当次commit发现的BUG可以不用写版本号，并且可以不写<code>RPBUG</code>标识符），然后再简单说明FIX了什么BUG，最后明如何FIX即可。</li>
+<li>如果是一些可以忽略说明的工作，则可以直接在标识符后面加上<code>*</code>，表示忽略说明（如<code>MODIGNORE</code>标识符）。</li>
+</ul>
+<p>比如：</p>
+<pre><code class="hljs language-vim">CPLFEAT:
+<span class="hljs-number">1</span>.初步完成了用户登陆功能 //LoginService.java
+<span class="hljs-number">2</span>.初步完成了用户注册功能 //SignupService.java
+</code></pre>
+<hr>
+<p>以上基本可以清晰表达commit的内容了，下面是一个完整的示例：</p>
+<pre><code class="hljs language-vim">CPLFEAT RPBUG TOFUNC FIXBUG MODIGNORE
+
+CPLFEAT:
+<span class="hljs-number">1</span>.初步完成了用户登陆功能 //LoginService.java
+<span class="hljs-number">2</span>.初步完成了用户注册功能 //SignupService.java
+
+REBUG:
+<span class="hljs-number">1</span>.登陆免验证时,在获取session变量时抛空指针异常  //LoginFilter.java(<span class="hljs-number">39</span>)
+
+TOFUNC:
+<span class="hljs-number">1</span>.用户名非法判断抽象成userNameRegExp()方法  //LoginFilter.java(<span class="hljs-number">46</span>-<span class="hljs-number">68</span>) LoginService.java(<span class="hljs-number">35</span>-<span class="hljs-number">57</span>)
+
+FIXBUG：
+<span class="hljs-number">1.59</span>ad23do,表单重复提交,增加了session验证来防止表单重复提交 //BaseService.java
+
+MODIGNORE:*
+</code></pre>

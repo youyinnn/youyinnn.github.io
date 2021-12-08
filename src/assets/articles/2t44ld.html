@@ -1,0 +1,183 @@
+
+          <h3 id="e25a21eb">Introduction</h3><p>在排序算法中有堆排序，而要理解好堆排序，首先我们得先理解好堆的概念，一般在数据结构上，我们把优先队列的数据结构称为堆，那什么是有限队列呢？它能应用在哪些场景呢？这些是本篇要介绍的重点</p>
+
+          <h3 id="d4c2b117">Priority Queue</h3><p>定义：</p>
+<blockquote>
+<p>优先队列至少要实现以下个操作：insert（插入）；deleteMin（删除最小元素），要找出、删除并返回队列中最小的元素</p>
+<p>插入等于是入队，删除等于是出队：</p>
+<pre><code class="hljs language-graph">      删除最小元素         ┏------------------┓      插入元素
+&lt;-------------------------|     优先队列      |&lt;--------------------
+                          ┗------------------┛
+</code></pre>
+</blockquote>
+
+          <h3 id="258a4df4">Binary Heap</h3><p>最常见的堆实现就是二叉堆，和二叉查找树一样，二叉堆也有两个性质：结构性、堆序性</p>
+<ul>
+<li><strong>结构性：</strong>堆在逻辑上可以看作的一个完全二叉树，而且因为完全二叉树的规律性，我们可以使用数组来存放堆元素，其中：<ol>
+<li>对于数组上任意<code>i</code>位置，其左儿子的位置在<code>2i</code>上，右儿子在<code>2i + 1</code>上，其父亲在<code>└i / 2┘</code>位置；</li>
+<li>最大堆的大小需要提前决定一个合适的值，尽量减少数组扩容；</li>
+</ol>
+</li>
+<li><strong>堆序性：</strong>堆中任意根节点应该<strong>小于等于</strong>它的后裔；</li>
+</ul>
+<pre><code class="hljs language-graph">            13                   13
+          /    \               /    \
+        14     15             6     16
+        / \                  / \
+       19 27                19  27
+           堆                    非堆       
+</code></pre>
+
+          <h4 id="f119e8a9">Insert</h4><p>为了将一个元素X插入到堆中，我们在堆的下一个可用位置（堆的尾部）创建一个“空穴”，以保证该堆还是一个完全树</p>
+<p>如果X可以放在空穴中而不破坏堆序性（如果此时X的值大于等于空穴的父节点的值），那么X就放在这个位置；否则，我们将该空穴的父节点放到空穴，然后父节点的原来的位置充当心的空穴；以此直到X能够放进空穴为止；</p>
+<pre><code class="hljs language-graph">比如插入5
+        13                   13                 ▢                 5
+      /    \               /    \             /    \            /    \
+    21     16     →       ▢     16     →    13     16     →   13     16
+    / \                  / \                / \               / \
+   24  ▢                19 21             19  21            19  21  
+</code></pre>
+<p>这个过程叫上滤（percolate up），相关的伪码：</p>
+<pre><code class="hljs language-pseudocode">// arr[]
+insert(x):
+    hole = ++currentSize;
+    while x &lt; arr[hole / 2]:
+        arr[hole] = arr[hole/2];
+        hole /= 2;
+    arr[hole] = x;
+</code></pre>
+<p>根据<em>《数据结构与算法分析——Mark Allen Weiss》</em>的结论，<strong>插入/上滤算法的平均效率为<em>O(1)<em>，最坏为</em>O(logN)</em></strong></p>
+
+          <h4 id="936a8c8">DeleteMin</h4><p>要删除最小元素，首先把堆顶元素挖空（数组第一个元素），然后再调整堆序性，由于这时候少了一个元素，所以要重新调整堆，我们把堆中最后一个元素当成对比元素，如果对比元素可以放在该空穴，那么就放置，否则将该空穴位置上较小的子元素放置到空穴处，原较小元素的位置称为新的空穴，再和对比元素进行比较；</p>
+<pre><code class="hljs language-graph">        ▢                    13                 13               13
+      /    \               /    \             /    \            /    \
+     13    16     →       ▢     16     →    19     16     →   19    16
+    / \                  / \                / \               /
+   24  21               19  21             ▢  21            21
+</code></pre>
+<p>但是当堆中有偶数个元素的时候，再使用这种算法会出现问题：</p>
+<pre><code class="hljs language-graph">        ▢                    13                 13               13
+      /    \               /    \             /    \            /    \
+     13    16     →      ▢      16     →    21     16     →   21    16
+    / \    /            /  \    /           / \    /         /  \  
+  24  21 19            24  21 19           24  ▢ 19        24   19?
+</code></pre>
+<p>所以我们需要巧妙地将每个根节点都视为都有2个子节点，实现的伪码：</p>
+<pre><code class="hljs language-pseudocode">// arr[]，且元素从下标1开始存放，保证当下标i为1的时候，其两倍是有效的下标2
+deleteMin():
+    min = findMin();
+    arr[1] = arr[currentSize--];
+    percolateDown(1);
+    return min;
+    
+percolateDown(hole):
+    tmp = arr[hole];
+    while hole * 2 &lt;= currentSize:
+        child = hole * 2;
+        if child != currentSize and arr[child + 1] &lt; arr[child]:
+            child++;
+        if arr[child] &lt; tmp:
+            arr[hole] = arr[child];
+        else:
+            break;
+        hole = child;
+    arr[hole] = tmp;
+</code></pre>
+<pre><code class="hljs language-graph">若原来15有左子节点19，则这时候堆顶为19，且将它挖空，tmp为19
+        ▢                    13                 13 
+      /    \               /    \             /    \ 
+     13    16     →      ▢      16     →    19     16 
+    / \                 /  \    /           / \   
+  24  21               24  21 19           24  21 
+</code></pre>
+<p>如上图，执行情况：</p>
+<ol>
+<li>当<code>hole = 1</code>时，这时候child为2，于是会对比13和16的值，发现13小于16，所以child还是2，然后<code>tmp = 19</code>大于<code>arr[child] = 13</code>，于是13填到空穴处，13原来的位置称为新的空穴；</li>
+<li>当<code>hole = 2</code>，这时候child为4，于是会对比24和21的值，发现24大于21，所以child加一，然后<code>tmp = 19</code>小于<code>arr[child] = 21</code>，于是break；</li>
+<li>最后退出了循环，直接<code>arr[hole] = tmp;</code></li>
+</ol>
+<p>根据<em>《数据结构与算法分析——Mark Allen Weiss》</em>的结论，<strong>删除最小点/下滤算法的平均效率为<em>O(logN)</em></strong></p>
+
+          <h4 id="f0c3d1d1">BuildHeap</h4><p>二叉堆的还有一个重要的操作就是构建堆，有两种思路，一是对每个新增节点都进行插入操作，<strong>平均效率为<em>O(N)</em></strong>;</p>
+<p>还有就是直接对原数组从中间节点（最后一个父节点）开始忘数组前面一一进行下滤，而这个的平均效率也被证明*<em>为</em>O(N)***；</p>
+<pre><code class="hljs language-pseudocode">buildHeap():
+    for i = currentSize / 2 -&gt; 1:
+        percolateDown(i);
+</code></pre>
+
+          <h3 id="2db4bd39">Application For BinaryHeap</h3><ol>
+<li>寻找序列中第k小的数：以线性效率建堆之后，调用<code>deleteMin()</code>k - 1次，此时堆顶就是第k小的数，因此平均效率为***O(N + klogN)***；</li>
+<li>寻找序列中前k小的数：调用<code>deleteMin()</code>k 次，此时堆顶就是第k小的数；</li>
+<li>“寻找序列中前90%大的数”，变治为“寻找序列中前10%小的数”；</li>
+</ol>
+
+          <h3 id="3096ad65">Heap Sort</h3><p>我们观察一下二叉堆的应用，如果说，应用1的k等于N的话，那么我们等于将序列从小到大输出了出来，效率为***O(NlogN)<em><strong>再加上</strong></em>O(N)***的空间，那么我们能不能够优化一下呢？</p>
+<p>我们在建堆的时候申请了N的空间，每次删除最小元素之后，虽然物理空间数组长度还是N，但是我们的关心的堆范围已经，假如说我们每次删除最小元素之后，把最小元素放在删除之前堆的大小的尾部，那么等所有删除最小元素操作完之后，我们就得到了一个逆序的数组，我们把实现这种功能的方法叫做小顶堆排序</p>
+<p>于是我们发现：小顶堆能在***O(NlogN)***时间常量空间内把乱序数组整理称逆序数组！</p>
+<p>我们再反过来想，如果要对数组进行排序，是不是可以构建<strong>大顶堆</strong>然后以相同的思路<strong>删除最大元素</strong>呢？</p>
+<p>按照书上的思路，实现起来就是：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">heapSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> arr.length / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)
+        percDown(arr, i, arr.length);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> arr.length - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) {
+        swap(arr, <span class="hljs-number">0</span>, i);
+        percDown(arr, <span class="hljs-number">0</span>, i);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">percDown</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> hole, <span class="hljs-type">int</span> nowSize)</span> {
+    <span class="hljs-type">int</span> child;
+    <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> arr[hole];
+    <span class="hljs-keyword">for</span> (; hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt; nowSize; hole = child) {
+        child = hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> &amp;&amp; arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
+            child++;
+        }
+        <span class="hljs-keyword">if</span> (tmp &lt; arr[child]) {
+            arr[hole] = arr[child];
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">break</span>;
+    }
+    arr[hole] = tmp;
+}
+</code></pre>
+<p>还有一种实现方式，但是这个效率稍差，参考<a href="https://www.geeksforgeeks.org/heap-sort/">GeeksforGeeks</a></p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[])</span> 
+{ 
+    <span class="hljs-comment">// Build heap</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> arr.length / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) 
+        heapify(arr, arr.length, i); 
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i= arr.length - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) { 
+        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> arr[<span class="hljs-number">0</span>]; 
+        arr[<span class="hljs-number">0</span>] = arr[i]; 
+        arr[i] = temp; 
+        heapify(arr, i, <span class="hljs-number">0</span>); 
+    } 
+} 
+
+<span class="hljs-comment">// To heapify a subtree rooted with node i which is </span>
+<span class="hljs-comment">// an index in arr[]. n is size of heap </span>
+<span class="hljs-keyword">void</span> <span class="hljs-title function_">heapify</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> currentSize, <span class="hljs-type">int</span> holeIndex)</span> { 
+    <span class="hljs-type">int</span> <span class="hljs-variable">largestIndex</span> <span class="hljs-operator">=</span> holeIndex; <span class="hljs-comment">// Initialize largest as root </span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">leftIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> * holeIndex + <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">rightIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> * holeIndex + <span class="hljs-number">2</span>;
+
+    <span class="hljs-comment">// If left child is larger than root </span>
+    <span class="hljs-keyword">if</span> (leftIndex &lt; currentSize &amp;&amp; arr[leftIndex] &gt; arr[largestIndex]) 
+        largestIndex = leftIndex; 
+
+    <span class="hljs-comment">// If right child is larger than largest so far </span>
+    <span class="hljs-keyword">if</span> (rightIndex &lt; currentSize &amp;&amp; arr[rightIndex] &gt; arr[largestIndex]) 
+        largestIndex = rightIndex; 
+
+    <span class="hljs-comment">// If largest is not root </span>
+    <span class="hljs-keyword">if</span> (largestIndex != holeIndex) { 
+        <span class="hljs-type">int</span> <span class="hljs-variable">swap</span> <span class="hljs-operator">=</span> arr[holeIndex]; 
+        arr[holeIndex] = arr[largestIndex]; 
+        arr[largestIndex] = swap; 
+        <span class="hljs-comment">// Recursively heapify the affected sub-tree </span>
+        heapify(arr, currentSize, largestIndex); 
+    } 
+} 
+</code></pre>

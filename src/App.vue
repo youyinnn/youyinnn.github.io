@@ -50,7 +50,7 @@ export default defineComponent({
 .page {
   max-width: @page-max-width;
   margin-top: 1rem !important;
-  margin-bottom: 5rem !important;
+  margin-bottom: 10rem !important;
   margin: auto;
 }
 </style>
