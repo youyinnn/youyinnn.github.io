@@ -140,9 +140,9 @@ let cacheFileName = `cache-${crc32(new Date().toString()).toString(36)}.js`;
 fs.writeFileSync(
   path.join(resourcesPath, cacheFileName),
   `
-    sessionStorage.setItem('pseries', ${JSON.stringify(allSeries)});
-    sessionStorage.setItem('pcbl', ${JSON.stringify(articlesMetadata)});
-    sessionStorage.setItem('pod', ${JSON.stringify(articlesOrder)});
+    sessionStorage.setItem('postSeries', ${JSON.stringify(allSeries)});
+    sessionStorage.setItem('postMetadata', ${JSON.stringify(articlesMetadata)});
+    sessionStorage.setItem('postOrder', ${JSON.stringify(articlesOrder)});
 `
 );
 

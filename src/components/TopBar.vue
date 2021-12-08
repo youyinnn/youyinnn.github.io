@@ -1,12 +1,18 @@
 <template>
   <n-card class="top-bar" :bordered="false" content-style="padding: 0;">
     <n-space class="tab-box unselectable" justify="start">
-      <n-tabs type="line" size="small" tab-style="tab-style">
+      <n-tabs
+        class="tabs"
+        :value="tabValue"
+        type="line"
+        size="small"
+        tab-style="width: 50px; justify-content: center;"
+      >
         <n-tab
           v-for="tab in tabs"
           :key="tab.name"
           :name="tab.name"
-          @click="goTo(tab.route)"
+          @click="goTo(tab)"
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
@@ -17,6 +23,24 @@
 <script>
 import { NTabs, NTab, NSpace, NCard } from "naive-ui";
 
+const tabList = [
+  {
+    name: "articles",
+    text: "Articles",
+    route: "/",
+  },
+  {
+    name: "script",
+    text: "Script",
+    route: "/",
+  },
+  {
+    name: "about",
+    text: "About",
+    route: "/about",
+  },
+];
+
 export default {
   name: "TopBar",
   components: {
@@ -26,28 +50,29 @@ export default {
     NSpace,
   },
   data: () => ({
-    tabs: [
-      {
-        name: "articles",
-        text: "Articles",
-        route: "/",
-      },
-      {
-        name: "script",
-        text: "Script",
-        route: "/",
-      },
-      {
-        name: "about",
-        text: "About",
-        route: "/about",
-      },
-    ],
+    tabValue: tabList[0].name,
+    tabs: tabList,
   }),
   methods: {
-    goTo(url) {
-      this.$router.push(url).catch(() => {});
+    goTo(tab) {
+      this.tabValue = tab.name;
+      this.$router.push(tab.route).catch(() => {});
     },
+  },
+  mounted: function () {
+    const hash = location.hash;
+    if (hash === "#/about") {
+      this.tabValue = tabList[2].name;
+    }
+    if (hash === "#/") {
+      this.tabValue = tabList[0].name;
+    }
+    if (hash === "#/script") {
+      this.tabValue = tabList[1].name;
+    }
+    if (hash.startsWith("#/article/")) {
+      this.tabValue = tabList[0].name;
+    }
   },
 };
 </script>
@@ -73,6 +98,10 @@ export default {
   left: 0;
   margin-top: 1rem !important;
   max-width: @page-max-width;
+  padding: 0 1rem;
+}
+.tabs {
+  width: 400px;
 }
 </style>
 
