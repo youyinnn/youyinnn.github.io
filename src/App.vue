@@ -8,13 +8,14 @@
         </transition>
       </router-view>
     </n-card>
+    <n-global-style />
   </n-config-provider>
 </template>
 
 <script>
 import TopBar from "@/components/TopBar.vue";
 import { defineComponent, ref } from "vue";
-import { darkTheme, NConfigProvider, NCard } from "naive-ui";
+import { darkTheme, NConfigProvider, NCard, NGlobalStyle } from "naive-ui";
 
 export default defineComponent({
   setup() {
@@ -32,6 +33,7 @@ export default defineComponent({
     NCard,
     TopBar,
     NConfigProvider,
+    NGlobalStyle,
   },
 });
 </script>
@@ -39,21 +41,15 @@ export default defineComponent({
 <style scoped lang="less">
 @import "../src/assets/css/index.less";
 .main {
-  position: absolute;
   margin: auto;
-  right: 0;
-  left: 0;
   top: @top-bar-height;
-  bottom: 0;
   border-radius: 0;
 }
 
 .page {
   max-width: @page-max-width;
-  margin-top: 0.5rem !important;
-  position: absolute;
+  margin-top: 1rem !important;
+  margin-bottom: 5rem !important;
   margin: auto;
-  right: 0;
-  left: 0;
 }
 </style>

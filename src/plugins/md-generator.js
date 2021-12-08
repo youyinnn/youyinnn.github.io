@@ -10,10 +10,9 @@ const { EmojiConvertor } = require("emoji-js");
 const articleDataExtract = require("./artricles-data-extract");
 const { exit } = require("process");
 
-let postsPath = path.join(__dirname, "..", "..", "_posts");
-let htmlPath = path.join(__dirname, "..", "..", "/public/md.tmp");
+let postsPath = path.join(__dirname, "..", "assets/_posts");
+// let htmlPath = path.join(__dirname, "..", "..", "/public/md.tmp");
 
-var html = undefined;
 // Get reference
 const renderer = new marked.Renderer();
 
@@ -49,21 +48,16 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   let sourceMdStr = fs.readFileSync(sourceFilePath, {
     encoding: "utf-8",
   });
-  if (html === undefined) {
-    html = fs.readFileSync(htmlPath, {
-      encoding: "utf-8",
-    });
-  }
+
   if (sourceMdStrHandleFunc !== undefined) {
     sourceMdStr = sourceMdStrHandleFunc(sourceMdStr);
   }
-  let htmlStr = marked(sourceMdStr, {
+  let htmlStr = marked.parse(sourceMdStr, {
     gfm: true,
     breaks: true,
     renderer: renderer,
   });
-  let html2 = html.split("{{% md %}}");
-  fs.writeFileSync(outputFilePath, html2[0] + htmlStr + html2[1], {
+  fs.writeFileSync(outputFilePath, htmlStr, {
     encoding: "utf-8",
   });
 }
@@ -85,10 +79,10 @@ for (let pname of postsrs) {
   let abbrlink = crc32(pname).toString(36);
   md2html(
     path.join(postsPath, pname),
-    path.join(__dirname, "..", "article", abbrlink + ".html"),
+    path.join(__dirname, "..", "assets", "articles", abbrlink + ".html"),
     function (sourceMdStr) {
       let data = articleDataExtract.extract(sourceMdStr);
-      data.metadata.short_content = marked(data.metadata.short_content, {
+      data.metadata.short_content = marked.parse(data.metadata.short_content, {
         gfm: true,
         breaks: true,
         renderer: renderer,
@@ -135,15 +129,46 @@ for (let ss of allSeries) {
   });
 }
 
-allSeries = yaml.dump(allSeries);
-articlesMetadata = yaml.dump(articlesMetadata);
+allSeries = JSON.stringify(allSeries);
+articlesMetadata = JSON.stringify(articlesMetadata);
+articlesOrder = JSON.stringify(articlesOrder);
 
-let resourcesPath = path.join(__dirname, "..", "resources");
-let websrcPath = path.join(__dirname, "..", "_websrc");
+let resourcesPath = path.join(__dirname, "..", "assets/resources");
 
-fs.copyFileSync(htmlPath, path.join(__dirname, "..", "articles", "index.html"));
+let cacheFileName = `cache-${crc32(new Date().toString()).toString(36)}.js`;
+
+fs.writeFileSync(
+  path.join(resourcesPath, cacheFileName),
+  `
+    sessionStorage.setItem('pseries', ${JSON.stringify(allSeries)});
+    sessionStorage.setItem('pcbl', ${JSON.stringify(articlesMetadata)});
+    sessionStorage.setItem('pod', ${JSON.stringify(articlesOrder)});
+`
+);
+
+var resoucesList = [cacheFileName];
+
+fs.writeFileSync(
+  path.join(resourcesPath, "resources.js"),
+  `/* eslint-disable no-unused-vars */
+var resourcesList = ${JSON.stringify(resoucesList)};
+module.exports.list = resourcesList
+  `
+);
+
+// delete old cache file
+let resourceFiles = fs.readdirSync(resourcesPath);
+for (let resf of resourceFiles) {
+  if (resf.startsWith("cache") && resf !== cacheFileName)
+    fs.unlinkSync(path.join(resourcesPath, resf), (err) => {
+      if (err) throw err;
+      console.log(resf, " has been deleted.");
+    });
+}
 
 exit(0);
+
+let websrcPath = path.join(__dirname, "..", "_websrc");
 
 // about
 md2html(
@@ -243,52 +268,18 @@ var scriptsHeaderHtml = marked(scriptsHeaderMd, {
   renderer: renderer,
 });
 
-let htmls = html.split("{{% md %}}");
+// let htmls = html.split("{{% md %}}");
 
-fs.writeFileSync(
-  path.join(__dirname, "..", "scripts", "index.html"),
-  htmls[0] + scriptsHeaderHtml + htmls[1],
-  {
-    encoding: "utf-8",
-  }
-);
+// fs.writeFileSync(
+//   path.join(__dirname, "..", "scripts", "index.html"),
+//   htmls[0] + scriptsHeaderHtml + htmls[1],
+//   {
+//     encoding: "utf-8",
+//   }
+// );
 
 // todos
 md2html(
   path.join(websrcPath, "todos.md"),
   path.join(__dirname, "..", "todos", "index.html")
 );
-
-let cacheFileName = `cache-${crc32(new Date().toString()).toString(36)}.js`;
-
-fs.writeFileSync(
-  path.join(resourcesPath, cacheFileName),
-  `
-    sessionStorage.setItem('pseries', ${JSON.stringify(allSeries)});
-    sessionStorage.setItem('pcbl', ${JSON.stringify(articlesMetadata)});
-    sessionStorage.setItem('pod', ${JSON.stringify(
-      articlesOrder.join(">--<")
-    )});
-`
-);
-
-var resoucesList = [cacheFileName];
-
-fs.writeFileSync(
-  path.join(resourcesPath, "resources.js"),
-  `sessionStorage.setItem('cacheversion', ${new Date().getTime()}); var articlesCount = ${
-    postsrs.length
-  }; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ${JSON.stringify(
-    resoucesList
-  )};}`
-);
-
-// delete old cache file
-let resourceFiles = fs.readdirSync(resourcesPath);
-for (let resf of resourceFiles) {
-  if (resf.startsWith("cache") && resf !== cacheFileName)
-    fs.unlinkSync(path.join(resourcesPath, resf), (err) => {
-      if (err) throw err;
-      console.log(resf, " has been deleted.");
-    });
-}
