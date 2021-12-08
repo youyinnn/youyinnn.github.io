@@ -13,7 +13,6 @@
     "roboto-fontface": "*",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vuetify": "^3.0.0-alpha.0",
     "vuex": "^4.0.0-0",
     "webfontloader": "^1.0.0"
   },
@@ -27,9 +26,12 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "naive-ui": "^2.21.5",
     "sass": "^1.38.0",
     "sass-loader": "^10.0.0",
-    "vue-cli-plugin-vuetify": "~2.4.5",
+    "vfonts": "^0.1.0",
     "vuetify-loader": "^2.0.0-alpha.0"
   },
   "eslintConfig": {
