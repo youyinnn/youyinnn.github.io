@@ -274,11 +274,13 @@
 </code></pre>
 <p><code>--list-modules</code>命令会返回一张完整的列表，这个列表包含了服务器可用的并且正在使用的模块，它同时还会显示模块所在的目录，以及它们是怎样、用什么命令实现的，当前项目所依赖的模块，以及相关的jar包等。</p>
 <p><code>--list-config</code>命令会显示一些关于服务器重要信息。包含Java和Jetty和环境变量、配置命令、任何的JVM参数或者系统变量设置、基础服务器配置、全列的Jetty服务器的类路径、被激活使用的JettyXML配置文件。</p>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="222创建jetty-base"></span></p>
 
           <h5 id="7af723ce">2.2.2、创建Jetty Base</h5><p>上述demo-bases目录给我们展示了Jetty的Jetty Base机制。一个Jetty Base目录允许使用单独的配置并且可以在Jetty目录以外的地方建立一个Jetty服务器实例，这样一来可以减小升级带来的代价。Jetty的默认配置是基于以下两个配置项：</p>
-<p><strong>jetty.home</strong>：用来定义Jetty根目录的位置的配置项，根目录包含：libs、默认模块、默认XML文件（具体的如 start.jar、lib、etc）。<br><strong>jetty.base</strong>：用来定义一个Jetty服务器的特殊实现，这个目录同时包含：它的配置文件、日志文件、web项目（具体如 start.d/*.ini文件，logs、webapps）。</p>
+<p><strong>jetty.home</strong>：用来定义Jetty根目录的位置的配置项，根目录包含：libs、默认模块、默认XML文件（具体的如 start.jar、lib、etc）。
+<strong>jetty.base</strong>：用来定义一个Jetty服务器的特殊实现，这个目录同时包含：它的配置文件、日志文件、web项目（具体如 start.d/*.ini文件，logs、webapps）。</p>
 <blockquote>
 <p><strong>注意</strong></p>
 <p>你必须认真对待JettyHome目录和保持它不变。如果你需要变动一些目录或者配置，你应该在JettyBase目录中进行。</p>
@@ -328,7 +330,8 @@ INFO: Base directory was modified
 <blockquote>
 <p><em>译者文外补充：第一行命令是在当前运行时环境变量中添加一条环境变量，把<code>JETTY_BASE</code>目录指定为<code>/tmp/mybase</code>，第二行创建这个目录，第三行是进入到这个目录，第四行是尝试运行这个目录，但是提示失败因为目录里啥也没有。然后使用<code>--create-startd</code>命令和<code>--add-to-start=http,deploy</code>命令去初始化和添加HTTP连接和Web部署模块，然后把之前demo-base目录中的一个war包复制过来，最后启动项目</em></p>
 </blockquote>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="223更改jetty的端口号"></span></p>
 
           <h5 id="afb7b851">2.2.3、更改Jetty的端口号</h5><pre><code>&gt; cd $JETTY_BASE
@@ -352,7 +355,8 @@ INFO: Base directory was modified
 </ul>
 <p>你可以在后面的章节中学到配置的更详细的说明。</p>
 </blockquote>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="224为https和http2添加ssl"></span></p>
 
           <h5 id="3275b4ff">2.2.4、为HTTPS和HTTP2添加SSL</h5><p>在上面的栗子中，我们可以为服务器激活附加的HTTPS模块和HTTP2模块。你可以使用以下命令添加：</p>
@@ -401,7 +405,8 @@ INFO  : Base directory was modified
 <li><p>检查是否存在<code>etc/keystore</code>文件，如果不存在，就联网下载一个示范用的keystore文件。</p>
 </li>
 </ul>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="225更改https的端口号"></span></p>
 
           <h5 id="1b5e3f9b">2.2.5、更改HTTPS的端口号</h5><p>你可以通过命令：</p>
@@ -409,7 +414,8 @@ INFO  : Base directory was modified
 &gt; java -jar $JETTY_HOME/start.jar jetty.ssl.port=8444
 </code></pre>
 <p>除此之外，你还可以在<code>start.ini</code>或者<code>start.d/*.ini</code>中设置有效的命令行去修改ssl端口号，你可以在“<a href="">Start.ini vs Start.d</a>”中了解到更多。</p>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="226获取更多的startjar选项"></span></p>
 
           <h5 id="e4943610">2.2.6、获取更多的start.jar选项</h5><p><code>start.jar</code>的工作有：</p>
@@ -466,12 +472,14 @@ INFO  : Base directory was modified
 </li>
 </ul>
 <p> 因为Jetty的主要配置是通过IoC来完成的，所以你可以在“<a href="">Jetty API 文档</a>”中参考最终的完整的配置。</p>
-<p> <a href="#top">回到顶部</a><br> <br></p>
+<p> <a href="#top">回到顶部</a>
+ <br></p>
 <p><span id="312使用start配置文件配置"></span></p>
 
           <h5 id="69c79b0d">3.1.2、使用Start配置文件配置</h5><p>Jetty使用以下的配置文件去实例化，通过start.jar机制去注入和启动服务器。</p>
 <ul>
-<li><strong>ini文件：</strong><br>Jetty的启动机制是使用命令行来完成的，<code>$JETTY_BASE/start.ini</code>或者是<code>$JETTY_BASE/start.d/*.ini</code>文件写好了有效的命令行参数来启动Jetty，这些参数可能是：<ul>
+<li><strong>ini文件：</strong>
+Jetty的启动机制是使用命令行来完成的，<code>$JETTY_BASE/start.ini</code>或者是<code>$JETTY_BASE/start.d/*.ini</code>文件写好了有效的命令行参数来启动Jetty，这些参数可能是：<ul>
 <li><blockquote>
 <p>模块的激活：<code>--modules=name</code></p>
 </blockquote>
@@ -493,7 +501,8 @@ INFO  : Base directory was modified
 </blockquote>
 </li>
 <li><blockquote>
-<p>一些JVM的选项<br><strong>NOTE：</strong></p>
+<p>一些JVM的选项
+<strong>NOTE：</strong></p>
 <p>只有在JettyBase目录（如果JettyBase目录不是JettyHome目录）下的ini文件，才能特别的更改配置。</p>
 <p><em>文档原文：It is the ini files located in the Jetty base directory (if different from Jetty home) that are typically edited to change the configuration (e.g. change ports).</em></p>
 </blockquote>
@@ -501,9 +510,11 @@ INFO  : Base directory was modified
 </ul>
 </li>
 </ul>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <ul>
-<li><strong>mod文件：</strong><br><code>$JETTY_HOME/modules/*.mod</code>文件定义了可使用的模块，你可以用<code>--modules=name</code>配置去激活它们。每一个mod都定义了：<ul>
+<li><strong>mod文件：</strong>
+<code>$JETTY_HOME/modules/*.mod</code>文件定义了可使用的模块，你可以用<code>--modules=name</code>配置去激活它们。每一个mod都定义了：<ul>
 <li><blockquote>
 <p>模块依赖的命令和激活指令</p>
 </blockquote>
@@ -531,8 +542,11 @@ INFO  : Base directory was modified
 <br>
 
 <ul>
-<li><strong>XML文件：</strong><br>在<a href="">Jetty IoC XML形式</a>或者Spring IoC形式中的XML文件。<br>后面的我就不翻译了，有需要的自己看，就一段话，并没有说明如何配置。<blockquote>
-<p><em>文档原文：</em><br>XML files in Jetty IoC XML format or Spring IoC format are listed either on the command line, in ini files, or are added to the effective command line by a module definition.</p>
+<li><strong>XML文件：</strong>
+在<a href="">Jetty IoC XML形式</a>或者Spring IoC形式中的XML文件。
+后面的我就不翻译了，有需要的自己看，就一段话，并没有说明如何配置。<blockquote>
+<p><em>文档原文：</em>
+XML files in Jetty IoC XML format or Spring IoC format are listed either on the command line, in ini files, or are added to the effective command line by a module definition.</p>
 <p>The XML files instantiate and inject the actual Java objects that comprise the server, connectors and contexts. Because Jetty IoC XML files use properties, most common configuration tasks can be accomplished without editing these XML files and can instead be achieved by editing the property in the corresponding ini files.</p>
 <p>XML files are normally located in <code>$JETTY_HOME/etc/</code>, but extra or edited XML files may be added to <code>$JETTY_BASE/etc/</code>. Note If XML configuration changes are required, it is best practice to copy the XML file from <code>$JETTY_HOME/etc/</code> to <code>$JETTY_BASE/etc/</code> before being modified.</p>
 </blockquote>
@@ -540,7 +554,8 @@ INFO  : Base directory was modified
 </ul>
 <p>下图描述了Jetty的各种各样的配置文件是如何联系起来的：</p>
 <p><img src="https://github.com/youyinnn/JettyDocTranslation/raw/master/doc/img/Jetty_Configuration_File_Relationships.png" alt="Jetty_Configuration_File_Relationships"></p>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="313其他配置文件"></span></p>
 
           <h5 id="9865262f">3.1.3、其他的配置文件</h5><ul>
@@ -549,7 +564,8 @@ INFO  : Base directory was modified
 <li><strong>properties文件</strong></li>
 </ul>
 <p>关于这三种配置文件的介绍内容就不再翻译，有需要的同学可以去<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/quick-start-configure.html#quickstart-config-how">原文</a>学习。</p>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="314jetty的ioc-xml的形式配置"></span></p>
 
           <h5 id="1e37b053">3.1.4、Jetty的IoC XML的形式配置</h5><p>你可以在Java代码里面启动服务器：</p>
@@ -654,7 +670,8 @@ public class ExampleServer
 <p>Connectors</p>
 <p>Services</p>
 </blockquote>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="322配置connectors"></span></p>
 
           <h5 id="298f3f4b">3.2.2、配置Connectors</h5><p>Jetty服务器连接器是一个网络端点接受连接一个或多个协议产生Jetty服务器的请求或消息。在标准Jetty服务器中，可以通过额外的文件增加Jetty服务器支持的协议，例如http.ini，https.ini 和jetty-http2.xml，连接的配置一般都是典型的，如下：</p>
@@ -665,7 +682,8 @@ public class ExampleServer
 <p>HTTP Configuration</p>
 <p>SSL Context Factory</p>
 </blockquote>
-<p><a href="#top">回到顶部</a><br><br></p>
+<p><a href="#top">回到顶部</a>
+<br></p>
 <p><span id="323配置contexts"></span></p>
 
           <h5 id="dc8cf57c">3.2.3、配置Contexts</h5><p>常见的Context配置：</p>

@@ -5,24 +5,24 @@
 <li><p>The first line should always be <u>50 characters</u> or less and that it should be followed by a blank line. Vim ships with syntax, indent, and filetype plugins for Git commits which can help here.</p>
 </li>
 <li><p>Add this line to your <code>~/.vimrc</code> to add spell checking and automatic wrapping at the recommended 72 columns to you commit messages.</p>
-<pre><code class="language-vim">autocmd Filetype gitcommit setlocal spell textwidth=72
+<pre><code class="hljs language-vim"><span class="hljs-keyword">autocmd</span> Filetype gitcommit <span class="hljs-keyword">setlocal</span> spell textwidth=<span class="hljs-number">72</span>
 </code></pre>
 </li>
 <li><p>Never use the <code>-m &lt;msg&gt;</code> / <code>--message=&lt;msg&gt;</code> flag to <code>git commit</code>.</p>
 <p> It gives you a poor mindset right off the bat as you will feel that you have to fit your commit message into the terminal command, and makes the commit feel more like a one-off argument than a page in history:</p>
-<pre><code class="language-bash">git commit -m &quot;Fix login bug&quot;
+<pre><code class="hljs language-bash">git commit -m <span class="hljs-string">&quot;Fix login bug&quot;</span>
 </code></pre>
 <p> A more useful commit message might be:</p>
-<pre><code class="language-vim">Redirect user to the requested page after login
+<pre><code class="hljs language-vim">Redirect user <span class="hljs-keyword">to</span> the requested page after login
 
-https://trello.com/path/to/relevant/card
+https://trello.<span class="hljs-keyword">com</span>/path/<span class="hljs-keyword">to</span>/relevant/card
 
-Users were being redirected to the home page after login, which is less
-useful than redirecting to the page they had originally requested before
-being redirected to the login form.
+Users were being redirected <span class="hljs-keyword">to</span> the home page after login, which <span class="hljs-keyword">is</span> less
+useful than redirecting <span class="hljs-keyword">to</span> the page they had originally requested before
+being redirected <span class="hljs-keyword">to</span> the login form.
 
-* Store requested path in a session variable
-* Redirect to the stored location after successfully logging in the user
+* Store requested path in <span class="hljs-keyword">a</span> session variable
+* Redirect <span class="hljs-keyword">to</span> the stored location after successfully logging in the user
 </code></pre>
 </li>
 <li><p>Answer the following questions:</p>
@@ -31,7 +31,10 @@ being redirected to the login form.
 <p> This question tells <u>reviewers of your pull request</u> what to expect in the commit, allowing them to more easily identify and point out unrelated changes.</p>
 </li>
 <li><p>How does it address the issue?</p>
-<p> Describe, at a high level, what was done to affect change.<br> <code>Introduce a red/black tree to increase search speed or </code><br> <code>Remove &lt;troublesome gem X&gt;, which was causing &lt;specific description of issue introduced by gem&gt; </code><br> are good examples.</p>
+<p> Describe, at a high level, what was done to affect change.
+ <code>Introduce a red/black tree to increase search speed or </code>
+ <code>Remove &lt;troublesome gem X&gt;, which was causing &lt;specific description of issue introduced by gem&gt; </code>
+ are good examples.</p>
 <p> If your change is obvious, you may be able to omit addressing this question.</p>
 </li>
 <li><p>What side effects does this change have?</p>

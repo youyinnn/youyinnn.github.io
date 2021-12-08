@@ -16,6 +16,23 @@ let postsPath = path.join(__dirname, "..", "assets/_posts");
 // Get reference
 const renderer = new marked.Renderer();
 
+marked.setOptions({
+  renderer: renderer,
+  highlight: function (code, lang) {
+    const hljs = require("highlight.js");
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
+    return hljs.highlight(code, { language }).value;
+  },
+  langPrefix: "hljs language-", // highlight.js css expects a top-level 'hljs' class.
+  pedantic: false,
+  gfm: true,
+  breaks: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false,
+});
+
 // Override function
 renderer.heading = function (text, level) {
   if (text.search("<a") > 0 || text.startsWith("<a")) {
@@ -52,11 +69,7 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   if (sourceMdStrHandleFunc !== undefined) {
     sourceMdStr = sourceMdStrHandleFunc(sourceMdStr);
   }
-  let htmlStr = marked.parse(sourceMdStr, {
-    gfm: true,
-    breaks: true,
-    renderer: renderer,
-  });
+  let htmlStr = marked.parse(sourceMdStr);
   fs.writeFileSync(outputFilePath, htmlStr, {
     encoding: "utf-8",
   });
@@ -82,11 +95,7 @@ for (let pname of postsrs) {
     path.join(__dirname, "..", "assets", "articles", abbrlink + ".html"),
     function (sourceMdStr) {
       let data = articleDataExtract.extract(sourceMdStr);
-      data.metadata.short_content = marked.parse(data.metadata.short_content, {
-        gfm: true,
-        breaks: true,
-        renderer: renderer,
-      });
+      data.metadata.short_content = marked.parse(data.metadata.short_content);
       data.metadata.abbrlink = abbrlink;
       if (data.metadata.series !== undefined) {
         let seriesForThisArticles;

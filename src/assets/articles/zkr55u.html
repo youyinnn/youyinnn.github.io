@@ -1,0 +1,106 @@
+
+          <h3 id="fc98c2af">Service</h3><p>In a distributed application, different pieces of the app are called “services.” For example, if you imagine a video sharing site, it probably includes <strong>[1]a service for storing application data in a database</strong>, <strong>[2]a service for video transcoding in the background after a user uploads something</strong>, <strong>[3]a service for the front-end</strong>, and so on.</p>
+<p>Services are really just “containers in production.” A service only runs one image, but it codifies the way that image runs:</p>
+<ul>
+<li>what ports it should use</li>
+<li>how many replicas of the container should run so the service has the capacity it needs</li>
+<li>scaling a service changes the number of container instances running that piece of software</li>
+<li>assigning more computing resources to the service in the process</li>
+<li>....</li>
+</ul>
+<p>Luckily it’s very easy to <strong>define</strong>, run, and scale services with the Docker platform -- just write a <code>docker-compose.yml</code> file</p>
+<p>A <code>docker-compose.yml</code> file is a YAML file that defines how Docker containers should behave in production.</p>
+<blockquote>
+<p>image或者说container只是一个app的运行环境，通常来说在完整系统里面我们不止要用到1个app，这也是微服务的架构，而每个app有各自的环境资源和部署策略</p>
+<p>我们这样去看待：</p>
+<ul>
+<li>app是面向业务，而提供解决方案的</li>
+<li>servcie是面向使用者，而提供使用这个app的管理办法的</li>
+</ul>
+<p>当我们将app看成是一个service的时候，我们可以对service做要上生产环境时候的确保配置，比如为每一个container设置一些容器管理参数，比如replicas、cpu资源、memory资源、重启策略等等</p>
+<p>于是我们可以用<code>docker-compose.yaml</code>去组织一个service，这是投入生产环境时候的正确做法</p>
+</blockquote>
+
+          <h3 id="80c333fc"><code>docker-compose.yml</code></h3><p>Save this file as <code>docker-compose.yml</code> wherever you want. Be sure you have <a href="https://docs.docker.com/get-started/part2/#share-your-image">pushed the image</a> you created in <a href="https://docs.docker.com/get-started/part2/">Part 2</a> to a registry, and update this <code>.yml</code> by replacing <code>username/repo:tag</code> with your image details.</p>
+<pre><code>version: &quot;3&quot;
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: username/repo:tag
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: &quot;0.1&quot;
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - &quot;4000:80&quot;
+    networks:
+      - webnet
+networks:
+  webnet:
+</code></pre>
+<p>This <code>docker-compose.yml</code> file tells Docker to do the following:</p>
+<ul>
+<li>Pull the image we uploaded <strong>before</strong> from the registry.</li>
+<li>Run 5 instances of that image as a service called <code>web</code>, limiting each one to use, at most, 10% of the CPU (across all cores), and 50MB of RAM.</li>
+<li>Immediately restart containers if one fails.</li>
+<li>Map port 4000 on the host to <code>web</code>’s port 80.</li>
+<li>Instruct <code>web</code>’s containers to share port 80 via a load-balanced network called <code>webnet</code>. (Internally, the containers themselves publish to <code>web</code>’s port 80 at an ephemeral port.)</li>
+<li>Define the <code>webnet</code> network with the default settings (which is a load-balanced overlay network).</li>
+</ul>
+
+          <h3 id="743e178a">Deploy a load-balanced app</h3><p>Before we can use the <code>docker stack deploy</code> command we first run:</p>
+<pre><code class="hljs language-bash">$ docker swarm init
+Swarm initialized: current node (gadm7xrpe7br364zscnmexkf6) is now a manager.
+
+To add a worker to this swarm, run the following <span class="hljs-built_in">command</span>:
+
+    docker swarm <span class="hljs-built_in">join</span> --token SWMTKN-1-16a3wl8wfmnu8z3vzu9t2a32x8mdb7n1c25ehkqbdfxtn1g6s9-8f5x4jehjlffr957k35euvojz 10.169.161.227:2377
+
+To add a manager to this swarm, run <span class="hljs-string">&#x27;docker swarm join-token manager&#x27;</span> and follow the instructions.
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: We get into the meaning of that command in <a href="https://docs.docker.com/get-started/part4/">part 4</a>. If you don’t run <code>docker swarm init</code> you get an error that “this node is not a swarm manager.”</p>
+</blockquote>
+<p>Now let’s run it. You need to give your app a name. Here, it is set to <code>getstartedlab</code>:</p>
+<pre><code class="hljs language-bash">$ docker stack deploy -c docker-compose.yml getstartedlab
+Creating network getstartedlab_webnet
+Creating service getstartedlab_web
+</code></pre>
+<p>Our single service stack is running 5 container instances of our deployed image on one host. Let’s investigate.</p>
+<p>Get the service ID for the one service in our application:</p>
+<pre><code class="hljs language-bash">$ docker service <span class="hljs-built_in">ls</span>
+</code></pre>
+<p>Look for output for the <code>web</code> service, prepended with your app name. If you named it the same as shown in this example, the name is<code>getstartedlab_web</code>. The service ID is listed as well, along with the number of replicas, image name, and <strong>exposed ports</strong>.</p>
+<p>A single container running in a service is called a <strong>task</strong>. Tasks are given unique IDs that numerically increment, up to the number of <code>replicas</code> you defined in <code>docker-compose.yml</code>. List the tasks for your service:</p>
+<pre><code class="hljs language-bash">$ docker service ps getstartedlab_web
+</code></pre>
+<p>Tasks also show up if you just list all the containers on your system, though that is not filtered by service:</p>
+<pre><code class="hljs language-bash">$ docker container <span class="hljs-built_in">ls</span> -q
+</code></pre>
+
+          <h3 id="2bd184cd">Scale the app</h3><p>You can scale the app by changing the <code>replicas</code> value in <code>docker-compose.yml</code>, saving the change, and re-running the <code>docker stack deploy</code> command:</p>
+<pre><code>docker stack deploy -c docker-compose.yml getstartedlab
+</code></pre>
+<p>Docker performs an in-place update, no need to tear the stack down first or kill any containers.</p>
+<p>Now, re-run <code>docker container ls -q</code> to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.</p>
+
+          <h3 id="2fa32edc">Take down the app and the swarm</h3><ul>
+<li><p>Take the app down with <code>docker stack rm</code>:</p>
+<pre><code class="hljs language-bash">$ docker stack <span class="hljs-built_in">rm</span> getstartedlab
+</code></pre>
+</li>
+<li><p>Take down the swarm.</p>
+<pre><code class="hljs language-bash">$ docker swarm leave --force
+</code></pre>
+</li>
+</ul>
+<p>It’s as easy as that to stand up and scale your app with Docker. You’ve taken a huge step towards learning how to run containers in production. Up next, you learn how to run this app as a bonafide swarm on a cluster of Docker machines.</p>
+<blockquote>
+<p><strong>Note</strong>: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using <a href="https://docs.docker.com/docker-cloud/">Docker Cloud</a>, or on any hardware or cloud provider you choose with <a href="https://www.docker.com/enterprise-edition">Docker Enterprise Edition</a>.</p>
+</blockquote>
+
+          <h3 id="a50984d0">Compose file Reference</h3><p><a href="https://docs.docker.com/compose/compose-file/#args">https://docs.docker.com/compose/compose-file/#args</a></p>

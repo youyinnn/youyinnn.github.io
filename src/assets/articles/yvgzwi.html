@@ -1,0 +1,49 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>Layout：定制你的输出模式</p>
+<p></div></p>
+<!-- more -->
+
+<p><a href="https://logging.apache.org/log4j/2.x/manual/layouts.html">Layouts</a>里提到了许多种Layout方式，我最常用的是PatternLayout。</p>
+
+          <h3 id="8d958db4">Pattern Layout 模式输出</h3><p>是一种通过pattern字符串来配置的灵活的输出方式。</p>
+<p>属性：</p>
+<ul>
+<li>charset：string：所使用的字符集</li>
+<li>pattern：string：定制你的输出模式</li>
+<li>header：string：这是一个可选项，它会包含在每个log文件的开头</li>
+<li>footer：string：这是一个可选项....</li>
+</ul>
+
+          <h4 id="f785e692">Patterns</h4>
+          <h5 id="3361bb5e">Logger Name模式</h5><p><code>c{precision}</code>
+<code>logger{precision}</code></p>
+<p>用例：</p>
+<p><img src="https://image.youyinnn.top/0c7bcdb7e018e47007e1f94164a2b626.png" alt="class pattern"></p>
+
+          <h4 id="db00d17a">Class模式</h4><p><code>C{precision}</code>
+<code>class{precision}</code></p>
+
+          <h5 id="1942c898">Date模式</h5><p><code>d{pattern} &amp; date{pattern}</code></p>
+<p>用例：</p>
+<p><img src="https://image.youyinnn.top/782b42701d03650c07a92766558d225f.png" alt="date pattern"></p>
+
+          <h4 id="febf9150">Line模式</h4><p><code>%L</code>：输出报出issue的logger的行数
+<code>%l</code>：输出更详细的行数信息</p>
+
+          <h4 id="83f69bd9">Message信息模式</h4><p><code>%msg</code>：输出logger的信息</p>
+
+          <h4 id="76a65949">Method模式</h4><p><code>%M</code>：输出logger所在的方法</p>
+
+          <h4 id="c8711d27">n模式</h4><p><code>%n</code>：输出系统支持的行分隔符，比如<code>\n</code>或者<code>\r\n</code></p>
+
+          <h4 id="31077f71">N模式</h4><p><code>%N</code>：输出调用Log事件时的:<code>System.nanoTime()</code></p>
+
+          <h4 id="d9900497">pid模式</h4><p><code>%pid</code>：输出程序的pid</p>
+
+          <h4 id="75db299b">level模式</h4><p><code>p|level{level=label, level=label, ...}</code>：指定每个级别的别名
+<code>p|level{lowerCase=true|false}</code>：指定级别是否小写</p>
+
+          <h4 id="e126ef4">Thread模式</h4><p><code>%t</code>:  输出调用Log事件时所处的线程名
+<code>%tid</code>:  输出调用Log事件时所处的线程id</p>
+
+          <h4 id="76e57bb5">Context模式</h4><p><code>%X{key[,key2...]}</code>: 输出存在ThreadContext里的键所对应的值</p>

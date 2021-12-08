@@ -1,0 +1,628 @@
+
+          <h1 id="8350b2a7">Cron4j</h1><p>一些必要的单词解释：</p>
+<ol>
+<li>schedule 安排、调度（安排在有主语的时候使用 调用在没主语的时候使用）</li>
+<li>scheduler 调度器</li>
+<li>scheduling pattern 调度模式</li>
+<li>reschedule 重新调度、安排</li>
+<li>action/task 动作/任务</li>
+<li>deschedule 脱离调度、安排</li>
+<li>Daemon threads 守护线程 （其实daemon本意就有守护进程的意思 加个threads应该是强调线程而非进程）</li>
+<li>Predictor 先知（故意翻译为这个中二的名字哈哈）、预报器（这才是常规翻译）</li>
+<li>Crontab/Cron 定时任务工具</li>
+<li>status tracking 状态跟踪</li>
+<li>executor 执行器</li>
+<li>collector 收集器</li>
+</ol>
+<hr>
+<p><span id="1快速开始"></span></p>
+
+          <h3 id="53756903">1、快速开始：</h3><p>cron4j的主要实体是‘scheduler’，实例化<code>it.sauronsoftware.cron4j.Scheduler</code>之后，你可以在一年当中任意的时间段执行任意的任务（Task）。</p>
+<p>要使用cron4j scheduler 你需要做下面四步：</p>
+<ol>
+<li>new一个Scheduler实例</li>
+<li>安排（schedule）你的动作（action）。你需要告诉scheduler对象你要做的事情是什么并且是在什么时候发生的。你可以指定（specify）一个实现了<code>java.lang.Runnable</code>接口的实例对象或者使用cron4j提供的<code>it.sauronsoftware.con4j.Task</code>类来实例一个对象来告诉它你要做什么事情，然后你可以使用一个<code>it.sauronsoftware.cron4j.SchedulingPattern</code>类的实例或者是一个字符串来代表指定的‘scheduling pattern’来告诉它你要在什么样的时间执行你的action。</li>
+<li>开启（start）你的scheduler实例。</li>
+<li>当你不再需要它的时候，停止（stop）它。</li>
+</ol>
+<pre><code>import it.sauronsoftware.cron4j.Scheduler;
+
+public class Quickstart {
+
+    public static void main(String[] args) {
+        // 第一步创建实例
+        Scheduler s = new Scheduler();
+        // 安排一个每分钟执行一次的任务
+        s.schedule(&quot;* * * * *&quot;, new Runnable() {
+            public void run() {
+                System.out.println(&quot;Another minute ticked away...&quot;);
+            }
+        });
+        // 开启你的调度器
+        s.start();
+        // 10分钟后执行之后的代码
+        try {
+            Thread.sleep(1000L * 60L * 10L);
+        } catch (InterruptedException e) {
+            ;
+        }
+        // 10分钟后停止你的调度器
+        s.stop();
+    }
+
+}
+</code></pre>
+<p>上面的代码会每隔一分钟执行一次run方法并打印出&quot;Another minute ticked away...&quot;句子。</p>
+<p>你需要知道一些关键的概念：</p>
+<ul>
+<li>你可以安排任意数量的任务。</li>
+<li>你可以在任意时间安排任务，即使是在调度器（scheduler）已经被开启过之后。</li>
+<li>你可以改变已经安排过的任务的‘scheduling pattern（调度模式）’，即使是当调度器正在运行的时候（reschedule operation 重新调度操作）。</li>
+<li>你可以移除之前安排过的任务，即使是当调度器正在运行的时候（deschedule operation 脱离调度操作）。</li>
+<li>你可以任意次开启或停止调度器。</li>
+<li>你可以使用文件配置来安排任务。</li>
+<li>你可以从任意文件源配置中安排任务。</li>
+<li>你可以提供一个监听器（listener）给调度器，用来接收执行过的任务的事件。</li>
+<li>你可以控制任何一个正在进行的任务。</li>
+<li>你可以不使用任何的‘scheduling pattern&#39;就可以手动启动任务。</li>
+<li>你可以改变调度器工作的时区。</li>
+<li>你可以在你的‘scheduling pattern’使用到调度器之前验证它的工作模式。</li>
+<li>你可以预报出你的‘scheduling pattern’可能造成的任务异常。</li>
+</ul>
+<hr>
+<p><span id="2调度模式-scheduling-pattern"></span></p>
+
+          <h3 id="889da3e1">2、调度模式 scheduling pattern</h3><p>&#39;scheduling pattern&#39;是一个 UNIX 的类定时任务模式，由一个以空格分隔为五个部分的字符串组成。每个部分代表着：</p>
+<p>分钟子模式（Minutes sub-pattern）：</p>
+<blockquote>
+<p>规定一小时中的哪个分钟会执行任务，取值范围为0-59。</p>
+</blockquote>
+<p>小时子模式（Hour sub-pattern）：</p>
+<blockquote>
+<p>规定一天中的哪个小时会执行任务，取值范围为0-23。</p>
+</blockquote>
+<p>日期子模式（Days of mouth sub-pattern）：</p>
+<blockquote>
+<p>规定一个月中的哪一号会执行任务，取值范围为1-31，特殊值“L”可以代表当月的最后一天。</p>
+</blockquote>
+<p>月份子模式（Months sub-pattern）：</p>
+<blockquote>
+<p>规定一年中的哪一月会执行任务，取值范围从1（January）-12（December），这个子模式也允许月份英文缩写如：jan、feb、mar、...、dec。</p>
+</blockquote>
+<p>周几子模式（Days of week sub-pattern）：</p>
+<blockquote>
+<p>规定一周中的周几会执行任务，取值范围0（sunday）-6（monday），这个子模式同样允许英文缩写（是否忽略大小写 并未做考究 请按照官方举例 首字母大写）：sun、mon、...、sat。</p>
+</blockquote>
+<p>模式还允许使用星号通配符来代表：小时中的每分钟、日中的每小时、月中的每一天、年中的每一月、一周中的每一天。</p>
+<p>一旦调度器被开启，任务会在每一个调度模式匹配为true的时候执行一次。</p>
+<p>下面是一些举例：</p>
+<blockquote>
+<p>5 * * * *</p>
+<p>每小时的过五分执行一次（1：05、2：05 etc）</p>
+</blockquote>
+<blockquote>
+<p>* * * * *</p>
+<p>每分钟执行一次</p>
+</blockquote>
+<blockquote>
+<p>* 12 * * Mon</p>
+<p>每周一的12时内的每分钟都执行一次</p>
+</blockquote>
+<blockquote>
+<p>* 12 16 * Mon</p>
+<p>每月的16号的12时内的每分钟都执行一次</p>
+</blockquote>
+<p>每个子模式都可以包含一个或多个逗号来分隔模式值</p>
+<blockquote>
+<p>59 11 * * 1,2,3,4,5</p>
+<p>每周一、周二、周三、周四、周五的 11:59am 会执行一次</p>
+</blockquote>
+<p>取值间隔也可以使用“-”号</p>
+<blockquote>
+<p>59 11 * * 1-5</p>
+<p>和上面的结果一样</p>
+</blockquote>
+<p>斜杠也可以运用到子模式当中，用来识别子模式取值范围内的分步值。</p>
+<p>它有两种运用方式：</p>
+<ul>
+<li>*/c</li>
+<li>a-b/c</li>
+</ul>
+<p>第一种会匹配到子模式范围0到最大值中的每个c增值 包含0值</p>
+<p>第二种会匹配到范围a到b中的每个c增值 包含a值</p>
+<blockquote>
+<p>*/5 * * * *</p>
+<p>每小时内从0分开始每过5分钟就执行一次（0：00、0：05、0：10、...）</p>
+</blockquote>
+<blockquote>
+<p>3-18/5 * * * *</p>
+<p>每小时中从3分到18分中每过5分钟就执行一次（0：03、0：08、0：13、0：18、1：03、...）</p>
+</blockquote>
+<blockquote>
+<p>*/15 9-17 * * *</p>
+<p>每天的9时到17时中从0分开始每过一刻钟就执行一次（9：00、9：15、...、最后一次执行会是在17：45分）</p>
+</blockquote>
+<p>上述所有规则都可以混合使用</p>
+<blockquote>
+<p>* 12 10-16/2 * *</p>
+<p>每月的10号到16号中每过两天中当天12时中的每分钟执行一次（也即10、12、14、16号中...）</p>
+</blockquote>
+<blockquote>
+<p>* 12 1-15,17,20-25 * *</p>
+<p>每月的1到15号、17号、20到25号当天中的12时中的每分钟执行一次</p>
+</blockquote>
+<p>cron4j允许你使用“|”符号连接多个调度模式组成一个调度模式</p>
+<blockquote>
+<p>0 5 * * *|8 10 * * *|22 17 * * *</p>
+<p>每天的5：00、10：08、17：22执行一次</p>
+</blockquote>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：文后其他地方会使用到<code>SchedulingPattern</code>对象，这个对象的创建非常简单，只需要在它的构造函数中传入调度模式即可。</em></p>
+</blockquote>
+<hr>
+<p><span id="3如何调度-schedule重新调度-reschedule脱离调度-deschedule一个任务task"></span></p>
+
+          <h3 id="df8392bc">3、如何调度 schedule、重新调度 reschedule、脱离调度 deschedule一个任务（Task）</h3>
+          <h5 id="458f8eb8">（1）调度</h5><p>创建Task的最简单最常用的方法就是实现<code>java.lang.Runnable</code>接口，任务创建好的时候，它可以被<code>it.sauronsoftware.cron4j.Scheduler.schedule(String, Runnable)</code>方法安排进调度器中，如果调度模式有格式异常，将会抛出<code>it.sauronsoftware.cron4j.InvalidPatternException</code>异常。</p>
+<p>创建Task的另一种方法就是继承抽象方法<code>it.sauronsoftware.cron4j.Task</code>，这种方式比上一种方式更加强大，它可以使开发者访问一些cron4j提供的特性。你可以在“<a href="#6">建立自定义的任务 Task</a>”小节中了解到更多相关用法。Task的实例可以被<code>schedule(String, Task)</code>方法和<code>schedule(SchedulingPattern, Task)</code>方法安排进调度器中。</p>
+
+          <h5 id="c1cf9ac5">（2）重新调度/脱离调度</h5><p>在调度器对象的调度方法<code>schedule</code>会返回一个ID值（String类型）用来识别和检索已经安排过的操作。</p>
+<p>这个ID可以被用来之后做：</p>
+<ul>
+<li>重新调度该任务（需要改变它的调度模式）</li>
+<li>把该任务脱离调度（把任务从调度器中移除）</li>
+</ul>
+<p>可以调用这两个方法取重新调度该任务：</p>
+<ul>
+<li><code>reschedule(String, String)</code></li>
+<li><code>reschedule(String, SchedulingPattern)</code></li>
+</ul>
+<p>可以调用这个方法让任务脱离调度：</p>
+<ul>
+<li><code>deschedule(String)</code></li>
+</ul>
+<hr>
+<p><span id="4如何调度系统程序"></span></p>
+
+          <h3 id="14c4df1f">4、如何调度系统程序</h3><ul>
+<li>使用类<code>ProcessTask</code>可以很简单的完成系统程序的调度<pre><code>ProcessTask task = new ProcessTask(&quot;C:\\Windows\\System32\\notepad.exe&quot;);
+Scheduler scheduler = new Scheduler();
+scheduler.schedule(&quot;* * * * *&quot;, task);
+scheduler.start();
+// ...
+</code></pre>
+</li>
+<li>多个程序参数可以作为字符串数组去代替一条参数<pre><code>String[] command = { &quot;C:\\Windows\\System32\\notepad.exe&quot;, &quot;C:\\File.txt&quot; };
+ProcessTask task = new ProcessTask(command);
+// ...
+</code></pre>
+</li>
+<li>程序的环境变量可以作为第二组字符串数组参数传入，其中的对象必须是‘NAME=VALUE’的形式<pre><code>String[] command = { &quot;C:\\tomcat\\bin\\catalina.bat&quot;, &quot;start&quot; };
+String[] envs = { &quot;CATALINA_HOME=C:\\tomcat&quot;, &quot;JAVA_HOME=C:\\jdks\\jdk5&quot; };
+ProcessTask task = new ProcessTask(command, envs);
+// ...
+</code></pre>
+</li>
+<li>默认工作目录可以通过传入第三组参数去改变<pre><code>String[] command = { &quot;C:\\tomcat\\bin\\catalina.bat&quot;, &quot;start&quot; };
+String[] envs = { &quot;CATALINA_HOME=C:\\tomcat&quot;, &quot;JAVA_HOME=C:\\jdks\\jdk5&quot; };
+File directory = &quot;C:\\MyDirectory&quot;;
+ProcessTask task = new ProcessTask(command, envs, directory);
+// ...
+</code></pre>
+</li>
+<li>如果你只想改变工作目录而不想使用环境变量，你可以在envs位置传入null值<pre><code>ProcessTask task = new ProcessTask(command, null, directory);
+</code></pre>
+当evns为null的时候，程序会继承当前JVM环境下工作的所有环境变量。</li>
+</ul>
+<p>环境变量和工作目录也可以通过调用<code>setEnvs(String[])</code>和<code>setDirectory(java.io,File)</code>方法来设置</p>
+<p>程序的标准输出和标准错误输出管道可以通过<code>setStdoutFile(java.io.File)</code>和<code>setStderrFile(java.io.File)</code>方法重定向到指定文件</p>
+<pre><code>ProcessTask task = new ProcessTask(command, envs, directory);
+task.setStdoutFile(new File(&quot;out.txt&quot;));
+task.setStderrFile(new File(&quot;err.txt&quot;));
+</code></pre>
+<p>同样的标准输入管道可以从已存在的文件中读取，通过调用方法<code>setStdinFile(java.io.File)</code></p>
+<pre><code>ProcessTask task = new ProcessTask(command, envs, directory);
+task.setStdinFile(new File(&quot;in.txt&quot;));
+</code></pre>
+<hr>
+<p><span id="5如何从调度配置文件中调度程序"></span></p>
+
+          <h3 id="2b48e387">5、如何从调度配置文件中调度程序</h3><p>cron4j调度器可以从调度配置文件中调度一系列的程序流程</p>
+<p>你需要准备一个调度配置文件，这和UNIX中crontab的用法非常相似，并且把文件通过<code>scheduleFile(File)</code>方法注册到调度器里面。</p>
+<p>调度配置文件也可以通过<code>deschedule(File)</code>方法来脱离调度。</p>
+<p>已经调度过的调度配置文件可以调用<code>getScheduledFiles()</code>方法来检索到。</p>
+<p>已经注册过的调度配置文件会每分钟都被解析一次，调度器会根据调度配置文件去运行所有调用‘scheduling pattern（调度模式）’来正确声明的、匹配当前系统时间的程序。</p>
+<p>cron4j的调度配置文件的声明规则可以从“<a href="#14cron%E8%A7%A3%E6%9E%90%E5%99%A8">Cron解析器</a>”小节中了解到。</p>
+<hr>
+<p><span id="6创建自定义的任务-task"></span></p>
+
+          <h3 id="45cc6dc7">6、创建自定义的任务 Task</h3><p>一个<code>java.lang.Runnable</code>对象是一个简单的Task，但是为了获得对整个任务的控制权你还需要继承<code>it.sauronsoftware,cron4j.Task</code>类（注意这是一个抽象类）。</p>
+<p>有两种比较简单的创建形式：
+（1）实现Runnable接口的时候：任务就是run方法所执行的语句。
+（2）继承Task抽象类的时候：任务就是需要实现的<code>execute(TaskExecutionContext)</code>方法所执行的语句。</p>
+<p>execute(TaskExecutionContext)方法提供了一个<code>it.sauronsoftware.cron4j.TaskExecutionContext</code>实例对象，这是在run方法中所没有的。</p>
+<p>你可以用这个对象做这些事情来操作当前任务：</p>
+<ul>
+<li><p>status tracking 状态跟踪</p>
+<blockquote>
+<p>任务可以和它的执行器进行通信，可以通过文本描述来向外通知它的internal state（内部状态）</p>
+<p>如果你想要你的任务支持这个功能的话，你可以重载<code>supportsStatusTracking()</code>方法，这个方法仅需要实现一个true为返回值就可以表示开启该功能。</p>
+<p>当你重载过这个方法之后，在<code>execute(TaskExecutionContext)</code>方法里面就可以调用<code>context.setStatusMessage(String)</code>方法，这会给该任务的执行器发一条状态消息。这个状态消息，通过执行器，可以被外部用户索引到（具体看“<a href="#9%E6%89%A7%E8%A1%8C%E5%99%A8-executors">执行器 Executors</a>”小节）。</p>
+</blockquote>
+</li>
+<li><p>completeness tracking 完成度跟踪</p>
+<blockquote>
+<p>任务可以和它的执行器进行通信，可以通过数字值来向外通知它的completeness level（完成度），</p>
+<p>如果你想要你的任务支持这个功能的话，你可以重载<code>supportsCompletenessTracking()</code>方法，这个方法仅需要实现一个true为返回值就可以表示开启该功能。</p>
+<p>当你重载过这个方法之后，在<code>execute(TaskExecutionContext)</code>方法里面就可以调用<code>context.setCompleteness(double)</code>方法，这个方法需要传递一个0~1之间的double值，这会给该任务的执行器发一个完成度值。这个完成度值，通过执行器，可以被外部用户索引到（具体看“<a href="#9%E6%89%A7%E8%A1%8C%E5%99%A8-executors">执行器 Executors</a>”小节）。</p>
+</blockquote>
+</li>
+<li><p>paused 被暂停</p>
+<blockquote>
+<p>任务可以根据情况而暂停。</p>
+<p>如果你想要你的任务支持这个功能的话，你可以重写<code>canBePaused()</code>方法，这个方法仅需要实现一个true为返回值就可以表示开启该功能。</p>
+<p>当你重载过这个方法之后，你需要定期地（原文此处为：you have to periodically call the...）调用<code>context.pauseIfRequested()</code>方法，这会暂停任务的执行，直到被外部用户恢复或者终止当前任务。</p>
+</blockquote>
+</li>
+<li><p>stopped 被终止</p>
+<blockquote>
+<p>任务可以根据情况而终止。</p>
+<p>如果你想要你的任务支持这个功能的话，你可以重载<code>canBeStopped()</code>方法，这个方法仅需要实现一个true为返回值就可以表示开启该功能。</p>
+<p>当你重载过这个方法之后，你需要定期地（...）调用<code>context.isStopped()</code>方法，当被外部用户命令终止的时候，这会返回一个true值（具体看“<a href="#9%E6%89%A7%E8%A1%8C%E5%99%A8-executors">执行器 Executors</a>”小节）。这时候你有义务处理好这个任务在执行时所反馈出来的事件结果，好让它在正在运行的状态下平稳地（原文：gently）结束。</p>
+</blockquote>
+</li>
+<li><p>索引调度器</p>
+<blockquote>
+<p>通过context对象，你可以通过<code>getScheduler()</code>索引到调度本身调度器。</p>
+</blockquote>
+</li>
+<li><p>索引执行器</p>
+<blockquote>
+<p>通过context对象，你可以通过<code>getTaskExecutor()</code>索引到调度本身调度器。</p>
+</blockquote>
+</li>
+</ul>
+<p>一个自定义的任务可以被任务收集器（task collector）所立即调度、运行、或者返回。</p>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：可以查看Task类的源码，不难发现，上述所要重载的方法在源码中也仅仅只是返回false值，也即默认是关闭这些功能的，我们只有重载为true才能开启和使用它们。</em></p>
+</blockquote>
+<p><a href="#index">回到索引</a></p>
+<hr>
+<p><span id="7创建自定义的收集器-collector"></span></p>
+
+          <h3 id="8a2455e6">7、创建自定义的收集器 Collector</h3><p>通过任务收集器提供的API，你可以在调度器里面创建和插入你自己的任务源（task source）。</p>
+<p>cron4j调度器支持注册一个或多个<code>it.sauronsoftware.cron4j.TaskCollector</code>实例，你只需要调用<code>addTaskCollector(TaskCollector)</code>方法即可。</p>
+<p>被注册的收集器可以被调度器对象调用<code>getTaskCollectors</code>方法索引到，之前的收集器可以调用<code>removeTaskCollector(TaskCollector)</code>方法从调度器中移除。</p>
+<p>收集器可以在任意的时间被添加（注册）、查询（索引）、移除，即使是在调度器正在运行的状态下也可以。</p>
+<p>每一个被注册过的收集器每隔一分钟都会被调度器去索引一次，调度器会调用收集器的<code>collector.getTasks()</code>方法。这个实现方法会返回一个<code>it.sauronsoftware,cron4j.TaskTable</code>实例，我们把这个实例称为任务表。</p>
+<p>每一个任务表都包含了本收集器中所有的任务实例和该任务对应的调度模式实例。一旦该表被检索到，调度器就会检查被记录（原文使用reported）到的对象，然后执行所有使用‘scheduling pattern（调度模式）’来正确声明的、匹配当前系统时间的任务。</p>
+<p>一个自定义的收集器可以配合外部任务源来约束调度器的行为，比如数据库、或者xml文件，这些同样支持在运行时更改和管理的源。</p>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：在<a href="#1collector-exp">下面</a>贴出译者实践演示代码，代码中演示了如何向一个调度器中注册、移除收集器，并且查看收集器的信息，同时在代码运行的过程中也演示了调度器每分钟索引收集器task的过程。</em></p>
+<p><em>读者可以自行研究代码，花上4分钟体会一下。读者也可以从<code>TaskController</code>类的源码开始阅读下去，特别是<code>TaskTable</code>类中，仅仅只有几个简单易懂的API，了解过后你会发现这套流程其实并不难走通。</em></p>
+</blockquote>
+<hr>
+<p><span id="8创建自定义的监听器来监控你的调度器"></span></p>
+
+          <h3 id="52e0744c">8、创建自定义的监听器来监控你的调度器</h3><p>cron4j提供了<code>it.sauronsoftware,cron4j.SchedulerListener</code>类，我们可以使用它的API来对调度器的事件进行监听。</p>
+<p>调度监听器需要实现以下方法：</p>
+<pre><code>taskLaunching(TaskExecutor)
+这个方法会在每个调度任务启动的时候被调度器调用
+
+taskSucceeded(TaskExecutor)
+这个方法会在每个任务成功地执行完毕的时候被调用
+
+taskFailed(TaskExecutor, Throwable)
+这个方法会在每个任务执行失败的时候被调用
+</code></pre>
+<p>你可以从“<a href="#9%E6%89%A7%E8%A1%8C%E5%99%A8-executors">执行器 Executors</a>”小节中了解到更多的信息。</p>
+<p>当你准备好一个调度监听器（SchedulerListener）的时候，你可以调用调度器的<code>addSchedulerListener(SchedulerListener)</code>方法将这个监听器注册到该调度器中。</p>
+<p>你可以调用<code>removeSchedulerListener(SchedulerListener)</code>方法移除已经注册的监听器。</p>
+<p>你可以调用<code>getSchedulerListeners()</code>方法获取到所有在本调度器注册的监听器。</p>
+<p>调度监听器可以在任何时候被注册或者移除，即使是在调度器正在运行的时候。</p>
+<hr>
+<p><span id="9执行器-executors"></span></p>
+
+          <h3 id="97c9b773">9、执行器 Executors</h3><p>每当调度器被开启并且运行的时候，你可以通过方法索引到它的执行器。</p>
+<p>执行器非常像一个线程，它是被调度器用来执行任务的利器。</p>
+<p>你可以调用<code>Scheduler.getExecutingTasks()</code>方法来获得当前正在运行的执行器。</p>
+<p>你也可以通过调度监听器来获得执行器（见“<a href="#8%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8%E6%9D%A5%E7%9B%91%E6%8E%A7%E4%BD%A0%E7%9A%84%E8%B0%83%E5%BA%A6%E5%99%A8">8、创建自定义的监听器来监控你的调度器</a>”小节）。</p>
+<p>每一个执行器，代表着一个<code>it.sauronsoftware.cron4j.TaskExecutor</code>实例，执行不同的任务。</p>
+<p>执行器中的任务可以被<code>TaskExecutor.getTask()</code>方法索引到。</p>
+<p>执行器的状态可以通过<code>TaskExecutor.isAlive()</code>方法来检查：如果当前执行器正在运行则返回true。</p>
+<p>如果执行器处于运行状态，那么一直到整个执行过程完毕之前，你都可以通过<code>join()</code>方法来暂停当前线程</p>
+<ul>
+<li><p>关于status tracking 状态跟踪</p>
+<blockquote>
+<p>你可以调用<code>TaskExecutor.supportsStatusTracking()</code>方法，如果它会返回一个true值，则表示当前正在执行的任务支持状态跟踪功能。这意味着任务可以和它的执行者进行沟通，当然只能传递字符串。当前的状态信息可以被执行器调用<code>TaskExecutor.getStatusMessage()</code>方法索引到。</p>
+</blockquote>
+</li>
+<li><p>关于completeness tracking 完成度跟踪</p>
+<blockquote>
+<p>你可以调用<code>supportsCompletenessTracking()</code>方法来检查当前正在执行的任务是否支持完成度跟踪。如果支持，那么你可以调用<code>TaskExecutor.getCompleteness()</code>方法来索引任务完成度值，它会返回一个0（未开始）~1（已完成）之间的数值。</p>
+</blockquote>
+</li>
+<li><p>关于 paused 暂停</p>
+<blockquote>
+<p>你可以调用<code>TaskExecutor.canBePaused()</code>方法来检查当前正在执行的任务是否支持运行时暂停执行的功能。如果支持，那么你可以你可以调用<code>TaskExecutor.paused()</code>方法来暂停当前任务的执行。你还可以调用<code>TaskExecutor.isPaused()</code>方法来检查当前任务是否处于暂停状态。被暂停的执行器可以通过<code>TaskExecutor.resume()</code>方法来恢复运行。</p>
+</blockquote>
+</li>
+<li><p>关于 stopped 终止</p>
+<blockquote>
+<p>你可以调用<code>TaskExecutor.canBeStopped()</code>方法来检查当前正在执行的任务是否支持运行时终止执行的功能。如果支持，那么你可以你可以调用<code>TaskExecutor.stop()</code>方法来终止当前任务的执行。同样你可以调用<code>TaskExecutor.isStopped()</code>方法去检查当前执行器是否被终止。</p>
+<p><strong>注意：被终止过的执行器不能再恢复运行。</strong></p>
+</blockquote>
+</li>
+<li><p>其他API</p>
+<blockquote>
+<p><code>TaskExecutor.getStartTime()</code></p>
+<p>它会返回一个时间标记（time stamp）来告诉你执行器启动的时间，或者一个小于0的值来表示执行器还没开始启动。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><code>TaskExecutor.getScheduler()</code></p>
+<p>它会返回当前执行器所属的调度器对象。</p>
+</blockquote>
+<blockquote>
+<p><code>TaskExecutor.getGuid()</code></p>
+<p>它会返回当前执行器所唯一对应的纯文本的GUID值。</p>
+</blockquote>
+<ul>
+<li>关于事件驱动</li>
+</ul>
+<blockquote>
+<p>执行器同时也提供了它自己的事件驱动API，你可以通过<code>it.sauronsoftware.cron4j.TaskExecutorListener</code>类来访问它们。</p>
+<p>你可以分别调用：</p>
+<p><code>addTaskExecutorListener(TaskExecutorListener)</code></p>
+<p><code>removeTaskExecutorListener(TaskExecutorListener)</code></p>
+<p><code>getTaskExecutorListeners()</code></p>
+<p>方法来注册、移除、索引到执行监听器。</p>
+<p>一个执行监听器需要实现以下方法：</p>
+<pre><code>executionPausing(TaskExecutor)
+该方法会在执行器被请求暂停正在运行的任务时调用。传入的参数代表着被请求暂停任务执行的执行器对象。
+
+executionResuming(TaskExecutor)
+该方法会在执行器被请求恢复正在被暂停的任务时调用。传入的参数代表着被请求恢复任务执行的执行器对象。
+
+executionStopping(TaskExecutor)
+该方法会在执行器被请求终止任务执行时调用。传入的参数代表着被请求的执行器对象。
+
+executionTerminated(TaskExecutor, Throwable)
+该方法会在执行器将任务执行完毕的时候被调用。传入的第一个参数代表着该执行器对象，第二个参数是可选项，代表着迫使执行器终止执行任务的异常，如果任务正确的执行成功的话，该对象值为null。
+
+statusMessageChanged(TaskExecutor, String)
+该方法会在每次运行时任务的状态信息发生改变的时候调用。传入的第一个参数代表着该执行器对象，第二个参数则是新发布的任务状态信息。
+
+completenessValueChanged(TaskExecutor, double)
+该方法会在每次运行时任务的完成度值发生改变的时候调用。传入的第一个参数代表着该执行器对象，第二个参数则是取值范围为0~1之间的新发布的完成度值。
+</code></pre>
+</blockquote>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：正如官方文档所说的一样，执行器非常像一个线程，所以它提供的API也相对线程性细致和线程性复杂，这也是cron4j的唯一的重难点，使用的时候一定要考虑周全，同时还要分清楚调度器和执行器的关系，以及调度监控器和执行监控器的事件监听方法的调用时机。</em></p>
+</blockquote>
+<p><a href="#index">回到索引</a></p>
+<hr>
+<p><span id="10手动启动任务"></span></p>
+
+          <h3 id="d56d65b3">10、手动启动任务</h3><p>如果调度器以及开启并且处于运行中，你是有可能手动启动一个任务的，你甚至可以不用安排调度模式。</p>
+<p>你可以使用<code>Scheduler.launch(Task)</code>方法，任务就会立马被执行，这个方法会返回该任务的TaskExecutor（执行器）实例，你可以使用它来控制整个任务的执行过程。</p>
+<hr>
+<p><span id="11在指定时区下运行"></span></p>
+
+          <h3 id="320e2a68">11、在指定时区下运行</h3><p>在默认的情况下，调度器会在系统默认的时区中运行。换句话说，一个“ 0 2 * * * ”的调度模式会根据系统时区在当地时间每天的2（am）时执行任务。</p>
+<p>你可以为调度器设置不同于系统默认时区的时区作为它的工作时区。</p>
+<p>调用<code>Scheduler.setTimeZone(TimeZone)</code>方法和<code>Scheduler.getTimeZone()</code>方法就可以控制这个属性。</p>
+<p>一旦调度器的默认时区被改变，系统当前运行时会在解释调度模式的时候去区适应你所提供的时区。那么结果会在你指定的时区中按照你指定的调度模式去执行任务。假设有以下的情况：</p>
+<p>系统时间：10：00
+系统时区：GMT+1
+调度器设置时区：GMT+3</p>
+<p>调度器会把调度模式和系统时间进行比较，然后把GTM+1时区下的10:00转换到GTM+3，这意味着10：00变成了12：00，这个结果会被运用到调度器中去执行任务。所以，在给定的设置下，任务会在模式“ 0 12 * * * ”中执行，而不是模式“ 0 10 * * * ” 。</p>
+<hr>
+<p><span id="12守护线程-daemon-threads"></span></p>
+
+          <h3 id="6086c0c6">12、守护线程 Daemon threads</h3><p>JVM只有在当前运行线程全部都是守护线程的时候才会退出，cron4j调度器可以被配置为只生产守护线程。为了控制这个特性，你需要调用<code>Scheduler.setDaemon(boolean)</code>方法，这个方法必须在调度器被开启之前调用，方法的默认值是false，你可以调用<code>Scheduler.isDaemon()</code>方法来检测当前调度器生成的线程是否是守护线程。</p>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：这小节的意思是，如果你启动了一个调度器，在它执行到特定状态的时候让它自己关闭（注意是关闭调度器）的话，在默认的情况下它是不会退出程序的，不信你可以写一个简单的demo来测试一下。</em></p>
+</blockquote>
+<hr>
+<p><span id="13预报器-predictor"></span></p>
+
+          <h3 id="933fa50f">13、预报器 Predictor</h3><p><code>it.sauronsoftware.cron4j.Predictor</code>类可以预测你的调度模式什么时候会被匹配到。</p>
+<p>假如你想知道调度器在使用模式“ 0 3 jan-jun,sep-dec mon-fri ”的情况下什么时候会执行任务，你可以使用预报器对象去预测接下来n次任务的执行时间：</p>
+<pre><code>String pattern = &quot;0 3 * jan-jun,sep-dec mon-fri&quot;;
+Predictor p = new Predictor(pattern);
+for (int i = 0; i &lt; n; i++) {
+    System.out.println(p.nextMatchingDate());
+}
+</code></pre>
+<br>
+
+<blockquote>
+<p><em>译者文外补充：当n等于5的时候结果如下：</em></p>
+<pre><code>Fri Sep 01 03:00:00 CST 2017
+Mon Sep 04 03:00:00 CST 2017
+Tue Sep 05 03:00:00 CST 2017
+Wed Sep 06 03:00:00 CST 2017
+Thu Sep 07 03:00:00 CST 2017
+</code></pre>
+</blockquote>
+<hr>
+<p><span id="14cron解析器"></span></p>
+
+          <h3 id="12428723">14、Cron解析器</h3><p><code>it.sauronsoftware.cron4j.CronParser</code>类可以被用来解类crontab形式的文件以及字符流。</p>
+<p>如果你想根据类crontab形式的文件去安排一系列的任务，你可以不需要使用Cron解析器，你只需要调用<code>Scheduler.scheduleFile(File)</code>方法把文件添加到调度器里面就可以了。</p>
+<p>如果<code>Scheduler.scheduleFile(File)</code>方法还不能够满足你的需求的话，你可以考虑使用Cron解析器去安排任务。</p>
+<p>举个栗子，如果你想从远程源获取任务安排表，可是远程源并不支持<code>java.io.File</code>对象去操作的话（比如远程服务器上的文档、数据库中的数据设置等等），这时候你可以自己实现<code>it.sauronsoftware.cron4j.TaskCollector</code>类，好让Cron解析器更方便的去解析任何类crontab内容。</p>
+<p>你可以解析整个文件或者整个流，也可以只解析其中一句。</p>
+<p>每一行可以是空行、注释、或者是可调度行。</p>
+<p>没有任何字符或者仅仅包含空格符的行会被认为是空行。</p>
+<p>第一个字符为非空格符而且是一个‘#’符的行会被认为是注释。</p>
+<p>解析器会忽略空行和注释行。</p>
+<p>任何其他类别的行都会被解析为可调度行。</p>
+<p>一个有效的可调度行应该遵循以下结构（注意四个部分之间有空格）：</p>
+<blockquote>
+<p>scheduling-pattern [options] command [args]</p>
+<p>调度模式 [选项] 命令 [提供的参数]</p>
+</blockquote>
+<p><strong>scheduling-pattern</strong>：必须是根据<code>it.sauronsoftware.cron4j.SchedulingPattern</code>类所给定义的有效的调度模式。</p>
+<p><strong>options</strong>：是一个可选选项的列表，它告诉cron4j该什么样的环境来执行任务。稍后会作详细的说明。</p>
+<p><strong>command</strong>：是有效的系统命令，比如一个可执行的调用。</p>
+<p><strong>args</strong>：是提供给系统命令的参数列表。</p>
+<p>在调度模式之后，其他的部分需要使用空格符或者双引号来界定。</p>
+<p>使用双引号的好处是你可以使用以下转义字符：</p>
+<pre><code>\&quot; - quotation mark
+\\ - back slash
+\/ - slash
+\b - back space
+\f - form feed
+\n - new line
+\r - carriage return
+\t - horizontal tab
+\ufour-hex-digits - the character at the given Unicode index
+</code></pre>
+<br>
+
+<p>对于<strong>options</strong>部分的子集可以包含一个或多个以下的对象：</p>
+<blockquote>
+<p>IN：一个文件路径，重定向命令的标准输入通道到指定的文件位置。</p>
+<p>OUT：一个文件路径，重定向命令的标准输出通道到指定的文件位置。</p>
+<p>ERR：一个文件路径，重定向命令的标准报错输出通道到指定的文件位置。</p>
+<p>ENV：名值对（name=value），在命令作用域中定义环境变量。</p>
+<p>DIR：一个目录位置，设置命令的工作目录，这要求你的JVM环境至少是1.3。</p>
+</blockquote>
+<p>你还可以安排一个在解析器的类加载器作用域内的Java类的方法调用。这个方法必须是静态方法并且它的参数列表只能是唯一的一个String数组，为了调用这个方法，你的调度行结构需要这么写：</p>
+<blockquote>
+<p>scheduling-pattern java:className#methodName [args]</p>
+<p>方法名部分可以被省略，这时解析器会调用类中的main方法（如果存在的话）。</p>
+</blockquote>
+<p>你需要注意的是，静态方法会在和调度器一样的JVM环境中执行，并不会产生任何的外部程序！因此这时候<strong>options</strong>部分不可选！</p>
+<p>非法的调度行将会被抛弃，不会阻断解析过程，但会在程序的标准错误输出通道中发送一条错误信息。</p>
+<p>以下是一些合法的调度行栗子：</p>
+<pre><code>0 5 * * * sol.exe
+0,30 * * * * OUT:C:\ping.txt ping 10.9.43.55
+0,30 4 * * * &quot;OUT:C:\Documents and Settings\Carlo\ping.txt&quot; ping 10.9.43.55
+0 3 * * * ENV:JAVA_HOME=C:\jdks\1.4.2_15 DIR:C:\myproject OUT:C:\myproject\build.log C:\myproject\build.bat &quot;Nightly Build&quot;
+0 4 * * * java:mypackage.MyClass#startApplication myOption1 myOption2
+</code></pre>
+<p>把上述文档作txt保存之后，可以在程序中这样调用：</p>
+<pre><code>public class Main {
+
+    public static void main(String[] args) {
+        // Declares the file.
+        File file = new File(&quot;cron4jtab.txt&quot;);
+        // Creates the scheduler.
+        Scheduler scheduler = new Scheduler();
+        // Schedules the file.
+        scheduler.scheduleFile(file);
+        // Starts the scheduler.
+        scheduler.start();
+        // Stays alive for five minutes.
+        try {
+            Thread.sleep(5L * 60L * 1000L);
+        } catch (InterruptedException e) {
+            ;
+        }
+        // Stops the scheduler.
+        scheduler.stop();
+    }
+
+}
+</code></pre>
+<hr>
+<ul>
+<li><br>
+<br>
+<br>
+<br></li>
+</ul>
+
+          <h1 id="62ac7b04">部分实践演示代码</h1><p><span id="1collector-exp"></span></p>
+
+          <h3 id="ef0910b2">1、Collector exp</h3><pre><code>public class CollectorExp {
+
+    public static void main(String[] args) {
+        Scheduler scheduler = new Scheduler();
+
+        TaskCollector c1 = new TaskCollector() {
+            @Override
+            public TaskTable getTasks() {
+                System.out.println(&quot;过了一分钟 调度器又来索引我啦&quot;);
+                TaskTable taskTable = new TaskTable();
+                taskTable.add(new SchedulingPattern(&quot;* * * * *&quot;), new MyTask(&quot;one&quot;));
+                taskTable.add(new SchedulingPattern(&quot;*/2 * * * *&quot;), new MyTask(&quot;two&quot;));
+                return taskTable;
+            }
+        };
+
+        TaskCollector c2 = () -&gt;{
+            System.out.println(&quot;过了一分钟 调度器又来索引我啦&quot;);
+            TaskTable taskTable = new TaskTable();
+            taskTable.add(new SchedulingPattern(&quot;* * * * *&quot;), new MyTask(&quot;three&quot;));
+            taskTable.add(new SchedulingPattern(&quot;*/2 * * * *&quot;), new MyTask(&quot;four&quot;));
+            return taskTable;
+        };
+
+        scheduler.addTaskCollector(c1);
+        scheduler.addTaskCollector(c2);
+
+        showController(scheduler);
+
+        scheduler.start();
+
+        try {
+            Thread.sleep(2000L * 60L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(&quot;两分钟到 移除c1&quot;);
+        scheduler.removeTaskCollector(c1);
+        showController(scheduler);
+
+    }
+
+    static void showController(Scheduler scheduler){
+        TaskCollector[] taskCollectors = scheduler.getTaskCollectors();
+        System.out.println(&quot;|----当前调度器中有&quot;+taskCollectors.length+&quot;个收集器&quot;);
+        for (int i = 0 ; i &lt; taskCollectors.length ; ++i){
+            System.out.println(&quot;|----|----当前显示第&quot;+(i+1)+&quot;个收集器的信息&quot;);
+            TaskCollector now = taskCollectors[i];
+            TaskTable tasks = now.getTasks();
+            System.out.println(&quot;|----|----|----当前收集器有&quot;+tasks.size()+&quot;个任务&quot;);
+            for (int j = 0 ; j &lt; tasks.size() ; ++j){
+                System.out.println(&quot;|----|----|----|----当前显示第&quot;+(j+1)+&quot;个任务信息&quot;);
+                System.out.println(&quot;|----|----|----|----Task:[&quot;+tasks.getTask(j)+&quot;] and scp:[&quot;+tasks.getSchedulingPattern(j)+&quot;]&quot;);
+            }
+        }
+    }
+
+}
+
+class MyTask extends Task{
+
+    private String num;
+
+    MyTask(String num) {
+        this.num = num;
+    }
+
+    @Override
+    public void execute(TaskExecutionContext taskExecutionContext) throws RuntimeException {
+        LocalTime now = LocalTime.now();
+        System.out.println(&quot;This is Task &quot;+num+&quot; ! [ &quot; + now.getHour() + &quot; : &quot; + now.getMinute() + &quot; ]&quot;);
+
+    }
+}
+</code></pre>
+<hr>

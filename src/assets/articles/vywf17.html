@@ -21,26 +21,26 @@
 <p>CLH Lock是一种比较简单的自旋锁算法之一，因为锁的CAS操作涉及到了硬件的锁定(锁总线或者是锁内存)所以性能和CPU架构也密不可分</p>
 <p>CLH Lock是独占式锁的一种，并且是不可重入的锁</p>
 
-          <h3 id="4fe68404">Implement</h3><pre><code class="language-java">public class ClhSpinLock implements Lock{
-    private final ThreadLocal&lt;Node&gt; prev;
-    private final ThreadLocal&lt;Node&gt; node;
-    private final AtomicReference&lt;Node&gt; tail = new AtomicReference&lt;Node&gt;(new Node());
+          <h3 id="4fe68404">Implement</h3><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClhSpinLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Node&gt; prev;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Node&gt; node;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicReference&lt;Node&gt; tail = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicReference</span>&lt;Node&gt;(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>());
 
-    public ClhSpinLock() {
-        this.node = new ThreadLocal&lt;Node&gt;() {
-            protected Node initialValue() {
-                return new Node();
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ClhSpinLock</span><span class="hljs-params">()</span> {
+        <span class="hljs-built_in">this</span>.node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadLocal</span>&lt;Node&gt;() {
+            <span class="hljs-keyword">protected</span> Node <span class="hljs-title function_">initialValue</span><span class="hljs-params">()</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();
             }
         };
 
-        this.prev = new ThreadLocal&lt;Node&gt;() {
-            protected Node initialValue() {
-                return null;
+        <span class="hljs-built_in">this</span>.prev = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadLocal</span>&lt;Node&gt;() {
+            <span class="hljs-keyword">protected</span> Node <span class="hljs-title function_">initialValue</span><span class="hljs-params">()</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
             }
         };
     }
 
-    /**
+    <span class="hljs-comment">/**
      * 1.初始状态 tail指向一个node(head)节点 
      * +------+ 
      * | head | &lt;---- tail 
@@ -62,23 +62,23 @@
      *                                                          +------+ 
      * 3.寻找当前node的prev-node然后开始自旋
      * 
-     */
-    public void lock() {
-        final Node node = this.node.get();
-        node.locked = true;
-        Node pred = this.tail.getAndSet(node);
-        this.prev.set(pred);
-        // 自旋
-        while (pred.locked);
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.node.get();
+        node.locked = <span class="hljs-literal">true</span>;
+        <span class="hljs-type">Node</span> <span class="hljs-variable">pred</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.tail.getAndSet(node);
+        <span class="hljs-built_in">this</span>.prev.set(pred);
+        <span class="hljs-comment">// 自旋</span>
+        <span class="hljs-keyword">while</span> (pred.locked);
     }
 
-    public void unlock() {
-        final Node node = this.node.get();
-        node.locked = false;
-        this.node.set(this.prev.get());
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unlock</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.node.get();
+        node.locked = <span class="hljs-literal">false</span>;
+        <span class="hljs-built_in">this</span>.node.set(<span class="hljs-built_in">this</span>.prev.get());
     }
 
-    private static class Node {private volatile boolean locked;}
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {<span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">boolean</span> locked;}
 }
 </code></pre>
 <p>CLH的算法定义</p>

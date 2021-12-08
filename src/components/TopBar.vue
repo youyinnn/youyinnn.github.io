@@ -16,14 +16,22 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
+      <n-gradient-text class="slogan" :size="16" type="success">
+        déjà vu
+      </n-gradient-text>
     </n-space>
   </n-card>
 </template>
 
 <script>
-import { NTabs, NTab, NSpace, NCard } from "naive-ui";
+import { NTabs, NTab, NSpace, NCard, NGradientText } from "naive-ui";
 
 const tabList = [
+  {
+    name: "about",
+    text: "About",
+    route: "/about",
+  },
   {
     name: "articles",
     text: "Articles",
@@ -34,11 +42,6 @@ const tabList = [
     text: "Script",
     route: "/",
   },
-  {
-    name: "about",
-    text: "About",
-    route: "/about",
-  },
 ];
 
 export default {
@@ -48,6 +51,7 @@ export default {
     NTabs,
     NTab,
     NSpace,
+    NGradientText,
   },
   data: () => ({
     tabValue: tabList[0].name,
@@ -62,16 +66,16 @@ export default {
   mounted: function () {
     const hash = location.hash;
     if (hash === "#/about") {
-      this.tabValue = tabList[2].name;
+      this.tabValue = tabList[0].name;
     }
     if (hash === "#/") {
-      this.tabValue = tabList[0].name;
-    }
-    if (hash === "#/script") {
       this.tabValue = tabList[1].name;
     }
+    if (hash === "#/script") {
+      this.tabValue = tabList[2].name;
+    }
     if (hash.startsWith("#/article/")) {
-      this.tabValue = tabList[0].name;
+      this.tabValue = tabList[1].name;
     }
   },
 };
@@ -102,6 +106,15 @@ export default {
 }
 .tabs {
   width: 400px;
+}
+.slogan {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: auto;
+  bottom: 0;
+  margin-right: 2rem;
+  line-height: 42px;
 }
 </style>
 

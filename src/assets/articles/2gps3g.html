@@ -1,0 +1,276 @@
+
+          <h3 id="263dea41">11. Container With Most Water(Medium)</h3><p>Given <em>n</em> non-negative integers <em>a1</em>, <em>a2</em>, ..., <em>an</em> , where each represents a point at coordinate (<em>i</em>, <em>ai</em>). <em>n</em> vertical lines are drawn such that the two endpoints of line <em>i</em> is at (<em>i</em>, <em>ai</em>) and (<em>i</em>, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+<p><strong>Note:</strong> You may not slant the container and <em>n</em> is at least 2.</p>
+<p><img src="http://image.youyinnn.top/20190228214420.png" alt=""></p>
+<p>The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [1,8,6,2,5,4,8,3,7]
+Output: 49
+</code></pre>
+
+          <h4 id="c084df25">Ⅰ. Brute Force - O(n^2)</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxArea2</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; height.length; i++) {
+        <span class="hljs-keyword">if</span> (Math.max(i * height[i], (height.length - i - <span class="hljs-number">1</span>) * height[i]) &gt; ans) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; height.length; j++) {
+                <span class="hljs-keyword">if</span> (i != j) {
+                    <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> Math.min(height[i], height[j]);
+                    <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> Math.abs(i - j);
+                    ans = Math.max(w * l, ans);
+                }
+            }
+
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h4 id="406255d">Ⅱ. Two Pointer - O (n)</h4><p>既然要找2根柱子，那么我们就设有2个指针，分别从两端开始往里走，因为指针撑到最大的时候，对于两边指针都可能是它们能得到的最大值</p>
+<p>设**(L, R)**表示一组可能的解，对于示例输入，最开始是<code>(1, 7)</code>，如果L比R小，那么证明以1为L的case：<code>(1, 3)、(1, 8)...</code>等等都不需要考虑了，因为这时候已经找到了以1为L的最优解了，<code>(1, 7) = 1*7i</code>，<code>(1, 3) = 1 * （7i - 1)</code></p>
+<p>所以L后走一步，情况反过来就R往前走一步，直到L和R相遇；并且这样做的同时我们不必运算对角线case和对称case</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxArea2</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, l = <span class="hljs-number">0</span>, r = height.length - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (l &lt; r) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> r - l;
+        <span class="hljs-keyword">if</span> (height[l] &gt; height[r]) {
+            ans = Math.max(ans, height[r] * w);
+            r--;
+        } <span class="hljs-keyword">else</span> {
+            ans = Math.max(ans, height[l] * w);
+            l++;
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+<p>然后在讨论区有更具象化的解释：<a href="https://leetcode.com/problems/container-with-most-water/discuss/6099/yet-another-way-to-see-what-happens-in-the-on-algorithm">Yet another way to see what happens in the O(n) algorithm</a></p>
+<blockquote>
+<p>The O(n) solution with proof by contradiction doesn&#39;t look intuitive enough to me. Before moving on, read any <a href="https://leetcode.com/problems/container-with-most-water/discuss/6100/Simple-and-clear-proofexplanation">example</a> of the algorithm first if you don&#39;t know it yet.</p>
+<p>Here&#39; another way to see what happens in a matrix representation:</p>
+<p>Draw a matrix where the row is the first line, and the column is the second line. For example, say <code>n=6</code>.</p>
+<p>In the figures below, <code>x</code> means we don&#39;t need to compute the volume for that case: (1) On the diagonal, the two lines are overlapped; (2) The lower left triangle area of the matrix is symmetric to the upper right area.</p>
+<p>We start by computing the volume at <code>(1,6)</code>, denoted by <code>o</code>. Now if the left line is shorter than the right line, then all the elements left to <code>(1,6)</code> on the first row have smaller volume, so we don&#39;t need to compute those cases (crossed by <code>---</code>).</p>
+<pre><code>  1 2 3 4 5 6
+1 x ------- o
+2 x x
+3 x x x 
+4 x x x x
+5 x x x x x
+6 x x x x x x
+</code></pre>
+<p>Next we move the left line and compute <code>(2,6)</code>. Now if the right line is shorter, all cases below <code>(2,6)</code> are eliminated.</p>
+<pre><code>  1 2 3 4 5 6
+1 x ------- o
+2 x x       o
+3 x x x     |
+4 x x x x   |
+5 x x x x x |
+6 x x x x x x
+</code></pre>
+<p>And no matter how this <code>o</code> path goes, we end up only need to find the max value on this path, which contains <code>n-1</code> cases.</p>
+<pre><code>  1 2 3 4 5 6
+1 x ------- o
+2 x x - o o o
+3 x x x o | |
+4 x x x x | |
+5 x x x x x |
+6 x x x x x x
+</code></pre>
+<p>Hope this helps. I feel more comfortable seeing things this way.</p>
+</blockquote>
+
+          <h3 id="9c39588d">12. Int To Roman(Medium)</h3><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+<pre><code>Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</code></pre>
+<p>For example, two is written as <code>II</code> in Roman numeral, just two one&#39;s added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+<ul>
+<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
+<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
+<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+</ul>
+<p>Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 3
+Output: &quot;III&quot;
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: 4
+Output: &quot;IV&quot;
+</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code>Input: 9
+Output: &quot;IX&quot;
+</code></pre>
+<p><strong>Example 4:</strong></p>
+<pre><code>Input: 58
+Output: &quot;LVIII&quot;
+Explanation: L = 50, V = 5, III = 3.
+</code></pre>
+<p><strong>Example 5:</strong></p>
+<pre><code>Input: 1994
+Output: &quot;MCMXCIV&quot;
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+</code></pre>
+
+          <h4 id="990055f5">Hashing</h4><p>这题没什么说的，一看就是Hashing</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> String[] hashRom = {
+        <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;I&quot;</span>,<span class="hljs-string">&quot;II&quot;</span>,<span class="hljs-string">&quot;III&quot;</span>,<span class="hljs-string">&quot;IV&quot;</span>,<span class="hljs-string">&quot;V&quot;</span>,<span class="hljs-string">&quot;VI&quot;</span>,<span class="hljs-string">&quot;VII&quot;</span>,<span class="hljs-string">&quot;VIII&quot;</span>,<span class="hljs-string">&quot;IX&quot;</span>,
+        <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;XX&quot;</span>,<span class="hljs-string">&quot;XXX&quot;</span>,<span class="hljs-string">&quot;XL&quot;</span>,<span class="hljs-string">&quot;L&quot;</span>,<span class="hljs-string">&quot;LX&quot;</span>,<span class="hljs-string">&quot;LXX&quot;</span>,<span class="hljs-string">&quot;LXXX&quot;</span>,<span class="hljs-string">&quot;XC&quot;</span>,
+        <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-string">&quot;CC&quot;</span>,<span class="hljs-string">&quot;CCC&quot;</span>,<span class="hljs-string">&quot;CD&quot;</span>,<span class="hljs-string">&quot;D&quot;</span>,<span class="hljs-string">&quot;DC&quot;</span>,<span class="hljs-string">&quot;DCC&quot;</span>,<span class="hljs-string">&quot;DCCC&quot;</span>,<span class="hljs-string">&quot;CM&quot;</span>,
+        <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;M&quot;</span>,<span class="hljs-string">&quot;MM&quot;</span>,<span class="hljs-string">&quot;MMM&quot;</span>,
+};
+
+<span class="hljs-keyword">public</span> String <span class="hljs-title function_">intToRoman</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> {
+    <span class="hljs-keyword">return</span> hashRom[<span class="hljs-number">30</span> + (num / <span class="hljs-number">1000</span>)] +
+            hashRom[<span class="hljs-number">20</span> + ((num % <span class="hljs-number">1000</span>) / <span class="hljs-number">100</span>)] +
+            hashRom[<span class="hljs-number">10</span> + ((num % <span class="hljs-number">100</span>) / <span class="hljs-number">10</span>)] +
+            hashRom[num % <span class="hljs-number">10</span>];
+}
+</code></pre>
+
+          <h3 id="166ae0bc">13. Roman To Int(Easy)</h3><pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">mapping</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> {
+    <span class="hljs-keyword">switch</span> (c) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;I&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;V&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;X&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;L&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">50</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;C&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;D&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">500</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;M&#x27;</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1000</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">romanToInt</span><span class="hljs-params">(String s)</span> {
+    <span class="hljs-type">char</span>[] rs = s.toCharArray();
+    <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; rs.length;) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">nowInt</span> <span class="hljs-operator">=</span> mapping(rs[i]), nextInt;
+        <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; rs.length
+                &amp;&amp; (nextInt = mapping(rs[i + <span class="hljs-number">1</span>])) &gt; nowInt) {
+            ans += nextInt - nowInt;
+            i += <span class="hljs-number">2</span>;
+        } <span class="hljs-keyword">else</span> {
+            ans += nowInt;
+            i++;
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+
+          <h3 id="893d787">14. Longest Common Prefix(Easy)</h3><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+Output: &quot;fl&quot;
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+Output: &quot;&quot;
+Explanation: There is no common prefix among the input strings.
+</code></pre>
+<p><strong>Note:</strong></p>
+<p>All given inputs are in lowercase letters <code>a-z</code>.</p>
+
+          <h4 id="3c105449">Brute Force (Beat 99.85%)</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestCommonPrefix</span><span class="hljs-params">(String[] strs)</span> {
+    <span class="hljs-keyword">if</span> (strs.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
+    }
+    <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">stringBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+    <span class="hljs-type">String</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> strs[<span class="hljs-number">0</span>];
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">stop</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; flag.length() &amp;&amp; !stop; i++) {
+        <span class="hljs-type">char</span> <span class="hljs-variable">flagP</span> <span class="hljs-operator">=</span> flag.charAt(i);
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; strs.length; j++) {
+            <span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> strs[j];
+            <span class="hljs-keyword">if</span> (next.length() - <span class="hljs-number">1</span> &lt; i || next.charAt(i) != flagP) {
+                stop = <span class="hljs-literal">true</span>;
+            }
+        }
+        <span class="hljs-keyword">if</span> (!stop) {
+            stringBuilder.append(flagP);
+        }
+    }
+    <span class="hljs-keyword">return</span> stringBuilder.toString();
+}
+</code></pre>
+
+          <h3 id="bc121546">15. 3Sum(Medium)</h3><p>Given an array <code>nums</code> of <em>n</em> integers, are there elements <em>a</em>, <em>b</em>, <em>c</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> = 0? Find all unique triplets in the array which gives the sum of zero.</p>
+<p><strong>Note:</strong></p>
+<p>The solution set must not contain duplicate triplets.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given array nums = [-1, 0, 1, 2, -1, -4],
+
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+</code></pre>
+<p>这题和2sum的思路有非常大的不同，2sum是通过哈希去寻找是否有target，而从3sum开始，到后面的4sum，做法都比较tricky，评论区里的第一解法也都是同一种思路</p>
+<p>因为2sum里的元素都是不重复的，所以可以用hash，而3sum开始就不能用hash去解了</p>
+<p>这题难点就在于，如何去重，比如说例子里给的<code>nums</code>，里面有两个负一，如果用暴力解的话，不免会出现两个<code>[-1, 0, 1]</code>，于是暴力解也很难受</p>
+<p>所以去重的思路，才是这题思路的关键</p>
+
+          <h4 id="9da64465">Sorted &amp; Double Pointer</h4><p>先排序，然后再前后双指针遍历解，遍历的同时直接根据排序的性质去重</p>
+<p>比如<code>nums=[-2,1,1,2,0,-2,4,4,-2]</code>排完序之后：<code>nums=[-2,-2,-2,0,1,1,2,4,4]</code></p>
+<p>套一层循环i=0，从-4开始寻找可能的解，指针L= i + 1，从i的下一位开始，R=nums.length - 1，从末尾开始：</p>
+<ul>
+<li><p>如果<code>nums[i] + nums[L] + nums[R] &gt; 0</code>，证明R值大了，于是R--，继续下一轮比较；</p>
+</li>
+<li><p>如果<code>nums[i] + nums[L] + nums[R] &lt; 0</code>，证明L值小了，于是L++，继续下一轮比较；</p>
+</li>
+<li><p>如果<code>nums[i] + nums[L] + nums[R] = 0</code>，证明找到了一个可能的解，于是将这个解记录，<strong>同时L++，R--继续下一组迭代</strong></p>
+<p>  但是还没处理完，这时候要处理重复，因为L和R同时靠拢了一步，如果下一步L或者R还是同样的值，那么这个答案不可取，L和R要继续靠拢到和上一个解不一样为止，比如例子中第一组解找到的是<code>nums[i] = -2,nums[L]=-2,nums[R]=4</code>，LR靠拢后，<code>nums[L]</code>还是<code>-2</code>，<code>nums[R]</code>还是<code>4</code>，这时候要各自考虑到和前值不一样的位置，再做考虑</p>
+</li>
+<li><p>如果<code>L &gt;= R</code>则枚举完了</p>
+</li>
+</ul>
+<p>在<code>i</code>循环中也是一样的，如果**nums[i] = nums[i - 1]**，那么说明当前值可能的解在上一次循环中已经求过了，再求也是重复的，于是跳过这种情况</p>
+<p>所以代码为：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">threeSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    Arrays.sort(nums);
+    List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i-<span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> i+<span class="hljs-number">1</span>, r = nums.length - <span class="hljs-number">1</span>, need = <span class="hljs-number">0</span> - nums[i];
+        <span class="hljs-keyword">while</span> (l &lt; r) {
+            <span class="hljs-keyword">if</span> (nums[l] + nums[r] == need) {
+                res.add(Arrays.asList(nums[i], nums[l++], nums[r--]));
+                <span class="hljs-keyword">while</span> (r &gt; l &amp;&amp; nums[l] == nums[l-<span class="hljs-number">1</span>]) {
+                    l++;
+                }
+                <span class="hljs-keyword">while</span> (r &gt; l &amp;&amp; nums[r] == nums[r+<span class="hljs-number">1</span>]) {
+                    r--;
+                }
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[l] + nums[r] &gt; need) {
+                r--;
+            } <span class="hljs-keyword">else</span>{
+                l++;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> res;
+}
+</code></pre>
+<p>其中排序用的是JDK提供的排序，具体实现是<code>DualPivotQuicksort</code>，效率比一般的快排快很多</p>
