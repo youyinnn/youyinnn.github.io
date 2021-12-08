@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "md": "node ./src/plugins/md-generator.js"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
@@ -32,7 +33,7 @@
     "eslint-plugin-vue": "^7.0.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
-    "marked": "^4.0.6",
+    "marked": "^4.0.5",
     "naive-ui": "^2.21.5",
     "raw-loader": "^4.0.2",
     "sass": "^1.38.0",
