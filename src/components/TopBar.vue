@@ -28,8 +28,8 @@ export default {
   data: () => ({
     tabs: [
       {
-        name: "home",
-        text: "Home",
+        name: "articles",
+        text: "Articles",
         route: "/",
       },
       {
