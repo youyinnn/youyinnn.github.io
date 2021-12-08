@@ -21,7 +21,7 @@ export default defineComponent({
   setup() {
     return {
       darkTheme,
-      theme: ref(darkTheme),
+      theme: ref(null),
     };
   },
   name: "App",
@@ -39,10 +39,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
-@import "../src/assets/css/index.less";
+@import "../src/assets/css/variables.less";
 .main {
   margin: auto;
   top: @top-bar-height;
+  padding: 0 1rem;
   border-radius: 0;
 }
 
