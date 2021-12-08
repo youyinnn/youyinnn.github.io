@@ -1,12 +1,28 @@
 <template>
-  <div class="home"><h1>This is an home page</h1></div>
+  <div class="home">
+    <div class="article-list-box">
+      <n-card>
+        <n-space>
+          <n-button @click="theme = darkTheme">深色</n-button>
+          <n-button @click="theme = null">浅色</n-button>
+        </n-space>
+      </n-card>
+    </div>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { NCard, NSpace, NButton } from "naive-ui";
 
 export default {
   name: "Home",
-  components: {},
+  components: {
+    NCard,
+    NSpace,
+    NButton,
+  },
 };
 </script>
+
+<style lang="less"></style>
