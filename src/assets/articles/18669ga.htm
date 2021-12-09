@@ -1,8 +1,8 @@
-
-          <h3 id="783b7f29">HotSpot虚拟机对象内存</h3><p>深入讨论HotSpot虚拟机在Java堆中的对象分配、内存布局和对象访问的过程</p>
-
-          <h4 id="bc9f22cb">对象创建流程</h4>
-          <h5 id="577e0ad6">过程</h5><ol>
+<h3 id="hotspot虚拟机对象内存">HotSpot虚拟机对象内存</h3>
+<p>深入讨论HotSpot虚拟机在Java堆中的对象分配、内存布局和对象访问的过程</p>
+<h4 id="对象创建流程">对象创建流程</h4>
+<h5 id="过程">过程</h5>
+<ol>
 <li><p><strong>加载类</strong></p>
 <p> 当虚拟机遇到一个<strong>new指令</strong>的时候，就会检查指令参数是否能在常量池中定位到一个类的符号引用，并坚持这个符号代表的类是否已经被加载、解析和初始化过，如果没有，则需要必须进行类加载过程</p>
 <p> 在类加载的过程完成后，<strong>对象所需的内存大小已经完全可以确定</strong></p>
@@ -38,15 +38,15 @@
 </ol>
 </li>
 </ol>
-
-          <h4 id="601b9354">对象内存布局</h4>
-          <h5 id="a03cb4d7">划分</h5><ul>
+<h4 id="对象内存布局">对象内存布局</h4>
+<h5 id="划分">划分</h5>
+<ul>
 <li>对象头（Header）</li>
 <li>实例数据（Instance Data）</li>
 <li>对齐填充（Padding）</li>
 </ul>
-
-          <h5 id="afe6dbdb">1. 对象头（Header）</h5><p>HotSpot的对象头分为两部分信息：</p>
+<h5 id="1-对象头（header）">1. 对象头（Header）</h5>
+<p>HotSpot的对象头分为两部分信息：</p>
 <ul>
 <li><p>第一部分：<strong>Mark Word</strong></p>
 <p>  用于存储对象自身的<strong>运行时数据</strong>如哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳</p>
@@ -58,18 +58,18 @@
 <p>  如果对象是一个<strong>数组</strong>，则对象头还需要用一块内存来记录数组长度数据</p>
 </li>
 </ul>
-
-          <h5 id="4dde8c47">2. 实例数据（Instance Data）</h5><p>这一部分是对象真正存储的<strong>有效信息</strong>，也是在程序代码中锁定义的各种类型的字段内容，包括继承下来的信息</p>
-
-          <h5 id="3e7c1704">3. 对齐填充（Padding）</h5><p>这部分不是必然的实现，也没有特殊含义，但是由于HotSpot VM的自动内存管理系统要求<strong>对象起始地址必须是8字节的整倍数</strong>，一个对象内存分配完之后，并不一定占8字节的整倍数空间，所以填充一些空间以补齐8字节整倍数，保证下一个对象内存分配的起始位置是8字节整倍数</p>
-
-          <h4 id="ad3949b5">对象访问定位</h4><p><strong>Java程序通过虚拟机栈上的reference数据来操作堆上的具体对象（重点）</strong></p>
+<h5 id="2-实例数据（instance-data）">2. 实例数据（Instance Data）</h5>
+<p>这一部分是对象真正存储的<strong>有效信息</strong>，也是在程序代码中锁定义的各种类型的字段内容，包括继承下来的信息</p>
+<h5 id="3-对齐填充（padding）">3. 对齐填充（Padding）</h5>
+<p>这部分不是必然的实现，也没有特殊含义，但是由于HotSpot VM的自动内存管理系统要求<strong>对象起始地址必须是8字节的整倍数</strong>，一个对象内存分配完之后，并不一定占8字节的整倍数空间，所以填充一些空间以补齐8字节整倍数，保证下一个对象内存分配的起始位置是8字节整倍数</p>
+<h4 id="对象访问定位">对象访问定位</h4>
+<p><strong>Java程序通过虚拟机栈上的reference数据来操作堆上的具体对象（重点）</strong></p>
 <p>JVM规范<strong>只说了reference是一个指向对象的引用，但是没有说怎么引用</strong>，所以对象访问方式还是取决于虚拟机的实现，主流的实现有<strong>句柄访问</strong>和<strong>直接指针访问</strong>两种</p>
-
-          <h5 id="62c86512">句柄访问</h5><p>如果使用这种方式，Java堆中会划分一块内存来作为<strong>句柄池</strong>，<strong>reference</strong>中存储的就是对象的<strong>句柄地址</strong>，句柄中包含了<strong>对象实例数据地址信息</strong>和<strong>类型实例数据地址信息</strong></p>
+<h5 id="句柄访问">句柄访问</h5>
+<p>如果使用这种方式，Java堆中会划分一块内存来作为<strong>句柄池</strong>，<strong>reference</strong>中存储的就是对象的<strong>句柄地址</strong>，句柄中包含了<strong>对象实例数据地址信息</strong>和<strong>类型实例数据地址信息</strong></p>
 <p><img src="https://image.youyinnn.top/jubingdangwen.png" alt="jubingdangwen"></p>
-
-          <h5 id="9d5c943c">直接指针访问</h5><p>reference中存储的直接就是对象地址</p>
+<h5 id="直接指针访问">直接指针访问</h5>
+<p>reference中存储的直接就是对象地址</p>
 <p><img src="https://image.youyinnn.top/zhijiezhizhenfangwen.png" alt="zhijiezhizhenfangwen"></p>
 <blockquote>
 <p>直观一点解释就是</p>
@@ -93,8 +93,8 @@
 <li>如果是句柄访问，那么在Java堆内会存在一个<strong>句柄地址</strong>，地址包含两个指针，一个指针是（3.），另一个指针指向对象实例数据（4.）</li>
 </ol>
 </blockquote>
-
-          <h5 id="297e9abf">两种方式的对比</h5><ul>
+<h5 id="两种方式的对比">两种方式的对比</h5>
+<ul>
 <li><strong>句柄稳定</strong>：句柄访问的好处是reference中存储的是稳定的句柄地址，<strong>对象被移动的时候（特别是垃圾回收的时候）</strong>，只需要改句柄指针就好了，reference不需要修改</li>
 <li><strong>直接更快</strong>：节省了多一次指针定位的开销，对象的访问在Java中很频繁，所以指针定位开销也是较为可观的执行成本</li>
 <li><strong>HotSpot用的是直接指针访问</strong></li>

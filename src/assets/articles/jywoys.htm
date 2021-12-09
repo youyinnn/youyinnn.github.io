@@ -1,5 +1,5 @@
-
-          <h3 id="156462d3">46. Permutation(Medium)</h3><p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
+<h3 id="46-permutationmedium">46. Permutation(Medium)</h3>
+<p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,2,3]
 Output:
@@ -12,8 +12,8 @@ Output:
   [3,2,1]
 ]
 </code></pre>
-
-          <h4 id="80756200">Backtracking</h4><p>回溯之前已经分析过了，关键是用contains或者一个flag数组去避免重复</p>
+<h4 id="backtracking">Backtracking</h4>
+<p>回溯之前已经分析过了，关键是用contains或者一个flag数组去避免重复</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permute</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     backtracking(ans, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), nums);
@@ -34,8 +34,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="316d1620">47. Permutation II(Medium)</h3><p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+<h3 id="47-permutation-iimedium">47. Permutation II(Medium)</h3>
+<p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,1,2]
 Output:
@@ -45,8 +45,8 @@ Output:
   [2,1,1]
 ]
 </code></pre>
-
-          <h4 id="80756200">Backtracking</h4><p>关键是用一个flags数组和预先排序操作去避免重复</p>
+<h4 id="backtracking-1">Backtracking</h4>
+<p>关键是用一个flags数组和预先排序操作去避免重复</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permuteUnique</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     <span class="hljs-type">int</span>[] flags = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
@@ -61,7 +61,7 @@ Output:
     } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
             <span class="hljs-keyword">if</span> (flags[i] == <span class="hljs-number">0</span>) {
-                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>] &amp;&amp; flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>] && flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">continue</span>;
                 }
                 tmp.add(nums[i]);
@@ -74,8 +74,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="6a10505e">48. Rotate Image(Medium)</h3><p>You are given an <em>n</em> x <em>n</em> 2D matrix representing an image.</p>
+<h3 id="48-rotate-imagemedium">48. Rotate Image(Medium)</h3>
+<p>You are given an <em>n</em> x <em>n</em> 2D matrix representing an image.</p>
 <p>Rotate the image by 90 degrees (clockwise).</p>
 <p><strong>Note:</strong></p>
 <p>You have to rotate the image <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>, which means you have to modify the input 2D matrix directly. <strong>DO NOT</strong> allocate another 2D matrix and do the rotation.</p>
@@ -111,8 +111,8 @@ rotate the input matrix in-place such that it becomes:
   [16, 7,10,11]
 ]
 </code></pre>
-
-          <h4 id="697ea9f">Think In The Smart Way</h4><p>挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的case</p>
+<h4 id="think-in-the-smart-way">Think In The Smart Way</h4>
+<p>挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的case</p>
 <p>如果我们将右旋90°这个事情简单地看成：</p>
 <pre><code>0. original matrix:
                     [1,2,3]
@@ -154,8 +154,8 @@ rotate the input matrix in-place such that it becomes:
     }
 }
 </code></pre>
-
-          <h3 id="d35375c1">49. Group Anagrams(Medium)</h3><p>Given an array of strings, group anagrams together.</p>
+<h3 id="49-group-anagramsmedium">49. Group Anagrams(Medium)</h3>
+<p>Given an array of strings, group anagrams together.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;],
 Output:
@@ -165,8 +165,8 @@ Output:
   [&quot;bat&quot;]
 ]
 </code></pre>
-
-          <h4 id="990055f5">Hashing</h4><p>先每个字符串用排序得出对应的字谜的解，然后这个解作为key放在HashMap中，后续相同字谜解的，一起加在同一个key下</p>
+<h4 id="hashing">Hashing</h4>
+<p>先每个字符串用排序得出对应的字谜的解，然后这个解作为key放在HashMap中，后续相同字谜解的，一起加在同一个key下</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">groupAnagrams</span><span class="hljs-params">(String[] strs)</span> {
     HashMap&lt;String, List&lt;String&gt;&gt; ansMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
     <span class="hljs-keyword">for</span> (String str : strs) {
@@ -186,8 +186,8 @@ Output:
 <li>因为都是在屁股加解，所以用<code>LinkedList</code>会好点；</li>
 <li><code>String.valueOf(chars)</code>会比<code>Arrays.toString(chars)</code>要来得干脆；</li>
 </ul>
-
-          <h3 id="a6aa2a0c">50. Pow(x, n) (Medium)</h3><p>Implement <a href="http://www.cplusplus.com/reference/valarray/pow/">pow(<em>x</em>, <em>n</em>)</a>, which calculates <em>x</em> raised to the power <em>n</em> (xn).</p>
+<h3 id="50-powx-n-medium">50. Pow(x, n) (Medium)</h3>
+<p>Implement <a href="http://www.cplusplus.com/reference/valarray/pow/">pow(<em>x</em>, <em>n</em>)</a>, which calculates <em>x</em> raised to the power <em>n</em> (xn).</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: 2.00000, 10
 Output: 1024.00000
@@ -206,8 +206,8 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 <li>-100.0 &lt; <em>x</em> &lt; 100.0</li>
 <li><em>n</em> is a 32-bit signed integer, within the range [−231, 231 − 1]</li>
 </ul>
-
-          <h4 id="8f5c12e1">Recursion</h4><p>这题首先暴力解可以，但是时间会爆，比较如果n为<code>Integer.MAX_VALUE</code>的话，那就得有20亿次的循环计算，但是呢，这20亿次计算，有一半可以砍掉的，我们拿<code>pow(2, 20)</code>来举例，2的20次方，等于2的10次方的平方，于是我们只需要算出2的10次方，那么就可以得出2的20次方了：<code>pow(2, 20) = pow(2, 10) * pow(2, 10)</code>，而<code>pow(2, 10) = pow(2, 5) * pow(2, 5)</code>，而<code>pow(2, 5) = pow(2, 4) * 2</code>，而<code>pow(2, 4) = pow(2, 2) * pow(2, 2)</code>，而<code>pow(2, 2) = 2 * 2</code>；</p>
+<h4 id="recursion">Recursion</h4>
+<p>这题首先暴力解可以，但是时间会爆，比较如果n为<code>Integer.MAX_VALUE</code>的话，那就得有20亿次的循环计算，但是呢，这20亿次计算，有一半可以砍掉的，我们拿<code>pow(2, 20)</code>来举例，2的20次方，等于2的10次方的平方，于是我们只需要算出2的10次方，那么就可以得出2的20次方了：<code>pow(2, 20) = pow(2, 10) * pow(2, 10)</code>，而<code>pow(2, 10) = pow(2, 5) * pow(2, 5)</code>，而<code>pow(2, 5) = pow(2, 4) * 2</code>，而<code>pow(2, 4) = pow(2, 2) * pow(2, 2)</code>，而<code>pow(2, 2) = 2 * 2</code>；</p>
 <p>于是我们把20次计算减少为5次计算，同理我们如果20亿次计算可以减少为31次计算，不要问为什么</p>
 <p>然后我们再覆盖一些边角case~</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">myPow</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">int</span> n)</span> {

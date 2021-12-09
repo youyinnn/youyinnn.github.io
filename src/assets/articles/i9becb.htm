@@ -1,5 +1,5 @@
-
-          <h3 id="8cd7a7ca">71. SimplifyPath(Medium)</h3><p>Given an <strong>absolute path</strong> for a file (Unix-style), simplify it. Or in other words, convert it to the <strong>canonical path</strong>.</p>
+<h3 id="71-simplifypathmedium">71. SimplifyPath(Medium)</h3>
+<p>Given an <strong>absolute path</strong> for a file (Unix-style), simplify it. Or in other words, convert it to the <strong>canonical path</strong>.</p>
 <p>In a UNIX-style file system, a period <code>.</code> refers to the current directory. Furthermore, a double period <code>..</code> moves the directory up a level. For more information, see: <a href="https://www.linuxnix.com/abslute-path-vs-relative-path-in-linuxunix/">Absolute path vs relative path in Linux/Unix</a></p>
 <p>Note that the returned canonical path must always begin with a slash <code>/</code>, and there must be only a single slash <code>/</code> between two directory names. The last directory name (if it exists) <strong>must not</strong> end with a trailing <code>/</code>. Also, the canonical path must be the <strong>shortest</strong> string representing the absolute path.</p>
 <p><strong>Example 1:</strong></p>
@@ -29,8 +29,8 @@ Output: &quot;/c&quot;
 <pre><code>Input: &quot;/a//b////c/d//././/..&quot;
 Output: &quot;/a/b/c&quot;
 </code></pre>
-
-          <h4 id="79a0e46c">Iterate</h4><p>以<code>/</code>为单位截出name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的name，最后依次遍历队列，组成path</p>
+<h4 id="iterate">Iterate</h4>
+<p>以<code>/</code>为单位截出name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的name，最后依次遍历队列，组成path</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">simplifyPath</span><span class="hljs-params">(String path)</span> {
     <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;/&quot;</span>);
     LinkedList&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
@@ -46,9 +46,9 @@ Output: &quot;/a/b/c&quot;
             nowI = path.length();
         }
 
-        <span class="hljs-keyword">if</span> (name.equals(<span class="hljs-string">&quot;..&quot;</span>) &amp;&amp; !list.isEmpty()) {
+        <span class="hljs-keyword">if</span> (name.equals(<span class="hljs-string">&quot;..&quot;</span>) && !list.isEmpty()) {
             list.removeLast();
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!name.equals(<span class="hljs-string">&quot;.&quot;</span>) &amp;&amp; !name.equals(<span class="hljs-string">&quot;..&quot;</span>) &amp;&amp; !name.isEmpty()) {
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!name.equals(<span class="hljs-string">&quot;.&quot;</span>) && !name.equals(<span class="hljs-string">&quot;..&quot;</span>) && !name.isEmpty()) {
             list.add(name);
         }
     }
@@ -61,8 +61,8 @@ Output: &quot;/a/b/c&quot;
     <span class="hljs-keyword">return</span> sb.toString();
 }
 </code></pre>
-
-          <h3 id="85c7b53f">72. Edit Distance(Hard)</h3><p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
+<h3 id="72-edit-distancehard">72. Edit Distance(Hard)</h3>
+<p>Given two words <em>word1</em> and <em>word2</em>, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
 <p>You have the following 3 operations permitted on a word:</p>
 <ol>
 <li>Insert a character</li>
@@ -87,8 +87,8 @@ enention -&gt; exention (replace &#x27;n&#x27; with &#x27;x&#x27;)
 exention -&gt; exection (replace &#x27;n&#x27; with &#x27;c&#x27;)
 exection -&gt; execution (insert &#x27;u&#x27;)
 </code></pre>
-
-          <h4 id="13dd55ef">DP</h4><p>针对这题的分析在<a href="./1flo1c0.html?hash=fd3f1d11">DP Again</a>中</p>
+<h4 id="dp">DP</h4>
+<p>针对这题的分析在<a href="./1flo1c0.html?hash=fd3f1d11">DP Again</a>中</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDistance</span><span class="hljs-params">(String word1, String word2)</span> {
     <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[word1.length() + <span class="hljs-number">1</span>][word2.length() + <span class="hljs-number">1</span>];
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= word1.length(); i++) {
@@ -118,8 +118,8 @@ exection -&gt; execution (insert &#x27;u&#x27;)
     <span class="hljs-keyword">return</span> dp[word1.length()][word2.length()];
 }
 </code></pre>
-
-          <h4 id="f1071b26">DFS</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDistance2</span><span class="hljs-params">(String a, String b)</span> {
+<h4 id="dfs">DFS</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDistance2</span><span class="hljs-params">(String a, String b)</span> {
     <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[a.length() + <span class="hljs-number">1</span>][b.length() + <span class="hljs-number">1</span>];
     <span class="hljs-keyword">return</span> dfs(a, b, a.length() - <span class="hljs-number">1</span>, b.length() - <span class="hljs-number">1</span>, dp);
 }
@@ -146,8 +146,8 @@ exection -&gt; execution (insert &#x27;u&#x27;)
     <span class="hljs-keyword">return</span> dp[i][j];
 }
 </code></pre>
-
-          <h3 id="9cca8b3e">73. Set Matrix Zeros(Medium)</h3><p>Given a <em>m</em> x <em>n</em> matrix, if an element is 0, set its entire row and column to 0. Do it <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>.</p>
+<h3 id="73-set-matrix-zerosmedium">73. Set Matrix Zeros(Medium)</h3>
+<p>Given a <em>m</em> x <em>n</em> matrix, if an element is 0, set its entire row and column to 0. Do it <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: 
 [
@@ -182,8 +182,8 @@ Output:
 <li>A simple improvement uses O(<em>m</em> + <em>n</em>) space, but still not the best solution.</li>
 <li>Could you devise a constant space solution?</li>
 </ul>
-
-          <h4 id="9ba030a0">Brute Force</h4><p>这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做</p>
+<h4 id="brute-force">Brute Force</h4>
+<p>这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setZeroes</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> {
     <span class="hljs-type">boolean</span>[] rowZ = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[matrix.length];
     <span class="hljs-type">boolean</span>[] colZ = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[matrix[<span class="hljs-number">0</span>].length];
@@ -207,8 +207,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="d9255176">74. Search a 2D Matrix(Medium)</h3><p>Write an efficient algorithm that searches for a value in an <em>m</em> x <em>n</em> matrix. This matrix has the following properties:</p>
+<h3 id="74-search-a-2d-matrixmedium">74. Search a 2D Matrix(Medium)</h3>
+<p>Write an efficient algorithm that searches for a value in an <em>m</em> x <em>n</em> matrix. This matrix has the following properties:</p>
 <ul>
 <li>Integers in each row are sorted from left to right.</li>
 <li>The first integer of each row is greater than the last integer of the previous row.</li>
@@ -233,8 +233,8 @@ matrix = [
 target = 13
 Output: false
 </code></pre>
-
-          <h4 id="4ca736c2">Binary</h4><p>没什么好说的</p>
+<h4 id="binary">Binary</h4>
+<p>没什么好说的</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">searchMatrix</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix, <span class="hljs-type">int</span> target)</span> {
     <span class="hljs-keyword">if</span> (matrix.length == <span class="hljs-number">0</span> || matrix[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -245,7 +245,7 @@ Output: false
         mid = (high + low) &gt;&gt;&gt; <span class="hljs-number">1</span>;
         <span class="hljs-type">int</span> <span class="hljs-variable">rowHead</span> <span class="hljs-operator">=</span> matrix[mid][<span class="hljs-number">0</span>];
         <span class="hljs-type">int</span> <span class="hljs-variable">rowTail</span> <span class="hljs-operator">=</span> matrix[mid][n - <span class="hljs-number">1</span>];
-        <span class="hljs-keyword">if</span> (rowHead &lt;= target &amp;&amp; rowTail &gt;= target) {
+        <span class="hljs-keyword">if</span> (rowHead &lt;= target && rowTail &gt;= target) {
             <span class="hljs-keyword">return</span> Arrays.binarySearch(matrix[mid], target) &gt;= <span class="hljs-number">0</span>;
         }
         <span class="hljs-keyword">if</span> (rowHead &gt; target) {
@@ -257,8 +257,8 @@ Output: false
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 }
 </code></pre>
-
-          <h3 id="7f20422">75. Sort Colors(Medium)</h3><p>Given an array with <em>n</em> objects colored red, white or blue, sort them <strong>in-place</strong> so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
+<h3 id="75-sort-colorsmedium">75. Sort Colors(Medium)</h3>
+<p>Given an array with <em>n</em> objects colored red, white or blue, sort them <strong>in-place</strong> so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
 <p>Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.</p>
 <p><strong>Note:</strong> You are not suppose to use the library&#39;s sort function for this problem.</p>
 <p><strong>Example:</strong></p>
@@ -271,8 +271,8 @@ Output: [0,0,1,1,2,2]
   First, iterate the array counting number of 0&#39;s, 1&#39;s, and 2&#39;s, then overwrite array with total number of 0&#39;s, then 1&#39;s and followed by 2&#39;s.</li>
 <li>Could you come up with a one-pass algorithm using only constant space?</li>
 </ul>
-
-          <h4 id="4af2fa6f">Two-pass Counting Sort</h4><p>关于计数排序，<a href="./1b0rp9e.html?hash=63d906b">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
+<h4 id="two-pass-counting-sort">Two-pass Counting Sort</h4>
+<p>关于计数排序，<a href="./1b0rp9e.html?hash=63d906b">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sortColors</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">3</span>];
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> color : nums) {

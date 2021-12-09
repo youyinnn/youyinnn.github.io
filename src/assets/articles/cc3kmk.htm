@@ -1,6 +1,6 @@
 <p><span id="top"></span></p>
-
-          <h3 id="50547fe">Ⅲ. Jetty管理者指南-13.注释</h3><ul>
+<h3 id="ⅲ-jetty管理者指南-13注释">Ⅲ. Jetty管理者指南-13.注释</h3>
+<ul>
 <li><ol start="13">
 <li><a href="#13%E6%B3%A8%E8%A7%A3">注解</a></li>
 </ol>
@@ -29,8 +29,8 @@
 </ul>
 <hr>
 <p><span id="13注解"></span></p>
-
-          <h4 id="b7dbbd6c">13、注解</h4><ul>
+<h4 id="13、注解">13、注解</h4>
+<ul>
 <li>13.1、<a href="#131%E5%BF%AB%E9%80%9F%E8%AE%BE%E7%BD%AE">快速设置</a></li>
 <li>13.2、<a href="#132%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">使用注解</a></li>
 <li>13.3、<a href="#133%E5%9C%A8jetty%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3">在Jetty嵌入式开发中使用注解</a></li>
@@ -39,15 +39,15 @@
 <br>
 
 <p><span id="131快速设置"></span></p>
-
-          <h5 id="808d28f6">13.1、快速设置</h5><ul>
+<h5 id="131、快速设置">13.1、快速设置</h5>
+<ul>
 <li>13.1.1、<a href="#1311%E5%85%B3%E4%BA%8Ejetty%E5%8F%91%E8%A1%8C%E7%89%88">关于Jetty发行版</a></li>
 <li>13.1.2、<a href="#1312%E5%85%B3%E4%BA%8Ejetty-maven-plugin">关于Jetty Maven Plugin</a></li>
 <li>13.1.3、<a href="#1313%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F">关于嵌入式</a><br></li>
 </ul>
 <p><span id="1311关于jetty发行版"></span></p>
-
-          <h6 id="3a9ba9fe">13.1.1、关于Jetty发行版</h6><p>如果你是使用的Jetty发行版，那么注解是默认支持的。注解模块以及它所需要的过渡的依赖都是负责支持注解功能的。</p>
+<h6 id="1311、关于jetty发行版">13.1.1、关于Jetty发行版</h6>
+<p>如果你是使用的Jetty发行版，那么注解是默认支持的。注解模块以及它所需要的过渡的依赖都是负责支持注解功能的。</p>
 <p>你需要注意的是，依赖JNDI的注解，比如<code>@Resource</code>和<code>@Resources</code>都是通过JNDI模块来实现的，JNDI模块是注解模块的过渡依赖模块。</p>
 <blockquote>
 <p><em>译者文外补充：Jetty发行版就是Jetty的客户端，与之相对的有Jetty嵌入式，我感觉文档是在强调这两个区别。</em></p>
@@ -55,13 +55,13 @@
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1312关于jetty-maven-plugin"></span></p>
-
-          <h6 id="f8c2e201">13.1.2、关于Jetty Maven Plugin</h6><p>注解和JNDI在Jetty Maven Plugin中都是预置的。</p>
+<h6 id="1312、关于jetty-maven-plugin">13.1.2、关于Jetty Maven Plugin</h6>
+<p>注解和JNDI在Jetty Maven Plugin中都是预置的。</p>
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1313关于嵌入式"></span></p>
-
-          <h6 id="b993cc8e">13.1.3、关于嵌入式</h6><p>为了在嵌入式Jetty场景中使用注解，你需要加入<code>jetty-annotations</code>jar包和所有它依赖的jar包到classpath下。你还需要把<code>org.eclipse.jetty.annotations.AnnotationConfiguration</code>类添加到装载<code>Configuration classes</code>的列表中，并把这个列表应用到代表你的web应用的<code>org.eclipse.jetty.wabapp.WebAppContext</code>类中。</p>
+<h6 id="1313、关于嵌入式">13.1.3、关于嵌入式</h6>
+<p>为了在嵌入式Jetty场景中使用注解，你需要加入<code>jetty-annotations</code>jar包和所有它依赖的jar包到classpath下。你还需要把<code>org.eclipse.jetty.annotations.AnnotationConfiguration</code>类添加到装载<code>Configuration classes</code>的列表中，并把这个列表应用到代表你的web应用的<code>org.eclipse.jetty.wabapp.WebAppContext</code>类中。</p>
 <p>下面这个栗子设置了一个标准的<code>test-spec.war</code>web应用，这个包你可以在我们发行版的demo-base中找到。你需要注意的是<code>test-spec.war</code>并不只运用到了注解，还运用到了JNDI，所以这个栗子还激活了其它一系列的配置（通过<code> org.eclipse.jetty.plus.webapp.EnvConfiguration</code>，<code>org.eclipse.jetty.plus.webapp.PlusConfiguration</code>和它们自身依赖的jars）。</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
@@ -131,8 +131,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="132使用注解"></span></p>
-
-          <h5 id="60d3ba0c">13.2、使用注解</h5><ul>
+<h5 id="132、使用注解">13.2、使用注解</h5>
+<ul>
 <li>13.2.1、<a href="#1321%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%B3%A8%E8%A7%A3">支持哪些注解</a></li>
 <li>13.2.2、<a href="#1322%E6%A3%80%E6%B5%8B%E6%B3%A8%E8%A7%A3%E5%92%8C%E8%87%AA%E6%A3%80%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AF%B9%E6%AF%94">检测注解和自检注解的对比</a></li>
 <li>13.2.3、<a href="#1323%E5%93%AA%E4%BA%9Bjar%E5%8C%85%E6%94%AF%E6%8C%81%E6%89%AB%E6%8F%8F%E6%A3%80%E6%9F%A5%E6%B3%A8%E8%A7%A3">哪些jar包支持扫描检查注解</a></li>
@@ -140,8 +140,8 @@ public class ServerWithAnnotations
 <li>13.2.5、<a href="#1325servletcontainerinitializers">ServletContainerInitializers</a></li>
 </ul>
 <p><span id="1321支持哪些注解"></span></p>
-
-          <h6 id="e90413b3">13.2.1、支持哪些注解</h6><p>Jetty支持解释和运用的注解有：</p>
+<h6 id="1321、支持哪些注解">13.2.1、支持哪些注解</h6>
+<p>Jetty支持解释和运用的注解有：</p>
 <ul>
 <li>@Resource</li>
 <li>@Resources</li>
@@ -160,8 +160,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1322检测注解和自检注解的对比"></span></p>
-
-          <h6 id="4dc59032">13.2.2、检测注解和自检注解的对比</h6><p>一些类型的注解可以标注在任何类中，虽然这些注释并不一定能和容器产生直接交互作用。这些类型的注解我们称为“discovered（发现/检测）注释”，这代表容器需要主动的去检测这些注释。</p>
+<h6 id="1322、检测注解和自检注解的对比">13.2.2、检测注解和自检注解的对比</h6>
+<p>一些类型的注解可以标注在任何类中，虽然这些注释并不一定能和容器产生直接交互作用。这些类型的注解我们称为“discovered（发现/检测）注释”，这代表容器需要主动的去检测这些注释。</p>
 <p>其它类型的注释我们称之为“introspected（自检）注释”，这意味着这种自检行为会发生在被容器的生命周期中直接作用的类上面（比如<code>javax.servlet.Servlet, javax.servlet.Filter</code>等等）因此可以通过对该类的简单的检测就可以找到。</p>
 <p>一些简单的“discovered（发现/检测）”注释比如：</p>
 <ul>
@@ -178,8 +178,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1323哪些jar包支持扫描检查注解"></span></p>
-
-          <h6 id="7627d206">13.2.3、哪些jar包支持扫描检查注解</h6><br>
+<h6 id="1323、哪些jar包支持扫描检查注解">13.2.3、哪些jar包支持扫描检查注解</h6>
+<br>
 
 <p>web.xml文件可以包含<code>metadata-complete</code>属性。如果它的值为真，那么将不会扫描可检测的注释。然而，对类的扫描行为仍然会发生，因为有<code>javax.servlet.ServletContainerInitializer</code>。类一旦实现了这个接口，Jetty就会使用<code>javax.util.ServiceLoader</code>机制找到这个类，并且如果它里面有<code>@HandlesTypes</code>注释，那么jetty就必定会有层次地扫描这个类。如果你容器路径下或者<code>WEB-INF/lib</code>目录中包含了许多jar包的话，这样会非常消耗时间。</p>
 <p>如果扫描一旦发生，要么是你没指定<code>metadata-complete</code>或者指定为false，要么是存在一个或者多个<code>javax.servlet.ServletContainerInitializer</code>和<code>@HandlesTypes</code>，这样Jetty就必须兼顾容器的路径内容以及web应用的类路径内容。</p>
@@ -190,8 +190,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1324多线程注解扫描"></span></p>
-
-          <h6 id="ac04908f">13.2.4、多线程注解扫描</h6><p>如果要执行注释扫描，默认的情况下，Jetty会使用多线程的方式去实现，企图以最短的时间完成。</p>
+<h6 id="1324、多线程注解扫描">13.2.4、多线程注解扫描</h6>
+<p>如果要执行注释扫描，默认的情况下，Jetty会使用多线程的方式去实现，企图以最短的时间完成。</p>
 <p>如果处于某些原因你不想以多线程的方式扫描，你可以在Jetty中配置为单线程扫描。有以下几种方式：</p>
 <ul>
 <li>Set the context attribute org.eclipse.jetty.annotations.multiThreaded to false</li>
@@ -209,8 +209,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1325servletcontainerinitializers"></span></p>
-
-          <h6 id="b5857940">13.2.5、ServletContainerInitializers</h6><p><code>javax.servlet.ServletContainerInitializer</code>可以在存在于容器的类路径下、webapp的<code>WEB-INF/classes</code>目录中、webapp的<code>WEB-INF/lib</code>jar中，或者是你为web应用配置的额外的<code>extraClasspath</code>下。</p>
+<h6 id="1325、servletcontainerinitializers">13.2.5、ServletContainerInitializers</h6>
+<p><code>javax.servlet.ServletContainerInitializer</code>可以在存在于容器的类路径下、webapp的<code>WEB-INF/classes</code>目录中、webapp的<code>WEB-INF/lib</code>jar中，或者是你为web应用配置的额外的<code>extraClasspath</code>下。</p>
 <p>Servlet规范并没有定义说我们应该在web应用启动的时候必须得按照顺序调用哪一个<code>ServletContainerInitializer</code>。在默认的情况下，Jetty会按照以下的顺序调用：</p>
 <ul>
 <li>ServletContainerInitializers from the container’s classpath</li>
@@ -223,14 +223,14 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="133在jetty嵌入式开发中使用注解"></span></p>
-
-          <h4 id="f9b5d958">13.3、在Jetty嵌入式开发中使用注解</h4><ul>
+<h4 id="133、在jetty嵌入式开发中使用注解">13.3、在Jetty嵌入式开发中使用注解</h4>
+<ul>
 <li>13.3.1、<a href="#1331%E8%AE%BE%E7%BD%AE%E7%B1%BB%E8%B7%AF%E5%BE%84">设置类路径</a></li>
 <li>13.3.2、<a href="#1332%E6%A0%97%E5%AD%90">栗子</a></li>
 </ul>
 <p><span id="1331设置类路径"></span></p>
-
-          <h5 id="37ff8bfb">13.3.1、设置类路径</h5><p>你需要在类路径下加入以下的jar。你可以从Jetty发行版目录中找到它们，或者使用maven依赖：</p>
+<h5 id="1331、设置类路径">13.3.1、设置类路径</h5>
+<p>你需要在类路径下加入以下的jar。你可以从Jetty发行版目录中找到它们，或者使用maven依赖：</p>
 <ul>
 <li>jetty-plus.jar</li>
 <li>jetty-annotations.jar</li>
@@ -239,8 +239,8 @@ public class ServerWithAnnotations
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="1332栗子"></span></p>
-
-          <h5 id="7bf379b7">13.3.2、栗子</h5><p>这个栗子设置了一个Jetty服务器，执行了一些设置来确保注解被扫描到，然后部署一个运用到了注解的web应用。</p>
+<h5 id="1332、栗子">13.3.2、栗子</h5>
+<p>这个栗子设置了一个Jetty服务器，执行了一些设置来确保注解被扫描到，然后部署一个运用到了注解的web应用。</p>
 <p>这个栗子使用<code>@Resource</code>注解来调用JNDI，所以我们能看到classpath中有一些必要的JNDI的jar包。</p>
 <p>这个栗子还添加了一些配置类来支持JNDI（见19行）。</p>
 <pre><code>import org.eclipse.jetty.security.HashLoginService;

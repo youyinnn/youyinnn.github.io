@@ -1,10 +1,10 @@
-
-          <h4 id="2b3c69a1">ArrayList类</h4><p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
+<h4 id="arraylist类">ArrayList类</h4>
+<p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
 <p>这个计划搁置了很久，大概有15天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习offer有没有已经不重要了，<strong>剑指秋招！</strong></p>
 <p>为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近1小时手撸了一个ArrayList的自实现，再搭配源码来看<strong>自己在基础方法上有哪些没考虑到的点</strong>，以及<strong>实际投入使用的ArrayList到底优秀在哪里</strong></p>
-
-          <h4 id="6b7220e">源码</h4>
-          <h5 id="420551b">类头</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt;
+<h4 id="源码">源码</h4>
+<h5 id="类头">类头</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt;
         <span class="hljs-keyword">implements</span> <span class="hljs-title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
 {
     <span class="hljs-comment">//...</span>
@@ -13,8 +13,8 @@
 <p>首先继承了<code>AbstractList</code></p>
 <p>我们顺着<code>AbstractList</code>往里摸，一直到最后我们发现，还有<strong>Collection接口和Iterable接口</strong>，这两个接口加上<strong>List接口</strong>为我们提供了非常重要的集合接口规范</p>
 <p>然后我们往下看</p>
-
-          <h5 id="b439b12c">成员变量</h5><p>ArrayList这个类的成员变量并不复杂</p>
+<h5 id="成员变量">成员变量</h5>
+<p>ArrayList这个类的成员变量并不复杂</p>
 <pre><code class="hljs language-java"><span class="hljs-comment">// 这是默认的容器长度</span>
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_CAPACITY</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
 
@@ -45,8 +45,8 @@
 因为这些改动，可能会<strong>扰乱容器结构</strong>，而导致迭代过程会出现错误的结果
 这个变量会在迭代器中去补充一些逻辑，比如非法的修改会扰乱迭代过程，则<strong>会抛出异常</strong>
 如果子类也要用到这个变量，要求<strong>每一个可能改动容器结构的操作都需要调用一次这个变量</strong></p>
-
-          <h5 id="9c2058b6">构造方法</h5><p>总共有三个，我们只关心前两个就好了</p>
+<h5 id="构造方法">构造方法</h5>
+<p>总共有三个，我们只关心前两个就好了</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">ArrayList</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span> {
     <span class="hljs-keyword">if</span> (initialCapacity &gt; <span class="hljs-number">0</span>) {
         <span class="hljs-built_in">this</span>.elementData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[initialCapacity];
@@ -62,10 +62,10 @@
 }
 </code></pre>
 <p>这里给出了我们的两个常量<strong>EMPTY_ELEMENTDATA</strong>和<strong>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</strong>的去处，在我的自实现里，<strong>无论是哪种方法我都选择了new出数组对象</strong>，而这里还会有点偷懒，如果没有指定容量的话，则并不会**new Object[DEFAULT_CAPACITY]**，等到真正要加入元素的时候，才创建对象，这在下面add方法的时候会看到</p>
-
-          <h5 id="96855997">成员方法</h5><p>接下来我们进入成员方法部分</p>
-
-          <h6 id="f51ddde9">trimToSize</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">trimToSize</span><span class="hljs-params">()</span> {
+<h5 id="成员方法">成员方法</h5>
+<p>接下来我们进入成员方法部分</p>
+<h6 id="trimtosize">trimToSize</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">trimToSize</span><span class="hljs-params">()</span> {
     modCount++;
     <span class="hljs-keyword">if</span> (size &lt; elementData.length) {
         elementData = (size == <span class="hljs-number">0</span>)
@@ -82,8 +82,8 @@
 <p><strong>修剪后：</strong>[a, b, c]</p>
 <p>并且<strong>修剪</strong>操作会访问<strong>modCount</strong>变量，意味着这告诉容器的<strong>迭代器</strong>，这个修剪方法可能会<strong>扰乱迭代过程</strong></p>
 <p>在修剪的时候，我们看到了这样的一个方法：<strong>Arrays.copyOf(elementData, size)</strong></p>
-
-          <h6 id="8ac2a651">Arrays.copyOf</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; T[] copyOf(T[] original, <span class="hljs-type">int</span> newLength) {
+<h6 id="arrayscopyof">Arrays.copyOf</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; T[] copyOf(T[] original, <span class="hljs-type">int</span> newLength) {
     <span class="hljs-keyword">return</span> (T[]) copyOf(original, newLength, original.getClass());
 }
 
@@ -97,8 +97,8 @@
 }
 </code></pre>
 <p>重点是<strong>line：10</strong>，整个方法是按照<strong>源数组的长度（original.length）</strong>以及<strong>新长度（newLength）</strong>的最小值去复制数组的</p>
-
-          <h6 id="e5e65103">ensureCapacity</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+<h6 id="ensurecapacity">ensureCapacity</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">minExpand</span> <span class="hljs-operator">=</span> (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
         ? <span class="hljs-number">0</span>
         : DEFAULT_CAPACITY;
@@ -131,8 +131,8 @@
 }
 </code></pre>
 <p>除了会改变容器结构，我们还得注意：当<strong>允许的最小容量（minCapacity）</strong>大于<strong>当前容器容量（elementData.length）</strong>的时候，这个时候我们就需要进行**溢出考虑(overflow-conscious)**了</p>
-
-          <h6 id="c049c2e2">grow</h6><pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX_ARRAY_SIZE</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE - <span class="hljs-number">8</span>;
+<h6 id="grow">grow</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX_ARRAY_SIZE</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE - <span class="hljs-number">8</span>;
 
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">grow</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
     <span class="hljs-comment">// overflow-conscious code</span>
@@ -166,8 +166,8 @@
 <p>我们知道，既然<strong>minCapacity</strong>是个<strong>int值</strong>，那么它最大值就只能为<strong>Integer.MAX_VALUE</strong>，而我们这里定义的最大的数组长度为<strong>Integer.MAX_VALUE - 8</strong>，也就是说，这个定义并不是一定的，如果我们设置的minCapacity的值在**( Integer.MAX_VALUE - 8, Integer.MAX_VALUE ]<strong>之间的话，那我们还是允许用</strong>Integer.MAX_VALUE**作为最大数组长度的</p>
 <p>这里我就有个疑问了，**-8的意义在哪里？一开始就定义到最大值不就好了？**</p>
 <p>考虑完新容量之后，开始使用<strong>Arrays.copyOf</strong>来扩展容量<strong>（grow line：12）</strong></p>
-
-          <h6 id="a8e80449">contains和indexOf</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object o)</span> {
+<h6 id="contains和indexof">contains和indexOf</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object o)</span> {
     <span class="hljs-keyword">return</span> indexOf(o) &gt;= <span class="hljs-number">0</span>;
 }
 
@@ -185,8 +185,8 @@
 }
 </code></pre>
 <p>和自实现不同的是，这里<strong>contains调用的是indexOf的实现</strong>，而且<strong>indexOf</strong>还允许<strong>查找到第一个null元素在哪里</strong>，这是我在自实现里没考虑过的</p>
-
-          <h6 id="28006047">get和set</h6><pre><code class="hljs language-java">E <span class="hljs-title function_">elementData</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+<h6 id="get和set">get和set</h6>
+<pre><code class="hljs language-java">E <span class="hljs-title function_">elementData</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
     <span class="hljs-keyword">return</span> (E) elementData[index];
 }
 
@@ -209,9 +209,9 @@
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IndexOutOfBoundsException</span>(outOfBoundsMsg(index));
 }
 </code></pre>
-<p>首先看<strong>get&amp;set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
-
-          <h6 id="900d3863">add1</h6><p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
+<p>首先看<strong>get&set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
+<h6 id="add1">add1</h6>
+<p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> {
     ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span>
     elementData[size++] = e;
@@ -317,8 +317,8 @@
 </ul>
 <p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
 <hr>
-
-          <h6 id="bb206ba0">add2</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> {
+<h6 id="add2">add2</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> {
     rangeCheckForAdd(index);
 
     ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span>
@@ -334,8 +334,8 @@
 }
 </code></pre>
 <p>对于<strong>index</strong>的限定：<strong>不能在载量之外，也不能小于0</strong>，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多</p>
-
-          <h6 id="f47eb27e">remove1</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+<h6 id="remove1">remove1</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
     rangeCheck(index);
 
     modCount++;
@@ -352,8 +352,8 @@
 </code></pre>
 <p>基本都是常规操作，但是！这里的<strong>line：11</strong>是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写<strong>elementData[--size] = null</strong>这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，<strong>将这个对象的引用摘除，好让GC管管这个被删除的元素</strong></p>
 <p>这就是真正投入使用的容器，要考虑到的事情，<strong>为用户尽可能地提高时间和空间效率！</strong></p>
-
-          <h6 id="df53e1bd">remove2</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object o)</span> {
+<h6 id="remove2">remove2</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object o)</span> {
     <span class="hljs-keyword">if</span> (o == <span class="hljs-literal">null</span>) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; index &lt; size; index++)
             <span class="hljs-keyword">if</span> (elementData[index] == <span class="hljs-literal">null</span>) {
@@ -379,8 +379,8 @@
 }
 </code></pre>
 <p>常规，我在想为什么remove1里的代码不用<strong>fastRemove</strong>，这两段完全是一摸一样的</p>
-
-          <h6 id="f43e6ed0">clear</h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> {
+<h6 id="clear">clear</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> {
     modCount++;
 
     <span class="hljs-comment">// clear to let GC do its work</span>
@@ -404,8 +404,8 @@
 <p>确实for循环一个个置空确实比较浪费时间，比如有30w个元素在容器中，我就得for30w次</p>
 <p>但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的<strong>更好的实现</strong>，那么我还得在内存中再申请<strong>30w个元素长度的数组空间</strong>，虽然看上去，我好像马上就<strong>摘除了原elementData的引用</strong>，但实际上，原<strong>elementData</strong>的数组数据仍然会在内存中停留一段时间，<strong>等待下一次GC并且GC选择回收它</strong></p>
 <p>上面只是我的推测，实际GC是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧</p>
-
-          <h6 id="91ed0528">removeAll和retainAll</h6><p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
+<h6 id="removeall和retainall">removeAll和retainAll</h6>
+<p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">removeAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span> {
     Objects.requireNonNull(c);
     <span class="hljs-keyword">return</span> batchRemove(c, <span class="hljs-literal">false</span>);

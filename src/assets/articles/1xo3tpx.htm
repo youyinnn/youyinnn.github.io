@@ -1,5 +1,5 @@
-
-          <h3 id="fccefbaf">前言</h3><p>前面说了好多好多刀枪剑，还说了一些最前置的内功心法，这回说说更深层的内功心法——<strong>JMM，Java Memory Model，Java内存模型！</strong></p>
+<h3 id="前言">前言</h3>
+<p>前面说了好多好多刀枪剑，还说了一些最前置的内功心法，这回说说更深层的内功心法——<strong>JMM，Java Memory Model，Java内存模型！</strong></p>
 <p>Java线程之间的通信对程序员是完全透明的（你是很难感知得到的），所以内存可见性问题经常称为并发的通病之一，这坎说的内存模型，是让你更好地去感知，去推断线程内存通信的有力武器。</p>
 <p>这坎基本就是<em>《核心》</em>的第三章内容，我就这书总结一下，然后调一下排版，主要说的内容：</p>
 <ul>
@@ -10,9 +10,9 @@
 <li><strong>JMM设计原理</strong></li>
 </ul>
 <hr>
-
-          <h3 id="7c9466b">JMM基础</h3>
-          <h4 id="cbddd190">并发编程的两个关键问题</h4><p>线程之间如何进行通信？线程之间如何进行同步？在命令式编程中，线程通信机制有两种：共享内存和消息通信</p>
+<h3 id="jmm基础">JMM基础</h3>
+<h4 id="并发编程的两个关键问题">并发编程的两个关键问题</h4>
+<p>线程之间如何进行通信？线程之间如何进行同步？在命令式编程中，线程通信机制有两种：共享内存和消息通信</p>
 <table>
 <thead>
 <tr>
@@ -43,8 +43,8 @@
 <li>由于消息的发送必须是在消息接收之前，所以是<strong>隐式同步</strong></li>
 </ul>
 <p>而Java的并发采用的是<strong>共享内存模型</strong>，所以同步是显示的，可能比线程通信好好懂一些</p>
-
-          <h4 id="e032c27b">JMM内存模型抽象结构</h4><p><img src="https://image.youyinnn.top/20180721202202.png" alt=""></p>
+<h4 id="jmm内存模型抽象结构">JMM内存模型抽象结构</h4>
+<p><img src="https://image.youyinnn.top/20180721202202.png" alt=""></p>
 <p>线程之间的通信由JMM控制，JMM控制之内从与每个线程的本地内存之间的交互，来为Java程序员提供内存可见性保证</p>
 <p>这里每个线程之间的本地内存在虚拟机中就是每个线程自己的栈空间</p>
 <p>也就是说：<strong>JMM决定一个线程对共享变量的写入在什么时候对另一个线程可见！</strong></p>
@@ -53,8 +53,8 @@
 <li>线程A将自己的副本值刷到主内存中</li>
 <li>线程B从主内存中读取共享变量来更新自己的该共享变量的副本</li>
 </ol>
-
-          <h4 id="9b86dc3d">从源代码到指令序列的重排序</h4><p>在执行程序的时候，为了提高性能，编译器和处理器通常会对指令做重排序，重排序分为3种：</p>
+<h4 id="从源代码到指令序列的重排序">从源代码到指令序列的重排序</h4>
+<p>在执行程序的时候，为了提高性能，编译器和处理器通常会对指令做重排序，重排序分为3种：</p>
 <ol>
 <li><strong>编译器优化重排序</strong>。编译器在不改变语义的情况下，可以重新安排语句的内容</li>
 <li><strong>指令级并行的重排序</strong>。用来将多条指令堆叠执行，如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序</li>
@@ -94,15 +94,15 @@
 </tr>
 </tbody></table>
 <p>最后一个屏障是全能型的屏障，它拥有前三个屏障所有的功能，但是执行这个屏障的开销会很大，因为要把缓冲区中所有的数据内容都刷到主存中去</p>
-
-          <h5 id="13bea374">数据依赖性</h5><p>什么是数据依赖性？如果两个操作访问同一个变量，而且至少其中一个操作是<strong>写操作</strong>，就称这两个操作之间存在数据依赖性，数据依赖性分为：写后读、写后写、读后写；</p>
+<h5 id="数据依赖性">数据依赖性</h5>
+<p>什么是数据依赖性？如果两个操作访问同一个变量，而且至少其中一个操作是<strong>写操作</strong>，就称这两个操作之间存在数据依赖性，数据依赖性分为：写后读、写后写、读后写；</p>
 <p>如果两个操作存在数据依赖性，那么一旦重排序这两个操作，并且改变了执行顺序，两个操作的执行结果就会被改变，JMM禁止这种重排序！</p>
 <ul>
 <li>所以编译器和处理器在进行重排序的时候，会遵循数据依赖原则，不会对这些情况进行重排序</li>
 <li>并且要注意的是，数据依赖性仅针对<strong>单个处理器中执行的指令序列和单个线程中执行的操作</strong>，对于多处理器和多线程情况的数据依赖性不被编译器和处理器考虑！</li>
 </ul>
-
-          <h5 id="8081a76">as-if-serial语义</h5><p>这个语义的意思是：<strong>不管怎么重排序，<u>单线程</u>程序的执行结果不能被改变！</strong></p>
+<h5 id="as-if-serial语义">as-if-serial语义</h5>
+<p>这个语义的意思是：<strong>不管怎么重排序，<u>单线程</u>程序的执行结果不能被改变！</strong></p>
 <blockquote>
 <p>as-if-serial语义把单线程操作保护了起来，即使底层进行了异常复杂的重排序，单线程程序员还是认为程序是按照顺序执行的，因为重排序并没有改变执行结果</p>
 </blockquote>
@@ -111,10 +111,10 @@
 <p>在单线程程序中，对存在控制依赖的操作进行重排序，不会改变执行结果（这也是as-if-serial语义做出的保证，实际上并不会进行重排序）；</p>
 <p>但是在多线程程序中，对存在控制依赖的操作进行重排序，可能会改变执行的结果，因为JMM没有保证</p>
 </blockquote>
-
-          <h4 id="89ddec52">happens-before关系和JMM的设计意图</h4><p>Happens Before是JMM最核心的概念，理解Happens Before就理解了JMM的管理机制。</p>
-
-          <h5 id="fb6e78dc">JMM的设计</h5><p>JMM作为Java的内存管理的一方霸主，它的设计自然不能特别随意，JMM的设计需要考虑：</p>
+<h4 id="happens-before关系和jmm的设计意图">happens-before关系和JMM的设计意图</h4>
+<p>Happens Before是JMM最核心的概念，理解Happens Before就理解了JMM的管理机制。</p>
+<h5 id="jmm的设计">JMM的设计</h5>
+<p>JMM作为Java的内存管理的一方霸主，它的设计自然不能特别随意，JMM的设计需要考虑：</p>
 <ul>
 <li>从程序员的角度来说：需要一个易于理解易于编程的强有力的内存模型来写代码</li>
 <li>从编译器和处理器的角度来说：内存模型的束缚越少越好，这样性能也快</li>
@@ -131,8 +131,8 @@
 <p>换句话说：<strong>只要不坑程序员，处理器和编译器想怎么玩就怎么玩~</strong></p>
 <p>举两个例子，如果编译器经过细致的分析过后，判定一个锁只会被一个线程单独访问，那么这个锁可以被消除；</p>
 <p>如果编译器经过细致的分析过后，认定一个volatila变量只会被单线程访问，那么编译器可以把这个变量当作普通变量去对待；</p>
-
-          <h5 id="7bb38720">happens-before关系是什么？</h5><blockquote>
+<h5 id="happens-before关系是什么？">happens-before关系是什么？</h5>
+<blockquote>
 <p>JSR-133使用happens-before的概念来指定两个操作之间的执行顺序。由于这两个操作可以在同一个线程，也可以在不同线程之间，因此，JMM可以通过happens-before关系向程序员提供跨线程的内存可见性保证。</p>
 </blockquote>
 <p><em>《JSR-133：Java Memory Model and Thread Specification》</em>对happens-before关系的定义如下：</p>
@@ -154,8 +154,8 @@
 <li>as-if-serial语言保证单线程内程序执行的结果不变，happens-before关系保证**<u>正确同步</u>**的多线程程序的执行结果不被改变</li>
 <li>as-if-before让程序员以为他们写的单线程程序是按照顺序执行的，happens-before关系让程序员以为他们写的正确同步的多线程程序是按照happens-before指定的顺序去执行的</li>
 </ul>
-
-          <h5 id="8727c138">happens-before规则</h5><p><em>《JSR-133：Java Memory Model and Thread Specification》</em>定义了如下happens-before规则：</p>
+<h5 id="happens-before规则">happens-before规则</h5>
+<p><em>《JSR-133：Java Memory Model and Thread Specification》</em>定义了如下happens-before规则：</p>
 <ol>
 <li><strong>程序顺序规则：</strong>一个线程中的每个操作，happens-beofore于该线程中的任意后续操作</li>
 <li><strong>监视器锁规则：</strong>对一个锁的解锁，happens-before于随后对这个锁的加锁</li>
@@ -164,9 +164,9 @@
 <li><strong>start()规则：</strong>如果线程A执行操作<code>ThreadB.start()</code>（启动线程B），那么A线程的<code>ThreadB.start()</code>操作happens-before于线程B中的任意操作</li>
 <li><strong>join()规则：</strong>如果线程A执行操作<code>ThreadB.join()</code>并成功返回，那么线程B中的任意操作 happens-before于线程A从<code>ThreadB.join()</code>操作成功返回</li>
 </ol>
-
-          <h5 id="d4bbcfe1">happens-before应用例子</h5>
-          <h6 id="45935517">程序顺序规则</h6><pre><code class="hljs language-java"><span class="hljs-type">double</span> <span class="hljs-variable">pi</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14</span>;    <span class="hljs-comment">// A</span>
+<h5 id="happens-before应用例子">happens-before应用例子</h5>
+<h6 id="程序顺序规则">程序顺序规则</h6>
+<pre><code class="hljs language-java"><span class="hljs-type">double</span> <span class="hljs-variable">pi</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14</span>;    <span class="hljs-comment">// A</span>
 <span class="hljs-type">double</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.0</span>;        <span class="hljs-comment">// B</span>
 <span class="hljs-type">double</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> pi * r * r; <span class="hljs-comment">// C</span>
 </code></pre>
@@ -179,9 +179,9 @@
 </ol>
 </blockquote>
 <p>这里1和2允许重排序，但是不改变3的结果，因为pi和r谁先被初始化都无所谓，只要不改变area的结果就好</p>
-
-          <h4 id="b3f15232">volatile的内存语义</h4>
-          <h5 id="dad783fb">特性</h5><p>我们可以用两段程序来说明volatile变量和一般变量访问锁方法之间的读写等效，首先看volatile变量：</p>
+<h4 id="volatile的内存语义">volatile的内存语义</h4>
+<h5 id="特性">特性</h5>
+<p>我们可以用两段程序来说明volatile变量和一般变量访问锁方法之间的读写等效，首先看volatile变量：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>{
     <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>{
@@ -220,8 +220,8 @@
 <li>可见性保证：对一个volatile变量的读，总是能看到所有线程对这个volatile变量的最后一次写入</li>
 <li>原子性保证：对volatile变量的读写操作具有原子性，但是volatile++这种复合操作一定不具有原子性</li>
 </ul>
-
-          <h5 id="b484aa4a">从happens-before关系看volatile的写-读</h5><p>从JSR-133（JDK1.5）开始，volatile变量的写-读可以实现线程之间的通信</p>
+<h5 id="从happens-before关系看volatile的写-读">从happens-before关系看volatile的写-读</h5>
+<p>从JSR-133（JDK1.5）开始，volatile变量的写-读可以实现线程之间的通信</p>
 <ul>
 <li>volatile写和锁的释放有相同的内存语义</li>
 <li>volatile读和锁的获取有相同的内存语义</li>
@@ -268,15 +268,15 @@
 </blockquote>
 <p>具体为什么，我们看下一节如何解释volatile的写-读的内存语义！</p>
 <p>我也尝试过去验证这些结论的反面，但是很遗憾的是，很有可能由于<strong>“CPU一旦空闲就刷共享内存（JVM尽可能的给你保证共享变量同步）”</strong>的原因，即使你不读取同一个volatile变量，甚至你不读取任何volatile变量，a的值也是999，在这样的情况下，不能说书上的结论有误，只能说这应该是两个不同的机制去做同一件事。</p>
-
-          <h5 id="f66da822">volatile写-读的内存语义</h5>
-          <h6 id="31c64b47">写volatile变量内存语义</h6><blockquote>
+<h5 id="volatile写-读的内存语义">volatile写-读的内存语义</h5>
+<h6 id="写volatile变量内存语义">写volatile变量内存语义</h6>
+<blockquote>
 <p>当写一个volatile变的时候，JMM会把该线程对应的本地内存中的共享比变量刷新到主内存。</p>
 </blockquote>
 <p><img src="https://image.youyinnn.top/20180722220148.png" alt=""></p>
 <p>线程A在写flag变量之后，本地内存A中被线程更新过的两个共享变量被更新到主内存中。此时本地内存A和主内存中的变量的值是一致的。</p>
-
-          <h6 id="63503a7f">读volatile内存语义</h6><blockquote>
+<h6 id="读volatile内存语义">读volatile内存语义</h6>
+<blockquote>
 <p>当读一个volatile变量的时候，JMM会把该线程对应的本地内存置为无效，然后从主内存中读取共享变量</p>
 </blockquote>
 <p><img src="https://image.youyinnn.top/20180722222721.png" alt=""></p>
@@ -287,9 +287,9 @@
 <li>线程B读一个volatile变量，实质上是接收了之前线程A发出的消息，知道了自己的本地内存变量已经无效了，所以就从主内存读取共享变量</li>
 <li><strong>线程A写一个volatile变量，随后线程B读取volatile变量，实际上是线程A通过主内存向线程B发消息！</strong></li>
 </ol>
-
-          <h4 id="26865691">锁的内存语义</h4>
-          <h5 id="98d293ab">从happens-before关系看锁的释放和获取</h5><p>下面代码引自P47</p>
+<h4 id="锁的内存语义">锁的内存语义</h4>
+<h5 id="从happens-before关系看锁的释放和获取">从happens-before关系看锁的释放和获取</h5>
+<p>下面代码引自P47</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MonitorExample</span>{
     <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">writer</span><span class="hljs-params">()</span>{    <span class="hljs-comment">// 1    拿锁</span>
@@ -311,13 +311,13 @@
 <blockquote>
 <p>线程A释放了锁之后，随后线程B获取同一个锁，根据传递的来的<code>2 happens-before 5</code>，A在释放锁之前的所有可变共享变量，在线程B获取同一个锁之后立即对线程B可见。</p>
 </blockquote>
-
-          <h5 id="20471e19">锁的释放和获取的内存语义</h5><ul>
+<h5 id="锁的释放和获取的内存语义">锁的释放和获取的内存语义</h5>
+<ul>
 <li><strong>获取锁</strong>：JMM会把本地内存置为无效，让线程执行临界区代码的时候必须去主内存中读取共享变量值（和<strong>volatile读</strong>一样）</li>
 <li><strong>释放锁</strong>：JMM建本地内存中的值刷到主内存中（和<strong>volatile写</strong>一样）</li>
 </ul>
-
-          <h5 id="a0bcb374">锁的内存语义的实现</h5><ol>
+<h5 id="锁的内存语义的实现">锁的内存语义的实现</h5>
+<ol>
 <li>利用volatile变量的写-读具有的内存语义</li>
 <li>利用CAS所附带的volatile读和volatile写的内存语义（同时具有两种语义）</li>
 </ol>

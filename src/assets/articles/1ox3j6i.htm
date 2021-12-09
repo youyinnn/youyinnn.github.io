@@ -3,18 +3,18 @@
 </div></p>
 <!-- more -->
 
-
-          <h3 id="fc823621">Python Photogrammetry ToolKit（PPT）</h3><p>这玩意是意大利的一个团队开发的一个Python图像处理工具包，正是这个工具包提供的osm-bundler加上PIL构成了一套解决方案。</p>
+<h3 id="python-photogrammetry-toolkit（ppt）">Python Photogrammetry ToolKit（PPT）</h3>
+<p>这玩意是意大利的一个团队开发的一个Python图像处理工具包，正是这个工具包提供的osm-bundler加上PIL构成了一套解决方案。</p>
 <p>官网：<a href="http://184.106.205.13/arcteam/ppt.php">http://184.106.205.13/arcteam/ppt.php</a></p>
-
-          <h4 id="e87a924d">PIL</h4><blockquote>
+<h4 id="pil">PIL</h4>
+<blockquote>
 <p>The Python Imaging Library (PIL) adds image processing capabilities to your Python interpreter. This library supports many file formats, and provides powerful image processing and graphics capabilities.</p>
 </blockquote>
 <p>简单来说就是Python的图像处理库，osm-bundler基于这个库对图像进行分析。</p>
 <p>官网：<a href="http://www.pythonware.com/products/pil/">http://www.pythonware.com/products/pil/</a></p>
 <p>但是很坑的一点是，这个项目09年就停止维护了，所以安装这个东西异常困难。</p>
-
-          <h4 id="be312d35">Pillow</h4><p>由于PIL属于史前神物，无法触碰，安装过程中所需要的组件特别零散，其实这对于Debian系的Linux系统来说问题并不大，大部分的库使用apt就能获取到，但是我的服务器是CentOS7，属于Redhat系的，只有yum和rpm。而开发PPT的意大利团队是在Debian下开发的，Redhat下库的获取不一样，所以我还不能按照官方给的思路来进行PPT的部署- -///。</p>
+<h4 id="pillow">Pillow</h4>
+<p>由于PIL属于史前神物，无法触碰，安装过程中所需要的组件特别零散，其实这对于Debian系的Linux系统来说问题并不大，大部分的库使用apt就能获取到，但是我的服务器是CentOS7，属于Redhat系的，只有yum和rpm。而开发PPT的意大利团队是在Debian下开发的，Redhat下库的获取不一样，所以我还不能按照官方给的思路来进行PPT的部署- -///。</p>
 <p>于是我找到了Pillow。</p>
 <p>介绍：</p>
 <blockquote>
@@ -25,22 +25,22 @@
 <p>hub：<a href="https://github.com/python-pillow/Pillow">https://github.com/python-pillow/Pillow</a></p>
 <p>所以说，我可以使用Pillow来代替PIL，这是完全可行的！！</p>
 <p>而且Pillow的安装异常简单，我们只需要使用python系的包管理工具PIP就可以一键安装！！！</p>
-
-          <h4 id="e0dcf10">PIP</h4><blockquote>
+<h4 id="pip">PIP</h4>
+<blockquote>
 <p>The PyPA recommended tool for installing Python packages.</p>
 </blockquote>
 <p>官网：<a href="https://pip.pypa.io/en/stable/">https://pip.pypa.io/en/stable/</a></p>
 <hr>
-
-          <h3 id="4224054a">安装PPT</h3>
-          <h4 id="a7170c0a">安装Python</h4><p>这是一切的大前提，你的系统里需要有python环境，但是一般的linux都会内置一个，只不过你不要使用版本太低的python就好，具体到多少我也不清楚，python的版本断代真的是傻的不行。</p>
-
-          <h4 id="a620006e">安装pip</h4><p>自己看：<a href="https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers">https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers</a></p>
+<h3 id="安装ppt">安装PPT</h3>
+<h4 id="安装python">安装Python</h4>
+<p>这是一切的大前提，你的系统里需要有python环境，但是一般的linux都会内置一个，只不过你不要使用版本太低的python就好，具体到多少我也不清楚，python的版本断代真的是傻的不行。</p>
+<h4 id="安装pip">安装pip</h4>
+<p>自己看：<a href="https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers">https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers</a></p>
 <p>然后需要更新一下pip</p>
 <pre><code class="hljs language-bash">pip install -U pip
 </code></pre>
-
-          <h4 id="e033ec9d">安装Pillow</h4><p>Installation页：<a href="http://pillow.readthedocs.io/en/latest/installation.html">http://pillow.readthedocs.io/en/latest/installation.html</a></p>
+<h4 id="安装pillow">安装Pillow</h4>
+<p>Installation页：<a href="http://pillow.readthedocs.io/en/latest/installation.html">http://pillow.readthedocs.io/en/latest/installation.html</a></p>
 <p>大概浏览一下这个页面，不要急着一上来就安装Pillow。</p>
 <p>在“External Libraries”一节，它提示我们，在安装Pillow之前我们需要安装完运行Pillow所需的库。</p>
 <p>开发Pillow的团队在hub的depends文件夹下提供了这些库在各种系统下的安装脚本，我们选择fedora_23.sh的脚本(fedora是RedHat)，但是不要运行这个脚本，我们看它对应的package需要安装哪些就好。</p>
@@ -69,8 +69,8 @@ im = Image.<span class="hljs-built_in">open</span>(picPath)
 [root@VM_16_214_centos youyinnn]<span class="hljs-comment">#</span>
 </code></pre>
 <p>说明已经安装成功！</p>
-
-          <h4 id="bc65a79d">安装BLAS库</h4><p>我们要使用PPT，除了PIL之外，还需要两个重要组件，其中一个便是 BLAS (libblas3gf, libblas-dev) 。</p>
+<h4 id="安装blas库">安装BLAS库</h4>
+<p>我们要使用PPT，除了PIL之外，还需要两个重要组件，其中一个便是 BLAS (libblas3gf, libblas-dev) 。</p>
 <p>就不介绍了，直接开始安装，在centos下的安装比较奇葩，因为PPT官网给的包名什么的都是apt有的，有的可能yum下没有，所以我们需要选择合适的库：</p>
 <p>首先把blas安装了：</p>
 <pre><code class="hljs language-bash">yum install blas
@@ -116,8 +116,8 @@ blas64-static.x86_64 : BLAS static libraries (64bit INTEGER)
 /usr/lib64/libblas.so.3gf.0
 </code></pre>
 <p>然后我们BLAS就安装完成了！</p>
-
-          <h4 id="6646888">安装LAPACK库</h4><p>LAPACK库需要安装：LAPACK (liblapack3gf, liblapack-dev)</p>
+<h4 id="安装lapack库">安装LAPACK库</h4>
+<p>LAPACK库需要安装：LAPACK (liblapack3gf, liblapack-dev)</p>
 <p>直接yum：</p>
 <pre><code class="hljs language-bash">yum install lapack
 </code></pre>

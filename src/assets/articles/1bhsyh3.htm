@@ -5,8 +5,8 @@
 <p>在学习这个东西的时候，找了很多资料，网上说的也都很笼统，找不到一个比较容易上手的例子，直到我看到一篇文章，作者在整体讲述Java5-8的新特性，其中讲完Java8的lambda表达式之后，马上就讲方法引用这个特性，我才更加清楚的意识到，方法引用其实是比lambda更加简洁的一个语法糖（不知道我这样理解对不对），但是，常识告诉我们，越简单的技术，限制条件就越多，为什么网上的关于方法引用的讲解都很散，因为方法引用的使用条件有点多。</p>
 </blockquote>
 <p>根据这篇文章，我又自己写了一个例子，来说明为什么方法引用可以是一个更加简洁的lambda：</p>
-
-          <h4 id="d7049de0">引例</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">methodReferences</span> {
+<h4 id="引例">引例</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">methodReferences</span> {
     
     <span class="hljs-comment">//标准FI</span>
     <span class="hljs-keyword">interface</span> <span class="hljs-title class_">methodReferencesFI</span>{
@@ -48,9 +48,9 @@
 <p>但是在JAVA8中，还可以直接通过方法引用来简写lambda表达式中已经存在的方法。</p>
 <pre><code class="hljs language-java">Arrays.sort(stringsArray, String::compareToIgnoreCase);
 </code></pre>
-
-          <h4 id="573d3230">四种方法引用的形式</h4>
-          <h5 id="8b10a1c">1. 引用某个对象的实例方法：</h5><pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ComparisonProvider</span>{
+<h4 id="四种方法引用的形式">四种方法引用的形式</h4>
+<h5 id="1-引用某个对象的实例方法：">1. 引用某个对象的实例方法：</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ComparisonProvider</span>{
             <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareByName</span><span class="hljs-params">(Person a,Person b)</span>{
                 <span class="hljs-keyword">return</span> a.getName().compareTo(b.getName());
             }
@@ -94,12 +94,12 @@ Arrays.sort(persons, provider::compareByAge);
     而方法引用更直接：
     Arrays.sort(persons, provider::compareByAge);
 </code></pre>
-
-          <h5 id="2e3a0f02">2. 引用特定类的类型对象的实例方法</h5><p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
-
-          <h5 id="4621016a">3. 构造函数的引用</h5><p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
-
-          <h5 id="5c9f1d16">4. 静态方法引用</h5><p>格式<code>Class::static_method</code></p>
+<h5 id="2-引用特定类的类型对象的实例方法">2. 引用特定类的类型对象的实例方法</h5>
+<p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
+<h5 id="3-构造函数的引用">3. 构造函数的引用</h5>
+<p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
+<h5 id="4-静态方法引用">4. 静态方法引用</h5>
+<p>格式<code>Class::static_method</code></p>
 <p>到这里方法引用总算是粗略的过了一遍，但是回想前面这一路学习下来，我还是有一个地方，不是很理解。</p>
 <pre><code class="hljs language-java">    <span class="hljs-comment">//这也是静态方法引用</span>
     personlist.forEach(System.out::println);

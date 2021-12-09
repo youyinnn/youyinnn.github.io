@@ -1,16 +1,16 @@
 <p>Flow control syntax, Function definition, Modules.</p>
-
-          <h2 id="525a5fb9">C</h2>
-          <h3 id="7a692751">Flow Control</h3>
-          <h4 id="5b69bf6"><code>if</code> statement</h4><pre><code class="hljs language-python"><span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">0</span>:
+<h2 id="c">C</h2>
+<h3 id="flow-control">Flow Control</h3>
+<h4 id="if-statement"><code>if</code> statement</h4>
+<pre><code class="hljs language-python"><span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">0</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x &gt; 0&#x27;</span>)
 <span class="hljs-keyword">elif</span> x == <span class="hljs-number">0</span>: 
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x = 0&#x27;</span>)
 <span class="hljs-keyword">else</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x &lt; 0&#x27;</span>)
 </code></pre>
-
-          <h4 id="d3b6e418"><code>for</code> statement</h4><p>Example:</p>
+<h4 id="for-statement"><code>for</code> statement</h4>
+<p>Example:</p>
 <pre><code class="hljs language-python">array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> array:
     <span class="hljs-built_in">print</span>(i)
@@ -42,8 +42,8 @@ clt = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string"
 <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">in</span> clt.items():
     <span class="hljs-built_in">print</span>(key, val)
 </code></pre>
-
-          <h4 id="c1c2407"><code>while</code> statement</h4><pre><code class="hljs language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+<h4 id="while-statement"><code>while</code> statement</h4>
+<pre><code class="hljs language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     num = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;Please enter a number bigger than 10&#x27;</span>)
     <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">10</span>):
         <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Too small!&#x27;</span>)
@@ -51,8 +51,8 @@ clt = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string"
         <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Number is:&#x27;</span>, num)
         <span class="hljs-keyword">break</span>
 </code></pre>
-
-          <h4 id="9a37eead"><code>pass</code> statement</h4><p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:</p>
+<h4 id="pass-statement"><code>pass</code> statement</h4>
+<p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#pass"><code>pass</code></a> statement does nothing. It can be used when a statement is required syntactically but the program requires no action. For example:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># Busy-wait for keyboard interrupt (Ctrl+C)</span>
 </code></pre>
@@ -64,9 +64,9 @@ clt = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string"
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">initlog</span>(<span class="hljs-params">*args</span>):
     <span class="hljs-keyword">pass</span>   <span class="hljs-comment"># Remember to implement this!</span>
 </code></pre>
-
-          <h3 id="b781ee3f">Function</h3>
-          <h4 id="20741448">Define One</h4><p>We must define a function with <code>def</code> keyword:</p>
+<h3 id="function">Function</h3>
+<h4 id="define-one">Define One</h4>
+<p>We must define a function with <code>def</code> keyword:</p>
 <pre><code class="hljs language-python"><span class="hljs-comment"># fibonacci series to an arbitary boundary</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">fib</span>(<span class="hljs-params">n</span>):
     a, b = <span class="hljs-number">0</span>, <span class="hljs-number">1</span>
@@ -88,8 +88,8 @@ fib(<span class="hljs-number">2000</span>)
 rs = fib2(<span class="hljs-number">2000</span>)
 <span class="hljs-built_in">print</span>(rs)
 </code></pre>
-
-          <h4 id="bbfce8fd">Default Argument Values</h4><pre><code class="hljs language-python"><span class="hljs-comment"># default arg values</span>
+<h4 id="default-argument-values">Default Argument Values</h4>
+<pre><code class="hljs language-python"><span class="hljs-comment"># default arg values</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">ask</span>(<span class="hljs-params">name, age=<span class="hljs-number">10</span>, gender=<span class="hljs-string">&#x27;male&#x27;</span></span>):
     <span class="hljs-built_in">print</span>(name, age, gender)
 
@@ -116,8 +116,8 @@ Julia 10 female
 [1, 2, 3]
 [0, 4]
 </code></pre>
-
-          <h4 id="cdd2f301">Special Area Of Parameters</h4><p>Take a look on this:</p>
+<h4 id="special-area-of-parameters">Special Area Of Parameters</h4>
+<p>Take a look on this:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>(<span class="hljs-params">pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2</span>):
       -----------    ----------     ----------
         |               /                  |
@@ -146,8 +146,8 @@ Julia 10 female
 <li>Use keyword-only when names have meaning and the function definition is more understandable by being explicit with names or you want to prevent users relying on the position of the argument being passed.</li>
 <li>For an API, use positional-only to prevent breaking API changes if the parameter’s name is modified in the future.</li>
 </ul>
-
-          <h4 id="162f9e66">Keyword Arguments</h4><p>Functions can also be called using <a href="https://docs.python.org/3/glossary.html#term-keyword-argument">keyword arguments</a> of the form <code>kwarg=value</code>. For instance, the following function:</p>
+<h4 id="keyword-arguments">Keyword Arguments</h4>
+<p>Functions can also be called using <a href="https://docs.python.org/3/glossary.html#term-keyword-argument">keyword arguments</a> of the form <code>kwarg=value</code>. For instance, the following function:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">parrot</span>(<span class="hljs-params">voltage, state=<span class="hljs-string">&#x27;a stiff&#x27;</span>, action=<span class="hljs-string">&#x27;voom&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;Norwegian Blue&#x27;</span></span>):
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-- This parrot wouldn&#x27;t&quot;</span>, action, end=<span class="hljs-string">&#x27; &#x27;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;if you put&quot;</span>, voltage, <span class="hljs-string">&quot;volts through it.&quot;</span>)
@@ -169,8 +169,8 @@ parrot(<span class="hljs-number">110</span>, voltage=<span class="hljs-number">2
 parrot(actor=<span class="hljs-string">&#x27;John Cleese&#x27;</span>)  <span class="hljs-comment"># unknown keyword argument</span>
 </code></pre>
 <p>In a function call, keyword arguments must follow positional arguments. All the keyword arguments passed must match one of the arguments accepted by the function (e.g. <code>actor</code> is not a valid argument for the <code>parrot</code> function), and their order is not important. This also includes non-optional arguments (e.g. <code>parrot(voltage=1000)</code> is valid too). No argument may receive a value more than once.</p>
-
-          <h4 id="4b1a2a1">Packing Arguments</h4><p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter. </p>
+<h4 id="packing-arguments">Packing Arguments</h4>
+<p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter. </p>
 <p>This may be combined with a formal parameter of the form <code>*name</code> (described in the next subsection) which receives a <a href="https://docs.python.org/3/tutorial/datastructures.html#tut-tuples">tuple</a> <strong>containing the positional arguments</strong> beyond the formal parameter list. (<code>*name</code> must occur before <code>**name</code>.) </p>
 <p>For example, if we define a function like this:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">cheeseshop</span>(<span class="hljs-params">kind, *arguments, **keywords</span>):
@@ -204,8 +204,8 @@ client : John Cleese
 sketch : Cheese Shop Sketch
 </code></pre>
 <p>Note that the order in which the keyword arguments are printed is guaranteed to match the order in which they were provided in the function call.</p>
-
-          <h4 id="307c19d7">Unpacking Arguments</h4><p>Pass a list with <code>*</code> operator:</p>
+<h4 id="unpacking-arguments">Unpacking Arguments</h4>
+<p>Pass a list with <code>*</code> operator:</p>
 <pre><code class="hljs language-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>, <span class="hljs-number">6</span>))            <span class="hljs-comment"># normal call with separate arguments</span>
 [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
 <span class="hljs-meta">&gt;&gt;&gt; </span>args = [<span class="hljs-number">3</span>, <span class="hljs-number">6</span>]
@@ -222,8 +222,8 @@ sketch : Cheese Shop Sketch
 <span class="hljs-meta">&gt;&gt;&gt; </span>parrot(**d)
 -- This parrot wouldn<span class="hljs-string">&#x27;t VOOM if you put four million volts through it. E&#x27;</span>s bleedin<span class="hljs-string">&#x27; demised !</span>
 </code></pre>
-
-          <h4 id="62953547">Function Annotation</h4><p><a href="https://docs.python.org/3/glossary.html#term-function-annotation">Annotations</a> are stored in the <code>__annotations__</code> attribute of the function as a dictionary and have no effect on any other part of the function.</p>
+<h4 id="function-annotation">Function Annotation</h4>
+<p><a href="https://docs.python.org/3/glossary.html#term-function-annotation">Annotations</a> are stored in the <code>__annotations__</code> attribute of the function as a dictionary and have no effect on any other part of the function.</p>
 <p><strong>Parameter annotations</strong> are defined by a colon(<code>:</code>) after the parameter name, followed by an expression evaluating to the value of the annotation.</p>
 <p><strong>Return annotations</strong> are defined by a literal <code>-&gt;</code>, followed by an expression, between the parameter list and the colon denoting the end of the <a href="https://docs.python.org/3/reference/compound_stmts.html#def"><code>def</code></a> statement.</p>
 <p>The following example has a positional argument, a keyword argument, and the return value annotated:</p>
@@ -237,10 +237,10 @@ Annotations: {<span class="hljs-string">&#x27;ham&#x27;</span>: &lt;<span class=
 Arguments: spam eggs
 <span class="hljs-string">&#x27;spam and eggs&#x27;</span>
 </code></pre>
-
-          <h4 id="16aa9f6b">Generator Function</h4><p>This part is a bit advancing, I recommend reading this after reading the <strong>(EF)</strong> chapter.</p>
-
-          <h5 id="8968caed">Generator Expression</h5><p>A generator expression is a compact generator notation in parentheses:</p>
+<h4 id="generator-function">Generator Function</h4>
+<p>This part is a bit advancing, I recommend reading this after reading the <strong>(EF)</strong> chapter.</p>
+<h5 id="generator-expression">Generator Expression</h5>
+<p>A generator expression is a compact generator notation in parentheses:</p>
 <pre><code class="hljs language-python">generator_expression ::=  <span class="hljs-string">&quot;(&quot;</span> expression comp_for <span class="hljs-string">&quot;)&quot;</span>
 </code></pre>
 <p>In the part of Data Structures, we have learned creating a list by using expression:</p>
@@ -267,8 +267,8 @@ Traceback (most recent call last):
     print(next(g))
 StopIteration
 </code></pre>
-
-          <h5 id="61a9cc98"><code>yield</code> statement</h5><p>We can turn a generator expression into a function by using <code>yield</code> statement:</p>
+<h5 id="yield-statement"><code>yield</code> statement</h5>
+<p>We can turn a generator expression into a function by using <code>yield</code> statement:</p>
 <pre><code class="hljs language-python">g = (x ** x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>))
 <span class="hljs-comment"># is equivilant to </span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
@@ -277,8 +277,8 @@ StopIteration
         <span class="hljs-keyword">yield</span> x
 g = g() <span class="hljs-comment"># it has to be call</span>
 </code></pre>
-
-          <h6 id="d7595e6c">More Examples</h6><pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
+<h6 id="more-examples">More Examples</h6>
+<pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():
     <span class="hljs-keyword">try</span>:
         <span class="hljs-keyword">yield</span> <span class="hljs-number">1</span>
         <span class="hljs-keyword">try</span>:
@@ -303,9 +303,9 @@ g = g() <span class="hljs-comment"># it has to be call</span>
 <span class="hljs-built_in">print</span> <span class="hljs-built_in">list</span>(f()) <span class="hljs-comment"># [1, 2, 4, 5, 8, 9, 10, 11]</span>
 </code></pre>
 <p>refer to: <a href="https://www.python.org/dev/peps/pep-0255/#example">https://www.python.org/dev/peps/pep-0255/#example</a></p>
-
-          <h2 id="1d1bc97e">D</h2>
-          <h3 id="8c3d1cf9">Modules</h3><p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <em><strong>imported</strong></em> into other modules or into the <em>main</em> module.</p>
+<h2 id="d">D</h2>
+<h3 id="modules">Modules</h3>
+<p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <em><strong>imported</strong></em> into other modules or into the <em>main</em> module.</p>
 <p>Before that, we should introduce a global variable  named <code>__name__</code> which can be used to identify whether a <code>.py</code> file is <strong>run directly</strong> from command line or <strong>is imported</strong> to other file as a module.</p>
 <p>For example, say we got a file named <code>fibo.py</code>:</p>
 <pre><code class="hljs language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;name in fibo&#x27;</span>, __name__) <span class="hljs-comment"># will print &#x27;fibo&#x27; when imported as a module</span>
@@ -331,8 +331,8 @@ g = g() <span class="hljs-comment"># it has to be call</span>
 <p>Or we can just run it as a command line script:</p>
 <pre><code class="hljs language-bash">python fibo.py 10
 </code></pre>
-
-          <h4 id="5f9000b3">Import</h4><pre><code class="hljs language-python"><span class="hljs-comment"># import as object</span>
+<h4 id="import">Import</h4>
+<pre><code class="hljs language-python"><span class="hljs-comment"># import as object</span>
 <span class="hljs-keyword">import</span> fibo <span class="hljs-comment"># this will import an object named &#x27;fibo&#x27; which file name is &#x27;fibo.py&#x27;</span>
 <span class="hljs-comment"># usage</span>
 fibo.fibo(<span class="hljs-number">10</span>)
@@ -354,15 +354,15 @@ fibonacci(<span class="hljs-number">10</span>)
 <span class="hljs-comment"># import all function</span>
 <span class="hljs-keyword">from</span> fibo <span class="hljs-keyword">import</span> *
 </code></pre>
-
-          <h4 id="a7e09d74">Module Search Path</h4><p>When a module named <code>fibo</code> is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named <code>fibo.py</code> in a list of directories given by the variable <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a>. <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> is initialized from these locations:</p>
+<h4 id="module-search-path">Module Search Path</h4>
+<p>When a module named <code>fibo</code> is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named <code>fibo.py</code> in a list of directories given by the variable <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a>. <a href="https://docs.python.org/3/library/sys.html#sys.path"><code>sys.path</code></a> is initialized from these locations:</p>
 <ul>
 <li>The directory containing the input script (or the current directory when no file is specified).</li>
 <li><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH"><code>PYTHONPATH</code></a> (a list of directory names, with the same syntax as the shell variable <code>PATH</code>).</li>
 <li>The installation-dependent default.</li>
 </ul>
-
-          <h4 id="4487fb5e">In Packages</h4><p>Here’s a possible structure for your package (expressed in terms of a hierarchical filesystem):</p>
+<h4 id="in-packages">In Packages</h4>
+<p>Here’s a possible structure for your package (expressed in terms of a hierarchical filesystem):</p>
 <pre><code class="hljs language-python">sound/                          Top-level package
       __init__.py               Initialize the sound package
       formats/                  Subpackage <span class="hljs-keyword">for</span> file <span class="hljs-built_in">format</span> conversions
@@ -387,8 +387,8 @@ fibonacci(<span class="hljs-number">10</span>)
 <pre><code class="hljs language-python"><span class="hljs-keyword">import</span> sound.effects.echo <span class="hljs-keyword">as</span> echo
 echo.makesound()
 </code></pre>
-
-          <h5 id="e9d54731">Import * From Packages</h5><p>For example, the file <code>sound/effects/__init__.py</code> could contain the following code:</p>
+<h5 id="import--from-packages">Import * From Packages</h5>
+<p>For example, the file <code>sound/effects/__init__.py</code> could contain the following code:</p>
 <pre><code class="hljs language-python">__all__ = [<span class="hljs-string">&quot;echo&quot;</span>, <span class="hljs-string">&quot;surround&quot;</span>, <span class="hljs-string">&quot;reverse&quot;</span>]
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">do</span>():

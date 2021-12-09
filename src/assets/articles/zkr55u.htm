@@ -1,5 +1,5 @@
-
-          <h3 id="fc98c2af">Service</h3><p>In a distributed application, different pieces of the app are called “services.” For example, if you imagine a video sharing site, it probably includes <strong>[1]a service for storing application data in a database</strong>, <strong>[2]a service for video transcoding in the background after a user uploads something</strong>, <strong>[3]a service for the front-end</strong>, and so on.</p>
+<h3 id="service">Service</h3>
+<p>In a distributed application, different pieces of the app are called “services.” For example, if you imagine a video sharing site, it probably includes <strong>[1]a service for storing application data in a database</strong>, <strong>[2]a service for video transcoding in the background after a user uploads something</strong>, <strong>[3]a service for the front-end</strong>, and so on.</p>
 <p>Services are really just “containers in production.” A service only runs one image, but it codifies the way that image runs:</p>
 <ul>
 <li>what ports it should use</li>
@@ -20,8 +20,8 @@
 <p>当我们将app看成是一个service的时候，我们可以对service做要上生产环境时候的确保配置，比如为每一个container设置一些容器管理参数，比如replicas、cpu资源、memory资源、重启策略等等</p>
 <p>于是我们可以用<code>docker-compose.yaml</code>去组织一个service，这是投入生产环境时候的正确做法</p>
 </blockquote>
-
-          <h3 id="80c333fc"><code>docker-compose.yml</code></h3><p>Save this file as <code>docker-compose.yml</code> wherever you want. Be sure you have <a href="https://docs.docker.com/get-started/part2/#share-your-image">pushed the image</a> you created in <a href="https://docs.docker.com/get-started/part2/">Part 2</a> to a registry, and update this <code>.yml</code> by replacing <code>username/repo:tag</code> with your image details.</p>
+<h3 id="docker-composeyml"><code>docker-compose.yml</code></h3>
+<p>Save this file as <code>docker-compose.yml</code> wherever you want. Be sure you have <a href="https://docs.docker.com/get-started/part2/#share-your-image">pushed the image</a> you created in <a href="https://docs.docker.com/get-started/part2/">Part 2</a> to a registry, and update this <code>.yml</code> by replacing <code>username/repo:tag</code> with your image details.</p>
 <pre><code>version: &quot;3&quot;
 services:
   web:
@@ -51,8 +51,8 @@ networks:
 <li>Instruct <code>web</code>’s containers to share port 80 via a load-balanced network called <code>webnet</code>. (Internally, the containers themselves publish to <code>web</code>’s port 80 at an ephemeral port.)</li>
 <li>Define the <code>webnet</code> network with the default settings (which is a load-balanced overlay network).</li>
 </ul>
-
-          <h3 id="743e178a">Deploy a load-balanced app</h3><p>Before we can use the <code>docker stack deploy</code> command we first run:</p>
+<h3 id="deploy-a-load-balanced-app">Deploy a load-balanced app</h3>
+<p>Before we can use the <code>docker stack deploy</code> command we first run:</p>
 <pre><code class="hljs language-bash">$ docker swarm init
 Swarm initialized: current node (gadm7xrpe7br364zscnmexkf6) is now a manager.
 
@@ -81,14 +81,14 @@ Creating service getstartedlab_web
 <p>Tasks also show up if you just list all the containers on your system, though that is not filtered by service:</p>
 <pre><code class="hljs language-bash">$ docker container <span class="hljs-built_in">ls</span> -q
 </code></pre>
-
-          <h3 id="2bd184cd">Scale the app</h3><p>You can scale the app by changing the <code>replicas</code> value in <code>docker-compose.yml</code>, saving the change, and re-running the <code>docker stack deploy</code> command:</p>
+<h3 id="scale-the-app">Scale the app</h3>
+<p>You can scale the app by changing the <code>replicas</code> value in <code>docker-compose.yml</code>, saving the change, and re-running the <code>docker stack deploy</code> command:</p>
 <pre><code>docker stack deploy -c docker-compose.yml getstartedlab
 </code></pre>
 <p>Docker performs an in-place update, no need to tear the stack down first or kill any containers.</p>
 <p>Now, re-run <code>docker container ls -q</code> to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.</p>
-
-          <h3 id="2fa32edc">Take down the app and the swarm</h3><ul>
+<h3 id="take-down-the-app-and-the-swarm">Take down the app and the swarm</h3>
+<ul>
 <li><p>Take the app down with <code>docker stack rm</code>:</p>
 <pre><code class="hljs language-bash">$ docker stack <span class="hljs-built_in">rm</span> getstartedlab
 </code></pre>
@@ -102,5 +102,5 @@ Creating service getstartedlab_web
 <blockquote>
 <p><strong>Note</strong>: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using <a href="https://docs.docker.com/docker-cloud/">Docker Cloud</a>, or on any hardware or cloud provider you choose with <a href="https://www.docker.com/enterprise-edition">Docker Enterprise Edition</a>.</p>
 </blockquote>
-
-          <h3 id="a50984d0">Compose file Reference</h3><p><a href="https://docs.docker.com/compose/compose-file/#args">https://docs.docker.com/compose/compose-file/#args</a></p>
+<h3 id="compose-file-reference">Compose file Reference</h3>
+<p><a href="https://docs.docker.com/compose/compose-file/#args">https://docs.docker.com/compose/compose-file/#args</a></p>

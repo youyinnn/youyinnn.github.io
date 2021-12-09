@@ -26,6 +26,7 @@
         ></div>
       </n-gi>
     </n-grid>
+    <toc :toc="toc" />
   </div>
 </template>
 
@@ -33,17 +34,8 @@
 /* eslint-disable no-unused-vars */
 import markdowBody from "@/assets/css/markdown-body.css";
 import resources from "@/assets/resources/resources.js";
-import { h } from "vue";
-import { NIcon, NMenu, NGrid, NGi } from "naive-ui";
-import {
-  BookOutline as BookIcon,
-  PersonOutline as PersonIcon,
-  WineOutline as WineIcon,
-} from "@vicons/ionicons5";
-
-function renderIcon(icon) {
-  return () => h(NIcon, null, { default: () => h(icon) });
-}
+import { NMenu, NGrid, NGi } from "naive-ui";
+import Toc from "@/components/Toc.vue";
 
 export default {
   name: "Script",
@@ -52,12 +44,14 @@ export default {
     NMenu,
     NGrid,
     NGi,
+    Toc,
   },
   data: () => ({
     content: null,
     activeKey: null,
     menuOptions: [],
     scriptChangeAnimate: false,
+    toc: {},
   }),
   computed: {
     menuValid() {
@@ -69,6 +63,8 @@ export default {
       this.scriptChangeAnimate = false;
       const src = require(`raw-loader!@/assets/scripts/${nv}.htm`);
       this.content = src.default;
+      const tocSrc = require(`@/assets/scripts/${nv}.htm.toc.json`);
+      this.toc = tocSrc;
       setTimeout(() => {
         this.scriptChangeAnimate = true;
       }, 100);
@@ -101,6 +97,7 @@ export default {
 }
 .script-box {
   padding: 1rem;
+  padding-left: 3rem;
   opacity: 0;
   animation-duration: 1s;
 }

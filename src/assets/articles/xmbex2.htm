@@ -1,5 +1,5 @@
-
-          <h3 id="6eeef492">51. N-Queens(Hard)</h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+<h3 id="51-n-queenshard">51. N-Queens(Hard)</h3>
+<p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
 <p>Given an integer <em>n</em>, return all distinct solutions to the <em>n</em>-queens puzzle.</p>
 <p>Each solution contains a distinct board configuration of the <em>n</em>-queens&#39; placement, where <code>&#39;Q&#39;</code> and <code>&#39;.&#39;</code> both indicate a queen and an empty space respectively.</p>
@@ -18,16 +18,16 @@ Output: [
 ]
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
 </code></pre>
-
-          <h4 id="7a32f6b7">Rough Backtracking</h4><p>要打这题，首先得做好下棋的一步关键的那一步：判断该位置是否能下，于是对于<strong>一张完整的棋盘</strong>来说，我们每下一步之前，就需要判断：</p>
+<h4 id="rough-backtracking">Rough Backtracking</h4>
+<p>要打这题，首先得做好下棋的一步关键的那一步：判断该位置是否能下，于是对于<strong>一张完整的棋盘</strong>来说，我们每下一步之前，就需要判断：</p>
 <ol>
 <li>同行同列是否有棋子；</li>
 <li>对角线是否有棋子；</li>
 </ol>
 <p>于是为了做到这一步，大概会花n * n的时间</p>
 <p>然后用回溯去做每一颗棋子的下棋判断，直观+回溯的考虑的话，确实是这样的，但是这题我们可以用一种更聪明的方式去解决；</p>
-
-          <h4 id="51b476fd">Smart Backtracking</h4><p>首先我们的判断步骤，不需要遍历整张<code>n*n</code>的棋盘，我们也不需要事先准备好整张棋盘，如果我们把每一步棋当成一行去填补棋盘，第一行是一个棋子，第二行是第二个棋子，于是</p>
+<h4 id="smart-backtracking">Smart Backtracking</h4>
+<p>首先我们的判断步骤，不需要遍历整张<code>n*n</code>的棋盘，我们也不需要事先准备好整张棋盘，如果我们把每一步棋当成一行去填补棋盘，第一行是一个棋子，第二行是第二个棋子，于是</p>
 <ul>
 <li>当我们下第<code>i</code>个棋子的时候，只需要判断前面的<code>0~i-1</code>行棋盘就好了；</li>
 <li>关于对角线，我们也不必遍历整行，因为对角线的位置可以根据行差算出来，比如要插入第<code>i</code>行第<code>j</code>列的时候，需要判断上面<code>i-1</code>行的对角线的话，比如第2行在该行的对角线理论上为<code>j + i - 2</code>或者<code>j - (i - 2)</code>；</li>
@@ -40,10 +40,10 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">gap</span> <span class="hljs-operator">=</span> x - rowIndex;
-        <span class="hljs-keyword">if</span> (y + gap &lt; row.length &amp;&amp; row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (y + gap &lt; row.length && row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> && row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
@@ -76,8 +76,8 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
     }
 }
 </code></pre>
-
-          <h4 id="b4d213ef">Elegant Backtracking</h4><p>很遗憾的是，我们上面再聪明再接近线性的判断效率，其实还是抵不过常数级的，所以我们上面的优化过后的code也仅是打到43.6%，我们再来整理一下我们的<strong>valid</strong>函数：</p>
+<h4 id="elegant-backtracking">Elegant Backtracking</h4>
+<p>很遗憾的是，我们上面再聪明再接近线性的判断效率，其实还是抵不过常数级的，所以我们上面的优化过后的code也仅是打到43.6%，我们再来整理一下我们的<strong>valid</strong>函数：</p>
 <ul>
 <li>同列不能下；</li>
 <li>左右对角线不能下；</li>
@@ -141,8 +141,8 @@ i = 0   0   1   2   3          1  1  1
     }
 }
 </code></pre>
-
-          <h3 id="b6a2de25">52.N-QueensII(Hard)</h3><p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
+<h3 id="52n-queensiihard">52.N-QueensII(Hard)</h3>
+<p>The <em>n</em>-queens puzzle is the problem of placing <em>n</em> queens on an <em>n</em>×<em>n</em> chessboard such that no two queens attack each other.</p>
 <p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
 <p>Given an integer <em>n</em>, return the number of distinct solutions to the <em>n</em>-queens puzzle.</p>
 <p><strong>Example:</strong></p>
@@ -161,8 +161,8 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
   &quot;.Q..&quot;]
 ]
 </code></pre>
-
-          <h4 id="3bd5346f">Solution I</h4><p>没什么，就改一改上一题而已</p>
+<h4 id="solution-i">Solution I</h4>
+<p>没什么，就改一改上一题而已</p>
 <pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
 
 <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">totalNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
@@ -194,18 +194,18 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">gap</span> <span class="hljs-operator">=</span> x - rowIndex;
-        <span class="hljs-keyword">if</span> (y + gap &lt; row.length &amp;&amp; row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (y + gap &lt; row.length && row[y + gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (y - gap &gt;= <span class="hljs-number">0</span> && row[y - gap] == <span class="hljs-string">&#x27;Q&#x27;</span>) {
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
 </code></pre>
-
-          <h4 id="b411b57e">Solution II</h4><pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+<h4 id="solution-ii">Solution II</h4>
+<pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
 <span class="hljs-type">boolean</span>[] colSet, drSet, dlSet;
 
 <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">totalNQueens</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
@@ -233,8 +233,8 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
     }
 }
 </code></pre>
-
-          <h3 id="2a2661e3">53. Maximun SubArray(Easy)</h3><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+<h3 id="53-maximun-subarrayeasy">53. Maximun SubArray(Easy)</h3>
+<p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [-2,1,-3,4,-1,2,1,-5,4],
 Output: 6
@@ -242,8 +242,8 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 </code></pre>
 <p><strong>Follow up:</strong></p>
 <p>If you have figured out the O(<em>n</em>) solution, try coding another solution using the divide and conquer approach, which is more subtle.</p>
-
-          <h4 id="13dd55ef">DP</h4><p>不多说，在<a href="./188zp6j.html">地痞</a>有分析过的</p>
+<h4 id="dp">DP</h4>
+<p>不多说，在<a href="./188zp6j.html">地痞</a>有分析过的</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxSubArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">rMax</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, max = Integer.MIN_VALUE;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> current: nums) {
@@ -253,8 +253,8 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
     <span class="hljs-keyword">return</span> max;
 }
 </code></pre>
-
-          <h3 id="73ecdd5a">54. Spiral Matrix(Medium)</h3><p>Given a matrix of <em>m</em> x <em>n</em> elements (<em>m</em> rows, <em>n</em> columns), return all elements of the matrix in spiral order.</p>
+<h3 id="54-spiral-matrixmedium">54. Spiral Matrix(Medium)</h3>
+<p>Given a matrix of <em>m</em> x <em>n</em> elements (<em>m</em> rows, <em>n</em> columns), return all elements of the matrix in spiral order.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input:
 [
@@ -273,8 +273,8 @@ Output: [1,2,3,6,9,8,7,4,5]
 ]
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 </code></pre>
-
-          <h4 id="9ba030a0">Brute Force</h4><p>hmmmmm，强打就完事了，怎么强打呢？四个关键点：</p>
+<h4 id="brute-force">Brute Force</h4>
+<p>hmmmmm，强打就完事了，怎么强打呢？四个关键点：</p>
 <ol>
 <li><p>起点</p>
 <blockquote>
@@ -362,8 +362,8 @@ Output: [1,2,3,4,8,12,11,10,9,5,6,7]
     <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span> &lt; <span class="hljs-number">4</span> ? i + <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;
 }
 </code></pre>
-
-          <h3 id="dde45d99">55.Jump Game(Medium)</h3><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<h3 id="55jump-gamemedium">55.Jump Game(Medium)</h3>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
 <p>Each element in the array represents your maximum jump length at that position.</p>
 <p>Determine if you are able to reach the last index.</p>
 <p><strong>Example 1:</strong></p>
@@ -378,13 +378,13 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.
 </code></pre>
 <p>这题就不多解释了，在<a href="./1flo1c0.html">DP Again</a>中有详细解读过，但是在再一次做到这题的时候，还是写出了一种更优的DP，因为一时间忘了贪婪解法怎么写出来了- -</p>
-
-          <h4 id="13dd55ef">DP</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+<h4 id="dp-1">DP</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">boolean</span>[] can = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[nums.length];
     can[nums.length - <span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
         <span class="hljs-type">int</span> <span class="hljs-variable">steps</span> <span class="hljs-operator">=</span> nums[i];
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length &amp;&amp; j &lt;= i + steps; j++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length && j &lt;= i + steps; j++) {
             <span class="hljs-keyword">if</span>  (can[j]) {
                 can[i] = <span class="hljs-literal">true</span>;
                 <span class="hljs-keyword">break</span>;
@@ -394,8 +394,8 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
     <span class="hljs-keyword">return</span> can[<span class="hljs-number">0</span>];
 }
 </code></pre>
-
-          <h4 id="979792b9">Greedy</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+<h4 id="greedy">Greedy</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canJump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
         <span class="hljs-keyword">if</span> (i + nums[i] &gt;= last) {

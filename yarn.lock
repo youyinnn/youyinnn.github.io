@@ -3010,7 +3010,7 @@ commander@^7.2.0:
   resolved "https://registry.npmmirror.com/commander/download/commander-7.2.0.tgz"
   integrity sha1-o2y1fQtQHOEI5NIFWaFQo5HZerc=
 
-commander@^8.3.0:
+commander@^8.0.0, commander@^8.3.0:
   version "8.3.0"
   resolved "https://registry.npmmirror.com/commander/download/commander-8.3.0.tgz"
   integrity sha1-SDfqGy2me5xhamevuw+v7lZ7ymY=
@@ -3652,14 +3652,14 @@ domelementtype@^2.0.1, domelementtype@^2.2.0:
   resolved "https://registry.npm.taobao.org/domelementtype/download/domelementtype-2.2.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdomelementtype%2Fdownload%2Fdomelementtype-2.2.0.tgz"
   integrity sha1-mgtsJ4LtahxzI9QiZxg9+b2LHVc=
 
-domhandler@^4.0.0, domhandler@^4.2.0:
+domhandler@^4.0.0, domhandler@^4.2.0, domhandler@^4.2.2:
   version "4.3.0"
   resolved "https://registry.npmmirror.com/domhandler/download/domhandler-4.3.0.tgz"
   integrity sha512-fC0aXNQXqKSFTr2wDNZDhsEYjCiYsDWl3D01kwt25hm1YIPyDGHvvi3rw+PLqHAl/m71MaiF7d5zvBr0p5UB2g==
   dependencies:
     domelementtype "^2.2.0"
 
-domutils@^2.5.2, domutils@^2.6.0:
+domutils@^2.5.2, domutils@^2.6.0, domutils@^2.8.0:
   version "2.8.0"
   resolved "https://registry.nlark.com/domutils/download/domutils-2.8.0.tgz?cache=0&sync_timestamp=1630106656355&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdomutils%2Fdownload%2Fdomutils-2.8.0.tgz"
   integrity sha1-RDfe9dtuLR9dbuhZvZXKfQIEgTU=
@@ -3797,6 +3797,11 @@ entities@^2.0.0:
   version "2.2.0"
   resolved "https://registry.nlark.com/entities/download/entities-2.2.0.tgz"
   integrity sha1-CY3JDruD2N/6CJ1VJWs1HTTE2lU=
+
+entities@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.nlark.com/entities/download/entities-3.0.1.tgz#2b887ca62585e96db3903482d336c1006c3001d4"
+  integrity sha1-K4h8piWF6W2zkDSC0zbBAGwwAdQ=
 
 errno@^0.1.1, errno@^0.1.3, errno@~0.1.7:
   version "0.1.8"
@@ -4789,6 +4794,16 @@ htmlparser2@^6.1.0:
     domutils "^2.5.2"
     entities "^2.0.0"
 
+htmlparser2@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npmmirror.com/htmlparser2/download/htmlparser2-7.2.0.tgz?cache=0&sync_timestamp=1636641100108&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fhtmlparser2%2Fdownload%2Fhtmlparser2-7.2.0.tgz#8817cdea38bbc324392a90b1990908e81a65f5a5"
+  integrity sha512-H7MImA4MS6cw7nbyURtLPO1Tms7C5H602LRETv95z1MxO/7CP7rDVROehUYeYBUYEON94NXXDEPmZuq+hX4sog==
+  dependencies:
+    domelementtype "^2.0.1"
+    domhandler "^4.2.2"
+    domutils "^2.8.0"
+    entities "^3.0.1"
+
 http-deceiver@^1.2.7:
   version "1.2.7"
   resolved "https://registry.npm.taobao.org/http-deceiver/download/http-deceiver-1.2.7.tgz"
@@ -5424,6 +5439,13 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.4.0"
     verror "1.10.0"
+
+katex@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.npmmirror.com/katex/download/katex-0.15.1.tgz?cache=0&sync_timestamp=1635843927744&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fkatex%2Fdownload%2Fkatex-0.15.1.tgz#cf4ce2fa1257c3279cc7a7fe0c8d1fab40800893"
+  integrity sha1-z0zi+hJXwyecx6f+DI0fq0CACJM=
+  dependencies:
+    commander "^8.0.0"
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"

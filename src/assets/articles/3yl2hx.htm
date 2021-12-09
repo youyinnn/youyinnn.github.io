@@ -1,5 +1,5 @@
-
-          <h3 id="5e05bcf5">16.3SumClosest(Medium)</h3><p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
+<h3 id="163sumclosestmedium">16.3SumClosest(Medium)</h3>
+<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given array nums = [-1, 2, 1, -4], and target = 1.
 
@@ -29,8 +29,8 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
     <span class="hljs-keyword">return</span> closest;
 }
 </code></pre>
-
-          <h3 id="dc727291">17. Letter Combinations of a Phone Number(Medium)</h3><p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent.</p>
+<h3 id="17-letter-combinations-of-a-phone-numbermedium">17. Letter Combinations of a Phone Number(Medium)</h3>
+<p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent.</p>
 <p>A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
 <p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png" alt="img"></p>
 <p><strong>Example:</strong></p>
@@ -94,8 +94,8 @@ Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;b
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h3 id="c82b5147">18. 4Sum(Medium)</h3><p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, are there elements <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> = <code>target</code>? Find all unique quadruplets in the array which gives the sum of <code>target</code>.</p>
+<h3 id="18-4summedium">18. 4Sum(Medium)</h3>
+<p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, are there elements <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> in <code>nums</code> such that <em>a</em> + <em>b</em> + <em>c</em> + <em>d</em> = <code>target</code>? Find all unique quadruplets in the array which gives the sum of <code>target</code>.</p>
 <p><strong>Note:</strong></p>
 <p>The solution set must not contain duplicate quadruplets.</p>
 <p><strong>Example:</strong></p>
@@ -113,12 +113,12 @@ A solution set is:
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Arrays.sort(nums);
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> nums[i];
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length; j++) {
-            <span class="hljs-keyword">if</span> (j &gt; i + <span class="hljs-number">1</span> &amp;&amp; nums[j] == nums[j - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">if</span> (j &gt; i + <span class="hljs-number">1</span> && nums[j] == nums[j - <span class="hljs-number">1</span>]) {
                 <span class="hljs-keyword">continue</span>;
             }
             <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> nums[j];
@@ -128,11 +128,11 @@ A solution set is:
                     <span class="hljs-comment">// l++ r-- here</span>
                     ans.add(Arrays.asList(a, b, nums[l++], nums[r--]));
                     <span class="hljs-comment">// skip same result when low is the same value</span>
-                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[l - <span class="hljs-number">1</span>] == nums[l]) {
+                    <span class="hljs-keyword">while</span> (l &lt; r && nums[l - <span class="hljs-number">1</span>] == nums[l]) {
                         l++;
                     }
                     <span class="hljs-comment">// skip same result when high is the same value</span>
-                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[r] == nums[r + <span class="hljs-number">1</span>]) {
+                    <span class="hljs-keyword">while</span> (l &lt; r && nums[r] == nums[r + <span class="hljs-number">1</span>]) {
                         r--;
                     }
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a + b + nums[l] + nums[r] &gt; target) {
@@ -146,8 +146,8 @@ A solution set is:
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h3 id="cf3ffd5b">19. Remove Nth Node From End Of List(Medium)</h3><p>Given a linked list, remove the <em>n</em>-th node from the end of list and return its head.</p>
+<h3 id="19-remove-nth-node-from-end-of-listmedium">19. Remove Nth Node From End Of List(Medium)</h3>
+<p>Given a linked list, remove the <em>n</em>-th node from the end of list and return its head.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
 
@@ -157,8 +157,8 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 <p>Given <em>n</em> will always be valid.</p>
 <p><strong>Follow up:</strong></p>
 <p>Could you do this in one pass?</p>
-
-          <h4 id="8a224b08">Two Pass Solution</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
+<h4 id="two-pass-solution">Two Pass Solution</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> head;
     <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
     <span class="hljs-keyword">while</span> (pre.next != <span class="hljs-literal">null</span>) {
@@ -182,8 +182,8 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 }
 </code></pre>
 <p>没什么说的，one pass获得长度，two pass直接定位删除</p>
-
-          <h4 id="db02c3f2">One Pass Solution</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd2</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
+<h4 id="one-pass-solution">One Pass Solution</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd2</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>), now = head, check;
     pre.next = head;
     <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) {
@@ -214,8 +214,8 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
 }
 </code></pre>
 <p>遍历链，对每个结点都往后找n+1个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
-
-          <h4 id="e39e1833">One Pass Solution - Tow pointers</h4><p>从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。</p>
+<h4 id="one-pass-solution---tow-pointers">One Pass Solution - Tow pointers</h4>
+<p>从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd3</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> head, p2 = head, pre = head;
@@ -236,8 +236,8 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     <span class="hljs-keyword">return</span> head;
 }
 </code></pre>
-
-          <h3 id="11824d81">20. Valid Parentheses</h3><p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+<h3 id="20-valid-parentheses">20. Valid Parentheses</h3>
+<p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
 <p>An input string is valid if:</p>
 <ol>
 <li>Open brackets must be closed by the same type of brackets.</li>
@@ -264,8 +264,8 @@ Output: false
 <pre><code>Input: &quot;{[]}&quot;
 Output: true
 </code></pre>
-
-          <h4 id="593c3e33">Stack</h4><p>没什么说的，和数据结构书上的表达式求值是一样的，比书上的简单</p>
+<h4 id="stack">Stack</h4>
+<p>没什么说的，和数据结构书上的表达式求值是一样的，比书上的简单</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String s)</span> {
     <span class="hljs-keyword">if</span> (s.isEmpty()) {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;

@@ -1,16 +1,16 @@
-
-          <h3 id="75e66719">Collection接口</h3>
-          <h3 id="d6f5163">源代码解读</h3>
-          <h4 id="a450c2dd">头部</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Collection</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Iterable</span>&lt;E&gt; {
+<h3 id="collection接口">Collection接口</h3>
+<h3 id="源代码解读">源代码解读</h3>
+<h4 id="头部">头部</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Collection</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Iterable</span>&lt;E&gt; {
   <span class="hljs-comment">//...</span>
 }
 </code></pre>
 <p>头部继承了<code>Iterable&lt;E&gt;</code>接口, 对, 这里要注意是extends一个接口, 为什么是extends, 我们去看<code>Iterable&lt;E&gt;</code>接口里到底有啥, <a href="./1kakozs.html">跳转文章</a>.</p>
 <p>所以我们知道, Collection继承了这个<code>接口</code>就代表着它拥有了容器内元素可迭代访问的功能.</p>
-
-          <h4 id="327a072f">方法</h4>
-          <h5 id="90e50b2a">查询操作 Query Operations</h5>
-          <h6 id="8fa25a9">size()方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h4 id="方法">方法</h4>
+<h5 id="查询操作-query-operations">查询操作 Query Operations</h5>
+<h6 id="size方法">size()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1) 返回容器中存储元素的个数,
      * (2) 注意如果容器存储元素的数量超过了Integer.MAX_VALUE, 则该方法会仅返回Integer.MAX_VALUE.
      *
@@ -21,34 +21,34 @@
 <blockquote>
 <p>注意返回值是int</p>
 </blockquote>
-
-          <h6 id="6d80b509">isEmpty()方法</h6><pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span>;
+<h6 id="isempty方法">isEmpty()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h6 id="f3892b95">contains(Object o)方法</h6><pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object o)</span>;
+<h6 id="containsobject-o方法">contains(Object o)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object o)</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h6 id="f1e23fc0">iterator()方法</h6><pre><code class="hljs language-java">    Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span>;
+<h6 id="iterator方法">iterator()方法</h6>
+<pre><code class="hljs language-java">    Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h6 id="3a3bf587">toArray()方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="toarray方法">toArray()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)返回一个包含集合所有元素的Object[]数组, 这个数组的元素顺序和迭代器迭代访问的顺序一致.
      * (2)这个方法返回的数组是安全的, 也就是一个new出来的数组, 里面的元素和源集合里的元素没有任何引用关系, 换句话说, 修改数组或者集合任何一方都不会影响彼此. 
      * (3)这个方法被视为数组和集合的转换方法之一.
      */</span>
     Object[] toArray();
 </code></pre>
-
-          <h6 id="43db240c">toArray(T[] a)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="toarrayt-a方法">toArray(T[] a)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)返回一个包含集合所有元素的指定运行时T类型的数组.
      * (2)如果数组的类型和容量适合改容器元素, 则将容器元素从数组0号位依次放置(覆盖数组该位置原值).
      * (3)如果类型不匹配, 则抛出<span class="hljs-doctag">@throws</span> ArrayStoreException.
@@ -59,9 +59,9 @@
      */</span>
     &lt;T&gt; T[] toArray(T[] a);
 </code></pre>
-
-          <h5 id="1172102">修改操作 Modification Operations</h5>
-          <h6 id="30873286">add(E e)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h5 id="修改操作-modification-operations">修改操作 Modification Operations</h5>
+<h6 id="adde-e方法">add(E e)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)这个方法不是必须要实现的.
      * (2)保证集合包含了特定的元素, 那么当集合的内容发生改变的时候, 方法返回true; 当集合不允许包含重复元素的时候, 这个方法返回false.
      * (3)支持这个方法的集合类需要明确地在文档中指出添加元素的条件限制, 比如在特定的情况下, 集合不允许添加null元素, 甚至还会强行限制添加元素的类型.
@@ -75,8 +75,8 @@
 <blockquote>
 <p>接口毕竟是接口, 注释中明确了实现这个方法的很多限制.</p>
 </blockquote>
-
-          <h6 id="a74f1def">remove(Object o)</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="removeobject-o">remove(Object o)</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)这个方法不是必须实现的.
      * (2)从集合中移除特定的一个元素, 移除规则需符合(o==null ? e==null : o.equals(e)), 如果有元素被移除, 则方法返回true.
      * 
@@ -84,15 +84,15 @@
      */</span>
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object o)</span>;
 </code></pre>
-
-          <h5 id="a4029721">数量级操作 Bulk Operations</h5>
-          <h6 id="4c177b91">containsAll(Collection&lt;?&gt; c)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h5 id="数量级操作-bulk-operations">数量级操作 Bulk Operations</h5>
+<h6 id="containsallcollection-c方法">containsAll(Collection&lt;?&gt; c)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)如果源集合里包含指定集合里的所有元素, 则返回true.
      */</span>
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">containsAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span>;
 </code></pre>
-
-          <h6 id="db577fb3">addAll(Collection&lt;? extends E&gt; c)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="addallcollection-extends-e-c方法">addAll(Collection&lt;? extends E&gt; c)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)这个方法不是必须实现的
      * (2)文档原句: 
      *  The behavior of this operation is undefined if the 
@@ -107,15 +107,15 @@
      */</span>
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">addAll</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span>;
 </code></pre>
-
-          <h6 id="60ca9654">removeAll(Collection&lt;?&gt; c)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="removeallcollection-c方法">removeAll(Collection&lt;?&gt; c)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)这个方法不是必须实现的.
      * (2)移除源集合中所有和c集合共有的元素.
      */</span>
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">removeAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span>;
 </code></pre>
-
-          <h6 id="e89269dc">removeIf(Predicate&lt;? super E&gt; filter)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="removeifpredicate-super-e-filter方法">removeIf(Predicate&lt;? super E&gt; filter)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)自1.8.
      * (2)移除集合中满足特定陈述(predicate)的元素.
      * 
@@ -136,34 +136,34 @@
         <span class="hljs-keyword">return</span> removed;
     }
 </code></pre>
-
-          <h6 id="f3d3c204">retainAll(Collection&lt;?&gt; c)方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="retainallcollection-c方法">retainAll(Collection&lt;?&gt; c)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)这个方法不是必须实现的.
      * (2)保留源集合中和c集合共有的元素.
      */</span>
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">retainAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span>;
 </code></pre>
-
-          <h6 id="f851576e">clear()方法</h6><pre><code class="hljs language-java">    <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span>;
+<h6 id="clear方法">clear()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h5 id="6cf867bf">比较和散列 Comparison and hashing</h5>
-          <h6 id="e0b026e1">equals(Object o)方法</h6><pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span>;
+<h5 id="比较和散列-comparison-and-hashing">比较和散列 Comparison and hashing</h5>
+<h6 id="equalsobject-o方法">equals(Object o)方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h6 id="70dc10d8">hashCode()方法</h6><pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span>;
+<h6 id="hashcode方法">hashCode()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span>;
 </code></pre>
 <blockquote>
 <p>略</p>
 </blockquote>
-
-          <h6 id="d44f536e">spliterator()方法</h6><pre><code class="hljs language-java">    <span class="hljs-comment">/**
+<h6 id="spliterator方法">spliterator()方法</h6>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
      * (1)自1.8.
      * (2)返回一个Spliterators对象
      * (3)若要实现该方法, 需要记录好子迭代器的特征值. 如果子迭代器记录的是Spliterator.SIZED 
@@ -177,7 +177,6 @@
         <span class="hljs-keyword">return</span> Spliterators.spliterator(<span class="hljs-built_in">this</span>, <span class="hljs-number">0</span>);
     }
 </code></pre>
-
-          <h4 id="3e29790c">疑问</h4>
-          <h5 id="533e88e2">Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?</h5>
-          <h5 id="dd373f5f">Q2: spliterator()方法的作用是什么?</h5>
+<h4 id="疑问">疑问</h4>
+<h5 id="q1-容器到底能不能存超过integermax_value数量的元素">Q1: 容器到底能不能存超过Integer.MAX_VALUE数量的元素?</h5>
+<h5 id="q2-spliterator方法的作用是什么">Q2: spliterator()方法的作用是什么?</h5>

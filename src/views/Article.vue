@@ -28,29 +28,33 @@
       class="article markdown-body editormd-html-preview animate__animated animate__fadeIn"
       v-html="content"
     ></div>
+    <toc :toc="toc" />
   </div>
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
 /* eslint-disable vue/no-unused-components */
 // @ is an alias to /src
 // import src from "raw-loader!@/assets/_posts/a.txt";
 import resources from "@/assets/resources/resources.js";
-// eslint-disable-next-line no-unused-vars
 import markdowBody from "@/assets/css/markdown-body.css";
 import { NSkeleton, NDivider } from "naive-ui";
 import dayjs from "dayjs";
+import Toc from "@/components/Toc.vue";
 
 export default {
   name: "Article",
   components: {
     NSkeleton,
     NDivider,
+    Toc,
   },
   data: () => ({
     content: null,
     postMetadata: null,
     loading: true,
+    toc: {},
     dayjs,
   }),
   mounted: function () {
@@ -58,6 +62,8 @@ export default {
     const aId = this.$route.params.articleId;
     const src = require(`raw-loader!@/assets/articles/${aId}.htm`);
     this.content = src.default;
+    const tocSrc = require(`@/assets/articles/${aId}.htm.toc.json`);
+    this.toc = tocSrc;
 
     const resourceList = resources.list;
     // console.log(resources);
@@ -92,11 +98,18 @@ export default {
         return ' <x style="color:#46bbcd;">2 days ago</x>';
       return Math.ceil(before / 24);
     },
+    goto(id) {
+      var element = document.getElementById(id);
+      var top = element.offsetTop;
+
+      window.scrollTo(0, top);
+    },
   },
 };
 </script>
 
 <style scoped>
+@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
 @import url("@/assets/css/editormd-0.0.1.preview.css");
 @import url("@/assets/css/github-gist.css");
 .article-metadata {
@@ -105,5 +118,19 @@ export default {
 .title {
   margin: 0;
   font-size: 25px;
+}
+</style>
+
+<style>
+.katexp {
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+  font-size: 15px;
+  border-right: 2px solid #80caff;
+}
+
+.katexp:hover {
+  box-shadow: 0px 5px 10px -2px #777;
 }
 </style>

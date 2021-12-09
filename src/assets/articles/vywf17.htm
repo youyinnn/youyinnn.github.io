@@ -1,5 +1,5 @@
-
-          <h3 id="e25a21eb">Introduction</h3><p>在学习Java并发中的同步器源码的时候，注释中有提到过AQS的Node结构是参考CLH的一种变体：</p>
+<h3 id="introduction">Introduction</h3>
+<p>在学习Java并发中的同步器源码的时候，注释中有提到过AQS的Node结构是参考CLH的一种变体：</p>
 <blockquote>
 <p>The wait queue is a variant of a &quot;CLH&quot; (Craig, Landin, and Hagersten) lock queue. </p>
 <p>CLH locks are normally used for spinlocks.  We instead use them for blocking synchronizers, but use the same basic tactic of holding some of the control information about a thread in the predecessor of its node.  A &quot;status&quot; field in each node keeps track of whether a thread should block.  </p>
@@ -20,8 +20,8 @@
 <p>CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋</p>
 <p>CLH Lock是一种比较简单的自旋锁算法之一，因为锁的CAS操作涉及到了硬件的锁定(锁总线或者是锁内存)所以性能和CPU架构也密不可分</p>
 <p>CLH Lock是独占式锁的一种，并且是不可重入的锁</p>
-
-          <h3 id="4fe68404">Implement</h3><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClhSpinLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>{
+<h3 id="implement">Implement</h3>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClhSpinLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>{
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Node&gt; prev;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Node&gt; node;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicReference&lt;Node&gt; tail = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicReference</span>&lt;Node&gt;(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>());

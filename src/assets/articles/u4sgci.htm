@@ -1,5 +1,5 @@
-
-          <h3 id="e25a21eb">Introduction</h3><p>上节我们介绍了Java并发编程的一个新的阶段——Java并发包中的<code>Lock</code>接口以及<code>AbstractQueuedSynchronizer</code>的配合使用</p>
+<h3 id="introduction">Introduction</h3>
+<p>上节我们介绍了Java并发编程的一个新的阶段——Java并发包中的<code>Lock</code>接口以及<code>AbstractQueuedSynchronizer</code>的配合使用</p>
 <p>并且尝试实现了一个简单的独占锁Mutex，借此我们了解到，并发编程还能如此灵活与优雅</p>
 <p>本节还是属于第七坎，因为第七坎应该是关于整个Java并发包的基础内容，所以会分成多节进行</p>
 <p>在上节的最后我们运用<code>Lock</code>和<code>AbstractQueuedSynchronizer</code>去简单地实现了一个独占锁，本节我们紧接着要分析一下<code>AbstractQueuedSynchronizer</code>的部分方法的实现原理，了解同步器为什么能如此强大</p>
@@ -17,10 +17,10 @@
 <li>在线程成为结点加入到同步队列的过程中，结点在自旋的时候也在不断地try获取同步状态</li>
 </ul>
 </blockquote>
-
-          <h3 id="cb8c7193">SynchronizedQueue</h3><p>同步器依赖内部实现的一个同步队列来完成<strong>同步状态的管理</strong>，当前线程获取同步状态失败的时候，同步器会将当前线程以及等待状态等信息构造成一个结点（Node）并将其加入到同步队列的尾部，<strong>同时阻塞当前线程</strong></p>
-
-          <h4 id="3444fecb">Node</h4><p>同步队列中的结点用来保存同步状态获取失败的线程引用、等待状态以及前驱和后继结点，我们来看一下Node结构，值得一提的是，Node的结构是CLH队列锁的一个变体，CLH队列锁是一种自旋锁，有兴趣可以参考<a href="./vywf17.html">这里</a>来学习一下，推荐学习Node之前看一下CLH队列锁</p>
+<h3 id="synchronizedqueue">SynchronizedQueue</h3>
+<p>同步器依赖内部实现的一个同步队列来完成<strong>同步状态的管理</strong>，当前线程获取同步状态失败的时候，同步器会将当前线程以及等待状态等信息构造成一个结点（Node）并将其加入到同步队列的尾部，<strong>同时阻塞当前线程</strong></p>
+<h4 id="node">Node</h4>
+<p>同步队列中的结点用来保存同步状态获取失败的线程引用、等待状态以及前驱和后继结点，我们来看一下Node结构，值得一提的是，Node的结构是CLH队列锁的一个变体，CLH队列锁是一种自旋锁，有兴趣可以参考<a href="./vywf17.html">这里</a>来学习一下，推荐学习Node之前看一下CLH队列锁</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {
     <span class="hljs-comment">/** Marker to indicate a node is waiting in shared mode */</span>
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">SHARED</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();
@@ -89,18 +89,18 @@
 <p>这里就有一个疑问，如果是共享式锁的情况下，同步状态回被多个线程获取到，那又该怎么办呢？</p>
 <p>疑问解决：看完后面的shared节点的获取过程之后，我们就能知道，在同步状态足够的情况下，unpark是会传递下去的</p>
 </blockquote>
-
-          <h4 id="529ecebe">Exclusive acquire &amp; release</h4>
-          <h5 id="6d13c799">acquire</h5><p>通过调用同步器的<code>acquire(int arg)</code>方法可以获取到同步状态</p>
+<h4 id="exclusive-acquire--release">Exclusive acquire & release</h4>
+<h5 id="acquire">acquire</h5>
+<p>通过调用同步器的<code>acquire(int arg)</code>方法可以获取到同步状态</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">acquire</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
-    <span class="hljs-keyword">if</span> (!tryAcquire(arg) &amp;&amp;
+    <span class="hljs-keyword">if</span> (!tryAcquire(arg) &&
         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
         selfInterrupt();
 }
 </code></pre>
 <p>在获取同步状态的时候，首先调用<code>tryAcquire(int arg)</code>方法，这个方法是我们需要实现的模板方法之一，我们需要保证该方法能够线程安全地获取同步状态，方法尝试获取一次同步状态，如果获取成功，则<code>acquire(int arg)</code>方法结束；如果获取失败，首先调用<code>addWaiter</code>方法将获取同步状态失败的线程构建为Node结点（Node.EXCLUSIVE），然后加入到队尾，最后调用<code>acquireQueued</code>方法，让这个结点以“死循环”的方式不断获取同步状态<strong>（实际上也就循环了2次，之后就会被park掉）</strong>，若是获取失败，则阻塞结点持有的线程，等到结点被前驱结点唤醒的时候（一般是前驱结点已经获取到同步状态并且打算释放了的时候），或者阻塞线程被中断了的时候</p>
-
-          <h5 id="d882867c">addWaiter</h5><pre><code class="hljs language-java"><span class="hljs-keyword">private</span> Node <span class="hljs-title function_">addWaiter</span><span class="hljs-params">(Node mode)</span> {
+<h5 id="addwaiter">addWaiter</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> Node <span class="hljs-title function_">addWaiter</span><span class="hljs-params">(Node mode)</span> {
     <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(Thread.currentThread(), mode);
     <span class="hljs-comment">// Try the fast path of enq; backup to full enq on failure</span>
     <span class="hljs-type">Node</span> <span class="hljs-variable">pred</span> <span class="hljs-operator">=</span> tail;
@@ -117,8 +117,8 @@
 </code></pre>
 <p>如注释所说，Node.EXCLUSIVE是独占式结点，Node.SHARED是共享式结点，我其实很好奇为什么要用Node对象来表示结点的mode，也许在后面的共享式结点中有什么出彩的操作吧，后面再继续研究这个事</p>
 <p>注释里也说了，line：10-17行只是一个<code>enq</code>的快速版本，如果是第一个要addWaiter的结点，这时候AQS里面的tail是为null的；如果AQS里已经有tail了，那么可以在这段代码中尝试快速设置tail（如注释中所说）</p>
-
-          <h5 id="f62b293">enq</h5><pre><code class="hljs language-java"><span class="hljs-keyword">private</span> Node <span class="hljs-title function_">enq</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Node node)</span> {
+<h5 id="enq">enq</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> Node <span class="hljs-title function_">enq</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Node node)</span> {
     <span class="hljs-keyword">for</span> (;;) {
         <span class="hljs-type">Node</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> tail;
         <span class="hljs-keyword">if</span> (t == <span class="hljs-literal">null</span>) { <span class="hljs-comment">// Must initialize</span>
@@ -180,21 +180,21 @@
 </pre>
 
 <p>这时候的<code>new Node()</code>是没有什么意义的，然后入队结点还系着获取同步状态失败的线程，后面如果再有入队的结点的话，就直接走else，尝试不断地将新入队结点设置为tail，直到成功的时候才返回，虽然<code>enq</code>的返回值没有被用到</p>
-
-          <h5 id="4d67a9ec">aquireQueued</h5><p>结点进入同步队列之后，就进入了一个自旋的过程并阻塞结点持有的线程，每个结点会自我审查，当条件满足，获取到同步状态的时候，就会从自旋中退出</p>
+<h5 id="aquirequeued">aquireQueued</h5>
+<p>结点进入同步队列之后，就进入了一个自旋的过程并阻塞结点持有的线程，每个结点会自我审查，当条件满足，获取到同步状态的时候，就会从自旋中退出</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">acquireQueued</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Node node, <span class="hljs-type">int</span> arg)</span> {
     <span class="hljs-type">boolean</span> <span class="hljs-variable">failed</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
     <span class="hljs-keyword">try</span> {
         <span class="hljs-type">boolean</span> <span class="hljs-variable">interrupted</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
         <span class="hljs-keyword">for</span> (;;) {
             <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> node.predecessor();
-            <span class="hljs-keyword">if</span> (p == head &amp;&amp; tryAcquire(arg)) {
+            <span class="hljs-keyword">if</span> (p == head && tryAcquire(arg)) {
                 setHead(node);
                 p.next = <span class="hljs-literal">null</span>; <span class="hljs-comment">// help GC</span>
                 failed = <span class="hljs-literal">false</span>;
                 <span class="hljs-keyword">return</span> interrupted;
             }
-            <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+            <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &&
                 parkAndCheckInterrupt())
                 interrupted = <span class="hljs-literal">true</span>;
         }
@@ -270,7 +270,7 @@
 </ul>
 <p>简单来说，<code>aquireQueued</code>方法让入队的线程进入一个自旋过程，我们可以展开一下它的结构与过程：</p>
 <pre class="nhi">
-                                     node.prev=head && tryAcquire(arg)
+                                     node.prev=head & tryAcquire(arg)
          AQS       might get sync state             /
     -------------         /      ┌------v       ┌------v       ┌------v
     |           |       Node     |     Node     |     Node     |     Node
@@ -311,11 +311,11 @@ behead(left)-&gt;exit(right)
 exit-&gt;e
 </code></pre>
 <p><em>流程图可以知道里的线条还需要注意一个，‘线程进入等待状态’到‘前驱是头节点’这里，意义是：线程被中断或者前驱结点被释放</em></p>
-
-          <h5 id="e7290074">release</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">release</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
+<h5 id="release">release</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">release</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
     <span class="hljs-keyword">if</span> (tryRelease(arg)) {
         <span class="hljs-type">Node</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> head;
-        <span class="hljs-keyword">if</span> (h != <span class="hljs-literal">null</span> &amp;&amp; h.waitStatus != <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">if</span> (h != <span class="hljs-literal">null</span> && h.waitStatus != <span class="hljs-number">0</span>)
             unparkSuccessor(h);
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
     }
@@ -323,10 +323,10 @@ exit-&gt;e
 }
 </code></pre>
 <p>方法执行的时候，会唤醒头节点的后继结点，然后在自旋中的后继结点会有机会获取到同步状态，然后进行上面的流程图；</p>
-
-          <h4 id="e607218e">Shared acquire &amp; release</h4><p>共享式的源码阅读真是<strong>一道大坎</strong>，网上的要么没说到重点，要么一通胡说，而且网上的版本大多都是1.7的，虽然相较1.8，也仅仅在<code>setHeadAndPropagate</code>中某处多了2个condition，但就是这个方法都没人能搞清楚到底<strong>“propagate”</strong>的含义是什么，甚至我觉得1.8多的那2个condition是用来迫不得已去修1.7时留下来的bug才加上去的，<em>Daug Lea</em>前辈的思想确实精巧高深</p>
-
-          <h5 id="48c2910f">tryAcquireShared</h5><p>分析<code>acquireShared</code>之前，我们首先分析一下<code>tryAcquireShared</code>方法，这个方法的返回值对前者影响非常大，关键是注释：</p>
+<h4 id="shared-acquire--release">Shared acquire & release</h4>
+<p>共享式的源码阅读真是<strong>一道大坎</strong>，网上的要么没说到重点，要么一通胡说，而且网上的版本大多都是1.7的，虽然相较1.8，也仅仅在<code>setHeadAndPropagate</code>中某处多了2个condition，但就是这个方法都没人能搞清楚到底<strong>“propagate”</strong>的含义是什么，甚至我觉得1.8多的那2个condition是用来迫不得已去修1.7时留下来的bug才加上去的，<em>Daug Lea</em>前辈的思想确实精巧高深</p>
+<h5 id="tryacquireshared">tryAcquireShared</h5>
+<p>分析<code>acquireShared</code>之前，我们首先分析一下<code>tryAcquireShared</code>方法，这个方法的返回值对前者影响非常大，关键是注释：</p>
 <p>这是第一段：</p>
 <pre><code>* Attempts to acquire in shared mode. This method should query if
 * the state of the object permits it to be acquired in the shared
@@ -368,8 +368,8 @@ exit-&gt;e
 </ul>
 <p>这里说支持3种情况，但是老爷子自己在写的时候也没太多想，实际上运用当作一般只支持负数代表不成功，非负数代表成功，所以和boolean没什么区别- -</p>
 </blockquote>
-
-          <h5 id="a2a6d3a8">acquireShared</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">acquireShared</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
+<h5 id="acquireshared">acquireShared</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">acquireShared</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
     <span class="hljs-keyword">if</span> (tryAcquireShared(arg) &lt; <span class="hljs-number">0</span>)
         doAcquireShared(arg);
 }
@@ -392,7 +392,7 @@ exit-&gt;e
                     <span class="hljs-keyword">return</span>;
                 }
             }
-            <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+            <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &&
                 parkAndCheckInterrupt())
                 interrupted = <span class="hljs-literal">true</span>;
         }
@@ -464,14 +464,14 @@ exit-&gt;e
      */</span>
     <span class="hljs-keyword">for</span> (;;) {
         <span class="hljs-type">Node</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> head;
-        <span class="hljs-keyword">if</span> (h != <span class="hljs-literal">null</span> &amp;&amp; h != tail) {
+        <span class="hljs-keyword">if</span> (h != <span class="hljs-literal">null</span> && h != tail) {
             <span class="hljs-type">int</span> <span class="hljs-variable">ws</span> <span class="hljs-operator">=</span> h.waitStatus;
             <span class="hljs-keyword">if</span> (ws == Node.SIGNAL) {
                 <span class="hljs-keyword">if</span> (!compareAndSetWaitStatus(h, Node.SIGNAL, <span class="hljs-number">0</span>))
                     <span class="hljs-keyword">continue</span>;            <span class="hljs-comment">// loop to recheck cases</span>
                 unparkSuccessor(h);
             }
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ws == <span class="hljs-number">0</span> &amp;&amp;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ws == <span class="hljs-number">0</span> &&
                      !compareAndSetWaitStatus(h, <span class="hljs-number">0</span>, Node.PROPAGATE))
                 <span class="hljs-keyword">continue</span>;                <span class="hljs-comment">// loop on failed CAS</span>
         }
@@ -494,8 +494,8 @@ exit-&gt;e
 <li><p>如果不是head，则应该park当前线程，直到被前驱唤醒</p>
 </li>
 </ol>
-
-          <h5 id="207d69ac">releaseShared</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">releaseShared</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
+<h5 id="releaseshared">releaseShared</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">releaseShared</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
     <span class="hljs-keyword">if</span> (tryReleaseShared(arg)) {
         doReleaseShared();
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
@@ -504,7 +504,7 @@ exit-&gt;e
 }
 </code></pre>
 <p><code>doReleaseShared</code>在这里体现出的含义是：确保同步状态被<strong>线程安全地释放（归还）</strong>，可以看到，方法内部通过CAS加循环的方式做这个确保，因为释放操作会同时来自多个线程</p>
-
-          <h3 id="26845fc6">Conclusion</h3><p>这篇应该是字数最多的blog了，分析了很很久时间，花费的精力也比较多，老爷子总是在高层次的地方设计逻辑，如果不多处一起看代码，估计很难理解逻辑设计的用意</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>这篇应该是字数最多的blog了，分析了很很久时间，花费的精力也比较多，老爷子总是在高层次的地方设计逻辑，如果不多处一起看代码，估计很难理解逻辑设计的用意</p>
 <p>特别是有的时候，即使是畅销书都不太会和你分析深一些的道理和结构逻辑，比如share部分就没太分析，网上也有许多同行尝试进行分析，但是也没讲出<strong>Propagate</strong>的真正含义</p>
 <hr>

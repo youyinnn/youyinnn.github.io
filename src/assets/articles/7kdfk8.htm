@@ -1,5 +1,5 @@
-
-          <h3 id="e25a21eb">Introduction</h3><blockquote>
+<h3 id="introduction">Introduction</h3>
+<blockquote>
 <p>事前吐槽：<em>Doug Lea</em>老爷子的注释可真难读，也许是我英语太菜鸡了- -（本来还挺自信的，现在哭着学英语）</p>
 </blockquote>
 <p>接下来我们进入Java并发编程的一个崭新的阶段</p>
@@ -11,8 +11,8 @@
 <li>锁的几种<strong>类型</strong>和使用场景</li>
 <li><strong>Lock API</strong>的使用以及和<code>synchronized</code>的区别</li>
 </ul>
-
-          <h3 id="5d3f0954">Lock 接口</h3><p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
+<h3 id="lock-接口">Lock 接口</h3>
+<p>在Lock之前，Java是靠<code>synchronized</code>关键字去实现锁的，Java5之后，并发包中新增了Lock接口</p>
 <p>它提供了同步功能，需要使用者<strong>显式</strong>地去获取锁和释放锁：</p>
 <pre><code class="hljs language-java"><span class="hljs-type">Lock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReentrantLock</span>();
 lock.lock();
@@ -66,7 +66,7 @@ lock.lock();
     t1.start();
     t2.start();
     TimeUnit.SECONDS.sleep(<span class="hljs-number">3</span>);
-    <span class="hljs-keyword">while</span> (t2.isAlive() &amp;&amp; t1.isAlive()) {
+    <span class="hljs-keyword">while</span> (t2.isAlive() && t1.isAlive()) {
         TimeUnit.MILLISECONDS.sleep(<span class="hljs-number">300</span>);
         <span class="hljs-keyword">if</span> (!t1.isInterrupted()) {t1.interrupt();}
         <span class="hljs-keyword">if</span> (!t2.isInterrupted()) {t2.interrupt();}
@@ -119,8 +119,8 @@ T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hl
 </tr>
 </tbody></table>
 <p>看了下上面的API，我们对于Lock和<code>synchronized</code>的区别就清楚了</p>
-
-          <h3 id="af86a087">队列同步器</h3><p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
+<h3 id="队列同步器">队列同步器</h3>
+<p>Lock接口的实现依赖队列同步器AbstractQueuedSynchronizer，它用来构建同步框架的基础</p>
 <p><strong>原理：</strong>它使用一个int成员变量来表示<strong>同步状态（state）</strong>，对锁的获取其实就是对该state的获取，对于同步状态的获取和改变，同步器提供了线程安全的方法；另外它还通过一个内置的FIFO的队列来完成资源获取线程的排队。</p>
 <blockquote>
 <p><strong>同步状态</strong>的概念，如果学过操作系统的都知道，在PV问题中会有一个值来代表当前可以访问临界资源的资格，这里的同步状态大概也是这么个意思</p>
@@ -133,17 +133,17 @@ T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hl
 <li>同步器是面向锁实现者的，它简化了锁的实现，屏蔽了同步状态管理、线程排队、等待和唤醒等底层操作</li>
 </ul>
 <p><strong>锁和同步器很好地隔离了使用者和实现者锁关注的领域，又增强了锁的可操作性和降低了锁的实现难度</strong></p>
-
-          <h4 id="804b002b">接口与示例</h4><p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
-
-          <h5 id="c957f9ea">状态相关方法</h5><p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
+<h4 id="接口与示例">接口与示例</h4>
+<p>同步器的设计是基于模板方法模式的，锁的实现者需要继承同步器并重写指定的方法，然后使用了这个同步器的自定义同步组件会调用这个同步器提供的同步方法，而这些方法就是实现者重写的方法</p>
+<h5 id="状态相关方法">状态相关方法</h5>
+<p>重写模板方法的时候，需要用到同步器提供的状态相关方法</p>
 <ul>
 <li><code>getState()</code>：获取同步状态</li>
 <li><code>setState()</code>：设置当前同步状态</li>
 <li><code>compareAndSetState()</code>用CAS设置同步状态，该方法保证设置动作的原子性</li>
 </ul>
-
-          <h5 id="bc4111fc">实现同步器需要重写的方法</h5><table>
+<h5 id="实现同步器需要重写的方法">实现同步器需要重写的方法</h5>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -171,8 +171,8 @@ T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hl
 <td>当前同步器是否在独占模式下被线程占用，一般用来表示是否被当前线程独占</td>
 </tr>
 </tbody></table>
-
-          <h5 id="43757738">同步器提供的模板方法</h5><table>
+<h5 id="同步器提供的模板方法">同步器提供的模板方法</h5>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -217,8 +217,8 @@ T2 Alive: <span class="hljs-literal">true</span>, isInterrupted: <span class="hl
 </tr>
 </tbody></table>
 <p>可以看到，模板方法分为三类：独占式获取和释放、共享式获取和释放、同步队列线程集合</p>
-
-          <h3 id="8f5b4a8a">尝试实现一个独占锁</h3><pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Mutex</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span> {
+<h3 id="尝试实现一个独占锁">尝试实现一个独占锁</h3>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Mutex</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span> {
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Q</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractQueuedSynchronizer</span> {
         <span class="hljs-comment">// 查看是否处于占用状态</span>
         <span class="hljs-meta">@Override</span>

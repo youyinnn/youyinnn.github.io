@@ -10,6 +10,14 @@ Half-baked Java EE developer.
 The worst FeWeb developer in the universe.
 ```
 
+#### Working Experience
+
+> 07/2018-09/2018 - CHINA UMS, Wuhan
+>
+> 10/2018-04/2019 - eBay.Inc , Shanghai
+>
+> 07/2021-11/2021 - Aleph.Inc , Shanghai
+
 #### Education
 
 > 2015-2019, SE, BE : [South-Central University For Nationalities](http://www.scuec.edu.cn/s/1/t/560/main.htm), Wuhan, China.

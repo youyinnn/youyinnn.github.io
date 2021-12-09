@@ -1,11 +1,11 @@
-
-          <h4 id="62aa6e0c">前言</h4><p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
+<h4 id="前言">前言</h4>
+<p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
 <p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection接口、Iterable接口、Iterator接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
 <p>为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读</p>
 <p>大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是<strong>往JDK源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
 <p>话不多说，开搞</p>
-
-          <h4 id="fcbdf930">热身</h4><p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
+<h4 id="热身">热身</h4>
+<p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt;
         <span class="hljs-keyword">implements</span> <span class="hljs-title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -98,10 +98,10 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
     <span class="hljs-keyword">return</span> size - <span class="hljs-number">1</span>;
 }
 </code></pre>
-
-          <h5 id="a2009b1f">remove</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+<h5 id="remove">remove</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
     E element;
-    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt;= endIndex()) {
+    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> && index &lt;= endIndex()) {
         element = array[index];
         <span class="hljs-keyword">if</span> (index &lt; endIndex()) {
             System.arraycopy(array, index + <span class="hljs-number">1</span>, array, index, endIndex() - index);
@@ -120,8 +120,8 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
 <li><strong>size--</strong></li>
 </ul>
 <p>否则只进行<code>size--</code></p>
-
-          <h5 id="ba224606">add</h5><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span> {
+<h5 id="add">add</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span> {
     add(size, element);
 }
 
@@ -148,8 +148,8 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
 }
 </code></pre>
 <p>实现<code>add(int index, E element)</code>和传统的不太一样，我的这个方法更具体一些，我们把扩容的事情抽象成一个<code>adjustArray</code>方法，如果要插入的位置在当前列表的中间，我们将数组从要插入的位置开始往后移一位</p>
-
-          <h5 id="6b78cb6c">Iterator</h5><p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
+<h5 id="iterator">Iterator</h5>
+<p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyArrayListIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;E&gt;{
 
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">currentIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;

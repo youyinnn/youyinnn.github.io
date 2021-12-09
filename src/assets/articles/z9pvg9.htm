@@ -1,5 +1,5 @@
-
-          <h3 id="54695786">66.Plus One(Easy)</h3><p>Given a <strong>non-empty</strong> array of digits representing a non-negative integer, plus one to the integer.</p>
+<h3 id="66plus-oneeasy">66.Plus One(Easy)</h3>
+<p>Given a <strong>non-empty</strong> array of digits representing a non-negative integer, plus one to the integer.</p>
 <p>The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.</p>
 <p>You may assume the integer does not contain any leading zero, except the number 0 itself.</p>
 <p><strong>Example 1:</strong></p>
@@ -12,8 +12,8 @@ Explanation: The array represents the integer 123.
 Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>处理carry的题目我们前面碰的多了，熟能生巧</p>
+<h4 id="solution">Solution</h4>
+<p>处理carry的题目我们前面碰的多了，熟能生巧</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] plusOne(<span class="hljs-type">int</span>[] digits) {
     <span class="hljs-type">boolean</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> digits.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
@@ -36,8 +36,8 @@ Explanation: The array represents the integer 4321.
     }
 }
 </code></pre>
-
-          <h3 id="9fa7771d">67.Add Binary(Easy)</h3><p>Given two binary strings, return their sum (also a binary string).</p>
+<h3 id="67add-binaryeasy">67.Add Binary(Easy)</h3>
+<p>Given two binary strings, return their sum (also a binary string).</p>
 <p>The input strings are both <strong>non-empty</strong> and contains only characters <code>1</code> or <code>0</code>.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: a = &quot;11&quot;, b = &quot;1&quot;
@@ -47,8 +47,8 @@ Output: &quot;100&quot;
 <pre><code>Input: a = &quot;1010&quot;, b = &quot;1011&quot;
 Output: &quot;10101&quot;
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>和<a href="./11z93zc.html?hash=22be3288">MultiplyString</a>一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理</p>
+<h4 id="solution-1">Solution</h4>
+<p>和<a href="./11z93zc.html?hash=22be3288">MultiplyString</a>一样，我们先把两数和算到长数数组中，然后再遍历长数数组进行进位的处理</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">addBinary</span><span class="hljs-params">(String a, String b)</span> {
     <span class="hljs-keyword">if</span> (a.length() &lt; b.length()) {
         <span class="hljs-keyword">return</span> addBinary(b, a);
@@ -98,8 +98,8 @@ Output: &quot;10101&quot;
     <span class="hljs-keyword">return</span> sb.toString();
 }
 </code></pre>
-
-          <h3 id="3e932a58">68.Text Justification(Hard)</h3><p>Given an array of words and a width <em>maxWidth</em>, format the text such that each line has exactly <em>maxWidth</em>characters and is fully (left and right) justified.</p>
+<h3 id="68text-justificationhard">68.Text Justification(Hard)</h3>
+<p>Given an array of words and a width <em>maxWidth</em>, format the text such that each line has exactly <em>maxWidth</em>characters and is fully (left and right) justified.</p>
 <p>You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces <code>&#39; &#39;</code> when necessary so that each line has exactly <em>maxWidth</em> characters.</p>
 <p>Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.</p>
 <p>For the last line of text, it should be left justified and no <strong>extra</strong> space is inserted between words.</p>
@@ -149,8 +149,8 @@ Output:
   &quot;do                  &quot;
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的</p>
+<h4 id="solution-2">Solution</h4>
+<p>这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的</p>
 <p>首先我们要来看一下标准解的条件：</p>
 <ul>
 <li>每一行尽可能的吃能吃的单词；（Greedy）</li>
@@ -181,7 +181,7 @@ Output:
     <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left;
     <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> words[right++].length();
     
-    <span class="hljs-keyword">while</span> (right &lt; words.length &amp;&amp; (sum + <span class="hljs-number">1</span> + words[right].length()) &lt;= maxWidth)
+    <span class="hljs-keyword">while</span> (right &lt; words.length && (sum + <span class="hljs-number">1</span> + words[right].length()) &lt;= maxWidth)
         sum += <span class="hljs-number">1</span> + words[right++].length();
         
     <span class="hljs-keyword">return</span> right - <span class="hljs-number">1</span>;
@@ -220,8 +220,8 @@ Output:
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[length]).replace(<span class="hljs-string">&#x27;\0&#x27;</span>, <span class="hljs-string">&#x27; &#x27;</span>);
 }
 </code></pre>
-
-          <h3 id="b0577789">69.Sqrt(x) (Easy)</h3><p>Implement <code>int sqrt(int x)</code>.</p>
+<h3 id="69sqrtx-easy">69.Sqrt(x) (Easy)</h3>
+<p>Implement <code>int sqrt(int x)</code>.</p>
 <p>Compute and return the square root of <em>x</em>, where <em>x</em> is guaranteed to be a non-negative integer.</p>
 <p>Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.</p>
 <p><strong>Example 1:</strong></p>
@@ -234,8 +234,8 @@ Output: 2
 Explanation: The square root of 8 is 2.82842..., and since 
              the decimal part is truncated, 2 is returned.
 </code></pre>
-
-          <h4 id="4ca736c2">Binary</h4><p>这题虽然是简单题，但我也还是在弯路上走了很久</p>
+<h4 id="binary">Binary</h4>
+<p>这题虽然是简单题，但我也还是在弯路上走了很久</p>
 <p>题目给到提示了：</p>
 <ol>
 <li><strong>Try exploring all integers.</strong></li>
@@ -262,8 +262,8 @@ Explanation: The square root of 8 is 2.82842..., and since
     <span class="hljs-keyword">return</span> low &gt; x / low ? low - <span class="hljs-number">1</span> : low;
 }
 </code></pre>
-
-          <h3 id="8985cc09">70.ClimbingStairs(Easy)</h3><p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
+<h3 id="70climbingstairseasy">70.ClimbingStairs(Easy)</h3>
+<p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
 <p><strong>Note:</strong> Given <em>n</em> will be a positive integer.</p>
 <p><strong>Example 1:</strong></p>
@@ -281,8 +281,8 @@ Explanation: There are three ways to climb to the top.
 2. 1 step + 2 steps
 3. 2 steps + 1 step
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+<h4 id="solution-3">Solution</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, b = <span class="hljs-number">0</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) {

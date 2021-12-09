@@ -1,10 +1,10 @@
-<p>Data Structures, Classes and Errors &amp; Exceptions.</p>
-
-          <h2 id="400f83f">E</h2>
-          <h3 id="de8a3dd1">Data Structures</h3>
-          <h4 id="3361887d">Sequence Types — range</h4><p>There are three basic sequence types: lists, tuples, and range objects. Additional sequence types tailored for processing of <a href="https://docs.python.org/3/library/stdtypes.html#binaryseq">binary data</a> and <a href="https://docs.python.org/3/library/stdtypes.html#textseq">text strings</a> are described in dedicated sections.</p>
-
-          <h4 id="d10190e4">Common Sequence Operations</h4><p>The operations in the following table are supported by most sequence types, both mutable and immutable. The <a href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence"><code>collections.abc.Sequence</code></a> ABC is provided to make it easier to correctly implement these operations on custom sequence types.</p>
+<p>Data Structures, Classes and Errors & Exceptions.</p>
+<h2 id="e">E</h2>
+<h3 id="data-structures">Data Structures</h3>
+<h4 id="sequence-types--list-tuple-range">Sequence Types — <a href="https://docs.python.org/3/library/stdtypes.html#list"><code>list</code></a>, <a href="https://docs.python.org/3/library/stdtypes.html#tuple"><code>tuple</code></a>, <a href="https://docs.python.org/3/library/stdtypes.html#range"><code>range</code></a></h4>
+<p>There are three basic sequence types: lists, tuples, and range objects. Additional sequence types tailored for processing of <a href="https://docs.python.org/3/library/stdtypes.html#binaryseq">binary data</a> and <a href="https://docs.python.org/3/library/stdtypes.html#textseq">text strings</a> are described in dedicated sections.</p>
+<h4 id="common-sequence-operations">Common Sequence Operations</h4>
+<p>The operations in the following table are supported by most sequence types, both mutable and immutable. The <a href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence"><code>collections.abc.Sequence</code></a> ABC is provided to make it easier to correctly implement these operations on custom sequence types.</p>
 <table>
 <thead>
 <tr>
@@ -61,12 +61,12 @@
 <td align="left">total number of occurrences of <em>x</em> in <em>s</em></td>
 </tr>
 </tbody></table>
-
-          <h4 id="f2c5bb3e">Immutable Sequence Types</h4><p>The only operation that immutable sequence types generally implement that is not also implemented by mutable sequence types is support for the <a href="https://docs.python.org/3/library/functions.html#hash"><code>hash()</code></a> built-in.</p>
+<h4 id="immutable-sequence-types">Immutable Sequence Types</h4>
+<p>The only operation that immutable sequence types generally implement that is not also implemented by mutable sequence types is support for the <a href="https://docs.python.org/3/library/functions.html#hash"><code>hash()</code></a> built-in.</p>
 <p>This support allows immutable sequences, such as <a href="https://docs.python.org/3/library/stdtypes.html#tuple"><code>tuple</code></a> instances, to be used as <a href="https://docs.python.org/3/library/stdtypes.html#dict"><code>dict</code></a> keys and stored in <a href="https://docs.python.org/3/library/stdtypes.html#set"><code>set</code></a> and <a href="https://docs.python.org/3/library/stdtypes.html#frozenset"><code>frozenset</code></a> instances.</p>
 <p>Attempting to hash an immutable sequence that contains unhashable values will result in <a href="https://docs.python.org/3/library/exceptions.html#TypeError"><code>TypeError</code></a>.</p>
-
-          <h4 id="bbc6c624">Mutable Sequence Types</h4><p>The operations in the following table are defined on mutable sequence types. The <a href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence"><code>collections.abc.MutableSequence</code></a> ABC is provided to make it easier to correctly implement these operations on custom sequence types.</p>
+<h4 id="mutable-sequence-types">Mutable Sequence Types</h4>
+<p>The operations in the following table are defined on mutable sequence types. The <a href="https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence"><code>collections.abc.MutableSequence</code></a> ABC is provided to make it easier to correctly implement these operations on custom sequence types.</p>
 <table>
 <thead>
 <tr>
@@ -131,9 +131,9 @@
 <td align="left">reverses the items of <em>s</em> in place</td>
 </tr>
 </tbody></table>
-
-          <h4 id="215f6492">List</h4>
-          <h5 id="63e4ad8b">Basic Operation</h5><p>Example:</p>
+<h4 id="list">List</h4>
+<h5 id="basic-operation">Basic Operation</h5>
+<p>Example:</p>
 <pre><code class="hljs language-python">l = []
 l.append(<span class="hljs-number">1</span>)
 l.append(<span class="hljs-string">&#x27;123&#x27;</span>)
@@ -183,8 +183,8 @@ l.extend([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,
 <li>A <em>deep copy</em> constructs a new compound object and then, recursively, inserts <em>copies</em> into it of the objects found in the original.</li>
 </ul>
 </blockquote>
-
-          <h5 id="904161bc">Sort</h5><pre><code class="hljs language-python"><span class="hljs-comment"># sort</span>
+<h5 id="sort">Sort</h5>
+<pre><code class="hljs language-python"><span class="hljs-comment"># sort</span>
 student_tuple = [
     (<span class="hljs-string">&quot;Jack&quot;</span>, <span class="hljs-number">12</span>),
     (<span class="hljs-string">&quot;Mark&quot;</span>, <span class="hljs-number">10</span>),
@@ -220,8 +220,8 @@ student_obj = [
 [(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]
 [(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]
 </code></pre>
-
-          <h5 id="517ff2ad">Creation</h5><p>Example:</p>
+<h5 id="creation">Creation</h5>
+<p>Example:</p>
 <pre><code class="hljs language-python"><span class="hljs-comment"># list comprehensions: a concise way to create lists</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)))
 <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)))
@@ -263,8 +263,8 @@ sq = []
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 [&#x27;3.1&#x27;, &#x27;3.14&#x27;, &#x27;3.142&#x27;, &#x27;3.1416&#x27;, &#x27;3.14159&#x27;]
 </code></pre>
-
-          <h4 id="f281f197">Tuples</h4><p>Example:</p>
+<h4 id="tuples">Tuples</h4>
+<p>Example:</p>
 <pre><code class="hljs language-python"><span class="hljs-meta">&gt;&gt;&gt; </span>t = <span class="hljs-number">12345</span>, <span class="hljs-number">54321</span>, <span class="hljs-string">&#x27;hello!&#x27;</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>t[<span class="hljs-number">0</span>]
 <span class="hljs-number">12345</span>
@@ -284,8 +284,8 @@ TypeError: <span class="hljs-string">&#x27;tuple&#x27;</span> <span class="hljs-
 <span class="hljs-meta">&gt;&gt;&gt; </span>v
 ([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>])
 </code></pre>
-
-          <h4 id="c3375b3b">Sets</h4><p>Example:</p>
+<h4 id="sets">Sets</h4>
+<p>Example:</p>
 <pre><code class="hljs language-python">st = {<span class="hljs-string">&#x27;apple&#x27;</span>, <span class="hljs-string">&#x27;orange&#x27;</span>, <span class="hljs-string">&#x27;grape&#x27;</span>, <span class="hljs-string">&#x27;grape&#x27;</span>, <span class="hljs-string">&#x27;apple&#x27;</span>}
 <span class="hljs-built_in">print</span>(st)
 
@@ -296,7 +296,7 @@ s1 = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <s
 s2 = {<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>}
 
 <span class="hljs-comment"># in both a and b</span>
-<span class="hljs-built_in">print</span>(s1 &amp; s2)
+<span class="hljs-built_in">print</span>(s1 & s2)
 <span class="hljs-comment"># in a or b or both</span>
 <span class="hljs-built_in">print</span>(s1 | s2)
 <span class="hljs-comment"># in a but not in b</span>
@@ -321,8 +321,8 @@ False
 {1, 2, 3, 6, 7, 8}
 {&#x27;c&#x27;, &#x27;a&#x27;, &#x27;d&#x27;, &#x27;h&#x27;, &#x27;b&#x27;}
 </code></pre>
-
-          <h4 id="be838c3f">Dictionaries</h4><p>Example:</p>
+<h4 id="dictionaries">Dictionaries</h4>
+<p>Example:</p>
 <pre><code class="hljs language-python">d = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">2</span>}
 
 <span class="hljs-comment"># return keys list</span>
@@ -387,11 +387,11 @@ dict_values([1, 2])
 a 1
 b 2
 </code></pre>
-
-          <h2 id="2f2dabfc">F</h2>
-          <h3 id="7fa8378c">Classes</h3>
-          <h4 id="aa9f2382">Namespaces And Scopes</h4>
-          <h5 id="a36502dd">Namespaces</h5><p>A <em>namespace</em> is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. </p>
+<h2 id="f">F</h2>
+<h3 id="classes">Classes</h3>
+<h4 id="namespaces-and-scopes">Namespaces And Scopes</h4>
+<h5 id="namespaces">Namespaces</h5>
+<p>A <em>namespace</em> is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. </p>
 <p>Examples of namespaces are: </p>
 <ul>
 <li>the set of built-in names (containing functions such as <a href="https://docs.python.org/3/library/functions.html#abs"><code>abs()</code></a>, and built-in exception names); </li>
@@ -405,10 +405,10 @@ b 2
 <li>The global namespace for a module is created when <strong>the module definition is read in</strong>; normally, module namespaces also last until the interpreter quits. </li>
 <li>The local namespace for a function is created <strong>when the function is called</strong>, and deleted when the function returns or raises an exception that is not handled within the function.</li>
 </ul>
-
-          <h5 id="6dd1f67d">Scopes</h5><p>A <em>scope</em> is a textual region of a Python program where a namespace is directly accessible. “Directly accessible” here means that an unqualified reference to a name attempts to find the name in the namespace.</p>
-
-          <h5 id="4142edc5"><code>global</code> and <code>nonlocal</code> statement</h5><p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> statement is a declaration which holds for the entire current code block. It means that the listed identifiers are to be interpreted as globals. It would be impossible to assign to a global variable without <code>global</code>, although free variables may refer to globals without being declared global.</p>
+<h5 id="scopes">Scopes</h5>
+<p>A <em>scope</em> is a textual region of a Python program where a namespace is directly accessible. “Directly accessible” here means that an unqualified reference to a name attempts to find the name in the namespace.</p>
+<h5 id="global-and-nonlocal-statement"><code>global</code> and <code>nonlocal</code> statement</h5>
+<p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> statement is a declaration which holds for the entire current code block. It means that the listed identifiers are to be interpreted as globals. It would be impossible to assign to a global variable without <code>global</code>, although free variables may refer to globals without being declared global.</p>
 <p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> statement causes the listed identifiers to refer to previously bound variables in the nearest enclosing scope excluding globals. This is important because the default behavior for binding is to search the local namespace first. The statement allows encapsulated code to rebind variables outside of the local scope besides the global (module) scope.</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">scope_test</span>():
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_local</span>():
@@ -440,8 +440,8 @@ After global assignment: nonlocal spam
 In global scope: global spam
 </code></pre>
 <p>Note how the <em>local</em> assignment (which is default) didn’t change <em>scope_test</em>’s binding of <em>spam</em>. The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> assignment changed <em>scope_test</em>’s binding of <em>spam</em>, and the <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> assignment changed the module-level binding.</p>
-
-          <h4 id="1b7f2302">Defining A Class</h4><pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
+<h4 id="defining-a-class">Defining A Class</h4>
+<pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
     <span class="hljs-string">&quot;&quot;&quot;here is __doc__ content\
     &quot;&quot;&quot;</span>
 
@@ -475,7 +475,7 @@ In global scope: global spam
 <ol>
 <li>how to define a class</li>
 <li>construct function</li>
-<li>private field &amp; static field</li>
+<li>private field & static field</li>
 <li>some weird behavior of attribute naming</li>
 </ol>
 <p>You might notice that every function&#39;s definition has the <code>self</code> argument as the first parameter. With this argument, this function will be defined as a instance function and can not be called by using <code>MyClass.func()</code> form.</p>
@@ -498,8 +498,8 @@ New.prints(<span class="hljs-string">&#x27;Name&#x27;</span>)
 This is a static method with name: Name
 cls
 </code></pre>
-
-          <h4 id="6c9566b0">Inheritance</h4><pre><code class="hljs language-python"><span class="hljs-comment"># inheritance</span>
+<h4 id="inheritance">Inheritance</h4>
+<pre><code class="hljs language-python"><span class="hljs-comment"># inheritance</span>
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Worker</span>(<span class="hljs-title class_ inherited__">Person</span>):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, career</span>):
         <span class="hljs-built_in">super</span>().__init__(name, age)
@@ -513,15 +513,15 @@ w = Worker(<span class="hljs-string">&#x27;Jim&#x27;</span>, <span class="hljs-n
 <li>Use <a href="https://docs.python.org/3/library/functions.html#isinstance"><code>isinstance()</code></a> to check an instance’s type: <code>isinstance(obj, int)</code> will be <code>True</code> only if <code>obj.__class__</code> is <a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a> or some class derived from <a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a>.</li>
 <li>Use <a href="https://docs.python.org/3/library/functions.html#issubclass"><code>issubclass()</code></a> to check class inheritance: <code>issubclass(bool, int)</code> is <code>True</code> since <a href="https://docs.python.org/3/library/functions.html#bool"><code>bool</code></a> is a subclass of <a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a>. However, <code>issubclass(float, int)</code> is <code>False</code> since <a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a> is not a subclass of <a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a>.</li>
 </ul>
-
-          <h4 id="d647c2b8">Multiple Inheritance</h4><p>Python supports a form of multiple inheritance as well. A class definition with multiple base classes looks like this:</p>
+<h4 id="multiple-inheritance">Multiple Inheritance</h4>
+<p>Python supports a form of multiple inheritance as well. A class definition with multiple base classes looks like this:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DerivedClassName</span>(Base1, Base2, Base3):
     &lt;statement-<span class="hljs-number">1</span>&gt;
     .
     &lt;statement-N&gt;
 </code></pre>
-
-          <h4 id="9c3a0cd4">Iterating Instances</h4><p>If we want our self-make instance iterable (iterating some attribute of it), we should implement the <code>__iter__</code> and the <code>__next__</code> function</p>
+<h4 id="iterating-instances">Iterating Instances</h4>
+<p>If we want our self-make instance iterable (iterating some attribute of it), we should implement the <code>__iter__</code> and the <code>__next__</code> function</p>
 <pre><code class="hljs language-python"><span class="hljs-comment"># iterator: object can be looped over using a for statement</span>
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Str</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, <span class="hljs-built_in">str</span></span>):
@@ -547,8 +547,8 @@ w = Worker(<span class="hljs-string">&#x27;Jim&#x27;</span>, <span class="hljs-n
 <span class="hljs-built_in">print</span>()
 <span class="hljs-comment"># a b c d e</span>
 </code></pre>
-
-          <h4 id="a8f3d403">Printing Instances</h4><p>Example:</p>
+<h4 id="printing-instances">Printing Instances</h4>
+<p>Example:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -584,8 +584,8 @@ p = Person(<span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-
 <p>For <code>__str__</code>:</p>
 <p>Called by <a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str(object)</code></a> and the built-in functions <a href="https://docs.python.org/3/library/functions.html#format"><code>format()</code></a> and <a href="https://docs.python.org/3/library/functions.html#print"><code>print()</code></a> to compute the “informal” or nicely printable string representation of an object. The return value must be a <a href="https://docs.python.org/3/library/stdtypes.html#textseq">string</a> object.</p>
 </blockquote>
-
-          <h4 id="bf23088a">More On Private Attributes</h4><p>It is clear that we set an attribute to private for safely visitation, but it make the attribute visitation syntactically more complicated.</p>
+<h4 id="more-on-private-attributes">More On Private Attributes</h4>
+<p>It is clear that we set an attribute to private for safely visitation, but it make the attribute visitation syntactically more complicated.</p>
 <p>We can use <code>@property</code> and  <code>@attr.setter</code> decorators to make it simple. </p>
 <p>What&#39;s more , we can use <code>@attr.deleter</code>.</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
@@ -636,18 +636,18 @@ ValueError: Age should between 0 ~ 100
 Person: age:99
 </code></pre>
 <p>reference: <a href="https://docs.python.org/3/library/functions.html#property">https://docs.python.org/3/library/functions.html#property</a></p>
-
-          <h3 id="b3b9cb7">Errors And Exceptions</h3>
-          <h4 id="d3458218">Error</h4><p>There is one error in python:</p>
+<h3 id="errors-and-exceptions">Errors And Exceptions</h3>
+<h4 id="error">Error</h4>
+<p>There is one error in python:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Hello world&#x27;</span>)
   File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>
     <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Hello world&#x27;</span>)
                    ^
 SyntaxError: invalid syntax
 </code></pre>
-
-          <h4 id="38b087ac">Exceptions</h4>
-          <h5 id="477b8a17">Handling Exceptions</h5><pre><code class="hljs language-python"><span class="hljs-comment"># handling exceptions</span>
+<h4 id="exceptions">Exceptions</h4>
+<h5 id="handling-exceptions">Handling Exceptions</h5>
+<pre><code class="hljs language-python"><span class="hljs-comment"># handling exceptions</span>
 <span class="hljs-keyword">try</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span> / <span class="hljs-number">0</span>)
 <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> exc:
@@ -693,8 +693,8 @@ ZeroDivisionError: division by zero
     <span class="hljs-built_in">print</span>(v)
 <span class="hljs-comment"># 0.1</span>
 </code></pre>
-
-          <h5 id="20193b38">Raising Exceptions</h5><p>With <code>raise</code> statement:</p>
+<h5 id="raising-exceptions">Raising Exceptions</h5>
+<p>With <code>raise</code> statement:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">raise</span> NameError(<span class="hljs-string">&#x27;HiThere&#x27;</span>) <span class="hljs-comment"># with msg</span>
 ----------------------
 <span class="hljs-keyword">raise</span> ValueError <span class="hljs-comment"># shorthand for &#x27;raise ValueError()&#x27;</span>
@@ -705,8 +705,8 @@ ZeroDivisionError: division by zero
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;An exception flew by!&#x27;</span>)
     <span class="hljs-keyword">raise</span> <span class="hljs-comment"># raise it again in except clause</span>
 </code></pre>
-
-          <h5 id="ef57f9d1">User-defined Exceptions</h5><pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">InputError</span>(<span class="hljs-title class_ inherited__">Error</span>):
+<h5 id="user-defined-exceptions">User-defined Exceptions</h5>
+<pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">InputError</span>(<span class="hljs-title class_ inherited__">Error</span>):
     <span class="hljs-string">&quot;&quot;&quot;Exception raised for errors in the input.
 
     Attributes:
@@ -718,8 +718,8 @@ ZeroDivisionError: division by zero
         self.expression = expression
         self.message = message
 </code></pre>
-
-          <h5 id="bdcf6ad3">Cleaning Up Actions</h5><p>With <code>finally</code> statement:</p>
+<h5 id="cleaning-up-actions">Cleaning Up Actions</h5>
+<p>With <code>finally</code> statement:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">try</span>:
     <span class="hljs-keyword">raise</span> KeyboardInterrupt
 <span class="hljs-keyword">finally</span>:

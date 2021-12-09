@@ -1,6 +1,6 @@
 <p>Introduce how to use multi-thread tech with python, refer to: <a href="https://docs.python.org/3/library/threading.html">https://docs.python.org/3/library/threading.html</a></p>
-
-          <h3 id="9e97550d">Lib - threading</h3><p>Example of basic usage:</p>
+<h3 id="lib---threading">Lib - threading</h3>
+<p>Example of basic usage:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread
 <span class="hljs-keyword">import</span> threading
 <span class="hljs-keyword">import</span> time
@@ -36,8 +36,8 @@ Thread running 1   &lt;Thread(Thread-1, started 7536)&gt;
 Thread running 2   &lt;Thread(Thread-1, started 7536)&gt;
 Thread running 3   &lt;Thread(Thread-1, started 7536)&gt;
 </code></pre>
-
-          <h3 id="2d5a752">Thread Object</h3><p>Create a thread with:</p>
+<h3 id="thread-object">Thread Object</h3>
+<p>Create a thread with:</p>
 <p><em>class</em> <code>threading.Thread</code>(<em>group=None</em>, <em>target=None</em>, <em>name=None</em>, <em>args=()</em>, <em>kwargs={}</em>, <em>*</em>, <em>daemon=None</em>)</p>
 <ul>
 <li><p><em>group</em> should be <code>None</code>; reserved for future extension when a <code>ThreadGroup</code> class is implemented.</p>
@@ -71,8 +71,8 @@ Thread running 3   &lt;Thread(Thread-1, started 7536)&gt;
 t = Thread(target=running)
 t.start()
 </code></pre>
-
-          <h3 id="617f73d">Lock Object</h3><p>A primitive lock is a synchronization primitive that is not owned by a particular thread when locked. In Python, it is currently the lowest level synchronization primitive available, implemented directly by the <a href="https://docs.python.org/3/library/_thread.html#module-_thread"><code>_thread</code></a> extension module.</p>
+<h3 id="lock-object">Lock Object</h3>
+<p>A primitive lock is a synchronization primitive that is not owned by a particular thread when locked. In Python, it is currently the lowest level synchronization primitive available, implemented directly by the <a href="https://docs.python.org/3/library/_thread.html#module-_thread"><code>_thread</code></a> extension module.</p>
 <ul>
 <li><p><code>class threading.Lock</code>
 The class implementing primitive lock objects. Once a thread has acquired a lock, subsequent attempts to acquire it block, until it is released; any thread may release it.</p>
@@ -152,8 +152,8 @@ t2.start()
 final money: 5000000
 </code></pre>
 <p>The final money will always be 5000000.</p>
-
-          <h3 id="1b60f5ea">RLock Object</h3><p>A reentrant lock is a synchronization primitive that may be acquired multiple times by the same thread. Internally, it uses the concepts of “owning thread” and “recursion level” in addition to the locked/unlocked state used by primitive locks. In the locked state, some thread owns the lock; in the unlocked state, no thread owns it.</p>
+<h3 id="rlock-object">RLock Object</h3>
+<p>A reentrant lock is a synchronization primitive that may be acquired multiple times by the same thread. Internally, it uses the concepts of “owning thread” and “recursion level” in addition to the locked/unlocked state used by primitive locks. In the locked state, some thread owns the lock; in the unlocked state, no thread owns it.</p>
 <p>To lock the lock, a thread calls its <a href="https://docs.python.org/3/library/threading.html#threading.RLock.acquire"><code>acquire()</code></a> method; this returns once the thread owns the lock. </p>
 <p>To unlock the lock, a thread calls its <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> method. <a href="https://docs.python.org/3/library/threading.html#threading.Lock.acquire"><code>acquire()</code></a>/<a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> call pairs may be nested; only the final <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> (the <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> of the outermost pair) resets the lock to unlocked and allows another thread blocked in <a href="https://docs.python.org/3/library/threading.html#threading.Lock.acquire"><code>acquire()</code></a> to proceed.</p>
 <p>Methods:</p>
@@ -217,8 +217,8 @@ release second
 release first
 rl aquired
 </code></pre>
-
-          <h3 id="4822d599">Event Object</h3><p>This is one of the simplest mechanisms for communication between threads: one thread signals an event and other threads wait for it.</p>
+<h3 id="event-object">Event Object</h3>
+<p>This is one of the simplest mechanisms for communication between threads: one thread signals an event and other threads wait for it.</p>
 <p>An event object manages an internal flag that can be set to true with the <a href="https://docs.python.org/3/library/threading.html#threading.Event.set"><code>set()</code></a> method and reset to false with the <a href="https://docs.python.org/3/library/threading.html#threading.Event.clear"><code>clear()</code></a> method. The <a href="https://docs.python.org/3/library/threading.html#threading.Event.wait"><code>wait()</code></a> method blocks until the flag is true.</p>
 <ul>
 <li><p><code>class threading.Event</code>
@@ -319,9 +319,9 @@ Mission done, collecting process stop.
 goods empty, open the gate
 Mission done, release process stop..
 </code></pre>
-
-          <h3 id="ce022b">More on threading</h3>
-          <h4 id="7bdca629">Condition Objects</h4><p>A condition variable is always associated with some kind of lock; this can be passed in or one will be created by default. Passing one in is useful when several condition variables must share the same lock. The lock is part of the condition object: you don’t have to track it separately.</p>
+<h3 id="more-on-threading">More on threading</h3>
+<h4 id="condition-objects">Condition Objects</h4>
+<p>A condition variable is always associated with some kind of lock; this can be passed in or one will be created by default. Passing one in is useful when several condition variables must share the same lock. The lock is part of the condition object: you don’t have to track it separately.</p>
 <p>The typical programming style using condition variables uses the lock to synchronize access to some shared state; threads that are interested in a particular change of state call <a href="https://docs.python.org/3/library/threading.html#threading.Condition.wait"><code>wait()</code></a> repeatedly until they see the desired state, while threads that modify the state call <a href="https://docs.python.org/3/library/threading.html#threading.Condition.notify"><code>notify()</code></a> or <a href="https://docs.python.org/3/library/threading.html#threading.Condition.notify_all"><code>notify_all()</code></a> when they change the state in such a way that it could possibly be a desired state for one of the waiters. For example, the following code is a generic producer-consumer situation with unlimited buffer capacity:</p>
 <pre><code class="hljs language-python"><span class="hljs-comment"># Consume one item</span>
 <span class="hljs-keyword">with</span> cv:
@@ -340,8 +340,8 @@ Mission done, release process stop..
     cv.wait_for(an_item_is_available)
     get_an_available_item()
 </code></pre>
-
-          <h4 id="caad7200">Timer Objects</h4><p>This class represents an action that should be run only after a certain amount of time has passed — a timer. <a href="https://docs.python.org/3/library/threading.html#threading.Timer"><code>Timer</code></a> is a subclass of <a href="https://docs.python.org/3/library/threading.html#threading.Thread"><code>Thread</code></a> and as such also functions as an example of creating custom threads.</p>
+<h4 id="timer-objects">Timer Objects</h4>
+<p>This class represents an action that should be run only after a certain amount of time has passed — a timer. <a href="https://docs.python.org/3/library/threading.html#threading.Timer"><code>Timer</code></a> is a subclass of <a href="https://docs.python.org/3/library/threading.html#threading.Thread"><code>Thread</code></a> and as such also functions as an example of creating custom threads.</p>
 <p>Timers are started, as with threads, by calling their <code>start()</code> method. The timer can be stopped (before its action has begun) by calling the <a href="https://docs.python.org/3/library/threading.html#threading.Timer.cancel"><code>cancel()</code></a> method. The interval the timer will wait before executing its action may not be exactly the same as the interval specified by the user.</p>
 <p>For example:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hello</span>():
@@ -350,8 +350,8 @@ Mission done, release process stop..
 t = Timer(<span class="hljs-number">30.0</span>, hello)
 t.start()  <span class="hljs-comment"># after 30 seconds, &quot;hello, world&quot; will be printed</span>
 </code></pre>
-
-          <h4 id="c0d81c68">Barrier Objects</h4><p>This class provides a simple synchronization primitive for use by a fixed number of threads that need to wait for each other. Each of the threads tries to pass the barrier by calling the <a href="https://docs.python.org/3/library/threading.html#threading.Barrier.wait"><code>wait()</code></a> method and will block until all of the threads have made their <a href="https://docs.python.org/3/library/threading.html#threading.Barrier.wait"><code>wait()</code></a> calls. At this point, the threads are released simultaneously.</p>
+<h4 id="barrier-objects">Barrier Objects</h4>
+<p>This class provides a simple synchronization primitive for use by a fixed number of threads that need to wait for each other. Each of the threads tries to pass the barrier by calling the <a href="https://docs.python.org/3/library/threading.html#threading.Barrier.wait"><code>wait()</code></a> method and will block until all of the threads have made their <a href="https://docs.python.org/3/library/threading.html#threading.Barrier.wait"><code>wait()</code></a> calls. At this point, the threads are released simultaneously.</p>
 <p>The barrier can be reused any number of times for the same number of threads.</p>
 <p>As an example, here is a simple way to synchronize a client and server thread:</p>
 <pre><code class="hljs language-python">b = Barrier(<span class="hljs-number">2</span>, timeout=<span class="hljs-number">5</span>)
@@ -369,8 +369,8 @@ t.start()  <span class="hljs-comment"># after 30 seconds, &quot;hello, world&quo
         connection = make_connection()
         process_client_connection(connection)
 </code></pre>
-
-          <h4 id="3bfa4404">Using locks, conditions, and semaphores in the <code>with</code> statement</h4><p>All of the objects provided by this module that have <code>acquire()</code> and <code>release()</code> methods can be used as context managers for a <a href="https://docs.python.org/3/reference/compound_stmts.html#with"><code>with</code></a> statement. The <code>acquire()</code> method will be called when the block is entered, and <code>release()</code> will be called when the block is exited. Hence, the following snippet:</p>
+<h4 id="using-locks-conditions-and-semaphores-in-the-with-statement">Using locks, conditions, and semaphores in the <code>with</code> statement</h4>
+<p>All of the objects provided by this module that have <code>acquire()</code> and <code>release()</code> methods can be used as context managers for a <a href="https://docs.python.org/3/reference/compound_stmts.html#with"><code>with</code></a> statement. The <code>acquire()</code> method will be called when the block is entered, and <code>release()</code> will be called when the block is exited. Hence, the following snippet:</p>
 <pre><code>with some_lock:
     # do something...
 </code></pre>

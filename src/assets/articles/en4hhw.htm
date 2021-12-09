@@ -4,9 +4,9 @@
 <!-- more -->
 
 <hr>
-
-          <h3 id="1e9b4fca">准备工作</h3>
-          <h4 id="44c92591">Maven依赖</h4><pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+<h3 id="准备工作">准备工作</h3>
+<h4 id="maven依赖">Maven依赖</h4>
+<pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
@@ -20,8 +20,8 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
 </code></pre>
 <p>认准这俩依赖</p>
-
-          <h4 id="fc574ea0">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4><p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
+<h4 id="默认配置文件如果配置文件缺省的情况下，也会是这样的配置">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4>
+<p>配置文件需要放在classpath的根目录下（一般的项目是src，maven web项目则是推荐在resource下），以log4j2.xml命名，配置文件还有其他的配置形式如json和yaml，我习惯使用xml。</p>
 <pre><code class="hljs language-xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;OFF&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">appenders</span>&gt;</span>
@@ -36,8 +36,8 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">loggers</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span>
 </code></pre>
-
-          <h4 id="d4c5d785">HelloWord</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
+<h4 id="helloword">HelloWord</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
         <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
         logger.trace(<span class="hljs-string">&quot;trace level&quot;</span>);
@@ -50,8 +50,8 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="773fe804">运行HelloWorld</h3><p>运行上面的代码之后会出现如下的log</p>
+<h3 id="运行helloworld">运行HelloWorld</h3>
+<p>运行上面的代码之后会出现如下的log</p>
 <pre><code class="hljs language-cmd"><span class="hljs-number">13</span>:<span class="hljs-number">34</span>:<span class="hljs-number">41</span>.<span class="hljs-number">070</span> [main] ERROR mylog - error level
 <span class="hljs-number">13</span>:<span class="hljs-number">34</span>:<span class="hljs-number">41</span>.<span class="hljs-number">072</span> [main] FATAL mylog - fatal level
 </code></pre>

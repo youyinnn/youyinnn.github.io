@@ -1,5 +1,5 @@
-
-          <h3 id="447c300f">HelloWorld</h3><p>昨天的小米笔试题: <strong>请用Lambda写一个将int数组[1,2,3]转换为String数组[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</strong></p>
+<h3 id="helloworld">HelloWorld</h3>
+<p>昨天的小米笔试题: <strong>请用Lambda写一个将int数组[1,2,3]转换为String数组[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</strong></p>
 <p>当时没写完整，就这个为例作为开始吧, 完整代码如下:</p>
 <pre><code class="hljs language-java">  <span class="hljs-type">int</span>[] si = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};
   Function&lt;<span class="hljs-type">int</span>[], String[]&gt; f = (<span class="hljs-type">int</span>[] ar) -&gt; {
@@ -12,14 +12,14 @@
   System.out.println(Arrays.toString(f.apply(si)));
 </code></pre>
 <p>看不懂是不是?看不懂就对了,Lambda是一个语法糖,它的语法你得看得懂,才知道上面的代码干了什么.</p>
-
-          <h3 id="4a348ef6">语法</h3>
-          <h4 id="d03a62a4">要点1-函数式接口的支持</h4><blockquote>
+<h3 id="语法">语法</h3>
+<h4 id="要点1-函数式接口的支持">要点1-函数式接口的支持</h4>
+<blockquote>
 <p>语法必须要函数式接口的支持, 函数式接口: <strong>即接口中只有一个抽象方法</strong>.一般需要<code>@FunctionalInterface</code>注解修饰类.</p>
 <p>我们称这个唯一的抽象方法为, <strong>函数方法</strong></p>
 </blockquote>
-
-          <h4 id="2e694de6">要点2-箭头语法</h4><p>函数式写法格式, 分<strong>左右两边</strong>:</p>
+<h4 id="要点2-箭头语法">要点2-箭头语法</h4>
+<p>函数式写法格式, 分<strong>左右两边</strong>:</p>
 <pre><code class="hljs language-lambda">  (param1, param2, ...) -&gt; {statement1;statement2;...;};
 </code></pre>
 <ul>
@@ -36,8 +36,8 @@
 </ul>
 </li>
 </ul>
-
-          <h4 id="55ed613e">要点3-参数列表类型和返回值类型</h4><p>我们的lambda表达式, 最终还是得被一个<strong>函数式接口</strong>所引用, 我们的表达式可能有<strong>参数列表</strong>, 可能有<strong>返回值</strong>, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口</p>
+<h4 id="要点3-参数列表类型和返回值类型">要点3-参数列表类型和返回值类型</h4>
+<p>我们的lambda表达式, 最终还是得被一个<strong>函数式接口</strong>所引用, 我们的表达式可能有<strong>参数列表</strong>, 可能有<strong>返回值</strong>, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口</p>
 <pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">interface</span> <span class="hljs-title class_">MyFunction</span>&lt;T, R&gt; {
     <span class="hljs-comment">/**
@@ -65,8 +65,8 @@
             Main.&lt;Person, Integer&gt;invokeGet(p1, p2, (ax, bx) -&gt; ax.getName().length() + bx.getName().length());
 </code></pre>
 <p>那么这里为什么可以省略? 因为我<code>invokeGet</code>的时候, 传进去的<strong>t1, t2</strong>是<strong>p1, p2</strong>, 所以<strong>T类型</strong>被补充为<strong>Person类型</strong>, 而对于返回值类型, 因为我们这里的方法体实现就一句话, 所以**{}**省略了, <strong>return</strong> 也省略了, 返回值类型就是语句<code>ax.getName().length() + bx.getName().length()</code>所运算出的类型.</p>
-
-          <h4 id="d35f88ca">代码示例</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span>{
+<h4 id="代码示例">代码示例</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span>{
 
     <span class="hljs-comment">/**
      * 语法格式一: 无参 无返回值
@@ -144,8 +144,8 @@
     }
 }
 </code></pre>
-
-          <h3 id="f84befb1">五大核心函数式接口</h3><p>前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的<strong>五大核心函数式接口</strong>, 这样的函数式接口在Java8中到处都是.</p>
+<h3 id="五大核心函数式接口">五大核心函数式接口</h3>
+<p>前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的<strong>五大核心函数式接口</strong>, 这样的函数式接口在Java8中到处都是.</p>
 <p>所以说了解这<strong>五大核心函数式接口</strong>到底能干什么, 这点是非常重要的.</p>
 <p>首先看看我写的笔试题的未完整版是什么样子的:</p>
 <pre><code class="hljs language-java">  <span class="hljs-type">Function</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>[] arr) -&gt; {
@@ -168,9 +168,9 @@
   System.out.println(Arrays.toString(f.apply(si)));
 </code></pre>
 <p>这和完整版相比, 缺少的是<code>Function</code>类后面的泛型定义, 所以这段代码是过不了的, 了解一下<strong>五大核心函数式接口</strong>,</p>
-
-          <h4 id="65ddf4e7">Consumer<T> 消费型接口</h4>
-          <h5 id="71b01298">源码</h5><pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
+<h4 id="consumer-消费型接口">Consumer<T> 消费型接口</h4>
+<h5 id="源码">源码</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Consumer</span>&lt;T&gt; {
 
     <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;
@@ -181,14 +181,14 @@
     }
 }
 </code></pre>
-
-          <h5 id="889bfb14">函数方法</h5><pre><code class="hljs language-java">    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;
+<h5 id="函数方法">函数方法</h5>
+<pre><code class="hljs language-java">    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;
 </code></pre>
 <p>消费型接口, 意思就是**&quot;只进不出&quot;<strong>的表现, 所以我们看到方法并没有</strong>返回值类型**</p>
-
-          <h5 id="be954b92">默认方法</h5><p>这个方法相当于将两个<code>Consumer</code>函数组合在了一起, 形成一个新的<code>Consumer</code>函数, after函数在源函数之后执行, 相当于一个**&quot;后置函数&quot;**</p>
-
-          <h5 id="9b88847c">示例</h5><pre><code class="hljs language-java">    <span class="hljs-meta">@Test</span>
+<h5 id="默认方法">默认方法</h5>
+<p>这个方法相当于将两个<code>Consumer</code>函数组合在了一起, 形成一个新的<code>Consumer</code>函数, after函数在源函数之后执行, 相当于一个**&quot;后置函数&quot;**</p>
+<h5 id="示例">示例</h5>
+<pre><code class="hljs language-java">    <span class="hljs-meta">@Test</span>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testConsumer</span><span class="hljs-params">()</span>{
         <span class="hljs-type">Person</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-number">12</span>);
         <span class="hljs-type">Person</span> <span class="hljs-variable">p2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&quot;uiop&quot;</span>, <span class="hljs-number">13</span>);
@@ -209,28 +209,28 @@ Age is : 13
 Name is : abc
 Age is : 12
 </code></pre>
-
-          <h4 id="67b9c1bb">Supplier<T> 供给型接口</h4>
-          <h5 id="71b01298">源码</h5><pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
+<h4 id="supplier-供给型接口">Supplier<T> 供给型接口</h4>
+<h5 id="源码-1">源码</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Supplier</span>&lt;T&gt; {
     T <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
 }
 </code></pre>
-
-          <h5 id="889bfb14">函数方法</h5><pre><code class="hljs language-java">    T <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
+<h5 id="函数方法-1">函数方法</h5>
+<pre><code class="hljs language-java">    T <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
 </code></pre>
 <p><strong>&quot;有出没进&quot;</strong>, 供给型的函数接口.</p>
-
-          <h5 id="9b88847c">示例</h5><pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<h5 id="示例-1">示例</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSupplier</span><span class="hljs-params">()</span>{
     Supplier&lt;Person&gt; supplier = () -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();
     <span class="hljs-type">Person</span> <span class="hljs-variable">person</span> <span class="hljs-operator">=</span> supplier.get();
     System.out.println(person);
 }
 </code></pre>
-
-          <h4 id="d760a731">Function&lt;T, R&gt; 函数型接口</h4>
-          <h5 id="71b01298">源码</h5><pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
+<h4 id="functiont-r-函数型接口">Function&lt;T, R&gt; 函数型接口</h4>
+<h5 id="源码-2">源码</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Function</span>&lt;T, R&gt; {
 
     R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t)</span>;
@@ -250,16 +250,16 @@ Age is : 12
     }
 }
 </code></pre>
-
-          <h5 id="889bfb14">函数方法</h5><pre><code class="hljs language-java">    R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t)</span>;
+<h5 id="函数方法-2">函数方法</h5>
+<pre><code class="hljs language-java">    R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t)</span>;
 </code></pre>
 <p>就像一个函数, <strong>&quot;有进有出&quot;</strong></p>
-
-          <h5 id="be954b92">默认方法</h5><p><code>andThen</code>方法我们在消费型接口的时候已经介绍过了, 然后<code>compose</code>方法和这个方法差不多, 只不过这个方法是在源函数之前执行, 相当于是一个**&quot;前置函数&quot;**</p>
-
-          <h5 id="6d7beffa">静态方法</h5><p>这个方法暂时还没摸到有什么作用</p>
-
-          <h5 id="9b88847c">示例</h5><pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<h5 id="默认方法-1">默认方法</h5>
+<p><code>andThen</code>方法我们在消费型接口的时候已经介绍过了, 然后<code>compose</code>方法和这个方法差不多, 只不过这个方法是在源函数之前执行, 相当于是一个**&quot;前置函数&quot;**</p>
+<h5 id="静态方法">静态方法</h5>
+<p>这个方法暂时还没摸到有什么作用</p>
+<h5 id="示例-2">示例</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testFunction</span><span class="hljs-params">()</span>{
     <span class="hljs-type">Person</span> <span class="hljs-variable">person</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();
     Function&lt;Person, Person&gt; function = (ps) -&gt; {
@@ -284,16 +284,16 @@ nothing change~
 after
 Person{name=&#x27;xixi&#x27;, age=15}
 </code></pre>
-
-          <h4 id="5014f71b">Predicate<T> 条件预测型接口</h4>
-          <h5 id="71b01298">源码</h5><pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
+<h4 id="predicate-条件预测型接口">Predicate<T> 条件预测型接口</h4>
+<h5 id="源码-3">源码</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Predicate</span>&lt;T&gt; {
 
     <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t)</span>;
 
     <span class="hljs-keyword">default</span> Predicate&lt;T&gt; <span class="hljs-title function_">and</span><span class="hljs-params">(Predicate&lt;? <span class="hljs-built_in">super</span> T&gt; other)</span> {
         Objects.requireNonNull(other);
-        <span class="hljs-keyword">return</span> (t) -&gt; test(t) &amp;&amp; other.test(t);
+        <span class="hljs-keyword">return</span> (t) -&gt; test(t) && other.test(t);
     }
 
     <span class="hljs-keyword">default</span> Predicate&lt;T&gt; <span class="hljs-title function_">negate</span><span class="hljs-params">()</span> {
@@ -312,11 +312,11 @@ Person{name=&#x27;xixi&#x27;, age=15}
     }
 }
 </code></pre>
-
-          <h5 id="889bfb14">函数方法</h5><pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t)</span>;
+<h5 id="函数方法-3">函数方法</h5>
+<pre><code class="hljs language-java">    <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t)</span>;
 </code></pre>
 <p>给个T, 返回个布尔值</p>
-
-          <h4 id="c9927b04">默认方法</h4><p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
-
-          <h4 id="4b37cf1a">Comparator<T> 比较器接口</h4><p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是**&quot;四大核心函数式接口&quot;**的, 这个我放在第五个, 因为这个接口里的方法有很有价值. </p>
+<h4 id="默认方法-2">默认方法</h4>
+<p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
+<h4 id="comparator-比较器接口">Comparator<T> 比较器接口</h4>
+<p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是**&quot;四大核心函数式接口&quot;**的, 这个我放在第五个, 因为这个接口里的方法有很有价值. </p>
