@@ -175,15 +175,15 @@ for (let resf of resourceFiles) {
     });
 }
 
-exit(0);
-
-let websrcPath = path.join(__dirname, "..", "_websrc");
+let websrcPath = path.join(__dirname, "..", "assets/_websrc");
 
 // about
 md2html(
   path.join(websrcPath, "about.md"),
-  path.join(__dirname, "..", "about", "index.html")
+  path.join(__dirname, "..", "assets", "about", "index.html")
 );
+
+exit(0);
 
 // resume
 md2html(

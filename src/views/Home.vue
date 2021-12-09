@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="article-list-box unselectable">
-      <p style="padding: 0 1rem">{{ postMetadataLength }} posts</p>
+      <p style="padding: 0 1rem; text-align: end">
+        {{ postMetadataLength }} posts since 2017-11-23
+      </p>
       <n-list>
         <n-list-item
           class="list-item"
