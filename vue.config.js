@@ -1,5 +1,6 @@
 module.exports = {
   publicPath: "./",
+  outputDir: "docs",
   pluginOptions: {},
   chainWebpack: (config) => {
     // GraphQL Loader

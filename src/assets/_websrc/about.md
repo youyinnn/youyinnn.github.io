@@ -1,5 +1,7 @@
 Hi there, this will help you know a little bit about me
 
+#### Infomation
+
 ```java
 Chinese
 Born in 1996.
@@ -8,10 +10,33 @@ Half-baked Java EE developer.
 The worst FeWeb developer in the universe.
 ```
 
-> Education:
+#### Education
+
 > 2015-2019, SE, BE : [South-Central University For Nationalities](http://www.scuec.edu.cn/s/1/t/560/main.htm), Wuhan, China.
 >
 > 2021(Fall)-2023(Winter), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
+
+##### Course Papers & Reports
+
+> COEN 6311
+>
+> [Project D1 Report](https://github.com/youyinnn/COEN6311_super/blob/main/doc/D1/output/main.pdf)
+>
+> [Project D2 Report](https://github.com/youyinnn/COEN6311_super/blob/main/doc/D2/output/main.pdf)
+>
+> [Project D3 Report](https://github.com/youyinnn/COEN6311_super/blob/main/doc/D3/output/main.pdf)
+>
+> [Assignment 1 Report](https://github.com/youyinnn/coen_6311_assignment1/blob/main/doc/report/output/main.pdf)
+>
+> [Assignment 2 Report](https://github.com/youyinnn/coen_6311_assignment1/blob/main/doc/report2/output/main.pdf)
+
+> COEN 6501
+>
+> [Technical Reoprt: Survey of Several Recent Full Adder Designs](https://github.com/youyinnn/coen_6501/blob/main/a1_report/output/report.pdf)(I like this one)
+>
+> [Project Report](https://github.com/youyinnn/coen_6501/blob/main/project_spec/output/main.pdf)
+
+#### About this site
 
 > This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del> <del>Searching support: [Algolia](https://www.algolia.com/)</del>
 > Comment plugin: <del>[Valine](https://valine.js.org/)</del>
