@@ -1,27 +1,28 @@
-------
-``` java
+Hi there, this will help you know a little bit about me
+
+```java
 Chinese
-Born in 1996. 
-Half-baked Bass Guitar player. 
-Half-baked Java EE developer. 
-The worst FeWeb developer in the universe. 
+Born in 1996.
+Half-baked Bass Guitar player.
+Half-baked Java EE developer.
+The worst FeWeb developer in the universe.
 ```
 
 > Education:
 > 2015-2019, SE, BE : [South-Central University For Nationalities](http://www.scuec.edu.cn/s/1/t/560/main.htm), Wuhan, China.
 >
-> 2021(Winter)-2022(Fall), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
+> 2021(Fall)-2023(Winter), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
 
-> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & [Coding Pages](https://help.coding.net/docs/cd/static-website.html)
-> Searching support: [Algolia](https://www.algolia.com/)
-> Comment plugin: [Valine](https://valine.js.org/)
+> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del> <del>Searching support: [Algolia](https://www.algolia.com/)</del>
+> Comment plugin: <del>[Valine](https://valine.js.org/)</del>
+>
 > Publishing my tech-articles, sharing my ideas, keeping some scripts, todos, and my personal resume.
 
-------
+---
 
-Change Log
+<!-- Change Log
 
-``` console
+```console
 2020-06-09: split scripts into multiple .htm file for compressing request traffic
 
 2020-06-09: flowchart.js support
@@ -30,7 +31,7 @@ Change Log
 
 2020-06-05: move back to gitee pages...
 
-2020-05-11: upgrade animate.css to 4.0.0 
+2020-05-11: upgrade animate.css to 4.0.0
 
 2020-05-08: abandon the gitee pages due to the unstability of their services, move to coding pages
 
@@ -65,5 +66,4 @@ Change Log
 2018-04-27: media support
 
 2017-11-23: online
-```
-
+``` -->
