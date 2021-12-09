@@ -1,6 +1,8 @@
 module.exports = {
-  publicPath: "./",
-  outputDir: "docs",
+  // refer public path to dist folder
+  publicPath: "./dist",
+  // make the index.html file place at the root of the repo
+  indexPath: "../index.html",
   pluginOptions: {},
   chainWebpack: (config) => {
     // GraphQL Loader

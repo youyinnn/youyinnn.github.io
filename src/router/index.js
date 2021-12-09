@@ -5,7 +5,7 @@ import Script from "../views/Script.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/articles",
     name: "Home",
     component: Home,
   },
@@ -20,7 +20,7 @@ const routes = [
     component: Article,
   },
   {
-    path: "/about",
+    path: "/",
     name: "About",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
