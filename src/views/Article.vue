@@ -56,7 +56,7 @@ export default {
   mounted: function () {
     // console.log(this.$route.params);
     const aId = this.$route.params.articleId;
-    const src = require(`raw-loader!@/assets/articles/${aId}.html`);
+    const src = require(`raw-loader!@/assets/articles/${aId}.htm`);
     this.content = src.default;
 
     const resourceList = resources.list;

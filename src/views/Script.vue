@@ -1,0 +1,110 @@
+<template>
+  <div class="script">
+    <n-grid x-gap="16" :cols="5">
+      <n-gi span="1">
+        <div>
+          <n-menu
+            v-if="menuValid"
+            class="script-menu unselectable"
+            v-model:value="activeKey"
+            mode="vertical"
+            :options="menuOptions"
+          />
+        </div>
+      </n-gi>
+      <n-gi style="border-left: 1px solid #eee" span="4">
+        <div
+          :class="{
+            'script-box': true,
+            article: true,
+            'markdown-body': true,
+            'editormd-html-preview': true,
+            animate__animated: true,
+            animate__fadeIn: scriptChangeAnimate,
+          }"
+          v-html="content"
+        ></div>
+      </n-gi>
+    </n-grid>
+  </div>
+</template>
+
+<script>
+/* eslint-disable no-unused-vars */
+import markdowBody from "@/assets/css/markdown-body.css";
+import resources from "@/assets/resources/resources.js";
+import { h } from "vue";
+import { NIcon, NMenu, NGrid, NGi } from "naive-ui";
+import {
+  BookOutline as BookIcon,
+  PersonOutline as PersonIcon,
+  WineOutline as WineIcon,
+} from "@vicons/ionicons5";
+
+function renderIcon(icon) {
+  return () => h(NIcon, null, { default: () => h(icon) });
+}
+
+export default {
+  name: "Script",
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    NMenu,
+    NGrid,
+    NGi,
+  },
+  data: () => ({
+    content: null,
+    activeKey: null,
+    menuOptions: [],
+    scriptChangeAnimate: false,
+  }),
+  computed: {
+    menuValid() {
+      return this.menuOptions.length > 0;
+    },
+  },
+  watch: {
+    activeKey: function (nv) {
+      this.scriptChangeAnimate = false;
+      const src = require(`raw-loader!@/assets/scripts/${nv}.htm`);
+      this.content = src.default;
+      setTimeout(() => {
+        this.scriptChangeAnimate = true;
+      }, 100);
+    },
+  },
+  mounted: function () {
+    const resourceList = resources.list;
+    // console.log(resources);
+    for (let rs of resourceList) {
+      require(`@/assets/resources/${rs}`);
+    }
+    const scriptSections = JSON.parse(sessionStorage.scriptsMds);
+    for (let sectionName in scriptSections) {
+      this.menuOptions.push({
+        label: sectionName,
+        key: scriptSections[sectionName],
+      });
+    }
+    this.activeKey = this.menuOptions[0].key;
+  },
+};
+</script>
+
+<style>
+.n-menu-item {
+  height: 30px !important;
+}
+.n-menu-item-content {
+  padding: 4px 12px !important;
+}
+.script-box {
+  padding: 1rem;
+  opacity: 0;
+  animation-duration: 1s;
+}
+.script-box h2 {
+  border-bottom: none !important;
+}
+</style>

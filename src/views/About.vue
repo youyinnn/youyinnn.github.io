@@ -12,12 +12,13 @@
 import markdowBody from "@/assets/css/markdown-body.css";
 
 export default {
+  name: "About",
   components: {},
   data: () => ({
     content: null,
   }),
   mounted: function () {
-    const src = require(`raw-loader!@/assets/about/index.html`);
+    const src = require(`raw-loader!@/assets/about/index.htm`);
     this.content = src.default;
   },
 };

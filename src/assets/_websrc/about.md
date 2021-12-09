@@ -18,8 +18,6 @@ The worst FeWeb developer in the universe.
 >
 > Publishing my tech-articles, sharing my ideas, keeping some scripts, todos, and my personal resume.
 
----
-
 <!-- Change Log
 
 ```console

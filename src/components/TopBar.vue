@@ -40,7 +40,7 @@ const tabList = [
   {
     name: "script",
     text: "Script",
-    route: "/",
+    route: "/script",
   },
 ];
 
@@ -54,30 +54,22 @@ export default {
     NGradientText,
   },
   data: () => ({
-    tabValue: tabList[0].name,
     tabs: tabList,
   }),
   methods: {
     goTo(tab) {
-      this.tabValue = tab.name;
+      this.$store.commit("tabChange", {
+        tab: tab.name,
+      });
       this.$router.push(tab.route).catch(() => {});
     },
   },
-  mounted: function () {
-    const hash = location.hash;
-    if (hash === "#/about") {
-      this.tabValue = tabList[0].name;
-    }
-    if (hash === "#/") {
-      this.tabValue = tabList[1].name;
-    }
-    if (hash === "#/script") {
-      this.tabValue = tabList[2].name;
-    }
-    if (hash.startsWith("#/article/")) {
-      this.tabValue = tabList[1].name;
-    }
+  computed: {
+    tabValue() {
+      return this.$store.state.currentTab;
+    },
   },
+  mounted: function () {},
 };
 </script>
 

@@ -92,10 +92,10 @@ for (let pname of postsrs) {
   let abbrlink = crc32(pname).toString(36);
   md2html(
     path.join(postsPath, pname),
-    path.join(__dirname, "..", "assets", "articles", abbrlink + ".html"),
+    path.join(__dirname, "..", "assets", "articles", abbrlink + ".htm"),
     function (sourceMdStr) {
       let data = articleDataExtract.extract(sourceMdStr);
-      data.metadata.short_content = marked.parse(data.metadata.short_content);
+      // data.metadata.short_content = marked.parse(data.metadata.short_content);
       data.metadata.abbrlink = abbrlink;
       if (data.metadata.series !== undefined) {
         let seriesForThisArticles;
@@ -138,31 +138,52 @@ for (let ss of allSeries) {
   });
 }
 
+let websrcPath = path.join(__dirname, "..", "assets/_websrc");
+
+// about
+md2html(
+  path.join(websrcPath, "about.md"),
+  path.join(__dirname, "..", "assets", "about", "index.htm")
+);
+
+// scripts
+var scriptsDir = fs.readdirSync(path.join(websrcPath, "scripts"));
+var scriptsMds = {};
+for (let md of scriptsDir) {
+  if (md.endsWith(".md")) {
+    const mdAbbrlink = crc32(md).toString(16);
+    scriptsMds[md.split(".md")[0]] = mdAbbrlink;
+    let sourceStr = fs.readFileSync(path.join(websrcPath, "scripts", md), {
+      encoding: "utf-8",
+    });
+    let htmlStr = marked.parse(sourceStr);
+    fs.writeFileSync(
+      path.join(__dirname, "..", "assets", "scripts", mdAbbrlink + ".htm"),
+      htmlStr,
+      {
+        encoding: "utf-8",
+      }
+    );
+  }
+}
+
 allSeries = JSON.stringify(allSeries);
 articlesMetadata = JSON.stringify(articlesMetadata);
 articlesOrder = JSON.stringify(articlesOrder);
+scriptsMds = JSON.stringify(scriptsMds);
 
 let resourcesPath = path.join(__dirname, "..", "assets/resources");
 
+// write cache.js file
 let cacheFileName = `cache-${crc32(new Date().toString()).toString(36)}.js`;
-
 fs.writeFileSync(
   path.join(resourcesPath, cacheFileName),
   `
     sessionStorage.setItem('postSeries', ${JSON.stringify(allSeries)});
     sessionStorage.setItem('postMetadata', ${JSON.stringify(articlesMetadata)});
     sessionStorage.setItem('postOrder', ${JSON.stringify(articlesOrder)});
+    sessionStorage.setItem('scriptsMds', ${JSON.stringify(scriptsMds)});
 `
-);
-
-var resoucesList = [cacheFileName];
-
-fs.writeFileSync(
-  path.join(resourcesPath, "resources.js"),
-  `/* eslint-disable no-unused-vars */
-var resourcesList = ${JSON.stringify(resoucesList)};
-module.exports.list = resourcesList
-  `
 );
 
 // delete old cache file
@@ -175,12 +196,14 @@ for (let resf of resourceFiles) {
     });
 }
 
-let websrcPath = path.join(__dirname, "..", "assets/_websrc");
+var resoucesList = [cacheFileName];
 
-// about
-md2html(
-  path.join(websrcPath, "about.md"),
-  path.join(__dirname, "..", "assets", "about", "index.html")
+fs.writeFileSync(
+  path.join(resourcesPath, "resources.js"),
+  `/* eslint-disable no-unused-vars */
+var resourcesList = ${JSON.stringify(resoucesList)};
+module.exports.list = resourcesList
+  `
 );
 
 exit(0);
@@ -190,102 +213,6 @@ md2html(
   path.join(websrcPath, "resume.md"),
   path.join(__dirname, "..", "resume", "index.html")
 );
-
-// scripts
-var scriptsDir = fs.readdirSync(path.join(websrcPath, "scripts"));
-var scriptsMds = [];
-var scriptsHeaderMd = "";
-for (let md of scriptsDir) {
-  if (md.endsWith(".md")) {
-    scriptsMds.push(path.join(websrcPath, "scripts", md));
-    let sourceStr = fs.readFileSync(path.join(websrcPath, "scripts", md), {
-      encoding: "utf-8",
-    });
-    let headerMatch = sourceStr.match(/^#{1,6}\s.*/gm);
-    for (let h of headerMatch) {
-      scriptsHeaderMd += h + "\r\n";
-    }
-    let name = escapeHtml(path.basename(md.substring(0, md.length - 3))) + "2";
-    let htmlStr = marked(sourceStr, {
-      gfm: true,
-      breaks: true,
-      renderer: renderer,
-    });
-    htmlStr = htmlStr.replace(/<\/h3>/g, '</h3><sb class="hide-script-block">');
-    htmlStr = htmlStr.replace(/<h3 /g, '</sb><h3 class="zip-tran"');
-    htmlStr = htmlStr.replace(/<h2 /g, '<h2 class="zip-tran"');
-    htmlStr = htmlStr.replace(/<\/sb>/, "");
-    htmlStr += "</sb>";
-    fs.writeFileSync(
-      path.join(__dirname, "..", "scripts", crc32(name).toString(16) + ".htm"),
-      htmlStr,
-      {
-        encoding: "utf-8",
-      }
-    );
-  }
-}
-function escapeHtml(string) {
-  var matchHtmlRegExp = /["'&<>]/;
-  var str = "" + string;
-  var match = matchHtmlRegExp.exec(str);
-
-  if (!match) {
-    return str;
-  }
-
-  var escape;
-  var html = "";
-  var index = 0;
-  var lastIndex = 0;
-
-  for (index = match.index; index < str.length; index++) {
-    switch (str.charCodeAt(index)) {
-      case 34: // "
-        escape = "&quot;";
-        break;
-      case 38: // &
-        escape = "&amp;";
-        break;
-      case 39: // '
-        escape = "&#39;";
-        break;
-      case 60: // <
-        escape = "&lt;";
-        break;
-      case 62: // >
-        escape = "&gt;";
-        break;
-      default:
-        continue;
-    }
-
-    if (lastIndex !== index) {
-      html += str.substring(lastIndex, index);
-    }
-
-    lastIndex = index + 1;
-    html += escape;
-  }
-
-  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
-}
-
-var scriptsHeaderHtml = marked(scriptsHeaderMd, {
-  gfm: true,
-  breaks: true,
-  renderer: renderer,
-});
-
-// let htmls = html.split("{{% md %}}");
-
-// fs.writeFileSync(
-//   path.join(__dirname, "..", "scripts", "index.html"),
-//   htmls[0] + scriptsHeaderHtml + htmls[1],
-//   {
-//     encoding: "utf-8",
-//   }
-// );
 
 // todos
 md2html(

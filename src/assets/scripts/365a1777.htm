@@ -1,0 +1,158 @@
+
+          <h2 id="9f5ee731">CSS</h2>
+          <h3 id="fcdf37c">CSS media设备适配样式设置</h3><pre><code class="hljs language-css"><span class="hljs-comment">/* 
+  针对iphone5 等320px的宽做出调整
+*/</span>
+<span class="hljs-keyword">@media</span> screen <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">320px</span>){
+  <span class="hljs-selector-class">.friendcard</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">15rem</span>;
+  }
+}
+</code></pre>
+
+          <h3 id="f3a01765">CSS 动画库animate.css</h3><p>介绍博客 : <a href="https://www.cnblogs.com/2050/p/3409129.html">https://www.cnblogs.com/2050/p/3409129.html</a></p>
+
+          <h3 id="33cb2bb">CSS 去除按钮选中蓝色边框</h3><pre><code class="hljs language-css"><span class="hljs-selector-class">.className</span> {
+  <span class="hljs-attribute">border</span>: none;
+}
+
+<span class="hljs-selector-class">.className</span><span class="hljs-selector-pseudo">:focus</span>{
+  <span class="hljs-attribute">outline</span>: none;
+}
+</code></pre>
+<p><a href="https://blog.csdn.net/qq_26222859/article/details/51516011">参考</a></p>
+
+          <h3 id="29c6ab2d">CSS 元素失焦/虚化滤镜</h3><pre><code class="hljs language-css"><span class="hljs-selector-id">#idname</span>{
+   <span class="hljs-attribute">filter</span> : <span class="hljs-built_in">blur</span>(<span class="hljs-number">2px</span>);
+}
+</code></pre>
+
+          <h3 id="6d2dccd6">CSS 文字换行</h3><p>强制不换行</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-tag">div</span>{
+    <span class="hljs-attribute">white-space</span>:nowrap;
+}
+</code></pre>
+<p>自动换行</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-tag">div</span>{ 
+    <span class="hljs-attribute">word-wrap</span>: break-word; 
+    <span class="hljs-attribute">word-break</span>: normal; 
+}
+</code></pre>
+<p>强制英文单词断开换行</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-tag">div</span>{
+    <span class="hljs-attribute">word-break</span>:break-all;
+}
+</code></pre>
+<p>英文单词不断开换行</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-tag">div</span> {
+    <span class="hljs-attribute">word-break</span>: keep-all;
+    <span class="hljs-attribute">word-wrap</span>: break-word;
+    <span class="hljs-attribute">white-space</span>: pre-wrap;
+}
+</code></pre>
+
+          <h3 id="c7a79f21">CSS placeholder居位设置</h3><pre><code class="hljs language-css"><span class="hljs-comment">/* placeholder居中 */</span>
+<span class="hljs-selector-id">#postsearchtext</span>:-moz-placeholder
+{
+  <span class="hljs-attribute">text-align</span>: center;
+}
+<span class="hljs-selector-id">#postsearchtext</span>::-moz-placeholder
+{
+  <span class="hljs-attribute">text-align</span>: center;
+}
+<span class="hljs-selector-id">#postsearchtext</span>:-ms-input-placeholder
+{
+  <span class="hljs-attribute">text-align</span>: center;
+}
+<span class="hljs-selector-id">#postsearchtext</span>::-webkit-input-placeholder
+{
+    <span class="hljs-attribute">text-align</span>: center;
+}
+</code></pre>
+
+          <h3 id="7d05a88c">CSS 文字超过元素长度显示省略号</h3><pre><code class="hljs language-css"><span class="hljs-selector-tag">div</span>{
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">75%</span>;
+  <span class="hljs-attribute">overflow</span>:hidden; 
+  <span class="hljs-attribute">white-space</span>:nowrap; 
+  <span class="hljs-attribute">text-overflow</span>:ellipsis;
+}
+</code></pre>
+
+          <h3 id="2ebdce57">CSS 变量设置和获取</h3>
+          <h4 id="a79484d1">🔹设置</h4><pre><code class="hljs language-css"><span class="hljs-selector-pseudo">:root</span>{
+  <span class="hljs-attr">--main-color</span>: <span class="hljs-number">#4d4e53</span>;
+  <span class="hljs-attr">--main-bg</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>);
+  <span class="hljs-attr">--logo-border-color</span>: rebeccapurple;
+
+  <span class="hljs-attr">--header-height</span>: <span class="hljs-number">68px</span>;
+  <span class="hljs-attr">--content-padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+
+  <span class="hljs-attr">--base-line-height</span>: <span class="hljs-number">1.428571429</span>;
+  <span class="hljs-attr">--transition-duration</span>: .<span class="hljs-number">35s</span>;
+  <span class="hljs-attr">--external-link</span>: <span class="hljs-string">&quot;external link&quot;</span>;
+  <span class="hljs-attr">--margin-top</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">2vh</span> + <span class="hljs-number">20px</span>);
+}
+</code></pre>
+
+          <h4 id="5f8a827d">🔹引用</h4><pre><code class="hljs language-css"><span class="hljs-selector-tag">a</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--foo);
+  <span class="hljs-attribute">text-decoration-color</span>: <span class="hljs-built_in">var</span>(--bar);
+}
+</code></pre>
+<p>参考 : <a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></p>
+
+          <h3 id="ed565198">CSS 元素垂直/水平居中的骚操作</h3><blockquote>
+<p>垂直居中就上下是0, 水平居中就左右是0,关键是margin:auto;</p>
+</blockquote>
+<pre><code class="hljs language-css"><span class="hljs-selector-id">#sidetoccontainer</span> {
+  <span class="hljs-attribute">position</span>: (不知道);
+  <span class="hljs-attribute">margin</span>: auto;
+  <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>如果元素定位的fixed, 且如果这个骚操作用不了, 那么就给父元素加上</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-id">#father</span> {
+   <span class="hljs-attribute">transform</span>:<span class="hljs-built_in">translate</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)
+}
+</code></pre>
+<p>参考自知乎 : <a href="https://www.zhihu.com/question/24822927">https://www.zhihu.com/question/24822927</a></p>
+
+          <h3 id="7bec9ad2">CSS3 瀑布布局</h3><p>三列瀑布</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-class">.con</span> {
+  <span class="hljs-attribute">column-count</span>: <span class="hljs-number">3</span>;
+}
+
+<span class="hljs-selector-class">.todo-card</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+}
+</code></pre>
+
+          <h3 id="2bb92814">CSS 将DIV画成直角三角形</h3><p>教程: <a href="https://www.cnblogs.com/v-weiwang/p/5057588.html">https://www.cnblogs.com/v-weiwang/p/5057588.html</a></p>
+
+          <h3 id="99626f0b">CSS自定义滚动条样式</h3><p><a href="https://segmentfault.com/a/1190000012800450">https://segmentfault.com/a/1190000012800450</a></p>
+<p>特效是不会无故无效的，检查一下是不是开了inline</p>
+<p>下面这个是coding的滚动条样式：</p>
+<pre><code class="hljs language-css">*::-webkit-scrollbar {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">8px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">8px</span>; 
+}
+*::-webkit-scrollbar-track {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">216</span>, <span class="hljs-number">221</span>, <span class="hljs-number">228</span>, <span class="hljs-number">0.3</span>);
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>; 
+}
+*::-webkit-scrollbar-thumb {
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#76808e</span>; 
+}
+*::-webkit-scrollbar-thumb:window-inactive {
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#d8dde4</span>; 
+}
+</code></pre>
+
+          <h3 id="49362e2b">CSS inline-block 垂直居中</h3><p><a href="https://www.cnblogs.com/olafff/p/5103775.html">https://www.cnblogs.com/olafff/p/5103775.html</a></p>
+<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html">https://www.cnblogs.com/hutuzhu/p/4450850.html</a></p>
+
+          <h3 id="66ed6f28">Scroll snap 滚动贴合</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type">https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type</a></p>
