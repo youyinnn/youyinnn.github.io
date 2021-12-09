@@ -52,5 +52,6 @@ export default defineComponent({
   margin-top: 1rem !important;
   margin-bottom: 10rem !important;
   margin: auto;
+  backface-visibility: hidden;
 }
 </style>

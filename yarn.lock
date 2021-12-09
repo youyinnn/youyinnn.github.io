@@ -1311,6 +1311,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@vicons/ionicons5@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.npmmirror.com/@vicons/ionicons5/download/@vicons/ionicons5-0.11.0.tgz#54185bfa572a09df70094db1954f28bfbf1363ed"
+  integrity sha1-VBhb+lcqCd9wCU2xlU8ov78TY+0=
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.nlark.com/@vue/babel-helper-vue-jsx-merge-props/download/@vue/babel-helper-vue-jsx-merge-props-1.2.1.tgz"
@@ -4706,12 +4711,7 @@ highlight.js@^10.7.1:
   resolved "https://registry.npmmirror.com/highlight.js/download/highlight.js-10.7.3.tgz"
   integrity sha1-aXJy45kTVuQMPKxWanTu9oF1ZTE=
 
-highlight.js@^11.0.1:
-  version "11.3.1"
-  resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-11.3.1.tgz"
-  integrity sha512-PUhCRnPjLtiLHZAQ5A/Dt5F8cWZeMyj9KRsACsWT+OD6OP0x6dp5OmT5jdx0JgEyPxPZZIPQpRN2TciUT7occw==
-
-highlight.js@^11.3.1:
+highlight.js@^11.0.1, highlight.js@^11.3.1:
   version "11.3.1"
   resolved "https://registry.npmmirror.com/highlight.js/download/highlight.js-11.3.1.tgz#813078ef3aa519c61700f84fe9047231c5dc3291"
   integrity sha1-gTB47zqlGcYXAPhP6QRyMcXcMpE=

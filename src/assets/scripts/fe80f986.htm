@@ -1,0 +1,41 @@
+
+          <h2 id="4d45ebbb">Vue</h2>
+          <h3 id="6424b09a">Vue技巧</h3><ol>
+<li><p><a href="https://juejin.cn/post/6951540864787152927">用了很多动效，介绍 4个很 Nice 的 Vue 路由过渡动效！</a></p>
+<p>t ransition得用这样的状态</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;slide-fade&quot;</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">&quot;out-in&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span>
+</code></pre>
+<p>css得用enter</p>
+<pre><code class="hljs language-css"><span class="hljs-selector-class">.fade-enter-active</span>,
+<span class="hljs-selector-class">.fade-leave-active</span> {
+  <span class="hljs-attribute">transition</span>: opacity <span class="hljs-number">0.3s</span>;
+}
+
+<span class="hljs-selector-class">.fade-enter</span>,
+<span class="hljs-selector-class">.fade-leave-to</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.slide-fade-enter-active</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease;
+}
+<span class="hljs-selector-class">.slide-fade-leave-active</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease;
+}
+<span class="hljs-selector-class">.slide-fade-enter</span>, <span class="hljs-selector-class">.slide-fade-leave-to</span>
+<span class="hljs-comment">/* .slide-fade-leave-active for below version 2.1.8 */</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">10px</span>);
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+</ol>
+
+          <h4 id="ae79ef78">Vue3 Troubleshoot</h4><ol>
+<li><a href="https://stackoverflow.com/questions/62023604/where-to-find-or-how-to-set-htmlwebpackplugin-options-title-in-project-created-w">where to find or how to set htmlWebpackPlugin.options.title in project created with vue cli 3?</a></li>
+<li></li>
+</ol>
