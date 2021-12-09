@@ -1,7 +1,7 @@
-
-          <h3 id="e81ff1bf">Iterable接口</h3><p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
-
-          <h4 id="6b7220e">源码</h4><pre><code class="hljs language-java"><span class="hljs-comment">/**
+<h3 id="iterable接口">Iterable接口</h3>
+<p>含义: 这个接口的含义是, 容器的元素是否支持<strong>迭代器</strong>访问</p>
+<h4 id="源码">源码</h4>
+<pre><code class="hljs language-java"><span class="hljs-comment">/**
  * 实现这个接口, 意味着对象可以使用forEach循环进行操作
  */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Iterable</span>&lt;T&gt; {
@@ -34,10 +34,10 @@
     }
 }
 </code></pre>
-
-          <h3 id="8d5c04e7">Iterator接口</h3><p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
-
-          <h4 id="6b7220e">源码</h4><pre><code class="hljs language-java"><span class="hljs-comment">/**
+<h3 id="iterator接口">Iterator接口</h3>
+<p>含义: 实现这个接口的类就是某个容器的<strong>迭代器</strong>, 这个概念的意思是, 我可以持有一个<strong>迭代器</strong>去遍历容器中的元素.</p>
+<h4 id="源码-1">源码</h4>
+<pre><code class="hljs language-java"><span class="hljs-comment">/**
  * 源代码不多 所以去掉了很多注释就贴出来了
  */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Iterator</span>&lt;E&gt; {
@@ -76,12 +76,12 @@
     }
 }
 </code></pre>
-
-          <h4 id="b8ed6974">forEachRemaining引例</h4><blockquote>
+<h4 id="foreachremaining引例">forEachRemaining引例</h4>
+<blockquote>
 <p>待补充</p>
 </blockquote>
-
-          <h3 id="61c853ac">ListIterator</h3><p>比一般的迭代器要厉害 </p>
+<h3 id="listiterator">ListIterator</h3>
+<p>比一般的迭代器要厉害 </p>
 <pre><code class="hljs language-java"><span class="hljs-comment">/**
  * 实现这个接口，意味着你的迭代器可以允许正向逆向地遍历list
  * 在过程中你甚至可以获取当前迭代的index，甚至是修改元素

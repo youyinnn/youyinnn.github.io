@@ -1,14 +1,14 @@
-
-          <h2 id="ddcc22ab">LaTeX</h2>
-          <h3 id="9fd35eea">Vscode <code>.tex</code> `file formatting on save</h3><p>Tools:</p>
+<h2 id="latex">LaTeX</h2>
+<h3 id="vscode-tex-file-formatting-on-save">Vscode <code>.tex</code> `file formatting on save</h3>
+<p>Tools:</p>
 <ol>
 <li>LaTeX-Workshop extension;</li>
 <li>latexindent.pl</li>
 <li>Save and Run extension(optional);</li>
 </ol>
-
-          <h4 id="d7619287">Toggle formatter</h4>
-          <h5 id="1496069f">Option 1</h5><p>While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent process.</p>
+<h4 id="toggle-formatter">Toggle formatter</h4>
+<h5 id="option-1">Option 1</h5>
+<p>While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent process.</p>
 <p> I fix it by replace the extension&#39;s setting:</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;latex-workshop.latex.recipes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -31,8 +31,8 @@
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span> 
 </code></pre>
-
-          <h5 id="5254b350">Option 2: Extension &quot;Save and Run&quot;</h5><pre><code class="hljs language-json"><span class="hljs-attr">&quot;saveAndRun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+<h5 id="option-2-extension-save-and-run">Option 2: Extension &quot;Save and Run&quot;</h5>
+<pre><code class="hljs language-json"><span class="hljs-attr">&quot;saveAndRun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;commands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;match&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\\.tex$&quot;</span><span class="hljs-punctuation">,</span>
@@ -43,20 +43,20 @@
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
-
-          <h4 id="5b375a8c">Environment modules for latexindent.pl</h4><p>Refer to: <a href="https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac">https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac</a></p>
-
-          <h4 id="d92b08f3">no backup file and log file</h4><p><code>-o</code>: no backup;</p>
+<h4 id="environment-modules-for-latexindentpl">Environment modules for latexindent.pl</h4>
+<p>Refer to: <a href="https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac">https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac</a></p>
+<h4 id="no-backup-file-and-log-file">no backup file and log file</h4>
+<p><code>-o</code>: no backup;</p>
 <p><code>-g /dev/null</code>: no log;</p>
 <pre><code class="hljs language-bash">latexindent <span class="hljs-string">&#x27;${file}&#x27;</span> -o <span class="hljs-string">&#x27;${file}&#x27;</span> -s -g /dev/null<span class="hljs-string">&quot;</span>
 </code></pre>
-
-          <h4 id="49931bff">Update latexindent.pl</h4><p>The latexindent.pl which brought by MacTex might out of date. Replace it manually by replacing it on the mac.</p>
+<h4 id="update-latexindentpl">Update latexindent.pl</h4>
+<p>The latexindent.pl which brought by MacTex might out of date. Replace it manually by replacing it on the mac.</p>
 <p>It might located at:</p>
 <pre><code class="hljs language-bash">/usr/local/texlive/2021/texmf-dist/scripts/latexindent/LatexIndent/
 </code></pre>
-
-          <h4 id="39b75531">Latex Trick</h4><ol>
+<h4 id="latex-trick">Latex Trick</h4>
+<ol>
 <li><p>use url nicely:</p>
 <p><a href="https://www.kronto.org/thesis/tips/url-formatting.html">How do you get nicely formatted URLs in the bibliography?</a></p>
 <p><a href="https://tex.stackexchange.com/questions/4503/how-do-i-specify-color-in-rgb-using-hypersetup-in-hyperref/4506#4506"><a href="https://tex.stackexchange.com/questions/4503/how-do-i-specify-color-in-rgb-using-hypersetup-in-hyperref">How do I specify color in RGB using \hypersetup in hyperref?</a></a></p>

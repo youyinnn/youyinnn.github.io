@@ -1,5 +1,5 @@
-
-          <h3 id="96dd99db">6. ZigZag Conversion(Medium)</h3><p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+<h3 id="6-zigzag-conversionmedium">6. ZigZag Conversion(Medium)</h3>
+<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
 <pre><code class="hljs language-graph">P   A   H   N
 A P L S I I G
 Y   I   R
@@ -24,8 +24,8 @@ Y A   H R
 P     I</p>
 </blockquote>
 <p>说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列</p>
-
-          <h4 id="b6dc1a29">Logical Gap Beat(99.82%)</h4><p>这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：</p>
+<h4 id="logical-gap-beat9982">Logical Gap Beat(99.82%)</h4>
+<p>这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：</p>
 <pre><code class="hljs language-graph">以26个字母序列为例：
 row=3
     A   E   I   M   Q   U   Y            00    04    08    12    16    20    24
@@ -92,8 +92,8 @@ E       M       U           04        | 12          | 20
             sb.append(chars[i]);
             <span class="hljs-comment">// add minorGap&#x27;s char if it&#x27;s not first/last row</span>
             <span class="hljs-keyword">if</span> (minorGap &lt; mainGap
-                    &amp;&amp; rowsCount &lt; numRows
-                    &amp;&amp; i + minorGap &lt; chars.length) {
+                    && rowsCount &lt; numRows
+                    && i + minorGap &lt; chars.length) {
                 sb.append(chars[i + minorGap]);
             }
         }
@@ -102,8 +102,8 @@ E       M       U           04        | 12          | 20
     <span class="hljs-keyword">return</span> sb.toString();
 }
 </code></pre>
-
-          <h3 id="d4c89ee3">7. Reverse Integer(Easy)</h3><p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+<h3 id="7-reverse-integereasy">7. Reverse Integer(Easy)</h3>
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
 <p><strong>Example 1:</strong></p>
 <blockquote>
 <p>Input: 123
@@ -121,8 +121,8 @@ Output: 21</p>
 </blockquote>
 <p><strong>Note:</strong>
 Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
-
-          <h4 id="dab7a080">Ⅰ. with string</h4><p>You can use only string but in java we have StringBuilder</p>
+<h4 id="ⅰ-with-string">Ⅰ. with string</h4>
+<p>You can use only string but in java we have StringBuilder</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">raw</span> <span class="hljs-operator">=</span> Math.abs(x);
     <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(raw + <span class="hljs-string">&quot;&quot;</span>);
@@ -139,8 +139,8 @@ Assume we are dealing with an environment which could only store integers within
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h4 id="6f81426c">Ⅱ. calculate</h4><p>Refer from discuss</p>
+<h4 id="ⅱ-calculate">Ⅱ. calculate</h4>
+<p>Refer from discuss</p>
 <ol>
 <li><p>No need to handle the minus sign cause <strong>Mod</strong> will keep it.</p>
 <p>e.g <code>-51  % 10</code> get  <code>-1</code></p>
@@ -160,8 +160,8 @@ Assume we are dealing with an environment which could only store integers within
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h3 id="31ea3742">8. String To Integer(Medium)</h3><p>Implement <code>atoi </code>which converts a string to an integer.</p>
+<h3 id="8-string-to-integermedium">8. String To Integer(Medium)</h3>
+<p>Implement <code>atoi </code>which converts a string to an integer.</p>
 <p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
 <p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
 <p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
@@ -236,17 +236,17 @@ Explanation: The number &quot;-91283472332&quot; is out of the range of a 32-bit
         startIndex++;
     }
     <span class="hljs-keyword">while</span> (startIndex &lt; cArr.length) {
-        <span class="hljs-keyword">if</span> (cArr[startIndex] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; cArr[startIndex] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (cArr[startIndex] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> && cArr[startIndex] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) {
             <span class="hljs-keyword">if</span> (ans &gt; Integer.MAX_VALUE / <span class="hljs-number">10</span> || ans &lt; Integer.MIN_VALUE / <span class="hljs-number">10</span>) {
                 <span class="hljs-comment">// multiplication overflow</span>
                 <span class="hljs-type">return</span> <span class="hljs-variable">sign</span> <span class="hljs-operator">=</span>= -<span class="hljs-number">1</span> ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
             ans = (ans * <span class="hljs-number">10</span>) + (sign * (cArr[startIndex] - <span class="hljs-string">&#x27;0&#x27;</span>));
             <span class="hljs-comment">// addiction overflow</span>
-            <span class="hljs-keyword">if</span> (sign == -<span class="hljs-number">1</span> &amp;&amp; ans &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (sign == -<span class="hljs-number">1</span> && ans &gt; <span class="hljs-number">0</span>) {
                 <span class="hljs-keyword">return</span> Integer.MIN_VALUE;
             }
-            <span class="hljs-keyword">if</span> (sign == <span class="hljs-number">1</span> &amp;&amp; ans &lt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (sign == <span class="hljs-number">1</span> && ans &lt; <span class="hljs-number">0</span>) {
                 <span class="hljs-keyword">return</span> Integer.MAX_VALUE;
             }
         } <span class="hljs-keyword">else</span> {
@@ -258,8 +258,8 @@ Explanation: The number &quot;-91283472332&quot; is out of the range of a 32-bit
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h3 id="116cdb55">9. Parlindrome Number(Easy)</h3><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+<h3 id="9-parlindrome-numbereasy">9. Parlindrome Number(Easy)</h3>
+<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
 <p><strong>Example 1:</strong></p>
 <blockquote>
 <p>Input: 121
@@ -279,8 +279,8 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</p>
 </blockquote>
 <p><strong>Follow up:</strong></p>
 <p>Coud you solve it without converting the integer to a string?</p>
-
-          <h4 id="261f70de">Ⅰ. slide window</h4><p>If we know the length of the number sequence, then we could easily pick up any single number on this sequence.</p>
+<h4 id="ⅰ-slide-window">Ⅰ. slide window</h4>
+<p>If we know the length of the number sequence, then we could easily pick up any single number on this sequence.</p>
 <pre class="nhi">
 We have number: x = 10234
                [1] 0 2 3 4
@@ -319,10 +319,10 @@ We call 10000/100 as a 'base', it descide the position of the window.
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
 </code></pre>
-
-          <h4 id="50cb768e">Ⅱ. just look on half</h4><p>Base on offical solution:</p>
+<h4 id="ⅱ-just-look-on-half">Ⅱ. just look on half</h4>
+<p>Base on offical solution:</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> bool <span class="hljs-title function_">IsPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
-    <span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> &amp;&amp; x != <span class="hljs-number">0</span>)) {
+    <span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> && x != <span class="hljs-number">0</span>)) {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
     <span class="hljs-type">int</span> <span class="hljs-variable">rev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
@@ -333,8 +333,8 @@ We call 10000/100 as a 'base', it descide the position of the window.
     <span class="hljs-type">return</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span>= rev || x == rev/<span class="hljs-number">10</span>;
 }
 </code></pre>
-
-          <h3 id="cc6e568a">10. Regular Expression Matching(hard)</h3><p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>&#39;.&#39;</code>and <code>&#39;*&#39;</code>.</p>
+<h3 id="10-regular-expression-matchinghard">10. Regular Expression Matching(hard)</h3>
+<p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>&#39;.&#39;</code>and <code>&#39;*&#39;</code>.</p>
 <pre><code>&#x27;.&#x27; Matches any single character.
 &#x27;*&#x27; Matches zero or more of the preceding element.
 </code></pre>
@@ -383,8 +383,8 @@ s = &quot;mississippi&quot;
 p = &quot;mis<em>is</em>p*.&quot;
 Output: false</p>
 </blockquote>
-
-          <h4 id="7c6215e5">Ⅰ. Recursion</h4><p>这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多</p>
+<h4 id="ⅰ-recursion">Ⅰ. Recursion</h4>
+<p>这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多</p>
 <p>我开始解的时候沉迷于线性解法，去遍历<code>pattern</code>字串，试图用多个<code>if-else</code>去覆盖到所有的case，但是失败了，因为线性解法去覆盖case的话，不太可能一次性写出所有的case就算真的让你写出来了话，花的时间也非常多</p>
 <p>那么怎么才能一阵见血呢？看你做题的sence了- -</p>
 <p>为了方便，我们把<code>text</code> matching <code>pattern</code>简写成<code>text -&gt; pattern</code></p>
@@ -393,7 +393,7 @@ Output: false</p>
 <li><p>如果<code>pattern</code>为&quot;&quot;的话，这次match的结果就等同于看<code>text</code>是否为空；</p>
 </li>
 <li><p>如果我们每次只对比<code>text</code>中的第一个字符，并且比完我们就将它剔除掉的话，于是我们每次都是从一个新的子<code>pattern</code>和一个新的子<code>text</code>去继续往下进行对比，比如说<code>abc -&gt; abc</code>，当对比完<code>text[0] -&gt; pattern[0]</code>之后，我们下一次就从<code>bc -&gt; bc</code>去对比；</p>
-<p>  也就是说：<code>text[0, n] -&gt; pattern[0, m]</code>的结果等于<code>text[0]-&gt;pattern[0] &amp;&amp; text[1, n]-&gt;pattern[1, m]</code></p>
+<p>  也就是说：<code>text[0, n] -&gt; pattern[0, m]</code>的结果等于<code>text[0]-&gt;pattern[0] && text[1, n]-&gt;pattern[1, m]</code></p>
 </li>
 <li><p>如果<code>pattern</code>不为空，根据上一个情况的扩展，对于<code>text[0]-&gt;pattern[0]</code>的判断，如果pattern是<code>.</code>，那么这次判断match，否则还是看text和pattern的字符是否相等；</p>
 </li>
@@ -404,32 +404,32 @@ Output: false</p>
     <span class="hljs-keyword">if</span> (pattern.isEmpty()) {
         <span class="hljs-keyword">return</span> text.isEmpty();
     }
-    <span class="hljs-type">boolean</span> <span class="hljs-variable">firstMatch</span> <span class="hljs-operator">=</span> (!text.isEmpty() &amp;&amp;
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">firstMatch</span> <span class="hljs-operator">=</span> (!text.isEmpty() &&
             (pattern.charAt(<span class="hljs-number">0</span>) == text.charAt(<span class="hljs-number">0</span>) || pattern.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;.&#x27;</span>));
 
-    <span class="hljs-keyword">if</span> (pattern.length() &gt;= <span class="hljs-number">2</span> &amp;&amp; pattern.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (pattern.length() &gt;= <span class="hljs-number">2</span> && pattern.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
         <span class="hljs-type">String</span> <span class="hljs-variable">subPattern</span> <span class="hljs-operator">=</span> pattern.substring(<span class="hljs-number">2</span>);
         <span class="hljs-keyword">return</span> (isMatch(text, subPattern) ||
-                (firstMatch &amp;&amp; isMatch(text.substring(<span class="hljs-number">1</span>), pattern)));
+                (firstMatch && isMatch(text.substring(<span class="hljs-number">1</span>), pattern)));
     } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">return</span> firstMatch &amp;&amp; isMatch(text.substring(<span class="hljs-number">1</span>), pattern.substring(<span class="hljs-number">1</span>));
+        <span class="hljs-keyword">return</span> firstMatch && isMatch(text.substring(<span class="hljs-number">1</span>), pattern.substring(<span class="hljs-number">1</span>));
     }
 }
 </code></pre>
-
-          <h4 id="9ee648cd">Ⅱ. DP</h4><p>DP能写出千种万种方式，只是想不想得到而已，附上我喜欢的<a href="https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235">一种</a></p>
+<h4 id="ⅱ-dp">Ⅱ. DP</h4>
+<p>DP能写出千种万种方式，只是想不想得到而已，附上我喜欢的<a href="https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235">一种</a></p>
 <pre><code>假如我们有：
 
 Tn = t1t2t3...tn-1tn
 Pm = p1p2p3...pm-1pm
 
 那么：
-Match(Tm, Pm) = Match(tn, pm) &amp;&amp; Match(Tn-1, Pm-1)        (1)
+Match(Tm, Pm) = Match(tn, pm) && Match(Tn-1, Pm-1)        (1)
 Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
                 then return Match(Ti-1, Pj-1);            (2)    
                 else
                     if (pj == &#x27;*&#x27;)
-                        if (ti != pj-1 &amp;&amp; pj-1 != &#x27;.&#x27;)
+                        if (ti != pj-1 && pj-1 != &#x27;.&#x27;)
                       then return Match(Ti, Pj-2);        (3)    // no match then skip &#x27;X*&#x27;
                       else
                         return 
@@ -458,7 +458,7 @@ Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
             <span class="hljs-keyword">if</span> (pj == si || pj == <span class="hljs-string">&#x27;.&#x27;</span>) {
                 dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pj == <span class="hljs-string">&#x27;*&#x27;</span>) {
-                <span class="hljs-keyword">if</span> (si != pcs[j - <span class="hljs-number">1</span>] &amp;&amp; pcs[j - <span class="hljs-number">1</span>] != <span class="hljs-string">&#x27;.&#x27;</span>) {
+                <span class="hljs-keyword">if</span> (si != pcs[j - <span class="hljs-number">1</span>] && pcs[j - <span class="hljs-number">1</span>] != <span class="hljs-string">&#x27;.&#x27;</span>) {
                     dp[i][j] = dp[i][j - <span class="hljs-number">2</span>];
                 } <span class="hljs-keyword">else</span> {
                     dp[i][j] = dp[i][j - <span class="hljs-number">1</span>] || dp[i - <span class="hljs-number">1</span>][j] || dp[i][j - <span class="hljs-number">2</span>];

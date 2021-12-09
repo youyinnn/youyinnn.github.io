@@ -1,41 +1,41 @@
-
-          <h2 id="b3b63817">Java</h2>
-          <h3 id="7605b6dd">Java8系列文章</h3><p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
-
-          <h3 id="5dccfe4">牛客 HttpServletRequest. getParameter</h3><p><img src="https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png" alt="image"></p>
+<h2 id="java">Java</h2>
+<h3 id="java8系列文章">Java8系列文章</h3>
+<p><a href="http://www.importnew.com/11908.html">http://www.importnew.com/11908.html</a></p>
+<h3 id="牛客-httpservletrequest-getparameter">牛客 HttpServletRequest. getParameter</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/40235928-620a249c-5ade-11e8-9b07-7dd6254daea3.png" alt="image"></p>
 <blockquote>
 <p> 编码格式由浏览器决定，浏览器根据html中指定的编码格式进行编码，tomcat根据指定的格式进行解码, tomcat默认的解码方式是ISO8859-1</p>
 </blockquote>
-
-          <h3 id="2f59ba57">Java Spliterator</h3><p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a>
+<h3 id="java-spliterator">Java Spliterator</h3>
+<p>参考1: <a href="https://segmentfault.com/q/1010000007087438">https://segmentfault.com/q/1010000007087438</a>
 参考2: <a href="https://blog.csdn.net/lh513828570/article/details/56673804">https://blog.csdn.net/lh513828570/article/details/56673804</a></p>
-
-          <h3 id="636d37aa">牛客 Integer的拆箱装箱</h3><p><img src="https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png" alt="image"></p>
+<h3 id="牛客-integer的拆箱装箱">牛客 Integer的拆箱装箱</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/40236440-22aec3b4-5ae0-11e8-8c36-740673df8f06.png" alt="image"></p>
 <p><img src="https://user-images.githubusercontent.com/23525754/40236420-137a4490-5ae0-11e8-91ae-c75518a5806c.png" alt="image"></p>
 <ul>
 <li>基本数据类型和包装类==比较的时候, 基本数据类型会拆箱, 所以是值比较</li>
 <li>valueOf()的取值还有IntegerCached的概念, 在[-127,127]之间的数会从池里面找, 有就返回同样的引用</li>
 </ul>
-
-          <h3 id="c8d63049">牛客 getDeclaredMethods()的范围</h3><p><img src="https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png" alt="image"></p>
+<h3 id="牛客-getdeclaredmethods的范围">牛客 getDeclaredMethods()的范围</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/40236595-ae2525f0-5ae0-11e8-89bb-c0649f2ba2b1.png" alt="image"></p>
 <p>Doc:</p>
 <blockquote>
 <p>public Method[] getDeclaredMethods()</p>
 <p>Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, </p>
 <p>including public, protected, default (package) access, and private methods, <strong>but excluding inherited methods</strong>.</p>
 </blockquote>
-
-          <h3 id="3f405a90">牛客 sleep()和wait()</h3><p><img src="https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png" alt="image"></p>
+<h3 id="牛客-sleep和wait">牛客 sleep()和wait()</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/40236826-52947b72-5ae1-11e8-8483-c867082dece0.png" alt="image"></p>
 <p><strong>Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行</strong></p>
-
-          <h5 id="73736d09">🔸共同点 ：</h5><ol>
+<h5 id="small_orange_diamond共同点-：">🔸共同点 ：</h5>
+<ol>
 <li>他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 </li>
 <li>wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException
 如果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
 需要注意的是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。</li>
 </ol>
-
-          <h5 id="bf0a7aab">🔸不同点 ：</h5><ol>
+<h5 id="small_orange_diamond不同点-：">🔸不同点 ：</h5>
+<ol>
 <li><p>每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 </p>
 </li>
 <li><p>wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用</p>
@@ -47,8 +47,8 @@
 <li><p>wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。</p>
 </li>
 </ol>
-
-          <h3 id="6f83359d">Java static方法中的变量是否存在线程安全问题</h3><p>我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。</p>
+<h3 id="java-static方法中的变量是否存在线程安全问题">Java static方法中的变量是否存在线程安全问题</h3>
+<p>我们在知道, 静态字段(static field)和静态方法(static method)的调用是通过类来调用。静态方法不对特定的实例操作，只能访问静态成员。实例方法可对特定的实例操作，既能访问静态成员，也能访问实例成员。</p>
 <p>那么,在多线程中使用静态方法是否有线程安全问题?这要看静态方法是是引起线程安全问题要看在静态方法中是否使用了静态成员。</p>
 <p>因为，在多线程中使用同一个静态方法时，每个线程使用各自的实例字段(instance field)的副本，而共享一个静态字段(static field)。所以说，如果该静态方法不去操作一个静态成员，只在方法内部使用实例字段(instance field)，不会引起安全性问题。但是，如果该静态方法操作了一个静态字段，则需要静态方法中采用互斥访问的方式进行安全处理。</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>
@@ -67,12 +67,12 @@
 <p>为什么呢？因为静态方法内声明的变量，每个线程调用时，都会新创建一份，而不会共用一个存储单元。比如这里的tmp,每个线程都会创建自己的一份，因此不会有线程安全问题。</p>
 <p>注意:静态变量，由于是在类加载时占用一个存储区，每个线程都是共用这个存储区的，所以如果在静态方法里使用了静态变量，这就会有线程安全问题！</p>
 </blockquote>
-
-          <h3 id="aba75350">Java多线程参考</h3><p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a>
+<h3 id="java多线程参考">Java多线程参考</h3>
+<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a>
 <a href="http://www.importnew.com/21136.html">http://www.importnew.com/21136.html</a>
 <a href="http://www.importnew.com/21089.html">http://www.importnew.com/21089.html</a></p>
-
-          <h3 id="5df1464c">Java字符串压缩</h3><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringCompress</span> {
+<h3 id="java字符串压缩">Java字符串压缩</h3>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringCompress</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">byte</span>[] compress(String paramString) {
         <span class="hljs-keyword">if</span> (paramString == <span class="hljs-literal">null</span>)
             <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
@@ -145,9 +145,9 @@
 }
 </code></pre>
 <p>参考：<a href="https://blog.csdn.net/isea533/article/details/8199848">https://blog.csdn.net/isea533/article/details/8199848</a></p>
-
-          <h3 id="2ff1cd53">Servlet和CGI的区别</h3>
-          <h4 id="61a5f5d2">CGI (Common Gateway Interface 公共网关接口)</h4><ol>
+<h3 id="servlet和cgi的区别">Servlet和CGI的区别</h3>
+<h4 id="cgi-common-gateway-interface-公共网关接口">CGI (Common Gateway Interface 公共网关接口)</h4>
+<ol>
 <li><p>定义：</p>
 <p>CGI(Common Gateway Interface 公共网关接口)是HTTP服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。</p>
 </li>
@@ -166,11 +166,11 @@
 </ol>
 </li>
 </ol>
-
-          <h4 id="276f89c">Servlet</h4><p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
+<h4 id="servlet">Servlet</h4>
+<p>Servlet是一种服务器端的Java应用程序，具有独立于平台和协议的特性,可以生成动态的Web页面。 它担当客户请求（Web浏览器或其他HTTP客户程序）与服务器响应（HTTP服务器上的数据库或应用程序）的中间层。 Servlet是位于Web 服务器内部的服务器端的Java应用程序，与传统的从命令行启动的Java应用程序不同，Servlet由Web服务器进行加载，该Web服务器必须包含支持Servlet的Java虚拟机。</p>
 <p>工作模式：客户端发送请求至服务器；服务器启动并调用Servlet，Servlet根据客户端请求生成响应内容并将其传给服务器；服务器将响应返回客户端。</p>
-
-          <h4 id="3fd957ba">Java Servlet与CGI的比较</h4><p>与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
+<h4 id="java-servlet与cgi的比较">Java Servlet与CGI的比较</h4>
+<p>与传统的CGI和许多其他类似CGI的技术相比，Java Servlet具有更高的效率，更容易使用，功能更强大，具有更好的可移植性，更节省投资。在未来的技术发展过程中，Servlet有可能彻底取代CGI。</p>
 <p>在传统的CGI中，每个请求都要启动一个新的进程，如果CGI程序本身的执行时间较短，启动进程所需要的开销很可能反而超过实际执行时间。而在Servlet中，每个请求由一个轻量级的Java线程处理(而不是重量级的操作系统进程)。</p>
 <p>在传统CGI中，如果有N个并发的对同一CGI程序的请求，则该CGI程序的代码在内存中重复装载了N次；而对于Servlet，处理请求的是N个线程，只需要一份Servlet类代码。在性能优化方面，Servlet也比CGI有着更多的选择。
 　　* 方便 　
@@ -180,8 +180,8 @@
 　　* 可移植性好
 Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet Enterprise Server写的Servlet无需任何实质上的改动即可移植到Apache、Microsoft IIS或者WebStar。几乎所有的主流服务器都直接或通过插件支持Servlet。</p>
 <p>转自：<a href="https://www.cnblogs.com/MuyouSome/p/3938203.html">https://www.cnblogs.com/MuyouSome/p/3938203.html</a></p>
-
-          <h3 id="9b2c2d07">Java HashMap好文</h3><p>源码解析：</p>
+<h3 id="java-hashmap好文">Java HashMap好文</h3>
+<p>源码解析：</p>
 <ul>
 <li><a href="https://www.cnblogs.com/xrq730/p/5030920.html">https://www.cnblogs.com/xrq730/p/5030920.html</a></li>
 <li><a href="http://www.importnew.com/20386.html">http://www.importnew.com/20386.html</a></li>
@@ -192,20 +192,20 @@ Servlet用Java编写，Servlet API具有完善的标准。因此，为IPlanet En
 <li><a href="https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=mobile_qq&amp;iid=5056005857&amp;utm_medium=toutiao_ios">https://www.toutiao.com/a6317489506677309698/?tt_from=mobile_qq&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=mobile_qq&amp;iid=5056005857&amp;utm_medium=toutiao_ios</a></li>
 <li><a href="https://blog.csdn.net/u012512634/article/details/72735183">https://blog.csdn.net/u012512634/article/details/72735183</a></li>
 </ul>
-
-          <h3 id="36c1a7da">fastjson 转时间</h3><p>在field上加注解，比如转ISO格式的时间</p>
+<h3 id="fastjson-转时间">fastjson 转时间</h3>
+<p>在field上加注解，比如转ISO格式的时间</p>
 <pre><code class="hljs language-java"><span class="hljs-meta">@JSONField(format=&quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss&#x27;Z&#x27;&quot;)</span>
 </code></pre>
-
-          <h3 id="bde36895">sun.misc.Unsafe</h3><ul>
+<h3 id="sunmiscunsafe">sun.misc.Unsafe</h3>
+<ul>
 <li><a href="http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/">http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/</a></li>
 <li><a href="https://blog.csdn.net/anLA_/article/details/78631026">https://blog.csdn.net/anLA_/article/details/78631026</a></li>
 <li><a href="https://blog.csdn.net/lvbaolin123/article/details/80527598">https://blog.csdn.net/lvbaolin123/article/details/80527598</a></li>
 </ul>
-
-          <h3 id="939cbccb">Java String pool</h3><p><a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">Where does Java&#39;s String constant pool live, the heap or the stack?</a></p>
-
-          <h3 id="11fbb3ea">Java 静态内部类和非静态内部类</h3><p><a href="https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones">Why prefer non-static inner classes over static ones?</a></p>
+<h3 id="java-string-pool">Java String pool</h3>
+<p><a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">Where does Java&#39;s String constant pool live, the heap or the stack?</a></p>
+<h3 id="java-静态内部类和非静态内部类">Java 静态内部类和非静态内部类</h3>
+<p><a href="https://softwareengineering.stackexchange.com/questions/238782/why-prefer-non-static-inner-classes-over-static-ones">Why prefer non-static inner classes over static ones?</a></p>
 <blockquote>
 <p>Joshua Bloch in Item 22 of his book &quot;Effective Java Second Edition&quot; tells when to use which kind of nested class and why. There are some quotes below:</p>
 <p>One common use of a static member class is as a public helper class, useful only in conjunction with its outer class. For example, consider an enum describing the operations supported by a calculator. The Operation enum should be a public static member class of the <code>Calculator</code> class. Clients of <code>Calculator</code> could then refer to operations using names like <code>Calculator.Operation.PLUS</code> and <code>Calculator.Operation.MINUS</code>.</p>
@@ -225,15 +225,15 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
 </code></pre>
 <p>If you declare a member class that does not require access to an enclosing instance, <em>always</em> put the <code>static</code> modifier in its declaration, making it a static rather than a nonstatic member class.</p>
 </blockquote>
-
-          <h3 id="52bd989c">bridge method</h3><ul>
+<h3 id="bridge-method">bridge method</h3>
+<ul>
 <li><a href="https://cn.aliyun.com/jiaocheng/330720.html">https://cn.aliyun.com/jiaocheng/330720.html</a></li>
 <li><a href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods">https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html#bridgeMethods</a></li>
 <li><a href="https://www.cnblogs.com/zsg88/p/7588929.html">https://www.cnblogs.com/zsg88/p/7588929.html</a></li>
 <li><a href="https://www.jianshu.com/p/250030ea9b28">https://www.jianshu.com/p/250030ea9b28</a></li>
 </ul>
-
-          <h3 id="c9c59767">finally &amp; return</h3><p>参考：<a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></p>
+<h3 id="finally--return">finally &amp; return</h3>
+<p>参考：<a href="https://www.cnblogs.com/lanxuezaipiao/p/3440471.html">https://www.cnblogs.com/lanxuezaipiao/p/3440471.html</a></p>
 <blockquote>
 <ol>
 <li><p><strong>finally块的语句在try或catch中的return语句执行之后返回之前执行</strong></p>
@@ -244,9 +244,9 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
 </li>
 </ol>
 </blockquote>
-
-          <h3 id="6a633537">动态代理</h3>
-          <h4 id="83033397">JDK动态代理</h4><p>机制：<strong>通过接口</strong></p>
+<h3 id="动态代理">动态代理</h3>
+<h4 id="jdk动态代理">JDK动态代理</h4>
+<p>机制：<strong>通过接口</strong></p>
 <p>流程：</p>
 <ol>
 <li>被代理类<code>Subject</code>需要实现包含相应需要做代理处理的方法，这些方法来自被代理类实现的<strong>若干接口</strong>；</li>
@@ -301,15 +301,15 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
     }
 }
 </code></pre>
-
-          <h4 id="5888e85b">Cglib动态代理</h4><p>机制：<strong>通过继承实现</strong></p>
+<h4 id="cglib动态代理">Cglib动态代理</h4>
+<p>机制：<strong>通过继承实现</strong></p>
 <p>流程：</p>
 <ol>
 <li>实现<code>MethodInterceptor </code>，在里面的<code>intercept</code>方法进行代理业务；</li>
 <li>获取Cglib的<code>Enhancer</code>对象，传入<code>SupperClass</code>，指定代理类，和<code>Callback</code>也就是一个<code>MethodInterceptor </code>实例；</li>
 </ol>
-
-          <h3 id="efb55492">泛型约束和局限性</h3><ol>
+<h3 id="泛型约束和局限性">泛型约束和局限性</h3>
+<ol>
 <li><p>不能把基本数据类型当成类型参数，要用包装类；</p>
 </li>
 <li><p>运行时类型检查只适用于原视类型：</p>
@@ -338,20 +338,20 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
 </code></pre>
 </li>
 </ol>
-
-          <h3 id="35e84e3f">ClassLoader</h3><p><a href="https://www.baeldung.com/java-classloaders">https://www.baeldung.com/java-classloaders</a></p>
-
-          <h4 id="644bac8e"><strong>Bootstrap Class Loader</strong></h4><p>Java classes are loaded by an instance of <em>java.lang.ClassLoader</em>. However, class loaders are classes themselves. Hence, the question is, who loads the <em>java.lang.ClassLoader</em> itself*?*</p>
+<h3 id="classloader">ClassLoader</h3>
+<p><a href="https://www.baeldung.com/java-classloaders">https://www.baeldung.com/java-classloaders</a></p>
+<h4 id="bootstrap-class-loader"><strong>Bootstrap Class Loader</strong></h4>
+<p>Java classes are loaded by an instance of <em>java.lang.ClassLoader</em>. However, class loaders are classes themselves. Hence, the question is, who loads the <em>java.lang.ClassLoader</em> itself*?*</p>
 <p>This is where the bootstrap or primordial class loader comes into the picture.</p>
 <p>It&#39;s mainly responsible for loading JDK internal classes, typically <em>rt.jar</em> and other core libraries located in <em>$JAVA_HOME/jre/lib directory</em>. Additionally, <strong>Bootstrap class loader serves as a parent of all the other *ClassLoader* instances</strong>.</p>
 <p><strong>This bootstrap class loader is part of the core JVM and is written in native code</strong> as pointed out in the above example. Different platforms might have different implementations of this particular class loader.</p>
-
-          <h4 id="6703f92f"><strong>Extension Class Loader</strong></h4><p>The <strong>extension class loader is a child of the bootstrap class loader and takes care of loading the extensions of the standard core Java classes</strong> so that it&#39;s available to all applications running on the platform.</p>
+<h4 id="extension-class-loader"><strong>Extension Class Loader</strong></h4>
+<p>The <strong>extension class loader is a child of the bootstrap class loader and takes care of loading the extensions of the standard core Java classes</strong> so that it&#39;s available to all applications running on the platform.</p>
 <p>Extension class loader loads from the JDK extensions directory, usually <em>$JAVA_HOME/lib/ext</em> directory or any other directory mentioned in the <em>java.ext.dirs</em> system property.</p>
-
-          <h4 id="658ad928"><strong>System Class Loader</strong></h4><p>The system or application class loader, on the other hand, takes care of loading all the application level classes into the JVM. <strong>It loads files found in the classpath environment variable, *-classpath* or *-cp* command line option</strong>. Also, it&#39;s a child of Extensions classloader.</p>
-
-          <h3 id="5a7c98e6">POJO &amp; JavaBean</h3><p>When we talk about a POJO(<strong>“Plain Old Java Object”</strong>), what we&#39;re describing is a straightforward type with no references to any particular frameworks. <strong>A POJO has no naming convention</strong> for our properties and methods.</p>
+<h4 id="system-class-loader"><strong>System Class Loader</strong></h4>
+<p>The system or application class loader, on the other hand, takes care of loading all the application level classes into the JVM. <strong>It loads files found in the classpath environment variable, *-classpath* or *-cp* command line option</strong>. Also, it&#39;s a child of Extensions classloader.</p>
+<h3 id="pojo--javabean">POJO &amp; JavaBean</h3>
+<p>When we talk about a POJO(<strong>“Plain Old Java Object”</strong>), what we&#39;re describing is a straightforward type with no references to any particular frameworks. <strong>A POJO has no naming convention</strong> for our properties and methods.</p>
 <p><strong>A JavaBean is still a POJO but introduces a strict set of rules around how we implement it:</strong></p>
 <ul>
 <li>Access levels – our properties are private and we expose getters and setters</li>
@@ -359,16 +359,16 @@ public class MySet&lt;E&gt; extends AbstractSet&lt;E&gt; {
 <li>Default Constructor – a no-argument constructor must be present so an instance can be created without providing arguments, for example during deserialization</li>
 <li>Serializable – implementing the <em>Serializable</em> interface allows us to store the state</li>
 </ul>
-
-          <h3 id="9dcc98cf">Finall 关键字</h3><ul>
+<h3 id="finall-关键字">Finall 关键字</h3>
+<ul>
 <li>修饰类：该类不能被继承；</li>
 <li>修饰方法：该方法不能被重载；</li>
 <li>修饰变量：该变量引用不能改变，并且必须在声明时就赋值，并且在编译时就已经赋值完毕，先于本类实例的构造方法；</li>
 <li>修饰方法参数：该参数在改方法内不能被改变引用；</li>
 </ul>
-
-          <h3 id="261390d4">异常小记</h3>
-          <h4 id="a900eb29">分类</h4><pre><code class="hljs language-graph">              ---&gt; Throwable &lt;--- 
+<h3 id="异常小记">异常小记</h3>
+<h4 id="分类">分类</h4>
+<pre><code class="hljs language-graph">              ---&gt; Throwable &lt;--- 
               |    (checked)    |
               |                 |
               |                 |
@@ -383,15 +383,15 @@ RuntimeException
 <li>非受检异常/运行时异常</li>
 <li>错误</li>
 </ol>
-
-          <h4 id="3aa12fb0">受检异常</h4><p>Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（<code>try-catch</code>）</p>
+<h4 id="受检异常">受检异常</h4>
+<p>Java编译器要求我们必须处理的异常，要么显式地往上层调用方法抛出该异常，要么必须原地处理（<code>try-catch</code>）</p>
 <ul>
 <li><em>IOException</em> – this exception is typically a way to say that <strong>something on the network, filesystem, or database failed</strong>.</li>
 <li><em>ServletException</em></li>
 <li><em>ClassNotFoundException</em> - occurs when an application tries to <strong>load a class through its fully-qualified name</strong> and <strong>can not find its definition on the classpath</strong></li>
 </ul>
-
-          <h4 id="f72c7c11">运行时异常</h4><p>运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用<code>try-catch</code>语句去处理他们</p>
+<h4 id="运行时异常">运行时异常</h4>
+<p>运行时异常即不要求我们处理的异常，因此我们可以不用显式地使用<code>try-catch</code>语句去处理他们</p>
 <ul>
 <li><em>ArrayIndexOutOfBoundsException</em> – this exception means that we tried to <strong>access a non-existent array index</strong>, like when trying to get index 5 from an array of length 3.</li>
 <li><em>ClassCastException –</em> this exception means that we tried to perform <strong>an illegal cast</strong>, like trying to convert a <em>String</em> into a <em>List</em>. We can usually avoid it by performing defensive <em>instanceof</em> checks before casting.</li>
@@ -400,18 +400,18 @@ RuntimeException
 <li><em>NullPointerException</em> – This exception means we tried to <strong>reference a <em>null</em> object</strong>. We can usually avoid it by either performing defensive <em>null</em> checks or by using <em>Optional.</em></li>
 <li><em>NumberFormatException</em> – This exception means that we tried to <strong>convert a <em>String</em> into a number, but the string contained illegal</strong> characters, like trying to convert “5f3” into a number.</li>
 </ul>
-
-          <h4 id="98710a97">错误</h4><p>错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出</p>
+<h4 id="错误">错误</h4>
+<p>错误都是非常严重的情况，比如内存泄露、栈溢出等等，而且我们也不会显示地在某个地方处理这些错误，而是希望它们一直往上抛出</p>
 <ul>
 <li><em>StackOverflowError –</em> this exception means that the <strong>stack trace is too big</strong>. This can sometimes happen in massive applications; however, it usually means that we have some <strong>infinite recursion</strong> happening in our code.</li>
 <li><em>NoClassDefFoundError</em> – this exception means that a class failed to load either due to <strong>not being on the classpath</strong> or <strong>due to failure in static initialization</strong>.</li>
 <li><em>OutOfMemoryError</em> –  this exception means that the JVM doesn&#39;t have any more memory available to allocate for more objects. Sometimes, this is due to a <strong>memory leak</strong>.</li>
 </ul>
-
-          <h4 id="1abae223">ClassNotFoundException &amp; NoClassDefFoundError</h4><p>前者是受检异常，就是在编译时就没找到这个类，压根就没有加载进classpath里；</p>
+<h4 id="classnotfoundexception--noclassdeffounderror">ClassNotFoundException &amp; NoClassDefFoundError</h4>
+<p>前者是受检异常，就是在编译时就没找到这个类，压根就没有加载进classpath里；</p>
 <p>后者是错误，是编译时没问题，运行时由于类在初始化静态内容的时候出错了，所以这个类也压根没被加载进运行时的classpath里；</p>
-
-          <h3 id="19e53ba8">Metaspace &amp; Method Area &amp; Perm Gen</h3><p>理一理这三个之间的关系：</p>
+<h3 id="metaspace--method-area--perm-gen">Metaspace &amp; Method Area &amp; Perm Gen</h3>
+<p>理一理这三个之间的关系：</p>
 <ul>
 <li>在JDK 7之前，方法区是<code>Perm Gen</code>的一部分；</li>
 <li>在JDK 7之前<code>interned-string</code>也就是平常说的字符串常量池是存储在<code>Perm Gen</code>的，由于<code>Perm Gen</code>的空间很小，所以经常被爆，于是Java 7先把字符串常量池移到了方法区；</li>

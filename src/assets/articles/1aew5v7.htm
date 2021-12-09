@@ -1,6 +1,6 @@
-
-          <h3 id="98f8fa23">Basic Algorithm In Binary Tree</h3>
-          <h4 id="281516c0">Traverse</h4><p>A Tree is typically traversed in two ways:</p>
+<h3 id="basic-algorithm-in-binary-tree">Basic Algorithm In Binary Tree</h3>
+<h4 id="traverse">Traverse</h4>
+<p>A Tree is typically traversed in two ways:</p>
 <ul>
 <li>Breadth First Traversal (Or Level Order Traversal)</li>
 <li>Depth First Traversals<ul>
@@ -45,8 +45,8 @@ There is difference in terms of extra space required.</p>
 </blockquote>
 </li>
 </ol>
-
-          <h5 id="366a6ede">BFS(BreathFirstSearch)</h5><p><strong>Idea:</strong></p>
+<h5 id="bfsbreathfirstsearch">BFS(BreathFirstSearch)</h5>
+<p><strong>Idea:</strong></p>
 <ol>
 <li>need a <strong>queue</strong></li>
 <li>need root node, and add it into queue</li>
@@ -72,12 +72,12 @@ There is difference in terms of extra space required.</p>
     }
 }
 </code></pre>
-
-          <h5 id="32d7db40">DFS(DepthFirstSearch)</h5><p>With the different position of root&#39;s visit, their 3 types of DFS: <strong>pre-order</strong>, <strong>in-order</strong>, <strong>post-order</strong>.</p>
+<h5 id="dfsdepthfirstsearch">DFS(DepthFirstSearch)</h5>
+<p>With the different position of root&#39;s visit, their 3 types of DFS: <strong>pre-order</strong>, <strong>in-order</strong>, <strong>post-order</strong>.</p>
 <p>There are two way we could use to implement it: <strong>1) loop with stack; 2) recursion</strong></p>
 <p>And we omit the recursion solusion here.</p>
-
-          <h6 id="993bd64d"><strong>Pre-Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+<h6 id="pre-order"><strong>Pre-Order</strong></h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
     LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ans;
     Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
@@ -92,8 +92,8 @@ There is difference in terms of extra space required.</p>
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h6 id="8dcb2ed0"><strong>In Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+<h6 id="in-order"><strong>In Order</strong></h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
     LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
     <span class="hljs-type">TreeNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> root;
@@ -110,8 +110,8 @@ There is difference in terms of extra space required.</p>
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h6 id="677fb254"><strong>Post Order</strong></h6><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
+<h6 id="post-order"><strong>Post Order</strong></h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> {
     Stack&lt;TreeNode&gt; s = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
     LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> ans;
@@ -126,8 +126,8 @@ There is difference in terms of extra space required.</p>
     <span class="hljs-keyword">return</span> ans;
 }
 </code></pre>
-
-          <h4 id="1bb8917">Insertion in level order</h4><p><strong>Idea:</strong> Traverse tree with level order, find a node which didn&#39;t have two child, insert the new node at here with level order.</p>
+<h4 id="insertion-in-level-order">Insertion in level order</h4>
+<p><strong>Idea:</strong> Traverse tree with level order, find a node which didn&#39;t have two child, insert the new node at here with level order.</p>
 <pre>
 tree: 
         10                                    10

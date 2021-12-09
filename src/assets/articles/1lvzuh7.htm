@@ -7,8 +7,8 @@
 <li><strong>“顺序排序”</strong>，因为索引是顺序存储，所以查询结果天然排序；</li>
 <li><strong>“索引即数据，数据即索引”</strong>，聚集索引的存储值就是数据本身；</li>
 </ul>
-
-          <h3 id="b798ff2b">使用B+树的索引过程</h3><p><img src="http://47.103.216.138/wp-content/uploads/2019/11/15727784554518.jpg" alt="img"></p>
+<h3 id="使用b树的索引过程">使用B+树的索引过程</h3>
+<p><img src="http://47.103.216.138/wp-content/uploads/2019/11/15727784554518.jpg" alt="img"></p>
 <p>现在假设我们要查找<code>id&gt;=18</code>并且<code>id&lt;40</code>的用户数据</p>
 <p>对应的sql语句如下，其中id为主键：</p>
 <pre><code class="hljs language-sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">&gt;=</span><span class="hljs-number">18</span> <span class="hljs-keyword">and</span> id <span class="hljs-operator">&lt;</span><span class="hljs-number">40</span>
@@ -30,12 +30,12 @@
 <p>具体流程如：</p>
 <p><img src="http://47.103.216.138/wp-content/uploads/2019/11/15727785424308.jpg" alt="img"></p>
 <p>而非聚集索引的查找流程也一样，只不过它最终返回的是记录的主键，然后再通过主键去聚集索引中查找数据，我们称这个行为叫做<strong>“回表”</strong></p>
-
-          <h3 id="b00be92a">索引匹配过程</h3>
-          <h4 id="956aeab4">Explain命令</h4><p>在了解索引匹配之前，我们先了解了解MySQL中一个对SQL执行过程进行解释的命令<code>explain</code>，</p>
+<h3 id="索引匹配过程">索引匹配过程</h3>
+<h4 id="explain命令">Explain命令</h4>
+<p>在了解索引匹配之前，我们先了解了解MySQL中一个对SQL执行过程进行解释的命令<code>explain</code>，</p>
 <p>我们需要了解各列的含义，接下来的内容转载整理自：<a href="https://www.cnblogs.com/mzhaox/p/11203042.html">https://www.cnblogs.com/mzhaox/p/11203042.html</a></p>
-
-          <h5 id="ef65433d">id</h5><p>id列的编号是 select 的序列号，有几个 select 就有几个id，并且id的顺序是按 select 出现的顺序增长的。MySQL将 select 查询分为简单查询和复杂查询。复杂查询分为三类：<strong>简单子查询、派生表（from语句中的子查询）、union 查询</strong>。</p>
+<h5 id="id">id</h5>
+<p>id列的编号是 select 的序列号，有几个 select 就有几个id，并且id的顺序是按 select 出现的顺序增长的。MySQL将 select 查询分为简单查询和复杂查询。复杂查询分为三类：<strong>简单子查询、派生表（from语句中的子查询）、union 查询</strong>。</p>
 <ol>
 <li><p>简单子查询</p>
 <pre><code class="hljs language-sql">mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> (<span class="hljs-keyword">select</span> <span class="hljs-number">1</span> <span class="hljs-keyword">from</span> actor limit <span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> film;
@@ -71,8 +71,8 @@
 <p>union结果总是放在一个匿名临时表中，临时表不在SQL总出现，因此它的id是NULL。</p>
 </li>
 </ol>
-
-          <h5 id="6f9bfcce">select_type</h5><p>select_type 表示对应行是是简单还是复杂的查询，如果是复杂的查询，又是上述三种复杂查询中的哪一种。</p>
+<h5 id="select_type">select_type</h5>
+<p>select_type 表示对应行是是简单还是复杂的查询，如果是复杂的查询，又是上述三种复杂查询中的哪一种。</p>
 <ol>
 <li><p><strong>simple</strong>：简单查询。查询不包含子查询和union；</p>
 </li>
@@ -105,12 +105,12 @@
 </code></pre>
 </li>
 </ol>
-
-          <h5 id="1bf8e684">table</h5><p>这一列表示 explain 的一行正在访问哪个表。</p>
+<h5 id="table">table</h5>
+<p>这一列表示 explain 的一行正在访问哪个表。</p>
 <p>当 from 子句中有子查询时，table列是 <derivenN> 格式，表示当前查询依赖 id=N 的查询，于是先执行 id=N 的查询。</p>
 <p>当有 union 时，UNION RESULT 的 table 列的值为 &lt;union1,2&gt;，1和2表示参与 union 的 select 行id。</p>
-
-          <h5 id="90bc59cf">type（重点）</h5><p>这一列表示关联类型或访问类型，即MySQL决定如何查找表中的行。</p>
+<h5 id="type（重点）">type（重点）</h5>
+<p>这一列表示关联类型或访问类型，即MySQL决定如何查找表中的行。</p>
 <p>依次从最优到最差分别为：<strong>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL</strong></p>
 <ul>
 <li><p><strong>NULL</strong>：mysql能够在优化阶段分解查询语句，在执行阶段用不着再访问表或索引。</p>
@@ -199,23 +199,23 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 </code></pre>
 </li>
 </ul>
-
-          <h5 id="31adb4b7">possible_keys</h5><p>这一列显示查询可能使用哪些索引来查找。</p>
+<h5 id="possible_keys">possible_keys</h5>
+<p>这一列显示查询可能使用哪些索引来查找。</p>
 <p>explain 时可能出现 possible_keys 有列，而 key 显示 NULL 的情况，这种情况是因为表中数据不多，mysql认为索引对此查询帮助不大，选择了全表查询。</p>
 <p>如果该列是NULL，则没有相关的索引。在这种情况下，可以通过检查 where 子句看是否可以创造一个适当的索引来提高查询性能，然后用 explain 查看效果。</p>
-
-          <h5 id="2b31a049">key</h5><p>这一列显示mysql实际采用哪个索引来优化对该表的访问。
+<h5 id="key">key</h5>
+<p>这一列显示mysql实际采用哪个索引来优化对该表的访问。
 如果没有使用索引，则该列是 NULL。如果想强制mysql使用或忽视possible_keys列中的索引，在查询中使用 force index、ignore index。</p>
-
-          <h5 id="3562c7af">key_len</h5><p>这一列显示了mysql在索引里使用的字节数，通过这个值可以算出具体使用了索引中的哪些列。</p>
-
-          <h5 id="cb7ab6c2">ref</h5><p>这一列显示了在key列记录的索引中，表查找值所用到的列或常量，常见的有：const（常量），func，NULL，字段名（例：film.id）</p>
-
-          <h5 id="256a3324">rows</h5><p>这一列是mysql估计要读取并检测的行数，注意这个不是结果集里的行数。</p>
-
-          <h5 id="53abcd37">filtered</h5><p>某个表经过搜索条件过滤后剩余记录条数的百分比</p>
-
-          <h5 id="b9248174">extra</h5><p>这一列展示的是额外信息。常见的重要值如下：</p>
+<h5 id="key_len">key_len</h5>
+<p>这一列显示了mysql在索引里使用的字节数，通过这个值可以算出具体使用了索引中的哪些列。</p>
+<h5 id="ref">ref</h5>
+<p>这一列显示了在key列记录的索引中，表查找值所用到的列或常量，常见的有：const（常量），func，NULL，字段名（例：film.id）</p>
+<h5 id="rows">rows</h5>
+<p>这一列是mysql估计要读取并检测的行数，注意这个不是结果集里的行数。</p>
+<h5 id="filtered">filtered</h5>
+<p>某个表经过搜索条件过滤后剩余记录条数的百分比</p>
+<h5 id="extra">extra</h5>
+<p>这一列展示的是额外信息。常见的重要值如下：</p>
 <ul>
 <li><p><strong>distinct</strong>: 一旦mysql找到了与行相联合匹配的行，就不再搜索了</p>
 <pre><code class="hljs language-sql">mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> name <span class="hljs-keyword">from</span> film <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> film_actor <span class="hljs-keyword">on</span> film.id <span class="hljs-operator">=</span> film_actor.film_id;
@@ -282,8 +282,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 </code></pre>
 </li>
 </ul>
-
-          <h4 id="6fd77e31">匹配过程</h4><p>假如我们有表：</p>
+<h4 id="匹配过程">匹配过程</h4>
+<p>假如我们有表：</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> mytable3\G
 <span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span>[ <span class="hljs-number">1.</span> <span class="hljs-type">row</span> ]<span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span>
 <span class="hljs-keyword">Table</span>        <span class="hljs-operator">|</span> mytable3
@@ -306,8 +306,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">|</span> mytable3 <span class="hljs-operator">|</span> <span class="hljs-number">0</span>          <span class="hljs-operator">|</span> <span class="hljs-keyword">PRIMARY</span>  <span class="hljs-operator">|</span> <span class="hljs-number">3</span>            <span class="hljs-operator">|</span> c           <span class="hljs-operator">|</span> A         <span class="hljs-operator">|</span> <span class="hljs-number">6</span>           <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>   <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span> <span class="hljs-operator">|</span>      <span class="hljs-operator">|</span> BTREE      <span class="hljs-operator">|</span>         <span class="hljs-operator">|</span>               <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
 </code></pre>
-
-          <h5 id="19f1de30">全列查询</h5><p>如果我们提供了所有主键的等值条件，那么就会使用const类型的查询</p>
+<h5 id="全列查询">全列查询</h5>
+<p>如果我们提供了所有主键的等值条件，那么就会使用const类型的查询</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> a <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">and</span> b <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;name&#x27;</span> <span class="hljs-keyword">and</span> c <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;age&#x27;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+-------+---------------+---------+---------+-------------------+------+----------+--------+</span>
 <span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> select_type <span class="hljs-operator">|</span> <span class="hljs-keyword">table</span>    <span class="hljs-operator">|</span> partitions <span class="hljs-operator">|</span> type  <span class="hljs-operator">|</span> possible_keys <span class="hljs-operator">|</span> key     <span class="hljs-operator">|</span> key_len <span class="hljs-operator">|</span> <span class="hljs-keyword">ref</span>               <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> filtered <span class="hljs-operator">|</span> Extra  <span class="hljs-operator">|</span>
@@ -315,8 +315,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">|</span> <span class="hljs-number">1</span>  <span class="hljs-operator">|</span> SIMPLE      <span class="hljs-operator">|</span> mytable3 <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>     <span class="hljs-operator">|</span> const <span class="hljs-operator">|</span> <span class="hljs-keyword">PRIMARY</span>       <span class="hljs-operator">|</span> <span class="hljs-keyword">PRIMARY</span> <span class="hljs-operator">|</span> <span class="hljs-number">158</span>     <span class="hljs-operator">|</span> const,const,const <span class="hljs-operator">|</span> <span class="hljs-number">1</span>    <span class="hljs-operator">|</span> <span class="hljs-number">100.0</span>    <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span> <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+-------+---------------+---------+---------+-------------------+------+----------+--------+</span>
 </code></pre>
-
-          <h5 id="c5f73885">最左前缀查询</h5><pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> a <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span>;
+<h5 id="最左前缀查询">最左前缀查询</h5>
+<pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> a <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+---------+---------+-------+------+----------+--------+</span>
 <span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> select_type <span class="hljs-operator">|</span> <span class="hljs-keyword">table</span>    <span class="hljs-operator">|</span> partitions <span class="hljs-operator">|</span> type <span class="hljs-operator">|</span> possible_keys <span class="hljs-operator">|</span> key     <span class="hljs-operator">|</span> key_len <span class="hljs-operator">|</span> <span class="hljs-keyword">ref</span>   <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> filtered <span class="hljs-operator">|</span> Extra  <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+---------+---------+-------+------+----------+--------+</span>
@@ -324,8 +324,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+---------+---------+-------+------+----------+--------+</span>
 </code></pre>
 <p>我们的索引有3列，但我们只用到了最左边的一列，所以type为ref</p>
-
-          <h5 id="57c85373">非最左前缀查询</h5><p>但是当我们不从索引列的最左边开始提供条件的时候：</p>
+<h5 id="非最左前缀查询">非最左前缀查询</h5>
+<p>但是当我们不从索引列的最左边开始提供条件的时候：</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> b <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;name&#x27;</span> <span class="hljs-keyword">and</span> c <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+--------+---------+--------+------+----------+-------------+</span>
 <span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> select_type <span class="hljs-operator">|</span> <span class="hljs-keyword">table</span>    <span class="hljs-operator">|</span> partitions <span class="hljs-operator">|</span> type <span class="hljs-operator">|</span> possible_keys <span class="hljs-operator">|</span> key    <span class="hljs-operator">|</span> key_len <span class="hljs-operator">|</span> <span class="hljs-keyword">ref</span>    <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> filtered <span class="hljs-operator">|</span> Extra       <span class="hljs-operator">|</span>
@@ -341,8 +341,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">|</span> <span class="hljs-number">1</span>  <span class="hljs-operator">|</span> SIMPLE      <span class="hljs-operator">|</span> mytable3 <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>     <span class="hljs-operator">|</span> <span class="hljs-keyword">range</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">PRIMARY</span>       <span class="hljs-operator">|</span> <span class="hljs-keyword">PRIMARY</span> <span class="hljs-operator">|</span> <span class="hljs-number">158</span>     <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span> <span class="hljs-operator">|</span> <span class="hljs-number">2</span>    <span class="hljs-operator">|</span> <span class="hljs-number">100.0</span>    <span class="hljs-operator">|</span> <span class="hljs-keyword">Using</span> <span class="hljs-keyword">where</span> <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+-------+---------------+---------+---------+--------+------+----------+-------------+</span>
 </code></pre>
-
-          <h5 id="5631f7a6">表达式查询</h5><p>很不幸，如果查询条件中含有函数或表达式，则MySQL不会为这列使用索引（虽然某些在数学意义上可以使用）：</p>
+<h5 id="表达式查询">表达式查询</h5>
+<p>很不幸，如果查询条件中含有函数或表达式，则MySQL不会为这列使用索引（虽然某些在数学意义上可以使用）：</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> a <span class="hljs-operator">-</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+--------+---------+--------+------+----------+-------------+</span>
 <span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> select_type <span class="hljs-operator">|</span> <span class="hljs-keyword">table</span>    <span class="hljs-operator">|</span> partitions <span class="hljs-operator">|</span> type <span class="hljs-operator">|</span> possible_keys <span class="hljs-operator">|</span> key    <span class="hljs-operator">|</span> key_len <span class="hljs-operator">|</span> <span class="hljs-keyword">ref</span>    <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> filtered <span class="hljs-operator">|</span> Extra       <span class="hljs-operator">|</span>
@@ -350,8 +350,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">|</span> <span class="hljs-number">1</span>  <span class="hljs-operator">|</span> SIMPLE      <span class="hljs-operator">|</span> mytable3 <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>     <span class="hljs-operator">|</span> <span class="hljs-keyword">ALL</span>  <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>        <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span> <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span>  <span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">null</span><span class="hljs-operator">&gt;</span> <span class="hljs-operator">|</span> <span class="hljs-number">6</span>    <span class="hljs-operator">|</span> <span class="hljs-number">100.0</span>    <span class="hljs-operator">|</span> <span class="hljs-keyword">Using</span> <span class="hljs-keyword">where</span> <span class="hljs-operator">|</span>
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+--------+---------+--------+------+----------+-------------+</span>
 </code></pre>
-
-          <h5 id="b44c82a9">or查询</h5><p>对于<strong>同列</strong>的or查询，它实际上就转成一个针对该列的范围查询（如果是最左的话）；</p>
+<h5 id="or查询">or查询</h5>
+<p>对于<strong>同列</strong>的or查询，它实际上就转成一个针对该列的范围查询（如果是最左的话）；</p>
 <p>对于<strong>不同列</strong>的or查询，我们就把or的子条件当成一个独立的子句，如果子句不符合最左前缀，那子句查询还是会走全表扫描：</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> a <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">or</span> b <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;name&#x27;</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+--------+---------+--------+------+----------+-------------+</span>
@@ -361,9 +361,9 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+------+---------------+--------+---------+--------+------+----------+-------------+</span>
 </code></pre>
 <p>就算把它们拆成union也是一样的</p>
-
-          <h3 id="e224da0">索引的选择</h3>
-          <h4 id="f899e0ea">索引的建立</h4><p>并不是所有的查询我们都需要为其建立索引，索引虽然加快了查询速度，但索引也是有代价的：</p>
+<h3 id="索引的选择">索引的选择</h3>
+<h4 id="索引的建立">索引的建立</h4>
+<p>并不是所有的查询我们都需要为其建立索引，索引虽然加快了查询速度，但索引也是有代价的：</p>
 <ul>
 <li>索引文件本身要消耗存储空间；</li>
 <li>同时索引会加重插入、删除和修改记录时的负担；</li>
@@ -380,12 +380,12 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 </blockquote>
 </li>
 </ol>
-
-          <h4 id="f82ef9d8">主键选择</h4><p><strong>在使用InnoDB存储引擎时，如果没有特别的需要，请永远使用一个与业务无关的自增字段作为主键。</strong></p>
+<h4 id="主键选择">主键选择</h4>
+<p><strong>在使用InnoDB存储引擎时，如果没有特别的需要，请永远使用一个与业务无关的自增字段作为主键。</strong></p>
 <p>我们从B+树索引的特性中可以明白，索引本质上还是依赖主键的值去排序、排列、分页的，如果选用非自增的值作为主键，可能会导致索引树频繁进行移动、分页而产生大量的碎片，这样索引的性能会很低</p>
-
-          <h3 id="c044e099">优化器行为</h3>
-          <h4 id="cabcca87">覆盖索引</h4><p>这个在上节中说过，这回来explain一下：</p>
+<h3 id="优化器行为">优化器行为</h3>
+<h4 id="覆盖索引">覆盖索引</h4>
+<p>这个在上节中说过，这回来explain一下：</p>
 <pre><code class="hljs language-sql">mysql root<span class="hljs-variable">@youyinnn</span>.top:test<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">select</span> a <span class="hljs-keyword">from</span> mytable3 <span class="hljs-keyword">where</span> e <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> e <span class="hljs-operator">&lt;=</span> <span class="hljs-number">3000</span>;
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+-------+---------------+-------+---------+--------+------+----------+--------------------------+</span>
 <span class="hljs-operator">|</span> id <span class="hljs-operator">|</span> select_type <span class="hljs-operator">|</span> <span class="hljs-keyword">table</span>    <span class="hljs-operator">|</span> partitions <span class="hljs-operator">|</span> type  <span class="hljs-operator">|</span> possible_keys <span class="hljs-operator">|</span> key   <span class="hljs-operator">|</span> key_len <span class="hljs-operator">|</span> <span class="hljs-keyword">ref</span>    <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> filtered <span class="hljs-operator">|</span> Extra                    <span class="hljs-operator">|</span>
@@ -394,10 +394,10 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 <span class="hljs-operator">+</span><span class="hljs-comment">----+-------------+----------+------------+-------+---------------+-------+---------+--------+------+----------+--------------------------+</span>
 </code></pre>
 <p>假如有e的辅助索引，在查询a值的时候，直接返回结果，不回表全表扫</p>
-
-          <h4 id="1a37e2fe">不使用索引</h4><p>有的时候我们有**某非主键字段进行范围查找整行数据（select *）**的情况，对某个非主键字段进行范围查找，这时候虽然该字段可能有辅助索引，但是辅助索引并不能包含整行信息，于是查到辅助索引还要再查一次聚集索引，因为是书签，所以在磁盘上进行的是离散的而不是顺序的读操作，这时候优化器会选择直接利用聚集索引来依次查找</p>
-
-          <h3 id="a40c7374">索引相关面试题</h3><ol>
+<h4 id="不使用索引">不使用索引</h4>
+<p>有的时候我们有**某非主键字段进行范围查找整行数据（select *）**的情况，对某个非主键字段进行范围查找，这时候虽然该字段可能有辅助索引，但是辅助索引并不能包含整行信息，于是查到辅助索引还要再查一次聚集索引，因为是书签，所以在磁盘上进行的是离散的而不是顺序的读操作，这时候优化器会选择直接利用聚集索引来依次查找</p>
+<h3 id="索引相关面试题">索引相关面试题</h3>
+<ol>
 <li><p>为什么采用B+树而不采用哈希索引？</p>
 <blockquote>
 <ul>
@@ -446,8 +446,8 @@ mysql<span class="hljs-operator">&gt;</span> explain <span class="hljs-keyword">
 </blockquote>
 </li>
 </ol>
-
-          <h3 id="b5b4cbf8">参考</h3><ul>
+<h3 id="参考">参考</h3>
+<ul>
 <li><p><a href="https://www.hollischuang.com/archives/4110">Hollis</a>；</p>
 </li>
 <li><p><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html">张洋</a>；</p>

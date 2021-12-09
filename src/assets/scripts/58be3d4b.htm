@@ -1,6 +1,6 @@
-
-          <h2 id="d61b8fed">MySQL</h2>
-          <h3 id="3d23ec13">数据库三范式</h3><p><strong>第一范式（1NF）</strong></p>
+<h2 id="mysql">MySQL</h2>
+<h3 id="数据库三范式">数据库三范式</h3>
+<p><strong>第一范式（1NF）</strong></p>
 <p>数据表中的每一列，必须是不可拆分的最小单元，也即必须保证列的原子性；</p>
 <p><strong>第二范式（2NF）</strong></p>
 <p>满足<em><strong>1NF</strong></em>要求的所有列，每个非主键列都必须完全依赖域主键，目的是为了消除<strong>部分依赖</strong>；</p>
@@ -52,8 +52,8 @@
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
-
-          <h3 id="96abc5d3">MySQL用户管理</h3><pre><code class="hljs language-sql"><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 查看所有用户
+<h3 id="mysql用户管理">MySQL用户管理</h3>
+<pre><code class="hljs language-sql"><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 查看所有用户
 use mysql;
 <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;
 
@@ -81,15 +81,15 @@ flush privileges;
 </code></pre>
 <p><a href="https://www.cnblogs.com/gavin110-lgy/p/5773981.html">https://www.cnblogs.com/gavin110-lgy/p/5773981.html</a>
 <a href="https://www.cnblogs.com/clsn/p/8047028.html">https://www.cnblogs.com/clsn/p/8047028.html</a></p>
-
-          <h3 id="df55037a">MySQL自己更新自己</h3><p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
+<h3 id="mysql自己更新自己">MySQL自己更新自己</h3>
+<p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
 <p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
-
-          <h3 id="a40df642">MySQL系统体系架构</h3><p><img src="https://image.youyinnn.top/20200611194657.png" alt=""></p>
+<h3 id="mysql系统体系架构">MySQL系统体系架构</h3>
+<p><img src="https://image.youyinnn.top/20200611194657.png" alt=""></p>
 <p>根据图里我们可以发现，MySQL系统最核心的“存储引擎”是以插件的形式为系统提供服务的，这种架构提供了与存储引擎实现无关的一系列标准服务支持，让引擎的实现能够解放出来。</p>
 <p><strong>需要注意的是，存储引擎是基于表的，而不是数据库</strong></p>
-
-          <h3 id="fc665a67">MySQL各引擎介绍</h3><p><strong>InnoDB</strong></p>
+<h3 id="mysql各引擎介绍">MySQL各引擎介绍</h3>
+<p><strong>InnoDB</strong></p>
 <p>MySQL5.5.8以后的默认引擎，支持事物、行锁设计、外键、全文索引、非锁定读（默认读操作不会产生锁）</p>
 <p>使用多版本并发控制（MVCC）来支持高并发性，并实现了4中标准的隔离级别，能避免幻读；还提供了许多其他的特性来支持高性能高并发；每张表按照主键顺序进行存放；</p>
 <p><strong>MyISAM</strong></p>
@@ -103,20 +103,20 @@ flush privileges;
 <p><strong>Archive</strong></p>
 <p>只支持Insert和Select操作，特点是会对数据进行压缩，压缩比高，适合存储归档数据、日志信息等；</p>
 <p>虽然支持行锁，但是不支持事物；</p>
-
-          <h3 id="56fffafd">MySQL文件有哪些</h3>
-          <h4 id="51825ffa">日志文件</h4>
-          <h5 id="187a45e0">错误日志</h5><p>错误日志对MySQL的启动、运行、关闭过程进行记录，在MySQL用户操作出现错误的时候，错误信息会被记录在这个日志里</p>
+<h3 id="mysql文件有哪些">MySQL文件有哪些</h3>
+<h4 id="日志文件">日志文件</h4>
+<h5 id="错误日志">错误日志</h5>
+<p>错误日志对MySQL的启动、运行、关闭过程进行记录，在MySQL用户操作出现错误的时候，错误信息会被记录在这个日志里</p>
 <p>而系统也会在运行时发出一些警告，提示用户需要优化系统</p>
 <p>通过以下命令查看日志的位置：</p>
 <pre><code class="hljs language-sql"><span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;log_error&#x27;</span>;
 </code></pre>
-
-          <h5 id="f076e136">慢查询日志</h5><p>在MySQL启动的时候可以设置一个阈值，MySQL系统就会将运行时间超过这个阈值的SQL语句记录到慢查询日志中，如果出现这种SQL，你可能需要考虑是否能够优化或者拆分这个SQL业务相关的业务</p>
-
-          <h5 id="f7edf8d1">查询日志</h5><p>记录了所有用户对MySQL数据库的请求信息</p>
-
-          <h5 id="9a526718">二进制日志</h5><p>记录了所有MySQL数据库执行的更改操作，不包括select和show这类操作，二进制日志的作用主要有：</p>
+<h5 id="慢查询日志">慢查询日志</h5>
+<p>在MySQL启动的时候可以设置一个阈值，MySQL系统就会将运行时间超过这个阈值的SQL语句记录到慢查询日志中，如果出现这种SQL，你可能需要考虑是否能够优化或者拆分这个SQL业务相关的业务</p>
+<h5 id="查询日志">查询日志</h5>
+<p>记录了所有用户对MySQL数据库的请求信息</p>
+<h5 id="二进制日志">二进制日志</h5>
+<p>记录了所有MySQL数据库执行的更改操作，不包括select和show这类操作，二进制日志的作用主要有：</p>
 <ul>
 <li>恢复数据；</li>
 <li>复制数据；</li>
@@ -134,20 +134,20 @@ flush privileges;
 <li>ROW：记录表的更改情况；</li>
 <li>MIXED：一般使用STATEMENT，一些情况下会使用ROW格式；</li>
 </ul>
-
-          <h5 id="35634934">InnoDB存储引擎文件</h5><ul>
+<h5 id="innodb存储引擎文件">InnoDB存储引擎文件</h5>
+<ul>
 <li>表空间文件：InnoDB将存储的数据按照表空间进行存放，<strong>需要注意的是，这里还存放着undo log文件</strong>；</li>
 <li>重做日志文件：记录了对于InnoDB引擎的事务日志；不同的操作有不同个重做日志格式；一般数据库里只会有两个重做日志文件，而且是循环使用的，一个写满了再换另一个；重做日志文件不能设置地太大，否则数据恢复会很长时间，也不能太小，否则会频繁切换重做日志，而且会频繁触发<em><strong>checkpoint</strong></em>导致性能抖动；</li>
 </ul>
-
-          <h4 id="45fbd831">其他文件</h4><ul>
+<h4 id="其他文件">其他文件</h4>
+<ul>
 <li>数据库系统的配置文件；</li>
 <li>pid文件；</li>
 <li>套接字文件（socket）；</li>
 <li>表结构定义文件</li>
 </ul>
-
-          <h3 id="a8e34dc0">InnoDB逻辑存储结构</h3><p><img src="https://image.youyinnn.top/20200612124701.png" alt=""></p>
+<h3 id="innodb逻辑存储结构">InnoDB逻辑存储结构</h3>
+<p><img src="https://image.youyinnn.top/20200612124701.png" alt=""></p>
 <p>所有数据都被存放在一个空间中，称为<strong>表空间</strong>，而表空间又由<strong>段（segment）、区（extent）、页（page）</strong>组成</p>
 <p><strong>表空间</strong></p>
 <p>表空间是InnoDB存储引擎的最高层，所有数据都存放在表空间，默认情况下只有一个共享表空间，如果用参数配置了<code>innodb_file_per_table</code>，那么每张表内的数据可以单独放在一个表空间内</p>
@@ -172,8 +172,8 @@ flush privileges;
 </ul>
 <p><strong>行</strong></p>
 <p>InnoDB引擎是面向行的，每页最多允许存放7992行记录；</p>
-
-          <h3 id="b5cbb0c3">InnoDB约束类型&amp;概念</h3><p>关系型数据库系统和文件系统的一个区别是，关系型数据库本身能保证数据的完整性，不需要程序控制</p>
+<h3 id="innodb约束类型概念">InnoDB约束类型&amp;概念</h3>
+<p>关系型数据库系统和文件系统的一个区别是，关系型数据库本身能保证数据的完整性，不需要程序控制</p>
 <p>所有的关系型数据库都提供了约束机制，利用这个机制区保证数据完整性，一般来说，数据完整性包括：</p>
 <ul>
 <li>保证表中有一个主键，在InnoDB中可以使用Primary Key或者Unique Key约束来保证；</li>
@@ -200,15 +200,15 @@ flush privileges;
 </code></pre>
 <p><strong>约束和索引的区别</strong></p>
 <p>约束是逻辑上的概念，用来保证数据完整性，而索引是数据结构，不仅有逻辑概念，还代表着物理存储方式</p>
-
-          <h3 id="b79440c">触发器概念</h3><p>MySQL5.1之后，触发器的实现已经稳定，我们可以使用其来对数据进行约束，<strong>触发器的作用是在执行INSERT、UPDATE、DELETE操作的之前和之后自动调用SQL命令或者存储过程</strong></p>
+<h3 id="触发器概念">触发器概念</h3>
+<p>MySQL5.1之后，触发器的实现已经稳定，我们可以使用其来对数据进行约束，<strong>触发器的作用是在执行INSERT、UPDATE、DELETE操作的之前和之后自动调用SQL命令或者存储过程</strong></p>
 <p>最多可以为一个表建立6个触发器：INSERT、UPDATE、DELETE的Before和After各建立一个，目前只支持按照<strong>每行记录</strong>进行触发</p>
 <p>通过触发器，用户可以实现MySQL本身不支持的<strong>特性</strong>，比如Check约束（检查某个值的合法性）、物化视图、高级复制、审计等等；</p>
-
-          <h3 id="5f71a74e">视图概念</h3><p>视图的主要用途就算被用作为抽象装置，一些程序如果不需要关心表的结构，只需要按照视图定义来<strong>取数据</strong>或者<strong>更新数据</strong>，因此视图在一定程度上起到了安全层的作用；</p>
+<h3 id="视图概念">视图概念</h3>
+<p>视图的主要用途就算被用作为抽象装置，一些程序如果不需要关心表的结构，只需要按照视图定义来<strong>取数据</strong>或者<strong>更新数据</strong>，因此视图在一定程度上起到了安全层的作用；</p>
 <p>虽然视图只是虚拟表，没有物理文件，但是我们依然可以通过视图来<strong>更新数据</strong></p>
-
-          <h3 id="c15632b">事务ACID</h3><p><strong>原子性（Atomicity）</strong></p>
+<h3 id="事务acid">事务ACID</h3>
+<p><strong>原子性（Atomicity）</strong></p>
 <p>是指整个事务是一个不可切分的工作单位，整个事务中所有的数据库操作要都成功，该事务才算成功；事务中任何一个语句失败则整个事务都失败；</p>
 <p><strong>一致性（Consistency）</strong></p>
 <p>指事务从一个状态转变到下一个状态的过程中，事务的开始和结束后，数据库的完整性约束没有被破坏；例如某个字段是唯一的，在事务进行当中如果破坏了该字段的唯一性，系统会撤销该事务，然会到初始状态；</p>
@@ -217,8 +217,8 @@ flush privileges;
 <p>事务的隔离性要求每个对鞋事务的对象对其他事务的操作对象能够互相分离，即该事务提交前对其他事务都不可见，一般是用锁来实现；</p>
 <p><strong>持久性（Durability）</strong></p>
 <p>事务一旦提交，其结果是永久性的，即使发生宕机事故，数据库也能恢复该数据；</p>
-
-          <h3 id="45b70b19">SQL事务隔离级别</h3><p><strong>读未提交（READ UNCOMMITTED）</strong></p>
+<h3 id="sql事务隔离级别">SQL事务隔离级别</h3>
+<p><strong>读未提交（READ UNCOMMITTED）</strong></p>
 <p>能够读取到其他事务的正在修改中的<strong>未提交的结果</strong>，称之为脏读；而且性能上说这个隔离级别也没有比后面的级别好多少，反而问题多多</p>
 <p><strong>读已提交（READ COMMITTED）</strong></p>
 <p>大多数数据库的默认隔离级别（MySQL不是），简单来说就是只能够读取到已经提交过的结果，但是在同一次事务中读取某个数据两次可能会得到两个不同的结果（假如其他事务同时对该数据提交了两次修改）；所以该级别也叫不可重复读（nonrepeatable read）</p>
@@ -226,8 +226,8 @@ flush privileges;
 <p>可重复读解决了脏读、多次读取不一致的问题，但在理论上，标准的可重复读没有能够解决幻读的问题，即某个事务在读取<strong>范围内数据</strong>的时候，另一个事务在这个范围又插了一条数据，原来的事务再次读取这个范围就会读取到<strong>幻行</strong>，导致上下文不一致；而MySQL的InnoDB通过多版本<strong>并发控制（MVCC）</strong>解决了这个问题</p>
 <p><strong>串行化（SERIALIZABLE）</strong></p>
 <p>最高级别，强制事务串行执行，避免前面的各种问题，简单说就是在读取的每行上都加了锁，所以这个隔离级别的性能会比较低；</p>
-
-          <h3 id="9b6766c4">多版本并发控制（MVCC）</h3><p>MVCC其实并不是一个标准，但是大多数数据库或者引擎都实现了它，可以简单将其理解为<strong>行级锁</strong>的一个变种，但它在很多情况下都避免了对行加锁因此开销小，阻塞率低</p>
+<h3 id="多版本并发控制（mvcc）">多版本并发控制（MVCC）</h3>
+<p>MVCC其实并不是一个标准，但是大多数数据库或者引擎都实现了它，可以简单将其理解为<strong>行级锁</strong>的一个变种，但它在很多情况下都避免了对行加锁因此开销小，阻塞率低</p>
 <p>其基本思路是，所有操作后都会保留一个快照，事务的执行以快照版本为准，也就是说，无论一个需要时间的事务执行期间该记录被修改了多少次，该事务始终只看到该记录在该事务开始之前的样子，除非该事务自己修改了这个记录；所以根据事务开始的时机的不同，它看到的表数据可能不一样，但是一旦事务开启之后，它只能看到唯一一个版本的数据</p>
 <p>每个引擎对这个机制的实现不同，InnoDB的行为如下：</p>
 <ul>
@@ -241,8 +241,8 @@ flush privileges;
 <p>都是对<strong>该行</strong>的版本号进行改动</p>
 </li>
 </ul>
-
-          <h3 id="839f7960">MySQL中的死锁</h3><p>一个简单的死锁复现：</p>
+<h3 id="mysql中的死锁">MySQL中的死锁</h3>
+<p>一个简单的死锁复现：</p>
 <ol>
 <li>t1开启事务，更新行a，于是行a被t1锁住；</li>
 <li>t2开启事务，更新行b，于是行b被t2锁住；</li>
@@ -251,8 +251,8 @@ flush privileges;
 </ol>
 <p>数据库对死锁的处理实现了各种<strong>死锁检测</strong>和<strong>死锁超时</strong>，越复杂的系统，比如InnoDB，越能检测到死锁的循环依赖，并立即返回一个错误；或者当等待锁时机过长的时候，放弃锁请求，但是一般不这样做；</p>
 <p>InnoDB的处理是：<strong>将持有最少行级排他锁的事务进行回滚</strong></p>
-
-          <h3 id="b730636c">MySQL备份</h3><p>备份的分类如果按照<strong>备份方法</strong>可以分为：</p>
+<h3 id="mysql备份">MySQL备份</h3>
+<p>备份的分类如果按照<strong>备份方法</strong>可以分为：</p>
 <ul>
 <li><p>Hot Backup</p>
 <p>在数据库运行期间直接备份，对正在运行的数据库没有任何影响；</p>
@@ -307,32 +307,32 @@ flush privileges;
 <p>对数据库的二进制日志的备份，通常根据这个文件进行重放（replay）来完成数据库的恢复；</p>
 </li>
 </ul>
-
-          <h3 id="80e59eaa">MySQL复制</h3><p><strong>复制（Replication）</strong>是MySQL提供的一种高可用高性能的解决方案，在大型应用中是必不可少的，其步骤为：</p>
+<h3 id="mysql复制">MySQL复制</h3>
+<p><strong>复制（Replication）</strong>是MySQL提供的一种高可用高性能的解决方案，在大型应用中是必不可少的，其步骤为：</p>
 <ol>
 <li>主库需要记录二进制日志文件；</li>
 <li>备库将主库的二进制日志文件复制到自己的<strong>中继日志（Replay Log）</strong>；</li>
 <li>备库重放中继日志；</li>
 </ol>
 <p><img src="https://image.youyinnn.top/20200618165816.png" alt=""></p>
-
-          <h4 id="494047bc">复制要解决的问题</h4><ol>
+<h4 id="复制要解决的问题">复制要解决的问题</h4>
+<ol>
 <li>数据分布</li>
 <li>负载均衡</li>
 <li>备份</li>
 <li>高可用性和故障切换</li>
 <li>MySQL升级测试</li>
 </ol>
-
-          <h3 id="63a50369">Select count细节</h3>
-          <h4 id="49a3df0f">函数用法</h4><p><img src="http://47.103.216.138/wp-content/uploads/2019/10/15709530990912-1.jpg" alt="img"></p>
+<h3 id="select-count细节">Select count细节</h3>
+<h4 id="函数用法">函数用法</h4>
+<p><img src="http://47.103.216.138/wp-content/uploads/2019/10/15709530990912-1.jpg" alt="img"></p>
 <ol>
 <li>COUNT(expr) ，返回SELECT语句检索的行中expr的值不为NULL的数量。结果是一个BIGINT值。</li>
 <li>如果查询结果没有命中任何记录，则返回0</li>
 <li>但是，值得注意的是，<code>COUNT(*)</code> 的统计结果中，会<strong>包含</strong>值为NULL的行数。</li>
 </ol>
-
-          <h4 id="3100c3e5">相关问题</h4><ol>
+<h4 id="相关问题">相关问题</h4>
+<ol>
 <li><p>为什么《阿里巴巴Java开发手册》中强制要求不让使用 <code>COUNT(列名)</code>或 <code>COUNT(常量)</code>来替代 <code>COUNT(*)</code>呢？</p>
 <blockquote>
 <p>不要使用 <code>count(列名)</code>或 <code>count(常量)</code>来替代 <code>count(*)</code>，<code>count(*)</code>是 SQL92 定义的标 准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。 说明：<code>count(*)</code>会统计值为 NULL 的行，而 <code>count(列名)</code>不会统计此列为 NULL 值的行。</p>
@@ -348,8 +348,8 @@ flush privileges;
 </blockquote>
 </li>
 </ol>
-
-          <h3 id="63ef0551">MySQL内存占用太大</h3><pre><code>performance_schema_max_table_instances=400
+<h3 id="mysql内存占用太大">MySQL内存占用太大</h3>
+<pre><code>performance_schema_max_table_instances=400
 table_definition_cache=400
 table_open_cache=256
 performance_schema = off

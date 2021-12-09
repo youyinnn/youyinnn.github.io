@@ -1,9 +1,9 @@
-
-          <h3 id="594214">术语</h3><p><strong>稳定性：</strong>算法排序前后，相同值的元素的相对位置是否不变，变了就不稳定</p>
+<h3 id="术语">术语</h3>
+<p><strong>稳定性：</strong>算法排序前后，相同值的元素的相对位置是否不变，变了就不稳定</p>
 <p><strong>在位性：</strong>算法排序是否要借助额外的内存空间，需要就不在位</p>
-
-          <h3 id="fb0657e9">各数据对比</h3>
-          <h4 id="9fd6f8df">小数据量</h4><table>
+<h3 id="各数据对比">各数据对比</h3>
+<h4 id="小数据量">小数据量</h4>
+<table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -47,8 +47,8 @@
 <td align="center">✖️</td>
 </tr>
 </tbody></table>
-
-          <h4 id="ac9740ce">大数据量</h4><table>
+<h4 id="大数据量">大数据量</h4>
+<table>
 <thead>
 <tr>
 <th align="center">算法</th>
@@ -85,8 +85,8 @@
 </tr>
 </tbody></table>
 <hr>
-
-          <h3 id="beb7da16">BubbleSort</h3><blockquote>
+<h3 id="bubblesort">BubbleSort</h3>
+<blockquote>
 <p> 相邻元素之间两两比较，按照大小顺序作为交换，每一轮比较都把最大的元素安排到当前轮次的最后面</p>
 <p> 每一轮都把当前待排序列的最大元素从前往后“移动”到最后面，移动的过程形象为“冒泡”；</p>
 <p> 所用技术：<strong>蛮力法</strong></p>
@@ -112,8 +112,8 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="3ded12b7">SelectionSort</h3><blockquote>
+<h3 id="selectionsort">SelectionSort</h3>
+<blockquote>
 <p>每次扫描后n-i个元素 选出当前参与扫描的最小值，扫描结束后把最小值放置当前轮次的最前面</p>
 <p>每一轮都把最值放到端位置，例子中就是找的最小值，放到最前面，挑最值的过程称为“选择”</p>
 <p>所用技术：<strong>蛮力法</strong></p>
@@ -143,9 +143,9 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="d841d3b8">InsertionSort</h3>
-          <h4 id="6ced55ab">StraightInsertionSort</h4><blockquote>
+<h3 id="insertionsort">InsertionSort</h3>
+<h4 id="straightinsertionsort">StraightInsertionSort</h4>
+<blockquote>
 <p>将数组分为两部分，一部分是已经排序好的，另一部分是待插入的数组</p>
 <p>每次从待插入的数组中取出<strong>第一个元素</strong>元素和有序数组从后往前进行比较，待插入一个一个<strong>往前挤</strong>，直到找到合适的位置</p>
 <p>直到待插入部分元素为0</p>
@@ -164,7 +164,7 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">straightInsertionSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span>{
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> ; i &lt; arr.length ; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> && arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
             swap(arr, j, j - <span class="hljs-number">1</span>);
             j--;
         }
@@ -172,8 +172,8 @@
 }
 </code></pre>
 <hr>
-
-          <h4 id="f0ff6807">BinaryInsertionSort</h4><blockquote>
+<h4 id="binaryinsertionsort">BinaryInsertionSort</h4>
+<blockquote>
 <p>直接插入排序是将带插入元素从后往前比较和移动
 目的是为了在以排序序列中找到自己该插入的位置
 二分插入排序就是在查找该插入位置的时候，使用二分法去查找
@@ -204,16 +204,16 @@
 }
 </code></pre>
 <hr>
-
-          <h4 id="dc5d97d9">ShellSort</h4><blockquote>
+<h4 id="shellsort">ShellSort</h4>
+<blockquote>
 <p>希尔排序，是插入排序的一种，是直接插入排序的改进版</p>
 <p>希尔排序有好几种实现，根据选取的增量的不同而改变</p>
 <p>希尔排序是<strong>不稳定的、在位的</strong></p>
 <p>使用场景：处理<strong>基本有序</strong>，<strong>小量数据</strong></p>
 <p>一般的Shell排序的时间复杂度为**O(n^2)<strong>，好一点的有</strong>O(n^(3/2))<strong>，下界为</strong>O(n(log2n))<strong>，没有快排</strong>O(n(logn))**快</p>
 </blockquote>
-
-          <h5 id="b08c1202">SwapHalfShellSort</h5><blockquote>
+<h5 id="swaphalfshellsort">SwapHalfShellSort</h5>
+<blockquote>
 <p>常规实现，增量一半一半地砍，交换法做插入</p>
 </blockquote>
 <pre><code class="hljs language-java">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shellSort1</span><span class="hljs-params">(<span class="hljs-type">int</span> []arr)</span>{
@@ -222,7 +222,7 @@
             <span class="hljs-comment">//从第gap个元素，逐个对其所在组进行直接插入排序操作</span>
             <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> gap; i &lt; arr.length; i++){
                 <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-                <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - gap]){
+                <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> && arr[j] &lt; arr[j - gap]){
                     <span class="hljs-comment">//插入排序采用交换法</span>
                     swap(arr,j,j - gap);
                     j -= gap;
@@ -235,15 +235,15 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">straightInsertionSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span>{
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> ; i &lt; arr.length ; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> && arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
             swap(arr, j, j - <span class="hljs-number">1</span>);
             j--;
         }
     }
 }
 </code></pre>
-
-          <h5 id="1a786d5f">MoveHalfShellSort</h5><blockquote>
+<h5 id="movehalfshellsort">MoveHalfShellSort</h5>
+<blockquote>
 <p>移动法做插入，一半增量    ，这种实现意义不大</p>
 </blockquote>
 <pre><code class="hljs language-java">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shellSort2</span><span class="hljs-params">(<span class="hljs-type">int</span> []arr)</span>{
@@ -254,7 +254,7 @@
                 <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
                 <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> arr[j];
                 <span class="hljs-keyword">if</span>(arr[j] &lt; arr[j - gap]){
-                    <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; temp &lt; arr[j - gap]){
+                    <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> && temp &lt; arr[j - gap]){
                         <span class="hljs-comment">//移动法</span>
                         arr[j] = arr[j - gap];
                         j -= gap;
@@ -266,8 +266,8 @@
     }
 </code></pre>
 <hr>
-
-          <h3 id="d9676976">MergeSort</h3><blockquote>
+<h3 id="mergesort">MergeSort</h3>
+<blockquote>
 <p>对于需要排序的数组，把它一分为二，递归分</p>
 <p>分到不可再分为止就开始合并，并且是有序地合并</p>
 <p>所用技术：<strong>分治法</strong></p>
@@ -294,7 +294,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">bLength</span> <span class="hljs-operator">=</span> brr.length;
     <span class="hljs-type">int</span> <span class="hljs-variable">cLength</span> <span class="hljs-operator">=</span> crr.length;
     <span class="hljs-type">int</span> <span class="hljs-variable">aIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, cIndex = <span class="hljs-number">0</span>, bIndex = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span> (bIndex &lt; bLength &amp;&amp; cIndex &lt; cLength) {
+    <span class="hljs-keyword">while</span> (bIndex &lt; bLength && cIndex &lt; cLength) {
         <span class="hljs-keyword">if</span> (brr[bIndex] &lt;= crr[cIndex]) {
             arr[aIndex++] = brr[bIndex++];
         } <span class="hljs-keyword">else</span> {
@@ -309,8 +309,8 @@
     }
 }
 </code></pre>
-
-          <h4 id="5d9db465">空间优化版本</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+<h4 id="空间优化版本">空间优化版本</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">int</span>[] tmp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
     mergeSort(nums, tmp, <span class="hljs-number">0</span>, nums.length - <span class="hljs-number">1</span>);
 }
@@ -329,7 +329,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">bi</span> <span class="hljs-operator">=</span> start,   bEnd = mid;
     <span class="hljs-type">int</span> <span class="hljs-variable">ci</span> <span class="hljs-operator">=</span> mid + <span class="hljs-number">1</span>, cEnd = end;
     <span class="hljs-type">int</span> <span class="hljs-variable">ti</span> <span class="hljs-operator">=</span> start;
-    <span class="hljs-keyword">while</span> (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
+    <span class="hljs-keyword">while</span> (bi &lt;= bEnd && ci &lt;= cEnd) {
         <span class="hljs-keyword">if</span> (arr[bi] &lt;= arr[ci]) {
             tmp[ti++] = arr[bi++];
         } <span class="hljs-keyword">else</span> {
@@ -349,8 +349,8 @@
     }
 }
 </code></pre>
-
-          <h4 id="31b274b8">排序索引数组版本</h4><p>为什么需要索引数组？参考：<a href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/">https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/</a></p>
+<h4 id="排序索引数组版本">排序索引数组版本</h4>
+<p>为什么需要索引数组？参考：<a href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/">https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/</a></p>
 <p><strong>一个元素在算法的执行过程中位置发生变化，我们还想定位它</strong>，这样的场景就可以使用索引数组：</p>
 <blockquote>
 <p>“原始数组” 不变，用于比较两个元素的大小，真正位置变换的是 “索引数组”。</p>
@@ -385,7 +385,7 @@
     }
 
     <span class="hljs-type">int</span> <span class="hljs-variable">ii</span> <span class="hljs-operator">=</span> start;
-    <span class="hljs-keyword">while</span> (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
+    <span class="hljs-keyword">while</span> (bi &lt;= bEnd && ci &lt;= cEnd) {
         <span class="hljs-keyword">if</span> (arr[tmp[bi]] &lt;= arr[tmp[ci]]) {
             index[ii++] = tmp[bi++];
         } <span class="hljs-keyword">else</span> {
@@ -401,8 +401,8 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="a7a1227f">QuickSort</h3><blockquote>
+<h3 id="quicksort">QuickSort</h3>
+<blockquote>
 <p> 以arr[l]为左界，arr[r]为右界，选择当前界限内的第一个元素作为分裂点</p>
 <p> 从两界向中间扫描为分裂点寻找一个合适的位置，使得分裂点左边的元素都小于等于分裂点</p>
 <p> 右边的元素都大于等于分裂点，再递归以分裂点对左右两边的子数组进行划分排序</p>
@@ -439,8 +439,8 @@
 <li><a href="https://www.jianshu.com/p/2c6f79e8ce6e">DualPivot的历史简介</a></li>
 </ul>
 </blockquote>
-
-          <h4 id="2200832d">BothSideQuickSort/DoublePointerQuickSort</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">bothSideQuickSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> {
+<h4 id="bothsidequicksortdoublepointerquicksort">BothSideQuickSort/DoublePointerQuickSort</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">bothSideQuickSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> {
     <span class="hljs-keyword">if</span> (left &lt; right) {
         <span class="hljs-type">int</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> partition(arr, left, right);
         bothSideQuickSort(arr, left, s - <span class="hljs-number">1</span>);
@@ -457,10 +457,10 @@
     <span class="hljs-comment">// 在一次快速排序中只要left的值比right小，我们就应该去移动，因为当前这次排序还没有完成</span>
     <span class="hljs-keyword">while</span> (left &lt; right) {
         <span class="hljs-comment">// 表示只有当前指针没有重合并且当前right指向的值大于val时，才会向左移动right</span>
-        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; arr[right] &gt;= <span class="hljs-keyword">var</span>) {
+        <span class="hljs-keyword">while</span> (left &lt; right && arr[right] &gt;= <span class="hljs-keyword">var</span>) {
             right--;
         }
-        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; arr[left] &lt;= <span class="hljs-keyword">var</span>) {
+        <span class="hljs-keyword">while</span> (left &lt; right && arr[left] &lt;= <span class="hljs-keyword">var</span>) {
             left++;
         }
         swap(arr, right, left);
@@ -471,8 +471,8 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="82ab626a">HeapSort</h3><blockquote>
+<h3 id="heapsort">HeapSort</h3>
+<blockquote>
 <p>堆排序很有意思，它的思想就是：</p>
 <p>将每个数组看作一个堆，然后我们将这个堆造成大顶堆（根的值在当前数组中最大）或者小顶堆（最小），然后如果是构造大顶堆，那么堆化成功的时候，将根交换到数组最后，这个时候等于找到了最大的元素了（排好了的意思），然后在这个最大元素之前的子数组规模中再造堆，直到造堆的规模为1为止</p>
 <p>这么看下来的话，有点选择排序的意思</p>
@@ -505,7 +505,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> arr[hole];
     <span class="hljs-keyword">for</span> (; hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt; nowSize; hole = child) {
         child = hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> &amp;&amp; arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> && arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
             child++;
         }
         <span class="hljs-keyword">if</span> (tmp &lt; arr[child]) {
@@ -516,8 +516,8 @@
 }
 </code></pre>
 <hr>
-
-          <h3 id="63d906b">CountingSort</h3><blockquote>
+<h3 id="countingsort">CountingSort</h3>
+<blockquote>
 <p>计数排序也是一种很有意思的算法，紫皮书上说到2种计数排序的思想，它是<strong>时空权衡</strong>思想的代表之一</p>
 <p>比较计数：是最直观的思想，针对待排序的每一个元素，算出列表中小于该元素值的元素<strong>个数</strong>，并把结果记录在一张表上，于是这个<strong>“个数”</strong>就是该元素在有序表中的位置。</p>
 <pre><code class="hljs language-graph">A[0..5]     62  31  84  96  19  47
@@ -550,8 +550,8 @@ explain：   比如有比62小的元素是2个，所以62应该在数组的2下�
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-
-          <h3 id="eb914193">BucketSort</h3><blockquote>
+<h3 id="bucketsort">BucketSort</h3>
+<blockquote>
 <p>待排序列表中的元素假如都能映射到一个<strong>天然有序的集合</strong>里，我们只需要计算出所有待排序列表中的元素在有序集合中<strong>出现的次数</strong>，就能按照<strong>次数</strong>将待排序列表转换为有序列表</p>
 <pre><code class="hljs language-java">A[<span class="hljs-number">0.</span><span class="hljs-number">.5</span>]     <span class="hljs-number">13</span>  <span class="hljs-number">11</span>  <span class="hljs-number">12</span>  <span class="hljs-number">13</span>  <span class="hljs-number">12</span>  <span class="hljs-number">12</span>
 map         <span class="hljs-number">11</span>  <span class="hljs-number">12</span>  <span class="hljs-number">13</span>
@@ -604,8 +604,8 @@ explain：   比如<span class="hljs-number">11</span>出现了<span class="hljs
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-
-          <h3 id="1d24ec65">BucketSort2</h3><blockquote>
+<h3 id="bucketsort2">BucketSort2</h3>
+<blockquote>
 <p>再补充一个场景限制，现有实现的分布式计数排序<strong>无法表达整数以外的特性</strong>，比如稳定性</p>
 <p>比方说我有一组元素**[3, 2, 2, 1]<strong>, 其中有两个2，第一个设为2a，后者2b，其他排序完成之后，能够表达出2a或者2b是否还在原来的</strong>相对位置<strong>，但是现在的分布率图，是无状态的，最终的结果仅是<code>result[i] = index + low</code>算出的，比如2元素的计数是</strong>2<strong>，这个</strong>2**无法区分到底是2a还是2b</p>
 <p>有一个方法是用queue数组来存储分布率，所以上面的序列的分布率可以为：</p>

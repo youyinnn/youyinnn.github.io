@@ -1,5 +1,5 @@
-
-          <h1 id="8350b2a7">Cron4j</h1><p>一些必要的单词解释：</p>
+<h1 id="cron4j">Cron4j</h1>
+<p>一些必要的单词解释：</p>
 <ol>
 <li>schedule 安排、调度（安排在有主语的时候使用 调用在没主语的时候使用）</li>
 <li>scheduler 调度器</li>
@@ -16,8 +16,8 @@
 </ol>
 <hr>
 <p><span id="1快速开始"></span></p>
-
-          <h3 id="53756903">1、快速开始：</h3><p>cron4j的主要实体是‘scheduler’，实例化<code>it.sauronsoftware.cron4j.Scheduler</code>之后，你可以在一年当中任意的时间段执行任意的任务（Task）。</p>
+<h3 id="1、快速开始：">1、快速开始：</h3>
+<p>cron4j的主要实体是‘scheduler’，实例化<code>it.sauronsoftware.cron4j.Scheduler</code>之后，你可以在一年当中任意的时间段执行任意的任务（Task）。</p>
 <p>要使用cron4j scheduler 你需要做下面四步：</p>
 <ol>
 <li>new一个Scheduler实例</li>
@@ -71,8 +71,8 @@ public class Quickstart {
 </ul>
 <hr>
 <p><span id="2调度模式-scheduling-pattern"></span></p>
-
-          <h3 id="889da3e1">2、调度模式 scheduling pattern</h3><p>&#39;scheduling pattern&#39;是一个 UNIX 的类定时任务模式，由一个以空格分隔为五个部分的字符串组成。每个部分代表着：</p>
+<h3 id="2、调度模式-scheduling-pattern">2、调度模式 scheduling pattern</h3>
+<p>&#39;scheduling pattern&#39;是一个 UNIX 的类定时任务模式，由一个以空格分隔为五个部分的字符串组成。每个部分代表着：</p>
 <p>分钟子模式（Minutes sub-pattern）：</p>
 <blockquote>
 <p>规定一小时中的哪个分钟会执行任务，取值范围为0-59。</p>
@@ -163,12 +163,12 @@ public class Quickstart {
 </blockquote>
 <hr>
 <p><span id="3如何调度-schedule重新调度-reschedule脱离调度-deschedule一个任务task"></span></p>
-
-          <h3 id="df8392bc">3、如何调度 schedule、重新调度 reschedule、脱离调度 deschedule一个任务（Task）</h3>
-          <h5 id="458f8eb8">（1）调度</h5><p>创建Task的最简单最常用的方法就是实现<code>java.lang.Runnable</code>接口，任务创建好的时候，它可以被<code>it.sauronsoftware.cron4j.Scheduler.schedule(String, Runnable)</code>方法安排进调度器中，如果调度模式有格式异常，将会抛出<code>it.sauronsoftware.cron4j.InvalidPatternException</code>异常。</p>
+<h3 id="3、如何调度-schedule、重新调度-reschedule、脱离调度-deschedule一个任务（task）">3、如何调度 schedule、重新调度 reschedule、脱离调度 deschedule一个任务（Task）</h3>
+<h5 id="（1）调度">（1）调度</h5>
+<p>创建Task的最简单最常用的方法就是实现<code>java.lang.Runnable</code>接口，任务创建好的时候，它可以被<code>it.sauronsoftware.cron4j.Scheduler.schedule(String, Runnable)</code>方法安排进调度器中，如果调度模式有格式异常，将会抛出<code>it.sauronsoftware.cron4j.InvalidPatternException</code>异常。</p>
 <p>创建Task的另一种方法就是继承抽象方法<code>it.sauronsoftware.cron4j.Task</code>，这种方式比上一种方式更加强大，它可以使开发者访问一些cron4j提供的特性。你可以在“<a href="#6">建立自定义的任务 Task</a>”小节中了解到更多相关用法。Task的实例可以被<code>schedule(String, Task)</code>方法和<code>schedule(SchedulingPattern, Task)</code>方法安排进调度器中。</p>
-
-          <h5 id="c1cf9ac5">（2）重新调度/脱离调度</h5><p>在调度器对象的调度方法<code>schedule</code>会返回一个ID值（String类型）用来识别和检索已经安排过的操作。</p>
+<h5 id="（2）重新调度脱离调度">（2）重新调度/脱离调度</h5>
+<p>在调度器对象的调度方法<code>schedule</code>会返回一个ID值（String类型）用来识别和检索已经安排过的操作。</p>
 <p>这个ID可以被用来之后做：</p>
 <ul>
 <li>重新调度该任务（需要改变它的调度模式）</li>
@@ -185,8 +185,8 @@ public class Quickstart {
 </ul>
 <hr>
 <p><span id="4如何调度系统程序"></span></p>
-
-          <h3 id="14c4df1f">4、如何调度系统程序</h3><ul>
+<h3 id="4、如何调度系统程序">4、如何调度系统程序</h3>
+<ul>
 <li>使用类<code>ProcessTask</code>可以很简单的完成系统程序的调度<pre><code>ProcessTask task = new ProcessTask(&quot;C:\\Windows\\System32\\notepad.exe&quot;);
 Scheduler scheduler = new Scheduler();
 scheduler.schedule(&quot;* * * * *&quot;, task);
@@ -228,8 +228,8 @@ task.setStdinFile(new File(&quot;in.txt&quot;));
 </code></pre>
 <hr>
 <p><span id="5如何从调度配置文件中调度程序"></span></p>
-
-          <h3 id="2b48e387">5、如何从调度配置文件中调度程序</h3><p>cron4j调度器可以从调度配置文件中调度一系列的程序流程</p>
+<h3 id="5、如何从调度配置文件中调度程序">5、如何从调度配置文件中调度程序</h3>
+<p>cron4j调度器可以从调度配置文件中调度一系列的程序流程</p>
 <p>你需要准备一个调度配置文件，这和UNIX中crontab的用法非常相似，并且把文件通过<code>scheduleFile(File)</code>方法注册到调度器里面。</p>
 <p>调度配置文件也可以通过<code>deschedule(File)</code>方法来脱离调度。</p>
 <p>已经调度过的调度配置文件可以调用<code>getScheduledFiles()</code>方法来检索到。</p>
@@ -237,8 +237,8 @@ task.setStdinFile(new File(&quot;in.txt&quot;));
 <p>cron4j的调度配置文件的声明规则可以从“<a href="#14cron%E8%A7%A3%E6%9E%90%E5%99%A8">Cron解析器</a>”小节中了解到。</p>
 <hr>
 <p><span id="6创建自定义的任务-task"></span></p>
-
-          <h3 id="45cc6dc7">6、创建自定义的任务 Task</h3><p>一个<code>java.lang.Runnable</code>对象是一个简单的Task，但是为了获得对整个任务的控制权你还需要继承<code>it.sauronsoftware,cron4j.Task</code>类（注意这是一个抽象类）。</p>
+<h3 id="6、创建自定义的任务-task">6、创建自定义的任务 Task</h3>
+<p>一个<code>java.lang.Runnable</code>对象是一个简单的Task，但是为了获得对整个任务的控制权你还需要继承<code>it.sauronsoftware,cron4j.Task</code>类（注意这是一个抽象类）。</p>
 <p>有两种比较简单的创建形式：
 （1）实现Runnable接口的时候：任务就是run方法所执行的语句。
 （2）继承Task抽象类的时候：任务就是需要实现的<code>execute(TaskExecutionContext)</code>方法所执行的语句。</p>
@@ -293,8 +293,8 @@ task.setStdinFile(new File(&quot;in.txt&quot;));
 <p><a href="#index">回到索引</a></p>
 <hr>
 <p><span id="7创建自定义的收集器-collector"></span></p>
-
-          <h3 id="8a2455e6">7、创建自定义的收集器 Collector</h3><p>通过任务收集器提供的API，你可以在调度器里面创建和插入你自己的任务源（task source）。</p>
+<h3 id="7、创建自定义的收集器-collector">7、创建自定义的收集器 Collector</h3>
+<p>通过任务收集器提供的API，你可以在调度器里面创建和插入你自己的任务源（task source）。</p>
 <p>cron4j调度器支持注册一个或多个<code>it.sauronsoftware.cron4j.TaskCollector</code>实例，你只需要调用<code>addTaskCollector(TaskCollector)</code>方法即可。</p>
 <p>被注册的收集器可以被调度器对象调用<code>getTaskCollectors</code>方法索引到，之前的收集器可以调用<code>removeTaskCollector(TaskCollector)</code>方法从调度器中移除。</p>
 <p>收集器可以在任意的时间被添加（注册）、查询（索引）、移除，即使是在调度器正在运行的状态下也可以。</p>
@@ -309,8 +309,8 @@ task.setStdinFile(new File(&quot;in.txt&quot;));
 </blockquote>
 <hr>
 <p><span id="8创建自定义的监听器来监控你的调度器"></span></p>
-
-          <h3 id="52e0744c">8、创建自定义的监听器来监控你的调度器</h3><p>cron4j提供了<code>it.sauronsoftware,cron4j.SchedulerListener</code>类，我们可以使用它的API来对调度器的事件进行监听。</p>
+<h3 id="8、创建自定义的监听器来监控你的调度器">8、创建自定义的监听器来监控你的调度器</h3>
+<p>cron4j提供了<code>it.sauronsoftware,cron4j.SchedulerListener</code>类，我们可以使用它的API来对调度器的事件进行监听。</p>
 <p>调度监听器需要实现以下方法：</p>
 <pre><code>taskLaunching(TaskExecutor)
 这个方法会在每个调度任务启动的时候被调度器调用
@@ -328,8 +328,8 @@ taskFailed(TaskExecutor, Throwable)
 <p>调度监听器可以在任何时候被注册或者移除，即使是在调度器正在运行的时候。</p>
 <hr>
 <p><span id="9执行器-executors"></span></p>
-
-          <h3 id="97c9b773">9、执行器 Executors</h3><p>每当调度器被开启并且运行的时候，你可以通过方法索引到它的执行器。</p>
+<h3 id="9、执行器-executors">9、执行器 Executors</h3>
+<p>每当调度器被开启并且运行的时候，你可以通过方法索引到它的执行器。</p>
 <p>执行器非常像一个线程，它是被调度器用来执行任务的利器。</p>
 <p>你可以调用<code>Scheduler.getExecutingTasks()</code>方法来获得当前正在运行的执行器。</p>
 <p>你也可以通过调度监听器来获得执行器（见“<a href="#8%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8%E6%9D%A5%E7%9B%91%E6%8E%A7%E4%BD%A0%E7%9A%84%E8%B0%83%E5%BA%A6%E5%99%A8">8、创建自定义的监听器来监控你的调度器</a>”小节）。</p>
@@ -412,13 +412,13 @@ completenessValueChanged(TaskExecutor, double)
 <p><a href="#index">回到索引</a></p>
 <hr>
 <p><span id="10手动启动任务"></span></p>
-
-          <h3 id="d56d65b3">10、手动启动任务</h3><p>如果调度器以及开启并且处于运行中，你是有可能手动启动一个任务的，你甚至可以不用安排调度模式。</p>
+<h3 id="10、手动启动任务">10、手动启动任务</h3>
+<p>如果调度器以及开启并且处于运行中，你是有可能手动启动一个任务的，你甚至可以不用安排调度模式。</p>
 <p>你可以使用<code>Scheduler.launch(Task)</code>方法，任务就会立马被执行，这个方法会返回该任务的TaskExecutor（执行器）实例，你可以使用它来控制整个任务的执行过程。</p>
 <hr>
 <p><span id="11在指定时区下运行"></span></p>
-
-          <h3 id="320e2a68">11、在指定时区下运行</h3><p>在默认的情况下，调度器会在系统默认的时区中运行。换句话说，一个“ 0 2 * * * ”的调度模式会根据系统时区在当地时间每天的2（am）时执行任务。</p>
+<h3 id="11、在指定时区下运行">11、在指定时区下运行</h3>
+<p>在默认的情况下，调度器会在系统默认的时区中运行。换句话说，一个“ 0 2 * * * ”的调度模式会根据系统时区在当地时间每天的2（am）时执行任务。</p>
 <p>你可以为调度器设置不同于系统默认时区的时区作为它的工作时区。</p>
 <p>调用<code>Scheduler.setTimeZone(TimeZone)</code>方法和<code>Scheduler.getTimeZone()</code>方法就可以控制这个属性。</p>
 <p>一旦调度器的默认时区被改变，系统当前运行时会在解释调度模式的时候去区适应你所提供的时区。那么结果会在你指定的时区中按照你指定的调度模式去执行任务。假设有以下的情况：</p>
@@ -428,8 +428,8 @@ completenessValueChanged(TaskExecutor, double)
 <p>调度器会把调度模式和系统时间进行比较，然后把GTM+1时区下的10:00转换到GTM+3，这意味着10：00变成了12：00，这个结果会被运用到调度器中去执行任务。所以，在给定的设置下，任务会在模式“ 0 12 * * * ”中执行，而不是模式“ 0 10 * * * ” 。</p>
 <hr>
 <p><span id="12守护线程-daemon-threads"></span></p>
-
-          <h3 id="6086c0c6">12、守护线程 Daemon threads</h3><p>JVM只有在当前运行线程全部都是守护线程的时候才会退出，cron4j调度器可以被配置为只生产守护线程。为了控制这个特性，你需要调用<code>Scheduler.setDaemon(boolean)</code>方法，这个方法必须在调度器被开启之前调用，方法的默认值是false，你可以调用<code>Scheduler.isDaemon()</code>方法来检测当前调度器生成的线程是否是守护线程。</p>
+<h3 id="12、守护线程-daemon-threads">12、守护线程 Daemon threads</h3>
+<p>JVM只有在当前运行线程全部都是守护线程的时候才会退出，cron4j调度器可以被配置为只生产守护线程。为了控制这个特性，你需要调用<code>Scheduler.setDaemon(boolean)</code>方法，这个方法必须在调度器被开启之前调用，方法的默认值是false，你可以调用<code>Scheduler.isDaemon()</code>方法来检测当前调度器生成的线程是否是守护线程。</p>
 <br>
 
 <blockquote>
@@ -437,8 +437,8 @@ completenessValueChanged(TaskExecutor, double)
 </blockquote>
 <hr>
 <p><span id="13预报器-predictor"></span></p>
-
-          <h3 id="933fa50f">13、预报器 Predictor</h3><p><code>it.sauronsoftware.cron4j.Predictor</code>类可以预测你的调度模式什么时候会被匹配到。</p>
+<h3 id="13、预报器-predictor">13、预报器 Predictor</h3>
+<p><code>it.sauronsoftware.cron4j.Predictor</code>类可以预测你的调度模式什么时候会被匹配到。</p>
 <p>假如你想知道调度器在使用模式“ 0 3 jan-jun,sep-dec mon-fri ”的情况下什么时候会执行任务，你可以使用预报器对象去预测接下来n次任务的执行时间：</p>
 <pre><code>String pattern = &quot;0 3 * jan-jun,sep-dec mon-fri&quot;;
 Predictor p = new Predictor(pattern);
@@ -459,8 +459,8 @@ Thu Sep 07 03:00:00 CST 2017
 </blockquote>
 <hr>
 <p><span id="14cron解析器"></span></p>
-
-          <h3 id="12428723">14、Cron解析器</h3><p><code>it.sauronsoftware.cron4j.CronParser</code>类可以被用来解类crontab形式的文件以及字符流。</p>
+<h3 id="14、cron解析器">14、Cron解析器</h3>
+<p><code>it.sauronsoftware.cron4j.CronParser</code>类可以被用来解类crontab形式的文件以及字符流。</p>
 <p>如果你想根据类crontab形式的文件去安排一系列的任务，你可以不需要使用Cron解析器，你只需要调用<code>Scheduler.scheduleFile(File)</code>方法把文件添加到调度器里面就可以了。</p>
 <p>如果<code>Scheduler.scheduleFile(File)</code>方法还不能够满足你的需求的话，你可以考虑使用Cron解析器去安排任务。</p>
 <p>举个栗子，如果你想从远程源获取任务安排表，可是远程源并不支持<code>java.io.File</code>对象去操作的话（比如远程服务器上的文档、数据库中的数据设置等等），这时候你可以自己实现<code>it.sauronsoftware.cron4j.TaskCollector</code>类，好让Cron解析器更方便的去解析任何类crontab内容。</p>
@@ -546,10 +546,10 @@ Thu Sep 07 03:00:00 CST 2017
 <br>
 <br></li>
 </ul>
-
-          <h1 id="62ac7b04">部分实践演示代码</h1><p><span id="1collector-exp"></span></p>
-
-          <h3 id="ef0910b2">1、Collector exp</h3><pre><code>public class CollectorExp {
+<h1 id="部分实践演示代码">部分实践演示代码</h1>
+<p><span id="1collector-exp"></span></p>
+<h3 id="1、collector-exp">1、Collector exp</h3>
+<pre><code>public class CollectorExp {
 
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler();

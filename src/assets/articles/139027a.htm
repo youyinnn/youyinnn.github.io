@@ -1,5 +1,5 @@
-
-          <h3 id="fccefbaf">前言</h3><p>不知不觉写到第六坎了，前面刀剑磨刀石内功心法都有了，感觉自己应该很厉害了，其实不是，这一个月因为考试末尾和实习，断断续续的看，反反复复的看，越看越精神，越看越心虚。</p>
+<h3 id="前言">前言</h3>
+<p>不知不觉写到第六坎了，前面刀剑磨刀石内功心法都有了，感觉自己应该很厉害了，其实不是，这一个月因为考试末尾和实习，断断续续的看，反反复复的看，越看越精神，越看越心虚。</p>
 <p>无论怎么说，短板还是得慢慢补上来，保持谦逊，虚心学习。</p>
 <p>回到整体，前面由内到外说了Java并发中很基本的几件事：</p>
 <ul>
@@ -16,8 +16,8 @@
 <li><strong>双重检查锁延迟初始化的错误与正确示范</strong></li>
 </ul>
 <hr>
-
-          <h3 id="f3aca1e4">死锁</h3><p>死锁是多个以上的process互相等待对方释放资源而进入永久等待的一种情况，要产生死锁，就必须同时满足一下四个条件：</p>
+<h3 id="死锁">死锁</h3>
+<p>死锁是多个以上的process互相等待对方释放资源而进入永久等待的一种情况，要产生死锁，就必须同时满足一下四个条件：</p>
 <ul>
 <li><p><strong>互斥条件</strong></p>
 <p>  ​    即某个资源在一段时间内只能由一个进程占有，不能同时被两个或两个以上的进程占有。这种独占资源如CD-ROM驱动器，打印机等等，必须在占有该资源的进程主动释放它之后，其它进程才能占有该资源。这是由资源本身的属性所决定的。如独木桥就是一种独占资源，两方的人不能同时过桥。</p>
@@ -33,12 +33,12 @@
 </li>
 </ul>
 <p>死锁的处理可以分为：预防，避免，检测和解除</p>
-
-          <h4 id="715e00ec">死锁预防</h4><p>这是一种较为简单、直观的事先预防方法，方法是破坏产生死锁的4个条件，就算破坏一个，死锁也不会产生。这是一种静态方法。</p>
-
-          <h4 id="20615b44">死锁避免</h4><p>系统在运行时分配资源的时候，能够对资源分配情况进行动态检查，如果结果良好，则允许分配，如果结果显示分配后会出现死锁，则不予分配。这是一种动态方法。</p>
-
-          <h4 id="b8aca52a">检测和解除</h4><ul>
+<h4 id="死锁预防">死锁预防</h4>
+<p>这是一种较为简单、直观的事先预防方法，方法是破坏产生死锁的4个条件，就算破坏一个，死锁也不会产生。这是一种静态方法。</p>
+<h4 id="死锁避免">死锁避免</h4>
+<p>系统在运行时分配资源的时候，能够对资源分配情况进行动态检查，如果结果良好，则允许分配，如果结果显示分配后会出现死锁，则不予分配。这是一种动态方法。</p>
+<h4 id="检测和解除">检测和解除</h4>
+<ul>
 <li><p>检测</p>
 <p>  ​    不事先采取限制措施，也不检测系统是否进入安全区，运行系统在运行时发生死锁，但是会通过系统设置的检查机制，检测出死锁发生的地方。</p>
 </li>
@@ -69,8 +69,8 @@
     }
 }
 </code></pre>
-
-          <h3 id="10b22002">“等待-通知”</h3><blockquote>
+<h3 id="等待-通知">“等待-通知”</h3>
+<blockquote>
 <p>在就餐的时候，厨师和服务员之间的交互就是一种等待通知模式：</p>
 <ol>
 <li>厨师需要一定的时间去做菜</li>
@@ -78,8 +78,8 @@
 <li>服务员取菜的时机是取决于厨师的，只有当厨师将菜放到“台面”上，并“通知（notify）”服务员，服务员菜开始干活</li>
 </ol>
 </blockquote>
-
-          <h4 id="825defa0">范式</h4><pre><code class="hljs language-java"><span class="hljs-keyword">synchronized</span>(对象) {
+<h4 id="范式">范式</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">synchronized</span>(对象) {
     <span class="hljs-keyword">while</span>(退出等待的条件不满足){
         对象.wait();
     }
@@ -91,8 +91,8 @@
     对象.notifyAll()；
 }
 </code></pre>
-
-          <h4 id="e4a6aa27">实现</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WaitNotifyParadigm</span> {
+<h4 id="实现">实现</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WaitNotifyParadigm</span> {
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;lock&quot;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">wait</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
@@ -137,8 +137,8 @@ T2 processing: 3
 T2 done process, notifyAll...
 T1 stop waitting !
 </code></pre>
-
-          <h4 id="3796f15e">有超时的“等待-通知”</h4><p>要搭配<code>wait()</code>的超时机制的话，就得在条件中也考虑超时，我们可以加两个变量来完成超时：</p>
+<h4 id="有超时的等待-通知">有超时的“等待-通知”</h4>
+<p>要搭配<code>wait()</code>的超时机制的话，就得在条件中也考虑超时，我们可以加两个变量来完成超时：</p>
 <ul>
 <li>left：表示剩余多少时间就超时</li>
 <li>end：表示超时时间的完整毫秒数</li>
@@ -155,7 +155,7 @@ T1 stop waitting !
                 System.out.println(<span class="hljs-string">&quot;T1 started to wait...&quot;</span>);
                 <span class="hljs-type">long</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> timeout;
                 <span class="hljs-type">long</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> System.currentTimeMillis() + timeout;
-                <span class="hljs-keyword">while</span> (wait &amp;&amp; left &gt; <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">while</span> (wait && left &gt; <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">try</span> {
                         lock.wait(left);
                     } <span class="hljs-keyword">catch</span> (InterruptedException e) {
@@ -184,8 +184,8 @@ T1 stop waitting !
     }
 }
 </code></pre>
-
-          <h3 id="3cc534bb">“生产者/消费者”</h3><p>利用wait/notify机制，先上一段多消费者/多生产者的示例</p>
+<h3 id="生产者消费者">“生产者/消费者”</h3>
+<p>利用wait/notify机制，先上一段多消费者/多生产者的示例</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestProducerConsumer2</span> {
 
     <span class="hljs-keyword">static</span> <span class="hljs-type">Integer</span> <span class="hljs-variable">limit</span> <span class="hljs-operator">=</span> <span class="hljs-number">50</span>;
@@ -279,8 +279,8 @@ T1 stop waitting !
 <p>P/C之间各通过对方的LOCK来唤醒对方</p>
 <p>生产/消费到达limit之后，各在自己的LOCK上等待</p>
 <p>消费者之间通过消费者LOCK保证消费同步，生产者之间通过生产者LOCK保证生产同步</p>
-
-          <h3 id="837b6316">双重检查锁延迟初始化的错误与正确示范</h3><p>关于双重检查锁的由来就不再多说，我们看看双重检查的错误示范：</p>
+<h3 id="双重检查锁延迟初始化的错误与正确示范">双重检查锁延迟初始化的错误与正确示范</h3>
+<p>关于双重检查锁的由来就不再多说，我们看看双重检查的错误示范：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DoubleCheckLocking</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Instance instance;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
@@ -300,8 +300,8 @@ T1 stop waitting !
 <p>在线程执行到line4的时候，代码读取到instance不为空，但是instance所引用的对象可能还没有完成对象初始化</p>
 <p>即现在不为空的对象其实并不具备工作能力</p>
 </blockquote>
-
-          <h4 id="dd6b17e8">探究</h4><p>代码的第七行（<code>instance = new Instance();</code>）问题就出在这里，我们可以把这句话分解为以下三行：</p>
+<h4 id="探究">探究</h4>
+<p>代码的第七行（<code>instance = new Instance();</code>）问题就出在这里，我们可以把这句话分解为以下三行：</p>
 <ol>
 <li>memory = allocate();        // 1 分配对象的内存空间</li>
 <li>ctorInstance(memory);       // 2 初始化对象</li>
@@ -355,8 +355,8 @@ T1 stop waitting !
 <li>禁止2和3的重排序</li>
 <li>允许重排序，但是禁止其他线程感知到这个重排序</li>
 </ul>
-
-          <h4 id="4e8be891">基于volatile的解决方法</h4><pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SafeDoubleCheckLocking</span> {
+<h4 id="基于volatile的解决方法">基于volatile的解决方法</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SafeDoubleCheckLocking</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Instance instance;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
         <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) {                            
@@ -371,8 +371,8 @@ T1 stop waitting !
 }
 </code></pre>
 <p>将instance声明为volatile变量，这样做可以<strong>禁止2和3的重排序</strong></p>
-
-          <h4 id="b570e7b5">基于内部类和类初始化的解决方案</h4><p>在JVM初始化类的时候，JVM首先会获取一个锁，保证多个线程同时初始化这个类的同步性，而类的加载和初始化工作，会准备好类中所有的静态变量</p>
+<h4 id="基于内部类和类初始化的解决方案">基于内部类和类初始化的解决方案</h4>
+<p>在JVM初始化类的时候，JVM首先会获取一个锁，保证多个线程同时初始化这个类的同步性，而类的加载和初始化工作，会准备好类中所有的静态变量</p>
 <p>基于这个特性，我们可以有另外一种线程安全的延迟初始化方案——<code>Initialization On Demand Holder idiom</code></p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InstanceFactory</span> {
     <span class="hljs-keyword">private</span> statci <span class="hljs-keyword">class</span> <span class="hljs-title class_">InstanceHolder</span> {

@@ -1,7 +1,7 @@
-
-          <h2 id="86d9b50a">网络</h2>
-          <h3 id="991b5d">TCP/UDP</h3>
-          <h4 id="352a6470">UDP特点</h4><blockquote>
+<h2 id="网络">网络</h2>
+<h3 id="tcpudp">TCP/UDP</h3>
+<h4 id="udp特点">UDP特点</h4>
+<blockquote>
 <ul>
 <li>UDP是<strong>无连接</strong>的</li>
 <li>UDP使用尽最大努力交付，但是<strong>不保证可靠交付</strong></li>
@@ -11,8 +11,8 @@
 <li>UDP首部的开销小</li>
 </ul>
 </blockquote>
-
-          <h4 id="be896287">TCP特点</h4><blockquote>
+<h4 id="tcp特点">TCP特点</h4>
+<blockquote>
 <ul>
 <li>TCP是<strong>面向连接</strong>的</li>
 <li>每一条TCP连接只能由两个端点，<strong>每一条TCP连接只能是点对点的</strong></li>
@@ -21,8 +21,8 @@
 <li>面向字节流</li>
 </ul>
 </blockquote>
-
-          <h3 id="a1dc0816">TCP可靠传输保证机制</h3><p><strong>停止等待协议：</strong> 每发完一个分组就停止发送，直到收到上一个分组的确认信息。若超过规定时间没有接收到确认信息，边认为是分组丢失，开始重传。</p>
+<h3 id="tcp可靠传输保证机制">TCP可靠传输保证机制</h3>
+<p><strong>停止等待协议：</strong> 每发完一个分组就停止发送，直到收到上一个分组的确认信息。若超过规定时间没有接收到确认信息，边认为是分组丢失，开始重传。</p>
 <p><strong>连续ARQ协议：</strong>  发送方采用滑动窗口的形式，处于滑动窗口的分组可以直接发送出去；接收方一般采用累积确认的方式，也就是说接受方不必对接收到的每一个分组都进行确认，而是对按序到达的最后一个分组进行确认，而发送方每接收到一个确认，窗口就向前滑动一定距离。</p>
 <p><strong>流量控制：</strong>协调发送方和接收方的收发速率，利用滑动窗口来协调，使用探测报文来探测当前应该发送的速率，采用<a href="http://baike.sogou.com/v10500918.htm?fromTitle=Nagle%E7%AE%97%E6%B3%95">Nagle算法</a></p>
 <p><strong>拥塞控制：</strong>
@@ -38,9 +38,9 @@
 </ul>
 <p><strong>快重传：</strong>要求收到方每收到一个时序的报文段之后就立即发出重复确认，而不要等到自己发送数据时才进行捎带确认。而发送方只要一连收到三个重复确认就应当立即重传对方尚未接受到的报文，而不必等待为报文设置的重传计时器到期。</p>
 <p><strong>快回复：</strong>与快重传配合使用，当发送方连续收到三个重复确认的时候，就执行“乘法减小”算法，将慢开始门限减半。将拥塞窗口设置为慢开始门限减半之后的值，并开始指向拥塞避免算法。</p>
-
-          <h3 id="d8c320fd">TCP/IP握手</h3>
-          <h4 id="e69a0656">建立连接</h4><ol>
+<h3 id="tcpip握手">TCP/IP握手</h3>
+<h4 id="建立连接">建立连接</h4>
+<ol>
 <li><p><strong>客户端</strong>请求建立连接：SYN=1，seq=x；</p>
 </li>
 <li><p><strong>服务器</strong>对<strong>客户端</strong>的请求进行响应：SYN=1，ACK=1，seq=y，ack=x+1；</p>
@@ -48,16 +48,16 @@
 <li><p><strong>客户端</strong>对<strong>服务器端</strong>的响应信息进行回应：ACK=1，seq=x+1，ack=y+1；</p>
 </li>
 </ol>
-
-          <h4 id="cb3d8215">断开连接</h4><ol>
+<h4 id="断开连接">断开连接</h4>
+<ol>
 <li><strong>客户端</strong>请求断开连接： FIN=1，seq = u；</li>
 <li><strong>服务端</strong>对<strong>客户端</strong>的请求应答：ACK=1，seq=v，ack=u+1；</li>
 <li><strong>服务端</strong>请求断开连接：FIN=1，ACK=1，seq=w，ack=u+1；</li>
 <li><strong>客户端</strong>对<strong>服务端</strong>的请求应答：ACK=1，seq=u+1，ack=w+1；</li>
 </ol>
 <p><img src="https://pic1.zhimg.com/80/v2-8720bd64871a5452df583fdab8207d64_1440w.jpg" alt="img"></p>
-
-          <h3 id="fc10e7da">对于游戏来说 怎么选择TCP和UDP?</h3><ul>
+<h3 id="对于游戏来说-怎么选择tcp和udp">对于游戏来说 怎么选择TCP和UDP?</h3>
+<ul>
 <li><p>如果是由客户端间歇性的发起无状态的查询，并且偶尔发生延迟是可以容忍，那么使用HTTP/HTTPS吧。</p>
 </li>
 <li><p>如果客户端和服务器都可以独立发包，但是偶尔发生延迟可以容忍（比如：在线的纸牌游戏，许多MMO类的游戏），那么使用TCP长连接吧。</p>
@@ -66,14 +66,14 @@
 </li>
 </ul>
 <p>转自: <a href="http://blog.jobbole.com/64638/">http://blog.jobbole.com/64638/</a></p>
-
-          <h3 id="255ca103">OSI七层网络模型</h3><p><img src="https://image.youyinnn.top/20200626085325.png" alt=""></p>
-
-          <h3 id="1795c716">TCP/IP四层模型</h3><p><img src="https://image.youyinnn.top/20200625181452.png" alt=""></p>
+<h3 id="osi七层网络模型">OSI七层网络模型</h3>
+<p><img src="https://image.youyinnn.top/20200626085325.png" alt=""></p>
+<h3 id="tcpip四层模型">TCP/IP四层模型</h3>
+<p><img src="https://image.youyinnn.top/20200625181452.png" alt=""></p>
 <p><img src="https://image.youyinnn.top/20200625181433.png" alt=""></p>
-
-          <h3 id="88605a5b">ARP与RARP</h3>
-          <h4 id="cca5cfac">ARP：拿IP地址问MAC地址</h4><ol>
+<h3 id="arp与rarp">ARP与RARP</h3>
+<h4 id="arp：拿ip地址问mac地址">ARP：拿IP地址问MAC地址</h4>
+<ol>
 <li>首先，每个主机都会在自己的ARP缓冲区中<strong>建立一个ARP列表</strong>，以表示IP地址和MAC地址之间的对应关系；</li>
 <li>当<strong>源主机要发送数据</strong>时，首先检查ARP列表中是否有对应IP地址的目的主机的MAC地址：<ol>
 <li>如果有，则直接发送数据；</li>
@@ -83,16 +83,16 @@
 <li>当<strong>本网络的所有主机</strong>收到该ARP数据包时，首先<strong>检查数据包中的IP地址是否是自己的IP地址</strong>，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入ARP响应包中，告诉源主机自己是它想要找的MAC地址；</li>
 <li>源主机收到ARP响应包后，<strong>将目的主机的IP和MAC写入ARP列表</strong>，并利用此信息发送数据。如果源主机一直都没有收到ARP响应数据包，表示ARP查询失败；</li>
 </ol>
-
-          <h4 id="4d5e4451">RARP：拿MAC地址问IP地址</h4><p>作用是完成<strong>硬件地址到IP地址的映射</strong>。</p>
+<h4 id="rarp：拿mac地址问ip地址">RARP：拿MAC地址问IP地址</h4>
+<p>作用是完成<strong>硬件地址到IP地址的映射</strong>。</p>
 <p>在网络中配置一台RARP服务器，里面保存着IP地址和MAC地址的映射关系，当无盘工作站启动后：</p>
 <ol>
 <li>首先，封装一个RARP数据包，里面有其MAC地址；</li>
 <li>其次，广播到网络中去；</li>
 <li>最后，当服务器收到请求包后，就查找对应的MAC地址的IP地址装入响应报文中发回给请求者。因为需要广播请求报文，因此RARP只能用于具有广播能力的网络；</li>
 </ol>
-
-          <h3 id="6170df3d">DNS</h3><p>DNS( Domain Name System)是“域名系统”的英文缩写，是一种组织成域层次结构的计算机和网络服务命名系统，它用于TCP/IP网络，它所提供的服务是用来将主机名和域名转换为IP地址的工作。</p>
+<h3 id="dns">DNS</h3>
+<p>DNS( Domain Name System)是“域名系统”的英文缩写，是一种组织成域层次结构的计算机和网络服务命名系统，它用于TCP/IP网络，它所提供的服务是用来将主机名和域名转换为IP地址的工作。</p>
 <p>关于DNS的获取流程：
 DNS是应用层协议，事实上他是为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址。
 具体过程如下：</p>

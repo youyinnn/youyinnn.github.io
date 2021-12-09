@@ -1,32 +1,32 @@
-
-          <h3 id="aa91a04f">Introductions</h3><p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
+<h3 id="introductions">Introductions</h3>
+<p>首先Jenkins要吐槽一下，Jenkins的Logo真的是太丑了，虽然很明显是一个管家形象- -</p>
 <p><img src="https://image.youyinnn.top/img/20181119145558.png" alt=""></p>
 <p>Jenkins的默认UI也有点丑，还不如官网的UI好看</p>
 <p>但是不影响这玩意的强大表现</p>
-
-          <h3 id="b65ea435">Installation on CentOS</h3>
-          <h4 id="fad00c11">Fetch yum repo</h4><p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
+<h3 id="installation-on-centos">Installation on CentOS</h3>
+<h4 id="fetch-yum-repo">Fetch yum repo</h4>
+<p>Add the Jenkins repository to the yum repos, and install Jenkins from here.</p>
 <p>There is also <a href="http://pkg.jenkins-ci.org/redhat-stable/">a LTS YUM repository</a> for the <a href="https://wiki.jenkins.io/display/JENKINS/LTS+Release+Line">LTS Release Line</a></p>
 <ul>
 <li><code>sudo wget -O /etc/yum.repos.d/jenkins.repo</code> <code>http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo</code></li>
 <li><code>sudo rpm --import</code> <code>https://jenkins-ci.org/redhat/jenkins-ci.org.key</code></li>
 <li><code>sudo yum install jenkins</code></li>
 </ul>
-
-          <h4 id="67e3adb7">Installation of Java</h4><p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
+<h4 id="installation-of-java">Installation of Java</h4>
+<p>Jenkins requires Java in order to run, yet certain distros don&#39;t include this by default. To install the Open Java Development Kit (OpenJDK) run the following:</p>
 <pre><code class="hljs language-bash">$ sudo yum install java
 </code></pre>
 <p><strong>Note:</strong> If running CentOS, ensure you follow the <a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava">guide below</a>.</p>
-
-          <h4 id="e827ec74">Start/Stop</h4><ul>
+<h4 id="startstop">Start/Stop</h4>
+<ul>
 <li><code>sudo service jenkins start/stop/restart</code></li>
 <li><code>sudo chkconfig jenkins on</code></li>
 </ul>
 <p><strong>Note:</strong> if you get the following error message, ensure that Java has been installed:</p>
 <pre><code class="hljs language-bash">Starting jenkins (via systemctl):  Job `<span class="hljs-keyword">for</span>` jenkins.service failed. See `<span class="hljs-string">&#x27;systemctl status jenkins.service&#x27;</span>` and `<span class="hljs-string">&#x27;journalctl -xn&#x27;</span>` `<span class="hljs-keyword">for</span>` details.[FAILED]
 </code></pre>
-
-          <h4 id="a361751d">What does this package do?</h4><ul>
+<h4 id="what-does-this-package-do">What does this package do?</h4>
+<ul>
 <li>Jenkins will be launched as a daemon on startup. See <code>/etc/init.d/jenkins</code> for more details.</li>
 <li>The &#39;<code>jenkins</code>&#39; user is created to run this service. If you change this to a different user via the config file, you must change the owner of /var/log/jenkins, /var/lib/jenkins, and /var/cache/jenkins.</li>
 <li>Log file will be placed in <code>/var/log/jenkins/jenkins.log</code>. Check this file if you are troubleshooting Jenkins.</li>
@@ -41,8 +41,8 @@
 <li>要在CentOS下支持Jenkins，请不要使用JDK，要安装OpenJDK</li>
 </ul>
 </blockquote>
-
-          <h4 id="54c0e641">More: change Jenkins run as with root</h4><p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
+<h4 id="more-change-jenkins-run-as-with-root">More: change Jenkins run as with root</h4>
+<p>在Jenkins中运行shell脚本经常遇到权限问题，解决起来非常麻烦，我们索性来个终极解决办法，就是给jenkins一个root权限，这样就不会再遇到权限问题了。</p>
 <ol>
 <li><p><code>vim /etc/sysconfig/jenkins</code></p>
 </li>
@@ -60,10 +60,10 @@ $ <span class="hljs-built_in">chown</span> -R root:root /var/log/jenkins
 <pre><code class="hljs language-bash">$ service jenkins restart
 </code></pre>
 <p>这样我们就给jenkins设置了root权限，我们再运行shell脚本就不会提示权限问题了。</p>
-
-          <h4 id="db365cd5">Wiki</h4><p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
-
-          <h3 id="3c4e040c">Create your first pipline by using github repo as branch source</h3><p>To get started quickly with Pipeline:</p>
+<h4 id="wiki">Wiki</h4>
+<p><a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions">https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a></p>
+<h3 id="create-your-first-pipline-by-using-github-repo-as-branch-source">Create your first pipline by using github repo as branch source</h3>
+<p>To get started quickly with Pipeline:</p>
 <ol>
 <li>Copy one of the <a href="https://jenkins.io/doc/pipeline/tour/hello-world/#examples">examples below</a> into your repository and name it <code>Jenkinsfile</code></li>
 <li>Click the <strong>New Item</strong> menu within Jenkins </li>

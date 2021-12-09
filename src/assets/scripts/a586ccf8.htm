@@ -1,6 +1,6 @@
-
-          <h2 id="db0d8e13">JS</h2>
-          <h3 id="e56333e6">JS 获取元素样式</h3><pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+<h2 id="js">JS</h2>
+<h3 id="js-获取元素样式">JS 获取元素样式</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
   此方法兼容IE
   获取元素的样式：
     参数1：元素
@@ -15,8 +15,8 @@
   }
 }
 </code></pre>
-
-          <h3 id="31f5dddc">JS 事件绑定兼容</h3><pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+<h3 id="js-事件绑定兼容">JS 事件绑定兼容</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
   事件绑定兼容
   首先要注意：
     addEventListener() 方法中的this是我们绑定的事件
@@ -46,8 +46,8 @@
   }
 }
 </code></pre>
-
-          <h3 id="a8e120f2">JS 滚动动画</h3><pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+<h3 id="js-滚动动画">JS 滚动动画</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
   md的滚动条
   去到id为elementid的元素位置
   速度是 500
@@ -56,8 +56,8 @@ $(<span class="hljs-string">&#x27;#md&#x27;</span>).<span class="hljs-title func
   <span class="hljs-attr">scrollTop</span>: $(<span class="hljs-string">&#x27;#elementid&#x27;</span>).<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>
 }, <span class="hljs-number">500</span>);
 </code></pre>
-
-          <h3 id="386ecdf">JS 滚动动画改进</h3><pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+<h3 id="js-滚动动画改进">JS 滚动动画改进</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
   防止到了位置之后再滚动到该元素 而offset改变
 */</span>
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">scrolltoelement</span>(<span class="hljs-params">elementid</span>) {
@@ -69,8 +69,8 @@ $(<span class="hljs-string">&#x27;#md&#x27;</span>).<span class="hljs-title func
   }, <span class="hljs-number">500</span>);
 }
 </code></pre>
-
-          <h3 id="3ac1cc36">JS 检测页面滚动代码</h3><pre><code class="hljs language-JavaScript">$(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">scroll</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+<h3 id="js-检测页面滚动代码">JS 检测页面滚动代码</h3>
+<pre><code class="hljs language-JavaScript">$(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">scroll</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
   <span class="hljs-keyword">var</span> scrollTo = $(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">scrollTop</span>(),
   docHeight = $(<span class="hljs-variable language_">document</span>).<span class="hljs-title function_">height</span>(),
   windowHeight = $(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">height</span>();
@@ -78,8 +78,8 @@ $(<span class="hljs-string">&#x27;#md&#x27;</span>).<span class="hljs-title func
   percent.<span class="hljs-property">innerText</span> = scrollPercent
 })
 </code></pre>
-
-          <h3 id="f386f62d">JS 小数</h3><ol>
+<h3 id="js-小数">JS 小数</h3>
+<ol>
 <li><p>丢弃小数部分,保留整数部分 <code>parseInt(7/2)</code> </p>
 </li>
 <li><p>向上取整,有小数就整数部分加1 <code>Math.ceil(7/2) </code></p>
@@ -94,8 +94,8 @@ num = num.<span class="hljs-title function_">toFixed</span>(<span class="hljs-nu
 </code></pre>
 </li>
 </ol>
-
-          <h3 id="58f57d8f">JS CSS 动态添加动画效果</h3><pre><code class="hljs language-javascript">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">addClass</span>(<span class="hljs-string">&#x27;getnothing&#x27;</span>)
+<h3 id="js-css-动态添加动画效果">JS CSS 动态添加动画效果</h3>
+<pre><code class="hljs language-javascript">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">addClass</span>(<span class="hljs-string">&#x27;getnothing&#x27;</span>)
   <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
     $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">removeClass</span>(<span class="hljs-string">&#x27;getnothing&#x27;</span>)
   }, <span class="hljs-number">1100</span>)
@@ -110,16 +110,16 @@ num = num.<span class="hljs-title function_">toFixed</span>(<span class="hljs-nu
   }
 }
 </code></pre>
-
-          <h3 id="31f85e50">JS 控制聚焦/失焦事件</h3><pre><code class="hljs language-js">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">focus</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+<h3 id="js-控制聚焦失焦事件">JS 控制聚焦/失焦事件</h3>
+<pre><code class="hljs language-js">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">focus</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
     $(<span class="hljs-string">&#x27;#scriptsearcher&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">style</span>.<span class="hljs-property">opacity</span> = <span class="hljs-string">&#x27;1&#x27;</span>
   })
   $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">blur</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
     $(<span class="hljs-string">&#x27;#scriptsearcher&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">style</span>.<span class="hljs-property">opacity</span> = <span class="hljs-string">&#x27;0.3&#x27;</span>
   })
 </code></pre>
-
-          <h3 id="5e7342ba">AJAX设置请求超时</h3><pre><code class="hljs language-js"><span class="hljs-keyword">var</span> ajaxTimeoutTest = $.<span class="hljs-title function_">ajax</span>({
+<h3 id="ajax设置请求超时">AJAX设置请求超时</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">var</span> ajaxTimeoutTest = $.<span class="hljs-title function_">ajax</span>({
 　　<span class="hljs-attr">url</span>:<span class="hljs-string">&#x27;&#x27;</span>,  <span class="hljs-comment">//请求的URL</span>
 　　timeout : <span class="hljs-number">1000</span>, <span class="hljs-comment">//超时时间设置，单位毫秒</span>
 　　type : <span class="hljs-string">&#x27;get&#x27;</span>,  <span class="hljs-comment">//请求方式，get或post</span>
@@ -137,27 +137,27 @@ num = num.<span class="hljs-title function_">toFixed</span>(<span class="hljs-nu
 });
 </code></pre>
 <p>函数写在complete中，因为无论success还是error，complete函数都会执行。</p>
-
-          <h3 id="6ecab23b">Async</h3><blockquote>
+<h3 id="async"><a href="https://github.com/caolan/async">Async</a></h3>
+<blockquote>
 <p>JS Ajax JQ 同步请求库</p>
 </blockquote>
 <p><a href="https://segmentfault.com/q/1010000005789740">来源</a></p>
 <p><a href="https://blog.csdn.net/marujunyy/article/details/8695205">中文文档</a></p>
-
-          <h3 id="73bc63f6">JS 刷新页面</h3>
-          <h4 id="440ec73c">🔹手动 reload</h4><pre><code class="hljs language-js">location.<span class="hljs-title function_">reload</span>();
+<h3 id="js-刷新页面">JS 刷新页面</h3>
+<h4 id="small_blue_diamond手动-reload">🔹手动 reload</h4>
+<pre><code class="hljs language-js">location.<span class="hljs-title function_">reload</span>();
 </code></pre>
-
-          <h4 id="4e562348">🔹自动定时刷新</h4><p>页面自动刷新：把如下代码加入<head>区域中</p>
+<h4 id="small_blue_diamond自动定时刷新">🔹自动定时刷新</h4>
+<p>页面自动刷新：把如下代码加入<head>区域中</p>
 <pre><code class="hljs language-js">&lt;meta http-equiv=<span class="hljs-string">&quot;refresh&quot;</span> content=<span class="hljs-string">&quot;5&quot;</span>&gt;
 </code></pre>
-
-          <h3 id="7f4ae2eb">JS获取图片原始尺寸</h3><p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
+<h3 id="js获取图片原始尺寸">JS获取图片原始尺寸</h3>
+<p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
 <pre><code class="hljs language-javascript">   <span class="hljs-keyword">let</span> imgw = <span class="hljs-variable language_">this</span>.<span class="hljs-property">naturalWidth</span>
    <span class="hljs-keyword">let</span> imgh = <span class="hljs-variable language_">this</span>.<span class="hljs-property">naturalHeight</span>
 </code></pre>
-
-          <h3 id="183db2f1">JQuery的高级选择器</h3><pre><code class="hljs language-javascript">jQuery.<span class="hljs-title function_">parent</span>(expr)           <span class="hljs-comment">//找父元素</span>
+<h3 id="jquery的高级选择器">JQuery的高级选择器</h3>
+<pre><code class="hljs language-javascript">jQuery.<span class="hljs-title function_">parent</span>(expr)           <span class="hljs-comment">//找父元素</span>
 jQuery.<span class="hljs-title function_">parents</span>(expr)          <span class="hljs-comment">//找到所有祖先元素，不限于父元素</span>
 jQuery.<span class="hljs-title function_">children</span>(expr)        <span class="hljs-comment">//查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙</span>
 jQuery.<span class="hljs-title function_">contents</span>()            <span class="hljs-comment">//查找下面的所有内容，包括节点和文本。</span>
@@ -171,15 +171,15 @@ jQuery.<span class="hljs-title function_">find</span>(expr)            <span cla
                                筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
                                $(&quot;p&quot;).find(&quot;span&quot;)是从元素开始找，等于$(&quot;p span&quot;) */</span>
 </code></pre>
-
-          <h3 id="76a8a4de">js取消事件冒泡</h3><pre><code class="hljs language-javascript">$(<span class="hljs-string">&quot;form&quot;</span>).<span class="hljs-title function_">bind</span>(<span class="hljs-string">&quot;submit&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) { 
+<h3 id="js取消事件冒泡">js取消事件冒泡</h3>
+<pre><code class="hljs language-javascript">$(<span class="hljs-string">&quot;form&quot;</span>).<span class="hljs-title function_">bind</span>(<span class="hljs-string">&quot;submit&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) { 
 　　　　<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 　　 }
 )
 </code></pre>
 <p><a href="https://www.cnblogs.com/wangking/p/6113024.html#">https://www.cnblogs.com/wangking/p/6113024.html#</a></p>
-
-          <h3 id="7d38bc67">JS判断字符串中是否含有Emoji表情</h3><p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
+<h3 id="js判断字符串中是否含有emoji表情">JS判断字符串中是否含有Emoji表情</h3>
+<p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
 原因如下：</p>
 <blockquote>
 <p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
@@ -221,16 +221,16 @@ jQuery.<span class="hljs-title function_">find</span>(expr)            <span cla
 }
 </code></pre>
 <p>引自： <a href="https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1">https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1</a></p>
-
-          <h3 id="bfeba059">Javascript使用字符串作为函数调用语句去调用</h3><pre><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">func_abc</span>(<span class="hljs-params"></span>){
+<h3 id="javascript使用字符串作为函数调用语句去调用">Javascript使用字符串作为函数调用语句去调用</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">func_abc</span>(<span class="hljs-params"></span>){
   <span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;a&#x27;</span>);
 }
 <span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;func_abc&quot;</span>;
 <span class="hljs-built_in">eval</span>(str+<span class="hljs-string">&quot;()&quot;</span>);<span class="hljs-comment">//执行func_abc()函数</span>
 </code></pre>
 <p>引自：<a href="https://blog.csdn.net/qq_26222859/article/details/75285784">https://blog.csdn.net/qq_26222859/article/details/75285784</a></p>
-
-          <h3 id="ccac24c8">JS 数组排序</h3><pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">23</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">78</span>, <span class="hljs-number">3</span>];
+<h3 id="js-数组排序">JS 数组排序</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">23</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">78</span>, <span class="hljs-number">3</span>];
 <span class="hljs-keyword">var</span> compare = <span class="hljs-keyword">function</span> (<span class="hljs-params">x, y</span>) {<span class="hljs-comment">//比较函数</span>
     <span class="hljs-keyword">if</span> (x &lt; y) {
         <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
@@ -242,8 +242,8 @@ jQuery.<span class="hljs-title function_">find</span>(expr)            <span cla
 }
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr.<span class="hljs-title function_">sort</span>(compare));    
 </code></pre>
-
-          <h3 id="4f50ce2f">JS 判断浏览器类型</h3><p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
+<h3 id="js-判断浏览器类型">JS 判断浏览器类型</h3>
+<p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> userAgent = navigator.<span class="hljs-property">userAgent</span>;
 <span class="hljs-keyword">var</span> isOpera = userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Opera&quot;</span>) &gt; -<span class="hljs-number">1</span>;
 
@@ -287,11 +287,11 @@ jQuery.<span class="hljs-title function_">find</span>(expr)            <span cla
     <span class="hljs-keyword">return</span> userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Chrome&quot;</span>) &gt; -<span class="hljs-number">1</span>
 }
 </code></pre>
-
-          <h3 id="ce9a464">JavaScript 解除xhr获取header的限制</h3><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<h3 id="javascript-解除xhr获取header的限制">JavaScript 解除xhr获取header的限制</h3>
+<p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
 <p>需要后端的配合</p>
-
-          <h3 id="38727d80">JS锚点跳转动画</h3><p>一般我们的锚点都长这样</p>
+<h3 id="js锚点跳转动画">JS锚点跳转动画</h3>
+<p>一般我们的锚点都长这样</p>
 <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xxx&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;reference-link&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 </code></pre>
 <p>因此我们就根据name去索引锚点</p>
@@ -302,8 +302,8 @@ $(<span class="hljs-string">&#x27;.markdown-toc a&#x27;</span>).<span class="hlj
     }, <span class="hljs-number">600</span>)
 })
 </code></pre>
-
-          <h3 id="74ce5d81">JS 监听元素任何变化</h3><p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a>
+<h3 id="js-监听元素任何变化">JS 监听元素任何变化</h3>
+<p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a>
 <a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> <span class="hljs-title class_">MutationObserver</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">MutationObserver</span> || <span class="hljs-variable language_">window</span>.<span class="hljs-property">WebKitMutationObserver</span> || <span class="hljs-variable language_">window</span>.<span class="hljs-property">MozMutationObserver</span>
 <span class="hljs-keyword">let</span> observer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MutationObserver</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">mutationList</span>) {
@@ -318,13 +318,13 @@ $(<span class="hljs-string">&#x27;.markdown-toc a&#x27;</span>).<span class="hlj
 };
 observer.<span class="hljs-title function_">observe</span>(article, options);
 </code></pre>
-
-          <h3 id="76320e1d">JQuery UI 拖拽</h3><p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
-
-          <h3 id="82211645">JQuery GIF播放/暂停 JS-GIF库</h3><p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a>
+<h3 id="jquery-ui-拖拽">JQuery UI 拖拽</h3>
+<p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
+<h3 id="jquery-gif播放暂停-js-gif库">JQuery GIF播放/暂停 JS-GIF库</h3>
+<p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a>
 <a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
-
-          <h3 id="426f3a5a">打开新网页</h3><pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">openInNewTab</span>(<span class="hljs-params">url</span>) {
+<h3 id="打开新网页">打开新网页</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">openInNewTab</span>(<span class="hljs-params">url</span>) {
  <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(url, <span class="hljs-string">&#x27;_blank&#x27;</span>).<span class="hljs-title function_">focus</span>();
 }
 

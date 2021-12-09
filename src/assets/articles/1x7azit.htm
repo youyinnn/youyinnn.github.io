@@ -1,11 +1,11 @@
-
-          <h3 id="e25a21eb">Introduction</h3><p>在Leetcode上做到某些题的时候，会发现这些题的解法大致都是差不多，将<strong>ans容器</strong>传递到某个方法中，这个方法一般有<code>dfs</code>，<code>backtracking</code>，<code>bfs</code>，等命名，然后方法中会有递归调用，然后到达某一个出口的时候，就会将当前的<strong>tmp答案</strong>放置到<strong>ans容器</strong>中，于是达到探索所有解的目的</p>
+<h3 id="introduction">Introduction</h3>
+<p>在Leetcode上做到某些题的时候，会发现这些题的解法大致都是差不多，将<strong>ans容器</strong>传递到某个方法中，这个方法一般有<code>dfs</code>，<code>backtracking</code>，<code>bfs</code>，等命名，然后方法中会有递归调用，然后到达某一个出口的时候，就会将当前的<strong>tmp答案</strong>放置到<strong>ans容器</strong>中，于是达到探索所有解的目的</p>
 <p>这篇大概也是各个题的题解，只是在评论区里看到有人<a href="https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)">整理</a>了，我就一起整理下来分析分析</p>
 <blockquote>
 <p>This structure might apply to many other backtracking questions, but here I am just going to demonstrate Subsets, Permutations, and Combination Sum.</p>
 </blockquote>
-
-          <h3 id="f4594f56">Subset</h3><p>Given a set of <strong>distinct</strong> integers, <em>nums</em>, return all possible subsets (the power set).</p>
+<h3 id="subset">Subset</h3>
+<p>Given a set of <strong>distinct</strong> integers, <em>nums</em>, return all possible subsets (the power set).</p>
 <p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: nums = [1,2,3]
@@ -21,8 +21,8 @@ Output:
   []
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>要找到一组无重复序列的子集，我们可以通过回溯的思想，去做这件事情，比如有序列<code>[1,2,3]</code>，因为子集可以不管顺序，所以123和321和312之类的是一样的，所以我们可以按照顺序决定谁开头，然后从这个开头位置开始进行回溯，比如：</p>
+<h4 id="solution">Solution</h4>
+<p>要找到一组无重复序列的子集，我们可以通过回溯的思想，去做这件事情，比如有序列<code>[1,2,3]</code>，因为子集可以不管顺序，所以123和321和312之类的是一样的，所以我们可以按照顺序决定谁开头，然后从这个开头位置开始进行回溯，比如：</p>
 <pre><code>第一个开头是什么都没有，这也是空集的情况[]；
 
 []——》  记录这个序列；
@@ -69,8 +69,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="51aaea1a">Subset II</h3><p>Given a collection of integers that might contain duplicates, <strong>nums</strong>, return all possible subsets (the power set).</p>
+<h3 id="subset-ii">Subset II</h3>
+<p>Given a collection of integers that might contain duplicates, <strong>nums</strong>, return all possible subsets (the power set).</p>
 <p><strong>Note:</strong> The solution set must not contain duplicate subsets.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,2,2]
@@ -85,8 +85,8 @@ Output:
 ]
 </code></pre>
 <p>和上题差不多，只是这类题总会有，无重复序列，有重复序列的两种题型出现，于是我们如何在处理有重复序列的时候，避免重复解成了解决第二类问题的关键</p>
-
-          <h4 id="60d9a1ee">Solution</h4><p>避免判断重复的关键是：<strong>先对序列进行排序</strong>！</p>
+<h4 id="solution-1">Solution</h4>
+<p>避免判断重复的关键是：<strong>先对序列进行排序</strong>！</p>
 <p>我们以<code>[1,2,2]</code>为例</p>
 <pre><code>第一个开头是什么都没有，这也是空集的情况[]；
 
@@ -98,7 +98,7 @@ Output:
      |----1，2——》  记录这个序列，加入2；这时候i从1开始；
         |---- 1，2，2——》  记录这个序列，这时候i从2开始，达到序列底部，删除2，回退到上一层； 
      |----1《——  从上一层回退回来的，删除2，结束该次循环；
-     |----1，2——》  这个序列i=2的时候，i != start &amp;&amp; nums[i] == nums[i - 1]
+     |----1，2——》  这个序列i=2的时候，i != start && nums[i] == nums[i - 1]
   |----1《——  从上一层回退回来的，删除1，结束该次循环；
 
 于是1开头的子集已经访问完毕，继续
@@ -113,7 +113,7 @@ Output:
 
 第三个开头是2，于是由2开始进行递归：
 
-    因为这时候start还是0，而i != start &amp;&amp; nums[i] == nums[i - 1]成立，于是2就应该跳过；
+    因为这时候start还是0，而i != start && nums[i] == nums[i - 1]成立，于是2就应该跳过；
     
 于是3开头的子集已经访问完毕，序列所有数字均已经作为开头访问过子序列了，求解完毕；
 </code></pre>
@@ -127,7 +127,7 @@ Output:
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, <span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> start)</span> {
     ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(tmp));
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i != start &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i != start && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         tmp.add(nums[i]);
@@ -136,8 +136,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="4bdb77d8">Permutation</h3><p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
+<h3 id="permutation">Permutation</h3>
+<p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,2,3]
 Output:
@@ -150,8 +150,8 @@ Output:
   [3,2,1]
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>这题就并不是找子集了，于是123和321是两个解，我们还是以前两题相类似的思路，顺序以某个数字开头，然后依次递归下去，比如以<code>1</code>开头，然后从剩下的数字中分别可以遍历出<code>12</code>和<code>13</code>，然后<code>12</code>从剩下的3中遍历出结果<code>123</code>，而<code>13</code>可以从剩下的2中遍历出<code>132</code>；于是1开头的所有排列已经找到了；依次类推2和3开头的结果</p>
+<h4 id="solution-2">Solution</h4>
+<p>这题就并不是找子集了，于是123和321是两个解，我们还是以前两题相类似的思路，顺序以某个数字开头，然后依次递归下去，比如以<code>1</code>开头，然后从剩下的数字中分别可以遍历出<code>12</code>和<code>13</code>，然后<code>12</code>从剩下的3中遍历出结果<code>123</code>，而<code>13</code>可以从剩下的2中遍历出<code>132</code>；于是1开头的所有排列已经找到了；依次类推2和3开头的结果</p>
 <p>其中有tricky的地方是，每次我们要找下一个候选的时候，我们要判断当前后续是否在当此排列人当中，如果在就跳过，跳过的方法也很简单，因为序列本身无重复，所以直接<code>!tmp.contains(nums[i])</code>就好，于是实现可以是：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permute</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
@@ -174,8 +174,8 @@ Output:
     }
 }
 </code></pre>
-
-          <h3 id="ae2882d8">Permutation II</h3><p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+<h3 id="permutation-ii">Permutation II</h3>
+<p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: [1,1,2]
 Output:
@@ -185,8 +185,8 @@ Output:
   [2,1,1]
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>这里又有不同了，序列中有重复的数字，那么不能像上一题一样用数值去判断是否存在过<strong>tmp</strong> 中了，所以我们可以设置一个flag数组，用于标识对应位置上的数组是否出现过，实际上我们上一题也可以用这样的方法</p>
+<h4 id="solution-3">Solution</h4>
+<p>这里又有不同了，序列中有重复的数字，那么不能像上一题一样用数值去判断是否存在过<strong>tmp</strong> 中了，所以我们可以设置一个flag数组，用于标识对应位置上的数组是否出现过，实际上我们上一题也可以用这样的方法</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permuteUnique</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     Arrays.sort(nums);
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>();
@@ -202,7 +202,7 @@ Output:
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
             <span class="hljs-comment">// 如果出现过就跳过</span>
             <span class="hljs-keyword">if</span> (flags[i] == <span class="hljs-number">0</span>) {
-                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>] &amp;&amp; flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>] && flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">continue</span>;
                 }
                 tmp.add(nums[i]);
@@ -215,10 +215,10 @@ Output:
     }
 }
 </code></pre>
-<p>关键去重是这一行：<code>i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; flags[i - 1] == 0</code></p>
+<p>关键去重是这一行：<code>i &gt; 0 && nums[i] == nums[i - 1] && flags[i - 1] == 0</code></p>
 <p>前面两个子条件可以理解，之前我们去重都是这样做的，第三个条件是什么意思呢？如果和当前数组重复的元素也就是前一位，<strong>并没有被计入tmp序列的话</strong>，那么就说明它已经被还原为0了，说明这是一个新开始了，比如说序列<code>[1,1,3]</code>，当以<strong>第一个1</strong>为开头的时候，序列解已经给出<code>1,1,3/1,3,1</code>了，等到给出解的时候，所有的flag已经都还原成<code>[0,0,0]</code>，意味着重新计数了，等到以<strong>第二个1</strong>为开头的时候，这时候判断它和第一个一数值相等，并且第一个1都没有被纳入计数的时候，于是这是一个开始，且是重复的开始，所以可以跳过</p>
-
-          <h3 id="2964b1cd">Combination Sum</h3><p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<h3 id="combination-sum">Combination Sum</h3>
+<p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -242,8 +242,8 @@ A solution set is:
   [3,5]
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>这里首先说说排列和组合的区别，前面两题<strong>Permutation</strong>，是排列问题，排列问题需要考虑顺序，也就是123和321是两个解，所以每次回溯的循环都是从0开始，以1开头要考虑所有的其他数字，以3开头也要考虑所有的其他数字；</p>
+<h4 id="solution-4">Solution</h4>
+<p>这里首先说说排列和组合的区别，前面两题<strong>Permutation</strong>，是排列问题，排列问题需要考虑顺序，也就是123和321是两个解，所以每次回溯的循环都是从0开始，以1开头要考虑所有的其他数字，以3开头也要考虑所有的其他数字；</p>
 <p>而组合是不需要考虑顺序的，也就是123和321是同一个解，于是每次循环都从一个新的start开始，比如序列<code>[1, 2, 3]</code>的话，从1开头，要考虑自己和剩下的2和3，从2开头就只需要考虑自己和3就行了，从3开头就只需要考虑自己就好了；</p>
 <p>然后对于这题来说，每次我们往下传的时候，都传做好减法的target，一直到最后target为0的时候，等于找到了一组解，于是代码为：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">combinationSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> target)</span> {
@@ -264,8 +264,8 @@ A solution set is:
     }
 }
 </code></pre>
-
-          <h3 id="72bb3df4">Combination Sum II</h3><p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<h3 id="combination-sum-ii">Combination Sum II</h3>
+<p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
 <p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
 <p><strong>Note:</strong></p>
 <ul>
@@ -290,8 +290,8 @@ A solution set is:
   [5]
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>额，我觉得到现在已经轻车熟路了，这里要注意的是，题目里说了每一个候选数字自能使用一次，于是我们往下传的时候，start要是i+1</p>
+<h4 id="solution-5">Solution</h4>
+<p>额，我觉得到现在已经轻车熟路了，这里要注意的是，题目里说了每一个候选数字自能使用一次，于是我们往下传的时候，start要是i+1</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">combinationSum2</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> target)</span> {
     List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     Arrays.sort(candidates);
@@ -304,7 +304,7 @@ A solution set is:
         ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(tmp));
     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt; candidate.length; i++) {
-            <span class="hljs-keyword">if</span> (i &gt; start &amp;&amp; candidate[i] == candidate[i - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">if</span> (i &gt; start && candidate[i] == candidate[i - <span class="hljs-number">1</span>]) {
                 <span class="hljs-keyword">continue</span>;
             }
             tmp.add(candidate[i]);
@@ -314,8 +314,8 @@ A solution set is:
     }
 }
 </code></pre>
-
-          <h3 id="32c363d8">Palindrome Partitioning</h3><p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
+<h3 id="palindrome-partitioning">Palindrome Partitioning</h3>
+<p>Given a string <em>s</em>, partition <em>s</em> such that every substring of the partition is a palindrome.</p>
 <p>Return all possible palindrome partitioning of <em>s</em>.</p>
 <p><strong>Example:</strong></p>
 <pre><code>Input: &quot;aab&quot;
@@ -325,8 +325,8 @@ Output:
   [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
 ]
 </code></pre>
-
-          <h4 id="60d9a1ee">Solution</h4><p>这题怎么说，其实可以用dp，而不用回溯，因为回溯确实有点魔幻，因为在回溯里不太好追踪子集，至少我这个笨脑子追踪不了</p>
+<h4 id="solution-6">Solution</h4>
+<p>这题怎么说，其实可以用dp，而不用回溯，因为回溯确实有点魔幻，因为在回溯里不太好追踪子集，至少我这个笨脑子追踪不了</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">partition</span><span class="hljs-params">(String s)</span> {
    List&lt;List&lt;String&gt;&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
    backtrack(list, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), s, <span class="hljs-number">0</span>);

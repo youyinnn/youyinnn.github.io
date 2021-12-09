@@ -1,9 +1,9 @@
-
-          <h3 id="5cfda864">小声BB</h3><p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
+<h3 id="小声bb">小声BB</h3>
+<p>本篇尽量不po代码，仅仅过一遍AVL树和红黑树</p>
 <p>其中红黑树更是在HashMap中大展身手，肯定要研究一下为什么他们要用到RBT</p>
 <hr>
-
-          <h3 id="89c1d359">AVL</h3><p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
+<h3 id="avl">AVL</h3>
+<p>了解AVL之前，我们先BB一句二叉搜索树（Binary Search Tree，BST），BST有什么性质？</p>
 <p>曰：<strong>二叉结构，元素可比，左小右大，仅此而已</strong></p>
 <p>然后再BB一句为什么有了BST之后，又要研究AVL树：在极端的情况下，一组大小有序的数据插入BST，那么就会生成一条线而不是一棵树，这样对于树的操作就完全退化成链表操作，举例说查找操作从二分法的效率变成了顺序查找</p>
 <p>大部分时候我们使用一棵树，更重要的是要用到他的查找操作，而不是插入或者删除操作</p>
@@ -13,8 +13,8 @@
 <p><strong>Why AVL Trees?</strong> Most of the BST operations (e.g., search, max, min, insert, delete.. etc) take O(h) time where h is the height of the BST. The cost of these operations may become O(n) for a skewed Binary tree. If we make sure that height of the tree remains O(Logn) after every insertion and deletion, then we can guarantee an upper bound of O(Logn) for all these operations. The height of an AVL tree is always O(Logn) where n is the number of nodes in the tree (See <a href="http://www.youtube.com/watch?v=TbvhGcf6UJU">this </a>video lecture for proof).</p>
 </blockquote>
 <p>大部分的BST操作都会在**O(h)<strong>的效率内完成，但是一旦树有倾斜，就会变成</strong>O(n)<strong>的效率，AVL通过旋转来保持平衡防止树倾斜，使得所有操作都在</strong>O(logn)<strong>的效率内完成；因为AVL的高度始终都是</strong>O(logn)**；</p>
-
-          <h4 id="ea24b7c">和BST有何异同？</h4><ul>
+<h4 id="和bst有何异同？">和BST有何异同？</h4>
+<ul>
 <li><strong>结点：</strong>AVL树的每一个结点中有一个字段用于存储平衡因子（average factor），这个平衡因子用于记录该结点的左子树高度和右子树高度之差，用以表示这棵树本身是否<strong>平衡</strong>，于是这个平衡因子的取值在一棵合法的AVL数中的每个节点上只可能取值为：-1，0，1；</li>
 <li><strong>平衡状态：</strong>保证树上的每个结点的平衡因子都只在**[-1，1]**之间，一旦达到+2或者-2，就需要通过选旋转操作来保持平衡；</li>
 <li><strong>旋转操作：</strong>为了保持平衡，在达插入的时候如果发现其祖父结点达到不平衡了，那么就需要旋转该树，以从新达到平衡；<ul>
@@ -61,9 +61,9 @@ T2   T3                           T3   T4
 </ul>
 </li>
 </ul>
-
-          <h4 id="cb315841">结构与过程</h4>
-          <h5 id="e05a12fc">结点结构</h5><p>结构比较简单，左右两子和平衡高度</p>
+<h4 id="结构与过程">结构与过程</h4>
+<h5 id="结点结构">结点结构</h5>
+<p>结构比较简单，左右两子和平衡高度</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {
     <span class="hljs-type">int</span> key, height;
     Node left, right;
@@ -93,8 +93,8 @@ T2   T3                           T3   T4
     <span class="hljs-comment">// ...</span>
 }
 </code></pre>
-
-          <h5 id="f1f9b735">右旋</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">rightRotate</span><span class="hljs-params">(Node y)</span> {
+<h5 id="右旋">右旋</h5>
+<pre><code class="hljs language-java">Node <span class="hljs-title function_">rightRotate</span><span class="hljs-params">(Node y)</span> {
     <span class="hljs-type">Node</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> y.left;
     <span class="hljs-type">Node</span> <span class="hljs-variable">T2</span> <span class="hljs-operator">=</span> x.right;
     <span class="hljs-comment">// Perform rotation</span>
@@ -114,8 +114,8 @@ T2   T3                           T3   T4
   \                          /
    T2                        T2
 </code></pre>
-
-          <h5 id="b1d02a07">左旋</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">leftRotate</span><span class="hljs-params">(Node x)</span> {
+<h5 id="左旋">左旋</h5>
+<pre><code class="hljs language-java">Node <span class="hljs-title function_">leftRotate</span><span class="hljs-params">(Node x)</span> {
     <span class="hljs-type">Node</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> x.right;
     <span class="hljs-type">Node</span> <span class="hljs-variable">T2</span> <span class="hljs-operator">=</span> y.left;
     <span class="hljs-comment">// Perform rotation</span>
@@ -136,8 +136,8 @@ T2   T3                           T3   T4
    T2                      T2
 </code></pre>
 <p>其他双旋操作都是基于这两个基本操作来搞的；</p>
-
-          <h5 id="3aa07ac0">插入</h5><pre><code class="hljs language-java">Node <span class="hljs-title function_">insert</span><span class="hljs-params">(Node node, <span class="hljs-type">int</span> key)</span> {
+<h5 id="插入">插入</h5>
+<pre><code class="hljs language-java">Node <span class="hljs-title function_">insert</span><span class="hljs-params">(Node node, <span class="hljs-type">int</span> key)</span> {
     <span class="hljs-comment">/* 1.  Perform the normal BST insertion */</span>
     <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(key));
@@ -160,21 +160,21 @@ T2   T3                           T3   T4
     <span class="hljs-comment">// If this node becomes unbalanced, then there</span>
     <span class="hljs-comment">// are 4 cases </span>
     <span class="hljs-comment">// Left Left Case</span>
-    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &lt; node.left.key)
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> && key &lt; node.left.key)
         <span class="hljs-keyword">return</span> rightRotate(node);
  
     <span class="hljs-comment">// Right Right Case</span>
-    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &gt; node.right.key)
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> && key &gt; node.right.key)
         <span class="hljs-keyword">return</span> leftRotate(node);
  
     <span class="hljs-comment">// Left Right Case</span>
-    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &gt; node.left.key) {
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> && key &gt; node.left.key) {
         node.left = leftRotate(node.left);
         <span class="hljs-keyword">return</span> rightRotate(node);
     }
  
     <span class="hljs-comment">// Right Left Case</span>
-    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &lt; node.right.key) {
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> && key &lt; node.right.key) {
         node.right = rightRotate(node.right);
         <span class="hljs-keyword">return</span> leftRotate(node);
     }
@@ -194,18 +194,18 @@ T2   T3                           T3   T4
 <li><p>根据四种失衡情况进行旋转；</p>
 </li>
 </ol>
-
-          <h5 id="59aabdc">删除操作</h5><p>这个更为复杂点，就先不分析了；</p>
-
-          <h4 id="c45485c2">效率</h4><p>插入、查找、删除均为<strong>O(logn)</strong></p>
-
-          <h4 id="2bd05e5b">参考</h4><blockquote>
+<h5 id="删除操作">删除操作</h5>
+<p>这个更为复杂点，就先不分析了；</p>
+<h4 id="效率">效率</h4>
+<p>插入、查找、删除均为<strong>O(logn)</strong></p>
+<h4 id="参考">参考</h4>
+<blockquote>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a></p>
 <p><a href="https://www.geeksforgeeks.org/avl-tree-set-2-deletion/">https://www.geeksforgeeks.org/avl-tree-set-2-deletion/</a></p>
 </blockquote>
 <hr>
-
-          <h3 id="f4234397">红黑树</h3><p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
+<h3 id="红黑树">红黑树</h3>
+<p>红黑树是一棵自平衡（self-balancing）的BST，它的每个结点都遵循以下四个规则：</p>
 <p><strong>1)</strong> 每点非红即黑</p>
 <p><strong>2)</strong> 根结点必定黑</p>
 <p><strong>3)</strong> 红结点若有子节点，这俩子节点必定是黑色（有直接关系的两结点不能同时都是红色）</p>
@@ -229,8 +229,8 @@ T2   T3                           T3   T4
 <p>如果场景中经常有插入和删除等操作，相应的就会有很多旋转操作，在这个情况下，RBT的表现无疑是更胜一筹；</p>
 <p>如果场景中查询操作更多，那还是选AVL-T吧；</p>
 <p>但是也因为如此，RBT的平衡是用概念去描述的，而非像AVL-T一样可以用高度差去量化平衡，所以RBT的实现稍微复杂和难懂一些；</p>
-
-          <h5 id="988d0d96">插入简要分析</h5><p>在做插入分析之前，我们再说两件事：</p>
+<h5 id="插入简要分析">插入简要分析</h5>
+<p>在做插入分析之前，我们再说两件事：</p>
 <ol>
 <li><strong>插入的结点一开始就把他当成一个红色结点来插入；（为什么？因为当成黑色结点插入必然会违背rule4）</strong></li>
 <li><strong>NULL结点虽然不做考虑，但是可以视为是黑色结点；</strong></li>

@@ -1,21 +1,21 @@
-
-          <h3 id="6be9ea42">Preface</h3><p>I can&#39;t get up early recently, and yesterday I suddenly thought about why can&#39;t I use my idle raspberry pi to broadcast TV news every 7:00 a.m and wake me up?</p>
+<h3 id="preface">Preface</h3>
+<p>I can&#39;t get up early recently, and yesterday I suddenly thought about why can&#39;t I use my idle raspberry pi to broadcast TV news every 7:00 a.m and wake me up?</p>
 <p>And how am I going to achieve that? There are some factors I should count in:</p>
 <ul>
 <li>a cron to set timing task at 7:00 a.m;</li>
 <li>tools to control the mouse action;</li>
 <li>tools to control the volume and the screen&#39;s display (save battery)</li>
 </ul>
-
-          <h3 id="a5c1de59">Make the pi connecting to the world</h3><p>There&#39;s a lot of choices for using SSR on Linux os, check  <a href="https://github.com/shadowsocks">here</a>, but many of them were banned and deleted their documents.</p>
+<h3 id="make-the-pi-connecting-to-the-world">Make the pi connecting to the world</h3>
+<p>There&#39;s a lot of choices for using SSR on Linux os, check  <a href="https://github.com/shadowsocks">here</a>, but many of them were banned and deleted their documents.</p>
 <p>Luckily, there still some tutorials showing how to implement it on Linux.  (<a href="%5Bhttps://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779%5D(https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779)">reference1</a><a href="https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477">reference2</a>)</p>
-
-          <h4 id="fcb269bd">Installation</h4><p>Require python &gt;2.7</p>
+<h4 id="installation">Installation</h4>
+<p>Require python &gt;2.7</p>
 <pre><code class="hljs language-bash">sudo apt-get install python-pip python-m2crypto
 sudo pip install shadowsocks
 </code></pre>
-
-          <h4 id="70248dc2">Config File</h4><p>Create a json file somewhere, which is used for both ssserver(server) and sslocal(client):</p>
+<h4 id="config-file">Config File</h4>
+<p>Create a json file somewhere, which is used for both ssserver(server) and sslocal(client):</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;server&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;my_server_ip&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;server_port&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8388</span><span class="hljs-punctuation">,</span>
@@ -38,14 +38,14 @@ sudo pip install shadowsocks
 <li>method: crypto method, by default is: <code>aes-256-cfb</code>, <a href="https://github.com/clowwindy/shadowsocks/wiki/Encryption">more info here</a></li>
 <li>workers: process number</li>
 </ol>
-
-          <h4 id="d64a004d">Startup ss server</h4><pre><code class="hljs language-bash">ssserver -c /etc/shadowsocks.json
+<h4 id="startup-ss-server">Startup ss server</h4>
+<pre><code class="hljs language-bash">ssserver -c /etc/shadowsocks.json
 </code></pre>
-
-          <h4 id="9908dbce">Startup ss client</h4><pre><code class="hljs language-bash">sslocal -c /etc/shadowsocks.json
+<h4 id="startup-ss-client">Startup ss client</h4>
+<pre><code class="hljs language-bash">sslocal -c /etc/shadowsocks.json
 </code></pre>
-
-          <h4 id="31ac3d71">Openssl Problem</h4><p>For some update reason, you might get this <code>error log</code> while using the commands above:</p>
+<h4 id="openssl-problem">Openssl Problem</h4>
+<p>For some update reason, you might get this <code>error log</code> while using the commands above:</p>
 <pre><code class="hljs language-bash">Traceback (most recent call last):
 File <span class="hljs-string">&quot;/usr/local/bin/sslocal&quot;</span>, line 9, <span class="hljs-keyword">in</span> 
 load_entry_point(<span class="hljs-string">&#x27;shadowsocks==2.8.2&#x27;</span>, <span class="hljs-string">&#x27;console_scripts&#x27;</span>, <span class="hljs-string">&#x27;sslocal&#x27;</span>)()
@@ -60,10 +60,10 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 </blockquote>
 <p>Reference: <a href="%5Bhttps://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/%5D(https://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/)">here</a></p>
 <p>Find <code>/site-packages/shadowsocks/crypto/openssl.py</code> according to your <code>error log</code> and edit it: change all <code>EVP_CIPHER_CTX_cleanup()</code> into  <code>EVP_CIPHER_CTX_reset()</code>, there are two places needed to handle.</p>
-
-          <h4 id="d8b0f24c">Proxy</h4><p>Since ss client is using SOCKS5 protocol, we can&#39;t use it directly or easily in Linux os as Windows os does, so we have to proxy turn the protocol into HTTP.</p>
-
-          <h5 id="bdd07298">Polipo</h5><p>For quick-start, we can use <a href="https://wiki.archlinux.org/index.php/Polipo">Polipo</a> to achieve that, but it is no longer maintain.</p>
+<h4 id="proxy">Proxy</h4>
+<p>Since ss client is using SOCKS5 protocol, we can&#39;t use it directly or easily in Linux os as Windows os does, so we have to proxy turn the protocol into HTTP.</p>
+<h5 id="polipo">Polipo</h5>
+<p>For quick-start, we can use <a href="https://wiki.archlinux.org/index.php/Polipo">Polipo</a> to achieve that, but it is no longer maintain.</p>
 <p>Polipo is a small and fast caching web proxy (a web cache, an HTTP proxy, a proxy server). While Polipo was designed to be used by one person or a small group of people, there is nothing that prevents it from being used by a larger group.</p>
 <ul>
 <li><p>Installation</p>
@@ -106,12 +106,12 @@ proxyPort = 8123
 <p>there will be a response if success.</p>
 </li>
 </ul>
-
-          <h5 id="83737e71">Privoxy</h5><p>For stable proxy, please use <a href="https://wiki.archlinux.org/index.php/Privoxy">Privoxy</a></p>
+<h5 id="privoxy">Privoxy</h5>
+<p>For stable proxy, please use <a href="https://wiki.archlinux.org/index.php/Privoxy">Privoxy</a></p>
 <p><a href="http://www.privoxy.org/">Privoxy</a> is a filtering proxy for the HTTP protocol, frequently used in combination with <a href="https://wiki.archlinux.org/index.php/Tor">Tor</a>. Privoxy is a web proxy with advanced filtering capabilities for protecting privacy, filtering web page content, managing cookies, controlling access, and removing ads, banners, pop-ups, etc. It supports both stand-alone systems and multi-user networks.</p>
 <p><a href="https://www.cnblogs.com/hongdada/p/10787924.html">A tutorials</a></p>
-
-          <h4 id="5a8c7741">Chromium with SwitchyOmega</h4><p><a href="https://github.com/FelisCatus/SwitchyOmega/releases">Download</a> and <a href="https://stackoverflow.com/questions/23091526/apps-extensions-and-scripts-cannot-be-added-from-this-website">extract it</a>, open <code>developer mode</code> on <code>chrome://extensions</code> and &quot;Load unpacked&quot;.</p>
+<h4 id="chromium-with-switchyomega">Chromium with SwitchyOmega</h4>
+<p><a href="https://github.com/FelisCatus/SwitchyOmega/releases">Download</a> and <a href="https://stackoverflow.com/questions/23091526/apps-extensions-and-scripts-cannot-be-added-from-this-website">extract it</a>, open <code>developer mode</code> on <code>chrome://extensions</code> and &quot;Load unpacked&quot;.</p>
 <p>New profile and then:</p>
 <p><strong>Proxy servers</strong></p>
 <table>
@@ -130,16 +130,16 @@ proxyPort = 8123
 <td>1080</td>
 </tr>
 </tbody></table>
-
-          <h3 id="4fe68404">Implement</h3><p>As I said before, this task should set as a timing task for displaying tv news every 7:00 a.m.</p>
+<h3 id="implement">Implement</h3>
+<p>As I said before, this task should set as a timing task for displaying tv news every 7:00 a.m.</p>
 <p>So firstly, we prepare a script to:</p>
 <ol>
 <li>open <a href="https://www.cgtn.com/tv">CGTN TV</a> the chromium with command line</li>
 <li>mute/unmute the system volume</li>
 <li>zoom in the video</li>
 </ol>
-
-          <h4 id="6f0328b6">Step 1: tv.sh</h4><pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
+<h4 id="step-1-tvsh">Step 1: tv.sh</h4>
+<pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
 if [ $1 == open ]
 then 
     amixer set PCM 0%
@@ -152,8 +152,8 @@ then
 fi
 </code></pre>
 <p>Open <code>bash /../tv.sh open</code> and play <code>bash /../tv.sh play</code></p>
-
-          <h4 id="83913848">Step 2: mouse.py</h4><p>Use python code to control the mouse move and click to click the fullscreen button:</p>
+<h4 id="step-2-mousepy">Step 2: mouse.py</h4>
+<p>Use python code to control the mouse move and click to click the fullscreen button:</p>
 <pre><code class="hljs language-bash">sudo pip install PyUserInput
 </code></pre>
 <pre><code class="hljs language-python"><span class="hljs-keyword">from</span> pymouse <span class="hljs-keyword">import</span> PyMouse
@@ -162,8 +162,8 @@ x,y = <span class="hljs-number">970</span>, <span class="hljs-number">575</span>
 m.move(x,y)
 m.click(x,y)
 </code></pre>
-
-          <h4 id="4f5b6a48">Step 3: cron</h4><pre><code class="hljs language-bash">DISPLAY=:0
+<h4 id="step-3-cron">Step 3: cron</h4>
+<pre><code class="hljs language-bash">DISPLAY=:0
 58 6 * * * bash /home/pi/tv.sh open 
 00 7 * * * bash /home/pi/tv.sh play
 </code></pre>
@@ -171,6 +171,6 @@ m.click(x,y)
 <p>Then restart the cron service  <code>/etc/init.d/cron restart</code>.</p>
 <p>A GUI Package for crontab is recommended: <a href="https://github.com/alseambusher/crontab-ui">crontab-gui</a></p>
 <p>Please notice that we set env value of <code>DISPLAY</code> at line 1 is because if we want to open and gui app with crontab.</p>
-
-          <h4 id="6b4f5bd9">More</h4><p>At first, I want to choose BBC News or other foreign News Live websites, but then I realized the quality of the Live stream totally depend on the stability of my SSR source, so I quit using foreign sources and find CGTN.</p>
+<h4 id="more">More</h4>
+<p>At first, I want to choose BBC News or other foreign News Live websites, but then I realized the quality of the Live stream totally depend on the stability of my SSR source, so I quit using foreign sources and find CGTN.</p>
 <p>Now everything are settled, enjoy your morning.</p>

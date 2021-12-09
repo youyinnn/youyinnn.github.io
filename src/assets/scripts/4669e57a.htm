@@ -1,10 +1,10 @@
-
-          <h2 id="2ae1f54d">MAC</h2>
-          <h3 id="2c293e1f">MAC M1系统怎么进入恢复模式</h3><p>Intel的MAC是在开机显示logo的时候按下<code>command + R</code>，而M1的MAC只需要长按开机键就能进入了</p>
-
-          <h3 id="1b138e84">MAC启动安全性实用工具</h3><p><a href="https://support.apple.com/zh-cn/HT208198">https://support.apple.com/zh-cn/HT208198</a></p>
-
-          <h3 id="29f6282b">MAC M1视频录制录入系统声音</h3><p><strong>Intel</strong>的Mac是可以用<a href="https://github.com/mattingalls/Soundflower/releases/tag/2.0b2">Soundflower</a>来解决</p>
+<h2 id="mac">MAC</h2>
+<h3 id="mac-m1系统怎么进入恢复模式">MAC M1系统怎么进入恢复模式</h3>
+<p>Intel的MAC是在开机显示logo的时候按下<code>command + R</code>，而M1的MAC只需要长按开机键就能进入了</p>
+<h3 id="mac启动安全性实用工具">MAC启动安全性实用工具</h3>
+<p><a href="https://support.apple.com/zh-cn/HT208198">https://support.apple.com/zh-cn/HT208198</a></p>
+<h3 id="mac-m1视频录制录入系统声音">MAC M1视频录制录入系统声音</h3>
+<p><strong>Intel</strong>的Mac是可以用<a href="https://github.com/mattingalls/Soundflower/releases/tag/2.0b2">Soundflower</a>来解决</p>
 <p>但是它不支持<strong>M1</strong>，所以找到了替代品</p>
 <p><a href="https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-macs">https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-macs</a></p>
 <p>就是这个<a href="https://existential.audio/blackhole/">BlackHole</a></p>
@@ -12,13 +12,13 @@
 <p><img src="https://image.youyinnn.top/20210425192156.png" alt=""></p>
 <p>添加聚合设备之后，再打开声音设置-&gt;输出-&gt;选上你刚设置的输出源</p>
 <p><img src="https://image.youyinnn.top/20210425192756.png" alt=""></p>
-
-          <h3 id="38f3bbc2">MAC M1安装Homebrew</h3><p>选择国内镜像安装</p>
+<h3 id="mac-m1安装homebrew">MAC M1安装Homebrew</h3>
+<p>选择国内镜像安装</p>
 <pre><code class="hljs language-bash">/bin/zsh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)</span>&quot;</span>
 </code></pre>
-
-          <h3 id="92e0ebae">关于Big Sur没有权限打开应用程序的解决方法</h3><p><a href="https://zhuanlan.zhihu.com/p/331816664">https://zhuanlan.zhihu.com/p/331816664</a></p>
-
-          <h3 id="5524582">MAC查看SSD写入和电源使用情况</h3><pre><code class="hljs language-bash">brew install smartmontools
+<h3 id="关于big-sur没有权限打开应用程序的解决方法">关于Big Sur没有权限打开应用程序的解决方法</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/331816664">https://zhuanlan.zhihu.com/p/331816664</a></p>
+<h3 id="mac查看ssd写入和电源使用情况">MAC查看SSD写入和电源使用情况</h3>
+<pre><code class="hljs language-bash">brew install smartmontools
 smartctl -a disk0
 </code></pre>

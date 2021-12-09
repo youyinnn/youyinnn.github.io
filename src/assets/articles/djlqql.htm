@@ -1,12 +1,12 @@
-
-          <h3 id="e25a21eb">Introduction</h3><p>就A了签到题，我觉得这次笔试很简单了，可是后面3题没过一个case，题目不难，各种各样的失误8，说到底菜才是原罪，还是得多刷题</p>
+<h3 id="introduction">Introduction</h3>
+<p>就A了签到题，我觉得这次笔试很简单了，可是后面3题没过一个case，题目不难，各种各样的失误8，说到底菜才是原罪，还是得多刷题</p>
 <p>和leecode不一样的是：</p>
 <ul>
 <li><strong>阅读理解</strong>很重要，这次读题特别耽误；</li>
 <li>多条件真的不要怕，一步一步地<strong>组合条件</strong>；</li>
 </ul>
-
-          <h3 id="fb000be2">Q1 Z国硬币找零</h3><blockquote>
+<h3 id="q1-z国硬币找零">Q1 Z国硬币找零</h3>
+<blockquote>
 <p> z国4种硬币，面值1、16、64、1024，小明用1024买东西，求找出的最小硬币数。</p>
 <p> 如买200，找824，可找12枚64、3枚16、2枚4
  输入200，输出17</p>
@@ -34,8 +34,8 @@
     System.out.println(count);
 }
 </code></pre>
-
-          <h3 id="2cea742b">Q2 字符串去重</h3><blockquote>
+<h3 id="q2-字符串去重">Q2 字符串去重</h3>
+<blockquote>
 <p> 字符串去重
  条件：
  1）如果三个一样的字符，去掉一个：helllo -&gt;hello
@@ -83,12 +83,12 @@
     <span class="hljs-type">boolean</span> <span class="hljs-variable">aab</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; chars.length; i++) {
-        <span class="hljs-type">boolean</span> <span class="hljs-variable">triple</span> <span class="hljs-operator">=</span> aa &amp;&amp; sb.charAt(last) == chars[i];
-        <span class="hljs-type">boolean</span> <span class="hljs-variable">aabb</span> <span class="hljs-operator">=</span> aab &amp;&amp; sb.charAt(last) == chars[i];
-        <span class="hljs-keyword">if</span> (!triple &amp;&amp; !aabb) {
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">triple</span> <span class="hljs-operator">=</span> aa && sb.charAt(last) == chars[i];
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">aabb</span> <span class="hljs-operator">=</span> aab && sb.charAt(last) == chars[i];
+        <span class="hljs-keyword">if</span> (!triple && !aabb) {
             aa = chars[i] == sb.charAt(last);
             <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">1</span>) {
-                aab = sb.charAt(last - <span class="hljs-number">1</span>) == sb.charAt(last) &amp;&amp; sb.charAt(last) != chars[i];
+                aab = sb.charAt(last - <span class="hljs-number">1</span>) == sb.charAt(last) && sb.charAt(last) != chars[i];
             }
             sb.append(chars[i]);
             last++;
@@ -97,8 +97,8 @@
     <span class="hljs-keyword">return</span> sb.toString();
 }
 </code></pre>
-
-          <h3 id="a74f2f5a">Q3 发礼品</h3><blockquote>
+<h3 id="q3-发礼品">Q3 发礼品</h3>
+<blockquote>
 <p> n个人比赛得分，围成圈领奖品，条件如下
  1）如果分数比左右两边的人高，那么奖品也比左右两边的人多
  2）每人至少一份
@@ -163,7 +163,7 @@
                 <span class="hljs-type">int</span> <span class="hljs-variable">leftP</span> <span class="hljs-operator">=</span> getLeft(p, index);
                 <span class="hljs-type">int</span> <span class="hljs-variable">rightP</span> <span class="hljs-operator">=</span> getRight(p, index);
 
-                <span class="hljs-keyword">if</span> (nowS &gt; leftS &amp;&amp; nowS &gt; rightS) {
+                <span class="hljs-keyword">if</span> (nowS &gt; leftS && nowS &gt; rightS) {
                     p[index] = Math.max(leftP, rightP) + <span class="hljs-number">1</span>;
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nowS &gt; leftS) {
                     p[index] = leftP + <span class="hljs-number">1</span>;
@@ -199,8 +199,8 @@
     }
 }
 </code></pre>
-
-          <h3 id="b26bda52">Q4 N绳子剪M等长</h3><blockquote>
+<h3 id="q4-n绳子剪m等长">Q4 N绳子剪M等长</h3>
+<blockquote>
 <p> n根绳子，剪成m段等长绳子，不可拼接，求等多长，结果保留2位小数</p>
 <p> 输入
  第一行2个数，n和m

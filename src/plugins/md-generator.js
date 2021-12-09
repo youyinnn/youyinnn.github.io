@@ -3,21 +3,22 @@
 const fs = require("fs");
 const path = require("path");
 const marked = require("marked");
-const yaml = require("js-yaml");
 const { crc32 } = require("crc");
 const dayjs = require("dayjs");
 const { EmojiConvertor } = require("emoji-js");
 const articleDataExtract = require("./artricles-data-extract");
+const tocExtractor = require("./toc-extractor");
 const { exit } = require("process");
+const katex = require("katex");
 
 let postsPath = path.join(__dirname, "..", "assets/_posts");
-// let htmlPath = path.join(__dirname, "..", "..", "/public/md.tmp");
 
 // Get reference
 const renderer = new marked.Renderer();
 
 marked.setOptions({
   renderer: renderer,
+  headerIds: true,
   highlight: function (code, lang) {
     const hljs = require("highlight.js");
     const language = hljs.getLanguage(lang) ? lang : "plaintext";
@@ -34,14 +35,6 @@ marked.setOptions({
 });
 
 // Override function
-renderer.heading = function (text, level) {
-  if (text.search("<a") > 0 || text.startsWith("<a")) {
-    text = text.replace(/<a href=".*">|<\/a>|<code>|<\/code>/g, "");
-  }
-  let hid = crc32(text + level).toString(16);
-  return `
-          <h${level} id="${hid}">${text}</h${level}>`;
-};
 renderer.html = renderer.text = function (text) {
   // convert emoji
   let emojis = text.match(/:[A-z]+[-|_]?[A-z|0-9]+:/gm);
@@ -69,7 +62,35 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   if (sourceMdStrHandleFunc !== undefined) {
     sourceMdStr = sourceMdStrHandleFunc(sourceMdStr);
   }
+  // marked parse
   let htmlStr = marked.parse(sourceMdStr);
+  const hMap = tocExtractor.read(sourceFilePath, htmlStr);
+  if (hMap !== null) {
+    fs.writeFileSync(outputFilePath + ".toc.json", JSON.stringify(hMap), {
+      encoding: "utf-8",
+    });
+  }
+
+  // katex rendering
+  htmlStr = htmlStr.replace(/amp;/g, "&");
+  htmlStr = htmlStr.replace(/&&/g, "&");
+  let inp = htmlStr.match(/\$\$[^$]*\$\$/);
+  while (inp !== null) {
+    let e = htmlStr.match(/\$\$[^$]*\$\$/)[0];
+    let ehtml =
+      '<span class="katex-display katexp">' +
+      katex.renderToString(e.substring(2, e.length - 2), {
+        displayMode: true,
+        throwOnError: false,
+        output: "html",
+        // ignore chinese charactor
+        strict: false,
+      }) +
+      "</span>";
+    htmlStr = htmlStr.replace(inp[0], ehtml);
+    inp = htmlStr.match(/\$\$[^$]*\$\$/);
+  }
+
   fs.writeFileSync(outputFilePath, htmlStr, {
     encoding: "utf-8",
   });
@@ -86,6 +107,8 @@ emoji = new EmojiConvertor();
 emoji.init_env();
 emoji.replace_mode = "unified";
 emoji.allow_native = true;
+
+var count = 0;
 
 // iterating md files
 for (let pname of postsrs) {
@@ -121,6 +144,8 @@ for (let pname of postsrs) {
       return data.body;
     }
   );
+  // count++;
+  // if (count === 4) break;
 }
 
 // sort metadata with date
@@ -157,6 +182,22 @@ for (let md of scriptsDir) {
       encoding: "utf-8",
     });
     let htmlStr = marked.parse(sourceStr);
+    const hMap = tocExtractor.read(md, htmlStr);
+    if (hMap !== null) {
+      fs.writeFileSync(
+        path.join(
+          __dirname,
+          "..",
+          "assets",
+          "scripts",
+          mdAbbrlink + ".htm.toc.json"
+        ),
+        JSON.stringify(hMap),
+        {
+          encoding: "utf-8",
+        }
+      );
+    }
     fs.writeFileSync(
       path.join(__dirname, "..", "assets", "scripts", mdAbbrlink + ".htm"),
       htmlStr,

@@ -1,8 +1,8 @@
 <p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
 <p>惊！仅用前端技术就可以打造跨平台桌面应用！</p>
 <p></div></p>
-
-          <h3 id="1ee19ae5">快速入门</h3><hr>
+<h3 id="快速入门">快速入门</h3>
+<hr>
 <p>简单介绍一下什么是Electron：</p>
 <blockquote>
 <p>如果你只会前端技术，如果你想打造一个桌面应用，如果你不想学C#、Swing之类的技术，那么Electron绝对是你的不二之选。</p>
@@ -18,8 +18,8 @@
 <p><strong>千万要</strong>使用原官网：<a href="https://electronjs.org/">https://electronjs.org/</a></p>
 <p>原官网也支持中文！中文网的内容有缺失！</p>
 <p>所以我们可以正式开始了！</p>
-
-          <h3 id="62c57345">安装</h3><hr>
+<h3 id="安装">安装</h3>
+<hr>
 <p>贴一个Electron的github项目地址：<a href="https://github.com/electron/electron">https://github.com/electron/electron</a> ，里面有安装说明。</p>
 <p>我觉得玩什么东西，安装才是第一步！</p>
 <blockquote>
@@ -33,26 +33,26 @@
 <pre><code class="hljs language-cpp">registry=https:<span class="hljs-comment">//registry.npm.taobao.org</span>
 electron_mirror=<span class="hljs-string">&quot;https://npm.taobao.org/mirrors/electron/&quot;</span>
 </code></pre>
-
-          <h3 id="99c0be8d">基本概念</h3><hr>
-
-          <h4 id="bda6f2b4">主进程</h4><blockquote>
+<h3 id="基本概念">基本概念</h3>
+<hr>
+<h4 id="主进程">主进程</h4>
+<blockquote>
 <p>在 <code>Electron</code> 里，运行 <code>package.json</code> 里 <code>main</code> 脚本的进程被称为主进程。在主进程运行的脚本可以以创建 web 页面的形式展示 GUI。</p>
 </blockquote>
-
-          <h4 id="e2d75238">渲染进程</h4><blockquote>
+<h4 id="渲染进程">渲染进程</h4>
+<blockquote>
 <p>由于 <code>Electron</code> 使用 <code>Chromium</code> 来展示页面，所以 <code>Chromium</code> 的多进程结构也被充分利用。每个 <code>Electron</code> 的页面都在运行着自己的进程，这样的进程我们称之为渲染进程。</p>
 <p>在一般浏览器中，网页通常会在沙盒环境下运行，并且不允许访问原生资源。然而，<code>Electron</code> 用户拥有在网页中调用 <code>Node.js</code> 的 <code>APIs</code> 的能力，可以与底层操作系统直接交互。</p>
 </blockquote>
-
-          <h4 id="663cdd48">主进程与渲染进程的区别</h4><blockquote>
+<h4 id="主进程与渲染进程的区别">主进程与渲染进程的区别</h4>
+<blockquote>
 <p>主进程使用 <code>BrowserWindow</code> 实例创建页面。每个 <code>BrowserWindow</code> 实例都在自己的渲染进程里运行页面。当一个 <code>BrowserWindow</code> 实例被销毁后，相应的渲染进程也会被终止。</p>
 <p>主进程管理所有页面和与之对应的渲染进程。每个渲染进程都是相互独立的，并且只关心他们自己的页面。</p>
 <p>由于在页面里管理原生 <code>GUI</code> 资源是非常危险而且容易造成资源泄露，所以在页面调用 <code>GUI</code> 相关的 <code>APIs</code> 是不被允许的。如果你想在网页里使用 <code>GUI</code> 操作，其对应的渲染进程必须与主进程进行通讯，请求主进程进行相关的 <code>GUI</code> 操作。</p>
 <p>在 <code>Electron</code>，我们提供几种方法用于主进程和渲染进程之间的通讯。像 <code>ipcRenderer</code> 和 <code>ipcMain</code> 模块用于发送消息， <code>remote</code> 模块用于 <code>RPC</code> 方式通讯。这些内容都可以在一个 FAQ 中查看 <a href="https://electron.org.cn/doc/faq.html#how-to-share-data-between-web-pages">how to share data between web pages</a>。</p>
 </blockquote>
-
-          <h3 id="447c300f">HelloWorld</h3><hr>
+<h3 id="helloworld">HelloWorld</h3>
+<hr>
 <p>大体上，一个<code>Electron</code>应用的目录结构如下：</p>
 <pre><code>your-app/
 ├── package.json
@@ -139,8 +139,8 @@ app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
-
-          <h3 id="5cdf0799">Run HelloWorld</h3><hr>
+<h3 id="run-helloworld">Run HelloWorld</h3>
+<hr>
 <p>一旦你创建了最初的 <code>main.js</code>， <code>index.html</code> 和<code> package.json</code> 这几个文件，你可能会想尝试在本地运行并测试，看看是不是和期望的那样正常运行。</p>
 <p>安装文档说明，运行electron应用的方式有两种：</p>
 <ul>

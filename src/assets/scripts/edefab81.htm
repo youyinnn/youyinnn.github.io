@@ -1,14 +1,14 @@
-
-          <h2 id="31f6ff39">概念与思考</h2>
-          <h3 id="48178f1e">关于 CI</h3>
-          <h4 id="7617f642">🔹示意图</h4><p><img src="https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png" alt="image"></p>
+<h2 id="概念与思考">概念与思考</h2>
+<h3 id="关于-ci">关于 CI</h3>
+<h4 id="small_blue_diamond示意图">🔹示意图</h4>
+<p><img src="https://user-images.githubusercontent.com/23525754/39740876-26eba2da-52ca-11e8-9403-74ce6686407e.png" alt="image"></p>
 <blockquote>
 <p>文章 <a href="https://www.mindtheproduct.com/2016/02/what-the-hell-are-ci-cd-and-devops-a-cheatsheet-for-the-rest-of-us/">The Product Managers’ Guide to Continuous Delivery and DevOps</a></p>
 <p>对「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」和「持续部署（Continuous Deployment）」这三个概念有很详细的解释。</p>
 </blockquote>
-
-          <h3 id="6db5b3e9">对IoC/DI的理解</h3>
-          <h4 id="cf6426d0">🔹Ioc—Inverse  of Control</h4><p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
+<h3 id="对iocdi的理解">对IoC/DI的理解</h3>
+<h4 id="small_blue_diamondiocinverse--of-control">🔹Ioc—Inverse  of Control</h4>
+<p><strong>即“控制反转”，不是什么技术，而是一种设计思想</strong>。在Java开发中，<strong>Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</strong> </p>
 <p>深入分析一下：</p>
 <ul>
 <li>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；<strong>谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</strong></li>
@@ -16,8 +16,8 @@
 </ul>
 <p><strong>举例说明</strong></p>
 <p>“常规的是，我们程序员<strong>手动new</strong>来给程序的<strong>Service对象</strong>提供所<strong>依赖的DAO对象</strong>，而现在是程序通过IoC容器自己提供<strong>DAO对象</strong>给<strong>Service对象</strong>。”</p>
-
-          <h4 id="7662d172">🔹DI—Dependency Injection</h4><p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
+<h4 id="small_blue_diamonddidependency-injection">🔹DI—Dependency Injection</h4>
+<p><strong>即“依赖注入”</strong>：<strong>组件之间依赖关系</strong>由容器在运行期决定，形象的说，即<strong>由容器动态的将某个依赖关系注入到组件之中</strong>。</p>
 <p><strong>依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。</strong>通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。 </p>
 <p>深入分析一下：</p>
 <ul>
@@ -28,22 +28,22 @@
 </ul>
 <p><strong>举例说明</strong></p>
 <p>“<strong>Service对象</strong>依赖于<strong>DAO对象</strong>，IoC容器通过<strong>注解和反射机制</strong>来<strong>注入（Injected）</strong>用户在配置文件中配置好的DAO对象到<strong>Service对象</strong>的对应属性中。”</p>
-
-          <h4 id="c3e76f9d">🔹两者关系</h4><p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
+<h4 id="small_blue_diamond两者关系">🔹两者关系</h4>
+<p><strong>IoC和DI</strong>由什么<strong>关系</strong>呢？其实它们<strong>是同一个概念的不同角度描述</strong>，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。 </p>
 <p>我的理解是：<strong>IoC说的是一种程序过程，而DI说的是注入的动作，DI是IoC的一种实现</strong>。</p>
 <p><a href="https://blog.csdn.net/qq_22654611/article/details/52606960">参考</a></p>
-
-          <h3 id="83ea1ac7">OOP三大特性</h3>
-          <h4 id="7aa9fb7c">🔹封装优点：</h4><ul>
+<h3 id="oop三大特性">OOP三大特性</h3>
+<h4 id="small_blue_diamond封装优点：">🔹封装优点：</h4>
+<ul>
 <li><strong>安全：</strong> 只能通过规定的方法访问数据 </li>
 <li><strong>隐藏细节：</strong> 隐藏类的实例细节，方便修改和实现</li>
 </ul>
-
-          <h4 id="d47e673e">🔹继承优点：</h4><ul>
+<h4 id="small_blue_diamond继承优点：">🔹继承优点：</h4>
+<ul>
 <li><strong>代码复用</strong></li>
 </ul>
-
-          <h4 id="ebe72dd2">🔹多态主要表现：</h4><ul>
+<h4 id="small_blue_diamond多态主要表现：">🔹多态主要表现：</h4>
+<ul>
 <li><p><strong>引用多态</strong>　　　</p>
 <ul>
 <li>父类的引用可以指向本类的对象；</li>
@@ -62,17 +62,17 @@
 </li>
 </ul>
 <p>参考: <a href="https://www.cnblogs.com/hysum/p/7100874.html#_label1">https://www.cnblogs.com/hysum/p/7100874.html#_label1</a></p>
-
-          <h3 id="db775422">文件头魔数 判断文件类型</h3><p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
+<h3 id="文件头魔数-判断文件类型">文件头魔数 判断文件类型</h3>
+<p><a href="https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1">https://blog.csdn.net/t894690230/article/details/51242110?winzoom=1</a></p>
 <p>但是这种方法比较复杂，在帖子里有前辈提到，文本类型是无法通过魔术去判断的，比如html和txt
 而且同一种文件类型不同的程序去创建，魔数也可能不一样，比如ZIP可能有多种不同的魔数</p>
 <p>魔数列表参考如下：
 <a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
-
-          <h3 id="fbc94e2d">微服务/集群/分布式</h3>
-          <h4 id="cdd19350">🔹微服务好文</h4><p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
-
-          <h4 id="9e52e389">🔹集群和分布式</h4><blockquote>
+<h3 id="微服务集群分布式">微服务/集群/分布式</h3>
+<h4 id="small_blue_diamond微服务好文">🔹微服务好文</h4>
+<p><a href="https://blog.csdn.net/ityouknow/article/details/80490926">学习springboot看这一篇就够了</a> 看它的微服务启蒙3篇</p>
+<h4 id="small_blue_diamond集群和分布式">🔹集群和分布式</h4>
+<blockquote>
 <p>小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群</p>
 <p>作者：张鹏飞
 链接：<a href="https://www.zhihu.com/question/20004877/answer/112124929">https://www.zhihu.com/question/20004877/answer/112124929</a>
@@ -83,29 +83,29 @@
 <a href="https://blog.csdn.net/cutesource/article/details/5811914">https://blog.csdn.net/cutesource/article/details/5811914</a>
 <a href="https://www.zhihu.com/question/20004877/answer/61025046">https://www.zhihu.com/question/20004877/answer/61025046</a>
 <a href="https://www.cnblogs.com/aspirant/p/5697807.html">https://www.cnblogs.com/aspirant/p/5697807.html</a></p>
-
-          <h3 id="895e5ab0">什么是/为什么要Tracing？Opentracing的入门铺垫</h3><p><img src="https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png" alt="image"></p>
+<h3 id="什么是为什么要tracing？opentracing的入门铺垫">什么是/为什么要Tracing？Opentracing的入门铺垫</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/46987507-0e617d80-d127-11e8-86b6-ba3a9ccd8f36.png" alt="image"></p>
 <p>好文：<a href="https://yq.aliyun.com/articles/514488">https://yq.aliyun.com/articles/514488</a></p>
-
-          <h4 id="57bbb73">🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：</h4><p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
+<h4 id="small_blue_diamond这个gitbook爆炸推【opentracing的中文文档翻译】：">🔹这个Gitbook爆炸推【Opentracing的中文文档翻译】：</h4>
+<p><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/">https://wu-sheng.gitbooks.io/opentracing-io/content/</a></p>
 <p>Tutorials:</p>
 <p><a href="https://github.com/yurishkuro/opentracing-tutorial/tree/master/java">https://github.com/yurishkuro/opentracing-tutorial/tree/master/java</a></p>
-
-          <h3 id="10874505">什么是/为什么要DevOps？</h3><p><img src="https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png" alt="image"></p>
+<h3 id="什么是为什么要devops？">什么是/为什么要DevOps？</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/46988029-4b2e7400-d129-11e8-943c-81b28b5ac5ec.png" alt="image"></p>
 <p><a href="https://www.cnblogs.com/liufei1983/p/7152013.html">https://www.cnblogs.com/liufei1983/p/7152013.html</a></p>
-
-          <h3 id="5cd95015">k8s</h3>
-          <h4 id="23c63e8d">🔹好文</h4><ul>
+<h3 id="k8s">k8s</h3>
+<h4 id="small_blue_diamond好文">🔹好文</h4>
+<ul>
 <li>概念：<a href="http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345">http://www.dockone.io/article/8341?cmd=redirect&amp;arubalp=12345</a></li>
 <li>简要介绍：<a href="http://www.dockone.io/article/8328">http://www.dockone.io/article/8328</a></li>
 <li>10分钟核心概念了解：<a href="http://www.dockone.io/article/932">http://www.dockone.io/article/932</a></li>
 </ul>
-
-          <h4 id="fe92a1e1">🔹中文文档</h4><ul>
+<h4 id="small_blue_diamond中文文档">🔹中文文档</h4>
+<ul>
 <li>设计理念（概念介绍）：<a href="http://docs.kubernetes.org.cn/249.html">http://docs.kubernetes.org.cn/249.html</a></li>
 </ul>
-
-          <h4 id="8a09b8c6">🔹配置</h4><ul>
+<h4 id="small_blue_diamond配置">🔹配置</h4>
+<ul>
 <li>k8s的Dashboard：<a href="http://blog.51cto.com/ylw6006/2113542">http://blog.51cto.com/ylw6006/2113542</a></li>
 <li>yaml：<ul>
 <li>sample: <a href="https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/">https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/</a></li>
@@ -113,17 +113,17 @@
 </ul>
 </li>
 </ul>
-
-          <h3 id="c5470431">docker</h3><p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
-
-          <h3 id="8af636c5">gRPC &amp; protobuf &amp; Swagger</h3><ul>
+<h3 id="docker">docker</h3>
+<p>介绍与入门：<a href="http://www.dockone.io/article/8350">http://www.dockone.io/article/8350</a></p>
+<h3 id="grpc--protobuf--swagger">gRPC &amp; protobuf &amp; Swagger</h3>
+<ul>
 <li><a href="https://segmentfault.com/a/1190000013513469">Grpc+Grpc Gateway实践三 Swagger了解一下</a></li>
 <li><a href="https://www.cnblogs.com/luoxn28/p/5303517.html">google protobuf安装与使用</a></li>
 <li><a href="https://github.com/protocolbuffers/protobuf">protobuf</a></li>
 <li><a href="https://www.cnblogs.com/andyidea/archive/2017/03/10/6529900.html">grpc-gateway：grpc转换为http协议对外提供服务</a></li>
 </ul>
-
-          <h3 id="3a2aed49">GraphQL 一种用于 API 的查询语言</h3><blockquote>
+<h3 id="graphql-一种用于-api-的查询语言">GraphQL 一种用于 API 的查询语言</h3>
+<blockquote>
 <p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 </p>
 <p>GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
 </blockquote>
@@ -134,11 +134,11 @@
 <p>2018年11月16日 10点04分
 要构建一个graphql需要的成本太大了 还不如restful来的快</p>
 </blockquote>
-
-          <h3 id="c3636876">Protobuf</h3>
-          <h4 id="8837675c">What are protocol buffers?</h4><p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
-
-          <h4 id="bd060b79">Why not just use XML?</h4><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
+<h3 id="protobuf">Protobuf</h3>
+<h4 id="what-are-protocol-buffers">What are protocol buffers?</h4>
+<p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages. You can even update your data structure without breaking deployed programs that are compiled against the &quot;old&quot; format.</p>
+<h4 id="why-not-just-use-xml">Why not just use XML?</h4>
+<p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
 <ul>
 <li>are simpler</li>
 <li>are 3 to 10 times smaller</li>
@@ -146,35 +146,35 @@
 <li>are less ambiguous</li>
 <li>generate data access classes that are easier to use programmatically</li>
 </ul>
-
-          <h4 id="8c0c55ad">References</h4><ul>
+<h4 id="references">References</h4>
+<ul>
 <li><a href="https://www.jianshu.com/p/a24c88c0526a">深入Protobuf</a></li>
 <li><a href="https://www.jianshu.com/p/b4b51b99e218">ProtoBuf试用与JSON的比较</a></li>
 <li><a href="https://mp.weixin.qq.com/s/yiAhQddl42eGSnM6XpkNZw">在python中使用ProtocolBuffers</a></li>
 <li><a href="https://developers.google.com/protocol-buffers/docs/overview">Google Docs</a></li>
 </ul>
-
-          <h3 id="3e30697c">CLU &amp; TUI?</h3>
-          <h4 id="9bcdf5b">Command-line Utilities</h4><ul>
+<h3 id="clu--tui">CLU &amp; TUI?</h3>
+<h4 id="command-line-utilities">Command-line Utilities</h4>
+<ul>
 <li>Accept arguments at invocation, execute, and terminate</li>
 <li>Examples:<code>ls</code>,<code>grep</code>,<code>git</code></li>
 <li>Python&#39;s built-in argparse module or Click have this well covered</li>
 </ul>
-
-          <h4 id="ef2f64d">Text User Interfaces</h4><ul>
+<h4 id="text-user-interfaces">Text User Interfaces</h4>
+<ul>
 <li>Full-screen applications more like a GUI but in a terminal</li>
 <li>Examples: <code>vim</code>, <code>emacs</code>, <code>top</code></li>
 <li>Python&#39;s built-in curses module can be used for this.</li>
 </ul>
-
-          <h4 id="8913a85a">Python TUI Libaraies</h4><ul>
+<h4 id="python-tui-libaraies">Python TUI Libaraies</h4>
+<ul>
 <li><a href="https://python-prompt-toolkit.readthedocs.io/en/stable/index.html">Python Prompt ToolKit</a></li>
 <li><a href="https://github.com/peterbrittain/asciimatics">asciimatics</a></li>
 <li><a href="http://urwid.org/index.html#">Urwid</a></li>
 </ul>
-
-          <h3 id="7bda9170">Github</h3>
-          <h4 id="8885ba86">🔹科学获取资源</h4><p>1. 
+<h3 id="github">Github</h3>
+<h4 id="small_blue_diamond科学获取资源">🔹科学获取资源</h4>
+<p>1. 
    在 <a href="https://site.ip138.com/raw.Githubusercontent.com/">https://site.ip138.com/raw.Githubusercontent.com/</a> 输入raw.githubusercontent.com查询IP地址</p>
 <p>2. 
    修改hosts Ubuntu，CentOS及macOS直接在终端输入</p>
@@ -183,20 +183,20 @@
 <ol start="3">
 <li>或者直接使用项目<a href="https://github.com/521xueweihan/GitHub520">GitHub520</a>，去修改hosts文件</li>
 </ol>
-
-          <h3 id="636051c0">Yarn</h3>
-          <h4 id="e41e569e">设置镜像</h4><pre><code class="hljs language-bash">yarn config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org
+<h3 id="yarn">Yarn</h3>
+<h4 id="设置镜像">设置镜像</h4>
+<pre><code class="hljs language-bash">yarn config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org
 <span class="hljs-comment"># electron</span>
 yarn config <span class="hljs-built_in">set</span> electron_mirror https://npm.taobao.org/mirrors/electron/
 </code></pre>
-
-          <h4 id="ee65e346">让nodejs能够引用yarn的全局模块</h4><pre><code class="hljs language-bash"><span class="hljs-comment"># 在有效的rc文件下</span>
+<h4 id="让nodejs能够引用yarn的全局模块">让nodejs能够引用yarn的全局模块</h4>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 在有效的rc文件下</span>
 <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.yarn/bin:<span class="hljs-variable">$HOME</span>/.config/yarn/global/node_modules/.bin:<span class="hljs-variable">$PATH</span>&quot;</span>
 <span class="hljs-built_in">export</span> NODE_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>&quot;</span>
 </code></pre>
-
-          <h3 id="814e5b6f">项目已知风险的状态与管理</h3>
-          <h4 id="835e7ef0">对于小项目/小团队</h4><p>涉及人员：</p>
+<h3 id="项目已知风险的状态与管理">项目已知风险的状态与管理</h3>
+<h4 id="对于小项目小团队">对于小项目/小团队</h4>
+<p>涉及人员：</p>
 <ul>
 <li>风险处理方——一线处理风险；</li>
 <li>风险处理监测方——对处理方的处理过程、结果进行监测；</li>
@@ -212,8 +212,8 @@ yarn config <span class="hljs-built_in">set</span> electron_mirror https://npm.t
 <p>失效意味着该风险已经被认为消除或者不会发生，即使客观上该风险再次发生了，也将被认为是新的而未被立项的风险；</p>
 </li>
 </ol>
-
-          <h4 id="e8dc34ba">对于大项目/大团队</h4><p>涉及人员：</p>
+<h4 id="对于大项目大团队">对于大项目/大团队</h4>
+<p>涉及人员：</p>
 <ul>
 <li>原风险处理方——一线处理风险；</li>
 <li>原风险处理监测方——对处理方的处理过程、结果进行监测；</li>

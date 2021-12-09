@@ -1,6 +1,6 @@
 <p><span id="top"></span></p>
-
-          <h3 id="539dfaa9">Ⅳ. Jetty开发指南-21.嵌入式开发</h3><ul>
+<h3 id="ⅳ-jetty开发指南-21嵌入式开发">Ⅳ. Jetty开发指南-21.嵌入式开发</h3>
+<ul>
 <li><ol start="21">
 <li><a href="#21%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91">嵌入式开发</a></li>
 </ol>
@@ -51,15 +51,15 @@
 </ul>
 <hr>
 <p><span id="21嵌入式开发"></span></p>
-
-          <h3 id="4fb3c0b2">21、嵌入式开发</h3><ul>
+<h3 id="21、嵌入式开发">21、嵌入式开发</h3>
+<ul>
 <li>21.1、<a href="#211jetty%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8Fhello-world">Jetty的嵌入式Hello World</a></li>
 <li>21.2、<a href="#212jetty%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91">Jetty的嵌入式开发</a></li>
 <li>21.3、<a href="#213%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%9A%84%E6%A0%97%E5%AD%90">嵌入式开发的栗子</a></li>
 </ul>
 <p><span id="211jetty的嵌入式hello-world"></span></p>
-
-          <h4 id="70bf6f96">21.1、Jetty的嵌入式HelloWorld</h4><ul>
+<h4 id="211、jetty的嵌入式helloworld">21.1、Jetty的嵌入式HelloWorld</h4>
+<ul>
 <li>21.1.1、<a href="#2111%E4%B8%8B%E8%BD%BDjar%E5%8C%85">下载Jar包</a></li>
 <li>21.1.2、<a href="#2112hello-world%E6%A0%97%E5%AD%90">Hello World栗子</a></li>
 <li>21.1.3、<a href="#2113%E7%BC%96%E8%AF%91hello-world%E6%A0%97%E5%AD%90">编译Hello World栗子</a></li>
@@ -67,8 +67,8 @@
 <li>21.1.5、<a href="#2115%E4%B8%8B%E4%B8%80%E6%AD%A5">下一步</a></li>
 </ul>
 <p><span id="2111下载jar包"></span></p>
-
-          <h5 id="c2903d32">21.1.1、下载Jar包</h5><p>Jetty把整体分解为许多的jar包，我们可以按需导入依赖。典型的做法是使用Maven去管理jar包，然而本节教程是使用的整体jar包，它包含了所有的Jetty服务。你可以通过curl或者浏览器去手动下载这个完整的jar包<code>jetty-all.jar</code>：<a href="http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar%E3%80%82">http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar。</a></p>
+<h5 id="2111、下载jar包">21.1.1、下载Jar包</h5>
+<p>Jetty把整体分解为许多的jar包，我们可以按需导入依赖。典型的做法是使用Maven去管理jar包，然而本节教程是使用的整体jar包，它包含了所有的Jetty服务。你可以通过curl或者浏览器去手动下载这个完整的jar包<code>jetty-all.jar</code>：<a href="http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar%E3%80%82">http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar。</a></p>
 <blockquote>
 <p><strong>NOTE：</strong></p>
 <p>这个地址拒绝使用wget去下载，你可以使用curl的方式下载。</p>
@@ -85,8 +85,8 @@
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2112hello-world栗子"></span></p>
-
-          <h5 id="bc1f75d0">21.1.2、Hello World栗子</h5><p>这个栗子中包含了许多关于JettyAPI的用例，这个教程会在主函数里面用到一个简单的Handler的Hello World来运行服务器：</p>
+<h5 id="2112、hello-world栗子">21.1.2、Hello World栗子</h5>
+<p>这个栗子中包含了许多关于JettyAPI的用例，这个教程会在主函数里面用到一个简单的Handler的Hello World来运行服务器：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.IOException;
@@ -134,21 +134,21 @@ public class HelloWorld extends AbstractHandler
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2113编译hello-world栗子"></span></p>
-
-          <h5 id="7b0530a5">21.1.3、编译Hello World栗子</h5><pre><code>&gt; mkdir classes
+<h5 id="2113、编译hello-world栗子">21.1.3、编译Hello World栗子</h5>
+<pre><code>&gt; mkdir classes
 &gt; javac -d classes -cp jetty-all-uber.jar HelloWorld.java
 </code></pre>
 <br>
 
 <p><span id="2114运行handler和server"></span></p>
-
-          <h5 id="5545f814">21.1.4、运行Handler和Server</h5><pre><code>&gt; java -cp classes:jetty-all-uber.jar org.eclipse.jetty.embedded.HelloWorld
+<h5 id="2114、运行handler和server">21.1.4、运行Handler和Server</h5>
+<pre><code>&gt; java -cp classes:jetty-all-uber.jar org.eclipse.jetty.embedded.HelloWorld
 </code></pre>
 <br>
 
 <p><span id="2115下一步"></span></p>
-
-          <h5 id="6c017d89">21.1.5、下一步</h5><p>如果你想了解更多的内容，请按照下面的步骤来：</p>
+<h5 id="2115、下一步">21.1.5、下一步</h5>
+<p>如果你想了解更多的内容，请按照下面的步骤来：</p>
 <ul>
 <li>跟着<a href="#212jetty%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91">21.2、Jetty的嵌入式开发</a>继续学习。</li>
 <li>探索整个<a href="#http://www.eclipse.org/jetty/javadoc/9.4.6.v20170531/">Jetty javadoc</a>。</li>
@@ -157,8 +157,8 @@ public class HelloWorld extends AbstractHandler
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="212jetty的嵌入式开发"></span></p>
-
-          <h4 id="839bc9a4">21.2、Jetty的嵌入式开发</h4><ul>
+<h4 id="212、jetty的嵌入式开发">21.2、Jetty的嵌入式开发</h4>
+<ul>
 <li>21.2.1、<a href="#2121%E6%A6%82%E8%BF%B0">概述</a></li>
 <li>21.2.2、<a href="#2122%E5%88%9B%E5%BB%BAserver">创建Server</a></li>
 <li>21.2.3、<a href="#2123%E4%BD%BF%E7%94%A8handler">使用Handler</a></li>
@@ -172,8 +172,8 @@ public class HelloWorld extends AbstractHandler
 <p>Jetty有一句口号“不要把你的应用部署到Jetty，要把Jetty部署到你的应用中！”，Jetty被设计成是可以被实例化并且拿来使用的一个组件，就像一个Java的POJO对象一样。把Jetty服务嵌入到你的应用中，这意味着嵌入一个HTTP模块进你的应用中去。</p>
 <p>这个教程会一步步地教你如何用最简单的方式使用Jetty服务器去运行多个Web应用。栗子中的许多代码来自于Jetty项目的源码。</p>
 <p><span id="2121概述"></span></p>
-
-          <h5 id="b8dcb3de">21.2.1、概述</h5><p>想要嵌入Jetty，以下是标准的步骤，在栗子里面会有详细的说明：</p>
+<h5 id="2121、概述">21.2.1、概述</h5>
+<p>想要嵌入Jetty，以下是标准的步骤，在栗子里面会有详细的说明：</p>
 <ol>
 <li>创建Server实例</li>
 <li>添加/配置Connectors</li>
@@ -184,8 +184,8 @@ public class HelloWorld extends AbstractHandler
 <br>
 
 <p><span id="2122创建server"></span></p>
-
-          <h5 id="e2d87962">21.2.2、创建Server</h5><p>下面的代码会简单的向你介绍一个JettyServer：</p>
+<h5 id="2122、创建server">21.2.2、创建Server</h5>
+<p>下面的代码会简单的向你介绍一个JettyServer：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Server;
@@ -208,8 +208,8 @@ public class SimplestServer
 <a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2123使用handler"></span></p>
-
-          <h5 id="502cbd35">21.2.3、使用Handler</h5><ul>
+<h5 id="2123、使用handler">21.2.3、使用Handler</h5>
+<ul>
 <li>21.2.3.1、<a href="#21231%E4%B8%80%E4%B8%AAhandler%E7%9A%84hello-world">一个Handler的Hello World</a></li>
 <li>21.2.3.2、<a href="#21232%E8%BF%90%E8%A1%8Chelloworldhandler">运行HelloWorldHandler</a></li>
 <li>21.2.3.3、<a href="#21233handler-collections%E5%92%8Cwrappers">Handler Collections和Wrappers</a></li>
@@ -226,8 +226,8 @@ public class SimplestServer
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21231一个handler的hello-world"></span></p>
-
-          <h6 id="d74afb6d">21.2.3.1、一个Handler的Hello World</h6><p>这是<code>HelloHandler.java</code>代码：</p>
+<h6 id="21231、一个handler的hello-world">21.2.3.1、一个Handler的Hello World</h6>
+<p>这是<code>HelloHandler.java</code>代码：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.IOException;
@@ -293,8 +293,8 @@ public class HelloHandler extends AbstractHandler
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21232运行helloworldhandler"></span></p>
-
-          <h6 id="dd4811eb">21.2.3.2、运行HelloWorldHandler</h6><p>为了Handler能够处理HTTP请求，你必须把它添加到Server实例中，下面这个<code>OneHandler.java</code>代码就会向你展示Jetty服务器如何才能使用HelloWorldHandler：</p>
+<h6 id="21232、运行helloworldhandler">21.2.3.2、运行HelloWorldHandler</h6>
+<p>为了Handler能够处理HTTP请求，你必须把它添加到Server实例中，下面这个<code>OneHandler.java</code>代码就会向你展示Jetty服务器如何才能使用HelloWorldHandler：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -319,8 +319,8 @@ public class OneHandler
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21233handler-collections和wrappers"></span></p>
-
-          <h6 id="fed19532">21.2.3.3、Handler Collections和Wrappers</h6><p>一个完整的请求处理是从多个Handlers中建立的，你可用以多种方式将多个Handler连接起来，Jetty提供了几种实现了<code>HandlerContainer</code>的实例：</p>
+<h6 id="21233、handler-collections和wrappers">21.2.3.3、Handler Collections和Wrappers</h6>
+<p>一个完整的请求处理是从多个Handlers中建立的，你可用以多种方式将多个Handler连接起来，Jetty提供了几种实现了<code>HandlerContainer</code>的实例：</p>
 <blockquote>
 <p><em>译者文外补充：HandlerContainer是Handler的容器，你可以把一套业务的Handler放在一个容器里面，再把这个容器添加到Server中，Handler容器的本质也是一个Handler。</em></p>
 </blockquote>
@@ -352,8 +352,8 @@ public class OneHandler
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21234scoped-handlers"></span></p>
-
-          <h6 id="be0f77e7">21.2.3.4、Scoped Handlers</h6><p>许多标准Servlet容器，Jetty是用<code>HandlerWrapper</code>实现的，它把很多handler以良好的链式处理连在一起：<code>ContextHandler</code>-<code>SessionHandler</code>-<code>SecurityHandler</code>-<code>ServletHandler</code>。然而，因为Servlet规范的特性，这种链式处理并不能就这么单纯的就把handler嵌套起来，因为外层handler有时候会需要内层handler处理过的信息。比如说当ContextHandler调用应用的监听器以通知有请求进到context的时候，ServletHandler必须提前知道请求该转发到哪一个servlet，这样才好返回正确的servletPath值。</p>
+<h6 id="21234、scoped-handlers">21.2.3.4、Scoped Handlers</h6>
+<p>许多标准Servlet容器，Jetty是用<code>HandlerWrapper</code>实现的，它把很多handler以良好的链式处理连在一起：<code>ContextHandler</code>-<code>SessionHandler</code>-<code>SecurityHandler</code>-<code>ServletHandler</code>。然而，因为Servlet规范的特性，这种链式处理并不能就这么单纯的就把handler嵌套起来，因为外层handler有时候会需要内层handler处理过的信息。比如说当ContextHandler调用应用的监听器以通知有请求进到context的时候，ServletHandler必须提前知道请求该转发到哪一个servlet，这样才好返回正确的servletPath值。</p>
 <p><code>HandlerWrapper</code>是<code>ScopedHandler</code>抽象类的父类，这个抽象类提供了一个良好的链式范围。比如说一个ServletHandler嵌套在ContextHandler中，执行嵌套的顺序如下：</p>
 <pre><code>Server.handle(...)
   ContextHandler.doScope(...)
@@ -369,8 +369,8 @@ public class OneHandler
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21235resource-handler"></span></p>
-
-          <h6 id="13072a1e">21.2.3.5、Resource Handler</h6><p>FileServer栗子展示了如何使用Resource Handler去为当前工作目录下的静态资源服务：</p>
+<h6 id="21235、resource-handler">21.2.3.5、Resource Handler</h6>
+<p>FileServer栗子展示了如何使用Resource Handler去为当前工作目录下的静态资源服务：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Handler;
@@ -423,15 +423,15 @@ public class FileServer
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2124嵌入connectors"></span></p>
-
-          <h5 id="2947a470">21.2.4、嵌入Connectors</h5><ul>
+<h5 id="2124、嵌入connectors">21.2.4、嵌入Connectors</h5>
+<ul>
 <li>21.2.4.1、<a href="#21241%E4%B8%80%E4%B8%AAconnectors">一个Connectors</a></li>
 <li>21.2.4.2、<a href="#21242%E5%A4%9A%E4%B8%AAconnectors">多个Connectors</a></li>
 </ul>
 <p>在上一个栗子中，<code>Server</code>通过端口号在内部创建了一个默认的Connector来监听所有通过这个端口号进来的请求。然而，一般我们用Jetty作嵌入式开发的时候，正确的做法是显示地去配置一个或多个connector提供给<code>Server</code>实例。</p>
 <p><span id="21241一个connectors"></span></p>
-
-          <h6 id="d974225b">21.2.4.1、一个Connectors</h6><p>举个例子，<code>OneConnector.java</code>，实例化、配置、添加好了一个简单的HTTP Connector实例，并把这个实例添加到server中：</p>
+<h6 id="21241、一个connectors">21.2.4.1、一个Connectors</h6>
+<p>举个例子，<code>OneConnector.java</code>，实例化、配置、添加好了一个简单的HTTP Connector实例，并把这个实例添加到server中：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Server;
@@ -469,8 +469,8 @@ public class OneConnector
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="21242多个connectors"></span></p>
-
-          <h6 id="47a464f4">21.2.4.2、多个Connectors</h6><p>如果想要配置多个connectors的时候（比如HTTP+HTTPS），可能需要共享一些为HTTP连接配置过的参数。为了做到这一点，你需要显示地使用<code>ConnectionFactory</code>实例去配置<code>ServerConnector</code>类，然后提供它们通用的HTTP配置。</p>
+<h6 id="21242、多个connectors">21.2.4.2、多个Connectors</h6>
+<p>如果想要配置多个connectors的时候（比如HTTP+HTTPS），可能需要共享一些为HTTP连接配置过的参数。为了做到这一点，你需要显示地使用<code>ConnectionFactory</code>实例去配置<code>ServerConnector</code>类，然后提供它们通用的HTTP配置。</p>
 <blockquote>
 <p><em>译者文外补充：这里文档并没有给出示例代码，代码的下载链接也挂了，后面仅有一段关于这个多连接栗子的描述，我就不翻译了。关于这多链接的示例代码，“已往之不谏”前辈的博客里面有，大家可以在<a href="http://www.cnblogs.com/yiwangzhibujian/p/5845623.html">这里</a>去参考。</em></p>
 </blockquote>
@@ -480,8 +480,8 @@ public class OneConnector
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2125嵌入servlets"></span></p>
-
-          <h5 id="ef339175">21.2.5、嵌入Servlets</h5><p>Servlet是为HTTP请求提供业务逻辑的标准解决方案。Servlet除了它里面的request对象是不可变的之外，在其他方面和Jetty的Handler很像。在Jetty里面Servlet通过<code>ServletHandler</code>类去接入处理。这个类使用标准的路径映射去为请求匹配一个Servlet，你还需要设置请求的<code>servletPath</code>和<code>pathInfo</code>，然后通过一些Filters处理之后，把请求传递到servlet，以生成项响应。</p>
+<h5 id="2125、嵌入servlets">21.2.5、嵌入Servlets</h5>
+<p>Servlet是为HTTP请求提供业务逻辑的标准解决方案。Servlet除了它里面的request对象是不可变的之外，在其他方面和Jetty的Handler很像。在Jetty里面Servlet通过<code>ServletHandler</code>类去接入处理。这个类使用标准的路径映射去为请求匹配一个Servlet，你还需要设置请求的<code>servletPath</code>和<code>pathInfo</code>，然后通过一些Filters处理之后，把请求传递到servlet，以生成项响应。</p>
 <p>以下的栗子展示了一个简答的Servlet mapping过程</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
@@ -539,8 +539,8 @@ public class MinimalServlets
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2126嵌入contexts"></span></p>
-
-          <h5 id="33b0f3e7">21.2.6、嵌入Contexts</h5><p>一个<code>ContextHandler</code>是一个<code>ScopedHandler</code>，只有请求过来的URL前缀和我们设定的context path相匹配才会响应。请求匹配到它们对应的context path之后，会有它们对应的path方法，并且context范围内的资源是可用的，以下是可能的范围情况：</p>
+<h5 id="2126、嵌入contexts">21.2.6、嵌入Contexts</h5>
+<p>一个<code>ContextHandler</code>是一个<code>ScopedHandler</code>，只有请求过来的URL前缀和我们设定的context path相匹配才会响应。请求匹配到它们对应的context path之后，会有它们对应的path方法，并且context范围内的资源是可用的，以下是可能的范围情况：</p>
 <ul>
 <li>当请求到某个context的时候，加载这个context的类加载器范围是可用的。</li>
 <li>通过<code>ServletContext</code>API设置的attribute集合都可用被使用。</li>
@@ -617,8 +617,8 @@ public class ManyContexts
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2127嵌入servletcontexts"></span></p>
-
-          <h5 id="d73c3424">21.2.7、嵌入ServletContexts</h5><p><code>ServletContextHandler</code>的<code>ContextHandler</code>的一个重要子类，它支持标准的Servlet和sessions机制。接下来的栗子实例化了一个<code>DefaultServlet</code>来为/tmp/目录下的静态资源服务，还有一个<code>DumpServlet</code>，它负责创建session和传储请求中的一些基本细节：</p>
+<h5 id="2127、嵌入servletcontexts">21.2.7、嵌入ServletContexts</h5>
+<p><code>ServletContextHandler</code>的<code>ContextHandler</code>的一个重要子类，它支持标准的Servlet和sessions机制。接下来的栗子实例化了一个<code>DefaultServlet</code>来为/tmp/目录下的静态资源服务，还有一个<code>DumpServlet</code>，它负责创建session和传储请求中的一些基本细节：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Server;
@@ -655,8 +655,8 @@ public class OneServletContext
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2128嵌入web应用程序"></span></p>
-
-          <h5 id="1323a28b">21.2.8、嵌入Web应用程序</h5><p>一个<code>WebAppContext</code>是一个<code>ServletContextHandler</code>的拓展，它使用标准布局和<code>web.xml</code>来配置使用注解或者在web.xml中配置的Servlet、filters和其他功能。下面这个栗子配置了一个Jetty的测试webapp。Web应用可以使用容器提供的资源，在这个栗子里面的<code>LoginService</code>正是这样配置的：</p>
+<h5 id="2128、嵌入web应用程序">21.2.8、嵌入Web应用程序</h5>
+<p>一个<code>WebAppContext</code>是一个<code>ServletContextHandler</code>的拓展，它使用标准布局和<code>web.xml</code>来配置使用注解或者在web.xml中配置的Servlet、filters和其他功能。下面这个栗子配置了一个Jetty的测试webapp。Web应用可以使用容器提供的资源，在这个栗子里面的<code>LoginService</code>正是这样配置的：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.File;
@@ -722,8 +722,8 @@ public class OneWebApp
 <p><a href="#top">回到顶部</a></p>
 <hr>
 <p><span id="213嵌入式开发的栗子"></span></p>
-
-          <h4 id="2f03f21d">21.3、嵌入式开发的栗子</h4><p>Jetty在各种各样的应用中有着非常丰富的嵌入式开发历史。这个部分我们会向你介绍一些简单应用的嵌入式开发的栗子。你也可以在我们的<a href="https://github.com/jetty-project?utf8=%E2%9C%93&amp;q=&amp;type=&amp;language=">git仓库</a>找到许多的Jetty嵌入式开发的示例项目。</p>
+<h4 id="213、嵌入式开发的栗子">21.3、嵌入式开发的栗子</h4>
+<p>Jetty在各种各样的应用中有着非常丰富的嵌入式开发历史。这个部分我们会向你介绍一些简单应用的嵌入式开发的栗子。你也可以在我们的<a href="https://github.com/jetty-project?utf8=%E2%9C%93&q=&type=&language=">git仓库</a>找到许多的Jetty嵌入式开发的示例项目。</p>
 <ul>
 <li>21.3.1、<a href="#2131%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8">简单的文件服务器</a></li>
 <li>21.3.2、<a href="#2132%E5%8F%AF%E5%88%86%E5%B8%83%E7%9A%84%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8">可分布的文件服务器</a></li>
@@ -734,8 +734,8 @@ public class OneWebApp
 <li>21.3.7、<a href="#2137web-application%E4%BB%A5%E5%8F%8Ajsp">Web Application以及JSP</a></li>
 </ul>
 <p><span id="2131简单的文件服务器"></span></p>
-
-          <h5 id="144a920a">21.3.1、简单的文件服务器</h5><p>这个栗子展示了如何使用Jetty创建一个简单的文件服务器。这对于你想要一个具有获取文件功能的服务器来说是一个非常适合的栗子，它可以非常简单的就配置好并且为指定资源目录下的文件进行服务。你需要注意的是，这里没有任何的业务逻辑来做文件缓存，同样服务器设置和响应头里面也没有。</p>
+<h5 id="2131、简单的文件服务器">21.3.1、简单的文件服务器</h5>
+<p>这个栗子展示了如何使用Jetty创建一个简单的文件服务器。这对于你想要一个具有获取文件功能的服务器来说是一个非常适合的栗子，它可以非常简单的就配置好并且为指定资源目录下的文件进行服务。你需要注意的是，这里没有任何的业务逻辑来做文件缓存，同样服务器设置和响应头里面也没有。</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import org.eclipse.jetty.server.Handler;
@@ -790,8 +790,8 @@ public class FileServer
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2132可分布的文件服务器"></span></p>
-
-          <h5 id="b23a423c">21.3.2、可分布的文件服务器</h5><p>这个栗子是基于上栗来向你展示如何把多个<code>ResourceHandler</code>链式处理到一起，让你可以集中多个目录下的文件到一个context path下，还向你展示了如何使用<code>ContextHandlers</code>把这些path连在一起：</p>
+<h5 id="2132、可分布的文件服务器">21.3.2、可分布的文件服务器</h5>
+<p>这个栗子是基于上栗来向你展示如何把多个<code>ResourceHandler</code>链式处理到一起，让你可以集中多个目录下的文件到一个context path下，还向你展示了如何使用<code>ContextHandlers</code>把这些path连在一起：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.File;
@@ -876,24 +876,24 @@ public class SplitFileServer
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2133多connectors"></span></p>
-
-          <h5 id="7c7e437d">21.3.3、多Connectors</h5><p>这部分展示如何使用多连接来处理不同的请求，如http和https。</p>
+<h5 id="2133、多connectors">21.3.3、多Connectors</h5>
+<p>这部分展示如何使用多连接来处理不同的请求，如http和https。</p>
 <blockquote>
 <p><em>译者文外补充：这部分我的学习需求不大，代码也就不贴了不翻译了，可能日后有需求了会再来补充的，大家有需要去的去参阅<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/embedded-examples.html">原文</a>。</em></p>
 </blockquote>
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2134安全方面handler的hello-world"></span></p>
-
-          <h5 id="9b03a4a6">21.3.4、安全方面Handler的Hello World</h5><p>这个栗子展示了如何使用一个负责安全的handler来包装另外一个handler。这里有一个简单的Hello Handler，它返回一句问候语，但是在这之前你必须先通过身份验证。另一个需要注意的是这个栗子是使用的<code>ConstraintSecurityHandler</code>，它可以在servletAPI中提供安全映射支持，我们简单的展示了一下它的用法，但是<code>Constraint</code>还可以提供更强大的功能。如果你不需要，那么你可以不使用它而仅仅使用<code>SecurityHandler</code>。</p>
+<h5 id="2134、安全方面handler的hello-world">21.3.4、安全方面Handler的Hello World</h5>
+<p>这个栗子展示了如何使用一个负责安全的handler来包装另外一个handler。这里有一个简单的Hello Handler，它返回一句问候语，但是在这之前你必须先通过身份验证。另一个需要注意的是这个栗子是使用的<code>ConstraintSecurityHandler</code>，它可以在servletAPI中提供安全映射支持，我们简单的展示了一下它的用法，但是<code>Constraint</code>还可以提供更强大的功能。如果你不需要，那么你可以不使用它而仅仅使用<code>SecurityHandler</code>。</p>
 <blockquote>
 <p><em>译者文外补充：这部分我的学习需求不大，代码也就不贴了不翻译了，可能日后有需求了会再来补充的，大家有需要去的去参阅<a href="http://www.eclipse.org/jetty/documentation/9.4.6.v20170531/embedded-examples.html">原文</a>。</em></p>
 </blockquote>
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2135最简单的servlet"></span></p>
-
-          <h5 id="23f26e5">21.3.5、最简单的Servlet</h5><p>这个栗子展示了最简单最简单的在Jetty中部署servlet的方式。你需要注意到的是，这里使用的是一个严格意义上的servlet，并不是web应用的context中的servlet，这种会在后面提到。这是一个单纯的servlet，它仅仅是部署和挂载在context上，让我们可以请求而已。这个栗子完美的展现了当你有一个简单的servlet，而你正需要对他进行单元测试的时候，你只需要把它挂载到context中，然后使用你最喜欢的http客户端库去发起请求。（可以参考Jetty的HTTP Client）</p>
+<h5 id="2135、最简单的servlet">21.3.5、最简单的Servlet</h5>
+<p>这个栗子展示了最简单最简单的在Jetty中部署servlet的方式。你需要注意到的是，这里使用的是一个严格意义上的servlet，并不是web应用的context中的servlet，这种会在后面提到。这是一个单纯的servlet，它仅仅是部署和挂载在context上，让我们可以请求而已。这个栗子完美的展现了当你有一个简单的servlet，而你正需要对他进行单元测试的时候，你只需要把它挂载到context中，然后使用你最喜欢的http客户端库去发起请求。（可以参考Jetty的HTTP Client）</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.IOException;
@@ -951,8 +951,8 @@ public class MinimalServlets
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2136web-application"></span></p>
-
-          <h5 id="c5cd4b0">21.3.6、Web Application</h5><p>这里会向你展示如何使用一个嵌入式的Jetty服务器去部署一个简单的web应用。这对你想要以编程的方式管理服务器的生命周期非常有帮助，不管是生产项目或者是部署和调试一个完整规模的应用也好。当你控制住classpath之后，那么在许多方面，Jetty的这种部署方式要比传统的部署方式要简单得多。</p>
+<h5 id="2136、web-application">21.3.6、Web Application</h5>
+<p>这里会向你展示如何使用一个嵌入式的Jetty服务器去部署一个简单的web应用。这对你想要以编程的方式管理服务器的生命周期非常有帮助，不管是生产项目或者是部署和调试一个完整规模的应用也好。当你控制住classpath之后，那么在许多方面，Jetty的这种部署方式要比传统的部署方式要简单得多。</p>
 <blockquote>
 <p><em>译者文外补充：这里贴的代码和<a href="#2128%E5%B5%8C%E5%85%A5web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F">上面</a>是一样的。</em></p>
 </blockquote>
@@ -966,8 +966,8 @@ public class MinimalServlets
 <p><a href="#top">回到顶部</a>
 <br></p>
 <p><span id="2137web-application以及jsp"></span></p>
-
-          <h5 id="77b653df">21.3.7、Web Application以及JSP</h5><p>这个栗子和上一个栗子非常像，因为它只是支持了内嵌web应用可以使用jsp而已。从Jetty9.2以来，我们一直使用的是Apache的JSP引擎，这种做法需要<code>ServletContainerInitializer</code>去实例化它自己以支持Servlet3.1规范。为了让Jetty做到这些，你需要开启注解处理机制：</p>
+<h5 id="2137、web-application以及jsp">21.3.7、Web Application以及JSP</h5>
+<p>这个栗子和上一个栗子非常像，因为它只是支持了内嵌web应用可以使用jsp而已。从Jetty9.2以来，我们一直使用的是Apache的JSP引擎，这种做法需要<code>ServletContainerInitializer</code>去实例化它自己以支持Servlet3.1规范。为了让Jetty做到这些，你需要开启注解处理机制：</p>
 <pre><code>package org.eclipse.jetty.embedded;
 
 import java.io.File;
