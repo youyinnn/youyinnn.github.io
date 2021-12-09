@@ -30,12 +30,12 @@ const tabList = [
   {
     name: "about",
     text: "About",
-    route: "/about",
+    route: "/",
   },
   {
     name: "articles",
     text: "Articles",
-    route: "/",
+    route: "/articles",
   },
   {
     name: "script",
