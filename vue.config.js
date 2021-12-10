@@ -1,7 +1,7 @@
 module.exports = {
   // refer public path to dist folder
   // publicPath: "./dist",
-  publicPath: process.env.NODE_ENV === "production" ? "./dist" : "/",
+  publicPath: "/dist/",
   // make the index.html file place at the root of the repo
   indexPath: "../index.html",
   pluginOptions: {},
