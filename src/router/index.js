@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import Article from "../views/Article.vue";
-import Script from "../views/Script.vue";
 
 const routes = [
   {
     path: "/articles",
     name: "Home",
-    component: Home,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Home.vue"),
   },
   {
     path: "/script",
     name: "Script",
-    component: Script,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Script.vue"),
   },
   {
     path: "/article/:articleId",
     name: "Article",
-    component: Article,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Article.vue"),
   },
   {
     path: "/",
