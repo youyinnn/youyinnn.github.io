@@ -13,8 +13,6 @@
     "@mdi/font": "5.9.55",
     "animate.css": "^4.1.1",
     "core-js": "^3.6.5",
-    "crc": "^3.8.0",
-    "js-yaml": "^4.1.0",
     "roboto-fontface": "*",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
@@ -30,12 +28,14 @@
     "@vue/cli-service": "5.0.0-beta.7",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
+    "crc": "^3.8.0",
     "dayjs": "^1.10.7",
     "emoji-js": "^3.6.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "highlight.js": "^11.3.1",
     "htmlparser2": "^7.2.0",
+    "js-yaml": "^4.1.0",
     "katex": "^0.15.1",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
@@ -44,7 +44,8 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.38.0",
     "sass-loader": "^10.0.0",
-    "vfonts": "^0.1.0"
+    "vfonts": "^0.1.0",
+    "vue-cli-plugin-webpack-bundle-analyzer": "^4.0.0"
   },
   "eslintConfig": {
     "root": true,
