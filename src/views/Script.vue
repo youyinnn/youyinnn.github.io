@@ -32,7 +32,6 @@
 
 <script>
 /* eslint-disable no-unused-vars */
-import markdowBody from "@/assets/css/markdown-body.css";
 import resources from "@/assets/resources/resources.js";
 import { NMenu, NGrid, NGi } from "naive-ui";
 import Toc from "@/components/Toc.vue";
@@ -87,6 +86,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
+@import url("@/assets/css/editormd-0.0.1.preview.css");
+@import url("@/assets/css/markdown-body.css");
+@import url("@/assets/css/github-gist.css");
+</style>
 
 <style>
 .n-menu-item {

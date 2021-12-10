@@ -8,9 +8,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import markdowBody from "@/assets/css/markdown-body.css";
-
 export default {
   name: "About",
   components: {},
@@ -23,3 +20,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
+@import url("@/assets/css/editormd-0.0.1.preview.css");
+@import url("@/assets/css/markdown-body.css");
+@import url("@/assets/css/github-gist.css");
+</style>
