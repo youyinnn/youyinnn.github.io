@@ -31,7 +31,7 @@ date: 2019-10-03 16:31:00
 
 下图展示了中间件功能的基本元素：
 
-![](../img/20191003170602.png)
+![](../../../public/img/20191003170602.png)
 
 ### Example: Middleware function myLogger
 

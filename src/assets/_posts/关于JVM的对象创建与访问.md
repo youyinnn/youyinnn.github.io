@@ -40,7 +40,7 @@ series: JVM
 
 1. **选择内存分配并发问题的解决方案**
 
-   ![objectmemorypointer](../img/objectmemorypointer.png)
+   ![objectmemorypointer](../../../public/img/objectmemorypointer.png)
 
    如图的并发指针分配问题，我们解决这个问题有两种方式：
 
@@ -97,13 +97,13 @@ JVM 规范**只说了 reference 是一个指向对象的引用，但是没有说
 
 如果使用这种方式，Java 堆中会划分一块内存来作为**句柄池**，**reference**中存储的就是对象的**句柄地址**，句柄中包含了**对象实例数据地址信息**和**类型实例数据地址信息**
 
-![jubingdangwen](../img/jubingdangwen.png)
+![jubingdangwen](../../../public/img/jubingdangwen.png)
 
 ##### 直接指针访问
 
 reference 中存储的直接就是对象地址
 
-![zhijiezhizhenfangwen](../img/zhijiezhizhenfangwen.png)
+![zhijiezhizhenfangwen](../../../public/img/zhijiezhizhenfangwen.png)
 
 > 直观一点解释就是
 >

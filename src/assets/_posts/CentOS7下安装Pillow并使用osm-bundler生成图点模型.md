@@ -89,7 +89,7 @@ Installation 页：http://pillow.readthedocs.io/en/latest/installation.html
 
 开发 Pillow 的团队在 hub 的 depends 文件夹下提供了这些库在各种系统下的安装脚本，我们选择 fedora_23.sh 的脚本(fedora 是 RedHat)，但是不要运行这个脚本，我们看它对应的 package 需要安装哪些就好。
 
-![fedora](../img/3aef0a673e1639aec3272e205b934971.png)
+![fedora](../../../public/img/3aef0a673e1639aec3272e205b934971.png)
 
 如图最下面一行，在 centos 下就可以执行：
 
@@ -97,7 +97,7 @@ Installation 页：http://pillow.readthedocs.io/en/latest/installation.html
 yum install libtiff-devel libjpeg-devel zlib-devel freetype-devel  lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter  tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel
 ```
 
-![yum](../img/5e3b4f30ce74fefbc7e2ebfcccb76543.png)
+![yum](../../../public/img/5e3b4f30ce74fefbc7e2ebfcccb76543.png)
 
 这些我都安装过了，其中丢失的 python3-tkinter 在 centos 下没有那就不用管了。
 

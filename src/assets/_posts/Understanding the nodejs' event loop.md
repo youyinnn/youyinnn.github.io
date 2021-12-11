@@ -13,7 +13,7 @@ date: 2019-10-02 15:47:20
 
 The first basic thesis of node.js is that I/O is expensive:
 
-![](../img/20191002162139.png)
+![](../../../public/img/20191002162139.png)
 
 So the largest waste with current programming technologies comes from waiting for I/O to complete. There are several ways in which one can deal with the performance impact (from [Sam Rushing](http://www.nightmare.com/medusa/async_sockets.html)):
 
@@ -57,7 +57,7 @@ In node.js, you aren't supposed to worry about what happens in the backend: just
 
 Having asynchronous I/O is good, because I/O is more expensive than most code and we should be doing something better than just waiting for I/O.
 
-![](../img/20191002162216.png)
+![](../../../public/img/20191002162216.png)
 
 An event loop is "an entity that handles and processes external events and converts them into callback invocations". So I/O calls are the points at which Node.js can switch from one request to another. At an I/O call, your code saves the callback and returns control to the node.js runtime environment. The callback will be called later when the data actually is available.
 

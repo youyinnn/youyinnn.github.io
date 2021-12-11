@@ -15,7 +15,7 @@ Given _n_ non-negative integers _a1_, _a2_, ..., _an_ , where each represents a 
 
 **Note:** You may not slant the container and _n_ is at least 2.
 
-![](../img/20190228214420.png)
+![](../../../public/img/20190228214420.png)
 
 The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
 

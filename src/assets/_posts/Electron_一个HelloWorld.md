@@ -233,13 +233,13 @@ electron .
 下面是我自己的演示：
 
 - 目录结构：
-  ![electron1](../img/302c77ea7393fa19e487b69fc98ec917.png)
+  ![electron1](../../../public/img/302c77ea7393fa19e487b69fc98ec917.png)
 
 - 运行：
-  ![electron2](../img/e003ac2bb2e4383b892641cba60ba100.png)
+  ![electron2](../../../public/img/e003ac2bb2e4383b892641cba60ba100.png)
 
 - 界面：
-  ![electron3](../img/7617fb5337cfd6d0e19a74b1a7968cc9.png)
+  ![electron3](../../../public/img/7617fb5337cfd6d0e19a74b1a7968cc9.png)
 
 ---
 

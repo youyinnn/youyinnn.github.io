@@ -59,6 +59,6 @@ date: 2018-11-2 21:56:10
 
 #### System Design Map
 
-![map](../img/20181102231633.png)
+![map](../../../public/img/20181102231633.png)
 
 As the map show，the green arrows are request/response/msg，we will trace every msg from Kafka Producers/Consumers.

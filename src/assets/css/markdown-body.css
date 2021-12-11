@@ -14,8 +14,10 @@ pre {
   border-radius: 0 !important;
 }
 
-.markdown-body {
-  padding: 5px;
+@media only screen and (max-width: 800px) {
+  .markdown-body {
+    padding: 0 1rem;
+  }
 }
 
 .markdown-body blockquote:hover,

@@ -1,20 +1,16 @@
 ## MAC
 
-### MAC M1系统怎么进入恢复模式
+### MAC M1 系统怎么进入恢复模式
 
-Intel的MAC是在开机显示logo的时候按下`command + R`，而M1的MAC只需要长按开机键就能进入了
+Intel 的 MAC 是在开机显示 logo 的时候按下`command + R`，而 M1 的 MAC 只需要长按开机键就能进入了
 
-
-
-### MAC启动安全性实用工具
+### MAC 启动安全性实用工具
 
 https://support.apple.com/zh-cn/HT208198
 
+### MAC M1 视频录制录入系统声音
 
-
-### MAC M1视频录制录入系统声音
-
-**Intel**的Mac是可以用[Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2)来解决
+**Intel**的 Mac 是可以用[Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2)来解决
 
 但是它不支持**M1**，所以找到了替代品
 
@@ -24,32 +20,27 @@ https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-m
 
 安装好之后打开
 
-![](../../img/20210425192156.png)
+![](../../../../public/img/20210425192156.png)
 
 添加聚合设备之后，再打开声音设置->输出->选上你刚设置的输出源
 
-![](../../img/20210425192756.png)
+![](../../../../public/img/20210425192756.png)
 
-### MAC M1安装Homebrew
+### MAC M1 安装 Homebrew
 
 选择国内镜像安装
 
-``` bash
+```bash
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
 ```
 
-
-
-### 关于Big Sur没有权限打开应用程序的解决方法
+### 关于 Big Sur 没有权限打开应用程序的解决方法
 
 https://zhuanlan.zhihu.com/p/331816664
 
+### MAC 查看 SSD 写入和电源使用情况
 
-
-### MAC查看SSD写入和电源使用情况
-
-``` bash
+```bash
 brew install smartmontools
 smartctl -a disk0
 ```
-

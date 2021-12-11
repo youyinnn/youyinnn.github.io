@@ -5,9 +5,9 @@ Hi there, this will help you know a little bit about me
 ```java
 Chinese
 Born in 1996.
-Half-baked Bass Guitar player.
-Half-baked Java EE developer.
-The worst FeWeb developer in the universe.
+Know how to play Bass Guitar.
+Know how to code with Java.
+The worst Front-end developer in the universe.
 ```
 
 #### Working Experience

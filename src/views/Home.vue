@@ -121,11 +121,6 @@ export default {
 
 <style lang="less">
 @import "../assets/css/index.less";
-
-.article-list-box {
-  width: @page-max-width;
-}
-
 .card-title {
   float: left;
   margin: 0;

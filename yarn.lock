@@ -1316,6 +1316,11 @@
   resolved "https://registry.npmmirror.com/@vicons/ionicons5/download/@vicons/ionicons5-0.11.0.tgz#54185bfa572a09df70094db1954f28bfbf1363ed"
   integrity sha1-VBhb+lcqCd9wCU2xlU8ov78TY+0=
 
+"@vicons/tabler@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.npmmirror.com/@vicons/tabler/download/@vicons/tabler-0.11.0.tgz#9eb0579c00caa3040c2c1cf9e5c0c76ba1204fb3"
+  integrity sha1-nrBXnADKowQMLBz55cDHa6EgT7M=
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.nlark.com/@vue/babel-helper-vue-jsx-merge-props/download/@vue/babel-helper-vue-jsx-merge-props-1.2.1.tgz"

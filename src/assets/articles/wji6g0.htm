@@ -213,7 +213,7 @@ T2   T3                           T3   T4
 <p><strong>2)</strong> 根结点必定黑</p>
 <p><strong>3)</strong> 红结点若有子节点，这俩子节点必定是黑色（有直接关系的两结点不能同时都是红色）</p>
 <p><strong>4)</strong> 每条从根节点到一个 NULL 结点的路径上总有相同数量的黑色结点</p>
-<p><img src="../img/20180829110435.png" alt="rbt example"></p>
+<p><img src="../../../public/img/20180829110435.png" alt="rbt example"></p>
 <p>前 3 条没什么难理解的，关键是第四条，到底是什么意思呢？参考<a href="https://baike.baidu.com/item/%E7%BA%A2%E9%BB%91%E6%A0%91">百度百科</a>可知，这句话还可以这样说：<strong>“从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点”</strong></p>
 <p>也就是说，如上图中任意结点到其子树上的所有的<strong>NIL 结点</strong>，路上都只有<strong>相同数量</strong>的黑色结点</p>
 <p>然后就是<em>Why</em>的问题了，下面引自<a href="https://baike.baidu.com/item/%E7%BA%A2%E9%BB%91%E6%A0%91">百度百科</a>：</p>

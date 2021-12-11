@@ -126,10 +126,10 @@ $
 ```
 
 然后项目目录下会生成：
-![electronpk](../img/ba4fa76eb64909e4d4959799cf130547.png)
+![electronpk](../../../public/img/ba4fa76eb64909e4d4959799cf130547.png)
 
 运行 exe：
-![runexe](../img/6420ae86e552fa8e6e1b0f7282f28ca4.png)
+![runexe](../../../public/img/6420ae86e552fa8e6e1b0f7282f28ca4.png)
 
 ---
 

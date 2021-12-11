@@ -64,7 +64,7 @@ Partition 中的每条 Message 由 offset 来表示它在这个 partition 中的
 
 Partition 的数据文件则包含了若干条上述格式的 Message，按 offset 由小到大排列在一起。它的实现类为 FileMessageSet，类图如下：
 
-![FileMessageSet](../img/20181107151441.png)
+![FileMessageSet](../../../public/img/20181107151441.png)
 
 它的主要方法如下：
 
@@ -107,7 +107,7 @@ index 文件中并没有为数据文件中的每条 Message 建立索引，而�
 
 在 Kafka 中，索引文件的实现类为 OffsetIndex，它的类图如下：
 
-![offsetindex](../img/20181107151802.png)
+![offsetindex](../../../public/img/20181107151802.png)
 
 主要的方法有：
 
@@ -120,17 +120,17 @@ index 文件中并没有为数据文件中的每条 Message 建立索引，而�
 
 Message 是按照 topic 来组织，每个 topic 可以分成多个的 partition，比如：有 5 个 partition 的名为为 page_visits 的 topic 的目录结构为：
 
-![topic_partition](../img/20181107151829.png)
+![topic_partition](../../../public/img/20181107151829.png)
 
 partition 是分段的，每个段叫 LogSegment，包括了一个数据文件和一个索引文件，下图是某个 partition 目录下的文件：
 
-![LogSegment](../img/20181107151557.png)
+![LogSegment](../../../public/img/20181107151557.png)
 
 可以看到，这个 partition 有 4 个 LogSegment。
 
 借用博主[@lizhitao](http://blog.csdn.net/lizhitao/)博客上的一张图来展示是如何查找 Message 的。
 
-![search](../img/20181107151736.png)
+![search](../../../public/img/20181107151736.png)
 
 比如要查找绝对 offset 为 7 的 Message：
 

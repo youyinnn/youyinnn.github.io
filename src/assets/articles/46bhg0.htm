@@ -13,7 +13,7 @@
 <span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);        <span class="hljs-comment">// new an object</span>
 </code></pre>
 <p>我们当然也知道，a 和 b 是两个不同的对象，因为 a 是直接引用 String Pool 的<strong>字面量</strong>，而 b 引用的是一个 String 对象，虽然这个 String 对象中的字面量实际上也是引用到 String Pool</p>
-<p><img src="../img/20190302153504.png" alt=""></p>
+<p><img src="../../../public/img/20190302153504.png" alt=""></p>
 <p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
 <blockquote>
 <p>在不同版本的 JDK 中，Java 堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考 Java 虚拟机规范。</p>
@@ -76,7 +76,7 @@
 <p>Java 中每个对象都是一个类的示例，JVM 管理这些对象并将它们存放在 Heap 中；</p>
 <p>Java 中每一个类也是有一个 Class 对象去对应的，于是经过前面的铺垫我们可以归总一下，Java 类对象，也就是所有的 Class 对象，是存放在 PermGen 的；</p>
 <p>于是他们的关系如图：</p>
-<p><img src="../img/20190302174113.png" alt=""></p>
+<p><img src="../../../public/img/20190302174113.png" alt=""></p>
 <p>那么我们说既然都是对象，而且它们在 GCor 的眼里反正都是一样的，那为什么不将他们放在一起呢？为什么要将类对象放在 PermGen 呢？</p>
 <p>有一个技术上的原因是，Class 对象仅仅只是用来给 JVM 看的，而 Heap 中的其他程序业务相关的示例对象，是 Java 开发者真正要去关心的，如果说这两个放在一起，那么开发者可能需要花费大量的精力去理解这些 Class 对象甚至是处理它们可能会报出来的错误；</p>
 <p>在更久以前，它俩确实是放在一起的，但是因为系统类和开发者写的自定义类的装载行为不一样，所以卸载行为变得很少发生，出于性能优化的考虑才推出了 PermGen，效果也很显著；</p>
@@ -114,7 +114,7 @@ System.out.println(s1 == s3); <span class="hljs-comment">// false</span>
 System.out.println(s1 == s2);    <span class="hljs-comment">// false</span>
 System.out.println(s1 == s3);    <span class="hljs-comment">// true</span>
 </code></pre>
-<p><img src="../img/20190302153504.png" alt=""></p>
+<p><img src="../../../public/img/20190302153504.png" alt=""></p>
 <p>由于 s1 和 s3 都是字符串池（字符串表）中的字面量的引用，所以 s1==s3。但是，s2 的引用是堆中的对象，所以 s2!=s1。</p>
 <h4 id="real-purpose-of-stringintern">Real Purpose Of String.intern()</h4>
 <p>其实，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，<code>intern</code>是多余的。</p>
@@ -170,7 +170,7 @@ System.out.println(s1 == s3);    <span class="hljs-comment">// true</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;        <span class="hljs-comment">// StringBuilder().append(a).append(b).toString()</span>
 </code></pre>
 <p>最后的<code>toString()</code>其实就有<code>new String()</code>的操作但是我们来说说数据的内存分布情况：</p>
-<p><img src="../img/stringpool.png" alt=""></p>
+<p><img src="../../../public/img/stringpool.png" alt=""></p>
 <p>我们可以知道，运行时产生的所有字符串的值都是存在堆的主内存区的，除非你调用<code>intern()</code>方法将它放进字符串池中，而美团给出的错误例子就是讲大量的不同值的字符串值放进字符串池，导致字符串池压力过大，从而性能降低。</p>
 <h3 id="switch-for-string">Switch For String</h3>
 <p>还是先上代码：</p>

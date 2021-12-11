@@ -61,7 +61,7 @@
 <h4 id="reachability-analysis">Reachability Analysis</h4>
 <p>主流的语言都是使用 RA 来判断对象存活的，甚至古老的 Lisp 也是。算法的基本思想是预置固定的<strong>“GC Root”对象</strong>作为起点，以树状逻辑开始从 root 向下索引，结点关系就是引用关系，索引到的对象就说明该对象至少还有一条 Reference Chain 可以达到 GC Root，则说明这个对象仍被系统使用</p>
 <p>没有 Reference Chain 可达的对象，则基本可以宣告作废了</p>
-<p><img src="../img/20181114235352.png" alt=""></p>
+<p><img src="../../../public/img/20181114235352.png" alt=""></p>
 <p>如图，灰色 chain 已经没有 GC Root 可达了，所以这些对象会在下次 GC 的时候被考虑回收</p>
 <p>常见的 GC Root 有：</p>
 <ul>

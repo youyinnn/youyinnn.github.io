@@ -175,7 +175,7 @@ static class Node<K,V> implements Map.Entry<K,V> {
 
 简单而常规，主要是两个 final 变量，存储 Key 和 hash，然后是 value 和下一个结点；
 
-![](../img/20180817154531.png)
+![](../../../public/img/20180817154531.png)
 
 ### 静态方法
 
@@ -300,7 +300,7 @@ public HashMap(int initialCapacity, float loadFactor) {
 
 ### 结构剧透！
 
-![](../img/20180817171145.png)
+![](../../../public/img/20180817171145.png)
 
 我们看到，这就是一张一般的 HashMap 的结构，最上面的一横排是一个`Node<K,V>[]`也就是成员变量 table，我私称这个 table 为**主仓（main warehouse）。**
 
@@ -584,7 +584,7 @@ static class Entry<K,V> extends HashMap.Node<K,V> {
 
 如果没分析错的话，**树箱子**的结构就应该是：
 
-![](../img/20180818150455.png)
+![](../../../public/img/20180818150455.png)
 
 这里应该还有**before**和**after**，但是和 HashMap 无关，就忽略了，我认为这里是不想重新实现某些已有方法
 

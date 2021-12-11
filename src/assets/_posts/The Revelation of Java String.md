@@ -39,7 +39,7 @@ String b = new String("hello");		// new an object
 
 我们当然也知道，a 和 b 是两个不同的对象，因为 a 是直接引用 String Pool 的**字面量**，而 b 引用的是一个 String 对象，虽然这个 String 对象中的字面量实际上也是引用到 String Pool
 
-![](../img/20190302153504.png)
+![](../../../public/img/20190302153504.png)
 
 图引自[我终于搞清楚了和 String 有关的那点事儿。](https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect)
 
@@ -130,7 +130,7 @@ Java 中每一个类也是有一个 Class 对象去对应的，于是经过前�
 
 于是他们的关系如图：
 
-![](../img/20190302174113.png)
+![](../../../public/img/20190302174113.png)
 
 那么我们说既然都是对象，而且它们在 GCor 的眼里反正都是一样的，那为什么不将他们放在一起呢？为什么要将类对象放在 PermGen 呢？
 
@@ -192,7 +192,7 @@ System.out.println(s1 == s2);	// false
 System.out.println(s1 == s3);	// true
 ```
 
-![](../img/20190302153504.png)
+![](../../../public/img/20190302153504.png)
 
 由于 s1 和 s3 都是字符串池（字符串表）中的字面量的引用，所以 s1==s3。但是，s2 的引用是堆中的对象，所以 s2!=s1。
 
@@ -279,7 +279,7 @@ String c = a + b;		// StringBuilder().append(a).append(b).toString()
 
 最后的`toString()`其实就有`new String()`的操作但是我们来说说数据的内存分布情况：
 
-![](../img/stringpool.png)
+![](../../../public/img/stringpool.png)
 
 我们可以知道，运行时产生的所有字符串的值都是存在堆的主内存区的，除非你调用`intern()`方法将它放进字符串池中，而美团给出的错误例子就是讲大量的不同值的字符串值放进字符串池，导致字符串池压力过大，从而性能降低。
 

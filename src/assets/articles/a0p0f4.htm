@@ -10,7 +10,7 @@
 <p>B+树的出现，是为磁盘这类直接存去辅助设备而设计的一种平衡查找树，其目的是为了降低查找次数，因为在磁盘上一次查找就需要一次磁盘 IO，只有尽量减少 IO 时间才能提高效率，所以要一次性尽可能 IO 到合适的数据集，我们把这种能力形容为<strong>“高扇出性”</strong></p>
 <p>本篇不介绍 B+树的特性、结构、操作原理，因为也挺复杂的；</p>
 <p>因为高扇出性，因此在数据库中，B+树的高度一般都在 2~4 层，也就是说查找某一键值最多只需要 2 到 4 次磁盘 IO</p>
-<p><img src="../img/20200614143631.png" alt=""></p>
+<p><img src="../../../public/img/20200614143631.png" alt=""></p>
 <p style="text-align: center">一棵高度为2的B+树</p>
 
 <h4 id="聚集索引（clustered-index）">聚集索引（Clustered Index）</h4>
@@ -162,7 +162,7 @@ mysql root@youyinnn.top:<span class="hljs-built_in">test</span>&gt; show index f
 <pre><code class="hljs language-sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">where</span> b<span class="hljs-operator">=</span>xxx;
 </code></pre>
 <p>对此情况，书上举例的解释为：</p>
-<p><img src="../img/20200614171318.png" alt=""></p>
+<p><img src="../../../public/img/20200614171318.png" alt=""></p>
 <p style="text-align: center">多键值的B+树</p>
 对于第三条语句，但看键值中的b元素：1、2、1、4、2，显然是不连续的，所以不使用该联合索引
 
