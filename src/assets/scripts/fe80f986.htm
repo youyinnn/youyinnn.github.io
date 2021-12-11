@@ -37,5 +37,125 @@
 <h4 id="vue3-troubleshoot">Vue3 Troubleshoot</h4>
 <ol>
 <li><a href="https://stackoverflow.com/questions/62023604/where-to-find-or-how-to-set-htmlwebpackplugin-options-title-in-project-created-w">where to find or how to set htmlWebpackPlugin.options.title in project created with vue cli 3?</a></li>
-<li></li>
+<li><a href="https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans">webpack-chain示例</a></li>
 </ol>
+<h3 id="vue3动态渲染">Vue3动态渲染</h3>
+<pre><code class="hljs language-js">&lt;script&gt;
+<span class="hljs-comment">/* eslint-disable no-unused-vars */</span>
+<span class="hljs-keyword">import</span> imgRouter <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/plugins/img-router.js&quot;</span>;
+<span class="hljs-keyword">import</span> { h, createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;
+<span class="hljs-keyword">import</span> { NImage } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;naive-ui&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">components</span>: {},
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">h</span>(<span class="hljs-string">&quot;div&quot;</span>, {
+      <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;md&quot;</span>,
+      <span class="hljs-attr">class</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">mdClass</span>,
+      <span class="hljs-attr">key</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">key</span>,
+    });
+  },
+  <span class="hljs-attr">props</span>: [<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;key&quot;</span>],
+  <span class="hljs-attr">mounted</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">renderMd</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">content</span>);
+  },
+  <span class="hljs-attr">watch</span>: {
+    <span class="hljs-comment">// when the content is load</span>
+    <span class="hljs-attr">content</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">nV</span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">renderMd</span>(nV);
+    },
+  },
+  <span class="hljs-attr">computed</span>: {
+    <span class="hljs-attr">mdClass</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">class</span> !== <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">class</span> !== <span class="hljs-literal">undefined</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">class</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;article markdown-body editormd-html-preview animate__animated animate__fadeIn&quot;</span>;
+    },
+  },
+  <span class="hljs-attr">methods</span>: {
+    <span class="hljs-title function_">imgReplacement</span>(<span class="hljs-params">innerHTML</span>) {
+      innerHTML = innerHTML.<span class="hljs-title function_">replaceAll</span>(<span class="hljs-string">&quot;&lt;img&quot;</span>, <span class="hljs-string">&quot;&lt;n-image&quot;</span>);
+      <span class="hljs-keyword">var</span> unhandleImageTagStart = innerHTML.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;&lt;n-image&quot;</span>);
+      <span class="hljs-keyword">const</span> unhandleImageTagStringList = [];
+      <span class="hljs-keyword">while</span> (unhandleImageTagStart !== -<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">var</span> unhandleImageTagEnd = innerHTML.<span class="hljs-title function_">indexOf</span>(
+          <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span>,
+          unhandleImageTagStart + <span class="hljs-number">8</span>
+        );
+        unhandleImageTagStringList.<span class="hljs-title function_">push</span>(
+          innerHTML.<span class="hljs-title function_">substring</span>(unhandleImageTagStart, unhandleImageTagEnd + <span class="hljs-number">2</span>)
+        );
+        unhandleImageTagStart = innerHTML.<span class="hljs-title function_">indexOf</span>(
+          <span class="hljs-string">&quot;&lt;n-image&quot;</span>,
+          unhandleImageTagEnd + <span class="hljs-number">2</span>
+        );
+      }
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> item <span class="hljs-keyword">of</span> unhandleImageTagStringList) {
+        innerHTML = innerHTML.<span class="hljs-title function_">replaceAll</span>(
+          item,
+          item.<span class="hljs-title function_">substring</span>(<span class="hljs-number">0</span>, item.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;/&gt;&quot;</span>
+        );
+      }
+      <span class="hljs-keyword">return</span> innerHTML;
+    },
+    <span class="hljs-title function_">renderMd</span>(<span class="hljs-params">c</span>) {
+      <span class="hljs-keyword">if</span> (c === <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-comment">// pre route the img src before they actually render into the real dom</span>
+      <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMParser</span>().<span class="hljs-title function_">parseFromString</span>(c, <span class="hljs-string">&quot;text/html&quot;</span>);
+      imgRouter.<span class="hljs-title function_">routeElements</span>(node.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">&quot;img&quot;</span>));
+      <span class="hljs-keyword">var</span> innerHTML = node.<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">1</span>].<span class="hljs-property">innerHTML</span>;
+
+      <span class="hljs-comment">// replace img with n-image</span>
+      innerHTML = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">imgReplacement</span>(innerHTML);
+
+      <span class="hljs-comment">// render it</span>
+      <span class="hljs-keyword">const</span> body = {
+        <span class="hljs-attr">template</span>: innerHTML,
+        <span class="hljs-attr">components</span>: {
+          NImage,
+        },
+      };
+      <span class="hljs-title function_">createApp</span>(body).<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#md&quot;</span>);
+    },
+  },
+};
+&lt;/script&gt;
+</code></pre>
+<p>使用这个组件：</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">markdown-body</span> <span class="hljs-attr">:content</span>=<span class="hljs-string">&quot;content&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;$route.params.articleId&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+</code></pre>
+<h3 id="vue监听窗口大小变化">Vue监听窗口大小变化</h3>
+<pre><code class="hljs language-js"><span class="hljs-attr">mounted</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">winHeight</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinHeight</span>();
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">winWidth</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinWidth</span>();
+  <span class="hljs-variable language_">window</span>.<span class="hljs-property">onresize</span> = <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">clearTimeout</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">timer</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">timer</span> = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">winHeight</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinHeight</span>();
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">winWidth</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinWidth</span>();
+    }, <span class="hljs-number">300</span>);
+  };
+},
+</code></pre>
+<h3 id="vue-打包体积优化方案和cdn">Vue 打包体积优化方案和CDN</h3>
+<p><a href="https://juejin.cn/post/6844904163327868941">https://juejin.cn/post/6844904163327868941</a></p>
+<h3 id="vue-spa和githubpages的配合">Vue SPA和GithubPages的配合</h3>
+<hr>
+<p>2021 Solution for vue3 &amp; vue-cli:</p>
+<p>Follow this with &quot;Basic instructions&quot;:</p>
+<p><a href="https://github.com/rafgraph/spa-github-pages#usage-instructions">https://github.com/rafgraph/spa-github-pages#usage-instructions</a></p>
+<p>no need to change <code>var pathSegmentsToKeep = 0;</code> the 404.html.</p>
+<p>and then in the <code>vue.config.js</code>:</p>
+<pre><code class="hljs language-javascript">  <span class="hljs-comment">// do not use &quot;./dist/&quot;</span>
+  <span class="hljs-attr">publicPath</span>: <span class="hljs-string">&quot;/dist/&quot;</span>,
+  <span class="hljs-comment">// make the index.html file place at the root of the repo</span>
+  <span class="hljs-attr">indexPath</span>: <span class="hljs-string">&quot;../index.html&quot;</span>,
+</code></pre>
+<p>then the spa is good to go~</p>
+<hr>
+<p>在<a href="https://stackoverflow.com/a/70299225/17094075">stackoverflow</a>上的回答</p>

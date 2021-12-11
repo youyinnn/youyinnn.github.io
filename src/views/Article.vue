@@ -24,23 +24,17 @@
       </div>
     </transition>
     <n-divider style="margin-top: 10px" />
-    <div
-      class="article markdown-body editormd-html-preview animate__animated animate__fadeIn"
-      v-html="content"
-    ></div>
+    <markdown-body :content="content" :key="$route.params.articleId" />
     <toc :toc="toc" />
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
-/* eslint-disable vue/no-unused-components */
-// @ is an alias to /src
-// import src from "raw-loader!@/assets/_posts/a.txt";
 import resources from "@/assets/resources/resources.js";
 import { NSkeleton, NDivider } from "naive-ui";
 import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
+import MarkdownBody from "@/components/MarkdownBody.vue";
 
 export default {
   name: "Article",
@@ -48,6 +42,7 @@ export default {
     NSkeleton,
     NDivider,
     Toc,
+    MarkdownBody,
   },
   data: () => ({
     content: null,
@@ -57,15 +52,15 @@ export default {
     dayjs,
   }),
   mounted: function () {
-    // console.log(this.$route.params);
     const aId = this.$route.params.articleId;
     const src = require(`raw-loader!@/assets/articles/${aId}.htm`);
     this.content = src.default;
+
+    // get toc
     const tocSrc = require(`@/assets/articles/${aId}.htm.toc.json`);
     this.toc = tocSrc;
 
     const resourceList = resources.list;
-    // console.log(resources);
     for (let rs of resourceList) {
       require(`@/assets/resources/${rs}`);
     }
@@ -75,8 +70,6 @@ export default {
         this.postMetadata = d;
       }
     }
-    // console.log(this.postMetadata);
-    // console.log(this.postMetadata.abbrlink);
     setTimeout(() => {
       this.loading = false;
     }, 300);
@@ -107,30 +100,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
-@import url("@/assets/css/editormd-0.0.1.preview.css");
-@import url("@/assets/css/markdown-body.css");
-@import url("@/assets/css/github-gist.css");
-.article-metadata {
-  min-height: 90px;
-}
-.title {
-  margin: 0;
-  font-size: 25px;
-}
-</style>
+<style scoped></style>
 
-<style>
-.katexp {
-  text-align: center;
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  font-size: 15px;
-  border-right: 2px solid #80caff;
-}
-
-.katexp:hover {
-  box-shadow: 0px 5px 10px -2px #777;
-}
-</style>
+<style></style>

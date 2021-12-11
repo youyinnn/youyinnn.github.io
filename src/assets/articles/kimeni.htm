@@ -4,48 +4,52 @@
 </blockquote>
 <p>线程：<a href="https://electronjs.org/docs/glossary#main-process">主线程</a></p>
 <p>显示用于选择多个文件和目录的对话框的示例:</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { dialog } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dialog.<span class="hljs-title function_">showOpenDialog</span>({ <span class="hljs-attr">properties</span>: [<span class="hljs-string">&#x27;openFile&#x27;</span>, <span class="hljs-string">&#x27;openDirectory&#x27;</span>, <span class="hljs-string">&#x27;multiSelections&#x27;</span>] }))
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { dialog } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(
+  dialog.<span class="hljs-title function_">showOpenDialog</span>({
+    <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;openFile&quot;</span>, <span class="hljs-string">&quot;openDirectory&quot;</span>, <span class="hljs-string">&quot;multiSelections&quot;</span>],
+  })
+);
 </code></pre>
-<p>这个对话框是从Electron的主线程上打开的。如果要使用渲染器进程中的对话框对象, 可以使用remote来获得:</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { dialog } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">remote</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dialog)
+<p>这个对话框是从 Electron 的主线程上打开的。如果要使用渲染器进程中的对话框对象, 可以使用 remote 来获得:</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { dialog } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>).<span class="hljs-property">remote</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dialog);
 </code></pre>
-<p>对话框的API大致分为：</p>
+<p>对话框的 API 大致分为：</p>
 <ul>
 <li>获取文件路径的对话框</li>
 <li>保存对话框</li>
-<li>消息对话框 </li>
+<li>消息对话框</li>
 <li>错误对话框</li>
 </ul>
 <h4 id="例子">例子</h4>
 <pre><code class="hljs language-javascript"><span class="hljs-comment">// 同步的获取文件路径的对话框</span>
-$(<span class="hljs-string">&#x27;#sopendialog&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">let</span> p = dialog.<span class="hljs-title function_">showOpenDialogSync</span>(win, {})
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(p)
-})
+$(<span class="hljs-string">&quot;#sopendialog&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> p = dialog.<span class="hljs-title function_">showOpenDialogSync</span>(win, {});
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(p);
+});
 
 <span class="hljs-comment">// 异步的</span>
-$(<span class="hljs-string">&#x27;#asopendialog&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">let</span> p = dialog.<span class="hljs-title function_">showOpenDialog</span>(win, {})
-    p.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">filePaths</span>)
-    })
-})
+$(<span class="hljs-string">&quot;#asopendialog&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> p = dialog.<span class="hljs-title function_">showOpenDialog</span>(win, {});
+  p.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">filePaths</span>);
+  });
+});
 
-$(<span class="hljs-string">&#x27;#smsgboxdialog&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">let</span> rs = dialog.<span class="hljs-title function_">showMessageBoxSync</span>(win, {
-        <span class="hljs-comment">// type: &#x27;info&#x27;,</span>
-        <span class="hljs-comment">// type: &#x27;error&#x27;,</span>
-        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;question&#x27;</span>,
-        <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Message&#x27;</span>,
-        <span class="hljs-attr">buttons</span>: [<span class="hljs-string">&#x27;Option one&#x27;</span>, <span class="hljs-string">&#x27;Option two&#x27;</span>],
-        <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;This is a stupid box.&#x27;</span>,
-        <span class="hljs-attr">detail</span>: <span class="hljs-string">&#x27;Extra message.&#x27;</span>,
-    })
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rs)
-})
+$(<span class="hljs-string">&quot;#smsgboxdialog&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> rs = dialog.<span class="hljs-title function_">showMessageBoxSync</span>(win, {
+    <span class="hljs-comment">// type: &#x27;info&#x27;,</span>
+    <span class="hljs-comment">// type: &#x27;error&#x27;,</span>
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;question&quot;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Message&quot;</span>,
+    <span class="hljs-attr">buttons</span>: [<span class="hljs-string">&quot;Option one&quot;</span>, <span class="hljs-string">&quot;Option two&quot;</span>],
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;This is a stupid box.&quot;</span>,
+    <span class="hljs-attr">detail</span>: <span class="hljs-string">&quot;Extra message.&quot;</span>,
+  });
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rs);
+});
 </code></pre>
 <h3 id="菜单">菜单</h3>
 <blockquote>
@@ -58,10 +62,10 @@ $(<span class="hljs-string">&#x27;#smsgboxdialog&#x27;</span>).<span class="hljs
 <ul>
 <li><code>menu</code> Menu | null</li>
 </ul>
-<p>当在MacOS、Windows、Linux中使用<code>menu</code>设置程序菜单时，会设置在各个程序窗体的顶层。</p>
-<p>在Windows和Linux中，可以在菜单的顶层标签的某个字母前添加<code>&</code>以绑定快捷键。 例如，使用<code>&File</code>后可以使用<code>Alt-F</code>呼出File的子选项。 被绑定快捷键的字母将会以下划线标出。 <code>&</code>并不会在运行时显示</p>
-<p>使用<code>null</code> 作为参数时将会隐藏默认菜单。在Windows和Linux上还有删除菜单的额外效果。</p>
-<p><strong>Note:</strong> 如果没有在app中设置一个菜单，系统会自动生成一个默认菜单， 默认生成的菜单中包含了一些初始选项，例如 <code>文件</code>,<code>编辑</code>, <code>视图</code>,<code>窗口</code>,<code>帮助</code>。</p>
+<p>当在 MacOS、Windows、Linux 中使用<code>menu</code>设置程序菜单时，会设置在各个程序窗体的顶层。</p>
+<p>在 Windows 和 Linux 中，可以在菜单的顶层标签的某个字母前添加<code>&</code>以绑定快捷键。 例如，使用<code>&File</code>后可以使用<code>Alt-F</code>呼出 File 的子选项。 被绑定快捷键的字母将会以下划线标出。 <code>&</code>并不会在运行时显示</p>
+<p>使用<code>null</code> 作为参数时将会隐藏默认菜单。在 Windows 和 Linux 上还有删除菜单的额外效果。</p>
+<p><strong>Note:</strong> 如果没有在 app 中设置一个菜单，系统会自动生成一个默认菜单， 默认生成的菜单中包含了一些初始选项，例如 <code>文件</code>,<code>编辑</code>, <code>视图</code>,<code>窗口</code>,<code>帮助</code>。</p>
 <p><a href="https://electronjs.org/docs/api/menu#menugetapplicationmenu"><code>Menu.getApplicationMenu()</code></a></p>
 <p>返回 <code>Menu | null</code> - 如果有设置, 则返回应用程序菜单， 如果没设置，则返回 <code>null</code>。</p>
 <p><strong>注意:</strong> 返回的 <code>menu</code> 实例不支持动态添加或删除菜单项。 但仍然可以动态修改 <a href="https://electronjs.org/docs/api/menu#instance-properties">实例属性 </a>。</p>
@@ -75,101 +79,113 @@ $(<span class="hljs-string">&#x27;#smsgboxdialog&#x27;</span>).<span class="hljs
 <h4 id="例子-1">例子</h4>
 <p>应用菜单</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> template = [
-    {
-        <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Menu1&#x27;</span>,
-        <span class="hljs-attr">submenu</span>: [
-            <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-                <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;about&#x27;</span>,
-                <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
-                    <span class="hljs-comment">// 这行不会打在chrome调试控制台上 因为这里的console是nodejs后台</span>
-                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;about&#x27;</span>)
-                }
-            }),
-            { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;separator&#x27;</span> },
-            { <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;about&#x27;</span> },
-            <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-                <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;xixi&#x27;</span>,
-                <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
-                <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
-                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;check&#x27;</span>)
-                }
-            }),
-            <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-                <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;haha&#x27;</span>,
-                <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
-                <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
-                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;radio&#x27;</span>)
-                }
-            }),
-        ]
-    },
-]
+  {
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;Menu1&quot;</span>,
+    <span class="hljs-attr">submenu</span>: [
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;about&quot;</span>,
+        <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
+          <span class="hljs-comment">// 这行不会打在chrome调试控制台上 因为这里的console是nodejs后台</span>
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;about&quot;</span>);
+        },
+      }),
+      { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;separator&quot;</span> },
+      { <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;about&quot;</span> },
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;xixi&quot;</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;checkbox&quot;</span>,
+        <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;check&quot;</span>);
+        },
+      }),
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;haha&quot;</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;radio&quot;</span>,
+        <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;radio&quot;</span>);
+        },
+      }),
+    ],
+  },
+];
 
-<span class="hljs-keyword">const</span> menu = <span class="hljs-title class_">Menu</span>.<span class="hljs-title function_">buildFromTemplate</span>(template)
-<span class="hljs-title class_">Menu</span>.<span class="hljs-title function_">setApplicationMenu</span>(menu)
+<span class="hljs-keyword">const</span> menu = <span class="hljs-title class_">Menu</span>.<span class="hljs-title function_">buildFromTemplate</span>(template);
+<span class="hljs-title class_">Menu</span>.<span class="hljs-title function_">setApplicationMenu</span>(menu);
 </code></pre>
 <p>右键菜单</p>
 <pre><code class="hljs language-javascript"><span class="hljs-comment">// 自定义右键菜单</span>
-<span class="hljs-keyword">const</span> menu = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Menu</span>()
-menu.<span class="hljs-title function_">append</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MenuItem1&#x27;</span>,
+<span class="hljs-keyword">const</span> menu = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Menu</span>();
+menu.<span class="hljs-title function_">append</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;MenuItem1&quot;</span>,
     <span class="hljs-title function_">click</span>(<span class="hljs-params"></span>) {
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;item 1 clicked&#x27;</span>)
-    }
-}))
-menu.<span class="hljs-title function_">append</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;separator&#x27;</span>
-}))
-menu.<span class="hljs-title function_">append</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MenuItem2&#x27;</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;checkbox&#x27;</span>,
-    <span class="hljs-attr">checked</span>: <span class="hljs-literal">true</span>
-}))
-<span class="hljs-comment">// 有下标</span>
-menu.<span class="hljs-title function_">append</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MenuItem3&#x27;</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;radio&#x27;</span>,
-    <span class="hljs-title function_">click</span>(<span class="hljs-params">mi, bwin, event</span>) {
-        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mi.<span class="hljs-property">overrideProperty</span>)
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;item 1 clicked&quot;</span>);
     },
-    <span class="hljs-attr">sublabel</span>: <span class="hljs-string">&#x27;xixi&#x27;</span>,
-}))
+  })
+);
+menu.<span class="hljs-title function_">append</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;separator&quot;</span>,
+  })
+);
+menu.<span class="hljs-title function_">append</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;MenuItem2&quot;</span>,
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;checkbox&quot;</span>,
+    <span class="hljs-attr">checked</span>: <span class="hljs-literal">true</span>,
+  })
+);
+<span class="hljs-comment">// 有下标</span>
+menu.<span class="hljs-title function_">append</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;MenuItem3&quot;</span>,
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;radio&quot;</span>,
+    <span class="hljs-title function_">click</span>(<span class="hljs-params">mi, bwin, event</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mi.<span class="hljs-property">overrideProperty</span>);
+    },
+    <span class="hljs-attr">sublabel</span>: <span class="hljs-string">&quot;xixi&quot;</span>,
+  })
+);
 <span class="hljs-comment">// 子菜单</span>
-menu.<span class="hljs-title function_">append</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-    <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;MenuItem4&#x27;</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;submenu&#x27;</span>,
-    <span class="hljs-attr">sublabel</span>: <span class="hljs-string">&#x27;xixi&#x27;</span>,
-    <span class="hljs-attr">submenu</span>: [<span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
-        <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;lolo&#x27;</span>,
-    })]
-}))
+menu.<span class="hljs-title function_">append</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+    <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;MenuItem4&quot;</span>,
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;submenu&quot;</span>,
+    <span class="hljs-attr">sublabel</span>: <span class="hljs-string">&quot;xixi&quot;</span>,
+    <span class="hljs-attr">submenu</span>: [
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">MenuItem</span>({
+        <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;lolo&quot;</span>,
+      }),
+    ],
+  })
+);
 </code></pre>
 <h3 id="任务栏">任务栏</h3>
 <h4 id="任务菜单">任务菜单</h4>
 <p>Windows 允许应用程序定义一个自定义上下文菜单，用户可以看到该菜单 右键单击任务栏中的应用图标。 该上下文菜单被成为 <code>弹出列表</code>. 您可以在弹出列表的 <code>Tasks</code> 类别中指定自定义操作， 来自 MSDN 的引用：</p>
 <blockquote>
-<p>应用程序的tasks应该是基于程序的功能和用户能用它做一些的关键性事情来制定的。 任务应当是上下文无关的，因为它不需要程序运行就可以工作 而且他们应该是统计上用户在这个应用上最多的行为例如: 撰写一封邮件或者在邮件程序里打开日历，word处理程序新建一个文档，以某一种模式启动应用程序，或者是启动应用程序的某些子命令。 一个应用程序不应当把菜单用一些用户不需要的高级功能的或者只会使用一次的动作例如注册给弄得杂乱无章。 不要将tasks功能用于广告项目例如升级或者特价产品之类。</p>
-<p>强烈推荐task列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
+<p>应用程序的 tasks 应该是基于程序的功能和用户能用它做一些的关键性事情来制定的。 任务应当是上下文无关的，因为它不需要程序运行就可以工作 而且他们应该是统计上用户在这个应用上最多的行为例如: 撰写一封邮件或者在邮件程序里打开日历，word 处理程序新建一个文档，以某一种模式启动应用程序，或者是启动应用程序的某些子命令。 一个应用程序不应当把菜单用一些用户不需要的高级功能的或者只会使用一次的动作例如注册给弄得杂乱无章。 不要将 tasks 功能用于广告项目例如升级或者特价产品之类。</p>
+<p>强烈推荐 task 列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
 </blockquote>
 <p><strong>Internet Explorer 的 任务:</strong></p>
-<p><img src="https://image.youyinnn.top/20191014094639.png" alt=""></p>
-<p>不同于 macOS 的dock菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>
+<p><img src="../img/20191014094639.png" alt=""></p>
+<p>不同于 macOS 的 dock 菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>
 <p>你可以使用 <a href="https://electronjs.org/docs/api/app#appsetusertaskstasks-windows">app.setUserTasks</a> API 来设置你的应用中的用户任务：</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
 app.<span class="hljs-title function_">setUserTasks</span>([
   {
     <span class="hljs-attr">program</span>: process.<span class="hljs-property">execPath</span>,
-    <span class="hljs-attr">arguments</span>: <span class="hljs-string">&#x27;--new-window&#x27;</span>,
+    <span class="hljs-attr">arguments</span>: <span class="hljs-string">&quot;--new-window&quot;</span>,
     <span class="hljs-attr">iconPath</span>: process.<span class="hljs-property">execPath</span>,
     <span class="hljs-attr">iconIndex</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;New Window&#x27;</span>,
-    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Create a new window&#x27;</span>
-  }
-])
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;New Window&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Create a new window&quot;</span>,
+  },
+]);
 </code></pre>
 <p>调用 <code>app.setUserTasks</code> 并传入空数组就可以清除你的任务列表：</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
-app.<span class="hljs-title function_">setUserTasks</span>([])
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
+app.<span class="hljs-title function_">setUserTasks</span>([]);
 </code></pre>
 <p>当你的应用关闭时，用户任务仍然会被显示，因此在你的应用被卸载之前，任务的图标和程序的路径必须是存在的。</p>
 <h3 id="托盘">托盘</h3>
@@ -195,11 +211,11 @@ app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27
 </code></pre>
 <p><strong>平台限制：</strong></p>
 <ul>
-<li>在Linux上，如果支持，就使用应用程序指示器，否则将使用<code>GtkStatusIcon</code>。</li>
-<li>在仅支持应用程序指标的Linux发行版中，必须安装<code>libappindicator1</code>才能使任务栏图标正常工作。</li>
+<li>在 Linux 上，如果支持，就使用应用程序指示器，否则将使用<code>GtkStatusIcon</code>。</li>
+<li>在仅支持应用程序指标的 Linux 发行版中，必须安装<code>libappindicator1</code>才能使任务栏图标正常工作。</li>
 <li>应用程序指标只有当它有一个上下文菜单时才会显示。</li>
-<li>当在Linux上使用应用程序指标时，它的 <code>click</code>事件将被忽略</li>
-<li>在Linux上，为了改变单独的<code>MenuItem</code>，你必须再次调用<code>setContextMenu</code>。 例如：</li>
+<li>当在 Linux 上使用应用程序指标时，它的 <code>click</code>事件将被忽略</li>
+<li>在 Linux 上，为了改变单独的<code>MenuItem</code>，你必须再次调用<code>setContextMenu</code>。 例如：</li>
 </ul>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app, <span class="hljs-title class_">Menu</span>, <span class="hljs-title class_">Tray</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
 
@@ -223,4 +239,4 @@ app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27
 </ul>
 <p>如果要在所有平台上保持完全相同的行为, 则不应依赖 <code>click</code> 事件, 并且始终将上下文菜单附加到任务栏图标。</p>
 <h4 id="事件">事件</h4>
-<p>windows下托盘的事件有点击、左右键单击、双击等事件</p>
+<p>windows 下托盘的事件有点击、左右键单击、双击等事件</p>

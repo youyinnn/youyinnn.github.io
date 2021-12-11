@@ -24,11 +24,11 @@ https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-m
 
 安装好之后打开
 
-![](https://image.youyinnn.top/20210425192156.png)
+![](../../img/20210425192156.png)
 
 添加聚合设备之后，再打开声音设置->输出->选上你刚设置的输出源
 
-![](https://image.youyinnn.top/20210425192756.png)
+![](../../img/20210425192756.png)
 
 ### MAC M1安装Homebrew
 

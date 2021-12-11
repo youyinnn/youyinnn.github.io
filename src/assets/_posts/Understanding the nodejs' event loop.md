@@ -7,23 +7,19 @@ tags:
 date: 2019-10-02 15:47:20
 ---
 
-
-
-
-
 > 转载自：http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/
 
 ### Understanding the nodejs' event loop
 
 The first basic thesis of node.js is that I/O is expensive:
 
-![](https://image.youyinnn.top/20191002162139.png)
+![](../img/20191002162139.png)
 
 So the largest waste with current programming technologies comes from waiting for I/O to complete. There are several ways in which one can deal with the performance impact (from [Sam Rushing](http://www.nightmare.com/medusa/async_sockets.html)):
 
-- **synchronous**: you handle one request at a time, each in turn. *pros*: simple *cons*: any one request can hold up all the other requests
-- **fork a new process**: you start a new process to handle each request. *pros*: easy *cons*: does not scale well, hundreds of connections means hundreds of processes. fork() is the Unix programmer's hammer. Because it's available, every problem looks like a nail. It's usually overkill
-- **threads**: start a new thread to handle each request. *pros*: easy, and kinder to the kernel than using fork, since threads usually have much less overhead *cons*: your machine may not have threads, and threaded programming can get very complicated very fast, with worries about controlling access to shared resources.
+- **synchronous**: you handle one request at a time, each in turn. _pros_: simple _cons_: any one request can hold up all the other requests
+- **fork a new process**: you start a new process to handle each request. _pros_: easy _cons_: does not scale well, hundreds of connections means hundreds of processes. fork() is the Unix programmer's hammer. Because it's available, every problem looks like a nail. It's usually overkill
+- **threads**: start a new thread to handle each request. _pros_: easy, and kinder to the kernel than using fork, since threads usually have much less overhead _cons_: your machine may not have threads, and threaded programming can get very complicated very fast, with worries about controlling access to shared resources.
 
 The second basis thesis is that thread-per-connection is memory-expensive: [e.g. that graph everyone showns about Apache sucking up memory compared to Nginx]
 
@@ -61,7 +57,7 @@ In node.js, you aren't supposed to worry about what happens in the backend: just
 
 Having asynchronous I/O is good, because I/O is more expensive than most code and we should be doing something better than just waiting for I/O.
 
-![](https://image.youyinnn.top/20191002162216.png)
+![](../img/20191002162216.png)
 
 An event loop is "an entity that handles and processes external events and converts them into callback invocations". So I/O calls are the points at which Node.js can switch from one request to another. At an I/O call, your code saves the callback and returns control to the node.js runtime environment. The callback will be called later when the data actually is available.
 

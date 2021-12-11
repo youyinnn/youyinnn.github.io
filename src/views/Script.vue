@@ -9,11 +9,14 @@
             v-model:value="activeKey"
             mode="vertical"
             :options="menuOptions"
+            @update:value="onUpdate"
           />
         </div>
       </n-gi>
       <n-gi style="border-left: 1px solid #eee" span="4">
-        <div
+        <markdown-body
+          :key="activeKey"
+          :content="content"
           :class="{
             'script-box': true,
             article: true,
@@ -22,11 +25,17 @@
             animate__animated: true,
             animate__fadeIn: scriptChangeAnimate,
           }"
-          v-html="content"
-        ></div>
+        />
       </n-gi>
     </n-grid>
-    <toc :toc="toc" />
+    <toc
+      :toc="toc"
+      :class="{
+        'script-toc-box': true,
+        animate__animated: true,
+        animate__fadeIn: scriptChangeAnimate,
+      }"
+    />
   </div>
 </template>
 
@@ -35,6 +44,7 @@
 import resources from "@/assets/resources/resources.js";
 import { NMenu, NGrid, NGi } from "naive-ui";
 import Toc from "@/components/Toc.vue";
+import MarkdownBody from "@/components/MarkdownBody.vue";
 
 export default {
   name: "Script",
@@ -44,6 +54,7 @@ export default {
     NGrid,
     NGi,
     Toc,
+    MarkdownBody,
   },
   data: () => ({
     content: null,
@@ -57,18 +68,7 @@ export default {
       return this.menuOptions.length > 0;
     },
   },
-  watch: {
-    activeKey: function (nv) {
-      this.scriptChangeAnimate = false;
-      const src = require(`raw-loader!@/assets/scripts/${nv}.htm`);
-      this.content = src.default;
-      const tocSrc = require(`@/assets/scripts/${nv}.htm.toc.json`);
-      this.toc = tocSrc;
-      setTimeout(() => {
-        this.scriptChangeAnimate = true;
-      }, 100);
-    },
-  },
+  watch: {},
   mounted: function () {
     const resourceList = resources.list;
     // console.log(resources);
@@ -83,6 +83,20 @@ export default {
       });
     }
     this.activeKey = this.menuOptions[0].key;
+    this.onUpdate(this.menuOptions[0].key);
+  },
+  methods: {
+    onUpdate: function (key) {
+      this.scriptChangeAnimate = false;
+      const src = require(`raw-loader!@/assets/scripts/${key}.htm`);
+      this.content = src.default;
+
+      const tocSrc = require(`@/assets/scripts/${key}.htm.toc.json`);
+      this.toc = tocSrc;
+      setTimeout(() => {
+        this.scriptChangeAnimate = true;
+      }, 100);
+    },
   },
 };
 </script>
@@ -105,6 +119,11 @@ export default {
   padding: 1rem;
   padding-left: 3rem;
   opacity: 0;
+  animation-duration: 1s;
+}
+.script-toc-box {
+  opacity: 0;
+  animation-delay: 0.3s;
   animation-duration: 1s;
 }
 .script-box h2 {

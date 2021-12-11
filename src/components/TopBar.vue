@@ -16,9 +16,9 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
-      <n-gradient-text class="slogan" :size="16" type="success">
+      <!-- <n-gradient-text class="slogan" :size="16" type="success">
         déjà vu
-      </n-gradient-text>
+      </n-gradient-text> -->
     </n-space>
   </n-card>
 </template>
@@ -51,6 +51,7 @@ export default {
     NTabs,
     NTab,
     NSpace,
+    // eslint-disable-next-line vue/no-unused-components
     NGradientText,
   },
   data: () => ({

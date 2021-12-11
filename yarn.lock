@@ -8530,13 +8530,6 @@ vooks@^0.2.10, vooks@^0.2.4:
   dependencies:
     evtd "^0.2.2"
 
-vue-cli-plugin-webpack-bundle-analyzer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/vue-cli-plugin-webpack-bundle-analyzer/download/vue-cli-plugin-webpack-bundle-analyzer-4.0.0.tgz#9e2a1884f87de37e055117716399b577c6871b38"
-  integrity sha1-nioYhPh9434FURdxY5m1d8aHGzg=
-  dependencies:
-    webpack-bundle-analyzer "^4.2.0"
-
 vue-eslint-parser@^7.10.0:
   version "7.11.0"
   resolved "https://registry.npmmirror.com/vue-eslint-parser/download/vue-eslint-parser-7.11.0.tgz"
@@ -8664,7 +8657,7 @@ webidl-conversions@^3.0.0:
   resolved "https://registry.nlark.com/webidl-conversions/download/webidl-conversions-3.0.1.tgz?cache=0&sync_timestamp=1631410836869&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwebidl-conversions%2Fdownload%2Fwebidl-conversions-3.0.1.tgz"
   integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
 
-webpack-bundle-analyzer@^4.2.0, webpack-bundle-analyzer@^4.4.0:
+webpack-bundle-analyzer@^4.4.0:
   version "4.5.0"
   resolved "https://registry.npmmirror.com/webpack-bundle-analyzer/download/webpack-bundle-analyzer-4.5.0.tgz?cache=0&sync_timestamp=1634019956604&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fwebpack-bundle-analyzer%2Fdownload%2Fwebpack-bundle-analyzer-4.5.0.tgz"
   integrity sha1-Gw7qKUfnNSh1Sm+a8+kbK24PedU=

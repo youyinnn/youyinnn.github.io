@@ -58,7 +58,7 @@ status:
   startTime: 2018-11-13T08:47:24Z
 </code></pre>
 <p>It seems like your account is &quot;MissingEscalationOwner&quot;</p>
-<p><img src="https://image.youyinnn.top/img/20181115155241.png" alt=""></p>
+<p><img src="../img/20181115155241.png" alt=""></p>
 <p>As Tess member said, we can create Application using -f option to create app with file:</p>
 <pre><code class="hljs language-bash">$ tskb create -f app.yaml
 </code></pre>
@@ -66,15 +66,15 @@ status:
 <pre><code class="hljs language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps.tess.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Application</span>
 <span class="hljs-attr">metadata:</span>
- <span class="hljs-attr">labels:</span>
-   <span class="hljs-attr">account.tess.io/name:</span> <span class="hljs-string">accountName</span>
- <span class="hljs-attr">name:</span> <span class="hljs-string">applicationName</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">account.tess.io/name:</span> <span class="hljs-string">accountName</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">applicationName</span>
 <span class="hljs-attr">spec:</span>
- <span class="hljs-attr">appType:</span>
-   <span class="hljs-attr">category:</span> <span class="hljs-string">web</span>
-   <span class="hljs-attr">type:</span> <span class="hljs-string">generic</span>
- <span class="hljs-attr">escalationOwner:</span> <span class="hljs-string">manager</span>
- <span class="hljs-attr">owner:</span> <span class="hljs-string">appOwner</span>
+  <span class="hljs-attr">appType:</span>
+    <span class="hljs-attr">category:</span> <span class="hljs-string">web</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">generic</span>
+  <span class="hljs-attr">escalationOwner:</span> <span class="hljs-string">manager</span>
+  <span class="hljs-attr">owner:</span> <span class="hljs-string">appOwner</span>
 </code></pre>
 <h4 id="3-learn-the-main-concepts-of-tess-model">3. Learn the main concepts of Tess Model</h4>
 <p><a href="https://tess.io/userdocs/models/">Tess Model</a></p>
@@ -93,7 +93,7 @@ Fetching released Tess CLI versions...
 Client Version: version.Info{Major:<span class="hljs-string">&quot;1&quot;</span>, Minor:<span class="hljs-string">&quot;8+&quot;</span>, GitVersion:<span class="hljs-string">&quot;v0.0.0-master+<span class="hljs-variable">$Format</span>:%h$&quot;</span>, GitCommit:<span class="hljs-string">&quot;<span class="hljs-variable">$Format</span>:%H$&quot;</span>, GitTreeState:<span class="hljs-string">&quot;&quot;</span>, BuildDate:<span class="hljs-string">&quot;1970-01-01T00:00:00Z&quot;</span>, GoVersion:<span class="hljs-string">&quot;go1.9.6&quot;</span>, Compiler:<span class="hljs-string">&quot;gc&quot;</span>, Platform:<span class="hljs-string">&quot;linux/amd64&quot;</span>}
 
 Tess CLI is currently an alpha offering. Functionalities are subject to be changed based on customer feedback and
-product direction. 
+product direction.
 
   * We are on slack: https://tessio.slack.com
 
