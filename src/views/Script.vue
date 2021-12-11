@@ -1,6 +1,6 @@
 <template>
   <div class="script">
-    <n-grid x-gap="16" :cols="5">
+    <n-grid x-gap="16" :cols="6">
       <n-gi span="1">
         <div>
           <n-menu
@@ -9,11 +9,11 @@
             v-model:value="activeKey"
             mode="vertical"
             :options="menuOptions"
-            @update:value="onUpdate"
+            @update:value="onMenuItemClick"
           />
         </div>
       </n-gi>
-      <n-gi style="border-left: 1px solid #eee" span="4">
+      <n-gi style="border-left: 1px solid #eee" span="5">
         <markdown-body
           :key="activeKey"
           :content="content"
@@ -71,7 +71,6 @@ export default {
   watch: {},
   mounted: function () {
     const resourceList = resources.list;
-    // console.log(resources);
     for (let rs of resourceList) {
       require(`@/assets/resources/${rs}`);
     }
@@ -82,11 +81,24 @@ export default {
         key: scriptSections[sectionName],
       });
     }
-    this.activeKey = this.menuOptions[0].key;
-    this.onUpdate(this.menuOptions[0].key);
+    const scriptId = this.$route.params.scriptId;
+    if (scriptId === undefined) {
+      this.onMenuItemClick(this.menuOptions[0].key);
+    } else {
+      this.showContent(scriptId);
+    }
   },
   methods: {
-    onUpdate: function (key) {
+    routeTo: function (key) {
+      this.$router.push(`/script/${key}`).catch(() => {});
+    },
+    onMenuItemClick: function (key) {
+      location.hash = "";
+      this.routeTo(key);
+      this.showContent(key);
+    },
+    showContent: function (key) {
+      this.activeKey = key;
       this.scriptChangeAnimate = false;
       const src = require(`raw-loader!@/assets/scripts/${key}.htm`);
       this.content = src.default;
@@ -101,13 +113,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
-@import url("@/assets/css/editormd-0.0.1.preview.css");
-@import url("@/assets/css/markdown-body.css");
-@import url("@/assets/css/github-gist.css");
-</style>
-
 <style>
 .n-menu-item {
   height: 30px !important;
@@ -117,7 +122,7 @@ export default {
 }
 .script-box {
   padding: 1rem;
-  padding-left: 3rem;
+  padding-left: 2rem;
   opacity: 0;
   animation-duration: 1s;
 }
