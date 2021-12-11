@@ -41,7 +41,7 @@ Layout：定制你的输出模式
 
 用例：
 
-![class pattern](../img/0c7bcdb7e018e47007e1f94164a2b626.png)
+![class pattern](../../../public/img/0c7bcdb7e018e47007e1f94164a2b626.png)
 
 #### Class 模式
 
@@ -54,7 +54,7 @@ Layout：定制你的输出模式
 
 用例：
 
-![date pattern](../img/782b42701d03650c07a92766558d225f.png)
+![date pattern](../../../public/img/782b42701d03650c07a92766558d225f.png)
 
 #### Line 模式
 

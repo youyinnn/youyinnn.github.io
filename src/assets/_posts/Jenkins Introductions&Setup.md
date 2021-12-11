@@ -14,7 +14,7 @@ series: jenkins
 
 首先 Jenkins 要吐槽一下，Jenkins 的 Logo 真的是太丑了，虽然很明显是一个管家形象- -
 
-![](../img/20181119145558.png)
+![](../../../public/img/20181119145558.png)
 
 Jenkins 的默认 UI 也有点丑，还不如官网的 UI 好看
 
@@ -109,7 +109,7 @@ To get started quickly with Pipeline:
 4. Click the **Add Source** button, choose the type of repository you want to use and fill in the details.
 5. Click the **Save** button and watch your first Pipeline run!
 
-![](../img/20181119184317.png)
+![](../../../public/img/20181119184317.png)
 
 Jinkinsfile:
 
@@ -129,4 +129,4 @@ pipeline {
 
 Then when the pipline is building, you can see the console output at:
 
-![](../img/20181119185023.png)
+![](../../../public/img/20181119185023.png)

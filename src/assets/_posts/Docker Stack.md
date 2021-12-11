@@ -97,7 +97,7 @@ We've been technically work with stack while we deploy a Composefile with `docke
 
 4. Take a look at the `visualizer`
 
-   ![](../img/20181129222014.png)
+   ![](../../../public/img/20181129222014.png)
 
    and you can also visit the port:4000 to visit the Flask web app.
 

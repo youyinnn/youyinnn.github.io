@@ -1,11 +1,14 @@
 <script>
 /* eslint-disable no-unused-vars */
 import imgRouter from "@/plugins/img-router.js";
+import failedToLoadImg from "/public/img/failed-to-load.png";
 import { h, createApp } from "vue";
 import { NImage } from "naive-ui";
 
 export default {
-  components: {},
+  components: {
+    failedToLoadImg,
+  },
   render() {
     return h("div", {
       id: "md",
@@ -33,7 +36,10 @@ export default {
   },
   methods: {
     imgReplacement(innerHTML) {
-      innerHTML = innerHTML.replaceAll("<img", "<n-image");
+      innerHTML = innerHTML.replaceAll(
+        "<img",
+        `<n-image fallback-src="${failedToLoadImg}"`
+      );
       var unhandleImageTagStart = innerHTML.indexOf("<n-image");
       const unhandleImageTagStringList = [];
       while (unhandleImageTagStart !== -1) {
@@ -107,5 +113,8 @@ export default {
 }
 .n-image {
   width: 100%;
+}
+img[data-error="true"] {
+  width: 180px;
 }
 </style>

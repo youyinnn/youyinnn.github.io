@@ -16,15 +16,40 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
-      <!-- <n-gradient-text class="slogan" :size="16" type="success">
-        déjà vu
-      </n-gradient-text> -->
+      <!-- <n-icon size="28">
+        < />
+      </n-icon> -->
+      <n-button
+        ghost
+        type="tertiary"
+        class="github-box"
+        tag="a"
+        href="https://github.com/youyinnn"
+        target="_blank"
+      >
+        <template v-slot:icon>
+          <n-icon :size="20"><brand-github /></n-icon>
+        </template>
+      </n-button>
+      <!-- <n-gradient-text  :size="16" type="success"> -->
+      <!-- déjà vu -->
+      <!-- </n-gradient-text> -->
     </n-space>
   </n-card>
 </template>
 
 <script>
-import { NTabs, NTab, NSpace, NCard, NGradientText } from "naive-ui";
+/* eslint-disable vue/no-unused-components */
+import { BrandGithub } from "@vicons/tabler";
+import {
+  NTabs,
+  NTab,
+  NSpace,
+  NCard,
+  NGradientText,
+  NIcon,
+  NButton,
+} from "naive-ui";
 
 const tabList = [
   {
@@ -53,9 +78,13 @@ export default {
     NSpace,
     // eslint-disable-next-line vue/no-unused-components
     NGradientText,
+    NIcon,
+    BrandGithub,
+    NButton,
   },
   data: () => ({
     tabs: tabList,
+    adjustTimer: 0,
   }),
   methods: {
     goTo(tab) {
@@ -64,13 +93,40 @@ export default {
       });
       this.$router.push(tab.route).catch(() => {});
     },
+    getPageWidth() {
+      const pageEl = document.getElementsByClassName("page");
+      if (pageEl.length >= 1) {
+        return document.getElementsByClassName("page")[0].clientWidth;
+      } else {
+        return this.getWinWidth();
+      }
+    },
+    getWinWidth: function () {
+      let winWidth = 0;
+      if (window.innerWidth) winWidth = window.innerWidth;
+      else if (document.body && document.body.clientWidth)
+        winWidth = document.body.clientWidth;
+      return winWidth;
+    },
+    adjustTabWidth() {
+      document.getElementsByClassName("tabs")[0].style.width =
+        this.getPageWidth() - 90 + "px";
+    },
   },
   computed: {
     tabValue() {
       return this.$store.state.currentTab;
     },
   },
-  mounted: function () {},
+  mounted: function () {
+    clearTimeout(this.adjustTimer);
+    this.adjustTimer = setTimeout(() => {
+      this.adjustTabWidth();
+      window.onresize = () => {
+        this.adjustTabWidth();
+      };
+    }, 300);
+  },
 };
 </script>
 
@@ -96,18 +152,19 @@ export default {
   margin-top: 1rem !important;
   max-width: @page-max-width;
   padding: 0 1rem;
+  height: 40px;
 }
 .tabs {
-  width: 400px;
+  width: 300px;
+  position: absolute;
 }
-.slogan {
+.github-box {
   position: absolute;
   right: 0;
   top: 0;
   margin: auto;
   bottom: 0;
-  margin-right: 2rem;
-  line-height: 42px;
+  margin-right: 1rem;
 }
 </style>
 

@@ -88,7 +88,7 @@ status:
 
 It seems like your account is "MissingEscalationOwner"
 
-![](../img/20181115155241.png)
+![](../../../public/img/20181115155241.png)
 
 As Tess member said, we can create Application using -f option to create app with file:
 

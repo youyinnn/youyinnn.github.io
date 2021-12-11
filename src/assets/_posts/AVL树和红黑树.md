@@ -270,7 +270,7 @@ Node insert(Node node, int key) {
 
 **4)** 每条从根节点到一个 NULL 结点的路径上总有相同数量的黑色结点
 
-![rbt example](../img/20180829110435.png)
+![rbt example](../../../public/img/20180829110435.png)
 
 前 3 条没什么难理解的，关键是第四条，到底是什么意思呢？参考[百度百科](https://baike.baidu.com/item/%E7%BA%A2%E9%BB%91%E6%A0%91)可知，这句话还可以这样说：**“从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点”**
 

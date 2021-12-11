@@ -50,7 +50,7 @@ date: 2018-03-30 16:59:43
 默认是只有.符号触发, 我们把所有字母的大小写和.一起加入代码提示的触发:
 
 - 开启路径:Window->Perferences->Java->Editor->Content Assist 栏目, 在这个框里把字母大小写敲个遍, **不要忘记把点符号"."也加上**:
-  ![1](../img/cf472e6b33efa166407c366d667ded0c.png)
+  ![1](../../../public/img/cf472e6b33efa166407c366d667ded0c.png)
 
 ##### 1.2 快捷键优化
 
@@ -58,7 +58,7 @@ date: 2018-03-30 16:59:43
 
 - 开启路径:Window->Perferences->Keys
 - 在 Keys 的搜索框里搜:run, 看到有图标的这个就是了, 默认是 Ctrl+F11, 但是这个键位跨度有点大, 我习惯改为 Alt+3
-  ![2](../img/c1a3c5f51a5e9863949608354f979d95.png)
+  ![2](../../../public/img/c1a3c5f51a5e9863949608354f979d95.png)
 
 ###### 1.2.2 Debug 快捷键修改
 
@@ -77,18 +77,18 @@ date: 2018-03-30 16:59:43
 ###### 1.3.1 System.out.println();
 
 - 默认是 sysout 呼出, 可以改为 sys, 看个人习惯- -
-  ![3](../img/1ff57526c65c8fea970940226be8e74f.png)
+  ![3](../../../public/img/1ff57526c65c8fea970940226be8e74f.png)
 
 - 修改配置路径:Window->搜索框搜索:Templates, 找到 Java->Editor->Templates
-  ![4](../img/61305b96fed7d551bff912f41a30ae3e.png)
+  ![4](../../../public/img/61305b96fed7d551bff912f41a30ae3e.png)
 
 - 双击之后就可以改, 它只是增加了一个 而不是把原来的改了
-  ![5](../img/6d8d94bba53204980044b88d8a8db804.png)
+  ![5](../../../public/img/6d8d94bba53204980044b88d8a8db804.png)
 
 ###### 1.3.2 for 循环/while 循环等
 
 从上面的 Templates 中可以找到许多代码段, 自己试着呼出就好;
-![6](../img/50a894e8516a818c2bba882008417f78.png)
+![6](../../../public/img/50a894e8516a818c2bba882008417f78.png)
 
 ---
 

@@ -31,7 +31,7 @@ export default {
   data: () => ({
     winHeight: 0,
     winWidth: 0,
-    timer: null,
+    resizeTimer: 0,
   }),
   mounted: function () {
     this.winHeight = this.getWinHeight();
@@ -39,11 +39,11 @@ export default {
     this.adjustTocRight();
     window.onresize = () => {
       this.adjustTocRight();
-      clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
         this.winHeight = this.getWinHeight();
         this.winWidth = this.getWinWidth();
-      }, 300);
+      }, 100);
     };
   },
   computed: {
@@ -53,8 +53,8 @@ export default {
   },
   methods: {
     adjustTocRight: function () {
-      document.getElementById("toc-box").style.width =
-        this.getLeft() - 40 + "px";
+      const el = document.getElementById("toc-box");
+      if (el !== null) el.style.width = this.getLeft() - 60 + "px";
     },
     getLeft: function () {
       return (this.getWinWidth() - 800) / 2;

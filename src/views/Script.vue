@@ -1,6 +1,6 @@
 <template>
   <div class="script">
-    <n-grid x-gap="16" :cols="6">
+    <n-grid x-gap="6" :cols="6">
       <n-gi span="1">
         <div>
           <n-menu
@@ -121,11 +121,17 @@ export default {
   padding: 4px 12px !important;
 }
 .script-box {
-  padding: 1rem;
   padding-left: 2rem;
   opacity: 0;
   animation-duration: 1s;
 }
+
+@media only screen and (max-width: 800px) {
+  .script-box {
+    padding-left: 0.5rem;
+  }
+}
+
 .script-toc-box {
   opacity: 0;
   animation-delay: 0.3s;

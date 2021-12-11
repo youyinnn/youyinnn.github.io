@@ -72,7 +72,7 @@ export default {
     }
     setTimeout(() => {
       this.loading = false;
-    }, 300);
+    }, 100);
   },
   methods: {
     daybefore: function (pastdayjs) {
@@ -102,4 +102,10 @@ export default {
 
 <style scoped></style>
 
-<style></style>
+<style>
+@media only screen and (max-width: 800px) {
+  .article-metadata {
+    padding: 0 1rem;
+  }
+}
+</style>

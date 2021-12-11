@@ -70,7 +70,7 @@ You’re already writing decent commit messages. Let’s see if we can level you
 
    This is generally done as the first paragraph after the summary, on line 3.
 
-![git-commit-tips](../img/6c9c0fc1f7a32c23e57b689a5bf1aca8.png)
+![git-commit-tips](../../../public/img/6c9c0fc1f7a32c23e57b689a5bf1aca8.png)
 
 Having a story in your git log will make a huge difference in how you and others perceive your project. By taking great care in commit messages, as you do in your code, you will help to increase overall quality.
 

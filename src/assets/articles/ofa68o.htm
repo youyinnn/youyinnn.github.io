@@ -135,7 +135,7 @@
 }
 </code></pre>
 <p>简单而常规，主要是两个 final 变量，存储 Key 和 hash，然后是 value 和下一个结点；</p>
-<p><img src="../img/20180817154531.png" alt=""></p>
+<p><img src="../../../public/img/20180817154531.png" alt=""></p>
 <h3 id="静态方法">静态方法</h3>
 <h4 id="hash">hash</h4>
 <pre><code class="hljs language-java"><span class="hljs-comment">// 计算key.hashCode()，并将(XORs)的高比特位分散到低比特位 以减少hash冲突</span>
@@ -229,7 +229,7 @@
 </code></pre>
 <p>这里其他的都不重要，关键看<code>line:11</code>，其实我们指定初始容量并是直接的给表指定长度，而是直接指定阈值大小，因为我指定 1000 容量的容器，肯定是计划好能一次性不扩容地装 1000 个，读后面你会发现，hashmap 你是不会装满的，到了它容量的 75%（默认情况下）它就会扩容，因为它要留一大部分的空间来防止 hash 冲突；</p>
 <h3 id="结构剧透！">结构剧透！</h3>
-<p><img src="../img/20180817171145.png" alt=""></p>
+<p><img src="../../../public/img/20180817171145.png" alt=""></p>
 <p>我们看到，这就是一张一般的 HashMap 的结构，最上面的一横排是一个<code>Node&lt;K,V&gt;[]</code>也就是成员变量 table，我私称这个 table 为<strong>主仓（main warehouse）。</strong></p>
 <p>每 hash 到的元素都会首先被放到<strong>主仓</strong>对应下标的位置上去，我私称每个下标对应的位置为一个<strong>仓位（position）</strong>，每一个<strong>箱子（也就是每一个结点）</strong>经过 hash 散列后，如果分到同一个仓位中，将在这个仓位上组织成链表，我私称这个链表为<strong>链箱群（linked bins）</strong>，如果<strong>链箱群</strong>长度达到树化阈值，那么这条<strong>链箱群</strong>就会树化为树结构，我私称这个树结构为<strong>树箱群（tree bins）</strong>。<strong>链箱群</strong>和<strong>树箱群</strong>我统称为<strong>箱群结构（bins structure）</strong></p>
 <p>所以我们找元素的时候有这么一件事：<strong>hashCode 找仓位，equals 找箱子！</strong></p>
@@ -462,7 +462,7 @@
 <p>而<code>LinkedHashMap</code>的<strong>主仓</strong>之间的<strong>仓位</strong>是以链的形式组织的，<code>LinkedHashMap.Entry&lt;K,V&gt;</code>除了键值对还要存放前一个仓位（before）以及后一个仓位（after）</p>
 <p>再说回<code>TreeNode&lt;K,V&gt;</code>，可以看到，这是一个 3+1 指针的结点，3 分别指向：<strong>父结点（parent）、左孩子结点（left）、右孩子结点（right）</strong>，1 指的是<strong>前指针（prev）</strong>，用于删除结点的时候，做辅助指针用，前指针不一定是父节点；再加上间接继承自<code>HashMap.Node&lt;K,V&gt;</code> ，<strong>那么就还有一个 next 指针！</strong></p>
 <p>如果没分析错的话，<strong>树箱子</strong>的结构就应该是：</p>
-<p><img src="../img/20180818150455.png" alt=""></p>
+<p><img src="../../../public/img/20180818150455.png" alt=""></p>
 <p>这里应该还有<strong>before</strong>和<strong>after</strong>，但是和 HashMap 无关，就忽略了，我认为这里是不想重新实现某些已有方法</p>
 <h6 id="split">split</h6>
 <p>之前在说<strong>resize/rehash</strong>的时候，就有看到，在重新散列节点的时候，也就是旧节点从旧表搬运到新表的时候，如果该节点是一个树节点，那么它会直接调用 split 方法：</p>

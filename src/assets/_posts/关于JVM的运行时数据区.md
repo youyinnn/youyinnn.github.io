@@ -24,7 +24,7 @@ series: JVM
 
 这些数据区域有**各自的用途**以及**各自的生命周期**(创建和销毁策略)
 
-![jvmRuntimeDataArea](../img/jvmRuntimeDataArea2.png)
+![jvmRuntimeDataArea](../../../public/img/jvmRuntimeDataArea2.png)
 
 我们得特别注意，这里我们再将**JVM 的运行时数据区**划分为：**线程共享数据区**，**线程私有数据区**
 

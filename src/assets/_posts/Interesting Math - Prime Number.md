@@ -117,7 +117,7 @@ def sixkopt(n):
 
 #### Sieve of Eratosthenes
 
-<img src="../img/Sieve_of_Eratosthenes_animation.gif" style="clear:right;float:right;margin-left:1rem;">
+<img src="../../../public/img/Sieve_of_Eratosthenes_animation.gif" style="clear:right;float:right;margin-left:1rem;">
 
 In [mathematics](https://en.wikipedia.org/wiki/Mathematics), the **sieve of Eratosthenes** is an ancient [algorithm](https://en.wikipedia.org/wiki/Algorithm) for finding all [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to any given limit.
 

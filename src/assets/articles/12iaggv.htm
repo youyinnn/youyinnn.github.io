@@ -87,17 +87,17 @@ Plumbr Co-Founder and VP of Engineering</p>
 <blockquote>
 <p>The <em>java.lang.OutOfMemoryError: GC overhead limit exceeded</em> error is displayed when <strong>your application has exhausted pretty much all the available memory and GC has repeatedly failed to clean it</strong>.</p>
 </blockquote>
-<p><img src="../img/20190317135716.png" alt=""></p>
+<p><img src="../../../public/img/20190317135716.png" alt=""></p>
 <p>其根本原因就是你写的程序创造出太多难以 GC 的对象了，导致 GC 效率非常低，于是 GCor 们都不干了；</p>
 <p>默认的情况下，如果 JVM 花费了**98%<strong>的时间，却只回收了</strong>2%**不到的内存的话，那么就就抛出这个 OOM；</p>
 <h5 id="3-permgen-space">3. Permgen space</h5>
 <p>我们之前了解过永久代的事情，也清楚它在 Java8 中到底变成什么样子了，更多就不再赘述了，原文和译文里有很多参考</p>
 <h5 id="4-metaspace">4. Metaspace</h5>
 <p>虽然永久代已经被无默认限制的 Metaspace 替代了，但是主机上 Metaspace 还是有限制的，它一样能被打爆，而且它被打爆的后果可能就是主机宕机，关于这个可以参考：<a href="http://ifeve.com/java-permgen-removed/">Java PermGen 去哪里了?</a></p>
-<p><img src="../img/20190317143413.png" alt=""></p>
+<p><img src="../../../public/img/./public/img/20190317143413.png" alt=""></p>
 <h5 id="5-unable-to-create-new-native-thread">5. Unable to create new native thread</h5>
 <p>JVM 的线程也是需要消耗空间的，当你的线程过多而还在不断地申请线程的时候，OS 对进程是会有默认的线程申请现在的，如果超过这个限制，OS 就不会分配线程给你了，这时候就会报这个 OOM，</p>
-<p><img src="../img/20190317144032.png" alt=""></p>
+<p><img src="../../../public/img/20190317144032.png" alt=""></p>
 <p>我们虽然可以增大这个限制，但我觉得你还是重新考虑一下优化你的程序，不要再给 JVM 甚至是 OS 压力了</p>
 <h5 id="6-out-of-swap-space">6. Out of swap space?</h5>
 <p>本质上是 OS 的交换空间被其他进程消耗了，可能的原因有：</p>
@@ -107,7 +107,7 @@ Plumbr Co-Founder and VP of Engineering</p>
 <li>Application fails due to <strong>a native leak</strong>, for example, if application or library code continuously allocates memory but does not release it to the operating system.</li>
 </ul>
 <h5 id="7-requested-array-size-exceeds-vm-limit">7. Requested array size exceeds VM limit</h5>
-<p><img src="../img/20190317145042.png" alt=""></p>
+<p><img src="../../../public/img/20190317145042.png" alt=""></p>
 <p>请求数组长度过长，一般来说，数组长度限制是根据主机自身的可寻址限制不同而不同的，所以申请这么大的数组之前，首先考虑好是否需要这么多的空间；</p>
 <p>Java 中数组的索引范围是<code>Integer.MAX_VALUE</code>，即 2^31 - 1，一个 int 占 4 byte，于是 2^31 个 4 byte 大约是<strong>8G</strong>，加上数组其他额外需要的元数据，一个这么大的数组就会要 8G 以上的内存，JVM 可不会允许你干这样的事；</p>
 <h5 id="8-kill-process-or-sacrifice-child">8. Kill process or sacrifice child</h5>
@@ -130,7 +130,7 @@ Plumbr Co-Founder and VP of Engineering</p>
 <p>这句话摘自<a href="https://www.oreilly.com/library/view/java-performance-the/9781449363512/ch04.html">《Java Performance》Chapter 4. Working with the JIT Compiler</a>，可见 JIT 对 JVM 的重要性！</p>
 <p>在早期的一些商用虚拟机，Java 代码最初是通过解释器（<strong>Interpreter</strong>）解释执行的，它将代码翻译成 JVM 能读懂的字节码（<strong>bytecode</strong>），但是这些字节码要运行起来，JVM 需要花费时间去解释，并且重复的热点代码可能会重复解释，于是为了提高效率，JIT 就出现了</p>
 <p>Just In Time Compiler，即时编译器，它负责在 JVM 运行的时候对特定的代码进行编译<strong>（有针对性的优化编译）</strong>，将它们编译成机器码，下次再运行这段逻辑的时候，直接执行机器码，提高运行时效率，这项技术大大地提高了 Java 程序的运行速度</p>
-<p><img src="../img/20190305203935.png" alt=""></p>
+<p><img src="../../../public/img/20190305203935.png" alt=""></p>
 <p>需要声明的一点是，JIT 只在运行时适当地编译部分运行频率很高的代码</p>
 <p>那么为什么不一开始就编译执行呢？因为有的代码只运行一次，也即是说，JVM 是经过运行时分析过后，才用 JIT 对代码进行优化，它不立即编译代码，这么做的原因主要有两个：</p>
 <ul>

@@ -12,7 +12,7 @@
 </ul>
 <p>如果当前中间件不结束该次请求响应周期，它必须调用 next 方法，将控制传递到下一个中间件，否则请求会被挂起。</p>
 <p>下图展示了中间件功能的基本元素：</p>
-<p><img src="../img/20191003170602.png" alt=""></p>
+<p><img src="../../../public/img/20191003170602.png" alt=""></p>
 <h3 id="example-middleware-function-mylogger">Example: Middleware function myLogger</h3>
 <p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> myLogger = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
