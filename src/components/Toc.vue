@@ -53,11 +53,10 @@ export default {
   },
   methods: {
     adjustTocRight: function () {
-      document.getElementById("toc-box").style.right =
-        this.getLeft() - 220 + "px";
+      document.getElementById("toc-box").style.width =
+        this.getLeft() - 40 + "px";
     },
     getLeft: function () {
-      console.log((this.getWinWidth() - 800) / 2);
       return (this.getWinWidth() - 800) / 2;
     },
     getWinWidth: function () {
@@ -84,6 +83,7 @@ export default {
   top: 6rem;
   bottom: 4rem;
   overflow: scroll;
-  width: 200px;
+  /* width: 200px; */
+  right: 2rem;
 }
 </style>

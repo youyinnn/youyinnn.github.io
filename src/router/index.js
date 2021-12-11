@@ -9,6 +9,12 @@ const routes = [
   },
   {
     path: "/script",
+    name: "ScriptInitial",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Script.vue"),
+  },
+  {
+    path: "/script/:scriptId",
     name: "Script",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Script.vue"),
