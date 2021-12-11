@@ -12,11 +12,11 @@ The worst FeWeb developer in the universe.
 
 #### Working Experience
 
-> 07/2018-09/2018 - CHINA UMS, Wuhan
+> 07/2018-09/2018 - Java back-end Engineer, intern, CHINA UMS, Wuhan
 >
-> 10/2018-04/2019 - eBay.Inc , Shanghai
+> 10/2018-04/2019 - Java back-end Engineer, intern, eBay.Inc , Shanghai
 >
-> 07/2021-11/2021 - Aleph.Inc , Shanghai
+> 07/2021-11/2021 - Java back-end Engineer, Aleph.Inc , Shanghai
 
 #### Education
 

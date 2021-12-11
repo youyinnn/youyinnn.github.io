@@ -85,7 +85,7 @@ flush privileges;
 <p><a href="https://www.cnblogs.com/jeffen/p/7016547.html">https://www.cnblogs.com/jeffen/p/7016547.html</a></p>
 <p>mysql不允许在同一次执行中自己更新自己 所以要套一次层中间查询 欺骗mysql以为不是同一张表</p>
 <h3 id="mysql系统体系架构">MySQL系统体系架构</h3>
-<p><img src="https://image.youyinnn.top/20200611194657.png" alt=""></p>
+<p><img src="../../img/20200611194657.png" alt=""></p>
 <p>根据图里我们可以发现，MySQL系统最核心的“存储引擎”是以插件的形式为系统提供服务的，这种架构提供了与存储引擎实现无关的一系列标准服务支持，让引擎的实现能够解放出来。</p>
 <p><strong>需要注意的是，存储引擎是基于表的，而不是数据库</strong></p>
 <h3 id="mysql各引擎介绍">MySQL各引擎介绍</h3>
@@ -147,7 +147,7 @@ flush privileges;
 <li>表结构定义文件</li>
 </ul>
 <h3 id="innodb逻辑存储结构">InnoDB逻辑存储结构</h3>
-<p><img src="https://image.youyinnn.top/20200612124701.png" alt=""></p>
+<p><img src="../../img/20200612124701.png" alt=""></p>
 <p>所有数据都被存放在一个空间中，称为<strong>表空间</strong>，而表空间又由<strong>段（segment）、区（extent）、页（page）</strong>组成</p>
 <p><strong>表空间</strong></p>
 <p>表空间是InnoDB存储引擎的最高层，所有数据都存放在表空间，默认情况下只有一个共享表空间，如果用参数配置了<code>innodb_file_per_table</code>，那么每张表内的数据可以单独放在一个表空间内</p>
@@ -314,7 +314,7 @@ flush privileges;
 <li>备库将主库的二进制日志文件复制到自己的<strong>中继日志（Replay Log）</strong>；</li>
 <li>备库重放中继日志；</li>
 </ol>
-<p><img src="https://image.youyinnn.top/20200618165816.png" alt=""></p>
+<p><img src="../../img/20200618165816.png" alt=""></p>
 <h4 id="复制要解决的问题">复制要解决的问题</h4>
 <ol>
 <li>数据分布</li>

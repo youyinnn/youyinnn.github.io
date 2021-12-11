@@ -1,9 +1,8 @@
 <template>
   <transition name="fade5" mode="out-in">
-    <div v-if="winWidth >= 900" class="toc">
+    <div id="toc-box" class="toc-box">
       <n-anchor
-        class="toc-box"
-        type="block"
+        v-if="winWidth >= 900"
         :show-background="true"
         ignore-gap
         :bound="winHeight / 2"
@@ -37,7 +36,9 @@ export default {
   mounted: function () {
     this.winHeight = this.getWinHeight();
     this.winWidth = this.getWinWidth();
+    this.adjustTocRight();
     window.onresize = () => {
+      this.adjustTocRight();
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.winHeight = this.getWinHeight();
@@ -51,6 +52,14 @@ export default {
     },
   },
   methods: {
+    adjustTocRight: function () {
+      document.getElementById("toc-box").style.right =
+        this.getLeft() - 220 + "px";
+    },
+    getLeft: function () {
+      console.log((this.getWinWidth() - 800) / 2);
+      return (this.getWinWidth() - 800) / 2;
+    },
     getWinWidth: function () {
       let winWidth = 0;
       if (window.innerWidth) winWidth = window.innerWidth;
@@ -72,17 +81,9 @@ export default {
 <style>
 .toc-box {
   position: fixed;
-  top: 5rem;
-  right: 1rem;
-  bottom: 5rem;
+  top: 6rem;
+  bottom: 4rem;
   overflow: scroll;
   width: 200px;
-}
-.toc-item {
-  text-align: end;
-}
-.n-anchor-rail {
-  left: initial !important;
-  right: 0 !important;
 }
 </style>

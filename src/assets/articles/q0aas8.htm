@@ -1,8 +1,11 @@
 <h4 id="graduation-design">Graduation Design</h4>
 <ul>
-<li>Title：Tracing Monitoring System of Kafka-Cluster with Opentracing API</li>
-<li>Framework：B/S</li>
-<li>Technology stack：<ul>
+<li><p>Title：Tracing Monitoring System of Kafka-Cluster with Opentracing API</p>
+</li>
+<li><p>Framework：B/S</p>
+</li>
+<li><p>Technology stack：</p>
+<ul>
 <li><p>back-end：</p>
 <ul>
 <li>Microservice：spring-boot</li>
@@ -22,13 +25,13 @@
 <blockquote>
 <h5 id="demo：">Demo：</h5>
 <ol>
-<li><p>We got three microservice application : </p>
+<li><p>We got three microservice application :</p>
 <ol>
 <li>Service App</li>
 <li>Logging App</li>
 <li>DataBase App</li>
 </ol>
-<p> With their name we can easily figure out how this three work：<code>Service App </code>handle the <strong>USER Request</strong> and send <strong>CRUD Request</strong> to<code>DataBase App</code>，then get the <strong>Result</strong> from<code>DataBase App</code>，and every <strong>Request/Response Information</strong> between those two app were gonna <strong>send</strong> to the<code>Logging App</code>and <strong>log as record</strong>.</p>
+<p>With their name we can easily figure out how this three work：<code>Service App </code>handle the <strong>USER Request</strong> and send <strong>CRUD Request</strong> to<code>DataBase App</code>，then get the <strong>Result</strong> from<code>DataBase App</code>，and every <strong>Request/Response Information</strong> between those two app were gonna <strong>send</strong> to the<code>Logging App</code>and <strong>log as record</strong>.</p>
 </li>
 <li><p>We got two pages：</p>
 <ol>
@@ -58,5 +61,5 @@
 <p>We could see the tracing result on a **&quot;tracing monitoring page&quot;**，every <strong>&quot;USER Requset process&quot;</strong> are display on this page to assess our system&#39;s preformence</p>
 </blockquote>
 <h4 id="system-design-map">System Design Map</h4>
-<p><img src="https://image.youyinnn.top/20181102231633.png" alt="map"></p>
+<p><img src="../img/20181102231633.png" alt="map"></p>
 <p>As the map show，the green arrows are request/response/msg，we will trace every msg from Kafka Producers/Consumers.</p>

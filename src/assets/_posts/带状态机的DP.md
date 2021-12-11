@@ -8,12 +8,6 @@ tags:
 date: 2020-7-10 11:51:57
 ---
 
-
-
-
-
-
-
 前几天碰到一套经典的题，《买卖股票》系列，其中最简单那道题我之前还在字节碰到过，然而当时我菜得连最简单的题都没做出来
 
 这个系列从简到难思路变化还挺大，但有趣的是中等难度之后的题开始涉及到状态机的思路，我觉得可以整理一下
@@ -33,7 +27,7 @@ date: 2020-7-10 11:51:57
 > 输入: [7,1,5,3,6,4]
 > 输出: 5
 > 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
->      注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+> 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
 
 示例 2:
 
@@ -45,7 +39,7 @@ date: 2020-7-10 11:51:57
 
 因为只能做一次交易，所以每天都把**之前天**的最小值当作**入股天**，然后把当天当中**出股天**，求得最大利益：
 
-``` java
+```java
 public int maxProfit(int[] prices) {
     if (prices.length == 0) return 0;
     int max = 0, min = prices[0];
@@ -56,8 +50,6 @@ public int maxProfit(int[] prices) {
     return max;
 }
 ```
-
-
 
 ### Ⅱ
 
@@ -72,15 +64,15 @@ public int maxProfit(int[] prices) {
 > 输入: [7,1,5,3,6,4]
 > 输出: 7
 > 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
->      随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。
+> 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。
 
 示例 2:
 
 > 输入: [1,2,3,4,5]
 > 输出: 4
 > 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
->      注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
->      因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
+> 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
+> 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
 
 示例 3:
 
@@ -88,17 +80,15 @@ public int maxProfit(int[] prices) {
 > 输出: 0
 > 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 
-
-
 #### O(n) - 线性贪婪
 
 因为可以进行**无数次**交易，所以我们以贪婪的思路来看：当每天交易价比前一天交易价大的时候，我们就进行：**昨天入股今天出股**的交易，争取到每一次的正收益：
 
-![](https://image.youyinnn.top/20200710161343.png)
+![](../img/20200710161343.png)
 
-如图以谷峰法的思路来延伸到贪心思路，其中A + B 肯定大于C
+如图以谷峰法的思路来延伸到贪心思路，其中 A + B 肯定大于 C
 
-![](https://image.youyinnn.top/20200710161356.png)
+![](../img/20200710161356.png)
 
 而连续上升也等于该上升区间最高处减去最低处，这时候有正收益：
 
@@ -108,7 +98,7 @@ public int maxProfit(int[] prices) {
 
 于是
 
-``` java
+```java
 public int maxProfit(int[] prices) {
     int count = 0;
     for (int i = 1; i < prices.length; i++) {
@@ -119,22 +109,23 @@ public int maxProfit(int[] prices) {
 }
 ```
 
-
-
 #### O(n) - 动态规划+状态 1
 
-我们将**第i天结束后的持股状态**分为：0、不持股；1、持股之后，我们某一天的收益可以分为：
+我们将**第 i 天结束后的持股状态**分为：0、不持股；1、持股之后，我们某一天的收益可以分为：
 
 0. **不持股**：代表前一天持股但是**今天卖了**，或者干脆前一天开始就不再持股了；
 1. **持股**：代表前一天不持股但是**今天买了**，或者干脆前一天开始就已经持股了；
 
 于是状态转移方程为：
+
 $$
 dp[i][0] = max(dp[i - 1][0],\enspace dp[i - 1][1] + prices[i])
 \\\\
 dp[i][1] = max(dp[i - 1][1],\enspace dp[i - 1][0] - prices[i])
 $$
+
 其中初始状态：
+
 $$
 \begin{aligned}
 dp[0][0] &= 0
@@ -142,9 +133,10 @@ dp[0][0] &= 0
 dp[0][1] &= -prices[0]
 \end{aligned}
 $$
-实际上我们的状态转移方程只依赖前一项，所以不必使用二维dp，压缩至一维然后对前一项做缓存就行了，于是代码：
 
-``` java
+实际上我们的状态转移方程只依赖前一项，所以不必使用二维 dp，压缩至一维然后对前一项做缓存就行了，于是代码：
+
+```java
 public int maxProfit(int[] prices) {
     int n = prices.length;
     int[] dp = new int[2];
@@ -159,8 +151,6 @@ public int maxProfit(int[] prices) {
     return Math.max(0, Math.max(dp[0], dp[1]));
 }
 ```
-
-
 
 ### Ⅱ+手续费
 
@@ -185,7 +175,8 @@ public int maxProfit(int[] prices) {
 
 #### O(n) - 动态规划+状态 2
 
-因为有了手续费，我们不能从贪婪的角度去解题了，但是我们还是能以dp加状态去打，只是状态转移方程要稍微修改一下，我们在不持股的时候，如果**前一天持股今天卖了**，那么就要手续费：
+因为有了手续费，我们不能从贪婪的角度去解题了，但是我们还是能以 dp 加状态去打，只是状态转移方程要稍微修改一下，我们在不持股的时候，如果**前一天持股今天卖了**，那么就要手续费：
+
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace dp[i - 1][1] + prices[i] - fee)
@@ -194,7 +185,7 @@ dp[i][1] &= max(dp[i - 1][1],\enspace dp[i - 1][0] - prices[i])
 \end{aligned}
 $$
 
-``` java
+```java
 public int maxProfit(int[] prices, int fee) {
     int n = prices.length;
     int[] dp = new int[2];
@@ -211,8 +202,6 @@ public int maxProfit(int[] prices, int fee) {
 }
 ```
 
-
-
 ### Ⅱ+冷冻期
 
 给定一个整数数组，其中第 `i `个元素代表了第 i 天的股票价格 。
@@ -224,7 +213,7 @@ public int maxProfit(int[] prices, int fee) {
 示例:
 
 > 输入: [1,2,3,0,2]
-> 输出: 3 
+> 输出: 3
 > 解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
 
 #### O(n) - 动态规划+状态 3
@@ -236,6 +225,7 @@ public int maxProfit(int[] prices, int fee) {
 2. **不持股+不冷冻**：前一天是不持股冷冻期今天解冻了，或者前一天就已经是不持股不冷冻的状态；
 
 于是状态转移方程为：
+
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace dp[i - 1][2] - prices[i])
@@ -245,9 +235,10 @@ dp[i][1] &= dp[i - 1][0] + prices[i]
 dp[i][2] &= max(dp[i - 1][1],\enspace dp[i - 1][2])
 \end{aligned}
 $$
+
 压缩后的代码：
 
-``` java
+```java
 public int maxProfit(int[] prices) {
     int l = prices.length;
     if (l == 0) return 0;
@@ -265,11 +256,9 @@ public int maxProfit(int[] prices) {
 }
 ```
 
+### Ⅲ 2 次交易
 
-
-### Ⅲ 2次交易
-
-给定一个数组，它的第` i `个元素是一支给定的股票在第 `i `天的价格。
+给定一个数组，它的第`i`个元素是一支给定的股票在第 `i `天的价格。
 
 设计一个算法来计算你所能获取的最大利润。你最多可以完成 `两笔` 交易。
 
@@ -286,16 +275,15 @@ public int maxProfit(int[] prices) {
 
 > 输入: [1,2,3,4,5]
 > 输出: 4
-> 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。   
+> 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
 >
-> 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。  因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
+> 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
 
 示例 3:
 
-> 输入: [7,6,4,3,1] 
-> 输出: 0 
+> 输入: [7,6,4,3,1]
+> 输出: 0
 > 解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。
-
 
 #### O(n) - 动态规划+状态 4
 
@@ -307,6 +295,7 @@ public int maxProfit(int[] prices) {
 3. 第二次出股：之前是第二次入股，所以当天出股，或者之前就已经出了第二次股了；
 
 方程：
+
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace 0 - prices[i])
@@ -318,7 +307,9 @@ dp[i][2] &= max(dp[i - 1][2],\enspace dp[i - 1][1] - prices[i])
 dp[i][3] &= max(dp[i - 1][3],\enspace dp[i - 1][2] + prices[i])
 \end{aligned}
 $$
+
 而且我们的初始状态要注意：
+
 $$
 \begin{aligned}
 dp[0][0] &= -price[0]
@@ -328,11 +319,12 @@ dp[0][2] &= Integer.MIN\_VALUE
 dp[0][3] &= Integer.MIN\_VALUE
 \end{aligned}
 $$
+
 后面两个状态要取无效值，因为第一天结束之后是不可能完成第二次交易的
 
 压缩后的代码：
 
-``` java
+```java
 public int maxProfit(int[] prices) {
     int n = prices.length;
     if (n == 0) return 0;
@@ -356,9 +348,7 @@ public int maxProfit(int[] prices) {
 }
 ```
 
-
-
-### Ⅳ k次交易
+### Ⅳ k 次交易
 
 给定一个数组，它的第 `i` 个元素是一支给定的股票在第 `i `天的价格。
 
@@ -381,7 +371,7 @@ public int maxProfit(int[] prices) {
 
 #### O(n) - 动态规划+状态 5
 
-其实和考虑2次交易是一样的，只不过这里是`k`次，于是就有`k * 2`种状态，分析2次交易的状态，我们可以这样设计：
+其实和考虑 2 次交易是一样的，只不过这里是`k`次，于是就有`k * 2`种状态，分析 2 次交易的状态，我们可以这样设计：
 
 - 当状态`j`为奇数的时候，代表：
   - 已经进行了第`j`次入股，今天出股；
@@ -391,6 +381,7 @@ public int maxProfit(int[] prices) {
   - 之前就已经做了第`j`次的入股；
 
 方程：
+
 $$
 dp[i][j] = \begin{cases}
 			\begin{aligned}
@@ -398,11 +389,13 @@ dp[i][j] = \begin{cases}
 			\\\\
 			&max(dp[i - 1][j],\enspace dp[i - 1][j - 1] + prices[i]) \qquad &j &= odd
 			\\\\
-			&max(dp[i - 1][j],\enspace dp[i - 1][j - 1] - prices[i]) \qquad &j &= even 
+			&max(dp[i - 1][j],\enspace dp[i - 1][j - 1] - prices[i]) \qquad &j &= even
 			\end{aligned}
 			\end{cases}
 $$
+
 而初始状态，在第一天结束的时候 所有入股状态都设为无效值：
+
 $$
 \begin{aligned}
 dp[0][0] &= -price[0]
@@ -416,9 +409,10 @@ dp[0][4] &= Integer.MIN\\_VALUE
 dp[0][j + 2] &= Integer.MIN\\_VALUE
 \end{aligned}
 $$
+
 压缩后的代码：
 
-``` java
+```java
 public int maxProfit(int k, int[] prices) {
     int n = prices.length;
     if (n == 0) return 0;
@@ -465,7 +459,7 @@ public int maxProfit(int k, int[] prices) {
 
 最终代码为：
 
-``` java
+```java
 public int maxProfit(int k, int[] prices) {
     int n = prices.length;
     if (n == 0) return 0;
@@ -474,7 +468,7 @@ public int maxProfit(int k, int[] prices) {
     if (k > n / 2) {
         return maxProfitOfII(prices);
     }
-    
+
     // 和上面的一样
     return max;
 }
@@ -492,4 +486,3 @@ public int maxProfitOfII(int[] prices) {
     return res;
 }
 ```
-

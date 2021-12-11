@@ -7,7 +7,7 @@
 <hr>
 <h4 id="栈相关">栈相关</h4>
 <h5 id="汉诺塔（递归方法）">汉诺塔（递归方法）</h5>
-<h6 id="c语言实现">C语言实现</h6>
+<h6 id="c-语言实现">C 语言实现</h6>
 <pre><code class="hljs language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">hanoi</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">char</span> source, <span class="hljs-type">char</span> help, <span class="hljs-type">char</span> target)</span> {
     <span class="hljs-comment">// 讲塔座上按照直径大小自上而下编号为1到n的n个圆盘按规则搬到塔座target上，help做辅助塔</span>
     <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) {
@@ -25,13 +25,13 @@
 }
 </code></pre>
 <blockquote>
-<p>参考：《数据结构（C语言版）》——严蔚敏. P55</p>
+<p>参考：《数据结构（C 语言版）》——严蔚敏. P55</p>
 </blockquote>
 <hr>
 <h4 id="数学逻辑相关">数学逻辑相关</h4>
 <h5 id="有理数的循环节">有理数的循环节</h5>
 <blockquote>
-<p>两次看到这题，第一次是在某年蓝桥杯上，第二次就是昨天（2018年9月10日）的快手笔试。如出一辙，分码未写。</p>
+<p>两次看到这题，第一次是在某年蓝桥杯上，第二次就是昨天（2018 年 9 月 10 日）的快手笔试。如出一辙，分码未写。</p>
 <p>1/7 = 0.142857142... 是个无限循环小数。任何有理数都可以表示为无限循环小数的形式。本题目要求即是：给出一个数字的循环小数表示法。</p>
 <p>例如：</p>
 <p>输入：
@@ -52,12 +52,12 @@
 <p>程序输出两个整数做除法产生的小数或无限循环小数（循环节用方括号括起）。</p>
 </blockquote>
 <p>这题.....真是纯数学题，你要是不懂怎么判断循环节，那就凉了，然后就求循环嘛，然后又发现一个很尴尬的事情，余数不会求....折腾了大半天，搞定- -</p>
-<p>首先我们手算3个例子，1/4和1/7和1/6</p>
-<p><img src="https://image.youyinnn.top/20180912111445.png" alt=""></p>
-<p>我们每次计算的时候，<strong>都需要将余数乘以10，再和除数取余，再进行下一轮计算，直到余数为0或者余数重复出现为止，与此同时我们可以记录每一轮的商</strong>；</p>
-<p>比如1/4，余数是1，<code>(1*10)%4=2</code>，再继续<code>(2*10)%4=0</code>，算到0就可以截止了</p>
-<p>1/7，余数是1，<code>(1*10)%7=3</code>，<code>(3*10)%7=2</code>，<code>(2*10)%7=6</code>，<code>(6*10)%7=4</code>，<code>(4*10)%7=5``(5*10)%7=1</code>，又碰到一样的余数了，说明下一轮得到的商之前是已经求出来过的，所以已经找到循环节了；</p>
-<h6 id="java实现">Java实现</h6>
+<p>首先我们手算 3 个例子，1/4 和 1/7 和 1/6</p>
+<p><img src="../img/20180912111445.png" alt=""></p>
+<p>我们每次计算的时候，<strong>都需要将余数乘以 10，再和除数取余，再进行下一轮计算，直到余数为 0 或者余数重复出现为止，与此同时我们可以记录每一轮的商</strong>；</p>
+<p>比如 1/4，余数是 1，<code>(1*10)%4=2</code>，再继续<code>(2*10)%4=0</code>，算到 0 就可以截止了</p>
+<p>1/7，余数是 1，<code>(1*10)%7=3</code>，<code>(3*10)%7=2</code>，<code>(2*10)%7=6</code>，<code>(6*10)%7=4</code>，<code>(4*10)%7=5``(5*10)%7=1</code>，又碰到一样的余数了，说明下一轮得到的商之前是已经求出来过的，所以已经找到循环节了；</p>
+<h6 id="java-实现">Java 实现</h6>
 <pre><code class="hljs language-java"><span class="hljs-comment">// resulet : k.(m1m2m3m4...mn)</span>
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getRepetend</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> a / b;

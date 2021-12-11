@@ -468,3 +468,11 @@ window.open(url, '_blank').focus();
 
 
 
+### 如何在不加载dom的情况下操作dom
+
+``` js
+const node = new DOMParser()
+    .parseFromString(html, 'text/html').body.firstElementChild;
+```
+
+https://grrr.tech/posts/create-dom-node-from-html-string/

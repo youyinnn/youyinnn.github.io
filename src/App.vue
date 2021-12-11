@@ -43,7 +43,6 @@ export default defineComponent({
 .main {
   margin: auto;
   top: @top-bar-height;
-  padding: 0 1rem;
   border-radius: 0;
 }
 

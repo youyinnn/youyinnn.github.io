@@ -10,7 +10,7 @@ date: 2018-11-15 16:18:00
 
 ### Tess
 
-#### 0. What is Tess? 
+#### 0. What is Tess?
 
 Tess.IO is eBay’s cluster manager, with a vision of ensuring a world-class **build, ship and run** experience for eBay’s applications at scale, while ensuring high efficiency, security, and agility to the developers. Tess.IO leverages Kubernetes under its hood. Kubernetes (commonly referred to as “k8s”) is an open source container cluster manager that aims to provide a “platform for automating deployment, scaling, and operations of application containers across clusters of hosts.”
 
@@ -51,13 +51,13 @@ Follow the instructions of [helloworld][tess-helloworld-page].
 
 Try
 
-``` bash
+```bash
 $ tskb get application tesshjapp -o yaml
 ```
 
 and
 
-``` bash
+```bash
 apiVersion: ebay/v1alpha1
 kind: Application
 metadata:
@@ -88,29 +88,29 @@ status:
 
 It seems like your account is "MissingEscalationOwner"
 
-![](https://image.youyinnn.top/img/20181115155241.png)
+![](../img/20181115155241.png)
 
 As Tess member said, we can create Application using -f option to create app with file:
 
-``` bash
+```bash
 $ tskb create -f app.yaml
 ```
 
 and the app.yaml file may look like:
 
-``` yaml
+```yaml
 apiVersion: apps.tess.io/v1alpha1
 kind: Application
 metadata:
- labels:
-   account.tess.io/name: accountName
- name: applicationName
+  labels:
+    account.tess.io/name: accountName
+  name: applicationName
 spec:
- appType:
-   category: web
-   type: generic
- escalationOwner: manager
- owner: appOwner
+  appType:
+    category: web
+    type: generic
+  escalationOwner: manager
+  owner: appOwner
 ```
 
 #### 3. Learn the main concepts of Tess Model
@@ -129,25 +129,25 @@ Here's some tips:
 
 2. use tess to get help, It does give a lot of help
 
-   ``` bash
+   ```bash
    $ tess
    Tess CLI Version: {"Experimental":"true","Major":"1","Minor":"8+","Tess Release":"release-0.33.2"}
    Fetching released Tess CLI versions...
    ** New version release-0.33.5 available. Please use `tess version list` to get the released versions.
    Client Version: version.Info{Major:"1", Minor:"8+", GitVersion:"v0.0.0-master+$Format:%h$", GitCommit:"$Format:%H$", GitTreeState:"", BuildDate:"1970-01-01T00:00:00Z", GoVersion:"go1.9.6", Compiler:"gc", Platform:"linux/amd64"}
-   
+
    Tess CLI is currently an alpha offering. Functionalities are subject to be changed based on customer feedback and
-   product direction. 
-   
+   product direction.
+
      * We are on slack: https://tessio.slack.com
-   
+
    Commands to initialize tess
      login       Login to Tess
      init        Initialize Tess workspace
-   
+
    Commands to manipulate kube objects
      kubectl     kubectl controls the Kubernetes cluster manager
-   
+
    Commands to manipulate groups/applications/accounts
      get         Display one or many resources
      annotate    Update the annotations on a resource
@@ -157,21 +157,20 @@ Here's some tips:
      edit        Edit a resource on the server
      label       Update the labels on a resource
      replace     Replace a resource by filename or stdin
-   
+
    Other Commands:
      clusters    List Tess clusters
      help        Help about any command
      install     Install specified Tess CLI version
      status      Print the cluster and user account information
      version     Print the client and server version information
-   
+
    Use "tess <command> --help" for more information about a given command.
    Use "tess options" for a list of global command-line options (applies to all commands).
    ```
 
-------
+---
 
-[tess-setup-page]:https://tess.io/userdocs/getting-start/setup/
-
-[tess-helloworld-page]:https://tess.io/userdocs/getting-start/hello-world/
-[tess-model-page]:https://tess.io/userdocs/models/
+[tess-setup-page]: https://tess.io/userdocs/getting-start/setup/
+[tess-helloworld-page]: https://tess.io/userdocs/getting-start/hello-world/
+[tess-model-page]: https://tess.io/userdocs/models/

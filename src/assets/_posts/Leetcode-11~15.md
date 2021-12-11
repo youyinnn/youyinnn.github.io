@@ -9,15 +9,13 @@ date: 2019-02-27 21:42:00
 series: leetcode
 ---
 
-
-
 ### 11. Container With Most Water(Medium)
 
-Given *n* non-negative integers *a1*, *a2*, ..., *an* , where each represents a point at coordinate (*i*, *ai*). *n* vertical lines are drawn such that the two endpoints of line *i* is at (*i*, *ai*) and (*i*, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+Given _n_ non-negative integers _a1_, _a2_, ..., _an_ , where each represents a point at coordinate (_i_, _ai_). _n_ vertical lines are drawn such that the two endpoints of line _i_ is at (_i_, _ai_) and (_i_, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
 
-**Note:** You may not slant the container and *n* is at least 2.
+**Note:** You may not slant the container and _n_ is at least 2.
 
-![](http://image.youyinnn.top/20190228214420.png)
+![](../img/20190228214420.png)
 
 The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
 
@@ -51,11 +49,11 @@ public int maxArea2(int[] height) {
 
 #### Ⅱ. Two Pointer - O (n)
 
-既然要找2根柱子，那么我们就设有2个指针，分别从两端开始往里走，因为指针撑到最大的时候，对于两边指针都可能是它们能得到的最大值
+既然要找 2 根柱子，那么我们就设有 2 个指针，分别从两端开始往里走，因为指针撑到最大的时候，对于两边指针都可能是它们能得到的最大值
 
-设**(L, R)**表示一组可能的解，对于示例输入，最开始是`(1, 7)`，如果L比R小，那么证明以1为L的case：`(1, 3)、(1, 8)...`等等都不需要考虑了，因为这时候已经找到了以1为L的最优解了，`(1, 7) = 1*7i`，`(1, 3) = 1 * （7i - 1)`
+设**(L, R)**表示一组可能的解，对于示例输入，最开始是`(1, 7)`，如果 L 比 R 小，那么证明以 1 为 L 的 case：`(1, 3)、(1, 8)...`等等都不需要考虑了，因为这时候已经找到了以 1 为 L 的最优解了，`(1, 7) = 1*7i`，`(1, 3) = 1 * （7i - 1)`
 
-所以L后走一步，情况反过来就R往前走一步，直到L和R相遇；并且这样做的同时我们不必运算对角线case和对称case
+所以 L 后走一步，情况反过来就 R 往前走一步，直到 L 和 R 相遇；并且这样做的同时我们不必运算对角线 case 和对称 case
 
 ```java
 public int maxArea2(int[] height) {
@@ -90,7 +88,7 @@ public int maxArea2(int[] height) {
 >   1 2 3 4 5 6
 > 1 x ------- o
 > 2 x x
-> 3 x x x 
+> 3 x x x
 > 4 x x x x
 > 5 x x x x x
 > 6 x x x x x x
@@ -122,8 +120,6 @@ public int maxArea2(int[] height) {
 >
 > Hope this helps. I feel more comfortable seeing things this way.
 
-
-
 ### 12. Int To Roman(Medium)
 
 Roman numerals are represented by seven different symbols: `I`, `V`, `X`, `L`, `C`, `D` and `M`.
@@ -143,8 +139,8 @@ For example, two is written as `II` in Roman numeral, just two one's added toget
 
 Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not `IIII`. Instead, the number four is written as `IV`. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as `IX`. There are six instances where subtraction is used:
 
-- `I` can be placed before `V` (5) and `X` (10) to make 4 and 9. 
-- `X` can be placed before `L` (50) and `C` (100) to make 40 and 90. 
+- `I` can be placed before `V` (5) and `X` (10) to make 4 and 9.
+- `X` can be placed before `L` (50) and `C` (100) to make 40 and 90.
 - `C` can be placed before `D` (500) and `M` (1000) to make 400 and 900.
 
 Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
@@ -186,11 +182,9 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 ```
 
-
-
 #### Hashing
 
-这题没什么说的，一看就是Hashing
+这题没什么说的，一看就是 Hashing
 
 ```java
 private String[] hashRom = {
@@ -207,8 +201,6 @@ public String intToRoman(int num) {
             hashRom[num % 10];
 }
 ```
-
-
 
 ### 13. Roman To Int(Easy)
 
@@ -251,8 +243,6 @@ public int romanToInt(String s) {
     return ans;
 }
 ```
-
-
 
 ### 14. Longest Common Prefix(Easy)
 
@@ -305,11 +295,9 @@ public String longestCommonPrefix(String[] strs) {
 }
 ```
 
-
-
 ### 15. 3Sum(Medium)
 
-Given an array `nums` of *n* integers, are there elements *a*, *b*, *c* in `nums` such that *a* + *b* + *c* = 0? Find all unique triplets in the array which gives the sum of zero.
+Given an array `nums` of _n_ integers, are there elements _a_, _b_, _c_ in `nums` such that _a_ + _b_ + _c_ = 0? Find all unique triplets in the array which gives the sum of zero.
 
 **Note:**
 
@@ -327,9 +315,9 @@ A solution set is:
 ]
 ```
 
-这题和2sum的思路有非常大的不同，2sum是通过哈希去寻找是否有target，而从3sum开始，到后面的4sum，做法都比较tricky，评论区里的第一解法也都是同一种思路
+这题和 2sum 的思路有非常大的不同，2sum 是通过哈希去寻找是否有 target，而从 3sum 开始，到后面的 4sum，做法都比较 tricky，评论区里的第一解法也都是同一种思路
 
-因为2sum里的元素都是不重复的，所以可以用hash，而3sum开始就不能用hash去解了
+因为 2sum 里的元素都是不重复的，所以可以用 hash，而 3sum 开始就不能用 hash 去解了
 
 这题难点就在于，如何去重，比如说例子里给的`nums`，里面有两个负一，如果用暴力解的话，不免会出现两个`[-1, 0, 1]`，于是暴力解也很难受
 
@@ -341,15 +329,15 @@ A solution set is:
 
 比如`nums=[-2,1,1,2,0,-2,4,4,-2]`排完序之后：`nums=[-2,-2,-2,0,1,1,2,4,4]`
 
-套一层循环i=0，从-4开始寻找可能的解，指针L= i + 1，从i的下一位开始，R=nums.length - 1，从末尾开始：
+套一层循环 i=0，从-4 开始寻找可能的解，指针 L= i + 1，从 i 的下一位开始，R=nums.length - 1，从末尾开始：
 
-- 如果`nums[i] + nums[L] + nums[R] > 0`，证明R值大了，于是R--，继续下一轮比较；
+- 如果`nums[i] + nums[L] + nums[R] > 0`，证明 R 值大了，于是 R--，继续下一轮比较；
 
-- 如果`nums[i] + nums[L] + nums[R] < 0`，证明L值小了，于是L++，继续下一轮比较；
+- 如果`nums[i] + nums[L] + nums[R] < 0`，证明 L 值小了，于是 L++，继续下一轮比较；
 
-- 如果`nums[i] + nums[L] + nums[R] = 0`，证明找到了一个可能的解，于是将这个解记录，**同时L++，R--继续下一组迭代**
+- 如果`nums[i] + nums[L] + nums[R] = 0`，证明找到了一个可能的解，于是将这个解记录，**同时 L++，R--继续下一组迭代**
 
-    但是还没处理完，这时候要处理重复，因为L和R同时靠拢了一步，如果下一步L或者R还是同样的值，那么这个答案不可取，L和R要继续靠拢到和上一个解不一样为止，比如例子中第一组解找到的是`nums[i] = -2,nums[L]=-2,nums[R]=4`，LR靠拢后，`nums[L]`还是`-2`，`nums[R]`还是`4`，这时候要各自考虑到和前值不一样的位置，再做考虑
+  但是还没处理完，这时候要处理重复，因为 L 和 R 同时靠拢了一步，如果下一步 L 或者 R 还是同样的值，那么这个答案不可取，L 和 R 要继续靠拢到和上一个解不一样为止，比如例子中第一组解找到的是`nums[i] = -2,nums[L]=-2,nums[R]=4`，LR 靠拢后，`nums[L]`还是`-2`，`nums[R]`还是`4`，这时候要各自考虑到和前值不一样的位置，再做考虑
 
 - 如果`L >= R`则枚举完了
 
@@ -386,4 +374,4 @@ public List<List<Integer>> threeSum(int[] nums) {
 }
 ```
 
-其中排序用的是JDK提供的排序，具体实现是`DualPivotQuicksort`，效率比一般的快排快很多
+其中排序用的是 JDK 提供的排序，具体实现是`DualPivotQuicksort`，效率比一般的快排快很多

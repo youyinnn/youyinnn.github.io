@@ -20,29 +20,30 @@ module.exports = {
   // make the index.html file place at the root of the repo
   indexPath: "../index.html",
   pluginOptions: {
-    webpackBundleAnalyzer: {
-      openAnalyzer: false,
-    },
+    // webpackBundleAnalyzer: {
+    //   openAnalyzer: false,
+    // },
   },
   chainWebpack: (config) => {
     config.module.rule("raw-loader").test(/\.md$/).use("raw-loader");
-    config
-      .plugin("webpack-bundle-analyzer")
-      .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin);
+    // config
+    //   .plugin("webpack-bundle-analyzer")
+    //   .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin);
     config.plugin("html").tap((args) => {
-      if (process.env.NODE_ENV === "production") {
-        args[0].cdn = cdn;
-      }
+      // if (process.env.NODE_ENV === "production") {
+      args[0].cdn = cdn;
+      // }
       return args;
     });
     // 移除 prefetch 插件
     config.plugins.delete("prefetch");
     // 移除 preload 插件
     config.plugins.delete("preload");
+    // config.resolve.alias.set("vue", "vue/dist/vue.esm-bundler.js");
   },
   configureWebpack: (config) => {
-    if (process.env.NODE_ENV === "production") {
-      return { externals: externals };
-    }
+    // if (process.env.NODE_ENV === "production") {
+    return { externals: externals };
+    // }
   },
 };

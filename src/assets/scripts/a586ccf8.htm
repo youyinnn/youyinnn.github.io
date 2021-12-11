@@ -331,3 +331,8 @@ observer.<span class="hljs-title function_">observe</span>(article, options);
 <span class="hljs-comment">//or just</span>
 <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(url, <span class="hljs-string">&#x27;_blank&#x27;</span>).<span class="hljs-title function_">focus</span>();
 </code></pre>
+<h3 id="如何在不加载dom的情况下操作dom">如何在不加载dom的情况下操作dom</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMParser</span>()
+    .<span class="hljs-title function_">parseFromString</span>(html, <span class="hljs-string">&#x27;text/html&#x27;</span>).<span class="hljs-property">body</span>.<span class="hljs-property">firstElementChild</span>;
+</code></pre>
+<p><a href="https://grrr.tech/posts/create-dom-node-from-html-string/">https://grrr.tech/posts/create-dom-node-from-html-string/</a></p>
