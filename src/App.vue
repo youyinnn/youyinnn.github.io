@@ -14,13 +14,16 @@
 
 <script>
 import TopBar from "@/components/TopBar.vue";
-import { darkTheme, NConfigProvider, NCard, NGlobalStyle } from "naive-ui";
+import { NConfigProvider, NCard, NGlobalStyle, darkTheme } from "naive-ui";
 
 export default {
   name: "App",
-  data: () => ({
-    theme: darkTheme,
-  }),
+  data: () => ({}),
+  computed: {
+    theme() {
+      return this.$store.state.currentThemeConfig.darkTheme ? darkTheme : null;
+    },
+  },
   components: {
     NCard,
     TopBar,
