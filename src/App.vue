@@ -14,20 +14,12 @@
 
 <script>
 import TopBar from "@/components/TopBar.vue";
-import { defineComponent, ref } from "vue";
 import { darkTheme, NConfigProvider, NCard, NGlobalStyle } from "naive-ui";
 
-export default defineComponent({
-  setup() {
-    return {
-      darkTheme,
-      theme: ref(null),
-    };
-  },
+export default {
   name: "App",
-
   data: () => ({
-    //
+    theme: darkTheme,
   }),
   components: {
     NCard,
@@ -35,14 +27,14 @@ export default defineComponent({
     NConfigProvider,
     NGlobalStyle,
   },
-});
+};
 </script>
 
 <style scoped lang="less">
 @import "../src/assets/css/variables.less";
 .main {
   margin: auto;
-  top: @top-bar-height;
+  top: 42px;
   border-radius: 0;
 }
 

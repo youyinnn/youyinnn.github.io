@@ -3,14 +3,14 @@
 import imgRouter from "@/plugins/img-router.js";
 import failedToLoadImg from "/public/img/failed-to-load.png";
 import { h, createApp } from "vue";
-import { NImage } from "naive-ui";
+import { NImage, NEl } from "naive-ui";
 
 export default {
   components: {
     failedToLoadImg,
   },
   render() {
-    return h("div", {
+    return h(NEl, {
       id: "md",
       class: this.mdClass,
       key: this.key,
@@ -63,7 +63,31 @@ export default {
       }
       return innerHTML;
     },
+    codeNodeSetup(root) {
+      while (root.getElementsByTagName("code").length > 0) {
+        var nodes = root.getElementsByTagName("code");
+        for (let node of nodes) {
+          const nCodeEl = document.createElement("n-code");
+          if (node.parentNode.nodeName === "P") {
+            // inline code
+            nCodeEl.setAttribute("inline", "");
+          } else {
+            //
+            const classList = node.classList[0];
+            if (classList !== undefined) {
+              nCodeEl.setAttribute("language", classList.split("language-")[1]);
+            }
+          }
+          console.log(node.innerHTML);
+          console.log(node.innerText);
+          nCodeEl.setAttribute("code", node.innerHTML);
+          // nCodeEl.setAttribute("codee", node.innerHTML);
+          node.parentNode.replaceChild(nCodeEl, node);
+        }
+      }
+    },
     renderMd(c) {
+      import(`@/assets/css/code/an-old-hope.css`);
       if (c === null) {
         return;
       }
@@ -75,12 +99,17 @@ export default {
       // replace img with n-image
       innerHTML = this.imgReplacement(innerHTML);
 
+      // escape the brace for not leting the vue compile the {{}} syntax
+      innerHTML = innerHTML.replaceAll("{", "&#123;");
+      innerHTML = innerHTML.replaceAll("}", "&#125;");
+
       // render it
       const body = {
         template: innerHTML,
         components: {
           NImage,
         },
+        data: () => ({}),
       };
       createApp(body).mount("#md");
     },
@@ -90,26 +119,13 @@ export default {
 
 <style>
 @import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
-@import url("@/assets/css/editormd-0.0.1.preview.css");
 @import url("@/assets/css/markdown-body.css");
-@import url("@/assets/css/github-gist.css");
 .article-metadata {
   min-height: 90px;
 }
 .title {
   margin: 0;
   font-size: 25px;
-}
-.katexp {
-  text-align: center;
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  font-size: 15px;
-  border-right: 2px solid #80caff;
-}
-
-.katexp:hover {
-  box-shadow: 0px 5px 10px -2px #777;
 }
 .n-image {
   width: 100%;
