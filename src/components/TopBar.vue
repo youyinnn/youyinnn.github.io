@@ -19,18 +19,29 @@
       <!-- <n-icon size="28">
         < />
       </n-icon> -->
-      <n-button
-        ghost
-        type="tertiary"
-        class="github-box"
-        tag="a"
-        href="https://github.com/youyinnn"
-        target="_blank"
-      >
-        <template v-slot:icon>
-          <n-icon :size="20"><brand-github /></n-icon>
-        </template>
-      </n-button>
+      <div class="github-box">
+        <n-tooltip
+          placement="bottom-end"
+          trigger="click"
+          display-directive="show"
+          :delay="0"
+        >
+          <template #trigger>
+            <n-button ghost type="tertiary">
+              <template v-slot:icon>
+                <n-icon :size="20"><brand-github /></n-icon>
+              </template>
+            </n-button>
+          </template>
+          <div class="setting-item">
+            <div style="margin-right: 10px; display: inline-block">Theme:</div>
+            <n-switch :value="themeValue" @update:value="themeSwitchHandle">
+              <template #checked>Light Theme</template>
+              <template #unchecked>Dark Theme</template>
+            </n-switch>
+          </div>
+        </n-tooltip>
+      </div>
       <!-- <n-gradient-text  :size="16" type="success"> -->
       <!-- déjà vu -->
       <!-- </n-gradient-text> -->
@@ -49,6 +60,8 @@ import {
   NGradientText,
   NIcon,
   NButton,
+  NTooltip,
+  NSwitch,
 } from "naive-ui";
 
 const tabList = [
@@ -81,10 +94,13 @@ export default {
     NIcon,
     BrandGithub,
     NButton,
+    NTooltip,
+    NSwitch,
   },
   data: () => ({
     tabs: tabList,
     adjustTimer: 0,
+    document,
   }),
   methods: {
     goTo(tab) {
@@ -112,10 +128,24 @@ export default {
       document.getElementsByClassName("tabs")[0].style.width =
         this.getPageWidth() - 90 + "px";
     },
+    themeSwitchHandle(value) {
+      if (!value) {
+        this.$store.commit("changeThemeConfig", {
+          darkTheme: true,
+        });
+      } else {
+        this.$store.commit("changeThemeConfig", {
+          darkTheme: false,
+        });
+      }
+    },
   },
   computed: {
     tabValue() {
       return this.$store.state.currentTab;
+    },
+    themeValue() {
+      return !this.$store.state.currentThemeConfig.darkTheme;
     },
   },
   mounted: function () {
@@ -165,6 +195,9 @@ export default {
   margin: auto;
   bottom: 0;
   margin-right: 1rem;
+}
+.setting-item {
+  margin: 5px 0;
 }
 </style>
 

@@ -87,7 +87,9 @@ export default {
       }
     },
     renderMd(c) {
-      import(`@/assets/css/code/an-old-hope.css`);
+      import(
+        `@/assets/css/code/${this.$store.state.currentThemeConfig.codeTheme}.css`
+      );
       if (c === null) {
         return;
       }
