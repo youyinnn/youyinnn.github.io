@@ -23,7 +23,26 @@
         </p>
       </div>
     </transition>
-    <n-divider style="margin-top: 10px" />
+    <div class="serie-box unselectable" v-if="hasSerie">
+      <n-divider style="margin-top: 0; margin-bottom: 10px" />
+      <n-collapse>
+        <n-collapse-item :title="'Serie:' + postSerie.se" name="1">
+          <div v-for="item of postSerie.ps" :key="item.abbrlink">
+            <n-el
+              :class="{
+                'serie-item-box': true,
+                'se-unselected': item.abbrlink !== postMetadata.abbrlink,
+                'se-selected': item.abbrlink === postMetadata.abbrlink,
+              }"
+            >
+              {{ item.name }}
+            </n-el>
+          </div>
+        </n-collapse-item>
+      </n-collapse>
+      <n-divider style="margin-top: 10px; margin-bottom: 10px" />
+    </div>
+    <n-divider v-else style="margin-top: 10px" />
     <markdown-body :content="content" :key="$route.params.articleId" />
     <toc :toc="toc" />
   </div>
@@ -31,10 +50,11 @@
 
 <script>
 import resources from "@/assets/resources/resources.js";
-import { NSkeleton, NDivider } from "naive-ui";
+import { NSkeleton, NDivider, NCollapse, NCollapseItem, NEl } from "naive-ui";
 import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
+// eslint-disable-next-line no-unused-vars
 
 export default {
   name: "Article",
@@ -43,18 +63,28 @@ export default {
     NDivider,
     Toc,
     MarkdownBody,
+    NCollapse,
+    NCollapseItem,
+    NEl,
   },
   data: () => ({
     content: null,
     postMetadata: null,
     loading: true,
     toc: {},
+    postSerie: null,
     dayjs,
   }),
+  computed: {
+    hasSerie() {
+      return this.postSerie !== null;
+    },
+  },
   mounted: function () {
     const aId = this.$route.params.articleId;
     const src = require(`raw-loader!@/assets/articles/${aId}.htm`);
     this.content = src.default;
+    // console.log(this.content);
 
     // get toc
     const tocSrc = require(`@/assets/articles/${aId}.htm.toc.json`);
@@ -68,6 +98,23 @@ export default {
     for (let d of postMetadatas) {
       if (d.abbrlink === aId) {
         this.postMetadata = d;
+      }
+    }
+    const series = JSON.parse(sessionStorage.postSeries);
+    for (let serie of series) {
+      for (let name of serie.ps) {
+        if (name.indexOf(this.postMetadata.abbrlink) > -1) {
+          for (let i = 0; i < serie.ps.length; i++) {
+            let split = serie.ps[i].split("===");
+            serie.ps[i] = {
+              name: split[0],
+              abbrlink: split[1],
+            };
+          }
+          this.postSerie = serie;
+          console.log(serie);
+          break;
+        }
       }
     }
     setTimeout(() => {
@@ -90,12 +137,6 @@ export default {
         return ' <x style="color:#46bbcd;">2 days ago</x>';
       return Math.ceil(before / 24);
     },
-    goto(id) {
-      var element = document.getElementById(id);
-      var top = element.offsetTop;
-
-      window.scrollTo(0, top);
-    },
   },
 };
 </script>
@@ -107,5 +148,27 @@ export default {
   .article-metadata {
     padding: 0 1rem;
   }
+}
+.serie-box {
+  margin-bottom: 1rem;
+}
+.serie-item-box {
+  cursor: pointer;
+  background-color: var(--color);
+  color: var(--text-color-base);
+  padding: 1px 10px;
+  border-left: 3px solid var(--success-color);
+  border-right: 3px solid var(--success-color);
+}
+.se-unselected:hover {
+  border-left: 3px solid var(--info-color-hover);
+  border-right: 3px solid var(--info-color-hover);
+  background-color: var(--divider-color);
+}
+.se-selected {
+  background-color: var(--border-color);
+
+  border-left: 3px solid var(--error-color);
+  border-right: 3px solid var(--error-color);
 }
 </style>

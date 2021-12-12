@@ -37,14 +37,16 @@ export default {
     this.winHeight = this.getWinHeight();
     this.winWidth = this.getWinWidth();
     this.adjustTocRight();
-    window.onresize = () => {
-      this.adjustTocRight();
-      clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
-        this.winHeight = this.getWinHeight();
-        this.winWidth = this.getWinWidth();
-      }, 100);
-    };
+    setTimeout(() => {
+      window.onresize = () => {
+        clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
+          this.adjustTocRight();
+          this.winHeight = this.getWinHeight();
+          this.winWidth = this.getWinWidth();
+        }, 100);
+      };
+    }, 300);
   },
   computed: {
     computedTocList: function () {

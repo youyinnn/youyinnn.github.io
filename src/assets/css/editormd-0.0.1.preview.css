@@ -2413,58 +2413,6 @@ li.L8 {
   display: table;
 }
 
-.editormd-logo-1x:before,
-.editormd-logo-2x:before,
-.editormd-logo-3x:before,
-.editormd-logo-4x:before,
-.editormd-logo-5x:before,
-.editormd-logo-6x:before,
-.editormd-logo-7x:before,
-.editormd-logo-8x:before,
-.editormd-logo:before {
-  content: "\e1987";
-}
-
-.editormd-logo-1x {
-  font-size: 1em;
-}
-
-.editormd-logo-lg {
-  font-size: 1.2em;
-}
-
-.editormd-logo-2x {
-  font-size: 2em;
-}
-
-.editormd-logo-3x {
-  font-size: 3em;
-}
-
-.editormd-logo-4x {
-  font-size: 4em;
-}
-
-.editormd-logo-5x {
-  font-size: 5em;
-}
-
-.editormd-logo-6x {
-  font-size: 6em;
-}
-
-.editormd-logo-7x {
-  font-size: 7em;
-}
-
-.editormd-logo-8x {
-  font-size: 8em;
-}
-
-.editormd-logo-color {
-  color: #2196f3;
-}
-
 /*! github-markdown-css | The MIT License (MIT) | Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) | https://github.com/sindresorhus/github-markdown-css */
 
 /* @font-face {
@@ -2475,7 +2423,7 @@ li.L8 {
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: #333;
+  color: var(--text-color-base);
   overflow: hidden;
   font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic",
     "Segoe UI", "Trebuchet MS", Monaco, monospace, Tahoma, STXihei, "华文细黑",
@@ -2534,7 +2482,7 @@ li.L8 {
 
 .markdown-body a {
   background: 0 0;
-  color: #38a160;
+  color: var(--success-color);
   text-decoration: none;
 }
 
@@ -2549,13 +2497,13 @@ li.L8 {
   overflow: hidden;
   background: 0 0;
   border: 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .markdown-body h1,
 .markdown-body h2 {
   /* padding-bottom: 0.3em; */
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .markdown-body hr:after {
@@ -2588,11 +2536,11 @@ li.L8 {
 }
 
 .markdown-body code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  /* font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; */
 }
 
 .markdown-body pre {
-  font: 14px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  /* font: 14px Consolas, "Liberation Mono", Menlo, Courier, monospace; */
   word-wrap: normal;
 }
 
@@ -3088,16 +3036,6 @@ li.L8 {
 .editormd-html-preview pre code,
 .editormd-preview-container pre code {
   padding: 0;
-}
-
-.editormd-html-preview code,
-.editormd-html-preview kbd,
-.editormd-html-preview pre,
-.editormd-preview-container code,
-.editormd-preview-container kbd,
-.editormd-preview-container pre {
-  font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic",
-    "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
 }
 
 .editormd-html-preview > table thead tr,

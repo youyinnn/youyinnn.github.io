@@ -133,7 +133,7 @@ export default {
 .list-item {
   padding-right: 1rem !important;
   padding-left: 1rem !important;
-  transition: border-left 0.5s, transform 0.25s !important;
+  transition: border-left 0.5s, border-right 0.5s, transform 0.25s !important;
   margin-bottom: 1rem;
   border-left: 3px solid rgba(0, 255, 128, 0);
   border-right: 3px solid rgba(0, 255, 128, 0);
