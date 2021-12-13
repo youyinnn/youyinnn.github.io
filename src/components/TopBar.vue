@@ -210,6 +210,15 @@ export default {
       window.onresize = () => {
         this.adjustTabWidth();
       };
+      if (screen !== undefined && screen.orientation !== undefined) {
+        screen.orientation.onchange = () => {
+          this.adjustTabWidth();
+        };
+      } else {
+        window.onorientationchange = () => {
+          this.adjustTabWidth();
+        };
+      }
     }, 300);
     const codeThemeCssFile = JSON.parse(sessionStorage.codeThemeCss);
     const codeThemeCssFileList = [];

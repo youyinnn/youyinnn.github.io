@@ -42,6 +42,11 @@ code.hljs {
   padding: 3px 5px;
 }
 
+pre > code {
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+}
+
 .markdown-body .katexp,
 .markdown-body blockquote,
 .markdown-body .md-diagram-panel-preview,
