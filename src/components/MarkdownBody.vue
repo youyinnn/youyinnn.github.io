@@ -25,6 +25,9 @@ export default {
     content: function (nV) {
       this.renderMd(nV);
     },
+    currentThemeConfig(nV) {
+      this.codeThemeCssSetup();
+    },
   },
   computed: {
     mdClass: function () {
@@ -32,6 +35,9 @@ export default {
         return this.class;
       }
       return "article markdown-body editormd-html-preview animate__animated animate__fadeIn";
+    },
+    currentThemeConfig() {
+      return this.$store.state.currentThemeConfig;
     },
   },
   methods: {
@@ -86,15 +92,38 @@ export default {
         }
       }
     },
+    codeThemeCssSetup() {
+      const before = document.getElementById("codeThemeCssLink");
+      if (before !== null) before.remove();
+      var codeCssEl = document.createElement("link");
+
+      codeCssEl.href = `https://cdn.jsdelivr.net/npm/highlight.js@11.3.1/styles/${this.$store.state.currentThemeConfig.codeTheme}.css`;
+      codeCssEl.id = "codeThemeCssLink";
+      codeCssEl.rel = "stylesheet";
+      codeCssEl.type = "text/css";
+
+      const headEl = document.getElementsByTagName("head")[0];
+      headEl.appendChild(codeCssEl);
+      return codeCssEl;
+    },
     renderMd(c) {
-      import(
-        `@/assets/css/code/${this.$store.state.currentThemeConfig.codeTheme}.css`
-      );
       if (c === null) {
         return;
       }
+
+      const codeCssEl = this.codeThemeCssSetup();
+
       // pre route the img src before they actually render into the real dom
       const node = new DOMParser().parseFromString(c, "text/html");
+
+      // add style on inline code block
+      const codeEls = node.getElementsByTagName("code");
+      for (let el of codeEls) {
+        if (el.parentNode.nodeName === "P") {
+          el.classList = "hljs hljs-bullet";
+        }
+      }
+
       imgRouter.routeElements(node.getElementsByTagName("img"));
       var innerHTML = node.children[0].children[1].innerHTML;
 
@@ -105,11 +134,18 @@ export default {
       innerHTML = innerHTML.replaceAll("{", "&#123;");
       innerHTML = innerHTML.replaceAll("}", "&#125;");
 
+      // add css on code block without language specifying
+      innerHTML = innerHTML.replaceAll(
+        "<pre><code>",
+        `<pre><code class="hljs">`
+      );
+
       // render it
       const body = {
         template: innerHTML,
         components: {
           NImage,
+          codeCssEl,
         },
         data: () => ({}),
       };
