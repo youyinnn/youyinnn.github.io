@@ -13,7 +13,7 @@
           />
         </div>
       </n-gi>
-      <n-gi style="border-left: 1px solid #eee" span="5">
+      <n-gi style="border-left: 1.5px solid var(--border-color)" span="5">
         <markdown-body
           :key="activeKey"
           :content="content"
@@ -41,7 +41,6 @@
 
 <script>
 /* eslint-disable no-unused-vars */
-import resources from "@/assets/resources/resources.js";
 import { NMenu, NGrid, NGi } from "naive-ui";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
@@ -70,10 +69,6 @@ export default {
   },
   watch: {},
   mounted: function () {
-    const resourceList = resources.list;
-    for (let rs of resourceList) {
-      require(`@/assets/resources/${rs}`);
-    }
     const scriptSections = JSON.parse(sessionStorage.scriptsMds);
     for (let sectionName in scriptSections) {
       this.menuOptions.push({

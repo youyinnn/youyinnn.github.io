@@ -16,15 +16,13 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
-      <!-- <n-icon size="28">
-        < />
-      </n-icon> -->
       <div class="github-box">
         <n-tooltip
           placement="bottom-end"
           trigger="click"
           display-directive="show"
           :delay="0"
+          :style="{ width: '200px' }"
         >
           <template #trigger>
             <n-button ghost type="tertiary">
@@ -34,17 +32,47 @@
             </n-button>
           </template>
           <div class="setting-item">
-            <div style="margin-right: 10px; display: inline-block">Theme:</div>
-            <n-switch :value="themeValue" @update:value="themeSwitchHandle">
-              <template #checked>Light Theme</template>
-              <template #unchecked>Dark Theme</template>
+            <div
+              style="
+                margin-right: 10px;
+                display: inline-block;
+                width: 79px;
+                text-align: end;
+              "
+            >
+              Theme:
+            </div>
+            <n-switch
+              style="width: 111px"
+              :value="themeValue"
+              @update:value="themeSwitchHandle"
+            >
+              <template #checked>Light</template>
+              <template #unchecked>Dark</template>
             </n-switch>
+          </div>
+          <div class="setting-item">
+            <div style="margin-top: 10px; margin-bottom: 5px">Code theme:</div>
+            <n-select
+              :value="codeThemeValue"
+              :options="codeThemeOptions"
+              size="small"
+              :virtual-scroll="false"
+              @update:value="codeThemeSelectHandle"
+            />
+          </div>
+          <div style="margin-top: 15px" class="setting-item">
+            <n-button
+              :style="{ width: '100%', padding: '0' }"
+              type="success"
+              tag="a"
+              href="https://github.com/youyinnn"
+              target="_blank"
+              >Visit My Github</n-button
+            >
           </div>
         </n-tooltip>
       </div>
-      <!-- <n-gradient-text  :size="16" type="success"> -->
-      <!-- déjà vu -->
-      <!-- </n-gradient-text> -->
     </n-space>
   </n-card>
 </template>
@@ -62,6 +90,7 @@ import {
   NButton,
   NTooltip,
   NSwitch,
+  NSelect,
 } from "naive-ui";
 
 const tabList = [
@@ -96,11 +125,22 @@ export default {
     NButton,
     NTooltip,
     NSwitch,
+    NSelect,
   },
   data: () => ({
     tabs: tabList,
     adjustTimer: 0,
     document,
+    codeThemeOptions: [
+      {
+        label: "Github",
+        value: "github",
+      },
+      {
+        label: "Github-Dark",
+        value: "github-dark",
+      },
+    ],
   }),
   methods: {
     goTo(tab) {
@@ -132,12 +172,20 @@ export default {
       if (!value) {
         this.$store.commit("changeThemeConfig", {
           darkTheme: true,
+          codeTheme: this.codeThemeValue,
         });
       } else {
         this.$store.commit("changeThemeConfig", {
           darkTheme: false,
+          codeTheme: this.codeThemeValue,
         });
       }
+    },
+    codeThemeSelectHandle(value) {
+      this.$store.commit("changeThemeConfig", {
+        darkTheme: this.$store.state.currentThemeConfig.darkTheme,
+        codeTheme: value,
+      });
     },
   },
   computed: {
@@ -146,6 +194,9 @@ export default {
     },
     themeValue() {
       return !this.$store.state.currentThemeConfig.darkTheme;
+    },
+    codeThemeValue() {
+      return this.$store.state.currentThemeConfig.codeTheme;
     },
   },
   mounted: function () {
@@ -156,6 +207,15 @@ export default {
         this.adjustTabWidth();
       };
     }, 300);
+    const codeThemeCssFile = JSON.parse(sessionStorage.codeThemeCss);
+    const codeThemeCssFileList = [];
+    for (let cssFile of codeThemeCssFile) {
+      codeThemeCssFileList.push({
+        label: cssFile,
+        value: cssFile,
+      });
+    }
+    this.codeThemeOptions = codeThemeCssFileList;
   },
 };
 </script>
@@ -187,6 +247,7 @@ export default {
 .tabs {
   width: 300px;
   position: absolute;
+  transition: all 0.5s;
 }
 .github-box {
   position: absolute;
@@ -202,6 +263,15 @@ export default {
 </style>
 
 <style>
+.n-switch__rail {
+  width: 100%;
+}
+.n-switch .n-switch__unchecked {
+  padding-left: 42px;
+}
+.n-switch .n-switch__checked {
+  padding-right: 42px;
+}
 /* .n-tabs-tab__label {
   color: rgb(66, 69, 109) !important;
 }

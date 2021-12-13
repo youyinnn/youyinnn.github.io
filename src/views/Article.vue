@@ -1,17 +1,16 @@
 <template>
   <div class="article-box">
-    <transition name="fade5" mode="out-in">
-      <div
-        v-if="loading"
-        style="height: 90px"
-        key="sk"
-        class="article-metadata clearfix"
-      >
-        <n-skeleton text :repeat="3" />
+    <transition name="fade3" mode="out-in">
+      <div v-if="loading" key="sk" class="article-metadata clearfix">
+        <n-skeleton text :repeat="2" />
         <n-skeleton text style="width: 60%" />
       </div>
 
-      <div v-else key="mt" class="article-metadata clearfix">
+      <div
+        v-else
+        :key="'mt-' + currentAbbrlink"
+        class="article-metadata clearfix"
+      >
         <p class="title">{{ postMetadata.title }}</p>
         <p style="margin-top: 10px">
           <span style="margin-right: 10px">
@@ -26,7 +25,7 @@
     <div class="serie-box unselectable" v-if="hasSerie">
       <n-divider style="margin-top: 0; margin-bottom: 10px" />
       <n-collapse>
-        <n-collapse-item :title="'Serie:' + postSerie.se" name="1">
+        <n-collapse-item :title="'Serie: ' + postSerie.se">
           <div v-for="item of postSerie.ps" :key="item.abbrlink">
             <n-el
               :class="{
@@ -34,6 +33,7 @@
                 'se-unselected': item.abbrlink !== postMetadata.abbrlink,
                 'se-selected': item.abbrlink === postMetadata.abbrlink,
               }"
+              @click="clickOtherPost(item.abbrlink)"
             >
               {{ item.name }}
             </n-el>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import resources from "@/assets/resources/resources.js";
 import { NSkeleton, NDivider, NCollapse, NCollapseItem, NEl } from "naive-ui";
 import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
@@ -79,27 +78,19 @@ export default {
     hasSerie() {
       return this.postSerie !== null;
     },
+    currentAbbrlink() {
+      return this.$route.params.articleId;
+    },
+  },
+  watch: {
+    currentAbbrlink(nV) {
+      this.loadMd(nV);
+    },
   },
   mounted: function () {
     const aId = this.$route.params.articleId;
-    const src = require(`raw-loader!@/assets/articles/${aId}.htm`);
-    this.content = src.default;
-    // console.log(this.content);
+    this.loadMd(aId);
 
-    // get toc
-    const tocSrc = require(`@/assets/articles/${aId}.htm.toc.json`);
-    this.toc = tocSrc;
-
-    const resourceList = resources.list;
-    for (let rs of resourceList) {
-      require(`@/assets/resources/${rs}`);
-    }
-    const postMetadatas = JSON.parse(sessionStorage.postMetadata);
-    for (let d of postMetadatas) {
-      if (d.abbrlink === aId) {
-        this.postMetadata = d;
-      }
-    }
     const series = JSON.parse(sessionStorage.postSeries);
     for (let serie of series) {
       for (let name of serie.ps) {
@@ -112,7 +103,6 @@ export default {
             };
           }
           this.postSerie = serie;
-          console.log(serie);
           break;
         }
       }
@@ -122,6 +112,27 @@ export default {
     }, 100);
   },
   methods: {
+    clickOtherPost(abbrlink) {
+      this.$router.push(`/article/${abbrlink}`).catch(() => {});
+    },
+    loadMd(abbrlink) {
+      if (abbrlink === null || abbrlink === undefined) {
+        return;
+      }
+      const src = require(`raw-loader!@/assets/articles/${abbrlink}.htm`);
+      this.content = src.default;
+
+      // get toc
+      const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
+      this.toc = tocSrc;
+
+      const postMetadatas = JSON.parse(sessionStorage.postMetadata);
+      for (let d of postMetadatas) {
+        if (d.abbrlink === abbrlink) {
+          this.postMetadata = d;
+        }
+      }
+    },
     daybefore: function (pastdayjs) {
       let now = dayjs().set("hour", 0).set("minute", 0).set("second", 0);
       let before = now.diff(pastdayjs);
@@ -159,6 +170,7 @@ export default {
   padding: 1px 10px;
   border-left: 3px solid var(--success-color);
   border-right: 3px solid var(--success-color);
+  transition: all 0.5s !important;
 }
 .se-unselected:hover {
   border-left: 3px solid var(--info-color-hover);
@@ -166,8 +178,8 @@ export default {
   background-color: var(--divider-color);
 }
 .se-selected {
+  cursor: not-allowed;
   background-color: var(--border-color);
-
   border-left: 3px solid var(--error-color);
   border-right: 3px solid var(--error-color);
 }

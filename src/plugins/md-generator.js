@@ -10,6 +10,7 @@ const articleDataExtract = require("./artricles-data-extract");
 const tocExtractor = require("./toc-extractor");
 const { exit } = require("process");
 const katex = require("katex");
+const { gen } = require("./list-code-theme-css-file");
 
 let postsPath = path.join(__dirname, "..", "assets/_posts");
 
@@ -90,6 +91,12 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     htmlStr = htmlStr.replace(inp[0], ehtml);
     inp = htmlStr.match(/\$\$[^$]*\$\$/);
   }
+
+  // if (htmlStr.indexOf("<code>")) {
+  //   console.warn(
+  //     "Code blocks without language specifying found at: " + sourceFilePath
+  //   );
+  // }
 
   fs.writeFileSync(outputFilePath, htmlStr, {
     encoding: "utf-8",
@@ -237,7 +244,7 @@ for (let resf of resourceFiles) {
     });
 }
 
-var resoucesList = [cacheFileName];
+var resoucesList = [cacheFileName, gen()];
 
 fs.writeFileSync(
   path.join(resourcesPath, "resources.js"),

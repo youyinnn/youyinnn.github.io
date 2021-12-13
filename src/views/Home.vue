@@ -24,7 +24,6 @@
 
 <script>
 // @ is an alias to /src
-import resources from "@/assets/resources/resources.js";
 import { NList, NListItem } from "naive-ui";
 import dayjs from "dayjs";
 
@@ -45,14 +44,8 @@ export default {
     },
   },
   mounted: function () {
-    const resourceList = resources.list;
-    // console.log(resources);
-    for (let rs of resourceList) {
-      require(`@/assets/resources/${rs}`);
-    }
     this.postMetadata = JSON.parse(sessionStorage.postMetadata);
     this.postMetadataLength = this.postMetadata.length;
-    // console.log(this.postMetadata);
   },
 };
 </script>

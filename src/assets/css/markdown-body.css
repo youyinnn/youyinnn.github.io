@@ -6,6 +6,8 @@ pre {
 }
 .article {
   --animate-duration: 1s;
+  word-wrap: break-word;
+  word-break: normal;
 }
 
 .katexp {
@@ -25,6 +27,29 @@ pre {
 
 pre code.hljs {
   padding: 1rem !important;
+}
+
+code.hljs {
+  transition: background-color 0.8s;
+}
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+
+.markdown-body .katexp,
+.markdown-body blockquote,
+.markdown-body .md-diagram-panel-preview,
+.markdown-body pre,
+.markdown-body .copyrightbox,
+.markdown-body .saying,
+.markdown-body img {
+  transition: box-shadow 0.5s;
 }
 
 .markdown-body .katexp:hover,
@@ -124,22 +149,22 @@ a code {
 }
 
 .markdown-body h1 {
-  border-left: 7px solid var(--success-color);
+  border-left: 7px solid var(--success-color-pressed);
 }
 .markdown-body h2 {
-  border-left: 6px solid var(--success-color);
+  border-left: 6px solid var(--success-color-pressed);
 }
 .markdown-body h3 {
-  border-left: 5px solid var(--success-color);
+  border-left: 5px solid var(--success-color-pressed);
 }
 .markdown-body h4 {
-  border-left: 4px solid var(--success-color);
+  border-left: 4px solid var(--success-color-pressed);
 }
 .markdown-body h5 {
-  border-left: 3px solid var(--success-color);
+  border-left: 3px solid var(--success-color-pressed);
 }
 .markdown-body h6 {
-  border-left: 2px solid var(--success-color);
+  border-left: 2px solid var(--success-color-pressed);
 }
 
 .katex-display {
