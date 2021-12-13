@@ -13,6 +13,7 @@
     "@mdi/font": "5.9.55",
     "animate.css": "^4.1.1",
     "core-js": "^3.6.5",
+    "gsap": "^3.8.0",
     "roboto-fontface": "*",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",

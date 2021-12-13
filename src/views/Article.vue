@@ -1,16 +1,7 @@
 <template>
   <div class="article-box">
     <transition name="fade3" mode="out-in">
-      <div v-if="loading" key="sk" class="article-metadata clearfix">
-        <n-skeleton text :repeat="2" />
-        <n-skeleton text style="width: 60%" />
-      </div>
-
-      <div
-        v-else
-        :key="'mt-' + currentAbbrlink"
-        class="article-metadata clearfix"
-      >
+      <div :key="'mt-' + currentAbbrlink" class="article-metadata clearfix">
         <p class="title">{{ postMetadata.title }}</p>
         <p style="margin-top: 10px">
           <span style="margin-right: 10px">
@@ -43,13 +34,15 @@
       <n-divider style="margin-top: 10px; margin-bottom: 10px" />
     </div>
     <n-divider v-else style="margin-top: 10px" />
-    <markdown-body :content="content" :key="$route.params.articleId" />
+    <transition name="fade3" mode="out-in">
+      <markdown-body :content="content" :key="$route.params.articleId" />
+    </transition>
     <toc :toc="toc" />
   </div>
 </template>
 
 <script>
-import { NSkeleton, NDivider, NCollapse, NCollapseItem, NEl } from "naive-ui";
+import { NDivider, NCollapse, NCollapseItem, NEl } from "naive-ui";
 import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
@@ -58,7 +51,6 @@ import MarkdownBody from "@/components/MarkdownBody.vue";
 export default {
   name: "Article",
   components: {
-    NSkeleton,
     NDivider,
     Toc,
     MarkdownBody,
@@ -70,7 +62,7 @@ export default {
     content: null,
     postMetadata: null,
     loading: true,
-    toc: {},
+    toc: [],
     postSerie: null,
     dayjs,
   }),
@@ -87,10 +79,9 @@ export default {
       this.loadMd(nV);
     },
   },
-  mounted: function () {
+  created() {
     const aId = this.$route.params.articleId;
     this.loadMd(aId);
-
     const series = JSON.parse(sessionStorage.postSeries);
     for (let serie of series) {
       for (let name of serie.ps) {
@@ -107,9 +98,6 @@ export default {
         }
       }
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 100);
   },
   methods: {
     clickOtherPost(abbrlink) {

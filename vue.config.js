@@ -36,9 +36,9 @@ module.exports = {
       return args;
     });
     // 移除 prefetch 插件
-    config.plugins.delete("prefetch");
+    // config.plugins.delete("prefetch");
     // 移除 preload 插件
-    config.plugins.delete("preload");
+    // config.plugins.delete("preload");
     // config.resolve.alias.set("vue", "vue/dist/vue.esm-bundler.js");
   },
   configureWebpack: (config) => {

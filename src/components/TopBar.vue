@@ -1,5 +1,9 @@
 <template>
-  <n-card class="top-bar" :bordered="false" content-style="padding: 0;">
+  <n-card
+    class="top-bar animate__animated animate__fadeIn"
+    :bordered="false"
+    content-style="padding: 0;"
+  >
     <n-space class="tab-box unselectable" justify="start">
       <n-tabs
         class="tabs"
@@ -232,6 +236,7 @@ export default {
   height: @top-bar-height;
   border-radius: 0;
   // background-color: aquamarine;
+  animation-delay: 0.2s;
 }
 
 .tab-box {
