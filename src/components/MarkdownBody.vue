@@ -34,7 +34,7 @@ export default {
       if (this.class !== null && this.class !== undefined) {
         return this.class;
       }
-      return "article markdown-body editormd-html-preview animate__animated animate__fadeIn";
+      return "article markdown-body editormd-html-preview";
     },
     currentThemeConfig() {
       return this.$store.state.currentThemeConfig;
@@ -68,29 +68,6 @@ export default {
         );
       }
       return innerHTML;
-    },
-    codeNodeSetup(root) {
-      while (root.getElementsByTagName("code").length > 0) {
-        var nodes = root.getElementsByTagName("code");
-        for (let node of nodes) {
-          const nCodeEl = document.createElement("n-code");
-          if (node.parentNode.nodeName === "P") {
-            // inline code
-            nCodeEl.setAttribute("inline", "");
-          } else {
-            //
-            const classList = node.classList[0];
-            if (classList !== undefined) {
-              nCodeEl.setAttribute("language", classList.split("language-")[1]);
-            }
-          }
-          console.log(node.innerHTML);
-          console.log(node.innerText);
-          nCodeEl.setAttribute("code", node.innerHTML);
-          // nCodeEl.setAttribute("codee", node.innerHTML);
-          node.parentNode.replaceChild(nCodeEl, node);
-        }
-      }
     },
     codeThemeCssSetup() {
       const before = document.getElementById("codeThemeCssLink");

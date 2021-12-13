@@ -94,7 +94,7 @@ export default {
 .saying {
   text-align: center;
   padding: 0.5rem 1rem 1rem;
-  background-color: #f8f9fa;
+  background-color: var(--table-header-color);
   font-size: 1rem;
 }
 

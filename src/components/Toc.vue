@@ -2,13 +2,21 @@
   <transition v-show="tocShow" name="fade5" mode="out-in">
     <div id="toc-box" class="toc-box">
       <n-anchor :show-background="true" ignore-gap :bound="winHeight / 2">
-        <n-anchor-link
-          class="toc-item"
-          v-for="toc of computedTocList"
-          :key="toc.id"
-          :title="toc.content"
-          :href="'#' + toc.id"
-        />
+        <transition-group
+          name="staggered-fade"
+          :css="false"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+        >
+          <n-anchor-link
+            v-for="(toc, index) in tocList"
+            :key="toc.id"
+            :data-index="index"
+            :title="toc.content"
+            :href="'#' + toc.id"
+          />
+        </transition-group>
       </n-anchor>
     </div>
   </transition>
@@ -16,6 +24,7 @@
 
 <script>
 import { NAnchor, NAnchorLink } from "naive-ui";
+import gsap from "gsap";
 
 export default {
   props: ["toc"],
@@ -28,8 +37,9 @@ export default {
     winWidth: 0,
     resizeTimer: 0,
     tocShow: false,
+    tocList: [],
   }),
-  mounted: function () {
+  mounted() {
     this.winHeight = this.getWinHeight();
     this.winWidth = this.getWinWidth();
     this.adjustTocRight();
@@ -43,11 +53,10 @@ export default {
         }, 100);
       };
     }, 300);
-  },
-  computed: {
-    computedTocList: function () {
-      return this.$props.toc;
-    },
+    this.tocList.splice(0, this.tocList.length);
+    for (let it of this.toc) {
+      this.tocList.push(it);
+    }
   },
   watch: {
     winWidth() {
@@ -57,8 +66,42 @@ export default {
         this.tocShow = false;
       }
     },
+    // eslint-disable-next-line no-unused-vars
+    toc(nv) {
+      while (this.tocList.length > 0) {
+        this.tocList.splice(0, 1);
+      }
+      for (let it of nv) {
+        this.tocList.splice(this.tocList.length + 1, 0, it);
+      }
+      // setTimeout(() => {
+      //   this.tocList.splice(this.tocList.length + 1, 0, nv[0]);
+      // }, 100);
+    },
   },
   methods: {
+    beforeEnter(el) {
+      el.style.opacity = 0;
+      el.style.height = 0;
+    },
+    // eslint-disable-next-line no-unused-vars
+    enter(el, done) {
+      gsap.to(el, {
+        opacity: 1,
+        height: "1em",
+        delay: el.dataset.index * 0.03,
+        onComplete: done,
+      });
+    },
+    // eslint-disable-next-line no-unused-vars
+    leave(el) {
+      gsap.to(el, {
+        opacity: 0,
+        height: 0,
+        delay: el.dataset.index * 0.01,
+        // onComplete: done,
+      });
+    },
     adjustTocRight: function () {
       const el = document.getElementById("toc-box");
       if (el !== null) {

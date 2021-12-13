@@ -28,14 +28,7 @@
         />
       </n-gi>
     </n-grid>
-    <toc
-      :toc="toc"
-      :class="{
-        'script-toc-box': true,
-        animate__animated: true,
-        animate__fadeIn: scriptChangeAnimate,
-      }"
-    />
+    <toc :toc="toc" />
   </div>
 </template>
 
@@ -68,7 +61,7 @@ export default {
     },
   },
   watch: {},
-  mounted: function () {
+  created: function () {
     const scriptSections = JSON.parse(sessionStorage.scriptsMds);
     for (let sectionName in scriptSections) {
       this.menuOptions.push({
@@ -125,12 +118,6 @@ export default {
   .script-box {
     padding-left: 0.5rem;
   }
-}
-
-.script-toc-box {
-  opacity: 0;
-  animation-delay: 0.3s;
-  animation-duration: 1s;
 }
 .script-box h2 {
   border-bottom: none !important;

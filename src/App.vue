@@ -1,7 +1,11 @@
 <template>
   <n-config-provider :theme="theme">
     <TopBar />
-    <n-card class="main" :bordered="false" content-style="padding: 0;">
+    <n-card
+      class="main animate__animated animate__fadeIn"
+      :bordered="false"
+      content-style="padding: 0;"
+    >
       <router-view v-slot="{ Component }">
         <transition name="fade3" mode="out-in">
           <component class="page" :is="Component" />
@@ -30,6 +34,10 @@ export default {
     NConfigProvider,
     NGlobalStyle,
   },
+  mounted() {
+    const pre = document.getElementById("preLoadingBodyCssElement");
+    if (pre !== null) pre.remove();
+  },
 };
 </script>
 
@@ -39,6 +47,7 @@ export default {
   margin: auto;
   top: 42px;
   border-radius: 0;
+  animation-delay: 0.35s;
 }
 
 .page {
