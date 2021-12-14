@@ -115,15 +115,15 @@ export default {
         }
       }
 
-      // const src = require(`raw-loader!@/assets/articles/${abbrlink}.htm`);
-      // this.content = src.default;
-      getContent("articles", abbrlink, this);
+      const src = require(`raw-loader!@/../public/assets/articles/${abbrlink}.htm`);
+      this.content = src.default;
+      // getContent("articles", abbrlink, this);
 
       // get toc
       if (this.postMetadata.hasToc) {
-        getToc("articles", abbrlink, this);
-        // const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
-        // this.toc = tocSrc;
+        // getToc("articles", abbrlink, this);
+        const tocSrc = require(`@/../public/assets/articles/${abbrlink}.htm.toc.json`);
+        this.toc = tocSrc;
       }
     },
     daybefore: function (pastdayjs) {

@@ -97,4 +97,8 @@ The worst Front-end developer in the universe.
 2018-04-27: media support
 
 2017-11-23: online
-``` -->
+```
+-->
+
+<p style="text-align: center;"><img src="../../../public/img/mona-loading-default.gif" style="width: 80px;margin-top:3rem;" preview-disabled></p>
+

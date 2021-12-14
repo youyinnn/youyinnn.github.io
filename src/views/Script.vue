@@ -36,7 +36,7 @@
 import { NMenu, NGrid, NGi } from "naive-ui";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
-import { getContent, getToc } from "@/plugins/get-md-content";
+// import { getContent, getToc } from "@/plugins/get-md-content";
 
 export default {
   name: "Script",
@@ -88,17 +88,17 @@ export default {
     showContent: function (key) {
       this.activeKey = key;
       this.scriptChangeAnimate = false;
-      // const src = require(`raw-loader!@/assets/scripts/${key}.htm`);
-      // this.content = src.default;
-      getContent("scripts", key, this);
+      const src = require(`raw-loader!@/../public/assets/scripts/${key}.htm`);
+      this.content = src.default;
+      // getContent("scripts", key, this);
 
-      // try {
-      //   const tocSrc = require(`@/assets/scripts/${key}.htm.toc.json`);
-      //   this.toc = tocSrc;
-      // } catch (error) {
-      //   console.log("No toc for this article.");
-      // }
-      getToc("scripts", key, this);
+      try {
+        const tocSrc = require(`@/../public/assets/scripts/${key}.htm.toc.json`);
+        this.toc = tocSrc;
+      } catch (error) {
+        console.log("No toc for this article.");
+      }
+      // getToc("scripts", key, this);
       setTimeout(() => {
         this.scriptChangeAnimate = true;
       }, 100);
