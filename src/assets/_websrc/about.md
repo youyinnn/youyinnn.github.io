@@ -40,7 +40,7 @@ The worst Front-end developer in the universe.
 
 > COEN 6501
 >
-> [Technical Reoprt: Survey of Several Recent Full Adder Designs](https://github.com/youyinnn/coen_6501/blob/main/a1_report/output/report.pdf)(I like this one)
+> [Technical Reoprt: Survey of Several Recent Full Adder Designs](https://github.com/youyinnn/coen_6501/blob/main/a1_report/output/report.pdf) (I like this one)
 >
 > [Project Report](https://github.com/youyinnn/coen_6501/blob/main/project_spec/output/main.pdf)
 
@@ -49,7 +49,7 @@ The worst Front-end developer in the universe.
 > This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del> <del>Searching support: [Algolia](https://www.algolia.com/)</del>
 > Comment plugin: <del>[Valine](https://valine.js.org/)</del>
 >
-> Publishing my tech-articles, sharing my ideas, keeping some scripts, todos, and my personal resume.
+> Publishing my tech-articles, sharing my ideas, keeping some scripts, <del>todos, and my personal resume.</del>
 
 <!-- Change Log
 

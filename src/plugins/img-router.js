@@ -11,7 +11,7 @@ function routeElements(elements) {
 function route(filename) {
   return process.env.NODE_ENV === "production"
     ? `https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/public/img/${filename}`
-    : `../img/${filename}`;
+    : `/img/${filename}`;
 }
 
 module.exports.routeElements = routeElements;

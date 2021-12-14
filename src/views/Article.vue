@@ -111,8 +111,12 @@ export default {
       this.content = src.default;
 
       // get toc
-      const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
-      this.toc = tocSrc;
+      try {
+        const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
+        this.toc = tocSrc;
+      } catch (error) {
+        console.log("No toc for this article.");
+      }
 
       const postMetadatas = JSON.parse(sessionStorage.postMetadata);
       for (let d of postMetadatas) {
