@@ -1,9 +1,10 @@
 <script>
-/* eslint-disable no-unused-vars */
 import imgRouter from "@/plugins/img-router.js";
 import failedToLoadImg from "/public/img/failed-to-load.png";
 import { h, createApp } from "vue";
 import { NImage, NEl } from "naive-ui";
+
+var app = null;
 
 export default {
   components: {
@@ -17,15 +18,15 @@ export default {
     });
   },
   props: ["content", "class", "key"],
-  mounted: function () {
+  mounted() {
     this.renderMd(this.content);
   },
   watch: {
     //   when the content is load
-    content: function (nV) {
-      this.renderMd(nV);
+    content: function (nv) {
+      this.renderMd(nv);
     },
-    currentThemeConfig(nV) {
+    currentThemeConfig() {
       this.codeThemeCssSetup();
     },
   },
@@ -118,6 +119,9 @@ export default {
       );
 
       // render it
+      if (app !== null) {
+        app.unmount();
+      }
       const body = {
         template: innerHTML,
         components: {
@@ -126,7 +130,8 @@ export default {
         },
         data: () => ({}),
       };
-      createApp(body).mount("#md");
+      app = createApp(body);
+      app.mount("#md");
 
       const renderedImgEl = document.getElementsByClassName("n-image");
       for (let el of renderedImgEl) {

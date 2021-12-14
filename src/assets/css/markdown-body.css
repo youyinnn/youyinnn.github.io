@@ -62,8 +62,7 @@ pre > code {
 .markdown-body .md-diagram-panel-preview:hover,
 .markdown-body pre:hover,
 .markdown-body .copyrightbox:hover,
-.markdown-body .saying:hover,
-.markdown-body img:hover {
+.markdown-body .saying:hover {
   box-shadow: var(--box-shadow-1);
 }
 

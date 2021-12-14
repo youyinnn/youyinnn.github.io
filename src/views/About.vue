@@ -14,6 +14,7 @@
 <script>
 import MarkdownBody from "@/components/MarkdownBody.vue";
 import { NImage } from "naive-ui";
+import { getContent } from "@/plugins/get-md-content";
 
 export default {
   name: "About",
@@ -32,8 +33,9 @@ export default {
     },
   },
   mounted: function () {
-    const src = require(`raw-loader!@/assets/about/index.htm`);
-    this.content = src.default;
+    // const src = require(`raw-loader!@/assets/about/index.htm`);
+    // this.content = src.default;
+    getContent("about", "index", this);
   },
 };
 </script>
