@@ -127,6 +127,13 @@ export default {
         data: () => ({}),
       };
       createApp(body).mount("#md");
+
+      const renderedImgEl = document.getElementsByClassName("n-image");
+      for (let el of renderedImgEl) {
+        if (el.style.length === 0) {
+          el.style.width = "100%";
+        }
+      }
     },
   },
 };
@@ -141,9 +148,6 @@ export default {
 .title {
   margin: 0;
   font-size: 25px;
-}
-.n-image {
-  width: 100%;
 }
 img[data-error="true"] {
   width: 180px;

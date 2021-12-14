@@ -12,6 +12,12 @@
       src="<%= BASE_URL %>preLoadingBody.js"
     ></script>
 
+    <style>
+      [v-cloak] {
+        display: none !important;
+      }
+    </style>
+
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
@@ -78,7 +84,7 @@
         continue.</strong
       >
     </noscript>
-    <div id="app"></div>
+    <div id="app" v-cloak></div>
     <!-- built files will be auto injected -->
       <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>    
     <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>

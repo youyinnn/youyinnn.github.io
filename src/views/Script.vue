@@ -91,8 +91,12 @@ export default {
       const src = require(`raw-loader!@/assets/scripts/${key}.htm`);
       this.content = src.default;
 
-      const tocSrc = require(`@/assets/scripts/${key}.htm.toc.json`);
-      this.toc = tocSrc;
+      try {
+        const tocSrc = require(`@/assets/scripts/${key}.htm.toc.json`);
+        this.toc = tocSrc;
+      } catch (error) {
+        console.log("No toc for this article.");
+      }
       setTimeout(() => {
         this.scriptChangeAnimate = true;
       }, 100);
