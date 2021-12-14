@@ -79,6 +79,10 @@ export default {
   methods: {
     routeTo: function (key) {
       this.$router.push(`/script/${key}`).catch(() => {});
+      const toTop = document.getElementsByClassName("n-back-top");
+      if (toTop.length > 0) {
+        toTop[0].click();
+      }
     },
     onMenuItemClick: function (key) {
       location.hash = "";

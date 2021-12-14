@@ -3,6 +3,7 @@
     <TopBar />
     <n-card class="main" :bordered="false" content-style="padding: 0;" v-cloak>
       <router-view v-slot="{ Component }" v-cloak>
+        <n-back-top :listen-to="body" />
         <transition name="fade1" mode="out-in" v-cloak>
           <component class="page" :is="Component" v-cloak />
         </transition>
@@ -14,11 +15,19 @@
 
 <script>
 import TopBar from "@/components/TopBar.vue";
-import { NConfigProvider, NCard, NGlobalStyle, darkTheme } from "naive-ui";
+import {
+  NConfigProvider,
+  NCard,
+  NGlobalStyle,
+  darkTheme,
+  NBackTop,
+} from "naive-ui";
 
 export default {
   name: "App",
-  data: () => ({}),
+  data: () => ({
+    body: document,
+  }),
   computed: {
     theme() {
       return this.$store.state.currentThemeConfig.darkTheme ? darkTheme : null;
@@ -29,6 +38,7 @@ export default {
     TopBar,
     NConfigProvider,
     NGlobalStyle,
+    NBackTop,
   },
   mounted() {
     setTimeout(() => {

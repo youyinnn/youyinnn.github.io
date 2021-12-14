@@ -35,7 +35,7 @@
     </div>
     <n-divider v-else style="margin-top: 10px" />
     <transition name="fade3" mode="out-in">
-      <markdown-body :content="content" :key="$route.params.articleId" />
+      <markdown-body :content="content" :key="currentAbbrlink" />
     </transition>
     <toc :toc="toc" />
   </div>
@@ -47,7 +47,6 @@ import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // eslint-disable-next-line no-unused-vars
-import { getContent, getToc } from "@/plugins/get-md-content";
 
 export default {
   name: "Article",
@@ -116,6 +115,7 @@ export default {
       }
 
       const src = require(`raw-loader!@/../public/assets/articles/${abbrlink}.htm`);
+      // this.content = `<div>${new Date().getTime()}</div>`;
       this.content = src.default;
       // getContent("articles", abbrlink, this);
 

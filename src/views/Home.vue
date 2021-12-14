@@ -41,6 +41,10 @@ export default {
   methods: {
     goToPage(abbrlink) {
       this.$router.push(`/article/${abbrlink}`).catch(() => {});
+      const toTop = document.getElementsByClassName("n-back-top");
+      if (toTop.length > 0) {
+        toTop[0].click();
+      }
     },
   },
   mounted: function () {
