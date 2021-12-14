@@ -35,7 +35,7 @@ export default {
       if (this.class !== null && this.class !== undefined) {
         return this.class;
       }
-      return "article markdown-body editormd-html-preview";
+      return "article markdown-body editormd-html-preview animate__animated animate__fadeIn";
     },
     currentThemeConfig() {
       return this.$store.state.currentThemeConfig;
@@ -147,9 +147,6 @@ export default {
 <style>
 @import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
 @import url("@/assets/css/markdown-body.css");
-.article-metadata {
-  min-height: 90px;
-}
 .title {
   margin: 0;
   font-size: 25px;

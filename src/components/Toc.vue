@@ -53,12 +53,12 @@ export default {
         }, 100);
       };
     }, 300);
-    if (this.tocList.length > 0) {
-      this.tocList.splice(0, this.tocList.length);
-      for (let it of this.toc) {
-        this.tocList.push(it);
-      }
+    // if (this.tocList.length > 0) {
+    this.tocList.splice(0, this.tocList.length);
+    for (let it of this.toc) {
+      this.tocList.push(it);
     }
+    // }
   },
   watch: {
     winWidth() {
