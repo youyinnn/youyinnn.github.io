@@ -1,14 +1,10 @@
 <template>
-  <n-config-provider :theme="theme">
+  <n-config-provider :theme="theme" v-cloak>
     <TopBar />
-    <n-card
-      class="main animate__animated animate__fadeIn"
-      :bordered="false"
-      content-style="padding: 0;"
-    >
-      <router-view v-slot="{ Component }">
-        <transition name="fade3" mode="out-in">
-          <component class="page" :is="Component" />
+    <n-card class="main" :bordered="false" content-style="padding: 0;" v-cloak>
+      <router-view v-slot="{ Component }" v-cloak>
+        <transition name="fade1" mode="out-in" v-cloak>
+          <component class="page" :is="Component" v-cloak />
         </transition>
       </router-view>
     </n-card>
@@ -35,11 +31,19 @@ export default {
     NGlobalStyle,
   },
   mounted() {
-    const pre = document.getElementById("preLoadingBodyCssElement");
-    if (pre !== null) pre.remove();
+    setTimeout(() => {
+      const pre = document.getElementById("preLoadingBodyCssElement");
+      if (pre !== null) pre.remove();
+    }, 300);
   },
 };
 </script>
+
+<style>
+[v-cloak] {
+  display: none !important;
+}
+</style>
 
 <style scoped lang="less">
 @import "../src/assets/css/variables.less";
@@ -47,7 +51,6 @@ export default {
   margin: auto;
   top: 42px;
   border-radius: 0;
-  animation-delay: 0.35s;
 }
 
 .page {
