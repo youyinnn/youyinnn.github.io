@@ -35,7 +35,7 @@ export default {
       if (this.class !== null && this.class !== undefined) {
         return this.class;
       }
-      return "article markdown-body editormd-html-preview animate__animated animate__fadeIn";
+      return "article markdown-body editormd-html-preview";
     },
     currentThemeConfig() {
       return this.$store.state.currentThemeConfig;
