@@ -1,0 +1,415 @@
+<p>本篇主要介绍一个用于字符串前后缀快速搜索的数据结构——前缀树，这篇也是在 Leetcode 里的一个数据结构<a href="https://leetcode-cn.com/explore/learn/card/trie/">专题</a>，专题里已经把前缀树的实现方式以及实际应用都介绍了一下，这里稍微整理一下这个专题</p>
+<p>关于前缀树的概念，可以参考：<a href="https://leetcode-cn.com/explore/learn/card/trie/165/introduction-to-trie/641/">什么是前缀树？</a></p>
+<p>关于前缀树的表示，可以参考：<a href="https://leetcode-cn.com/explore/learn/card/trie/165/introduction-to-trie/642/">如何表示一个前缀树？</a></p>
+<p>我们一般使用数组的方式去表示前缀树，虽然它会多占用一些空间，但是在查找的执行效率上，要比 HashMap 快上不少</p>
+<h3 id="数组实现">数组实现</h3>
+<p>我们假定场景单词只有 26 个小写字母：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isEnd</span>   <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">private</span> Trie[] children = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>[<span class="hljs-number">26</span>];
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Trie</span><span class="hljs-params">()</span> {}
+
+    <span class="hljs-comment">// 录入单词</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                cur.children[cn] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-comment">// 是否存在某个单词</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">search</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+            cur = cur.children[cn];
+        }
+        <span class="hljs-keyword">return</span> cur.isEnd;
+    }
+
+    <span class="hljs-comment">// 是否存在某个前缀</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">startsWith</span><span class="hljs-params">(String prefix)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: prefix.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+            cur = cur.children[cn];
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+}
+</code></pre>
+<h3 id="相关题目">相关题目</h3>
+<h4 id="记录权值---map-sum-pairs">记录权值 - Map Sum Pairs</h4>
+<p>实现一个 MapSum 类里的两个方法，<code>insert</code> 和 <code>sum</code>。</p>
+<p>对于方法 <code>insert</code>，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。如果键已经存在，那么原来的键值对将被替代成新的键值对。</p>
+<p>对于方法 <code>sum</code>，你将得到一个表示前缀的字符串，你需要返回所有以该前缀开头的键的值的总和。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: insert(&quot;apple&quot;, 3), 输出: Null
+输入: sum(&quot;ap&quot;), 输出: 3
+输入: insert(&quot;app&quot;, 2), 输出: Null
+输入: sum(&quot;ap&quot;), 输出: 5
+</code></pre>
+<p>这题的关键就是要在<strong>每个缀点</strong>上都记录<strong>权值</strong>，所以我们设计的前缀树要同时支持<strong>权值</strong>记录，这里稍微要注意的是已存在键的<strong>权值</strong>的替换，我们的<code>search</code>方法返回的是该前缀的<strong>最后一个缀点</strong>，以便获取该前缀的旧<strong>权值</strong></p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isEnd</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">public</span> Trie[] children = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>[<span class="hljs-number">26</span>];
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Trie</span><span class="hljs-params">()</span> {}
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word, <span class="hljs-type">int</span> sum)</span> {
+        <span class="hljs-comment">// 搜索出该前缀是否已经存在</span>
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">oldTrie</span> <span class="hljs-operator">=</span> search(word);
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">addOn</span> <span class="hljs-operator">=</span> oldTrie == <span class="hljs-literal">null</span>;
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                cur.children[cn] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+            }
+            <span class="hljs-keyword">if</span> (addOn) {
+                <span class="hljs-comment">// 如果是新的前缀 那么就直接在原权值上加</span>
+                cur.children[cn].sum += sum;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// 如果是已存在的前缀 那么需要减去旧的权值 然后再加上新的权值</span>
+                cur.children[cn].sum = cur.children[cn].sum - oldTrie.sum + sum;
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> Trie <span class="hljs-title function_">search</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+            }
+            cur = cur.children[cn];
+        }
+        <span class="hljs-keyword">return</span> cur.isEnd ? cur : <span class="hljs-literal">null</span>;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getSum</span><span class="hljs-params">(String prefix)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: prefix.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            } <span class="hljs-keyword">else</span> {
+                cur = cur.children[cn];
+            }
+        }
+        <span class="hljs-keyword">return</span> cur.sum;
+    }
+}
+</code></pre>
+<h4 id="查询前缀---单词替换">查询前缀 - 单词替换</h4>
+<p>在英语中，我们有一个叫做 <code>词根</code>(root)的概念，它可以跟着其他一些词组成另一个较长的单词——我们称这个词为 <code>继承词</code>(successor)。例如，词根<code>an</code>，跟随着单词 <code>other</code>(其他)，可以形成新的单词 <code>another</code>(另一个)。</p>
+<p>现在，给定一个由许多词根组成的词典和一个句子。你需要将句子中的所有<code>继承词</code>用<code>词根</code>替换掉。如果<code>继承词</code>有许多可以形成它的<code>词根</code>，则用最短的词根替换它。</p>
+<p>你需要输出替换之后的句子。</p>
+<p><strong>示例：</strong></p>
+<pre><code>输入：dict(词典) = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;] sentence(句子) = &quot;the cattle was rattled by the battery&quot;
+输出：&quot;the cat was rat by the bat&quot;
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li>输入只包含小写字母。</li>
+<li><code>1 &lt;= dict.length &lt;= 1000</code></li>
+<li><code>1 &lt;= dict[i].length &lt;= 100</code></li>
+<li>1 &lt;= 句中词语数 &lt;= 1000</li>
+<li>1 &lt;= 句中词语长度 &lt;= 1000</li>
+</ul>
+<p>这题首先把字典录入到前缀树，然后根据构造的前缀树，查询所有输入单词的前缀然后替换即可</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">replaceWords</span><span class="hljs-params">(List&lt;String&gt; dict, String sentence)</span> {
+        <span class="hljs-keyword">if</span> (sentence.length() &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> sentence;
+
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">trie</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+        <span class="hljs-keyword">for</span> (String word: dict) {
+            trie.insert(word);
+        }
+
+        String[] words = sentence.split(<span class="hljs-string">&quot; &quot;</span>);
+
+        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;&quot;</span>);
+        <span class="hljs-keyword">for</span> (String word: words) {
+            <span class="hljs-comment">// 搜索前缀长度</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> trie.getPrefix(word);
+            <span class="hljs-keyword">if</span> (length == <span class="hljs-number">0</span>) length = word.length();
+            sb.append(word.substring(<span class="hljs-number">0</span>, length)).append(<span class="hljs-string">&quot; &quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> sb.deleteCharAt(sb.length() - <span class="hljs-number">1</span>).toString();
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isEnd</span>  <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">public</span> Trie[] children = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>[<span class="hljs-number">26</span>];
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Trie</span><span class="hljs-params">()</span> {}
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span>) {
+                cur.children[cn] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+            }
+            cur = cur.children[cn];
+        }
+        cur.isEnd = <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-comment">// 返回前缀的长度</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getPrefix</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.children[cn] == <span class="hljs-literal">null</span> || cur.isEnd) {
+                <span class="hljs-comment">// 如果已经到底了 说明当前缀点就是最短的前缀</span>
+                <span class="hljs-keyword">break</span>;
+            }
+            cur = cur.children[cn];
+            length++;
+        }
+        <span class="hljs-keyword">return</span> cur.isEnd ? length : <span class="hljs-number">0</span>;
+    }
+}
+</code></pre>
+<h4 id="有通配符---添加与搜索单词">有通配符 - 添加与搜索单词</h4>
+<p>设计一个支持以下两种操作的数据结构：</p>
+<pre><code>void addWord(word)
+bool search(word)
+</code></pre>
+<p>search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 <code>.</code> 或 <code>a-z</code> 。 <code>.</code> 可以表示任何一个字母。</p>
+<p><strong>示例:</strong></p>
+<pre><code>addWord(&quot;bad&quot;)
+addWord(&quot;dad&quot;)
+addWord(&quot;mad&quot;)
+search(&quot;pad&quot;) -&gt; false
+search(&quot;bad&quot;) -&gt; true
+search(&quot;.ad&quot;) -&gt; true
+search(&quot;b..&quot;) -&gt; true
+</code></pre>
+<p><strong>说明:</strong></p>
+<p>你可以假设所有单词都是由小写字母 <code>a-z</code> 组成的。</p>
+<p>这题的关键就是处理通配符，对于像<code>b.a</code>，<code>b..</code>这样的用例，每当遇到<code>.</code>的时候，我们就需要遍历当前缀点的所有子缀点，比如实例上能构造前缀树：</p>
+<p><img src="../../../public/img/20200714132901.png" alt=""></p>
+<p>当我们搜索到第一个缀点 b 的子缀点的时候，发现是通配符，于是我们需要遍历 b 的所有有效子缀点<code>(trie != null)</code>来搜索后续的字符所以我们的<code>search</code>方法可以修改为</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">search</span><span class="hljs-params">(String word, Trie root, <span class="hljs-type">int</span> begin)</span> {
+    <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> root;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> begin; i &lt; word.length(); i++) {
+        <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> word.charAt(i);
+        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;.&#x27;</span>) {
+            <span class="hljs-comment">// 遍历当前子缀点，并从当前子缀点继续搜索</span>
+            <span class="hljs-keyword">for</span> (Trie t: cur.next) {
+                <span class="hljs-keyword">if</span> (t != <span class="hljs-literal">null</span> && search(word, t, i + <span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// 正常的搜索</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.next[cn] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> {
+                cur = cur.next[cn];
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> cur.isEnd;
+}
+</code></pre>
+<h4 id="深度回溯---单词搜索-ii">深度回溯 - 单词搜索 II</h4>
+<p>给定一个二维网格 <strong>board</strong> 和一个字典中的单词列表 <strong>words</strong>，找出所有同时在二维网格和字典中出现的单词。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</p>
+<p><strong>示例:</strong></p>
+<pre><code>输入:
+words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =
+[
+  [&#x27;o&#x27;,&#x27;a&#x27;,&#x27;a&#x27;,&#x27;n&#x27;],
+  [&#x27;e&#x27;,&#x27;t&#x27;,&#x27;a&#x27;,&#x27;e&#x27;],
+  [&#x27;i&#x27;,&#x27;h&#x27;,&#x27;k&#x27;,&#x27;r&#x27;],
+  [&#x27;i&#x27;,&#x27;f&#x27;,&#x27;l&#x27;,&#x27;v&#x27;]
+]
+
+输出: [&quot;eat&quot;,&quot;oath&quot;]
+</code></pre>
+<p><strong>说明:</strong>
+你可以假设所有输入都由小写字母 <code>a-z</code> 组成。</p>
+<p>本体就在<strong>二维数组上进行深度优先</strong>再运用上<strong>前缀树的缀点进行回溯</strong>，难度不大，关键是要优化到 99%</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+
+    <span class="hljs-type">int</span>[][] direction = {
+        {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>},
+        {<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>},
+        {<span class="hljs-number">1</span>, <span class="hljs-number">0</span>},
+        {-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>}
+    };
+
+    <span class="hljs-type">int</span> m;
+    <span class="hljs-type">int</span> n;
+    <span class="hljs-type">int</span> wc;
+
+    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findWords</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] board, String[] words)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">trie</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+        wc = words.length;
+        <span class="hljs-keyword">for</span> (String word: words) {
+            trie.insert(word);
+        }
+        m = board.length;
+        List&lt;String&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> ans;
+        n = board[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> ans;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; row &lt; m; row++) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; col &lt; n; col++) {
+                <span class="hljs-comment">// 优化4：一旦字典找满了 则后面的搜索就没必要做了 因为答案是不重复记录</span>
+                <span class="hljs-keyword">if</span> (ans.size() &lt; wc) {
+                    back(board, row, col, trie, ans);
+                }
+            }
+        }
+        <span class="hljs-keyword">return</span> ans;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">back</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] board, <span class="hljs-type">int</span> row, <span class="hljs-type">int</span> col, Trie trie, List&lt;String&gt; ans)</span> {
+        <span class="hljs-comment">// 优化3：直接使用缀点去进行查询 快速剪枝</span>
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> trie.next[board[row][col] -<span class="hljs-string">&#x27;a&#x27;</span>];
+        <span class="hljs-keyword">if</span> (t != <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">if</span> (t.word != <span class="hljs-literal">null</span> && !t.visited) {
+                ans.add(t.word);
+                t.visited = <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-type">char</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> board[row][col];
+            board[row][col] = <span class="hljs-string">&#x27;#&#x27;</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] d: direction) {
+                <span class="hljs-type">int</span> <span class="hljs-variable">newRow</span> <span class="hljs-operator">=</span> row + d[<span class="hljs-number">0</span>];
+                <span class="hljs-type">int</span> <span class="hljs-variable">newCol</span> <span class="hljs-operator">=</span> col + d[<span class="hljs-number">1</span>];
+
+                <span class="hljs-keyword">if</span> (newRow &lt; <span class="hljs-number">0</span> || newRow &gt;= m || newCol &lt; <span class="hljs-number">0</span> || newCol &gt;= n) <span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">if</span> (board[newRow][newCol] == <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">continue</span>;
+
+                back(board, newRow, newCol, t, ans);
+            }
+            board[row][col] = tmp;
+        }
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    <span class="hljs-keyword">public</span> Trie[]  next    = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>[<span class="hljs-number">26</span>];
+    <span class="hljs-comment">// 优化1：单词记录在最后一个缀点上，这样就不用在回溯的时候用StringBuilder去一个个记录字符</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">String</span>  <span class="hljs-variable">word</span>    <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-comment">// 优化2：使用一个布尔值去记录这个答案是否被访问过了，以达到答案去重的目的</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">visited</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: word.toCharArray()) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> c - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.next[cn] == <span class="hljs-literal">null</span>) {
+                cur.next[cn] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
+            }
+            cur = cur.next[cn];
+        }
+        cur.word = word;
+    }
+}
+</code></pre>
+<h4 id="有后缀树---恢复空格">有后缀树 - 恢复空格</h4>
+<p>哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子<code>&quot;I reset the computer. It still didn’t boot!&quot;</code>已经变成了<code>&quot;iresetthecomputeritstilldidntboot&quot;</code>。在处理标点符号和大小写之前，你得先把它断成词语。</p>
+<p>当然了，你有一本厚厚的词典<code>dictionary</code>，不过，有些词没在词典里。假设文章用<code>sentence</code>表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。</p>
+<p><strong>注意：</strong>本题相对原题稍作改动，只需返回未识别的字符数</p>
+<p><strong>示例：</strong></p>
+<pre><code>输入：
+dictionary = [&quot;looked&quot;,&quot;just&quot;,&quot;like&quot;,&quot;her&quot;,&quot;brother&quot;]
+sentence = &quot;jesslookedjustliketimherbrother&quot;
+输出： 7
+解释： 断句后为&quot;jess looked just like tim her brother&quot;，共7个未识别字符。
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= len(sentence) &lt;= 1000</code></li>
+<li><code>dictionary</code>中总字符数不超过 150000。</li>
+<li>你可以认为<code>dictionary</code>和<code>sentence</code>中只包含小写字母。</li>
+</ul>
+<p><img src="../../../public/img/20200714144233.gif" alt=""></p>
+<p>刚开思考的时候，确实是正向思考的，录入了一颗前缀树，但是这样的坏处是，无法在 n^2 的时间内很好地进行单词的划分与判断，所以参考了一下官方给的思路，构造一颗后缀树，从后缀往前摸，不得不说这个思路确实很漂亮</p>
+<p>而且这里还运用到了动态规划，申请了 n+1 长度的数组<code>dp</code>，<code>dp[i]</code>表示前 <code>i</code> 个字符最少的未识别的字符数量，从前往后计算 dp 值</p>
+<p>考虑转移方程，每次转移的时候我们考虑第 <code>j(j &lt;= i)</code>个到第 <code>i</code> 个字符组成的子串 <code>sentence[j−1⋯i−1] </code>（注意字符串下标从 0 开始）是否能在词典中找到，如果能找到的话按照定义转移方程为：</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.5em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">])</span></span></span></span></span></span></p>
+<p>否则没有找到的话我们可以复用 \textit{dp}[i-1]dp[i−1] 的状态再加上当前未被识别的第 ii 个字符，因此此时 \textit{dp}dp 值为</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></p>
+<p>dp 的取值过程在动图里已经展示了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-comment">/**
+     * 参考官方解答
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">respace</span><span class="hljs-params">(String[] dictionary, String sentence)</span> {
+        <span class="hljs-keyword">if</span> (sentence.length() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-type">BackTrie</span> <span class="hljs-variable">backtrie</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BackTrie</span>();
+        <span class="hljs-keyword">for</span> (String word: dictionary) {
+            backtrie.insert(word);
+        }
+        <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> sentence.length();
+        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[length + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= length; i++) {
+            dp[i] = dp[i - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;
+
+            <span class="hljs-type">BackTrie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> backtrie;
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) {
+                <span class="hljs-keyword">if</span> (dp[i] == <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">break</span>;
+                }
+                <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> sentence.charAt(j) - <span class="hljs-string">&#x27;a&#x27;</span>;
+                <span class="hljs-keyword">if</span> (cur.next[cn] == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">break</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cur.next[cn].isEnd) {
+                    dp[i] = Math.min(dp[i], dp[j]);
+                }
+                <span class="hljs-comment">// 一旦是某个单词的后缀 就往前摸</span>
+                cur = cur.next[cn];
+            }
+        }
+        <span class="hljs-keyword">return</span> dp[length];
+    }
+}
+
+<span class="hljs-comment">/**
+ * 后缀树
+ */</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">BackTrie</span> {
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isEnd</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">public</span> BackTrie[] next;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BackTrie</span><span class="hljs-params">()</span> {
+        next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BackTrie</span>[<span class="hljs-number">26</span>];
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">BackTrie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> word.length() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> word.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;
+            <span class="hljs-keyword">if</span> (cur.next[cn] == <span class="hljs-literal">null</span>) {
+                cur.next[cn] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BackTrie</span>();
+            }
+            cur = cur.next[cn];
+        }
+        cur.isEnd = <span class="hljs-literal">true</span>;
+    }
+}
+</code></pre>

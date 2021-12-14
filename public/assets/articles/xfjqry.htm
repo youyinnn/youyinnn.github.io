@@ -1,0 +1,178 @@
+<h3 id="介绍">介绍</h3>
+<p>本篇主要介绍了 MySQL 系统的核心引擎之一：**<em>InnoDB</em>*<em>，本系列所有的内容是基于姜承尧老师所著</em>《MySQL 技术内幕：InnoDB 存储引擎》*再加上整理的网络笔记、MySQL5.7 的<a href="https://dev.mysql.com/doc/refman/5.7/en/">官方文档</a>和自己的一些理解</p>
+<h3 id="innodb-引擎">InnoDB 引擎</h3>
+<p>MySQL5.5.8 以后的默认引擎，支持事务、行锁设计、外键、全文索引、非锁定读（默认读操作不会产生锁）；</p>
+<p>使用多版本并发控制（MVCC）来支持高并发性，并实现了 4 中标准的隔离级别，能避免幻读；还提供了许多其他的特性来支持高性能高并发；</p>
+<h3 id="体系架构">体系架构</h3>
+<p><img src="../../../public/img/20200611211157.png" alt=""></p>
+<p>引擎的内存中主要包含以下工作区域：</p>
+<ol>
+<li>线程维护区域/线程所需内部数据结构区域</li>
+<li>数据缓存，数据修改之后并不是马上进入磁盘文件，而是先缓存在这里；</li>
+<li>重做日志（redo log）缓冲；</li>
+</ol>
+<h3 id="后台线程的分类">后台线程的分类</h3>
+<ol>
+<li><strong>Master Thread</strong>：核心线程，主要负责将缓冲池中的数据异步地刷新到磁盘，保证数据一致性，具体表现为：<strong>刷脏页（InnoDB 1.2.x 之后被独立为 Page Cleaner Thread）、合并插入缓冲、回收 Undo 页（InnoDB 1.1 之后被独立为 Purge Thread）</strong>；</li>
+<li><strong>IO Thread</strong>：引擎使用了大量的 AIO 技术来处理写 IO 请求，以提高数据库的性能，该线程的工作是<strong>处理这些 IO 的回调</strong>；而在 Windows 系统中，IO 线程的数量可以调整；</li>
+<li><strong>Purge Thread</strong>：（InnoDB 1.1 引入）事务被提交后，其所使用的 undolog 可能不再被需要，该线程是负责<strong>回收</strong>这些被分配的 undo 页；该线程的线程数也支持配置；减轻 Master Thread 的负担，提高性能；</li>
+<li><strong>Page Cleaner Thread</strong>：（InnoDB 1.2.x 引入），主要完成<strong>脏页的刷新</strong>操作，减轻 Master Thread 的负担，提高性能；</li>
+</ol>
+<h3 id="内存内存对象">内存/内存对象</h3>
+<h3 id="缓冲池">缓冲池</h3>
+<p>InnoDB 是基于磁盘文件存储的引擎，并将数据按页分配和管理。而由于 CPU 和磁盘的 IO 差距，想要提高性能，肯定是要利用系统内存区弥补 IO 差距的，所以我们可以简单地将缓冲池理解为磁盘数据文件的内存映射</p>
+<h4 id="基本逻辑和内容">基本逻辑和内容</h4>
+<p><strong>读操作</strong>：系统启动的时候，会缓存（FIX）部分页到缓冲池里，在读页的时候，首先去缓冲池里找，如果找到了就直接读取，否则就从磁盘上读</p>
+<p><strong>写操作</strong>：首先修改缓冲池中的页，然后再以一定频率刷新到次磁盘上，而且不是一有页更新就刷，而是根据一种叫<strong>Checkpoint</strong>的机制来刷</p>
+<p>缓冲池的内存大小也直接影响了数据库的性能，我们也可以再配置中调节它的大小，也能够调节缓冲池的实例个数，多缓冲池实例的好处是每个页会更散列地分配到不同实例当中，好处是减少内部资源竞争</p>
+<p>缓冲池的内存数据对象如下：</p>
+<p><img src="../../../public/img/20200611215932.png" alt=""></p>
+<h4 id="缓冲算法">缓冲算法</h4>
+<p>对于缓冲池的管理，引擎使用了基本的三种算法来完成：<strong>LRU List、Free List、Flush List</strong></p>
+<p>假设我们知道基本的 LRU 缓存算法，但再 InnoDB 中的 LRU 算法又不太一样，它提供了一个**<em>midpoint</em>**来处理使用频率更新时，节点的放置策略：在新读取到页的时候，虽然是最新访问的，但是并不是放到队列的头部，而是放在大概中间的位置，默认是列表长度的 5/8 处，这个值也是可以进行配置的</p>
+<p>而我们把这个点之前的页称为 new 列表，表示是使用频繁的热点数据，后面的称为 old 列表</p>
+<p>InnoDB 之所以对算法进行改进的原因是：某些 SQL 操作可以能会把相当一部分的页甚至是所有页都刷出去，如果热点数据放在头部，那么它有可能最早被刷出，而下一次需要的时候，又从磁盘读取，非常影响性能</p>
+<p><strong>Free 列表是干嘛的呢？</strong></p>
+<p>在数据库刚启动的时候，LRU 列表是空的，没有任何的页，因为这时候页都在 Free 列表中。当需要从缓冲池中分页的时候，首先从 Free 列表中查找是否有可用的空闲页，有就直接将该页从 Free 列表移动到 LRU 列表</p>
+<p><strong>Flush 列表和脏页</strong></p>
+<p>在 LRU 列表中的页被修改之后，该页被称为脏页，这时候该页的数据和磁盘上对应的映射数据不一致，于是引擎通过 Checkpoint 机制将脏页刷回磁盘，我们把脏页都放在 Flush 列表中</p>
+<p><em>注意：脏页即存在 LRU 列表中，页存在 Flush 列表中，两者逻辑上分工不同</em></p>
+<h4 id="重做日志缓冲（redo-log-buffer）">重做日志缓冲（redo log buffer）</h4>
+<p>在一个事务的过程中，引擎会先把重做日志放到缓冲区，然后再按照频率刷新到重做日志文件。在这样的场景下，重做日志缓存一般不会占用太多内存，保证每秒的事务量在这个范围内就好，默认的 8M，也是能够配置的</p>
+<blockquote>
+<p>重做日志刷新的时机：</p>
+<ol>
+<li>Master Thread 每一秒都刷一次；</li>
+<li>每个事务提交的时候也会刷；</li>
+<li>重做日志空间剩余空间小于 1/2 的时候，也会刷；</li>
+</ol>
+</blockquote>
+<h4 id="额外的内存">额外的内存</h4>
+<p>剩下还有一些额外内存，用于分配数据库所需的对象、数据结构等，用于记录锁信息和 LRU 以及等待的信息</p>
+<h3 id="checkpoint-机制">Checkpoint 机制</h3>
+<p>之前说过，缓冲池的为了弥补 CPU 速度和磁盘速度而存在的，因此页操作都是先在缓冲池中完成，这种页叫脏页（缓冲池中页的版本比磁盘上的新）</p>
+<p>当出现脏页的时候，需要把数据刷回磁盘，但不能每出现一次脏页就刷回，这样会增加 IO 的压力，从而性能会很差；同时，如果在刷页的时候系统挂了，那么数据就难以恢复；大部分数据库系统采用了**<em>Write Ahead Log</em>**的策略，即先写重做日志，再修改页，在出意外的时候，可用日志恢复；</p>
+<p>但是这样又会带来新的问题：</p>
+<ol>
+<li><strong>缓冲池中脏页过多，重做日志的体积也会很大！</strong>万一宕机，那数据恢复的时间会很长，因为要从整个重做日志从头开始重做；</li>
+<li><strong>缓冲池容量不是无限大的，重做日志的体积也不能无限大！</strong>所以必须找合适的时机强制将脏页刷到磁盘，保证缓冲池和重做日志体积不会压力过大；</li>
+</ol>
+<p>所以 Checkpoint 技术的出现主要是为了解决：</p>
+<ol>
+<li><p>缩短<strong>数据恢复</strong>的时间；</p>
+<blockquote>
+<p>当系统挂掉的时候，数据库<strong>不需要</strong>重做所有的日志，checkpoint 之前的页已经刷回磁盘；只需要恢复<strong>checkpoint 后面的页</strong>就行；</p>
+</blockquote>
+</li>
+<li><p><strong>缓冲池不够用</strong>的时候，将脏页刷到磁盘；</p>
+<blockquote>
+<p>缓冲池不够用的时候，LRU 算法会溢出最近少使用的页，如果这个页是脏页，那么需要强制执行 checkpoint，将脏页刷回磁盘</p>
+</blockquote>
+</li>
+<li><p><strong>重做日志不可用</strong>的时候，刷新脏页；</p>
+<blockquote>
+<p>在重做日志不够用的时候，强制产生 checkpoint，将缓冲池的页至少刷新到当前重做日志的位置；</p>
+</blockquote>
+</li>
+</ol>
+<p>于是 Checkpoint 机制的行为就了然了：<strong>将缓冲池中的脏页刷到磁盘！</strong>而它真正要关心的无非是<strong>每次要刷多次脏页、每次刷哪些脏页、什么时候应该要刷脏页</strong>了。</p>
+<p>InnoDB 的 Checkpont 分为 2 种：</p>
+<ol>
+<li>Sharp Checkpoint：数据库即将关闭的时候将所有的脏页刷回磁盘；</li>
+<li>Fuzzy Checkpoint：运行时的 Checkpoint，每次只刷新部分脏页，保证数据库可用性；</li>
+</ol>
+<h3 id="master-threadbefore-11">Master Thread(before 1.1)</h3>
+<p>Master Thread 具有最高的线程优先级，其内部由多个循环组成：主循环（loop）、后台循环（backgroud loop）、暂停循环（suspend loop）。主线程会根据数据库的状态在不同下循环之间进行切换</p>
+<p>而我们先分析 InnoDB1.1 之前，Master Thread 的工作细节，再回头看，Master 线程中的哪些工作被独立为线程</p>
+<h4 id="loop">Loop</h4>
+<p>主循环的工作有 2 部分：</p>
+<ol>
+<li>每秒一次：<ul>
+<li>（总是）将重做日志（redo log）缓存刷到磁盘，即使事务还没提交；</li>
+<li>（可能）合并插入缓冲，是否发生看 IO 的次数，次数小就可用执行合并；</li>
+<li>（可能）最多刷 100 个脏页到磁盘，是否发生看脏页比例，超过某个阈值就刷；</li>
+<li>（可能）如果当前用户没有活动，切换到后台循环；</li>
+</ul>
+</li>
+<li>每 10 秒一次：<ul>
+<li>（可能）刷 100 个脏页；</li>
+<li>（总是）合并若干个插入缓冲；</li>
+<li>（总是）刷重做日志（redo log）到磁盘；</li>
+<li>（总是）删除无用的 Undo 页；</li>
+<li>（总是）刷 100 个脏页或者 10 个脏页到磁盘；</li>
+</ul>
+</li>
+</ol>
+<p>在 InnoDB 版本迭代之后，每秒次可以刷不只 100 页脏页，可以自己在配置中调节，其中阈值也能够进行调节</p>
+<p>除此之外，我们把删除 Undo 页的操作称为<strong>“full purge”</strong>，在引擎版本升级的时候，删除多少页 Undo 页也能够配置</p>
+<h4 id="background-loop">Background Loop</h4>
+<p>如果当前用户没有活动，或者数据库要关闭了，那么就会切换到这个循环，它的工作有：</p>
+<ol>
+<li>（总是）删除无用的 Undo 页；</li>
+<li>（总是）合并 20 个插入缓冲；</li>
+<li>（总是）跳回主循环；</li>
+<li>（可能）刷 100 页直到符合条件（在 flush loop 还在主线程的版本的时候，这会跳转到 flush loop）</li>
+</ol>
+<p>如果 flush loop 也没有什么可以做的了，主线程就会切换到 suspend loop，将线程挂起，等待事件发生</p>
+<h4 id="version">Version</h4>
+<ul>
+<li>InnoDB 1.1 开始，回收 Undo 页的工作独立为**<em>Purge Thread</em>**；</li>
+<li>InnoDB 1.2 开始，刷脏页的工作独立为**<em>Page Cleaner Thread</em>**;</li>
+</ul>
+<h3 id="innodb-关键特性">InnoDB 关键特性</h3>
+<h4 id="插入缓冲（insert-buffer）">插入缓冲（Insert Buffer）</h4>
+<p>听名字可能会让人以为它是缓冲池的一部分，但其实它和数据页一样，是物理页的一个组成部分，它的作用是为了提高插入操作的性能</p>
+<p>了解插入缓冲之前，我们先来了解一下引擎是如何根据索引插入行记录的：</p>
+<ul>
+<li><strong>在一般情况下</strong>，主键是行的唯一标识符，所以插入顺序一般是按照主键递增的顺序执行，不需要磁盘随机读取，若主键支持自动增长，那么这类情况的插入效率非常快；对于这样的<strong>按照表的主键构造的索引</strong>，我们称为<strong>聚集索引</strong>；</li>
+<li><strong>但是每张表中不一定只有聚集索引</strong>，可能还有多个<strong>非聚集的辅助索引</strong>，比如需要按照某个字段进行查找，而且某个字段不是唯一的，这样就会产生非聚集索引；而在插入的时候，数据页虽然还是按照主键顺序存放，但是非聚集索引的叶子节点就不是顺序的了，这时候就需要<strong>离散地</strong>访问非聚集索引页，导致插入性能会有所下降（<strong>由 B+树的特性决定的非聚集索引插入的离散性</strong>）；</li>
+<li><strong>某些情况下</strong>，非聚集索引也可能是顺序的或者说较为顺序，在插入索引值的时候手动保证绝对顺序（比如字段存的是绝对时间）；</li>
+</ul>
+<p>于是对于非聚集索引的插入或者更新操作，InnoDB 设计的<strong>Insert Buffer</strong>就会起到作用：</p>
+<ul>
+<li>对于非聚集索引的插入或者更新，不是直接插入到索引页中，而是先判断插入的非聚集索引页是否在缓冲池中：<ul>
+<li>若在，则直接插入；</li>
+<li>否则，先放到一个<strong>Insert Buffer</strong>对象中；</li>
+</ul>
+</li>
+<li>然后再以一定频率和特定情况将<strong>Insert Buffer</strong>和辅助索引子节点进行<strong>merge</strong>操作；这时通常能够将多个插入操作合并到一个操作中（如果是针对同一张索引页的话），这就大大提高非聚集索引的插入性能；</li>
+</ul>
+<p>然而插入缓冲是需要条件的，只有符合以下条件的插入操作才能触发插入缓冲：</p>
+<ol>
+<li>索引是辅助索引（not primary key）；</li>
+<li>索引不是唯一的（not unique）；</li>
+</ol>
+<h5 id="结构">结构</h5>
+<p>Insert Buffer 的数据结构是一棵 B+树，而且是全局共享的，负责对所有表的辅助索引进行 Insert Buffer</p>
+<h4 id="改动缓冲（change-buffer）">改动缓冲（Change Buffer）</h4>
+<p>Change Buffer 可以理解为 Insert Buffer 的升级，它对更新操作都进行缓冲——INSERT、DELETE、UPDATE，分别对应 Insert Buffer、Delete Buffer、Purge Buffer；它面向的依然是非唯一的辅助索引</p>
+<h4 id="合并插入缓冲">合并插入缓冲</h4>
+<p>接下来我们了解 Insert Buffer 的合并时机：</p>
+<ul>
+<li><p>辅助索引页被读取到缓冲池时；</p>
+<blockquote>
+<p>比如在执行 Select 操作的时候，先检查 Insert Buffer Bitmap，然后确认该辅助页在不在树上，在树上就把该页记录插入到辅助索引页中</p>
+</blockquote>
+</li>
+<li><p>Insert Buffer Bitmap 页追踪到该辅助索引页已无可用空间的时候；</p>
+</li>
+<li><p>钟点工 Master Thread 在认真地工作；</p>
+</li>
+</ul>
+<h4 id="两次写（doublewrite）">两次写（Doublewrite）</h4>
+<p>主要是保证数据页的可靠性，当数据库在写操作的中间时候发生宕机，这种情况叫做分写失败</p>
+<p>我们之前了解过，重做日志中记录的是对该页的物理操作，但是如果这个页本身已经发生了损坏，再重做的意义就不大了，于是可用在<strong>应用重做日志之前</strong>，先准备一个页的副本，当写入失效的时候，先通过副本还原页，再进行重做，这就是<strong>两次写</strong>技术</p>
+<p>我们先来看看 doublewrite 的架构</p>
+<p><img src="../../../public/img/20200612112402.png" alt=""></p>
+<p>doublewrite 由两部分组成：内存中的 doublewrite buffer，另一部分是物理磁盘上共享表空间中连续的 128 页，大小都是 2MB</p>
+<p>在对脏页刷新的时候，不直接写到磁盘，而是先将脏页复制到内存中的 doublewrite buffer，然后通过该 buffer 分写两次，每次 1MB 顺序地写入共享表空间磁盘，然后马上调用 fsync 函数，同步磁盘</p>
+<p>在这个过程中，因为 doublewrite 页是连续的，所以写入过程是顺序的，执行非常快；写完 doublewrite 页之后，再将 doublewrite buffer 中的页写如各个表空间文件中；</p>
+<p>如果要恢复数据，InnoDB 可用从共享表空间中的 doublewrite 页中找到该页的副本，将其复制到表空间文件，再应用重做日志</p>
+<h4 id="自适应哈希索引（adaptive-hash-index）">自适应哈希索引（Adaptive Hash Index）</h4>
+<p>一般情况下，索引页都是 B+树结构，虽然已经非常快了，但是随机访问还是没有哈希快，InnoDB 引擎会对表上索引页的查询进行监控，如果觉得建立哈希索引可以提示速度，则简历哈希索引，这个哈希索引是从 B+树页构造而来，所以建立的速度非常快</p>
+<p>但是 AHI 的建立条件非常多但是这些条件不太需要用户去关心，引擎默认开启 AHI 的建立；</p>
+<h4 id="异步-io（async-io）">异步 IO（Async IO）</h4>
+<p>AIO 对应的是 SIO（Sync IO），AIO 的优势是充分利用线程的优势，异步读取多个对象；其另一个优势就是可以合并多个 IO 操作，也能够提高性能；</p>
+<p>需要注意的是，AIO 需要操作系统提供 Native 支持，Windows 和 Linus 都行，Max OS 不行；</p>
+<h4 id="刷新邻接页（flush-neighbor-page）">刷新邻接页（Flush Neighbor Page）</h4>
+<p>再刷脏页的时候，引擎会检测该页所在区域（extent）的所有页，如果是脏页，那么一起刷新，这样做的好处的可以合并 IO，但是对于读写速度比较快的磁盘，应用这个特性可能会带来一些问题，于是推荐在机械磁盘开启这个设置，在 SSD 等高速磁盘关闭该设置</p>

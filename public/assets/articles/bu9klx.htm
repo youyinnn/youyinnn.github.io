@@ -1,0 +1,480 @@
+<h3 id="前言">前言</h3>
+<p>本<strong>系列</strong>文章主要是为 Java 并发入门做铺垫，集中清点：</p>
+<ul>
+<li><strong>Thread 的基本概念</strong></li>
+<li><strong>生命周期</strong></li>
+<li><strong>创建和使用</strong></li>
+<li><strong>线程的魅力所在</strong><ul>
+<li><strong>从线程不同步到线程安全</strong><ul>
+<li><strong>锁</strong></li>
+<li><strong>死锁情况</strong></li>
+</ul>
+</li>
+<li><strong>从线程各自独立到线程通信</strong><ul>
+<li><strong>停止线程</strong></li>
+<li><strong>唤醒线程</strong></li>
+<li><strong>通信</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Java 中的并发编程</strong></li>
+<li><strong>并发和单例模式的那些事</strong></li>
+</ul>
+<p>本系列除了参考<em>《Java 并发编程的艺术》</em>和<em>《Java 多线程编程核心技术》</em>这两本书之外，还会参考 JDK 的源码和<a href="https://docs.oracle.com/javase/8/docs/api/">API 文档</a>，<strong>会翻译文档中部分重要的说明，比如过期方法为什么过期和官方解决办法等等</strong></p>
+<p>本篇主要介绍一下三部分</p>
+<ul>
+<li><strong>Thread 的基本概念：</strong>线程是什么，什么是线程，Java 的线程优先级</li>
+<li><strong>生命周期：</strong>生命周期的状态、转换、相关方法</li>
+<li><strong>创建和使用：</strong>线程的创建的两种方法、常用方法如 sleep，yield，状态获取等</li>
+</ul>
+<hr>
+<h3 id="thread-基本概念">Thread 基本概念</h3>
+<p><strong>程序(program)：</strong>是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码，静态对象</p>
+<p><strong>进程(process)：</strong>是程序的一次执行过程，或是正在运行的一个程序。动态过程：有它自身的产生、存在和消亡的过程。程序是静态的，进程是动态的</p>
+<p><strong>线程(thread)：</strong>进程可进一步细化为线程，是一个程序内部的一条执行路径。若一个程序可同一时间执行多个线程，就是支持多线程的</p>
+<p>Java 语言的 JVM 允许程序运行多个线程，它通过 java.lang.Thread 类来实现。</p>
+<h4 id="进程和线程的区别">进程和线程的区别</h4>
+<p>一个进程包含多个线程，线程是进程的一个子任务</p>
+<h4 id="java-的线程优先级">Java 的线程优先级</h4>
+<p>优先级的意义就是优先级越高，越有可能先获得 CPU 资源，或者更多的 CPU 资源</p>
+<p>特点：</p>
+<ul>
+<li><strong>继承性：</strong>子线程持有和父线程一样的优先级</li>
+<li><strong>概率性：</strong>高优先级仅仅是提高获取资源的概率，而不是绝对优先，换句话说，JVM 只是把你设置的优先级作为参考，实际执行还是看 JVM 自己的选择，大部分情况下 JVM 都会参考你的优先级</li>
+</ul>
+<h4 id="守护线程（daemon-thread）">守护线程（Daemon Thread）</h4>
+<p>从我的理解来看，线程的分类可以根据线程的服务对象来分为：</p>
+<ul>
+<li><strong>用户线程：</strong>直接为业务服务的线程</li>
+<li><strong>守护线程：</strong>直接为线程服务的线程或者间接为业务服务的线程</li>
+</ul>
+<p>守护线程的意义在于<strong>“守护”</strong>，当线程中不存在用户线程了，守护线程就自动销毁，对于守护线程，<em>《Java 多线程编程核心技术》</em>一书说了一个很好的比喻：</p>
+<blockquote>
+<p>任何一个守护线程就想一个保姆一样守护着整个 JVM 中所有的用户线程（原话是非守护线程），只要当前 JVM 里面还有一个用户线程没有结束，守护线程就得一直工作。只有当最后一个用户线程结束的时候，守护线程才自动随着 JVM 一同结束工作。Daemon 线程的作用就是为其他线程的运行提供便利。</p>
+<p>守护线程典型的代表就是 GC，当程序里面没有用户线程了，也就没有垃圾回收的必要了，执行 GC 的线程自动销毁。</p>
+</blockquote>
+<h3 id="生命周期">生命周期</h3>
+<table>
+<thead>
+<tr>
+<th align="left">状态名称</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">NEW</td>
+<td align="left">初试状态，刚刚 new 出线程，但是还没有调用 start 方法</td>
+</tr>
+<tr>
+<td align="left">RUNNABLE</td>
+<td align="left">运行状态，Java 线程中将操作系统中的“RUNNING”和“READY”两个状态统称为“RUNNABLE”</td>
+</tr>
+<tr>
+<td align="left">BLOCKED</td>
+<td align="left">阻塞状态，线程阻塞于锁</td>
+</tr>
+<tr>
+<td align="left">WAITING</td>
+<td align="left">等待状态，表示线程进入无时间限制的等待，线程需要其他线程做一些通知或者中断动作</td>
+</tr>
+<tr>
+<td align="left">TIMED_WAITING</td>
+<td align="left">超时等待状态，表示线程进入有时间限制的等待，在时间限制内可以进行中断或者通知操作，超时则自行返回</td>
+</tr>
+<tr>
+<td align="left">TERMINATED</td>
+<td align="left">终止状态，线程已经执行完毕</td>
+</tr>
+</tbody></table>
+<p><img src="../../../public/img/TIM%E5%9B%BE%E7%89%8720180710172525.png" alt=""></p>
+<h3 id="线程创建与使用">线程创建与使用</h3>
+<h4 id="创建">创建</h4>
+<p><strong>线程的实现方法：</strong></p>
+<ol>
+<li>继承 Thread 类</li>
+<li>实现 Runnable 接口并实现 run()方法</li>
+</ol>
+<h5 id="方式-1：继承-thread-类">方式 1：继承 Thread 类</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">testThread</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-comment">//3、创建子类独对象</span>
+        <span class="hljs-type">SubThread</span> <span class="hljs-variable">subThread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SubThread</span>();
+        <span class="hljs-comment">//4、调用线程start方法 启动线程 调用run方法</span>
+        <span class="hljs-comment">//5、run方法 并不启动线程</span>
+        subThread.start();
+    }
+}
+
+<span class="hljs-comment">//1、创建一个继承Thread类的子类</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SubThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span>{
+    <span class="hljs-comment">//2、重写Thread类的run方法，方法内实现这个线程需要做的功能。</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> {
+        <span class="hljs-built_in">super</span>.setName(<span class="hljs-string">&quot;子线程&quot;</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i&lt; <span class="hljs-number">10</span> ; ++i){
+            System.out.println(Thread.currentThread().getName()+<span class="hljs-string">&quot;:线程方法&quot;</span>);
+        }
+    }
+}
+</code></pre>
+<h5 id="方式-2：实现-runnable-接口">方式 2：实现 Runnable 接口</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">testImplRunnable</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">PrintNumber</span> <span class="hljs-variable">printNumber</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintNumber</span>();
+        <span class="hljs-comment">//启动线程 执行Thread对象构造时传入的对象的run方法</span>
+        <span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(printNumber);
+        thread.start();
+
+        <span class="hljs-type">Thread</span> <span class="hljs-variable">thread2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(printNumber);
+        thread2.start();
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">PrintNumber</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span> ; i &lt; <span class="hljs-number">10</span> ; ++i){
+            System.out.println(i);
+        }
+    }
+}
+</code></pre>
+<h5 id="两种方式的对比">两种方式的对比</h5>
+<ul>
+<li><strong>继承方式</strong>让类在继承上面的选择受限，<strong>接口实现方式</strong>则很随意</li>
+<li><strong>继承方式</strong>让类拥有一些<strong>线程内建的方法</strong>例如<code>yield()</code>，<strong>接口实现方式</strong>则没有</li>
+</ul>
+<h5 id="start-和-run的区别">start() 和 run()的区别</h5>
+<ol>
+<li><p>是否创建新线程：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">testThread</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">SubThread</span> <span class="hljs-variable">subThread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SubThread</span>();
+        <span class="hljs-comment">// start方法  创建新线程    由新线程去调用run方法</span>
+        subThread.start();
+        <span class="hljs-comment">// run方法    并不启动新线程 由当前线程调用run方法</span>
+        subThread.run();
+    }
+}
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SubThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> {
+        <span class="hljs-built_in">super</span>.start();
+        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; start&quot;</span>);
+    }
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i&lt; <span class="hljs-number">3</span> ; ++i){
+            System.out.println(Thread.currentThread().getName()+<span class="hljs-string">&quot;:线程方法&quot;</span>);
+        }
+    }
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs language-console">main start
+main:线程方法
+Thread-0:线程方法
+Thread-0:线程方法
+Thread-0:线程方法
+main:线程方法
+main:线程方法
+</code></pre>
+</li>
+<li><p>start 只能调用 1 次，而 run 可以调用无数次，就像调用一般的对象方法一样；</p>
+</li>
+<li><p>start 方法是 Thread 类实现的，而 run 方法是来自于 Runnable 接口的；</p>
+</li>
+<li><p>如果你重写了 start 方法，那么 start 方法中的当前线程是父线程，而不是新线程；</p>
+</li>
+</ol>
+<h4 id="使用">使用</h4>
+<h5 id="currentthread方法">currentThread()方法</h5>
+<p>这个方法获取正在调用当前代码段的线程的<strong>线程对象</strong>，获取到线程对象，我们可以获取线程的<strong>名字、状态、ID 号、线程优先级、是否处于终端、是否处于活动状态</strong>等信息，这些 API 在后面我们会一个个讲到</p>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testCurr</span><span class="hljs-params">()</span>{
+    System.out.println(Thread.currentThread().getName()); <span class="hljs-comment">//main</span>
+    System.out.println(Thread.currentThread().isAlive()); <span class="hljs-comment">//true</span>
+    System.out.println(Thread.currentThread().getState()); <span class="hljs-comment">//RUNNABLE</span>
+    System.out.println(Thread.currentThread().getPriority()); <span class="hljs-comment">//5</span>
+}
+</code></pre>
+<h5 id="isalive方法">isAlive()方法</h5>
+<p>作用是判断当前线程是否<strong>存活</strong>，这个存活的界定是：<strong>如果线程处于正在运行或者准备开始运行的状态，则判定线程存活</strong></p>
+<h5 id="sleep方法">sleep()方法</h5>
+<p>让当前线程睡上<strong>n 毫秒</strong></p>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSleep</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException {
+    <span class="hljs-type">Runnable</span> <span class="hljs-variable">sleep</span> <span class="hljs-operator">=</span> () -&gt; {
+        <span class="hljs-keyword">try</span> {
+            System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; sleep&quot;</span>);
+            Thread.sleep(<span class="hljs-number">10</span> * <span class="hljs-number">1000</span>);
+            System.out.println(<span class="hljs-string">&quot;sleep done&quot;</span>);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+    };
+    <span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(sleep, <span class="hljs-string">&quot;sleepThread&quot;</span>);
+    t.start();
+    <span class="hljs-comment">//t.run();</span>
+    Thread.sleep(<span class="hljs-number">1000</span>);
+    System.out.println(t.getState() + <span class="hljs-string">&quot;  &quot;</span> + t.getName());
+}
+</code></pre>
+<p>在<strong>line：13-14</strong>，我们需要注意：</p>
+<ul>
+<li>t.<strong>start()方法</strong>是以<strong>新开一个线程</strong>的方式运行<strong>sleep.run()</strong></li>
+<li>start.<strong>run()方法</strong>是直接在<strong>当前线程</strong>中运行<strong>sleep.run()</strong></li>
+</ul>
+<p>所以当我们以<strong>start 方式</strong>去启动程序的时候，输出结果为：</p>
+<pre><code class="hljs language-console">sleepThread sleep
+TIMED_WAITING  sleepThread
+</code></pre>
+<p>可以看到线程名字为<strong>sleepThread</strong>，需要注意的是：</p>
+<ul>
+<li>这个程序还有另外一个目的就是为了<strong>检测睡眠中的线程到底是处于什么状态</strong>，从结果得知，是<strong>TIMED_WAITING 状态</strong></li>
+<li>为了可以检测到睡眠线程，我们<strong>在 main 线程中也睡了 1 秒</strong>，原因是<strong>sleepThread</strong>只是<strong>main 线程</strong>的一个<strong>子线程</strong>，<strong>如果 main 线程挂了，则其子线程也就跟着挂</strong>，所以理论上来说，整个程序并不会看到<strong>line：7</strong>所输出的语句</li>
+</ul>
+<p>当我们以<strong>run 方式</strong>启动线程的时候，输出为：</p>
+<pre><code class="hljs language-console">main sleep
+sleep done
+NEW  sleepThread
+</code></pre>
+<p>可以看到，执行<strong>sleep.run</strong>方法的确实是<strong>main 线程</strong>，而且整个程序在输出第一行的时候，是睡了 10 秒再输出接下来的，然后我们的<strong>sleepThread</strong>也是没有运行，还是处于<strong>NEW 状态</strong></p>
+<h6 id="注意">注意</h6>
+<blockquote>
+<p>在线程的<strong>sleep</strong>的过程中，如果调用了线程的中断方法<code>interrupt()</code>，则在 sleep 代码处会抛出<code>InterruptedException</code>异常，这个异常会<strong>清除线程的中断标识</strong>，所以你之前调用<code>interrupt()</code>方法设置的中断标识可能没用了，也就是说，如果要在有<strong>sleep</strong>代码的线程中使用中断标识去有效地进行终端操作的话，那么<code>catch(){}</code>语句块里就不能什么也不做，必须在<code>catch(){}</code>中有中断的逻辑，否则可能达不到中断的效果。</p>
+</blockquote>
+<h5 id="join方法">join()方法</h5>
+<p>在当前线程中调用<code>someThread.join()</code>方法，就是暂停当前线程，启动 someThread，只有当 someThread 执行完毕或者这个方法会被<code>interrupt()</code>打断，而抛出中断异常。</p>
+<p><code>join()</code>还有<code>join(long timeout)</code>，其内部实现如：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">join</span><span class="hljs-params">(<span class="hljs-type">long</span> millis)</span> <span class="hljs-keyword">throws</span> InterruptedException {
+    <span class="hljs-type">long</span> <span class="hljs-variable">base</span> <span class="hljs-operator">=</span> System.currentTimeMillis();
+    <span class="hljs-type">long</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (millis &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;timeout value is negative&quot;</span>);
+    }
+    <span class="hljs-keyword">if</span> (millis == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">while</span> (isAlive()) {
+            wait(<span class="hljs-number">0</span>);
+        }
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">while</span> (isAlive()) {
+            <span class="hljs-type">long</span> <span class="hljs-variable">delay</span> <span class="hljs-operator">=</span> millis - now;
+            <span class="hljs-keyword">if</span> (delay &lt;= <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">break</span>;
+            }
+            wait(delay);
+            now = System.currentTimeMillis() - base;
+        }
+    }
+}
+</code></pre>
+<p>可以看到，join 方法就是如果本线程还存活，就无限等待自己，给别的线程让出机会</p>
+<h5 id="yield方法">yield()方法</h5>
+<p>这个方法的作用是<strong>放弃当前的 CPU 资源</strong>，将它让给其他的任务去占用 CPU 执行，<strong>但是放弃的时间不确定，有可能刚一放弃，马上就抢回来了，有点不要脸！</strong></p>
+<h5 id="getstate方法">getState()方法</h5>
+<p>获取一个 State 对象，表示当前线程的生命周期</p>
+<h3 id="object-方法">Object 方法</h3>
+<h4 id="waitlong-timeout">wait(long timeout)</h4>
+<p>作用是使当前执行代码的<strong>线程（as T）</strong>进入等待状态，由于<code>wait()</code>方法是 Object 类的方法，用来将<strong>当前线程（T）</strong>置入“等待队列”中。所以需要显式地使用<strong>synchronized</strong>块包裹起来，在 synchronized 块中再次获取<strong>该锁（调用<code>wait()</code>的对象的对象锁，as OL）</strong>，才能调用<code>wait()</code>方法，否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>只有线程在获取了该锁对象的锁之后（在该锁对象的 synchronized 块或者方法中），才能调用该对象的<code>wait()</code>方法，否则抛出异常；</li>
+<li>在哪个锁对象上调用<code>wait()</code>方法，就释放哪个锁对象；</li>
+<li>无论 timeout 为多少，总是需要等到该同步区域再次竞争到锁对象时才能解除等待，如果其他同步区域一直不放弃该锁对象，那么前同步区域也一直获取不到该锁对象；</li>
+</ol>
+</blockquote>
+<p>调用<code>wait()</code>方法之后，当前线程<strong>马上（从 wait 那一行开始马上放锁，而不是直到退出 sync 块）</strong>释放<strong>该锁（OL）</strong>，并进入等待队列<strong>（对象锁对应对象的等待队列）</strong>，此时线程进入 suspend 状态</p>
+<p>如果 timeout 设置为 0 的话则没有超时时间，一直等到 notify</p>
+<p>若要<strong>线程 T</strong>从<code>wait()</code>中返回：</p>
+<ul>
+<li><strong>其他线程</strong>，获取到<strong>OL</strong>，并且调用该对象的<code>notify()</code>方法，并且<strong>线程 T</strong>，在等待队列中<strong>随机地（arbitrarily）</strong>被选中唤醒</li>
+<li><strong>其他线程</strong>，获取到<strong>OL</strong>，并且调用该对象的<code>notifyAll()</code>方法</li>
+<li><strong>其他线程</strong>，调用了<strong>线程 T</strong>的<code>interrupt()</code>方法，所以需要处理中断异常</li>
+<li>除非 timeout 不是 0，到期超时自己返回</li>
+</ul>
+<p><strong>线程 T</strong>被<strong>唤醒（notify）</strong>之后，仍然和其他线程在通常的情况下，再次竞争<strong>OL</strong>，以获取进入同步的权力，一旦获取到权力，<strong>线程 T</strong>就会恢复到 wait 时候完全一样的状态，继续工作。</p>
+<p>等待状态中的线程也可以不必被其他线程唤醒、打断、或者等待超时，我们可以自行<strong>检测</strong>唤醒的条件，满足条件就不再等待，换句话说，我们推荐你在使用<code>wait()</code>的时候使用以下这样的 loop：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">synchronized</span> (obj) {
+ <span class="hljs-keyword">while</span> (&lt;condition does not hold&gt;)
+     obj.wait(timeout);
+ ... <span class="hljs-comment">// Perform action appropriate to condition</span>
+}
+</code></pre>
+<p>需要注意的是，<strong>线程 T</strong>在<code>wait()</code>的过程中，仅释放<strong>OL</strong>锁，线程原来持有的锁仍会随着线程进入 wait 状态，我们可以做个简单的测试：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WaitTest</span> {
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">lockA</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;la&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">lockB</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;lb&quot;</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+            <span class="hljs-keyword">synchronized</span> (lockA) {
+                System.out.println(<span class="hljs-string">&quot;T1 got locak A&quot;</span>);
+                <span class="hljs-keyword">synchronized</span> (lockB) {
+                    System.out.println(<span class="hljs-string">&quot;T1 got locak B&quot;</span>);
+                    <span class="hljs-keyword">try</span> {
+                        System.out.println(<span class="hljs-string">&quot;T1 wait, released lockA for now&quot;</span>);
+                        lockA.wait(<span class="hljs-number">5000</span>);
+                        System.out.println(<span class="hljs-string">&quot;T1 come back from wait, and got lockA again&quot;</span>);
+                    } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(<span class="hljs-string">&quot;T1 released lockB&quot;</span>);
+            }
+            System.out.println(<span class="hljs-string">&quot;T1 released lockA finally&quot;</span>);
+        }).start();
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+            System.out.println(<span class="hljs-string">&quot;T2 sleep 3 seconds&quot;</span>);
+            <span class="hljs-keyword">try</span> {
+                Thread.sleep(<span class="hljs-number">3000</span>);
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace();
+            }
+            <span class="hljs-keyword">synchronized</span> (lockA) {
+                System.out.println(<span class="hljs-string">&quot;T2 got lockA, and sleep 6 sec&quot;</span>);
+                <span class="hljs-keyword">try</span> {
+                    Thread.sleep(<span class="hljs-number">6000</span>);
+                } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(<span class="hljs-string">&quot;T2 released lockA&quot;</span>);
+        }).start();
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+            <span class="hljs-keyword">try</span> {
+                Thread.sleep(<span class="hljs-number">1000</span>);
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(<span class="hljs-string">&quot;T3 wanna get lockB&quot;</span>);
+            <span class="hljs-keyword">synchronized</span> (lockB) {
+                System.out.println(<span class="hljs-string">&quot;T3 got lockB&quot;</span>);
+            }
+            System.out.println(<span class="hljs-string">&quot;T3 released lockB&quot;</span>);
+        }).start();
+    }
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="hljs language-console">T1 got locak A
+T2 sleep 3 seconds
+T1 got locak B
+T1 wait, released lockA for now
+T3 wanna get lockB
+T2 got lockA, and sleep 6 sec
+T2 released lockA
+T1 come back from wait, and got lockA again
+T1 released lockB
+T1 released lockA finally
+T3 got lockB
+T3 released lockB
+</code></pre>
+<p>我们需要注意 2 点：</p>
+<ol>
+<li>在 14 行虽然设置了超时时间是 5 秒，但是仍旧等待了 6 秒，因为 t2 占有了 lockA6 秒之久</li>
+<li>虽然 t1 在某时刻释放了 lockA，但是 t1 持有的 lockB 还没释放，最后 t3 还是得等到 t1 释放了 lockB 之后才能获取到 lockB</li>
+</ol>
+<p>总结一下时间线，按照绝对时间来说：</p>
+<ul>
+<li><p>0 秒开始不久：</p>
+<ul>
+<li>T1 拿到 A 锁，随后拿到 B 锁，然后在 A 锁上 wait，并且超时 5 秒；</li>
+<li>T2 开始沉睡 3 秒</li>
+<li>T3 开始沉睡 1 秒</li>
+</ul>
+<blockquote>
+<p>这时 A 锁已经释放，B 锁被 T1 抓住</p>
+</blockquote>
+</li>
+<li><p>1 秒时：</p>
+<ul>
+<li>T3 醒来，在 B 锁的门前 BLOCK 住，因为这时候 B 锁被 T1 抓住着；</li>
+<li>T2 还在睡，还有 2 秒；</li>
+<li>T1 在等待 A 锁超时，还剩 4 秒；</li>
+</ul>
+</li>
+<li><p>2 秒时：</p>
+<ul>
+<li>T1 在等待 A 锁超时，还剩 3 秒；</li>
+<li>T2 还在睡，还有 1 秒；</li>
+<li>T3 仍在等 B 锁；</li>
+</ul>
+</li>
+<li><p>3 秒时：</p>
+<ul>
+<li>T2 醒来，拿到 A 锁，并沉睡 6 秒；</li>
+<li>T1 在等待 A 锁超时，还剩 2 秒；</li>
+<li>T3 仍在等 B 锁；</li>
+</ul>
+</li>
+<li><p>5 秒时：</p>
+<ul>
+<li>T1 等待 A 锁超时结束，但是 A 锁被 T2 抓住睡觉了，还剩 1 秒，所以 T1 BLOCK 住；</li>
+<li>T2 还有 1 秒苏醒；</li>
+<li>T3 快哭了；</li>
+</ul>
+</li>
+<li><p>6 秒时：</p>
+<ul>
+<li>T2 醒来，放开 A 锁；</li>
+<li>T1 拿到 A 锁，没事干了，放开 B 锁，放开 A 锁；</li>
+<li>T3 终于拿到 B 锁了；</li>
+</ul>
+</li>
+</ul>
+<h4 id="notify">notify()</h4>
+<p>唤醒在该对象<strong>等待队列</strong>中的一个等待线程，在队列中等待的线程是被<strong>随机选取</strong>唤醒的，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
+<p>被唤醒的线程会和其他线程一样，在同样的情况下一起竞争该<strong>对象的同步锁（as OL）</strong></p>
+<blockquote>
+<p>细节说明：</p>
+<ol>
+<li>被 notify 通知的对象，并不是马上就获取<strong>OL</strong>，而是还需要积极竞争</li>
+<li>notify 之后，和 wait 不一样的是，并不是马上放锁，而是直到退出 sync 区域之后才释放锁</li>
+</ol>
+</blockquote>
+<p>本方法只能在当前线程<strong>持有该对象锁的时候，才能调用该对象的<code>notify()</code>方法</strong>：</p>
+<ul>
+<li>By executing a synchronized instance method of that object.</li>
+<li>By executing the body of a <code>synchronized</code> statement that synchronizes on the object.</li>
+<li>For objects of type <code>Class,</code> by executing a synchronized static method of that class.</li>
+</ul>
+<p>否则会抛出<code>java.lang.IllegalMonitorStateException</code>异常</p>
+<h4 id="notifyall">notifyAll()</h4>
+<p>唤醒在该对象<strong>等待队列</strong>中的所有等待线程，且必须是由调用该对象<code>wait()</code>方法而进入的等待队列</p>
+<p>被唤醒的所有线程会和其他线程一样，在同样的情况下一起竞争该<strong>对象的同步锁（as OL）</strong></p>
+<h4 id="讨论一下-wait-的风险">讨论一下 wait 的风险</h4>
+<p>这是在几个月前顺丰科技面试的时候，一面面试官问我的问题，当时我没答上，因为当时准备的很不充分，连 wait 和 sleep 的区别都没看，估计是因为这个原因，面试官以为又摸到我的上限了，顺丰科技还是挺想去的</p>
+<p>今天看了一下 wait 和 notify 之后，感觉能回答出这个问题了</p>
+<ol>
+<li><p>因为 wait 并<strong>不会释放线程占有的其他锁</strong>，如果忽略掉这个问题的话，会隐形地制造一些<strong>死锁</strong>，当然，这属于<strong>设计上</strong>的问题</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+    <span class="hljs-keyword">synchronized</span> (lockA) {
+        <span class="hljs-keyword">synchronized</span> (lockB) {
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-type">String</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> lockA;
+                lock.wait(<span class="hljs-number">10000</span>);
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {}
+        }
+    }
+}).start();
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; {
+    <span class="hljs-keyword">try</span> {Thread.sleep(<span class="hljs-number">300</span>);} <span class="hljs-keyword">catch</span> (InterruptedException e) {}
+    <span class="hljs-keyword">synchronized</span> (lockA) {
+        <span class="hljs-keyword">synchronized</span>(lockB) {}
+    }
+}).start();
+</code></pre>
+<p>当线程 1 放弃了 LockA 并且进入阻塞的情况下，线程 B 获取到了 LockA 并且在获取 LockB 的时候阻塞，然后线程 A 也进入了阻塞状态，因为要从 wait 返回的条件是竞争到 LockA，而这时候 LockA 已经被别的线程获取了；</p>
+<p>在这种状态下，超时就无效了，发起中断也无效，因为发起中断只是打了标志，线程 A 仍然需要获取到 LockA 才能返回；</p>
+<p>而使用<code>Lock</code>API 就能够很好地解决这个问题，因为它能够提供<strong>非阻塞式、有超时</strong>的获取锁获取不到就超时返回；</p>
+</li>
+<li><p>因为 wait 的唤醒机制还是重新去竞争锁，如果竞争不顺利的话，会一直返回不了<strong>等待前的状态</strong>，导致这个线程进入<strong>饥饿状态</strong></p>
+</li>
+<li><p>同样的 notify 的唤醒是随机的，如果运气不好的话，线程会一直在等待队列中没有被选中，也进入了一种<strong>饥饿状态</strong></p>
+</li>
+</ol>

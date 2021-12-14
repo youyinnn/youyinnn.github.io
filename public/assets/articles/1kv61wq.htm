@@ -1,0 +1,268 @@
+<h3 id="56merge-intervalsmedium">56.Merge Intervals(Medium)</h3>
+<p>Given a collection of intervals, merge all overlapping intervals.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+</code></pre>
+<h4 id="solution">Solution</h4>
+<p>多写几组就知道规律了，我们将start和end各<strong>按照升序</strong>写成2个数组：</p>
+<pre><code>[[1,3],[2,6],[8,10],[15,18]]
+start: [1,2, 8,15]
+end:   [3,6,10,18]
+result:
+       [1,2  [8, [15
+        3,6] 10]  18]
+
+[[1,4],[4,5]]
+start: [1,4]
+end:   [4,5]
+result:
+       [1,4
+        4,5]
+</code></pre>
+<p>于是我们找得出规律，我们同时从开头遍历两个数组，当下标为<code>i</code>的时候，如果<code>end[i] &lt;= start[i + 1]</code>，证明找到了一组intervals</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Interval&gt; <span class="hljs-title function_">merge</span><span class="hljs-params">(List&lt;Interval&gt; intervals)</span> {
+    List&lt;Interval&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-type">int</span>[] ss = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[intervals.size()];
+    <span class="hljs-type">int</span>[] ee = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[intervals.size()];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; intervals.size(); i++) {
+        ss[i] = intervals.get(i).start;
+        ee[i] = intervals.get(i).end;
+    }
+    Arrays.sort(ss);
+    Arrays.sort(ee);
+    <span class="hljs-type">int</span> <span class="hljs-variable">si</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">ei</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> nowStart;
+    <span class="hljs-keyword">while</span> (ei &lt; intervals.size()) {
+        nowStart = ss[si];
+        <span class="hljs-keyword">while</span> (si + <span class="hljs-number">1</span> &lt; intervals.size() && ee[ei] &gt;= ss[si + <span class="hljs-number">1</span>]) {
+            si++;
+            ei++;
+        }
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Interval</span>(nowStart, ee[ei]));
+        si++;
+        ei++;
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+<h3 id="57insert-interval">57.Insert Interval</h3>
+<p>Given a set of <em>non-overlapping</em> intervals, insert a new interval into the intervals (merge if necessary).</p>
+<p>You may assume that the intervals were initially sorted according to their start times.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+Output: [[1,5],[6,9]]
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+Output: [[1,2],[3,10],[12,16]]
+Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+</code></pre>
+<h4 id="solution-1">Solution</h4>
+<p>因为前面解Merge的时候，就用排序无视掉了顺序，所以插入的时候，直接可以使用上面的Merge继续做</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Interval&gt; <span class="hljs-title function_">insert</span><span class="hljs-params">(List&lt;Interval&gt; intervals, Interval newInterval)</span> {
+    intervals.add(newInterval);
+    <span class="hljs-keyword">return</span> merge(intervals);
+}
+
+<span class="hljs-keyword">public</span> List&lt;Interval&gt; <span class="hljs-title function_">merge</span><span class="hljs-params">(List&lt;Interval&gt; intervals)</span> {
+    List&lt;Interval&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-type">int</span>[] ss = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[intervals.size()];
+    <span class="hljs-type">int</span>[] ee = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[intervals.size()];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; intervals.size(); i++) {
+        ss[i] = intervals.get(i).start;
+        ee[i] = intervals.get(i).end;
+    }
+    Arrays.sort(ss);
+    Arrays.sort(ee);
+    <span class="hljs-type">int</span> <span class="hljs-variable">si</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">ei</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> nowStart;
+    <span class="hljs-keyword">while</span> (ei &lt; intervals.size()) {
+        nowStart = ss[si];
+        <span class="hljs-keyword">while</span> (si + <span class="hljs-number">1</span> &lt; intervals.size() && ee[ei] &gt;= ss[si + <span class="hljs-number">1</span>]) {
+            si++;
+            ei++;
+        }
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Interval</span>(nowStart, ee[ei]));
+        si++;
+        ei++;
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+<h3 id="58length-of-last-wordeasy">58.Length Of Last Word(Easy)</h3>
+<p>Given a string <em>s</em> consists of upper/lower-case alphabets and empty space characters <code>&#39; &#39;</code>, return the length of last word in the string.</p>
+<p>If the last word does not exist, return 0.</p>
+<p><strong>Note:</strong> A word is defined as a character sequence consists of non-space characters only.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: &quot;Hello World&quot;
+Output: 5
+</code></pre>
+<h4 id="solution-2">Solution</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lengthOfLastWord</span><span class="hljs-params">(String s)</span> {
+    String[] split = s.split(<span class="hljs-string">&quot; &quot;</span>);
+    <span class="hljs-keyword">if</span> (s.isEmpty() || split.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> split.length - <span class="hljs-number">1</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> split[i].length();
+        <span class="hljs-keyword">while</span> (len == <span class="hljs-number">0</span>) {
+            len = split[--i].length();
+        }
+        <span class="hljs-keyword">return</span> len;
+    }
+}
+</code></pre>
+<h3 id="59spiralmatrixiimedium">59.SpiralMatrixII(Medium)</h3>
+<p>Given a positive integer <em>n</em>, generate a square matrix filled with elements from 1 to <em>n</em>2 in spiral order.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: 3
+Output:
+[
+ [ 1, 2, 3 ],
+ [ 8, 9, 4 ],
+ [ 7, 6, 5 ]
+]
+</code></pre>
+<h4 id="solution-3">Solution</h4>
+<p>有了<a href="./xmbex2.html?hash=73ecdd5a">Spiral Matrix</a>的经验，这题就很容易暴打出来了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] generateMatrix(<span class="hljs-type">int</span> n) {
+    <span class="hljs-type">int</span>[][] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n];
+    <span class="hljs-type">int</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    ans[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span>[] point = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+    <span class="hljs-keyword">while</span> (count &lt;= n * n) {
+        <span class="hljs-keyword">if</span> (dir == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>; i &lt; n; i++) {
+                ans[point[<span class="hljs-number">0</span>]][i] = count++;
+                point[<span class="hljs-number">1</span>] = i;
+                <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; n && ans[point[<span class="hljs-number">0</span>]][i + <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            dir = <span class="hljs-number">1</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dir == <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>; i &lt; n; i++) {
+                ans[i][point[<span class="hljs-number">1</span>]] = count++;
+                point[<span class="hljs-number">0</span>] = i;
+                <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; n && ans[i + <span class="hljs-number">1</span>][point[<span class="hljs-number">1</span>]] &gt; <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            dir = <span class="hljs-number">2</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dir == <span class="hljs-number">2</span>) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+                ans[point[<span class="hljs-number">0</span>]][i] = count++;
+                point[<span class="hljs-number">1</span>] = i;
+                <span class="hljs-keyword">if</span> (i - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> && ans[point[<span class="hljs-number">0</span>]][i - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            dir = <span class="hljs-number">3</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> point[<span class="hljs-number">0</span>] - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+                ans[i][point[<span class="hljs-number">1</span>]] = count++;
+                point[<span class="hljs-number">0</span>] = i;
+                <span class="hljs-keyword">if</span> (i - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> && ans[i - <span class="hljs-number">1</span>][point[<span class="hljs-number">1</span>]] &gt; <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            dir = <span class="hljs-number">0</span>;
+        }
+
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+<h3 id="60permutation-sequencemedium">60.Permutation Sequence(Medium)</h3>
+<p>The set <code>[1,2,3,...,*n*]</code> contains a total of <em>n</em>! unique permutations.</p>
+<p>By listing and labeling all of the permutations in order, we get the following sequence for <em>n</em> = 3:</p>
+<ol>
+<li><code>&quot;123&quot;</code></li>
+<li><code>&quot;132&quot;</code></li>
+<li><code>&quot;213&quot;</code></li>
+<li><code>&quot;231&quot;</code></li>
+<li><code>&quot;312&quot;</code></li>
+<li><code>&quot;321&quot;</code></li>
+</ol>
+<p>Given <em>n</em> and <em>k</em>, return the <em>k</em>th permutation sequence.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Given <em>n</em> will be between 1 and 9 inclusive.</li>
+<li>Given <em>k</em> will be between 1 and <em>n</em>! inclusive.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: n = 3, k = 3
+Output: &quot;213&quot;
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: n = 4, k = 9
+Output: &quot;2314&quot;
+</code></pre>
+<h4 id="mathematical">Mathematical</h4>
+<p>数学观察法做出- -</p>
+<pre><code>我们观察一下n=4的时候：
+前12个序列为：
+
+1: 1 2 3 4   7: 2 1 3 4
+2: 1 2 4 3   8: 2 1 4 3
+3: 1 3 2 4   9: 2 3 1 4
+4: 1 3 4 2  10: 2 3 4 1
+5: 1 4 2 3  11: 2 4 1 3
+6: 1 4 3 2  12: 2 4 3 1
+
+可以观察到，我们选第一个数是满6个选一位，也就是以1开头的序列共有剩下3!=6种可能，
+一次类推后面几位数字就都
+
+当n=4，k=9的时候
+
+我们开始选第一个数，candidate:[1,2,3,4]
+
+3! x 1 &lt; k = 9 ≤ 3! x 2
+
+于是选第2个候选者；k = 9 - (3! x 1) = 3;
+
+我们开始选第二个数，candidate:[1,3,4]
+
+2! x 1 &lt; k = 3 ≤ 2! x 2
+
+于是选第2个候选者；k = 3 - (2! x 1) = 1;
+
+我们开始选第三个数，candidate:[1,4]
+
+0 &lt; k = 1 ≤ 1! x 1
+
+于是选择第1个候选者;这时候只剩下一个候选者了，得解
+</code></pre>
+<p>于是代码为：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getPermutation</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> {
+    LinkedList&lt;String&gt; candidate = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+    <span class="hljs-type">int</span> <span class="hljs-variable">factorial</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++) {
+        factorial *= i;
+        candidate.add(String.valueOf(i));
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">bit</span> <span class="hljs-operator">=</span> n;
+    <span class="hljs-keyword">while</span> (candidate.size() &gt; <span class="hljs-number">0</span>) {
+        factorial = factorial / bit;
+        bit--;
+        <span class="hljs-type">int</span> <span class="hljs-variable">pick</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (k &gt; pick * factorial) {
+            pick++;
+        }
+        sb.append(candidate.remove(pick - <span class="hljs-number">1</span>));
+        k -= ((pick - <span class="hljs-number">1</span>) * factorial);
+    }
+    <span class="hljs-keyword">return</span> sb.toString();
+}
+</code></pre>

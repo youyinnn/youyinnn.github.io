@@ -1,0 +1,166 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>本文从为知笔记迁移过来, 本文的写作时间是 : 2016/10/17 下午12:28:14, 两年前的文章, 言语难免幼稚, 思维难免浅显, 多多包含.</p>
+<p></div></p>
+<h3 id="引例">引例</h3>
+<pre><code class="hljs language-java">    List&lt;Integer&gt; intlist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();
+
+    intlist.add(<span class="hljs-number">1</span>);
+    intlist.add(<span class="hljs-number">2</span>);
+    intlist.add(<span class="hljs-number">3</span>);
+
+    intlist.forEach((num)-&gt;System.out.println(num));
+</code></pre>
+<p>这里就有一个疑问：ArrayList为什么会有一个forEach()函数，而且传进去的变量是这样的形式？</p>
+<p>于是我向上找了<code>forEach()</code>方法的源码，发现这个方法是被定义在   <code>Iterable</code>接口里面的，接口里面为什么能定义方法？</p>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
+     * Performs the given action for each element of the {<span class="hljs-doctag">@code</span> Iterable}
+     * until all elements have been processed or the action throws an
+     * exception.  Unless otherwise specified by the implementing class,
+     * actions are performed in the order of iteration (if an iteration order
+     * is specified).  Exceptions thrown by the action are relayed to the
+     * caller.
+     *
+     * <span class="hljs-doctag">@implSpec</span>
+     * &lt;p&gt;The default implementation behaves as if:
+     * &lt;pre&gt;{<span class="hljs-doctag">@code</span>
+     *     for (T t : this)
+     *         action.accept(t);
+     * }&lt;/pre&gt;
+     *
+     * <span class="hljs-doctag">@param</span> action The action to be performed for each element
+     * <span class="hljs-doctag">@throws</span> NullPointerException if the specified action is null
+     * <span class="hljs-doctag">@since</span> 1.8
+     */</span>
+    <span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; action)</span> {
+        Objects.requireNonNull(action);
+        <span class="hljs-keyword">for</span> (T t : <span class="hljs-built_in">this</span>) {
+            action.accept(t);
+        }
+    }
+</code></pre>
+<p>看了这个方法的说明发现，这是java8的新特性：允许接口里面定义默认方法。再一层一层地往上找可以发现继承和实现的关系图：</p>
+<p>我们再回到<code>forEach</code>方法，他的参数为什么是这样的，看了源码我发现，他传进去的是一个：<code>Consumer</code> 类型的参数。所以这又是个什么鬼？惯例帖源码：</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">/**
+ * Represents an operation that accepts a single input argument and returns no
+ * result. Unlike most other functional interfaces, {<span class="hljs-doctag">@code</span> Consumer} is expected
+ * to operate via side-effects.
+ *
+ * &lt;p&gt;This is a &lt;a href=&quot;package-summary.html&quot;&gt;functional interface&lt;/a&gt;
+ * whose functional method is {<span class="hljs-doctag">@link</span> #accept(Object)}.
+ *
+ * <span class="hljs-doctag">@param</span> &lt;T&gt; the type of the input to the operation
+ *
+ * <span class="hljs-doctag">@since</span> 1.8
+ */</span>
+<span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Consumer</span>&lt;T&gt; {
+​
+    <span class="hljs-comment">/**
+     * Performs this operation on the given argument.
+     *
+     * <span class="hljs-doctag">@param</span> t the input argument
+     */</span>
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;
+​
+    <span class="hljs-comment">/**
+     * Returns a composed {<span class="hljs-doctag">@code</span> Consumer} that performs, in sequence, this
+     * operation followed by the {<span class="hljs-doctag">@code</span> after} operation. If performing either
+     * operation throws an exception, it is relayed to the caller of the
+     * composed operation.  If performing this operation throws an exception,
+     * the {<span class="hljs-doctag">@code</span> after} operation will not be performed.
+     *
+     * <span class="hljs-doctag">@param</span> after the operation to perform after this operation
+     * <span class="hljs-doctag">@return</span> a composed {<span class="hljs-doctag">@code</span> Consumer} that performs in sequence this
+     * operation followed by the {<span class="hljs-doctag">@code</span> after} operation
+     * <span class="hljs-doctag">@throws</span> NullPointerException if {<span class="hljs-doctag">@code</span> after} is null
+     */</span>
+    <span class="hljs-keyword">default</span> Consumer&lt;T&gt; <span class="hljs-title function_">andThen</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; after)</span> {
+        Objects.requireNonNull(after);
+        <span class="hljs-keyword">return</span> (T t) -&gt; { accept(t); after.accept(t); };
+    }
+}
+</code></pre>
+<p>得，看到这个 @since 1.8 就知道，<code>这又是一个java8的新东西：函数式接口 @FunctionalInterface 简称FI</code>，通过一些资料，我得知虽然之前也有一些<code>FI</code>，但是并没有很明确的给这些接口定义为<code>FI</code>，而是叫做<code>SAM类型（单抽象方法类型 Single Abstract Method）</code>。现在让我来好好研究这个接口，嗯，接口里面有个需要实现的方法<code>void accept(T t);</code>既然说需要实现那这个先放着，看下面那坨玩意.... 默认定义了一个<code>anThen</code>方法，传进去的是一个<code>Consumer</code>，出来的也是一个<code>Consumer</code>...？？</p>
+<p>没关系，我们看第一句，这玩意就是判断你传进去的东西是不是<code>null</code>，不是就抛出个空指针异常；</p>
+<p>下面就直接<code>return</code>了 而且这个结构有点不太好看出他做了什么，下面来分析分析我们<code>return</code>的是一个<code>Consumer</code>，所以在得出最终结果之前我们还得再进一次这个函数...所以..等等...不过这好像跟我们的<code>forEach</code>没什么关系。</p>
+<p>好我们言归正传，看看forEach：</p>
+<pre><code class="hljs language-java">    <span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; action)</span> {
+        Objects.requireNonNull(action);
+        <span class="hljs-keyword">for</span> (T t : <span class="hljs-built_in">this</span>) {
+            action.accept(t);
+        }
+    }
+</code></pre>
+<p>直接看for循环，这种形式的for循环是java1.5出的增强性for循环，目的是为了方便便利数组和集合，因为隐藏了index信息，所以对于单个元素的引索则显得很无力。 </p>
+<p>因此吧，<code>this</code>就是我们的<code>intlist</code>，<code>action</code>就是我们的<code>lambda</code>表达式</p>
+<pre><code class="hljs language-java">  (num)-&gt;System.out.println(num)
+</code></pre>
+<p>然后。。。<code>action.accept(t)</code>。。这其实没什么，我们去看看<code>accept</code>就好了，往上翻发现：</p>
+<pre><code class="hljs language-java">    <span class="hljs-comment">/**
+     * Performs this operation on the given argument.
+     *
+     * <span class="hljs-doctag">@param</span> t the input argument
+     */</span>
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;
+</code></pre>
+<p>说啥？它说，执行输入进来的这个语句的操作。但这是接口里面的待实现的方法，没有实现我这么执行？？在哪实现的？？好，执行吧，他执行什么？ t ？ 往上看，t 是....？？？根据结果来看 t 应该是 <code>System.out.println(num)</code></p>
+<p>因为我们accept的就是这个句子，但是，如果 t 是一个语句，那么就和之前java5的增强性for循环的格式不对应...那那那我真没办法了。。只能认为这是一个语法糖了。。。我去反编译.class也看不懂底层到底是这么实现的，所学有限。</p>
+<p>现在回到我们的最初----lambda表达式</p>
+<p>其语法如下：</p>
+<p><code>(parameters)-&gt;{ statements; }</code></p>
+<p>我们的例子</p>
+<p><code>(num)-&gt;System.out.println(num)</code></p>
+<p>从结果来看，应该是我给你什么，你就能拿这个为我干什么事情。</p>
+<p>再来看Java5和Java8的对比：</p>
+<pre><code class="hljs language-java">    <span class="hljs-comment">//Java5的for-Each表达式对集合的循环</span>
+    <span class="hljs-keyword">for</span>(Integer num : intlist){
+        System.out.println(num);
+    }
+    
+    <span class="hljs-comment">//Java8的forEach()+lambda表达式对集合的循环</span>
+    intlist.forEach((num)-&gt;System.out.println(num));
+</code></pre>
+<p>在Java5的基础上，lambda就使代码更加简洁。</p>
+<p>那么。。。lambda能在哪里用？前面提到过一个： <code>@FunctionalInterface</code> ，研究了Java8的API文档我发现：</p>
+<p>这是一个FI声明，FI官方给的定义就是：有且仅有一个抽象方法的接口。而且这个抽象方法被称作是函数式方法，这个函数式方法能被lambda表达式的值和返回值类型所匹配。FI能够为多种上下文提供目标类型。</p>
+<h3 id="lambda的用法：">Lambda的用法：</h3>
+<p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。 </p>
+<p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。 </p>
+<p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。 </p>
+<p>可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。</p>
+<p>关于<code>lambda</code>表达式的理解，我在runoob网上看到一个例子，我觉得挺有代表性的，我自己也试着模仿这个例子去使用<code>lambda</code>：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">lambdaTest</span> {
+    
+    <span class="hljs-comment">//首先有一个标准的FI</span>
+    <span class="hljs-meta">@FunctionalInterface</span>
+    <span class="hljs-keyword">interface</span> <span class="hljs-title class_">LambdaPerform</span>{
+        <span class="hljs-keyword">void</span> <span class="hljs-title function_">interfacesay</span><span class="hljs-params">(String name,<span class="hljs-type">int</span> age)</span>;
+    }
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        
+        <span class="hljs-comment">//lambda表达式登场</span>
+        <span class="hljs-type">LambdaPerform</span> <span class="hljs-variable">implementsay</span> <span class="hljs-operator">=</span> (String name,<span class="hljs-type">int</span> age) -&gt; { System.out.print(<span class="hljs-string">&quot;lambda :&quot;</span>);System.out.println(<span class="hljs-string">&quot; &quot;</span>+name+<span class="hljs-string">&quot; : &quot;</span>+age);};
+        
+        <span class="hljs-comment">//神奇的一幕发生了</span>
+        implementsay.interfacesay(<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">25</span>);
+    }
+}
+</code></pre>
+<p>控制台有结果：</p>
+<p>lambda : Tom : 25</p>
+<p>我们可以看到，传统的接口里面的抽象方法，必须要在某个类实现了这个接口，并提供了这个方法的实现，才可以用这个方法，那现在，如果这个接口是一个<code>FI</code>，<code>lambda</code>表达式登场之后，这个抽象方法<code>interfacesay</code>就能被使用。现在我们明白了，<code>lambda</code>表达式一登场的时候，他等于就干了两件大事：</p>
+<ul>
+<li><p>实现了这个接口（从格式上看应该是等式左边的部分完成这个操作，有点匿名内部类的意思）</p>
+</li>
+<li><p>实现了这个接口里面唯一的抽象方法。（等式右边就好比写成列出成员列表，完成方法体实现抽象方法）</p>
+</li>
+</ul>
+<p>至少我是这样理解他干了这俩事的，所以我们就可以使用这个<code>interfacesay</code>函数！！！</p>
+<h3 id="总结">总结</h3>
+<p>这也就解决了上面的<code>accept</code>方法为什么没有实现却可以使用的问题！</p>
+<p>runoob网站还提到，<code>lambda</code>表达式只能引用<code>final</code>或者<code>final</code>局部变量，也就是不能在<code>lambda</code>内修改外部定义的变量，否则编译出错。就算没有说明变量是<code>final</code>，在表达式内也改不了，意思是传进去的变量被标识为有一个隐式的<code>final</code>说明。</p>
+<p>参考：
+<a href="http://www.runoob.com/java/java8-lambda-expressions.html">http://www.runoob.com/java/java8-lambda-expressions.html</a>
+<a href="http://blog.csdn.net/samjustin1/article/details/52268004">http://blog.csdn.net/samjustin1/article/details/52268004</a>
+Java Platform SE 8 - API</p>

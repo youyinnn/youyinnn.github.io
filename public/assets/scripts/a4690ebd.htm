@@ -1,0 +1,29 @@
+<h2 id="html">HTML</h2>
+<h3 id="textarea的字数限制">textarea的字数限制</h3>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> 
+  <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;5&quot;</span>  
+  <span class="hljs-attr">maxlength</span>=<span class="hljs-string">&quot;200&quot;</span> 
+  <span class="hljs-attr">onchange</span>=<span class="hljs-string">&quot;this.value=this.value.substring(0, 200)&quot;</span> 
+  <span class="hljs-attr">onkeydown</span>=<span class="hljs-string">&quot;this.value=this.value.substring(0, 200)&quot;</span> 
+  <span class="hljs-attr">onkeyup</span>=<span class="hljs-string">&quot;this.value=this.value.substring(0, 200)&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>
+</code></pre>
+<p>事实上，有了maxLength属性，textarea的输入就已经会有限制了</p>
+<h3 id="input只允许输入数字">input只允许输入数字</h3>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">&quot;value=value.replace(/[^\d]/g,&#x27;&#x27;)&quot;</span>&gt;</span>
+</code></pre>
+<h3 id="图片禁止拖拽">图片禁止拖拽</h3>
+<p>在对应标签中添加如下属性即可。</p>
+<pre><code class="hljs language-javascript">oncontextmenu = <span class="hljs-string">&quot;return false;&quot;</span> <span class="hljs-comment">//禁止鼠标右键</span>
+ondragstart = <span class="hljs-string">&quot;return false;&quot;</span> <span class="hljs-comment">//禁止鼠标拖动</span>
+onselectstart = <span class="hljs-string">&quot;return false;&quot;</span> <span class="hljs-comment">//文字禁止鼠标选中</span>
+onselect = <span class="hljs-string">&quot;document.selection.empty();&quot;</span> <span class="hljs-comment">//禁止复制文本</span>
+</code></pre>
+<p>例如：</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img/logo.jpg&quot;</span> <span class="hljs-attr">ondragstart</span>=<span class="hljs-string">&quot;return false;&quot;</span> /&gt;</span>
+</code></pre>
+<blockquote>
+<p>作者：祁月笑
+链接：<a href="https://www.imooc.com/article/20121?block_id=tuijian_wz">https://www.imooc.com/article/20121?block_id=tuijian_wz</a>
+来源：慕课网</p>
+</blockquote>

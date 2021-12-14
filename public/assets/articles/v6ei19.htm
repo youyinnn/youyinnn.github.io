@@ -1,0 +1,225 @@
+<h3 id="36-valid-sudokumedium">36. Valid Sudoku(Medium)</h3>
+<p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
+<ol>
+<li>Each row must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each column must contain the digits <code>1-9</code> without repetition.</li>
+<li>Each of the 9 <code>3x3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without repetition.</li>
+</ol>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="sudoku"></p>
+<p>A partially filled sudoku which is valid.</p>
+<p>The Sudoku board could be partially filled, where empty cells are filled with the character <code>&#39;.&#39;</code>.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+[
+  [&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],
+  [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],
+  [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],
+  [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],
+  [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]
+]
+Output: true
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input:
+[
+  [&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],
+  [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],
+  [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],
+  [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],
+  [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],
+  [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being 
+    modified to 8. Since there are two 8&#x27;s in the top left 3x3 sub-box, it is invalid.
+</code></pre>
+<p><strong>Note:</strong></p>
+<ul>
+<li>A Sudoku board (partially filled) could be valid but is not necessarily solvable.</li>
+<li>Only the filled cells need to be validated according to the mentioned rules.</li>
+<li>The given board contain only digits <code>1-9</code> and the character <code>&#39;.&#39;</code>.</li>
+<li>The given board size is always <code>9x9</code>.</li>
+</ul>
+<h4 id="brute-force">Brute Force</h4>
+<p>这图暴力解就已经足够快了，其他解也不觉得有多快，比较无论怎么弄都是常数次，所以空间消耗要考虑好</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValidSudoku</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] board)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">rowIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; rowIndex &lt; board.length; rowIndex++) {
+        <span class="hljs-type">char</span>[] row = board[rowIndex];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">columnIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; columnIndex &lt; row.length; columnIndex++) {
+            <span class="hljs-type">char</span> <span class="hljs-variable">number</span> <span class="hljs-operator">=</span> row[columnIndex];
+            <span class="hljs-keyword">if</span> (number != <span class="hljs-string">&#x27;.&#x27;</span>) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; col &lt; row.length; col++) {
+                    <span class="hljs-comment">// duplicate in same row</span>
+                    <span class="hljs-keyword">if</span> (col != columnIndex && row[col] == number) {
+                        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                    }
+                }
+                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">ro</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; ro &lt; row.length; ro++) {
+                    <span class="hljs-comment">// duplicate in same column</span>
+                    <span class="hljs-keyword">if</span> (ro != rowIndex && board[ro][columnIndex] == number) {
+                        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                    }
+                }
+                <span class="hljs-type">int</span> <span class="hljs-variable">rowFactor</span> <span class="hljs-operator">=</span> rowIndex / <span class="hljs-number">3</span>;
+                <span class="hljs-type">int</span> <span class="hljs-variable">colFactor</span> <span class="hljs-operator">=</span> columnIndex / <span class="hljs-number">3</span>;
+                <span class="hljs-comment">// duplicate in 3x3</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> rowFactor * <span class="hljs-number">3</span>; rs &lt; (rowFactor * <span class="hljs-number">3</span>) + <span class="hljs-number">3</span>; rs++) {
+                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">cs</span> <span class="hljs-operator">=</span> colFactor * <span class="hljs-number">3</span>; cs &lt; (colFactor * <span class="hljs-number">3</span>) + <span class="hljs-number">3</span>; cs++) {
+                        <span class="hljs-keyword">if</span> (rs != rowIndex && cs != columnIndex && board[rs][cs] == number) {
+                            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>
+<h3 id="37-sudoku-solverhard">37. Sudoku Solver(Hard)</h3>
+<p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
+<p>A sudoku solution must satisfy <strong>all of the following rules</strong>:</p>
+<ol>
+<li>Each of the digits <code>1-9</code> must occur exactly once in each row.</li>
+<li>Each of the digits <code>1-9</code> must occur exactly once in each column.</li>
+<li>Each of the the digits <code>1-9</code> must occur exactly once in each of the 9 <code>3x3</code> sub-boxes of the grid.</li>
+</ol>
+<p>Empty cells are indicated by the character <code>&#39;.&#39;</code>.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="img">
+A sudoku puzzle...</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png" alt="img">
+...and its solution numbers marked in red.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The given board contain only digits <code>1-9</code> and the character <code>&#39;.&#39;</code>.</li>
+<li>You may assume that the given Sudoku puzzle will have a single unique solution.</li>
+<li>The given board size is always <code>9x9</code>.</li>
+</ul>
+<p>暂不会解，感觉和马踏棋盘一样要用回溯法，而且需要对数独的解法要有了解；</p>
+<h3 id="38-count-and-sayeasy">38. Count And Say(Easy)</h3>
+<p>傻逼题</p>
+<h3 id="39-combination-summedium">39. Combination Sum(Medium)</h3>
+<p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code class="hljs language-java">Input: candidates = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>], target = <span class="hljs-number">8</span>,
+A solution set is:
+[
+  [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>],
+  [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>],
+  [<span class="hljs-number">3</span>,<span class="hljs-number">5</span>]
+]
+</code></pre>
+<h4 id="recursion">Recursion</h4>
+<p>这题比较好用回溯，去重的技巧也有点3sum的意思</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">combinationSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> target)</span> {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    Arrays.sort(candidates);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; candidates.length; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];
+        LinkedList&lt;Integer&gt; one = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        one.add(candidate);
+        get(ans, one, candidates, i, target - candidate);
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">get</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, <span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> offset, <span class="hljs-type">int</span> target)</span> {
+    <span class="hljs-keyword">if</span> (target == <span class="hljs-number">0</span>) {
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;(one));
+    }
+    <span class="hljs-keyword">if</span> (candidates[offset] &lt;= target) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> offset; i &lt; candidates.length; i++) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];
+            <span class="hljs-keyword">if</span> (candidate &lt;= target) {
+                one.add(candidate);
+                get(ans, one, candidates, i, target - candidate);
+                one.remove(one.size() - <span class="hljs-number">1</span>);
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="40-combination-sum-iimedium">40. Combination Sum II(Medium)</h3>
+<p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
+<p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including <code>target</code>) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: candidates = [10,1,2,7,6,1,5], target = 8,
+A solution set is:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: candidates = [2,5,2,1,2], target = 5,
+A solution set is:
+[
+  [1,2,2],
+  [5]
+]
+</code></pre>
+<p>这题和上题一样，多费心思处理重复就好了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">combinationSum2</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> target)</span> {
+    LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    Arrays.sort(candidates);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; candidates.length; i++) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];
+        LinkedList&lt;Integer&gt; one = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        one.add(candidate);
+        get(ans, one, candidates, i + <span class="hljs-number">1</span>, target - candidate);
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">get</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; one, <span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> offset, <span class="hljs-type">int</span> target)</span> {
+    <span class="hljs-keyword">if</span> (target == <span class="hljs-number">0</span>) {
+        ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;(one));
+    }
+    <span class="hljs-keyword">if</span> (offset &lt; candidates.length && candidates[offset] &lt;= target) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> offset; i &lt; candidates.length; i++) {
+            <span class="hljs-keyword">if</span> (i != offset && candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
+                <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];
+            <span class="hljs-keyword">if</span> (candidate &lt;= target) {
+                one.add(candidate);
+                get(ans, one, candidates, i + <span class="hljs-number">1</span>, target - candidate);
+                one.remove(one.size() - <span class="hljs-number">1</span>);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+    }
+}
+</code></pre>

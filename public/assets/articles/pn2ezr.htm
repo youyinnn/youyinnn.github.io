@@ -1,0 +1,641 @@
+<h3 id="1-twosumeasy">1. TwoSum(Easy)</h3>
+<p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have <strong>exactly</strong> one solution, and you may not use the <em>same</em> element twice.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+</code></pre>
+<h4 id="ⅰbrute-force">Ⅰ.Brute Force</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length; j++) {
+            <span class="hljs-keyword">if</span> (nums[j] == target - nums[i]) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] { i, j };
+            }
+        }
+    }
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;No two sum solution&quot;</span>);
+}
+</code></pre>
+<h4 id="ⅱhashing">Ⅱ.Hashing</h4>
+<p>Of all other Java solution with they call “hashing”, they just using JDK’s provided implementation, and it’s not a friendly solution for those who are not coding with Java.</p>
+<p>And as I thinking about, it’s shit code that you are using <strong>a non-classic structure</strong> like <strong>“HashMap”, “ArrayList”</strong> and so on.</p>
+<p>It’s ok that you using JDK’s implementation like <strong>“LinkedList”, “Stack”</strong> because their basic function were all implemented in the accepted ordinary way.</p>
+<p>But using a structure like <strong>“HashMap”, “ArrayList”</strong>, it’s totally cheating because the algorithm inside them <strong>is not your work</strong>, and you probably don’t know how to implement <strong>HashMap’s</strong> treeify operation or <strong>ArrayList’s</strong> grow operation.</p>
+<p>I see the solution to this Problem and I was disappointed with it.</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) {
+    HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(nums.length);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length ; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">complement</span> <span class="hljs-operator">=</span> target - nums[i];
+        <span class="hljs-keyword">if</span> (map.containsKey(complement)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]{i, map.get(complement)};
+        }
+        map.put(nums[i], i);
+    }
+    <span class="hljs-keyword">return</span> nums;
+}
+</code></pre>
+<p>So here is my solution about &quot;TwoSum&quot; with <strong>self implement &quot;hashing&quot;</strong>, it may not a nice code but it&#39;s friendly for all of you</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// 4ms runtime 26~27MB memory use</span>
+<span class="hljs-comment">// need to record val and index at the same time</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Pair</span> {
+    <span class="hljs-type">int</span> val;
+    <span class="hljs-type">int</span> index;
+}
+
+<span class="hljs-comment">// hash table</span>
+<span class="hljs-keyword">private</span> Pair[] table;
+
+<span class="hljs-comment">// hash method just mod</span>
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hash</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
+    <span class="hljs-keyword">return</span> Math.abs(key) % table.length;
+}
+
+<span class="hljs-comment">// set hash table from origin sequence</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setTable</span><span class="hljs-params">(<span class="hljs-type">int</span>[] origin)</span> {
+    <span class="hljs-comment">// table&#x27;s rank is double</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">rank</span> <span class="hljs-operator">=</span> origin.length &lt;&lt; <span class="hljs-number">1</span>;
+    table = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Pair</span>[rank];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; origin.length; i++) {
+        <span class="hljs-comment">// detection the right place the key should set on hash table</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">place</span> <span class="hljs-operator">=</span> detection(origin[i], <span class="hljs-literal">false</span>);
+        <span class="hljs-type">Pair</span> <span class="hljs-variable">pair</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Pair</span>();
+        pair.val = origin[i];
+        pair.index = i;
+        table[place] = pair;
+    }
+}
+
+<span class="hljs-comment">// seek the key&#x27;s position in hash table</span>
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">seek</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
+    <span class="hljs-comment">// seek key and return -1 if no key found in hash table</span>
+    <span class="hljs-keyword">return</span> detection(key, <span class="hljs-literal">true</span>);
+}
+
+<span class="hljs-comment">// collsion handle with just linear detection</span>
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">detection</span><span class="hljs-params">(<span class="hljs-type">int</span> key, <span class="hljs-type">boolean</span> seek)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">hash</span> <span class="hljs-operator">=</span> hash(key);
+    <span class="hljs-comment">// detect key&#x27;s position in hash table at once hash()</span>
+    <span class="hljs-keyword">if</span> (!seek && table[hash] == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> hash;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash] == <span class="hljs-literal">null</span>) {
+        <span class="hljs-comment">// no match found</span>
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash].val == key) {
+        <span class="hljs-comment">// match key</span>
+        <span class="hljs-keyword">return</span> hash;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// collsion handle with linear detection</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">offset</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">after</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+        <span class="hljs-comment">// linear detect forward</span>
+        <span class="hljs-keyword">while</span> (hash + offset &lt; table.length) {
+            <span class="hljs-keyword">if</span> (!seek && table[hash + offset] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">break</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash + offset] == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash + offset].val == key) {
+                <span class="hljs-keyword">return</span> hash + offset;
+            }
+            offset++;
+        }
+        <span class="hljs-comment">// liner detect backward</span>
+        <span class="hljs-keyword">if</span> (hash + offset == table.length) {
+            offset = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">while</span> (hash - offset &gt;= <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (!seek && table[hash - offset] == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">break</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash - offset] == <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (seek && table[hash - offset].val == key) {
+                    <span class="hljs-keyword">return</span> hash + offset;
+                }
+                offset++;
+            }
+        } <span class="hljs-keyword">else</span> {
+            after = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> after ? hash + offset : hash - offset;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) {
+    setTable(nums);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">complement</span> <span class="hljs-operator">=</span> target - nums[i];
+        <span class="hljs-type">int</span> <span class="hljs-variable">seek</span> <span class="hljs-operator">=</span> seek(complement);
+        <span class="hljs-keyword">if</span> (seek != -<span class="hljs-number">1</span>) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> table[seek].index;
+            <span class="hljs-comment">// handle case like [3, 3] target 6</span>
+            <span class="hljs-keyword">if</span> (index == i) {
+                <span class="hljs-keyword">if</span> (seek + <span class="hljs-number">1</span> &lt; table.length) {
+                    index = table[seek + <span class="hljs-number">1</span>].index;
+                } <span class="hljs-keyword">else</span> {
+                    index = table[seek - <span class="hljs-number">1</span>].index;
+                }
+            }
+            <span class="hljs-comment">// handle case like [3, 2, 4] target 6</span>
+            <span class="hljs-keyword">if</span> (nums[index] + nums[i] == target) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]{i, index};
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> nums;
+}
+</code></pre>
+<h3 id="2-add-two-numbermedium">2. Add Two Number(Medium)</h3>
+<p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong> and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+Output: 7 -&gt; 0 -&gt; 8
+Explanation: 342 + 465 = 807.
+</code></pre>
+<p><img src="https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg" alt=""></p>
+<p>这题没什么tricky的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的solution：</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// 由第三条新的链和它的计算指针完成</span>
+<span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummyHead</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> l1, q = l2, curr = dummyHead;
+    <span class="hljs-type">int</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (p != <span class="hljs-literal">null</span> || q != <span class="hljs-literal">null</span>) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> (p != <span class="hljs-literal">null</span>) ? p.val : <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> (q != <span class="hljs-literal">null</span>) ? q.val : <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> carry + x + y;
+        carry = sum / <span class="hljs-number">10</span>;
+        curr.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(sum % <span class="hljs-number">10</span>);
+        curr = curr.next;
+        <span class="hljs-keyword">if</span> (p != <span class="hljs-literal">null</span>) p = p.next;
+        <span class="hljs-keyword">if</span> (q != <span class="hljs-literal">null</span>) q = q.next;
+    }
+    <span class="hljs-keyword">if</span> (carry &gt; <span class="hljs-number">0</span>) {
+        curr.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(carry);
+    }
+    <span class="hljs-keyword">return</span> dummyHead.next;
+}
+</code></pre>
+<p>下面是我参照这种思路，针对空间优化的代码，所有计算在1链上进行，并处理了两条链长短不一样的情况，如果1链长，那么就继续计算carry；如果二链长，那么把二链剩余需要计算的链接到1链上，在1链上继续计算carry：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-type">ListNode</span> <span class="hljs-variable">ap</span> <span class="hljs-operator">=</span> l1, bp = l2;
+    <span class="hljs-keyword">while</span> (ap != <span class="hljs-literal">null</span> || bp != <span class="hljs-literal">null</span>) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> carry ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span> (ap != <span class="hljs-literal">null</span>) {
+            count += ap.val;
+        }
+        <span class="hljs-keyword">if</span> (bp != <span class="hljs-literal">null</span>) {
+            count += bp.val;
+        }
+        <span class="hljs-keyword">if</span> (count &gt;= <span class="hljs-number">10</span>) {
+            count = count % <span class="hljs-number">10</span>;
+            carry = <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> {
+            carry = <span class="hljs-literal">false</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (ap != <span class="hljs-literal">null</span>) {
+            ap.val = count;
+            <span class="hljs-keyword">if</span> (ap.next == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">if</span> (bp != <span class="hljs-literal">null</span>) {
+                    ap.next = bp.next;
+                    bp = <span class="hljs-literal">null</span>;
+                    <span class="hljs-comment">// 以防还有carry 在l2上记录l1最后一个结点</span>
+                    l2 = ap;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (carry) {
+                    ap.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">1</span>);
+                    carry = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            ap = ap.next;
+        }
+        <span class="hljs-keyword">if</span> (bp != <span class="hljs-literal">null</span>) {
+            bp = bp.next;
+        }
+    }
+    <span class="hljs-keyword">if</span> (carry) {
+        l2.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> l1;
+}
+</code></pre>
+<h3 id="3-longest-substringmedium">3. Longest Substring(Medium)</h3>
+<p>Given a string, find the length of the <strong>longest substring</strong> without repeating characters.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: &quot;abcabcbb&quot;
+Output: 3 
+Explanation: The answer is &quot;abc&quot;, with the length of 3. 
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: &quot;bbbbb&quot;
+Output: 1
+Explanation: The answer is &quot;b&quot;, with the length of 1.
+</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code>Input: &quot;pwwkew&quot;
+Output: 3
+Explanation: The answer is &quot;wke&quot;, with the length of 3. 
+             Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.
+</code></pre>
+<h4 id="ascii-mapping">ascii mapping</h4>
+<p>官方给出的解法，官方还给出了用HashMap和HashSet去解的</p>
+<p><strong>ascii mapping</strong>这样的解法虽然知道<strong>第一目的</strong>是用ascii映射数组去记录上一次重复出现char的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的i、j已经完全没有灵魂了，难以理解</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length(), ans = <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span>[] index = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">128</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, i = <span class="hljs-number">0</span>; j &lt; n; j++) {
+            i = Math.max(index[s.charAt(j)], i);
+            ans = Math.max(ans, j - i + <span class="hljs-number">1</span>);
+            index[s.charAt(j)] = j + <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">return</span> ans;
+    }
+}
+</code></pre>
+<p>还是解一下逻辑：</p>
+<ol>
+<li><p>既然有下标，可以考虑用<strong>下标差</strong>去计算长度，而不是count出来</p>
+</li>
+<li><p>假设要表达的字符序列只在<strong>ascii-128</strong>中出现，于是我们可以用<strong>hash</strong>的方式，给出一个128位的数组<code>index</code>，数组用来记录<strong>上一次重复出现该ascii码字符的index的下一位（<code>index[s.charAt(j)] = j + 1</code>）</strong>，为什么是下一位？因为既然已经重复了，就从下一位开始计算所求序列</p>
+<p> 比如说<strong>“a”</strong>这个序列，<strong>a</strong>的<strong>ascii</strong>是97，所以在<code>index</code>的97号上找index，这时候是0</p>
+</li>
+<li><p><strong>i</strong>的作用：获取最靠近<code>j</code>的<strong>有过重复的字符index的下一位</strong>，比如序列<strong>“abca”</strong>，当J循环到最后一个a的时候，i的值是上一个有过重复的a的index的下一位</p>
+</li>
+</ol>
+<h3 id="4-median-of-two-sorted-arrayshard">4. Median of Two Sorted Arrays(Hard)</h3>
+<p>There are two sorted arrays <strong>nums1</strong> and <strong>nums2</strong> of size m and n respectively.</p>
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<p>You may assume <strong>nums1</strong> and <strong>nums2</strong> cannot be both empty.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>nums1 = [1, 3]
+nums2 = [2]
+
+The median is 2.0
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>nums1 = [1, 2]
+nums2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5
+</code></pre>
+<p>这道题难就难在要找到**O(log (m+n))**的解，说到已排好序、log级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数</p>
+<p>在此先给出容易想到但是不符合题意的解**(n+m)/2**解</p>
+<h4 id="ⅰa-nm2-solution">Ⅰ.a (n+m)/2 solution</h4>
+<p>分别从两个数组中取最小的数，然后取到两数组长度中位之后，自然就找到中位数了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMedianSortedArrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2)</span> {
+    <span class="hljs-keyword">if</span> (nums1.length &lt; nums2.length) {
+        <span class="hljs-keyword">return</span> findMedianSortedArrays(nums2, nums1);
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">lengthSum</span> <span class="hljs-operator">=</span> nums1.length + nums2.length;
+    <span class="hljs-type">int</span> <span class="hljs-variable">mi</span> <span class="hljs-operator">=</span> lengthSum / <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, p2 = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span>[] tar = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[mi + <span class="hljs-number">1</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span> ; i &lt;= mi; i++) {
+        <span class="hljs-keyword">if</span> (p1 == nums1 .length) {
+            tar[i] = nums2[p2];
+            <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-keyword">if</span> (p1 &lt;= nums1.length - <span class="hljs-number">1</span> && p2 &lt;= nums2.length - <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">if</span> (nums1[p1] &gt; nums2[p2]) {
+                tar[i] = nums2[p2];
+                p2++;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums1[p1] &lt; nums2[p2]) {
+                tar[i] = nums1[p1];
+                p1++;
+            } <span class="hljs-keyword">else</span> {
+                tar[i++] = nums1[p1];
+                <span class="hljs-keyword">if</span> (i &lt; tar.length) {
+                    tar[i] = nums1[p1];
+                }
+                p1++;
+                p2++;
+            }
+        } <span class="hljs-keyword">else</span> {
+            tar[i] = nums1[p1];
+            p1++;
+        }
+    }
+    <span class="hljs-keyword">if</span> (lengthSum % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
+        <span class="hljs-type">double</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> tar[tar.length - <span class="hljs-number">1</span>];
+        <span class="hljs-type">double</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> tar[tar.length - <span class="hljs-number">2</span>];
+        <span class="hljs-keyword">return</span> (a + b) / <span class="hljs-number">2</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> tar[tar.length - <span class="hljs-number">1</span>];
+    }
+}
+</code></pre>
+<h4 id="ⅱ-logmn-solution">Ⅱ. log(m+n) solution</h4>
+<p>对数级解非常不容易找出来，我觉得能解出来的都是数学家- -</p>
+<p>对数级解决方案有2种，一种是<strong>泛化为“findKth”问题</strong>，另一种是<strong>“分治法寻找perfect I”</strong></p>
+<h5 id="perfect-i">Perfect I</h5>
+<p>官方给出的<a href="https://leetcode.com/problems/median-of-two-sorted-arrays/solution/">solution</a>就是它，为了解这个问题，首先我们从统计学上去了解一下什么是<strong>Medium</strong></p>
+<blockquote>
+<p>Dividing a set into two equal length subsets, that one subset is always greater than the other.</p>
+<p>它将原集合分成等长的两个子集，其中一个子集中的任意元素总是大于另一个子集中的任意元素</p>
+</blockquote>
+<p>然后我们再了解一个<strong>切（Cut）</strong>的概念：</p>
+<p>假设长度为m的A集合有随机一个<strong>cut</strong>出现在下标i的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
+<pre><code class="hljs language-nhi">left_A                   |  right_A
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><p>len(left_A) = i, len(right_A) = m − i</p>
+</li>
+<li><p>when i = 0, <strong>left_A</strong> is empty, and when i = m, <strong>right_A</strong> is empty</p>
+</li>
+</ul>
+<p>类似地，对B我们可以：</p>
+<pre><code class="hljs language-nhi">left_B                   |  right_B
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+</code></pre>
+<p>A、B连在一起看，我们得出：</p>
+<pre><code class="hljs language-nhi">left_part                |  right_part
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+</code></pre>
+<p>对于总集长度为偶数时，如果我们可以找到如下<strong>两个条件</strong>：
+<span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2.</span><span class="mspace" style="margin-right:1em;"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span></span></span></span></span></span></span></span>
+那么我们就等于将全集**{A, B}<strong>分为</strong>等长**的2部分，且左半部分中的元素总是比右半部分中的元素要小</p>
+<p>此时集合的中位数为：
+<span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ian</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.136em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.7em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></span>
+对于总集长度为奇数时：
+<span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2.</span><span class="mspace" style="margin-right:1em;"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span></span></span></span></span></span></span></span>
+注意，<strong>等长</strong>概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定<strong>左集合比右集合多一个</strong>，所以奇数集合的中位数总是<strong>左集合中最大的那一个</strong></p>
+<p>此时集合的中位数为：
+<span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ian</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></span></span>
+于是我们按照以下步骤进行切点的寻找：</p>
+<ol>
+<li><p>总是以较短的集合作为A集合，以短集合的长度去寻找<strong>Cut</strong></p>
+</li>
+<li><p>设置<code>iMin=0</code>，<code>iMax=m</code>，在<code>[iMin, iMax]</code>中寻找<strong>Cut</strong></p>
+</li>
+<li><p><code>i</code>为A的<strong>Cut</strong>，它等于<code>(iMin + iMax) / 2</code>; <code>j</code>为B的<strong>Cut</strong>，它等于<code>(m + n + 1) / 2 -i </code></p>
+</li>
+<li><p>现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有3种情况：</p>
+<ul>
+<li><p><code>B[j - 1] &lt;= A[i] && A[i - 1] &gt;= B[j]</code>：</p>
+<p>意味着满足了条件二了，<code>i</code>和<code>j</code>正是我们要找的<strong>切点</strong>，找到了切点，就判断全集长度的奇偶性，从而求出<strong>Medium</strong></p>
+<blockquote>
+<p>我们来分析一下：</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+</blockquote>
+<pre><code> &gt; 对于左边集合，我们需要找`maxLeft`，对于左边的集合来说，`i`和`j`任意一个切点如果顶到0下标了，那么左边集合最大值肯定在对方那里，比如`i`等于0的时候，左边集合最大的数字肯定在`B[j - 1]`处，如果两个切点都没顶格，那么有`maxLeft = Math.max(A[i-1], B[j-1])`
+</code></pre>
+<blockquote>
+</blockquote>
+<pre><code> &gt; 对于右边集合，同样如此，如果顶格（`i = m`或者`j = n`）了的话，右边集合的最小值肯定在对方那里，否则就取`minRight = Math.min(B[j], A[i])`
+</code></pre>
+<blockquote>
+</blockquote>
+<pre><code> &gt; 然后根据`m + n`的奇偶性求得中位数
+</code></pre>
+<ul>
+<li><p>如果<code>i &lt; iMax </code>并且<code>A[i] &lt; B[j - 1]  </code>：</p>
+<p>表示此时<code>i</code>还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着<code>i</code>找小了，所以这时候将<code>iMin</code>加1，这时：</p>
+<blockquote>
+<p><code>i</code>切点会往后挪，把<code>A[i]</code>退回左边集合，<code>j</code>相应地会往前挪，然后把<code>B[j - 1]</code>收进右边集合；</p>
+</blockquote>
+</li>
+<li><p>如果<code>i &gt; iMin </code>并且<code>A[i-1] &gt; B[j]</code>：</p>
+<p>表示此时<code>i</code>还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着<code>i</code>找大了，这时候将<code>iMax</code>减1，这时：</p>
+<blockquote>
+<p><code>i</code>切点会往前挪，把<code>A[i - 1]</code>收进右边集合，<code>j</code>相应地会往后挪，把<code>B[j]</code>退回到左边集合；</p>
+</blockquote>
+</li>
+</ul>
+<p>该题有两个需要注意的约定：</p>
+<ol>
+<li>奇数集合里面，约定<strong>左集合比右集合多一个</strong>；</li>
+<li>保证A集合长度要小于等于B集合；</li>
+</ol>
+<p>题解：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMedianSortedArrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] A, <span class="hljs-type">int</span>[] B)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> A.length;
+    <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> B.length;
+    <span class="hljs-comment">// to ensure m&lt;=n</span>
+    <span class="hljs-keyword">if</span> (m &gt; n) {
+        <span class="hljs-keyword">return</span> findMedianSortedArrays(B, A);
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">iMin</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, iMax = m, halfLen = (m + n + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">while</span> (iMin &lt;= iMax) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> (iMin + iMax) / <span class="hljs-number">2</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> halfLen - i;
+        <span class="hljs-keyword">if</span> (i &lt; iMax && B[j-<span class="hljs-number">1</span>] &gt; A[i]){
+            <span class="hljs-comment">// i is too small</span>
+            iMin = i + <span class="hljs-number">1</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i &gt; iMin && A[i-<span class="hljs-number">1</span>] &gt; B[j]) {
+            <span class="hljs-comment">// i is too big</span>
+            iMax = i - <span class="hljs-number">1</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// i is perfect</span>
+            <span class="hljs-type">int</span> maxLeft;
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) { maxLeft = B[j-<span class="hljs-number">1</span>]; }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) { maxLeft = A[i-<span class="hljs-number">1</span>]; }
+            <span class="hljs-keyword">else</span> { maxLeft = Math.max(A[i-<span class="hljs-number">1</span>], B[j-<span class="hljs-number">1</span>]); }
+            <span class="hljs-keyword">if</span> ( (m + n) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> ) { <span class="hljs-keyword">return</span> maxLeft; }
+
+            <span class="hljs-type">int</span> minRight;
+            <span class="hljs-keyword">if</span> (i == m) { minRight = B[j]; }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j == n) { minRight = A[i]; }
+            <span class="hljs-keyword">else</span> { minRight = Math.min(B[j], A[i]); }
+
+            <span class="hljs-keyword">return</span> (maxLeft + minRight) / <span class="hljs-number">2.0</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>;
+}
+
+<span class="hljs-comment">// show cut when perfect i was found</span>
+<span class="hljs-comment">// eg: A[1, 8, 20, 55, 77] B[2, 4, 5, 9, 23, 27, 85, 152, 964]</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// cut:3 --&gt; [1, 8, 20] | [55, 77]</span>
+<span class="hljs-comment">// cut:4 --&gt; [2, 4, 5, 9] | [23, 27, 85, 152, 964]</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">showCut</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> cutIndex)</span> {
+    <span class="hljs-type">int</span>[] leftPart = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[cutIndex];
+    <span class="hljs-type">int</span>[] rightPart = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[arr.length - cutIndex];
+    System.arraycopy(arr, <span class="hljs-number">0</span>, leftPart, <span class="hljs-number">0</span>, cutIndex);
+    System.arraycopy(arr, cutIndex, rightPart, <span class="hljs-number">0</span>, arr.length - cutIndex);
+    System.out.println(<span class="hljs-string">&quot;cut:&quot;</span> + cutIndex + <span class="hljs-string">&quot; --&gt; &quot;</span> + Arrays.toString(leftPart) + <span class="hljs-string">&quot; | &quot;</span> + Arrays.toString(rightPart));
+}
+</code></pre>
+<h3 id="5-longest-palindromic-substring">5. Longest Palindromic Substring</h3>
+<p>Given a string <strong>s</strong>, find the longest palindromic substring in <strong>s</strong>. You may assume that the maximum length of <strong>s</strong> is 1000.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: &quot;babad&quot;
+Output: &quot;bab&quot;
+Note: &quot;aba&quot; is also a valid answer.
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: &quot;cbbd&quot;
+Output: &quot;bb&quot;
+</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code>Input: &quot;ab&quot;
+Output: &quot;a&quot;
+</code></pre>
+<p><strong>Example 4:</strong></p>
+<pre><code>Input: &quot;&quot;
+Output: &quot;&quot;
+</code></pre>
+<h4 id="60ms-solution-beat-33">60+ms Solution (Beat 33%)</h4>
+<p>因为String <strong>s</strong>是一个char数组，我们以遍历这个数组为基础，当我们在位置<code>i</code>碰到一个char的时候，就找它下一次出现的位置<code>j</code>，那么我们就可以继续数组子序列<code>[i, j]</code>是否是回文串，由此找到一个可能的解；然后再以<code>j+1</code>开始，再找下一个<code>j</code>，于是代码可以是：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">char</span>[] src, <span class="hljs-type">int</span> begin, <span class="hljs-type">int</span> end)</span> {
+    <span class="hljs-keyword">while</span>(begin &lt; end) {
+        <span class="hljs-keyword">if</span>(src[begin++] != src[end--]) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestPalindrome</span><span class="hljs-params">(String s)</span> {
+    <span class="hljs-type">char</span>[] chars = s.toCharArray();
+    <span class="hljs-keyword">if</span> (chars.length == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> s;
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, end = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; chars.length; i++) {
+        <span class="hljs-keyword">if</span> (chars.length - i &lt; end - start + <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-type">char</span> <span class="hljs-variable">nowC</span> <span class="hljs-operator">=</span> chars[i];
+        <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> i;
+        <span class="hljs-keyword">do</span> {
+            next = s.indexOf(nowC, next + <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span> (next - i + <span class="hljs-number">1</span> &lt; end - start + <span class="hljs-number">1</span>) {
+                <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-keyword">if</span> (next &gt; <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (next - i + <span class="hljs-number">2</span> &gt; end - start + <span class="hljs-number">1</span> &&
+                    isPalindrome(chars, i + <span class="hljs-number">1</span>, next - <span class="hljs-number">1</span>)) {
+                    
+                    start = i;
+                    end = next + <span class="hljs-number">1</span>;
+                }
+            }
+        } <span class="hljs-keyword">while</span> (next &gt; <span class="hljs-number">0</span>);
+    }
+    <span class="hljs-keyword">if</span> (end == <span class="hljs-number">0</span> && chars.length != <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> chars[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot;&quot;</span>;
+    }
+    <span class="hljs-keyword">return</span> s.substring(start, end);
+}
+</code></pre>
+<p>解法的关键是do循环里面的<code>next = s.indexOf(nowC, next + 1)</code>，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -</p>
+<h4 id="7-10ms-solution-beat-98">7-10ms Solution (Beat 98%)</h4>
+<p>我们换个思路，关于next的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的end字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来<strong>猜</strong>出下标</p>
+<p>我们倒着来看（为什么倒着？后面解释），对于每个<code>i &gt; 0</code>，都有很多种可能说在<code>s[i]</code>就是一组回文数的end，那么这个可能性由什么去缩小？由一个<strong>既定的长度len</strong>来决定，我们倒着来看的话，<code>s[i - len + 1]</code>到<code>s[i]</code>之间的<strong>len</strong>长度子串如果是回文数的话，我们就马上找到了一组可能的解</p>
+<p>那么这个<strong>既定的len</strong>怎么求？我们可以发现这个<strong>len</strong>最终就是我们想要的结果字串的长度，所以我们不妨从0开始，在序列<strong>至少有一个字符</strong>的时候，<strong>要找到比原len更长的解的话，我们的len需要再往前吃1位或者2位数字</strong>，如果还是要保持原<strong>len</strong>的话，是求不出解的，比如最开始<code>end = i = 0</code>的时候<code>start = i - len + 1 = 1</code>，这是无解</p>
+<p>以<code>&quot;abcba&quot;</code>为例</p>
+<p>我们尝试<strong>len</strong>往前吃1位，<code>end = i = 0</code>的时候<code>start = i - (len + 1)+ 1 = i - len = 0</code>，我们得到整个字符串的第一个字符<code>&#39;a&#39;</code>，它肯定是回文数，所以我们得到第一个解，**len++**，此时记录下<code>start</code>和<code>end</code></p>
+<p>接下来我们以表格的形式来描述遍历过程，包含了往前吃2位的情况：</p>
+<table>
+<thead>
+<tr>
+<th align="center">end = i</th>
+<th align="center">start = i - len - 1</th>
+<th align="center">start = i - len</th>
+<th align="center">string[start, end]</th>
+<th align="center">len</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0 = <code>&#39;a&#39;</code></td>
+<td align="center">-1 <strong>无解</strong></td>
+<td align="center">0</td>
+<td align="center">a</td>
+<td align="center">++后等于1</td>
+</tr>
+<tr>
+<td align="center">1= <code>&#39;b&#39;</code></td>
+<td align="center">-1 <strong>无解</strong></td>
+<td align="center">0</td>
+<td align="center">ab <strong>不是解</strong></td>
+<td align="center">还是1</td>
+</tr>
+<tr>
+<td align="center">2= <code>&#39;c&#39;</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">abc/bc <strong>都不是解</strong></td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3= <code>&#39;b&#39;</code></td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">bcb <strong>是解</strong></td>
+<td align="center">吃两位得的解，所以len+=2 = 3</td>
+</tr>
+<tr>
+<td align="center">4= <code>&#39;a&#39;</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">abcba <strong>是解</strong></td>
+<td align="center">len+=2 = 5</td>
+</tr>
+</tbody></table>
+<p>于是循环中的逻辑为：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestPalindrome</span><span class="hljs-params">(String s)</span> {
+    <span class="hljs-type">char</span>[] ca = s.toCharArray();
+    <span class="hljs-comment">// handle &quot;&quot;</span>
+    <span class="hljs-keyword">if</span> (ca.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, end = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; ca.length; i++) {
+        <span class="hljs-comment">// eat 2</span>
+        <span class="hljs-keyword">if</span>(isPalindrome(ca, i - len - <span class="hljs-number">1</span>, i)) {
+            start = i - len - <span class="hljs-number">1</span>; end = i;
+            len += <span class="hljs-number">2</span>;
+        } 
+        <span class="hljs-comment">// eat 1</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(isPalindrome(ca, i - len, i)) {
+            start = i - len; end = i;
+            len += <span class="hljs-number">1</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> s.substring(start, end + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">char</span>[] chars, <span class="hljs-type">int</span> head, <span class="hljs-type">int</span> tail)</span> {
+    <span class="hljs-keyword">if</span>(head &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">while</span>(head &lt; tail) {
+        <span class="hljs-keyword">if</span>(chars[head++] != chars[tail--]) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>
+<h5 id="一点优化">一点优化</h5>
+<p>观察表中最后一行以及<code>isPalindrome</code>函数可以发现，判断<code>abcba</code>是否为回文串的时候，重复判断了<code>bcb</code>，而它已经在上一次被判断过了，于是我们可以将start和end提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断</p>
+<p>在回文数判断函数中补上：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> start, end;
+<span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">char</span>[] chars, <span class="hljs-type">int</span> head, <span class="hljs-type">int</span> tail)</span> {
+    <span class="hljs-keyword">if</span>(head &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (chars[head] == chars[tail] && start == head + <span class="hljs-number">1</span> && end == tail - <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">while</span>(head &lt; tail) {
+        <span class="hljs-keyword">if</span>(chars[head++] != chars[tail--]) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>

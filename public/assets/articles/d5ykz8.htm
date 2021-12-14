@@ -1,0 +1,85 @@
+<h3 id="introduction">Introduction</h3>
+<p>本篇主要介绍什么是GC，GC一般发生在哪里，GC在这些地方都干些什么</p>
+<p>顺带简单提一下四种<strong>引用类型</strong>以及<code>finalize()</code>方法</p>
+<h3 id="about-garbage-collection">About Garbage Collection</h3>
+<p>你已经是一个成熟的JVM了，应该自己学会智能GC了</p>
+<blockquote>
+<p>说起GC，很多人把这项技术当作Java语言的伴生产物。事实上，GC的历史比Java更久远，1960年诞生于MIT的Lisp语言是第一门真正使用内存动态分配和垃圾收集技术的语言。当Lisp还在胚胎时期的时候，人们就在思考GC需要完成的事情：</p>
+<ul>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>如何回收？</li>
+</ul>
+<p>经过半个多世纪的发展，目前内存的动态分配和内存回收技术已经非常成熟了，一切看起来都进入了“自动化”时代，那我们为什么还要去了解GC和内存分配呢？——当需要排查各种内存溢出、内存泄漏问题的时候，当垃圾收集称为系统达到<strong>更高并发量</strong>的瓶颈的时候，我们就需要对这些自动化的技术实施必要的监控和调节。</p>
+</blockquote>
+<p>我们前面知道了JVM的内存区域会分成：Java堆、方法区、栈（本地方法栈、虚拟机栈）、程序计数器，我们一个一个来看</p>
+<ul>
+<li><p>栈（本地方法栈、虚拟机栈）、程序计数器：</p>
+<p>  这部分的内存是线程私有的，随线程生，随线程灭，特别是<strong>每一个栈帧需要多少内存是在类结构确定的时候就已经定下来的了（基本）</strong>所以这部分的内存分配和回收都具备<strong>确定性</strong>，我们并不能在这部分的内存做出更多的考虑了</p>
+</li>
+<li><p>堆和方法区：</p>
+<p>  对象的内存分配、常量的内存分配、类的加载和卸载，这部分内存是运行时动态变化的，这也正是GC要关注的，一般我们说GC就是在管理这部分的内存</p>
+</li>
+</ul>
+<h3 id="heap-areas-gc">Heap Area&#39;s GC</h3>
+<p>因为堆是对象分配的主要区域，所以堆的垃圾回收非常重要，这里面也有很多值得深入的地方：</p>
+<ul>
+<li>对象回收判断；</li>
+<li>基本垃圾回收思路；</li>
+<li>垃圾回收算法在JVM中的实现——垃圾回收器；</li>
+</ul>
+<h3 id="method-areas-gc">Method Area&#39;s GC</h3>
+<p>我们知道，方法区（永久代）里面主要存放两部分东西：类信息和运行时常量。</p>
+<p>一般我们说垃圾回收都是在堆里去回收，在新生代中回收垃圾，这部分的回收效率非常高，而永久代的回收效率就远低于此。</p>
+<p>因为永久代主要回收2样东西：<strong>废弃常量和无用的类</strong></p>
+<p>对于废弃常量的回收判定，基本和对象回收差不多，看引用就好了</p>
+<p>而对于无用类的判定就需要谨慎对待了，要想回收一个类，该类必须满足一下3个条件：</p>
+<ol>
+<li>该类所有的实例都已经被回收</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的Class对象没有在任何地方被引用到，无法在代码中通过反射访问到该类的方法</li>
+</ol>
+<p>就算满足了这些条件，也仅仅是可以回收而已，而具体是否回收该类......作者也没有说- -</p>
+<h3 id="reference-tips-reference-type">Reference Tips: reference type</h3>
+<p>关于Java中的引用，不是直接引用这么简单，无论是哪种存活判断，都和引用有关</p>
+<p>在JDK1.2之前，引用只有一种定义：reference类型中存储的是另一块空间的地址，就代表是一个引用</p>
+<p>这样的定义存粹，但是比较狭隘，一个对象可能会有“要你的时候你得在，不要的时候就管你死活”的备胎状态，这样尴尬的情况就需要更进一步地去进行引用描述了</p>
+<p>我们希望能考虑到：系统内存充足的时候，你可以在这玩；内存紧张的时候，您还是请回吧；这样的情况</p>
+<p>所以在JDK1.2之后增强了引用的概念，分别有强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference），引用强度依次减弱</p>
+<ol>
+<li>Strong Reference：描述必须的对象。有明确的赋值语句声明的对象引用，无论如何只要没有断开引用就不会被GC回收</li>
+<li>Soft Reference：描述有用但是非必须的对象。可以通过实现<code>SoftReference</code>接口来表示存在软引用关联的对象，<strong>在系统将要内存溢出的时候，把这些对象标进可回收范围内进行二次回收，如果这次回收还没有足够的内存，才会抛出内存溢出异常</strong></li>
+<li>Weak Reference：描述非必须的对象。可以通过实现<code>WeakReference</code>接口来表示存在弱引用关联的对象，这些对象只能生存到下次GC之前，无论内存是否紧张</li>
+<li>Phantom Reference：可以通过实现<code>PhantomReference</code>接口来表示存在虚引用关联的对象，存在虚引用的对象不会在声明周期和GC策略上有任何的影响，仅仅是在这个对象被GC的时候收到一个系统通知而已</li>
+</ol>
+<h3 id="gc-process--objects-finalize-method">GC Process & Object&#39;s finalize Method</h3>
+<p>即使对象已经具备回收条件，执行了GC之后也不是马上就回收内存的，要宣告一个对象死亡，至少需要经历两次标记：</p>
+<ol>
+<li><p>如果对象在进行RA之后发现没有Reference Chian，那么他会被<strong>第一次标记</strong>，并且执行一次筛选，筛选的细节：</p>
+<blockquote>
+<p>*** 对象是否有必要执行finalize方法：**</p>
+<ol>
+<li><p>当对象没有覆盖finalize方法的时候</p>
+</li>
+<li><p>当对象已经被JVM调用过一次finalize方法的时候</p>
+<p> 以上两种情况都是——<strong>没有必要执行finalize方法</strong></p>
+</li>
+</ol>
+<p>*** 当有必要执行finalize方法的时候:**</p>
+<ol>
+<li><p>将对象放置到一个<code>F-Queue</code>队列中，并在稍后由一个由JVM建立、低优先级的Finalizer线程去处理它</p>
+</li>
+<li><p>开始处理<code>F-Queue</code>，对于每个对象，仅call一次它们的finalize方法，call的结果如何并不关心，注意是call，这是一个trigger，而不是执行，也就是不会等待finalize方法结束，GC和JVM都没有义务要等待一个对象的finalize方法；</p>
+<p> 这时候对象可以在finalize方法中自救自己，为自己建立一个引用</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>对对象进行<strong>第二次标记</strong>：如果有第一次标记且进行RA之后还没有引用关联的话，就mark第二次且进行回收</p>
+</li>
+</ol>
+<p>需要特别说明的是：</p>
+<blockquote>
+<p>finalize方法并不是用来自救用的，也不推荐使用这个方法，它是Java为了迎合C/C++程序员的产物、妥协</p>
+<p>因为它运行代价高昂、不稳定、且无调用顺序保证</p>
+</blockquote>

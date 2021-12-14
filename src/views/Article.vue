@@ -47,6 +47,7 @@ import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // eslint-disable-next-line no-unused-vars
+import { getContent, getToc } from "@/plugins/get-md-content";
 
 export default {
   name: "Article",
@@ -107,22 +108,22 @@ export default {
       if (abbrlink === null || abbrlink === undefined) {
         return;
       }
-      const src = require(`raw-loader!@/assets/articles/${abbrlink}.htm`);
-      this.content = src.default;
-
-      // get toc
-      try {
-        const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
-        this.toc = tocSrc;
-      } catch (error) {
-        console.log("No toc for this article.");
-      }
-
       const postMetadatas = JSON.parse(sessionStorage.postMetadata);
       for (let d of postMetadatas) {
         if (d.abbrlink === abbrlink) {
           this.postMetadata = d;
         }
+      }
+
+      // const src = require(`raw-loader!@/assets/articles/${abbrlink}.htm`);
+      // this.content = src.default;
+      getContent("articles", abbrlink, this);
+
+      // get toc
+      if (this.postMetadata.hasToc) {
+        getToc("articles", abbrlink, this);
+        // const tocSrc = require(`@/assets/articles/${abbrlink}.htm.toc.json`);
+        // this.toc = tocSrc;
       }
     },
     daybefore: function (pastdayjs) {

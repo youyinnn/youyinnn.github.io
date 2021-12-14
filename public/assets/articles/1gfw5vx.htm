@@ -1,0 +1,193 @@
+<h4 id="前言">前言</h4>
+<p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
+<p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection接口、Iterable接口、Iterator接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
+<p>为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读</p>
+<p>大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是<strong>往JDK源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
+<p>话不多说，开搞</p>
+<h4 id="热身">热身</h4>
+<p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt;
+        <span class="hljs-keyword">implements</span> <span class="hljs-title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+    <span class="hljs-comment">//...</span>
+}
+</code></pre>
+<p>这里面重要的内容首先我们就盯着<code>AbstractList</code>这个抽象类，一直往深了摸，摸到了<code>Collection</code>这个接口，这个接口继承了<code>Iterable</code>接口，欸~摸到宝了，我们拿这个玩意去开展我们的<strong>自实现类</strong>，为什么其他的抽象类、其他的接口不用管呢？</p>
+<p>在我看来，<strong>无论是Collection、List这类的接口，还是AbstractList、AbstractCollection这些抽象类</strong>它们仅是提供一个<strong>接口规范以及一定的实现</strong>，真正有意思的东西，还得是<strong>迭代器</strong>这个利器！</p>
+<p>于是马上写好自实现的类头，加上泛型就不用说了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyArrayList</span>&lt;E&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterable</span>&lt;E&gt;{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span> {
+
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Spliterator&lt;E&gt; <span class="hljs-title function_">spliterator</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+}
+</code></pre>
+<p>这里面除了<code>Iterator()</code>方法之外，另外两个方法不太熟，但首先我们保证好一个容器结构应有的几个基本接口：</p>
+<ul>
+<li><strong>get(int index)</strong></li>
+<li><strong>int size()</strong></li>
+<li><strong>E remove(int index)</strong></li>
+<li><strong>void add(E element)</strong></li>
+<li><strong>void add(int index, E element)</strong></li>
+<li><strong>boolean contains(int index)</strong></li>
+<li><strong>int indexOf(E element)</strong></li>
+</ul>
+<p>里面注意的几个点：</p>
+<ul>
+<li>凡是牵扯到<strong>索引操作</strong>的，都需要<strong>判断index是否合法</strong>，比如是负数或者超过界限了</li>
+<li>add方法的<strong>扩容问题</strong></li>
+</ul>
+<p>准备就绪，咔咔咔就写下十几行代码：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_CAPACTTY</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+<span class="hljs-keyword">private</span> E[] array;
+
+MyArrayList() {
+    array = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[DEFAULT_CAPACTTY];
+}
+
+MyArrayList(<span class="hljs-type">int</span> capacity) {
+    array = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[capacity];
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> size;
+}
+<span class="hljs-keyword">public</span> E <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    <span class="hljs-type">E</span> <span class="hljs-variable">element</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">if</span> (index &lt;= endIndex()) {
+        element = array[index];
+    }
+    <span class="hljs-keyword">return</span> element;
+}
+<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(E target)</span> {
+    <span class="hljs-keyword">if</span> (target != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">for</span> (E e : <span class="hljs-built_in">this</span>) {
+            <span class="hljs-keyword">if</span> (e.equals(target)) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">indexOf</span><span class="hljs-params">(E element)</span> {
+    <span class="hljs-keyword">if</span> (element != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++) {
+            <span class="hljs-keyword">if</span> (element.equals(array[i])) {
+                <span class="hljs-keyword">return</span> i;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+}
+</code></pre>
+<p>这些就不解释了，为了方便，我还写了一个获取末尾元素下标值的方法，这也是基本的</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">endIndex</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> size - <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h5 id="remove">remove</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    E element;
+    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> && index &lt;= endIndex()) {
+        element = array[index];
+        <span class="hljs-keyword">if</span> (index &lt; endIndex()) {
+            System.arraycopy(array, index + <span class="hljs-number">1</span>, array, index, endIndex() - index);
+        }
+        size--;
+        <span class="hljs-keyword">return</span> element;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayIndexOutOfBoundsException</span>(<span class="hljs-string">&quot;index:&quot;</span> + index);
+    }
+}    
+</code></pre>
+<p>基本思路，如果index在可取范围内，则可以remove，否则抛出异常</p>
+<p>在可取范围内，如果index不是最后一个的话，那么移除该元素就得：</p>
+<ul>
+<li><strong>index位之后的元素往前移一位</strong></li>
+<li><strong>size--</strong></li>
+</ul>
+<p>否则只进行<code>size--</code></p>
+<h5 id="add">add</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span> {
+    add(size, element);
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> {
+    <span class="hljs-keyword">if</span> (index &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayIndexOutOfBoundsException</span>(<span class="hljs-string">&quot;index:&quot;</span> + index);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// 如果插入位置为当前数组尾部或者更后面 则统一插到尾部位置</span>
+        adjustArray();
+        <span class="hljs-keyword">if</span> (index &lt; size) {
+            System.arraycopy(array, index, array, index + <span class="hljs-number">1</span>, endIndex() - index);
+        }
+        array[index] = element;
+        size++;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">adjustArray</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">if</span> (size == array.length) {
+        E[] newArr = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[array.length * <span class="hljs-number">2</span>];
+        System.arraycopy(array, <span class="hljs-number">0</span>, newArr, <span class="hljs-number">0</span>, array.length);
+        array = newArr;
+    }
+}
+</code></pre>
+<p>实现<code>add(int index, E element)</code>和传统的不太一样，我的这个方法更具体一些，我们把扩容的事情抽象成一个<code>adjustArray</code>方法，如果要插入的位置在当前列表的中间，我们将数组从要插入的位置开始往后移一位</p>
+<h5 id="iterator">Iterator</h5>
+<p>每个集合的<strong>Iterator</strong>的实现和各自集合的特点有关，所以<strong>Iterator</strong>也需要我们自己实现</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyArrayListIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;E&gt;{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">currentIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> currentIndex &lt; size;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> E <span class="hljs-title function_">next</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> array[currentIndex++];
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">remove</span><span class="hljs-params">()</span> {
+        MyArrayList.<span class="hljs-built_in">this</span>.remove(--currentIndex);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEachRemaining</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span> {
+        MyArrayList.<span class="hljs-built_in">this</span>.forEach(action);
+    }
+}
+</code></pre>
+<p>这是我们写在<strong>MyArrayList</strong>类中的内部类，由于是基于数组的实现，<strong>三大迭代器方法</strong>也很简单就实现了，我们写完之后，<strong>Iterable</strong>方法就可以写两个了：</p>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyArrayListIterator</span>();
+}
+
+<span class="hljs-meta">@Override</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span> {
+    <span class="hljs-keyword">if</span> (action != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">for</span> (E e : <span class="hljs-built_in">this</span>) {
+            action.accept(e);
+        }
+    }
+}
+</code></pre>
+<p>目前为止（2018年6月5日-08点55分）<a href="https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java">代码快照</a>，我们的自实现算是基本达标了，接下来我们进入阅读ArrayList的环节</p>

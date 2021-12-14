@@ -1,0 +1,101 @@
+<h3 id="hotspot-虚拟机对象内存">HotSpot 虚拟机对象内存</h3>
+<p>深入讨论 HotSpot 虚拟机在 Java 堆中的对象分配、内存布局和对象访问的过程</p>
+<h4 id="对象创建流程">对象创建流程</h4>
+<h5 id="过程">过程</h5>
+<ol>
+<li><p><strong>加载类</strong></p>
+<p>当虚拟机遇到一个<strong>new 指令</strong>的时候，就会检查指令参数是否能在常量池中定位到一个类的符号引用，并坚持这个符号代表的类是否已经被加载、解析和初始化过，如果没有，则需要必须进行类加载过程</p>
+<p>在类加载的过程完成后，<strong>对象所需的内存大小已经完全可以确定</strong></p>
+</li>
+<li><p><strong>选择内存分配算法</strong></p>
+</li>
+</ol>
+<ul>
+<li><p><strong>指针碰撞（Bump the Pointer）</strong></p>
+<p>假设<strong>Java 堆的内存是绝对规整</strong>，即所有<strong>用过的内存放一边</strong>，<strong>空闲的内存放另一边</strong>，中间有一个指针作为<strong>分界点</strong>，此时对象内存分配仅是把指针向<strong>空闲方向</strong>挪动<strong>一个对象内存的距离</strong></p>
+</li>
+<li><p><strong>空闲列表（Free List）</strong></p>
+<p>假设<strong>Java 堆内存并不是规整的</strong>，即已使用的内存和未使用的内存<strong>互相交错</strong>，虚拟机就必须维护一个<strong>列表</strong>，这个列表记录着哪些内存块是<strong>可用的</strong>，在分配的时候就在列表中找到一块<strong>足够大的空间</strong>划分给对象实例，并更新列表记录</p>
+<p>因此我们选择内存分配算法的根据就是：<strong>Java 堆内存的划分是否规整</strong></p>
+</li>
+</ul>
+<ol>
+<li><p><strong>选择内存分配并发问题的解决方案</strong></p>
+<p><img src="../../../public/img/objectmemorypointer.png" alt="objectmemorypointer"></p>
+<p>如图的并发指针分配问题，我们解决这个问题有两种方式：</p>
+<ol>
+<li>对<strong>内存分配的动作</strong>进行<strong>同步</strong>处理</li>
+<li>把<strong>内存分配的动作</strong>按照线程划分<strong>在不同的空间中进行</strong>，即每个线程在 Java 堆中预先分配一小块内存，这样的内存成为<strong>本地线程分配缓冲（Thread Local Allocation Buffer，TLAB）</strong>，哪个线程需要分配内存，就在哪个线程的<strong>TLAB</strong>上分配，只有当<strong>TLAB</strong>用完并分配新的<strong>TLAB</strong>的时候，再进行同步锁定</li>
+</ol>
+</li>
+<li><p><strong>设置对象基本信息</strong></p>
+<ol>
+<li><p><strong>对象头（Object Header）</strong>信息的设置</p>
+</li>
+<li><p><strong>执行<code>init</code>方法</strong></p>
+<p>在此之前，对于 JVM 来说，对象已经产生了，但是对象的字段还都是 0，对于 Java 程序来说，执行完<strong>new 指令</strong>之后还得执行**<code>init</code>方法**，初始化对象数据</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="对象内存布局">对象内存布局</h4>
+<h5 id="划分">划分</h5>
+<ul>
+<li>对象头（Header）</li>
+<li>实例数据（Instance Data）</li>
+<li>对齐填充（Padding）</li>
+</ul>
+<h5 id="1-对象头（header）">1. 对象头（Header）</h5>
+<p>HotSpot 的对象头分为两部分信息：</p>
+<ul>
+<li><p>第一部分：<strong>Mark Word</strong></p>
+<p>用于存储对象自身的<strong>运行时数据</strong>如哈希码、GC 分代年龄、锁状态标志、线程持有的锁、偏向线程 ID、偏向时间戳</p>
+</li>
+<li><p>第二部分：<strong>类型指针</strong></p>
+<p>虚拟机通过这个指针来<strong>确定对象是哪个类的实例</strong>，<strong>但是</strong>并不是所有的虚拟机实现都必须在对象数据上保留类型指针，也就是查找对象所属类的元数据信息并不一定要经过类本身</p>
+</li>
+<li><p>第三部分：<strong>数组长度数据</strong></p>
+<p>如果对象是一个<strong>数组</strong>，则对象头还需要用一块内存来记录数组长度数据</p>
+</li>
+</ul>
+<h5 id="2-实例数据（instance-data）">2. 实例数据（Instance Data）</h5>
+<p>这一部分是对象真正存储的<strong>有效信息</strong>，也是在程序代码中锁定义的各种类型的字段内容，包括继承下来的信息</p>
+<h5 id="3-对齐填充（padding）">3. 对齐填充（Padding）</h5>
+<p>这部分不是必然的实现，也没有特殊含义，但是由于 HotSpot VM 的自动内存管理系统要求<strong>对象起始地址必须是 8 字节的整倍数</strong>，一个对象内存分配完之后，并不一定占 8 字节的整倍数空间，所以填充一些空间以补齐 8 字节整倍数，保证下一个对象内存分配的起始位置是 8 字节整倍数</p>
+<h4 id="对象访问定位">对象访问定位</h4>
+<p><strong>Java 程序通过虚拟机栈上的 reference 数据来操作堆上的具体对象（重点）</strong></p>
+<p>JVM 规范<strong>只说了 reference 是一个指向对象的引用，但是没有说怎么引用</strong>，所以对象访问方式还是取决于虚拟机的实现，主流的实现有<strong>句柄访问</strong>和<strong>直接指针访问</strong>两种</p>
+<h5 id="句柄访问">句柄访问</h5>
+<p>如果使用这种方式，Java 堆中会划分一块内存来作为<strong>句柄池</strong>，<strong>reference</strong>中存储的就是对象的<strong>句柄地址</strong>，句柄中包含了<strong>对象实例数据地址信息</strong>和<strong>类型实例数据地址信息</strong></p>
+<p><img src="../../../public/img/jubingdangwen.png" alt="jubingdangwen"></p>
+<h5 id="直接指针访问">直接指针访问</h5>
+<p>reference 中存储的直接就是对象地址</p>
+<p><img src="../../../public/img/zhijiezhizhenfangwen.png" alt="zhijiezhizhenfangwen"></p>
+<blockquote>
+<p>直观一点解释就是</p>
+<p>假如我有一个 Person 类：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">kind</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;human&quot;</span>;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> Integer age;
+    <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<p>然后有：</p>
+<pre><code class="hljs language-java">    <span class="hljs-type">Person</span> <span class="hljs-variable">jack</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&quot;Jack&quot;</span>, <span class="hljs-number">21</span>);
+</code></pre>
+<p>这个时候，语句会有两部分，左边<code>Person</code>类型的指针<code>jack</code>，指向右边<code>Person</code>对象实例，且如果是第一次 new，则会进行一系列的<code>Person</code>类的加载，这时候：</p>
+<ol>
+<li>在 Java 栈中的本地变量表（当前线程中）会存在一个 reference 类型指针<code>jack</code>，该指针指向一个对象的<strong>句柄地址/对象地址（4.）</strong></li>
+<li>在方法区内会存在<code>Person</code>类的静态变量<code>kind</code>的数据</li>
+<li>在 Java 堆内会存在<code>Person</code>类的静态变量<code>kind</code>的索引指针，该指针指向（2.）</li>
+<li>在 Java 堆内会存在一个<code>Person</code>类型对象数据，数据中有<code>name=jack，age=12</code>，如果是直接指针访问，则它会包含（3.）</li>
+<li>如果是句柄访问，那么在 Java 堆内会存在一个<strong>句柄地址</strong>，地址包含两个指针，一个指针是（3.），另一个指针指向对象实例数据（4.）</li>
+</ol>
+</blockquote>
+<h5 id="两种方式的对比">两种方式的对比</h5>
+<ul>
+<li><strong>句柄稳定</strong>：句柄访问的好处是 reference 中存储的是稳定的句柄地址，<strong>对象被移动的时候（特别是垃圾回收的时候）</strong>，只需要改句柄指针就好了，reference 不需要修改</li>
+<li><strong>直接更快</strong>：节省了多一次指针定位的开销，对象的访问在 Java 中很频繁，所以指针定位开销也是较为可观的执行成本</li>
+<li><strong>HotSpot 用的是直接指针访问</strong></li>
+</ul>

@@ -1,0 +1,681 @@
+<h3 id="大声bb">大声BB</h3>
+<p>为了以后看到一道我知道是用DP但是不知道如何去DP的问题再也不会束手无策</p>
+<p>决心做一个地痞，至少下次看到一个DP不会再被它DP</p>
+<hr>
+<h3 id="什么是dp？">什么是DP？</h3>
+<p>动态规划（Dynamic Programming），最初并不是应用于计算机科学当中，而是一种数学方法，在20世纪50年代初由美国数学家<em>Richard Bellman</em>发明，意图用来求解某类最优问题。</p>
+<p>在DP的思想当中：如果问题是由交叠的子问题构成的，我们就可以用DP去解决这个问题。一般这样的子问题出现在对给定问题的求解<strong>递推关系</strong>中，这个<strong>递推关系</strong>中包含了相同类型的更小子问题的解<strong>（已经解出来了的）</strong>。</p>
+<p>DP建议我们，与其对交叠子问题一次次的求解，还不如将每个子问题的解记录在<strong>一张表</strong>中，这样就可以在表中直接得到原始问题的解。</p>
+<h3 id="dp怎么操作？">DP怎么操作？</h3>
+<h4 id="斐波那契引例">斐波那契引例</h4>
+<p>我们先来看一个斐波那契数列第n个数是多少的例子，寻常<strong>递归解法</strong>：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fibonacci</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> fibonacci(n-<span class="hljs-number">1</span>) + fibonacci(n-<span class="hljs-number">2</span>);
+}
+</code></pre>
+<p>这个解法的时间复杂度，我们可以从它兵分两路去将它看成是一棵满二叉树：</p>
+<p><img src="http://img.mp.sohu.com/upload/20170702/07bc2cc044c245588e0873e773dd9079_th.png" alt="img"></p>
+<p>二叉树的结点就是递归次数，这个结果近似是2的n-1次方，也就是<strong>O(2^n)</strong></p>
+<p>显然，指数级的效率是非常低的，我们观察一下这棵树，其中有很多结点是重复计算的：</p>
+<p><img src="http://img.mp.sohu.com/upload/20170702/148d4dfd369240efbd2e28e0f44e8adc_th.png" alt="img"></p>
+<p>为了避免这种重复计算，我们可以将每个子问题求出的结果，放在<strong>一张表</strong>中，每次求解当前问题的时候，索引表中已经求好的子问题，如果说将<strong>递归法</strong>视为自顶向下的方法，那么这种开辟空间存结果的方法，我们称之为<strong>备忘录法</strong>，这是一种自底向上的考虑方法</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fibonacci</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span>[] memo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];
+    memo[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    memo[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">while</span>(i &lt; n) {
+        memo[i++] = memo[i - <span class="hljs-number">1</span>] + memo[i - <span class="hljs-number">2</span>];
+    }
+    <span class="hljs-keyword">return</span> memo[i];
+}
+</code></pre>
+<p>这个算法，性能是<strong>O(n)<strong>，但是空间耗费也变成了</strong>O(n)<strong>，说实话，我们一次次备忘，其实真正需要的总不就是n的前两个n-1和n-2么，至于前面的n-3一直到0，其实已经不需要了，所以这</strong>备忘录之法</strong>还是可以进一步优化的，优化了之后，才是真正的、最简单的动态规划</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fibonacci</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">n1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">n2</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(i &lt; n) {
+        get = n1 + n2;
+        n2 = n1;
+        n1 = get;
+        i++;
+    }
+    <span class="hljs-keyword">return</span> get;
+}
+</code></pre>
+<p>在这样的情况下，既不需要**O(n)<strong>的空间，又可以保持</strong>O(n)**的时间</p>
+<h4 id="分析这个引例">分析这个引例</h4>
+<p>通过这个小小的斐波那契，我们经历了从：<strong>递归法</strong>——<strong>备忘录</strong>——<strong>动态规划</strong>等三个阶段，在这个过程中，我们不断得将无意义的计算精简下来，将我们的思维由自顶向下，往前索取子问题的解，转变为自底向上，拿着子问题的解去找原问题的解，从整表的备忘录，到两个变量足矣运算的效率；</p>
+<h4 id="dp要素">DP要素</h4>
+<ol>
+<li><strong>最优子结构：</strong>我们从最优解，看到什么子问题，比如<code>Fibonacci(10)=Fibonacci(9)+Fibonacci(8)</code></li>
+<li><strong>边界：</strong>最低端的子问题，如<code>Fibonacci(0)=0,Fibonacci(1)=1;</code></li>
+<li><strong>状态转移公式：</strong>问题求解的公式，我们要靠这个公式去推进结果，如：<code>Fibonacci(n)=Fibonacci(n-1)+Fibonacci(n-2)</code></li>
+</ol>
+<p>但是，仅仅做到到以上3要素，顶多只是个递归level，动态规划真正的精髓在于：<strong>减少无用功，利用已做工，权衡时空效率</strong></p>
+<p>我们来练习一下新的题目</p>
+<h4 id="练习：上台阶">练习：上台阶</h4>
+<blockquote>
+<p>有一座高度是<strong>10</strong>级台阶的楼梯，从下往上走，每跨一步只能向上<strong>1</strong>级或者<strong>2</strong>级台阶。要求用程序来求出一共有多少种走法。</p>
+</blockquote>
+<p>我们从上到下考虑问题，我们要知道最后一步有两个情况，一个是从第8阶上2级，一个是从第9阶上1级，所以上到第10阶的最后一步可能的情况是这两个情况的总和，于是得出<code>F(10)=F(9)+F(8)</code>，这个式子是不是很眼熟？别急，我们得到了<strong>最优子结构</strong>，接下来看边界，我们很容易得知<code>F(3)=F(2)+F(1)</code>，于是<strong>边界</strong><code>F(2)=2，F(1)=1</code>，<strong>状态转移公式</strong>也就出来了<code>F(n)=F(n-1)+F(n-2)</code></p>
+<p>这道题和斐波那契几乎如出一辙，仅仅是边界数据不一样而已，复现出来的代码</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">climbingWay</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">n1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">n2</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(i &lt; n) {
+        get = n1 + n2;
+        n2 = n1;
+        n1 = get;
+        i++;
+    }
+    <span class="hljs-keyword">return</span> get;
+}
+</code></pre>
+<hr>
+<h3 id="dp练习">DP练习</h3>
+<h4 id="1：国王和金矿">1：国王和金矿</h4>
+<blockquote>
+<p>有一个国家发现了5座金矿，每座金矿的黄金储量不同，需要参与挖掘的工人数也不同。参与挖矿工人的总数是10人。<strong>每座金矿要么全挖，要么不挖，不能派出一半人挖取一半金矿。</strong>要求用程序求解出，要想得到尽可能多的黄金，应该选择挖取哪几座金矿？</p>
+<p>金矿信息：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">1金矿</th>
+<th align="center">2金矿</th>
+<th align="center">3金矿</th>
+<th align="center">4金矿</th>
+<th align="center">5金矿</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>储金</strong></td>
+<td align="center">400</td>
+<td align="center">500</td>
+<td align="center">200</td>
+<td align="center">300</td>
+<td align="center">350</td>
+</tr>
+<tr>
+<td align="center"><strong>需要工人</strong></td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>下至上分析用备忘录法去分析：</p>
+<p>我们用<strong>W代表所用的工人数</strong>，<strong>M代表所考虑的金矿前几座的座数</strong>，<strong>每格代表用这么多工人考虑这么多座矿所能获得的最大金量G</strong>，首先我们要明确<code>G(m)={400, 500, 200, 300, 350}</code>，且每个<strong>G</strong>都要付出相应的<strong>W</strong></p>
+<p>比如第一格代表考虑前1座金矿，只用一个工人，于是第一行的数据我们很容易得出：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">w=1</th>
+<th align="center">w=2</th>
+<th align="center">w=3</th>
+<th align="center">w=4</th>
+<th align="center">w=5</th>
+<th align="center">w=6</th>
+<th align="center">w=7</th>
+<th align="center">w=8</th>
+<th align="center">w=9</th>
+<th align="center">w=10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>m=1</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">400</td>
+<td align="center">400</td>
+<td align="center">400</td>
+<td align="center">400</td>
+<td align="center">400</td>
+<td align="center">400</td>
+</tr>
+<tr>
+<td align="center"><strong>m=2</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">500⭐</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">900⭐</td>
+</tr>
+<tr>
+<td align="center"><strong>m=3</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">200</td>
+<td align="center">200</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">700</td>
+<td align="center">700</td>
+<td align="center">900</td>
+</tr>
+<tr>
+<td align="center"><strong>m=4</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">200</td>
+<td align="center">300</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">500</td>
+<td align="center">700</td>
+<td align="center">800</td>
+<td align="center">900</td>
+</tr>
+<tr>
+<td align="center"><strong>m=5</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">350</td>
+<td align="center">350</td>
+<td align="center">500</td>
+<td align="center">550</td>
+<td align="center">650</td>
+<td align="center">850</td>
+<td align="center">850</td>
+<td align="center">900</td>
+</tr>
+</tbody></table>
+<p>到了w=5，m=2的时候，我们就需要考虑一下了：</p>
+<ol>
+<li><p>当我只有5个人的时候，我有2座矿可以挖，一个挖400一个挖500，不做考虑<strong>肯定</strong>挖500，那这个考虑是怎么做的呢？这会还看不出，总之这里就有</p>
+<p><code>F（m=2，w=5）=Max（G（m=1，w=5），G（m=2，w=5）+G（m=1，w=5-5））=Max（400，500+0）=500</code></p>
+</li>
+<li><p>w=6，n=2的时候，这时候可以出5个人挖500，剩下一个人去算的话，就是n=1，w=1，即是0金，所以w=6，n=2也是500，这里有</p>
+<p><code>F（m=2，w=6）=Max（G（m=1，w=6），G（m=2，w=5）+G（m=1，w=6-5））=Max（400，500+0）=500</code></p>
+</li>
+<li><p>最后我们看到w=10，n=2这块，首先5人去挖500，剩下还有5人，可以考虑w=5，n=1，挖400，这500和400肯定是加起来了得900，所以有</p>
+<p><code>F（m=2，w=10）=Max（G（m=1，w=10），G（m=2，w=5）+G（m=1，w=10-5））=Max（400，500+400）=900</code></p>
+</li>
+</ol>
+<p>于是我们可以看出，Max中的前半部分代表着<strong>我不挖现在考虑到的这座矿，w人全部去挖考虑之前的矿能挖到的</strong>，后半部分代表<strong>我出本矿所需要的人挖本矿，剩下的W-Wn人去挖之前的矿能挖到的</strong></p>
+<p>于是我们尝试推算一下<strong>最优子结构：</strong></p>
+<p><code>F（m=5，w=10）=Max（G（m=4，w=10），G（m=5，w=3）+G（m=4，w=10-3））</code></p>
+<p>我们的<strong>边界：</strong></p>
+<p><code>F（m=1，w={1，10}）={0，0，0，0，400，400，400，400，400，400}</code></p>
+<p>就是第一行的结果，然后很容易得出<strong>状态转移公式：</strong></p>
+<p><code>F（m，w）=Max（G（m -1 ，w），G（m，Wm）+G（m - 1，w-Wm））</code>其中m为当前考虑的前几座金矿数，w为当前分配的工人数，Wm为挖m需要的刚好的人数，w-Wm就是剩下的人数了；</p>
+<p>不难发现，下一行的结果都是前一行推导出来的，所以我们每次只需要记录前一行的内容就好了，并不需要将整个二维表记录下来，于是地痞该出场了：</p>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testDig</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">int</span>[] g = {<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>, <span class="hljs-number">350</span>};
+    <span class="hljs-type">int</span>[] gw = {<span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>};
+    dig(g, gw, <span class="hljs-number">10</span>);
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dig</span><span class="hljs-params">(<span class="hljs-type">int</span>[] g, <span class="hljs-type">int</span>[] gw, <span class="hljs-type">int</span> w)</span>{
+    <span class="hljs-type">int</span>[] preResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w];
+    <span class="hljs-comment">// 准备第一行的数据</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">useWorker</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; useWorker &lt;= w; useWorker++) {
+        preResult[useWorker - <span class="hljs-number">1</span>] = useWorker &gt;= gw[<span class="hljs-number">0</span>] ? g[<span class="hljs-number">0</span>] : <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-type">int</span>[] nowResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w];
+    <span class="hljs-comment">// 从第二座矿开始算</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; m &lt; g.length; m++){
+        System.out.println(Arrays.toString(preResult));
+        <span class="hljs-comment">// 从第一个工人开始算</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">useWorker</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; useWorker &lt;= w; useWorker++) {
+            <span class="hljs-comment">// 如果当前的工人数不能挖当前的矿，那么就挖之前的矿</span>
+            <span class="hljs-keyword">if</span> (useWorker &lt; gw[m]) {
+                nowResult[useWorker - <span class="hljs-number">1</span>] = preResult[useWorker - <span class="hljs-number">1</span>];
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// 在：1.挖当前的矿，剩余的人挖之前的矿；2.当前可用的工人挖之前的矿；中选一个最多金量的</span>
+                nowResult[useWorker - <span class="hljs-number">1</span>] = 
+                    Math.max(preResult[useWorker - <span class="hljs-number">1</span>], 
+                             (useWorker - gw[m] - <span class="hljs-number">1</span> &gt; <span class="hljs-number">0</span> ? 
+                              preResult[useWorker - gw[m] - <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>) + g[m]);
+            }
+        }
+        System.arraycopy(nowResult, <span class="hljs-number">0</span>, preResult, <span class="hljs-number">0</span>, w);
+    }
+    System.out.println(Arrays.toString(nowResult));
+}
+</code></pre>
+<pre><code class="hljs language-java">[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>]
+[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">900</span>]
+[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">700</span>, <span class="hljs-number">700</span>, <span class="hljs-number">900</span>]
+[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>, <span class="hljs-number">700</span>, <span class="hljs-number">800</span>, <span class="hljs-number">900</span>]
+[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">350</span>, <span class="hljs-number">350</span>, <span class="hljs-number">500</span>, <span class="hljs-number">550</span>, <span class="hljs-number">650</span>, <span class="hljs-number">850</span>, <span class="hljs-number">850</span>, <span class="hljs-number">900</span>]
+</code></pre>
+<p>输出的结果和我们用备忘录推算的结果一致，但是在实现的时候要注意2点：</p>
+<ol>
+<li>工人数（useWorker）使用的是自然数1-10，而记录数组的下标却是0-9，我们使用自然数的原因是为了更好地和gw（每个矿需要多少人挖）做差运算；</li>
+<li>第26行的preResult和nowResult的结果替换，并不能直接<code>preResult=nowResult</code>，Java毕竟是直接引用，所以还是老老实实地一个个复制过去；有的实现是直接赋值，估计是c的代码，指针机制不一样；</li>
+</ol>
+<p>分解实现：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dig2</span><span class="hljs-params">(<span class="hljs-type">int</span>[] g, <span class="hljs-type">int</span>[] gw, <span class="hljs-type">int</span> w)</span>{
+    <span class="hljs-type">int</span>[] preResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w];
+    <span class="hljs-comment">// 准备第一行的数据</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">useWorker</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; useWorker &lt;= w; useWorker++) {
+        preResult[useWorker - <span class="hljs-number">1</span>] = useWorker &gt;= gw[<span class="hljs-number">0</span>] ? g[<span class="hljs-number">0</span>] : <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-type">int</span>[] nowResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w];
+    <span class="hljs-comment">// 从第二座矿开始算</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; m &lt; g.length; m++){
+        System.out.println(Arrays.toString(preResult));
+        <span class="hljs-comment">// 从第一个工人开始算</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">useWorker</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; useWorker &lt;= w; useWorker++) {
+            <span class="hljs-comment">// 前矿</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">front</span> <span class="hljs-operator">=</span> preResult[useWorker - <span class="hljs-number">1</span>];
+            <span class="hljs-comment">// 当前工人能不能挖当前这个矿 能就耗费wm人 不能就耗费0个人</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">wm</span> <span class="hljs-operator">=</span> useWorker &gt;= gw[m] ? gw[m] : <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// 剩下多少人</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> useWorker - wm;
+            <span class="hljs-comment">// 后矿：如果挖不了当前的矿，就挖前矿；如果能挖，剩下的人去挖前矿剩下的人能挖的</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">back</span> <span class="hljs-operator">=</span> wm == <span class="hljs-number">0</span> ? 
+                preResult[useWorker - <span class="hljs-number">1</span>] : 
+                g[m] + (left &gt; <span class="hljs-number">0</span> ? preResult[left - <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>);
+            <span class="hljs-comment">// 前矿后矿谁大挖谁</span>
+            nowResult[useWorker - <span class="hljs-number">1</span>] = front &gt; back ? front : back;
+        }
+        System.arraycopy(nowResult, <span class="hljs-number">0</span>, preResult, <span class="hljs-number">0</span>, w);
+    }
+    System.out.println(Arrays.toString(nowResult));
+}
+</code></pre>
+<h5 id="从金矿再分析一下dp">从金矿再分析一下DP</h5>
+<p>别高兴太早，我们做出了DP确实很开心，但是你有没有想过DP是否合适同一道题的所有情况？</p>
+<p>我们做DP，时间复杂度<strong>O(m*w)<strong>，也就是</strong>矿数（m）</strong>和<strong>工人数（w）</strong>之积，空间复杂度<strong>O(w)</strong></p>
+<p>而如果使用递归法的话，时间复杂度就为<strong>O(2^m)<strong>，</strong>空间复杂度O(m)（递归深度）</strong></p>
+<p>如果有这样的场景，1000个工人，每个矿工人用量如下：</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">1金矿</th>
+<th align="center">2金矿</th>
+<th align="center">3金矿</th>
+<th align="center">4金矿</th>
+<th align="center">5金矿</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>储金</strong></td>
+<td align="center">400</td>
+<td align="center">500</td>
+<td align="center">200</td>
+<td align="center">300</td>
+<td align="center">350</td>
+</tr>
+<tr>
+<td align="center"><strong>需要工人</strong></td>
+<td align="center">430</td>
+<td align="center">450</td>
+<td align="center">320</td>
+<td align="center">420</td>
+<td align="center">350</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>那我们用DP去算的话效率为：<strong>O(5000)/O(1000)</strong></p>
+<p>用递归去算的话效率为：<strong>O(2^5)/O(5)</strong></p>
+<p>其实这只是一道简单的数学问题，DP和w的数量成正比，递归只和m有关</p>
+<p>所以一种算法并不是完美适合一道题，要根据场景去选择算法</p>
+<h6 id="递归实现">递归实现</h6>
+<pre><code class="hljs language-java"><span class="hljs-comment">// dig3(g, gw, 1000, 4);</span>
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] dig3(<span class="hljs-type">int</span>[] g, <span class="hljs-type">int</span>[] gw, <span class="hljs-type">int</span> w, <span class="hljs-type">int</span> m) {
+    <span class="hljs-type">int</span>[] nowResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w];
+    <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>) {
+        nowResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]{<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">400</span>,<span class="hljs-number">400</span>,<span class="hljs-number">400</span>,<span class="hljs-number">400</span>,<span class="hljs-number">400</span>,<span class="hljs-number">400</span>};
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-type">int</span>[] preResult = dig3(g, gw, w, m - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">useWorker</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; useWorker &lt;= w; useWorker++) {
+            <span class="hljs-keyword">if</span> (useWorker &lt; gw[m]) {
+                nowResult[useWorker - <span class="hljs-number">1</span>] = preResult[useWorker - <span class="hljs-number">1</span>];
+            } <span class="hljs-keyword">else</span> {
+                nowResult[useWorker - <span class="hljs-number">1</span>] = 
+                    Math.max(preResult[useWorker - <span class="hljs-number">1</span>], 
+                             (useWorker - gw[m] - <span class="hljs-number">1</span> &gt; <span class="hljs-number">0</span> ? 
+                                  preResult[useWorker - gw[m] - <span class="hljs-number">1</span>] : <span class="hljs-number">0</span>) + g[m]);
+            }
+        }
+    }
+    System.out.println(Arrays.toString(nowResult));
+    <span class="hljs-keyword">return</span> nowResult;
+}
+</code></pre>
+<h4 id="2：最大子序列和">2：最大子序列和</h4>
+<blockquote>
+<p>leetcode:<a href="https://leetcode-cn.com/problems/maximum-subarray/description/">https://leetcode-cn.com/problems/maximum-subarray/description/</a></p>
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>示例:</strong></p>
+<pre><code>输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</code></pre>
+<p><strong>进阶:</strong></p>
+<p>如果你已经实现复杂度为 O(<em>n</em>) 的解法，尝试使用更为精妙的分治法求解。</p>
+</blockquote>
+<p>这是一道既简单又复杂的DP，因为这道题咋一眼看去，实在是不好分析DP的3要素，边界无法确定，谁都有可能是边界，最优子结构无法确定，多长多短都不清楚，有可能解是在序列的前半部分，有可能在后半部分，有可能是在中间，子结构都没出来，更别说状态转移方程了</p>
+<h5 id="暴力解on2">暴力解O(n^2)</h5>
+<p>带着诸多考虑，无论如何都无法独立想出DP来，尽管如此，我们先做暴力解，枚举出所有可能的序列和：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ms</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">rSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i; j &lt; nums.length; j++) {
+            rSum += nums[j];
+            max = max &gt; rSum ? max : rSum;
+        }
+    }
+    <span class="hljs-keyword">return</span> max;
+}
+</code></pre>
+<p>其中max一开始就是int的最小值，这里不能用0，万一序列全是负数的话，最后求出的序列max就是0；</p>
+<p>从i开始遍历序列，每次i里面又从<code>j=i</code>开始往后遍历，从<code>j=i</code>到<code>j=nums.length</code>的每个可能的序列和都求出来，取最大的那个rSum，每次i遍历完第二个for循环之后，比较rSum和max谁大，取大的为max；</p>
+<p>这是一种什么思路？拿[-2,1,-3,4,-1,2,1,-5,4]来举例：</p>
+<p>从<code>i=0，num[i]=-2</code>开始考虑，然后第二层for循环就是计算（-2+1）、（-2+1+-3）、（-2+1+-3+4）....即以-2开头的子序列和都算过一次了，然后将以-2开头的所有子序列和中最大的那个当作当前i循环轮次最大的rSum，然后取最大的rSum为max</p>
+<p>也就是说，这是一种从序列<strong>开头</strong>往后考虑的暴力解，时间复杂度为<strong>O(n^2)</strong></p>
+<h5 id="看似简单">看似简单</h5>
+<p>先前的3例DP，我们都是从递归去入手，然后分析备忘录，然后精简备忘录为DP，每到题都可以很直接的以一种递归的思想去求解问题，因为这些题都有一个共同的鲜明的特点：<strong>解答一定在问题规模的最后</strong></p>
+<p>但是这道题根本无从下手递归，因为我固化了思维：<strong>解答不一定是在最后，可以在任何地方，所以不知道从哪开始递</strong>，所以我不能代入递归的思想去求解</p>
+<p>但是我们先不看答案可能在哪里，本质上说，我们处理序列的过程依然是一个从一端到另一端，<strong>这也是一个传递的过程！</strong>至于答案在哪，我们在边传递的时候，<strong>就边比较边记录就好了！</strong></p>
+<h5 id="转变思维到可传递">转变思维到可传递</h5>
+<p>所以我们隐约看出，貌似有一种可传递的求解过程，如果我们将序列从头到尾传递求解的话，不难想出，这个<strong>“递归”</strong>的<strong>边界</strong>就是序列的第一个元素，而我们递到最后一个元素，则是<strong>最优子序列</strong></p>
+<p>现在还剩最重要的问题——<strong>状态转移方程的求解</strong>，我们再从传递过程的角度来深入分析一下，假如边界是<code>nums[0]</code>，则可以直接从<code>nums[1]</code>开始，且此时rMax=-2：</p>
+<ol>
+<li>当前考虑<code>[-2， 1]</code>，程序从-2传递到1，那么在1这里我要进行什么样的选择呢？我得考虑（-2+1）和（1）谁更大，而且既然考虑到1了，那么我们每次的考虑都得包含1，因为题目要求的是连续子序列；考虑完的结果是当前最大的rMax是（1）=1；往下传递；</li>
+<li>当前考虑<code>[-2，1，-3]</code>，有（-2+1+-3）、（1+-3）、（-3），如何进行选择呢？首先（-2+1+-3）可以不用考虑，为什么？因为（-2+1）在上一轮已经被否定掉了，所以我们直接拿上一轮的rMax和-3一起考虑，因为必须是连续的子序列，所以就在（rMax）+（-3）和（-3）当作选择，选出的这轮选择的rMax=（rMax）+（-3）=（1+-3）=-2</li>
+<li>当前考虑<code>[-2，1，-3，4]</code>，前面的就不用再多考虑了，直接对比（rMax）+（4）和（4），选中rMax=（4）=4</li>
+<li>当前考虑<code>[-2，1，-3，4，-1]</code>，rMax=Max（（rMax）+（-1），（-1））=（4，-1）=3</li>
+<li>当前考虑<code>[-2，1，-3，4，-1，2]</code>，rMax=Max（（rMax）+（2），（2））=（4，-1，2）=5</li>
+<li>当前考虑<code>[-2，1，-3，4，-1，2，1]</code>，rMax=Max（（rMax）+（1），（1））=（4，-1，2，1）=6</li>
+<li>当前考虑<code>[-2，1，-3，4，-1，2，1，-5]</code>，rMax=Max（（rMax）+（-5），（-5））=（4，-1，2，1，-5）=-1</li>
+<li>当前考虑<code>[-2，1，-3，4，-1，2，1，-5，4]</code>，rMax=Max（（rMax）+（4），（4））=（4，-1，2，1，-5，4）=3</li>
+</ol>
+<p>传递完毕，我们每一轮都将当前的<code>nums[i]</code>当作最大子序列和的<strong>结尾</strong>去考虑的话，这样就只需要在循环一次的情况下从后往前考虑到每一个序列了，于是我们可以推算出<strong>状态转移方程：rMax=Max（rMax+nums[i]，nums[i]）</strong></p>
+<p>且与此同时我们可以顺便筛选出max，每次rMax求出之后就可以放到max中去（如果比上一次的max大的话）</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ms3</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> nums[<span class="hljs-number">0</span>];
+    <span class="hljs-type">int</span> <span class="hljs-variable">rMax</span>  <span class="hljs-operator">=</span> nums[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; nums.length; i++) {
+        rMax = Math.max(nums[i], rMax + nums[i]);
+        max = Math.max(max, rMax);
+    }
+    <span class="hljs-keyword">return</span> max;
+}
+</code></pre>
+<h5 id="递归？">递归？</h5>
+<p>这道题也有一种递归的解法，基本思想就是，答案的位置只有3种可能性：序列的前半部分、序列的后半部分、前半部分的后面一点加上后半部分的前面一点，我们递归左右两部分然后再算中间；</p>
+<p>这种实现最后可以做出证明，效率是**O(nlogn)**，但是实现比较难理解</p>
+<h5 id="题目变种">题目变种</h5>
+<h6 id="21：挑菜问题">2.1：挑菜问题</h6>
+<blockquote>
+<p>2018年9月10日，快手校招笔试</p>
+<p>n个菜，每个菜有好吃程度，求出一个连续吃到的好吃程度最多的菜，可以选多次，但是每道菜只吃一次，比如7道菜选2次，菜好吃程度依次为1 2 3 -2 3 -10 3，则可以选出[1,2,3,-2,3]，剩下-10，3还可以再选一次[3]，总的好吃程度是10；也可以不选菜，比如7道菜选4次，1 2 3 -2 3 -10 3中可以选[1,2,3]是一次[3]是一次[3]又是一次，最后一次不选任何菜，因为只剩下-10和-2，总的好吃程度是12。</p>
+<p>输入</p>
+<p>7 2</p>
+<p>1 2 3 -2 3 -10 3</p>
+<p>输出</p>
+<p>10</p>
+<p>解释</p>
+<p>[1,2,3,-2,3] -10 [3]</p>
+<p>输入</p>
+<p>7 4</p>
+<p>1 2 3 -2 3 -10 3</p>
+<p>输出</p>
+<p>12</p>
+<p>解释</p>
+<p>[1,2,3] -2 [3] -10 [3]</p>
+</blockquote>
+<p>这题还不止是简单的最大子序列和，还涉及到选择分界的问题，比如72的case，pick one为什么可以包含-2，然后74的case中，为什么又可以避开负数</p>
+<p>时隔许久又看到这道题，一时半会没想出解，等洗个澡回来的功夫，就想到了解题思路</p>
+<p>我们使用变治法，问题是有选择地求最大子序列和，变为二分求最小某段区域的最小子序列和，这个最小子序列和必然将当前段分为最大子序列的两部分：</p>
+<ul>
+<li>比如72的case中整段的最小子序列和为-10，它将整段分为两部分，这两部分就是解；</li>
+<li>比如74的case中又72case递归而来的话，左边又求最小子序列，求得-2，又分为两部分；</li>
+</ul>
+<p>再更新，不解了这道题，这是道傻逼题；</p>
+<h4 id="3：机器人走方格">3：机器人走方格</h4>
+<blockquote>
+<p>newcoder:<a href="https://www.nowcoder.com/questionTerminal/e8bb8e68434e42acbcdff0341f2a32c5">https://www.nowcoder.com/questionTerminal/e8bb8e68434e42acbcdff0341f2a32c5</a></p>
+<p>有一个XxY的网格，一个机器人只能走格点且只能向右或向下走，要从左上角走到右下角。请设计一个算法，计算机器人有多少种走法。</p>
+<p>给定两个正整数int <strong>x</strong>,int <strong>y</strong>，请返回机器人的走法数目。保证x＋y小于等于12。</p>
+<p>测试样例：</p>
+<pre><code>2,2
+返回：2
+</code></pre>
+</blockquote>
+<p>刚开始可能不清楚怎么用DP，直到我看到<strong>“只能向右或向下走”</strong>，这句话心想，嘿，最后一格有多少种走法，不就是要么从上面下来的走法，要么从左边过来的么走法么，这俩的走法加起来就是最后一格的走法，于是马上得出：<code>F(2，2)=F（1，2）+F（2，1）</code>，这是<strong>最优子结构</strong></p>
+<p>然后一切的事情都迎刃而解了，<strong>边界</strong>：</p>
+<ol>
+<li><code>F（0，0）=0</code></li>
+<li>当x=0 || y=0时<code>F（x，y）=1</code></li>
+</ol>
+<p><strong>状态转移方程：</strong><code>F(x，y)=F（x，y - 1）+F（x - 1，y）</code></p>
+<p>接下来不多BB了，DP三连：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countWays</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span> || y == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x == <span class="hljs-number">1</span> || y == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> countWays(x - <span class="hljs-number">1</span>, y) + countWays(x, y - <span class="hljs-number">1</span>);
+}
+</code></pre>
+<p>这是递归</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countWaysMemo</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+    <span class="hljs-type">int</span>[][] memo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[x][y];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; x; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; y; j++) {
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> && j == <span class="hljs-number">0</span>) {
+                memo[i][j] = <span class="hljs-number">0</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span>) {
+                memo[i][j] = <span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                memo[i][j] = memo[i - <span class="hljs-number">1</span>][j] + memo[i][j - <span class="hljs-number">1</span>];
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> memo[x - <span class="hljs-number">1</span>][y - <span class="hljs-number">1</span>];
+}
+</code></pre>
+<p>这是备忘录</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countWaysDp</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+    <span class="hljs-type">int</span>[] pre = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[x];
+    <span class="hljs-type">int</span>[] now = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[x];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; x; i++) {
+        pre[i] = <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; y; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; x; j++) {
+            <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) {
+                now[j] = <span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                now[j] = now[j - <span class="hljs-number">1</span>] + pre[j];
+            }
+        }
+        System.arraycopy(now, <span class="hljs-number">0</span>, pre, <span class="hljs-number">0</span>, x);
+    }
+    <span class="hljs-keyword">return</span> now[x - <span class="hljs-number">1</span>];
+}
+</code></pre>
+<p>DP</p>
+<p>这道题是我第一道按照经典的DP三连的方法独立做出来的，稍微和头3例不同点，但是模式几乎一模一样，但是因为有2个输入，所以递归法的时间复杂度暂时先不好推，但是DP的时间复杂度是<strong>O(xy)<strong>，空间是</strong>O(2x)</strong></p>
+<h4 id="4：币值最大化问题">4：币值最大化问题</h4>
+<blockquote>
+<p>来源：紫皮书</p>
+<p>给定一排n个硬币，其面值均为正数c1，c2，...，cn，这些整数不一定两两不同。请问如何选择硬币，使得在其原始位置互不相邻的情况下，所选的硬币币值之和最大。</p>
+</blockquote>
+<p>分析：</p>
+<p>题目里面有一句很关键的话：<strong>“使得在其原始位置互不相邻的情况下”</strong>，那我从递归的角度去看：最后一个硬币和F（n），可能的值只有F（n-1）和F（n-2）+cn，这里又有一点不同了，这里是递归选最大值，那么状态转移方程也比较明显了：<strong>F（n）=Max（F（n-1），F（n-2）+cn）</strong></p>
+<p>来，试着一步到位：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">coinRowDp</span><span class="hljs-params">(<span class="hljs-type">int</span>[] coins)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">f2</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">f1</span> <span class="hljs-operator">=</span> coins[<span class="hljs-number">0</span>];
+    <span class="hljs-type">int</span> <span class="hljs-variable">fn</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (n &lt; coins.length + <span class="hljs-number">1</span>) {
+        fn = Math.max(f1, f2 + coins[n - <span class="hljs-number">1</span>]);
+        f2 = f1;
+        f1 = fn;
+        n += <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> fn;
+}
+</code></pre>
+<p>这里稍微有一点点绕，我们先解释一下<code>F（n）=Max（F（n-1），F（n-2）+cn）</code>，他代表的是我如果要拿第n个选择可能是什么，它可能是拿第n个硬币+第n-2个硬币，有可能是，不拿第n个硬币，拿n-1个，我们来演算一遍，假设有硬币<code>[5，1，2，10，6，2]</code>：</p>
+<ol>
+<li><code>F(0)</code>：一个硬币也不拿，币值<code>c0=0</code>；</li>
+<li><code>F(1)</code>：考虑前1个硬币，拿或者不拿的最大币值，当然是拿了：<code>c1=coins[0]</code>，5</li>
+<li><code>F(2)</code>：考虑前2个硬币，拿或者不拿第2个硬币，这个选择相当于：选<code>F(1)</code>，或者<code>c2+F(0)</code>，5</li>
+<li><code>F(3)</code>：考虑前3个硬币，拿或者不拿第3个硬币，这个选择相当于：选<code>F(2)</code>，或者<code>F(1)+c3</code>，5+2</li>
+<li><code>F(4)</code>：考虑前4个硬币，那或者不拿第4个硬币，这个选择相当于：选<code>F(3)</code>，或者<code>F(2)+c4</code>，5+10</li>
+<li><code>F(5)</code>：考虑前5个硬币，那或者不拿第5个硬币，这个选择相当于：选<code>F(4)</code>，或者<code>F(3)+c5</code>，5+10</li>
+<li><code>F(6)</code>：考虑前6个硬币，那或者不拿第6个硬币，这个选择相当于：选<code>F(5)</code>，或者<code>F(4)+c6</code>，5+10+2</li>
+</ol>
+<p>这么来说的话，一目了然了吧？其中f1代表的是F(n-1)，f2代表F(n-2)</p>
+<h4 id="5：硬币找零问题">5：硬币找零问题</h4>
+<blockquote>
+<p>有硬币d1-dj，且d1 &lt; d2 &lt; d3 &lt; ... &lt; dj，其中d1=1</p>
+<p>，需要找零n，求最少的硬币数；</p>
+<p>比如有硬币1，3，4；找零6，输出2（两个3硬币）</p>
+</blockquote>
+<p>这道题还是递归考虑，定义<code>F(n)</code>为找n需要的最少硬币数，那么<code>F(6)</code>那么我最后一颗硬币有3种取法：</p>
+<ol>
+<li>我可以取1，那么<code>F(6)=F(6-1)+1</code>，也就是找零5的时候所需最少硬币数+1</li>
+<li>我可以取3，那么<code>F(6)=F(6-3)+1</code>，</li>
+<li>我可以取4，那么<code>F(6)=F(6-4)+1</code>，</li>
+</ol>
+<p>这几种取法取最小的硬币数，再比如<code>F(3)</code>有如下取法：<code>F(3)=F(3-1)+1</code>或者<code>F(3)=F(3-3)+1</code>，在这里我们可以触摸到<strong>边界</strong>，<code>F(0)=0</code>，顺便补上<code>F(1)=1</code>（因为d1=1），于是最优子结构出来了，用单一的式子可能难以描述：<code>F(n)=min{F(n-dj)}+1</code>，<strong>其中j从1开始，一直到dj&lt;=n</strong></p>
+<p>为什么我会提它？它有两点值得我们注意：</p>
+<ol>
+<li>你发现他即使到了F(6)，也还是会用到F(2)，所以这个DP可不能简化掉备忘录，备忘录是必须的；</li>
+<li>申请备忘录的技巧，数组的下标和问题中的自然数总是会引起严重的逻辑偏差问题，所以申请备忘录的时候，还是严格对齐自然数吧，详细的我们贴了代码再说；</li>
+</ol>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">changeMaking</span><span class="hljs-params">(<span class="hljs-type">int</span>[] coins, <span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-type">int</span>[] fn = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];
+    fn[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    fn[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n + <span class="hljs-number">1</span>; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> n;
+        <span class="hljs-type">int</span> <span class="hljs-variable">coinIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (coinIndex &lt; coins.length && i &gt;= coins[coinIndex]) {
+            temp = Math.min(fn[i - coins[coinIndex]], temp);
+            coinIndex++;
+        }
+        fn[i] = temp + <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> fn[n];
+}
+</code></pre>
+<p>可以看到，我们的fn是申请的n+1个空间，为什么？因为我们要严格对齐自然数和题意，防止逻辑错乱，比如说你真的不能偷懒去用<code>fn[0]</code>去代表<code>F(1)</code></p>
+<h4 id="6：硬币收集问题">6：硬币收集问题</h4>
+<blockquote>
+<p>在n*m格木板中放有一些硬币，每格的硬币数目最多为1个。机器人从木板左上方走到右下方，只能往下走或者往右走一格，求机器人可能收集到的最大硬币数。</p>
+<p>输入：一个n*m的二维数组，元素值为1代表有硬币，0代表没有；</p>
+<p>输出：最大硬币数</p>
+</blockquote>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+    <span class="hljs-type">int</span>[][] coinMap = {{<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>},{<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>},{<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>}};
+    System.out.println(collectionMemo(coinMap));
+    System.out.println(collectionDp(coinMap));
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">collectionMemo</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] coinMap)</span> {
+    <span class="hljs-type">int</span>[][] fn = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[coinMap.length][coinMap[<span class="hljs-number">0</span>].length];
+    fn[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = coinMap[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; coinMap.length; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; coinMap[<span class="hljs-number">0</span>].length; j++) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">n1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-type">int</span> <span class="hljs-variable">m1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span>) {
+                n1 = fn[i - <span class="hljs-number">1</span>][j];
+            }
+            <span class="hljs-keyword">if</span> (j != <span class="hljs-number">0</span>) {
+                m1 = fn[i][j - <span class="hljs-number">1</span>];
+            }
+            fn[i][j] = Math.max(n1, m1) + coinMap[i][j];
+        }
+    }
+    <span class="hljs-keyword">return</span> fn[coinMap.length - <span class="hljs-number">1</span>][coinMap[<span class="hljs-number">0</span>].length - <span class="hljs-number">1</span>];
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">collectionDp</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] coinMap)</span> {
+    <span class="hljs-type">int</span>[] preFn = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[coinMap[<span class="hljs-number">0</span>].length];
+    preFn[<span class="hljs-number">0</span>] = coinMap[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; preFn.length; i++) {
+        preFn[i] = preFn[i - <span class="hljs-number">1</span>] + coinMap[<span class="hljs-number">0</span>][i];
+    }
+    <span class="hljs-type">int</span> m1;
+    <span class="hljs-type">int</span> <span class="hljs-variable">fn</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; coinMap.length; i++) {
+        m1 = preFn[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; coinMap[<span class="hljs-number">0</span>].length; j++) {
+            fn = Math.max(m1, preFn[j]) + coinMap[i][j];
+            m1 = fn;
+            preFn[j] = fn;
+        }
+    }
+    <span class="hljs-keyword">return</span> fn;
+}
+</code></pre>
+<h4 id="7：-背包问题">7： 背包问题</h4>
+<blockquote>
+<p>给定n个重量为W1,W2,W3...Wn且价值为V1,V2,V3...Vn的物品，现有一个称重为W的背包，求背包能装下物品的最大价值</p>
+<p>具体解析参考紫皮书，把状态转移公式写出来了就没什么问题了</p>
+</blockquote>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">mostValuableLoading</span><span class="hljs-params">(<span class="hljs-type">int</span>[] iw, <span class="hljs-type">int</span>[] iv, <span class="hljs-type">int</span> w)</span> {
+    <span class="hljs-type">int</span>[] tmp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w + <span class="hljs-number">1</span>];
+    <span class="hljs-type">int</span>[] next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[w + <span class="hljs-number">1</span>];
+    tmp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; tmp.length; i++) {
+        <span class="hljs-keyword">if</span> (i &gt;= iw[<span class="hljs-number">0</span>]) {
+            tmp[i] = iv[<span class="hljs-number">0</span>];
+        }
+    }
+    <span class="hljs-comment">// F (i, j) = / max(F(i - 1, j), Vi + F(i - 1, j - Wi))    j - Wi &gt;= 0</span>
+    <span class="hljs-comment">//            \ F(i - i, j)                                j - Wi &lt; 0</span>
+    <span class="hljs-comment">// i represent as item number</span>
+    <span class="hljs-comment">// j represent as weight</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; iw.length; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; next.length; j++) {
+            <span class="hljs-keyword">if</span> (j - iw[i] &lt; <span class="hljs-number">0</span>) {
+                next[j] = tmp[j];
+            } <span class="hljs-keyword">else</span> {
+                next[j] = Math.max(tmp[j], iv[i] + tmp[j - iw[i]]);
+            }
+        }
+        System.arraycopy(next, <span class="hljs-number">0</span>, tmp, <span class="hljs-number">0</span>, w + <span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> next[w];
+}
+</code></pre>
+<h3 id="参考：">参考：</h3>
+<blockquote>
+<p>[1]DP到金矿的参考</p>
+<p><a href="https://www.sohu.com/a/153858619_466939">https://www.sohu.com/a/153858619_466939</a>
+《算法设计与分析基础》（紫皮书）</p>
+<p>[2]Maximum-SubArray的参考</p>
+<p><a href="https://blog.csdn.net/zwzsdy/article/details/80029796">https://blog.csdn.net/zwzsdy/article/details/80029796</a>
+<a href="https://www.cnblogs.com/coderJiebao/p/Algorithmofnotes27.html">https://www.cnblogs.com/coderJiebao/p/Algorithmofnotes27.html</a></p>
+</blockquote>

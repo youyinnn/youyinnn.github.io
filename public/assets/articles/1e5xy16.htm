@@ -1,0 +1,343 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>小心点，一不小心你就栽跟头了 👻</p>
+<p></div></p>
+<h3 id="你画我猜">你画我猜</h3>
+<p>下面程序输出多少？</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    i += i -= i *= i;
+    System.out.println(i);
+}
+</code></pre>
+<p>答案：0</p>
+<h3 id="你对java运算符了解多少？">你对Java运算符了解多少？</h3>
+<ul>
+<li>你知道Java里有哪几种运算符嘛？</li>
+<li>你知道<code>-=</code>是算数运算符还是赋值运算符嘛？</li>
+<li>你知道是<code>|</code>和<code>||</code>到底哪个才是短路嘛？</li>
+<li>你知道怎么不用<code>*</code>或<code>/</code>做2的倍数的乘除运算嘛？</li>
+<li>你知道<code>&gt;&gt;</code>和<code>&gt;&gt;&gt;</code>有什么区别嘛？</li>
+<li>你知道<code>-1 &gt;&gt;&gt; 1 = 2147483647 </code>怎么来的嘛？</li>
+<li>你知道<code>&lt;&lt;&lt;</code>代表什么意思嘛？</li>
+<li>你知道还有一种运算符它里面全是字母没有符号嘛？</li>
+<li>上面的问题你如果有一大半不会，那你还不觉得Java运算符里有阴谋吗？</li>
+</ul>
+<h3 id="运算符种类">运算符种类</h3>
+<h4 id="算数运算符">算数运算符</h4>
+<p>没得说，加减乘除模，+、-、*、/、%</p>
+<h4 id="一元运算符">一元运算符</h4>
+<ul>
+<li><strong>-，</strong>负号运算符</li>
+<li><strong>+，</strong>正号运算符（还有这玩意？你不知道吧？）</li>
+<li><strong>++，</strong>自加运算符，注意前后</li>
+<li><strong>--，</strong>自减运算符，注意前后</li>
+<li><strong>!，</strong>非运算符，用于逻辑语句改是非</li>
+</ul>
+<h4 id="赋值运算符">赋值运算符</h4>
+<ul>
+<li><strong>=，</strong>就这一个</li>
+</ul>
+<h4 id="复合赋值运算符">复合赋值运算符</h4>
+<ul>
+<li><strong>+=</strong>, for adding left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>-=</strong>, for subtracting left operand with right operand and then assigning it to variable on the left.</li>
+<li>***=**, for multiplying left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>/=</strong>, for dividing left operand with right operand and then assigning it to variable on the left.</li>
+<li><strong>^=</strong>, for raising power of left operand to right operand and assigning it to variable on the left.</li>
+<li><strong>%=</strong>, for assigning modulo of left operand with right operand and then assigning it to variable on the left.</li>
+</ul>
+<p>都不解释了，需要注意的是，赋值运算式这个表达式本身的结果是求出的值，因为要赋值，所以运算式的左边必须是一个变量，因为只有变量才能够赋值</p>
+<p>Leetcode有一道题：</p>
+<p>求 <code>1+2+...+n</code> ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
+<p>因为不能使用循环，所以就使用递归去记录乘积，因为不能使用判断语句，所以我们使用逻辑运算符去短路递归</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumNums</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> n &gt; <span class="hljs-number">0</span> && (n += sumNums(n - <span class="hljs-number">1</span>)) &gt; <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> n;
+}
+</code></pre>
+<p>第二行<code>n += sumNums(n - 1)</code>是即赋值又求值，所以该表达式的值为<code>n + sumNums(n - 1)</code>，因此可以配合比较运算符求出布尔值</p>
+<h4 id="关系运算符">关系运算符</h4>
+<ul>
+<li><strong>== , Equal to :</strong> returns true of left hand side is equal to right hand side.</li>
+<li><strong>!= , Not Equal to :</strong> returns true of left hand side is not equal to right hand side.</li>
+<li><strong>&lt; , less than :</strong> returns true of left hand side is less than right hand side.</li>
+<li><strong>&lt;= , less than or equal to :</strong> returns true of left hand side is less than or equal to right hand side.</li>
+<li><strong>&gt; , Greater than :</strong> returns true of left hand side is greater than right hand side.</li>
+<li><strong>&gt;= , Greater than or equal to:</strong> returns true of left hand side is greater than or equal to right hand side.</li>
+</ul>
+<h4 id="逻辑运算符">逻辑运算符</h4>
+<ul>
+<li>**&& , **短路与</li>
+<li>**|| ,**短路或</li>
+<li><strong>&，</strong>非短路与</li>
+<li><strong>|，</strong>非短路或</li>
+</ul>
+<h4 id="三元运算符">三元运算符</h4>
+<pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">2</span>;
+</code></pre>
+<h4 id="位运算符">位运算符</h4>
+<ul>
+<li><strong>&，</strong>二进制和运算</li>
+<li><strong>|，</strong>二进制或运算</li>
+<li><strong>^，</strong>二进制异或预算</li>
+<li><strong>~，</strong>二进制逆运算</li>
+</ul>
+<h4 id="位移运算符以及二进制补码位移规则">位移运算符以及二进制补码位移规则</h4>
+<ul>
+<li><strong>&lt;&lt; ,<strong>有符号左移，</strong>丢弃最高位，低位补0</strong> </li>
+<li><strong>&gt;&gt; , <strong>有符号右移，</strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃</strong> </li>
+<li><strong>&gt;&gt;&gt; ,</strong> 无符号左移，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong></li>
+</ul>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testShift</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">8</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">7</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;
+    System.out.println(a &gt;&gt; <span class="hljs-number">1</span>);
+    System.out.println(a &gt;&gt; <span class="hljs-number">2</span>);
+    System.out.println(b &lt;&lt; <span class="hljs-number">1</span>);
+    System.out.println(b &lt;&lt; <span class="hljs-number">2</span>);
+    System.out.println(c &gt;&gt; <span class="hljs-number">1</span>);
+    System.out.println(c &gt;&gt;&gt; <span class="hljs-number">1</span>);
+    System.out.println(c &gt;&gt;&gt; <span class="hljs-number">2</span>);
+}
+</code></pre>
+<pre><code class="hljs language-console">4 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0100 -&gt; 8 / 2
+2 // 0000 ... 0000 1000 -&gt; 0000 ... 0000 0010 -&gt; 8 / 4
+14 // 0000 ... 0000 0111 -&gt; 0000 ... 0000 1110 -&gt; 7 * 2
+28 // 0000 ... 0000 0111 -&gt; 0000 ... 0001 1100 -&gt; 7 * 4
+-1 
+2147483647
+1073741823
+</code></pre>
+<p>上面的<strong>负数计算</strong>可能看不懂，我们先复习一下数的二进制表示</p>
+<p>以有符号数来说，数的二进制表示有<strong>原码表示法</strong>、<strong>补码表示法</strong>、<strong>移码表示法</strong>我们观察以下码表</p>
+<table>
+<thead>
+<tr>
+<th align="center">真值x（十进制）</th>
+<th align="center">真值x（二进制）</th>
+<th align="center">原码</th>
+<th align="center">反码（过渡）</th>
+<th align="center">补码</th>
+<th align="center">移码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-127</td>
+<td align="center">- 0111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td align="center">- 0000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 111 1110</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+</tr>
+<tr>
+<td align="center">+0</td>
+<td align="center">+ 0000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">-0</td>
+<td align="center">- 0000 0000</td>
+<td align="center"><strong>1</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 000 0000</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+1</td>
+<td align="center">+ 0000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>0</strong> 000 0001</td>
+<td align="center"><strong>1</strong> 000 0001</td>
+</tr>
+<tr>
+<td align="center">+127</td>
+<td align="center">+ 0111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>0</strong> 111 1111</td>
+<td align="center"><strong>1</strong> 111 1111</td>
+</tr>
+</tbody></table>
+<p>所以对于**-1**，Java中的的int长度为32，一步步来</p>
+<p><strong>二进制真值表示：</strong>- 0000 0000 0000 0000 0000 0000 0000 0001</p>
+<p>**二进制原码表示： ** <strong>1</strong>000 0000 0000 0000 0000 0000 0000 0001</p>
+<p>**二进制反码表示： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1110</p>
+<p>**二进制补码表示： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>我们始终都得记住这一点，<strong>计算机中的负数都是用二进制补码存储的</strong>，所以负数的二进制运算也是基于补码来算的</p>
+<p><strong>所以：</strong></p>
+<ul>
+<li><p>当我们运算：**-1 &gt;&gt; 1** 的时候，<strong>符号位不变，左边依次补上符号位，且与此同时最低位要舍弃</strong> </p>
+<p>**原补码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>**新补码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p>**得结果： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>去掉尾部多出来的1之后，整个补码表示的负数还是**-1**</p>
+</li>
+<li><p>当我们运算：**-1 &gt;&gt;&gt; 1** 的时候，<strong>符号位跟着左移，左边依次补上0，且与此同时最低位要舍弃</strong> </p>
+<p>**原补码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>**新补码： ** <strong>0</strong>111 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">1</span> &lt;---去掉</p>
+<p>**得结果： ** <strong>0</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^31 - 1 = 2147483648 - 1 = 2147483647</strong> 去计算</p>
+<p><strong>2147483647的补码正是0111 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：**-1 &gt;&gt;&gt; 2** </p>
+<p>**原补码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 1111</p>
+<p>**新补码： ** <strong>0</strong>011 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">11</span> &lt;---去掉</p>
+<p>**得结果： ** <strong>0</strong>011 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^30 - 1 = 1073741824 - 1 = 1073741823</strong> 去计算</p>
+<p><strong>1073741823的补码正是0011 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+<li><p>我们继续验算：**-9 &gt;&gt;&gt; 4**</p>
+<p>**有原码： ** <strong>1</strong>000 0000 0000 0000 0000 0000 0000 1001</p>
+<p>**有反码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 0110</p>
+<p>**有补码： ** <strong>1</strong>111 1111 1111 1111 1111 1111 1111 0111</p>
+<p>**新补码： ** <strong>0</strong>000 1111 1111 1111 1111 1111 1111 1111 <span style="color:red;font-weight:bold;">0111</span> &lt;---去掉</p>
+<p>**得结果： ** <strong>0</strong>000 1111 1111 1111 1111 1111 1111 1111</p>
+<p>这个结果我们可以简单地由：<strong>2^28 - 1 = 268435456 - 1 = 268435455</strong> 去计算</p>
+<p><strong>268435455的补码正是0000 1111 1111 1111 1111 1111 1111 1111</strong></p>
+</li>
+</ul>
+<h4 id="类型判断运算符">类型判断运算符</h4>
+<p>使用格式：</p>
+<pre><code class="hljs language-java">    object <span class="hljs-keyword">instanceof</span> Class/SubClass/Interface
+</code></pre>
+<h4 id="位运算符位移运算符的使用场景">位运算符/位移运算符的使用场景</h4>
+<h5 id="2的次幂快速乘除运算">2的次幂快速乘除运算</h5>
+<p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
+<h5 id="快速模2奇偶判断（不要再只会x--2--0啦）">快速模2/奇偶判断（不要再只会x % 2 == 0啦）</h5>
+<p>任意数与1取位与，结果为1则是奇数</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// x & 1 等价于 x % 2</span>
+System.out.println(<span class="hljs-number">3</span> & <span class="hljs-number">1</span>); <span class="hljs-comment">//1</span>
+System.out.println(<span class="hljs-number">2</span> & <span class="hljs-number">1</span>); <span class="hljs-comment">//0</span>
+</code></pre>
+<h5 id="快速两数交换不用中间值">快速两数交换/不用中间值</h5>
+<pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">999</span>;
+<span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">888</span>;
+a ^= b;
+b ^= a;
+a ^= b;
+System.out.println(a); <span class="hljs-comment">// 888</span>
+System.out.println(b); <span class="hljs-comment">// 999</span>
+</code></pre>
+<h5 id="加密解密">加密解密</h5>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testEncript</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">int</span> <span class="hljs-variable">plaintext</span> <span class="hljs-operator">=</span> <span class="hljs-number">0b00001111</span>; <span class="hljs-comment">// 0000 1111</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span>       <span class="hljs-number">0b01010101</span>; <span class="hljs-comment">// 0101 0101</span>
+    
+    <span class="hljs-comment">//encription</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">cipher</span> <span class="hljs-operator">=</span> plaintext ^ key; <span class="hljs-comment">// 0101 1010</span>
+    
+    <span class="hljs-comment">//decription</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">plaintext2</span> <span class="hljs-operator">=</span> cipher ^ key; <span class="hljs-comment">// 0000 1111</span>
+}
+</code></pre>
+<h5 id="bitmask">BitMask</h5>
+<p>什么是BitMask？一般翻译为<strong>位掩码</strong>，是一种以高效、省空间的方式对<strong>状态（status）</strong>进行<strong>设置（set）、清零（clear）、检查（check）</strong>的位运算运用。</p>
+<p>比如我们在业务中<strong>某条记录</strong>需要记录16个<strong>A业务状态</strong>，也就是需要4个bit位来记录我们的<strong>A业务状态</strong>，假设我们这条记录还有其他<strong>业务的状态</strong>，我们选择记录的第<strong>5-8位</strong>来记录<strong>A业务状态</strong>，则可以假设有如下记录：</p>
+<p><strong>record：</strong>1001 <strong>0111</strong> 0010</p>
+<p>则中间的<strong>0111</strong>才是我们真正想要操作的记录位，我们可以用<strong>BitMask</strong>来操作：</p>
+<ul>
+<li>设置<strong>BitMask：</strong>0x0<strong>F</strong>0 -&gt; 0000 <strong>1111</strong> 0000</li>
+<li>对于<strong>检查（check）</strong>：<strong>record & mask</strong></li>
+<li>对于<strong>清零（clear）</strong>：<strong>record & ~mask</strong></li>
+<li>对于<strong>设置（set）</strong>：<strong>record & ~mask | status binary code</strong></li>
+</ul>
+<pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testBitMask</span><span class="hljs-params">()</span>{
+    <span class="hljs-comment">// Mask: 0000 1111 0000 -&gt; 0x0F0 -&gt; 240</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">mask</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x0F0</span>;
+    <span class="hljs-comment">// Record: 0111 0011 1111 -&gt; 0x73F -&gt; 1855</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">record</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x73F</span>;
+    <span class="hljs-type">int</span> status;
+    <span class="hljs-comment">// check</span>
+    status = record & mask;
+    System.out.println(status); <span class="hljs-comment">// 48 -&gt; 0000 0011 0000</span>
+    <span class="hljs-comment">// clear</span>
+    status = record & ~mask;
+    System.out.println(status); <span class="hljs-comment">// 1807 -&gt; 0111 0000 1111</span>
+    <span class="hljs-comment">// set</span>
+    status = record & ~mask | <span class="hljs-number">0x060</span>;
+    System.out.println(status); <span class="hljs-comment">// 1903 -&gt; 0111 0110 1111</span>
+}
+</code></pre>
+<h3 id="bitmap算法">BitMap算法</h3>
+<p>类似于BitMask的思想，只不过BitMap是用于大量单一数据的状态，比如问题：</p>
+<p>给定范围<code>[1-10]</code>中取任意5个数字，再任意给一个数字n，判断这个数字是否被获取过。</p>
+<p>假设被取出的数字为<code>[5,7,1,9,3]</code>我们可以用一个数组表示范围内的数字，其中数组的元素占计算机中的1位：</p>
+<pre><code class="hljs language-graph">┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐┌---┐
+| 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 || 1 || 0 |
+└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘└---┘
+  0    1    2    3    4    5    6    7    8    9
+</code></pre>
+<p>而在Java中：</p>
+<table>
+<thead>
+<tr>
+<th>简单类型</th>
+<th>boolean</th>
+<th>byte</th>
+<th>char</th>
+<th>short</th>
+<th>Int</th>
+<th>long</th>
+<th>float</th>
+<th>double</th>
+<th>void</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二进制位数</td>
+<td>1</td>
+<td>8</td>
+<td>16</td>
+<td>16</td>
+<td>32</td>
+<td>64</td>
+<td>32</td>
+<td>64</td>
+<td>--</td>
+</tr>
+<tr>
+<td>封装器类</td>
+<td>Boolean</td>
+<td>Byte</td>
+<td>Character</td>
+<td>Short</td>
+<td>Integer</td>
+<td>Long</td>
+<td>Float</td>
+<td>Double</td>
+<td>Void</td>
+</tr>
+</tbody></table>
+<p>布尔类型符合数组要求，于是申请<code>boolean[] map = new boolean[10]</code>，然后进行后续操作</p>
+<h4 id="题1：40亿">题1：40亿</h4>
+<p><strong>给40亿个不重复的Unsigned Int的整数，乱序，然后再给一个数，如何快速判断这个数是否在那40亿个数当中，要求内存限制2GB；</strong></p>
+<p>40亿个<strong>Unsigned Int</strong>的整数，如果放到内存， 那就是大约16G的空间：</p>
+<p>一个整型32bit，占4B，那么40亿个4B就是160亿B，</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">MB</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">10</span><span class="mord cjk_fallback">亿</span></span></span></span></span></span>
+而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
+<p>而在Java中，JDK也有可供使用的BitMap，叫做<code>BitSet</code>类，但是它只能存储0到<code>Integer.MAX_VALUE</code>也就是21亿多，所以我们可以使用Lucene提供的工具类<code>org.apache.lucene.util.LongBitSet</code>，它最大支持千亿量级的位图（具体应该是看机器配置）</p>
+<p>我们设定一个43亿比特位的<code>LongBitSet</code>需要占用约520MB的内存</p>
+<p>不要想当然地说使用boolean数组，虽然一个boolean变量占1比特，但是除了要补位之外，boolean数组的内存占用大小可不是单只按照bit来计算的，一样是4Byte来计算，所以初始化一个<code>new boolean[Integer.MAX_VALUE - 2]</code>这样的事情不可取，经过测试，一个<code>new boolean[Integer.MAX_VALUE / 2]</code>的数组就需要1G内存，所以还是使用<code>BitSet</code>或者<code>LongBitSet</code>好</p>
+<hr>
+<p><strong>参考</strong></p>
+<p><a href="https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators">https://www.geeksforgeeks.org/operators-in-java/#Unary%20Operators</a></p>
+<p><a href="http://www.52ij.com/jishu/102.html">http://www.52ij.com/jishu/102.html</a></p>
+<p><a href="https://segmentfault.com/q/1010000005850046">https://segmentfault.com/q/1010000005850046</a></p>
+<p><a href="https://blog.csdn.net/tangxiaoyin/article/details/80123142">https://blog.csdn.net/tangxiaoyin/article/details/80123142</a></p>
+<p><a href="https://www.cnblogs.com/wuyudong/p/bitmap.html">https://www.cnblogs.com/wuyudong/p/bitmap.html</a></p>

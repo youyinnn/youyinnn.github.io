@@ -1,0 +1,485 @@
+<h4 id="arraylist类">ArrayList类</h4>
+<p>对终于要正式开始读<strong>ArrayList</strong>的源码了，虽然<strong>ArrayList</strong>的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟</p>
+<p>这个计划搁置了很久，大概有15天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习offer有没有已经不重要了，<strong>剑指秋招！</strong></p>
+<p>为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近1小时手撸了一个ArrayList的自实现，再搭配源码来看<strong>自己在基础方法上有哪些没考虑到的点</strong>，以及<strong>实际投入使用的ArrayList到底优秀在哪里</strong></p>
+<h4 id="源码">源码</h4>
+<h5 id="类头">类头</h5>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt;
+        <span class="hljs-keyword">implements</span> <span class="hljs-title class_">List</span>&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+    <span class="hljs-comment">//...</span>
+}
+</code></pre>
+<p>首先继承了<code>AbstractList</code></p>
+<p>我们顺着<code>AbstractList</code>往里摸，一直到最后我们发现，还有<strong>Collection接口和Iterable接口</strong>，这两个接口加上<strong>List接口</strong>为我们提供了非常重要的集合接口规范</p>
+<p>然后我们往下看</p>
+<h5 id="成员变量">成员变量</h5>
+<p>ArrayList这个类的成员变量并不复杂</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// 这是默认的容器长度</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_CAPACITY</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
+
+<span class="hljs-comment">// 这是一个空的容器数组</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] EMPTY_ELEMENTDATA = {};
+
+<span class="hljs-comment">// 这是默认容量的空的容器数组 用这个数组和上面那个数组对比</span>
+<span class="hljs-comment">// 来分辨出第一个元素被添加进来的时候到底有多膨胀</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
+<span class="hljs-comment">// 存储元素的数组</span>
+<span class="hljs-comment">// ArrayList的容量就是这个数组的长度</span>
+<span class="hljs-comment">// 在空数组的情况下 如果 elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span>
+<span class="hljs-comment">// 那么我们加入第一个元素的时候会选择以DEFAULT_CAPACITY为初试容量去扩展容器</span>
+<span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// non-private to simplify nested class access</span>
+
+<span class="hljs-comment">// 包含元素的个数 我更愿意将size叫成是载量</span>
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> size;
+</code></pre>
+<p>其中最重要的显然就是<strong>elementData</strong>这个变量了，它就是整个容器的核心</p>
+<p>其次就是<strong>size</strong>这个变量，在<strong>线性结构</strong>中，我们常接触到的两个概念：<strong>capacity（容量）、size（大小）</strong></p>
+<p>前者表示容器<strong>能装多少</strong>，后者表示容器<strong>装了多少</strong>，但我们使用后者的时候，总说<strong>“这个容器大小是多少”</strong>，这个<strong>”大小“</strong>的说法很容易和<strong>“容量”</strong>混为一谈</p>
+<p>所以我更愿意将<strong>size</strong>叫成是<strong>载量（loaded size）</strong></p>
+<p>在这里我们还需要留意一个变量，这个变量来自于<strong>AbstractList抽象类</strong></p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">transient</span> <span class="hljs-type">int</span> <span class="hljs-variable">modCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+</code></pre>
+<p>这个值记录着List的<strong>结构被改变的次数</strong>，结构改变指的是<strong>任何会影响到size的操作</strong>
+因为这些改动，可能会<strong>扰乱容器结构</strong>，而导致迭代过程会出现错误的结果
+这个变量会在迭代器中去补充一些逻辑，比如非法的修改会扰乱迭代过程，则<strong>会抛出异常</strong>
+如果子类也要用到这个变量，要求<strong>每一个可能改动容器结构的操作都需要调用一次这个变量</strong></p>
+<h5 id="构造方法">构造方法</h5>
+<p>总共有三个，我们只关心前两个就好了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">ArrayList</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span> {
+    <span class="hljs-keyword">if</span> (initialCapacity &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">this</span>.elementData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[initialCapacity];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (initialCapacity == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">this</span>.elementData = EMPTY_ELEMENTDATA;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Illegal Capacity: &quot;</span>+
+                                           initialCapacity);
+    }
+}
+<span class="hljs-keyword">public</span> <span class="hljs-title function_">ArrayList</span><span class="hljs-params">()</span> {
+    <span class="hljs-built_in">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+</code></pre>
+<p>这里给出了我们的两个常量<strong>EMPTY_ELEMENTDATA</strong>和<strong>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</strong>的去处，在我的自实现里，<strong>无论是哪种方法我都选择了new出数组对象</strong>，而这里还会有点偷懒，如果没有指定容量的话，则并不会**new Object[DEFAULT_CAPACITY]**，等到真正要加入元素的时候，才创建对象，这在下面add方法的时候会看到</p>
+<h5 id="成员方法">成员方法</h5>
+<p>接下来我们进入成员方法部分</p>
+<h6 id="trimtosize">trimToSize</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">trimToSize</span><span class="hljs-params">()</span> {
+    modCount++;
+    <span class="hljs-keyword">if</span> (size &lt; elementData.length) {
+        elementData = (size == <span class="hljs-number">0</span>)
+          ? EMPTY_ELEMENTDATA
+          : Arrays.copyOf(elementData, size);
+    }
+}
+</code></pre>
+<p>首当其冲就是这个方法 该方法用于<strong>修剪容器的容量</strong></p>
+<p>怎么个<strong>修剪</strong>法？将容器的<strong>”容量“</strong>修剪为当前列表的<strong>载量</strong>，其目的是为了<strong>优化容器对象所占存储空间</strong></p>
+<p>比如我们容器初始容量为10，里面装了3个元素，那么就有<strong>7个元素空间是被null占着的</strong></p>
+<p>假设我们容器的使用场景总是在小于等于3的情况下工作，那么我们就可以把容器的容量修剪一下</p>
+<p><strong>修剪前：</strong>[a, b, c, <strong>null, null, null, null, null, null, null</strong>]</p>
+<p><strong>修剪后：</strong>[a, b, c]</p>
+<p>并且<strong>修剪</strong>操作会访问<strong>modCount</strong>变量，意味着这告诉容器的<strong>迭代器</strong>，这个修剪方法可能会<strong>扰乱迭代过程</strong></p>
+<p>在修剪的时候，我们看到了这样的一个方法：<strong>Arrays.copyOf(elementData, size)</strong></p>
+<h6 id="arrayscopyof">Arrays.copyOf</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; T[] copyOf(T[] original, <span class="hljs-type">int</span> newLength) {
+    <span class="hljs-keyword">return</span> (T[]) copyOf(original, newLength, original.getClass());
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T,U&gt; T[] copyOf(U[] original, <span class="hljs-type">int</span> newLength, Class&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">T</span>[]&gt; newType) {
+    T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+    System.arraycopy(original, <span class="hljs-number">0</span>, copy, <span class="hljs-number">0</span>,
+                     Math.min(original.length, newLength));
+    <span class="hljs-keyword">return</span> copy;
+}
+</code></pre>
+<p>重点是<strong>line：10</strong>，整个方法是按照<strong>源数组的长度（original.length）</strong>以及<strong>新长度（newLength）</strong>的最小值去复制数组的</p>
+<h6 id="ensurecapacity">ensureCapacity</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">minExpand</span> <span class="hljs-operator">=</span> (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+        ? <span class="hljs-number">0</span>
+        : DEFAULT_CAPACITY;
+
+    <span class="hljs-keyword">if</span> (minCapacity &gt; minExpand) {
+        ensureExplicitCapacity(minCapacity);
+    }
+}
+</code></pre>
+<p>这个方法用于提升容器的容量，这个方法告诉容器：<strong>至少要保证根据传入的最小容量（minCapacity）参数那么多的容量</strong></p>
+<p>在这个方法里的选择是：</p>
+<ul>
+<li>对于<strong>最小扩容量（minExpand）</strong>，如果当前容器为空容器，则最小扩容量为<strong>DEFAULT_CAPACITY（10）</strong>，如果容器<strong>不是空容器</strong>，则最<strong>小扩容量为0</strong></li>
+<li>一旦<strong>最小容量（minCapacity）&gt; 最小扩容量（minExpand）</strong>，则需要<strong>确保显式容量</strong></li>
+</ul>
+<p>这里的理解有点绕，我们把它放到场景去分析一下：</p>
+<p><strong>场景1，空容器：</strong></p>
+<p>空容器传进来，<strong>minExpand</strong>就得<strong>DEFAULT_CAPACITY</strong>等于10，那么如果我们传入的<strong>minCapacity</strong>甚至小于默认的容量，那你就<strong>一边呆着吧</strong></p>
+<p>如果大于10，那就<strong>按照你的来</strong>，虽然还得进<strong>ensureExplicitCapacity方法</strong>，但是看到了后面就会发现，确实是会按照你给的大于10的值来扩容</p>
+<p><strong>场景2，[ 1 / 10 ] 的容器：</strong></p>
+<p><strong>minExpand</strong>肯定是0，那么只要我们传入的传入的<strong>minCapacity</strong>大于0，是肯定可以进<strong>ensureExplicitCapacity方法</strong>的，到了方法里面我们发现，如果你给的<strong>minCapacity</strong>还没有当前容器长度的<strong>1.5倍</strong>大，那么容器至少也会扩到<strong>1.5倍</strong>而忽略你给的值，大于<strong>1.5倍</strong>救会采用你给值来扩容</p>
+<p>为什么是<strong>1.5倍</strong>？往下看就知道了</p>
+<p>我们来看<strong>ensureExplicitCapacity方法</strong></p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    modCount++;
+
+    <span class="hljs-comment">// overflow-conscious code</span>
+    <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)
+        grow(minCapacity);
+}
+</code></pre>
+<p>除了会改变容器结构，我们还得注意：当<strong>允许的最小容量（minCapacity）</strong>大于<strong>当前容器容量（elementData.length）</strong>的时候，这个时候我们就需要进行**溢出考虑(overflow-conscious)**了</p>
+<h6 id="grow">grow</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX_ARRAY_SIZE</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE - <span class="hljs-number">8</span>;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">grow</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    <span class="hljs-comment">// overflow-conscious code</span>
+    <span class="hljs-type">int</span> <span class="hljs-variable">oldCapacity</span> <span class="hljs-operator">=</span> elementData.length;
+    <span class="hljs-type">int</span> <span class="hljs-variable">newCapacity</span> <span class="hljs-operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)
+        newCapacity = minCapacity;
+    <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)
+        newCapacity = hugeCapacity(minCapacity);
+    <span class="hljs-comment">// minCapacity is usually close to size, so this is a win:</span>
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+</code></pre>
+<p>这里规定：<strong>数组最大的长度（MAX_ARRAY_SIZE）</strong>为Integer值所能表示的最大的数减8，也就是**(2^31 - 1) - 8**</p>
+<p>在方法里首先考虑<strong>新容量（newCapacity）</strong>怎么定义：</p>
+<ul>
+<li><strong>先定义新容量为旧容量的1.5倍（line：6）！</strong> </li>
+<li>一旦<strong>新容量（1.5倍）</strong>比<strong>允许的最小容量（minCapacity，这是用户期望的最小扩容量）</strong>要小，那么新容量被<strong>重新定义</strong>为允许的最小容量</li>
+<li>一旦<strong>新容量（这时候可能是期望值，也可能是1.5倍）</strong>大于<strong>数组最大的长度（MAX_ARRAY_SIZE）</strong>，那么我们就按照<strong>hugeCapacity(minCapacity)<strong>方法去</strong>重新定义新容量</strong></li>
+</ul>
+<p>于是我们发现，<strong>ArrayList</strong>的每次扩容，<strong>最少都得是原容器的1.5倍</strong></p>
+<p>对于<strong>hugeCapacity</strong></p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hugeCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    <span class="hljs-keyword">if</span> (minCapacity &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// overflow</span>
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutOfMemoryError</span>();
+    <span class="hljs-keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?
+        Integer.MAX_VALUE :
+        MAX_ARRAY_SIZE;
+}
+</code></pre>
+<p>我们知道，既然<strong>minCapacity</strong>是个<strong>int值</strong>，那么它最大值就只能为<strong>Integer.MAX_VALUE</strong>，而我们这里定义的最大的数组长度为<strong>Integer.MAX_VALUE - 8</strong>，也就是说，这个定义并不是一定的，如果我们设置的minCapacity的值在**( Integer.MAX_VALUE - 8, Integer.MAX_VALUE ]<strong>之间的话，那我们还是允许用</strong>Integer.MAX_VALUE**作为最大数组长度的</p>
+<p>这里我就有个疑问了，**-8的意义在哪里？一开始就定义到最大值不就好了？**</p>
+<p>考虑完新容量之后，开始使用<strong>Arrays.copyOf</strong>来扩展容量<strong>（grow line：12）</strong></p>
+<h6 id="contains和indexof">contains和indexOf</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object o)</span> {
+    <span class="hljs-keyword">return</span> indexOf(o) &gt;= <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">indexOf</span><span class="hljs-params">(Object o)</span> {
+    <span class="hljs-keyword">if</span> (o == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++)
+            <span class="hljs-keyword">if</span> (elementData[i]==<span class="hljs-literal">null</span>)
+                <span class="hljs-keyword">return</span> i;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++)
+            <span class="hljs-keyword">if</span> (o.equals(elementData[i]))
+                <span class="hljs-keyword">return</span> i;
+    }
+    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+}
+</code></pre>
+<p>和自实现不同的是，这里<strong>contains调用的是indexOf的实现</strong>，而且<strong>indexOf</strong>还允许<strong>查找到第一个null元素在哪里</strong>，这是我在自实现里没考虑过的</p>
+<h6 id="get和set">get和set</h6>
+<pre><code class="hljs language-java">E <span class="hljs-title function_">elementData</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    <span class="hljs-keyword">return</span> (E) elementData[index];
+}
+
+<span class="hljs-keyword">public</span> E <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    rangeCheck(index);
+
+    <span class="hljs-keyword">return</span> elementData(index);
+}
+
+<span class="hljs-keyword">public</span> E <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> {
+    rangeCheck(index);
+
+    <span class="hljs-type">E</span> <span class="hljs-variable">oldValue</span> <span class="hljs-operator">=</span> elementData(index);
+    elementData[index] = element;
+    <span class="hljs-keyword">return</span> oldValue;
+}
+</code></pre>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rangeCheck</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    <span class="hljs-keyword">if</span> (index &gt;= size)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IndexOutOfBoundsException</span>(outOfBoundsMsg(index));
+}
+</code></pre>
+<p>首先看<strong>get&set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
+<h6 id="add1">add1</h6>
+<p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> {
+    ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span>
+    elementData[size++] = e;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>
+<p>这里我们又注意到了<strong>ensureCapacityInternal</strong>这个方法</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculateCapacity</span><span class="hljs-params">(Object[] elementData, <span class="hljs-type">int</span> minCapacity)</span> {
+    <span class="hljs-keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        <span class="hljs-keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    <span class="hljs-keyword">return</span> minCapacity;
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacityInternal</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> {
+    modCount++;
+
+    <span class="hljs-comment">// overflow-conscious code</span>
+    <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)
+        grow(minCapacity);
+}
+</code></pre>
+<p>从方法名意义上去解释，当我们调用<strong>add(E e)<strong>的时候，是把元素加到数组的尾部位置，在这之前我们得先</strong>确保容器的内部容量（ensureCapacityInternal）</strong>，确保这个内部容量至少得是当前的<strong>载量（size） + 1</strong>，以这个值作为我们<strong>允许的最小容量（minCapacity）</strong></p>
+<p>也就是说，我的<strong>elementData</strong>数组至少还有最后一个位置可以让我顺利添加一个元素</p>
+<p>在确保内部容量的时候，得先<strong>计算容量（calculateCapacity）</strong>，这里面的处理没有太多的花哨，如果容器为空，而且你给的<strong>允许的最小容量（minCapacity）</strong>还不如<strong>默认容量（10）</strong>大的话，那就直接选默认容量，只要容器不为空，哪怕里面只有一个元素，你给的<strong>允许的最小容量（minCapacity）</strong>甚至只是<strong>2</strong>，那也还是用2作为<strong>参照</strong>去调整容量，但这仅仅只是<strong>参照</strong></p>
+<p>为什么说仅仅是<strong>参照</strong>？重点在<strong>ensureExplicitCapacity</strong>这里</p>
+<p>我们先理一理调用栈：</p>
+<ul>
+<li><strong>add(E e)</strong><ul>
+<li><strong>ensureCapacityInternal(size + 1)</strong><ul>
+<li><strong>calculateCapacity(elementData, minCapacity)</strong></li>
+<li><strong>ensureExplicitCapacity(calculateCapacity(elementData, minCapacity))</strong><ul>
+<li><strong>grow(minCapacity)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>准备3个场景：</p>
+<ul>
+<li>空容器，加一个元素</li>
+<li>非空容器，容器容量足够  <strong>[ 1 / 10 ]  (size &lt; element.length)</strong></li>
+<li>非空容器，容器容量已满  <strong>[ 10 / 10 ]  （size == element.length）</strong></li>
+</ul>
+<hr>
+<p>对于<strong>场景1</strong>：</p>
+<ul>
+<li><strong>add(E e)</strong><ul>
+<li><strong>ensureCapacityInternal(0 + 1)</strong><ul>
+<li><p><strong>calculateCapacity(elementData, 0 + 1)    ==》   10</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(10)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(10)<strong>的时候，因为这时候</strong>elementData</strong>其实是空的，所以会继续到<strong>grow（10）</strong></p>
+</li>
+<li><p><strong>grow（10）</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>保证完内部容量之后</strong>，可以进行<strong>elementData[size++] = e</strong>了，所以总的来说，最最最开始的时候，数组扩容肯定是一扩到10的</p>
+<p>对于<strong>场景2</strong>：</p>
+<ul>
+<li><strong>add(E e)</strong><ul>
+<li><p><strong>ensureCapacityInternal(1 + 1)</strong></p>
+<ul>
+<li><p><strong>calculateCapacity(elementData, 1 + 1)    ==》   2</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(2)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(2)<strong>的时候，因为这时候</strong>elementData.length = 10 &gt; 2</strong>，所以并不会调用<strong>grow</strong>来扩容</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
+<p>对于<strong>场景3</strong>：</p>
+<ul>
+<li><p><strong>add(E e)</strong></p>
+<ul>
+<li><p><strong>ensureCapacityInternal(10 + 1)</strong></p>
+<ul>
+<li><p><strong>calculateCapacity(elementData, 10 + 1)    ==》   11</strong></p>
+</li>
+<li><p><strong>ensureExplicitCapacity(11)</strong></p>
+<p>到了<strong>ensureExplicitCapacity(11)<strong>的时候，因为这时候</strong>elementData.length = 10 &lt; 11</strong>，所以会继续到<strong>grow（11）来进行扩容</strong></p>
+</li>
+<li><p><strong>grow（11）</strong></p>
+<p>往上翻<strong>grow</strong>会发现，这里新容量是扩展到了<strong>15</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>此时可以直接进行<strong>elementData[size++] = e</strong></p>
+<hr>
+<h6 id="add2">add2</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span>
+    System.arraycopy(elementData, index, elementData, index + <span class="hljs-number">1</span>,
+                     size - index);
+    elementData[index] = element;
+    size++;
+}
+</code></pre>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rangeCheckForAdd</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    <span class="hljs-keyword">if</span> (index &gt; size || index &lt; <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IndexOutOfBoundsException</span>(outOfBoundsMsg(index));
+}
+</code></pre>
+<p>对于<strong>index</strong>的限定：<strong>不能在载量之外，也不能小于0</strong>，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多</p>
+<h6 id="remove1">remove1</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    rangeCheck(index);
+
+    modCount++;
+    <span class="hljs-type">E</span> <span class="hljs-variable">oldValue</span> <span class="hljs-operator">=</span> elementData(index);
+
+    <span class="hljs-type">int</span> <span class="hljs-variable">numMoved</span> <span class="hljs-operator">=</span> size - index - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (numMoved &gt; <span class="hljs-number">0</span>)
+        System.arraycopy(elementData, index+<span class="hljs-number">1</span>, elementData, index,
+                         numMoved);
+    elementData[--size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// clear to let GC do its work</span>
+
+    <span class="hljs-keyword">return</span> oldValue;
+}
+</code></pre>
+<p>基本都是常规操作，但是！这里的<strong>line：11</strong>是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写<strong>elementData[--size] = null</strong>这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，<strong>将这个对象的引用摘除，好让GC管管这个被删除的元素</strong></p>
+<p>这就是真正投入使用的容器，要考虑到的事情，<strong>为用户尽可能地提高时间和空间效率！</strong></p>
+<h6 id="remove2">remove2</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object o)</span> {
+    <span class="hljs-keyword">if</span> (o == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; index &lt; size; index++)
+            <span class="hljs-keyword">if</span> (elementData[index] == <span class="hljs-literal">null</span>) {
+                fastRemove(index);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; index &lt; size; index++)
+            <span class="hljs-keyword">if</span> (o.equals(elementData[index])) {
+                fastRemove(index);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fastRemove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
+    modCount++;
+    <span class="hljs-type">int</span> <span class="hljs-variable">numMoved</span> <span class="hljs-operator">=</span> size - index - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (numMoved &gt; <span class="hljs-number">0</span>)
+        System.arraycopy(elementData, index+<span class="hljs-number">1</span>, elementData, index,
+                         numMoved);
+    elementData[--size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// clear to let GC do its work</span>
+}
+</code></pre>
+<p>常规，我在想为什么remove1里的代码不用<strong>fastRemove</strong>，这两段完全是一摸一样的</p>
+<h6 id="clear">clear</h6>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> {
+    modCount++;
+
+    <span class="hljs-comment">// clear to let GC do its work</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++)
+        elementData[i] = <span class="hljs-literal">null</span>;
+
+    size = <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>同理，很多自实现也只是将<strong>size</strong>置为零，并没扣考虑GC，但是我觉得这里是否存在一个<strong>更好的实现</strong>呢？比如说可以这样：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> {
+    modCount++;
+
+    <span class="hljs-comment">// clear to let GC do its work</span>
+    elementData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[elementData.length];
+
+    size = <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>转瞬我就想明白了，这其实是一个<strong>时间换空间的选择！</strong></p>
+<p>确实for循环一个个置空确实比较浪费时间，比如有30w个元素在容器中，我就得for30w次</p>
+<p>但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的<strong>更好的实现</strong>，那么我还得在内存中再申请<strong>30w个元素长度的数组空间</strong>，虽然看上去，我好像马上就<strong>摘除了原elementData的引用</strong>，但实际上，原<strong>elementData</strong>的数组数据仍然会在内存中停留一段时间，<strong>等待下一次GC并且GC选择回收它</strong></p>
+<p>上面只是我的推测，实际GC是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧</p>
+<h6 id="removeall和retainall">removeAll和retainAll</h6>
+<p>对于<strong>addAll、removeRange</strong>等方法的实现比较常规，基本上和上面的差不多，<strong>removeAll以及retainAll</strong>还是要研究一哈子</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">removeAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span> {
+    Objects.requireNonNull(c);
+    <span class="hljs-keyword">return</span> batchRemove(c, <span class="hljs-literal">false</span>);
+}
+</code></pre>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">retainAll</span><span class="hljs-params">(Collection&lt;?&gt; c)</span> {
+    Objects.requireNonNull(c);
+    <span class="hljs-keyword">return</span> batchRemove(c, <span class="hljs-literal">true</span>);
+}
+</code></pre>
+<p>这两个方法很相似，作用恰好相反，</p>
+<ul>
+<li><strong>removeAll是移除交集元素，留下补集元素</strong></li>
+<li><strong>retainAll是移除补集元素，保留交集元素</strong></li>
+</ul>
+<p>两个方法都调用了<strong>bantchRemove</strong>方法</p>
+<p>为了方便理解，我们将<strong>bantchRemove</strong>源码中的</p>
+<ul>
+<li><strong>complement重命名为justComplement，这个变量标识是取补集还是交集</strong></li>
+<li><strong>r重命名为readIndex，标识到元素的下标</strong></li>
+<li><strong>w重命名为writeIndex，标识写到元素的下标</strong></li>
+</ul>
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">batchRemove</span><span class="hljs-params">(Collection&lt;?&gt; c, <span class="hljs-type">boolean</span> justComplement)</span> {
+    <span class="hljs-keyword">final</span> Object[] elementData = <span class="hljs-built_in">this</span>.elementData;
+    <span class="hljs-type">int</span> <span class="hljs-variable">readIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, writeIndex = <span class="hljs-number">0</span>;
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">modified</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">for</span> (; readIndex &lt; size; readIndex++)
+            <span class="hljs-keyword">if</span> (c.contains(elementData[readIndex]) == justComplement)
+                elementData[writeIndex++] = elementData[readIndex];
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-comment">// Preserve behavioral compatibility with AbstractCollection,</span>
+        <span class="hljs-comment">// even if c.contains() throws.</span>
+        <span class="hljs-keyword">if</span> (readIndex != size) {
+            System.arraycopy(elementData, readIndex,
+                             elementData, writeIndex,
+                             size - readIndex);
+            writeIndex += size - readIndex;
+        }
+        <span class="hljs-keyword">if</span> (writeIndex != size) {
+            <span class="hljs-comment">// clear to let GC do its work</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> writeIndex; i &lt; size; i++)
+                elementData[i] = <span class="hljs-literal">null</span>;
+            modCount += size - writeIndex;
+            size = writeIndex;
+            modified = <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> modified;
+}
+</code></pre>
+<p>我们看<strong>try块代码</strong>，代码遍历了<strong>elementData</strong>，其中这一句的解读很有意思：</p>
+<pre><code class="hljs language-java">c.contains(elementData[r]) == justComplement
+</code></pre>
+<p>在<strong>justComplement</strong>为<strong>false</strong>的情况下：</p>
+<ul>
+<li>如果c中没有原容器当前遍历到的元素，则<strong>（false == false）= true</strong>，将这个<strong>c中没有的元素</strong>覆盖到**elementData[writeIndex]**的位置</li>
+<li>如果c中有原容器当前遍历到的元素，则<strong>（true == false）= false</strong>，不进行操作，进入下次循环</li>
+</ul>
+<p>总的来说，就是<strong>把原容器和c容器中不相交的元素按顺序移到原容器的前面去了</strong></p>
+<p>同理在<strong>justComplement</strong>为<strong>true</strong>的情况下：</p>
+<ul>
+<li>如果c中没有原容器当前遍历到的元素，则<strong>（false == true）= false</strong>，不进行操作，进入下次循环</li>
+<li>如果c中有原容器当前遍历到的元素，则<strong>（true == true）= true</strong>，将这个<strong>c中有的元素</strong>覆盖到**elementData[writeIndex]**的位置</li>
+</ul>
+<p>就是<strong>把原容器和c容器中相交的元素按顺序移到原容器的前面去了</strong></p>
+<p>然后有点迷的是<strong>finally块</strong>的语句</p>
+<p>第一个判断应该是说，加入之前抛了一些异常什么的，导致上面的for循环中断了，如此一来应该是<strong>没读完原容器里的元素</strong>的，好了，没读完就算了，<strong>把剩下没读完的元素移到之前写好的元素之后</strong>，那这部分也算<strong>读到了写好了（line：16）</strong></p>
+<p>我认为这样的做法是<strong>保护未读取完的元素数据不被丢失</strong></p>
+<p>第二个判断，好了读完也写完了，现在数组中可能有三部分：</p>
+<ul>
+<li>第一部分是选择<strong>写下的元素序列</strong>，这部分<strong>有效</strong></li>
+<li>第二部分可能是之前出错了，没读完的元素但是我移动到紧接着第一部分序列的后边了，这部分也<strong>有效</strong></li>
+<li>第三部分就是第二部分往前移动之前剩下的一些错位的元素，这部分不应该被访问到，所以<strong>无效</strong></li>
+</ul>
+<p>读完写完之后，**(writeIndex != size)<strong>这样的条件会在什么情况下出现？第二部分真的有往前移动的时候，也就是说包含</strong>无效元素**的时候</p>
+<p>所以这时候就要<strong>摘除无效元素的引用，然后重置载量为写元素的长度</strong></p>

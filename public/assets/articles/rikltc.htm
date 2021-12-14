@@ -1,0 +1,101 @@
+<h3 id="前言">前言</h3>
+<p>本书第二版为止，其实还是针对于 Java SE 7 Specification（后简称 Spec），然而到了 Java8，情况又有很大的不同，比如最出名的 Permanent Generation，就在 8 中被 HotSpot 虚拟机移除掉了，所以这一系列的文章，我后续还需要慢慢地研究和重写</p>
+<p>然后是一篇关于 Java SE 7 Spec 的<a href="http://blog.jamesdbloom.com/JVMInternals.html#threads">好文</a></p>
+<h3 id="jvm-运行时数据区">JVM 运行时数据区</h3>
+<p>基本上整个第二章说的都是<strong>运行时数据取区</strong>,，Java 虚拟机在执行 Java 程序的时候,，会把它所管理的内存划分为若干个不同的数据区域</p>
+<p>这些数据区域有<strong>各自的用途</strong>以及<strong>各自的生命周期</strong>(创建和销毁策略)</p>
+<p><img src="../../../public/img/jvmRuntimeDataArea2.png" alt="jvmRuntimeDataArea"></p>
+<p>我们得特别注意，这里我们再将<strong>JVM 的运行时数据区</strong>划分为：<strong>线程共享数据区</strong>，<strong>线程私有数据区</strong></p>
+<h4 id="1-程序计数器（pcr）">1. 程序计数器（PCR）</h4>
+<h5 id="作用">作用</h5>
+<p>它可以看作是<strong>当前线程程序执行的字节码的行号指示器</strong></p>
+<p>字节码解释器工作的时候，就是通过改变这个计数器里的值来选取下一条需要执行的字节码指令，程序的分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖计数器</p>
+<h5 id="特点">特点</h5>
+<ul>
+<li><strong>内存较小</strong></li>
+<li><strong>线程私有</strong>：每条线程都有自己的独立的程序计数器，各线程之间的计数器互不影响，独立存储</li>
+<li><strong>仅面对 Java 方法计数</strong>：如果线程执行的是 Java 方法，则计数器有记录，记录的是所执行字节码的指令地址，如果执行的是 Native 方法，则计数器记录为空</li>
+<li><strong>不会内存溢出</strong>：则个区域是 JVM 中唯一不会出<code>OutOfMemoryError</code>的地方</li>
+</ul>
+<h4 id="2-java-虚拟机栈（jvm-stack）">2. Java 虚拟机栈（JVM Stack）</h4>
+<h5 id="作用-1">作用</h5>
+<p>虚拟机栈描述的是<strong>Java 方法执行（注意是方法执行）的内存模型</strong></p>
+<p>当<strong>每个方法执行的同时</strong>，<strong>会创建一个栈帧（Stack Frame）</strong>用于存放<u><strong>局部变量表（这个表就是我们 Java 程序员常说的栈内存所在）</strong></u>、<u><strong>操作数栈</strong></u>、**<u>动态链接</u><strong>、</strong><u>方法出口</u>**等信息</p>
+<p>每个方法从<strong>调用</strong>到<strong>执行完成的过程</strong>，就对应着一个栈帧在虚拟机栈中入栈到出栈</p>
+<h5 id="局部变量表">局部变量表</h5>
+<h6 id="存放内容">存放内容</h6>
+<p>这里存放了编译期可知的各种：</p>
+<ul>
+<li><strong>基本数据类型</strong>（boolean、byte、char、short、int、float、long、double）</li>
+<li><strong>对象引用（reference 类型， 这个是重点，它不同于对象本身，它可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他和此对象相关的位置）</strong></li>
+<li><strong>returnAddress 类型（指向了一条字节码指令地址）</strong></li>
+</ul>
+<h6 id="特点-1">特点</h6>
+<ul>
+<li>其中 64 位长度的<strong>long 类型</strong>和<strong>double 类型</strong>数据会占用两个<strong>局部变量空间（Slot）</strong>，其他占 1 个</li>
+<li>局部变量表所需内存空间<strong>在编译器就完成分配，运行期间不会改变</strong>，当方法入栈时，运行期间栈帧所需的内存大小是<strong>完全固定的</strong></li>
+</ul>
+<h5 id="特点-2">特点</h5>
+<ul>
+<li><strong>线程私有</strong></li>
+<li><strong>两个异常</strong>：<code>StackOverflowError</code>栈深过长和<code>OutOfMemoryError</code>扩充内存时内存不够而溢出</li>
+</ul>
+<h4 id="3-本地方法栈（nm-stack）">3. 本地方法栈（NM Stack）</h4>
+<p>这个区域和<strong>JVM-Stack</strong>如出一辙，唯一不同的地方就是，<strong>JVM-Stack</strong>执行的是 Java 方法，而<strong>NM-Stack</strong>执行的是 Native 方法，这里同样也会抛出<code>StackOverflowError</code>栈深过长和<code>OutOfMemoryError</code>扩充内存时内存不够而溢出两个异常</p>
+<h4 id="4-java-堆（java-heapgc-heap）">4. Java 堆（Java Heap/GC Heap）</h4>
+<h5 id="作用-2">作用</h5>
+<p>唯一的目的就是<strong>存放对象实例</strong>，“几乎”所有的<strong>对象实例以及数组</strong>都在这里分配内存</p>
+<h5 id="特点-3">特点</h5>
+<ul>
+<li><p><strong>内存最大</strong></p>
+</li>
+<li><p><strong>线程共享：</strong> 因为存放的是所有对象的实例</p>
+</li>
+<li><p><strong>别名 GC-Heap：</strong> 是垃圾收集器（Garbage Collector）管理的主要区域</p>
+</li>
+<li><p><strong>堆内再划分：</strong> 基于<strong>CG 分代收集算法</strong>，还可细分为新生代、老年代</p>
+<p><strong>再划分的意义：</strong> 为了更好地管理回收内存，或者说更快地分配内存</p>
+</li>
+<li><p><strong>可以不连续：</strong> 内存空间可以不连续，只要逻辑连续即可</p>
+</li>
+<li><p><strong>一个异常：</strong><code>OutOfMemoryError</code></p>
+</li>
+</ul>
+<h4 id="5-方法区（method-area）">5. 方法区（Method Area）</h4>
+<h5 id="作用-3">作用</h5>
+<p>用于存储已被虚拟机加载的<strong>类信息</strong>、<strong>常量</strong>、<strong>静态变量</strong>、<strong>即时编译器编译后的代码</strong>等数据</p>
+<h5 id="特点-4">特点</h5>
+<ul>
+<li><p><strong>逻辑上是堆的一部分</strong></p>
+<blockquote>
+<p>虽然 JVM Spec 把方法区描述为堆的一个<strong>逻辑部分</strong>，但它有一个别名：Non-Heap，目的应该是表面它相比于堆的其它部分的特殊性；</p>
+</blockquote>
+</li>
+<li><p><strong>线程共享</strong></p>
+</li>
+<li><p><strong>CG 执行少：</strong></p>
+<ul>
+<li>回收内容：针对<strong>常量池的回收</strong>和对<strong>类型的卸载</strong></li>
+<li>回收难度大，尤其是类型卸载</li>
+<li>回收必要性：很有必要</li>
+</ul>
+</li>
+<li><p><strong>一个异常：</strong><code>OutOfMemoryError</code></p>
+</li>
+</ul>
+<h5 id="运行时常量池（runtime-constant-pool）">运行时常量池（Runtime Constant Pool）</h5>
+<p>它是方法区的一部分，主要存储的东西有：</p>
+<ol>
+<li>在 Class 文件中除了有类的版本、字段、方法、接口等描述信息，还有一项信息是常量池（Constant Pool Table），用于存放<strong>“编译期”生成的各种字面量和符号引用</strong>，这部分常量是运行之前就确定好了的，并且在类被加载后将这些信息<strong>转入</strong>运行时常量池存放；</li>
+<li>系统运行的过程中才确定的常量；</li>
+<li>还有编译期翻译出来的直接引用；</li>
+<li>String 类型、Integer、Double、Long、Float 等类型的字面量常量；</li>
+</ol>
+<p>所以这里也会发生 OOM</p>
+<h4 id="-6-直接内存（direct-memory）">* 6. 直接内存（Direct Memory）</h4>
+<h5 id="介绍">介绍</h5>
+<p>在 NIO 类的使用中，基于通道（Channel）和缓冲区（Buffer）的 IO 方式，它们使用的是<strong>Native 函数库直接分配的堆外内存（注意是堆外）</strong>，这部分内存并不属于堆或者 JVM 的运行时数据区内存</p>
+<p>通过堆中的一个<strong>DirectByteBuffer 对象</strong>来操作这块<strong>内存的引用</strong></p>
+<p>而在 Java 8 之后，这里又有一块区域被划分为 Metaspace，承担原 Perm Gen 区的部分功能，存储类的元数据</p>
+<h5 id="作用-4">作用</h5>
+<p>在某些场景中显著地提高性能，因为避免了<strong>Java 堆</strong>和<strong>Native 堆</strong>中来回复制数据</p>

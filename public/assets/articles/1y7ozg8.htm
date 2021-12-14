@@ -1,0 +1,426 @@
+<h3 id="introduction">Introduction</h3>
+<p>有了一些铺垫之后，我们就能开始了解一下Electron的主体功能都提供了什么东西，具体的列表可以看：<a href="https://electronjs.org/docs/api">https://electronjs.org/docs/api</a></p>
+<ul>
+<li>配置相关与对象<ul>
+<li>app：整个应用程序生命周期相关的api和事件</li>
+<li>BrowserView：创建和控制视图</li>
+<li>BrowserWindow：创建和控制浏览器窗口</li>
+<li>webContent：渲染以及控制 web 页面</li>
+<li>screen：检索有关屏幕大小、显示器、光标位置等的信息。</li>
+<li>session：管理浏览器会话、cookie、缓存、代理设置等。</li>
+<li>process：nodejs的process对象的扩展</li>
+</ul>
+</li>
+<li>UI<ul>
+<li>对话框</li>
+<li>菜单</li>
+<li>任务栏</li>
+<li>托盘</li>
+</ul>
+</li>
+<li>功能<ul>
+<li>快捷键/系统快捷键：</li>
+<li>剪切板</li>
+<li>操作文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="app">app</h3>
+<blockquote>
+<p>控制你的应用程序的事件生命周期。</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p>下面的这个例子将会展示如何在最后一个窗口被关闭时退出应用：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;window-all-closed&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  app.<span class="hljs-title function_">quit</span>()
+})<span class="hljs-title class_">Copy</span>
+</code></pre>
+<h4 id="事件">事件</h4>
+<p>一些主要的事件如启动前后、退出先后的事件</p>
+<ul>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6-will-finish-launching">事件: &#39;will-finish-launching&#39;</a></p>
+</li>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6-ready">事件: &#39;ready&#39;</a></p>
+</li>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6-window-all-closed">事件: &#39;window-all-closed&#39;</a></p>
+</li>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6%EF%BC%9Abefore-quit">事件：&#39;before-quit&#39;</a></p>
+</li>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6-will-quit">事件: &#39;will-quit&#39;</a></p>
+</li>
+<li><p><a href="https://electronjs.org/docs/api/app#%E4%BA%8B%E4%BB%B6-quit">事件: &#39;quit&#39;</a></p>
+</li>
+</ul>
+<p><strong>其他事件：</strong></p>
+<p>还有一些窗口blur和focus、webcontent创建、remote相关、crashed相关的事件</p>
+<h4 id="api">API</h4>
+<h5 id="appquit"><a href="https://electronjs.org/docs/api/app#appquit"><code>app.quit()</code></a></h5>
+<p>尝试关闭所有窗口 将首先发出 <code>before-quit</code> 事件。 如果所有窗口都已成功关闭, 则将发出 <code>will-quit</code> 事件, 并且默认情况下应用程序将终止。</p>
+<p>此方法会确保执行所有<code>beforeunload</code> 和 <code>unload</code>事件处理程序。 可以在退出窗口之前的<code>beforeunload</code>事件处理程序中返回<code>false</code>取消退出。</p>
+<h5 id="appexitexitcode"><a href="https://electronjs.org/docs/api/app#appexitexitcode"><code>app.exit([exitCode])</code></a></h5>
+<ul>
+<li><code>exitCode</code> Integer (可选)</li>
+</ul>
+<p>立即退出程序并返回 <code>exitCode</code>。<code>exitCode</code> 的默认值是 0。</p>
+<p>所有窗口都将立即被关闭，而不询问用户，而且 <code>before-quit</code> 和 <code>will-quit</code> 事件也不会被触发。</p>
+<h5 id="apprelaunchoptions"><a href="https://electronjs.org/docs/api/app#apprelaunchoptions"><code>app.relaunch([options])</code></a></h5>
+<ul>
+<li><code>options</code> Object (可选)<ul>
+<li><code>args</code> String</li>
+<li><code>execPath</code> String (可选)</li>
+</ul>
+</li>
+</ul>
+<p>从当前实例退出，重启应用。</p>
+<p>默认情况下，新的实例将会使用和当前实例相同的工作目录以及命令行参数。 当设置了 <code>args</code> 参数时， <code>args</code> 将作为命令行参数传递。 当设置了 <code>execPath</code> ，<code>execPath</code> 将被执行以重新启动，而不是当前的应用程序。</p>
+<p>请注意, 此方法在执行时不会退出当前的应用程序, 你需要在调用 <code>app.relaunch</code> 方法后再执行 <code>app. quit</code> 或者 <code>app.exit</code> 来让应用重启。</p>
+<h5 id="appdisablehardwareacceleration"><a href="https://electronjs.org/docs/api/app#appdisablehardwareacceleration"><code>app.disableHardwareAcceleration()</code></a></h5>
+<p>禁用当前应用程序的硬件加速。</p>
+<p>这个方法只能在应用程序准备就绪（ready）之前调用。</p>
+<h5 id="appdisabledomainblockingfor3dapis"><a href="https://electronjs.org/docs/api/app#appdisabledomainblockingfor3dapis"><code>app.disableDomainBlockingFor3DAPIs()</code></a></h5>
+<p>默认情况下, 如果 GPU 进程频繁崩溃, Chromium 会禁用 3D api (例如 WebGL) 直到每个域重新启动。此函数禁用该行为。</p>
+<p>这个方法只能在应用程序准备就绪（ready）之前调用。</p>
+<h5 id="appgetappmetrics"><a href="https://electronjs.org/docs/api/app#appgetappmetrics"><code>app.getAppMetrics()</code></a></h5>
+<p>返回 <a href="https://electronjs.org/docs/api/structures/process-metric"><code>ProcessMetric[]</code></a>: 包含所有与应用相关的进程的内存和CPU的使用统计的 <code>ProcessMetric</code> 对象的数组。</p>
+<h5 id="appgetgpufeaturestatus"><a href="https://electronjs.org/docs/api/app#appgetgpufeaturestatus"><code>app.getGPUFeatureStatus()</code></a></h5>
+<p>返回 <a href="https://electronjs.org/docs/api/structures/gpu-feature-status"><code>GPUFeatureStatus</code></a>-来自 <code>chrome://gpu/</code> 的图形功能状态。</p>
+<h5 id="appgetgpuinfoinfotype"><a href="https://electronjs.org/docs/api/app#appgetgpuinfoinfotype"><code>app.getGPUInfo(infoType)</code></a></h5>
+<ul>
+<li><code>infoType</code> String - 值可以是基本信息的<code>basic</code>，也可以是完整信息的<code>complete</code></li>
+</ul>
+<h5 id="其他api">其他API</h5>
+<ul>
+<li>资源path相关</li>
+<li>应用信息相关</li>
+<li>任务栏List、最近打开文档相关</li>
+<li>单例锁</li>
+</ul>
+<h3 id="browserview">BrowserView</h3>
+<blockquote>
+<p>创建和控制视图</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p><code>BrowserView</code> 被用来让 <a href="https://electronjs.org/docs/api/browser-window"><code>BrowserWindow</code></a> 嵌入更多的 web 内容。 它就像一个子窗口，除了它的位置是相对于父窗口。 这意味着可以替代<code>webview</code>标签.</p>
+<p>这个类有静态方法能够获取所有的BrowserView，也能够再窗口中创建新的Browser实例，也有destory等方法。</p>
+<h3 id="browserwindow">BrowserWindow</h3>
+<blockquote>
+<p>创建和控制浏览器窗口</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">// 在主进程中.</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+
+<span class="hljs-comment">// 或者从渲染进程中使用 `remote`.</span>
+<span class="hljs-comment">// const { BrowserWindow } = require(&#x27;electron&#x27;).remote</span>
+
+<span class="hljs-keyword">let</span> win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({ <span class="hljs-attr">width</span>: <span class="hljs-number">800</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">600</span> })
+win.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;closed&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  win = <span class="hljs-literal">null</span>
+})
+
+<span class="hljs-comment">// 加载远程URL</span>
+win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;https://github.com&#x27;</span>)
+
+<span class="hljs-comment">// 或加载本地HTML文件</span>
+win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">`file://<span class="hljs-subst">${__dirname}</span>/app/index.html`</span>)
+</code></pre>
+<h4 id="api-1">API</h4>
+<p><a href="https://electronjs.org/docs/api/browser-window#new-browserwindowoptions"><code>new BrowserWindow([options])</code></a></p>
+<ul>
+<li><code>选项</code> Object (可选)<ul>
+<li><code>width</code> Integer (可选) - 窗口的宽度，单位为像素。默认为<code>800</code>.</li>
+<li><code>height</code> Integer(可选) - 窗口的高度，单位为像素。默认为<code>600</code>.</li>
+<li><code>x</code> Integer (可选) (如果 y 存在时<strong>必填</strong>) - 窗口相对于屏幕左侧的偏移位置. 默认居中.</li>
+<li><code>y</code> Integer (可选) (如果 x 存在时<strong>必填</strong>) - 窗口相对于屏幕顶部的偏移位置. 默认居中.</li>
+<li><code>useContentSize</code> Boolean (可选) - <code>width</code> 和 <code>height</code> 将设置为 web 页面的尺寸(译注: 不包含边框), 这意味着窗口的实际尺寸将包括窗口边框的大小，稍微会大一点。 默认值为 <code>false</code>.</li>
+<li><code>center</code> Boolean (可选) - 窗口在屏幕居中.</li>
+<li><code>minWidth</code> Integer (可选) - 窗口的最小宽度, 默认值为 <code>0</code>.</li>
+<li><code>minHeight</code> Integer (可选) - 窗口的最小高度. 默认值为 <code>0</code>.</li>
+<li><code>maxWidth</code> Integer (可选) - 窗口的最大宽度, 默认无限制.</li>
+<li><code>maxHeight</code> Integer (可选) - 窗口的最大高度, 默认无限制.</li>
+<li><code>resizable</code> Boolean (可选) - 窗口是否可以改变尺寸. 默认值为<code>true</code>.</li>
+<li><code>movable</code> Boolean (可选) - 窗口是否可以移动. 在 Linux 中无效. 默认值为 <code>true</code>.</li>
+<li><code>minimizable</code> Boolean (可选) - 窗口是否可以最小化. 在 Linux 中无效. 默认值为 <code>true</code>.</li>
+<li><code>maximizable</code> Boolean (可选) - 窗口是否可以最大化动. 在 Linux 中无效. 默认值为 <code>true</code>.</li>
+<li><code>closable</code> Boolean (可选) - 窗口是否可以关闭. 在 Linux 中无效. 默认值为 <code>true</code>.</li>
+<li><code>focusable</code> Boolean (可选) - 窗口是否可以聚焦. 默认值为 <code>true</code>。 在 Windows 中设置 <code>focusable: false</code> 也意味着设置了<code>skipTaskbar: true</code>. 在 Linux 中设置 <code>focusable: false</code> 时窗口停止与 wm 交互, 并且窗口将始终置顶。</li>
+<li><code>alwaysOnTop</code> Boolean (可选) -窗口是否永远在别的窗口的上面. 默认值为<code>false</code>.</li>
+<li><code>fullscreen</code> Boolean (可选) - 窗口是否全屏. 当明确设置为 <code>false</code> 时，在 macOS 上全屏的按钮将被隐藏或禁用. 默认值为 <code>false</code>.</li>
+<li><code>fullscreenable</code> Boolean (可选) - 窗口是否可以进入全屏状态. 在 macOS上, 最大化/缩放按钮是否可用 默认值为 <code>true</code>。</li>
+<li><code>simpleFullscreen</code> Boolean (可选) - 在 macOS 上使用 pre-Lion 全屏. 默认为<code>false</code>.</li>
+<li><code>skipTaskbar</code> Boolean (可选) - 是否在任务栏中显示窗口. 默认值为<code>false</code>.</li>
+<li><code>kiosk</code> Boolean (可选) - kiosk 模式. 默认值为 <code>false</code>.</li>
+<li><code>title</code>String(可选) - 默认窗口标题 默认为<code>&quot;Electron&quot;</code>。 如果由<code>loadURL()</code>加载的HTML文件中含有标签<code>&lt;title&gt;</code>，此属性将被忽略。</li>
+<li><code>icon</code> (<a href="https://electronjs.org/docs/api/native-image">NativeImage</a> | String) (可选) - 窗口的图标. 在 Windows 上推荐使用 <code>ICO</code> 图标来获得最佳的视觉效果, 默认使用可执行文件的图标.</li>
+<li><code>show</code> Boolean (可选) - 窗口创建的时候是否显示. 默认值为<code>true</code>.</li>
+<li><code>frame</code> Boolean (可选) - 设置为 <code>false</code> 时可以创建一个<a href="https://electronjs.org/docs/api/frameless-window">Frameless Window</a>. 默认值为 <code>true</code>.</li>
+<li><code>parent</code> BrowserWindow (可选) - 指定父窗口. 默认值为 <code>null</code>.</li>
+<li><code>modal</code> Boolean (可选) -是否为模态窗. 仅供子窗口使用. 默认值为<code>false</code>.</li>
+<li><code>acceptFirstMouse</code> Boolean (可选) - 是否允许单击页面来激活窗口. 默认值为 <code>false</code>.</li>
+<li><code>disableAutoHideCursor</code> Boolean (可选) - 是否在输入时隐藏鼠标. 默认值为<code>false</code>.</li>
+<li><code>autoHideMenuBar</code> Boolean (可选) - 自动隐藏菜单栏, 除非按了<code>Alt</code>键. 默认值为<code>false</code>.</li>
+<li><code>enableLargerThanScreen</code> Boolean (可选) - 是否允许改变窗口的大小时, 大于屏幕的尺寸. 默认值为<code>false</code>.</li>
+<li><code>backgroundColor</code> String(可选) - 窗口的背景颜色为十六进制值，例如<code>#66CD00</code>, <code>#FFF</code>, <code>#80FFFFFF</code> (设置<code>transparent</code>为<code>true</code>方可支持alpha属性，格式为#AARRGGBB)。 默认值为 <code>#FFF</code>（白色）。</li>
+<li><code>hasShadow</code> Boolean (可选) - 窗口是否有阴影. 仅在 macOS 上支持. 默认值为 <code>true</code>.</li>
+<li><code>opacity</code> Number (可选)-设置窗口初始的不透明度, 介于 0.0 (完全透明) 和 1.0 (完全不透明) 之间。仅支持 Windows 和 macOS 。</li>
+<li><code>darkTheme</code> Boolean (可选) - 强制窗口使用 dark 主题, 只在一些拥有 GTK+3 桌面环境上有效. 默认值为 <code>false</code>.</li>
+<li><code>transparent</code> Boolean (可选) - 使窗口 <a href="https://electronjs.org/docs/api/frameless-window">透明</a>. 默认值为 <code>false</code>.</li>
+<li><code>type</code> String (可选) - 窗口的类型, 默认为普通窗口. 下面可以查看更多.</li>
+<li><code>titleBarStyle</code> String (可选) - 窗口标题栏的样式. 默认值为 <code>default</code>. 可能的值有：<ul>
+<li><code>default</code> - 标准灰色不透明的Mac标题栏</li>
+<li><code>hidden</code> - 隐藏标题栏, 内容充满整个窗口, 但它依然在左上角, 仍然受标准窗口控制.</li>
+<li><code>hiddenInset</code> - 隐藏标题栏, 显示小的控制按钮在窗口边缘</li>
+<li><code>customButtonsOnHover</code> Boolean (可选) - 在macOS的无框窗口上绘制自定义的关闭与最小化按钮. 除非鼠标悬停到窗口的左上角, 否则这些按钮不会显示出来. 这些自定义的按钮能防止, 与发生于标准的窗口工具栏按钮处的鼠标事件相关的问题. <strong>注意:</strong> 此选项目前是实验性的。</li>
+</ul>
+</li>
+<li><code>fullscreenWindowTitle</code> Boolean (可选) - 在 macOS 全屏模式时，为所有带 <code>titleBarStyle</code> 选项的标题栏显示标题。默认值为 <code>false</code>。</li>
+<li><code>thickFrame</code> Boolean(可选)-对 Windows 上的无框窗口使用<code>WS_THICKFRAME</code> 样式，会增加标准窗口框架。 设置为 <code>false</code> 时将移除窗口的阴影和动画. 默认值为 <code>true</code>。</li>
+<li><code>vibrancy</code> String (可选) - 窗口是否使用 vibrancy 动态效果, 仅 macOS 中有效. 可以为 <code>appearance-based</code>, <code>light</code>, <code>dark</code>, <code>titlebar</code>, <code>selection</code>, <code>menu</code>, <code>popover</code>, <code>sidebar</code>, <code>medium-light</code> 或 <code>ultra-dark</code>. 请注意，结合一个 vibrancy 值使用 <code>frame: false</code> ，需要确保<code>titleBarStyle</code>为一个非默认值。</li>
+<li><code>zoomToPageWidth</code> Boolean (可选) - 单击工具栏上的绿色信号灯按钮或单击 窗口&gt;缩放 菜单项时的行为, 仅macOS中有效. 如果为 <code>true</code>, 窗口将放大到网页的本身宽度, <code>false</code> 将使其缩放到屏幕的宽度。 这也会影响直接调用 <code>maximize()</code> 时的行为。 默认值为 <code>false</code>.</li>
+<li><code>tabbingIdentifier</code> String (可选) - 选项组卡的名称，在macOS 10.12+上可使窗口在原生选项卡中打开. 具有相同标识符的窗口将被组合在一起。 这还会在窗口的标签栏中添加一个原生的新选项卡按钮, 并允许 <code>app</code> 和窗口接收 <code>new-window-for-tab</code> 事件。</li>
+<li><code>webPreferences</code> Object (可选) - 网页功能的设置<ul>
+<li><code>devTools</code> Boolean (可选) - 是否开启 DevTools. 如果设置为 <code>false</code>, 则无法使用 <code>BrowserWindow.webContents.openDevTools ()</code> 打开 DevTools。 默认值为 <code>true</code>。</li>
+<li><code>nodeIntegration</code> Boolean (可选) - 是否集成Node，默认为<code>false</code>。</li>
+<li><code>nodeIntegrationInWorker</code> Boolean (可选) - 是否在Web工作器中启用了Node集成. 默认值为 <code>false</code>. 更多内容参见 <a href="https://electronjs.org/docs/tutorial/multithreading">多线程</a>.</li>
+<li><code>nodeIntegrationInSubFrames</code> Boolean (optional) - Experimental option for enabling Node.js support in sub-frames such as iframes and child windows. All your preloads will load for every iframe, you can use <code>process.isMainFrame</code> to determine if you are in the main frame or not.</li>
+<li><code>preload</code> String (可选) -在页面运行其他脚本之前预先加载指定的脚本 无论页面是否集成Node, 此脚本都可以访问所有Node API 脚本路径为文件的绝对路径。 当 node integration 关闭时, 预加载的脚本将从全局范围重新引入node的全局引用标志 <a href="https://electronjs.org/docs/api/process#event-loaded">参考示例</a>.</li>
+<li><code>sandbox</code> Boolean (可选)-如果设置该参数, 沙箱的渲染器将与窗口关联, 使它与Chromium OS-level 的沙箱兼容, 并禁用 Node. js 引擎。 它与 <code>nodeIntegration</code> 的选项不同，且预加载脚本的 API 也有限制. <a href="https://electronjs.org/docs/api/sandbox-option">更多详情</a>. **注意:**改选项目前是为实验性质，可能会在 Electron 未来的版本中移除。</li>
+<li><code>enableRemoteModule</code> Boolean（可选）- 是否启用 <a href="https://electronjs.org/docs/api/remote"><code>Remote</code></a> 模块。 默认值为 <code>true</code>。</li>
+<li><code>session</code> <a href="https://electronjs.org/docs/api/session#class-session">Session</a> (可选) - 设置页面的 session 而不是直接忽略 Session 对象, 也可用 <code>partition</code> 选项来代替，它接受一个 partition 字符串. 同时设置了<code>session</code> 和 <code>partition</code>时, <code>session</code> 的优先级更高. 默认使用默认的 session.</li>
+<li><code>partition</code> String (optional) - 通过 session 的 partition 字符串来设置界面session. 如果 <code>partition</code> 以 <code>persist:</code>开头, 该页面将使用持续的 session，并在所有页面生效，且使用同一个<code>partition</code>. 如果没有 <code>persist:</code> 前缀, 页面将使用 in-memory session. 通过分配相同的 <code>partition</code>, 多个页可以共享同一会话。 默认使用默认的 session.</li>
+<li><code>affinity</code> String (可选) - 当指定，具有相同<code>affinity</code> 的 web页面将在相同的渲染进程运行。 需要注意的是，由于渲染过程中会有代码重用，如 <code>webPreferences</code>的<code>preload</code>, <code>sandbox</code> 和 <code>nodeIntegration</code>等选项会在不同页面之间共用，即使你已经在不同页面中为同一选项设置过不同的值，它们仍会被共用。 因此，建议为<code>affinity</code>相同的页面，使用相同的 <code>webPreferences</code> <em>这一选项当前是实验性的</em></li>
+<li><code>zoomFactor</code> Number (可选) - 页面的默认缩放系数, <code>3.0</code> 表示 <code>300%</code>. 默认值为 <code>1.0</code>.</li>
+<li><code>javascript</code> Boolean (可选) - 是否启用 JavaScript 支持. 默认值为 <code>true</code>.</li>
+<li><code>webSecurity</code> Boolean (可选) - 当设置为 <code>false</code>, 它将禁用同源策略 (通常用来测试网站), 如果此选项不是由开发者设置的，还会把 <code>allowRunningInsecureContent</code>设置为 <code>true</code>. 默认值为 <code>true</code>。</li>
+<li><code>allowRunningInsecureContent</code> Boolean (可选) -允许一个 https 页面运行 http url 里的资源，包括 JavaScript, CSS 或 plugins. 默认值为 <code>false</code>.</li>
+<li><code>images</code> Boolean (可选) - 启动图像支持. 默认值为 <code>true</code>.</li>
+<li><code>textAreasAreResizable</code> Boolean (可选) - 让 TextArea 元素可以调整大小. 默认值为 <code>true</code>.</li>
+<li><code>webgl</code> Boolean (可选) - 启用 WebGL 支持. 默认值为 <code>true</code>.</li>
+<li><code>plugins</code> Boolean (可选) - 是否支持插件. 默认值为 <code>false</code>.</li>
+<li><code>experimentalFeatures</code> Boolean (optional) - 启用 Chromium 的实验功能. 默认值为 <code>false</code>.</li>
+<li><code>scrollBounce</code> Boolean (可选) - 在 macOS 启用弹力动画 (橡皮筋) 效果. 默认值为 <code>false</code>.</li>
+<li><code>enableBlinkFeatures</code>String(可选) - 以<code>逗号</code>分隔的需要启用的特性列表，譬如<code>CSSVariables,KeyboardEventKey</code> 在 <a href="https://cs.chromium.org/chromium/src/third_party/blink/renderer/platform/runtime_enabled_features.json5?l=70">RuntimeEnabledFeatures.json5</a>文件中查看被支持的所有特性.</li>
+<li><code>disableBlinkFeatures</code> String (可选) - 以 <code>,</code>分隔的禁用特性列表, 如 <code>CSSVariables,KeyboardEventKey</code>. 在<a href="https://cs.chromium.org/chromium/src/third_party/blink/renderer/platform/runtime_enabled_features.json5?l=70">RuntimeEnabledFeatures.json5</a> 文件中查看被支持的所有特性.</li>
+<li><code>defaultFontFamily</code> Object (可选) - 设置 font-family 的默认字体.<ul>
+<li><code>standard</code> String (可选) - 默认值为 <code>Times New Roman</code>.</li>
+<li><code>serif</code> String (可选) - 默认值为 <code>Times New Roman</code>.</li>
+<li><code>sansSerif</code> String (可选) - 默认值为 <code>Arial</code>.</li>
+<li><code>monospace</code> String (可选) - 默认值为 <code>Courier New</code>.</li>
+<li><code>cursive</code> String (可选) - 默认值为 <code>Script</code>.</li>
+<li><code>fantasy</code> String (可选) - 默认值为 <code>Impact</code>.</li>
+</ul>
+</li>
+<li><code>defaultFontSize</code> Integer (可选) - 默认值为 <code>16</code>.</li>
+<li><code>defaultMonospaceFontSize</code> Integer (可选) - 默认值为 <code>13</code>.</li>
+<li><code>minimumFontSize</code> Integer (可选) - 默认值为 <code>0</code>.</li>
+<li><code>defaultEncoding</code> String (可选) - 默认值为 <code>ISO-8859-1</code>.</li>
+<li><code>backgroundThrottling</code>Boolean (可选)-是否在页面成为背景时限制动画和计时器。 这也会影响到 <a href="https://electronjs.org/docs/api/browser-window#page-visibility">Page Visibility API</a>. 默认值为 <code>true</code>。</li>
+<li><code>offscreen</code> Boolean (optional) - 是否绘制和渲染可视区域外的窗口. 默认值为 <code>false</code>. 更多详情, 请参见 <a href="https://electronjs.org/docs/tutorial/offscreen-rendering">offscreen rendering tutorial </a>。</li>
+<li><code>contextIsolation</code> Boolean (可选) - 是否在独立 JavaScript 环境中运行 Electron API和指定的<code>preload</code> 脚本. 默认值为 <code>false</code>. <code>preload</code>脚本的运行环境仍然可以访问<code>document</code> 和 <code>window</code>全局变量，但它将使用自己内置的函数 (如<code>Array</code>, <code>Object</code>, <code>JSON</code>等)，并且将被加载的页面与对全局环境所做的任何更改隔离开来. Electron API 仅在 <code>preload</code> 脚本中有效，而不是加载的页面。 在加载可能不受信任的远程内容时, 应使用此选项, 以确保加载的内容不能篡改 <code>preload</code> 脚本和使用的 Electron APIs。 此选项使用 <a href="https://developer.chrome.com/extensions/content_scripts#execution-environment">Chrome Content Scripts </a>使用的相同技术。 通过在控制台选项卡顶部的组合框中选择 &quot;Electron Isolated Context&quot; 条目, 可以在开发工具中访问此上下文。</li>
+<li><code>nativeWindowOpen</code> Boolean (可选) - 是否使用原生的<code>window.open()</code>. 默认值为 <code>false</code>. Child windows will always have node integration disabled unless <code>nodeIntegrationInSubFrames</code> is true. <strong>注意:</strong> 此选项目前是实验性的。</li>
+<li><code>webviewTag</code> Boolean (可选) - 是否启用 <a href="https://electronjs.org/docs/api/webview-tag">`` tag</a>标签. 默认值为 <code>false</code>. <strong>注意:</strong> 为 <code>&lt; webview&gt;</code> 配置的 <code>preload</code> 脚本在执行时将启用节点集成, 因此应确保远程或不受信任的内容无法创建恶意的 <code>preload</code> 脚本 。 可以使用 <a href="https://electronjs.org/docs/api/web-contents">webContents </a>上的 <code>will-attach-webview</code> 事件对 <code>preload</code> 脚本进行剥离, 并验证或更改 <code>&lt;webview&gt;</code> 的初始设置。</li>
+<li><code>additionalArguments</code> String[] (可选) - 一系列将会被附加至此app的渲染进程的<code>process.argv</code>的字符串. 对于将少量数据向下传至渲染进程的预加载脚本而言是十分实用的.</li>
+<li><code>safeDialogs</code> Boolean (可选) - 是否启用浏览器样式的持续对话框保护。 缺省为<code>false</code>。</li>
+<li><code>safeDialogsMessage</code> String (可选) - 当持续对话框保护被触发时显示的消息。 如果没有定义，那么将使用缺省的消息。注意：当前缺省消息是英文，并没有本地化。</li>
+<li><code>navigateOnDragDrop</code> Boolean (可选) - 将文件或链接拖放到页面上时是否触发页面跳转. 默认为<code>false</code>.</li>
+<li><code>autoplayPolicy</code> String (optional) - Autoplay policy to apply to content in the window, can be <code>no-user-gesture-required</code>, <code>user-gesture-required</code>, <code>document-user-activation-required</code>. Defaults to <code>no-user-gesture-required</code>.</li>
+<li><code>disableHtmlFullscreenWindowResize</code> Boolean (optional) - Whether to prevent the window from resizing when entering HTML Fullscreen. Default is <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>当使用 <code>minWidth</code>/<code>maxWidth</code>/<code>minHeight</code>/<code>maxHeight</code> 设置最小或最大窗口大小时, 它只限制用户。 它不会阻止您将不符合大小限制的值传递给 <code>setBounds</code>/<code>setSize</code> 或 <code>BrowserWindow</code> 的构造函数。</p>
+<p><code>type</code> 选项的可能值和行为与平台相关。可能的值为:</p>
+<ul>
+<li>在 Linux 上, 可能的类型有 <code>desktop</code>、<code>dock</code>、<code>toolbar</code>、<code>splash</code>、<code>notification</code>。</li>
+<li>在 macOS, 可能的类型是 <code>desktop</code>, <code>textured</code>.<ul>
+<li><code>textured</code> 类型增加金属色泽的外观 (<code>NSTexturedBackgroundWindowMask</code>).</li>
+<li><code>desktop</code> 类型将窗口置于桌面背景级别 (<code>kCGDesktopWindowLevel - 1</code>). 注意，桌面窗口不会接收焦点、键盘或鼠标事件，但您可以使用<code>globalShortcut</code>接收快捷键的消息</li>
+</ul>
+</li>
+<li>在 Windows 上, 可能的类型为 <code>toolbar</code>.</li>
+</ul>
+<h5 id="静态方法">静态方法</h5>
+<p><a href="https://electronjs.org/docs/api/browser-window#browserwindowgetallwindows"><code>BrowserWindow.getAllWindows()</code></a></p>
+<p>返回 <code>BrowserWindow[]</code> - 所有打开的窗口的数组</p>
+<p><a href="https://electronjs.org/docs/api/browser-window#browserwindowgetfocusedwindow"><code>BrowserWindow.getFocusedWindow()</code></a></p>
+<p>返回 <code>BrowserWindow | null</code> - 此应用程序中当前获得焦点的窗口，如果无就返回 <code>null</code>.</p>
+<p><a href="https://electronjs.org/docs/api/browser-window#browserwindowfromwebcontentswebcontents"><code>BrowserWindow.fromWebContents(webContents)</code></a></p>
+<ul>
+<li><code>webContents</code> <a href="https://electronjs.org/docs/api/web-contents">WebContents</a></li>
+</ul>
+<p>返回 <code>BrowserWindow</code> - 拥有给定 <code>webContents</code> 的窗口.</p>
+<p><a href="https://electronjs.org/docs/api/browser-window#browserwindowfrombrowserviewbrowserview"><code>BrowserWindow.fromBrowserView(browserView)</code></a></p>
+<ul>
+<li><code>browserView</code> <a href="https://electronjs.org/docs/api/browser-view">BrowserView</a></li>
+</ul>
+<p>返回 <code>BrowserWindow | null</code>-拥有给定 <code>browserView</code> 的窗口。如果给定视图未附加到任何窗口, 则返回 <code>null</code>。</p>
+<p><a href="https://electronjs.org/docs/api/browser-window#browserwindowfromidid"><code>BrowserWindow.fromId(id)</code></a></p>
+<ul>
+<li><code>id</code> Integer</li>
+</ul>
+<p>返回 <code>BrowserWindow</code> -拥有给定 <code>id</code> 的窗口.</p>
+<p>还有其他的静态方法能够控制浏览器扩展程序和开发者工具</p>
+<h5 id="实例方法">实例方法</h5>
+<p>各种窗口方法：缩放、最大化最小化、关闭、移动、未响应、展示隐藏、聚焦失焦、窗口位置设置、置顶设置、全屏设置、各种属性的获取、各种状态的获取、加载网页、文件、重启应用、添加删除显示隐藏菜单、子窗口父窗口、菜单可见性、浏览器可见性（透明度）</p>
+<h4 id="事件-1">事件</h4>
+<p>关于浏览器窗口的各种事件：缩放、最大化最小化、关闭、移动、未响应、展示隐藏、聚焦失焦</p>
+<h4 id="例1：窗口关闭不退出程序">例1：窗口关闭不退出程序</h4>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">// 取消窗口关闭则推出应用的行为</span>
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">onbeforeunload</span> = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;I don\&#x27;t want to be closed.&#x27;</span>)
+    <span class="hljs-comment">// 返回默认值会取消关闭</span>
+    e.<span class="hljs-property">returnValue</span> = <span class="hljs-literal">false</span>
+    <span class="hljs-comment">// 直接调用hide方法 这样窗口会关闭 但应用还未推出 还能通过托盘还原</span>
+    win.<span class="hljs-title function_">hide</span>()
+}
+</code></pre>
+<h4 id="例2：透明度kiosk模式无边框任务栏隐藏窗口全屏大小">例2：透明度/kiosk模式/无边框/任务栏隐藏/窗口全屏大小</h4>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> {
+    width,
+    height
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">screen</span>.<span class="hljs-title function_">getPrimaryDisplay</span>().<span class="hljs-property">workAreaSize</span>
+
+win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({
+    <span class="hljs-attr">width</span>: width,
+    <span class="hljs-attr">height</span>: height,
+    <span class="hljs-comment">// 窗口无边框</span>
+    <span class="hljs-comment">// frame: false,</span>
+
+    <span class="hljs-comment">// 透明度</span>
+    <span class="hljs-attr">opacity</span>: <span class="hljs-number">0.8</span>,
+
+    <span class="hljs-comment">// 是否在任务栏中显示窗口</span>
+    <span class="hljs-comment">// skipTaskbar: true,</span>
+
+    <span class="hljs-comment">// 终极全屏模式 配合上无边框之后 就像游戏的全屏模式一样</span>
+    <span class="hljs-comment">// kiosk: true,</span>
+})
+</code></pre>
+<h3 id="webcontents">webContents</h3>
+<blockquote>
+<p>渲染以及控制 web 页面</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p><code>webContents</code> 是 <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter </a>的实例， 负责渲染和控制网页, 是 <a href="https://electronjs.org/docs/api/browser-window"><code>BrowserWindow</code></a> 对象的一个属性。 这是一个访问 <code>webContents</code> 对象的例子:</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+
+<span class="hljs-keyword">let</span> win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({ <span class="hljs-attr">width</span>: <span class="hljs-number">800</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">1500</span> })
+win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;http://github.com&#x27;</span>)
+
+<span class="hljs-keyword">let</span> contents = win.<span class="hljs-property">webContents</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(contents)
+</code></pre>
+<h4 id="api-2">API</h4>
+<p>通过<code>webContents</code>模块可以访问以下方法：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { webContents } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(webContents)<span class="hljs-title class_">Copy</span>
+</code></pre>
+<p><a href="https://electronjs.org/docs/api/web-contents#webcontentsgetallwebcontents"><code>webContents.getAllWebContents()</code></a></p>
+<p><a href="https://electronjs.org/docs/api/web-contents#webcontentsgetfocusedwebcontents"><code>webContents.getFocusedWebContents()</code></a></p>
+<p><a href="https://electronjs.org/docs/api/web-contents#webcontentsfromidid"><code>webContents.fromId(id)</code></a></p>
+<p>其他的api还有：</p>
+<ul>
+<li><p>load资源相关的：URL或者文件</p>
+</li>
+<li><p>页面停止加载、重载、前进后退导航</p>
+</li>
+<li><p>插入css或者执行js</p>
+</li>
+<li><p>放大缩小</p>
+</li>
+<li><p>页面音频静音</p>
+</li>
+<li><p>编辑命令：redo、undo、cut、copy、select等等</p>
+</li>
+<li><p>页面字符查找</p>
+</li>
+<li><p>截图</p>
+<pre><code class="hljs language-javascript">$(<span class="hljs-string">&#x27;#jietu&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-comment">// 截图</span>
+    <span class="hljs-keyword">let</span> c = contents[<span class="hljs-number">0</span>].<span class="hljs-title function_">capturePage</span>()
+    <span class="hljs-comment">// 从promise中获取数据</span>
+    c.<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) {
+        <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>)
+        <span class="hljs-comment">// 用fs处理buffer</span>
+        <span class="hljs-keyword">let</span> bf = data.<span class="hljs-title function_">toPNG</span>()
+        <span class="hljs-comment">// 写到文件</span>
+        fs.<span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&#x27;a.png&#x27;</span>, bf, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {})
+    })
+})
+</code></pre>
+</li>
+<li><p>打印机调用</p>
+</li>
+<li><p>打开关闭开发者工具</p>
+</li>
+</ul>
+<h4 id="事件-2">事件</h4>
+<p>load相关、导航相关、页面寻找相关</p>
+<h3 id="screen">screen</h3>
+<blockquote>
+<p>检索有关屏幕大小、显示器、光标位置等的信息。</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p>在 <code>app</code> 模块发出 <code>ready</code> 事件之前, 您不能引用或者使用此模块。</p>
+<p><code>screen</code> 是一个 <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a>.</p>
+<p><strong>注意:</strong> 在 renderer/DevTools 中, <code>window.screen</code> 是一个保留的 DOM 属性, 因此编写 <code>let { screen } = require(&#39;electron&#39;)</code> 将不起作用。</p>
+<p>创建填充整个屏幕的窗口的示例:</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> electron = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+<span class="hljs-keyword">const</span> { app, <span class="hljs-title class_">BrowserWindow</span> } = electron
+
+<span class="hljs-keyword">let</span> win
+
+app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> { width, height } = electron.<span class="hljs-property">screen</span>.<span class="hljs-title function_">getPrimaryDisplay</span>().<span class="hljs-property">workAreaSize</span>
+  win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({ width, height })
+  win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;https://github.com&#x27;</span>)
+})<span class="hljs-title class_">Copy</span>
+</code></pre>
+<p>另一个在外部显示器中创建窗口的例子</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> electron = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+<span class="hljs-keyword">const</span> { app, <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+
+<span class="hljs-keyword">let</span> win
+
+app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> displays = electron.<span class="hljs-property">screen</span>.<span class="hljs-title function_">getAllDisplays</span>()
+  <span class="hljs-keyword">let</span> externalDisplay = displays.<span class="hljs-title function_">find</span>(<span class="hljs-function">(<span class="hljs-params">display</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> display.<span class="hljs-property">bounds</span>.<span class="hljs-property">x</span> !== <span class="hljs-number">0</span> || display.<span class="hljs-property">bounds</span>.<span class="hljs-property">y</span> !== <span class="hljs-number">0</span>
+  })
+
+  <span class="hljs-keyword">if</span> (externalDisplay) {
+    win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({
+      <span class="hljs-attr">x</span>: externalDisplay.<span class="hljs-property">bounds</span>.<span class="hljs-property">x</span> + <span class="hljs-number">50</span>,
+      <span class="hljs-attr">y</span>: externalDisplay.<span class="hljs-property">bounds</span>.<span class="hljs-property">y</span> + <span class="hljs-number">50</span>
+    })
+    win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;https://github.com&#x27;</span>)
+  }
+})
+</code></pre>
+<h3 id="session">session</h3>
+<blockquote>
+<p>管理浏览器会话、cookie、缓存、代理设置等。</p>
+</blockquote>
+<p>进程：<a href="https://electronjs.org/docs/glossary#main-process">主进程</a></p>
+<p><code>session</code> 模块可用于创建新的 <code>session</code> 对象。</p>
+<p>你还可以使用<a href="https://electronjs.org/docs/api/web-contents"><code>WebContents</code></a>的<code>session</code>属性或<code>session</code>模块访问现有页的<code>session</code></p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
+
+<span class="hljs-keyword">let</span> win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({ <span class="hljs-attr">width</span>: <span class="hljs-number">800</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">600</span> })
+win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;http://github.com&#x27;</span>)
+
+<span class="hljs-keyword">const</span> ses = win.<span class="hljs-property">webContents</span>.<span class="hljs-property">session</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ses.<span class="hljs-title function_">getUserAgent</span>())
+</code></pre>
+<h4 id="api-3">API</h4>
+<p>它的api包括：浏览器缓存清除、代理设置</p>
+<h3 id="process">process</h3>
+<blockquote>
+<p>处理对象的扩展</p>
+</blockquote>
+<p>进程： <a href="https://electronjs.org/docs/glossary#main-process">Main</a>, <a href="https://electronjs.org/docs/glossary#renderer-process">Renderer</a></p>
+<p>Electron&#39;s <code>process</code> 对象继承 <a href="https://nodejs.org/api/process.html">Node.js <code>process</code> object</a>。 它新增了以下事件、属性和方法</p>
+<p>api新增了有内存信息、系统信息、CPU信息</p>

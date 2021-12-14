@@ -1,0 +1,205 @@
+<h3 id="前言">前言</h3>
+<p>一周前考完了计算机网络，不得不说，计算机网络确实是一个精妙而繁杂的体系产物，虽然民大的考试都很水，但是计网这门课我是认认真真复习好了的，并不是当作考试去复习，每个点都看了，书上的课后习题都大概刷了 80%（谢希仁前辈出的这本书，习题量很多），基本上每个点都吃透了一遍。</p>
+<p>虽然后面还有两门考试，但很容易就过，也不需要准备，主要的复习科目也考完了，所以趁热打铁，马上进行计网的笔记整理和复习。</p>
+<p>因为学时有限，学校上的课程只教到第五章运输层，后面的没教，我准备先把前五章的笔记都整理下来，再继续看后面的内容，看完再整理。</p>
+<p>所以这一系列的笔记也是按照谢希仁前辈的《计算机网络》第七版的内容顺序整理的<strong>（可能会跳一些顺序，可能会改一些章节标题）</strong>。</p>
+<p>本来想的只是按需记录，但是觉得还是要对得起自己的劳动，所以这一系列的笔记等于是考试重点笔记，意思是事无巨细的都记下来，甚至把课本后的习题解答（自己的解答）都记录下来。</p>
+<h3 id="chapter1-概述">Chapter1-概述</h3>
+<h4 id="11-计算机网络与信息时代">1.1 计算机网络与信息时代</h4>
+<h5 id="internet">Internet</h5>
+<p>（1）因特网（旧译）</p>
+<p>（2）<strong>互联网：</strong>这个翻译是最流行最被接受的。Internet 是<strong>由数量极大的各种计算机网络互连起来的网络的统称。</strong></p>
+<h5 id="互联网提供的服务">互联网提供的服务</h5>
+<ul>
+<li><strong>连通性：</strong>互联网用户无论地域距离有多远，在互联网上都可以<strong>非常便捷、非常经济地交换各种信息</strong>，<strong>好像</strong>这些用户终端彼此直接连通一样。</li>
+<li><strong>共享：</strong>指资源共享，可以是信息共享、软件共享，也可以是硬件共享。由于网络的存在，<strong>好像</strong>这些资源就在用户身边一样可以直接使用。</li>
+</ul>
+<h4 id="12-互联网概述">1.2 互联网概述</h4>
+<h5 id="121-网络的网络">1.2.1 网络的网络</h5>
+<h6 id="计算机网络">计算机网络</h6>
+<p>简称为网络，由若干<strong>结点（node）</strong>和连接在这些结点的<strong>链路（link）</strong>组成。网络中的结点可以是计算机、集线器、交换机或路由器等。</p>
+<h6 id="互联网">互联网</h6>
+<p>上述的网络还可以通过<strong>路由器</strong>互连起来，这样就构成了一个覆盖范围更大的计算机网络，这样的网络称为<strong>互联网</strong>，这也是<strong>“网络的网络”</strong>说法来源。</p>
+<h5 id="122-互联网发展的三个阶段">1.2.2 互联网发展的三个阶段</h5>
+<ol>
+<li>单个网络<strong>ARPANET</strong>向互联网发展的过程，主要解决多网络互联的问题。</li>
+<li><strong>三级结构的互联网</strong>，分为主干网、地区网、校园网（企业网）。</li>
+<li>多层次的 ISP 结构互联网。</li>
+</ol>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180630122733.png" alt=""></p>
+<h6 id="isp">ISP</h6>
+<p>互联网服务提供者，提供商，在国内，中国移动、联通电信就是 ISP。ISP 可以从互联网管理机构申请到很多<strong>IP 地址</strong>，同时拥有<strong>通信线路</strong>以及<strong>路由器</strong>等联网设备。个人用户需要向 ISP 付费获取提供的 IP 地址，<strong>持有 IP 地址才可以接入互联网</strong>，也就是我们说的“上网”。</p>
+<p>ISP 也分层次：主干 ISP、地区 ISP、本地 ISP。</p>
+<h6 id="主干-isp">主干 ISP</h6>
+<p>由几个专门的公司创建和维持，服务面积大，一般能够覆盖到国家范围，并且拥有高速主干网，地区 ISP 可以直接和主干 ISP 相连。</p>
+<h6 id="地区-isp">地区 ISP</h6>
+<p>较小的 ISP，通常几个地区 ISP 通过一个主干 ISP 相连。</p>
+<h6 id="本地-isp">本地 ISP</h6>
+<p>本地 ISP 直接给用户提供服务，本地 ISP 可以连接到地区也可以连接到主干。绝大多数用户是直接连到本地 ISP 的。</p>
+<h6 id="ixp">IXP</h6>
+<p>为了提高转发分组的效率，以及如何更有效得利用网络资源，<strong>互联网交换点（Internet eXchange Point，IXP）</strong>应运而生。IXP 允许两个网络直接相连并交换分组，而不需要通过第三个网络来转发分组。</p>
+<h4 id="13-互联网组成">1.3 互联网组成</h4>
+<p>（1）边缘部分：由所有连接在互联网上的主机组成。这部分是用户直接使用的，用来进行通信和资源共享。</p>
+<p>（2）核心部分：由大量网络和连接这些网络的路由器组成。这部分是<strong>为边缘部分提供服务的（连通性和交换）。</strong></p>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180630125027.png" alt=""></p>
+<h5 id="131-边缘部分">1.3.1 边缘部分</h5>
+<p>边缘部分指的是用户使用的主机，这些主机又称为端系统。需要明确一个观点：我们说<strong>“主机 A 和主机 B 在通信”</strong>实际上说的是<strong>“运行在主机 A 上的某程序和运行在主机 B 上的某程序在通信”</strong>。计算机之间的通讯通常可分为两大类：客户-服务器方式（C/S 方式）和对等方式（P2P 方式）。</p>
+<h6 id="cs-和-p2p-的区别">C/S 和 P2P 的区别</h6>
+<p>C/S 里：<strong>客户是服务请求方，服务器是服务提供方。</strong>而 P2P 方式，两端<strong>既是请求方也是服务方。</strong></p>
+<h5 id="132-核心部分和分组交换（packet-switching）">1.3.2 核心部分和分组交换（packet switching）</h5>
+<p>网络核心部分是互联网最复杂的地方，这里面起特殊作用的是<strong>路由器（router）</strong>，它是一种专用计算机（但并不是主机）。路由器是实现<strong>分组交换（packet switching）</strong>的关键构件，其任务是转发收到的分组，这是网络中最核心最重要的功能。我们先介绍电路交换的基本概念。</p>
+<h6 id="电路交换">电路交换</h6>
+<p>以前的电话通讯是以电路交换作为交换方式的，从通信资源的分配角度上看，<strong>交换（switching）</strong>就是按照某种方式动态地分配传输线路的资源。</p>
+<p>电路交换步骤：</p>
+<ul>
+<li>建立连接：建立一条专用的物理线路，并在释放之前一直占用该线路</li>
+<li>通话：占用该线路</li>
+<li>释放连接：归还通信资源</li>
+</ul>
+<p>特点：通话的时候，两端始终占用当前线路，线路传输效率<strong>（note：这里说传输线路的利用率更好）</strong>往往很低。</p>
+<h6 id="分组交换">分组交换</h6>
+<p>分组交换采用<strong>存储转发</strong>技术，表示把一个报文划分为几个分组后再进行传送。把要发送的整块数据称为一个<strong>报文（message）</strong>，在发送报文之前，把较长的报文划分为一个个更小的等长数据段，在数据段的前面加上一些由必要控制信息组成的<strong>首部（header）</strong>，就构成了一个<strong>分组（packet）</strong>，分组又称为<strong>“包”</strong>，是在互联网中传送的数据单元。</p>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180630133525.png" alt=""></p>
+<p>互联网中的网络通讯可不止分组交换这样简单，做成了分组之后，还需要路由器还需要进行<strong>存储转发</strong>，路由器收到一个分组之后，先暂时存储一下，检查其首部，查找转发表，按照首部中的目的地址，找到合适的接口转发出去，把分组交给下一个路由器。</p>
+<p>这样一步步的，分组通过网络上的每一段由路由器或者其他结点隔开的链路，最终送到目的主机。</p>
+<p>这里需要注意两点：</p>
+<ul>
+<li>段链路只是有分组在传递的时候才被占用，没分组传递的链路依然可以使用</li>
+<li>路由器存储的只是分组，而不是整个报文，每个分组到了合适的时机就会被转发出去</li>
+</ul>
+<p>分组交换在传送数据之前不必先占用一条端到端的链路通信资源，互联网采用专门的措施，保证数据传送具有可靠性，当链路中某些阶段突然出现故障的时候，在各路由器中运行的路由选择协议可以自动找到合适的转发分组路径。</p>
+<h6 id="三种方式的比较">三种方式的比较</h6>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180630140639.png" alt=""></p>
+<ul>
+<li><strong>电路交换</strong><ul>
+<li>优点：<ul>
+<li>稳定、安全</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>线路利用率低、有连接管理成本</li>
+<li>适合大量数据连续传输</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分组交换</strong><ul>
+<li>优点：<ul>
+<li>线路利用率高、因为无连接，所以效率快</li>
+<li>适合突发传输</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>无连接、分组头部开销、转发有一定时延</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="16-计算机网络的性能">1.6 计算机网络的性能</h4>
+<h5 id="1-速率">1. 速率</h5>
+<p>计算机发出的信号都是离散信号，也就是数字形式的，比特（bit）来源于 binary digit，意思是一个“二进制数字”。网络技术中<strong>速率(SpeedRate)<strong>指的是</strong>数据的传送速率</strong>，它也称为<strong>数据率(DataRate)<strong>或者</strong>比特率(BitRate)<strong>，单位是 bit/s（比特每秒，有时也写为</strong>bps</strong>），当数据率高的时候，可以在 bit/s 前面加上一个字母。</p>
+<ul>
+<li>k bit/s = 10^3 bit/s（注意 k 是小写）</li>
+<li>M = 10^6</li>
+<li>G = 10^9</li>
+<li>T = 10^12</li>
+</ul>
+<p>比如说，1Mbit/s 可以说是 1 秒中吐出 10^6 比特的数据，特别要注意的是，这里速率的 kMGT 和数据体积单位的 k（K）MGT 不一样，后者：</p>
+<ul>
+<li>1 k = 2^10 byte = 2^10 * 8 bit</li>
+<li>1 M = 2^10 k = 2^20 byte</li>
+<li>依此类推</li>
+</ul>
+<h5 id="2-带宽">2. 带宽</h5>
+<p>在计算机网络中，带宽用来表示网络中某<strong>通道</strong>传送数据的<strong>能力（也就是一种度量）</strong>，因此网络带宽表示在单位时间内网络中的某信道所能通过的<strong>“最高数据率”</strong>，这种意义的带宽的单位，就是数据率的单位 bit/s。</p>
+<h5 id="3-吞吐量">3. 吞吐量</h5>
+<p>吞吐量（throughput）表示在单位时间内通过某个网络的实际的数据量。</p>
+<h5 id="4-时延">4. 时延</h5>
+<p>（1）发送时延，是主机或者路由器发送数据帧所需要的时间，也就是从发送数据帧的第一个比特开始算起，到该帧的最后一个比特发送完毕所需要的时间。</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">an</span><span class="mord mathnormal">s</span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.00773em;">tR</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mord">/</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">L</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></span></p>
+<blockquote>
+<p>数据帧长度 / 速率</p>
+</blockquote>
+<p>（2）传播时延，是电磁波在信道中传播一定距离需要花的时间。</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.01968em;">El</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">t</span><span class="mord mathnormal">Wa</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">e</span><span class="mord mathnormal">Sp</span><span class="mord mathnormal">ee</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord">/</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">hann</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">L</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></span></p>
+<blockquote>
+<p>信道长度 / 电磁波在信道上的传播速率</p>
+</blockquote>
+<p>还有两个时延需要知道</p>
+<p>（3）处理时延，主机或者路由器在给帧做加工工作的时候，或者查找目的地接口的时候，需要的处理时间。</p>
+<p>（4）排队时延，分组在网络传输中，要经过许多路由器，路由器一次处理的分组数量有限，一般会有一个排队机制，先来的先处理，后来的在队尾等候。</p>
+<h5 id="5-时延带宽积（略）">5. 时延带宽积（略）</h5>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">an</span><span class="mord mathnormal">d</span><span class="mord mathnormal">Wi</span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">d</span><span class="mord mathnormal">u</span><span class="mord mathnormal">c</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">an</span><span class="mord mathnormal">s</span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">an</span><span class="mord mathnormal">d</span><span class="mord mathnormal">Wi</span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span></span></span></span></span></span></p>
+<h5 id="6-往返时间-rtt">6. 往返时间 RTT</h5>
+<p>Round-Trip Time 是一个重要的指标，它代表了双向交互一次所需要的时间。比如，如果 A 向 B 发送数据，数据长度是 100MB，发送速率是 100 Mbit/s</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">anmi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.00773em;">tR</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">L</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2604em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">8</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel amsrm">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8.39</span><span class="mord mathnormal">s</span></span></span></span></span></span></p>
+<p>如果 B 正确收完 100MB 的数据之后，就立即向 A 发送确认，假定 A 只有在收到 B 的确认信息后，才能继续向 B 发送数据。显然这需要等一个 RTT 的时间。如果 RTT = 2s，那么有效数据率为：</p>
+<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.10764em;">ff</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.00773em;">tR</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">an</span><span class="mord mathnormal">s</span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">De</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">RTT</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">L</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2604em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8.39</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">8</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel amsrm">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">80.7</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">bi</span><span class="mord mathnormal">t</span><span class="mord">/</span><span class="mord mathnormal">s</span></span></span></span></span></span></p>
+<p>可以看出，考虑上 RTT 之后，实际有效的速率会大受影响。</p>
+<h5 id="7-利用率">7. 利用率</h5>
+<p>利用率有信道利用率和网络利用率两种：</p>
+<ul>
+<li>信道利用率：某信道有百分之几的时间是被利用的（有数据通过），完全空闲的信道利用率是 0</li>
+<li>网络利用率：是全网络的信道利用率的加权平均值</li>
+</ul>
+<p>对于利用率我们要知道：<strong>信道或网络利用率过高会产生非常大的时延</strong>，所以通常利用率控制在不超过 50%</p>
+<h4 id="17-计算机网络体系结构">1.7 计算机网络体系结构</h4>
+<h5 id="171-协议与层次">1.7.1 协议与层次</h5>
+<h6 id="协议">协议</h6>
+<p>在计算机网络中要做到有条不紊地交换数据，就必须遵守一些实验约定好的规则，<strong>这些规则明确规定了所交换的数据的格式以及有关的同步问题，这里的同步指的是广义的同步，即在一定条件下发生什么事件，按序发生。</strong></p>
+<p>这些<strong>为网络中的数据交换而建立的规则、标准或约定称为网络协议（network protocol），简称协议。</strong></p>
+<p>协议三要素：</p>
+<ul>
+<li>语法：数据和控制信息的结构或格式</li>
+<li>语义：需要发出何种信息，完成何种动作以及做出何种响应</li>
+<li>同步：事件的顺序说明</li>
+</ul>
+<h6 id="层次划分">层次划分</h6>
+<p>好处：</p>
+<ul>
+<li>各层独立，上层无需关心下层实现，仅需要知道相接的接口服务即可</li>
+<li>灵活，一层发生变化的时候，只要保证接口关系不变，相接层不会收到影响</li>
+<li>结构上分割，每一层都用最适合的技术去实现</li>
+<li>易于实现和维护，分层优点</li>
+<li>促进标准化，每一层都有自己的标准，明确</li>
+</ul>
+<h5 id="172-五层协议体系结构">1.7.2 五层协议体系结构</h5>
+<h6 id="体系结构">体系结构</h6>
+<p>最开始计算机网络协议是由<strong>ISO（International Organization for Standardization，国际标准化组织）</strong>在 1977 年成立的专门的机构去制订的<strong>开放系统互连基本参考模型 OSI/RM（Open System Interconnection Reference Model）</strong>，进行非垄断开放的标准，只要遵循该标准，在世界上任何地方都可以接入互联网。</p>
+<p>但是我们现在使用的计算机体系结构其实并不是<strong>OSI</strong>这套，而是著名的<strong>TCP/IP</strong>这套，为什么 OSI 会失败，主要原因还是<strong>“OSI 标准在完成的时候，缺乏根本的商业动力”</strong>，没有实际经验，实现过分复杂，层次划分不合理，标准周期长。等等这些原因告诉我们，<strong>一个新标准的出现，有时候不一定是反映最先进的技术水平，而是往往有一定的市场背景，从某种意义上来说，能占领市场的才是标准。</strong></p>
+<p>OSI 的七层协议体系结构的概念清楚，体系也完整，但是它既复杂又不实用。TCP/IP 的体系结构不一样，它只有四风结构，实质上说，TCP/IP 只有最上面的三层，因为最下面一层其实没有什么内容，所以在学习的时候，往往采用折中的方法，一种五层协议结构，结合了 TCP/IP 和 OSI 的优点。</p>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180701161712.png" alt=""></p>
+<p>其中每层的用处，这里略过，后面每篇文章讲一层。</p>
+<h6 id="数据传递过程">数据传递过程</h6>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180701162434.png" alt=""></p>
+<p>假定主机 1 的应用进程 AP1 向主机 2 的应用进程 AP2 传输数据：</p>
+<ul>
+<li>AP1 先将数据交给本层主机的第五层（应用层）</li>
+<li>第五层加上必要的控制信息（Header）就变成了下层的<strong>数据单元</strong>，往下传</li>
+<li>第四层（传输层）接到这个<strong>数据单元</strong>之后，加上本层必要控制信息，往下传</li>
+<li>第三层（网络层）加头部，往下传</li>
+<li>到了第二层（数据链路层），控制信息被分成两部分，加在<strong>数据单元</strong>的头部和尾部</li>
+<li>到了第一层（物理层）这时候传输的是比特流，就不用加控制信息了</li>
+</ul>
+<p>OSI 把<strong>对等层</strong>之间传输的单元称为该层的<strong>协议数据单元（Protocol Data Unit, PDU）</strong></p>
+<p>虽然 AP1 传输数据，要经过上图这么复杂的过程才能到 AP2，但是在 AP1 看来，数据好像是直接就交到 AP2 手上一样，AP1 并不需要关心下层的细节，下层的复杂细节都被屏蔽掉了。同理，第五层也好像是直接交到对等的第五层手上了，其他层也一样。<strong>这是一个很重要的思维方式。</strong></p>
+<h5 id="173-协议、服务、服务访问点">1.7.3 协议、服务、服务访问点</h5>
+<h6 id="协议的本质">协议的本质</h6>
+<p>协议是控制两个对等实体间的通信，使得本层能够向上一层提供服务。要实现本层协议，还需要下一层提供服务。</p>
+<h6 id="协议和服务的区别">协议和服务的区别</h6>
+<ul>
+<li>协议的实现保证了能够<strong>向上一层提供服务</strong>，使用本层服务的实体只能看见服务而无法看见下层协议，也即<strong>下层协议对上层实体的透明的。</strong></li>
+<li><strong>协议是“水平的”</strong>，协议是控制<strong>对等实体之间的通讯规则</strong>，而<strong>服务是“垂直的”</strong>，即服务是下层向上层实现协议所提供的。</li>
+</ul>
+<h6 id="服务访问点-sap（service-access-point）">服务访问点 SAP（Service Access Point）</h6>
+<p>同系统中相邻两层的实体进行交换信息的地方交 SAP</p>
+<h6 id="服务数据单元-sdu（service-data-unit）">服务数据单元 SDU（Service Data Unit）</h6>
+<p>层与层之间交换的数据单元叫做 SDU</p>
+<h5 id="174-tcpip-结构">1.7.4 TCP/IP 结构</h5>
+<p><img src="../../../public/img/TIM%E6%88%AA%E5%9B%BE20180701164518.png" alt=""></p>
+<p>这里有两个很重要的概念：</p>
+<ul>
+<li><strong>everything over IP：</strong>TCP/IP 协议可以为各式各样的应用提供服务</li>
+<li><strong>IP over everything：</strong>TCP/IP 协议允许 IP 协议在各式各样的网络构成的互联网上运行</li>
+</ul>

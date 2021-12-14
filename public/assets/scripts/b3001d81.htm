@@ -1,0 +1,16 @@
+<h2 id="python">Python</h2>
+<h3 id="pyenv">Pyenv</h3>
+<h4 id="install-and-config">Install and config</h4>
+<ol>
+<li><p>follow: <a href="https://github.com/pyenv/pyenv">https://github.com/pyenv/pyenv</a></p>
+</li>
+<li><p>PATH:</p>
+<pre><code class="hljs language-zsh">// .zshrc
+
+export PYENV_ROOR=&quot;$HOME/.pyenv&quot;
+export PATH=$PYENV_ROOT/shims:$PATH
+eval &quot;$(pyenv init -)&quot;
+eval &quot;$(pyenv virtualenv-init -)&quot;
+</code></pre>
+</li>
+</ol>

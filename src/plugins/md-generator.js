@@ -101,6 +101,8 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   fs.writeFileSync(outputFilePath, htmlStr, {
     encoding: "utf-8",
   });
+
+  return hMap;
 }
 
 // articles 2 htm
@@ -115,14 +117,12 @@ emoji.init_env();
 emoji.replace_mode = "unified";
 emoji.allow_native = true;
 
-var count = 0;
-
 // iterating md files
 for (let pname of postsrs) {
   let abbrlink = crc32(pname).toString(36);
-  md2html(
+  const hMap = md2html(
     path.join(postsPath, pname),
-    path.join(__dirname, "..", "assets", "articles", abbrlink + ".htm"),
+    path.join(process.cwd(), "public", "assets", "articles", abbrlink + ".htm"),
     function (sourceMdStr) {
       let data = articleDataExtract.extract(sourceMdStr);
       // data.metadata.short_content = marked.parse(data.metadata.short_content);
@@ -151,8 +151,11 @@ for (let pname of postsrs) {
       return data.body;
     }
   );
-  // count++;
-  // if (count === 4) break;
+  for (let metadata of articlesMetadata) {
+    if (metadata.abbrlink === abbrlink) {
+      metadata.hasToc = hMap !== null;
+    }
+  }
 }
 
 // sort metadata with date
@@ -175,7 +178,7 @@ let websrcPath = path.join(__dirname, "..", "assets/_websrc");
 // about
 md2html(
   path.join(websrcPath, "about.md"),
-  path.join(__dirname, "..", "assets", "about", "index.htm")
+  path.join(process.cwd(), "public", "assets", "about", "index.htm")
 );
 
 // scripts
@@ -193,8 +196,8 @@ for (let md of scriptsDir) {
     if (hMap !== null) {
       fs.writeFileSync(
         path.join(
-          __dirname,
-          "..",
+          process.cwd(),
+          "public",
           "assets",
           "scripts",
           mdAbbrlink + ".htm.toc.json"
@@ -206,7 +209,13 @@ for (let md of scriptsDir) {
       );
     }
     fs.writeFileSync(
-      path.join(__dirname, "..", "assets", "scripts", mdAbbrlink + ".htm"),
+      path.join(
+        process.cwd(),
+        "public",
+        "assets",
+        "scripts",
+        mdAbbrlink + ".htm"
+      ),
       htmlStr,
       {
         encoding: "utf-8",
@@ -227,6 +236,7 @@ let cacheFileName = `cache-${crc32(new Date().toString()).toString(36)}.js`;
 fs.writeFileSync(
   path.join(resourcesPath, cacheFileName),
   `
+    console.log('Loading cache: ${cacheFileName}')
     sessionStorage.setItem('postSeries', ${JSON.stringify(allSeries)});
     sessionStorage.setItem('postMetadata', ${JSON.stringify(articlesMetadata)});
     sessionStorage.setItem('postOrder', ${JSON.stringify(articlesOrder)});

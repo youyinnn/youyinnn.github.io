@@ -1,0 +1,338 @@
+<h2 id="js">JS</h2>
+<h3 id="js-获取元素样式">JS 获取元素样式</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+  此方法兼容IE
+  获取元素的样式：
+    参数1：元素
+    参数2：样式名
+*/</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getStyle</span>(<span class="hljs-params">obj, styleName</span>) {
+  <span class="hljs-keyword">var</span> cs = obj.<span class="hljs-property">currentStyle</span>
+  <span class="hljs-keyword">if</span> (cs === <span class="hljs-literal">undefined</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">getComputedStyle</span>(obj, <span class="hljs-literal">null</span>)[styleName]
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> cs[styleName]
+  }
+}
+</code></pre>
+<h3 id="js-事件绑定兼容">JS 事件绑定兼容</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+  事件绑定兼容
+  首先要注意：
+    addEventListener() 方法中的this是我们绑定的事件
+    attachedEvent() 方法中的this是window
+
+  参数：
+    1、obj 要绑定的对象
+    2、eventStr 绑定事件 (不要on)
+    3、callback 回调函数
+*/</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bindev</span>(<span class="hljs-params">obj, eventStr, callback</span>) {
+  <span class="hljs-keyword">if</span> (obj.<span class="hljs-property">addEventListener</span>) {
+    <span class="hljs-comment">// 兼容大部分浏览器</span>
+    obj.<span class="hljs-title function_">addEventListener</span>(eventStr, callback, <span class="hljs-literal">false</span>)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/*
+      this是谁由调用方式决定
+      由于attachEvent()的默认this是window
+      为了统一this
+      我们可以用下面的方式来指定this
+      callback.apply(obj);
+    */</span>
+    <span class="hljs-comment">// IE</span>
+    obj.<span class="hljs-title function_">attachEvent</span>(<span class="hljs-string">&#x27;on&#x27;</span> + eventStr, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+      callback.<span class="hljs-title function_">apply</span>(obj)
+    })
+  }
+}
+</code></pre>
+<h3 id="js-滚动动画">JS 滚动动画</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+  md的滚动条
+  去到id为elementid的元素位置
+  速度是 500
+*/</span>
+$(<span class="hljs-string">&#x27;#md&#x27;</span>).<span class="hljs-title function_">animate</span>({
+  <span class="hljs-attr">scrollTop</span>: $(<span class="hljs-string">&#x27;#elementid&#x27;</span>).<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>
+}, <span class="hljs-number">500</span>);
+</code></pre>
+<h3 id="js-滚动动画改进">JS 滚动动画改进</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">/*
+  防止到了位置之后再滚动到该元素 而offset改变
+*/</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">scrolltoelement</span>(<span class="hljs-params">elementid</span>) {
+  <span class="hljs-keyword">if</span> ($(<span class="hljs-string">&#x27;#&#x27;</span> + elementid)[<span class="hljs-number">0</span>].<span class="hljs-property">oset</span> === <span class="hljs-literal">undefined</span>) {
+    $(<span class="hljs-string">&#x27;#&#x27;</span> + elementid)[<span class="hljs-number">0</span>].<span class="hljs-property">oset</span> = $(<span class="hljs-string">&#x27;#&#x27;</span> + elementid).<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>
+  }
+  $(<span class="hljs-string">&#x27;#md&#x27;</span>).<span class="hljs-title function_">animate</span>({
+    <span class="hljs-attr">scrollTop</span>: $(<span class="hljs-string">&#x27;#&#x27;</span> + elementid)[<span class="hljs-number">0</span>].<span class="hljs-property">oset</span>
+  }, <span class="hljs-number">500</span>);
+}
+</code></pre>
+<h3 id="js-检测页面滚动代码">JS 检测页面滚动代码</h3>
+<pre><code class="hljs language-JavaScript">$(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">scroll</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">var</span> scrollTo = $(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">scrollTop</span>(),
+  docHeight = $(<span class="hljs-variable language_">document</span>).<span class="hljs-title function_">height</span>(),
+  windowHeight = $(<span class="hljs-variable language_">window</span>).<span class="hljs-title function_">height</span>();
+  scrollPercent = (scrollTo / (docHeight-windowHeight)) * <span class="hljs-number">100</span>;
+  percent.<span class="hljs-property">innerText</span> = scrollPercent
+})
+</code></pre>
+<h3 id="js-小数">JS 小数</h3>
+<ol>
+<li><p>丢弃小数部分,保留整数部分 <code>parseInt(7/2)</code> </p>
+</li>
+<li><p>向上取整,有小数就整数部分加1 <code>Math.ceil(7/2) </code></p>
+</li>
+<li><p>四舍五入 <code>Math.round(7/2) </code></p>
+</li>
+<li><p>向下取整 <code>Math.floor(7/2)</code></p>
+</li>
+<li><p>四舍五入 保留位数：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> num =<span class="hljs-number">2.446242342</span>;
+num = num.<span class="hljs-title function_">toFixed</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// 输出结果为 2.45</span>
+</code></pre>
+</li>
+</ol>
+<h3 id="js-css-动态添加动画效果">JS CSS 动态添加动画效果</h3>
+<pre><code class="hljs language-javascript">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">addClass</span>(<span class="hljs-string">&#x27;getnothing&#x27;</span>)
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">removeClass</span>(<span class="hljs-string">&#x27;getnothing&#x27;</span>)
+  }, <span class="hljs-number">1100</span>)
+</code></pre>
+<pre><code class="hljs language-css"><span class="hljs-selector-class">.getnothing</span>{
+  <span class="hljs-attribute">animation</span>: getnothing <span class="hljs-number">1s</span>;
+}
+
+<span class="hljs-keyword">@keyframes</span> getnothing{
+  <span class="hljs-number">50%</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">247</span>, <span class="hljs-number">117</span>, <span class="hljs-number">117</span>, <span class="hljs-number">0.534</span>);
+  }
+}
+</code></pre>
+<h3 id="js-控制聚焦失焦事件">JS 控制聚焦/失焦事件</h3>
+<pre><code class="hljs language-js">  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">focus</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    $(<span class="hljs-string">&#x27;#scriptsearcher&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">style</span>.<span class="hljs-property">opacity</span> = <span class="hljs-string">&#x27;1&#x27;</span>
+  })
+  $(<span class="hljs-string">&#x27;#searchtext&#x27;</span>).<span class="hljs-title function_">blur</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    $(<span class="hljs-string">&#x27;#scriptsearcher&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">style</span>.<span class="hljs-property">opacity</span> = <span class="hljs-string">&#x27;0.3&#x27;</span>
+  })
+</code></pre>
+<h3 id="ajax设置请求超时">AJAX设置请求超时</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">var</span> ajaxTimeoutTest = $.<span class="hljs-title function_">ajax</span>({
+　　<span class="hljs-attr">url</span>:<span class="hljs-string">&#x27;&#x27;</span>,  <span class="hljs-comment">//请求的URL</span>
+　　timeout : <span class="hljs-number">1000</span>, <span class="hljs-comment">//超时时间设置，单位毫秒</span>
+　　type : <span class="hljs-string">&#x27;get&#x27;</span>,  <span class="hljs-comment">//请求方式，get或post</span>
+　　data :{},  <span class="hljs-comment">//请求所传参数，json格式</span>
+　　<span class="hljs-attr">dataType</span>:<span class="hljs-string">&#x27;json&#x27;</span>,<span class="hljs-comment">//返回的数据格式</span>
+　　<span class="hljs-attr">success</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>){ <span class="hljs-comment">//请求成功的回调函数</span>
+　　　　<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;成功&quot;</span>);
+　　},
+　　complete : <span class="hljs-keyword">function</span>(<span class="hljs-params">XMLHttpRequest,status</span>){ <span class="hljs-comment">//请求完成后最终执行参数</span>
+　　　　<span class="hljs-keyword">if</span>(status==<span class="hljs-string">&#x27;timeout&#x27;</span>){<span class="hljs-comment">//超时,status还有success,error等值的情况</span>
+ 　　　　　 ajaxTimeoutTest.<span class="hljs-title function_">abort</span>();
+　　　　　  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;超时&quot;</span>);
+　　　　}
+　　}
+});
+</code></pre>
+<p>函数写在complete中，因为无论success还是error，complete函数都会执行。</p>
+<h3 id="async"><a href="https://github.com/caolan/async">Async</a></h3>
+<blockquote>
+<p>JS Ajax JQ 同步请求库</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000005789740">来源</a></p>
+<p><a href="https://blog.csdn.net/marujunyy/article/details/8695205">中文文档</a></p>
+<h3 id="js-刷新页面">JS 刷新页面</h3>
+<h4 id="small_blue_diamond手动-reload">🔹手动 reload</h4>
+<pre><code class="hljs language-js">location.<span class="hljs-title function_">reload</span>();
+</code></pre>
+<h4 id="small_blue_diamond自动定时刷新">🔹自动定时刷新</h4>
+<p>页面自动刷新：把如下代码加入<head>区域中</p>
+<pre><code class="hljs language-js">&lt;meta http-equiv=<span class="hljs-string">&quot;refresh&quot;</span> content=<span class="hljs-string">&quot;5&quot;</span>&gt;
+</code></pre>
+<h3 id="js获取图片原始尺寸">JS获取图片原始尺寸</h3>
+<p>HTML5提供了一个新属性naturalWidth/naturalHeight可以直接获取图片的原始宽高</p>
+<pre><code class="hljs language-javascript">   <span class="hljs-keyword">let</span> imgw = <span class="hljs-variable language_">this</span>.<span class="hljs-property">naturalWidth</span>
+   <span class="hljs-keyword">let</span> imgh = <span class="hljs-variable language_">this</span>.<span class="hljs-property">naturalHeight</span>
+</code></pre>
+<h3 id="jquery的高级选择器">JQuery的高级选择器</h3>
+<pre><code class="hljs language-javascript">jQuery.<span class="hljs-title function_">parent</span>(expr)           <span class="hljs-comment">//找父元素</span>
+jQuery.<span class="hljs-title function_">parents</span>(expr)          <span class="hljs-comment">//找到所有祖先元素，不限于父元素</span>
+jQuery.<span class="hljs-title function_">children</span>(expr)        <span class="hljs-comment">//查找所有子元素，只会找到直接的孩子节点，不会返回所有子孙</span>
+jQuery.<span class="hljs-title function_">contents</span>()            <span class="hljs-comment">//查找下面的所有内容，包括节点和文本。</span>
+jQuery.<span class="hljs-title function_">prev</span>()                <span class="hljs-comment">//查找上一个兄弟节点，不是所有的兄弟节点</span>
+jQuery.<span class="hljs-title function_">prevAll</span>()             <span class="hljs-comment">//查找所有之前的兄弟节点</span>
+jQuery.<span class="hljs-title function_">next</span>()                <span class="hljs-comment">//查找下一个兄弟节点，不是所有的兄弟节点</span>
+jQuery.<span class="hljs-title function_">nextAll</span>()             <span class="hljs-comment">//查找所有之后的兄弟节点</span>
+jQuery.<span class="hljs-title function_">siblings</span>()            <span class="hljs-comment">//查找兄弟节点，不分前后</span>
+jQuery.<span class="hljs-title function_">find</span>(expr)            <span class="hljs-comment">/*跟jQuery.filter(expr)完全不一样，jQuery.filter(expr)是从初始的
+                               jQuery对象集合中筛选出一部分，而jQuery.find()的返回结果，不会有初始集中
+                               筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，比如：
+                               $(&quot;p&quot;).find(&quot;span&quot;)是从元素开始找，等于$(&quot;p span&quot;) */</span>
+</code></pre>
+<h3 id="js取消事件冒泡">js取消事件冒泡</h3>
+<pre><code class="hljs language-javascript">$(<span class="hljs-string">&quot;form&quot;</span>).<span class="hljs-title function_">bind</span>(<span class="hljs-string">&quot;submit&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) { 
+　　　　<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+　　 }
+)
+</code></pre>
+<p><a href="https://www.cnblogs.com/wangking/p/6113024.html#">https://www.cnblogs.com/wangking/p/6113024.html#</a></p>
+<h3 id="js判断字符串中是否含有emoji表情">JS判断字符串中是否含有Emoji表情</h3>
+<p>如果前端的字符串含有Emoji表情，那么在默认的情况下是不能存在MySQL数据库中的，因为编码的问题
+原因如下：</p>
+<blockquote>
+<p>本地数据库的默认编码是utf8，默认保存的是1到3个字节，但是现在的emoji表情采用4个字节保存，所以抛出异常。
+引自：<a href="https://blog.csdn.net/wang704987562/article/details/54093979">https://blog.csdn.net/wang704987562/article/details/54093979</a></p>
+</blockquote>
+<p>JS判断：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isEmojiCharacter</span>(<span class="hljs-params">substring</span>) {  
+    <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; substring.<span class="hljs-property">length</span>; i++) {  
+        <span class="hljs-keyword">var</span> hs = substring.<span class="hljs-title function_">charCodeAt</span>(i);  
+        <span class="hljs-keyword">if</span> (<span class="hljs-number">0xd800</span> &lt;= hs &amp;&amp; hs &lt;= <span class="hljs-number">0xdbff</span>) {  
+            <span class="hljs-keyword">if</span> (substring.<span class="hljs-property">length</span> &gt; <span class="hljs-number">1</span>) {  
+                <span class="hljs-keyword">var</span> ls = substring.<span class="hljs-title function_">charCodeAt</span>(i + <span class="hljs-number">1</span>);  
+                <span class="hljs-keyword">var</span> uc = ((hs - <span class="hljs-number">0xd800</span>) * <span class="hljs-number">0x400</span>) + (ls - <span class="hljs-number">0xdc00</span>) + <span class="hljs-number">0x10000</span>;  
+                <span class="hljs-keyword">if</span> (<span class="hljs-number">0x1d000</span> &lt;= uc &amp;&amp; uc &lt;= <span class="hljs-number">0x1f77f</span>) {  
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+                }  
+            }  
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (substring.<span class="hljs-property">length</span> &gt; <span class="hljs-number">1</span>) {  
+            <span class="hljs-keyword">var</span> ls = substring.<span class="hljs-title function_">charCodeAt</span>(i + <span class="hljs-number">1</span>);  
+            <span class="hljs-keyword">if</span> (ls == <span class="hljs-number">0x20e3</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            }  
+        } <span class="hljs-keyword">else</span> {  
+            <span class="hljs-keyword">if</span> (<span class="hljs-number">0x2100</span> &lt;= hs &amp;&amp; hs &lt;= <span class="hljs-number">0x27ff</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-number">0x2B05</span> &lt;= hs &amp;&amp; hs &lt;= <span class="hljs-number">0x2b07</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-number">0x2934</span> &lt;= hs &amp;&amp; hs &lt;= <span class="hljs-number">0x2935</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-number">0x3297</span> &lt;= hs &amp;&amp; hs &lt;= <span class="hljs-number">0x3299</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (hs == <span class="hljs-number">0xa9</span> || hs == <span class="hljs-number">0xae</span> || hs == <span class="hljs-number">0x303d</span> || hs == <span class="hljs-number">0x3030</span>  
+                    || hs == <span class="hljs-number">0x2b55</span> || hs == <span class="hljs-number">0x2b1c</span> || hs == <span class="hljs-number">0x2b1b</span>  
+                    || hs == <span class="hljs-number">0x2b50</span>) {  
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  
+            }  
+        }  
+    }  
+}
+</code></pre>
+<p>引自： <a href="https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1">https://blog.csdn.net/u014520745/article/details/52947466?locationNum=8&amp;fps=1</a></p>
+<h3 id="javascript使用字符串作为函数调用语句去调用">Javascript使用字符串作为函数调用语句去调用</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">func_abc</span>(<span class="hljs-params"></span>){
+  <span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;a&#x27;</span>);
+}
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;func_abc&quot;</span>;
+<span class="hljs-built_in">eval</span>(str+<span class="hljs-string">&quot;()&quot;</span>);<span class="hljs-comment">//执行func_abc()函数</span>
+</code></pre>
+<p>引自：<a href="https://blog.csdn.net/qq_26222859/article/details/75285784">https://blog.csdn.net/qq_26222859/article/details/75285784</a></p>
+<h3 id="js-数组排序">JS 数组排序</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">23</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">78</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">var</span> compare = <span class="hljs-keyword">function</span> (<span class="hljs-params">x, y</span>) {<span class="hljs-comment">//比较函数</span>
+    <span class="hljs-keyword">if</span> (x &lt; y) {
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; y) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+}
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr.<span class="hljs-title function_">sort</span>(compare));    
+</code></pre>
+<h3 id="js-判断浏览器类型">JS 判断浏览器类型</h3>
+<p>ie那段参考自：<a href="https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html">https://www.cnblogs.com/XCWebLTE/archive/2017/06/15/7017338.html</a></p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> userAgent = navigator.<span class="hljs-property">userAgent</span>;
+<span class="hljs-keyword">var</span> isOpera = userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Opera&quot;</span>) &gt; -<span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">ievertion</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">var</span> isIE = userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;compatible&quot;</span>) &gt; -<span class="hljs-number">1</span> &amp;&amp; userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;MSIE&quot;</span>) &gt; -<span class="hljs-number">1</span>; <span class="hljs-comment">//判断是否IE&lt;11浏览器  </span>
+    <span class="hljs-keyword">var</span> isEdge = userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Edge&quot;</span>) &gt; -<span class="hljs-number">1</span> &amp;&amp; !isIE; <span class="hljs-comment">//判断是否IE的Edge浏览器  </span>
+    <span class="hljs-keyword">var</span> isIE11 = userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;Trident&#x27;</span>) &gt; -<span class="hljs-number">1</span> &amp;&amp; userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;rv:11.0&quot;</span>) &gt; -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (isIE) {
+        <span class="hljs-keyword">var</span> reIE = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&quot;MSIE (\\d+\\.\\d+);&quot;</span>);
+        reIE.<span class="hljs-title function_">test</span>(userAgent);
+        <span class="hljs-keyword">var</span> fIEVersion = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-title class_">RegExp</span>[<span class="hljs-string">&quot;$1&quot;</span>]);
+        <span class="hljs-keyword">if</span> (fIEVersion == <span class="hljs-number">7</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (fIEVersion == <span class="hljs-number">8</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">8</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (fIEVersion == <span class="hljs-number">9</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (fIEVersion == <span class="hljs-number">10</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>; <span class="hljs-comment">//IE版本&lt;=7</span>
+        }
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isEdge) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;edge&#x27;</span>; <span class="hljs-comment">//edge</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isIE11) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">11</span>; <span class="hljs-comment">//IE11  </span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">//不是ie浏览器</span>
+    }
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isSafari</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Safari&quot;</span>) &gt; -<span class="hljs-number">1</span>
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isFF</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Firefox&quot;</span>) &gt; -<span class="hljs-number">1</span>
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isChrome</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> userAgent.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Chrome&quot;</span>) &gt; -<span class="hljs-number">1</span>
+}
+</code></pre>
+<h3 id="javascript-解除xhr获取header的限制">JavaScript 解除xhr获取header的限制</h3>
+<p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<p>需要后端的配合</p>
+<h3 id="js锚点跳转动画">JS锚点跳转动画</h3>
+<p>一般我们的锚点都长这样</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xxx&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;reference-link&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
+<p>因此我们就根据name去索引锚点</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> $root = $(<span class="hljs-string">&#x27;html, body&#x27;</span>)
+$(<span class="hljs-string">&#x27;.markdown-toc a&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    $root.<span class="hljs-title function_">animate</span>({
+        <span class="hljs-attr">scrollTop</span>: $(<span class="hljs-string">&#x27;[name=&quot;xxx&quot;]&#x27;</span>).<span class="hljs-title function_">offset</span>().<span class="hljs-property">top</span>
+    }, <span class="hljs-number">600</span>)
+})
+</code></pre>
+<h3 id="js-监听元素任何变化">JS 监听元素任何变化</h3>
+<p><a href="http://javascript.ruanyifeng.com/dom/mutationobserver.html">mutationobserver</a>
+<a href="https://blog.csdn.net/u010419337/article/details/81474311">csdn blog</a></p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> <span class="hljs-title class_">MutationObserver</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">MutationObserver</span> || <span class="hljs-variable language_">window</span>.<span class="hljs-property">WebKitMutationObserver</span> || <span class="hljs-variable language_">window</span>.<span class="hljs-property">MozMutationObserver</span>
+<span class="hljs-keyword">let</span> observer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MutationObserver</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">mutationList</span>) {
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-comment">// handle change</span>
+    }, <span class="hljs-number">250</span>);
+})
+<span class="hljs-keyword">let</span> article = $(<span class="hljs-string">&#x27;#docpanel&#x27;</span>)[<span class="hljs-number">0</span>]
+<span class="hljs-keyword">let</span> options = {
+    <span class="hljs-string">&#x27;attributes&#x27;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&#x27;attributeOldValue&#x27;</span>: <span class="hljs-literal">true</span>
+};
+observer.<span class="hljs-title function_">observe</span>(article, options);
+</code></pre>
+<h3 id="jquery-ui-拖拽">JQuery UI 拖拽</h3>
+<p><a href="https://www.runoob.com/jqueryui/example-draggable.html">https://www.runoob.com/jqueryui/example-draggable.html</a></p>
+<h3 id="jquery-gif播放暂停-js-gif库">JQuery GIF播放/暂停 JS-GIF库</h3>
+<p><a href="https://www.lanrenzhijia.com/pic/3719.html">https://www.lanrenzhijia.com/pic/3719.html</a>
+<a href="https://github.com/buzzfeed/libgif-js">https://github.com/buzzfeed/libgif-js</a></p>
+<h3 id="打开新网页">打开新网页</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">openInNewTab</span>(<span class="hljs-params">url</span>) {
+ <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(url, <span class="hljs-string">&#x27;_blank&#x27;</span>).<span class="hljs-title function_">focus</span>();
+}
+
+<span class="hljs-comment">//or just</span>
+<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">open</span>(url, <span class="hljs-string">&#x27;_blank&#x27;</span>).<span class="hljs-title function_">focus</span>();
+</code></pre>
+<h3 id="如何在不加载dom的情况下操作dom">如何在不加载dom的情况下操作dom</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMParser</span>()
+    .<span class="hljs-title function_">parseFromString</span>(html, <span class="hljs-string">&#x27;text/html&#x27;</span>).<span class="hljs-property">body</span>.<span class="hljs-property">firstElementChild</span>;
+</code></pre>
+<p><a href="https://grrr.tech/posts/create-dom-node-from-html-string/">https://grrr.tech/posts/create-dom-node-from-html-string/</a></p>

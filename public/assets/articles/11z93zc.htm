@@ -1,0 +1,390 @@
+<h3 id="41-first-missing-postivehard">41. First Missing Postive(Hard)</h3>
+<p>Given an unsorted integer array, find the smallest missing positive integer.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: [1,2,0]
+Output: 3
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: [3,4,-1,1]
+Output: 2
+</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code>Input: [7,8,9,11,12]
+Output: 1
+</code></pre>
+<p><strong>Note:</strong></p>
+<p>Your algorithm should run in <em>O</em>(<em>n</em>) time and uses constant extra space.</p>
+<p>这题难点在于线性和常数空间</p>
+<h4 id="after-sort-beat-85">After Sort (Beat 85%)</h4>
+<p>思路和之前处理3sum一样，为了处理重复，我们先把数组排序，然后设一个flag从1开始数就好了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstMissingPositive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    Arrays.sort(nums);
+    <span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];
+        <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (num != flag) {
+                <span class="hljs-keyword">break</span>;
+            } <span class="hljs-keyword">else</span> {
+                flag++;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> flag;
+}
+</code></pre>
+<h4 id="turned">Turned</h4>
+<ol>
+<li><p>数组里面有干扰数字，比如负数和0，对于负数我们直接变成整数最大值，0则可以忽略掉，这是我们第一个n时间要干的事情；</p>
+</li>
+<li><p>第二个n时间我们遍历数组，所有出现的正数，并且在数组长度范围内的数，就将这个数对应的排序位置中的数变为负数；比如有正数4，那么就要把数组下标3上的数字取相反数；</p>
+</li>
+<li><p>第三个n时间，如果碰到非负数，则说明这个位置没有在第二个n里被置反，所以这个位置对应的就是第一个丢失的正数；</p>
+</li>
+<li><p>如果三个n时间没有找到解，那么解就是数组长度+1；</p>
+</li>
+</ol>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstMissingPositive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (nums[i] &lt;= <span class="hljs-number">0</span>) {
+            nums[i] = Integer.MAX_VALUE;
+        }
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">abs</span> <span class="hljs-operator">=</span> Math.abs(nums[i]);
+        <span class="hljs-keyword">if</span> (abs &lt;= nums.length && abs &gt; <span class="hljs-number">0</span> && nums[abs - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) {
+            nums[abs - <span class="hljs-number">1</span>] *= -<span class="hljs-number">1</span>;
+        }
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (nums[i] &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> nums.length + <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h3 id="42-trapping-rain-waterhard">42. Trapping Rain Water(Hard)</h3>
+<p>Given <em>n</em> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" alt="img">
+The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.<strong>Thanks Marcos</strong> for contributing this image!</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+</code></pre>
+<h4 id="find-logicbeat-987">Find Logic(Beat 98.7%)</h4>
+<p>我们需要两根柱子，左，右；我们顺序遍历数组，每遇到一个0以上的柱子视为左柱子，那么右柱子是怎么决定的呢？我们多看几个例子：</p>
+<pre><code>[9,8,4,6]     [4,2,3]       [4,9,4,5,3,2]
+░             ░                ░
+░ ░           ░ ▓ ░            ░
+░ ░           ░ ░ ░            ░
+░ ░ ▓ ░       ░ ░ ░            ░
+░ ░ ▓ ░                        ░ ▓ ░
+░ ░ ░ ░                      ░ ░ ░ ░
+░ ░ ░ ░                      ░ ░ ░ ░ ░
+░ ░ ░ ░                      ░ ░ ░ ░ ░ ░
+░ ░ ░ ░                      ░ ░ ░ ░ ░ ░
+</code></pre>
+<p>加上例子我们可以发现：</p>
+<ul>
+<li>一旦碰到比左柱子高的柱子，这个就是右柱子，如例图中的[1,0,3]；</li>
+<li>如果没有比左柱子高的柱子，剩下的柱子中最高的柱子就是右柱子，比如上面的3个例子就是；</li>
+<li>下一轮右柱子就是上一轮的左柱子；</li>
+</ul>
+<p>然后关于积水的计算：</p>
+<ul>
+<li>左右柱子之间，最多能积矮柱那么高的水；</li>
+<li>左右柱子之间，最长能积两柱之间那么宽水；</li>
+<li>两柱之间会有石头；</li>
+<li>积水：<ol>
+<li>面积：遍历两柱之间的石头，高宽乘积减去石头和就是积水；</li>
+<li>遍历两柱之间，每次都用高减去当前的石头高，然后加到一个sum中；</li>
+</ol>
+</li>
+</ul>
+<p>于是：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; height.length - <span class="hljs-number">1</span>;) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> height[i];
+        <span class="hljs-keyword">if</span> (l &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">ri</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;
+            <span class="hljs-comment">// 找右柱子</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; height.length; j++) {
+                <span class="hljs-keyword">if</span> (height[j] &gt; l) {
+                    ri = j;
+                    <span class="hljs-keyword">break</span>;
+                } <span class="hljs-keyword">else</span> {
+                    ri = height[j] &gt; height[ri] ? j : ri;
+                }
+            }
+            <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> Math.min(l, height[ri]);
+            <span class="hljs-type">int</span> <span class="hljs-variable">trap</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// 减石头</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; ri; j++) {
+                trap += length - Math.min(length, height[j]);
+            }
+            <span class="hljs-keyword">if</span> (trap &gt; <span class="hljs-number">0</span>) {
+                count += trap;
+                i = ri;
+            } <span class="hljs-keyword">else</span> {
+                i++;
+            }
+        } <span class="hljs-keyword">else</span> {
+            i++;
+        }
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+</code></pre>
+<h3 id="43-multiply-stringsmedium">43. Multiply Strings(Medium)</h3>
+<p>Given two non-negative integers <code>num1</code> and <code>num2</code> represented as strings, return the product of <code>num1</code> and <code>num2</code>, also represented as a string.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: num1 = &quot;2&quot;, num2 = &quot;3&quot;
+Output: &quot;6&quot;
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: num1 = &quot;123&quot;, num2 = &quot;456&quot;
+Output: &quot;56088&quot;
+</code></pre>
+<p><strong>Note:</strong></p>
+<ol>
+<li>The length of both <code>num1</code> and <code>num2</code> is &lt; 110.</li>
+<li>Both <code>num1</code> and <code>num2</code> contain only digits <code>0-9</code>.</li>
+<li>Both <code>num1</code> and <code>num2</code> do not contain any leading zero, except the number 0 itself.</li>
+<li>You <strong>must not use any built-in BigInteger library</strong> or <strong>convert the inputs to integer</strong> directly.</li>
+</ol>
+<p>这题，当然你可以硬打，拆分乘法为2位数内的乘法和多位数的加法，但是效率很慢，我们来用数学解决这个问题</p>
+<h4 id="mathematics">Mathematics</h4>
+<p>要点：</p>
+<ul>
+<li><p>n位数×m位数，结果长度是n+m；</p>
+</li>
+<li><p>把乘法看成是矩阵；</p>
+<pre><code>123 x 456:
+         j = 0   1   2
+             4   5   6
+i = 0    1   4   5   6       5  4  3
+    1    2   8  10  12       4  3  2
+    2    3  12  15  18       3  2  1
+左边是两位数相乘结果，右边是相乘结果的位数，于是123 x 456的结果可以是：
+
+位数：N  N  N  N  N  N
+     0  4  5  6 15 18
+           8 10 12 
+             12
+乘积缩放的篮子位置，观察ij就能看出来，位置会放在i+j+1下标的位置上，
+最后验算一下可知：
+123 x 456 = 56088 = 18 + （150+120）+（1200+1000+600）+（8000+5000）+40000
+</code></pre>
+</li>
+</ul>
+<p>于是我们准备好篮子，把每一位的两位数相乘结果算出来，都加在篮子里，然后从篮子后面往前处理好进位就行了</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">multiply</span><span class="hljs-params">(String a, String b)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">maxLength</span> <span class="hljs-operator">=</span> a.length() + b.length();
+    <span class="hljs-type">int</span>[] box = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[maxLength];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; a.length(); i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; b.length(); j++) {
+            <span class="hljs-type">char</span> <span class="hljs-variable">an</span> <span class="hljs-operator">=</span> a.charAt(i);
+            <span class="hljs-type">char</span> <span class="hljs-variable">bn</span> <span class="hljs-operator">=</span> b.charAt(j);
+            box[i + j + <span class="hljs-number">1</span>] += (an - <span class="hljs-string">&#x27;0&#x27;</span>) * (bn - <span class="hljs-string">&#x27;0&#x27;</span>);
+        }
+    }
+    <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> box.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> box[i];
+        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> num % <span class="hljs-number">10</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> num / <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span>) {
+            box[i - <span class="hljs-number">1</span>] += carry;
+        }
+        sb.insert(<span class="hljs-number">0</span>, left);
+    }
+    <span class="hljs-keyword">while</span> (sb.length() &gt; <span class="hljs-number">0</span> && sb.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;0&#x27;</span>) {
+        sb.delete(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> sb.length() &gt; <span class="hljs-number">0</span> ? sb.toString() : <span class="hljs-string">&quot;0&quot;</span>;
+}
+</code></pre>
+<h3 id="44-wildcard-matchinghard">44. Wildcard Matching(Hard)</h3>
+<p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement wildcard pattern matching with support for <code>&#39;?&#39;</code> and <code>&#39;*&#39;</code>.</p>
+<pre><code>&#x27;?&#x27; Matches any single character.
+&#x27;*&#x27; Matches any sequence of characters (including the empty sequence).
+</code></pre>
+<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li><code>s</code> could be empty and contains only lowercase letters <code>a-z</code>.</li>
+<li><code>p</code> could be empty and contains only lowercase letters <code>a-z</code>, and characters like <code>?</code> or <code>*</code>.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+s = &quot;aa&quot;
+p = &quot;a&quot;
+Output: false
+Explanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input:
+s = &quot;aa&quot;
+p = &quot;*&quot;
+Output: true
+Explanation: &#x27;*&#x27; matches any sequence.
+</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code>Input:
+s = &quot;cb&quot;
+p = &quot;?a&quot;
+Output: false
+Explanation: &#x27;?&#x27; matches &#x27;c&#x27;, but the second letter is &#x27;a&#x27;, which does not match &#x27;b&#x27;.
+</code></pre>
+<p><strong>Example 4:</strong></p>
+<pre><code>Input:
+s = &quot;adceb&quot;
+p = &quot;*a*b&quot;
+Output: true
+Explanation: The first &#x27;*&#x27; matches the empty sequence, while the second &#x27;*&#x27; matches the substring &quot;dce&quot;.
+</code></pre>
+<p><strong>Example 5:</strong></p>
+<pre><code>Input:
+s = &quot;acdcb&quot;
+p = &quot;a*c?b&quot;
+Output: false
+</code></pre>
+<h4 id="dp-beat-7043">DP (Beat 70.43%)</h4>
+<p>这题和第10题类似，不同的是它的*可以是任意序列，而不是任意前面一个字符，所以首先它可以用DP去打，要领：</p>
+<pre><code>if (pc == &#x27;?&#x27;) {
+    dp[i][j] = dp[i - 1][j - 1];
+}
+if (pc == &#x27;*&#x27;) {
+    dp[i][j] = dp[i][j - 1] | dp[i - 1][j];
+}
+if (pc == sc) {
+    dp[i][j] = sc == pc && dp[i - 1][j - 1];
+}
+
+于是比较简单的写出矩阵来：
+s: acdcb p: a*c?b
+
+    + a * c ? b
+ +  √ × × × × ×
+ a  × √ √ × × ×
+ c  × × √ √ × ×
+ d  × × √ × √ ×
+ c  × × √ √ × ×
+ b  × × √ × √ ×
+</code></pre>
+<p>于是：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isMatch</span><span class="hljs-params">(String s, String p)</span> {
+    s = <span class="hljs-string">&quot;+&quot;</span> + s;
+    p = <span class="hljs-string">&quot;+&quot;</span> + p;
+    <span class="hljs-type">boolean</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[s.length()][p.length()];
+    dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; p.length(); i++) {
+        <span class="hljs-keyword">if</span> (p.charAt(i) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+            dp[<span class="hljs-number">0</span>][i] = dp[<span class="hljs-number">0</span>][i - <span class="hljs-number">1</span>];
+        }
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; s.length(); i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; p.length(); j++) {
+            <span class="hljs-type">char</span> <span class="hljs-variable">sc</span> <span class="hljs-operator">=</span> s.charAt(i);
+            <span class="hljs-type">char</span> <span class="hljs-variable">pc</span> <span class="hljs-operator">=</span> p.charAt(j);
+            <span class="hljs-keyword">if</span> (pc == <span class="hljs-string">&#x27;*&#x27;</span>) {
+                dp[i][j] = dp[i][j - <span class="hljs-number">1</span>] | dp[i - <span class="hljs-number">1</span>][j];
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pc == <span class="hljs-string">&#x27;?&#x27;</span>) {
+                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
+            } <span class="hljs-keyword">else</span> {
+                dp[i][j] = sc == pc && dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> dp[s.length() - <span class="hljs-number">1</span>][p.length() - <span class="hljs-number">1</span>];
+}
+</code></pre>
+<p>虽然按部就班地打下了这题，但是beat率不高，所以这题还有更精妙的做法，讨论区有一种线性打法，直接根据if-else来打，我觉得case太难覆盖，我自己做的话，笔试时间内可能打不出，所以不推荐；</p>
+<h4 id="dfsbeat-100">DFS(Beat 100%)</h4>
+<p>参考一下究竟是怎么个dfs法：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isMatch</span><span class="hljs-params">(String s, String p)</span> {
+    <span class="hljs-keyword">return</span> dfs(s, p, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) &gt; <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(String s, String p, <span class="hljs-type">int</span> si, <span class="hljs-type">int</span> pi)</span> {
+    <span class="hljs-keyword">if</span> (si == s.length() && pi == p.length()) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    }
+    <span class="hljs-keyword">if</span> (si == s.length() && p.charAt(pi) != <span class="hljs-string">&#x27;*&#x27;</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">if</span> (pi == p.length()) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">if</span> (p.charAt(pi) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (pi + <span class="hljs-number">1</span> &lt; p.length() && p.charAt(pi + <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+            <span class="hljs-keyword">return</span> dfs(s, p, si, pi + <span class="hljs-number">1</span>);
+        }
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= s.length() - si; i++) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> dfs(s, p, si + i, pi + <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span> (ret == <span class="hljs-number">0</span> || ret == <span class="hljs-number">2</span>) {
+                <span class="hljs-keyword">return</span> ret;
+            }
+        }
+    }
+    <span class="hljs-keyword">if</span> (s.charAt(si) == p.charAt(pi) || p.charAt(pi) == <span class="hljs-string">&#x27;?&#x27;</span>) {
+        <span class="hljs-keyword">return</span> dfs(s, p, si + <span class="hljs-number">1</span>, pi + <span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h3 id="45-jump-game-ii-hard">45. Jump Game II (Hard)</h3>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Your goal is to reach the last index in the minimum number of jumps.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: [2,3,1,1,4]
+Output: 2
+Explanation: The minimum number of jumps to reach the last index is 2.
+    Jump 1 step from index 0 to 1, then 3 steps to the last index.
+</code></pre>
+<p>这题有在<a href="./1flo1c0.html">DP Again</a>做过分析，就不多说了</p>
+<h4 id="dp">DP</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">jump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+        <span class="hljs-comment">// one jump to the end</span>
+        <span class="hljs-keyword">if</span> (i + nums[i] &gt;= nums.length) {
+            dp[i] = <span class="hljs-number">1</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// jump max step if it can reach the end</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt;= i + nums[i]; j++) {
+                <span class="hljs-keyword">if</span> (dp[j] != Integer.MAX_VALUE) {
+                    tmp = Math.min(tmp, dp[j] + <span class="hljs-number">1</span>);
+                }
+            }
+            dp[i] = tmp;
+        }
+    }
+    <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>];
+}
+</code></pre>
+<h4 id="bfs">BFS</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">jump</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">jump</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, end = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (end &lt; nums.length - <span class="hljs-number">1</span>) {
+        jump++;
+        <span class="hljs-type">int</span> <span class="hljs-variable">tmpEnd</span> <span class="hljs-operator">=</span> end + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt;= end; i++) {
+            <span class="hljs-keyword">if</span> (i + nums[i] &gt; nums.length) {
+                <span class="hljs-keyword">return</span> jump;
+            }
+            tmpEnd = Math.max(tmpEnd, i + nums[i]);
+        }
+        start = end + <span class="hljs-number">1</span>;
+        end = tmpEnd;
+    }
+    <span class="hljs-keyword">return</span> jump;
+}
+</code></pre>

@@ -1,0 +1,51 @@
+<h3 id="xquartz-setup">XQuartz setup</h3>
+<p><a href="https://www.xquartz.org/">https://www.xquartz.org/</a></p>
+<p>Download & Install</p>
+<p>Then you will see this in the ssh config file located at <code>/private/etc/ssh/ssh_config</code>:</p>
+<pre><code>....
+
+# XAuthLocation added by XQuartz (https://www.xquartz.org)
+Host *
+    XAuthLocation /opt/X11/bin/xauth
+</code></pre>
+<h3 id="vs-code">VS Code</h3>
+<p>With the power of <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a>, you can add a ssh connection like:</p>
+<pre><code>Host login.encs.concordia.ca
+  HostName login.encs.concordia.ca
+  ForwardX11Trusted yes
+  User hu_ju
+</code></pre>
+<p>And also <a href="https://marketplace.visualstudio.com/items?itemName=rjyoung.vscode-modern-vhdl-support">Modern VHDL</a> for vhdl support.</p>
+<h3 id="troubshoot">Troubshoot</h3>
+<h4 id="establish-error">Establish Error</h4>
+<p>When this shows on the output of <code>Remote SSH</code></p>
+<pre><code class="hljs language-bash">...
+
+[16:44:34.541] Platform: linux
+[16:44:34.549] stderr&gt; bash: line 1: syntax error near unexpected token <span class="hljs-keyword">fi</span>
+[16:44:34.550] stderr&gt; bash: line 1: <span class="hljs-keyword">fi</span>
+[16:44:34.552] &gt; 6b09ed1419cf: running
+[16:44:34.553] stderr&gt; <span class="hljs-keyword">function</span>: Command not found.
+[16:44:34.553] stderr&gt; Bad : modifier <span class="hljs-keyword">in</span> $ (-).
+[16:44:34.553] stderr&gt; <span class="hljs-keyword">fi</span>: Command not found.
+[16:44:34.553] stderr&gt; found_glibc: Undefined variable.
+[16:44:34.554] stderr&gt; Unmatched <span class="hljs-string">&quot;.
+[16:44:34.556] stderr&gt; SERVER_PID: Undefined variable.
+[16:44:34.558] stderr&gt; =: Command not found.</span>
+</code></pre>
+<p>Fix this with:</p>
+<p><a href="https://github.com/microsoft/vscode-remote-release/issues/5543">https://github.com/microsoft/vscode-remote-release/issues/5543</a></p>
+<p>by adding a setting on vscode settings file:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;remote.SSH.useLocalServer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>And then select Linux when first connection</p>
+<h4 id="can-not-open-modelsim-ui-with-vscode">Can not open ModelSIM UI with vscode</h4>
+<p>Fefering: <a href="https://unix.stackexchange.com/a/12772/495761">https://unix.stackexchange.com/a/12772/495761</a></p>
+<p>Fix it by enable <code>ForwardX11 yes</code> in ssh_config:</p>
+<pre><code># XAuthLocation added by XQuartz (https://www.xquartz.org)
+Host *
+    XAuthLocation /opt/X11/bin/xauth
+    ForwardX11 yes
+</code></pre>

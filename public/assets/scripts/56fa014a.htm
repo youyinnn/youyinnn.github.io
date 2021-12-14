@@ -1,0 +1,102 @@
+<h2 id="latex">LaTeX</h2>
+<h3 id="vscode-tex-file-formatting-on-save">Vscode <code>.tex</code> `file formatting on save</h3>
+<p>Tools:</p>
+<ol>
+<li>LaTeX-Workshop extension;</li>
+<li>latexindent.pl</li>
+<li>Save and Run extension(optional);</li>
+</ol>
+<h4 id="toggle-formatter">Toggle formatter</h4>
+<h5 id="option-1">Option 1</h5>
+<p>While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent process.</p>
+<p> I fix it by replace the extension&#39;s setting:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;latex-workshop.latex.recipes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexmk 🔃&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-comment">// add tool &quot;latexindent&quot; as the second step of this recipes</span>
+      <span class="hljs-attr">&quot;tools&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;latexmk&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;latexindent&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;latex-workshop.latex.tools&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-comment">// previous tools should be remained ....</span>
+    
+    <span class="hljs-comment">// adding a new tool named latexindent</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexindent&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexindent&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;%DOC_EXT%&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;-w&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span> 
+</code></pre>
+<h5 id="option-2-extension-save-and-run">Option 2: Extension &quot;Save and Run&quot;</h5>
+<pre><code class="hljs language-json"><span class="hljs-attr">&quot;saveAndRun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;commands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;match&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\\.tex$&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cmd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexindent &#x27;${file}&#x27; -o &#x27;${file}&#x27; -s -g /dev/null&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;useShortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;silent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h4 id="environment-modules-for-latexindentpl">Environment modules for latexindent.pl</h4>
+<p>Refer to: <a href="https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac">https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac</a></p>
+<h4 id="no-backup-file-and-log-file">no backup file and log file</h4>
+<p><code>-o</code>: no backup;</p>
+<p><code>-g /dev/null</code>: no log;</p>
+<pre><code class="hljs language-bash">latexindent <span class="hljs-string">&#x27;${file}&#x27;</span> -o <span class="hljs-string">&#x27;${file}&#x27;</span> -s -g /dev/null<span class="hljs-string">&quot;</span>
+</code></pre>
+<h4 id="update-latexindentpl">Update latexindent.pl</h4>
+<p>The latexindent.pl which brought by MacTex might out of date. Replace it manually by replacing it on the mac.</p>
+<p>It might located at:</p>
+<pre><code class="hljs language-bash">/usr/local/texlive/2021/texmf-dist/scripts/latexindent/LatexIndent/
+</code></pre>
+<h4 id="latex-trick">Latex Trick</h4>
+<ol>
+<li><p>use url nicely:</p>
+<p><a href="https://www.kronto.org/thesis/tips/url-formatting.html">How do you get nicely formatted URLs in the bibliography?</a></p>
+<p><a href="https://tex.stackexchange.com/questions/4503/how-do-i-specify-color-in-rgb-using-hypersetup-in-hyperref/4506#4506"><a href="https://tex.stackexchange.com/questions/4503/how-do-i-specify-color-in-rgb-using-hypersetup-in-hyperref">How do I specify color in RGB using \hypersetup in hyperref?</a></a></p>
+<p><a href="https://www.overleaf.com/learn/latex/Questions%2FI%27m_trying_to_include_URLs_in_my_.tex_or_.bib%2C_but_I_got_an_error_%22Missing_%24_inserted%22">I&#39;m trying to include URLs in my .tex or .bib, but I got an error &quot;Missing $ inserted&quot;</a></p>
+</li>
+<li><p>first line indent: <a href="https://tex.stackexchange.com/questions/39227/no-indent-in-the-first-paragraph-in-a-section">No indent in the first paragraph in a section?</a></p>
+</li>
+<li><p>line space: <a href="https://zhuanlan.zhihu.com/p/138408387">https://zhuanlan.zhihu.com/p/138408387</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/111822/using-subfloat-to-place-figures-side-by-side">Using subfloat to place figures side by side</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/467491/warning-a-possible-image-without-description">Warning: a possible image without description</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/456063/how-to-remove-authors-addresses-in-acm-art">How to remove Author&#39;s addresses in acm art?</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/21536/how-to-remove-the-copyright-box-on-a-paper-that-uses-the-acm-sig-alternate-cls-c">How to remove the copyright box on a paper that uses the ACM sig-alternate.cls class file?</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/296624/subfloat-vertical-alignment-in-latex">Subfloat vertical alignment in latex</a></p>
+</li>
+<li><p><a href="https://mirror.csclub.uwaterloo.ca/CTAN/macros/latex/contrib/csquotes/csquotes.pdf">Context Sensitive Quotation Facilities</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/12703/how-to-create-fixed-width-table-columns-with-text-raggedright-centered-raggedlef">How to create fixed width table columns with text raggedright/centered/raggedleft?</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/100434/centering-figure-captions-in-ieeetran">Centering figure captions in IEEEtran</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/62636/referencing-subfigures-in-main-caption-with-subfloat-and-subref">Referencing subfigures in main caption (with \subfloat and \subref)</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/14144/make-more-lines-fit-on-the-page-in-the-scrreprt-class">Make more lines fit on the page in the scrreprt class</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/161439/fancyhdr-and-scrreprt">Fancyhdr and scrreprt</a> header on scrreprt</p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/74108/text-alignment-on-top-with-multirow-command">Text alignment on top with multirow command</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/70143/cross-reference-with-custom-text">Cross-Reference with custom text</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/5017/center-column-with-specifying-width-in-table-tabular-enviroment">Center column with specifying width in table (tabular enviroment)?</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/117358/newcommand-argument-confusion">\newcommand argument confusion</a></p>
+</li>
+<li><p><a href="https://tex.stackexchange.com/questions/194236/why-does-not-return-a-new-line-in-an-equation">Why does \ not return a new line in an equation?</a></p>
+</li>
+<li></li>
+</ol>
