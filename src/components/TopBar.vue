@@ -1,11 +1,8 @@
 <template>
-  <n-card
-    class="top-bar animate__animated animate__fadeIn"
-    :bordered="false"
-    content-style="padding: 0;"
-  >
-    <n-space class="tab-box unselectable" justify="start">
+  <n-card class="top-bar" :bordered="false" content-style="padding: 0;" v-cloak>
+    <n-space class="tab-box unselectable" justify="start" v-cloak>
       <n-tabs
+        v-cloak
         class="tabs"
         :value="tabValue"
         type="line"
@@ -13,6 +10,7 @@
         tab-style="width: 50px; justify-content: center;"
       >
         <n-tab
+          v-cloak
           v-for="tab in tabs"
           :key="tab.name"
           :name="tab.name"
@@ -20,7 +18,7 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
-      <div class="github-box">
+      <div class="github-box" v-cloak>
         <n-tooltip
           placement="bottom-end"
           trigger="click"
@@ -97,24 +95,6 @@ import {
   NSelect,
 } from "naive-ui";
 
-const tabList = [
-  {
-    name: "about",
-    text: "About",
-    route: "/",
-  },
-  {
-    name: "articles",
-    text: "Articles",
-    route: "/articles",
-  },
-  {
-    name: "script",
-    text: "Script",
-    route: "/script",
-  },
-];
-
 export default {
   name: "TopBar",
   components: {
@@ -132,7 +112,23 @@ export default {
     NSelect,
   },
   data: () => ({
-    tabs: tabList,
+    tabs: [
+      {
+        name: "about",
+        text: "About",
+        route: "/",
+      },
+      {
+        name: "articles",
+        text: "Articles",
+        route: "/articles",
+      },
+      {
+        name: "script",
+        text: "Script",
+        route: "/script",
+      },
+    ],
     adjustTimer: 0,
     document,
     codeThemeOptions: [
@@ -233,6 +229,12 @@ export default {
 };
 </script>
 
+<style>
+[v-cloak] {
+  display: none !important;
+}
+</style>
+
 <style scoped lang="less">
 @import "../assets/css/index.less";
 
@@ -244,8 +246,6 @@ export default {
   top: 0;
   height: @top-bar-height;
   border-radius: 0;
-  // background-color: aquamarine;
-  animation-delay: 0.2s;
 }
 
 .tab-box {
