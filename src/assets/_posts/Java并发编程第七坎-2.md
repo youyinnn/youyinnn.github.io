@@ -344,31 +344,7 @@ final boolean acquireQueued(final Node node, int arg) {
 
 最后，给出独占锁`acquire`方法的流程图：
 
-``` flow
-st=>start: start
-getsycn=>condition: 获取同步状态
-gennode=>operation: 生成入队结点
-addwaiter=>operation: 加入同步队列尾部(CAS)
-preishead=>condition: 前驱是头节点
-getsycn2=>condition: 获取同步状态
-twait=>operation: 线程进入等待状态
-behead=>operation: 当前结点设置为头节点
-exit=>operation: 退出
-e=>end: end
-
-st->getsycn
-getsycn(yes)->exit
-getsycn(no)->gennode
-gennode->addwaiter
-addwaiter->preishead
-preishead(yes)->getsycn2
-preishead(no)->twait
-getsycn2(no)->twait
-twait(right)->preishead
-getsycn2(yes)->behead
-behead(left)->exit(right)
-exit->e
-```
+![image-20211214115918238](../../../public/img/image-20211214115918238.png)
 
 *流程图可以知道里的线条还需要注意一个，‘线程进入等待状态’到‘前驱是头节点’这里，意义是：线程被中断或者前驱结点被释放*
 

@@ -286,30 +286,7 @@
 
 <p>如结构里展示的一样，除了获取到同步状态的头节点之外，后面的结点都在排队park中，这个结论我已经debug过了，确实是这样的，<strong>这样看来，排队中的各个结点线程它们之间获取锁的顺序，是“公平的”</strong>，</p>
 <p>最后，给出独占锁<code>acquire</code>方法的流程图：</p>
-<pre><code class="hljs language-flow">st=&gt;start: start
-getsycn=&gt;condition: 获取同步状态
-gennode=&gt;operation: 生成入队结点
-addwaiter=&gt;operation: 加入同步队列尾部(CAS)
-preishead=&gt;condition: 前驱是头节点
-getsycn2=&gt;condition: 获取同步状态
-twait=&gt;operation: 线程进入等待状态
-behead=&gt;operation: 当前结点设置为头节点
-exit=&gt;operation: 退出
-e=&gt;end: end
-
-st-&gt;getsycn
-getsycn(yes)-&gt;exit
-getsycn(no)-&gt;gennode
-gennode-&gt;addwaiter
-addwaiter-&gt;preishead
-preishead(yes)-&gt;getsycn2
-preishead(no)-&gt;twait
-getsycn2(no)-&gt;twait
-twait(right)-&gt;preishead
-getsycn2(yes)-&gt;behead
-behead(left)-&gt;exit(right)
-exit-&gt;e
-</code></pre>
+<p><img src="../../../public/img/image-20211214115918238.png" alt="image-20211214115918238"></p>
 <p><em>流程图可以知道里的线条还需要注意一个，‘线程进入等待状态’到‘前驱是头节点’这里，意义是：线程被中断或者前驱结点被释放</em></p>
 <h5 id="release">release</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">release</span><span class="hljs-params">(<span class="hljs-type">int</span> arg)</span> {
