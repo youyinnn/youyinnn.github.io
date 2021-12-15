@@ -48,6 +48,35 @@
       })(window.location);
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- 使用CDN的CSS文件 -->
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.css) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+      rel="external nofollow"
+      rel="external nofollow"
+      rel="preload"
+      as="style"
+    />
+
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+      rel="external nofollow"
+      rel="external nofollow"
+      rel="stylesheet"
+    />
+    <% } %>
+    <!-- 使用CDN的JS文件 -->
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
+      rel="external nofollow"
+      rel="preload"
+      as="script"
+    />
+    <% } %>
   </head>
   <body>
     <noscript>
@@ -59,5 +88,10 @@
     </noscript>
     <div id="app" v-cloak></div>
     <!-- built files will be auto injected -->
+
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
   </body>
 </html>
