@@ -1,10 +1,21 @@
 /* eslint-disable no-unused-vars */
+const externals = {
+  vue: "Vue",
+  "vue-router": "VueRouter",
+  vuex: "Vuex",
+};
+const cdn = {
+  css: [],
+  js: [
+    "https://cdn.jsdelivr.net/npm/vue@3.2.24/dist/vue.global.min.js",
+    "https://cdn.jsdelivr.net/npm/vue-router@4.0.12/dist/vue-router.global.min.js",
+    "https://cdn.jsdelivr.net/npm/vuex@4.0.2/dist/vuex.global.min.js",
+  ],
+};
 
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  // refer public path to dist folder
-  // publicPath: "./dist",
   publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
   // make the index.html file place at the root of the repo
   indexPath: "../index.html",
@@ -18,11 +29,19 @@ module.exports = {
     config.plugins.delete("prefetch");
     // 移除 preload 插件
     config.plugins.delete("preload");
+
+    config.plugin("html").tap((args) => {
+      if (process.env.NODE_ENV === "production") {
+        args[0].cdn = cdn;
+      }
+      return args;
+    });
   },
 
   configureWebpack: (config) => {
     if (process.env.NODE_ENV === "production") {
       return {
+        externals: externals,
         plugins: [
           new CompressionPlugin({
             test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/, // 需要压缩的文件类型
