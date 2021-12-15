@@ -41,10 +41,10 @@ export default {
     NBackTop,
   },
   mounted() {
-    setTimeout(() => {
-      const pre = document.getElementById("preLoadingBodyCssElement");
-      if (pre !== null) pre.remove();
-    }, 300);
+    // setTimeout(() => {
+    //   const pre = document.getElementById("preLoadingBodyCssElement");
+    //   if (pre !== null) pre.remove();
+    // }, 300);
   },
 };
 </script>
@@ -59,7 +59,7 @@ export default {
 @import "../src/assets/css/variables.less";
 .main {
   margin: auto;
-  top: 42px;
+  top: @top-bar-height;
   border-radius: 0;
 }
 

@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import "vfonts/Lato.css";
 import "./assets/css/index.less";
 import "animate.css";
 import resources from "@/assets/resources/resources.js";
