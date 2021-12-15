@@ -4,7 +4,7 @@
     <n-card class="main" :bordered="false" content-style="padding: 0;" v-cloak>
       <router-view v-slot="{ Component }" v-cloak>
         <n-back-top :listen-to="body" />
-        <transition name="fade1" mode="out-in" v-cloak>
+        <transition :name="transitionName" mode="out-in" v-cloak>
           <component class="page" :is="Component" v-cloak />
         </transition>
       </router-view>
@@ -27,6 +27,7 @@ export default {
   name: "App",
   data: () => ({
     body: document,
+    transitionName: null,
   }),
   computed: {
     theme() {
@@ -45,6 +46,9 @@ export default {
     //   const pre = document.getElementById("preLoadingBodyCssElement");
     //   if (pre !== null) pre.remove();
     // }, 300);
+    setTimeout(() => {
+      this.transitionName = "fade1";
+    }, 300);
   },
 };
 </script>
