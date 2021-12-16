@@ -54,7 +54,7 @@ pre > code {
 .markdown-body .copyrightbox,
 .markdown-body .saying,
 .markdown-body img {
-  transition: box-shadow 0.5s;
+  transition: transform 0.4s, box-shadow 0.5s;
 }
 
 .markdown-body .katexp:hover,
@@ -64,6 +64,7 @@ pre > code {
 .markdown-body .copyrightbox:hover,
 .markdown-body .saying:hover {
   box-shadow: var(--box-shadow-1);
+  transform: translateX(3px);
 }
 
 .markdown-body code:after,

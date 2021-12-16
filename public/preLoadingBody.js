@@ -1,9 +1,13 @@
-const initialCurrentThemeConfig = localStorage.getItem("__currentThemeConfig");
-const before = document.getElementById("preLoadingBodyCssElement");
-if (before !== null) before.remove();
-const preLoadingBodyCssElement = document.createElement("style");
-preLoadingBodyCssElement.id = "preLoadingBodyCssElement";
-preLoadingBodyCssElement.innerHTML = `
+function setBodyCss() {
+  const initialCurrentThemeConfig = localStorage.getItem(
+    "__currentThemeConfig"
+  );
+  const currentThemeConfig = JSON.parse(initialCurrentThemeConfig);
+  const before = document.getElementById("preLoadingBodyCssElement");
+  if (before !== null) before.remove();
+  const preLoadingBodyCssElement = document.createElement("style");
+  preLoadingBodyCssElement.id = "preLoadingBodyCssElement";
+  preLoadingBodyCssElement.innerHTML = `
     body {
       transition: none !important;
       position: absolute !important;
@@ -15,10 +19,9 @@ preLoadingBodyCssElement.innerHTML = `
       background-color: rgb(24, 24, 28) !important;
     }
     `;
-if (initialCurrentThemeConfig !== null) {
-  const currentThemeConfig = JSON.parse(initialCurrentThemeConfig);
-  if (!currentThemeConfig.darkTheme) {
-    preLoadingBodyCssElement.innerHTML = `
+  if (initialCurrentThemeConfig !== null) {
+    if (!currentThemeConfig.darkTheme) {
+      preLoadingBodyCssElement.innerHTML = `
         body {
           transition: none !important;
           position: absolute !important;
@@ -30,11 +33,20 @@ if (initialCurrentThemeConfig !== null) {
           background-color: white !important;
         }
       `;
+    }
+  }
+  const ref = document.getElementById("preLoadingJs");
+  insertAfter(ref, preLoadingBodyCssElement);
+
+  function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 }
-const ref = document.getElementById("preLoadingJs");
-insertAfter(ref, preLoadingBodyCssElement);
 
-function insertAfter(referenceNode, newNode) {
-  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+setBodyCss();
+
+try {
+  module.exports.setBodyCss = setBodyCss;
+} catch (error) {
+  //
 }
