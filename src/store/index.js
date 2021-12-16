@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { setBodyCss } from "../../public/preLoadingBody";
 
 const pathName = location.pathname;
 var initialRoute = "about";
@@ -36,6 +37,7 @@ export default createStore({
         "__currentThemeConfig",
         JSON.stringify(state.currentThemeConfig)
       );
+      setBodyCss();
     },
   },
   actions: {},

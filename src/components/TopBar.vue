@@ -5,7 +5,6 @@
         v-cloak
         class="tabs"
         :value="tabValue"
-        type="line"
         size="small"
         tab-style="width: 50px; justify-content: center;"
       >
@@ -200,22 +199,6 @@ export default {
     },
   },
   mounted: function () {
-    clearTimeout(this.adjustTimer);
-    this.adjustTimer = setTimeout(() => {
-      this.adjustTabWidth();
-      window.onresize = () => {
-        this.adjustTabWidth();
-      };
-      if (screen !== undefined && screen.orientation !== undefined) {
-        screen.orientation.onchange = () => {
-          this.adjustTabWidth();
-        };
-      } else {
-        window.onorientationchange = () => {
-          this.adjustTabWidth();
-        };
-      }
-    }, 300);
     const codeThemeCssFile = JSON.parse(sessionStorage.codeThemeCss);
     const codeThemeCssFileList = [];
     for (let cssFile of codeThemeCssFile) {
