@@ -12,7 +12,7 @@ date: 2018-11-06 16:34:00
 
 kafka 中的 Message 以 topic 为分类去组织的，每个 topic 又可以分为不同的 partition 去存储：
 
-![img](http://kafka.apache.org/20/images/log_anatomy.png)
+![img](../../../public/img/log_anatomy.png)
 
 我们引用官方的 Introduction 中的一节，看官方是怎么解释的：
 

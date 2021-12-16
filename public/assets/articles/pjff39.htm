@@ -5,13 +5,13 @@
 <h3 id="概述">概述</h3>
 <p>微服务是最近非常火热的新概念，大家都在追，也都觉得很对，但是似乎没有很充足的理论基础说明这是正确的，给人的感觉是 <strong>不明觉厉</strong> 。前段时间看了Mike Amundsen <a href="http://www.infoq.com/cn/presentations/team-building-implementation-in-distributed-world">《远距离条件下的康威定律——分布式世界中实现团队构建》</a>（是Design RESTful API的作者）在InfoQ上的一个分享，觉得很有帮助，结合自己的一些思考，整理了该演讲的内容。</p>
 <p>可能出乎很多人意料之外的一个事实是，微服务很多核心理念其实在半个世纪前的一篇文章中就被阐述过了，而且这篇文章中的很多论点在软件开发飞速发展的这半个世纪中竟然一再被验证，这就是<a href="http://www.melconway.com/Home/Conways_Law.html">康威定律（Conway&#39;s Law）</a>。</p>
-<p><img src="http://img1.tbcdn.cn/L1/461/1/3fa834ea8c880a97d00f187f67962a8218b16f22" alt="screenshot"><img src="http://img2.tbcdn.cn/L1/461/1/ad8ba09ed2350c2a8c2f067d80197e74aefcef8d" alt="screenshot"></p>
+<p><img src="../../../public/img/3fa834ea8c880a97d00f187f67962a8218b16f22.png" alt="screenshot"><img src="../../../public/img/ad8ba09ed2350c2a8c2f067d80197e74aefcef8d.png" alt="screenshot"></p>
 <p>在康威的这篇文章中，最有名的一句话就是：</p>
 <blockquote>
 <p>Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations. - Melvin Conway(1967)</p>
 </blockquote>
 <p>中文直译大概的意思就是：设计系统的组织，其产生的设计等同于组织之内、组织之间的沟通结构。看看下面的图片（来源于互联网，侵删），再想想Apple的产品、微软的产品设计，就能形象生动的理解这句话。
-<img src="http://img2.tbcdn.cn/L1/461/1/74ab78cb5db601e5db68adf61e6dc58f437df4e0" alt="screenshot"></p>
+<img src="../../../public/img/74ab78cb5db601e5db68adf61e6dc58f437df4e0.png" alt="screenshot"></p>
 <p>用通俗的说法就是：组织形式等同系统设计。</p>
 <p>这里的系统按原作者的意思并不局限于软件系统。据说这篇文章最初投的哈佛商业评论，结果程序员屌丝的文章不入商业人士的法眼，无情被拒，康威就投到了一个编程相关的杂志，所以被误解为是针对软件开发的。最初这篇文章显然不敢自称定律（law），只是描述了作者自己的发现和总结。后来，在Brooks Law著名的人月神话中，引用这个论点，并将其“吹捧”成了现在我们熟知“康威定律”。</p>
 <h3 id="康威定律详细介绍">康威定律详细介绍</h3>
@@ -47,7 +47,7 @@
 </li>
 </ul>
 <p>组织的沟通和系统设计之间的紧密联系，在很多别的领域有类似的阐述。对于复杂的系统，聊设计就离不开聊人与人的沟通，解决好人与人的沟通问题，才能有一个好的系统设计。相信几乎每个程序员都读过的《人月神话》（1975年，感觉都是老古董了，经典的就是经得起时间考验）里面许多观点都和这句话有异曲同工之妙。</p>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/8759732579d4193ef27df9011d252cf357562349" alt="screenshot"><img src="http://img2.tbcdn.cn/L1/461/1/fb215be9fe9232ccda1fc8817b4af6e8da6abcd0" alt="screenshot"></p>
+<p><img src="../../../public/img/8759732579d4193ef27df9011d252cf357562349.png" alt="screenshot"><img src="../../../public/img/fb215be9fe9232ccda1fc8817b4af6e8da6abcd0.png" alt="screenshot"></p>
 <p>比如《人月神话》中最著名的一句话就是</p>
 <blockquote>
 <p>Adding manpower to a late software project makes it later --Fred Brooks, (1975)</p>
@@ -68,7 +68,7 @@
 <li>酒肉（close）朋友: 35</li>
 <li>照面（casual）朋友: 150</li>
 </ul>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/a63beac73c8d217c71aba36c4a6e270a3fa18603" alt="screenshot"></p>
+<p><img src="../../../public/img/a63beac73c8d217c71aba36c4a6e270a3fa18603.png" alt="screenshot"></p>
 <p>是不是和上面的沟通成本的数字很貌似有关联？是的，我们的大脑智力只能支持我们维系这么多的关系。（大家都知道这不是程序猿擅长的领域，在开发团队里，这个值应该更小，估计和猿差不多 -_-凸 ）</p>
 <p>沟通的问题，会带来系统设计的问题，进而影响整个系统的开发效率和最终产品结果。</p>
 <h4 id="一口气吃不成胖子，先搞定能搞定的">一口气吃不成胖子，先搞定能搞定的</h4>
@@ -85,7 +85,7 @@
 <pre><code>            --Eric Hollnagel (2009)
 </code></pre>
 </blockquote>
-<p><img src="http://img1.tbcdn.cn/L1/461/1/654425008b3a53442a77f32068302b44b51a32da" alt="screenshot"><img src="http://img1.tbcdn.cn/L1/461/1/78d32f9955e5deebd42ab75333e226fd52d6797f" alt="screenshot"></p>
+<p><img src="../../../public/img/654425008b3a53442a77f32068302b44b51a32da.png" alt="screenshot"><img src="../../../public/img/78d32f9955e5deebd42ab75333e226fd52d6797f.png" alt="screenshot"></p>
 <p>系统越做越复杂，功能越来越多，外部市场的竞争越来越剧烈，投资人的期待越来越高。但人的智力是有上限的，即使再牛逼的人，融到钱再多也不一定招到足够多合适的人。对于一个巨复杂的系统，我们永远无法考虑周全。Eric认为，这个时候最好的解决办法竟然是——“破罐子破摔”。</p>
 <p>其实我们在日常开发中也经常碰到。产品经理的需求太复杂了？适当忽略一些细节，先抓主线。产品经理的需求太多了？放弃一些功能。</p>
 <p>据说Eric被一家航空公司请去做安全咨询顾问，复杂保证飞机飞行系统的稳定性和安全性。Eric认为做到安全有两种方式：</p>
@@ -95,7 +95,7 @@
 </ul>
 <p>对于飞机这样的复杂系统，再牛逼的人也无法考虑到漏洞的方方面面，所以Eric建议放弃打造完美系统的想法，而是通过不断的试飞，发现问题，确保问题发生时，系统能自动复原即可，而不追求飞行系统的绝对正确和安全。</p>
 <p>下面的图很好的解释了这个过程：
-<img src="http://img1.tbcdn.cn/L1/461/1/a7fab1b350cd8c03d5e9ddded183c7bda114c326" alt="screenshot">
+<img src="../../../public/img/a7fab1b350cd8c03d5e9ddded183c7bda114c326.png" alt="screenshot">
 听着很耳熟不是吗？这不就是 <strong>持续集成</strong> 和敏捷开发吗？的确就是。</p>
 <p>另一方面，这和互联网公司维护的分布式系统的弹性设计也是一个道理。对于一个分布式系统，我们几乎永远不可能找到并修复所有的bug，单元测试覆盖1000%也没有用，错误流淌在分布式系统的血液里。解决方法不是消灭这些问题，而是容忍这些问题，在问题发生时，能自动回复，微服务组成的系统，每一个微服务都可能挂掉，这是常态，我们只有有足够的冗余和备份即可。即所谓的 <strong>弹性设计（Resilience）</strong> 或者叫高可用设计（High Availability）。</p>
 <h4 id="种瓜得瓜，做独立自治的字系统减少沟通成本">种瓜得瓜，做独立自治的字系统减少沟通成本</h4>
@@ -106,11 +106,11 @@
 </ul>
 </li>
 </ul>
-<p><img src="http://img1.tbcdn.cn/L1/461/1/3810f88633a55bdf59bb7757cedc827ab425538e" alt="screenshot"></p>
+<p><img src="../../../public/img/3810f88633a55bdf59bb7757cedc827ab425538e.png" alt="screenshot"></p>
 <p>这是康威第一定律组织和设计间内在关系的一个具体应用。更直白的说，你想要什么样的系统，就搭建什么样的团队。如果你的团队分成前端团队，Java后台开发团队，DBA团队，运维团队，你的系统就会长成下面的样子：
-<img src="http://img4.tbcdn.cn/L1/461/1/f4c2d4a8f8390ca6be19b54a524c8272aced3e34" alt="screenshot"></p>
+<img src="../../../public/img/f4c2d4a8f8390ca6be19b54a524c8272aced3e34.png" alt="screenshot"></p>
 <p>相反，如果你的系统是按照业务边界划分的，大家按照一个业务目标去把自己的模块做出小系统，小产品的话，你的大系统就会长成下面的样子，即微服务的架构
-<img src="http://img3.tbcdn.cn/L1/461/1/c827db7a12d730140d4c0e6947535e168902a73e" alt="screenshot"></p>
+<img src="../../../public/img/c827db7a12d730140d4c0e6947535e168902a73e.png" alt="screenshot"></p>
 <p>微服务的理念团队间应该是 <strong>inter-operate, not integrate</strong> 。inter-operate是定义好系统的边界和接口，在一个团队内全栈，让团队自治，原因就是因为如果团队按照这样的方式组建，将沟通的成本维持在系统内部，每个子系统就会更加内聚，彼此的依赖耦合能变弱，跨系统的沟通成本也就能降低。</p>
 <h4 id="合久必分，分而治之">合久必分，分而治之</h4>
 <ul>
