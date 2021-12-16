@@ -1,6 +1,6 @@
 <h3 id="topic--partition">Topic & Partition</h3>
 <p>kafka 中的 Message 以 topic 为分类去组织的，每个 topic 又可以分为不同的 partition 去存储：</p>
-<p><img src="http://kafka.apache.org/20/images/log_anatomy.png" alt="img"></p>
+<p><img src="../../../public/img/log_anatomy.png" alt="img"></p>
 <p>我们引用官方的 Introduction 中的一节，看官方是怎么解释的：</p>
 <p>Each partition is an ordered, immutable sequence of records that is continually appended to—a structured commit log. The records in the partitions are each assigned a sequential id number called the <em>offset</em> that uniquely identifies each record within the partition.</p>
 <p>每个分区都是一个<strong>有序的，不可变的记录序列</strong>，不断附加到结构化的提交日志中。分区中的记录每个都分配了一个称为偏移的顺序 ID 号，它唯一地标识分区中的每个记录。</p>

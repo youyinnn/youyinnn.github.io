@@ -17,14 +17,14 @@ date: 2018-11-06 10:21:00
 
 这次参加JavaOne2015最大的困难就是听Microservice相关的session，无论内容多么水，只要题目带microservice，必定报不上名，可见Microservice有多火。最喜欢其中一页。关于这个典故，可以参考[this](
 <http://knowyourmeme.com/memes/you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means)，此图适用于一切高大上的名字——技术有SOA，Agile，CLOUD，DevOps等等，古代有道，气，八卦等等。此类名词的最大特点就是 **一解释就懂，一问就不知，一讨论就打架。** 
-![screenshot](http://img2.tbcdn.cn/L1/461/1/59f97219283a8e8cef996531a05a3c7880fb501b.png)
+![screenshot](../../../public/img/59f97219283a8e8cef996531a05a3c7880fb501b.png)
 
 微服务的流行，Martin功不可没，这老头也是个奇人，特别擅长抽象归纳和制造概念，我觉的这就是最牛逼的markting啊，感觉这也是目前国人欠缺的能力。
 
 > Martin Fowler是国际著名的OO专家，敏捷开发方法的创始人之一，现为ThoughtWorks公司的首席科学家.福勒（Martin Fowler），在面向对象分析设计、UML、模式、软件开发方法学、XP、重构等方面，都是世界顶级的专家，现为Thought Works公司的首席科学家。Thought Works是一家从事企业应用开发和集成的公司。早在20世纪80年代，Fowler就是使用对象技术构建多层企业应用的倡导者，他著有几本经典书籍：《企业应用架构模式》、《UML精粹》和《重构》等。—— 百度百科
 
 先来看看传统的web开发方式，通过对比比较容易理解什么是Microservice Architecture。和Microservice相对应的，这种方式一般被称为Monolithic（比较难传神的翻译）。所有的功能打包在一个WAR包里，基本没有外部依赖（除了容器），部署在一个JEE容器（Tomcat，JBoss，WebLogic）里，包含了DO/DAO，Service，UI等所有逻辑。
-![screenshot](http://img3.tbcdn.cn/L1/461/1/cb87aabb9b184df0edd6769ef877b4b16b200855.png)
+![screenshot](../../../public/img/cb87aabb9b184df0edd6769ef877b4b16b200855.png)
 
 Monolithic比较适合小项目，优点是：
 
@@ -41,10 +41,10 @@ Monolithic比较适合小项目，优点是：
 - 扩展性不够：无法满足高并发情况下的业务需求
 
 所以，现在主流的设计一般会采用Microservice Architecture，就是基于微服务的架构。简单来说， **微服务的目的是有效的拆分应用，实现敏捷开发和部署** 。
-![screenshot](http://img3.tbcdn.cn/L1/461/1/6a2474878e4c1000335770fe64269269f9211d17.png)
+![screenshot](../../../public/img/6a2474878e4c1000335770fe64269269f9211d17.png)
 
 用《The art of scalability》一书里提到的scale cube比较容易理解如何拆分。你看，我们叫分库分表，别人总结成了scale cube，这就是抽象的能力啊，把复杂的东西用最简单的概念解释和总结。X轴代表运行多个负载均衡器之后运行的实例，Y轴代表将应用进一步分解为微服务（分库），数据量大时，还可以用Z轴将服务按数据分区（分表）
-![screenshot](http://img4.tbcdn.cn/L1/461/1/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png)
+![screenshot](../../../public/img/238adf07b6afdc6ae246e2da83f83ce2e144cbeb.png)
 
 #### 微服务的具体特征
 
@@ -103,7 +103,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 我的理解其实这个API Gateway可以有很多广义的实现办法，可以是一个软硬一体的盒子，也可以是一个简单的MVC框架，甚至是一个Node.js的服务端。他们最重要的作用是为前台（通常是移动应用）提供后台服务的聚合，提供一个统一的服务出口，解除他们之间的耦合，不过API Gateway也有可能成为单点故障点或者性能的瓶颈。
 
 一般用过Taobao Open Platform的就能很容易的体会，TAO就是这个API Gateway。
-![screenshot](http://img2.tbcdn.cn/L1/461/1/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png)
+![screenshot](../../../public/img/4da28f2382d64d39ee4942c51636af31e9cc1d0b.png)
 
 #### 服务之间如何通信？
 
@@ -114,7 +114,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
   - RPC（Dubbo）
 - 异步消息调用(Kafka, Notify, MetaQ)
 
-![screenshot](http://img2.tbcdn.cn/L1/461/1/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png)
+![screenshot](../../../public/img/d7e9a881c8940c216e6c1d8cb3bbbe7407e1e63b.png)
 
 一般同步调用比较简单，一致性强，但是容易出调用问题，性能体验上也会差些，特别是调用层次多的时候。RESTful和RPC的比较也是一个很有意思的话题。一般REST基于HTTP，更容易实现，更容易被接受，服务端实现技术也更灵活些，各个语言都能支持，同时能跨客户端，对客户端没有特殊的要求，只要封装了HTTP的SDK就能调用，所以相对使用的广一些。RPC也有自己的优点，传输协议更高效，安全更可控，特别在一个公司内部，如果有统一个的开发规范和统一的服务框架时，他的开发效率优势更明显些。就看各自的技术积累实际条件，自己的选择了。
 
@@ -127,7 +127,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 - 客户端做：优点是架构简单，扩展灵活，只对服务注册器依赖。缺点是客户端要维护所有调用服务的地址，有技术难度，一般大公司都有成熟的内部框架支持，比如Dubbo。
 - 服务端做：优点是简单，所有服务对于前台调用方透明，一般在小公司在云服务上部署的应用采用的比较多。
 
-![screenshot](http://img3.tbcdn.cn/L1/461/1/61decc9c96f96e795ae36353c9cbcc312c035910.png)
+![screenshot](../../../public/img/61decc9c96f96e795ae36353c9cbcc312c035910.png)
 
 #### 这么多服务，服务挂了怎么办？
 
@@ -140,7 +140,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 - 降级（本地缓存）
 
 这些方法基本上都很明确通用，就不详细说明了。比如Netflix的Hystrix：<https://github.com/Netflix/Hystrix>
-![screenshot](http://img2.tbcdn.cn/L1/461/1/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png)
+![screenshot](../../../public/img/d639a17e4d2c9fc8d0ceebed2eaf32016096c458.png)
 
 #### WHY - 微服务的应用
 
@@ -153,7 +153,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 - 服务部署
 - 数据调用
 
-![screenshot](http://img3.tbcdn.cn/L1/461/1/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png)
+![screenshot](../../../public/img/766c31d336cfe1e455547fdf5f3a3751f62bdd59.png)
 
 微服务的优点和缺点（或者说挑战）一样明显。
 
@@ -176,7 +176,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 
 - 对于大的互联网公司，微服务架构是血液，是习惯，每家公司都有自己的套路和架构，细节有不同，但是核心理念是通的。
 - 对于一般的公司而言，实践微服务有非常大的技术挑战，于是乎才有了这么多IT供应商考虑这里的商机。微服务比较适合未来有一定的扩展复杂度，且有很大用户增量预期的应用，说人话就是新兴的互联网公司。创业初期，不可能买大量的机器或者很贵的机器，但是又必须考虑应对成功后的巨量的用户，微服务架构成了最好的选择。
-  ![screenshot](http://img2.tbcdn.cn/L1/461/1/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png)
+  ![screenshot](../../../public/img/052b1cebf73e0b31c502341e0e3cc916a3da2a25.png)
 
 ### So What - 思考
 
@@ -186,7 +186,7 @@ Martin自己也说了，每个人对微服务都可以有自己的理解，不�
 from: <https://github.com/Netflix/recipes-rss/wiki/Architecture>
 
 其实本来所谓的微服务就是对互联网在应用技术的一个总结归纳，IT厂商鼓吹所有概念无非是为了生意（business），SOA是，Cloud是，Microservice也是。下面玩笑很有意思的概括了这个情况（我加了第一条线，原图见[这里](http://blog.gardeviance.org/2012/07/adoption-cycles.html)）
-![screenshot](http://img3.tbcdn.cn/L1/461/1/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png)
+![screenshot](../../../public/img/f9684c79f476a27982f3285cfb9b5b6eb7e29517.png)
 
 所以微服对我们的思考我觉得更多的是思维上的，对已微服务架构， **技术上不是问题，意识比工具重要。**
 
@@ -200,6 +200,6 @@ from: <https://github.com/Netflix/recipes-rss/wiki/Architecture>
 同时，对于开发同学，有这么多的中间件和强大的PE支持固然是好事，我们也需要深入去了解这些中间件背后的原理，知其然知其所以然，设想下，如果我们是一个小公司的CTO，离开的阿里的大环境，在有限的技术资源如何通过开源技术实施微服务？
 
 最后，一般提到微服务都离不开DevOps和Docker，理解微服务架构是核心，devops和docker是工具，是手段。下次在抽时间再学习整理下。
-![screenshot](http://img2.tbcdn.cn/L1/461/1/2ada4ac057eaf561f8862572bf6327845c482ca7.png)
+![screenshot](../../../public/img/2ada4ac057eaf561f8862572bf6327845c482ca7.png)
 
 > 转载自：https://yq.aliyun.com/articles/2764

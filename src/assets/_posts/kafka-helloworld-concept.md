@@ -72,7 +72,7 @@ Apache kafka是消息中间件的一种，我发现很多人不知道消息中�
 - 应用程序使用 `Streams API` 充当一个流处理器，从1个或多个topic消费输入流，并生产一个输出流到1个或多个输出topic，有效地将输入流转换到输出流。
 - `Connector API`允许构建或运行可重复使用的生产者或消费者，将topic连接到现有的应用程序或数据系统。例如，一个关系数据库的连接器可捕获每一个变化。
 
-![img](http://kafka.apache.org/20/images/kafka-apis.png)
+![img](../../../public/img/kafka-apis.png)
 
 Client和Server之间的通讯，是通过一条简单、高性能并且和开发语言无关的[TCP协议](https://kafka.apache.org/protocol.html)。并且该协议保持与老版本的兼容。Kafka提供了Java Client（客户端）。除了Java Client外，还有非常多的[其它编程语言的Client](https://cwiki.apache.org/confluence/display/KAFKA/Clients)。
 
@@ -100,12 +100,12 @@ Kafka将消息种子(Feed)分门别类，每一类的消息称之为一个主题
 
 Topic是发布的消息的类别或者种子Feed名。对于每一个Topic，Kafka集群维护这一个分区（partition）的log，就像下图中的示例：
 
-![img](http://kafka.apache.org/20/images/log_anatomy.png)
+![img](../../../public/img/log_anatomy.png)
 
 每一个分区（partition）都是一个顺序的、不可变的消息队列， 并且可以持续的添加。分区（partition）中的消息都被分了一个序列号，称之为偏移量(offset)，在每个分区（partition）中此偏移量都是唯一的。
 
 Kafka集群保持所有的消息，直到它们过期， 无论消息是否被消费了。 实际上消费者所持有的仅有的元数据就是这个偏移量，也就是消费者在这个log中的位置。 这个偏移量由消费者控制：正常情况当消费者消费消息的时候，偏移量也线性的的增加。但是实际偏移量由消费者控制，消费者可以将偏移量重置为更老的一个偏移量，重新读取消息。 可以看到这种设计对消费者来说操作自如， 一个消费者的操作不会影响其它消费者对此log的处理。 再说说分区（partition）。Kafka中采用分区（partition）的设计有几个目的。一是可以处理更多的消息，不受单台服务器的限制。Topic拥有多个分区（partition）意味着它可以不受限的处理更多的数据。第二，分区（partition）可以作为并行处理的单元，稍后会谈到这一点。
-![img](http://kafka.apache.org/20/images/log_consumer.png)
+![img](../../../public/img/log_consumer.png)
 
 ### 分布式(Distribution)
 
@@ -122,7 +122,7 @@ Log的分区（partition）被分布到集群中的多个服务器上。每个�
 ### 消费者(Consumers)
 
 通常来讲，消息模型可以分为两种， 队列和发布-订阅式。 队列的处理方式是 一组消费者从服务器读取消息，一条消息只有其中的一个消费者来处理。在发布-订阅模型中，消息被广播给所有的消费者，接收到消息的消费者都可以处理此消息。Kafka为这两种模型提供了单一的消费者抽象模型： 消费者组 （consumer group）。 消费者用一个消费者组名标记自己。 一个发布在Topic上消息被分发给此消费者组中的一个消费者。 假如所有的消费者都在一个组中，那么这就变成了queue模型。 假如所有的消费者都在不同的组中，那么就完全变成了发布-订阅模型。 更通用的， 我们可以创建一些消费者组作为逻辑上的订阅者。每个组包含数目不等的消费者， 一个组内多个消费者可以用来扩展性能和容错。正如下图所示：
-![img](http://kafka.apache.org/20/images/consumer-groups.png)
+![img](../../../public/img/consumer-groups.png)
 
 2个kafka集群托管4个分区（partition）（P0-P3），2个消费者组，消费组A有2个消费者实例，消费组B有4个。
 
