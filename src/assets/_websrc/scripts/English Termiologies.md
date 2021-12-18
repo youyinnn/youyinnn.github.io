@@ -12,3 +12,12 @@ But I also like the generic terms ***integer-part*** and ***fractional-part***. 
 
 [reference](https://math.stackexchange.com/questions/64042/what-are-the-numbers-before-and-after-the-decimal-point-referred-to-in-mathemati)
 
+#### Superscript & Subscript
+
+$$
+X_z^{y}
+$$
+
+#### Mean
+
+Mean is same as the average number.
