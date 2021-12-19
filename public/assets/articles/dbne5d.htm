@@ -185,7 +185,7 @@ Output: -1
     }
     <span class="hljs-type">int</span> <span class="hljs-variable">pivot</span> <span class="hljs-operator">=</span> findPivot(nums);
 
-    <span class="hljs-keyword">if</span> (nums[pivot] &lt;= target && nums[nums.length - <span class="hljs-number">1</span>] &gt;= target) {
+    <span class="hljs-keyword">if</span> (nums[pivot] &lt;= target &amp;&amp; nums[nums.length - <span class="hljs-number">1</span>] &gt;= target) {
         rs = Arrays.binarySearch(nums, pivot, nums.length, target);
     } <span class="hljs-keyword">else</span> {
         rs = Arrays.binarySearch(nums, <span class="hljs-number">0</span>, pivot, target);
@@ -218,7 +218,7 @@ Output: [-1,-1]
             }
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> search, tmpLast = search;
-        <span class="hljs-keyword">while</span> (tmpLast &gt;= <span class="hljs-number">0</span> && tmpLast &lt; nums.length) {
+        <span class="hljs-keyword">while</span> (tmpLast &gt;= <span class="hljs-number">0</span> &amp;&amp; tmpLast &lt; nums.length) {
             tmpLast = Arrays.binarySearch(nums, tmpLast + <span class="hljs-number">1</span>, nums.length, target);
             <span class="hljs-keyword">if</span> (tmpLast &gt;= <span class="hljs-number">0</span>) {
                 last = tmpLast;

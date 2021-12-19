@@ -118,26 +118,26 @@
 <h4 id="例子">例子</h4>
 <h5 id="1">1</h5>
 <pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RollingRandomAccessFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RollingFile&quot;</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">&quot;logs/a.log&quot;</span>
-             <span class="hljs-attr">filePattern</span>=<span class="hljs-string">&quot;logs/<span class="katex-display katexp"><span class="katex-error" title="ParseError: KaTeX parse error: Expected &#x27;EOF&#x27;, got &#x27;&amp;&#x27; at position 97: …ass=&quot;hljs-tag&quot;&gt;&amp;̲lt;&lt;span class=…" style="color:#cc0000">{date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;PatternLayout&lt;/span&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;Pattern&lt;/span&gt;&amp;gt;&lt;/span&gt;%d %p %c{1.} [%t] %m%n&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;Pattern&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;PatternLayout&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;Policies&lt;/span&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;TimeBasedTriggeringPolicy&lt;/span&gt; /&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;SizeBasedTriggeringPolicy&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;size&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;250 MB&amp;quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;Policies&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;RollingRandomAccessFile&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;触发策略：&lt;/p&gt;
-&lt;p&gt;1、按照时间切换：由于&lt;code&gt;filePattern&lt;/code&gt;属性中配置的最精确的time pattern是&lt;code&gt;mm&lt;/code&gt;即Minute in hour，且这条触发策略没有指定interval，那么默认是1分钟切换一次。&lt;/p&gt;
-&lt;p&gt;2、根据size切换，如果按照上一条的策略，在1分钟内产生超过250MB的日志，则切换，且&lt;code&gt;%i&lt;/code&gt;加一。&lt;/p&gt;
-&lt;p&gt;切换策略：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;hljs language-js&quot;&gt;filePattern=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;logs/%d{yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;在logs文件夹下，&lt;code&gt;%d{yyyy-MM}&lt;/code&gt;按照月份建立一级文件夹，一月一个文件夹，然后月份里按照触发策略的约束去执行切换策略进行日志文件的切换。&lt;/p&gt;
-&lt;h5 id=&quot;2&quot;&gt;2&lt;/h5&gt;
-&lt;pre&gt;&lt;code class=&quot;hljs language-xml&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;RollingRandomAccessFile&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;RollingFile&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;fileName&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;logs/a.log&amp;quot;&lt;/span&gt;
-             &lt;span class=&quot;hljs-attr&quot;&gt;filePattern&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;logs/</span></span>{date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;</span>&gt;</span>
+             <span class="hljs-attr">filePattern</span>=<span class="hljs-string">&quot;logs/$${date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Pattern</span>&gt;</span>%d %p %c{1.} [%t] %m%n<span class="hljs-tag">&lt;/<span class="hljs-name">Pattern</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">PatternLayout</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SizeBasedTriggeringPolicy</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;250 MB&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">RollingRandomAccessFile</span>&gt;</span>
+</code></pre>
+<p>触发策略：</p>
+<p>1、按照时间切换：由于<code>filePattern</code>属性中配置的最精确的time pattern是<code>mm</code>即Minute in hour，且这条触发策略没有指定interval，那么默认是1分钟切换一次。</p>
+<p>2、根据size切换，如果按照上一条的策略，在1分钟内产生超过250MB的日志，则切换，且<code>%i</code>加一。</p>
+<p>切换策略：</p>
+<pre><code class="hljs language-js">filePattern=<span class="hljs-string">&quot;logs/%d{yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;</span>
+</code></pre>
+<p>在logs文件夹下，<code>%d{yyyy-MM}</code>按照月份建立一级文件夹，一月一个文件夹，然后月份里按照触发策略的约束去执行切换策略进行日志文件的切换。</p>
+<h5 id="2">2</h5>
+<pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RollingRandomAccessFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RollingFile&quot;</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">&quot;logs/a.log&quot;</span>
+             <span class="hljs-attr">filePattern</span>=<span class="hljs-string">&quot;logs/$${date:yyyy-MM}/a-%d{yyyy-MM-dd-HH-mm}-%i.log&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">Pattern</span>&gt;</span>%d %p %c{1.} [%t] %m%n<span class="hljs-tag">&lt;/<span class="hljs-name">Pattern</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">PatternLayout</span>&gt;</span>

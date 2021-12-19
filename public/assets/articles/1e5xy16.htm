@@ -51,7 +51,7 @@
 <p>求 <code>1+2+...+n</code> ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
 <p>因为不能使用循环，所以就使用递归去记录乘积，因为不能使用判断语句，所以我们使用逻辑运算符去短路递归</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumNums</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
-    <span class="hljs-type">boolean</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> n &gt; <span class="hljs-number">0</span> && (n += sumNums(n - <span class="hljs-number">1</span>)) &gt; <span class="hljs-number">0</span>;
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> n &gt; <span class="hljs-number">0</span> &amp;&amp; (n += sumNums(n - <span class="hljs-number">1</span>)) &gt; <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> n;
 }
 </code></pre>
@@ -67,9 +67,9 @@
 </ul>
 <h4 id="逻辑运算符">逻辑运算符</h4>
 <ul>
-<li>**&& , **短路与</li>
+<li>**&amp;&amp; , **短路与</li>
 <li>**|| ,**短路或</li>
-<li><strong>&，</strong>非短路与</li>
+<li><strong>&amp;，</strong>非短路与</li>
 <li><strong>|，</strong>非短路或</li>
 </ul>
 <h4 id="三元运算符">三元运算符</h4>
@@ -77,7 +77,7 @@
 </code></pre>
 <h4 id="位运算符">位运算符</h4>
 <ul>
-<li><strong>&，</strong>二进制和运算</li>
+<li><strong>&amp;，</strong>二进制和运算</li>
 <li><strong>|，</strong>二进制或运算</li>
 <li><strong>^，</strong>二进制异或预算</li>
 <li><strong>~，</strong>二进制逆运算</li>
@@ -219,9 +219,9 @@
 <p>看上面，有符号左右移，每移n位是运算2的n次幂乘除</p>
 <h5 id="快速模2奇偶判断（不要再只会x--2--0啦）">快速模2/奇偶判断（不要再只会x % 2 == 0啦）</h5>
 <p>任意数与1取位与，结果为1则是奇数</p>
-<pre><code class="hljs language-java"><span class="hljs-comment">// x & 1 等价于 x % 2</span>
-System.out.println(<span class="hljs-number">3</span> & <span class="hljs-number">1</span>); <span class="hljs-comment">//1</span>
-System.out.println(<span class="hljs-number">2</span> & <span class="hljs-number">1</span>); <span class="hljs-comment">//0</span>
+<pre><code class="hljs language-java"><span class="hljs-comment">// x &amp; 1 等价于 x % 2</span>
+System.out.println(<span class="hljs-number">3</span> &amp; <span class="hljs-number">1</span>); <span class="hljs-comment">//1</span>
+System.out.println(<span class="hljs-number">2</span> &amp; <span class="hljs-number">1</span>); <span class="hljs-comment">//0</span>
 </code></pre>
 <h5 id="快速两数交换不用中间值">快速两数交换/不用中间值</h5>
 <pre><code class="hljs language-java"><span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">999</span>;
@@ -252,9 +252,9 @@ System.out.println(b); <span class="hljs-comment">// 999</span>
 <p>则中间的<strong>0111</strong>才是我们真正想要操作的记录位，我们可以用<strong>BitMask</strong>来操作：</p>
 <ul>
 <li>设置<strong>BitMask：</strong>0x0<strong>F</strong>0 -&gt; 0000 <strong>1111</strong> 0000</li>
-<li>对于<strong>检查（check）</strong>：<strong>record & mask</strong></li>
-<li>对于<strong>清零（clear）</strong>：<strong>record & ~mask</strong></li>
-<li>对于<strong>设置（set）</strong>：<strong>record & ~mask | status binary code</strong></li>
+<li>对于<strong>检查（check）</strong>：<strong>record &amp; mask</strong></li>
+<li>对于<strong>清零（clear）</strong>：<strong>record &amp; ~mask</strong></li>
+<li>对于<strong>设置（set）</strong>：<strong>record &amp; ~mask | status binary code</strong></li>
 </ul>
 <pre><code class="hljs language-java"><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testBitMask</span><span class="hljs-params">()</span>{
@@ -264,13 +264,13 @@ System.out.println(b); <span class="hljs-comment">// 999</span>
     <span class="hljs-type">int</span> <span class="hljs-variable">record</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x73F</span>;
     <span class="hljs-type">int</span> status;
     <span class="hljs-comment">// check</span>
-    status = record & mask;
+    status = record &amp; mask;
     System.out.println(status); <span class="hljs-comment">// 48 -&gt; 0000 0011 0000</span>
     <span class="hljs-comment">// clear</span>
-    status = record & ~mask;
+    status = record &amp; ~mask;
     System.out.println(status); <span class="hljs-comment">// 1807 -&gt; 0111 0000 1111</span>
     <span class="hljs-comment">// set</span>
-    status = record & ~mask | <span class="hljs-number">0x060</span>;
+    status = record &amp; ~mask | <span class="hljs-number">0x060</span>;
     System.out.println(status); <span class="hljs-comment">// 1903 -&gt; 0111 0110 1111</span>
 }
 </code></pre>
@@ -329,7 +329,7 @@ System.out.println(b); <span class="hljs-comment">// 999</span>
 <p><strong>给40亿个不重复的Unsigned Int的整数，乱序，然后再给一个数，如何快速判断这个数是否在那40亿个数当中，要求内存限制2GB；</strong></p>
 <p>40亿个<strong>Unsigned Int</strong>的整数，如果放到内存， 那就是大约16G的空间：</p>
 <p>一个整型32bit，占4B，那么40亿个4B就是160亿B，</p>
-<p><span class="katex-display katexp"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">MB</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">10</span><span class="mord cjk_fallback">亿</span></span></span></span></span></span>
+<p><span class="katex-display katexp" katex-exp="CgAxAEcAIABcAGEAcABwAHIAbwB4ACAAMQAwAF4AMwBNAEIAIABcAGEAcABwAHIAbwB4ACAAMQAwAF4ANgBLAEIAIABcAGEAcABwAHIAbwB4ACAAMQAwAF4AOQBCACAAPQAgADEAMAC/TgoA"><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">1</span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">MB</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">10</span><span class="mord cjk_fallback">亿</span></span></span></span></span></span>
 而<strong>Unsigned Int</strong>的整数的取值范围是<code>[0 ~ 2^32-1]</code>，最大值是<code>4,294,967,295</code>，约42亿</p>
 <p>而在Java中，JDK也有可供使用的BitMap，叫做<code>BitSet</code>类，但是它只能存储0到<code>Integer.MAX_VALUE</code>也就是21亿多，所以我们可以使用Lucene提供的工具类<code>org.apache.lucene.util.LongBitSet</code>，它最大支持千亿量级的位图（具体应该是看机器配置）</p>
 <p>我们设定一个43亿比特位的<code>LongBitSet</code>需要占用约520MB的内存</p>

@@ -126,7 +126,7 @@
             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
         <span class="hljs-keyword">if</span> (o <span class="hljs-keyword">instanceof</span> Map.Entry) {
             Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
-            <span class="hljs-keyword">if</span> (Objects.equals(key, e.getKey()) &&
+            <span class="hljs-keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;
                 Objects.equals(value, e.getValue()))
                 <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
         }
@@ -246,17 +246,17 @@
     Node&lt;K,V&gt;[] tab;
     Node&lt;K,V&gt; first, e;
     <span class="hljs-type">int</span> n; K k;
-    <span class="hljs-keyword">if</span> ((tab = table) != <span class="hljs-literal">null</span> && (n = tab.length) &gt; <span class="hljs-number">0</span> &&
-        (first = tab[(n - <span class="hljs-number">1</span>) & hash]) != <span class="hljs-literal">null</span>) {
-        <span class="hljs-keyword">if</span> (first.hash == hash && <span class="hljs-comment">// always check first node</span>
-            ((k = first.key) == key || (key != <span class="hljs-literal">null</span> && key.equals(k))))
+    <span class="hljs-keyword">if</span> ((tab = table) != <span class="hljs-literal">null</span> &amp;&amp; (n = tab.length) &gt; <span class="hljs-number">0</span> &amp;&amp;
+        (first = tab[(n - <span class="hljs-number">1</span>) &amp; hash]) != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">if</span> (first.hash == hash &amp;&amp; <span class="hljs-comment">// always check first node</span>
+            ((k = first.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k))))
             <span class="hljs-keyword">return</span> first;
         <span class="hljs-keyword">if</span> ((e = first.next) != <span class="hljs-literal">null</span>) {
             <span class="hljs-keyword">if</span> (first <span class="hljs-keyword">instanceof</span> TreeNode)
                 <span class="hljs-keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
             <span class="hljs-keyword">do</span> {
-                <span class="hljs-keyword">if</span> (e.hash == hash &&
-                    ((k = e.key) == key || (key != <span class="hljs-literal">null</span> && key.equals(k))))
+                <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k))))
                     <span class="hljs-keyword">return</span> e;
             } <span class="hljs-keyword">while</span> ((e = e.next) != <span class="hljs-literal">null</span>);
         }
@@ -272,7 +272,7 @@
 <p>读完代码发现，在一系列严谨的条件过后，首先看第一个箱子的 hash 值和要找到的 key 的 hash 值是否相等，相等则再比较地址以及 equals 方法；</p>
 <p>如果第一个箱子并不是要找的元素，且当前仓位不只一个箱子而是一个箱群，那么接下来就开始判断<strong>箱群结构</strong>，如果 first 是<strong>树箱</strong>，那么就用<strong>树结构的方法去查找结点</strong>，否则就是<strong>链箱群</strong>，接着就是中规中矩的链遍历，对比步骤和上面一致；</p>
 <p><strong>无论是树箱子还是链箱子的查找，都是<code>k == key || k.equals(key)</code>这样的比较句式！</strong></p>
-<p>注意到<code>line:8</code>有一句<code>(n - 1) & hash</code>，这是将 hash 再映射到主仓的下标中，这也就解释了为什么会有<code>first.hash == hash</code>这样的语句，因为即使不同的 hash 也有可能映射到同一个仓位，下文的<code>hash & (n - 1)</code>也是计算仓位的下标，二者没有区别；</p>
+<p>注意到<code>line:8</code>有一句<code>(n - 1) &amp; hash</code>，这是将 hash 再映射到主仓的下标中，这也就解释了为什么会有<code>first.hash == hash</code>这样的语句，因为即使不同的 hash 也有可能映射到同一个仓位，下文的<code>hash &amp; (n - 1)</code>也是计算仓位的下标，二者没有区别；</p>
 <p>但是要注意的是，这样计算下标是有要求的，<strong>要求就是表容量必须是 2 的次幂，才能进行这样的运算</strong>，这也是为什么有静态方法<code>tableSizeFor</code>这个方法，比如说你指定初始化容量为 1000，实际创建出来的表容量也是比 1000 大的 2 的次幂数即 1024，我们配合<strong>有参构造方法 1</strong>去解答，当我们最开始使用<strong>有参构造方法 1</strong>的时候，只有<strong>threshold</strong>被赋值为比如说 1000，然后到了<code>resize()</code>方法：</p>
 <blockquote>
 <p>oldCap=0；</p>
@@ -301,12 +301,12 @@
     <span class="hljs-type">int</span> n, i;
     <span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-literal">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)
         n = (tab = resize()).length;
-    <span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) & hash]) == <span class="hljs-literal">null</span>)
+    <span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-literal">null</span>)
         tab[i] = newNode(hash, key, value, <span class="hljs-literal">null</span>);
     <span class="hljs-keyword">else</span> {
         Node&lt;K,V&gt; e; K k;
-        <span class="hljs-keyword">if</span> (p.hash == hash &&
-            ((k = p.key) == key || (key != <span class="hljs-literal">null</span> && key.equals(k))))
+        <span class="hljs-keyword">if</span> (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k))))
             e = p;
         <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p <span class="hljs-keyword">instanceof</span> TreeNode)
             e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="hljs-built_in">this</span>, tab, hash, key, value);
@@ -318,8 +318,8 @@
                         treeifyBin(tab, hash);
                     <span class="hljs-keyword">break</span>;
                 }
-                <span class="hljs-keyword">if</span> (e.hash == hash &&
-                    ((k = e.key) == key || (key != <span class="hljs-literal">null</span> && key.equals(k))))
+                <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k))))
                     <span class="hljs-keyword">break</span>;
                 p = e;
             }
@@ -371,7 +371,7 @@
             threshold = Integer.MAX_VALUE;
             <span class="hljs-keyword">return</span> oldTab;
         }
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="hljs-number">1</span>) &lt; MAXIMUM_CAPACITY &&
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="hljs-number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;
                  oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
             newThr = oldThr &lt;&lt; <span class="hljs-number">1</span>; <span class="hljs-comment">// double threshold</span>
     }
@@ -383,7 +383,7 @@
     }
     <span class="hljs-keyword">if</span> (newThr == <span class="hljs-number">0</span>) {
         <span class="hljs-type">float</span> <span class="hljs-variable">ft</span> <span class="hljs-operator">=</span> (<span class="hljs-type">float</span>)newCap * loadFactor;
-        newThr = (newCap &lt; MAXIMUM_CAPACITY && ft &lt; (<span class="hljs-type">float</span>)MAXIMUM_CAPACITY ?
+        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="hljs-type">float</span>)MAXIMUM_CAPACITY ?
                   (<span class="hljs-type">int</span>)ft : Integer.MAX_VALUE);
     }
     threshold = newThr;
@@ -396,7 +396,7 @@
             <span class="hljs-keyword">if</span> ((e = oldTab[j]) != <span class="hljs-literal">null</span>) {
                 oldTab[j] = <span class="hljs-literal">null</span>;
                 <span class="hljs-keyword">if</span> (e.next == <span class="hljs-literal">null</span>)
-                    newTab[e.hash & (newCap - <span class="hljs-number">1</span>)] = e;
+                    newTab[e.hash &amp; (newCap - <span class="hljs-number">1</span>)] = e;
                 <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> TreeNode)
                     ((TreeNode&lt;K,V&gt;)e).split(<span class="hljs-built_in">this</span>, newTab, j, oldCap);
                 <span class="hljs-keyword">else</span> { <span class="hljs-comment">// preserve order</span>
@@ -405,7 +405,7 @@
                     Node&lt;K,V&gt; next;
                     <span class="hljs-keyword">do</span> {
                         next = e.next;
-                        <span class="hljs-keyword">if</span> ((e.hash & oldCap) == <span class="hljs-number">0</span>) {
+                        <span class="hljs-keyword">if</span> ((e.hash &amp; oldCap) == <span class="hljs-number">0</span>) {
                             <span class="hljs-keyword">if</span> (loTail == <span class="hljs-literal">null</span>)
                                 loHead = e;
                             <span class="hljs-keyword">else</span>
@@ -475,7 +475,7 @@
     <span class="hljs-keyword">for</span> (TreeNode&lt;K,V&gt; e = b, next; e != <span class="hljs-literal">null</span>; e = next) {
         next = (TreeNode&lt;K,V&gt;)e.next;
         e.next = <span class="hljs-literal">null</span>;
-        <span class="hljs-keyword">if</span> ((e.hash & bit) == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> ((e.hash &amp; bit) == <span class="hljs-number">0</span>) {
             <span class="hljs-keyword">if</span> ((e.prev = loTail) == <span class="hljs-literal">null</span>)
                 loHead = e;
             <span class="hljs-keyword">else</span>
@@ -513,7 +513,7 @@
     }
 }
 </code></pre>
-<p>可以看到，该方法在保证结点顺序的情况下，将旧节点上的一颗树分为矮树和高树，划分的依据是<code>e.hash & bit</code>，划分完之后，矮树保留在旧节点的原位，而高数则分配到原下标加上一个 offset 为旧表的长度的下标位置</p>
+<p>可以看到，该方法在保证结点顺序的情况下，将旧节点上的一颗树分为矮树和高树，划分的依据是<code>e.hash &amp; bit</code>，划分完之后，矮树保留在旧节点的原位，而高数则分配到原下标加上一个 offset 为旧表的长度的下标位置</p>
 <h6 id="treeifybin">treeifyBin</h6>
 <p>不管怎么说，我们还是开始分析树化方法：</p>
 <pre><code class="hljs language-java"><span class="hljs-comment">// 树化这个hash仓位上的箱群</span>
@@ -521,7 +521,7 @@
     <span class="hljs-type">int</span> n, index; Node&lt;K,V&gt; e;
     <span class="hljs-keyword">if</span> (tab == <span class="hljs-literal">null</span> || (n = tab.length) &lt; MIN_TREEIFY_CAPACITY)
         resize();
-    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((e = tab[index = (n - <span class="hljs-number">1</span>) & hash]) != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((e = tab[index = (n - <span class="hljs-number">1</span>) &amp; hash]) != <span class="hljs-literal">null</span>) {
         TreeNode&lt;K,V&gt; hd = <span class="hljs-literal">null</span>, tl = <span class="hljs-literal">null</span>;
         <span class="hljs-keyword">do</span> {
             TreeNode&lt;K,V&gt; p = replacementTreeNode(e, <span class="hljs-literal">null</span>);
@@ -567,20 +567,20 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">final</span> Node&lt;K,V&gt; <span class="hljs-title function_">removeNode</span><span class="hljs-params">(<span class="hljs-type">int</span> hash, Object key, Object value,
                            <span class="hljs-type">boolean</span> matchValue, <span class="hljs-type">boolean</span> movable)</span> {
     Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-type">int</span> n, index;
-    <span class="hljs-keyword">if</span> ((tab = table) != <span class="hljs-literal">null</span> && (n = tab.length) &gt; <span class="hljs-number">0</span> &&
-        (p = tab[index = (n - <span class="hljs-number">1</span>) & hash]) != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">if</span> ((tab = table) != <span class="hljs-literal">null</span> &amp;&amp; (n = tab.length) &gt; <span class="hljs-number">0</span> &amp;&amp;
+        (p = tab[index = (n - <span class="hljs-number">1</span>) &amp; hash]) != <span class="hljs-literal">null</span>) {
         Node&lt;K,V&gt; node = <span class="hljs-literal">null</span>, e; K k; V v;
-        <span class="hljs-keyword">if</span> (p.hash == hash &&
-            ((k = p.key) == key || (key != <span class="hljs-literal">null</span> && key.equals(k))))
+        <span class="hljs-keyword">if</span> (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k))))
             node = p;
         <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((e = p.next) != <span class="hljs-literal">null</span>) {
             <span class="hljs-keyword">if</span> (p <span class="hljs-keyword">instanceof</span> TreeNode)
                 node = ((TreeNode&lt;K,V&gt;)p).getTreeNode(hash, key);
             <span class="hljs-keyword">else</span> {
                 <span class="hljs-keyword">do</span> {
-                    <span class="hljs-keyword">if</span> (e.hash == hash &&
+                    <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
                         ((k = e.key) == key ||
-                         (key != <span class="hljs-literal">null</span> && key.equals(k)))) {
+                         (key != <span class="hljs-literal">null</span> &amp;&amp; key.equals(k)))) {
                         node = e;
                         <span class="hljs-keyword">break</span>;
                     }
@@ -588,8 +588,8 @@
                 } <span class="hljs-keyword">while</span> ((e = e.next) != <span class="hljs-literal">null</span>);
             }
         }
-        <span class="hljs-keyword">if</span> (node != <span class="hljs-literal">null</span> && (!matchValue || (v = node.value) == value ||
-                             (value != <span class="hljs-literal">null</span> && value.equals(v)))) {
+        <span class="hljs-keyword">if</span> (node != <span class="hljs-literal">null</span> &amp;&amp; (!matchValue || (v = node.value) == value ||
+                             (value != <span class="hljs-literal">null</span> &amp;&amp; value.equals(v)))) {
             <span class="hljs-keyword">if</span> (node <span class="hljs-keyword">instanceof</span> TreeNode)
                 ((TreeNode&lt;K,V&gt;)node).removeTreeNode(<span class="hljs-built_in">this</span>, tab, movable);
             <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (node == p)

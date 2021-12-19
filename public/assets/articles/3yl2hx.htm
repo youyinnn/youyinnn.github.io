@@ -113,12 +113,12 @@ A solution set is:
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Arrays.sort(nums);
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> nums[i];
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length; j++) {
-            <span class="hljs-keyword">if</span> (j &gt; i + <span class="hljs-number">1</span> && nums[j] == nums[j - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">if</span> (j &gt; i + <span class="hljs-number">1</span> &amp;&amp; nums[j] == nums[j - <span class="hljs-number">1</span>]) {
                 <span class="hljs-keyword">continue</span>;
             }
             <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> nums[j];
@@ -128,11 +128,11 @@ A solution set is:
                     <span class="hljs-comment">// l++ r-- here</span>
                     ans.add(Arrays.asList(a, b, nums[l++], nums[r--]));
                     <span class="hljs-comment">// skip same result when low is the same value</span>
-                    <span class="hljs-keyword">while</span> (l &lt; r && nums[l - <span class="hljs-number">1</span>] == nums[l]) {
+                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[l - <span class="hljs-number">1</span>] == nums[l]) {
                         l++;
                     }
                     <span class="hljs-comment">// skip same result when high is the same value</span>
-                    <span class="hljs-keyword">while</span> (l &lt; r && nums[r] == nums[r + <span class="hljs-number">1</span>]) {
+                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[r] == nums[r + <span class="hljs-number">1</span>]) {
                         r--;
                     }
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a + b + nums[l] + nums[r] &gt; target) {

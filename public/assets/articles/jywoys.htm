@@ -61,7 +61,7 @@ Output:
     } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
             <span class="hljs-keyword">if</span> (flags[i] == <span class="hljs-number">0</span>) {
-                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>] && flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>] &amp;&amp; flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">continue</span>;
                 }
                 tmp.add(nums[i]);

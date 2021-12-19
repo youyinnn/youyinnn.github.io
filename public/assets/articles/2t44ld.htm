@@ -131,7 +131,7 @@ percolateDown(hole):
     <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> arr[hole];
     <span class="hljs-keyword">for</span> (; hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt; nowSize; hole = child) {
         child = hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> && arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> &amp;&amp; arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
             child++;
         }
         <span class="hljs-keyword">if</span> (tmp &lt; arr[child]) {
@@ -164,11 +164,11 @@ percolateDown(hole):
     <span class="hljs-type">int</span> <span class="hljs-variable">rightIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> * holeIndex + <span class="hljs-number">2</span>;
 
     <span class="hljs-comment">// If left child is larger than root </span>
-    <span class="hljs-keyword">if</span> (leftIndex &lt; currentSize && arr[leftIndex] &gt; arr[largestIndex]) 
+    <span class="hljs-keyword">if</span> (leftIndex &lt; currentSize &amp;&amp; arr[leftIndex] &gt; arr[largestIndex]) 
         largestIndex = leftIndex; 
 
     <span class="hljs-comment">// If right child is larger than largest so far </span>
-    <span class="hljs-keyword">if</span> (rightIndex &lt; currentSize && arr[rightIndex] &gt; arr[largestIndex]) 
+    <span class="hljs-keyword">if</span> (rightIndex &lt; currentSize &amp;&amp; arr[rightIndex] &gt; arr[largestIndex]) 
         largestIndex = rightIndex; 
 
     <span class="hljs-comment">// If largest is not root </span>

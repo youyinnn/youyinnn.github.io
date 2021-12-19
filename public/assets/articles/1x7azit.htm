@@ -98,7 +98,7 @@ Output:
      |----1，2——》  记录这个序列，加入2；这时候i从1开始；
         |---- 1，2，2——》  记录这个序列，这时候i从2开始，达到序列底部，删除2，回退到上一层； 
      |----1《——  从上一层回退回来的，删除2，结束该次循环；
-     |----1，2——》  这个序列i=2的时候，i != start && nums[i] == nums[i - 1]
+     |----1，2——》  这个序列i=2的时候，i != start &amp;&amp; nums[i] == nums[i - 1]
   |----1《——  从上一层回退回来的，删除1，结束该次循环；
 
 于是1开头的子集已经访问完毕，继续
@@ -113,7 +113,7 @@ Output:
 
 第三个开头是2，于是由2开始进行递归：
 
-    因为这时候start还是0，而i != start && nums[i] == nums[i - 1]成立，于是2就应该跳过；
+    因为这时候start还是0，而i != start &amp;&amp; nums[i] == nums[i - 1]成立，于是2就应该跳过；
     
 于是3开头的子集已经访问完毕，序列所有数字均已经作为开头访问过子序列了，求解完毕；
 </code></pre>
@@ -127,7 +127,7 @@ Output:
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtracking</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; tmp, <span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> start)</span> {
     ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(tmp));
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i != start && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i != start &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         tmp.add(nums[i]);
@@ -202,7 +202,7 @@ Output:
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
             <span class="hljs-comment">// 如果出现过就跳过</span>
             <span class="hljs-keyword">if</span> (flags[i] == <span class="hljs-number">0</span>) {
-                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>] && flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>] &amp;&amp; flags[i - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">continue</span>;
                 }
                 tmp.add(nums[i]);
@@ -215,7 +215,7 @@ Output:
     }
 }
 </code></pre>
-<p>关键去重是这一行：<code>i &gt; 0 && nums[i] == nums[i - 1] && flags[i - 1] == 0</code></p>
+<p>关键去重是这一行：<code>i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; flags[i - 1] == 0</code></p>
 <p>前面两个子条件可以理解，之前我们去重都是这样做的，第三个条件是什么意思呢？如果和当前数组重复的元素也就是前一位，<strong>并没有被计入tmp序列的话</strong>，那么就说明它已经被还原为0了，说明这是一个新开始了，比如说序列<code>[1,1,3]</code>，当以<strong>第一个1</strong>为开头的时候，序列解已经给出<code>1,1,3/1,3,1</code>了，等到给出解的时候，所有的flag已经都还原成<code>[0,0,0]</code>，意味着重新计数了，等到以<strong>第二个1</strong>为开头的时候，这时候判断它和第一个一数值相等，并且第一个1都没有被纳入计数的时候，于是这是一个开始，且是重复的开始，所以可以跳过</p>
 <h3 id="combination-sum">Combination Sum</h3>
 <p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
@@ -304,7 +304,7 @@ A solution set is:
         ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(tmp));
     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt; candidate.length; i++) {
-            <span class="hljs-keyword">if</span> (i &gt; start && candidate[i] == candidate[i - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">if</span> (i &gt; start &amp;&amp; candidate[i] == candidate[i - <span class="hljs-number">1</span>]) {
                 <span class="hljs-keyword">continue</span>;
             }
             tmp.add(candidate[i]);

@@ -181,7 +181,7 @@ Output:
     <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left;
     <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> words[right++].length();
     
-    <span class="hljs-keyword">while</span> (right &lt; words.length && (sum + <span class="hljs-number">1</span> + words[right].length()) &lt;= maxWidth)
+    <span class="hljs-keyword">while</span> (right &lt; words.length &amp;&amp; (sum + <span class="hljs-number">1</span> + words[right].length()) &lt;= maxWidth)
         sum += <span class="hljs-number">1</span> + words[right++].length();
         
     <span class="hljs-keyword">return</span> right - <span class="hljs-number">1</span>;

@@ -11,6 +11,8 @@ const tocExtractor = require("./toc-extractor");
 const { exit } = require("process");
 const katex = require("katex");
 const { gen } = require("./list-code-theme-css-file");
+const htmlparser2 = require("htmlparser2");
+const { toBinary } = require("./binary-base64-encoder");
 
 let postsPath = path.join(__dirname, "..", "assets/_posts");
 
@@ -63,33 +65,22 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   if (sourceMdStrHandleFunc !== undefined) {
     sourceMdStr = sourceMdStrHandleFunc(sourceMdStr);
   }
+
+  sourceMdStr = blockKatexRendering(sourceMdStr);
   // marked parse
   let htmlStr = marked.parse(sourceMdStr);
+
+  htmlStr = inlineKatexRendering(htmlStr);
+
+  if (htmlStr.match("KaTeX parse error")) {
+    console.log("Katex parse error on: " + sourceFilePath);
+  }
+
   const hMap = tocExtractor.read(sourceFilePath, htmlStr);
   if (hMap !== null) {
     fs.writeFileSync(outputFilePath + ".toc.json", JSON.stringify(hMap), {
       encoding: "utf-8",
     });
-  }
-
-  // katex rendering
-  htmlStr = htmlStr.replace(/amp;/g, "&");
-  htmlStr = htmlStr.replace(/&&/g, "&");
-  let inp = htmlStr.match(/\$\$[^$]*\$\$/);
-  while (inp !== null) {
-    let e = htmlStr.match(/\$\$[^$]*\$\$/)[0];
-    let ehtml =
-      '<span class="katex-display katexp">' +
-      katex.renderToString(e.substring(2, e.length - 2), {
-        displayMode: true,
-        throwOnError: false,
-        output: "html",
-        // ignore chinese charactor
-        strict: false,
-      }) +
-      "</span>";
-    htmlStr = htmlStr.replace(inp[0], ehtml);
-    inp = htmlStr.match(/\$\$[^$]*\$\$/);
   }
 
   // if (htmlStr.indexOf("<code>")) {
@@ -103,6 +94,91 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   });
 
   return hMap;
+}
+
+function blockKatexRendering(htmlStr) {
+  // katex rendering
+  htmlStr = htmlStr.replace(/&amp;/g, "&");
+  // htmlStr = htmlStr.replace(/&&/g, "&");
+  let crossLineRegex = /^\$\$[^$]*\$\$$/gm;
+  let inp = htmlStr.match(crossLineRegex);
+  while (inp !== null) {
+    let e = htmlStr.match(crossLineRegex)[0];
+    let exp = e.substring(2, e.length - 2);
+    let ehtml =
+      '<span class="katex-display katexp" katex-exp="' +
+      toBinary(exp) +
+      '">' +
+      katex.renderToString(exp, {
+        displayMode: true,
+        throwOnError: false,
+        output: "html",
+        // ignore chinese charactor
+        strict: false,
+      }) +
+      "</span>";
+    htmlStr = htmlStr.replace(inp[0], ehtml);
+    inp = htmlStr.match(crossLineRegex);
+  }
+  return htmlStr;
+}
+
+function inlineKatexRendering(htmlStr) {
+  const dom = htmlparser2.parseDocument(htmlStr);
+  const els = htmlparser2.DomUtils.filter(
+    (node) => {
+      return (
+        node.data !== undefined && RegExp(/\$[^$]*\$/, "gm").test(node.data)
+      );
+    },
+    dom,
+    true
+  );
+  let find = [];
+  for (let textEl of els) {
+    if (RegExp(/\$[^$]*\$/, "gm").test(textEl.data)) {
+      let currentEl = textEl;
+      let upperParent = currentEl.parent;
+      let inCode = false;
+      while (upperParent.name !== undefined) {
+        if (upperParent.name === "code") {
+          inCode = true;
+        }
+        currentEl = upperParent;
+        upperParent = currentEl.parent;
+      }
+      if (!inCode) {
+        find.push(textEl);
+      }
+    }
+  }
+  const replaceMap = [];
+  for (let el of find) {
+    const dataBefore = el.data;
+    const match = [...dataBefore.matchAll(/\$[^$]*\$/gm)];
+    for (let mc of match) {
+      let mcText = mc[0];
+      let exp = mcText.substring(1, mcText.length - 1).trim();
+      let ehtml =
+        '<span class="" katex-exp="' +
+        toBinary(exp) +
+        '">' +
+        katex.renderToString(exp, {
+          throwOnError: false,
+          output: "html",
+          strict: false,
+        }) +
+        "</span>";
+      replaceMap.push({
+        before: mcText,
+        after: ehtml,
+      });
+    }
+  }
+  for (let rp of replaceMap) {
+    htmlStr = htmlStr.replace(rp.before, rp.after);
+  }
+  return htmlStr;
 }
 
 // articles 2 htm
@@ -191,7 +267,17 @@ for (let md of scriptsDir) {
     let sourceStr = fs.readFileSync(path.join(websrcPath, "scripts", md), {
       encoding: "utf-8",
     });
+
+    sourceStr = blockKatexRendering(sourceStr);
+
     let htmlStr = marked.parse(sourceStr);
+
+    htmlStr = inlineKatexRendering(htmlStr);
+
+    if (htmlStr.match("KaTeX parse error")) {
+      console.log("Katex parse error on: " + md);
+    }
+
     const hMap = tocExtractor.read(md, htmlStr);
     if (hMap !== null) {
       fs.writeFileSync(

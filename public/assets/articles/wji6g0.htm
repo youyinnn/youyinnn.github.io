@@ -163,21 +163,21 @@ T2   T3                           T3   T4
     <span class="hljs-comment">// If this node becomes unbalanced, then there</span>
     <span class="hljs-comment">// are 4 cases</span>
     <span class="hljs-comment">// Left Left Case</span>
-    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> && key &lt; node.left.key)
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &lt; node.left.key)
         <span class="hljs-keyword">return</span> rightRotate(node);
 
     <span class="hljs-comment">// Right Right Case</span>
-    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> && key &gt; node.right.key)
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &gt; node.right.key)
         <span class="hljs-keyword">return</span> leftRotate(node);
 
     <span class="hljs-comment">// Left Right Case</span>
-    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> && key &gt; node.left.key) {
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &gt; node.left.key) {
         node.left = leftRotate(node.left);
         <span class="hljs-keyword">return</span> rightRotate(node);
     }
 
     <span class="hljs-comment">// Right Left Case</span>
-    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> && key &lt; node.right.key) {
+    <span class="hljs-keyword">if</span> (balance &lt; -<span class="hljs-number">1</span> &amp;&amp; key &lt; node.right.key) {
         node.right = rightRotate(node.right);
         <span class="hljs-keyword">return</span> leftRotate(node);
     }

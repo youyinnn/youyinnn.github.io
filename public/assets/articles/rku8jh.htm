@@ -209,7 +209,7 @@
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IndexOutOfBoundsException</span>(outOfBoundsMsg(index));
 }
 </code></pre>
-<p>首先看<strong>get&set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
+<p>首先看<strong>get&amp;set</strong>，没什么特别的设计，只是这里有个<strong>rangeCheck</strong>，如果index大于等于载量，就抛异常</p>
 <h6 id="add1">add1</h6>
 <p>这个是<strong>ArrayList</strong>的重头戏之一，牵扯到扩容的问题，来看看它怎么面对扩容</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> {

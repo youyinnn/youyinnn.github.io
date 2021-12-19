@@ -164,7 +164,7 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">straightInsertionSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span>{
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> ; i &lt; arr.length ; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> && arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
             swap(arr, j, j - <span class="hljs-number">1</span>);
             j--;
         }
@@ -222,7 +222,7 @@
             <span class="hljs-comment">//从第gap个元素，逐个对其所在组进行直接插入排序操作</span>
             <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> gap; i &lt; arr.length; i++){
                 <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-                <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> && arr[j] &lt; arr[j - gap]){
+                <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - gap]){
                     <span class="hljs-comment">//插入排序采用交换法</span>
                     swap(arr,j,j - gap);
                     j -= gap;
@@ -235,7 +235,7 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">straightInsertionSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span>{
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> ; i &lt; arr.length ; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
-        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> && arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j - <span class="hljs-number">1</span>]) {
             swap(arr, j, j - <span class="hljs-number">1</span>);
             j--;
         }
@@ -254,7 +254,7 @@
                 <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;
                 <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> arr[j];
                 <span class="hljs-keyword">if</span>(arr[j] &lt; arr[j - gap]){
-                    <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> && temp &lt; arr[j - gap]){
+                    <span class="hljs-keyword">while</span>(j - gap &gt;= <span class="hljs-number">0</span> &amp;&amp; temp &lt; arr[j - gap]){
                         <span class="hljs-comment">//移动法</span>
                         arr[j] = arr[j - gap];
                         j -= gap;
@@ -294,7 +294,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">bLength</span> <span class="hljs-operator">=</span> brr.length;
     <span class="hljs-type">int</span> <span class="hljs-variable">cLength</span> <span class="hljs-operator">=</span> crr.length;
     <span class="hljs-type">int</span> <span class="hljs-variable">aIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, cIndex = <span class="hljs-number">0</span>, bIndex = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span> (bIndex &lt; bLength && cIndex &lt; cLength) {
+    <span class="hljs-keyword">while</span> (bIndex &lt; bLength &amp;&amp; cIndex &lt; cLength) {
         <span class="hljs-keyword">if</span> (brr[bIndex] &lt;= crr[cIndex]) {
             arr[aIndex++] = brr[bIndex++];
         } <span class="hljs-keyword">else</span> {
@@ -329,7 +329,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">bi</span> <span class="hljs-operator">=</span> start,   bEnd = mid;
     <span class="hljs-type">int</span> <span class="hljs-variable">ci</span> <span class="hljs-operator">=</span> mid + <span class="hljs-number">1</span>, cEnd = end;
     <span class="hljs-type">int</span> <span class="hljs-variable">ti</span> <span class="hljs-operator">=</span> start;
-    <span class="hljs-keyword">while</span> (bi &lt;= bEnd && ci &lt;= cEnd) {
+    <span class="hljs-keyword">while</span> (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
         <span class="hljs-keyword">if</span> (arr[bi] &lt;= arr[ci]) {
             tmp[ti++] = arr[bi++];
         } <span class="hljs-keyword">else</span> {
@@ -385,7 +385,7 @@
     }
 
     <span class="hljs-type">int</span> <span class="hljs-variable">ii</span> <span class="hljs-operator">=</span> start;
-    <span class="hljs-keyword">while</span> (bi &lt;= bEnd && ci &lt;= cEnd) {
+    <span class="hljs-keyword">while</span> (bi &lt;= bEnd &amp;&amp; ci &lt;= cEnd) {
         <span class="hljs-keyword">if</span> (arr[tmp[bi]] &lt;= arr[tmp[ci]]) {
             index[ii++] = tmp[bi++];
         } <span class="hljs-keyword">else</span> {
@@ -457,10 +457,10 @@
     <span class="hljs-comment">// 在一次快速排序中只要left的值比right小，我们就应该去移动，因为当前这次排序还没有完成</span>
     <span class="hljs-keyword">while</span> (left &lt; right) {
         <span class="hljs-comment">// 表示只有当前指针没有重合并且当前right指向的值大于val时，才会向左移动right</span>
-        <span class="hljs-keyword">while</span> (left &lt; right && arr[right] &gt;= <span class="hljs-keyword">var</span>) {
+        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; arr[right] &gt;= <span class="hljs-keyword">var</span>) {
             right--;
         }
-        <span class="hljs-keyword">while</span> (left &lt; right && arr[left] &lt;= <span class="hljs-keyword">var</span>) {
+        <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; arr[left] &lt;= <span class="hljs-keyword">var</span>) {
             left++;
         }
         swap(arr, right, left);
@@ -505,7 +505,7 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> arr[hole];
     <span class="hljs-keyword">for</span> (; hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span> &lt; nowSize; hole = child) {
         child = hole * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> && arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (child != nowSize - <span class="hljs-number">1</span> &amp;&amp; arr[child] &lt; arr[child + <span class="hljs-number">1</span>]) {
             child++;
         }
         <span class="hljs-keyword">if</span> (tmp &lt; arr[child]) {

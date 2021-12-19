@@ -13,7 +13,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
     pre.next = l1;
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">head</span> <span class="hljs-operator">=</span> l1;
     <span class="hljs-comment">// use l1 l2 as pointers</span>
-    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> && l1 != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> &amp;&amp; l1 != <span class="hljs-literal">null</span>) {
         <span class="hljs-keyword">if</span> (l2.val &lt; l1.val) {
             pre.next = l2;
             l2 = l2.next;
@@ -121,7 +121,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
     pre.next = l1;
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">head</span> <span class="hljs-operator">=</span> l1;
-    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> && l1 != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">while</span> (l2 != <span class="hljs-literal">null</span> &amp;&amp; l1 != <span class="hljs-literal">null</span>) {
         <span class="hljs-keyword">if</span> (l2.val &lt; l1.val) {
             pre.next = l2;
             l2 = l2.next;
@@ -317,7 +317,7 @@ assign some pointer：
         nowHead = tmp;
         tmpPre = nowPre;
         <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (count &lt; k && tmp != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">while</span> (count &lt; k &amp;&amp; tmp != <span class="hljs-literal">null</span>) {
             tmp = tmp.next;
             tmpPre = tmpPre.next;
             count++;
@@ -330,9 +330,9 @@ assign some pointer：
             <span class="hljs-keyword">if</span> (newHead == <span class="hljs-literal">null</span>) {
                 newHead = reverse.head;
             }
-            <span class="hljs-comment">// reconnected part B & C</span>
+            <span class="hljs-comment">// reconnected part B &amp; C</span>
             nowHead.next = tmp;
-            <span class="hljs-comment">// reconnected part A & B</span>
+            <span class="hljs-comment">// reconnected part A &amp; B</span>
             nowPre.next = tmpPre;
             <span class="hljs-comment">// reassign the nowPre</span>
             nowPre = nowHead;

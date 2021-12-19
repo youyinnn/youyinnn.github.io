@@ -4,7 +4,7 @@
 <p>还有比如它的本质是一个<code>char[]</code>数组这些事实就简单带过了</p>
 <p>我们需要深入的是<code>String</code>的内存问题，既然它是一成不变的，有一个对象是一个对象，那么 JVM 是如何减少内存的开销的？以及它引申出的一系列内存问题</p>
 <p>而我想写这篇文章的引子，则是<a href="https://github.com/hollischuang">Hollis 前辈</a>的一篇：<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在 for 循环中使用&quot;+&quot;进行字符串拼接</a></p>
-<h3 id="constant-pool--runtime-constant-pool">Constant Pool & Runtime Constant Pool</h3>
+<h3 id="constant-pool--runtime-constant-pool">Constant Pool &amp; Runtime Constant Pool</h3>
 <p>关于常量池，它用于存放 Java 编译期生成的各种字面量和符号引用，于是每个 Class 文件都会有一个 Constant Pool，具体的你可以通过<code>javap -v ClassName</code>一个类去看到；</p>
 <p>而在 JVM 装载 class 文件的时候，会读取 Constant Pool 里的内容到 Runtime Constant Pool，而 Runtime Constant Pool 会在程序运行的时候动态产生新的常量；</p>
 <h3 id="literal">Literal</h3>
@@ -14,7 +14,7 @@
 </code></pre>
 <p>我们当然也知道，a 和 b 是两个不同的对象，因为 a 是直接引用 String Pool 的<strong>字面量</strong>，而 b 引用的是一个 String 对象，虽然这个 String 对象中的字面量实际上也是引用到 String Pool</p>
 <p><img src="../../../public/img/20190302153504.png" alt=""></p>
-<p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
+<p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121551&amp;idx=1&amp;sn=b14691e0daeca8d1283fc8a860732405&amp;chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&amp;scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
 <blockquote>
 <p>在不同版本的 JDK 中，Java 堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考 Java 虚拟机规范。</p>
 </blockquote>
@@ -219,7 +219,7 @@ System.out.println(s1 == s3);    <span class="hljs-comment">// true</span>
 <p>看到这个代码，你知道原来字符串的 switch 是通过<code>equals()</code>和<code>hashCode()</code>方法来实现的。<strong>记住，switch 中只能使用整型</strong>，比如<code>byte</code>，<code>short</code>，<code>char</code>(ackii 码是整型)以及<code>int</code>。</p>
 <p>仔细看下可以发现，进行<code>switch</code>的实际是哈希值，然后通过使用 equals 方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。</p>
 <p>所以，<strong>其实 swich 只支持一种数据类型，那就是整型，其他数据类型都是转换成整型之后在使用 switch 的。</strong></p>
-<h3 id="substring-in-java6--java7">Substring In Java6 & Java7</h3>
+<h3 id="substring-in-java6--java7">Substring In Java6 &amp; Java7</h3>
 <p>简单一句话，6 里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而 7 的方法会真正分配一个空间存储字串；</p>
 <h3 id="concating-string">Concating String</h3>
 <p>终于来到我们的引子了，大部分参考自<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在 for 循环中使用&quot;+&quot;进行字符串拼接</a></p>

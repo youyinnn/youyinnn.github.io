@@ -101,7 +101,7 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
 <h5 id="remove">remove</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> {
     E element;
-    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> && index &lt;= endIndex()) {
+    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt;= endIndex()) {
         element = array[index];
         <span class="hljs-keyword">if</span> (index &lt; endIndex()) {
             System.arraycopy(array, index + <span class="hljs-number">1</span>, array, index, endIndex() - index);

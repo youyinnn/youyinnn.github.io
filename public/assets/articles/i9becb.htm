@@ -46,9 +46,9 @@ Output: &quot;/a/b/c&quot;
             nowI = path.length();
         }
 
-        <span class="hljs-keyword">if</span> (name.equals(<span class="hljs-string">&quot;..&quot;</span>) && !list.isEmpty()) {
+        <span class="hljs-keyword">if</span> (name.equals(<span class="hljs-string">&quot;..&quot;</span>) &amp;&amp; !list.isEmpty()) {
             list.removeLast();
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!name.equals(<span class="hljs-string">&quot;.&quot;</span>) && !name.equals(<span class="hljs-string">&quot;..&quot;</span>) && !name.isEmpty()) {
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!name.equals(<span class="hljs-string">&quot;.&quot;</span>) &amp;&amp; !name.equals(<span class="hljs-string">&quot;..&quot;</span>) &amp;&amp; !name.isEmpty()) {
             list.add(name);
         }
     }
@@ -245,7 +245,7 @@ Output: false
         mid = (high + low) &gt;&gt;&gt; <span class="hljs-number">1</span>;
         <span class="hljs-type">int</span> <span class="hljs-variable">rowHead</span> <span class="hljs-operator">=</span> matrix[mid][<span class="hljs-number">0</span>];
         <span class="hljs-type">int</span> <span class="hljs-variable">rowTail</span> <span class="hljs-operator">=</span> matrix[mid][n - <span class="hljs-number">1</span>];
-        <span class="hljs-keyword">if</span> (rowHead &lt;= target && rowTail &gt;= target) {
+        <span class="hljs-keyword">if</span> (rowHead &lt;= target &amp;&amp; rowTail &gt;= target) {
             <span class="hljs-keyword">return</span> Arrays.binarySearch(matrix[mid], target) &gt;= <span class="hljs-number">0</span>;
         }
         <span class="hljs-keyword">if</span> (rowHead &gt; target) {
