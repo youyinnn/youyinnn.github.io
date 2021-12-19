@@ -1,6 +1,6 @@
 <h3 id="introduction">Introduction</h3>
 <p>我们对Lock和AQS有了一定的了解了之后，可以尝试着接触一些Lock+AQS的基本实现了，本篇会了解到最基本的同步组件<code>ReentrantLock</code>和<code>ReentrantReadWriteLock</code>，前者提供了排他锁的实现，并且支持重入，后者在前者的基础上，支持锁的分级，写锁排他读锁共享。特别的，重入锁的获取还有公平和非公平之分，我们先从这部分入手。</p>
-<h4 id="fair-lock--nonfair-lock">Fair Lock & Nonfair Lock</h4>
+<h4 id="fair-lock--nonfair-lock">Fair Lock &amp; Nonfair Lock</h4>
 <p>公平锁：锁的获取次序和请求锁的时间顺序一致，即在绝对的时间里，等待时间越久的线程越先获取到锁。</p>
 <p>非公平锁：锁的获取和瞬间的竞争有关，一瞬间谁运气好就能获取到锁，而且锁的获取即同步状态的获取，刚获取到同步状态的线程，再次获取到状态的机会比较大。</p>
 <p>说明：虽然非公平锁可能会造成“饥饿”情况，但是大多数情况下还是非公平锁用的多，因为公平锁在释放锁又再获取锁的时候，总是会<strong>切换线程</strong>，而非公平锁一段时间内很可能总是那一个线程不停放锁持锁，<strong>线程切换的开销小就意味着——吞吐量大</strong></p>
@@ -88,7 +88,7 @@
         <span class="hljs-keyword">final</span> <span class="hljs-type">Thread</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> Thread.currentThread();
         <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> getState();
         <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">if</span> (!hasQueuedPredecessors() &&
+            <span class="hljs-keyword">if</span> (!hasQueuedPredecessors() &amp;&amp;
                 compareAndSetState(<span class="hljs-number">0</span>, acquires)) {
                 setExclusiveOwnerThread(current);
                 <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
@@ -114,7 +114,7 @@
     <span class="hljs-type">Node</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> tail; <span class="hljs-comment">// Read fields in reverse initialization order</span>
     <span class="hljs-type">Node</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> head;
     Node s;
-    <span class="hljs-keyword">return</span> h != t &&
+    <span class="hljs-keyword">return</span> h != t &amp;&amp;
         ((s = h.next) == <span class="hljs-literal">null</span> || s.thread != Thread.currentThread());
 }
 </code></pre>
@@ -195,7 +195,7 @@
                    高16位表示读状态 = 2
 </pre>
 
-<p>通过位运算，假设当前同步状态值为S，那么写状态就等于S & 0x0000FFFF（高16位清零），读状态等于S &gt;&gt;&gt; 16（无符号补位0右移16位）</p>
+<p>通过位运算，假设当前同步状态值为S，那么写状态就等于S &amp; 0x0000FFFF（高16位清零），读状态等于S &gt;&gt;&gt; 16（无符号补位0右移16位）</p>
 <p>当写状态要增加1的时候，直接S + 1，当读状态要增加1的是，直接S + 0x00010000就行</p>
 <h5 id="structure">Structure</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReentrantReadWriteLock</span>
@@ -219,7 +219,7 @@
 }
 </code></pre>
 <p>这是重入读写锁的整体结构，可以看到ReentrantReadWriteLock仅仅只是实现了ReadWriteLock接口而已，这个接口仅定义了获取ReadLock和WriteLock的方法，真正的锁实现是<code>ReentrantReadWriteLock.ReadLock</code>和<code>ReentrantReadWriteLock.WriteLock</code>，而这两个锁实现，用的是同一个<code>Sync</code>实例，<code>Sync</code>实例即实现了AQS的公平锁或者非公平锁</p>
-<h5 id="fair--nonfair">Fair & NonFair</h5>
+<h5 id="fair--nonfair">Fair &amp; NonFair</h5>
 <p>我们先来看非公平锁和公平锁的实现：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NonfairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">8159625535654395037L</span>;
@@ -240,9 +240,9 @@
 <p>读写锁中的公平性主要体现在是否要阻塞读写线程这方面，对于公平锁而言，无论读写线程，都要判断<code>hasQueeudPredecessors</code>这个方法我们上面讲过了，关键是非公平锁，对于写锁是否应该block来说，它总是不应该被block住，而读锁则需要判断<code>apparentlyFirstQueuedIsExclusive</code>方法，</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">apparentlyFirstQueuedIsExclusive</span><span class="hljs-params">()</span> {
     Node h, s;
-    <span class="hljs-keyword">return</span> (h = head) != <span class="hljs-literal">null</span> &&
-        (s = h.next)  != <span class="hljs-literal">null</span> &&
-        !s.isShared()         &&
+    <span class="hljs-keyword">return</span> (h = head) != <span class="hljs-literal">null</span> &amp;&amp;
+        (s = h.next)  != <span class="hljs-literal">null</span> &amp;&amp;
+        !s.isShared()         &amp;&amp;
         s.thread != <span class="hljs-literal">null</span>;
 }
 </code></pre>
@@ -255,7 +255,7 @@
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">EXCLUSIVE_MASK</span> <span class="hljs-operator">=</span> (<span class="hljs-number">1</span> &lt;&lt; SHARED_SHIFT) - <span class="hljs-number">1</span>;
 
     <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sharedCount</span><span class="hljs-params">(<span class="hljs-type">int</span> c)</span>    { <span class="hljs-keyword">return</span> c &gt;&gt;&gt; SHARED_SHIFT; }
-    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">exclusiveCount</span><span class="hljs-params">(<span class="hljs-type">int</span> c)</span> { <span class="hljs-keyword">return</span> c & EXCLUSIVE_MASK; }
+    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">exclusiveCount</span><span class="hljs-params">(<span class="hljs-type">int</span> c)</span> { <span class="hljs-keyword">return</span> c &amp; EXCLUSIVE_MASK; }
 
     Sync() {
         readHolds = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadLocalHoldCounter</span>();
@@ -353,12 +353,12 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-title function_">tryAcquireShared</span><span class="hljs-params">(<span class="hljs-type">int</span> unused)</span> {
     <span class="hljs-type">Thread</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> Thread.currentThread();
     <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> getState();
-    <span class="hljs-keyword">if</span> (exclusiveCount(c) != <span class="hljs-number">0</span> &&
+    <span class="hljs-keyword">if</span> (exclusiveCount(c) != <span class="hljs-number">0</span> &amp;&amp;
         getExclusiveOwnerThread() != current)
         <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> sharedCount(c);
-    <span class="hljs-keyword">if</span> (!readerShouldBlock() &&
-        r &lt; MAX_COUNT &&
+    <span class="hljs-keyword">if</span> (!readerShouldBlock() &amp;&amp;
+        r &lt; MAX_COUNT &amp;&amp;
         compareAndSetState(c, c + SHARED_UNIT)) {
         <span class="hljs-keyword">if</span> (r == <span class="hljs-number">0</span>) {
             firstReader = current;
@@ -390,8 +390,8 @@
 <li><code>tryWriteLock</code>：和<code>tryAcquire</code>相比仅仅少了<code>writerShouldBlock</code></li>
 <li><code>tryReadLock</code>：和<code>tryAcquire</code>相比仅仅少了<code>readerShouldBlock</code></li>
 </ul>
-<h5 id="readlock--writelock-in-reentrantreadwirtelock">ReadLock & WriteLock in ReentrantReadWirteLock</h5>
-<p>大致读下了上面的<code>Sync</code>之后，剩下的<code>ReadLock </code>& <code>WriteLock </code>其实就很简单了</p>
+<h5 id="readlock--writelock-in-reentrantreadwirtelock">ReadLock &amp; WriteLock in ReentrantReadWirteLock</h5>
+<p>大致读下了上面的<code>Sync</code>之后，剩下的<code>ReadLock </code>&amp; <code>WriteLock </code>其实就很简单了</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReadLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>, java.io.Serializable {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Sync sync;
     <span class="hljs-keyword">protected</span> <span class="hljs-title function_">ReadLock</span><span class="hljs-params">(ReentrantReadWriteLock lock)</span> {

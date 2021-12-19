@@ -155,7 +155,7 @@ T1 stop waitting !
                 System.out.println(<span class="hljs-string">&quot;T1 started to wait...&quot;</span>);
                 <span class="hljs-type">long</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> timeout;
                 <span class="hljs-type">long</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> System.currentTimeMillis() + timeout;
-                <span class="hljs-keyword">while</span> (wait && left &gt; <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">while</span> (wait &amp;&amp; left &gt; <span class="hljs-number">0</span>) {
                     <span class="hljs-keyword">try</span> {
                         lock.wait(left);
                     } <span class="hljs-keyword">catch</span> (InterruptedException e) {

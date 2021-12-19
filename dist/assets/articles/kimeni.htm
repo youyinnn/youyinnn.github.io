@@ -63,7 +63,7 @@ $(<span class="hljs-string">&quot;#smsgboxdialog&quot;</span>).<span class="hljs
 <li><code>menu</code> Menu | null</li>
 </ul>
 <p>当在 MacOS、Windows、Linux 中使用<code>menu</code>设置程序菜单时，会设置在各个程序窗体的顶层。</p>
-<p>在 Windows 和 Linux 中，可以在菜单的顶层标签的某个字母前添加<code>&</code>以绑定快捷键。 例如，使用<code>&File</code>后可以使用<code>Alt-F</code>呼出 File 的子选项。 被绑定快捷键的字母将会以下划线标出。 <code>&</code>并不会在运行时显示</p>
+<p>在 Windows 和 Linux 中，可以在菜单的顶层标签的某个字母前添加<code>&amp;</code>以绑定快捷键。 例如，使用<code>&amp;File</code>后可以使用<code>Alt-F</code>呼出 File 的子选项。 被绑定快捷键的字母将会以下划线标出。 <code>&amp;</code>并不会在运行时显示</p>
 <p>使用<code>null</code> 作为参数时将会隐藏默认菜单。在 Windows 和 Linux 上还有删除菜单的额外效果。</p>
 <p><strong>Note:</strong> 如果没有在 app 中设置一个菜单，系统会自动生成一个默认菜单， 默认生成的菜单中包含了一些初始选项，例如 <code>文件</code>,<code>编辑</code>, <code>视图</code>,<code>窗口</code>,<code>帮助</code>。</p>
 <p><a href="https://electronjs.org/docs/api/menu#menugetapplicationmenu"><code>Menu.getApplicationMenu()</code></a></p>

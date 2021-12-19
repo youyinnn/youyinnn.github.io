@@ -164,7 +164,7 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; rs.length;) {
         <span class="hljs-type">int</span> <span class="hljs-variable">nowInt</span> <span class="hljs-operator">=</span> mapping(rs[i]), nextInt;
         <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; rs.length
-                && (nextInt = mapping(rs[i + <span class="hljs-number">1</span>])) &gt; nowInt) {
+                &amp;&amp; (nextInt = mapping(rs[i + <span class="hljs-number">1</span>])) &gt; nowInt) {
             ans += nextInt - nowInt;
             i += <span class="hljs-number">2</span>;
         } <span class="hljs-keyword">else</span> {
@@ -197,7 +197,7 @@ Explanation: There is no common prefix among the input strings.
     <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">stringBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
     <span class="hljs-type">String</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> strs[<span class="hljs-number">0</span>];
     <span class="hljs-type">boolean</span> <span class="hljs-variable">stop</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
-    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; flag.length() && !stop; i++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; flag.length() &amp;&amp; !stop; i++) {
         <span class="hljs-type">char</span> <span class="hljs-variable">flagP</span> <span class="hljs-operator">=</span> flag.charAt(i);
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; strs.length; j++) {
             <span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> strs[j];
@@ -229,7 +229,7 @@ A solution set is:
 <p>因为 2sum 里的元素都是不重复的，所以可以用 hash，而 3sum 开始就不能用 hash 去解了</p>
 <p>这题难点就在于，如何去重，比如说例子里给的<code>nums</code>，里面有两个负一，如果用暴力解的话，不免会出现两个<code>[-1, 0, 1]</code>，于是暴力解也很难受</p>
 <p>所以去重的思路，才是这题思路的关键</p>
-<h4 id="sorted--double-pointer">Sorted & Double Pointer</h4>
+<h4 id="sorted--double-pointer">Sorted &amp; Double Pointer</h4>
 <p>先排序，然后再前后双指针遍历解，遍历的同时直接根据排序的性质去重</p>
 <p>比如<code>nums=[-2,1,1,2,0,-2,4,4,-2]</code>排完序之后：<code>nums=[-2,-2,-2,0,1,1,2,4,4]</code></p>
 <p>套一层循环 i=0，从-4 开始寻找可能的解，指针 L= i + 1，从 i 的下一位开始，R=nums.length - 1，从末尾开始：</p>
@@ -250,17 +250,17 @@ A solution set is:
     Arrays.sort(nums);
     List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i-<span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i-<span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> i+<span class="hljs-number">1</span>, r = nums.length - <span class="hljs-number">1</span>, need = <span class="hljs-number">0</span> - nums[i];
         <span class="hljs-keyword">while</span> (l &lt; r) {
             <span class="hljs-keyword">if</span> (nums[l] + nums[r] == need) {
                 res.add(Arrays.asList(nums[i], nums[l++], nums[r--]));
-                <span class="hljs-keyword">while</span> (r &gt; l && nums[l] == nums[l-<span class="hljs-number">1</span>]) {
+                <span class="hljs-keyword">while</span> (r &gt; l &amp;&amp; nums[l] == nums[l-<span class="hljs-number">1</span>]) {
                     l++;
                 }
-                <span class="hljs-keyword">while</span> (r &gt; l && nums[r] == nums[r+<span class="hljs-number">1</span>]) {
+                <span class="hljs-keyword">while</span> (r &gt; l &amp;&amp; nums[r] == nums[r+<span class="hljs-number">1</span>]) {
                     r--;
                 }
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[l] + nums[r] &gt; need) {

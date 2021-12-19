@@ -487,7 +487,7 @@
     <span class="hljs-type">int</span>[][] memo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[x][y];
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; x; i++) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; y; j++) {
-            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> && j == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> &amp;&amp; j == <span class="hljs-number">0</span>) {
                 memo[i][j] = <span class="hljs-number">0</span>;
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span>) {
                 memo[i][j] = <span class="hljs-number">1</span>;
@@ -579,7 +579,7 @@
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n + <span class="hljs-number">1</span>; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> n;
         <span class="hljs-type">int</span> <span class="hljs-variable">coinIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (coinIndex &lt; coins.length && i &gt;= coins[coinIndex]) {
+        <span class="hljs-keyword">while</span> (coinIndex &lt; coins.length &amp;&amp; i &gt;= coins[coinIndex]) {
             temp = Math.min(fn[i - coins[coinIndex]], temp);
             coinIndex++;
         }

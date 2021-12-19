@@ -1,7 +1,7 @@
 <p>The series of &lt;Python Note&gt; is talking about some basic grammar rules of python, for quick search while I might use python.</p>
 <p>The first article will introduces  <code>print()</code> and <code>input()</code>, the comment syntax, variables assignment and some basic types in python.</p>
 <h2 id="a">A</h2>
-<h3 id="method-print--input">Method: print() & input()</h3>
+<h3 id="method-print--input">Method: print() &amp; input()</h3>
 <p>Example:</p>
 <pre><code class="hljs language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;NI&#x27;</span>, <span class="hljs-string">&#x27;Hao&#x27;</span>) <span class="hljs-comment"># NI HAO</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;1 + 3 =&#x27;</span>, <span class="hljs-number">1</span> + <span class="hljs-number">3</span>) <span class="hljs-comment"># 1 + 3 = 4</span>
@@ -493,8 +493,8 @@ po = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#
 <span class="hljs-built_in">print</span>(re.split(<span class="hljs-string">r&#x27;[a-z]&#x27;</span>, <span class="hljs-string">&#x27;adas123fd12d123&#x27;</span>, flags=re.IGNORECASE))
 
 <span class="hljs-comment"># replace</span>
-<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE))
-<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE, count=<span class="hljs-number">1</span>))
+<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&amp;&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE))
+<span class="hljs-built_in">print</span>(re.sub(<span class="hljs-string">r&#x27;and&#x27;</span>, <span class="hljs-string">&#x27;&amp;&#x27;</span>, <span class="hljs-string">&#x27;You And Me, Me And You.&#x27;</span>, flags=re.IGNORECASE, count=<span class="hljs-number">1</span>))
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs language-console">&lt;re.Match object; span=(4, 7), match=&#x27;doh&#x27;&gt;
@@ -503,6 +503,6 @@ po = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#
 &lt;re.Match object; span=(4, 7), match=&#x27;doh&#x27;&gt;
 &lt;re.Match object; span=(11, 14), match=&#x27;dog&#x27;&gt;
 [&#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;123&#x27;, &#x27;&#x27;, &#x27;12&#x27;, &#x27;123&#x27;]
-You & Me, Me & You.
-You & Me, Me And You.
+You &amp; Me, Me &amp; You.
+You &amp; Me, Me And You.
 </code></pre>

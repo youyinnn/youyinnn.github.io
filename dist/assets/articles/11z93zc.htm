@@ -22,7 +22,7 @@ Output: 1
     <span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> (; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && nums[i] == nums[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];
@@ -56,7 +56,7 @@ Output: 1
     }
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
         <span class="hljs-type">int</span> <span class="hljs-variable">abs</span> <span class="hljs-operator">=</span> Math.abs(nums[i]);
-        <span class="hljs-keyword">if</span> (abs &lt;= nums.length && abs &gt; <span class="hljs-number">0</span> && nums[abs - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> (abs &lt;= nums.length &amp;&amp; abs &gt; <span class="hljs-number">0</span> &amp;&amp; nums[abs - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) {
             nums[abs - <span class="hljs-number">1</span>] *= -<span class="hljs-number">1</span>;
         }
     }
@@ -202,7 +202,7 @@ i = 0    1   4   5   6       5  4  3
         }
         sb.insert(<span class="hljs-number">0</span>, left);
     }
-    <span class="hljs-keyword">while</span> (sb.length() &gt; <span class="hljs-number">0</span> && sb.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;0&#x27;</span>) {
+    <span class="hljs-keyword">while</span> (sb.length() &gt; <span class="hljs-number">0</span> &amp;&amp; sb.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;0&#x27;</span>) {
         sb.delete(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
     }
     <span class="hljs-keyword">return</span> sb.length() &gt; <span class="hljs-number">0</span> ? sb.toString() : <span class="hljs-string">&quot;0&quot;</span>;
@@ -262,7 +262,7 @@ if (pc == &#x27;*&#x27;) {
     dp[i][j] = dp[i][j - 1] | dp[i - 1][j];
 }
 if (pc == sc) {
-    dp[i][j] = sc == pc && dp[i - 1][j - 1];
+    dp[i][j] = sc == pc &amp;&amp; dp[i - 1][j - 1];
 }
 
 于是比较简单的写出矩阵来：
@@ -296,7 +296,7 @@ s: acdcb p: a*c?b
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pc == <span class="hljs-string">&#x27;?&#x27;</span>) {
                 dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
             } <span class="hljs-keyword">else</span> {
-                dp[i][j] = sc == pc && dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
+                dp[i][j] = sc == pc &amp;&amp; dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
             }
         }
     }
@@ -311,17 +311,17 @@ s: acdcb p: a*c?b
 }
 
 <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(String s, String p, <span class="hljs-type">int</span> si, <span class="hljs-type">int</span> pi)</span> {
-    <span class="hljs-keyword">if</span> (si == s.length() && pi == p.length()) {
+    <span class="hljs-keyword">if</span> (si == s.length() &amp;&amp; pi == p.length()) {
         <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
     }
-    <span class="hljs-keyword">if</span> (si == s.length() && p.charAt(pi) != <span class="hljs-string">&#x27;*&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (si == s.length() &amp;&amp; p.charAt(pi) != <span class="hljs-string">&#x27;*&#x27;</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
     <span class="hljs-keyword">if</span> (pi == p.length()) {
         <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
     }
     <span class="hljs-keyword">if</span> (p.charAt(pi) == <span class="hljs-string">&#x27;*&#x27;</span>) {
-        <span class="hljs-keyword">if</span> (pi + <span class="hljs-number">1</span> &lt; p.length() && p.charAt(pi + <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (pi + <span class="hljs-number">1</span> &lt; p.length() &amp;&amp; p.charAt(pi + <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
             <span class="hljs-keyword">return</span> dfs(s, p, si, pi + <span class="hljs-number">1</span>);
         }
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= s.length() - si; i++) {

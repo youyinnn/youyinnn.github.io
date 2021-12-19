@@ -52,7 +52,7 @@
 <li>Weak Reference：描述非必须的对象。可以通过实现<code>WeakReference</code>接口来表示存在弱引用关联的对象，这些对象只能生存到下次GC之前，无论内存是否紧张</li>
 <li>Phantom Reference：可以通过实现<code>PhantomReference</code>接口来表示存在虚引用关联的对象，存在虚引用的对象不会在声明周期和GC策略上有任何的影响，仅仅是在这个对象被GC的时候收到一个系统通知而已</li>
 </ol>
-<h3 id="gc-process--objects-finalize-method">GC Process & Object&#39;s finalize Method</h3>
+<h3 id="gc-process--objects-finalize-method">GC Process &amp; Object&#39;s finalize Method</h3>
 <p>即使对象已经具备回收条件，执行了GC之后也不是马上就回收内存的，要宣告一个对象死亡，至少需要经历两次标记：</p>
 <ol>
 <li><p>如果对象在进行RA之后发现没有Reference Chian，那么他会被<strong>第一次标记</strong>，并且执行一次筛选，筛选的细节：</p>

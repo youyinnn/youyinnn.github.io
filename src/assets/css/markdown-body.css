@@ -64,7 +64,7 @@ pre > code {
 .markdown-body .copyrightbox:hover,
 .markdown-body .saying:hover {
   box-shadow: var(--box-shadow-1);
-  transform: translateX(3px);
+  /* transform: translateX(3px); */
 }
 
 .markdown-body code:after,

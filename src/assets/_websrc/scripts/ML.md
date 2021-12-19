@@ -65,9 +65,11 @@ When $y$ can take on only a small number of discrete values (such as if, given t
 ##### The Cost Function
 
 Back to the example of the house prices, with hypothesis:
+
 $$
 h_\theta(x) = \theta_0 + \theta_1x
 $$
+
 and with $\theta_i$ represent the **parameters** of the **model**, it is time to find out what $\theta_0$ and $\theta_1$ stand for.
 
 ![image-20211217153913519](../../../../public/img/image-20211217153913519.png)
@@ -75,13 +77,17 @@ and with $\theta_i$ represent the **parameters** of the **model**, it is time to
 The mission is to **find out $\theta_0$ and $\theta_1$** to make our hypothesis function close to our tranning set.
 
 Hence we have:
+
 $$
 J(\theta_0, \theta_1) = {1 \over 2m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) \space\space - \space\space y^{(i)})^2
 $$
+
 We want the find out the **minimization** of the function:
+
 $$
 \substack{minimize\\\theta_0,\theta_1} \space J(\theta_0, \theta_1)
 $$
+
 We call $J(\theta_0, \theta_1)$ a **Cost function** or **Square error cost function**.It is the most commonly used function for most linear regression function.
 
 This takes an **average difference** $\frac{1}{2m}$ (actually a fancier version of an average, better than $\frac{1}{m}$) of all the results of the hypothesis with inputs from $x$'s and the actual output $y$'s.
@@ -105,26 +111,30 @@ $m=$ the number of training **examples**
 $n=$ the number of **features**
 
 The multivariable form of the **hypothesis aka $h$** function accommodating these multiple features is as follows:
+
 $$
 h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n
 $$
+
 In order to develop intuition about this function, we can think about $\theta_0$ as the **basic price** of a house, $\theta_1$ as **the price per square meter**,  $\theta_2$ as the **price per floor**, etc.  
 
 $x_1$ will be the number of square meters in the house, $x_2$ the number of floors, etc.
 
 Using the definition of **matrix multiplication**, our **multivariable hypothesis function** can be concisely represented as:
+
 $$
 h_\theta(x) = 
-[\theta_1 & \theta_2 & \theta_3 &\cdots&\theta_4]
+[\theta_1 \enspace \theta_2 \enspace \theta_3 \enspace \cdots \enspace \theta_4]
 \begin{bmatrix}
-   x_0 \\
-   x_1 \\
-   x_2 \\
-   \vdots\\
+   x_0 \newline
+   x_1 \newline
+   x_2 \newline
+   \vdots\newline
    x_n
 \end{bmatrix}
 =\theta^Tx
 $$
+
 This is a **vectorization** of our hypothesis function for one training example; see the lessons on vectorization to learn more.
 
 Note that for convenience reasons in this course we assume $x_0^{(i)} =  for (i\in1,\dots,m)$.

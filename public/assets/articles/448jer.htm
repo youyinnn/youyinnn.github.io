@@ -33,7 +33,7 @@ It doesn&#x27;t matter what values are set beyond the returned length.
     <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">range</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, set = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
-        <span class="hljs-keyword">if</span> (range &lt; nums.length - <span class="hljs-number">1</span> &&
+        <span class="hljs-keyword">if</span> (range &lt; nums.length - <span class="hljs-number">1</span> &amp;&amp;
             nums[range] == nums[range + <span class="hljs-number">1</span>]) {
             range++;
         } <span class="hljs-keyword">else</span> {
@@ -106,7 +106,7 @@ Output: -1
     <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> p.length;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n - m; i++){
         <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span>(j &lt; m && p[j] == t[i + j]){
+        <span class="hljs-keyword">while</span>(j &lt; m &amp;&amp; p[j] == t[i + j]){
             j++;
             <span class="hljs-keyword">if</span> (j == m) <span class="hljs-keyword">return</span> i;
         }
@@ -126,7 +126,7 @@ Output: -1
     <span class="hljs-type">int</span>[] next = nextVal(p);
     <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span> (i &lt; t.length && j &lt; p.length) {
+    <span class="hljs-keyword">while</span> (i &lt; t.length &amp;&amp; j &lt; p.length) {
         <span class="hljs-keyword">if</span> (j == -<span class="hljs-number">1</span> || t[i] == p[j]) {
             <span class="hljs-comment">// 有匹配就++</span>
             i++;
@@ -186,7 +186,7 @@ Output: -2
 <p>但是怎么说，这题也是垃圾题，500+👍，2700+的👎</p>
 <h4 id="bit-operation-beat-100">Bit operation (Beat 100%)</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> dividend, <span class="hljs-type">int</span> divisor)</span> {       
-    <span class="hljs-keyword">if</span>(dividend ==  Integer.MIN_VALUE && divisor == -<span class="hljs-number">1</span>){
+    <span class="hljs-keyword">if</span>(dividend ==  Integer.MIN_VALUE &amp;&amp; divisor == -<span class="hljs-number">1</span>){
         <span class="hljs-keyword">return</span> Integer.MAX_VALUE;
     }
     
@@ -200,7 +200,7 @@ Output: -2
     <span class="hljs-keyword">if</span>(divid &gt; divis) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">curSum</span> <span class="hljs-operator">=</span> divis &lt;&lt; <span class="hljs-number">1</span>, prevSum = divis, q = <span class="hljs-number">1</span>;
     
-    <span class="hljs-keyword">while</span>(divid &lt;= curSum && curSum &lt; prevSum){
+    <span class="hljs-keyword">while</span>(divid &lt;= curSum &amp;&amp; curSum &lt; prevSum){
         prevSum = curSum;
         curSum &lt;&lt;= <span class="hljs-number">1</span>; q &lt;&lt;= <span class="hljs-number">1</span>;
     }
@@ -273,7 +273,7 @@ Output: []
                     <span class="hljs-keyword">if</span> (tmpI &lt;= s.length() - wordLength) {
                         <span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> s.substring(tmpI, tmpI + wordLength);
                         <span class="hljs-type">Integer</span> <span class="hljs-variable">nextCount</span> <span class="hljs-operator">=</span> tmp.get(next);
-                        <span class="hljs-keyword">if</span> (nextCount != <span class="hljs-literal">null</span> && nextCount != <span class="hljs-number">0</span>) {
+                        <span class="hljs-keyword">if</span> (nextCount != <span class="hljs-literal">null</span> &amp;&amp; nextCount != <span class="hljs-number">0</span>) {
                             tmp.put(next, --nextCount);
                             tmpCount--;
                         } <span class="hljs-keyword">else</span> {

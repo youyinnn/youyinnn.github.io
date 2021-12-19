@@ -34,7 +34,7 @@
     <span class="hljs-keyword">for</span> (Point a : set) {
         <span class="hljs-keyword">for</span> (Point b : set) {
             <span class="hljs-type">double</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> distanceOfTwoPoint(a, b);
-            <span class="hljs-keyword">if</span> (tmp &lt; get && a != b) {
+            <span class="hljs-keyword">if</span> (tmp &lt; get &amp;&amp; a != b) {
                 get = tmp;
                 ans[<span class="hljs-number">0</span>] = a;
                 ans[<span class="hljs-number">1</span>] = b;
@@ -107,17 +107,17 @@
         <span class="hljs-type">Point</span> <span class="hljs-variable">midP</span> <span class="hljs-operator">=</span> set[mid];
         <span class="hljs-type">double</span> <span class="hljs-variable">midAnsD</span> <span class="hljs-operator">=</span> Double.MAX_VALUE;
         <span class="hljs-comment">// process 5.4.1</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt;= end && set[i].x &lt;= midP.x; i++) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt;= end &amp;&amp; set[i].x &lt;= midP.x; i++) {
             <span class="hljs-type">Point</span> <span class="hljs-variable">pl</span> <span class="hljs-operator">=</span> set[i];
             <span class="hljs-keyword">if</span> (pl.x &gt;= midP.x - dis) {
                 <span class="hljs-comment">// process 5.4.2</span>
                 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> mid, count = <span class="hljs-number">0</span>;
-                     j &lt;= end && count &lt; <span class="hljs-number">6</span> && set[j].x &lt;= midP.x + dis;
+                     j &lt;= end &amp;&amp; count &lt; <span class="hljs-number">6</span> &amp;&amp; set[j].x &lt;= midP.x + dis;
                      j++, count++) {
                     <span class="hljs-type">Point</span> <span class="hljs-variable">pr</span> <span class="hljs-operator">=</span> set[j];
                     <span class="hljs-type">double</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> distanceOfTwoPoint(pl, pr);
                     <span class="hljs-comment">// process 5.4.3</span>
-                    <span class="hljs-keyword">if</span> (tmp &lt; dis && tmp != <span class="hljs-number">0</span>) {
+                    <span class="hljs-keyword">if</span> (tmp &lt; dis &amp;&amp; tmp != <span class="hljs-number">0</span>) {
                         ans[<span class="hljs-number">0</span>] = pl;
                         ans[<span class="hljs-number">1</span>] = pr;
                         midAnsD = tmp;
@@ -149,7 +149,7 @@
             <span class="hljs-type">int</span> <span class="hljs-variable">rightChildIndex</span> <span class="hljs-operator">=</span> leftChildIndex + <span class="hljs-number">1</span>;
             <span class="hljs-type">int</span> <span class="hljs-variable">bigIndex</span> <span class="hljs-operator">=</span> leftChildIndex;
             <span class="hljs-keyword">if</span> (rightChildIndex &lt; heapLength
-                    && set[rightChildIndex].x &gt; set[leftChildIndex].x) {
+                    &amp;&amp; set[rightChildIndex].x &gt; set[leftChildIndex].x) {
                 bigIndex = rightChildIndex;
             }
             <span class="hljs-keyword">if</span> (set[bigIndex].x &gt; set[j].x) {

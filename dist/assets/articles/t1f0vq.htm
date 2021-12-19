@@ -92,8 +92,8 @@ E       M       U           04        | 12          | 20
             sb.append(chars[i]);
             <span class="hljs-comment">// add minorGap&#x27;s char if it&#x27;s not first/last row</span>
             <span class="hljs-keyword">if</span> (minorGap &lt; mainGap
-                    && rowsCount &lt; numRows
-                    && i + minorGap &lt; chars.length) {
+                    &amp;&amp; rowsCount &lt; numRows
+                    &amp;&amp; i + minorGap &lt; chars.length) {
                 sb.append(chars[i + minorGap]);
             }
         }
@@ -236,17 +236,17 @@ Explanation: The number &quot;-91283472332&quot; is out of the range of a 32-bit
         startIndex++;
     }
     <span class="hljs-keyword">while</span> (startIndex &lt; cArr.length) {
-        <span class="hljs-keyword">if</span> (cArr[startIndex] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> && cArr[startIndex] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (cArr[startIndex] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; cArr[startIndex] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) {
             <span class="hljs-keyword">if</span> (ans &gt; Integer.MAX_VALUE / <span class="hljs-number">10</span> || ans &lt; Integer.MIN_VALUE / <span class="hljs-number">10</span>) {
                 <span class="hljs-comment">// multiplication overflow</span>
                 <span class="hljs-type">return</span> <span class="hljs-variable">sign</span> <span class="hljs-operator">=</span>= -<span class="hljs-number">1</span> ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
             ans = (ans * <span class="hljs-number">10</span>) + (sign * (cArr[startIndex] - <span class="hljs-string">&#x27;0&#x27;</span>));
             <span class="hljs-comment">// addiction overflow</span>
-            <span class="hljs-keyword">if</span> (sign == -<span class="hljs-number">1</span> && ans &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (sign == -<span class="hljs-number">1</span> &amp;&amp; ans &gt; <span class="hljs-number">0</span>) {
                 <span class="hljs-keyword">return</span> Integer.MIN_VALUE;
             }
-            <span class="hljs-keyword">if</span> (sign == <span class="hljs-number">1</span> && ans &lt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (sign == <span class="hljs-number">1</span> &amp;&amp; ans &lt; <span class="hljs-number">0</span>) {
                 <span class="hljs-keyword">return</span> Integer.MAX_VALUE;
             }
         } <span class="hljs-keyword">else</span> {
@@ -322,7 +322,7 @@ We call 10000/100 as a 'base', it descide the position of the window.
 <h4 id="ⅱ-just-look-on-half">Ⅱ. just look on half</h4>
 <p>Base on offical solution:</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> bool <span class="hljs-title function_">IsPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
-    <span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> && x != <span class="hljs-number">0</span>)) {
+    <span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> &amp;&amp; x != <span class="hljs-number">0</span>)) {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
     <span class="hljs-type">int</span> <span class="hljs-variable">rev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
@@ -393,7 +393,7 @@ Output: false</p>
 <li><p>如果<code>pattern</code>为&quot;&quot;的话，这次match的结果就等同于看<code>text</code>是否为空；</p>
 </li>
 <li><p>如果我们每次只对比<code>text</code>中的第一个字符，并且比完我们就将它剔除掉的话，于是我们每次都是从一个新的子<code>pattern</code>和一个新的子<code>text</code>去继续往下进行对比，比如说<code>abc -&gt; abc</code>，当对比完<code>text[0] -&gt; pattern[0]</code>之后，我们下一次就从<code>bc -&gt; bc</code>去对比；</p>
-<p>  也就是说：<code>text[0, n] -&gt; pattern[0, m]</code>的结果等于<code>text[0]-&gt;pattern[0] && text[1, n]-&gt;pattern[1, m]</code></p>
+<p>  也就是说：<code>text[0, n] -&gt; pattern[0, m]</code>的结果等于<code>text[0]-&gt;pattern[0] &amp;&amp; text[1, n]-&gt;pattern[1, m]</code></p>
 </li>
 <li><p>如果<code>pattern</code>不为空，根据上一个情况的扩展，对于<code>text[0]-&gt;pattern[0]</code>的判断，如果pattern是<code>.</code>，那么这次判断match，否则还是看text和pattern的字符是否相等；</p>
 </li>
@@ -404,15 +404,15 @@ Output: false</p>
     <span class="hljs-keyword">if</span> (pattern.isEmpty()) {
         <span class="hljs-keyword">return</span> text.isEmpty();
     }
-    <span class="hljs-type">boolean</span> <span class="hljs-variable">firstMatch</span> <span class="hljs-operator">=</span> (!text.isEmpty() &&
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">firstMatch</span> <span class="hljs-operator">=</span> (!text.isEmpty() &amp;&amp;
             (pattern.charAt(<span class="hljs-number">0</span>) == text.charAt(<span class="hljs-number">0</span>) || pattern.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;.&#x27;</span>));
 
-    <span class="hljs-keyword">if</span> (pattern.length() &gt;= <span class="hljs-number">2</span> && pattern.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (pattern.length() &gt;= <span class="hljs-number">2</span> &amp;&amp; pattern.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;*&#x27;</span>) {
         <span class="hljs-type">String</span> <span class="hljs-variable">subPattern</span> <span class="hljs-operator">=</span> pattern.substring(<span class="hljs-number">2</span>);
         <span class="hljs-keyword">return</span> (isMatch(text, subPattern) ||
-                (firstMatch && isMatch(text.substring(<span class="hljs-number">1</span>), pattern)));
+                (firstMatch &amp;&amp; isMatch(text.substring(<span class="hljs-number">1</span>), pattern)));
     } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">return</span> firstMatch && isMatch(text.substring(<span class="hljs-number">1</span>), pattern.substring(<span class="hljs-number">1</span>));
+        <span class="hljs-keyword">return</span> firstMatch &amp;&amp; isMatch(text.substring(<span class="hljs-number">1</span>), pattern.substring(<span class="hljs-number">1</span>));
     }
 }
 </code></pre>
@@ -424,12 +424,12 @@ Tn = t1t2t3...tn-1tn
 Pm = p1p2p3...pm-1pm
 
 那么：
-Match(Tm, Pm) = Match(tn, pm) && Match(Tn-1, Pm-1)        (1)
+Match(Tm, Pm) = Match(tn, pm) &amp;&amp; Match(Tn-1, Pm-1)        (1)
 Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
                 then return Match(Ti-1, Pj-1);            (2)    
                 else
                     if (pj == &#x27;*&#x27;)
-                        if (ti != pj-1 && pj-1 != &#x27;.&#x27;)
+                        if (ti != pj-1 &amp;&amp; pj-1 != &#x27;.&#x27;)
                       then return Match(Ti, Pj-2);        (3)    // no match then skip &#x27;X*&#x27;
                       else
                         return 
@@ -458,7 +458,7 @@ Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
             <span class="hljs-keyword">if</span> (pj == si || pj == <span class="hljs-string">&#x27;.&#x27;</span>) {
                 dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pj == <span class="hljs-string">&#x27;*&#x27;</span>) {
-                <span class="hljs-keyword">if</span> (si != pcs[j - <span class="hljs-number">1</span>] && pcs[j - <span class="hljs-number">1</span>] != <span class="hljs-string">&#x27;.&#x27;</span>) {
+                <span class="hljs-keyword">if</span> (si != pcs[j - <span class="hljs-number">1</span>] &amp;&amp; pcs[j - <span class="hljs-number">1</span>] != <span class="hljs-string">&#x27;.&#x27;</span>) {
                     dp[i][j] = dp[i][j - <span class="hljs-number">2</span>];
                 } <span class="hljs-keyword">else</span> {
                     dp[i][j] = dp[i][j - <span class="hljs-number">1</span>] || dp[i - <span class="hljs-number">1</span>][j] || dp[i][j - <span class="hljs-number">2</span>];

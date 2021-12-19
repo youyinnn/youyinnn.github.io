@@ -66,7 +66,7 @@ lock.lock();
     t1.start();
     t2.start();
     TimeUnit.SECONDS.sleep(<span class="hljs-number">3</span>);
-    <span class="hljs-keyword">while</span> (t2.isAlive() && t1.isAlive()) {
+    <span class="hljs-keyword">while</span> (t2.isAlive() &amp;&amp; t1.isAlive()) {
         TimeUnit.MILLISECONDS.sleep(<span class="hljs-number">300</span>);
         <span class="hljs-keyword">if</span> (!t1.isInterrupted()) {t1.interrupt();}
         <span class="hljs-keyword">if</span> (!t2.isInterrupted()) {t2.interrupt();}

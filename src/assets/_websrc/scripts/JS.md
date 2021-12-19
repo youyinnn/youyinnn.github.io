@@ -476,3 +476,11 @@ const node = new DOMParser()
 ```
 
 https://grrr.tech/posts/create-dom-node-from-html-string/
+
+
+
+
+
+### JS Base64
+
+https://stackoverflow.com/a/30106551/17094075

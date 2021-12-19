@@ -1,4 +1,4 @@
 /* eslint-disable no-unused-vars */
-var resourcesList = ["cache-1ywdriq.js","code-theme-css-ef37e5d9.js"];
+var resourcesList = ["cache-hji8ws.js","code-theme-css-ef37e5d9.js"];
 module.exports.list = resourcesList
   

@@ -571,7 +571,7 @@ Example 3:
 
 $$
 \begin{aligned}
-f(16) &= \frac {1} {10} \cdotp (1 + 1+ 1+ 1+ 1 + 0 + 0 + 0 + 0 + 0) \\\\ 
+f(16) &= \frac {1} {10} \cdotp (1 + 1+ 1+ 1+ 1 + 0 + 0 + 0 + 0 + 0) \newline
 &= \frac {5} {10} = 0.5
 \end{aligned}
 $$

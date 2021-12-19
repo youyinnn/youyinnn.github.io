@@ -57,13 +57,13 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
             <span class="hljs-keyword">if</span> (number != <span class="hljs-string">&#x27;.&#x27;</span>) {
                 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; col &lt; row.length; col++) {
                     <span class="hljs-comment">// duplicate in same row</span>
-                    <span class="hljs-keyword">if</span> (col != columnIndex && row[col] == number) {
+                    <span class="hljs-keyword">if</span> (col != columnIndex &amp;&amp; row[col] == number) {
                         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
                     }
                 }
                 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">ro</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; ro &lt; row.length; ro++) {
                     <span class="hljs-comment">// duplicate in same column</span>
-                    <span class="hljs-keyword">if</span> (ro != rowIndex && board[ro][columnIndex] == number) {
+                    <span class="hljs-keyword">if</span> (ro != rowIndex &amp;&amp; board[ro][columnIndex] == number) {
                         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
                     }
                 }
@@ -72,7 +72,7 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
                 <span class="hljs-comment">// duplicate in 3x3</span>
                 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> rowFactor * <span class="hljs-number">3</span>; rs &lt; (rowFactor * <span class="hljs-number">3</span>) + <span class="hljs-number">3</span>; rs++) {
                     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">cs</span> <span class="hljs-operator">=</span> colFactor * <span class="hljs-number">3</span>; cs &lt; (colFactor * <span class="hljs-number">3</span>) + <span class="hljs-number">3</span>; cs++) {
-                        <span class="hljs-keyword">if</span> (rs != rowIndex && cs != columnIndex && board[rs][cs] == number) {
+                        <span class="hljs-keyword">if</span> (rs != rowIndex &amp;&amp; cs != columnIndex &amp;&amp; board[rs][cs] == number) {
                             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
                         }
                     }
@@ -191,7 +191,7 @@ A solution set is:
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Arrays.sort(candidates);
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; candidates.length; i++) {
-        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> && candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
             <span class="hljs-keyword">continue</span>;
         }
         <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];
@@ -206,9 +206,9 @@ A solution set is:
     <span class="hljs-keyword">if</span> (target == <span class="hljs-number">0</span>) {
         ans.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;(one));
     }
-    <span class="hljs-keyword">if</span> (offset &lt; candidates.length && candidates[offset] &lt;= target) {
+    <span class="hljs-keyword">if</span> (offset &lt; candidates.length &amp;&amp; candidates[offset] &lt;= target) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> offset; i &lt; candidates.length; i++) {
-            <span class="hljs-keyword">if</span> (i != offset && candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
+            <span class="hljs-keyword">if</span> (i != offset &amp;&amp; candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {
                 <span class="hljs-keyword">continue</span>;
             }
             <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> candidates[i];

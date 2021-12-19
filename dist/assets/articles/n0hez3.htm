@@ -293,7 +293,7 @@ Person{name=&#x27;xixi&#x27;, age=15}
 
     <span class="hljs-keyword">default</span> Predicate&lt;T&gt; <span class="hljs-title function_">and</span><span class="hljs-params">(Predicate&lt;? <span class="hljs-built_in">super</span> T&gt; other)</span> {
         Objects.requireNonNull(other);
-        <span class="hljs-keyword">return</span> (t) -&gt; test(t) && other.test(t);
+        <span class="hljs-keyword">return</span> (t) -&gt; test(t) &amp;&amp; other.test(t);
     }
 
     <span class="hljs-keyword">default</span> Predicate&lt;T&gt; <span class="hljs-title function_">negate</span><span class="hljs-params">()</span> {

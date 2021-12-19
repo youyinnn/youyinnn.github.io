@@ -13,7 +13,7 @@
 <p>The second basis thesis is that thread-per-connection is memory-expensive: [e.g. that graph everyone showns about Apache sucking up memory compared to Nginx]</p>
 <p>Apache is multithreaded: it spawns a <a href="http://httpd.apache.org/docs/2.0/mod/worker.html">thread per request</a> (or <a href="http://httpd.apache.org/docs/2.0/mod/prefork.html">process</a>, it depends on the conf). You can see how that overhead eats up memory as the number of concurrent connections increases and more threads are needed to serve multiple simulataneous clients. Nginx and Node.js are not multithreaded, because threads and processes carry a heavy memory cost. They are single-threaded, but event-based. This eliminates the overhead created by thousands of threads/processes by handling many connections in a single thread.</p>
 <h3 id="nodejs-keeps-a-single-thread-for-your-code"><strong>Node.js keeps a single thread for your code...</strong></h3>
-<p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &lt; now + 1000) { // do nothing }</code></p>
+<p>It really is a single thread running: you can&#39;t do any parallel code execution; doing a &quot;sleep&quot; for example will block the server for one second: <code>js while(new Date().getTime() &amp;lt; now + 1000) { // do nothing }</code></p>
 <h3 id="however-everything-runs-in-parallel-except-your-code"><strong>...however, everything runs in parallel except your code</strong></h3>
 <p>There is no way of making code run in parallel within a single request. However, all I/O is evented and asynchronous, so the following won&#39;t block the server: [codesyntax lang=&quot;javascript&quot;]</p>
 <pre><code> c.query(
@@ -23,7 +23,7 @@
        throw err;
      }
      res.writeHead(200, {&#x27;Content-Type&#x27;: &#x27;text/html&#x27;});
-     res.end(&#x27;&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Return from async DB query&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#x27;);
+     res.end(&#x27;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;Hello&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Return from async DB query&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&#x27;);
      c.end();
     }
 );
