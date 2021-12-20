@@ -2,16 +2,18 @@
 /* eslint-disable no-unused-vars */
 const fs = require("fs");
 const path = require("path");
-const marked = require("marked");
-const { crc32 } = require("crc");
-const dayjs = require("dayjs");
-const { EmojiConvertor } = require("emoji-js");
+const { exit } = require("process");
+
+const marked = require("../../node_modules/marked");
+const { crc32 } = require("../../node_modules/crc");
+const dayjs = require("../../node_modules/dayjs");
+const { EmojiConvertor } = require("../../node_modules/emoji-js");
+const katex = require("../../node_modules/katex");
+const htmlparser2 = require("../../node_modules/htmlparser2");
+
 const articleDataExtract = require("./artricles-data-extract");
 const tocExtractor = require("./toc-extractor");
-const { exit } = require("process");
-const katex = require("katex");
 const { gen } = require("./list-code-theme-css-file");
-const htmlparser2 = require("htmlparser2");
 const { toBinary } = require("./binary-base64-encoder");
 
 let postsPath = path.join(__dirname, "..", "assets/_posts");
@@ -100,13 +102,18 @@ function blockKatexRendering(htmlStr) {
   // katex rendering
   htmlStr = htmlStr.replace(/&amp;/g, "&");
   // htmlStr = htmlStr.replace(/&&/g, "&");
-  let crossLineRegex = /^\$\$[^$]*\$\$$/gm;
+  let crossLineRegex = /(^\$\$|^> \$\$)[^$]*\$\$$/gm;
   let inp = htmlStr.match(crossLineRegex);
   while (inp !== null) {
     let e = htmlStr.match(crossLineRegex)[0];
-    let exp = e.substring(2, e.length - 2);
+    let exp =
+      e[0] === ">"
+        ? e.substring(6, e.length - 4)
+        : e.substring(2, e.length - 2);
+
     let ehtml =
-      '<span class="katex-display katexp" katex-exp="' +
+      (e[0] === ">" ? ">" : "") +
+      '<div class="katex-display katexp" katex-exp="' +
       toBinary(exp) +
       '">' +
       katex.renderToString(exp, {
@@ -116,7 +123,7 @@ function blockKatexRendering(htmlStr) {
         // ignore chinese charactor
         strict: false,
       }) +
-      "</span>";
+      "</div>";
     htmlStr = htmlStr.replace(inp[0], ehtml);
     inp = htmlStr.match(crossLineRegex);
   }

@@ -34,7 +34,7 @@ A good hash method will mapping any key to a un-used place, which means there is
 **Capture information on key**
 
 $$
-H(key) = key \\\\ H(key) = a \cdotp key + b
+H(key) = key \\ H(key) = a \cdotp key + b
 $$
 
 **Mod**

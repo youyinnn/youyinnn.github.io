@@ -100,5 +100,4 @@ The worst Front-end developer in the universe.
 ```
 -->
 
-<p style="text-align: center;"><img src="../../../public/img/mona-loading-default.gif" style="width: 80px;margin-top:3rem;" preview-disabled></p>
-
+<p style="text-align: center;" class="unselectable undragable"><img src="../../../public/img/mona-loading-default.gif" style="width: 80px;margin-top:3rem;" preview-disabled></p>

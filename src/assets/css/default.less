@@ -1,9 +1,16 @@
 .unselectable,
-.unselectable > * {
+.unselectable * {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
+
+.undragable,
+.undragable * {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+}
+
 body,
 html {
   backface-visibility: hidden;

@@ -120,7 +120,7 @@ public int maxProfit(int[] prices) {
 
 $$
 dp[i][0] = max(dp[i - 1][0],\enspace dp[i - 1][1] + prices[i])
-\\\\
+\\
 dp[i][1] = max(dp[i - 1][1],\enspace dp[i - 1][0] - prices[i])
 $$
 
@@ -129,7 +129,7 @@ $$
 $$
 \begin{aligned}
 dp[0][0] &= 0
-\\\\
+\\
 dp[0][1] &= -prices[0]
 \end{aligned}
 $$
@@ -180,7 +180,7 @@ public int maxProfit(int[] prices) {
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace dp[i - 1][1] + prices[i] - fee)
-\\\\
+\\
 dp[i][1] &= max(dp[i - 1][1],\enspace dp[i - 1][0] - prices[i])
 \end{aligned}
 $$
@@ -229,9 +229,9 @@ public int maxProfit(int[] prices, int fee) {
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace dp[i - 1][2] - prices[i])
-\\\\
+\\
 dp[i][1] &= dp[i - 1][0] + prices[i]
-\\\\
+\\
 dp[i][2] &= max(dp[i - 1][1],\enspace dp[i - 1][2])
 \end{aligned}
 $$
@@ -299,11 +299,11 @@ public int maxProfit(int[] prices) {
 $$
 \begin{aligned}
 dp[i][0] &= max(dp[i - 1][0],\enspace 0 - prices[i])
-\\\\
+\\
 dp[i][1] &= max(dp[i - 1][1],\enspace dp[i - 1][0] + prices[i])
-\\\\
+\\
 dp[i][2] &= max(dp[i - 1][2],\enspace dp[i - 1][1] - prices[i])
-\\\\
+\\
 dp[i][3] &= max(dp[i - 1][3],\enspace dp[i - 1][2] + prices[i])
 \end{aligned}
 $$
@@ -313,9 +313,9 @@ $$
 $$
 \begin{aligned}
 dp[0][0] &= -price[0]
-\\\\
+\\
 dp[0][2] &= Integer.MIN\_VALUE
-\\\\
+\\
 dp[0][3] &= Integer.MIN\_VALUE
 \end{aligned}
 $$
@@ -386,9 +386,9 @@ $$
 dp[i][j] = \begin{cases}
 			\begin{aligned}
 			&max(dp[i - 1][0],\enspace 0 - prices[i]) \qquad &j &= 0
-			\\\\
+			\\
 			&max(dp[i - 1][j],\enspace dp[i - 1][j - 1] + prices[i]) \qquad &j &= odd
-			\\\\
+			\\
 			&max(dp[i - 1][j],\enspace dp[i - 1][j - 1] - prices[i]) \qquad &j &= even
 			\end{aligned}
 			\end{cases}
@@ -399,14 +399,14 @@ $$
 $$
 \begin{aligned}
 dp[0][0] &= -price[0]
-\\\\
-dp[0][2] &= Integer.MIN\\_VALUE
-\\\\
-dp[0][4] &= Integer.MIN\\_VALUE
-\\\\
+\\
+dp[0][2] &= Integer.MIN\_VALUE
+\\
+dp[0][4] &= Integer.MIN\_VALUE
+\\
 \vdots
-\\\\
-dp[0][j + 2] &= Integer.MIN\\_VALUE
+\\
+dp[0][j + 2] &= Integer.MIN\_VALUE
 \end{aligned}
 $$
 

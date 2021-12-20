@@ -55,6 +55,8 @@ pre > code {
 .markdown-body .saying,
 .markdown-body img {
   transition: transform 0.4s, box-shadow 0.5s;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .markdown-body .katexp:hover,

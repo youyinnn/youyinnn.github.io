@@ -579,19 +579,19 @@ $$
 并且：
 
 $$
-f(17) = f(18) = f(19)  = f(20)  = f(21)  = 1 \\\\  f(22) = f(23) = f(24)  = f(25)  = f(26)  = 0
+f(17) = f(18) = f(19)  = f(20)  = f(21)  = 1 \\  f(22) = f(23) = f(24)  = f(25)  = f(26)  = 0
 $$
 
  于是我们可以得到初步的状态转移方程：
 
 $$
-\begin{aligned} f(x) &= \frac {1} {W} \cdotp (f(x + 1) + f(x + 2) + \dotsb + f(x + W)) \\\\  f(x - 1) &= \frac {1} {W} \cdotp (f(x) + f(x + 1) + \dotsb + f(x + W - 1)) \\\\ \vdots \\\\ f(0) &= \frac {1} {W} \cdotp (f(1) + f(2) + \dotsb + f(W)) \end{aligned}
+\begin{aligned} f(x) &= \frac {1} {W} \cdotp (f(x + 1) + f(x + 2) + \dotsb + f(x + W)) \\  f(x - 1) &= \frac {1} {W} \cdotp (f(x) + f(x + 1) + \dotsb + f(x + W - 1)) \\ \vdots \\ f(0) &= \frac {1} {W} \cdotp (f(1) + f(2) + \dotsb + f(W)) \end{aligned}
 $$
 
 到这里为止，其实我们已经能够写出题解了，但是我们要是以高中生的眼光来看上面的公式，我们不难发现，后一项和前一项的公式中其实有部分个结果是有重复的部分，*f(x)*和*f(x - 1)*中有重叠的*f(x + 1) + ... + f(x + W - 1))*，于是我们可以两式相减来简化一下：
 
 $$
-\begin{aligned} f(x) - f(x - 1) &= \frac {1} {W} \cdotp (\bcancel{f(x + 1)} + \bcancel{f(x + 2)} + \bcancel{\dotsb} + f(x + W)) \\\\ &\quad- \frac {1} {W} \cdotp (f(x) + \bcancel{f(x + 1)} + \bcancel{\dotsb} + \bcancel{f(x + W - 1)}) \\\\ &= \frac {1} {W} \cdotp (f(x + W) - f(x)) \end{aligned}
+\begin{aligned} f(x) - f(x - 1) &= \frac {1} {W} \cdotp (\bcancel{f(x + 1)} + \bcancel{f(x + 2)} + \bcancel{\dotsb} + f(x + W)) \\ &\quad- \frac {1} {W} \cdotp (f(x) + \bcancel{f(x + 1)} + \bcancel{\dotsb} + \bcancel{f(x + W - 1)}) \\ &= \frac {1} {W} \cdotp (f(x + W) - f(x)) \end{aligned}
 $$
 
 于是有：
@@ -618,7 +618,7 @@ $$
 
 2. *f(x - 1)*右移后，原式右边左移，最后左右翻转一下：
 $$
-   \begin{aligned} f(x - 1) &= f(x) -  \frac {1} {W} \cdotp (f(x + W) - f(x)) \\\\ f(x) &= f(x + 1) -  \frac {1} {W} \cdotp (f(x + 1 + W) - f(x + 1)) \end{aligned}
+\begin{aligned} f(x - 1) &= f(x) -  \frac {1} {W} \cdotp (f(x + W) - f(x)) \\ f(x) &= f(x + 1) -  \frac {1} {W} \cdotp (f(x + 1 + W) - f(x + 1)) \end{aligned}
 $$
 
 上式就是我们最终得出的简化的通项公式，然后我们兴高采烈地写出题解：

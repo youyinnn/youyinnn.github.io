@@ -467,15 +467,15 @@ $$
 对于总集长度为奇数时：
 $$
 \begin{aligned}
-1.\quad &len(left\\_part) = len(right\\_part) + 1 \\\\
-2.\quad &max(left\\_part) ≤ min(right\\_part)
+1.\quad &len(left\_part) = len(right\_part) + 1 \\\\
+2.\quad &max(left\_part) ≤ min(right\_part)
 \end{aligned}
 $$
 注意，**等长**概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定**左集合比右集合多一个**，所以奇数集合的中位数总是**左集合中最大的那一个**
 
 此时集合的中位数为：
 $$
-Median = max(left\\_part)
+Median = max(left\_part)
 $$
 于是我们按照以下步骤进行切点的寻找：
 
