@@ -1,5 +1,5 @@
 ---
-title: Machine Learnnig Week1 Note
+title: Machine Learning Week1 Note
 categories:
   - ml
 tags:
@@ -9,7 +9,7 @@ date: 2021-12-16 14:14:00 -4
 
 
 
-### Defination of Machine Learning
+### Definition of Machine Learning
 
 From Arthur Samuel
 
@@ -43,7 +43,7 @@ The picture shown above is a **classification problem** to be solved.
 
 ![img](../../../public/img/c34fa10153f223aa955d6717663a9f91.png)
 
-### Singlevariate Linear Regression
+### Univariate Linear Regression
 
 Given an example:
 
@@ -81,7 +81,7 @@ and with $\theta_i$ represent the **parameters** of the **model**, it is time to
 
 ![image-20211217153913519](../../../public/img/image-20211217153913519.png)
 
-The mission is to **find out $\theta_0$ and $\theta_1$** to make our hypothesis function close to our tranning set.
+The mission is to **find out $\theta_0$ and $\theta_1$** to make our hypothesis function close to our training set.
 
 Hence we have:
 
@@ -141,18 +141,90 @@ We make steps down the cost function in the direction with the steepest descent.
 
 For example, the distance between each 'star' in the graph above represents a step determined by our parameter $\alpha$. A **smaller** $\alpha$ would result in a **smaller step** and a **larger** $\alpha$ results in a **larger step**. 
 
-The direction in which the step is taken is determined by the partial derivative of $J(\theta_0,\theta_1)$. 
+The direction in which the step is taken is determined by the **partial derivative** of $J(\theta_0,\theta_1)$. 
 
 Depending on **where one starts** on the graph, one could end up **at different points**. The image above shows us two different starting points that end up in two different places. 
 
 > The **gradient descent algorithm** is:
 >
-> repeat until convergence:
+> repeat until convergence: $\{$
 > $$
 > \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)
 > $$
-> where $j=0,1$ represents the feature index number.
+> $\}$
 >
+> where $j=0,1$ represents the feature index number.
 
 At each iteration j, one should **simultaneously update** the parameters $\theta_1, \theta_2,...,\theta_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation. 
+
+#### Gradient Descent Intuition
+
+What we presented before of the descent algorithm, there is a derivative term which use $\partial$ symbol, but in mathematic area, it should use $d$ to represent. Hence we can also have:
+$$
+\theta_j := \theta_j - \alpha \frac{d}{d \theta_j} J(\theta_0, \theta_1)
+$$
+**Regardless** of the slope's sign for $\frac{d}{d\theta_1} J(\theta_1)$,  $\theta_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of  $\theta_1$ increases and when it is positive, the value of $\theta_1$ decreases.
+
+![img](../../../public/img/SMSIxKGUEeav5QpTGIv-Pg_ad3404010579ac16068105cfdc8e950a_Screenshot-2016-11-03-00.05.06.png)
+
+On a side note, **we should adjust** our parameter $\alpha$ to ensure that the gradient descent algorithm converges in a reasonable time. Failure to converge or too much time to obtain the minimum value imply that our step size is wrong.
+
+![img](../../../public/img/UJpiD6GWEeai9RKvXdDYag_3c3ad6625a2a4ec8456f421a2f4daf2e_Screenshot-2016-11-03-00.05.27.png)
+
+#### How does gradient descent converge with a fixed step size $\alpha$?
+
+The intuition behind the convergence is that $\frac{d}{d\theta_1} J(\theta_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get: 
+$$
+\theta_1:=\theta_1-\alpha * 0
+$$
+![img](../../../public/img/4668349e04cf0c4489865e133d112e98.png)
+
+This means that once we hit the local minimal point, the update of the gradient descent will **remain unchanged**.
+
+
+
+#### Gradient Descent for Linear Regression
+
+![image-20211220172738271](../../../public/img/image-20211220172738271.png)
+
+Going back to the linear regression model we discussed before, if we are trying to use the gradient descent algorithm on that, we can come up with:
+$$
+\begin{align}
+\frac{d}{d\theta_j} J(\theta_0, \theta_1) &= \frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) \space\space - \space\space y^{(i)})^2
+\\
+&= 
+\frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(\theta_0 + \theta_1x^{(i)} \space\space - \space\space y^{(i)})^2
+\end{align}
+$$
+Then we need to figure out the **partial derivative** of two $\theta s$. And we get:
+$$
+\begin{align}
+j = 0, \enspace \frac{d}{d\theta_0} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
+\\
+j = 1, \enspace \frac{d}{d\theta_1} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
+\end{align}
+$$
+Then we can repeat: $\{$
+$$
+\begin{align}
+\theta_0 &:= \space \theta_0 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
+\\
+\theta_1 &:= \space \theta_1 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
+\end{align}
+$$
+$\}$
+
+and we should update $\theta_0$ and $\theta_1$ **simultaneously**.
+
+And we have the bow shaped function:
+
+<img src="../../../public/img/image-20211220175100778.png" alt="image-20211220175100778" style="zoom:50%;" />
+
+hence we can always get the global optimum where there is no local optimum in the shape.
+
+
+
+
+
+
 
