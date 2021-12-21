@@ -5,6 +5,7 @@ categories:
 tags:
   - dp
 date: 2021-12-16 14:14:00 -4
+series: Machine Learning From Andrew Ng
 ---
 
 
@@ -147,12 +148,10 @@ Depending on **where one starts** on the graph, one could end up **at different 
 
 > The **gradient descent algorithm** is:
 >
-> repeat until convergence: $\{$
+> repeat until convergence: 
 > $$
 > \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)
 > $$
-> $\}$
->
 > where $j=0,1$ represents the feature index number.
 
 At each iteration j, one should **simultaneously update** the parameters $\theta_1, \theta_2,...,\theta_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation. 
@@ -189,36 +188,34 @@ This means that once we hit the local minimal point, the update of the gradient 
 
 Going back to the linear regression model we discussed before, if we are trying to use the gradient descent algorithm on that, we can come up with:
 $$
-\begin{align}
+\begin{aligned}
 \frac{d}{d\theta_j} J(\theta_0, \theta_1) &= \frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) \space\space - \space\space y^{(i)})^2
 \\
 &= 
 \frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(\theta_0 + \theta_1x^{(i)} \space\space - \space\space y^{(i)})^2
-\end{align}
+\end{aligned}
 $$
 Then we need to figure out the **partial derivative** of two $\theta s$. And we get:
 $$
-\begin{align}
+\begin{aligned}
 j = 0, \enspace \frac{d}{d\theta_0} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
 \\
 j = 1, \enspace \frac{d}{d\theta_1} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
-\end{align}
+\end{aligned}
 $$
-Then we can repeat: $\{$
+Then we can repeat: 
 $$
-\begin{align}
+\begin{aligned}
 \theta_0 &:= \space \theta_0 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
 \\
 \theta_1 &:= \space \theta_1 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
-\end{align}
+\end{aligned}
 $$
-$\}$
-
 and we should update $\theta_0$ and $\theta_1$ **simultaneously**.
 
 And we have the bow shaped function:
 
-<img src="../../../public/img/image-20211220175100778.png" alt="image-20211220175100778" style="zoom:50%;" />
+<img src="../../../public/img/image-20211220175100778.png" alt="image-20211220175100778" style="zoom:50%;width: 100%;" />
 
 hence we can always get the global optimum where there is no local optimum in the shape.
 

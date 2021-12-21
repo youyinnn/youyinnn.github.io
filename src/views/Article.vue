@@ -16,7 +16,7 @@
     <div class="serie-box unselectable" v-if="hasSerie">
       <n-divider style="margin-top: 0; margin-bottom: 10px" />
       <n-collapse>
-        <n-collapse-item :title="'Serie: ' + postSerie.se">
+        <n-collapse-item :title="'Serie of ' + postSerie.se">
           <div v-for="item of postSerie.ps" :key="item.abbrlink">
             <n-el
               :class="{
@@ -141,6 +141,23 @@ export default {
         return ' <x style="color:#46bbcd;">2 days ago</x>';
       return Math.ceil(before / 24);
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    const postOrder = JSON.parse(sessionStorage.postOrder);
+    const aId = to.params.articleId;
+    let exist = false;
+    for (let p of postOrder) {
+      let pId = p.split("<=>")[1];
+      if (pId === aId) {
+        exist = true;
+        break;
+      }
+    }
+    if (exist) {
+      next();
+    } else {
+      location.href = "/page-not-found";
+    }
   },
 };
 </script>
