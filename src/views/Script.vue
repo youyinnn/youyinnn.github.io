@@ -108,6 +108,28 @@ export default {
       }, 100);
     },
   },
+  beforeRouteEnter(to, from, next) {
+    const scriptSections = JSON.parse(sessionStorage.scriptsMds);
+    var sId = to.params.scriptId;
+    let exist = false;
+    for (let sc in scriptSections) {
+      let existingSid = scriptSections[sc];
+      if (sId === undefined) {
+        sId = existingSid;
+        exist = true;
+        break;
+      }
+      if (existingSid === sId) {
+        exist = true;
+        break;
+      }
+    }
+    if (exist) {
+      next();
+    } else {
+      location.href = "/page-not-found";
+    }
+  },
 };
 </script>
 

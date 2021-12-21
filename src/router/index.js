@@ -3,6 +3,7 @@ import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Script from "@/views/Script.vue";
 import Article from "@/views/Article.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const routes = [
   {
@@ -33,6 +34,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: About,
   },
+  { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
 ];
 
 const router = createRouter({
