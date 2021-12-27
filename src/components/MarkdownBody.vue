@@ -2,11 +2,22 @@
 import imgRouter from "@/plugins/img-router.js";
 import failedToLoadImg from "/public/img/failed-to-load.png";
 import { h, createApp } from "vue";
-import { NImage, NEl } from "naive-ui";
-
+import { NImage, NEl, NButton, NIcon } from "naive-ui";
+import { CopySharp } from "@vicons/ionicons5";
+import { toBinary, fromBinary } from "@/plugins/binary-base64-encoder.js";
+// eslint-disable-next-line no-undef
+var cbjs = ClipboardJS;
+var clipboard = null;
 var app = null;
 
-export default {
+import { useMessage } from "naive-ui";
+import { defineComponent } from "vue";
+
+// content
+export default defineComponent({
+  setup() {
+    window.$message = useMessage();
+  },
   components: {
     failedToLoadImg,
   },
@@ -84,6 +95,93 @@ export default {
       headEl.appendChild(codeCssEl);
       return codeCssEl;
     },
+    setupCopyElement(node) {
+      const codeBlock = node.getElementsByTagName("code");
+      // console.log(codeBlock);
+      const codeBlockFilter = [];
+      for (let el of codeBlock) {
+        if (el.parentNode.tagName === "PRE") {
+          codeBlockFilter.push(el);
+        }
+      }
+      // console.log(codeBlockFilter);
+      for (let el of codeBlockFilter) {
+        el.parentNode.style = "position: relative";
+        el.parentNode.innerHTML =
+          el.parentNode.innerHTML +
+          `<n-button fromCode class="codeCopyBtn hideCodeCopyBtn" size="tiny" type="info" 
+            data-clipboard-text="${toBinary(el.innerText)}"
+            style="margin: 0.8rem; position: absolute;right: 0;z-index: 5;top: 0;">
+            Copy
+            <template #icon>
+              <n-icon>
+                <copy-sharp />
+              </n-icon>
+            </template>
+          </n-button>`;
+      }
+
+      const katexBlock = node.getElementsByClassName("katexp");
+      for (let el of katexBlock) {
+        // console.log(fromBinary(el.getAttribute("katex-exp")));
+        el.style = "position: relative";
+        el.innerHTML =
+          el.innerHTML +
+          `<n-button class="codeCopyBtn hideCodeCopyBtn" size="tiny" type="info" 
+            data-clipboard-text="${el.getAttribute("katex-exp")}"
+            style="margin: 0.8rem; position: absolute;right: 0;z-index: 5;top: 0;">
+            Copy
+            <template #icon>
+              <n-icon>
+                <copy-sharp />
+              </n-icon>
+            </template>
+          </n-button>`;
+      }
+    },
+    setupCopyEvent() {
+      const renderedCodePreEl = document.getElementsByTagName("pre");
+      for (let el of renderedCodePreEl) {
+        el.addEventListener("mouseover", () => {
+          el.getElementsByClassName("codeCopyBtn")[0].classList.remove(
+            "hideCodeCopyBtn"
+          );
+        });
+        el.addEventListener("mouseout", () => {
+          el.getElementsByClassName("codeCopyBtn")[0].classList.add(
+            "hideCodeCopyBtn"
+          );
+        });
+      }
+
+      const renderedKatexBlockEl = document.getElementsByClassName("katexp");
+      for (let el of renderedKatexBlockEl) {
+        el.addEventListener("mouseover", () => {
+          el.getElementsByClassName("codeCopyBtn")[0].classList.remove(
+            "hideCodeCopyBtn"
+          );
+        });
+        el.addEventListener("mouseout", () => {
+          el.getElementsByClassName("codeCopyBtn")[0].classList.add(
+            "hideCodeCopyBtn"
+          );
+        });
+      }
+
+      if (clipboard !== null) {
+        clipboard.destroy();
+      }
+      clipboard = new cbjs(".codeCopyBtn", {
+        text: function (trigger) {
+          if (trigger.getAttribute("fromCode") === null) {
+            window.$message.success("Katex Expression copied.");
+          } else {
+            window.$message.success("Code copied.");
+          }
+          return fromBinary(trigger.getAttribute("data-clipboard-text")).trim();
+        },
+      });
+    },
     renderMd(c) {
       if (c === null) {
         return;
@@ -103,6 +201,8 @@ export default {
       }
 
       imgRouter.routeElements(node.getElementsByTagName("img"));
+      this.setupCopyElement(node);
+
       var innerHTML = node.children[0].children[1].innerHTML;
 
       // replace img with n-image
@@ -114,8 +214,8 @@ export default {
 
       // add css on code block without language specifying
       innerHTML = innerHTML.replaceAll(
-        "<pre><code>",
-        `<pre><code class="hljs">`
+        `<pre style="position: relative;"><code>`,
+        `<pre style="position: relative;"><code class="hljs">`
       );
 
       // render it
@@ -127,9 +227,14 @@ export default {
         components: {
           NImage,
           codeCssEl,
+          NButton,
+          NIcon,
+          CopySharp,
         },
         data: () => ({}),
+        methods: {},
       };
+
       app = createApp(body);
       app.mount("#md");
 
@@ -139,9 +244,10 @@ export default {
           el.style.width = "100%";
         }
       }
+      this.setupCopyEvent();
     },
   },
-};
+});
 </script>
 
 <style>
@@ -153,5 +259,10 @@ export default {
 }
 img[data-error="true"] {
   width: 180px;
+}
+
+.hideCodeCopyBtn {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
 }
 </style>

@@ -1,15 +1,22 @@
 <template>
   <n-config-provider :theme="theme" v-cloak>
-    <TopBar />
-    <n-card class="main" :bordered="false" content-style="padding: 0;" v-cloak>
-      <router-view v-slot="{ Component }" v-cloak>
-        <n-back-top :listen-to="body" />
-        <transition :name="transitionName" mode="out-in" v-cloak>
-          <component class="page" :is="Component" v-cloak />
-        </transition>
-      </router-view>
-    </n-card>
-    <n-global-style />
+    <n-message-provider placement="bottom-left">
+      <TopBar />
+      <n-card
+        class="main"
+        :bordered="false"
+        content-style="padding: 0;"
+        v-cloak
+      >
+        <router-view v-slot="{ Component }" v-cloak>
+          <n-back-top :listen-to="body" />
+          <transition :name="transitionName" mode="out-in" v-cloak>
+            <component class="page" :is="Component" v-cloak />
+          </transition>
+        </router-view>
+      </n-card>
+      <n-global-style />
+    </n-message-provider>
   </n-config-provider>
 </template>
 
@@ -21,9 +28,13 @@ import {
   NGlobalStyle,
   darkTheme,
   NBackTop,
+  NMessageProvider,
 } from "naive-ui";
 
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  setup() {},
   name: "App",
   data: () => ({
     body: document,
@@ -40,6 +51,7 @@ export default {
     NConfigProvider,
     NGlobalStyle,
     NBackTop,
+    NMessageProvider,
   },
   mounted() {
     // setTimeout(() => {
@@ -50,7 +62,7 @@ export default {
       this.transitionName = "fade1";
     }, 300);
   },
-};
+});
 </script>
 
 <style>
