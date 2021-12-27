@@ -12,4 +12,6 @@ for (let rs of resourceList) {
   require(`@/assets/resources/${rs}`);
 }
 
-createApp(App).use(router).use(store).mount("#app");
+const vue = createApp(App);
+console.log("Vue on: " + vue.version);
+vue.use(router).use(store).mount("#app");
