@@ -1,1 +1,1 @@
-[{"id":"准备工作","content":"准备工作"},{"id":"maven依赖","content":"Maven依赖"},{"id":"默认配置文件如果配置文件缺省的情况下，也会是这样的配置","content":"默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)"},{"id":"helloword","content":"HelloWord"},{"id":"运行helloworld","content":"运行HelloWorld"}]
+[{"id":"准备工作","level":3,"content":"准备工作","child":[{"id":"maven依赖","level":4,"content":"Maven依赖","child":[]},{"id":"默认配置文件如果配置文件缺省的情况下，也会是这样的配置","level":4,"content":"默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)","child":[]},{"id":"helloword","level":4,"content":"HelloWord","child":[]}]},{"id":"运行helloworld","level":3,"content":"运行HelloWorld","child":[]}]

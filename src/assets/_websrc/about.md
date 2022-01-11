@@ -3,11 +3,11 @@ Hi there, this will help you know a little bit about me
 #### Infomation
 
 ```java
-Chinese
+Chinese.
 Born in 1996.
-Know how to play Bass Guitar.
-Know how to code with Java.
-The worst Front-end developer in the universe.
+Play Bass Guitar.
+Code with Java mainly.
+Amateur Front-end developer.
 ```
 
 #### Working Experience

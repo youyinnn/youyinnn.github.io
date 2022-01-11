@@ -104,7 +104,8 @@ td.hljs-ln-code {
 
 .markdown-body h1,
 .markdown-body h2 {
-  /* padding-bottom: 0.3em; */
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
   border-bottom: 1px solid var(--border-color);
 }
 

@@ -4640,11 +4640,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.npmmirror.com/graceful-fs/download/graceful-fs-4.2.8.tgz"
   integrity sha1-5BK40z9eAGWTy9PO5t+fLOu+gCo=
 
-gsap@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.npmmirror.com/gsap/download/gsap-3.8.0.tgz#a404dd6ebbaabc92605539aea9d98e3098688064"
-  integrity sha1-pATdbruqvJJgVTmuqdmOMJhogGQ=
-
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npmmirror.com/gzip-size/download/gzip-size-6.0.0.tgz"

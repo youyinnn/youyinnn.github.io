@@ -12,13 +12,13 @@ const routes = [
     component: Home,
   },
   {
-    path: "/script",
+    path: "/scripts",
     name: "ScriptInitial",
     component: Script,
   },
   {
-    path: "/script/:scriptId",
-    name: "Script",
+    path: "/scripts/:scriptId",
+    name: "Scripts",
     component: Script,
   },
   {

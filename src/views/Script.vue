@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     routeTo: function (key) {
-      this.$router.push(`/script/${key}`).catch(() => {});
+      this.$router.push(`/scripts/${key}`).catch(() => {});
       const toTop = document.getElementsByClassName("n-back-top");
       if (toTop.length > 0) {
         toTop[0].click();
@@ -98,7 +98,7 @@ export default {
 
       try {
         const tocSrc = require(`@/../public/assets/scripts/${key}.htm.toc.json`);
-        this.toc = tocSrc;
+        this.toc = tocSrc[0].child;
       } catch (error) {
         console.log("No toc for this article.");
       }

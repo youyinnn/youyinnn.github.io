@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 const htmlparser2 = require("htmlparser2");
 
@@ -9,7 +10,11 @@ function read(sourceFilePath, htm) {
   if (found !== null) {
     // const hMap = {};
     const toc = [];
+
+    var firstLevel = 999;
     for (let f of found) {
+      var level = Number(f.charAt(2));
+      if (firstLevel === 999) firstLevel = level;
       const id = f
         .match(/id=".*"/gm)[0]
         .split('id="')[1]
@@ -26,10 +31,32 @@ function read(sourceFilePath, htm) {
       // );
       toc.push({
         id,
+        level,
         content: htmlparser2.DomUtils.textContent(htmlparser2.parseDocument(f)),
+        child: [],
       });
     }
-    return toc;
+    const nonFlattenToc = [];
+    for (let i = 0; i < toc.length; i++) {
+      let t = toc[i];
+      if (nonFlattenToc.length === 0) {
+        nonFlattenToc.push(t);
+      } else {
+        // find current parent
+        if (t.level === firstLevel) {
+          nonFlattenToc.push(t);
+        } else {
+          for (let j = i - 1; j >= 0; j--) {
+            let preT = toc[j];
+            if (preT.level < t.level) {
+              preT.child.push(t);
+              break;
+            }
+          }
+        }
+      }
+    }
+    return nonFlattenToc;
   }
   return null;
 }

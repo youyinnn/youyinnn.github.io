@@ -1,1 +1,1 @@
-[{"id":"python","content":"Python"},{"id":"pyenv","content":"Pyenv"},{"id":"install-and-config","content":"Install and config"}]
+[{"id":"python","level":2,"content":"Python","child":[{"id":"pyenv","level":3,"content":"Pyenv","child":[{"id":"install-and-config","level":4,"content":"Install and config","child":[]}]}]}]

@@ -1,22 +1,63 @@
 <template>
   <transition v-show="tocShow" name="fade5" mode="out-in">
     <div id="toc-box" class="toc-box">
-      <n-anchor :show-background="true" ignore-gap :bound="winHeight / 2">
-        <transition-group
+      <n-anchor :show-background="true" ignore-gap>
+        <!-- <transition-group
           name="staggered-fade"
           :css="false"
           @before-enter="beforeEnter"
           @enter="enter"
           @leave="leave"
+        > -->
+        <n-anchor-link
+          v-for="(toc, index) in tocList"
+          :key="toc.id"
+          :data-index="index"
+          :title="toc.content"
+          :href="'#' + toc.id"
         >
           <n-anchor-link
-            v-for="(toc, index) in tocList"
-            :key="toc.id"
-            :data-index="index"
-            :title="toc.content"
-            :href="'#' + toc.id"
-          />
-        </transition-group>
+            v-for="(toc2, index2) in toc.child"
+            :key="toc2.id"
+            :data-index="index2"
+            :title="toc2.content"
+            :href="'#' + toc2.id"
+          >
+            <n-anchor-link
+              v-for="(toc3, index3) in toc2.child"
+              :key="toc3.id"
+              :data-index="index3"
+              :title="toc3.content"
+              :href="'#' + toc3.id"
+            >
+              <n-anchor-link
+                v-for="(toc4, index4) in toc3.child"
+                :key="toc4.id"
+                :data-index="index4"
+                :title="toc4.content"
+                :href="'#' + toc4.id"
+              >
+                <n-anchor-link
+                  v-for="(toc5, index5) in toc4.child"
+                  :key="toc5.id"
+                  :data-index="index5"
+                  :title="toc5.content"
+                  :href="'#' + toc5.id"
+                >
+                  <n-anchor-link
+                    v-for="(toc6, index6) in toc5.child"
+                    :key="toc6.id"
+                    :data-index="index6"
+                    :title="toc6.content"
+                    :href="'#' + toc6.id"
+                  >
+                  </n-anchor-link>
+                </n-anchor-link>
+              </n-anchor-link>
+            </n-anchor-link>
+          </n-anchor-link>
+        </n-anchor-link>
+        <!-- </transition-group> -->
       </n-anchor>
     </div>
   </transition>
@@ -24,7 +65,7 @@
 
 <script>
 import { NAnchor, NAnchorLink } from "naive-ui";
-import gsap from "gsap";
+// import gsap from "gsap";
 
 export default {
   props: ["toc"],
@@ -82,28 +123,28 @@ export default {
     },
   },
   methods: {
-    beforeEnter(el) {
-      el.style.opacity = 0;
-      el.style.height = 0;
-    },
-    // eslint-disable-next-line no-unused-vars
-    enter(el, done) {
-      gsap.to(el, {
-        opacity: 1,
-        height: "1em",
-        delay: el.dataset.index * 0.03,
-        onComplete: done,
-      });
-    },
-    // eslint-disable-next-line no-unused-vars
-    leave(el) {
-      gsap.to(el, {
-        opacity: 0,
-        height: 0,
-        delay: el.dataset.index * 0.01,
-        // onComplete: done,
-      });
-    },
+    // beforeEnter(el) {
+    //   el.style.opacity = 0;
+    //   el.style.height = 0;
+    // },
+    // // eslint-disable-next-line no-unused-vars
+    // enter(el, done) {
+    //   gsap.to(el, {
+    //     opacity: 1,
+    //     height: "1em",
+    //     delay: el.dataset.index * 0.03,
+    //     onComplete: done,
+    //   });
+    // },
+    // // eslint-disable-next-line no-unused-vars
+    // leave(el) {
+    //   gsap.to(el, {
+    //     opacity: 0,
+    //     height: 0,
+    //     delay: el.dataset.index * 0.01,
+    //     // onComplete: done,
+    //   });
+    // },
     adjustTocRight: function () {
       const el = document.getElementById("toc-box");
       if (el !== null) {

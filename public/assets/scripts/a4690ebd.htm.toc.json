@@ -1,1 +1,1 @@
-[{"id":"html","content":"HTML"},{"id":"textarea的字数限制","content":"textarea的字数限制"},{"id":"input只允许输入数字","content":"input只允许输入数字"},{"id":"图片禁止拖拽","content":"图片禁止拖拽"}]
+[{"id":"html","level":2,"content":"HTML","child":[{"id":"textarea的字数限制","level":3,"content":"textarea的字数限制","child":[]},{"id":"input只允许输入数字","level":3,"content":"input只允许输入数字","child":[]},{"id":"图片禁止拖拽","level":3,"content":"图片禁止拖拽","child":[]}]}]
