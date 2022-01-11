@@ -97,7 +97,6 @@ export default defineComponent({
     },
     setupCopyElement(node) {
       const codeBlock = node.getElementsByTagName("code");
-      // console.log(codeBlock);
       const codeBlockFilter = [];
       for (let el of codeBlock) {
         if (el.parentNode.tagName === "PRE") {
@@ -110,8 +109,7 @@ export default defineComponent({
         el.parentNode.innerHTML =
           el.parentNode.innerHTML +
           `<n-button fromCode class="codeCopyBtn hideCodeCopyBtn" size="tiny" type="info" 
-            data-clipboard-text="${toBinary(el.innerText)}"
-            style="margin: 0.8rem; position: absolute;right: 0;z-index: 5;top: 0;">
+            data-clipboard-text="${toBinary(el.innerText)}">
             Copy
             <template #icon>
               <n-icon>
@@ -128,8 +126,7 @@ export default defineComponent({
         el.innerHTML =
           el.innerHTML +
           `<n-button class="codeCopyBtn hideCodeCopyBtn" size="tiny" type="info" 
-            data-clipboard-text="${el.getAttribute("katex-exp")}"
-            style="margin: 0.8rem; position: absolute;right: 0;z-index: 5;top: 0;">
+            data-clipboard-text="${el.getAttribute("katex-exp")}">
             Copy
             <template #icon>
               <n-icon>
@@ -264,5 +261,13 @@ img[data-error="true"] {
 .hideCodeCopyBtn {
   opacity: 0;
   transition: opacity 0.6s ease-in-out;
+}
+
+.codeCopyBtn {
+  margin: 0.4rem;
+  position: absolute;
+  right: 0;
+  z-index: 5;
+  top: 0;
 }
 </style>

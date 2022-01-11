@@ -123,9 +123,9 @@ export default {
         route: "/articles",
       },
       {
-        name: "script",
-        text: "Script",
-        route: "/script",
+        name: "scripts",
+        text: "Scripts",
+        route: "/scripts",
       },
     ],
     adjustTimer: 0,

@@ -1,1 +1,1 @@
-[{"id":"什么是ci","content":"什么是CI"},{"id":"小层次","content":"小层次"},{"id":"大层次","content":"大层次"},{"id":"ci的目的","content":"CI的目的"}]
+[{"id":"什么是ci","level":3,"content":"什么是CI","child":[{"id":"小层次","level":4,"content":"小层次","child":[]},{"id":"大层次","level":4,"content":"大层次","child":[]}]},{"id":"ci的目的","level":3,"content":"CI的目的","child":[]}]

@@ -78,7 +78,8 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
     console.log("Katex parse error on: " + sourceFilePath);
   }
 
-  const hMap = tocExtractor.read(sourceFilePath, htmlStr);
+  var hMap;
+  hMap = tocExtractor.read(sourceFilePath, htmlStr);
   if (hMap !== null) {
     fs.writeFileSync(outputFilePath + ".toc.json", JSON.stringify(hMap), {
       encoding: "utf-8",
