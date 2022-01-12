@@ -8,7 +8,7 @@
             Posted at: {{ dayjs(postMetadata.date).format("MM/DD/YYYY") }}
           </span>
           <span style="color: #46bbcd">
-            {{ daybefore(dayjs(postMetadata.date)) }} days ago
+            {{ daybefore(dayjs(postMetadata.date)) }}
           </span>
         </p>
       </div>
@@ -132,14 +132,13 @@ export default {
       before /= 3600000;
       if (before < 24) {
         if (before > now.hour()) {
-          return ' <x style="color:#46bbcd;">Yesterday</x>';
+          return "Yesterday";
         } else {
-          return ' <x style="color:#46bbcd;">Today</x>';
+          return "Today";
         }
       }
-      if (before > 24 && before < 48)
-        return ' <x style="color:#46bbcd;">2 days ago</x>';
-      return Math.ceil(before / 24);
+      if (before > 24 && before < 48) return "2 days ago";
+      return Math.ceil(before / 24) + " days ago";
     },
   },
   beforeRouteEnter(to, from, next) {
