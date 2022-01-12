@@ -21,3 +21,20 @@ $$
 #### Mean
 
 Mean is same as the average number.
+
+#### Prime
+
+A notation where there is a ' at the top right of the target:
+$$
+X^\prime
+$$
+It represent the transpose of a matrix($X^T$) in octave.
+
+#### Chart
+
+##### Histogram
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Histogram_of_arrivals_per_minute.svg/1920px-Histogram_of_arrivals_per_minute.svg.png" style="zoom:33%;width:100%" />
+
+
+
