@@ -8,8 +8,6 @@ date: 2021-12-16 14:14:00 -4
 series: Machine Learning From Andrew Ng
 ---
 
-
-
 ## Introduction
 
 ### Definition of Machine Learning
@@ -34,11 +32,11 @@ From Tom Mitchell
 
 **"You tell the program what is what and it will find the pattern by your guiding."**
 
-> Supervised learning problems are **categorized into** "regression" and "classification" problems. 
+> Supervised learning problems are **categorized into** "regression" and "classification" problems.
 >
-> In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. 
+> In a regression problem, we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function.
 >
-> In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. 
+> In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories.
 
 ![img](../../../public/img/2d99281dfc992452c9d32e022ce71161.png)
 
@@ -60,7 +58,7 @@ The picture shown above is a **classification problem** to be solved.
 
 > **Discrete** valued output(there might be more than 2 values).
 
-*More attributes can be used in the problem.
+\*More attributes can be used in the problem.
 
 ![img](../../../public/img/c34fa10153f223aa955d6717663a9f91.png)
 
@@ -96,19 +94,19 @@ To establish notation for future use, we’ll use
 
 - $x^{(i)}$ to denote the “**input**” variables (living area in this example), also called input features.
 
-- $ y^{(i)}$ to denote the “**output**” or target variable that we are trying to predict (price). 
+- $ y^{(i)}$ to denote the “**output**” or target variable that we are trying to predict (price).
 
-- a pair $(x^{(i)} , y^{(i)} )$ is called a training example, and the dataset that we’ll be using to learn—a list of m training examples $(x^{(i)} , y^{(i)}); i = 1, . . . , m$—is called a training set. 
+- a pair $(x^{(i)} , y^{(i)} )$ is called a training example, and the dataset that we’ll be using to learn—a list of m training examples $(x^{(i)} , y^{(i)}); i = 1, . . . , m$—is called a training set.
 
 We will also use $X$ to denote the space of **input values**, and $Y$ to denote the space of **output values**.
 
-To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function $h : X → Y $ so that $h(x)$ is a “good” predictor for the corresponding value of $y$. 
+To describe the supervised learning problem slightly more formally, our goal is, given a training set, to learn a function $h : X → Y $ so that $h(x)$ is a “good” predictor for the corresponding value of $y$.
 
 For historical reasons, this function h is called a **hypothesis**.
 
 ![img](../../../public/img/hypothesis-sl.png)
 
-When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a **regression problem**. 
+When the target variable that we’re trying to predict is continuous, such as in our housing example, we call the learning problem a **regression problem**.
 
 When $y$ can take on only a small number of discrete values (such as if, given the living area, we wanted to predict if a dwelling is a house or an apartment, say), we call it a **classification problem**.
 
@@ -151,11 +149,13 @@ The **mean(平均数) is halved($\frac{1}{2}$)** as a convenience for the comput
 #### Cost Function Intuition I
 
 Say we have a hypothesis of $h_\theta(x)$ where $\theta$ contains only $\theta_1$, and $m = 3$, then we have:
+
 $$
 h_\theta(x) = \theta_1x
 \newline
 J(\theta_1) = {1 \over 2m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) \space\space - \space\space y^{(i)})^2
 $$
+
 then when:
 
 - $\theta_1 = 0$, $J(\theta_1) = \frac{1}{2m}(1^2 + 2 ^ 2 + 3^2) = \frac{1}{6} \cdot14$
@@ -166,8 +166,6 @@ then when:
 
 we can plot $J(\theta_1)$ as the second picture shows, the minimize result will be 0 when $\theta_1 = 1$.
 
-
-
 ### Gradient Decent
 
 **"This algorithm is for minimizing the cost function. And it will be used in all over the machine learning, not just in linear regression."**
@@ -176,43 +174,45 @@ Say:
 
 <img src="../../../public/img/image-20220110163640292.png" alt="image-20220110163640292" style="zoom: 33%;width: 100%" />
 
-Imagine that we graph our **hypothesis function** based on its fields $\theta_0$ and $\theta_1$ (actually we are graphing the cost function as a function of the parameter estimates). 
+Imagine that we graph our **hypothesis function** based on its fields $\theta_0$ and $\theta_1$ (actually we are graphing the cost function as a function of the parameter estimates).
 
-We are not graphing ***x*** and ***y*** itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.
+We are not graphing **_x_** and **_y_** itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.
 
-We put $\theta_0$ on the ***x axis*** and  $\theta_1$on the ***y axis***, with the **cost function** on the vertical **z axis**. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.
+We put $\theta_0$ on the **_x axis_** and $\theta_1$on the **_y axis_**, with the **cost function** on the vertical **z axis**. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.
 
 ![img](../../../public/img/No43vxpjKZqj8Sl8AdZwffsWj59Sq5u_iEDyMRKSv18.png)
 
 > The **gradient descent algorithm** is:
 >
-> repeat until convergence: 
+> repeat until convergence:
+>
 > $$
 > \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)
 > $$
+>
 > where $j=0,1$ represents the feature index number.
 >
-> Some details: 
+> Some details:
 >
 > - the $:=$ means assignment;
 > - $\alpha$ is the learning rate;
 > - $\partial$ means derivative or $d$;
 
-We will know that we have succeeded when our cost function is **at the very bottom of the pits** in our graph, i.e. when its value is the minimum.  
+We will know that we have succeeded when our cost function is **at the very bottom of the pits** in our graph, i.e. when its value is the minimum.
 
 The red arrows show the minimum points in the graph.
 
-The way we do this is by taking the **derivative（导数）** (the **tangential line（正切线）** to a function) of our cost function. The **slope of the tangent（切面的坡度）** is the **derivative** at that point and it will give us a direction to move towards. 
+The way we do this is by taking the **derivative（导数）** (the **tangential line（正切线）** to a function) of our cost function. The **slope of the tangent（切面的坡度）** is the **derivative** at that point and it will give us a direction to move towards.
 
-We make steps down the cost function in the direction with the steepest descent. The **size** of each step is determined by the parameter $\alpha$, which is called the **learning rate**. 
+We make steps down the cost function in the direction with the steepest descent. The **size** of each step is determined by the parameter $\alpha$, which is called the **learning rate**.
 
-For example, the distance between each 'star' in the graph above represents a step determined by our parameter $\alpha$. A **smaller** $\alpha$ would result in a **smaller step** and a **larger** $\alpha$ results in a **larger step**. 
+For example, the distance between each 'star' in the graph above represents a step determined by our parameter $\alpha$. A **smaller** $\alpha$ would result in a **smaller step** and a **larger** $\alpha$ results in a **larger step**.
 
-The direction in which the step is taken is determined by the **partial derivative** of $J(\theta_0,\theta_1)$. 
+The direction in which the step is taken is determined by the **partial derivative** of $J(\theta_0,\theta_1)$.
 
-Depending on **where one starts** on the graph, one could end up **at different points**. The image above shows us two different starting points that end up in two different places. 
+Depending on **where one starts** on the graph, one could end up **at different points**. The image above shows us two different starting points that end up in two different places.
 
-At each iteration j, one should **simultaneously update** the parameters $\theta_1, \theta_2,...,\theta_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation. 
+At each iteration j, one should **simultaneously update** the parameters $\theta_1, \theta_2,...,\theta_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.
 
 > $\textcolor{#228B22}{temp0} \enspace := \enspace \theta_0 - \alpha \frac{\partial}{\partial \theta_0} J(\theta_0, \theta_1)$
 >
@@ -225,10 +225,12 @@ At each iteration j, one should **simultaneously update** the parameters $\theta
 #### Gradient Descent Intuition
 
 What we presented before of the descent algorithm, there is a derivative term which use $\partial$ symbol, but in mathematic area, it should use $d$ to represent. Hence we can also have:
+
 $$
 \theta_j := \theta_j - \alpha \frac{d}{d \theta_j} J(\theta_0, \theta_1)
 $$
-**Regardless** of the slope's sign for $\frac{d}{d\theta_1} J(\theta_1)$,  $\theta_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of  $\theta_1$ increases and when it is positive, the value of $\theta_1$ decreases.
+
+**Regardless** of the slope's sign for $\frac{d}{d\theta_1} J(\theta_1)$, $\theta_1$ eventually converges to its minimum value. The following graph shows that when the slope is negative, the value of $\theta_1$ increases and when it is positive, the value of $\theta_1$ decreases.
 
 ![img](../../../public/img/SMSIxKGUEeav5QpTGIv-Pg_ad3404010579ac16068105cfdc8e950a_Screenshot-2016-11-03-00.05.06.png)
 
@@ -238,30 +240,33 @@ On a side note, **we should adjust** our parameter $\alpha$ to ensure that the g
 
 #### How does gradient descent converge with a fixed step size $\alpha$?
 
-The intuition behind the convergence is that $\frac{d}{d\theta_1} J(\theta_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get: 
+The intuition behind the convergence is that $\frac{d}{d\theta_1} J(\theta_1)$ approaches 0 as we approach the bottom of our convex function. At the minimum, the derivative will always be 0 and thus we get:
+
 $$
 \theta_1:=\theta_1-\alpha * 0
 $$
+
 ![img](../../../public/img/4668349e04cf0c4489865e133d112e98.png)
 
-This means that once we hit the local minimal point, the update of the gradient descent will **remain unchanged**.
-
-
+This means that once we hit the local minimal point, the update of the gradient descent will **remain unchanged** cause the derivative term will always be zero.
 
 #### Gradient Descent for Linear Regression
 
 ![image-20220110202058883](../../../public/img/image-20220110202058883.png)
 
 Going back to the linear regression model we discussed before, if we are trying to use the gradient descent algorithm on that, we can come up with:
+
 $$
 \begin{aligned}
 \frac{d}{d\theta_j} J(\theta_0, \theta_1) &= \frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) \space\space - \space\space y^{(i)})^2
 \\
-&= 
+&=
 \frac{d}{d\theta_j} \cdot {1 \over 2m}\cdot  \stackrel{m}{\sum_{i=1}}(\theta_0 + \theta_1x^{(i)} \space\space - \space\space y^{(i)})^2
 \end{aligned}
 $$
+
 Then we need to figure out the **partial derivative** of two $\theta s$. And we get:
+
 $$
 \begin{aligned}
 j = 0, \enspace \frac{d}{d\theta_0} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
@@ -269,7 +274,9 @@ j = 0, \enspace \frac{d}{d\theta_0} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel
 j = 1, \enspace \frac{d}{d\theta_1} J(\theta_0, \theta_1) &=\frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
 \end{aligned}
 $$
-Then we can repeat: 
+
+Then we can repeat:
+
 $$
 \begin{aligned}
 \theta_0 &:= \space \theta_0 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}(h_\theta(x^{(i)}) - y^{(i)})
@@ -277,6 +284,7 @@ $$
 \theta_1 &:= \space \theta_1 - \alpha \frac{1}{m}\stackrel{m}{\sum_{i=1}}((h_\theta(x^{(i)}) - y^{(i)}) \space \cdot \space x^{(i)})
 \end{aligned}
 $$
+
 and we should update $\theta_0$ and $\theta_1$ **simultaneously**.
 
 And we have this bowl shaped function or convex function:
@@ -286,8 +294,3 @@ And we have this bowl shaped function or convex function:
 hence we can always get the global optimum where there is no local optimum in the shape.
 
 So, this is simply gradient descent on the original cost function J. This method looks at every example in the entire training set on every step, and is called **batch gradient descent**.
-
-
-
-
-

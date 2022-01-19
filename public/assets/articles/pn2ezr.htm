@@ -154,7 +154,7 @@ Output: 7 -&gt; 0 -&gt; 8
 Explanation: 342 + 465 = 807.
 </code></pre>
 <p><img src="https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg" alt=""></p>
-<p>这题没什么tricky的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的solution：</p>
+<p>这题没什么 tricky 的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的 solution：</p>
 <pre><code class="hljs language-java"><span class="hljs-comment">// 由第三条新的链和它的计算指针完成</span>
 <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummyHead</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
@@ -176,7 +176,7 @@ Explanation: 342 + 465 = 807.
     <span class="hljs-keyword">return</span> dummyHead.next;
 }
 </code></pre>
-<p>下面是我参照这种思路，针对空间优化的代码，所有计算在1链上进行，并处理了两条链长短不一样的情况，如果1链长，那么就继续计算carry；如果二链长，那么把二链剩余需要计算的链接到1链上，在1链上继续计算carry：</p>
+<p>下面是我参照这种思路，针对空间优化的代码，所有计算在 1 链上进行，并处理了两条链长短不一样的情况，如果 1 链长，那么就继续计算 carry；如果二链长，那么把二链剩余需要计算的链接到 1 链上，在 1 链上继续计算 carry：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
     <span class="hljs-type">boolean</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">ap</span> <span class="hljs-operator">=</span> l1, bp = l2;
@@ -225,8 +225,8 @@ Explanation: 342 + 465 = 807.
 <p>Given a string, find the length of the <strong>longest substring</strong> without repeating characters.</p>
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: &quot;abcabcbb&quot;
-Output: 3 
-Explanation: The answer is &quot;abc&quot;, with the length of 3. 
+Output: 3
+Explanation: The answer is &quot;abc&quot;, with the length of 3.
 </code></pre>
 <p><strong>Example 2:</strong></p>
 <pre><code>Input: &quot;bbbbb&quot;
@@ -236,12 +236,12 @@ Explanation: The answer is &quot;b&quot;, with the length of 1.
 <p><strong>Example 3:</strong></p>
 <pre><code>Input: &quot;pwwkew&quot;
 Output: 3
-Explanation: The answer is &quot;wke&quot;, with the length of 3. 
+Explanation: The answer is &quot;wke&quot;, with the length of 3.
              Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.
 </code></pre>
 <h4 id="ascii-mapping">ascii mapping</h4>
-<p>官方给出的解法，官方还给出了用HashMap和HashSet去解的</p>
-<p><strong>ascii mapping</strong>这样的解法虽然知道<strong>第一目的</strong>是用ascii映射数组去记录上一次重复出现char的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的i、j已经完全没有灵魂了，难以理解</p>
+<p>官方给出的解法，官方还给出了用 HashMap 和 HashSet 去解的</p>
+<p><strong>ascii mapping</strong>这样的解法虽然知道<strong>第一目的</strong>是用 ascii 映射数组去记录上一次重复出现 char 的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的 i、j 已经完全没有灵魂了，难以理解</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> {
         <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length(), ans = <span class="hljs-number">0</span>;
@@ -257,12 +257,12 @@ Explanation: The answer is &quot;wke&quot;, with the length of 3.
 </code></pre>
 <p>还是解一下逻辑：</p>
 <ol>
-<li><p>既然有下标，可以考虑用<strong>下标差</strong>去计算长度，而不是count出来</p>
+<li><p>既然有下标，可以考虑用<strong>下标差</strong>去计算长度，而不是 count 出来</p>
 </li>
-<li><p>假设要表达的字符序列只在<strong>ascii-128</strong>中出现，于是我们可以用<strong>hash</strong>的方式，给出一个128位的数组<code>index</code>，数组用来记录<strong>上一次重复出现该ascii码字符的index的下一位（<code>index[s.charAt(j)] = j + 1</code>）</strong>，为什么是下一位？因为既然已经重复了，就从下一位开始计算所求序列</p>
-<p> 比如说<strong>“a”</strong>这个序列，<strong>a</strong>的<strong>ascii</strong>是97，所以在<code>index</code>的97号上找index，这时候是0</p>
+<li><p>假设要表达的字符序列只在<strong>ascii-128</strong>中出现，于是我们可以用<strong>hash</strong>的方式，给出一个 128 位的数组<code>index</code>，数组用来记录<strong>上一次重复出现该 ascii 码字符的 index 的下一位（<code>index[s.charAt(j)] = j + 1</code>）</strong>，为什么是下一位？因为既然已经重复了，就从下一位开始计算所求序列</p>
+<p>比如说<strong>“a”</strong>这个序列，<strong>a</strong>的<strong>ascii</strong>是 97，所以在<code>index</code>的 97 号上找 index，这时候是 0</p>
 </li>
-<li><p><strong>i</strong>的作用：获取最靠近<code>j</code>的<strong>有过重复的字符index的下一位</strong>，比如序列<strong>“abca”</strong>，当J循环到最后一个a的时候，i的值是上一个有过重复的a的index的下一位</p>
+<li><p><strong>i</strong>的作用：获取最靠近<code>j</code>的<strong>有过重复的字符 index 的下一位</strong>，比如序列<strong>“abca”</strong>，当 J 循环到最后一个 a 的时候，i 的值是上一个有过重复的 a 的 index 的下一位</p>
 </li>
 </ol>
 <h3 id="4-median-of-two-sorted-arrayshard">4. Median of Two Sorted Arrays(Hard)</h3>
@@ -281,7 +281,7 @@ nums2 = [3, 4]
 
 The median is (2 + 3)/2 = 2.5
 </code></pre>
-<p>这道题难就难在要找到**O(log (m+n))**的解，说到已排好序、log级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数</p>
+<p>这道题难就难在要找到**O(log (m+n))**的解，说到已排好序、log 级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数</p>
 <p>在此先给出容易想到但是不符合题意的解**(n+m)/2**解</p>
 <h4 id="ⅰa-nm2-solution">Ⅰ.a (n+m)/2 solution</h4>
 <p>分别从两个数组中取最小的数，然后取到两数组长度中位之后，自然就找到中位数了</p>
@@ -329,7 +329,7 @@ The median is (2 + 3)/2 = 2.5
 </code></pre>
 <h4 id="ⅱ-logmn-solution">Ⅱ. log(m+n) solution</h4>
 <p>对数级解非常不容易找出来，我觉得能解出来的都是数学家- -</p>
-<p>对数级解决方案有2种，一种是<strong>泛化为“findKth”问题</strong>，另一种是<strong>“分治法寻找perfect I”</strong></p>
+<p>对数级解决方案有 2 种，一种是<strong>泛化为“findKth”问题</strong>，另一种是<strong>“分治法寻找 perfect I”</strong></p>
 <h5 id="perfect-i">Perfect I</h5>
 <p>官方给出的<a href="https://leetcode.com/problems/median-of-two-sorted-arrays/solution/">solution</a>就是它，为了解这个问题，首先我们从统计学上去了解一下什么是<strong>Medium</strong></p>
 <blockquote>
@@ -337,7 +337,7 @@ The median is (2 + 3)/2 = 2.5
 <p>它将原集合分成等长的两个子集，其中一个子集中的任意元素总是大于另一个子集中的任意元素</p>
 </blockquote>
 <p>然后我们再了解一个<strong>切（Cut）</strong>的概念：</p>
-<p>假设长度为m的A集合有随机一个<strong>cut</strong>出现在下标i的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
+<p>假设长度为 m 的 A 集合有随机一个<strong>cut</strong>出现在下标 i 的位置，那么有<strong>m + 1</strong>种可能的<strong>cut（0 ~ m）</strong></p>
 <pre><code class="hljs language-nhi">left_A                   |  right_A
 A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 </code></pre>
@@ -348,77 +348,67 @@ A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 <li><p>when i = 0, <strong>left_A</strong> is empty, and when i = m, <strong>right_A</strong> is empty</p>
 </li>
 </ul>
-<p>类似地，对B我们可以：</p>
+<p>类似地，对 B 我们可以：</p>
 <pre><code class="hljs language-nhi">left_B                   |  right_B
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 </code></pre>
-<p>A、B连在一起看，我们得出：</p>
+<p>A、B 连在一起看，我们得出：</p>
 <pre><code class="hljs language-nhi">left_part                |  right_part
 A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 </code></pre>
 <p>对于总集长度为偶数时，如果我们可以找到如下<strong>两个条件</strong>：</p>
 <div class="katex-display katexp" katex-exp="CgBcAGIAZQBnAGkAbgB7AGEAbABpAGcAbgBlAGQAfQAKADEALgBcAHEAdQBhAGQAIAAmAGwAZQBuACgAbABlAGYAdABcAFwAXwBwAGEAcgB0ACkAIAA9ACAAbABlAG4AKAByAGkAZwBoAHQAXABcAF8AcABhAHIAdAApACAAXABcAFwAXAAKADIALgBcAHEAdQBhAGQAIAAmAG0AYQB4ACgAbABlAGYAdABcAFwAXwBwAGEAcgB0ACkAIABkIiAAbQBpAG4AKAByAGkAZwBoAHQAXABcAF8AcABhAHIAdAApAAoAXABlAG4AZAB7AGEAbABpAGcAbgBlAGQAfQAKAA=="><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:10.5em;vertical-align:-5em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.5em;"><span style="top:-7.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-6.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span></span></span><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-0.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span></span></span><span style="top:1.34em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.5em;"><span style="top:-7.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
-那么我们就等于将全集**{A, B}**分为**等长**的2部分，且左半部分中的元素总是比右半部分中的元素要小
 
+<p>那么我们就等于将全集**{A, B}<strong>分为</strong>等长**的 2 部分，且左半部分中的元素总是比右半部分中的元素要小</p>
 <p>此时集合的中位数为：</p>
 <div class="katex-display katexp" katex-exp="CgBNAGUAZABpAGEAbgAgAD0AIABcAGYAcgBhAGMAIAB7AG0AYQB4ACgAbABlAGYAdABcAFwAXwBwAGEAcgB0ACkAIAArACAAbQBpAG4AKAByAGkAZwBoAHQAXABcAF8AcABhAHIAdAApAH0AIAB7ADIAfQAKAA=="><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ian</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord"><span class="mspace newline"></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord"><span class="mspace newline"></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div>
-对于总集长度为奇数时：
-<div class="katex-display katexp" katex-exp="CgBcAGIAZQBnAGkAbgB7AGEAbABpAGcAbgBlAGQAfQAKADEALgBcAHEAdQBhAGQAIAAmAGwAZQBuACgAbABlAGYAdABcAF8AcABhAHIAdAApACAAPQAgAGwAZQBuACgAcgBpAGcAaAB0AFwAXwBwAGEAcgB0ACkAIAArACAAMQAgAFwAXABcAFwACgAyAC4AXABxAHUAYQBkACAAJgBtAGEAeAAoAGwAZQBmAHQAXABfAHAAYQByAHQAKQAgAGQiIABtAGkAbgAoAHIAaQBnAGgAdABcAF8AcABhAHIAdAApAAoAXABlAG4AZAB7AGEAbABpAGcAbgBlAGQAfQAKAA=="><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.5em;vertical-align:-2em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2.</span><span class="mspace" style="margin-right:1em;"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
-注意，**等长**概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定**左集合比右集合多一个**，所以奇数集合的中位数总是**左集合中最大的那一个**
 
+<p>对于总集长度为奇数时：</p>
+<div class="katex-display katexp" katex-exp="CgBcAGIAZQBnAGkAbgB7AGEAbABpAGcAbgBlAGQAfQAKADEALgBcAHEAdQBhAGQAIAAmAGwAZQBuACgAbABlAGYAdABcAF8AcABhAHIAdAApACAAPQAgAGwAZQBuACgAcgBpAGcAaAB0AFwAXwBwAGEAcgB0ACkAIAArACAAMQAgAFwAXABcAFwACgAyAC4AXABxAHUAYQBkACAAJgBtAGEAeAAoAGwAZQBmAHQAXABfAHAAYQByAHQAKQAgAGQiIABtAGkAbgAoAHIAaQBnAGgAdABcAF8AcABhAHIAdAApAAoAXABlAG4AZAB7AGEAbABpAGcAbgBlAGQAfQAKAA=="><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.5em;vertical-align:-2em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1.</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2.</span><span class="mspace" style="margin-right:1em;"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-1.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+
+<p>注意，<strong>等长</strong>概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定<strong>左集合比右集合多一个</strong>，所以奇数集合的中位数总是<strong>左集合中最大的那一个</strong></p>
 <p>此时集合的中位数为：</p>
 <div class="katex-display katexp" katex-exp="CgBNAGUAZABpAGEAbgAgAD0AIABtAGEAeAAoAGwAZQBmAHQAXABfAHAAYQByAHQAKQAKAA=="><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ian</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></span></div>
-于是我们按照以下步骤进行切点的寻找：
 
+<p>于是我们按照以下步骤进行切点的寻找：</p>
 <ol>
-<li><p>总是以较短的集合作为A集合，以短集合的长度去寻找<strong>Cut</strong></p>
+<li><p>总是以较短的集合作为 A 集合，以短集合的长度去寻找<strong>Cut</strong></p>
 </li>
 <li><p>设置<code>iMin=0</code>，<code>iMax=m</code>，在<code>[iMin, iMax]</code>中寻找<strong>Cut</strong></p>
 </li>
-<li><p><code>i</code>为A的<strong>Cut</strong>，它等于<code>(iMin + iMax) / 2</code>; <code>j</code>为B的<strong>Cut</strong>，它等于<code>(m + n + 1) / 2 -i </code></p>
+<li><p><code>i</code>为 A 的<strong>Cut</strong>，它等于<code>(iMin + iMax) / 2</code>; <code>j</code>为 B 的<strong>Cut</strong>，它等于<code>(m + n + 1) / 2 -i </code></p>
 </li>
-<li><p>现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有3种情况：</p>
+<li><p>现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有 3 种情况：</p>
 <ul>
 <li><p><code>B[j - 1] &lt;= A[i] &amp;&amp; A[i - 1] &gt;= B[j]</code>：</p>
 <p>意味着满足了条件二了，<code>i</code>和<code>j</code>正是我们要找的<strong>切点</strong>，找到了切点，就判断全集长度的奇偶性，从而求出<strong>Medium</strong></p>
 <blockquote>
 <p>我们来分析一下：</p>
+<p>对于左边集合，我们需要找<code>maxLeft</code>，对于左边的集合来说，<code>i</code>和<code>j</code>任意一个切点如果顶到 0 下标了，那么左边集合最大值肯定在对方那里，比如<code>i</code>等于 0 的时候，左边集合最大的数字肯定在<code>B[j - 1]</code>处，如果两个切点都没顶格，那么有<code>maxLeft = Math.max(A[i-1], B[j-1])</code></p>
+<p>对于右边集合，同样如此，如果顶格（<code>i = m</code>或者<code>j = n</code>）了的话，右边集合的最小值肯定在对方那里，否则就取<code>minRight = Math.min(B[j], A[i])</code></p>
+<p>然后根据<code>m + n</code>的奇偶性求得中位数</p>
 </blockquote>
 </li>
-</ul>
-</li>
-</ol>
-<blockquote>
-</blockquote>
-<pre><code> &gt; 对于左边集合，我们需要找`maxLeft`，对于左边的集合来说，`i`和`j`任意一个切点如果顶到0下标了，那么左边集合最大值肯定在对方那里，比如`i`等于0的时候，左边集合最大的数字肯定在`B[j - 1]`处，如果两个切点都没顶格，那么有`maxLeft = Math.max(A[i-1], B[j-1])`
-</code></pre>
-<blockquote>
-</blockquote>
-<pre><code> &gt; 对于右边集合，同样如此，如果顶格（`i = m`或者`j = n`）了的话，右边集合的最小值肯定在对方那里，否则就取`minRight = Math.min(B[j], A[i])`
-</code></pre>
-<blockquote>
-</blockquote>
-<pre><code> &gt; 然后根据`m + n`的奇偶性求得中位数
-</code></pre>
-<ul>
-<li><p>如果<code>i &lt; iMax </code>并且<code>A[i] &lt; B[j - 1]  </code>：</p>
-<p>表示此时<code>i</code>还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着<code>i</code>找小了，所以这时候将<code>iMin</code>加1，这时：</p>
+<li><p>如果<code>i &lt; iMax </code>并且<code>A[i] &lt; B[j - 1] </code>：</p>
+<p>表示此时<code>i</code>还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着<code>i</code>找小了，所以这时候将<code>iMin</code>加 1，这时：</p>
 <blockquote>
 <p><code>i</code>切点会往后挪，把<code>A[i]</code>退回左边集合，<code>j</code>相应地会往前挪，然后把<code>B[j - 1]</code>收进右边集合；</p>
 </blockquote>
 </li>
 <li><p>如果<code>i &gt; iMin </code>并且<code>A[i-1] &gt; B[j]</code>：</p>
-<p>表示此时<code>i</code>还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着<code>i</code>找大了，这时候将<code>iMax</code>减1，这时：</p>
+<p>表示此时<code>i</code>还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着<code>i</code>找大了，这时候将<code>iMax</code>减 1，这时：</p>
 <blockquote>
 <p><code>i</code>切点会往前挪，把<code>A[i - 1]</code>收进右边集合，<code>j</code>相应地会往后挪，把<code>B[j]</code>退回到左边集合；</p>
 </blockquote>
 </li>
 </ul>
+</li>
+</ol>
 <p>该题有两个需要注意的约定：</p>
 <ol>
 <li>奇数集合里面，约定<strong>左集合比右集合多一个</strong>；</li>
-<li>保证A集合长度要小于等于B集合；</li>
+<li>保证 A 集合长度要小于等于 B 集合；</li>
 </ol>
 <p>题解：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMedianSortedArrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] A, <span class="hljs-type">int</span>[] B)</span> {
@@ -490,7 +480,7 @@ Output: &quot;a&quot;
 Output: &quot;&quot;
 </code></pre>
 <h4 id="60ms-solution-beat-33">60+ms Solution (Beat 33%)</h4>
-<p>因为String <strong>s</strong>是一个char数组，我们以遍历这个数组为基础，当我们在位置<code>i</code>碰到一个char的时候，就找它下一次出现的位置<code>j</code>，那么我们就可以继续数组子序列<code>[i, j]</code>是否是回文串，由此找到一个可能的解；然后再以<code>j+1</code>开始，再找下一个<code>j</code>，于是代码可以是：</p>
+<p>因为 String <strong>s</strong>是一个 char 数组，我们以遍历这个数组为基础，当我们在位置<code>i</code>碰到一个 char 的时候，就找它下一次出现的位置<code>j</code>，那么我们就可以继续数组子序列<code>[i, j]</code>是否是回文串，由此找到一个可能的解；然后再以<code>j+1</code>开始，再找下一个<code>j</code>，于是代码可以是：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">char</span>[] src, <span class="hljs-type">int</span> begin, <span class="hljs-type">int</span> end)</span> {
     <span class="hljs-keyword">while</span>(begin &lt; end) {
         <span class="hljs-keyword">if</span>(src[begin++] != src[end--]) {
@@ -520,7 +510,7 @@ Output: &quot;&quot;
             <span class="hljs-keyword">if</span> (next &gt; <span class="hljs-number">0</span>) {
                 <span class="hljs-keyword">if</span> (next - i + <span class="hljs-number">2</span> &gt; end - start + <span class="hljs-number">1</span> &amp;&amp;
                     isPalindrome(chars, i + <span class="hljs-number">1</span>, next - <span class="hljs-number">1</span>)) {
-                    
+
                     start = i;
                     end = next + <span class="hljs-number">1</span>;
                 }
@@ -533,14 +523,14 @@ Output: &quot;&quot;
     <span class="hljs-keyword">return</span> s.substring(start, end);
 }
 </code></pre>
-<p>解法的关键是do循环里面的<code>next = s.indexOf(nowC, next + 1)</code>，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -</p>
+<p>解法的关键是 do 循环里面的<code>next = s.indexOf(nowC, next + 1)</code>，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -</p>
 <h4 id="7-10ms-solution-beat-98">7-10ms Solution (Beat 98%)</h4>
-<p>我们换个思路，关于next的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的end字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来<strong>猜</strong>出下标</p>
-<p>我们倒着来看（为什么倒着？后面解释），对于每个<code>i &gt; 0</code>，都有很多种可能说在<code>s[i]</code>就是一组回文数的end，那么这个可能性由什么去缩小？由一个<strong>既定的长度len</strong>来决定，我们倒着来看的话，<code>s[i - len + 1]</code>到<code>s[i]</code>之间的<strong>len</strong>长度子串如果是回文数的话，我们就马上找到了一组可能的解</p>
-<p>那么这个<strong>既定的len</strong>怎么求？我们可以发现这个<strong>len</strong>最终就是我们想要的结果字串的长度，所以我们不妨从0开始，在序列<strong>至少有一个字符</strong>的时候，<strong>要找到比原len更长的解的话，我们的len需要再往前吃1位或者2位数字</strong>，如果还是要保持原<strong>len</strong>的话，是求不出解的，比如最开始<code>end = i = 0</code>的时候<code>start = i - len + 1 = 1</code>，这是无解</p>
+<p>我们换个思路，关于 next 的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的 end 字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来<strong>猜</strong>出下标</p>
+<p>我们倒着来看（为什么倒着？后面解释），对于每个<code>i &gt; 0</code>，都有很多种可能说在<code>s[i]</code>就是一组回文数的 end，那么这个可能性由什么去缩小？由一个<strong>既定的长度 len</strong>来决定，我们倒着来看的话，<code>s[i - len + 1]</code>到<code>s[i]</code>之间的<strong>len</strong>长度子串如果是回文数的话，我们就马上找到了一组可能的解</p>
+<p>那么这个<strong>既定的 len</strong>怎么求？我们可以发现这个<strong>len</strong>最终就是我们想要的结果字串的长度，所以我们不妨从 0 开始，在序列<strong>至少有一个字符</strong>的时候，<strong>要找到比原 len 更长的解的话，我们的 len 需要再往前吃 1 位或者 2 位数字</strong>，如果还是要保持原<strong>len</strong>的话，是求不出解的，比如最开始<code>end = i = 0</code>的时候<code>start = i - len + 1 = 1</code>，这是无解</p>
 <p>以<code>&quot;abcba&quot;</code>为例</p>
-<p>我们尝试<strong>len</strong>往前吃1位，<code>end = i = 0</code>的时候<code>start = i - (len + 1)+ 1 = i - len = 0</code>，我们得到整个字符串的第一个字符<code>&#39;a&#39;</code>，它肯定是回文数，所以我们得到第一个解，**len++**，此时记录下<code>start</code>和<code>end</code></p>
-<p>接下来我们以表格的形式来描述遍历过程，包含了往前吃2位的情况：</p>
+<p>我们尝试<strong>len</strong>往前吃 1 位，<code>end = i = 0</code>的时候<code>start = i - (len + 1)+ 1 = i - len = 0</code>，我们得到整个字符串的第一个字符<code>&#39;a&#39;</code>，它肯定是回文数，所以我们得到第一个解，**len++**，此时记录下<code>start</code>和<code>end</code></p>
+<p>接下来我们以表格的形式来描述遍历过程，包含了往前吃 2 位的情况：</p>
 <table>
 <thead>
 <tr>
@@ -556,14 +546,14 @@ Output: &quot;&quot;
 <td align="center">-1 <strong>无解</strong></td>
 <td align="center">0</td>
 <td align="center">a</td>
-<td align="center">++后等于1</td>
+<td align="center">++后等于 1</td>
 </tr>
 <tr>
 <td align="center">1= <code>&#39;b&#39;</code></td>
 <td align="center">-1 <strong>无解</strong></td>
 <td align="center">0</td>
 <td align="center">ab <strong>不是解</strong></td>
-<td align="center">还是1</td>
+<td align="center">还是 1</td>
 </tr>
 <tr>
 <td align="center">2= <code>&#39;c&#39;</code></td>
@@ -577,7 +567,7 @@ Output: &quot;&quot;
 <td align="center">1</td>
 <td align="center">2</td>
 <td align="center">bcb <strong>是解</strong></td>
-<td align="center">吃两位得的解，所以len+=2 = 3</td>
+<td align="center">吃两位得的解，所以 len+=2 = 3</td>
 </tr>
 <tr>
 <td align="center">4= <code>&#39;a&#39;</code></td>
@@ -601,7 +591,7 @@ Output: &quot;&quot;
         <span class="hljs-keyword">if</span>(isPalindrome(ca, i - len - <span class="hljs-number">1</span>, i)) {
             start = i - len - <span class="hljs-number">1</span>; end = i;
             len += <span class="hljs-number">2</span>;
-        } 
+        }
         <span class="hljs-comment">// eat 1</span>
         <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(isPalindrome(ca, i - len, i)) {
             start = i - len; end = i;
@@ -624,7 +614,7 @@ Output: &quot;&quot;
 }
 </code></pre>
 <h5 id="一点优化">一点优化</h5>
-<p>观察表中最后一行以及<code>isPalindrome</code>函数可以发现，判断<code>abcba</code>是否为回文串的时候，重复判断了<code>bcb</code>，而它已经在上一次被判断过了，于是我们可以将start和end提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断</p>
+<p>观察表中最后一行以及<code>isPalindrome</code>函数可以发现，判断<code>abcba</code>是否为回文串的时候，重复判断了<code>bcb</code>，而它已经在上一次被判断过了，于是我们可以将 start 和 end 提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断</p>
 <p>在回文数判断函数中补上：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> start, end;
 <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">char</span>[] chars, <span class="hljs-type">int</span> head, <span class="hljs-type">int</span> tail)</span> {

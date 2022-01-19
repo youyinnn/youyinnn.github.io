@@ -4,18 +4,16 @@ categories:
   - algorithm
   - leetcode
 tags:
- - leetcode
+  - leetcode
 date: 2019-02-02 19:51:00
 series: leetcode
 ---
-
-
 
 ### 1. TwoSum(Easy)
 
 Given an array of integers, return **indices** of the two numbers such that they add up to a specific target.
 
-You may assume that each input would have **exactly** one solution, and you may not use the *same* element twice.
+You may assume that each input would have **exactly** one solution, and you may not use the _same_ element twice.
 
 **Example:**
 
@@ -28,7 +26,7 @@ return [0, 1].
 
 #### Ⅰ.Brute Force
 
-``` java
+```java
 public int[] twoSum(int[] nums, int target) {
     for (int i = 0; i < nums.length; i++) {
         for (int j = i + 1; j < nums.length; j++) {
@@ -69,7 +67,7 @@ public int[] twoSum(int[] nums, int target) {
 
 So here is my solution about "TwoSum" with **self implement "hashing"**, it may not a nice code but it's friendly for all of you
 
-``` java
+```java
 // 4ms runtime 26~27MB memory use
 // need to record val and index at the same time
 class Pair {
@@ -194,9 +192,9 @@ Explanation: 342 + 465 = 807.
 
 ![](https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg)
 
-这题没什么tricky的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的solution：
+这题没什么 tricky 的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的 solution：
 
-``` java
+```java
 // 由第三条新的链和它的计算指针完成
 public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     ListNode dummyHead = new ListNode(0);
@@ -219,7 +217,7 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 
-下面是我参照这种思路，针对空间优化的代码，所有计算在1链上进行，并处理了两条链长短不一样的情况，如果1链长，那么就继续计算carry；如果二链长，那么把二链剩余需要计算的链接到1链上，在1链上继续计算carry：
+下面是我参照这种思路，针对空间优化的代码，所有计算在 1 链上进行，并处理了两条链长短不一样的情况，如果 1 链长，那么就继续计算 carry；如果二链长，那么把二链剩余需要计算的链接到 1 链上，在 1 链上继续计算 carry：
 
 ```java
 public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -267,8 +265,6 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 
-
-
 ### 3. Longest Substring(Medium)
 
 Given a string, find the length of the **longest substring** without repeating characters.
@@ -277,8 +273,8 @@ Given a string, find the length of the **longest substring** without repeating c
 
 ```
 Input: "abcabcbb"
-Output: 3 
-Explanation: The answer is "abc", with the length of 3. 
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
 ```
 
 **Example 2:**
@@ -294,17 +290,17 @@ Explanation: The answer is "b", with the length of 1.
 ```
 Input: "pwwkew"
 Output: 3
-Explanation: The answer is "wke", with the length of 3. 
+Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
 
 #### ascii mapping
 
-官方给出的解法，官方还给出了用HashMap和HashSet去解的
+官方给出的解法，官方还给出了用 HashMap 和 HashSet 去解的
 
-**ascii mapping**这样的解法虽然知道**第一目的**是用ascii映射数组去记录上一次重复出现char的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的i、j已经完全没有灵魂了，难以理解
+**ascii mapping**这样的解法虽然知道**第一目的**是用 ascii 映射数组去记录上一次重复出现 char 的下标，但是官方的这个后续实现，不多看几眼，很难看出意图，所以我觉得这是一段没有灵魂的代码，里面的 i、j 已经完全没有灵魂了，难以理解
 
-``` java
+```java
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
         int n = s.length(), ans = 0;
@@ -321,13 +317,13 @@ public class Solution {
 
 还是解一下逻辑：
 
-1. 既然有下标，可以考虑用**下标差**去计算长度，而不是count出来
+1. 既然有下标，可以考虑用**下标差**去计算长度，而不是 count 出来
 
-2. 假设要表达的字符序列只在**ascii-128**中出现，于是我们可以用**hash**的方式，给出一个128位的数组`index`，数组用来记录**上一次重复出现该ascii码字符的index的下一位（`index[s.charAt(j)] = j + 1`）**，为什么是下一位？因为既然已经重复了，就从下一位开始计算所求序列
+2. 假设要表达的字符序列只在**ascii-128**中出现，于是我们可以用**hash**的方式，给出一个 128 位的数组`index`，数组用来记录**上一次重复出现该 ascii 码字符的 index 的下一位（`index[s.charAt(j)] = j + 1`）**，为什么是下一位？因为既然已经重复了，就从下一位开始计算所求序列
 
-    比如说**“a”**这个序列，**a**的**ascii**是97，所以在`index`的97号上找index，这时候是0
+   比如说**“a”**这个序列，**a**的**ascii**是 97，所以在`index`的 97 号上找 index，这时候是 0
 
-3. **i**的作用：获取最靠近`j`的**有过重复的字符index的下一位**，比如序列**“abca”**，当J循环到最后一个a的时候，i的值是上一个有过重复的a的index的下一位
+3. **i**的作用：获取最靠近`j`的**有过重复的字符 index 的下一位**，比如序列**“abca”**，当 J 循环到最后一个 a 的时候，i 的值是上一个有过重复的 a 的 index 的下一位
 
 ### 4. Median of Two Sorted Arrays(Hard)
 
@@ -355,7 +351,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 ```
 
-这道题难就难在要找到**O(log (m+n))**的解，说到已排好序、log级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数
+这道题难就难在要找到**O(log (m+n))**的解，说到已排好序、log 级，自然而然想到二分法，关键是怎么对两个已排序的数组进行统一二分法，找到中位数
 
 在此先给出容易想到但是不符合题意的解**(n+m)/2**解
 
@@ -411,7 +407,7 @@ public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
 对数级解非常不容易找出来，我觉得能解出来的都是数学家- -
 
-对数级解决方案有2种，一种是**泛化为“findKth”问题**，另一种是**“分治法寻找perfect I”**
+对数级解决方案有 2 种，一种是**泛化为“findKth”问题**，另一种是**“分治法寻找 perfect I”**
 
 ##### Perfect I
 
@@ -423,7 +419,7 @@ public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
 然后我们再了解一个**切（Cut）**的概念：
 
-假设长度为m的A集合有随机一个**cut**出现在下标i的位置，那么有**m + 1**种可能的**cut（0 ~ m）**
+假设长度为 m 的 A 集合有随机一个**cut**出现在下标 i 的位置，那么有**m + 1**种可能的**cut（0 ~ m）**
 
 ```nhi
 left_A                   |  right_A
@@ -436,14 +432,14 @@ A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 
 - when i = 0, **left_A** is empty, and when i = m, **right_A** is empty
 
-类似地，对B我们可以：
+类似地，对 B 我们可以：
 
 ```nhi
 left_B                   |  right_B
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 ```
 
-A、B连在一起看，我们得出：
+A、B 连在一起看，我们得出：
 
 ```nhi
 left_part                |  right_part
@@ -452,69 +448,77 @@ B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 ```
 
 对于总集长度为偶数时，如果我们可以找到如下**两个条件**：
+
 $$
 \begin{aligned}
 1.\quad &len(left\\_part) = len(right\\_part) \\\\
 2.\quad &max(left\\_part) ≤ min(right\\_part)
 \end{aligned}
 $$
-那么我们就等于将全集**{A, B}**分为**等长**的2部分，且左半部分中的元素总是比右半部分中的元素要小
+
+那么我们就等于将全集**{A, B}**分为**等长**的 2 部分，且左半部分中的元素总是比右半部分中的元素要小
 
 此时集合的中位数为：
+
 $$
 Median = \frac {max(left\\_part) + min(right\\_part)} {2}
 $$
+
 对于总集长度为奇数时：
+
 $$
 \begin{aligned}
 1.\quad &len(left\_part) = len(right\_part) + 1 \\\\
 2.\quad &max(left\_part) ≤ min(right\_part)
 \end{aligned}
 $$
+
 注意，**等长**概念在偶数全集里面比较容易展现，即左右两边元素个数相同，而在奇数集合里面，约定**左集合比右集合多一个**，所以奇数集合的中位数总是**左集合中最大的那一个**
 
 此时集合的中位数为：
+
 $$
 Median = max(left\_part)
 $$
+
 于是我们按照以下步骤进行切点的寻找：
 
-1. 总是以较短的集合作为A集合，以短集合的长度去寻找**Cut**
+1. 总是以较短的集合作为 A 集合，以短集合的长度去寻找**Cut**
 
 2. 设置`iMin=0`，`iMax=m`，在`[iMin, iMax]`中寻找**Cut**
 
-3.  `i`为A的**Cut**，它等于`(iMin + iMax) / 2`; `j`为B的**Cut**，它等于`(m + n + 1) / 2 -i `
+3. `i`为 A 的**Cut**，它等于`(iMin + iMax) / 2`; `j`为 B 的**Cut**，它等于`(m + n + 1) / 2 -i `
 
-4. 现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有3种情况：
+4. 现在我们切好了，满足了等长条件，于是我们判断切点是否是我们想要的，这将会有 3 种情况：
 
    - `B[j - 1] <= A[i] && A[i - 1] >= B[j]`：
 
      意味着满足了条件二了，`i`和`j`正是我们要找的**切点**，找到了切点，就判断全集长度的奇偶性，从而求出**Medium**
 
      > 我们来分析一下：
-  >
-     > 对于左边集合，我们需要找`maxLeft`，对于左边的集合来说，`i`和`j`任意一个切点如果顶到0下标了，那么左边集合最大值肯定在对方那里，比如`i`等于0的时候，左边集合最大的数字肯定在`B[j - 1]`处，如果两个切点都没顶格，那么有`maxLeft = Math.max(A[i-1], B[j-1])`
-  >
+     >
+     > 对于左边集合，我们需要找`maxLeft`，对于左边的集合来说，`i`和`j`任意一个切点如果顶到 0 下标了，那么左边集合最大值肯定在对方那里，比如`i`等于 0 的时候，左边集合最大的数字肯定在`B[j - 1]`处，如果两个切点都没顶格，那么有`maxLeft = Math.max(A[i-1], B[j-1])`
+     >
      > 对于右边集合，同样如此，如果顶格（`i = m`或者`j = n`）了的话，右边集合的最小值肯定在对方那里，否则就取`minRight = Math.min(B[j], A[i])`
-  >
+     >
      > 然后根据`m + n`的奇偶性求得中位数
 
-   - 如果`i < iMax `并且`A[i] < B[j - 1]  `：
-   
-     表示此时`i`还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着`i`找小了，所以这时候将`iMin`加1，这时：
-   
+   - 如果`i < iMax `并且`A[i] < B[j - 1] `：
+
+     表示此时`i`还能继续往大的方向走，并且此时左边最大的数字大于右边最小的数字，此时意味着`i`找小了，所以这时候将`iMin`加 1，这时：
+
      > `i`切点会往后挪，把`A[i]`退回左边集合，`j`相应地会往前挪，然后把`B[j - 1]`收进右边集合；
-   
+
    - 如果`i > iMin `并且`A[i-1] > B[j]`：
-   
-     表示此时`i`还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着`i`找大了，这时候将`iMax`减1，这时：
-     
+
+     表示此时`i`还能继续往小的方向走，并且此时左边最大的数字大于右边最的数字，此时意味着`i`找大了，这时候将`iMax`减 1，这时：
+
      > `i`切点会往前挪，把`A[i - 1]`收进右边集合，`j`相应地会往后挪，把`B[j]`退回到左边集合；
 
 该题有两个需要注意的约定：
 
 1. 奇数集合里面，约定**左集合比右集合多一个**；
-2. 保证A集合长度要小于等于B集合；
+2. 保证 A 集合长度要小于等于 B 集合；
 
 题解：
 
@@ -569,8 +573,6 @@ public void showCut(int[] arr, int cutIndex) {
 }
 ```
 
-
-
 ### 5. Longest Palindromic Substring
 
 Given a string **s**, find the longest palindromic substring in **s**. You may assume that the maximum length of **s** is 1000.
@@ -604,11 +606,9 @@ Input: ""
 Output: ""
 ```
 
-
-
 #### 60+ms Solution (Beat 33%)
 
-因为String **s**是一个char数组，我们以遍历这个数组为基础，当我们在位置`i`碰到一个char的时候，就找它下一次出现的位置`j`，那么我们就可以继续数组子序列`[i, j]`是否是回文串，由此找到一个可能的解；然后再以`j+1`开始，再找下一个`j`，于是代码可以是：
+因为 String **s**是一个 char 数组，我们以遍历这个数组为基础，当我们在位置`i`碰到一个 char 的时候，就找它下一次出现的位置`j`，那么我们就可以继续数组子序列`[i, j]`是否是回文串，由此找到一个可能的解；然后再以`j+1`开始，再找下一个`j`，于是代码可以是：
 
 ```java
 public boolean isPalindrome(char[] src, int begin, int end) {
@@ -640,7 +640,7 @@ public String longestPalindrome(String s) {
             if (next > 0) {
                 if (next - i + 2 > end - start + 1 &&
                     isPalindrome(chars, i + 1, next - 1)) {
-                    
+
                     start = i;
                     end = next + 1;
                 }
@@ -654,31 +654,29 @@ public String longestPalindrome(String s) {
 }
 ```
 
-解法的关键是do循环里面的`next = s.indexOf(nowC, next + 1)`，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -
-
-
+解法的关键是 do 循环里面的`next = s.indexOf(nowC, next + 1)`，但也正是在这一步里，花费了大量的时间做了重复的工作，因为这里也是在遍历数组- -
 
 #### 7-10ms Solution (Beat 98%)
 
-我们换个思路，关于next的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的end字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来**猜**出下标
+我们换个思路，关于 next 的位置，我们不一定要通过遍历数组的方式去寻找下一个可能的 end 字符的下标，我们可以通过之前已经找到过的回文字符串的长度，来**猜**出下标
 
-我们倒着来看（为什么倒着？后面解释），对于每个`i > 0`，都有很多种可能说在`s[i]`就是一组回文数的end，那么这个可能性由什么去缩小？由一个**既定的长度len**来决定，我们倒着来看的话，`s[i - len + 1]`到`s[i]`之间的**len**长度子串如果是回文数的话，我们就马上找到了一组可能的解
+我们倒着来看（为什么倒着？后面解释），对于每个`i > 0`，都有很多种可能说在`s[i]`就是一组回文数的 end，那么这个可能性由什么去缩小？由一个**既定的长度 len**来决定，我们倒着来看的话，`s[i - len + 1]`到`s[i]`之间的**len**长度子串如果是回文数的话，我们就马上找到了一组可能的解
 
-那么这个**既定的len**怎么求？我们可以发现这个**len**最终就是我们想要的结果字串的长度，所以我们不妨从0开始，在序列**至少有一个字符**的时候，**要找到比原len更长的解的话，我们的len需要再往前吃1位或者2位数字**，如果还是要保持原**len**的话，是求不出解的，比如最开始`end = i = 0`的时候`start = i - len + 1 = 1`，这是无解
+那么这个**既定的 len**怎么求？我们可以发现这个**len**最终就是我们想要的结果字串的长度，所以我们不妨从 0 开始，在序列**至少有一个字符**的时候，**要找到比原 len 更长的解的话，我们的 len 需要再往前吃 1 位或者 2 位数字**，如果还是要保持原**len**的话，是求不出解的，比如最开始`end = i = 0`的时候`start = i - len + 1 = 1`，这是无解
 
 以`"abcba"`为例
 
-我们尝试**len**往前吃1位，`end = i = 0`的时候`start = i - (len + 1)+ 1 = i - len = 0`，我们得到整个字符串的第一个字符`'a'`，它肯定是回文数，所以我们得到第一个解，**len++**，此时记录下`start`和`end`
+我们尝试**len**往前吃 1 位，`end = i = 0`的时候`start = i - (len + 1)+ 1 = i - len = 0`，我们得到整个字符串的第一个字符`'a'`，它肯定是回文数，所以我们得到第一个解，**len++**，此时记录下`start`和`end`
 
-接下来我们以表格的形式来描述遍历过程，包含了往前吃2位的情况：
+接下来我们以表格的形式来描述遍历过程，包含了往前吃 2 位的情况：
 
-|  end = i  | start = i - len - 1 | start = i - len | string[start, end]  |             len              |
-| :-------: | :-----------------: | :-------------: | :-----------------: | :--------------------------: |
-| 0 = `'a'` |     -1 **无解**     |        0        |          a          |          ++后等于1           |
-| 1= `'b'`  |     -1 **无解**     |        0        |    ab **不是解**    |            还是1             |
-| 2= `'c'`  |          0          |        1        | abc/bc **都不是解** |              1               |
-| 3= `'b'`  |          1          |        2        |    bcb **是解**     | 吃两位得的解，所以len+=2 = 3 |
-| 4= `'a'`  |          0          |        1        |   abcba **是解**    |          len+=2 = 5          |
+|  end = i  | start = i - len - 1 | start = i - len | string[start, end]  |              len              |
+| :-------: | :-----------------: | :-------------: | :-----------------: | :---------------------------: |
+| 0 = `'a'` |     -1 **无解**     |        0        |          a          |          ++后等于 1           |
+| 1= `'b'`  |     -1 **无解**     |        0        |    ab **不是解**    |            还是 1             |
+| 2= `'c'`  |          0          |        1        | abc/bc **都不是解** |               1               |
+| 3= `'b'`  |          1          |        2        |    bcb **是解**     | 吃两位得的解，所以 len+=2 = 3 |
+| 4= `'a'`  |          0          |        1        |   abcba **是解**    |          len+=2 = 5           |
 
 于是循环中的逻辑为：
 
@@ -696,7 +694,7 @@ public String longestPalindrome(String s) {
         if(isPalindrome(ca, i - len - 1, i)) {
             start = i - len - 1; end = i;
             len += 2;
-        } 
+        }
         // eat 1
         else if(isPalindrome(ca, i - len, i)) {
             start = i - len; end = i;
@@ -721,7 +719,7 @@ private boolean isPalindrome(char[] chars, int head, int tail) {
 
 ##### 一点优化
 
-观察表中最后一行以及`isPalindrome`函数可以发现，判断`abcba`是否为回文串的时候，重复判断了`bcb`，而它已经在上一次被判断过了，于是我们可以将start和end提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断
+观察表中最后一行以及`isPalindrome`函数可以发现，判断`abcba`是否为回文串的时候，重复判断了`bcb`，而它已经在上一次被判断过了，于是我们可以将 start 和 end 提出去，让它们在下一次判断回文数的时候也能够使用，避免重复判断
 
 在回文数判断函数中补上：
 
@@ -742,4 +740,3 @@ private boolean isPalindrome(char[] chars, int head, int tail) {
     return true;
 }
 ```
-
