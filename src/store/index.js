@@ -7,8 +7,9 @@ var initialRoute = "about";
 if (pathName.startsWith("/article")) {
   initialRoute = "articles";
 }
-if (pathName.startsWith("/script")) {
-  initialRoute = "script";
+if (pathName.startsWith("/scripts")) {
+  console.log(pathName);
+  initialRoute = "scripts";
 }
 
 const initialCurrentThemeConfig = localStorage.getItem("__currentThemeConfig");

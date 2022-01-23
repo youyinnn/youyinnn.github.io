@@ -55,8 +55,17 @@ pre > code {
 .markdown-body .saying,
 .markdown-body img {
   transition: transform 0.4s, box-shadow 0.5s;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
+  /* margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important; */
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.markdown-body p,
+.markdown-body ol,
+.markdown-body ul {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
 .markdown-body .katexp:hover,
@@ -134,11 +143,11 @@ td.hljs-ln-code {
 } */
 
 .markdown-body blockquote > :first-child {
-  margin-top: 0;
+  margin-top: 0.25rem !important;
 }
 
 .markdown-body blockquote > :last-child {
-  margin-bottom: 0;
+  margin-bottom: 0.25rem !important;
 }
 
 a code {

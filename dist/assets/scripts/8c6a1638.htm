@@ -1,14 +1,23 @@
 <h2 id="docker">Docker</h2>
 <h3 id="centos-installation">Centos Installation</h3>
-<p>问题描述：在Centos8系统中，使用docker run时，出现如下报错：
-Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
-Error: open /proc/self/uid_map: no such file or directory</p>
-<p>解决办法：
-1，卸载podman软件（可以使用rpm -qa|grep docker）
-yum remove docker
-2,下载docker-ce源
-curl <a href="https://download.docker.com/linux/centos/docker-ce.repo">https://download.docker.com/linux/centos/docker-ce.repo</a> -o /etc/yum.repos.d/docker-ce.repo
-3，安装docker-ce
-yum install docker-ce -y</p>
+<p>问题描述：在 Centos8 系统中，使用 docker run 时，出现如下报错：</p>
+<pre><code class="hljs language-bash">Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Error: open /proc/self/uid_map: no such file or directory
+</code></pre>
+<p>解决办法：</p>
+<ol>
+<li><p>卸载 podman 软件（可以使用 rpm -qa|grep docker）</p>
+<pre><code class="hljs language-bash">yum remove docker
+</code></pre>
+</li>
+<li><p>下载 docker-ce 源</p>
+<pre><code class="hljs language-bash">curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+</code></pre>
+</li>
+<li><p>安装 docker-ce</p>
+<pre><code class="hljs language-bash">yum install docker-ce -y
+</code></pre>
+</li>
+</ol>
 <p>问题原因分析：
-Centos 8使用yum install docker -y时，默认安装的是podman-docker软件</p>
+Centos 8 使用 yum install docker -y 时，默认安装的是 podman-docker 软件</p>
