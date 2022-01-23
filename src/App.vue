@@ -1,5 +1,11 @@
 <template>
-  <n-config-provider :theme="theme" v-cloak>
+  <n-config-provider
+    :theme="theme"
+    v-cloak
+    :theme-overrides="{
+      common: overrideThemeCommon,
+    }"
+  >
     <n-message-provider placement="bottom-left">
       <TopBar />
       <n-card
@@ -39,6 +45,10 @@ export default defineComponent({
   data: () => ({
     body: document,
     transitionName: null,
+    overrideThemeCommon: {
+      fontSize: "14.35px",
+      fontFamily: "'Google Sans Text', arial, sans-serif",
+    },
   }),
   computed: {
     theme() {

@@ -22,7 +22,9 @@ Amateur Front-end developer.
 
 > 2015-2019, SE, BE : [South-Central University For Nationalities](http://www.scuec.edu.cn/s/1/t/560/main.htm), Wuhan, China.
 >
-> 2021(Fall)-2023(Winter), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
+> 2021(Fall), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
+>
+> 2022(Winter)-2023(Winter), ECE, MASc : [Concordia Universty](https://www.concordia.ca/).
 
 ##### Course Papers & Reports
 
