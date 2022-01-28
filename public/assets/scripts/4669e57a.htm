@@ -1,9 +1,10 @@
 <h2 id="mac">MAC</h2>
-<h3 id="mac-m1-系统怎么进入恢复模式">MAC M1 系统怎么进入恢复模式</h3>
+<h3 id="m1">M1</h3>
+<h4 id="系统怎么进入恢复模式">系统怎么进入恢复模式</h4>
 <p>Intel 的 MAC 是在开机显示 logo 的时候按下<code>command + R</code>，而 M1 的 MAC 只需要长按开机键就能进入了</p>
-<h3 id="mac-启动安全性实用工具">MAC 启动安全性实用工具</h3>
+<h4 id="启动安全性实用工具">启动安全性实用工具</h4>
 <p><a href="https://support.apple.com/zh-cn/HT208198">https://support.apple.com/zh-cn/HT208198</a></p>
-<h3 id="mac-m1-视频录制录入系统声音">MAC M1 视频录制录入系统声音</h3>
+<h4 id="视频录制录入系统声音">视频录制录入系统声音</h4>
 <p><strong>Intel</strong>的 Mac 是可以用<a href="https://github.com/mattingalls/Soundflower/releases/tag/2.0b2">Soundflower</a>来解决</p>
 <p>但是它不支持<strong>M1</strong>，所以找到了替代品</p>
 <p><a href="https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-macs">https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-macs</a></p>
@@ -12,9 +13,37 @@
 <p><img src="../../../../public/img/20210425192156.png" alt=""></p>
 <p>添加聚合设备之后，再打开声音设置-&gt;输出-&gt;选上你刚设置的输出源</p>
 <p><img src="../../../../public/img/20210425192756.png" alt=""></p>
-<h3 id="mac-m1-安装-homebrew">MAC M1 安装 Homebrew</h3>
+<h4 id="安装-arm-homebrew">安装 ARM Homebrew</h4>
 <p>选择国内镜像安装</p>
 <pre><code class="hljs language-bash">/bin/zsh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)</span>&quot;</span>
+</code></pre>
+<p>位置：</p>
+<pre><code class="hljs language-bash">yinnnyou@yinnndeMBP: <span class="hljs-built_in">which</span> brew
+/opt/homebrew/bin/brew
+</code></pre>
+<h4 id="安装-x86-hombrew">安装 X86 Hombrew</h4>
+<p><a href="https://medium.com/mkdir-awesome/how-to-install-x86-64-homebrew-packages-on-apple-m1-macbook-54ba295230f">https://medium.com/mkdir-awesome/how-to-install-x86-64-homebrew-packages-on-apple-m1-macbook-54ba295230f</a></p>
+<p>When you install Homebrew on an Intel Mac, it installs in the <code>/usr/local/homebrew</code> directory.</p>
+<p>Create a <code>~/Downloads/homebrew</code> and download Homebrew tarball and extract it to the <code>~/Downloads/homobrew</code> directory.</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">cd</span> ~/Downloads
+<span class="hljs-built_in">mkdir</span> homebrew
+curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+</code></pre>
+<p>Move the <code>homebrew</code> directory to <code>/usr/local/homebrew</code>. You need the <code>sudo</code> command:</p>
+<pre><code class="hljs language-bash">sudo <span class="hljs-built_in">mv</span> homebrew /usr/local/homebrew
+</code></pre>
+<p>Add a path to the <code>.zshrc</code> file:</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$HOME</span>/bin:/usr/local/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<p>By now you can use <code>arch -x86_64 /usr/local/homebrew/bin/brew</code> to install apps to the <code>/usr/local/homebrew/Cellar</code> directory.</p>
+<p>Let’s add an alias and path in the <code>~/.zshrc</code> file:</p>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># If you come from bash you might have to change your $PATH.</span>
+<span class="hljs-comment"># need this for x86_64 brew</span>
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$HOME</span>/bin:/usr/local/bin:<span class="hljs-variable">$PATH</span><span class="hljs-comment"># for intel x86_64 brew</span>
+<span class="hljs-built_in">alias</span> axbrew=<span class="hljs-string">&#x27;arch -x86_64 /usr/local/homebrew/bin/brew&#x27;</span>
+</code></pre>
+<p>Now you can install apps for Intel processors:</p>
+<pre><code class="hljs language-bash">axbrew install package-name
 </code></pre>
 <h3 id="关于-big-sur-没有权限打开应用程序的解决方法">关于 Big Sur 没有权限打开应用程序的解决方法</h3>
 <p><a href="https://zhuanlan.zhihu.com/p/331816664">https://zhuanlan.zhihu.com/p/331816664</a></p>
