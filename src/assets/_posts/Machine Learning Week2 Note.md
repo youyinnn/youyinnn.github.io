@@ -128,7 +128,7 @@ $$
 
 **"Some data can not be represent with just a straight line, things are more complicated."**
 
-<img src="../../../public/img/image-20220111150432097.png" alt="image-20220111150432097" style="zoom:33%;width:100%" />
+<img src="../../../public/img/image-20220111150432097.png" alt="image-20220111150432097" style="zoom:66%;width:100%" />
 
 Suppose we want to know the price of the house, and we have two features which lead to the following hypothesis:
 
@@ -144,7 +144,7 @@ $$
 
 And suppose we have the following training set:
 
-<img src="../../../public/img/image-20220111151455763.png" alt="image-20220111151455763" style="zoom:33%;width:100%" />
+<img src="../../../public/img/image-20220111151455763.png" alt="image-20220111151455763" style="zoom:66%;width:100%" />
 
 the quadratic function:
 
