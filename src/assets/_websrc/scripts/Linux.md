@@ -43,6 +43,10 @@ http://www.findme.wang/blog/detail/id/261.html
 
 https://www.cnblogs.com/Survivalist/p/11297938.html
 
+#### Bash Prompt
+
+https://opensource.com/article/17/7/bash-prompt-tips-and-tricks#:~:text=The%20Bash%20prompt%20is%20set,to%20complete%20a%20Bash%20command.
+
 
 
 ### Tools & System

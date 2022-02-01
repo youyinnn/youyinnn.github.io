@@ -24,6 +24,158 @@ eval &quot;$(pyenv virtualenv-init -)&quot;
 <pre><code class="hljs language-bash">conda config --add channels https://repo.anaconda.com/pkgs/main/osx-64/
 conda install python=3.7.0
 </code></pre>
+<h4 id="cheat-sheet">Cheat sheet</h4>
+<p><a href="https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index">https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index</a></p>
+<h5 id="managing-conda-and-anaconda">Managing Conda and Anaconda</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda info</code></th>
+<th>Verify conda is installed, check version #</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda update conda</code></td>
+<td>Update conda package and environment manager</td>
+</tr>
+<tr>
+<td><code>conda update anaconda</code></td>
+<td>Update the anaconda meta package</td>
+</tr>
+</tbody></table>
+<h5 id="managing-environments">Managing Environments</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda info --envs``conda info -e</code></th>
+<th>Get a list of all my environmentsActive environment shown with <code>*</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda create --name snowflakes biopython``conda create -n snowflakes biopython</code></td>
+<td>Create an environment and install program(s)</td>
+</tr>
+<tr>
+<td><code>conda activate snowflakes</code></td>
+<td>Activate the new environment to use it</td>
+</tr>
+<tr>
+<td><code>conda deactivate</code></td>
+<td>Deactivate the environment</td>
+</tr>
+<tr>
+<td><code>conda create -n bunnies python=3.4 astroid</code></td>
+<td>Create a new environment, specify Python version</td>
+</tr>
+<tr>
+<td><code>conda create -n flowers --clone snowflakes</code></td>
+<td>Make exact copy of an environment</td>
+</tr>
+<tr>
+<td><code>conda remove -n flowers --all</code></td>
+<td>Delete an environment</td>
+</tr>
+<tr>
+<td><code>conda env export &gt; puppies.yml</code></td>
+<td>Save current environment to a file</td>
+</tr>
+<tr>
+<td><code>conda env create -f puppies.yml</code></td>
+<td>Load environment from a file</td>
+</tr>
+</tbody></table>
+<h5 id="managing-python">Managing Python</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda search --full-name python``conda search -f python</code></th>
+<th>Check versions of Python available to install</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda create -n snakes python=3.4</code></td>
+<td>Install different version of Python in new environment</td>
+</tr>
+</tbody></table>
+<h5 id="managing-condarc-configuration">Managing .condarc Configuration</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda config --get</code></th>
+<th>Get all keys and values from my .condarc file</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda config --get channels</code></td>
+<td>Get value of the key channels from .condarc file</td>
+</tr>
+<tr>
+<td><code>conda config --add channels pandas</code></td>
+<td>Add a new value to channels so conda looks for packages in this location</td>
+</tr>
+</tbody></table>
+<h5 id="managing-packages-including-python">Managing Packages, Including Python</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda list</code></th>
+<th>View list of packages and versions installed in active environment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda search beautiful-soup</code></td>
+<td>Search for a package to see if it is available to conda install</td>
+</tr>
+<tr>
+<td><code>conda install -n bunnies beautiful-soup</code></td>
+<td>Install a new package<strong>NOTE:</strong> If you do not include the name of the environment, it will install in the current active environment.</td>
+</tr>
+<tr>
+<td><code>conda update beautiful-soup</code></td>
+<td>Update a package in the current environment</td>
+</tr>
+<tr>
+<td><code>conda search --override-channels -c pandas bottleneck</code></td>
+<td>Search for a package in a specific location (the pandas channel on Anaconda.org)</td>
+</tr>
+<tr>
+<td><code>conda install -c pandas bottleneck</code></td>
+<td>Install a package from a specific channel</td>
+</tr>
+<tr>
+<td><code>conda search --override-channels -c defaults beautiful-soup</code></td>
+<td>Search for a package to see if it is available from the Anaconda repository</td>
+</tr>
+<tr>
+<td><code>conda install iopro accelerate</code></td>
+<td>Install commercial Continuum packages</td>
+</tr>
+<tr>
+<td><code>conda skeleton pypi pyinstrument``conda build pyinstrument</code></td>
+<td>Build a Conda package from a Python Package Index (PyPi) Package</td>
+</tr>
+</tbody></table>
+<h5 id="removing-packages-or-environments">Removing Packages or Environments</h5>
+<table>
+<thead>
+<tr>
+<th><code>conda remove --name bunnies beautiful-soup</code></th>
+<th>Remove one package from any named environment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>conda remove beautiful-soup</code></td>
+<td>Remove one package from the active environment</td>
+</tr>
+<tr>
+<td><code>conda remove --name bunnies beautiful-soup astroid</code></td>
+<td>Remove multiple packages from any environment</td>
+</tr>
+<tr>
+<td><code>conda remove --name snakes --all</code></td>
+<td>Remove an environment</td>
+</tr>
+</tbody></table>
 <h3 id="colab--jupiter">Colab &amp; Jupiter</h3>
 <ul>
 <li><a href="https://stackoverflow.com/questions/53581278/test-if-notebook-is-running-on-google-colab">Test if notebook is running on Google Colab</a></li>
