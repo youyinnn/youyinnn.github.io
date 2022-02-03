@@ -8,7 +8,7 @@
 
 1. vscode settings:
 
-   ``` javascript
+   ```javascript
    {
        "editor.formatOnSave": true,
        "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -23,12 +23,9 @@
 
    e.g
 
-   ``` javascript
+   ```javascript
    {
      "singleQuote": true,
      "arrowParens": "avoid"
    }
    ```
-
-   
-

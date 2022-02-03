@@ -1,5 +1,5 @@
 <p>The series of &lt;Python Note&gt; is talking about some basic grammar rules of python, for quick search while I might use python.</p>
-<p>The first article will introduces  <code>print()</code> and <code>input()</code>, the comment syntax, variables assignment and some basic types in python.</p>
+<p>The first article will introduces <code>print()</code> and <code>input()</code>, the comment syntax, variables assignment and some basic types in python.</p>
 <h2 id="a">A</h2>
 <h3 id="method-print--input">Method: print() &amp; input()</h3>
 <p>Example:</p>
@@ -17,14 +17,14 @@ name = <span class="hljs-built_in">input</span>() <span class="hljs-comment"># t
 <h4 id="input">input()</h4>
 <p><code>input</code>([<em>prompt</em>])</p>
 <p>If the <em>prompt</em> argument is present, it is written to standard output without a trailing newline. The function then reads a line from input, converts it to a string (stripping a trailing newline), and returns that. When EOF is read, <a href="https://docs.python.org/3/library/exceptions.html#EOFError"><code>EOFError</code></a> is raised. Example:</p>
-<pre><code>&gt;&gt;&gt; s = input(&#x27;--&gt; &#x27;)  
+<pre><code>&gt;&gt;&gt; s = input(&#x27;--&gt; &#x27;)
 --&gt; Monty Python&#x27;s Flying Circus
-&gt;&gt;&gt; s  
+&gt;&gt;&gt; s
 &quot;Monty Python&#x27;s Flying Circus&quot;
 </code></pre>
 <h3 id="comment">Comment</h3>
 <pre><code class="hljs language-python"><span class="hljs-comment"># single line</span>
-<span class="hljs-string">&#x27;&#x27;&#x27; multi-line 
+<span class="hljs-string">&#x27;&#x27;&#x27; multi-line
 xixi = 123
 haha = 456
 &#x27;&#x27;&#x27;</span>
@@ -44,7 +44,7 @@ var2, var3 = <span class="hljs-string">&#x27;123&#x27;</span>, <span class="hljs
 <h5 id="truth-value-testing">Truth Value Testing</h5>
 <p><strong>Any object can be tested for truth value</strong>, for use in an <a href="https://docs.python.org/3/reference/compound_stmts.html#if"><code>if</code></a> or <a href="https://docs.python.org/3/reference/compound_stmts.html#while"><code>while</code></a> condition or as operand of the Boolean operations below.</p>
 <p>By default, an object <strong>is considered <code>true</code></strong> unless its class defines either a <a href="https://docs.python.org/3/reference/datamodel.html#object.__bool__"><code>__bool__()</code></a> method that returns <code>False</code> or a <a href="https://docs.python.org/3/reference/datamodel.html#object.__len__"><code>__len__()</code></a> method that returns zero, when called with the object. [<a href="https://docs.python.org/3/library/stdtypes.html#id12">1</a>]</p>
-<p>Here are most of the built-in objects considered  <strong><code>false</code></strong>:</p>
+<p>Here are most of the built-in objects considered <strong><code>false</code></strong>:</p>
 <ul>
 <li>constants defined to be false: <code>None</code> and <code>False</code>.</li>
 <li>zero of any numeric type: <code>0</code>, <code>0.0</code>, <code>0j</code>, <code>Decimal(0)</code>, <code>Fraction(0, 1)</code></li>
@@ -99,7 +99,7 @@ x <span class="hljs-keyword">and</span> y <span class="hljs-comment"># if x is f
 <td align="left">negated object identity</td>
 </tr>
 </tbody></table>
-<p>Any object can be compared with those operators when defining <code>__lt__()</code>,<code>__le__()</code>,<code>__eq__()</code>,<code>__ne__()</code>, <code>__gt__()</code>,<code>__ge__()</code> methods. </p>
+<p>Any object can be compared with those operators when defining <code>__lt__()</code>,<code>__le__()</code>,<code>__eq__()</code>,<code>__ne__()</code>, <code>__gt__()</code>,<code>__ge__()</code> methods.</p>
 <p>These are the so-called “rich comparison” methods. The correspondence between operator symbols and method names is as follows: <code>x&lt;y</code> calls <code>x.__lt__(y)</code>, <code>x&lt;=y</code> calls <code>x.__le__(y)</code>, <code>x==y</code> calls <code>x.__eq__(y)</code>, <code>x!=y</code> calls <code>x.__ne__(y)</code>, <code>x&gt;y</code> calls <code>x.__gt__(y)</code>, and <code>x&gt;=y</code> calls <code>x.__ge__(y)</code>.</p>
 <p>Example:</p>
 <pre><code class="hljs language-python"><span class="hljs-meta">@total_ordering</span>
@@ -288,7 +288,7 @@ word = <span class="hljs-string">&quot;abcd&quot;</span>
 <span class="hljs-comment"># span multiple line with triple quotes &#x27;&#x27;&#x27;... &#x27;&#x27;&#x27; or &quot;&quot;&quot;...&quot;&quot;&quot;</span>
 <span class="hljs-comment"># backslash can prevent newline when placed at the end of the line</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;&#x27;\
-Options: 
+Options:
     -a      all
     -c      clean\
 &#x27;&#x27;&#x27;</span>)
@@ -381,7 +381,7 @@ Hello
 HELLO
 asd
 HELLO
-  HELLO   
+  HELLO
 ---HELLO---
 HELLO------
 ------HELLO
@@ -470,12 +470,12 @@ int:10 hex:0xa oct:0o12 bin:0b1010
 33.3333333333%
 </code></pre>
 <h5 id="regex">Regex</h5>
-<pre><code class="hljs language-python"><span class="hljs-comment"># compile a regular expression pattern into a regular expression object </span>
+<pre><code class="hljs language-python"><span class="hljs-comment"># compile a regular expression pattern into a regular expression object</span>
 <span class="hljs-keyword">import</span> re
 
 <span class="hljs-built_in">str</span> = <span class="hljs-string">&#x27;aasddohwawddogasads&#x27;</span>
 
-<span class="hljs-comment"># use regular expression object </span>
+<span class="hljs-comment"># use regular expression object</span>
 po = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;do[gh]&#x27;</span>)
 <span class="hljs-built_in">print</span>(po.search(<span class="hljs-built_in">str</span>))
 

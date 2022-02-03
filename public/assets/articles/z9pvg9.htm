@@ -13,7 +13,7 @@ Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 </code></pre>
 <h4 id="solution">Solution</h4>
-<p>处理carry的题目我们前面碰的多了，熟能生巧</p>
+<p>处理 carry 的题目我们前面碰的多了，熟能生巧</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] plusOne(<span class="hljs-type">int</span>[] digits) {
     <span class="hljs-type">boolean</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> digits.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
@@ -163,46 +163,46 @@ Output:
 <li>从剩下的单词中，尽可能地吃能吃的单词；<code>findRight</code></li>
 <li>调整当前吃下的单词的空格；<code>justify</code></li>
 <li>将调整好的单词添加到结果；</li>
-<li>如果还有剩下的单词，重复步骤1；</li>
+<li>如果还有剩下的单词，重复步骤 1；</li>
 </ol>
 <pre><code class="hljs language-java"> <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">fullJustify</span><span class="hljs-params">(String[] words, <span class="hljs-type">int</span> maxWidth)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; List&lt;String&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-    
+
     <span class="hljs-keyword">while</span> (left &lt; words.length) {
         <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> findRight(left, words, maxWidth);
         result.add(justify(left, right, words, maxWidth));
         left = right + <span class="hljs-number">1</span>;
     }
-    
+
     <span class="hljs-keyword">return</span> result;
 }
 
 <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findRight</span><span class="hljs-params">(<span class="hljs-type">int</span> left, String[] words, <span class="hljs-type">int</span> maxWidth)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left;
     <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> words[right++].length();
-    
+
     <span class="hljs-keyword">while</span> (right &lt; words.length &amp;&amp; (sum + <span class="hljs-number">1</span> + words[right].length()) &lt;= maxWidth)
         sum += <span class="hljs-number">1</span> + words[right++].length();
-        
+
     <span class="hljs-keyword">return</span> right - <span class="hljs-number">1</span>;
 }
 
 <span class="hljs-keyword">private</span> String <span class="hljs-title function_">justify</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right, String[] words, <span class="hljs-type">int</span> maxWidth)</span> {
     <span class="hljs-keyword">if</span> (right - left == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> padResult(words[left], maxWidth);
-    
+
     <span class="hljs-type">boolean</span> <span class="hljs-variable">isLastLine</span> <span class="hljs-operator">=</span> right == words.length - <span class="hljs-number">1</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">numSpaces</span> <span class="hljs-operator">=</span> right - left;
     <span class="hljs-type">int</span> <span class="hljs-variable">totalSpace</span> <span class="hljs-operator">=</span> maxWidth - wordsLength(left, right, words);
-    
+
     <span class="hljs-type">String</span> <span class="hljs-variable">space</span> <span class="hljs-operator">=</span> isLastLine ? <span class="hljs-string">&quot; &quot;</span> : blank(totalSpace / numSpaces);
     <span class="hljs-type">int</span> <span class="hljs-variable">remainder</span> <span class="hljs-operator">=</span> isLastLine ? <span class="hljs-number">0</span> : totalSpace % numSpaces;
-    
+
     <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> left; i &lt;= right; i++)
         result.append(words[i])
             .append(space)
             .append(remainder-- &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">&quot; &quot;</span> : <span class="hljs-string">&quot;&quot;</span>);
-    
+
     <span class="hljs-keyword">return</span> padResult(result.toString().trim(), maxWidth);
 }
 
@@ -231,7 +231,7 @@ Output: 2
 <p><strong>Example 2:</strong></p>
 <pre><code>Input: 8
 Output: 2
-Explanation: The square root of 8 is 2.82842..., and since 
+Explanation: The square root of 8 is 2.82842..., and since
              the decimal part is truncated, 2 is returned.
 </code></pre>
 <h4 id="binary">Binary</h4>
@@ -242,10 +242,10 @@ Explanation: The square root of 8 is 2.82842..., and since
 <li><strong>Use the sorted property of integers to reduced the search space.</strong></li>
 </ol>
 <p>这两条提示我开始没看出来什么，后面发现- -，原来都已经告诉你标准的二分法思路了</p>
-<p>于是我们要求X的开根号，可以这样想：</p>
+<p>于是我们要求 X 的开根号，可以这样想：</p>
 <ul>
 <li>答案肯定在<code>[1~X]</code>之间；</li>
-<li>二分的思路找最接近X^2的数，因为毕竟是整数结果；</li>
+<li>二分的思路找最接近 X^2 的数，因为毕竟是整数结果；</li>
 </ul>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">mySqrt</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">low</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, high = x, mid;

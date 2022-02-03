@@ -9,8 +9,6 @@ date: 2018-12-2 12:39:09
 series: docker
 ---
 
-
-
 ### Introduction
 
 In this section, we will go through all the main concepts of docker technologies such as : **Docker Engine**, **Docker Architecture**, **Docker underlying technology**.
@@ -19,7 +17,7 @@ Basically reprinted from: https://docs.docker.com/engine/docker-overview, but I 
 
 ### Docker Engine
 
-*Docker Engine* is a client-server application with these major components:
+_Docker Engine_ is a client-server application with these major components:
 
 - A server which is a type of long-running program called a daemon process (the `dockerd` command).
 - A REST API which specifies interfaces that programs can use to talk to the daemon and instruct it what to do.
@@ -29,13 +27,13 @@ Basically reprinted from: https://docs.docker.com/engine/docker-overview, but I 
 
 The CLI uses the Docker REST API to control or interact with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI.
 
-The daemon creates and manages Docker *objects*, such as images, containers, networks, and volumes.
+The daemon creates and manages Docker _objects_, such as images, containers, networks, and volumes.
 
 ### Docker architecture
 
-Docker uses a **client-server architecture**. 
+Docker uses a **client-server architecture**.
 
-The Docker *client* talks to the Docker *daemon*, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon *can* run on the same system, or you can connect a Docker client to a remote Docker daemon. 
+The Docker _client_ talks to the Docker _daemon_, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon _can_ run on the same system, or you can connect a Docker client to a remote Docker daemon.
 
 **The Docker client and daemon communicate using a REST API, over UNIX sockets or a network interface.**
 
@@ -51,7 +49,7 @@ The Docker client (`docker`) is the primary way that many Docker users interact 
 
 #### 3. Docker registries (store)
 
-A Docker *registry* stores Docker images. Docker Hub and Docker Cloud are public registries that anyone can use, and Docker is configured to look for images on Docker Hub by default. You can even run your own private registry. If you use Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
+A Docker _registry_ stores Docker images. Docker Hub and Docker Cloud are public registries that anyone can use, and Docker is configured to look for images on Docker Hub by default. You can even run your own private registry. If you use Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
 
 When you use the `docker pull` or `docker run` commands, the required images are pulled from your configured registry. When you use the `docker push` command, your image is pushed to your configured registry.
 
@@ -63,17 +61,17 @@ When you use Docker, you are creating and using images, containers, networks, vo
 
 ##### IMAGES
 
-An *image* is a **read-only template** with instructions for creating a Docker container. 
+An _image_ is a **read-only template** with instructions for creating a Docker container.
 
-Often, an image is *based on* another image, with some additional customization. For example, you may build an image which is based on the `ubuntu` image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
+Often, an image is _based on_ another image, with some additional customization. For example, you may build an image which is based on the `ubuntu` image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
 
-You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a *Dockerfile* with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
+You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a _Dockerfile_ with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
 
 ##### CONTAINERS
 
 **A container is a runnable instance of an image.** You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
 
-By default, a container is relatively well isolated from other containers and its host machine. 
+By default, a container is relatively well isolated from other containers and its host machine.
 
 **You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.**
 
@@ -81,7 +79,7 @@ A container is defined by its image as well as any configuration options you pro
 
 ##### SERVICES
 
-Services allow you to scale containers across multiple Docker daemons, which all work together as a *swarm* with multiple *managers* and *workers*. Each member of a swarm is a Docker daemon, and the daemons all communicate using the Docker API. A service allows you to define the desired state, such as the number of replicas of the service that must be available at any given time. By default, the service is load-balanced across all worker nodes. To the consumer, the Docker service appears to be a single application. Docker Engine supports swarm mode in Docker 1.12 and higher.
+Services allow you to scale containers across multiple Docker daemons, which all work together as a _swarm_ with multiple _managers_ and _workers_. Each member of a swarm is a Docker daemon, and the daemons all communicate using the Docker API. A service allows you to define the desired state, such as the number of replicas of the service that must be available at any given time. By default, the service is load-balanced across all worker nodes. To the consumer, the Docker service appears to be a single application. Docker Engine supports swarm mode in Docker 1.12 and higher.
 
 ### The underlying technology
 
@@ -89,7 +87,7 @@ Docker is written in [Go](https://golang.org/) and takes advantage of several fe
 
 #### Namespaces
 
-Docker uses a technology called `namespaces` to provide the isolated workspace called the *container*. When you run a container, Docker creates a set of *namespaces* for that container.
+Docker uses a technology called `namespaces` to provide the isolated workspace called the _container_. When you run a container, Docker creates a set of _namespaces_ for that container.
 
 These namespaces provide a layer of isolation. Each aspect of a container runs in a separate namespace and its access is limited to that namespace.
 
@@ -103,7 +101,7 @@ Docker Engine uses namespaces such as the following on Linux:
 
 #### Control groups
 
-Docker Engine on Linux also relies on another technology called *control groups* (`cgroups`). A cgroup limits an application to a specific set of resources. Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. For example, you can limit the memory available to a specific container.
+Docker Engine on Linux also relies on another technology called _control groups_ (`cgroups`). A cgroup limits an application to a specific set of resources. Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. For example, you can limit the memory available to a specific container.
 
 #### Union file systems
 

@@ -1,8 +1,8 @@
 <h4 id="前言">前言</h4>
 <p>最近在复习<strong>数据结构</strong>和<strong>算法</strong>，这两个玩意也是被称之为<strong>“程序员的基本素养”</strong>，我最近比较想干的一件事就是读集合框架的源码</p>
-<p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection接口、Iterable接口、Iterator接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
-<p>为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读</p>
-<p>大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是<strong>往JDK源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
+<p>基于这个伟大目标，我开启了源码阅读的<strong>“从头到尾读”</strong>系列，目前只完成了<strong>Collection 接口、Iterable 接口、Iterator 接口</strong>这三个章节，正打算开始读<strong>ArrayList</strong>的源码</p>
+<p>为什么想要写自实现的 ArrayList，主要也是为了配合 ArrayList 的源码阅读</p>
+<p>大二的时候也学过数据结构这门课，也用 Java 实现过简单的 ArrayList 和其他常见的结构，但是这次的自实现，我的目标是<strong>往 JDK 源码上面靠拢</strong>，意在学习大师级的<strong>设计手法以及精妙的算法</strong></p>
 <p>话不多说，开搞</p>
 <h4 id="热身">热身</h4>
 <p>在此之前还没开始阅读<code>ArrayList</code>，但是我们可以稍稍瞥一眼它的类头，</p>
@@ -13,7 +13,7 @@
 }
 </code></pre>
 <p>这里面重要的内容首先我们就盯着<code>AbstractList</code>这个抽象类，一直往深了摸，摸到了<code>Collection</code>这个接口，这个接口继承了<code>Iterable</code>接口，欸~摸到宝了，我们拿这个玩意去开展我们的<strong>自实现类</strong>，为什么其他的抽象类、其他的接口不用管呢？</p>
-<p>在我看来，<strong>无论是Collection、List这类的接口，还是AbstractList、AbstractCollection这些抽象类</strong>它们仅是提供一个<strong>接口规范以及一定的实现</strong>，真正有意思的东西，还得是<strong>迭代器</strong>这个利器！</p>
+<p>在我看来，<strong>无论是 Collection、List 这类的接口，还是 AbstractList、AbstractCollection 这些抽象类</strong>它们仅是提供一个<strong>接口规范以及一定的实现</strong>，真正有意思的东西，还得是<strong>迭代器</strong>这个利器！</p>
 <p>于是马上写好自实现的类头，加上泛型就不用说了</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyArrayList</span>&lt;E&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterable</span>&lt;E&gt;{
 
@@ -45,8 +45,8 @@
 </ul>
 <p>里面注意的几个点：</p>
 <ul>
-<li>凡是牵扯到<strong>索引操作</strong>的，都需要<strong>判断index是否合法</strong>，比如是负数或者超过界限了</li>
-<li>add方法的<strong>扩容问题</strong></li>
+<li>凡是牵扯到<strong>索引操作</strong>的，都需要<strong>判断 index 是否合法</strong>，比如是负数或者超过界限了</li>
+<li>add 方法的<strong>扩容问题</strong></li>
 </ul>
 <p>准备就绪，咔咔咔就写下十几行代码：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_CAPACTTY</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
@@ -111,12 +111,12 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
     } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayIndexOutOfBoundsException</span>(<span class="hljs-string">&quot;index:&quot;</span> + index);
     }
-}    
+}
 </code></pre>
-<p>基本思路，如果index在可取范围内，则可以remove，否则抛出异常</p>
-<p>在可取范围内，如果index不是最后一个的话，那么移除该元素就得：</p>
+<p>基本思路，如果 index 在可取范围内，则可以 remove，否则抛出异常</p>
+<p>在可取范围内，如果 index 不是最后一个的话，那么移除该元素就得：</p>
 <ul>
-<li><strong>index位之后的元素往前移一位</strong></li>
+<li><strong>index 位之后的元素往前移一位</strong></li>
 <li><strong>size--</strong></li>
 </ul>
 <p>否则只进行<code>size--</code></p>
@@ -190,4 +190,4 @@ MyArrayList(<span class="hljs-type">int</span> capacity) {
     }
 }
 </code></pre>
-<p>目前为止（2018年6月5日-08点55分）<a href="https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java">代码快照</a>，我们的自实现算是基本达标了，接下来我们进入阅读ArrayList的环节</p>
+<p>目前为止（2018 年 6 月 5 日-08 点 55 分）<a href="https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java">代码快照</a>，我们的自实现算是基本达标了，接下来我们进入阅读 ArrayList 的环节</p>

@@ -16,7 +16,7 @@ Output: 1
 <p>Your algorithm should run in <em>O</em>(<em>n</em>) time and uses constant extra space.</p>
 <p>这题难点在于线性和常数空间</p>
 <h4 id="after-sort-beat-85">After Sort (Beat 85%)</h4>
-<p>思路和之前处理3sum一样，为了处理重复，我们先把数组排序，然后设一个flag从1开始数就好了</p>
+<p>思路和之前处理 3sum 一样，为了处理重复，我们先把数组排序，然后设一个 flag 从 1 开始数就好了</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstMissingPositive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     Arrays.sort(nums);
     <span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
@@ -39,13 +39,13 @@ Output: 1
 </code></pre>
 <h4 id="turned">Turned</h4>
 <ol>
-<li><p>数组里面有干扰数字，比如负数和0，对于负数我们直接变成整数最大值，0则可以忽略掉，这是我们第一个n时间要干的事情；</p>
+<li><p>数组里面有干扰数字，比如负数和 0，对于负数我们直接变成整数最大值，0 则可以忽略掉，这是我们第一个 n 时间要干的事情；</p>
 </li>
-<li><p>第二个n时间我们遍历数组，所有出现的正数，并且在数组长度范围内的数，就将这个数对应的排序位置中的数变为负数；比如有正数4，那么就要把数组下标3上的数字取相反数；</p>
+<li><p>第二个 n 时间我们遍历数组，所有出现的正数，并且在数组长度范围内的数，就将这个数对应的排序位置中的数变为负数；比如有正数 4，那么就要把数组下标 3 上的数字取相反数；</p>
 </li>
-<li><p>第三个n时间，如果碰到非负数，则说明这个位置没有在第二个n里被置反，所以这个位置对应的就是第一个丢失的正数；</p>
+<li><p>第三个 n 时间，如果碰到非负数，则说明这个位置没有在第二个 n 里被置反，所以这个位置对应的就是第一个丢失的正数；</p>
 </li>
-<li><p>如果三个n时间没有找到解，那么解就是数组长度+1；</p>
+<li><p>如果三个 n 时间没有找到解，那么解就是数组长度+1；</p>
 </li>
 </ol>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstMissingPositive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
@@ -75,7 +75,7 @@ The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In th
 Output: 6
 </code></pre>
 <h4 id="find-logicbeat-987">Find Logic(Beat 98.7%)</h4>
-<p>我们需要两根柱子，左，右；我们顺序遍历数组，每遇到一个0以上的柱子视为左柱子，那么右柱子是怎么决定的呢？我们多看几个例子：</p>
+<p>我们需要两根柱子，左，右；我们顺序遍历数组，每遇到一个 0 以上的柱子视为左柱子，那么右柱子是怎么决定的呢？我们多看几个例子：</p>
 <pre><code>[9,8,4,6]     [4,2,3]       [4,9,4,5,3,2]
 ░             ░                ░
 ░ ░           ░ ▓ ░            ░
@@ -90,7 +90,7 @@ Output: 6
 <p>加上例子我们可以发现：</p>
 <ul>
 <li>一旦碰到比左柱子高的柱子，这个就是右柱子，如例图中的[1,0,3]；</li>
-<li>如果没有比左柱子高的柱子，剩下的柱子中最高的柱子就是右柱子，比如上面的3个例子就是；</li>
+<li>如果没有比左柱子高的柱子，剩下的柱子中最高的柱子就是右柱子，比如上面的 3 个例子就是；</li>
 <li>下一轮右柱子就是上一轮的左柱子；</li>
 </ul>
 <p>然后关于积水的计算：</p>
@@ -100,7 +100,7 @@ Output: 6
 <li>两柱之间会有石头；</li>
 <li>积水：<ol>
 <li>面积：遍历两柱之间的石头，高宽乘积减去石头和就是积水；</li>
-<li>遍历两柱之间，每次都用高减去当前的石头高，然后加到一个sum中；</li>
+<li>遍历两柱之间，每次都用高减去当前的石头高，然后加到一个 sum 中；</li>
 </ol>
 </li>
 </ul>
@@ -156,11 +156,11 @@ Output: &quot;56088&quot;
 <li>Both <code>num1</code> and <code>num2</code> do not contain any leading zero, except the number 0 itself.</li>
 <li>You <strong>must not use any built-in BigInteger library</strong> or <strong>convert the inputs to integer</strong> directly.</li>
 </ol>
-<p>这题，当然你可以硬打，拆分乘法为2位数内的乘法和多位数的加法，但是效率很慢，我们来用数学解决这个问题</p>
+<p>这题，当然你可以硬打，拆分乘法为 2 位数内的乘法和多位数的加法，但是效率很慢，我们来用数学解决这个问题</p>
 <h4 id="mathematics">Mathematics</h4>
 <p>要点：</p>
 <ul>
-<li><p>n位数×m位数，结果长度是n+m；</p>
+<li><p>n 位数 ×m 位数，结果长度是 n+m；</p>
 </li>
 <li><p>把乘法看成是矩阵；</p>
 <pre><code>123 x 456:
@@ -173,7 +173,7 @@ i = 0    1   4   5   6       5  4  3
 
 位数：N  N  N  N  N  N
      0  4  5  6 15 18
-           8 10 12 
+           8 10 12
              12
 乘积缩放的篮子位置，观察ij就能看出来，位置会放在i+j+1下标的位置上，
 最后验算一下可知：
@@ -254,7 +254,7 @@ p = &quot;a*c?b&quot;
 Output: false
 </code></pre>
 <h4 id="dp-beat-7043">DP (Beat 70.43%)</h4>
-<p>这题和第10题类似，不同的是它的*可以是任意序列，而不是任意前面一个字符，所以首先它可以用DP去打，要领：</p>
+<p>这题和第 10 题类似，不同的是它的*可以是任意序列，而不是任意前面一个字符，所以首先它可以用 DP 去打，要领：</p>
 <pre><code>if (pc == &#x27;?&#x27;) {
     dp[i][j] = dp[i - 1][j - 1];
 }
@@ -303,9 +303,9 @@ s: acdcb p: a*c?b
     <span class="hljs-keyword">return</span> dp[s.length() - <span class="hljs-number">1</span>][p.length() - <span class="hljs-number">1</span>];
 }
 </code></pre>
-<p>虽然按部就班地打下了这题，但是beat率不高，所以这题还有更精妙的做法，讨论区有一种线性打法，直接根据if-else来打，我觉得case太难覆盖，我自己做的话，笔试时间内可能打不出，所以不推荐；</p>
+<p>虽然按部就班地打下了这题，但是 beat 率不高，所以这题还有更精妙的做法，讨论区有一种线性打法，直接根据 if-else 来打，我觉得 case 太难覆盖，我自己做的话，笔试时间内可能打不出，所以不推荐；</p>
 <h4 id="dfsbeat-100">DFS(Beat 100%)</h4>
-<p>参考一下究竟是怎么个dfs法：</p>
+<p>参考一下究竟是怎么个 dfs 法：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isMatch</span><span class="hljs-params">(String s, String p)</span> {
     <span class="hljs-keyword">return</span> dfs(s, p, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) &gt; <span class="hljs-number">1</span>;
 }

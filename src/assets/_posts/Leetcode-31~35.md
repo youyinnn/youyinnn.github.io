@@ -9,8 +9,6 @@ date: 2019-03-16 21:46:00
 series: leetcode
 ---
 
-
-
 ### 31. Next Permutation(Medium)
 
 Implement **next permutation**, which rearranges numbers into the lexicographically next greater permutation of numbers.
@@ -29,7 +27,7 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 
 #### From Back(7ms)
 
-不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列1 2 3 4，往后的序列是
+不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列 1 2 3 4，往后的序列是
 
 ```
 1 2 3 4  ┌→ 2 1 3 4  ┌→ 3 1 2 4  ┌→ 4 1 2 3
@@ -40,7 +38,7 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1 4 3 2 -┘  2 4 3 1 -┘  3 4 2 1 -┘  4 3 2 1
 ```
 
-多看几组我们可以发现，如果我们从后往前找到**顺序**的一对，比如4 1 3 2中，1和3是顺序的，那么如果将1和**它的下一个自然数交换位置**，然后**将该位置往后的序列自然排序**，就可以得到下一组自然序列，比如1在当前序列中的下一个自然数是2，于是交换得到4 2 3 1，然后再对2后面的序列进行排序，如此得到4 2 1 3
+多看几组我们可以发现，如果我们从后往前找到**顺序**的一对，比如 4 1 3 2 中，1 和 3 是顺序的，那么如果将 1 和**它的下一个自然数交换位置**，然后**将该位置往后的序列自然排序**，就可以得到下一组自然序列，比如 1 在当前序列中的下一个自然数是 2，于是交换得到 4 2 3 1，然后再对 2 后面的序列进行排序，如此得到 4 2 1 3
 
 于是代码为：
 
@@ -78,8 +76,6 @@ private int findTheBiggerOne(int[] nums, int start, int end, int target) {
 }
 ```
 
-
-
 ### 32. Longest Valid Parentheses(Hard)
 
 Given a string containing just the characters `'('` and `')'`, find the length of the longest valid (well-formed) parentheses substring.
@@ -100,13 +96,13 @@ Output: 4
 Explanation: The longest valid parentheses substring is "()()"
 ```
 
-这题，本来还想用找**Q5最长回文数**的套路去做的，不行，而且这题有更简单的方法
+这题，本来还想用找**Q5 最长回文数**的套路去做的，不行，而且这题有更简单的方法
 
 #### DP
 
-想不到吧？这题居然可以dp，牛皮吧？根据官方给的solution，我优化了代码，以一种更简单的方式去用dp解这道题，我们先看几个例子：
+想不到吧？这题居然可以 dp，牛皮吧？根据官方给的 solution，我优化了代码，以一种更简单的方式去用 dp 解这道题，我们先看几个例子：
 
-``` java
+```java
 1.假如我们有：
                 ( ) ( )
     -------------------
@@ -115,7 +111,7 @@ Explanation: The longest valid parentheses substring is "()()"
 match:            2   2
                   +   +
 before match:     ?   2
-    
+
 对于最后一个4，我们可以做这样的解释：
 1）因为它和前一个字符match了，所以算2个长度；
 2）因为在这2个长度之前，紧前面也有一个长度为2的合法子串，所以这两紧挨着的串长度可以加在一起；
@@ -128,7 +124,7 @@ before match:     ?   2
 match:             2   2
                    +   +
 before match:      0   2
-    
+
 3.再看另外一个例子：
               + ( ( ) ) ( ( ) )
     ---------------------------
@@ -139,7 +135,7 @@ match:              2 2     2 2
 inside:             0 2     0 2
                     + +     + +
 before match:       0 0     0 4
-    
+
 对于第一个4：
 它前面一个符号是闭口，且这个闭口符号有效值为2，于是当前闭口要考虑的有效开口，
 应该往前数2+1位，也就是下标为1的位置，如果这个位置是开口，那么证明match，
@@ -153,12 +149,12 @@ before match:       0 0     0 4
 
 于是我们可以看出规律：
 
-- 开口有效值都是0
+- 开口有效值都是 0
 - 闭口：
-    - 如果前一位是开口，那么直接match到2个长度，然后再连上这对开闭口**紧前的符号**的有效值；
-    - 如果前以为是闭口，那么说明有可能是大包小的情况，所以**以前一位闭口的有效值为参考**，在这个有效值**再前一位（这里记为far match）**与当前闭口做match：
-        - 如果不match，那么当前闭口有效值为0；
-        - 否则match值2加上前一位闭口有效值再加上**far match的紧前的符号**的有效值，就是当前闭口的有效值；
+  - 如果前一位是开口，那么直接 match 到 2 个长度，然后再连上这对开闭口**紧前的符号**的有效值；
+  - 如果前以为是闭口，那么说明有可能是大包小的情况，所以**以前一位闭口的有效值为参考**，在这个有效值**再前一位（这里记为 far match）**与当前闭口做 match：
+    - 如果不 match，那么当前闭口有效值为 0；
+    - 否则 match 值 2 加上前一位闭口有效值再加上**far match 的紧前的符号**的有效值，就是当前闭口的有效值；
 
 于是代码：
 
@@ -194,7 +190,7 @@ You are given a target value to search. If found in the array return its index, 
 
 You may assume no duplicate exists in the array.
 
-Your algorithm's runtime complexity must be in the order of *O*(log *n*).
+Your algorithm's runtime complexity must be in the order of _O_(log _n_).
 
 **Example 1:**
 
@@ -256,13 +252,11 @@ public int search(int[] nums, int target) {
 }
 ```
 
-
-
 ### 34. Find First And Last Position Of Element In Sorted Array
 
 Given an array of integers `nums` sorted in ascending order, find the starting and ending position of a given `target` value.
 
-Your algorithm's runtime complexity must be in the order of *O*(log *n*).
+Your algorithm's runtime complexity must be in the order of _O_(log _n_).
 
 If the target is not found in the array, return `[-1, -1]`.
 
@@ -304,9 +298,8 @@ public int[] searchRange(int[] nums, int target) {
     }
 }
 ```
+
 不多说
-
-
 
 ### 35. Search Insert Position(Easy)
 
@@ -344,7 +337,8 @@ public int searchInsert(int[] nums, int target) {
     return low;
 }
 ```
+
 关键：
 
 - low <= high
-- 返回low
+- 返回 low

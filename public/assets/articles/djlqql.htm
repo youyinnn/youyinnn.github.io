@@ -1,15 +1,15 @@
 <h3 id="introduction">Introduction</h3>
-<p>就A了签到题，我觉得这次笔试很简单了，可是后面3题没过一个case，题目不难，各种各样的失误8，说到底菜才是原罪，还是得多刷题</p>
-<p>和leecode不一样的是：</p>
+<p>就 A 了签到题，我觉得这次笔试很简单了，可是后面 3 题没过一个 case，题目不难，各种各样的失误 8，说到底菜才是原罪，还是得多刷题</p>
+<p>和 leecode 不一样的是：</p>
 <ul>
 <li><strong>阅读理解</strong>很重要，这次读题特别耽误；</li>
 <li>多条件真的不要怕，一步一步地<strong>组合条件</strong>；</li>
 </ul>
-<h3 id="q1-z国硬币找零">Q1 Z国硬币找零</h3>
+<h3 id="q1-z-国硬币找零">Q1 Z 国硬币找零</h3>
 <blockquote>
-<p> z国4种硬币，面值1、16、64、1024，小明用1024买东西，求找出的最小硬币数。</p>
-<p> 如买200，找824，可找12枚64、3枚16、2枚4
- 输入200，输出17</p>
+<p>z 国 4 种硬币，面值 1、16、64、1024，小明用 1024 买东西，求找出的最小硬币数。</p>
+<p>如买 200，找 824，可找 12 枚 64、3 枚 16、2 枚 4
+输入 200，输出 17</p>
 </blockquote>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
     <span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);
@@ -36,29 +36,29 @@
 </code></pre>
 <h3 id="q2-字符串去重">Q2 字符串去重</h3>
 <blockquote>
-<p> 字符串去重
- 条件：
- 1）如果三个一样的字符，去掉一个：helllo -&gt;hello
- 2）AABB型，去掉最后一个：AABB -&gt; AAB
- 3）从左到右优先考虑上面两个条件，比如AABBCC，虽然AABB、BBCC都需要考虑，但是AABB删除完之后变成AABCC了，CC可以不用处理了：AABBCC -&gt; AABCC</p>
-<p> 输入
- 2
- helllo
- wooooooow</p>
-<p> 输出
- hello
- woow</p>
+<p>字符串去重
+条件：
+1）如果三个一样的字符，去掉一个：helllo -&gt;hello
+2）AABB 型，去掉最后一个：AABB -&gt; AAB
+3）从左到右优先考虑上面两个条件，比如 AABBCC，虽然 AABB、BBCC 都需要考虑，但是 AABB 删除完之后变成 AABCC 了，CC 可以不用处理了：AABBCC -&gt; AABCC</p>
+<p>输入
+2
+helllo
+wooooooow</p>
+<p>输出
+hello
+woow</p>
 </blockquote>
 <p>这题关键：</p>
 <ul>
 <li>用一个新的地方去存储<strong>已记录的合法字符串</strong>，记为<code>newS</code>，然后在这个已记录的字符串上继续考虑去重；</li>
-<li>设两个flag，一个记录前两位是否是AA，记为<code>aa</code>，一个记录前三位是否是AAB，记为<code>aab</code>；这两个flag都在<strong>已记录的合法字符串</strong>中打；每次通过这两个flag去删选字符；</li>
+<li>设两个 flag，一个记录前两位是否是 AA，记为<code>aa</code>，一个记录前三位是否是 AAB，记为<code>aab</code>；这两个 flag 都在<strong>已记录的合法字符串</strong>中打；每次通过这两个 flag 去删选字符；</li>
 </ul>
 <p>步骤：</p>
 <ol>
 <li>遍历源串：<ol>
 <li>如果<code>aa</code>满足，且当前字符，和<code>newS</code>的末尾字符一样，说明三个一样，于是这个字符跳过；</li>
-<li>如果<code>aab</code>满足，且当前字符，和<code>newS</code>的末尾字符一样，说明是AABB，于是这个字符跳过；</li>
+<li>如果<code>aab</code>满足，且当前字符，和<code>newS</code>的末尾字符一样，说明是 AABB，于是这个字符跳过；</li>
 <li>否则：重新打<code>aa</code>和<code>aab</code>flag；当前字符记到<code>newS</code></li>
 </ol>
 </li>
@@ -99,32 +99,32 @@
 </code></pre>
 <h3 id="q3-发礼品">Q3 发礼品</h3>
 <blockquote>
-<p> n个人比赛得分，围成圈领奖品，条件如下
- 1）如果分数比左右两边的人高，那么奖品也比左右两边的人多
- 2）每人至少一份
- 求最少奖品数</p>
-<p> 输入：第一行为比赛轮次，接下来每2行分别代表比赛人数和每个人的分数
- 2
- 2
- 1 2
- 4
- 1 2 3 3</p>
-<p> 输出
- 3
- 8</p>
-<p> 解释：</p>
+<p>n 个人比赛得分，围成圈领奖品，条件如下
+1）如果分数比左右两边的人高，那么奖品也比左右两边的人多
+2）每人至少一份
+求最少奖品数</p>
+<p>输入：第一行为比赛轮次，接下来每 2 行分别代表比赛人数和每个人的分数
+2
+2
+1 2
+4
+1 2 3 3</p>
+<p>输出
+3
+8</p>
+<p>解释：</p>
 <ul>
-<li>第一轮2个人比赛，第一个人1分，最少一个奖品，第二个人2分，比左边的人高，所以奖品也要多，最少可以拿2个；
-  所以礼物序列为：1 2 所以总最少3份</li>
-<li>第二轮4个人比赛，第一个人1分，最少一个奖品，第二个人2分，比左边的人高，所以奖品也要多，最少可以拿2个，第三个人比第二个人高分，也多一份，第四个人和三个一样，但是比第一个人高，所以最少要比第一个人多拿一份礼物；
-  所以礼物序列为：1 2 3 2 总最少8份</li>
+<li>第一轮 2 个人比赛，第一个人 1 分，最少一个奖品，第二个人 2 分，比左边的人高，所以奖品也要多，最少可以拿 2 个；
+所以礼物序列为：1 2 所以总最少 3 份</li>
+<li>第二轮 4 个人比赛，第一个人 1 分，最少一个奖品，第二个人 2 分，比左边的人高，所以奖品也要多，最少可以拿 2 个，第三个人比第二个人高分，也多一份，第四个人和三个一样，但是比第一个人高，所以最少要比第一个人多拿一份礼物；
+所以礼物序列为：1 2 3 2 总最少 8 份</li>
 </ul>
 </blockquote>
-<p>这题特别耽误，因为开始的时候，并没有解释的，做到一半的时候，系统发了公告解释为什么得8，估计是问考官要解释的人太多了- -，我也是看了评论区才知道，考试的时候居然可以问考官的操</p>
-<p>这题吧，关键就是条件比较tricky：</p>
+<p>这题特别耽误，因为开始的时候，并没有解释的，做到一半的时候，系统发了公告解释为什么得 8，估计是问考官要解释的人太多了- -，我也是看了评论区才知道，考试的时候居然可以问考官的操</p>
+<p>这题吧，关键就是条件比较 tricky：</p>
 <ol>
 <li>人是围成圈站的，所以数组最后一个人和第一个人是相邻的，而且奖品数量的计算也不是从第一个人开始计算；</li>
-<li>如果比左右两边高礼品才高，三者比较这只是其中一种case，剩下还有相等的，左高右低左低右高的几种case；</li>
+<li>如果比左右两边高礼品才高，三者比较这只是其中一种 case，剩下还有相等的，左高右低左低右高的几种 case；</li>
 <li>最少一个礼物，求最少的礼物；这两句话的意思是，能少尽量少；</li>
 </ol>
 <p>思路：</p>
@@ -134,10 +134,10 @@
 <li>按照得分升序，依次进行如下逻辑：<ol>
 <li>如果当前人的分数比左右两边都高，那么当前人获得比更多那一边的人的礼品数多一；</li>
 <li>如果仅比一遍高，那么当前人至少也要比这一边多一个礼品；</li>
-<li>其他情况就都是分配最小礼物1个；</li>
+<li>其他情况就都是分配最小礼物 1 个；</li>
 </ol>
 </li>
-<li>记录每次当前人的礼品数，加到sum中，得解；</li>
+<li>记录每次当前人的礼品数，加到 sum 中，得解；</li>
 </ol>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
     <span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);
@@ -199,17 +199,17 @@
     }
 }
 </code></pre>
-<h3 id="q4-n绳子剪m等长">Q4 N绳子剪M等长</h3>
+<h3 id="q4-n-绳子剪-m-等长">Q4 N 绳子剪 M 等长</h3>
 <blockquote>
-<p> n根绳子，剪成m段等长绳子，不可拼接，求等多长，结果保留2位小数</p>
-<p> 输入
- 第一行2个数，n和m
- 第二行n个数，原始的绳子长度</p>
-<p> 3 4
- 3 4 5</p>
-<p> 输出
- 2.50
- 5可剪成两条2.5和2.5，3和4分别可以剪出一个2.5，总共4个2.5</p>
+<p>n 根绳子，剪成 m 段等长绳子，不可拼接，求等多长，结果保留 2 位小数</p>
+<p>输入
+第一行 2 个数，n 和 m
+第二行 n 个数，原始的绳子长度</p>
+<p>3 4
+3 4 5</p>
+<p>输出
+2.50
+5 可剪成两条 2.5 和 2.5，3 和 4 分别可以剪出一个 2.5，总共 4 个 2.5</p>
 </blockquote>
 <p>这题说实话，经验提，我看几篇题解都是这样的做法- -</p>
 <p>二分法在<strong>0-最长绳子里进行中位选择</strong>，每次选择的中位如果用每条绳子去剪，直到能剪出符合要求的</p>

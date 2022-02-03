@@ -8,11 +8,11 @@
 <p>回来一看</p>
 <p>可以答</p>
 <p>耻辱</p>
-<p>说明：本篇代码大部分引自：<a href="https://github.com/iluwatar/java-design-patterns">https://github.com/iluwatar/java-design-patterns</a> </p>
+<p>说明：本篇代码大部分引自：<a href="https://github.com/iluwatar/java-design-patterns">https://github.com/iluwatar/java-design-patterns</a></p>
 <hr>
 <h3 id="singleton">Singleton</h3>
 <p>单例模式（Singleton）算是工厂模式的一种特例，你不需要给出任何参数，就可以马上得到一个在任何地方都可以调用到的唯一的实例</p>
-<p>第一次接触到单例，还是在1年多前学习spring的时候，在配置Bean的时候有单例多例配置</p>
+<p>第一次接触到单例，还是在 1 年多前学习 spring 的时候，在配置 Bean 的时候有单例多例配置</p>
 <p>总的来说，一个实例，如果是用作工具类或者工具对象的话，那么它并不需要创建多个实例，我们就可以用单例的形式去获取这个对象</p>
 <h4 id="hungrymanstyle（thread-safe）">HungryManStyle（thread safe）</h4>
 <pre><code class="hljs language-java"><span class="hljs-comment">/**
@@ -44,11 +44,11 @@
 </code></pre>
 <p>这种是最基本的单例</p>
 <ul>
-<li>私有无参构造方法保证外部引用不可以new一个对象</li>
-<li>判断是否初始化了instance变量 始终只返会同一个对象</li>
+<li>私有无参构造方法保证外部引用不可以 new 一个对象</li>
+<li>判断是否初始化了 instance 变量 始终只返会同一个对象</li>
 </ul>
-<p>但是这种单例只能在单线程的情况下正常工作，在多线程的情况下，如果多个线程同一时刻在line5处判断实例变量不为空，那么就可能有多个线程同时执行line6，在这个时间，会有大量的实例挤破头得被instance引用，这样会造成资源浪费</p>
-<h5 id="简单synchronized上锁（线程安全）">简单Synchronized上锁（线程安全）</h5>
+<p>但是这种单例只能在单线程的情况下正常工作，在多线程的情况下，如果多个线程同一时刻在 line5 处判断实例变量不为空，那么就可能有多个线程同时执行 line6，在这个时间，会有大量的实例挤破头得被 instance 引用，这样会造成资源浪费</p>
+<h5 id="简单-synchronized-上锁（线程安全）">简单 Synchronized 上锁（线程安全）</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span>{
     <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span>{}
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Singletion INSTANCE;
@@ -70,7 +70,7 @@
     <span class="hljs-keyword">return</span> INSTANCE;
 }
 </code></pre>
-<p>优点，比上面那种安全，缺点，获取对象的时候资源浪费，我们上锁的目的只是<strong>防止最开始在实例未被初始化的时候，被多线程访问导致line5判断异常</strong>，往后在实例被创建好了之后，并不需要防止多线程同时访问，每次调用方法都加锁只会增加无意义的消耗，我称这个为<strong>“无意义锁”</strong></p>
+<p>优点，比上面那种安全，缺点，获取对象的时候资源浪费，我们上锁的目的只是<strong>防止最开始在实例未被初始化的时候，被多线程访问导致 line5 判断异常</strong>，往后在实例被创建好了之后，并不需要防止多线程同时访问，每次调用方法都加锁只会增加无意义的消耗，我称这个为<strong>“无意义锁”</strong></p>
 <p>这种实现不可取</p>
 <h5 id="想当然的双重检查锁（非线程安全）">想当然的双重检查锁（非线程安全）</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span>{
@@ -88,7 +88,7 @@
     }
 }
 </code></pre>
-<p>这个实现，看似可以避免<strong>无意义锁</strong>的问题，但是line8可能会因为某单线程的重排序导致其他线程对该实例的可见性问题，对于双重检查锁的错误，在系列文章《并发编程第六坎》中可以看到，这里不再赘述</p>
+<p>这个实现，看似可以避免<strong>无意义锁</strong>的问题，但是 line8 可能会因为某单线程的重排序导致其他线程对该实例的可见性问题，对于双重检查锁的错误，在系列文章《并发编程第六坎》中可以看到，这里不再赘述</p>
 <p>基于双重检查锁的解决方案，给出两种比较标准的实现：</p>
 <h5 id="基于内部类和类加载机制的initialization-on-demand-holder-idiom">基于内部类和类加载机制的——Initialization On Demand Holder Idiom</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InitializingOnDemandHolderIdiom</span> {
@@ -97,22 +97,22 @@
         <span class="hljs-keyword">return</span> HelperHolder.INSTANCE;
     }
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HelperHolder</span> {
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">InitializingOnDemandHolderIdiom</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span> 
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">InitializingOnDemandHolderIdiom</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span>
             <span class="hljs-keyword">new</span> <span class="hljs-title class_">InitializingOnDemandHolderIdiom</span>();
     }
 }
 </code></pre>
-<p>这个实现的好处就是，它可以在既可以保证线程安全和懒加载，又可以适应所有的JDK版本，比如我们下面的实现用到了volatile变量，就需要JDK1.5以上的支持</p>
+<p>这个实现的好处就是，它可以在既可以保证线程安全和懒加载，又可以适应所有的 JDK 版本，比如我们下面的实现用到了 volatile 变量，就需要 JDK1.5 以上的支持</p>
 <blockquote>
-<p> 参考：</p>
+<p>参考：</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom</a> </li>
+<li><a href="https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom</a></li>
 <li><a href="http://ifeve.com/initialization-on-demand-holder-idiom/">http://ifeve.com/initialization-on-demand-holder-idiom/</a></li>
 <li><a href="https://www.cnblogs.com/fuyoucaoyu/p/6547715.html">https://www.cnblogs.com/fuyoucaoyu/p/6547715.html</a></li>
 </ul>
 </blockquote>
-<p>在这里我们多接触了一个概念——<strong>初始化锁LC锁</strong>，具体的介绍可以看第六坎</p>
-<h5 id="基于volatile变量的线程安全的双重检查锁">基于volatile变量的——线程安全的双重检查锁</h5>
+<p>在这里我们多接触了一个概念——<strong>初始化锁 LC 锁</strong>，具体的介绍可以看第六坎</p>
+<h5 id="基于-volatile-变量的线程安全的双重检查锁">基于 volatile 变量的——线程安全的双重检查锁</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadSafeDoubleCheckLocking</span> {
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> ThreadSafeDoubleCheckLocking instance;
   <span class="hljs-keyword">private</span> <span class="hljs-title function_">ThreadSafeDoubleCheckLocking</span><span class="hljs-params">()</span> {
@@ -141,7 +141,7 @@
   }
 }
 </code></pre>
-<p>关键是volatile的声明，原因见第六坎</p>
+<p>关键是 volatile 的声明，原因见第六坎</p>
 <h5 id="枚举法单例">枚举法单例</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">EnumSingleton</span> {
   INSTANCE;
@@ -152,14 +152,14 @@
 }
 </code></pre>
 <p>也是利用枚举的特点，线程安全，简单、直接、省事、可用</p>
-<p>单例的枚举实现在《Effective Java》中有提到，因为其<strong>功能完整、使用简洁、无偿地提供了序列化机制、在面对复杂的序列化或者反射攻击时仍然可以绝对防止多次实例化</strong>等优点，单元素的枚举类型被作者认为是实现Singleton的最佳方法。 </p>
+<p>单例的枚举实现在《Effective Java》中有提到，因为其<strong>功能完整、使用简洁、无偿地提供了序列化机制、在面对复杂的序列化或者反射攻击时仍然可以绝对防止多次实例化</strong>等优点，单元素的枚举类型被作者认为是实现 Singleton 的最佳方法。</p>
 <p>具体可以参考：<a href="https://blog.csdn.net/gavin_dyson/article/details/70832185">https://blog.csdn.net/gavin_dyson/article/details/70832185</a></p>
 <p>里面说了，为什么枚举类会有一次性锁的效果，其实枚举是一种语法糖，本质是上利用的还是静态特性，然后因为<strong>语法糖揪在一起（自创说法）</strong>的原因，序列化绝对安全</p>
 <h4 id="总结">总结</h4>
 <p>这么多单例，最好的实现无疑是最后三种，最后三种各自有各自的优点</p>
 <ul>
 <li><strong>静态内部类实现：</strong>所有版本通用，常规且有效</li>
-<li><strong>volatile双重检查锁实现：</strong>只适用JDK1.5以上，正式切有效</li>
+<li><strong>volatile 双重检查锁实现：</strong>只适用 JDK1.5 以上，正式切有效</li>
 <li><strong>枚举法实现：</strong>蜜汁实现，简单暴力省事高效，但是不易理解其特性</li>
 </ul>
 <p>多提一句，饿汉式写法没有绝对的漏洞，只是如果你的实例内容如果多，占用空间大，而且没有一开始就需要伴随系统初始化的必要的话，有点浪费资源，其他也没差。</p>
@@ -167,7 +167,7 @@
 <h3 id="observerdependentspublisher-subscriber">Observer/Dependents/Publisher-Subscriber</h3>
 <p>观察者模式意在建立一种一对多的关联关系，在这个关系中，任意其中一个对象发生了状态变化，其他对象都可以自动感知到这个变化。</p>
 <p>观察者模式又称为：关联模式、发布者-订阅者模式</p>
-<p>这样的关系很容易理解，就像电视台播报的天气预报一样，天气一变，气象台就会发送变动天气的短信给当地用户，武汉就一天至少2封高温预警的短信- -</p>
+<p>这样的关系很容易理解，就像电视台播报的天气预报一样，天气一变，气象台就会发送变动天气的短信给当地用户，武汉就一天至少 2 封高温预警的短信- -</p>
 <p>我们首先来看</p>
 <h4 id="subjectpublisher">Subject/Publisher</h4>
 <pre><code class="hljs language-java"><span class="hljs-comment">/**
@@ -245,7 +245,7 @@
  */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Observable</span>&lt;
     S <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observable</span>&lt;S, O, A&gt;,
-    O <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observer</span>&lt;S, O, A&gt;, 
+    O <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observer</span>&lt;S, O, A&gt;,
     A&gt; {
 
   <span class="hljs-keyword">protected</span> List&lt;O&gt; observers;
@@ -273,8 +273,8 @@
  * <span class="hljs-doctag">@param</span> &lt;O&gt; Observer
  * <span class="hljs-doctag">@param</span> &lt;A&gt; Action
  */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Observer</span>&lt;S <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observable</span>&lt;S, O, A&gt;, 
-                          O <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observer</span>&lt;S, O, A&gt;, 
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Observer</span>&lt;S <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observable</span>&lt;S, O, A&gt;,
+                          O <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observer</span>&lt;S, O, A&gt;,
                           A&gt; {
 
   <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(S subject, A argument)</span>;
@@ -331,7 +331,7 @@
 <p>参考项目的作者<code>iluwatter</code>有这样一段比喻：</p>
 <blockquote>
 <p>附近的山里有一只巨魔（Troll），他平时都空着手，偶尔也会拿着武器；</p>
-<p>如果你要让同一只巨魔拿着武器的话，你不需要new一只一模一样的巨魔，你只需要包装这只巨魔就好了[doge]</p>
+<p>如果你要让同一只巨魔拿着武器的话，你不需要 new 一只一模一样的巨魔，你只需要包装这只巨魔就好了[doge]</p>
 </blockquote>
 <h4 id="object-interface-and-simple-implement">Object-Interface and Simple Implement</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Troll</span> {
@@ -350,7 +350,7 @@
   }
 }
 </code></pre>
-<p>现在我们有一只攻击力+10的巨魔，接下来我们给它把无尽</p>
+<p>现在我们有一只攻击力+10 的巨魔，接下来我们给它把无尽</p>
 <h4 id="decorator">Decorator</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClubbedTroll</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Troll</span> {
   <span class="hljs-keyword">private</span> Troll decorated;
@@ -377,7 +377,7 @@ troll = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cl
 troll.attack(); <span class="hljs-comment">// 暴击！</span>
 </code></pre>
 <h4 id="总结-2">总结</h4>
-<p>感觉和AOP差不多，只不过实现思路和需求不一样</p>
+<p>感觉和 AOP 差不多，只不过实现思路和需求不一样</p>
 <hr>
 <h3 id="adapterwrapper">Adapter/Wrapper</h3>
 <p>适配器模式，也是包装模式的一种，它和装饰器模式有一方面像的一点就是，它们都是包装要使用的类，只不过装饰器是针对同一种类去包装，企图强化这个类；而适配器是要包装两个类为一个统一的类，在适配器里兼容一个类的输出，让它的输出为另一个类可用的输入，适配器输出这另一个类的输出，企图让这两个类联合工作。</p>
@@ -417,7 +417,7 @@ troll.attack(); <span class="hljs-comment">// 暴击！</span>
   }
 }
 </code></pre>
-<p>可以看到，这里有一个关键的地方，船长实现RowingBoat类的方式是解耦的，是传入一个RowingBoat对象，基于这个，我们可以编写一个适配器</p>
+<p>可以看到，这里有一个关键的地方，船长实现 RowingBoat 类的方式是解耦的，是传入一个 RowingBoat 对象，基于这个，我们可以编写一个适配器</p>
 <h4 id="adapter">Adapter</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FishingBoatAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">RowingBoat</span> {
   <span class="hljs-keyword">private</span> FishingBoat boat;
@@ -440,12 +440,12 @@ captain.row();
 <hr>
 <h3 id="factory">Factory</h3>
 <p>工厂模式，在工程化编程中有着举足轻重的地位，将对象的创建、参数分派等行为工程化，是一个项目严谨编写的第一步体现。</p>
-<p>项目的作者写分别引了<code>Factory-method</code>和<code>Factory-kit</code>两部分，我们先从method开始说起</p>
+<p>项目的作者写分别引了<code>Factory-method</code>和<code>Factory-kit</code>两部分，我们先从 method 开始说起</p>
 <h4 id="factory-method">Factory-method</h4>
 <p>工厂方法模式，是要定义一个专门用于创建对象的接口，只不过创建对象的方式是让实现子类去决定应该创建具体哪一个对象，工厂方法模式<strong>让一个类将实例化过程延迟到子类上</strong>。</p>
 <p>我们来看比喻：</p>
 <blockquote>
-<p> 一个铁匠（BlackSmith）打造（manufacture）武器，精灵（Elves）要求使用小巧的（Elvish）武器，半兽人（Orcs）要求使用重型武器（Orcish）。根据客户要求的不同会召集到打造同一类型武器的铁匠。</p>
+<p>一个铁匠（BlackSmith）打造（manufacture）武器，精灵（Elves）要求使用小巧的（Elvish）武器，半兽人（Orcs）要求使用重型武器（Orcish）。根据客户要求的不同会召集到打造同一类型武器的铁匠。</p>
 </blockquote>
 <p>专业的解释：</p>
 <blockquote>
@@ -514,17 +514,17 @@ captain.row();
   <span class="hljs-keyword">public</span> <span class="hljs-title function_">App</span><span class="hljs-params">(Blacksmith blacksmith)</span> {
     <span class="hljs-built_in">this</span>.blacksmith = blacksmith;
   }
-  
+
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
     <span class="hljs-comment">// Lets go to war with Orc weapons</span>
     <span class="hljs-type">App</span> <span class="hljs-variable">app</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">App</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">OrcBlacksmith</span>());
     app.manufactureWeapons();
- 
+
     <span class="hljs-comment">// Lets go to war with Elf weapons</span>
     app = <span class="hljs-keyword">new</span> <span class="hljs-title class_">App</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ElfBlacksmith</span>());
     app.manufactureWeapons();
   }
-  
+
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">manufactureWeapons</span><span class="hljs-params">()</span> {
     Weapon weapon;
     weapon = blacksmith.manufactureWeapon(WeaponType.SPEAR);
@@ -538,7 +538,7 @@ captain.row();
 <li>首先一个工厂（Factory）只生产同一类产品（Product），这里将工厂映射为<code>BlackSmith interface</code>接口，他可以制造<code>Weapon</code>对象</li>
 <li>其次产品有很多种产品，所以我们也把产品抽象成接口<code>Weapon interface</code></li>
 <li>那么我们要指派不同的创造者（Producer/Builder），去生产不同的产品，这其实就是不同的工厂接口的实现，这映射到的就是<code>ElfBlacksmith</code>和<code>OrcBlacksmith</code>，分别生产<code>ElfWeapon</code>和<code>OrcWeapon</code></li>
-<li>最后在App里面，完美地使用了多态的特性：<strong>父类引用指向子类对象</strong></li>
+<li>最后在 App 里面，完美地使用了多态的特性：<strong>父类引用指向子类对象</strong></li>
 </ol>
 </blockquote>
 <h4 id="factory-kit">Factory-kit</h4>
@@ -570,7 +570,7 @@ captain.row();
 }
 </code></pre>
 <h5 id="builder">Builder</h5>
-<p>再看看工匠，这里用到了Java8的函数式特性，传入一个供给者对象</p>
+<p>再看看工匠，这里用到了 Java8 的函数式特性，传入一个供给者对象</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Builder</span> {
   <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(WeaponType name, Supplier&lt;Weapon&gt; supplier)</span>;            <span class="hljs-comment">// 4</span>
 }
@@ -605,16 +605,16 @@ captain.row();
 </code></pre>
 <p>这里有一段稍微难懂的方法引用语法，我们可以这样理解，跟着标号走</p>
 <ol>
-<li>首先传入一个<code>consumer</code>对象（1.1-1.2），这个对象就是Builder，它要实现的唯一方法就是<code>add</code>方法，在括号内我们注意到他利用<code>builder</code>调用了多次<code>add</code>方法，将武器类型和武器对象一一对应了起来；</li>
-<li>维护一个map，用作映射武器类型名字和武器制造方法（Suplier）这个武器制造方法可以制造一种武器</li>
-<li>3.0的代码代表，<code>builder.add(a, b)</code>传入的参数a和b被这个map的<code>put</code>方法所接管，在这个意义上，我们在<code>Main</code>中看到的3.1-3.4相当于在<code>Factory.factory()</code>方法中调用map的<code>put</code>方法，我们看到3.1-3.4后一个参数是一个构造方法引用，用于作为Suplier对象来直接返回一个武器对象</li>
-<li>往上看到的是Builder的add方法，这个方法的实现被3.0接管了</li>
-<li>看到这个return语句，千万不要会错意，这个return语句其实是上面<code>create</code>方法的实现语句，用于返回一件武器</li>
+<li>首先传入一个<code>consumer</code>对象（1.1-1.2），这个对象就是 Builder，它要实现的唯一方法就是<code>add</code>方法，在括号内我们注意到他利用<code>builder</code>调用了多次<code>add</code>方法，将武器类型和武器对象一一对应了起来；</li>
+<li>维护一个 map，用作映射武器类型名字和武器制造方法（Suplier）这个武器制造方法可以制造一种武器</li>
+<li>3.0 的代码代表，<code>builder.add(a, b)</code>传入的参数 a 和 b 被这个 map 的<code>put</code>方法所接管，在这个意义上，我们在<code>Main</code>中看到的 3.1-3.4 相当于在<code>Factory.factory()</code>方法中调用 map 的<code>put</code>方法，我们看到 3.1-3.4 后一个参数是一个构造方法引用，用于作为 Suplier 对象来直接返回一个武器对象</li>
+<li>往上看到的是 Builder 的 add 方法，这个方法的实现被 3.0 接管了</li>
+<li>看到这个 return 语句，千万不要会错意，这个 return 语句其实是上面<code>create</code>方法的实现语句，用于返回一件武器</li>
 <li>这段实现真的是无比的迷，毫无逻辑可言</li>
 </ol>
-<p>大致看懂这段语法糖之后，可以自己尝试实现一个平民版的工厂Kit，函数式编程很大程度上扭曲了Java程序编程的直接意图，让程序晦涩难懂，复现难度大。</p>
+<p>大致看懂这段语法糖之后，可以自己尝试实现一个平民版的工厂 Kit，函数式编程很大程度上扭曲了 Java 程序编程的直接意图，让程序晦涩难懂，复现难度大。</p>
 <h4 id="friendly-factory-kit">Friendly Factory-kit</h4>
-<p>下面是我改进的亲民版的<code>Factory-kit</code>，虽然也用到了Lambda和方法引用，但是特别强调了面向对象思想，并不难懂</p>
+<p>下面是我改进的亲民版的<code>Factory-kit</code>，虽然也用到了 Lambda 和方法引用，但是特别强调了面向对象思想，并不难懂</p>
 <h5 id="interfaces">Interfaces</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Builder</span> {
     Product <span class="hljs-title function_">build</span><span class="hljs-params">()</span>;
@@ -636,7 +636,7 @@ captain.row();
     }
 }
 </code></pre>
-<p>注意<code>addBuilder</code>方法，第二个参数直接就是Builder，因为你观察Builder可以发现，Builder接口直接就可以是一个<code>Supplier</code>，用以直接生产产品</p>
+<p>注意<code>addBuilder</code>方法，第二个参数直接就是 Builder，因为你观察 Builder 可以发现，Builder 接口直接就可以是一个<code>Supplier</code>，用以直接生产产品</p>
 <h5 id="implements">Implements</h5>
 <h6 id="product-implemenets">Product implemenets</h6>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Axe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Product</span> {
@@ -663,7 +663,7 @@ captain.row();
     }
 }
 </code></pre>
-<p>这里稍微用到了一些Lambda的语法了，我们在继承<code>Factory</code>的时候，用泛型去规定产品类型，然后在实现子类的构造方法里面注册工匠，我们注意到，传递<code>Builder</code>的时候，第一次传生产<code>Axe</code>对象的<code>Builder</code>的时候，我直接使用了<code>Axe</code>的构造方法引用，这其实是<strong>初始化了一个专门生产<code>Axe</code>对象的<code>Builder</code>对象，这个<code>Builder</code>对象的<code>build</code>方法的实现就是返回生成的<code>Axe</code>对象</strong>，如果不是很好理解，可以看第二次传入生产<code>Bow</code>对象的<code>Builder</code>对象，一看就懂</p>
+<p>这里稍微用到了一些 Lambda 的语法了，我们在继承<code>Factory</code>的时候，用泛型去规定产品类型，然后在实现子类的构造方法里面注册工匠，我们注意到，传递<code>Builder</code>的时候，第一次传生产<code>Axe</code>对象的<code>Builder</code>的时候，我直接使用了<code>Axe</code>的构造方法引用，这其实是<strong>初始化了一个专门生产<code>Axe</code>对象的<code>Builder</code>对象，这个<code>Builder</code>对象的<code>build</code>方法的实现就是返回生成的<code>Axe</code>对象</strong>，如果不是很好理解，可以看第二次传入生产<code>Bow</code>对象的<code>Builder</code>对象，一看就懂</p>
 <h5 id="main-6">Main</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {

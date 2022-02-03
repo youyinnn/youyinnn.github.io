@@ -1,11 +1,11 @@
 <h3 id="introduction">Introduction</h3>
-<p>在学习Java并发中的同步器源码的时候，注释中有提到过AQS的Node结构是参考CLH的一种变体：</p>
+<p>在学习 Java 并发中的同步器源码的时候，注释中有提到过 AQS 的 Node 结构是参考 CLH 的一种变体：</p>
 <blockquote>
-<p>The wait queue is a variant of a &quot;CLH&quot; (Craig, Landin, and Hagersten) lock queue. </p>
-<p>CLH locks are normally used for spinlocks.  We instead use them for blocking synchronizers, but use the same basic tactic of holding some of the control information about a thread in the predecessor of its node.  A &quot;status&quot; field in each node keeps track of whether a thread should block.  </p>
-<p>A node is signalled when its predecessor releases.  Each node of the queue otherwise serves as a specific-notification-style monitor holding a single waiting thread. The status field does NOT control whether threads are granted locks etc though.  </p>
-<p>A thread may try to acquire if it is first in the queue. But being first does not guarantee success; it only gives the right to contend.  So the currently released contender thread may need to rewait.</p>
-<p><strong>To enqueue into a CLH lock, you atomically splice it in as new tail.</strong> </p>
+<p>The wait queue is a variant of a &quot;CLH&quot; (Craig, Landin, and Hagersten) lock queue.</p>
+<p>CLH locks are normally used for spinlocks. We instead use them for blocking synchronizers, but use the same basic tactic of holding some of the control information about a thread in the predecessor of its node. A &quot;status&quot; field in each node keeps track of whether a thread should block.</p>
+<p>A node is signalled when its predecessor releases. Each node of the queue otherwise serves as a specific-notification-style monitor holding a single waiting thread. The status field does NOT control whether threads are granted locks etc though.</p>
+<p>A thread may try to acquire if it is first in the queue. But being first does not guarantee success; it only gives the right to contend. So the currently released contender thread may need to rewait.</p>
+<p><strong>To enqueue into a CLH lock, you atomically splice it in as new tail.</strong></p>
 <p><strong>To dequeue, you just set the head field.</strong></p>
  <pre class="nhi">
       +------+  prev +-----+       +-----+
@@ -13,13 +13,13 @@
       +------+       +-----+       +-----+
  </pre>
 
-<p>Insertion into a CLH queue requires only a single atomic operation on &quot;tail&quot;, so there is a simple atomic point of demarcation from unqueued to queued. Similarly, dequeuing involves only updating the &quot;head&quot;. </p>
+<p>Insertion into a CLH queue requires only a single atomic operation on &quot;tail&quot;, so there is a simple atomic point of demarcation from unqueued to queued. Similarly, dequeuing involves only updating the &quot;head&quot;.</p>
 <p>However, it takes a bit more work for nodes to determine who their successors are, in part to deal with possible cancellation due to timeouts and interrupts.</p>
 </blockquote>
-<p>CLH锁即Craig, Landin, and Hagersten (CLH) locks，CLH锁是一个自旋锁，能确保无饥饿性，提供先来先服务的公平性</p>
-<p>CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋</p>
-<p>CLH Lock是一种比较简单的自旋锁算法之一，因为锁的CAS操作涉及到了硬件的锁定(锁总线或者是锁内存)所以性能和CPU架构也密不可分</p>
-<p>CLH Lock是独占式锁的一种，并且是不可重入的锁</p>
+<p>CLH 锁即 Craig, Landin, and Hagersten (CLH) locks，CLH 锁是一个自旋锁，能确保无饥饿性，提供先来先服务的公平性</p>
+<p>CLH 锁也是一种基于链表的可扩展、高性能、公平的自旋锁，申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋</p>
+<p>CLH Lock 是一种比较简单的自旋锁算法之一，因为锁的 CAS 操作涉及到了硬件的锁定(锁总线或者是锁内存)所以性能和 CPU 架构也密不可分</p>
+<p>CLH Lock 是独占式锁的一种，并且是不可重入的锁</p>
 <h3 id="implement">Implement</h3>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClhSpinLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>{
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Node&gt; prev;
@@ -41,27 +41,27 @@
     }
 
     <span class="hljs-comment">/**
-     * 1.初始状态 tail指向一个node(head)节点 
-     * +------+ 
-     * | head | &lt;---- tail 
+     * 1.初始状态 tail指向一个node(head)节点
      * +------+
-     * 
+     * | head | &lt;---- tail
+     * +------+
+     *
      * 2.lock-thread加入等待队列: tail指向新的Node，同时Prev指向tail之前指向的节点
      * +----------+
      * | Thread-A |
      * | := Node  | &lt;---- tail
      * | := Prev  | -----&gt; +------+
      * +----------+        | head |
-     *                     +------+ 
-     * 
+     *                     +------+
+     *
      *             +----------+            +----------+
      *             | Thread-B |            | Thread-A |
-     * tail ----&gt;  | := Node  |     --&gt;    | := Node  | 
+     * tail ----&gt;  | := Node  |     --&gt;    | := Node  |
      *             | := Prev  | ----|      | := Prev  | -----&gt;  +------+
      *             +----------+            +----------+         | head |
-     *                                                          +------+ 
+     *                                                          +------+
      * 3.寻找当前node的prev-node然后开始自旋
-     * 
+     *
      */</span>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> {
         <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.node.get();
@@ -81,30 +81,30 @@
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> {<span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">boolean</span> locked;}
 }
 </code></pre>
-<p>CLH的算法定义</p>
+<p>CLH 的算法定义</p>
 <blockquote>
 <p>the list, the application thread spin only on a local variable, it constantly polling the precursor state, if it is found that the pre release lock end spin.</p>
 </blockquote>
-<p>基于list，线程仅在一个局部变量上自旋，它不断轮询前一个节点状态，如果发现前一个节点释放锁结束.</p>
-<p>所以在java中使用了ThreadLocal作为具体实现,AtomicReference为了消除多个线程并发对tail引用Node的影响，核心方法lock()中分为3个步骤去实现</p>
+<p>基于 list，线程仅在一个局部变量上自旋，它不断轮询前一个节点状态，如果发现前一个节点释放锁结束.</p>
+<p>所以在 java 中使用了 ThreadLocal 作为具体实现,AtomicReference 为了消除多个线程并发对 tail 引用 Node 的影响，核心方法 lock()中分为 3 个步骤去实现</p>
 <ol>
-<li><p>初始状态 tail指向一个node(head)节点</p>
+<li><p>初始状态 tail 指向一个 node(head)节点</p>
 <pre><code>private final AtomicReference&lt;Node&gt; tail = new AtomicReference&lt;Node&gt;(new Node());
 </code></pre>
 </li>
-<li><p>thread加入等待队列: tail指向新的Node，同时Prev指向tail之前指向的节点，在java代码中使用了getAndSet即CAS操作使用</p>
+<li><p>thread 加入等待队列: tail 指向新的 Node，同时 Prev 指向 tail 之前指向的节点，在 java 代码中使用了 getAndSet 即 CAS 操作使用</p>
 <pre><code>Node pred = this.tail.getAndSet(node);
 this.prev.set(pred);
 </code></pre>
 </li>
-<li><p>寻找当前线程对应的node的前驱node然后开始自旋前驱node的status判断是否可以获取lock</p>
+<li><p>寻找当前线程对应的 node 的前驱 node 然后开始自旋前驱 node 的 status 判断是否可以获取 lock</p>
 <pre><code>while (pred.locked);
 </code></pre>
 </li>
 </ol>
-<p>同理unlock()方法，获取当前线程的node，设置lock status，将当前node指向前驱node(这样操作tail指向的就是前驱node等同于出队操作).至此CLH Lock的过程就结束了</p>
+<p>同理 unlock()方法，获取当前线程的 node，设置 lock status，将当前 node 指向前驱 node(这样操作 tail 指向的就是前驱 node 等同于出队操作).至此 CLH Lock 的过程就结束了</p>
 <hr>
-<p>更多的关于简单的自旋锁或者MCS锁可以参考：<a href="https://coderbee.net/index.php/concurrent/20131115/577">https://coderbee.net/index.php/concurrent/20131115/577</a></p>
+<p>更多的关于简单的自旋锁或者 MCS 锁可以参考：<a href="https://coderbee.net/index.php/concurrent/20131115/577">https://coderbee.net/index.php/concurrent/20131115/577</a></p>
 <p>本文整理自：</p>
 <ol>
 <li><a href="https://segmentfault.com/a/1190000007094429">https://segmentfault.com/a/1190000007094429</a></li>

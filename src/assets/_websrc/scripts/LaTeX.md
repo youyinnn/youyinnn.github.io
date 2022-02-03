@@ -14,20 +14,20 @@ Tools:
 
 While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent process.
 
- I fix it by replace the extension's setting:
+I fix it by replace the extension's setting:
 
-``` json
+```json
 {
   "latex-workshop.latex.recipes": [
     {
       "name": "latexmk 🔃",
       // add tool "latexindent" as the second step of this recipes
       "tools": ["latexmk", "latexindent"]
-    },
+    }
   ],
   "latex-workshop.latex.tools": [
     // previous tools should be remained ....
-    
+
     // adding a new tool named latexindent
     {
       "name": "latexindent",
@@ -36,12 +36,12 @@ While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent proce
       "env": {}
     }
   ]
-} 
+}
 ```
 
 ##### Option 2: Extension "Save and Run"
 
-``` json
+```json
 "saveAndRun": {
   "commands": [
     {
@@ -64,11 +64,9 @@ Refer to: https://latexindentpl.readthedocs.io/en/latest/appendices.html#mac
 
 `-g /dev/null`: no log;
 
-``` bash
+```bash
 latexindent '${file}' -o '${file}' -s -g /dev/null"
 ```
-
-
 
 #### Update latexindent.pl
 
@@ -76,11 +74,9 @@ The latexindent.pl which brought by MacTex might out of date. Replace it manuall
 
 It might located at:
 
-``` bash
+```bash
 /usr/local/texlive/2021/texmf-dist/scripts/latexindent/LatexIndent/
 ```
-
-
 
 #### Latex Trick
 
@@ -122,11 +118,10 @@ It might located at:
 
 16. [Cross-Reference with custom text](https://tex.stackexchange.com/questions/70143/cross-reference-with-custom-text)
 
-17.  [Center column with specifying width in table (tabular enviroment)?](https://tex.stackexchange.com/questions/5017/center-column-with-specifying-width-in-table-tabular-enviroment)
+17. [Center column with specifying width in table (tabular enviroment)?](https://tex.stackexchange.com/questions/5017/center-column-with-specifying-width-in-table-tabular-enviroment)
 
 18. [\newcommand argument confusion](https://tex.stackexchange.com/questions/117358/newcommand-argument-confusion)
 
 19. [Why does \\ not return a new line in an equation?](https://tex.stackexchange.com/questions/194236/why-does-not-return-a-new-line-in-an-equation)
 
-15. 
-
+20.

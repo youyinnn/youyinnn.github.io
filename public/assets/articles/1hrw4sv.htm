@@ -34,8 +34,8 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
     <span class="hljs-keyword">return</span> head;
 }
 </code></pre>
-<p>大致思想是以第一条链为参照，做插入排序，分别用l1，l2做now指针</p>
-<p>链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原head的基础上，加一个pre，再标识now，然后迭代两个指针</p>
+<p>大致思想是以第一条链为参照，做插入排序，分别用 l1，l2 做 now 指针</p>
+<p>链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原 head 的基础上，加一个 pre，再标识 now，然后迭代两个指针</p>
 <h3 id="22-generate-parentheses">22. Generate Parentheses</h3>
 <p>Given <em>n</em> pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
 <p>For example, given <em>n</em> = 3, a solution set is:</p>
@@ -162,7 +162,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
         pre.next = next;
         now.next = next.next;
         next.next = now;
-        
+
         pre = now;
         now = pre.next;
         <span class="hljs-keyword">if</span> (now == <span class="hljs-literal">null</span>) {
@@ -190,7 +190,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
 <p>这题，做出来了就是成功了，基本上思路就是直观的暴力解，解题的难点在于，如何处理指针</p>
 <p>做链表题的时候始终要记住一句话：<strong>Keep tracking the pointer</strong></p>
 <p>跟踪指针到最后，你就赢了</p>
-<p>我们的思路很简单，首先从头开始，每k个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去</p>
+<p>我们的思路很简单，首先从头开始，每 k 个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去</p>
 <p>要做到这件事，首先我们得做到逆转一段链表，这件事也没什么技巧，hmmmmm，好吧还是有点东西的，我总是喜欢分治法+递归，我已经爱上了这种简单直接的做法了</p>
 <p>上公式：<code>reverse(2 -&gt; 3 -&gt; 4 -&gt; 5) = reverse ( reverse (2 -&gt; 3) -&gt; reverse(3 -&gt; 4))</code>，于是所有的逆转都变成了两个结点链表的逆转，而且为了更简单地做到这件事，我还用一个数据结构来表示一条链，记录它的头和尾，以更好地接上两个链</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Segment</span> {
@@ -227,7 +227,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
     }
 }
 </code></pre>
-<p>那么接下来：我们用4个指针，来对原链进行分段逆转，大致思路如下：</p>
+<p>那么接下来：我们用 4 个指针，来对原链进行分段逆转，大致思路如下：</p>
 <pre><code>               head (ignore this)
                  ↓
 origin list:     1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
@@ -241,13 +241,13 @@ assign some pointer：
 4. tmpPre: the pre node of tmp node, it also the tail node of the reversed segment
 
         newHead -&gt; NULL
-                             
+
         nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
                ↗     ↑
            tmpPre    tmp
                       ↑
                     nowHead
-                    
+
 这是初始状态，我们开始移动tmp和tmpPre：
 
         nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
@@ -264,7 +264,7 @@ assign some pointer：
         nowPre → 0 -&gt; 1 -&gt; 2 -&gt; 3       4 -&gt; 5 -&gt; 6 -&gt; NULL
                       ↑       ↗        ↑
                    nowHead tmpPre      tmp
-                   
+
 这时候逆转B段（注意原来的nowPre、tmpPre、nowHead也会变的）：
 
                    nowPre → 0
@@ -272,7 +272,7 @@ assign some pointer：
                   3 -&gt; 2 -&gt; 1           4 -&gt; 5 -&gt; 6 -&gt; NULL
                   ↑         ↑           ↑
                tmpPre    nowHead       tmp
-               
+
 然后nowHead.next = tmp，就可以接上BC段：
 
                        nowPre → 0
@@ -280,13 +280,13 @@ assign some pointer：
                       3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
                       ↑       ↗     ↑
                    tmpPre  nowHead  tmp
-               
+
 再nowPre.next = tmpPre，纠正AB段：
 
         nowPre → 0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
                       ↑       ↗     ↑
                    tmpPre  nowHead  tmp
-               
+
 最后调整指针，为下一次处理做准备（若是第一次处理，则newHead必定为空，则可以指定newHead）：
 1. newHead = reverseSegment.head
 2. nowPre = nowHead
@@ -340,6 +340,6 @@ assign some pointer：
     }
     <span class="hljs-comment">// when k is bigger than list length then newHead will be null</span>
     <span class="hljs-comment">// so just return head</span>
-    <span class="hljs-type">return</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? head : newHead; 
+    <span class="hljs-type">return</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? head : newHead;
 }
 </code></pre>

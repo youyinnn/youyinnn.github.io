@@ -1,26 +1,23 @@
 ## HTML
 
-### textarea的字数限制
+### textarea 的字数限制
 
-
-``` html
-<textarea 
-  rows="5"  
-  maxlength="200" 
-  onchange="this.value=this.value.substring(0, 200)" 
-  onkeydown="this.value=this.value.substring(0, 200)" 
-  onkeyup="this.value=this.value.substring(0, 200)">
-</textarea>
+```html
+<textarea
+  rows="5"
+  maxlength="200"
+  onchange="this.value=this.value.substring(0, 200)"
+  onkeydown="this.value=this.value.substring(0, 200)"
+  onkeyup="this.value=this.value.substring(0, 200)"
+></textarea>
 ```
 
-事实上，有了maxLength属性，textarea的输入就已经会有限制了
+事实上，有了 maxLength 属性，textarea 的输入就已经会有限制了
 
+### input 只允许输入数字
 
-### input只允许输入数字
-
-
-``` html
-<input type="text" oninput="value=value.replace(/[^\d]/g,'')">
+```html
+<input type="text" oninput="value=value.replace(/[^\d]/g,'')" />
 ```
 
 ### 图片禁止拖拽
@@ -28,10 +25,10 @@
 在对应标签中添加如下属性即可。
 
 ```javascript
-oncontextmenu = "return false;" //禁止鼠标右键
-ondragstart = "return false;" //禁止鼠标拖动
-onselectstart = "return false;" //文字禁止鼠标选中
-onselect = "document.selection.empty();" //禁止复制文本
+oncontextmenu = "return false;"; //禁止鼠标右键
+ondragstart = "return false;"; //禁止鼠标拖动
+onselectstart = "return false;"; //文字禁止鼠标选中
+onselect = "document.selection.empty();"; //禁止复制文本
 ```
 
 例如：

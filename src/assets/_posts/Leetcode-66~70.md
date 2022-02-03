@@ -11,8 +11,6 @@ date: 2019-04-02 22:40:00 +8
 series: leetcode
 ---
 
-
-
 ### 66.Plus One(Easy)
 
 Given a **non-empty** array of digits representing a non-negative integer, plus one to the integer.
@@ -37,13 +35,11 @@ Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 ```
 
-
-
 #### Solution
 
-处理carry的题目我们前面碰的多了，熟能生巧
+处理 carry 的题目我们前面碰的多了，熟能生巧
 
-``` java
+```java
 public int[] plusOne(int[] digits) {
     boolean carry = true;
     for (int i = digits.length - 1; i >= 0; i--) {
@@ -67,8 +63,6 @@ public int[] plusOne(int[] digits) {
 }
 ```
 
-
-
 ### 67.Add Binary(Easy)
 
 Given two binary strings, return their sum (also a binary string).
@@ -88,8 +82,6 @@ Output: "100"
 Input: a = "1010", b = "1011"
 Output: "10101"
 ```
-
-
 
 #### Solution
 
@@ -146,13 +138,11 @@ public String addBinary(String a, String b) {
 }
 ```
 
- 
-
 ### 68.Text Justification(Hard)
 
-Given an array of words and a width *maxWidth*, format the text such that each line has exactly *maxWidth*characters and is fully (left and right) justified.
+Given an array of words and a width _maxWidth_, format the text such that each line has exactly *maxWidth*characters and is fully (left and right) justified.
 
-You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces `' '` when necessary so that each line has exactly *maxWidth* characters.
+You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces `' '` when necessary so that each line has exactly _maxWidth_ characters.
 
 Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.
 
@@ -161,7 +151,7 @@ For the last line of text, it should be left justified and no **extra** space is
 **Note:**
 
 - A word is defined as a character sequence consisting of non-space characters only.
-- Each word's length is guaranteed to be greater than 0 and not exceed *maxWidth*.
+- Each word's length is guaranteed to be greater than 0 and not exceed _maxWidth_.
 - The input array `words` contains at least one word.
 
 **Example 1:**
@@ -213,8 +203,6 @@ Output:
 ]
 ```
 
-
-
 #### Solution
 
 这题难，难就难在题解的步骤多，虽然这题争议很大，但是这题还挺多公司喜欢出的
@@ -226,54 +214,52 @@ Output:
 - 如果一行只有一个单词，那么它左对齐；（left-justify）
 - 最后一行无论多少单词，都是左对齐；（left-justify）
 
-
-
 我们的步骤可以简单地理解为：
 
 1. 从剩下的单词中，尽可能地吃能吃的单词；`findRight`
 2. 调整当前吃下的单词的空格；`justify`
 3. 将调整好的单词添加到结果；
-4. 如果还有剩下的单词，重复步骤1；
+4. 如果还有剩下的单词，重复步骤 1；
 
 ```java
  public List<String> fullJustify(String[] words, int maxWidth) {
     int left = 0; List<String> result = new ArrayList<>();
-    
+
     while (left < words.length) {
         int right = findRight(left, words, maxWidth);
         result.add(justify(left, right, words, maxWidth));
         left = right + 1;
     }
-    
+
     return result;
 }
 
 private int findRight(int left, String[] words, int maxWidth) {
     int right = left;
     int sum = words[right++].length();
-    
+
     while (right < words.length && (sum + 1 + words[right].length()) <= maxWidth)
         sum += 1 + words[right++].length();
-        
+
     return right - 1;
 }
 
 private String justify(int left, int right, String[] words, int maxWidth) {
     if (right - left == 0) return padResult(words[left], maxWidth);
-    
+
     boolean isLastLine = right == words.length - 1;
     int numSpaces = right - left;
     int totalSpace = maxWidth - wordsLength(left, right, words);
-    
+
     String space = isLastLine ? " " : blank(totalSpace / numSpaces);
     int remainder = isLastLine ? 0 : totalSpace % numSpaces;
-    
+
     StringBuilder result = new StringBuilder();
     for (int i = left; i <= right; i++)
         result.append(words[i])
             .append(space)
             .append(remainder-- > 0 ? " " : "");
-    
+
     return padResult(result.toString().trim(), maxWidth);
 }
 
@@ -292,12 +278,11 @@ private String blank(int length) {
 }
 ```
 
-
-### 69.Sqrt(x) (Easy) 
+### 69.Sqrt(x) (Easy)
 
 Implement `int sqrt(int x)`.
 
-Compute and return the square root of *x*, where *x* is guaranteed to be a non-negative integer.
+Compute and return the square root of _x_, where _x_ is guaranteed to be a non-negative integer.
 
 Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
 
@@ -313,11 +298,9 @@ Output: 2
 ```
 Input: 8
 Output: 2
-Explanation: The square root of 8 is 2.82842..., and since 
+Explanation: The square root of 8 is 2.82842..., and since
              the decimal part is truncated, 2 is returned.
 ```
-
-
 
 #### Binary
 
@@ -330,10 +313,10 @@ Explanation: The square root of 8 is 2.82842..., and since
 
 这两条提示我开始没看出来什么，后面发现- -，原来都已经告诉你标准的二分法思路了
 
-于是我们要求X的开根号，可以这样想：
+于是我们要求 X 的开根号，可以这样想：
 
 - 答案肯定在`[1~X]`之间；
-- 二分的思路找最接近X^2的数，因为毕竟是整数结果；
+- 二分的思路找最接近 X^2 的数，因为毕竟是整数结果；
 
 ```java
 public int mySqrt(int x) {
@@ -352,14 +335,13 @@ public int mySqrt(int x) {
 }
 ```
 
-
 ### 70.ClimbingStairs(Easy)
 
-You are climbing a stair case. It takes *n* steps to reach to the top.
+You are climbing a stair case. It takes _n_ steps to reach to the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-**Note:** Given *n* will be a positive integer.
+**Note:** Given _n_ will be a positive integer.
 
 **Example 1:**
 
@@ -384,7 +366,7 @@ Explanation: There are three ways to climb to the top.
 
 #### Solution
 
-``` java
+```java
 public int climbStairs(int n) {
     int a = 1, b = 0;
     int ans = 0;
@@ -396,4 +378,3 @@ public int climbStairs(int n) {
     return ans;
 }
 ```
-

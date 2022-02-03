@@ -30,7 +30,7 @@ Output: &quot;/c&quot;
 Output: &quot;/a/b/c&quot;
 </code></pre>
 <h4 id="iterate">Iterate</h4>
-<p>以<code>/</code>为单位截出name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的name，最后依次遍历队列，组成path</p>
+<p>以<code>/</code>为单位截出 name，然后如果碰到不是<code>..</code>也不是<code>.</code>也非空的 name，就加入到队列中，如果碰到<code>..</code>，就退出中尾部的 name，最后依次遍历队列，组成 path</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">simplifyPath</span><span class="hljs-params">(String path)</span> {
     <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;/&quot;</span>);
     LinkedList&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
@@ -72,7 +72,7 @@ Output: &quot;/a/b/c&quot;
 <p><strong>Example 1:</strong></p>
 <pre><code>Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;
 Output: 3
-Explanation: 
+Explanation:
 horse -&gt; rorse (replace &#x27;h&#x27; with &#x27;r&#x27;)
 rorse -&gt; rose (remove &#x27;r&#x27;)
 rose -&gt; ros (remove &#x27;e&#x27;)
@@ -80,7 +80,7 @@ rose -&gt; ros (remove &#x27;e&#x27;)
 <p><strong>Example 2:</strong></p>
 <pre><code>Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;
 Output: 5
-Explanation: 
+Explanation:
 intention -&gt; inention (remove &#x27;t&#x27;)
 inention -&gt; enention (replace &#x27;i&#x27; with &#x27;e&#x27;)
 enention -&gt; exention (replace &#x27;n&#x27; with &#x27;x&#x27;)
@@ -149,13 +149,13 @@ exection -&gt; execution (insert &#x27;u&#x27;)
 <h3 id="73-set-matrix-zerosmedium">73. Set Matrix Zeros(Medium)</h3>
 <p>Given a <em>m</em> x <em>n</em> matrix, if an element is 0, set its entire row and column to 0. Do it <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>.</p>
 <p><strong>Example 1:</strong></p>
-<pre><code>Input: 
+<pre><code>Input:
 [
   [1,1,1],
   [1,0,1],
   [1,1,1]
 ]
-Output: 
+Output:
 [
   [1,0,1],
   [0,0,0],
@@ -163,13 +163,13 @@ Output:
 ]
 </code></pre>
 <p><strong>Example 2:</strong></p>
-<pre><code>Input: 
+<pre><code>Input:
 [
   [0,1,2,0],
   [3,4,5,2],
   [1,3,1,5]
 ]
-Output: 
+Output:
 [
   [0,0,0,0],
   [0,4,5,0],
@@ -183,7 +183,7 @@ Output:
 <li>Could you devise a constant space solution?</li>
 </ul>
 <h4 id="brute-force">Brute Force</h4>
-<p>这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做</p>
+<p>这题我觉得没必要想太多，暴力解复杂度也就 O(mn)，然后这边空间复杂度就 O(m + n)，虽然题目要求说要用常数空间去做</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setZeroes</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> {
     <span class="hljs-type">boolean</span>[] rowZ = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[matrix.length];
     <span class="hljs-type">boolean</span>[] colZ = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[matrix[<span class="hljs-number">0</span>].length];
@@ -268,11 +268,11 @@ Output: [0,0,1,1,2,2]
 <p><strong>Follow up:</strong></p>
 <ul>
 <li>A rather straight forward solution is a two-pass algorithm using counting sort.
-  First, iterate the array counting number of 0&#39;s, 1&#39;s, and 2&#39;s, then overwrite array with total number of 0&#39;s, then 1&#39;s and followed by 2&#39;s.</li>
+First, iterate the array counting number of 0&#39;s, 1&#39;s, and 2&#39;s, then overwrite array with total number of 0&#39;s, then 1&#39;s and followed by 2&#39;s.</li>
 <li>Could you come up with a one-pass algorithm using only constant space?</li>
 </ul>
 <h4 id="two-pass-counting-sort">Two-pass Counting Sort</h4>
-<p>关于计数排序，<a href="./1b0rp9e.html?hash=63d906b">排序大礼包</a>的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机</p>
+<p>关于计数排序，<a href="./1b0rp9e.html?hash=63d906b">排序大礼包</a>的时候讲过的，但这是 2n 时间，题目要求 1n 时间，暂时就不先做了，因为我觉得盲目追求 1n 时间属于投机</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sortColors</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">3</span>];
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> color : nums) {

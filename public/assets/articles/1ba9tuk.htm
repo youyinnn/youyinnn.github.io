@@ -4,7 +4,7 @@
 <h4 id="if-statement"><code>if</code> statement</h4>
 <pre><code class="hljs language-python"><span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">0</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x &gt; 0&#x27;</span>)
-<span class="hljs-keyword">elif</span> x == <span class="hljs-number">0</span>: 
+<span class="hljs-keyword">elif</span> x == <span class="hljs-number">0</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x = 0&#x27;</span>)
 <span class="hljs-keyword">else</span>:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;x &lt; 0&#x27;</span>)
@@ -14,7 +14,7 @@
 <pre><code class="hljs language-python">array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> array:
     <span class="hljs-built_in">print</span>(i)
-    
+
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):
     <span class="hljs-built_in">print</span>(i)
 </code></pre>
@@ -37,7 +37,7 @@
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;never be reached here because the break&#x27;</span>)
 </code></pre>
 <p>Key-pair iteration:</p>
-<pre><code class="hljs language-python"><span class="hljs-comment"># key-pair </span>
+<pre><code class="hljs language-python"><span class="hljs-comment"># key-pair</span>
 clt = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>: <span class="hljs-string">&#x27;d&#x27;</span>}
 <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">in</span> clt.items():
     <span class="hljs-built_in">print</span>(key, val)
@@ -73,7 +73,7 @@ clt = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string"
     <span class="hljs-keyword">while</span> a &lt;= n:
         <span class="hljs-built_in">print</span>(a, end=<span class="hljs-string">&#x27; &#x27;</span>)
         a, b = b, a + b
-    <span class="hljs-built_in">print</span>()    
+    <span class="hljs-built_in">print</span>()
 fib(<span class="hljs-number">2000</span>)
 
 <span class="hljs-comment"># with return statement</span>
@@ -170,8 +170,8 @@ parrot(actor=<span class="hljs-string">&#x27;John Cleese&#x27;</span>)  <span cl
 </code></pre>
 <p>In a function call, keyword arguments must follow positional arguments. All the keyword arguments passed must match one of the arguments accepted by the function (e.g. <code>actor</code> is not a valid argument for the <code>parrot</code> function), and their order is not important. This also includes non-optional arguments (e.g. <code>parrot(voltage=1000)</code> is valid too). No argument may receive a value more than once.</p>
 <h4 id="packing-arguments">Packing Arguments</h4>
-<p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter. </p>
-<p>This may be combined with a formal parameter of the form <code>*name</code> (described in the next subsection) which receives a <a href="https://docs.python.org/3/tutorial/datastructures.html#tut-tuples">tuple</a> <strong>containing the positional arguments</strong> beyond the formal parameter list. (<code>*name</code> must occur before <code>**name</code>.) </p>
+<p>When a final formal parameter of the form <code>**name</code> is present, it receives a dictionary (see <a href="https://docs.python.org/3/library/stdtypes.html#typesmapping">Mapping Types — dict</a>) <strong>containing all keyword arguments</strong> except for those corresponding to a formal parameter.</p>
+<p>This may be combined with a formal parameter of the form <code>*name</code> (described in the next subsection) which receives a <a href="https://docs.python.org/3/tutorial/datastructures.html#tut-tuples">tuple</a> <strong>containing the positional arguments</strong> beyond the formal parameter list. (<code>*name</code> must occur before <code>**name</code>.)</p>
 <p>For example, if we define a function like this:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">cheeseshop</span>(<span class="hljs-params">kind, *arguments, **keywords</span>):
     <span class="hljs-comment"># &#x27;kind&#x27; is a formal parameter</span>
@@ -186,7 +186,7 @@ parrot(actor=<span class="hljs-string">&#x27;John Cleese&#x27;</span>)  <span cl
         <span class="hljs-built_in">print</span>(kw, <span class="hljs-string">&quot;:&quot;</span>, keywords[kw])
 </code></pre>
 <p>It could be called like this:</p>
-<pre><code class="hljs language-python">cheeseshop(<span class="hljs-string">&quot;Limburger&quot;</span>, 
+<pre><code class="hljs language-python">cheeseshop(<span class="hljs-string">&quot;Limburger&quot;</span>,
            <span class="hljs-string">&quot;It&#x27;s very runny, sir.&quot;</span>,
            <span class="hljs-string">&quot;It&#x27;s really very, VERY runny, sir.&quot;</span>,
            shopkeeper=<span class="hljs-string">&quot;Michael Palin&quot;</span>,
@@ -270,7 +270,7 @@ StopIteration
 <h5 id="yield-statement"><code>yield</code> statement</h5>
 <p>We can turn a generator expression into a function by using <code>yield</code> statement:</p>
 <pre><code class="hljs language-python">g = (x ** x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>))
-<span class="hljs-comment"># is equivilant to </span>
+<span class="hljs-comment"># is equivilant to</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">g</span>():
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>)
         x = i ** i
@@ -305,8 +305,8 @@ g = g() <span class="hljs-comment"># it has to be call</span>
 <p>refer to: <a href="https://www.python.org/dev/peps/pep-0255/#example">https://www.python.org/dev/peps/pep-0255/#example</a></p>
 <h2 id="d">D</h2>
 <h3 id="modules">Modules</h3>
-<p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <em><strong>imported</strong></em> into other modules or into the <em>main</em> module.</p>
-<p>Before that, we should introduce a global variable  named <code>__name__</code> which can be used to identify whether a <code>.py</code> file is <strong>run directly</strong> from command line or <strong>is imported</strong> to other file as a module.</p>
+<p>Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a <em>module</em>; definitions from a module can be <strong><em>imported</em></strong> into other modules or into the <em>main</em> module.</p>
+<p>Before that, we should introduce a global variable named <code>__name__</code> which can be used to identify whether a <code>.py</code> file is <strong>run directly</strong> from command line or <strong>is imported</strong> to other file as a module.</p>
 <p>For example, say we got a file named <code>fibo.py</code>:</p>
 <pre><code class="hljs language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;name in fibo&#x27;</span>, __name__) <span class="hljs-comment"># will print &#x27;fibo&#x27; when imported as a module</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">fibo</span>(<span class="hljs-params">n</span>):
@@ -381,7 +381,7 @@ fibonacci(<span class="hljs-number">10</span>)
               ...
 </code></pre>
 <p>When importing the package, Python searches through the directories on <code>sys.path</code> looking for the package subdirectory.</p>
-<p>The <code>__init__.py</code> files are required to make Python treat directories containing the file as packages. This prevents directories with a common name, such as <code>string</code>, unintentionally hiding valid modules that occur later on the module search path. </p>
+<p>The <code>__init__.py</code> files are required to make Python treat directories containing the file as packages. This prevents directories with a common name, such as <code>string</code>, unintentionally hiding valid modules that occur later on the module search path.</p>
 <p>In the simplest case, <code>__init__.py</code> <strong>can just be an empty file</strong>, but it can also execute initialization code for the package or set the <code>__all__</code> variable, described later.</p>
 <p>Users of the package can import individual modules from the package, for example:</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">import</span> sound.effects.echo <span class="hljs-keyword">as</span> echo

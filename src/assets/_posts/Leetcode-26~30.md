@@ -9,11 +9,9 @@ date: 2019-03-09 16:21:00
 series: leetcode
 ---
 
-
-
 ### 26. Remove Duplicated From Sorted Array(Easy)
 
-Given a sorted array *nums*, remove the duplicates [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm) such that each element appear only *once* and return the new length.
+Given a sorted array _nums_, remove the duplicates [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm) such that each element appear only _once_ and return the new length.
 
 Do not allocate extra space for another array, you must do this by **modifying the input array in-place** with O(1) extra memory.
 
@@ -77,11 +75,9 @@ public int removeDuplicates(int[] nums) {
 }
 ```
 
-
-
 ### 27. Remove Element(Easy)
 
-Given an array *nums* and a value *val*, remove all instances of that value [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm) and return the new length.
+Given an array _nums_ and a value _val_, remove all instances of that value [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm) and return the new length.
 
 Do not allocate extra space for another array, you must do this by **modifying the input array in-place** with O(1) extra memory.
 
@@ -122,12 +118,13 @@ public int removeElement(int[] nums, int val) {
     int len = 0;
     for (int i = 0; i < nums.length; i++) {
         if (nums[i] != val) {
-            nums[len++] = nums[i];   
+            nums[len++] = nums[i];
         }
     }
     return len;
 }
 ```
+
 ### 28. Implement strStr() (Easy)
 
 Implement [strStr()](http://www.cplusplus.com/reference/cstring/strstr/).
@@ -152,9 +149,9 @@ Output: -1
 
 What should we return when `needle` is an empty string? This is a great question to ask during an interview.
 
-For the purpose of this problem, we will return 0 when `needle` is an empty string. This is consistent to C's [strstr()](http://www.cplusplus.com/reference/cstring/strstr/) and Java's [indexOf()](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)).
+For the purpose of this problem, we will return 0 when `needle` is an empty string. This is consistent to C's [strstr()](http://www.cplusplus.com/reference/cstring/strstr/) and Java's [indexOf()](<https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)>).
 
-这题其实就是字符串匹配，所以没什么多说的，要么暴力解要么kmp，比较遗憾的是，Leetcode的case不够多，于是暴力解的Runtime居然比KMP解的Runtime还要快
+这题其实就是字符串匹配，所以没什么多说的，要么暴力解要么 kmp，比较遗憾的是，Leetcode 的 case 不够多，于是暴力解的 Runtime 居然比 KMP 解的 Runtime 还要快
 
 #### Brute Force - O(n \* m)
 
@@ -177,9 +174,10 @@ public int strStr(String haystack, String needle) {
     return -1;
 }
 ```
+
 #### KMP - O(n + m)
 
-``` java
+```java
 public int strStr(String haystack, String needle) {
     if (needle.isEmpty()) {
         return 0;
@@ -207,7 +205,7 @@ private int kmp(char[] t, char[] p) {
         return -1;
     }
 }
-    
+
 public int[] nextVal(char[] p) {
     int[] nextVal = new int[p.length];
     int j = 0;
@@ -229,8 +227,6 @@ public int[] nextVal(char[] p) {
     return nextVal;
 }
 ```
-
-
 
 ### 29. Divide Two Integer (Medium)
 
@@ -258,30 +254,30 @@ Output: -2
 
 - Both dividend and divisor will be 32-bit signed integers.
 - The divisor will never be 0.
-- Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
+- Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231, 231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
 
-不能用乘除符号、不能用Long，行吧，用位运算试试，两倍两倍地运算，总比暴力一个一个的减要快多了
+不能用乘除符号、不能用 Long，行吧，用位运算试试，两倍两倍地运算，总比暴力一个一个的减要快多了
 
 但是怎么说，这题也是垃圾题，500+👍，2700+的:thumbsdown:
 
 #### Bit operation (Beat 100%)
 
 ```java
-public int divide(int dividend, int divisor) {       
+public int divide(int dividend, int divisor) {
     if(dividend ==  Integer.MIN_VALUE && divisor == -1){
         return Integer.MAX_VALUE;
     }
-    
+
     boolean isNeg = (dividend < 0) ^ (divisor < 0);
     if(dividend > 0) dividend = -dividend;
     if(divisor > 0) divisor = -divisor;
-       
+
     return isNeg? -div(dividend, divisor) : div(dividend, divisor);
 }
 public int div(int divid, int divis){
     if(divid > divis) return 0;
     int curSum = divis << 1, prevSum = divis, q = 1;
-    
+
     while(divid <= curSum && curSum < prevSum){
         prevSum = curSum;
         curSum <<= 1; q <<= 1;
@@ -289,8 +285,6 @@ public int div(int divid, int divis){
     return q + div(divid - prevSum, divis);
 }
 ```
-
-
 
 ### 30. Substring with Concatenation of All Words(Hard !!)
 
@@ -316,25 +310,25 @@ Input:
 Output: []
 ```
 
-这题，变态难，首先words能全排列出n！种pattern，如果这题用全排列去做，然后每个排列去indexOf，那肯定TLE，先不说indexOf的效率，就是非递归的全排列，一时半会也写不出来，递归全排列绝壁TLE
+这题，变态难，首先 words 能全排列出 n！种 pattern，如果这题用全排列去做，然后每个排列去 indexOf，那肯定 TLE，先不说 indexOf 的效率，就是非递归的全排列，一时半会也写不出来，递归全排列绝壁 TLE
 
 不用全排列，那么我们从概率的角度来思考一下，假如我们把全排列的一个解称为一个**pattern**
 
 从第二个例子我们可以知道，一个可能的**pattern**必然包含所有单词出现的频数；这是第一个关键点；
 
-第二个点就是，我们处理字符串匹配的时候，不免会具象化一个滑动窗口出来，这个滑动窗口阔着s串中的一个和**pattern**一样长的子串；
+第二个点就是，我们处理字符串匹配的时候，不免会具象化一个滑动窗口出来，这个滑动窗口阔着 s 串中的一个和**pattern**一样长的子串；
 
-那么一个明显的思路是：我们知道words中的单词都是一样长的，假如说窗口中的子串，从头开始每个一个word长度，都有一个单词匹配到words中的word，而且我们可以维护一个临时的words频数计数器，每匹配到一个单词就增加这个频数计数
+那么一个明显的思路是：我们知道 words 中的单词都是一样长的，假如说窗口中的子串，从头开始每个一个 word 长度，都有一个单词匹配到 words 中的 word，而且我们可以维护一个临时的 words 频数计数器，每匹配到一个单词就增加这个频数计数
 
 于是到最后就只会有三种可能：
 
-1. 窗口中的某个word并没有在words中记过频数；
-2. 窗口中的某个word临时出现的频数超过words中记过频数；
-3. 窗口中最后一个word都没有出现上面两个可能；那么这就是一个解！
+1. 窗口中的某个 word 并没有在 words 中记过频数；
+2. 窗口中的某个 word 临时出现的频数超过 words 中记过频数；
+3. 窗口中最后一个 word 都没有出现上面两个可能；那么这就是一个解！
 
 于是我们处理问题的关键就在于，如何**避免重复的单词对比而滑动窗口**
 
-其实我自己想是已经想到了频数记录，然后滑动窗口了，但是我只能i++地滑动窗口，效率慢了许多，先放上我的解
+其实我自己想是已经想到了频数记录，然后滑动窗口了，但是我只能 i++地滑动窗口，效率慢了许多，先放上我的解
 
 #### My Solution (550+ms Beat 9.0%)
 
@@ -392,11 +386,9 @@ public List<Integer> findSubstring(String s, String[] words) {
 }
 ```
 
-
-
 #### Elegant Solution (9ms Beat 99.6%)
 
-leetcode上效率最快的解，用一种难以想象的方式去滑动窗口，优雅而晦涩
+leetcode 上效率最快的解，用一种难以想象的方式去滑动窗口，优雅而晦涩
 
 ```java
 public List<Integer> findSubstring2(String s, String[] words) {
@@ -438,20 +430,20 @@ public List<Integer> findSubstring2(String s, String[] words) {
 }
 ```
 
-假如我们一个单词的长度是`wordLength`，一个pattern的长度是`patternLength`
+假如我们一个单词的长度是`wordLength`，一个 pattern 的长度是`patternLength`
 
-18行开始是精髓，用了3个for去做滑动窗口，其中：
+18 行开始是精髓，用了 3 个 for 去做滑动窗口，其中：
 
-- 第一个for长度是单词的长度，它可以处理偏差，可以理解为滑动窗口的出发点，因为我们**滑动窗口的长度总是单词长度的倍数（`j = i + patternLength`），并且总是以单词长度的倍数为距离做滑动（`i += wordLength`）**，想象一下就知道了，比如：
+- 第一个 for 长度是单词的长度，它可以处理偏差，可以理解为滑动窗口的出发点，因为我们**滑动窗口的长度总是单词长度的倍数（`j = i + patternLength`），并且总是以单词长度的倍数为距离做滑动（`i += wordLength`）**，想象一下就知道了，比如：
 
-    `s = “aasosfoobar” words = ["foo", "bar"]`的时候，第一个第一个循环表示只需要每次从**第一个a**或者**第二个a**或**第三个s**开始往后滑动窗口就行了，因为**第四个o**如果也需要滑动的话，它得到的结果会有一部分和**第一个a**重叠；再其次，如果要窗口滑动到解`foobar`处的话，必须从**第三个s**为起点，对比两次（**滑动两个单词长度距离**）才滑动到正解处；
+  `s = “aasosfoobar” words = ["foo", "bar"]`的时候，第一个第一个循环表示只需要每次从**第一个 a**或者**第二个 a**或**第三个 s**开始往后滑动窗口就行了，因为**第四个 o**如果也需要滑动的话，它得到的结果会有一部分和**第一个 a**重叠；再其次，如果要窗口滑动到解`foobar`处的话，必须从**第三个 s**为起点，对比两次（**滑动两个单词长度距离**）才滑动到正解处；
 
-- 第二个for循环是用于滑动窗口距离的；
+- 第二个 for 循环是用于滑动窗口距离的；
 
-- 第三个for循环也是精髓，是用于对比窗口里的单词出现的频数的，根据频数结果来**记录解或者决定下一次滑动窗口的起点**
+- 第三个 for 循环也是精髓，是用于对比窗口里的单词出现的频数的，根据频数结果来**记录解或者决定下一次滑动窗口的起点**
 
-    为什么这里要决定下一次滑动窗口的起点？原因很简单，在处理的时候我们已经知道当前窗口**尾部**有几组**连续**单词是**出现在words**里的，而当前窗口**头部**可能有几组单词是**不出现在words**里的，如果有不出现在words中的单词，那么我们下一次滑动窗口的起点可以从当前窗口中**尾部连续命中**的地方开始继续对比窗口，因为这部分连续的命中单词在下一个窗口中可能是一个解；
+  为什么这里要决定下一次滑动窗口的起点？原因很简单，在处理的时候我们已经知道当前窗口**尾部**有几组**连续**单词是**出现在 words**里的，而当前窗口**头部**可能有几组单词是**不出现在 words**里的，如果有不出现在 words 中的单词，那么我们下一次滑动窗口的起点可以从当前窗口中**尾部连续命中**的地方开始继续对比窗口，因为这部分连续的命中单词在下一个窗口中可能是一个解；
 
-分析起来比较复杂，实现起来就更精妙了，我们从第三个for循环中可以看到，我们是从窗口的后面往前比较的（`j -= wordLength`），如果比较到没有命中的单词，那么**当前的j**，就是下一次窗口的起点，为什么要`i = j - wordLength` ？因为下一次i循环之前会执行一次`i += wordLength`
+分析起来比较复杂，实现起来就更精妙了，我们从第三个 for 循环中可以看到，我们是从窗口的后面往前比较的（`j -= wordLength`），如果比较到没有命中的单词，那么**当前的 j**，就是下一次窗口的起点，为什么要`i = j - wordLength` ？因为下一次 i 循环之前会执行一次`i += wordLength`
 
-然后30行处，如果j已经和i一样了，那么说明从窗口的最后到最前都命中了，并且符合频数限制，于是这是一组合法的解
+然后 30 行处，如果 j 已经和 i 一样了，那么说明从窗口的最后到最前都命中了，并且符合频数限制，于是这是一组合法的解

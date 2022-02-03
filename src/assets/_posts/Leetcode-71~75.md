@@ -11,8 +11,6 @@ date: 2019-04-04 15:35:00 +8
 series: leetcode
 ---
 
-
-
 ### 71. SimplifyPath(Medium)
 
 Given an **absolute path** for a file (Unix-style), simplify it. Or in other words, convert it to the **canonical path**.
@@ -20,8 +18,6 @@ Given an **absolute path** for a file (Unix-style), simplify it. Or in other wor
 In a UNIX-style file system, a period `.` refers to the current directory. Furthermore, a double period `..` moves the directory up a level. For more information, see: [Absolute path vs relative path in Linux/Unix](https://www.linuxnix.com/abslute-path-vs-relative-path-in-linuxunix/)
 
 Note that the returned canonical path must always begin with a slash `/`, and there must be only a single slash `/` between two directory names. The last directory name (if it exists) **must not** end with a trailing `/`. Also, the canonical path must be the **shortest** string representing the absolute path.
-
- 
 
 **Example 1:**
 
@@ -68,11 +64,9 @@ Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
 ```
 
-
-
 #### Iterate
 
-以`/`为单位截出name，然后如果碰到不是`..`也不是`.`也非空的name，就加入到队列中，如果碰到`..`，就退出中尾部的name，最后依次遍历队列，组成path
+以`/`为单位截出 name，然后如果碰到不是`..`也不是`.`也非空的 name，就加入到队列中，如果碰到`..`，就退出中尾部的 name，最后依次遍历队列，组成 path
 
 ```java
 public String simplifyPath(String path) {
@@ -106,10 +100,9 @@ public String simplifyPath(String path) {
 }
 ```
 
-
 ### 72. Edit Distance(Hard)
 
-Given two words *word1* and *word2*, find the minimum number of operations required to convert *word1* to *word2*.
+Given two words _word1_ and _word2_, find the minimum number of operations required to convert _word1_ to _word2_.
 
 You have the following 3 operations permitted on a word:
 
@@ -122,7 +115,7 @@ You have the following 3 operations permitted on a word:
 ```
 Input: word1 = "horse", word2 = "ros"
 Output: 3
-Explanation: 
+Explanation:
 horse -> rorse (replace 'h' with 'r')
 rorse -> rose (remove 'r')
 rose -> ros (remove 'e')
@@ -133,15 +126,13 @@ rose -> ros (remove 'e')
 ```
 Input: word1 = "intention", word2 = "execution"
 Output: 5
-Explanation: 
+Explanation:
 intention -> inention (remove 't')
 inention -> enention (replace 'i' with 'e')
 enention -> exention (replace 'n' with 'x')
 exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 ```
-
-
 
 #### DP
 
@@ -178,8 +169,6 @@ public int minDistance(String word1, String word2) {
 }
 ```
 
-
-
 #### DFS
 
 ```java
@@ -211,22 +200,20 @@ private int dfs(String a, String b, int i, int j, int[][] dp) {
 }
 ```
 
-
-
 ### 73. Set Matrix Zeros(Medium)
 
-Given a *m* x *n* matrix, if an element is 0, set its entire row and column to 0. Do it [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm).
+Given a _m_ x _n_ matrix, if an element is 0, set its entire row and column to 0. Do it [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm).
 
 **Example 1:**
 
 ```
-Input: 
+Input:
 [
   [1,1,1],
   [1,0,1],
   [1,1,1]
 ]
-Output: 
+Output:
 [
   [1,0,1],
   [0,0,0],
@@ -237,13 +224,13 @@ Output:
 **Example 2:**
 
 ```
-Input: 
+Input:
 [
   [0,1,2,0],
   [3,4,5,2],
   [1,3,1,5]
 ]
-Output: 
+Output:
 [
   [0,0,0,0],
   [0,4,5,0],
@@ -253,15 +240,13 @@ Output:
 
 **Follow up:**
 
-- A straight forward solution using O(*m**n*) space is probably a bad idea.
-- A simple improvement uses O(*m* + *n*) space, but still not the best solution.
+- A straight forward solution using O(_m\*\*n_) space is probably a bad idea.
+- A simple improvement uses O(_m_ + _n_) space, but still not the best solution.
 - Could you devise a constant space solution?
-
-
 
 #### Brute Force
 
-这题我觉得没必要想太多，暴力解复杂度也就O(mn)，然后这边空间复杂度就O(m + n)，虽然题目要求说要用常数空间去做
+这题我觉得没必要想太多，暴力解复杂度也就 O(mn)，然后这边空间复杂度就 O(m + n)，虽然题目要求说要用常数空间去做
 
 ```java
 public void setZeroes(int[][] matrix) {
@@ -288,10 +273,9 @@ public void setZeroes(int[][] matrix) {
 }
 ```
 
-
 ### 74. Search a 2D Matrix(Medium)
 
-Write an efficient algorithm that searches for a value in an *m* x *n* matrix. This matrix has the following properties:
+Write an efficient algorithm that searches for a value in an _m_ x _n_ matrix. This matrix has the following properties:
 
 - Integers in each row are sorted from left to right.
 - The first integer of each row is greater than the last integer of the previous row.
@@ -322,8 +306,6 @@ target = 13
 Output: false
 ```
 
-
-
 #### Binary
 
 没什么好说的
@@ -352,10 +334,9 @@ public boolean searchMatrix(int[][] matrix, int target) {
 }
 ```
 
-
 ### 75. Sort Colors(Medium)
 
-Given an array with *n* objects colored red, white or blue, sort them **in-place** so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+Given an array with _n_ objects colored red, white or blue, sort them **in-place** so that objects of the same color are adjacent, with the colors in the order red, white and blue.
 
 Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
 
@@ -371,14 +352,12 @@ Output: [0,0,1,1,2,2]
 **Follow up:**
 
 - A rather straight forward solution is a two-pass algorithm using counting sort.
-    First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
+  First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
 - Could you come up with a one-pass algorithm using only constant space?
-
-
 
 #### Two-pass Counting Sort
 
-关于计数排序，[排序大礼包](./1b0rp9e.html?hash=63d906b)的时候讲过的，但这是2n时间，题目要求1n时间，暂时就不先做了，因为我觉得盲目追求1n时间属于投机
+关于计数排序，[排序大礼包](./1b0rp9e.html?hash=63d906b)的时候讲过的，但这是 2n 时间，题目要求 1n 时间，暂时就不先做了，因为我觉得盲目追求 1n 时间属于投机
 
 ```java
 public void sortColors(int[] nums) {

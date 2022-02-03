@@ -1,30 +1,32 @@
 ## Vue
 
-### Vue技巧
+### Vue 技巧
 
-1. [用了很多动效，介绍 4个很 Nice 的 Vue 路由过渡动效！](https://juejin.cn/post/6951540864787152927)
+1. [用了很多动效，介绍 4 个很 Nice 的 Vue 路由过渡动效！](https://juejin.cn/post/6951540864787152927)
 
-   t ransition得用这样的状态
-   ``` html
+   t ransition 得用这样的状态
+
+   ```html
    <transition name="slide-fade" mode="out-in">
      <keep-alive>
-     	<router-view></router-view>
-   	</keep-alive>
+       <router-view></router-view>
+     </keep-alive>
    </transition>
    ```
 
-   css得用enter
-   ``` css
+   css 得用 enter
+
+   ```css
    .fade-enter-active,
    .fade-leave-active {
      transition: opacity 0.3s;
    }
-   
+
    .fade-enter,
    .fade-leave-to {
      opacity: 0;
    }
-   
+
    .slide-fade-enter-active {
      transition: all 0.3s ease;
    }
@@ -38,18 +40,14 @@
    }
    ```
 
-   
-
 #### Vue3 Troubleshoot
 
 1. [where to find or how to set htmlWebpackPlugin.options.title in project created with vue cli 3?](https://stackoverflow.com/questions/62023604/where-to-find-or-how-to-set-htmlwebpackplugin-options-title-in-project-created-w)
-1. [webpack-chain示例](https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans)
+1. [webpack-chain 示例](https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans)
 
+### Vue3 动态渲染
 
-
-### Vue3动态渲染
-
-``` js
+```js
 <script>
 /* eslint-disable no-unused-vars */
 import imgRouter from "@/plugins/img-router.js";
@@ -137,17 +135,15 @@ export default {
 
 使用这个组件：
 
-``` html
+```html
 <template>
-	<markdown-body :content="content" :key="$route.params.articleId" />
+  <markdown-body :content="content" :key="$route.params.articleId" />
 </template>
 ```
 
+### Vue 监听窗口大小变化
 
-
-### Vue监听窗口大小变化
-
-``` js
+```js
 mounted: function () {
   this.winHeight = this.getWinHeight();
   this.winWidth = this.getWinWidth();
@@ -161,17 +157,13 @@ mounted: function () {
 },
 ```
 
-
-
-### Vue 打包体积优化方案和CDN
+### Vue 打包体积优化方案和 CDN
 
 https://juejin.cn/post/6844904163327868941
 
+### Vue SPA 和 GithubPages 的配合
 
-
-### Vue SPA和GithubPages的配合
-
------
+---
 
 2021 Solution for vue3 & vue-cli:
 
@@ -192,6 +184,6 @@ and then in the `vue.config.js`:
 
 then the spa is good to go~
 
------
+---
 
 在[stackoverflow](https://stackoverflow.com/a/70299225/17094075)上的回答

@@ -9,26 +9,23 @@ tags:
   - arraylist
 ---
 
-
-
 #### 前言
 
 最近在复习**数据结构**和**算法**，这两个玩意也是被称之为**“程序员的基本素养”**，我最近比较想干的一件事就是读集合框架的源码
 
-基于这个伟大目标，我开启了源码阅读的**“从头到尾读”**系列，目前只完成了**Collection接口、Iterable接口、Iterator接口**这三个章节，正打算开始读**ArrayList**的源码
+基于这个伟大目标，我开启了源码阅读的**“从头到尾读”**系列，目前只完成了**Collection 接口、Iterable 接口、Iterator 接口**这三个章节，正打算开始读**ArrayList**的源码
 
-为什么想要写自实现的ArrayList，主要也是为了配合ArrayList的源码阅读
+为什么想要写自实现的 ArrayList，主要也是为了配合 ArrayList 的源码阅读
 
-大二的时候也学过数据结构这门课，也用Java实现过简单的ArrayList和其他常见的结构，但是这次的自实现，我的目标是**往JDK源码上面靠拢**，意在学习大师级的**设计手法以及精妙的算法**
+大二的时候也学过数据结构这门课，也用 Java 实现过简单的 ArrayList 和其他常见的结构，但是这次的自实现，我的目标是**往 JDK 源码上面靠拢**，意在学习大师级的**设计手法以及精妙的算法**
 
 话不多说，开搞
 
-
-
 #### 热身
+
 在此之前还没开始阅读`ArrayList`，但是我们可以稍稍瞥一眼它的类头，
 
-``` java
+```java
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -38,7 +35,7 @@ public class ArrayList<E> extends AbstractList<E>
 
 这里面重要的内容首先我们就盯着`AbstractList`这个抽象类，一直往深了摸，摸到了`Collection`这个接口，这个接口继承了`Iterable`接口，欸~摸到宝了，我们拿这个玩意去开展我们的**自实现类**，为什么其他的抽象类、其他的接口不用管呢？
 
-在我看来，**无论是Collection、List这类的接口，还是AbstractList、AbstractCollection这些抽象类**它们仅是提供一个**接口规范以及一定的实现**，真正有意思的东西，还得是**迭代器**这个利器！
+在我看来，**无论是 Collection、List 这类的接口，还是 AbstractList、AbstractCollection 这些抽象类**它们仅是提供一个**接口规范以及一定的实现**，真正有意思的东西，还得是**迭代器**这个利器！
 
 于是马上写好自实现的类头，加上泛型就不用说了
 
@@ -61,6 +58,7 @@ public class MyArrayList<E> implements Iterable<E>{
     }
 }
 ```
+
 这里面除了`Iterator()`方法之外，另外两个方法不太熟，但首先我们保证好一个容器结构应有的几个基本接口：
 
 - **get(int index)**
@@ -73,8 +71,8 @@ public class MyArrayList<E> implements Iterable<E>{
 
 里面注意的几个点：
 
-- 凡是牵扯到**索引操作**的，都需要**判断index是否合法**，比如是负数或者超过界限了
-- add方法的**扩容问题**
+- 凡是牵扯到**索引操作**的，都需要**判断 index 是否合法**，比如是负数或者超过界限了
+- add 方法的**扩容问题**
 
 准备就绪，咔咔咔就写下十几行代码：
 
@@ -132,8 +130,6 @@ private int endIndex() {
 }
 ```
 
-
-
 ##### remove
 
 ```java
@@ -149,19 +145,17 @@ public E remove(int index) {
     } else {
         throw new ArrayIndexOutOfBoundsException("index:" + index);
     }
-}	
+}
 ```
 
-基本思路，如果index在可取范围内，则可以remove，否则抛出异常
+基本思路，如果 index 在可取范围内，则可以 remove，否则抛出异常
 
-在可取范围内，如果index不是最后一个的话，那么移除该元素就得：
+在可取范围内，如果 index 不是最后一个的话，那么移除该元素就得：
 
-- **index位之后的元素往前移一位**
+- **index 位之后的元素往前移一位**
 - **size--**
 
 否则只进行`size--`
-
-
 
 ##### add
 
@@ -194,8 +188,6 @@ public void adjustArray() {
 ```
 
 实现`add(int index, E element)`和传统的不太一样，我的这个方法更具体一些，我们把扩容的事情抽象成一个`adjustArray`方法，如果要插入的位置在当前列表的中间，我们将数组从要插入的位置开始往后移一位
-
-
 
 ##### Iterator
 
@@ -246,6 +238,4 @@ public void forEach(Consumer<? super E> action) {
 }
 ```
 
-
-
-目前为止（2018年6月5日-08点55分）[代码快照](https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java)，我们的自实现算是基本达标了，接下来我们进入阅读ArrayList的环节
+目前为止（2018 年 6 月 5 日-08 点 55 分）[代码快照](https://github.com/youyinnn/Algorithm_zoom/blob/a853c7bfa875ad032e4638562f5ae5d5a5483b79/src/main/java/datasrtuct/list/MyArrayList.java)，我们的自实现算是基本达标了，接下来我们进入阅读 ArrayList 的环节

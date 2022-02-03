@@ -216,7 +216,7 @@ student_obj = [
 <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>)))
 </code></pre>
 <p>Output:</p>
-<pre><code class="hljs language-console">[(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]     
+<pre><code class="hljs language-console">[(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]
 [(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]
 [(&#x27;Mark&#x27;, 10), (&#x27;Jack&#x27;, 12), (&#x27;Jim&#x27;, 15)]
 </code></pre>
@@ -307,7 +307,7 @@ s2 = {<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <s
 <span class="hljs-comment"># in a or b but not both</span>
 <span class="hljs-built_in">print</span>(s1 ^ s2)
 
-<span class="hljs-comment"># comprehensions </span>
+<span class="hljs-comment"># comprehensions</span>
 <span class="hljs-built_in">print</span>({x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;abcdefgh&#x27;</span> <span class="hljs-keyword">if</span> x <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;efg&#x27;</span>})
 </code></pre>
 <p>Output:</p>
@@ -391,18 +391,18 @@ b 2
 <h3 id="classes">Classes</h3>
 <h4 id="namespaces-and-scopes">Namespaces And Scopes</h4>
 <h5 id="namespaces">Namespaces</h5>
-<p>A <em>namespace</em> is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. </p>
-<p>Examples of namespaces are: </p>
+<p>A <em>namespace</em> is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future.</p>
+<p>Examples of namespaces are:</p>
 <ul>
-<li>the set of built-in names (containing functions such as <a href="https://docs.python.org/3/library/functions.html#abs"><code>abs()</code></a>, and built-in exception names); </li>
-<li>the global names in a module; </li>
+<li>the set of built-in names (containing functions such as <a href="https://docs.python.org/3/library/functions.html#abs"><code>abs()</code></a>, and built-in exception names);</li>
+<li>the global names in a module;</li>
 <li>the local names in a function invocation;</li>
 </ul>
-<p>In a sense the set of attributes of an object also form a namespace. </p>
-<p>Namespaces are created at <strong>different moments</strong> and have different lifetimes. </p>
+<p>In a sense the set of attributes of an object also form a namespace.</p>
+<p>Namespaces are created at <strong>different moments</strong> and have different lifetimes.</p>
 <ul>
-<li>The namespace containing the built-in names is created when <strong>the Python interpreter starts up</strong>, and is never deleted. </li>
-<li>The global namespace for a module is created when <strong>the module definition is read in</strong>; normally, module namespaces also last until the interpreter quits. </li>
+<li>The namespace containing the built-in names is created when <strong>the Python interpreter starts up</strong>, and is never deleted.</li>
+<li>The global namespace for a module is created when <strong>the module definition is read in</strong>; normally, module namespaces also last until the interpreter quits.</li>
 <li>The local namespace for a function is created <strong>when the function is called</strong>, and deleted when the function returns or raises an exception that is not handled within the function.</li>
 </ul>
 <h5 id="scopes">Scopes</h5>
@@ -439,7 +439,7 @@ After nonlocal assignment: nonlocal spam
 After global assignment: nonlocal spam
 In global scope: global spam
 </code></pre>
-<p>Note how the <em>local</em> assignment (which is default) didn’t change <em>scope_test</em>’s binding of <em>spam</em>. The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> assignment changed <em>scope_test</em>’s binding of <em>spam</em>, and the <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> assignment changed the module-level binding.</p>
+<p>Note how the <em>local</em> assignment (which is default) didn’t change _scope_test_’s binding of <em>spam</em>. The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> assignment changed _scope_test_’s binding of <em>spam</em>, and the <a href="https://docs.python.org/3/reference/simple_stmts.html#global"><code>global</code></a> assignment changed the module-level binding.</p>
 <h4 id="defining-a-class">Defining A Class</h4>
 <pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
     <span class="hljs-string">&quot;&quot;&quot;here is __doc__ content\
@@ -528,7 +528,7 @@ w = Worker(<span class="hljs-string">&#x27;Jim&#x27;</span>, <span class="hljs-n
         <span class="hljs-built_in">super</span>().__init__()
         self.<span class="hljs-built_in">str</span> = <span class="hljs-built_in">str</span>
         self.index = <span class="hljs-number">0</span>
-    
+
     <span class="hljs-comment"># make object iterable</span>
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):
         <span class="hljs-keyword">return</span> self
@@ -586,7 +586,7 @@ p = Person(<span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-
 </blockquote>
 <h4 id="more-on-private-attributes">More On Private Attributes</h4>
 <p>It is clear that we set an attribute to private for safely visitation, but it make the attribute visitation syntactically more complicated.</p>
-<p>We can use <code>@property</code> and  <code>@attr.setter</code> decorators to make it simple. </p>
+<p>We can use <code>@property</code> and <code>@attr.setter</code> decorators to make it simple.</p>
 <p>What&#39;s more , we can use <code>@attr.deleter</code>.</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:
     <span class="hljs-comment"># a getter for age</span>
@@ -603,7 +603,7 @@ p = Person(<span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-
             <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Age should between 0 ~ 100&#x27;</span>)
         <span class="hljs-keyword">else</span>:
             self._age = age
-    
+
 <span class="hljs-meta">    @age.deleter</span>
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">age</span>(<span class="hljs-params">self</span>):
         <span class="hljs-comment"># more logic can be put in here</span>
@@ -624,7 +624,7 @@ p = Person()
 p.age = <span class="hljs-number">99</span>
 <span class="hljs-built_in">print</span>(p)
 </code></pre>
-<p>Output: </p>
+<p>Output:</p>
 <pre><code class="hljs language-console">----------------------------------------------------------------------------------------------------
 Traceback (most recent call last):
   File &quot;d:/Workshop/MyPython/practice/class/property.py&quot;, line 28, in &lt;module&gt;

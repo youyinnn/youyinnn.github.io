@@ -38,13 +38,13 @@ Thread running 3   &lt;Thread(Thread-1, started 7536)&gt;
 </code></pre>
 <h3 id="thread-object">Thread Object</h3>
 <p>Create a thread with:</p>
-<p><em>class</em> <code>threading.Thread</code>(<em>group=None</em>, <em>target=None</em>, <em>name=None</em>, <em>args=()</em>, <em>kwargs={}</em>, <em>*</em>, <em>daemon=None</em>)</p>
+<p><em>class</em> <code>threading.Thread</code>(<em>group=None</em>, <em>target=None</em>, <em>name=None</em>, <em>args=()</em>, <em>kwargs={}</em>, ***, *daemon=None*)</p>
 <ul>
 <li><p><em>group</em> should be <code>None</code>; reserved for future extension when a <code>ThreadGroup</code> class is implemented.</p>
 </li>
 <li><p><em>target</em> is the callable object to be invoked by the <a href="https://docs.python.org/3/library/threading.html#threading.Thread.run"><code>run()</code></a> method. Defaults to <code>None</code>, meaning nothing is called.</p>
 </li>
-<li><p><em>name</em> is the thread name. By default, a unique name is constructed of the form “Thread-<em>N</em>” where <em>N</em> is a small decimal number.</p>
+<li><p><em>name</em> is the thread name. By default, a unique name is constructed of the form “Thread-_N_” where <em>N</em> is a small decimal number.</p>
 </li>
 <li><p><em>args</em> is the argument tuple for the target invocation. Defaults to <code>()</code>.</p>
 </li>
@@ -144,7 +144,7 @@ t2.start()
         <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;check money:&#x27;</span>, money)
         l.release()
     time.sleep(<span class="hljs-number">1</span>)
-    
+
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;final money:&#x27;</span>, money)
 </code></pre>
 <p>Output:</p>
@@ -154,7 +154,7 @@ final money: 5000000
 <p>The final money will always be 5000000.</p>
 <h3 id="rlock-object">RLock Object</h3>
 <p>A reentrant lock is a synchronization primitive that may be acquired multiple times by the same thread. Internally, it uses the concepts of “owning thread” and “recursion level” in addition to the locked/unlocked state used by primitive locks. In the locked state, some thread owns the lock; in the unlocked state, no thread owns it.</p>
-<p>To lock the lock, a thread calls its <a href="https://docs.python.org/3/library/threading.html#threading.RLock.acquire"><code>acquire()</code></a> method; this returns once the thread owns the lock. </p>
+<p>To lock the lock, a thread calls its <a href="https://docs.python.org/3/library/threading.html#threading.RLock.acquire"><code>acquire()</code></a> method; this returns once the thread owns the lock.</p>
 <p>To unlock the lock, a thread calls its <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> method. <a href="https://docs.python.org/3/library/threading.html#threading.Lock.acquire"><code>acquire()</code></a>/<a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> call pairs may be nested; only the final <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> (the <a href="https://docs.python.org/3/library/threading.html#threading.Lock.release"><code>release()</code></a> of the outermost pair) resets the lock to unlocked and allows another thread blocked in <a href="https://docs.python.org/3/library/threading.html#threading.Lock.acquire"><code>acquire()</code></a> to proceed.</p>
 <p>Methods:</p>
 <ul>
@@ -192,7 +192,7 @@ rl = RLock()
 
 t = Thread(target=running)
 t.start()
-                
+
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">aq</span>():
     <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> rl.acquire(timeout=<span class="hljs-number">0</span>):
         <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;tring to aquire rl&#x27;</span>)
@@ -256,7 +256,7 @@ release_count = <span class="hljs-number">0</span>
 goods = <span class="hljs-number">0</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">collect</span>():
-    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:        
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
         <span class="hljs-keyword">global</span> release_count
         <span class="hljs-keyword">if</span> (release_count == <span class="hljs-number">3</span>):
             <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Mission done, collecting process stop.&#x27;</span>)

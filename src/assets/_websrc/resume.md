@@ -8,13 +8,13 @@
 >
 > **性别：** 男
 >
-> **邮箱：** youyinnn@gmail.com 
+> **邮箱：** youyinnn@gmail.com
 >
-> **Github：** https://github.com/youyinnn 
+> **Github：** https://github.com/youyinnn
 >
-> **博客：** https://youyinnn.github.io 
+> **博客：** https://youyinnn.github.io
 >
-> **电子简历：** https://youyinnn.github.io/resume/ 
+> **电子简历：** https://youyinnn.github.io/resume/
 >
 > **本科：** [中南民族大学](http://www.scuec.edu.cn/s/1/t/560/main.htm) 19 年应届生
 >

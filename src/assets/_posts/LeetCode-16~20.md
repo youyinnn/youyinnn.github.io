@@ -4,16 +4,14 @@ categories:
   - algorithm
   - leetcode
 tags:
- - leetcode
+  - leetcode
 date: 2019-03-06 20:13:00
 series: leetcode
 ---
 
-
-
 ### 16.3SumClosest(Medium)
 
-Given an array `nums` of *n* integers and an integer `target`, find three integers in `nums` such that the sum is closest to `target`. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+Given an array `nums` of _n_ integers and an integer `target`, find three integers in `nums` such that the sum is closest to `target`. Return the sum of the three integers. You may assume that each input would have exactly one solution.
 
 **Example:**
 
@@ -50,8 +48,6 @@ public int threeSumClosest2(int[] nums, int target) {
 }
 ```
 
-
-
 ### 17. Letter Combinations of a Phone Number(Medium)
 
 Given a string containing digits from `2-9` inclusive, return all possible letter combinations that the number could represent.
@@ -71,11 +67,11 @@ Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 
 Although the above answer is in lexicographical order, your answer could be in any order you want.
 
-这题怎么说，一看就是DP，最终解法有点像最近点对，然后也有点像**Merge Kth Sorted List**
+这题怎么说，一看就是 DP，最终解法有点像最近点对，然后也有点像**Merge Kth Sorted List**
 
 上一个公式：`Get("234")=Get("2") X Get("34")`；`Get("34")=Get("3") X Get("4")`；
 
-于是我们将多个问题始终简化为只处理2个符号的问题，最后暴力求2个符号的问题即可
+于是我们将多个问题始终简化为只处理 2 个符号的问题，最后暴力求 2 个符号的问题即可
 
 ```java
 private static char[][] map = {
@@ -131,11 +127,9 @@ private static List<String> get(char[] set, int start, int end) {
 }
 ```
 
-
-
 ### 18. 4Sum(Medium)
 
-Given an array `nums` of *n* integers and an integer `target`, are there elements *a*, *b*, *c*, and *d* in `nums` such that *a* + *b* + *c* + *d* = `target`? Find all unique quadruplets in the array which gives the sum of `target`.
+Given an array `nums` of _n_ integers and an integer `target`, are there elements _a_, _b_, _c_, and _d_ in `nums` such that _a_ + _b_ + _c_ + _d_ = `target`? Find all unique quadruplets in the array which gives the sum of `target`.
 
 **Note:**
 
@@ -154,7 +148,7 @@ A solution set is:
 ]
 ```
 
-有了3sum的经验，4sum迎刃而解
+有了 3sum 的经验，4sum 迎刃而解
 
 ```java
 public List<List<Integer>> fourSum(int[] nums, int target) {
@@ -195,10 +189,9 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
 }
 ```
 
-
 ### 19. Remove Nth Node From End Of List(Medium)
 
-Given a linked list, remove the *n*-th node from the end of list and return its head.
+Given a linked list, remove the _n_-th node from the end of list and return its head.
 
 **Example:**
 
@@ -210,13 +203,13 @@ After removing the second node from the end, the linked list becomes 1->2->3->5.
 
 **Note:**
 
-Given *n* will always be valid.
+Given _n_ will always be valid.
 
 **Follow up:**
 
 Could you do this in one pass?
 
-####  Two Pass Solution
+#### Two Pass Solution
 
 ```java
 public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -242,9 +235,10 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
     return head;
 }
 ```
-没什么说的，one pass获得长度，two pass直接定位删除
 
-#### One Pass Solution 
+没什么说的，one pass 获得长度，two pass 直接定位删除
+
+#### One Pass Solution
 
 ```java
 public ListNode removeNthFromEnd2(ListNode head, int n) {
@@ -278,13 +272,13 @@ public ListNode removeNthFromEnd2(ListNode head, int n) {
 }
 ```
 
-遍历链，对每个结点都往后找n+1个结点记为**CHECK**，如果**CHECK**为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍
+遍历链，对每个结点都往后找 n+1 个结点记为**CHECK**，如果**CHECK**为 NULL，则说明当前的 now 就是要删掉的结点，我觉得这种方法还不如遍历两遍
 
 #### One Pass Solution - Tow pointers
 
-从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。
+从剑指 Offer 上面看到的思路，对应面试题 22，思想是设立两个指针，指针 1 先走 n 步，然后这时候指针 2 开始走，在这个过程种指针 1 和 2 始终有 n 步的距离差，所以当指针 1 走到 null 位置时，指针 2 自然就走到倒数第 n 个节点的位置了。
 
-``` java
+```java
 public ListNode removeNthFromEnd3(ListNode head, int n) {
     if (head == null || head.next == null) return null;
     ListNode p1 = head, p2 = head, pre = head;
@@ -293,7 +287,7 @@ public ListNode removeNthFromEnd3(ListNode head, int n) {
             n--;
         } else {
             pre = p2;
-            p2 = p2.next;    
+            p2 = p2.next;
         }
         p1 = p1.next;
     }
@@ -305,10 +299,6 @@ public ListNode removeNthFromEnd3(ListNode head, int n) {
     return head;
 }
 ```
-
-
-
-
 
 ### 20. Valid Parentheses
 

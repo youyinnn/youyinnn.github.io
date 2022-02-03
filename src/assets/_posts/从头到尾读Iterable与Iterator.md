@@ -12,15 +12,13 @@ tags:
 series: 从头到尾读
 ---
 
-
-
-### Iterable接口
+### Iterable 接口
 
 含义: 这个接口的含义是, 容器的元素是否支持**迭代器**访问
 
 #### 源码
 
-``` java
+```java
 /**
  * 实现这个接口, 意味着对象可以使用forEach循环进行操作
  */
@@ -55,15 +53,13 @@ public interface Iterable<T> {
 }
 ```
 
-
-
-### Iterator接口
+### Iterator 接口
 
 含义: 实现这个接口的类就是某个容器的**迭代器**, 这个概念的意思是, 我可以持有一个**迭代器**去遍历容器中的元素.
 
 #### 源码
 
-``` java
+```java
 /**
  * 源代码不多 所以去掉了很多注释就贴出来了
  */
@@ -105,15 +101,13 @@ public interface Iterator<E> {
 
 ```
 
-#### forEachRemaining引例
+#### forEachRemaining 引例
 
 > 待补充
 
-
-
 ### ListIterator
 
-比一般的迭代器要厉害 
+比一般的迭代器要厉害
 
 ```java
 /**
@@ -121,7 +115,7 @@ public interface Iterator<E> {
  * 在过程中你甚至可以获取当前迭代的index，甚至是修改元素
  */
 public interface ListIterator<E> extends Iterator<E> {
-    
+
     // 查询操作
     boolean hasNext();
 
@@ -139,10 +133,9 @@ public interface ListIterator<E> extends Iterator<E> {
 
     // 修改操作
     void remove();
-    
+
     void set(E e);
 
     void add(E e);
 }
 ```
-

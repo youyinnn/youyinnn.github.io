@@ -13,7 +13,7 @@ Output:
 ]
 </code></pre>
 <h4 id="backtracking">Backtracking</h4>
-<p>回溯之前已经分析过了，关键是用contains或者一个flag数组去避免重复</p>
+<p>回溯之前已经分析过了，关键是用 contains 或者一个 flag 数组去避免重复</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permute</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     backtracking(ans, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(), nums);
@@ -46,7 +46,7 @@ Output:
 ]
 </code></pre>
 <h4 id="backtracking-1">Backtracking</h4>
-<p>关键是用一个flags数组和预先排序操作去避免重复</p>
+<p>关键是用一个 flags 数组和预先排序操作去避免重复</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permuteUnique</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     List&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
     <span class="hljs-type">int</span>[] flags = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
@@ -80,7 +80,7 @@ Output:
 <p><strong>Note:</strong></p>
 <p>You have to rotate the image <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a>, which means you have to modify the input 2D matrix directly. <strong>DO NOT</strong> allocate another 2D matrix and do the rotation.</p>
 <p><strong>Example 1:</strong></p>
-<pre><code>Given input matrix = 
+<pre><code>Given input matrix =
 [
   [1,2,3],
   [4,5,6],
@@ -101,7 +101,7 @@ rotate the input matrix in-place such that it becomes:
   [ 2, 4, 8,10],
   [13, 3, 6, 7],
   [15,14,12,16]
-], 
+],
 
 rotate the input matrix in-place such that it becomes:
 [
@@ -112,13 +112,13 @@ rotate the input matrix in-place such that it becomes:
 ]
 </code></pre>
 <h4 id="think-in-the-smart-way">Think In The Smart Way</h4>
-<p>挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的case</p>
-<p>如果我们将右旋90°这个事情简单地看成：</p>
+<p>挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的 case</p>
+<p>如果我们将右旋 90° 这个事情简单地看成：</p>
 <pre><code>0. original matrix:
                     [1,2,3]
                     [4,5,6]
                     [7,8,9]
-                    
+
 1. swap side base on diagonal:
 
                     [@,2,3]            [@,4,7]           [1,4,7]
@@ -166,7 +166,7 @@ Output:
 ]
 </code></pre>
 <h4 id="hashing">Hashing</h4>
-<p>先每个字符串用排序得出对应的字谜的解，然后这个解作为key放在HashMap中，后续相同字谜解的，一起加在同一个key下</p>
+<p>先每个字符串用排序得出对应的字谜的解，然后这个解作为 key 放在 HashMap 中，后续相同字谜解的，一起加在同一个 key 下</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">groupAnagrams</span><span class="hljs-params">(String[] strs)</span> {
     HashMap&lt;String, List&lt;String&gt;&gt; ansMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
     <span class="hljs-keyword">for</span> (String str : strs) {
@@ -181,7 +181,7 @@ Output:
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;(ansMap.values());
 }
 </code></pre>
-<p>这里有2个优化的地方：</p>
+<p>这里有 2 个优化的地方：</p>
 <ul>
 <li>因为都是在屁股加解，所以用<code>LinkedList</code>会好点；</li>
 <li><code>String.valueOf(chars)</code>会比<code>Arrays.toString(chars)</code>要来得干脆；</li>
@@ -207,9 +207,9 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 <li><em>n</em> is a 32-bit signed integer, within the range [−231, 231 − 1]</li>
 </ul>
 <h4 id="recursion">Recursion</h4>
-<p>这题首先暴力解可以，但是时间会爆，比较如果n为<code>Integer.MAX_VALUE</code>的话，那就得有20亿次的循环计算，但是呢，这20亿次计算，有一半可以砍掉的，我们拿<code>pow(2, 20)</code>来举例，2的20次方，等于2的10次方的平方，于是我们只需要算出2的10次方，那么就可以得出2的20次方了：<code>pow(2, 20) = pow(2, 10) * pow(2, 10)</code>，而<code>pow(2, 10) = pow(2, 5) * pow(2, 5)</code>，而<code>pow(2, 5) = pow(2, 4) * 2</code>，而<code>pow(2, 4) = pow(2, 2) * pow(2, 2)</code>，而<code>pow(2, 2) = 2 * 2</code>；</p>
-<p>于是我们把20次计算减少为5次计算，同理我们如果20亿次计算可以减少为31次计算，不要问为什么</p>
-<p>然后我们再覆盖一些边角case~</p>
+<p>这题首先暴力解可以，但是时间会爆，比较如果 n 为<code>Integer.MAX_VALUE</code>的话，那就得有 20 亿次的循环计算，但是呢，这 20 亿次计算，有一半可以砍掉的，我们拿<code>pow(2, 20)</code>来举例，2 的 20 次方，等于 2 的 10 次方的平方，于是我们只需要算出 2 的 10 次方，那么就可以得出 2 的 20 次方了：<code>pow(2, 20) = pow(2, 10) * pow(2, 10)</code>，而<code>pow(2, 10) = pow(2, 5) * pow(2, 5)</code>，而<code>pow(2, 5) = pow(2, 4) * 2</code>，而<code>pow(2, 4) = pow(2, 2) * pow(2, 2)</code>，而<code>pow(2, 2) = 2 * 2</code>；</p>
+<p>于是我们把 20 次计算减少为 5 次计算，同理我们如果 20 亿次计算可以减少为 31 次计算，不要问为什么</p>
+<p>然后我们再覆盖一些边角 case~</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">myPow</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || x == <span class="hljs-number">1</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;

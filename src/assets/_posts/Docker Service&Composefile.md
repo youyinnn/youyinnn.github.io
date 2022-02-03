@@ -10,8 +10,6 @@ date: 2018-11-27 12:19:02
 series: docker
 ---
 
-
-
 ### Service
 
 In a distributed application, different pieces of the app are called “services.” For example, if you imagine a video sharing site, it probably includes **[1]a service for storing application data in a database**, **[2]a service for video transcoding in the background after a user uploads something**, **[3]a service for the front-end**, and so on.
@@ -28,16 +26,16 @@ Luckily it’s very easy to **define**, run, and scale services with the Docker 
 
 A `docker-compose.yml` file is a YAML file that defines how Docker containers should behave in production.
 
-> image或者说container只是一个app的运行环境，通常来说在完整系统里面我们不止要用到1个app，这也是微服务的架构，而每个app有各自的环境资源和部署策略
+> image 或者说 container 只是一个 app 的运行环境，通常来说在完整系统里面我们不止要用到 1 个 app，这也是微服务的架构，而每个 app 有各自的环境资源和部署策略
 >
 > 我们这样去看待：
 >
-> - app是面向业务，而提供解决方案的
-> - servcie是面向使用者，而提供使用这个app的管理办法的
+> - app 是面向业务，而提供解决方案的
+> - servcie 是面向使用者，而提供使用这个 app 的管理办法的
 >
-> 当我们将app看成是一个service的时候，我们可以对service做要上生产环境时候的确保配置，比如为每一个container设置一些容器管理参数，比如replicas、cpu资源、memory资源、重启策略等等
+> 当我们将 app 看成是一个 service 的时候，我们可以对 service 做要上生产环境时候的确保配置，比如为每一个 container 设置一些容器管理参数，比如 replicas、cpu 资源、memory 资源、重启策略等等
 >
-> 于是我们可以用`docker-compose.yaml`去组织一个service，这是投入生产环境时候的正确做法
+> 于是我们可以用`docker-compose.yaml`去组织一个 service，这是投入生产环境时候的正确做法
 
 ### `docker-compose.yml`
 
@@ -150,7 +148,6 @@ Now, re-run `docker container ls -q` to see the deployed instances reconfigured.
 It’s as easy as that to stand up and scale your app with Docker. You’ve taken a huge step towards learning how to run containers in production. Up next, you learn how to run this app as a bonafide swarm on a cluster of Docker machines.
 
 > **Note**: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using [Docker Cloud](https://docs.docker.com/docker-cloud/), or on any hardware or cloud provider you choose with [Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
-
 
 ### Compose file Reference
 

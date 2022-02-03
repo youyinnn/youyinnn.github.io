@@ -8,7 +8,7 @@
 `1,1,5` → `1,5,1
 </code></pre>
 <h4 id="from-back7ms">From Back(7ms)</h4>
-<p>不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列1 2 3 4，往后的序列是</p>
+<p>不难，找规律找出来就好了，首先弄清楚字典顺序是怎么回事，比如序列 1 2 3 4，往后的序列是</p>
 <pre><code>1 2 3 4  ┌→ 2 1 3 4  ┌→ 3 1 2 4  ┌→ 4 1 2 3
 1 2 4 3  |  2 1 4 3  |  3 1 4 2  |  4 1 3 2
 1 3 2 4  |  2 3 1 4  |  3 2 1 4  |  4 2 1 3
@@ -16,7 +16,7 @@
 1 4 2 3  |  2 4 1 3  |  3 4 1 2  |  4 3 1 2
 1 4 3 2 -┘  2 4 3 1 -┘  3 4 2 1 -┘  4 3 2 1
 </code></pre>
-<p>多看几组我们可以发现，如果我们从后往前找到<strong>顺序</strong>的一对，比如4 1 3 2中，1和3是顺序的，那么如果将1和<strong>它的下一个自然数交换位置</strong>，然后<strong>将该位置往后的序列自然排序</strong>，就可以得到下一组自然序列，比如1在当前序列中的下一个自然数是2，于是交换得到4 2 3 1，然后再对2后面的序列进行排序，如此得到4 2 1 3</p>
+<p>多看几组我们可以发现，如果我们从后往前找到<strong>顺序</strong>的一对，比如 4 1 3 2 中，1 和 3 是顺序的，那么如果将 1 和<strong>它的下一个自然数交换位置</strong>，然后<strong>将该位置往后的序列自然排序</strong>，就可以得到下一组自然序列，比如 1 在当前序列中的下一个自然数是 2，于是交换得到 4 2 3 1，然后再对 2 后面的序列进行排序，如此得到 4 2 1 3</p>
 <p>于是代码为：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">nextPermutation</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
@@ -62,9 +62,9 @@ Explanation: The longest valid parentheses substring is &quot;()&quot;
 Output: 4
 Explanation: The longest valid parentheses substring is &quot;()()&quot;
 </code></pre>
-<p>这题，本来还想用找<strong>Q5最长回文数</strong>的套路去做的，不行，而且这题有更简单的方法</p>
+<p>这题，本来还想用找<strong>Q5 最长回文数</strong>的套路去做的，不行，而且这题有更简单的方法</p>
 <h4 id="dp">DP</h4>
-<p>想不到吧？这题居然可以dp，牛皮吧？根据官方给的solution，我优化了代码，以一种更简单的方式去用dp解这道题，我们先看几个例子：</p>
+<p>想不到吧？这题居然可以 dp，牛皮吧？根据官方给的 solution，我优化了代码，以一种更简单的方式去用 dp 解这道题，我们先看几个例子：</p>
 <pre><code class="hljs language-java"><span class="hljs-number">1.</span>假如我们有：
                 ( ) ( )
     -------------------
@@ -73,7 +73,7 @@ Explanation: The longest valid parentheses substring is &quot;()()&quot;
 match:            <span class="hljs-number">2</span>   <span class="hljs-number">2</span>
                   +   +
 before match:     ?   <span class="hljs-number">2</span>
-    
+
 对于最后一个<span class="hljs-number">4</span>，我们可以做这样的解释：
 <span class="hljs-number">1</span>）因为它和前一个字符match了，所以算<span class="hljs-number">2</span>个长度；
 <span class="hljs-number">2</span>）因为在这<span class="hljs-number">2</span>个长度之前，紧前面也有一个长度为<span class="hljs-number">2</span>的合法子串，所以这两紧挨着的串长度可以加在一起；
@@ -86,7 +86,7 @@ before match:     ?   <span class="hljs-number">2</span>
 match:             <span class="hljs-number">2</span>   <span class="hljs-number">2</span>
                    +   +
 before match:      <span class="hljs-number">0</span>   <span class="hljs-number">2</span>
-    
+
 <span class="hljs-number">3.</span>再看另外一个例子：
               + ( ( ) ) ( ( ) )
     ---------------------------
@@ -97,7 +97,7 @@ match:              <span class="hljs-number">2</span> <span class="hljs-number"
 inside:             <span class="hljs-number">0</span> <span class="hljs-number">2</span>     <span class="hljs-number">0</span> <span class="hljs-number">2</span>
                     + +     + +
 before match:       <span class="hljs-number">0</span> <span class="hljs-number">0</span>     <span class="hljs-number">0</span> <span class="hljs-number">4</span>
-    
+
 对于第一个<span class="hljs-number">4</span>：
 它前面一个符号是闭口，且这个闭口符号有效值为<span class="hljs-number">2</span>，于是当前闭口要考虑的有效开口，
 应该往前数<span class="hljs-number">2</span>+<span class="hljs-number">1</span>位，也就是下标为<span class="hljs-number">1</span>的位置，如果这个位置是开口，那么证明match，
@@ -110,12 +110,12 @@ before match:       <span class="hljs-number">0</span> <span class="hljs-number"
 </code></pre>
 <p>于是我们可以看出规律：</p>
 <ul>
-<li>开口有效值都是0</li>
+<li>开口有效值都是 0</li>
 <li>闭口：<ul>
-<li>如果前一位是开口，那么直接match到2个长度，然后再连上这对开闭口<strong>紧前的符号</strong>的有效值；</li>
-<li>如果前以为是闭口，那么说明有可能是大包小的情况，所以<strong>以前一位闭口的有效值为参考</strong>，在这个有效值<strong>再前一位（这里记为far match）</strong>与当前闭口做match：<ul>
-<li>如果不match，那么当前闭口有效值为0；</li>
-<li>否则match值2加上前一位闭口有效值再加上<strong>far match的紧前的符号</strong>的有效值，就是当前闭口的有效值；</li>
+<li>如果前一位是开口，那么直接 match 到 2 个长度，然后再连上这对开闭口<strong>紧前的符号</strong>的有效值；</li>
+<li>如果前以为是闭口，那么说明有可能是大包小的情况，所以<strong>以前一位闭口的有效值为参考</strong>，在这个有效值<strong>再前一位（这里记为 far match）</strong>与当前闭口做 match：<ul>
+<li>如果不 match，那么当前闭口有效值为 0；</li>
+<li>否则 match 值 2 加上前一位闭口有效值再加上<strong>far match 的紧前的符号</strong>的有效值，就是当前闭口的有效值；</li>
 </ul>
 </li>
 </ul>
@@ -258,5 +258,5 @@ Output: 1
 <p>关键：</p>
 <ul>
 <li>low &lt;= high</li>
-<li>返回low</li>
+<li>返回 low</li>
 </ul>

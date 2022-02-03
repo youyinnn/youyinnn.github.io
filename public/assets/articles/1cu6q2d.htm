@@ -33,7 +33,7 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
         now = now.next;
         length++;
     }
-    
+
     <span class="hljs-comment">// 处理k</span>
     k %= length;
     <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>) {
@@ -79,7 +79,7 @@ From the top-left corner, there are a total of 3 ways to reach the bottom-right 
 Output: 28
 </code></pre>
 <h4 id="dp">DP</h4>
-<p>机器人走方格，有多少种走法题目，在<a href="./188zp6j.html?hash=c401ac5d">地痞</a>解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好pre数组的结果</p>
+<p>机器人走方格，有多少种走法题目，在<a href="./188zp6j.html?hash=c401ac5d">地痞</a>解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好 pre 数组的结果</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-type">int</span>[] pre = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];
     <span class="hljs-type">int</span>[] now = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];
@@ -114,7 +114,7 @@ There are two ways to reach the bottom-right corner:
 2. Down -&gt; Down -&gt; Right -&gt; Right
 </code></pre>
 <h4 id="dp-1">DP</h4>
-<p>稍微变种一下，因为有障碍物，所以我们处理第一行now的时候，还是预处理一下pre比较好</p>
+<p>稍微变种一下，因为有障碍物，所以我们处理第一行 now 的时候，还是预处理一下 pre 比较好</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePathsWithObstacles</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] obstacleGrid)</span> {
     <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> obstacleGrid.length;
     <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> obstacleGrid[<span class="hljs-number">0</span>].length;

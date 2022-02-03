@@ -8,10 +8,6 @@ tags:
 date: 2021-10-5 19:22:5
 ---
 
-
-
-
-
 ### XQuartz setup
 
 https://www.xquartz.org/
@@ -28,24 +24,18 @@ Host *
     XAuthLocation /opt/X11/bin/xauth
 ```
 
-
-
 ### VS Code
 
 With the power of [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh), you can add a ssh connection like:
 
-``` 
+```
 Host login.encs.concordia.ca
   HostName login.encs.concordia.ca
   ForwardX11Trusted yes
   User hu_ju
 ```
 
-
-
 And also [Modern VHDL](https://marketplace.visualstudio.com/items?itemName=rjyoung.vscode-modern-vhdl-support) for vhdl support.
-
-
 
 ### Troubshoot
 
@@ -53,7 +43,7 @@ And also [Modern VHDL](https://marketplace.visualstudio.com/items?itemName=rjyou
 
 When this shows on the output of `Remote SSH`
 
-``` bash
+```bash
 ...
 
 [16:44:34.541] Platform: linux
@@ -75,9 +65,9 @@ https://github.com/microsoft/vscode-remote-release/issues/5543
 
 by adding a setting on vscode settings file:
 
-``` json
+```json
 {
-    "remote.SSH.useLocalServer": false,
+  "remote.SSH.useLocalServer": false
 }
 ```
 
@@ -89,12 +79,9 @@ Fefering: https://unix.stackexchange.com/a/12772/495761
 
 Fix it by enable `ForwardX11 yes` in ssh_config:
 
-``` 
+```
 # XAuthLocation added by XQuartz (https://www.xquartz.org)
 Host *
     XAuthLocation /opt/X11/bin/xauth
     ForwardX11 yes
 ```
-
-
-

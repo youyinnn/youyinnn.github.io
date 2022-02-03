@@ -39,9 +39,9 @@ Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;b
 </code></pre>
 <p><strong>Note:</strong></p>
 <p>Although the above answer is in lexicographical order, your answer could be in any order you want.</p>
-<p>这题怎么说，一看就是DP，最终解法有点像最近点对，然后也有点像<strong>Merge Kth Sorted List</strong></p>
+<p>这题怎么说，一看就是 DP，最终解法有点像最近点对，然后也有点像<strong>Merge Kth Sorted List</strong></p>
 <p>上一个公式：<code>Get(&quot;234&quot;)=Get(&quot;2&quot;) X Get(&quot;34&quot;)</code>；<code>Get(&quot;34&quot;)=Get(&quot;3&quot;) X Get(&quot;4&quot;)</code>；</p>
-<p>于是我们将多个问题始终简化为只处理2个符号的问题，最后暴力求2个符号的问题即可</p>
+<p>于是我们将多个问题始终简化为只处理 2 个符号的问题，最后暴力求 2 个符号的问题即可</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">char</span>[][] map = {
         {}, <span class="hljs-comment">// 0</span>
         {}, <span class="hljs-comment">// 1</span>
@@ -108,7 +108,7 @@ A solution set is:
   [-2,  0, 0, 2]
 ]
 </code></pre>
-<p>有了3sum的经验，4sum迎刃而解</p>
+<p>有了 3sum 的经验，4sum 迎刃而解</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">fourSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> {
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Arrays.sort(nums);
@@ -181,7 +181,7 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     <span class="hljs-keyword">return</span> head;
 }
 </code></pre>
-<p>没什么说的，one pass获得长度，two pass直接定位删除</p>
+<p>没什么说的，one pass 获得长度，two pass 直接定位删除</p>
 <h4 id="one-pass-solution">One Pass Solution</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd2</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>), now = head, check;
@@ -213,9 +213,9 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
     <span class="hljs-keyword">return</span> head;
 }
 </code></pre>
-<p>遍历链，对每个结点都往后找n+1个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为NULL，则说明当前的now就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
+<p>遍历链，对每个结点都往后找 n+1 个结点记为<strong>CHECK</strong>，如果<strong>CHECK</strong>为 NULL，则说明当前的 now 就是要删掉的结点，我觉得这种方法还不如遍历两遍</p>
 <h4 id="one-pass-solution---tow-pointers">One Pass Solution - Tow pointers</h4>
-<p>从剑指Offer上面看到的思路，对应面试题22，思想是设立两个指针，指针1先走n步，然后这时候指针2开始走，在这个过程种指针1和2始终有n步的距离差，所以当指针1走到null位置时，指针2自然就走到倒数第n个节点的位置了。</p>
+<p>从剑指 Offer 上面看到的思路，对应面试题 22，思想是设立两个指针，指针 1 先走 n 步，然后这时候指针 2 开始走，在这个过程种指针 1 和 2 始终有 n 步的距离差，所以当指针 1 走到 null 位置时，指针 2 自然就走到倒数第 n 个节点的位置了。</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd3</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> {
     <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">p1</span> <span class="hljs-operator">=</span> head, p2 = head, pre = head;
@@ -224,7 +224,7 @@ After removing the second node from the end, the linked list becomes 1-&gt;2-&gt
             n--;
         } <span class="hljs-keyword">else</span> {
             pre = p2;
-            p2 = p2.next;    
+            p2 = p2.next;
         }
         p1 = p1.next;
     }

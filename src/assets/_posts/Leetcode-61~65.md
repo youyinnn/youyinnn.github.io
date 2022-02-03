@@ -9,11 +9,9 @@ date: 2019-04-02 14:18:00 +8
 series: leetcode
 ---
 
-
-
 ### 61.Rotate List(Medium)
 
-Given a linked list, rotate the list to the right by *k* places, where *k* is non-negative.
+Given a linked list, rotate the list to the right by _k_ places, where _k_ is non-negative.
 
 **Example 1:**
 
@@ -37,8 +35,6 @@ rotate 3 steps to the right: 0->1->2->NULL
 rotate 4 steps to the right: 2->0->1->NULL
 ```
 
-
-
 #### Solution
 
 追踪指针，简单直接
@@ -59,7 +55,7 @@ public ListNode rotateRight(ListNode head, int k) {
         now = now.next;
         length++;
     }
-    
+
     // 处理k
     k %= length;
     if (k == 0) {
@@ -85,10 +81,9 @@ public ListNode rotateRight(ListNode head, int k) {
 }
 ```
 
-
 ### 62.Unique Paths(Medium)
 
-A robot is located at the top-left corner of a *m* x *n* grid (marked 'Start' in the diagram below).
+A robot is located at the top-left corner of a _m_ x _n_ grid (marked 'Start' in the diagram below).
 
 The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
 
@@ -97,7 +92,7 @@ How many possible unique paths are there?
 ![img](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
 Above is a 7 x 3 grid. How many possible unique paths are there?
 
-**Note:** *m* and *n* will be at most 100.
+**Note:** _m_ and _n_ will be at most 100.
 
 **Example 1:**
 
@@ -118,11 +113,9 @@ Input: m = 7, n = 3
 Output: 28
 ```
 
-
-
 #### DP
 
-机器人走方格，有多少种走法题目，在[地痞](./188zp6j.html?hash=c401ac5d)解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好pre数组的结果
+机器人走方格，有多少种走法题目，在[地痞](./188zp6j.html?hash=c401ac5d)解过的，这遍解不同的是，我简化了之前的思路，并不需要预置好 pre 数组的结果
 
 ```java
 public int uniquePaths(int m, int n) {
@@ -138,11 +131,9 @@ public int uniquePaths(int m, int n) {
 }
 ```
 
-
-
 ### 63.Unique Paths II (Medium)
 
-A robot is located at the top-left corner of a *m* x *n* grid (marked 'Start' in the diagram below).
+A robot is located at the top-left corner of a _m_ x _n_ grid (marked 'Start' in the diagram below).
 
 The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
 
@@ -152,7 +143,7 @@ Now consider if some obstacles are added to the grids. How many unique paths wou
 
 An obstacle and empty space is marked as `1` and `0` respectively in the grid.
 
-**Note:** *m* and *n* will be at most 100.
+**Note:** _m_ and _n_ will be at most 100.
 
 **Example 1:**
 
@@ -171,11 +162,9 @@ There are two ways to reach the bottom-right corner:
 2. Down -> Down -> Right -> Right
 ```
 
-
-
 #### DP
 
-稍微变种一下，因为有障碍物，所以我们处理第一行now的时候，还是预处理一下pre比较好
+稍微变种一下，因为有障碍物，所以我们处理第一行 now 的时候，还是预处理一下 pre 比较好
 
 ```java
 public int uniquePathsWithObstacles(int[][] obstacleGrid) {
@@ -209,11 +198,9 @@ public int uniquePathsWithObstacles(int[][] obstacleGrid) {
 }
 ```
 
-
-
 ### 64.Minimun Path Sum(Medium)
 
-Given a *m* x *n* grid filled with non-negative numbers, find a path from top left to bottom right which *minimizes* the sum of all numbers along its path.
+Given a _m_ x _n_ grid filled with non-negative numbers, find a path from top left to bottom right which _minimizes_ the sum of all numbers along its path.
 
 **Note:** You can only move either down or right at any point in time.
 
@@ -230,13 +217,11 @@ Output: 7
 Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 ```
 
-
-
 #### DP
 
 曾经有一道题，[硬币收集问题](./188zp6j.html?hash=d2258ac5)，这个就相当于收集到的最小币值
 
-``` java
+```java
 public int minPathSum(int[][] grid) {
     if (grid.length == 0 || grid[0].length == 0) {
         return 0;
@@ -260,8 +245,6 @@ public int minPathSum(int[][] grid) {
     return now[now.length - 1];
 }
 ```
-
-
 
 ### 65.Valid Number(Hard)
 

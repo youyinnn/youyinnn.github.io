@@ -12,8 +12,6 @@ tags:
 date: 2019-01-30 21:36:20
 ---
 
-
-
 ### Basic Algorithm In Binary Tree
 
 #### Traverse
@@ -22,9 +20,9 @@ A Tree is typically traversed in two ways:
 
 - Breadth First Traversal (Or Level Order Traversal)
 - Depth First Traversals
-    - Inorder Traversal (Left-Root-Right)
-    - Preorder Traversal (Root-Left-Right)
-    - Postorder Traversal (Left-Right-Root)
+  - Inorder Traversal (Left-Root-Right)
+  - Preorder Traversal (Root-Left-Right)
+  - Postorder Traversal (Left-Right-Root)
 
 ```
             1
@@ -36,8 +34,8 @@ A Tree is typically traversed in two ways:
 BFS and DFSs of above Tree
 Breadth First Traversal : 1 2 3 4 5
 Depth First Traversals:
-      Preorder  : 1 2 4 5 3 
-      Inorder   : 4 2 5 1 3 
+      Preorder  : 1 2 4 5 3
+      Inorder   : 4 2 5 1 3
       Postorder : 4 5 2 3 1
 ```
 
@@ -50,7 +48,7 @@ There is difference in terms of extra space required.
 1. Extra Space required for **Level Order** Traversal is **O(w) where w is maximum width** of Binary Tree. In level order traversal, **queue** one by one stores nodes of different level.
 2. Extra Space required for **Depth First** Traversals is **O(h) where h is maximum height** of Binary Tree. In Depth First Traversals, **stack** (or function call stack) stores all ancestors of a node.
 
-***It is evident from above points that extra space required for Level order traversal is likely to be more when tree is more balanced and extra space for Depth First Traversal is likely to be more when tree is less balanced.***
+**_It is evident from above points that extra space required for Level order traversal is likely to be more when tree is more balanced and extra space for Depth First Traversal is likely to be more when tree is less balanced._**
 
 **How to Pick One?**
 
@@ -60,9 +58,9 @@ There is difference in terms of extra space required.
 
 3. The most important points is:
 
-    > **BFS starts visiting nodes from root while DFS starts visiting nodes from leaves.** 
-    >
-    > So if our problem is to search something that is more likely to closer to root, we would prefer BFS. And if the target node is close to a leaf, we would prefer DFS.
+   > **BFS starts visiting nodes from root while DFS starts visiting nodes from leaves.**
+   >
+   > So if our problem is to search something that is more likely to closer to root, we would prefer BFS. And if the target node is close to a leaf, we would prefer DFS.
 
 ##### BFS(BreathFirstSearch)
 
@@ -71,9 +69,9 @@ There is difference in terms of extra space required.
 1. need a **queue**
 2. need root node, and add it into queue
 3. loop this while queue is not empty:
-    1. dequeue the queue head as tmp
-    2. print tmp's value;
-    3. enqueue tmp's children(left first then right);
+   1. dequeue the queue head as tmp
+   2. print tmp's value;
+   3. enqueue tmp's children(left first then right);
 
 ```java
 public static void breathFirstTraversal(Node root) {
@@ -171,4 +169,3 @@ tree:
       \    /                             /  \    /
        7  15                            3    7  15
 </pre>
-

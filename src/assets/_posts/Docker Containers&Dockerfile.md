@@ -11,13 +11,13 @@ series: docker
 
 ### Introduction
 
-本篇主要介绍Docker里面Containers的概念，以及它的定义
+本篇主要介绍 Docker 里面 Containers 的概念，以及它的定义
 
-还有就是如何分享你创建的Containers到hub上面
+还有就是如何分享你创建的 Containers 到 hub 上面
 
-需要注意的是，containers的定义其实就是image的定义
+需要注意的是，containers 的定义其实就是 image 的定义
 
-以及说到了docker run了两个option`-p`和`-d`
+以及说到了 docker run 了两个 option`-p`和`-d`
 
 ### Define a container with Dockerfile
 
@@ -148,7 +148,7 @@ docker run -d -p 4000:80 hello-hj
 
 You get the long container ID for your app and then are kicked back to your terminal. Your container is running in the background. You can also see the abbreviated container ID with `docker container ls` (and both work interchangeably when running commands):
 
-``` bash
+```bash
 $ docker container ls
 CONTAINER ID        IMAGE               COMMAND             CREATED
 1fa4ab2cf395        hello-hj       "python app.py"     28 seconds ago
@@ -160,7 +160,7 @@ Notice that `CONTAINER ID` matches what’s on `http://localhost:4000`.
 
 Now use `docker container stop` to end the process, using the `CONTAINER ID`, like so:
 
-``` bash
+```bash
 docker container stop 1fa4ab2cf395
 ```
 
@@ -172,7 +172,7 @@ If you don’t have a Docker account, sign up for one at [hub.docker.com](https:
 
 Log in to the Docker public registry on your local machine.
 
-``` bash
+```bash
 $ docker login
 ```
 
@@ -182,19 +182,19 @@ The notation for associating a local image with a repository on a registry is `u
 
 Now, put it all together to tag the image. Run `docker tag image` with your username, repository, and tag names so that the image uploads to your desired destination. The syntax of the command is:
 
-``` bash
+```bash
 docker tag image username/repository:tag
 ```
 
 For example:
 
-``` bash
+```bash
 docker tag hello-hj youyinnn/getstarted:tag1
 ```
 
 Run [docker image ls](https://docs.docker.com/engine/reference/commandline/image_ls/) to see your newly tagged image.
 
-``` bash
+```bash
 $ docker image ls
 
 REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
@@ -208,7 +208,7 @@ hello-world           latest              4ab4c602aa5e        2 months ago      
 
 Upload your tagged image to the repository:
 
-``` bash
+```bash
 docker push username/repository:tag
 ```
 
@@ -218,14 +218,14 @@ Once complete, the results of this upload are publicly available. If you log in 
 
 From now on, you can use `docker run` and run your app on any machine with this command:
 
-``` bash
+```bash
 docker run -p 4000:80 username/repository:tag
 ```
 
 If the image isn’t available locally on the machine, Docker pulls it from the repository.
 
-``` bash
-$ docker run -p 4000:80 youyinnn/getstarted:tag1 
+```bash
+$ docker run -p 4000:80 youyinnn/getstarted:tag1
 Unable to find image 'youyinnn/getstarted:tag1' locally
 part2: Pulling from gordon/get-started
 10a267c67f42: Already exists
@@ -246,4 +246,4 @@ No matter where `docker run` executes, it pulls your image, along with Python an
 
 Docker can build images automatically by reading the instructions from a `Dockerfile`. A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession.
 
-For more information,  please refer to: **https://docs.docker.com/engine/reference/builder/#usage**
+For more information, please refer to: **https://docs.docker.com/engine/reference/builder/#usage**

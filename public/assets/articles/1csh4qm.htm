@@ -1,5 +1,5 @@
 <h3 id="前言">前言</h3>
-<p>2月份的时候，疫情原因，学校实验室和学院要开发一款帮助小区居民批量采购的小程序，实验室团队人手不足，说是少后台开发，所以我就上了，看着微信的文档还有学长的帮助，也就吭哧吭哧写上线了</p>
+<p>2 月份的时候，疫情原因，学校实验室和学院要开发一款帮助小区居民批量采购的小程序，实验室团队人手不足，说是少后台开发，所以我就上了，看着微信的文档还有学长的帮助，也就吭哧吭哧写上线了</p>
 <h3 id="操作流程">操作流程</h3>
 <p><img src="https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg" alt="小程序支付时序图"></p>
 <p style="text-align: center;">图源：<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_4&index=3" target="_blank">微信文档</a></p>
@@ -7,9 +7,9 @@
 
 <ol>
 <li><strong>用户</strong>通过<strong>小程序</strong>发送<strong>“请求下单”</strong>的请求到<strong>商户后台</strong>；</li>
-<li><strong>商户后台</strong>调用微信官方依赖提供的接口，发送请求到<strong>微信后台</strong>（统一下单API），获取<code>prepay_id</code>；</li>
-<li><strong>商户后台</strong>生成签名，返回5个参数和sign；</li>
-<li><strong>小程序</strong>获取到正常的5个参数和sign之后，调用JS的SDK中的支付API，<strong>用户</strong>界面拉起支付，支付成功；</li>
+<li><strong>商户后台</strong>调用微信官方依赖提供的接口，发送请求到<strong>微信后台</strong>（统一下单 API），获取<code>prepay_id</code>；</li>
+<li><strong>商户后台</strong>生成签名，返回 5 个参数和 sign；</li>
+<li><strong>小程序</strong>获取到正常的 5 个参数和 sign 之后，调用 JS 的 SDK 中的支付 API，<strong>用户</strong>界面拉起支付，支付成功；</li>
 </ol>
 <p>这个图展示的部分就这么多，但是我们还需要操作后续的业务，就是用户在<strong>小程序</strong>支付之后，发送一个请求把支付结果告诉到<strong>商户后台</strong>，这样<strong>商户后台</strong>才能够即使回写这个订单的支付状态到商户自己的数据库中，虽然<strong>微信后台</strong>会推送支付结果给<strong>商户后台</strong>，但是微信<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_7">不保证及时性以及请求必达</a>，所以我们需要靠自己强制回写。</p>
 <ol start="5">
@@ -22,12 +22,12 @@
 <ul>
 <li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=9_1">请求参数参考</a></li>
 <li><a href="https://github.com/Wechat-Group/WxJava/wiki/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98">代码参考</a></li>
-<li><a href="https://github.com/binarywang/weixin-java-pay-demo/blob/5ea0ad02efb734751dce18eee35817af82c3ee13/src/main/java/com/github/binarywang/demo/wx/pay/controller/WxPayController.java#L106">官方Demo</a></li>
+<li><a href="https://github.com/binarywang/weixin-java-pay-demo/blob/5ea0ad02efb734751dce18eee35817af82c3ee13/src/main/java/com/github/binarywang/demo/wx/pay/controller/WxPayController.java#L106">官方 Demo</a></li>
 <li><a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&amp;index=5">签名方式</a></li>
 </ul>
 <h4 id="自己的实现">自己的实现</h4>
-<h5 id="获取5个参数和sign">获取5个参数和sign</h5>
-<p>下面这个接口完成了流程的2和3：</p>
+<h5 id="获取-5-个参数和-sign">获取 5 个参数和 sign</h5>
+<p>下面这个接口完成了流程的 2 和 3：</p>
 <pre><code class="hljs language-java"><span class="hljs-meta">@PostMapping(&quot;/unifiedOrder&quot;)</span>
 <span class="hljs-meta">@ResponseBody</span>
 <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">unifiedOrder</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> WxPayUnifiedOrderRequest request, HttpServletRequest realReq)</span> {
@@ -74,7 +74,7 @@
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-<p>这里需要和前端约定好，前端发送请求的时候只需要带上3个参数：</p>
+<p>这里需要和前端约定好，前端发送请求的时候只需要带上 3 个参数：</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
     “outTradeNo”<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxx&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;openId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxx&quot;</span><span class="hljs-punctuation">,</span>
@@ -111,7 +111,7 @@
     <span class="hljs-keyword">return</span> result;
 }
 </code></pre>
-<h5 id="提供给微信后台的notify接口">提供给微信后台的notify接口</h5>
+<h5 id="提供给微信后台的-notify-接口">提供给微信后台的 notify 接口</h5>
 <pre><code class="hljs language-java"><span class="hljs-meta">@PostMapping(&quot;/notify/order&quot;)</span>
 <span class="hljs-keyword">public</span> String <span class="hljs-title function_">parseOrderNotifyResult</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> String xmlData)</span> <span class="hljs-keyword">throws</span> WxPayException {
     <span class="hljs-keyword">final</span> <span class="hljs-type">WxPayOrderNotifyResult</span> <span class="hljs-variable">notifyResult</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.wxService.parseOrderNotifyResult(xmlData);
@@ -133,4 +133,4 @@
 }
 </code></pre>
 <h3 id="后话">后话</h3>
-<p>需求简单，所以只用到了请求支付下单以及查询支付结果这两个接口，退款的接口什么的都没写，用了大概1天的时间调通，3天的时间完善上线</p>
+<p>需求简单，所以只用到了请求支付下单以及查询支付结果这两个接口，退款的接口什么的都没写，用了大概 1 天的时间调通，3 天的时间完善上线</p>

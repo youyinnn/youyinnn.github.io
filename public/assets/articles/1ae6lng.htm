@@ -27,7 +27,7 @@
 <li>The third field is optional, and is a comma-separated list of options, such as <code>ro</code>. These options are discussed below.</li>
 </ul>
 </li>
-<li><p><code>--mount</code>  : Consists of multiple key-value pairs, separated by commas and each consisting of a <code>&lt;key&gt;=&lt;value&gt;</code>tuple. The<code>--mount</code>syntax is more verbose than<code>-v</code> or <code>--volume</code>, but the order of the keys is not significant, and the value of the flag is easier to understand.</p>
+<li><p><code>--mount</code> : Consists of multiple key-value pairs, separated by commas and each consisting of a <code>&lt;key&gt;=&lt;value&gt;</code>tuple. The<code>--mount</code>syntax is more verbose than<code>-v</code> or <code>--volume</code>, but the order of the keys is not significant, and the value of the flag is easier to understand.</p>
 <ul>
 <li>The <code>type</code> of the mount, which can be <a href="https://docs.docker.com/storage/bind-mounts/"><code>bind</code></a>, <code>volume</code>, or <a href="https://docs.docker.com/storage/tmpfs/"><code>tmpfs</code></a>. This topic discusses volumes, so the type is always<code>volume</code>.</li>
 <li>The <code>source</code> of the mount. For named volumes, this is the name of the volume. For anonymous volumes, this field is omitted. May be specified as <code>source</code> or <code>src</code>.</li>

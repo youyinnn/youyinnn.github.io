@@ -2,7 +2,7 @@
 <p>By default all files created inside a container are stored on a writable container layer.</p>
 <p>That means that the data doesn&#39;t persist when that container no longer exists, and it can be difficult to get the data out of the container if another process needs it.</p>
 <p>And here&#39;s you should know: a container&#39;s writable layer is tightly coupled to the host machine where the container is running. So <strong>you can&#39;t easily move the data somewhere else</strong>.</p>
-<p>Docker has two options for containers to store files in the host machine, so that the files are persisted even after the container stops: </p>
+<p>Docker has two options for containers to store files in the host machine, so that the files are persisted even after the container stops:</p>
 <ul>
 <li><em>volumes</em></li>
 <li><em>bind mounts</em></li>
@@ -24,7 +24,7 @@
 </li>
 <li><p><strong>Bind mounts</strong> may be stored <em>anywhere</em> on the host system. They may even be important system files or directories. <strong>Non-Docker processes on the Docker host or a Docker container can modify them at any time</strong>.</p>
 <blockquote>
-<p>Available since the early days of Docker. Bind mounts have limited functionality compared to volumes. </p>
+<p>Available since the early days of Docker. Bind mounts have limited functionality compared to volumes.</p>
 <p>When you use a bind mount, a file or directory on the <em>host machine</em> is mounted into a container. The file or directory is referenced by its full path on the host machine. The file or directory does not need to exist on the Docker host already. It is created on demand if it does not yet exist. Bind mounts are very performant, but they rely on the host machine’s filesystem having a specific directory structure available. If you are developing new Docker applications, consider using named volumes instead. You can’t use Docker CLI commands to directly manage bind mounts.</p>
 </blockquote>
 </li>
@@ -44,10 +44,10 @@
 </ul>
 <h4 id="for-bind-mounts">For bind mounts</h4>
 <ul>
-<li><p><strong>Sharing configuration files from the host machine to containers.</strong> </p>
+<li><p><strong>Sharing configuration files from the host machine to containers.</strong></p>
 <p>This is how Docker provides DNS resolution to containers by default, by mounting <code>/etc/resolv.conf</code> from the host machine into each container.</p>
 </li>
-<li><p><strong>Sharing source code or build artifacts between a development environment on the Docker host and a container.</strong> </p>
+<li><p><strong>Sharing source code or build artifacts between a development environment on the Docker host and a container.</strong></p>
 <p><strong>For image user:</strong> you may mount a Maven <code>target/</code> directory into a container, and each time you build the Maven project on the Docker host, the container gets access to the rebuilt artifacts.</p>
 <p><strong>For image developer:</strong> your production Dockerfile would copy the production-ready artifacts directly into the image, rather than relying on a bind mount.</p>
 </li>
@@ -65,7 +65,7 @@
 <h3 id="conclusion">Conclusion</h3>
 <p>We have three ways to manage data on a running container:</p>
 <ol>
-<li>volume: <ul>
+<li>volume:<ul>
 <li>docker managed</li>
 <li>the most powerful way to manage data between host machine and container</li>
 <li>data persist on <code>/var/lib/docker/volumes/&lt;volume-name&gt;</code></li>

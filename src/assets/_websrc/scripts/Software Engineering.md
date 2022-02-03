@@ -8,21 +8,15 @@
 2. [What is Use Case Diagram?](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/)
 3. [The diff. between Activity Diagram and Sequence Diagram](https://www.geeksforgeeks.org/difference-between-sequence-diagram-and-activity-diagram/)
 
-
-
 #### About SRS
 
 1. [Your 2022 Guide to Writing a Software Requirements Specification (SRS) Document](https://relevant.software/blog/software-requirements-specification-srs-document/)
 2. [What are System Requirements Specifications/Software (SRS)?](https://www.inflectra.com/ideas/topic/requirements-definition.aspx) ✅
 
-
-
 #### About Concept
 
 1. [Agile Release Train](https://www.scaledagileframework.com/agile-release-train/)
 2. [Comparison between Agile model and other models](https://www.geeksforgeeks.org/software-engineering-comparison-between-agile-model-and-other-models/)
-
-
 
 #### About User Stories
 
@@ -42,21 +36,15 @@
 
 4. [What are User Stories - User Story Examples from Inflectra](http://www.inflectra.com/Ideas/Topic/User-Stories.aspx) ✅
 
-
-
 #### About Agile Mgmt.
 
 1. [Handling Work Left At The End of The Sprint](https://www.mountaingoatsoftware.com/blog/handling-work-left-at-the-end-of-a-sprint)
-
-
 
 #### About SRS Documentation
 
 1. [Example1](https://medium.com/trailblazer-of-salesforce/software-requirements-specification-srs-document-fd9ab103b18#_Toc77487629)
 2. [Example2](https://krazytech.com/projects/sample-software-requirements-specificationsrs-report-airline-database)
-3. 
-
-
+3.
 
 #### ASM
 

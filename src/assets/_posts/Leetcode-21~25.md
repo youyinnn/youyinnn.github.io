@@ -9,8 +9,6 @@ date: 2019-03-06 21:17:00
 series: leetcode
 ---
 
-
-
 ### 21. Merge Two Sorted Lists(Easy)
 
 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
@@ -54,17 +52,16 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     return head;
 }
 ```
-大致思想是以第一条链为参照，做插入排序，分别用l1，l2做now指针
 
-链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原head的基础上，加一个pre，再标识now，然后迭代两个指针
+大致思想是以第一条链为参照，做插入排序，分别用 l1，l2 做 now 指针
 
-
+链这玩意，很依赖指针，特别是单链表，对逻辑能力要求比较高，推荐做的时候把图画出来，并且适当的在原 head 的基础上，加一个 pre，再标识 now，然后迭代两个指针
 
 ### 22. Generate Parentheses
 
-Given *n* pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+Given _n_ pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
-For example, given *n* = 3, a solution set is:
+For example, given _n_ = 3, a solution set is:
 
 ```
 [
@@ -112,7 +109,7 @@ private List<String> get(List<String> ans, String str, int open, int close, int 
 
 ### 23. Merge K Sorted Lists(Hard)
 
-Merge *k* sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+Merge _k_ sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
 **Example:**
 
@@ -187,7 +184,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 }
 ```
 
-
 ### 24. Swap Nodes In Pairs(Medium)
 
 Given a linked list, swap every two adjacent nodes and return its head.
@@ -219,7 +215,7 @@ public ListNode swapPairs(ListNode head) {
         pre.next = next;
         now.next = next.next;
         next.next = now;
-        
+
         pre = now;
         now = pre.next;
         if (now == null) {
@@ -230,23 +226,22 @@ public ListNode swapPairs(ListNode head) {
     return newHead;
 }
 ```
+
 没难度的，指针做好就行
-
-
 
 ### 25. Reverse Nodes In K-Group(Hard)
 
-Given a linked list, reverse the nodes of a linked list *k* at a time and return its modified list.
+Given a linked list, reverse the nodes of a linked list _k_ at a time and return its modified list.
 
-*k* is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of *k* then left-out nodes in the end should remain as it is.
+_k_ is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of _k_ then left-out nodes in the end should remain as it is.
 
 **Example:**
 
 Given this linked list: `1->2->3->4->5`
 
-For *k* = 2, you should return: `2->1->4->3->5`
+For _k_ = 2, you should return: `2->1->4->3->5`
 
-For *k* = 3, you should return: `3->2->1->4->5`
+For _k_ = 3, you should return: `3->2->1->4->5`
 
 **Note:**
 
@@ -261,7 +256,7 @@ For *k* = 3, you should return: `3->2->1->4->5`
 
 跟踪指针到最后，你就赢了
 
-我们的思路很简单，首先从头开始，每k个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去
+我们的思路很简单，首先从头开始，每 k 个结点为一段，我们的任务就是把这一段提出来，逆转，再放回去
 
 要做到这件事，首先我们得做到逆转一段链表，这件事也没什么技巧，hmmmmm，好吧还是有点东西的，我总是喜欢分治法+递归，我已经爱上了这种简单直接的做法了
 
@@ -302,7 +297,8 @@ private Segment reverse(ListNode head) {
     }
 }
 ```
-那么接下来：我们用4个指针，来对原链进行分段逆转，大致思路如下：
+
+那么接下来：我们用 4 个指针，来对原链进行分段逆转，大致思路如下：
 
 ```
                head (ignore this)
@@ -318,13 +314,13 @@ assign some pointer：
 4. tmpPre: the pre node of tmp node, it also the tail node of the reversed segment
 
 		newHead -> NULL
-							 
+
 		nowPre → 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
 			   ↗     ↑
 		   tmpPre    tmp
 		              ↑
 		            nowHead
-		            
+
 这是初始状态，我们开始移动tmp和tmpPre：
 
 		nowPre → 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
@@ -341,7 +337,7 @@ assign some pointer：
 		nowPre → 0 -> 1 -> 2 -> 3       4 -> 5 -> 6 -> NULL
 			          ↑       ↗        ↑
 		           nowHead tmpPre      tmp
-		           
+
 这时候逆转B段（注意原来的nowPre、tmpPre、nowHead也会变的）：
 
                    nowPre → 0
@@ -349,7 +345,7 @@ assign some pointer：
 		          3 -> 2 -> 1           4 -> 5 -> 6 -> NULL
 		          ↑         ↑           ↑
 	           tmpPre    nowHead       tmp
-	           
+
 然后nowHead.next = tmp，就可以接上BC段：
 
                        nowPre → 0
@@ -357,13 +353,13 @@ assign some pointer：
     		          3 -> 2 -> 1 -> 4 -> 5 -> 6 -> NULL
 	    	          ↑       ↗     ↑
     	           tmpPre  nowHead  tmp
-	           
+
 再nowPre.next = tmpPre，纠正AB段：
 
     	nowPre → 0 -> 3 -> 2 -> 1 -> 4 -> 5 -> 6 -> NULL
 	    	          ↑       ↗     ↑
     	           tmpPre  nowHead  tmp
-	           
+
 最后调整指针，为下一次处理做准备（若是第一次处理，则newHead必定为空，则可以指定newHead）：
 1. newHead = reverseSegment.head
 2. nowPre = nowHead
@@ -420,6 +416,6 @@ public ListNode reverseKGroup(ListNode head, int k) {
     }
     // when k is bigger than list length then newHead will be null
     // so just return head
-    return newHead == null ? head : newHead; 
+    return newHead == null ? head : newHead;
 }
 ```

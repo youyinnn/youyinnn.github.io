@@ -37,7 +37,7 @@ Output: true
   [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]
 ]
 Output: false
-Explanation: Same as Example 1, except with the 5 in the top left corner being 
+Explanation: Same as Example 1, except with the 5 in the top left corner being
     modified to 8. Since there are two 8&#x27;s in the top left 3x3 sub-box, it is invalid.
 </code></pre>
 <p><strong>Note:</strong></p>
@@ -131,7 +131,7 @@ A solution set is:
 ]
 </code></pre>
 <h4 id="recursion">Recursion</h4>
-<p>这题比较好用回溯，去重的技巧也有点3sum的意思</p>
+<p>这题比较好用回溯，去重的技巧也有点 3sum 的意思</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">combinationSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates, <span class="hljs-type">int</span> target)</span> {
     LinkedList&lt;List&lt;Integer&gt;&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
     Arrays.sort(candidates);

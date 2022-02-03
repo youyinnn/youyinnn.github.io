@@ -1,51 +1,51 @@
 <p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
-<p>本文从为知笔记迁移过来, 本文的写作时间是 : 2016/10/18 下午1:41:28, 两年前的文章, 言语难免幼稚, 思维难免浅显, 多多包含.</p>
+<p>本文从为知笔记迁移过来, 本文的写作时间是 : 2016/10/18 下午 1:41:28, 两年前的文章, 言语难免幼稚, 思维难免浅显, 多多包含.</p>
 <p></div></p>
 <blockquote>
-<p>在学习这个东西的时候，找了很多资料，网上说的也都很笼统，找不到一个比较容易上手的例子，直到我看到一篇文章，作者在整体讲述Java5-8的新特性，其中讲完Java8的lambda表达式之后，马上就讲方法引用这个特性，我才更加清楚的意识到，方法引用其实是比lambda更加简洁的一个语法糖（不知道我这样理解对不对），但是，常识告诉我们，越简单的技术，限制条件就越多，为什么网上的关于方法引用的讲解都很散，因为方法引用的使用条件有点多。</p>
+<p>在学习这个东西的时候，找了很多资料，网上说的也都很笼统，找不到一个比较容易上手的例子，直到我看到一篇文章，作者在整体讲述 Java5-8 的新特性，其中讲完 Java8 的 lambda 表达式之后，马上就讲方法引用这个特性，我才更加清楚的意识到，方法引用其实是比 lambda 更加简洁的一个语法糖（不知道我这样理解对不对），但是，常识告诉我们，越简单的技术，限制条件就越多，为什么网上的关于方法引用的讲解都很散，因为方法引用的使用条件有点多。</p>
 </blockquote>
-<p>根据这篇文章，我又自己写了一个例子，来说明为什么方法引用可以是一个更加简洁的lambda：</p>
+<p>根据这篇文章，我又自己写了一个例子，来说明为什么方法引用可以是一个更加简洁的 lambda：</p>
 <h4 id="引例">引例</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">methodReferences</span> {
-    
+
     <span class="hljs-comment">//标准FI</span>
     <span class="hljs-keyword">interface</span> <span class="hljs-title class_">methodReferencesFI</span>{
         List&lt;String&gt; <span class="hljs-title function_">toList</span><span class="hljs-params">(String[] string)</span>;
     }
-    
+
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
-        
+
         <span class="hljs-comment">//lambda登场，这时候干了哪两件事？</span>
         <span class="hljs-type">methodReferencesFI</span> <span class="hljs-variable">lam</span> <span class="hljs-operator">=</span> person-&gt;{<span class="hljs-keyword">return</span> Arrays.asList(person);};
-        
+
         <span class="hljs-comment">//MethodReferences登场，这时候其实也干了两件事</span>
         <span class="hljs-type">methodReferencesFI</span> <span class="hljs-variable">mr</span> <span class="hljs-operator">=</span> Arrays::asList;
-        
+
         <span class="hljs-comment">//给定数组</span>
         String[] person = {<span class="hljs-string">&quot;Tom&quot;</span>,<span class="hljs-string">&quot;Jack&quot;</span>,<span class="hljs-string">&quot;Jimy&quot;</span>};
-        
+
         System.out.println(<span class="hljs-string">&quot;lambda &#x27;s toList :&quot;</span>+lam.toList(person));
-        
+
         <span class="hljs-comment">//神奇的事情</span>
         System.out.println(<span class="hljs-string">&quot;MethodReferances &#x27;s toList :&quot;</span>+mr.toList(person));
-        
+
         <span class="hljs-comment">//更神奇的事</span>
         List&lt;String&gt; personlist = mr.toList(person);
-        
+
         <span class="hljs-comment">//这也是静态方法引用</span>
         personlist.forEach(System.out::println);
-        
+
     }
 ​
 }
 </code></pre>
-<p>你看，两种方式，同样实现了<code>methodReferencesFI</code> ，只是MR更加简便。这里同时也演示了昨天我没举例的有返回值的FI方法是如何使用lambda的。</p>
-<p>这样看来，方法引用，好像更6一点啊？但是，但是，前面说了，越简单的技术，使用条件就越多，这里的使用条件就是，引用的方法是静态方法 ，比如asList是Arrays这个工具类下面的静态方法，这种工具类一般不用创建对象，可以直接用类名调用方法。这就是方法引用的其中一个限制条件。</p>
-<p>刚才我又看了一篇文章，让我对于lambda表达式和方法引用之间的关系又有了新的理解。</p>
-<p>上面说到，我们通常用lambda表达式来创建匿名方法，然而，我们有时候仅仅是调用了一个已经存在的方法：</p>
+<p>你看，两种方式，同样实现了<code>methodReferencesFI</code> ，只是 MR 更加简便。这里同时也演示了昨天我没举例的有返回值的 FI 方法是如何使用 lambda 的。</p>
+<p>这样看来，方法引用，好像更 6 一点啊？但是，但是，前面说了，越简单的技术，使用条件就越多，这里的使用条件就是，引用的方法是静态方法  ，比如 asList 是 Arrays 这个工具类下面的静态方法，这种工具类一般不用创建对象，可以直接用类名调用方法。这就是方法引用的其中一个限制条件。</p>
+<p>刚才我又看了一篇文章，让我对于 lambda 表达式和方法引用之间的关系又有了新的理解。</p>
+<p>上面说到，我们通常用 lambda 表达式来创建匿名方法，然而，我们有时候仅仅是调用了一个已经存在的方法：</p>
 <pre><code class="hljs language-java">Arrays.sort(stringsArray,(s1,s2)-&gt;s1.compareToIgnoreCase(s2));
 </code></pre>
-<p>但是在JAVA8中，还可以直接通过方法引用来简写lambda表达式中已经存在的方法。</p>
+<p>但是在 JAVA8 中，还可以直接通过方法引用来简写 lambda 表达式中已经存在的方法。</p>
 <pre><code class="hljs language-java">Arrays.sort(stringsArray, String::compareToIgnoreCase);
 </code></pre>
 <h4 id="四种方法引用的形式">四种方法引用的形式</h4>
@@ -70,7 +70,7 @@ Arrays.sort(persons,(a,b)-&gt;provider.compareByAge(a,b));
 <span class="hljs-comment">//引用的是对象的实例方法</span>
 Arrays.sort(persons, provider::compareByAge);
 </code></pre>
-<p>首先我们来分析一下这里为什么可以用lambda，我们来看一下这个Arrays.sort的源码：</p>
+<p>首先我们来分析一下这里为什么可以用 lambda，我们来看一下这个 Arrays.sort 的源码：</p>
 <pre><code class="hljs language-java">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(T[] a, Comparator&lt;? <span class="hljs-built_in">super</span> T&gt; c)</span> {
         <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>) {
             sort(a);
@@ -82,8 +82,8 @@ Arrays.sort(persons, provider::compareByAge);
         }
     }
 </code></pre>
-<p>这里看不出什么花，再看第二个参数：Comparator&lt;? super T&gt; c ，行，看源码之后我发现，这是一个FI，里面定义了唯一的一个抽象方法。。。？？唉不对？有两个抽象方法。。这就很尴尬了。。这和官方给出的FI的定义不符啊，这不是打脸嘛，后面我去查资料和看源码注释了解到，虽然这个接口显式定义了两个类方法，但是equals是一个明确声明为继承自Object的具体的函数！！！ </p>
-<p>但是，例子上这个lambda的使用方式，和我昨天学的有点不太一样，昨天的是，首先有一个FI，然后一步做两步，实现FI，实现FI方法，再调用该方法，但是呢，这里一步做了三件事情。我们先来看看如果用按照昨天的步骤做会如何。</p>
+<p>这里看不出什么花，再看第二个参数：Comparator&lt;? super T&gt; c ，行，看源码之后我发现，这是一个 FI，里面定义了唯一的一个抽象方法。。。？？唉不对？有两个抽象方法。。这就很尴尬了。。这和官方给出的 FI 的定义不符啊，这不是打脸嘛，后面我去查资料和看源码注释了解到，虽然这个接口显式定义了两个类方法，但是 equals 是一个明确声明为继承自 Object 的具体的函数！！！</p>
+<p>但是，例子上这个 lambda 的使用方式，和我昨天学的有点不太一样，昨天的是，首先有一个 FI，然后一步做两步，实现 FI，实现 FI 方法，再调用该方法，但是呢，这里一步做了三件事情。我们先来看看如果用按照昨天的步骤做会如何。</p>
 <pre><code class="hljs language-java">    <span class="hljs-comment">//开始肯定是一步做两步了</span>
     Comparator&lt;Person&gt; comparator = (Person a,Person b)-&gt;provider.compareByName(a,b);
     ​
@@ -97,14 +97,14 @@ Arrays.sort(persons, provider::compareByAge);
 <h5 id="2-引用特定类的类型对象的实例方法">2. 引用特定类的类型对象的实例方法</h5>
 <p>这个引用在文章里面被介绍为<code>难以理解的</code>，难以理解的东西，所以也难以维护，建议不使用这种引用。</p>
 <h5 id="3-构造函数的引用">3. 构造函数的引用</h5>
-<p>其实这挺简单的。但是我觉得也没必要，因为new Class()；这种形式就已经够简单的了。</p>
+<p>其实这挺简单的。但是我觉得也没必要，因为 new Class()；这种形式就已经够简单的了。</p>
 <h5 id="4-静态方法引用">4. 静态方法引用</h5>
 <p>格式<code>Class::static_method</code></p>
 <p>到这里方法引用总算是粗略的过了一遍，但是回想前面这一路学习下来，我还是有一个地方，不是很理解。</p>
 <pre><code class="hljs language-java">    <span class="hljs-comment">//这也是静态方法引用</span>
     personlist.forEach(System.out::println);
 </code></pre>
-<p>上文有一个地方说道这个...我们把这句话用lambda表示出来看看：</p>
+<p>上文有一个地方说道这个...我们把这句话用 lambda 表示出来看看：</p>
 <pre><code class="hljs language-java">    personlist.forEach((p)-&gt;System.out.println(p));
 </code></pre>
-<p>但是...静态在哪？往上找源码我发现，只有out这个对象是静态的 ，其他的类都没有静态方法和这个相关，首先，System里面有一个静态的PrintStream对象out，然后PrintStream里面有一个已经实现的非静态方法println。静态对象应用非静态方法，算是静态引用么？</p>
+<p>但是...静态在哪？往上找源码我发现，只有 out 这个对象是静态的 ，其他的类都没有静态方法和这个相关，首先，System 里面有一个静态的 PrintStream 对象 out，然后 PrintStream 里面有一个已经实现的非静态方法 println。静态对象应用非静态方法，算是静态引用么？</p>
