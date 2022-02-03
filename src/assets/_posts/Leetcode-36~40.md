@@ -11,8 +11,6 @@ date: 2019-03-20 19:46:00
 series: leetcode
 ---
 
-
-
 ### 36. Valid Sudoku(Medium)
 
 Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated **according to the following rules**:
@@ -61,7 +59,7 @@ Input:
   [".",".",".",".","8",".",".","7","9"]
 ]
 Output: false
-Explanation: Same as Example 1, except with the 5 in the top left corner being 
+Explanation: Same as Example 1, except with the 5 in the top left corner being
     modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
 ```
 
@@ -71,8 +69,6 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
 - Only the filled cells need to be validated according to the mentioned rules.
 - The given board contain only digits `1-9` and the character `'.'`.
 - The given board size is always `9x9`.
-
-
 
 #### Brute Force
 
@@ -114,7 +110,6 @@ public boolean isValidSudoku(char[][] board) {
 }
 ```
 
-
 ### 37. Sudoku Solver(Hard)
 
 Write a program to solve a Sudoku puzzle by filling the empty cells.
@@ -139,17 +134,11 @@ A sudoku puzzle...
 - You may assume that the given Sudoku puzzle will have a single unique solution.
 - The given board size is always `9x9`.
 
-
-
 暂不会解，感觉和马踏棋盘一样要用回溯法，而且需要对数独的解法要有了解；
-
-
 
 ### 38. Count And Say(Easy)
 
 傻逼题
-
-
 
 ### 39. Combination Sum(Medium)
 
@@ -185,11 +174,9 @@ A solution set is:
 ]
 ```
 
-
-
 #### Recursion
 
-这题比较好用回溯，去重的技巧也有点3sum的意思
+这题比较好用回溯，去重的技巧也有点 3sum 的意思
 
 ```java
 public List<List<Integer>> combinationSum(int[] candidates, int target) {
@@ -220,7 +207,6 @@ private void get(List<List<Integer>> ans, List<Integer> one, int[] candidates, i
     }
 }
 ```
-
 
 ### 40. Combination Sum II(Medium)
 
@@ -256,8 +242,6 @@ A solution set is:
   [5]
 ]
 ```
-
-
 
 这题和上题一样，多费心思处理重复就好了
 

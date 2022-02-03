@@ -7,8 +7,8 @@
 <h3 id="贪心算法和动态规划的区别">贪心算法和动态规划的区别</h3>
 <blockquote>
 <p>贪心算法：贪心算法采用的是逐步构造最优解的方法。在每个阶段，都在一定的标准下做出一个看上去最优的决策。决策一旦做出，就不可能再更改。做出这个局部最优决策所依照的标准称为贪心准则。</p>
-<p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。 </p>
-<p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。 </p>
+<p>分治算法：分治法的思想是将一个难以直接解决大的问题分解成容易求解的子问题，以便各个击破、分而治之。</p>
+<p>动态规划：将待求解的问题分解为若干个子问题，按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。</p>
 </blockquote>
 <p>引自：<a href="https://www.cnblogs.com/codeskiller/p/6477181.html">https://www.cnblogs.com/codeskiller/p/6477181.html</a></p>
 <h3 id="三种静态查找算法：顺序、二分折半、索引分块查找">三种静态查找算法：顺序、二分/折半、索引/分块查找</h3>
@@ -36,7 +36,7 @@
             father[xFather] = yFather;
             <span class="hljs-keyword">if</span> (rank[x] == rank[y] &amp;&amp; x != y) {
                 rank[y]++;
-            }            
+            }
         } <span class="hljs-keyword">else</span> {
             father[yFather] = xFather;
         }
@@ -45,7 +45,7 @@
     <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findFather</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
         <span class="hljs-keyword">return</span> father[x] == x ? x : (father[x] = findFather(father[x]));
     }
-    
+
     <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isRelated</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
         <span class="hljs-keyword">return</span> findFather(x) == findFather(y);
     }

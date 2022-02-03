@@ -11,11 +11,9 @@ date: 2018-11-28 21:06:03
 series: docker
 ---
 
-
-
 ### Introduction
 
-In the last post, we discussed the relationship between Application and Service. 
+In the last post, we discussed the relationship between Application and Service.
 
 So they say: **Services are really just "Containers in Production".**
 
@@ -31,13 +29,13 @@ After that has happened, you continue to run the Docker commands you’re used t
 
 Swarm managers can use several **strategies** to run containers, such as :
 
-- “emptiest node” 
+- “emptiest node”
 
-    which fills the least utilized machines with containers.
+  which fills the least utilized machines with containers.
 
 - “global”
 
-    which ensures that each machine gets exactly one instance of the specified container. 
+  which ensures that each machine gets exactly one instance of the specified container.
 
 You instruct the swarm manager to use these strategies **in the Compose file**, just like the one you have already been using.
 
@@ -45,7 +43,7 @@ You instruct the swarm manager to use these strategies **in the Compose file**, 
 
 Swarm managers are the only machines in a swarm that can execute your commands, or authorize other machines to join the swarm as **workers**. Workers are just there to provide capacity and do not have the authority to tell any other machine what it can and cannot do.
 
-``` 
+```
 Relationship in swarm:
 
 	1.each virtual/physical machine as a "node" ni a swarm.
@@ -83,29 +81,29 @@ Some RPM base:
 
 > **Notice:**
 >
-> **Never ever intall docker on WIN10 system !!! Because the `Hyper-V` that docker need will just weaken your machine's performance at some ways !!! Such as I found my LOL's fps rate was suddenly fall down to 58-61, and it usually was 100+ !!! And when I uninstall the docker on WIN10 then turn off the `Hyper-V` on windows functional options, the fps problem was solved !!!** 
+> **Never ever intall docker on WIN10 system !!! Because the `Hyper-V` that docker need will just weaken your machine's performance at some ways !!! Such as I found my LOL's fps rate was suddenly fall down to 58-61, and it usually was 100+ !!! And when I uninstall the docker on WIN10 then turn off the `Hyper-V` on windows functional options, the fps problem was solved !!!**
 
 1. download
 
-    ``` bash
-    $ base=https://github.com/docker/machine/releases/download/v0.16.0 && wget $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine
-    ```
+   ```bash
+   $ base=https://github.com/docker/machine/releases/download/v0.16.0 && wget $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine
+   ```
 
 2. install
 
-    ``` bash
-    $ install /tmp/docker-machine /usr/local/bin/docker-machine
-    ```
+   ```bash
+   $ install /tmp/docker-machine /usr/local/bin/docker-machine
+   ```
 
 3. verify
 
-    ``` bash
-    $ docker-machine
-    Usage: docker-machine [OPTIONS] COMMAND [arg...]
-    Create and manage machines running Docker.
-    Version: 0.16.0, build 702c267f
-    ...
-    ```
+   ```bash
+   $ docker-machine
+   Usage: docker-machine [OPTIONS] COMMAND [arg...]
+   Create and manage machines running Docker.
+   Version: 0.16.0, build 702c267f
+   ...
+   ```
 
 Reference: https://docs.docker.com/machine/install-machine/#install-machine-directly
 
@@ -195,13 +193,13 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
 
 ### Deploy your app on the swarm cluster
 
-**The hard part is over.** Now you just repeat the process you used in [part 3](https://docs.docker.com/get-started/part3/) to deploy on your new swarm. 
+**The hard part is over.** Now you just repeat the process you used in [part 3](https://docs.docker.com/get-started/part3/) to deploy on your new swarm.
 
 **Just remember that only swarm managers like `myvm1` execute Docker commands; workers are just for capacity.**
 
 #### Two ways to talk to your vms
 
-So far, you’ve been wrapping Docker commands in `docker-machine ssh` to talk to the VMs. 
+So far, you’ve been wrapping Docker commands in `docker-machine ssh` to talk to the VMs.
 
 Another option is to run `docker-machine env <machine>` to get and run a command that configures your current shell to talk to the Docker daemon on the VM. This method works better for the next step because it allows you to use your local `docker-compose.yml` file to deploy the app “remotely” without having to copy it anywhere.
 
@@ -213,23 +211,23 @@ To more details, refer to: https://docs.docker.com/get-started/part4/#configure-
 
 #### Deploy
 
-``` bash
+```bash
 # send compose file to manager node with scp
-$ docker-machine scp docker-compose.yml myvm1:~                                             
+$ docker-machine scp docker-compose.yml myvm1:~
 
 # deploy it
-$ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"  
+$ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
 Creating network getstartedlab_webnet
 Creating service getstartedlab_web
 
 # get it's info
 $ docker-machine ssh myvm1 "docker stack ps getstartedlab"
-ID                  NAME                  IMAGE                              NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS              
-kjeymj6rp0y8        getstartedlab_web.1   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
-dehkjrmu0fxn        getstartedlab_web.2   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
-acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
-36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
-q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
+ID                  NAME                  IMAGE                              NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+kjeymj6rp0y8        getstartedlab_web.1   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
+dehkjrmu0fxn        getstartedlab_web.2   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago
+acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
+36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago
+q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
 ```
 
 ### Accessing your cluster
@@ -240,7 +238,7 @@ The network you created is shared between them and load-balancing. Run `docker-m
 
 There are five possible container IDs all cycling by randomly, demonstrating the load-balancing.
 
-**The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh**. 
+**The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh**.
 
 This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called `my-web` published at port `8080` on a three-node swarm would look:
 
@@ -253,4 +251,3 @@ So far you can do a lot of things with docker-machine and knowing how to setup a
 There are also some options you might have check out such as cleanup/reboot/reset.
 
 Please refer to: https://docs.docker.com/get-started/part4/#cleanup-and-reboot
-

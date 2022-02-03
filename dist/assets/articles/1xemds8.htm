@@ -7,8 +7,8 @@
 <li>tools to control the volume and the screen&#39;s display (save battery)</li>
 </ul>
 <h3 id="make-the-pi-connecting-to-the-world">Make the pi connecting to the world</h3>
-<p>There&#39;s a lot of choices for using SSR on Linux os, check  <a href="https://github.com/shadowsocks">here</a>, but many of them were banned and deleted their documents.</p>
-<p>Luckily, there still some tutorials showing how to implement it on Linux.  (<a href="%5Bhttps://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779%5D(https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779)">reference1</a><a href="https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477">reference2</a>)</p>
+<p>There&#39;s a lot of choices for using SSR on Linux os, check <a href="https://github.com/shadowsocks">here</a>, but many of them were banned and deleted their documents.</p>
+<p>Luckily, there still some tutorials showing how to implement it on Linux. (<a href="%5Bhttps://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779%5D(https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779)">reference1</a><a href="https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477">reference2</a>)</p>
 <h4 id="installation">Installation</h4>
 <p>Require python &gt;2.7</p>
 <pre><code class="hljs language-bash">sudo apt-get install python-pip python-m2crypto
@@ -17,24 +17,24 @@ sudo pip install shadowsocks
 <h4 id="config-file">Config File</h4>
 <p>Create a json file somewhere, which is used for both ssserver(server) and sslocal(client):</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;server&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;my_server_ip&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;server_port&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8388</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;local_address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;local_port&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1080</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;mypassword&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;timeout&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">300</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;aes-256-cfb&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;fast_open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;workers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">&quot;server&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;my_server_ip&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;server_port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8388</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;local_address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;local_port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1080</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mypassword&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aes-256-cfb&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fast_open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;workers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
 <ol>
 <li>server: server listening address, set <code>0.0.0.0</code> <strong>if your are using your machine as ssserver</strong></li>
 <li>server_port: server listening port, should avoided existing port <strong>if your are using your machine as ssserver</strong></li>
-<li>local_address: local listening address, should be  <code>127.0.0.1</code></li>
+<li>local_address: local listening address, should be <code>127.0.0.1</code></li>
 <li>local_port: local listening port, should avoided existing port</li>
 <li>password: your <strong>ss password</strong></li>
-<li>timeout: connection timeout, second unit </li>
+<li>timeout: connection timeout, second unit</li>
 <li>method: crypto method, by default is: <code>aes-256-cfb</code>, <a href="https://github.com/clowwindy/shadowsocks/wiki/Encryption">more info here</a></li>
 <li>workers: process number</li>
 </ol>
@@ -47,7 +47,7 @@ sudo pip install shadowsocks
 <h4 id="openssl-problem">Openssl Problem</h4>
 <p>For some update reason, you might get this <code>error log</code> while using the commands above:</p>
 <pre><code class="hljs language-bash">Traceback (most recent call last):
-File <span class="hljs-string">&quot;/usr/local/bin/sslocal&quot;</span>, line 9, <span class="hljs-keyword">in</span> 
+File <span class="hljs-string">&quot;/usr/local/bin/sslocal&quot;</span>, line 9, <span class="hljs-keyword">in</span>
 load_entry_point(<span class="hljs-string">&#x27;shadowsocks==2.8.2&#x27;</span>, <span class="hljs-string">&#x27;console_scripts&#x27;</span>, <span class="hljs-string">&#x27;sslocal&#x27;</span>)()
 ....
 ....
@@ -59,7 +59,7 @@ AttributeError: /usr/local/lib/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CT
 <p><strong>EVP_CIPHER_CTX</strong> was made opaque in OpenSSL 1.1.0. As a result, EVP_CIPHER_CTX_reset() appeared and EVP_CIPHER_CTX_cleanup() disappeared. EVP_CIPHER_CTX_init() remains as an alias for EVP_CIPHER_CTX_reset()</p>
 </blockquote>
 <p>Reference: <a href="%5Bhttps://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/%5D(https://floperry.github.io/2019/02/24/2018-06-25-Ubuntu-18.04-%E4%B8%8B%E8%A7%A3%E5%86%B3-shadowsocks-%E6%9C%8D%E5%8A%A1%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/)">here</a></p>
-<p>Find <code>/site-packages/shadowsocks/crypto/openssl.py</code> according to your <code>error log</code> and edit it: change all <code>EVP_CIPHER_CTX_cleanup()</code> into  <code>EVP_CIPHER_CTX_reset()</code>, there are two places needed to handle.</p>
+<p>Find <code>/site-packages/shadowsocks/crypto/openssl.py</code> according to your <code>error log</code> and edit it: change all <code>EVP_CIPHER_CTX_cleanup()</code> into <code>EVP_CIPHER_CTX_reset()</code>, there are two places needed to handle.</p>
 <h4 id="proxy">Proxy</h4>
 <p>Since ss client is using SOCKS5 protocol, we can&#39;t use it directly or easily in Linux os as Windows os does, so we have to proxy turn the protocol into HTTP.</p>
 <h5 id="polipo">Polipo</h5>
@@ -96,7 +96,7 @@ proxyPort = 8123
 <li><p>set global http proxy for terminal：</p>
 <pre><code class="hljs language-bash"><span class="hljs-built_in">export</span> http_proxy=”127.0.0.1:8123”
 </code></pre>
-<p>  for undo it ：</p>
+<p>for undo it ：</p>
 <pre><code class="hljs language-bash"><span class="hljs-built_in">unset</span> http_proxy
 </code></pre>
 </li>
@@ -141,12 +141,12 @@ proxyPort = 8123
 <h4 id="step-1-tvsh">Step 1: tv.sh</h4>
 <pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
 if [ $1 == open ]
-then 
+then
     amixer set PCM 0%
     chromium-browser https://www.cgtn.com/tv
 fi
 if [ $1 == play ]
-then 
+then
     amixer set PCM 100%
     python mouse.py
 fi
@@ -164,11 +164,11 @@ m.click(x,y)
 </code></pre>
 <h4 id="step-3-cron">Step 3: cron</h4>
 <pre><code class="hljs language-bash">DISPLAY=:0
-58 6 * * * bash /home/pi/tv.sh open 
+58 6 * * * bash /home/pi/tv.sh open
 00 7 * * * bash /home/pi/tv.sh play
 </code></pre>
 <p>Set crontab by using <code>crontab -e</code> command, and choose your editor for editing crontab config file, then you can use <code>crontab -l</code> to display the config file.</p>
-<p>Then restart the cron service  <code>/etc/init.d/cron restart</code>.</p>
+<p>Then restart the cron service <code>/etc/init.d/cron restart</code>.</p>
 <p>A GUI Package for crontab is recommended: <a href="https://github.com/alseambusher/crontab-ui">crontab-gui</a></p>
 <p>Please notice that we set env value of <code>DISPLAY</code> at line 1 is because if we want to open and gui app with crontab.</p>
 <h4 id="more">More</h4>

@@ -11,8 +11,6 @@ date: 2019-03-30 21:16:00 +8
 series: leetcode
 ---
 
-
-
 ### 56.Merge Intervals(Medium)
 
 Given a collection of intervals, merge all overlapping intervals.
@@ -33,11 +31,9 @@ Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 ```
 
-
-
 #### Solution
 
-多写几组就知道规律了，我们将start和end各**按照升序**写成2个数组：
+多写几组就知道规律了，我们将 start 和 end 各**按照升序**写成 2 个数组：
 
 ```
 [[1,3],[2,6],[8,10],[15,18]]
@@ -56,7 +52,7 @@ result:
 
 ```
 
-于是我们找得出规律，我们同时从开头遍历两个数组，当下标为`i`的时候，如果`end[i] <= start[i + 1]`，证明找到了一组intervals
+于是我们找得出规律，我们同时从开头遍历两个数组，当下标为`i`的时候，如果`end[i] <= start[i + 1]`，证明找到了一组 intervals
 
 ```java
 public List<Interval> merge(List<Interval> intervals) {
@@ -86,10 +82,9 @@ public List<Interval> merge(List<Interval> intervals) {
 }
 ```
 
-
 ### 57.Insert Interval
 
-Given a set of *non-overlapping* intervals, insert a new interval into the intervals (merge if necessary).
+Given a set of _non-overlapping_ intervals, insert a new interval into the intervals (merge if necessary).
 
 You may assume that the intervals were initially sorted according to their start times.
 
@@ -108,11 +103,9 @@ Output: [[1,2],[3,10],[12,16]]
 Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 ```
 
-
-
 #### Solution
 
-因为前面解Merge的时候，就用排序无视掉了顺序，所以插入的时候，直接可以使用上面的Merge继续做
+因为前面解 Merge 的时候，就用排序无视掉了顺序，所以插入的时候，直接可以使用上面的 Merge 继续做
 
 ```java
 public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
@@ -147,11 +140,9 @@ public List<Interval> merge(List<Interval> intervals) {
 }
 ```
 
-
-
 ### 58.Length Of Last Word(Easy)
 
-Given a string *s* consists of upper/lower-case alphabets and empty space characters `' '`, return the length of last word in the string.
+Given a string _s_ consists of upper/lower-case alphabets and empty space characters `' '`, return the length of last word in the string.
 
 If the last word does not exist, return 0.
 
@@ -182,11 +173,9 @@ public int lengthOfLastWord(String s) {
 }
 ```
 
-
-
 ### 59.SpiralMatrixII(Medium)
 
-Given a positive integer *n*, generate a square matrix filled with elements from 1 to *n*2 in spiral order.
+Given a positive integer _n_, generate a square matrix filled with elements from 1 to *n*2 in spiral order.
 
 **Example:**
 
@@ -255,13 +244,11 @@ public int[][] generateMatrix(int n) {
 }
 ```
 
-
-
 ### 60.Permutation Sequence(Medium)
 
-The set `[1,2,3,...,*n*]` contains a total of *n*! unique permutations.
+The set `[1,2,3,...,*n*]` contains a total of _n_! unique permutations.
 
-By listing and labeling all of the permutations in order, we get the following sequence for *n* = 3:
+By listing and labeling all of the permutations in order, we get the following sequence for _n_ = 3:
 
 1. `"123"`
 2. `"132"`
@@ -270,12 +257,12 @@ By listing and labeling all of the permutations in order, we get the following s
 5. `"312"`
 6. `"321"`
 
-Given *n* and *k*, return the *k*th permutation sequence.
+Given _n_ and _k_, return the *k*th permutation sequence.
 
 **Note:**
 
-- Given *n* will be between 1 and 9 inclusive.
-- Given *k* will be between 1 and *n*! inclusive.
+- Given _n_ will be between 1 and 9 inclusive.
+- Given _k_ will be between 1 and _n_! inclusive.
 
 **Example 1:**
 
@@ -290,8 +277,6 @@ Output: "213"
 Input: n = 4, k = 9
 Output: "2314"
 ```
-
-
 
 #### Mathematical
 

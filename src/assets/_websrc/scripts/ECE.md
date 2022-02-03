@@ -1,7 +1,5 @@
 ## ECE
 
-
-
 ### VHDL
 
 #### Collection
@@ -12,8 +10,8 @@
 4. [VHDL Configuration Example](https://www.nandland.com/vhdl/examples/example-configuration-vhdl.html)
 5. [Package STD_LOGIC_1164](https://www.csee.umbc.edu/portal/help/VHDL/packages/std_logic_1164.vhd)
 6. [Package numeric_std](https://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl)
-6. [Using entities from another file in VHDL](https://stackoverflow.com/questions/26288447/using-entities-from-another-file-in-vhdl)
-6. [use package in ghdl](https://stackoverflow.com/questions/41661495/use-package-in-ghdl)
+7. [Using entities from another file in VHDL](https://stackoverflow.com/questions/26288447/using-entities-from-another-file-in-vhdl)
+8. [use package in ghdl](https://stackoverflow.com/questions/41661495/use-package-in-ghdl)
 
 #### Code
 
@@ -38,4 +36,3 @@
 Youtube
 
 [karnaugh map (k-map)](https://www.youtube.com/watch?v=RO5alU6PpSU)
-

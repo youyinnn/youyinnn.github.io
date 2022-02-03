@@ -12,8 +12,6 @@ date: 2019-03-27 15:39:00 +8
 series: leetcode
 ---
 
-
-
 ### 46. Permutation(Medium)
 
 Given a collection of **distinct** integers, return all possible permutations.
@@ -35,9 +33,9 @@ Output:
 
 #### Backtracking
 
-回溯之前已经分析过了，关键是用contains或者一个flag数组去避免重复
+回溯之前已经分析过了，关键是用 contains 或者一个 flag 数组去避免重复
 
-``` java
+```java
 public List<List<Integer>> permute(int[] nums) {
     List<List<Integer>> ans = new ArrayList<>();
     backtracking(ans, new ArrayList<>(), nums);
@@ -59,8 +57,6 @@ private void backtracking(List<List<Integer>> ans, List<Integer> tmp, int[] nums
 }
 ```
 
-
-
 ### 47. Permutation II(Medium)
 
 Given a collection of numbers that might contain duplicates, return all possible unique permutations.
@@ -79,9 +75,9 @@ Output:
 
 #### Backtracking
 
-关键是用一个flags数组和预先排序操作去避免重复
+关键是用一个 flags 数组和预先排序操作去避免重复
 
-``` java
+```java
 public List<List<Integer>> permuteUnique(int[] nums) {
     List<List<Integer>> ans = new ArrayList<>();
     int[] flags = new int[nums.length];
@@ -110,11 +106,9 @@ private void backtracking(List<List<Integer>> ans, List<Integer> tmp, int[] nums
 }
 ```
 
-
-
 ### 48. Rotate Image(Medium)
 
-You are given an *n* x *n* 2D matrix representing an image.
+You are given an _n_ x _n_ 2D matrix representing an image.
 
 Rotate the image by 90 degrees (clockwise).
 
@@ -125,7 +119,7 @@ You have to rotate the image [**in-place**](https://en.wikipedia.org/wiki/In-pla
 **Example 1:**
 
 ```
-Given input matrix = 
+Given input matrix =
 [
   [1,2,3],
   [4,5,6],
@@ -149,7 +143,7 @@ Given input matrix =
   [ 2, 4, 8,10],
   [13, 3, 6, 7],
   [15,14,12,16]
-], 
+],
 
 rotate the input matrix in-place such that it becomes:
 [
@@ -160,20 +154,18 @@ rotate the input matrix in-place such that it becomes:
 ]
 ```
 
-
-
 #### Think In The Smart Way
 
-挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的case
+挺简单的，就看你想不想地到而已- -，刚开始我真的一个数字一个数字地去转，从最外面一圈转到最里面，结果就傻逼了，需要处理很多拐弯的 case
 
-如果我们将右旋90°这个事情简单地看成：
+如果我们将右旋 90° 这个事情简单地看成：
 
 ```
 0. original matrix:
                     [1,2,3]
                     [4,5,6]
                     [7,8,9]
-                    
+
 1. swap side base on diagonal:
 
                     [@,2,3]            [@,4,7]           [1,4,7]
@@ -190,7 +182,7 @@ rotate the input matrix in-place such that it becomes:
 
 其他旋也是一样的
 
-``` java
+```java
 public void rotate(int[][] matrix) {
     for (int i = 0; i < matrix.length; i++) {
         for (int j = i + 1; j < matrix.length; j++) {
@@ -214,8 +206,6 @@ public void rotate(int[][] matrix) {
 }
 ```
 
-
-
 ### 49. Group Anagrams(Medium)
 
 Given an array of strings, group anagrams together.
@@ -234,9 +224,9 @@ Output:
 
 #### Hashing
 
-先每个字符串用排序得出对应的字谜的解，然后这个解作为key放在HashMap中，后续相同字谜解的，一起加在同一个key下
+先每个字符串用排序得出对应的字谜的解，然后这个解作为 key 放在 HashMap 中，后续相同字谜解的，一起加在同一个 key 下
 
-``` java
+```java
 public List<List<String>> groupAnagrams(String[] strs) {
     HashMap<String, List<String>> ansMap = new HashMap<>();
     for (String str : strs) {
@@ -251,16 +241,15 @@ public List<List<String>> groupAnagrams(String[] strs) {
     return new LinkedList<>(ansMap.values());
 }
 ```
-这里有2个优化的地方：
+
+这里有 2 个优化的地方：
 
 - 因为都是在屁股加解，所以用`LinkedList`会好点；
 - `String.valueOf(chars)`会比`Arrays.toString(chars)`要来得干脆；
 
-
-
 ### 50. Pow(x, n) (Medium)
 
-Implement [pow(*x*, *n*)](http://www.cplusplus.com/reference/valarray/pow/), which calculates *x* raised to the power *n* (xn).
+Implement [pow(_x_, _n_)](http://www.cplusplus.com/reference/valarray/pow/), which calculates _x_ raised to the power _n_ (xn).
 
 **Example 1:**
 
@@ -286,18 +275,18 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 
 **Note:**
 
-- -100.0 < *x* < 100.0
-- *n* is a 32-bit signed integer, within the range [−231, 231 − 1]
+- -100.0 < _x_ < 100.0
+- _n_ is a 32-bit signed integer, within the range [−231, 231 − 1]
 
 #### Recursion
 
-这题首先暴力解可以，但是时间会爆，比较如果n为`Integer.MAX_VALUE`的话，那就得有20亿次的循环计算，但是呢，这20亿次计算，有一半可以砍掉的，我们拿`pow(2, 20)`来举例，2的20次方，等于2的10次方的平方，于是我们只需要算出2的10次方，那么就可以得出2的20次方了：`pow(2, 20) = pow(2, 10) * pow(2, 10)`，而`pow(2, 10) = pow(2, 5) * pow(2, 5)`，而`pow(2, 5) = pow(2, 4) * 2`，而`pow(2, 4) = pow(2, 2) * pow(2, 2)`，而`pow(2, 2) = 2 * 2`；
+这题首先暴力解可以，但是时间会爆，比较如果 n 为`Integer.MAX_VALUE`的话，那就得有 20 亿次的循环计算，但是呢，这 20 亿次计算，有一半可以砍掉的，我们拿`pow(2, 20)`来举例，2 的 20 次方，等于 2 的 10 次方的平方，于是我们只需要算出 2 的 10 次方，那么就可以得出 2 的 20 次方了：`pow(2, 20) = pow(2, 10) * pow(2, 10)`，而`pow(2, 10) = pow(2, 5) * pow(2, 5)`，而`pow(2, 5) = pow(2, 4) * 2`，而`pow(2, 4) = pow(2, 2) * pow(2, 2)`，而`pow(2, 2) = 2 * 2`；
 
-于是我们把20次计算减少为5次计算，同理我们如果20亿次计算可以减少为31次计算，不要问为什么
+于是我们把 20 次计算减少为 5 次计算，同理我们如果 20 亿次计算可以减少为 31 次计算，不要问为什么
 
-然后我们再覆盖一些边角case~
+然后我们再覆盖一些边角 case~
 
-``` java
+```java
 public double myPow(double x, int n) {
     if (n == 0 || x == 1) {
         return 1;

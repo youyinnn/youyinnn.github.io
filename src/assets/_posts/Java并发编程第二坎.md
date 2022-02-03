@@ -14,16 +14,13 @@ date: 2018-7-15 10:53:22
 series: 并发
 ---
 
-
-
 ### 前言
 
 前一篇基本说了线程的基本概念和如何创建一个线程，以及非常基本的几个线程方法，接下来我们说说线程的前几个控制相关的方法，包括和暂停一个线程（PAUSE）、让暂停的线程恢复（RESUME）、让线程终止（STOP）
 
-这篇我们但是这几个方法不能直接去用，因为这些方法都**过期了**！下面就着Java官方的文档解释，说说为什么过期这几个方法，以及贴出官方给的模板方法去实现这几个过期方法，具体的实现会在后面有例子
+这篇我们但是这几个方法不能直接去用，因为这些方法都**过期了**！下面就着 Java 官方的文档解释，说说为什么过期这几个方法，以及贴出官方给的模板方法去实现这几个过期方法，具体的实现会在后面有例子
 
--------
-
+---
 
 #### 中断线程
 
@@ -31,13 +28,11 @@ series: 并发
 
 但是停止线程的任务并不简单，总的来说，停止线程的方式有这么三种：
 
-- **让run方法执行完**，线程就停了
-- **使用stop方法**，但是这个方法**绝对不能够使用**，因为不安全而被列为**过期方法**
-- **使用interrupt方法去中断线程**
+- **让 run 方法执行完**，线程就停了
+- **使用 stop 方法**，但是这个方法**绝对不能够使用**，因为不安全而被列为**过期方法**
+- **使用 interrupt 方法去中断线程**
 
-这么看来，如果要在线程任务中间去停止线程，只能使用**interrupt方法**，但是这个方法也**不是说停就停**的
-
-
+这么看来，如果要在线程任务中间去停止线程，只能使用**interrupt 方法**，但是这个方法也**不是说停就停**的
 
 ##### interrupt()
 
@@ -60,11 +55,9 @@ public void interrupt() {
 }
 ```
 
-
-
 ##### 判断线程中断
 
-**Thread类**中有两个方法可以用于判断线程是否中断，分别是：
+**Thread 类**中有两个方法可以用于判断线程是否中断，分别是：
 
 1. **Thread.interrupted()：测试当前线程是否已经中断**
 2. **this.isInterrupted()：测试线程是否已经中断**
@@ -83,17 +76,15 @@ public boolean isInterrupted() {
 private native boolean isInterrupted(boolean ClearInterrupted);
 ```
 
-可以看到，**interrupted()**其实也是调用的**本地方法isInterrupted(boolean clearInterrupted)**，而且是**当前线程（currendThread）去调用**，所以这个方法是静态方法，而**isInterrupted()**同样也是调用**本地方法isInterrupted(boolean clearInterrupted)**，只是这个调用是通过this去调用的
+可以看到，**interrupted()**其实也是调用的**本地方法 isInterrupted(boolean clearInterrupted)**，而且是**当前线程（currendThread）去调用**，所以这个方法是静态方法，而**isInterrupted()**同样也是调用**本地方法 isInterrupted(boolean clearInterrupted)**，只是这个调用是通过 this 去调用的
 
-还需要注意的是，**interrupted()会清楚中断标识，而isInterrupted()不会**
-
-
+还需要注意的是，**interrupted()会清楚中断标识，而 isInterrupted()不会**
 
 ##### 有效中断的方法
 
-前面我们说了，**interrupted()**方法只是设置中断flag，到底怎么真正停止线程呢？
+前面我们说了，**interrupted()**方法只是设置中断 flag，到底怎么真正停止线程呢？
 
-**方法1：**
+**方法 1：**
 
 我们就可以使用上面的**判断中断方法+程序流程设计**去实行有效地中断
 
@@ -120,23 +111,23 @@ public void testEffectedInterrupt() throws InterruptedException {
 }
 ```
 
-**runThread**一直在跑，只不过在跑之前会判断一下自身线程的**中断标志**，如果被设置了**中断标志**，那while就break，也就是说方法已经执行完毕了，**线程自然死亡**
+**runThread**一直在跑，只不过在跑之前会判断一下自身线程的**中断标志**，如果被设置了**中断标志**，那 while 就 break，也就是说方法已经执行完毕了，**线程自然死亡**
 
-当然这里是在main线程里面调用**runThread**的中断方法，**runThread**内部也可以不依靠中断方法去break语句，这里只是示例外部中断
+当然这里是在 main 线程里面调用**runThread**的中断方法，**runThread**内部也可以不依靠中断方法去 break 语句，这里只是示例外部中断
 
-**方法2：**
+**方法 2：**
 
-也许你可以使用**interrupt()方法+return语句**，和上面的break差不多骚，都是为了到达run方法的底部
+也许你可以使用**interrupt()方法+return 语句**，和上面的 break 差不多骚，都是为了到达 run 方法的底部
 
-> 2018年7月9日 13点12分 补充如下：
+> 2018 年 7 月 9 日 13 点 12 分 补充如下：
 >
-> 我在Servlet中尝试使用interrupt()设置中断标识的方法去中断线程，但是很遗憾的是失败了，但是单独写在Main数中，或者在Android代码中去验证却是可以，不太清楚是不是Servlet对线程有什么影响，所以中断线程可以用官方给的模型去中断，即用一个volatile布尔变量去设置`run(){while()}`的run方法的while循环退出条件
+> 我在 Servlet 中尝试使用 interrupt()设置中断标识的方法去中断线程，但是很遗憾的是失败了，但是单独写在 Main 数中，或者在 Android 代码中去验证却是可以，不太清楚是不是 Servlet 对线程有什么影响，所以中断线程可以用官方给的模型去中断，即用一个 volatile 布尔变量去设置`run(){while()}`的 run 方法的 while 循环退出条件
 >
-> 搞懂为什么失败了，我在线程run方法中有**Thread.sleep()**方法，虽然我while循环最开始就有isInterrupt()方法做判断，但是大部分时间线程是在sleep()方法中的`TIMED_WAITING`状态下，在这个状态下使用interrupt()方法去中断线程会在sleep方法被调用处抛出`InterruptedException`异常，如果在catch语句中没有跳出循环的语句的话，下次while循环中的isInterrupt()仍然是false，因为一旦抛出`InterruptedException`异常就会**清除线程的中断标志**
+> 搞懂为什么失败了，我在线程 run 方法中有**Thread.sleep()**方法，虽然我 while 循环最开始就有 isInterrupt()方法做判断，但是大部分时间线程是在 sleep()方法中的`TIMED_WAITING`状态下，在这个状态下使用 interrupt()方法去中断线程会在 sleep 方法被调用处抛出`InterruptedException`异常，如果在 catch 语句中没有跳出循环的语句的话，下次 while 循环中的 isInterrupt()仍然是 false，因为一旦抛出`InterruptedException`异常就会**清除线程的中断标志**
 >
-> 我们看看sleep的源码说明：
+> 我们看看 sleep 的源码说明：
 >
-> ``` java
+> ```java
 >     /**
 >      * Causes the currently executing thread to sleep (temporarily cease
 >      * execution) for the specified number of milliseconds, subject to
@@ -157,17 +148,17 @@ public void testEffectedInterrupt() throws InterruptedException {
 >     public static native void sleep(long millis) throws InterruptedException;
 > ```
 >
-> 之前实验的时候，使用到了sleep，使用interrupt怎么都测不到isInterrupted()为true，然后catch语句块里也没有做任何处理，所以线程始终无法停止，搞得我以为哪里出错了
+> 之前实验的时候，使用到了 sleep，使用 interrupt 怎么都测不到 isInterrupted()为 true，然后 catch 语句块里也没有做任何处理，所以线程始终无法停止，搞得我以为哪里出错了
 >
-> 关于怎么写stop、suspend、resume方法的代码贴在后面
+> 关于怎么写 stop、suspend、resume 方法的代码贴在后面
 
-##### 关于stop()强制停止
+##### 关于 stop()强制停止
 
 关于这个作废的方法，我们还是要说一下为什么这方法被作废了，当然最权威的介绍还是官方解释了*[Why are Thread.stop, Thread.suspend and Thread.resume Deprecated?](https://docs.oracle.com/javase/8/docs/technotes/guides/concurrency/threadPrimitiveDeprecation.html)*
 
 官方给出的**stop()过期解释**：
 
-> 强制性地使用**stop()**方法会**释放当前线程所持有的所有锁（监控器会因为ThreadDeath异常被抛到方法栈的最上层而解锁）**，有的锁并不是我们期望释放掉的，所以这样会**导致某些同步数据在并发且不完全锁上**的情况下被修改，如果在这种**状态**不一致的情况下，事先有任何对象被这些监视器所保护着的话，其他的对象也会看到这些不一致的**状态**，我们可以认为，这些对象已经被**破坏（damaged）**了，再用这些对象去执行任务已经没有意义了
+> 强制性地使用**stop()**方法会**释放当前线程所持有的所有锁（监控器会因为 ThreadDeath 异常被抛到方法栈的最上层而解锁）**，有的锁并不是我们期望释放掉的，所以这样会**导致某些同步数据在并发且不完全锁上**的情况下被修改，如果在这种**状态**不一致的情况下，事先有任何对象被这些监视器所保护着的话，其他的对象也会看到这些不一致的**状态**，我们可以认为，这些对象已经被**破坏（damaged）**了，再用这些对象去执行任务已经没有意义了
 >
 > 而且上述的影响很微妙，短时间内是无法检测出来的，因为不像其他**非受检异常（unchecked exceptions）**，**ThreadDeath**异常是一种**静默异常**，因此，如果程序因为这个异常而出错，用户通常是不会收到任何警告的，可能过个几个小时或者几天，程序才会因为最开始的**强制停止**所带来的长久影响而抛出某个业务中的异常
 
@@ -194,9 +185,9 @@ public void run() {
 }
 ```
 
-如代码里面所示，线程一旦开启，就进入到**run()**方法的**while循环**里面，**while循环**退出的点是**blinker等于当前线程**的时候，我们只需要简单的**在外部将这个同步变量置空**，这样线程就会**结束while循环——方法结束——退出线程**，达到暂停线程的效果
+如代码里面所示，线程一旦开启，就进入到**run()**方法的**while 循环**里面，**while 循环**退出的点是**blinker 等于当前线程**的时候，我们只需要简单的**在外部将这个同步变量置空**，这样线程就会**结束 while 循环——方法结束——退出线程**，达到暂停线程的效果
 
-但是这个方法还不够强，如果说，我们要让一个**陷入长时间wait的线程（比方说在等待某个输入流）中断的话（陷入wait就意味着线程卡在某个代码段那不继续往下执行了，而是等着抢资源）**这个时候你就别指望说线程会跑到**line：9**去判断了
+但是这个方法还不够强，如果说，我们要让一个**陷入长时间 wait 的线程（比方说在等待某个输入流）中断的话（陷入 wait 就意味着线程卡在某个代码段那不继续往下执行了，而是等着抢资源）**这个时候你就别指望说线程会跑到**line：9**去判断了
 
 所以这里就该是我们的**interrupt()方法**登场了~
 
@@ -210,7 +201,7 @@ public void stop() {
 }
 ```
 
->  这个机制，对于在任何**捕获到中断异常并且还没有准备好马上重新处理该异常**的方法来说很重要，我们常说**宁可处理掉这个新的异常也不要往上层抛这个异常**，这样做回带来额外的麻烦
+> 这个机制，对于在任何**捕获到中断异常并且还没有准备好马上重新处理该异常**的方法来说很重要，我们常说**宁可处理掉这个新的异常也不要往上层抛这个异常**，这样做回带来额外的麻烦
 >
 > 如果一个方法捕获到了**没有声明过的中断异常**，你应该让这个线程**再中断它自己一次**
 >
@@ -220,23 +211,19 @@ public void stop() {
 >
 > 以保证它尽可能及时地发出中断异常
 
-而在这节的最后，官方又提到了一个事情*“如果某个线程对``Thread.interrupt``没有反应怎么办？”*
+而在这节的最后，官方又提到了一个事情*“如果某个线程对`Thread.interrupt`没有反应怎么办？”*
 
-在某些情况下，你可能将程序设计得很独特。比如说一个线程正在等待一个已知的socket资源，这时候你可以关闭这个socket来让这个线程马上从等待中返回。非常不幸的是，目前（JDK 8）还没有能够解决这种情况的技术。而且一旦某个线程不响应`Thread.interrupt`，那么它们也绝对不会响应`Thread.stop`。
+在某些情况下，你可能将程序设计得很独特。比如说一个线程正在等待一个已知的 socket 资源，这时候你可以关闭这个 socket 来让这个线程马上从等待中返回。非常不幸的是，目前（JDK 8）还没有能够解决这种情况的技术。而且一旦某个线程不响应`Thread.interrupt`，那么它们也绝对不会响应`Thread.stop`。
 
 > Such cases include deliberate denial-of-service attacks, and I/O operations for which thread.stop and thread.interrupt do not work properly.
 
+##### 在 sleep()里中断线程
 
-
-##### 在sleep()里中断线程
-
-没什么说的，**sleep()**的调用需要捕获中断异常，如果在**sleep()**的过程中中断异常的话，就会抛出**中断异常**，在**catch语句块中处理中断的后续逻辑**就好了，**<u>请一定要在catch块中做出中断处理！！！（原因见前一章的[sleep的注意](./bu9klx.html?hash=479c457a)）</u>**
-
-
+没什么说的，**sleep()**的调用需要捕获中断异常，如果在**sleep()**的过程中中断异常的话，就会抛出**中断异常**，在**catch 语句块中处理中断的后续逻辑**就好了，**<u>请一定要在 catch 块中做出中断处理！！！（原因见前一章的[sleep 的注意](./bu9klx.html?hash=479c457a)）</u>**
 
 #### 暂停/恢复线程
 
-同样的，因为不安全，**suspend()和resume()**方法也都过期了，禁止使用，在和**stop()**被过期的官方介绍中同样介绍了原因：
+同样的，因为不安全，**suspend()和 resume()**方法也都过期了，禁止使用，在和**stop()**被过期的官方介绍中同样介绍了原因：
 
 > **Thread.suspend**方法有天生的死锁倾向
 >
@@ -280,7 +267,7 @@ public synchronized void mousePressed(MouseEvent e) {
 }
 ```
 
-然后在线程的run循环里面加上：
+然后在线程的 run 循环里面加上：
 
 ```java
 synchronized(this) {
@@ -289,7 +276,7 @@ synchronized(this) {
 }
 ```
 
-因为**wait()**方法会抛出**中断异常**，所以得包在try-catch语句中，你不妨在这里顺便睡上一小段时间，给程序一些缓冲时间好让线程在**“恢复”**之后可以马上执行**repaint()方法（这里的repaint方法代表恢复之后要做的事情）**
+因为**wait()**方法会抛出**中断异常**，所以得包在 try-catch 语句中，你不妨在这里顺便睡上一小段时间，给程序一些缓冲时间好让线程在**“恢复”**之后可以马上执行**repaint()方法（这里的 repaint 方法代表恢复之后要做的事情）**
 
 ```java
 public void run() {
@@ -306,7 +293,8 @@ public void run() {
     }
 }
 ```
-特别注意到：**notify()和wait()**方法都被包在**同步块（synchronized block）**中，这是Java语法要求这么做的，以保证这两个方法是**绝对串行**地工作，然而，保证同步的代价确实有点大，为了减小同步带来的代价，我们可以简单的用一些伎俩去优化上述的两段代码，这个伎俩也很简单，在进**同步块**之前，先判断一次**threadSuspended**
+
+特别注意到：**notify()和 wait()**方法都被包在**同步块（synchronized block）**中，这是 Java 语法要求这么做的，以保证这两个方法是**绝对串行**地工作，然而，保证同步的代价确实有点大，为了减小同步带来的代价，我们可以简单的用一些伎俩去优化上述的两段代码，这个伎俩也很简单，在进**同步块**之前，先判断一次**threadSuspended**
 
 ```java
 if (threadSuspended) {
@@ -342,13 +330,11 @@ public void run() {
 }
 ```
 
-
-
 #### 实例
 
-为了有多线程效果，把例子装在了servlet中用网页请求去运行
+为了有多线程效果，把例子装在了 servlet 中用网页请求去运行
 
-``` java
+```java
 package mythread;
 
 import java.io.IOException;
@@ -360,19 +346,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/xixi")
 public class AThreadTest extends HttpServlet {
-	
+
 	private static Thread timer;
 	private volatile boolean stoped = false;
 	private volatile boolean suspended = false;
-	
+
 	@Override
 	public void init() throws ServletException {
 		timer = new Thread() {
 			private int count = 0;
-			
+
 			@Override
 			public void run() {
-				if (!timer.getName().equals("Timer")) {					
+				if (!timer.getName().equals("Timer")) {
 					timer.setName("Timer");
 				}
 				System.out.println(Thread.currentThread() + " started");
@@ -390,7 +376,7 @@ public class AThreadTest extends HttpServlet {
 									while (suspended) {
 										timer.wait();
 									}
-								}															
+								}
 							}
 						}
 						Thread.sleep(1000);
@@ -435,12 +421,12 @@ public class AThreadTest extends HttpServlet {
 //		stoped = true;
 		System.out.println("stop");
 	}
-	
+
 	public void pause() {
 		suspended = true;
 		System.out.println("pause");
 	}
-	
+
 	public void resume() {
 		suspended = false;
 		if (!suspended) {
@@ -450,54 +436,53 @@ public class AThreadTest extends HttpServlet {
 			}
 		}
 	}
-	
+
 	public void state() {
 		System.out.print("status: ");
 		if (timer == null) {
 			System.out.println("null");
-		} else {			
-			System.out.println(timer.getState());			
+		} else {
+			System.out.println(timer.getState());
 		}
 	}
-	
+
 }
 
 ```
 
 网页如下，线程过程中顺便还可以监控线程的状态
 
-``` html
+```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    HelloWorld!
 
-HelloWorld!
+    <hr />
+    Timer Test<br />
 
-<hr>
-Timer Test<br>
+    <a href="http://localhost:8080/Learning_zoom/xixi?act=start">Start</a><br />
+    <a href="http://localhost:8080/Learning_zoom/xixi?act=stop">Stop</a><br />
+    <a href="http://localhost:8080/Learning_zoom/xixi?act=pause">Pause</a><br />
+    <a href="http://localhost:8080/Learning_zoom/xixi?act=resume">Resume</a
+    ><br />
+    <a href="http://localhost:8080/Learning_zoom/xixi?act=state">State</a><br />
 
-    <a href="http://localhost:8080/Learning_zoom/xixi?act=start">Start</a><br>
-    <a href="http://localhost:8080/Learning_zoom/xixi?act=stop">Stop</a><br>
-    <a href="http://localhost:8080/Learning_zoom/xixi?act=pause">Pause</a><br>
-    <a href="http://localhost:8080/Learning_zoom/xixi?act=resume">Resume</a><br>
-    <a href="http://localhost:8080/Learning_zoom/xixi?act=state">State</a><br>
-
-<hr>
-
-</body>
+    <hr />
+  </body>
 </html>
 ```
 
-上面的例子中对于暂停的做法有三个处理，因为有45行的sleep代码，所以线程大多数时候都是处于sleep状态，这时候你想要用中断标志去停止线程是有点不太可能，所以我们需要在catch块中对sleep中断错误的处理进行停止的逻辑，比如可以直接return
+上面的例子中对于暂停的做法有三个处理，因为有 45 行的 sleep 代码，所以线程大多数时候都是处于 sleep 状态，这时候你想要用中断标志去停止线程是有点不太可能，所以我们需要在 catch 块中对 sleep 中断错误的处理进行停止的逻辑，比如可以直接 return
 
-如果想要看中断标志去停止线程的效果，可以把45行的sleep注掉，然后就可以看到用29-32行的那种中断标志+break的方式去中断了，当然你可能还会注意到还有一个volatile变量：stoped
+如果想要看中断标志去停止线程的效果，可以把 45 行的 sleep 注掉，然后就可以看到用 29-32 行的那种中断标志+break 的方式去中断了，当然你可能还会注意到还有一个 volatile 变量：stoped
 
-你可以把84行的注释打开，这样可以用和暂停一样的思想去做中断，效果也是一样的
+你可以把 84 行的注释打开，这样可以用和暂停一样的思想去做中断，效果也是一样的
 
---------
+---
 
 好了**第二坎**就到这啦，神兵利器已经准备好啦！开始修炼内功！

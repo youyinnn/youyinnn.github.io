@@ -12,11 +12,11 @@ tags:
 
 ### HelloWorld
 
-昨天的小米笔试题: **请用Lambda写一个将int数组[1,2,3]转换为String数组["1","2","3"]**
+昨天的小米笔试题: **请用 Lambda 写一个将 int 数组[1,2,3]转换为 String 数组["1","2","3"]**
 
 当时没写完整，就这个为例作为开始吧, 完整代码如下:
 
-``` java
+```java
   int[] si = {1, 2, 3};
   Function<int[], String[]> f = (int[] ar) -> {
       String[] ss = new String[ar.length];
@@ -28,27 +28,26 @@ tags:
   System.out.println(Arrays.toString(f.apply(si)));
 ```
 
-看不懂是不是?看不懂就对了,Lambda是一个语法糖,它的语法你得看得懂,才知道上面的代码干了什么.
-
-
+看不懂是不是?看不懂就对了,Lambda 是一个语法糖,它的语法你得看得懂,才知道上面的代码干了什么.
 
 ### 语法
 
-#### 要点1-函数式接口的支持
+#### 要点 1-函数式接口的支持
 
 > 语法必须要函数式接口的支持, 函数式接口: **即接口中只有一个抽象方法**.一般需要`@FunctionalInterface`注解修饰类.
 >
 > 我们称这个唯一的抽象方法为, **函数方法**
 
-
-
-#### 要点2-箭头语法
+#### 要点 2-箭头语法
 
 函数式写法格式, 分**左右两边**:
-``` lambda
+
+```lambda
   (param1, param2, ...) -> {statement1;statement2;...;};
 ```
+
 - **左边-参数列表**-方法要传递的参数:
+
   - 根据泛型可以省略参数列表的类型
   - 没有参数或者有两个以上参数时必须写`()`, 只有一个参数时可以省略`()`
 
@@ -56,14 +55,11 @@ tags:
   - 如果只有一条语句, 则可以省略`{}`, 多条语句必须要`{}`
   - 如果有返回值, 且只有一条语句, 则可以`return`, 多条语句必须加
 
+#### 要点 3-参数列表类型和返回值类型
 
+我们的 lambda 表达式, 最终还是得被一个**函数式接口**所引用, 我们的表达式可能有**参数列表**, 可能有**返回值**, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口
 
-
-#### 要点3-参数列表类型和返回值类型
-
-我们的lambda表达式, 最终还是得被一个**函数式接口**所引用, 我们的表达式可能有**参数列表**, 可能有**返回值**, 也可能都没有. 那么我们省略类型的时候, 函数是怎么判断参数列表类型和返回值类型的呢? 我们来看看这个接口
-
-``` java
+```java
 @FunctionalInterface
 interface MyFunction<T, R> {
     /**
@@ -74,40 +70,37 @@ interface MyFunction<T, R> {
 }
 ```
 
-很容易就看出, 我们是根据接口上的**泛型**去规定**参数列表类型**以及**返回值类型**的,  当我们省略类型的时候, 因为lambda是**依靠泛型填充类型**, 编译的时候, 代码就已经根据上下文自动填补类型了, 比如说这里的`get(T t1, T t2)`方法, 你**传递什么参数**, 参数类型就是什么, **方法体中实现的**的返回语句是什么类型的, 函数的返回值类型就是什么
+很容易就看出, 我们是根据接口上的**泛型**去规定**参数列表类型**以及**返回值类型**的, 当我们省略类型的时候, 因为 lambda 是**依靠泛型填充类型**, 编译的时候, 代码就已经根据上下文自动填补类型了, 比如说这里的`get(T t1, T t2)`方法, 你**传递什么参数**, 参数类型就是什么, **方法体中实现的**的返回语句是什么类型的, 函数的返回值类型就是什么
 
-``` java
+```java
 public class Main{
 	public static <T, R> R invokeGet(T t1, T t2, MyFunction<T, R> mf) {
         return mf.get(t1, t2);
-    }    
+    }
 }
 ```
 
-我们可以如下省略类型的调用: 
+我们可以如下省略类型的调用:
 
-``` java
+```java
     Person p1 = new Person("abc", 12);
     Person p2 = new Person("efg", 13);
     Integer integer =
             Main.invokeGet(p1, p2, (ax, bx) -> ax.getName().length() + bx.getName().length());
 ```
 
-正常的做法是: 
+正常的做法是:
 
-``` java
+```java
     Integer integer =
             Main.<Person, Integer>invokeGet(p1, p2, (ax, bx) -> ax.getName().length() + bx.getName().length());
 ```
 
-那么这里为什么可以省略? 因为我`invokeGet`的时候, 传进去的**t1, t2**是**p1, p2**, 所以**T类型**被补充为**Person类型**, 而对于返回值类型, 因为我们这里的方法体实现就一句话, 所以**{}**省略了, **return** 也省略了, 返回值类型就是语句`ax.getName().length() + bx.getName().length()`所运算出的类型.
-
-
-
+那么这里为什么可以省略? 因为我`invokeGet`的时候, 传进去的**t1, t2**是**p1, p2**, 所以**T 类型**被补充为**Person 类型**, 而对于返回值类型, 因为我们这里的方法体实现就一句话, 所以**{}**省略了, **return** 也省略了, 返回值类型就是语句`ax.getName().length() + bx.getName().length()`所运算出的类型.
 
 #### 代码示例
 
-``` java
+```java
 public class Main{
 
     /**
@@ -176,9 +169,9 @@ public class Main{
     public void test4(){
         Person p1 = new Person("abc", 12);
         Person p2 = new Person("uiop", 13);
-        Integer integer = 
+        Integer integer =
                 Main.invokeGet(p1, p2, (ax, bx) -> ax.getName().length() + bx.getName().length());
-        String s = 
+        String s =
                 Main.invokeGet(p1, p2, (ax, bx) -> ax.getAge() + " : " + bx.getAge());
 
         System.out.println(integer);
@@ -187,17 +180,15 @@ public class Main{
 }
 ```
 
-
-
 ### 五大核心函数式接口
 
-前面我们说了, lambda依赖函数式接口, Java8已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的**五大核心函数式接口**, 这样的函数式接口在Java8中到处都是.
+前面我们说了, lambda 依赖函数式接口, Java8 已经写好了很多函数式接口了, 而其中最常用的就是接下来要介绍的**五大核心函数式接口**, 这样的函数式接口在 Java8 中到处都是.
 
 所以说了解这**五大核心函数式接口**到底能干什么, 这点是非常重要的.
 
 首先看看我写的笔试题的未完整版是什么样子的:
 
-``` java
+```java
   Function f = (int[] arr) -> {
       String[] s = new String[arr.length];
       for (int i = 0; i < arr.length ; i++) {
@@ -209,7 +200,7 @@ public class Main{
 
 再来看看完整版:
 
-``` java
+```java
   int[] si = {1, 2, 3};
   Function<int[], String[]> f = (int[] ar) -> {
       String[] ss = new String[ar.length];
@@ -223,12 +214,11 @@ public class Main{
 
 这和完整版相比, 缺少的是`Function`类后面的泛型定义, 所以这段代码是过不了的, 了解一下**五大核心函数式接口**,
 
-
-
 #### Consumer<T> 消费型接口
+
 ##### 源码
 
-``` java
+```java
 @FunctionalInterface
 public interface Consumer<T> {
 
@@ -243,7 +233,7 @@ public interface Consumer<T> {
 
 ##### 函数方法
 
-``` java
+```java
     void accept(T t);
 ```
 
@@ -251,19 +241,19 @@ public interface Consumer<T> {
 
 ##### 默认方法
 
-这个方法相当于将两个`Consumer`函数组合在了一起, 形成一个新的`Consumer`函数, after函数在源函数之后执行, 相当于一个**"后置函数"**
+这个方法相当于将两个`Consumer`函数组合在了一起, 形成一个新的`Consumer`函数, after 函数在源函数之后执行, 相当于一个**"后置函数"**
 
 ##### 示例
 
-``` java
+```java
     @Test
     public void testConsumer(){
         Person p1 = new Person("abc", 12);
         Person p2 = new Person("uiop", 13);
 
-        Consumer<Person> gn = 
+        Consumer<Person> gn =
             (person) -> System.out.println("Name is : " + person.getName());
-        Consumer<Person> ga = 
+        Consumer<Person> ga =
             (person) -> System.out.println("Age is : " + person.getAge());
         Consumer<Person> gnAndga = gn.andThen(ga);
 
@@ -273,16 +263,15 @@ public interface Consumer<T> {
     }
 ```
 
-``` console
+```console
 Name is : abc
 Age is : 13
 Name is : abc
 Age is : 12
 ```
 
-
-
 #### Supplier<T> 供给型接口
+
 ##### 源码
 
 ```java
@@ -310,8 +299,6 @@ public void testSupplier(){
     System.out.println(person);
 }
 ```
-
-
 
 #### Function<T, R> 函数型接口
 
@@ -379,14 +366,12 @@ public void testFunction(){
 }
 ```
 
-``` console
+```console
 before
 nothing change~
 after
 Person{name='xixi', age=15}
 ```
-
-
 
 #### Predicate<T> 条件预测型接口
 
@@ -426,14 +411,12 @@ public interface Predicate<T> {
 	boolean test(T t);
 ```
 
-给个T, 返回个布尔值
+给个 T, 返回个布尔值
 
 #### 默认方法
 
 经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于**条件预测型接口**的默认方法, `and` `or` `negate` 分别代表用**和**的方式连接两个条件, 用**与**的方式连接两个条件, 用**非**呈现这个条件.
 
-
-
 #### Comparator<T> 比较器接口
 
-这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是**"四大核心函数式接口"**的, 这个我放在第五个, 因为这个接口里的方法有很有价值. 
+这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是**"四大核心函数式接口"**的, 这个我放在第五个, 因为这个接口里的方法有很有价值.

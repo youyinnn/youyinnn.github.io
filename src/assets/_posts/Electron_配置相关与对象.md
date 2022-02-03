@@ -10,20 +10,18 @@ series: electron
 date: 2019-10-10 09:03:21
 ---
 
-
-
 ### Introduction
 
-有了一些铺垫之后，我们就能开始了解一下Electron的主体功能都提供了什么东西，具体的列表可以看：https://electronjs.org/docs/api
+有了一些铺垫之后，我们就能开始了解一下 Electron 的主体功能都提供了什么东西，具体的列表可以看：https://electronjs.org/docs/api
 
 - 配置相关与对象
-  - app：整个应用程序生命周期相关的api和事件
+  - app：整个应用程序生命周期相关的 api 和事件
   - BrowserView：创建和控制视图
   - BrowserWindow：创建和控制浏览器窗口
   - webContent：渲染以及控制 web 页面
   - screen：检索有关屏幕大小、显示器、光标位置等的信息。
   - session：管理浏览器会话、cookie、缓存、代理设置等。
-  - process：nodejs的process对象的扩展
+  - process：nodejs 的 process 对象的扩展
 - UI
   - 对话框
   - 菜单
@@ -33,8 +31,6 @@ date: 2019-10-10 09:03:21
   - 快捷键/系统快捷键：
   - 剪切板
   - 操作文件
-
-
 
 ### app
 
@@ -69,7 +65,7 @@ app.on('window-all-closed', () => {
 
 **其他事件：**
 
-还有一些窗口blur和focus、webcontent创建、remote相关、crashed相关的事件
+还有一些窗口 blur 和 focus、webcontent 创建、remote 相关、crashed 相关的事件
 
 #### API
 
@@ -113,7 +109,7 @@ app.on('window-all-closed', () => {
 
 ##### [`app.getAppMetrics()`](https://electronjs.org/docs/api/app#appgetappmetrics)
 
-返回 [`ProcessMetric[\]`](https://electronjs.org/docs/api/structures/process-metric): 包含所有与应用相关的进程的内存和CPU的使用统计的 `ProcessMetric` 对象的数组。
+返回 [`ProcessMetric[\]`](https://electronjs.org/docs/api/structures/process-metric): 包含所有与应用相关的进程的内存和 CPU 的使用统计的 `ProcessMetric` 对象的数组。
 
 ##### [`app.getGPUFeatureStatus()`](https://electronjs.org/docs/api/app#appgetgpufeaturestatus)
 
@@ -123,11 +119,11 @@ app.on('window-all-closed', () => {
 
 - `infoType` String - 值可以是基本信息的`basic`，也可以是完整信息的`complete`
 
-##### 其他API
+##### 其他 API
 
-- 资源path相关
+- 资源 path 相关
 - 应用信息相关
-- 任务栏List、最近打开文档相关
+- 任务栏 List、最近打开文档相关
 - 单例锁
 
 ### BrowserView
@@ -138,7 +134,7 @@ app.on('window-all-closed', () => {
 
 `BrowserView` 被用来让 [`BrowserWindow`](https://electronjs.org/docs/api/browser-window) 嵌入更多的 web 内容。 它就像一个子窗口，除了它的位置是相对于父窗口。 这意味着可以替代`webview`标签.
 
-这个类有静态方法能够获取所有的BrowserView，也能够再窗口中创建新的Browser实例，也有destory等方法。
+这个类有静态方法能够获取所有的 BrowserView，也能够再窗口中创建新的 Browser 实例，也有 destory 等方法。
 
 ### BrowserWindow
 
@@ -148,24 +144,22 @@ app.on('window-all-closed', () => {
 
 ```javascript
 // 在主进程中.
-const { BrowserWindow } = require('electron')
+const { BrowserWindow } = require("electron");
 
 // 或者从渲染进程中使用 `remote`.
 // const { BrowserWindow } = require('electron').remote
 
-let win = new BrowserWindow({ width: 800, height: 600 })
-win.on('closed', () => {
-  win = null
-})
+let win = new BrowserWindow({ width: 800, height: 600 });
+win.on("closed", () => {
+  win = null;
+});
 
 // 加载远程URL
-win.loadURL('https://github.com')
+win.loadURL("https://github.com");
 
 // 或加载本地HTML文件
-win.loadURL(`file://${__dirname}/app/index.html`)
+win.loadURL(`file://${__dirname}/app/index.html`);
 ```
-
-
 
 #### API
 
@@ -190,11 +184,11 @@ win.loadURL(`file://${__dirname}/app/index.html`)
   - `focusable` Boolean (可选) - 窗口是否可以聚焦. 默认值为 `true`。 在 Windows 中设置 `focusable: false` 也意味着设置了`skipTaskbar: true`. 在 Linux 中设置 `focusable: false` 时窗口停止与 wm 交互, 并且窗口将始终置顶。
   - `alwaysOnTop` Boolean (可选) -窗口是否永远在别的窗口的上面. 默认值为`false`.
   - `fullscreen` Boolean (可选) - 窗口是否全屏. 当明确设置为 `false` 时，在 macOS 上全屏的按钮将被隐藏或禁用. 默认值为 `false`.
-  - `fullscreenable` Boolean (可选) - 窗口是否可以进入全屏状态. 在 macOS上, 最大化/缩放按钮是否可用 默认值为 `true`。
+  - `fullscreenable` Boolean (可选) - 窗口是否可以进入全屏状态. 在 macOS 上, 最大化/缩放按钮是否可用 默认值为 `true`。
   - `simpleFullscreen` Boolean (可选) - 在 macOS 上使用 pre-Lion 全屏. 默认为`false`.
   - `skipTaskbar` Boolean (可选) - 是否在任务栏中显示窗口. 默认值为`false`.
   - `kiosk` Boolean (可选) - kiosk 模式. 默认值为 `false`.
-  - `title`String(可选) - 默认窗口标题 默认为`"Electron"`。 如果由`loadURL()`加载的HTML文件中含有标签`<title>`，此属性将被忽略。
+  - `title`String(可选) - 默认窗口标题 默认为`"Electron"`。 如果由`loadURL()`加载的 HTML 文件中含有标签`<title>`，此属性将被忽略。
   - `icon` ([NativeImage](https://electronjs.org/docs/api/native-image) | String) (可选) - 窗口的图标. 在 Windows 上推荐使用 `ICO` 图标来获得最佳的视觉效果, 默认使用可执行文件的图标.
   - `show` Boolean (可选) - 窗口创建的时候是否显示. 默认值为`true`.
   - `frame` Boolean (可选) - 设置为 `false` 时可以创建一个[Frameless Window](https://electronjs.org/docs/api/frameless-window). 默认值为 `true`.
@@ -204,33 +198,33 @@ win.loadURL(`file://${__dirname}/app/index.html`)
   - `disableAutoHideCursor` Boolean (可选) - 是否在输入时隐藏鼠标. 默认值为`false`.
   - `autoHideMenuBar` Boolean (可选) - 自动隐藏菜单栏, 除非按了`Alt`键. 默认值为`false`.
   - `enableLargerThanScreen` Boolean (可选) - 是否允许改变窗口的大小时, 大于屏幕的尺寸. 默认值为`false`.
-  - `backgroundColor` String(可选) - 窗口的背景颜色为十六进制值，例如`#66CD00`, `#FFF`, `#80FFFFFF` (设置`transparent`为`true`方可支持alpha属性，格式为#AARRGGBB)。 默认值为 `#FFF`（白色）。
+  - `backgroundColor` String(可选) - 窗口的背景颜色为十六进制值，例如`#66CD00`, `#FFF`, `#80FFFFFF` (设置`transparent`为`true`方可支持 alpha 属性，格式为#AARRGGBB)。 默认值为 `#FFF`（白色）。
   - `hasShadow` Boolean (可选) - 窗口是否有阴影. 仅在 macOS 上支持. 默认值为 `true`.
   - `opacity` Number (可选)-设置窗口初始的不透明度, 介于 0.0 (完全透明) 和 1.0 (完全不透明) 之间。仅支持 Windows 和 macOS 。
   - `darkTheme` Boolean (可选) - 强制窗口使用 dark 主题, 只在一些拥有 GTK+3 桌面环境上有效. 默认值为 `false`.
   - `transparent` Boolean (可选) - 使窗口 [透明](https://electronjs.org/docs/api/frameless-window). 默认值为 `false`.
   - `type` String (可选) - 窗口的类型, 默认为普通窗口. 下面可以查看更多.
   - `titleBarStyle` String (可选) - 窗口标题栏的样式. 默认值为 `default`. 可能的值有：
-    - `default` - 标准灰色不透明的Mac标题栏
+    - `default` - 标准灰色不透明的 Mac 标题栏
     - `hidden` - 隐藏标题栏, 内容充满整个窗口, 但它依然在左上角, 仍然受标准窗口控制.
     - `hiddenInset` - 隐藏标题栏, 显示小的控制按钮在窗口边缘
-    - `customButtonsOnHover` Boolean (可选) - 在macOS的无框窗口上绘制自定义的关闭与最小化按钮. 除非鼠标悬停到窗口的左上角, 否则这些按钮不会显示出来. 这些自定义的按钮能防止, 与发生于标准的窗口工具栏按钮处的鼠标事件相关的问题. **注意:** 此选项目前是实验性的。
+    - `customButtonsOnHover` Boolean (可选) - 在 macOS 的无框窗口上绘制自定义的关闭与最小化按钮. 除非鼠标悬停到窗口的左上角, 否则这些按钮不会显示出来. 这些自定义的按钮能防止, 与发生于标准的窗口工具栏按钮处的鼠标事件相关的问题. **注意:** 此选项目前是实验性的。
   - `fullscreenWindowTitle` Boolean (可选) - 在 macOS 全屏模式时，为所有带 `titleBarStyle` 选项的标题栏显示标题。默认值为 `false`。
   - `thickFrame` Boolean(可选)-对 Windows 上的无框窗口使用`WS_THICKFRAME` 样式，会增加标准窗口框架。 设置为 `false` 时将移除窗口的阴影和动画. 默认值为 `true`。
   - `vibrancy` String (可选) - 窗口是否使用 vibrancy 动态效果, 仅 macOS 中有效. 可以为 `appearance-based`, `light`, `dark`, `titlebar`, `selection`, `menu`, `popover`, `sidebar`, `medium-light` 或 `ultra-dark`. 请注意，结合一个 vibrancy 值使用 `frame: false` ，需要确保`titleBarStyle`为一个非默认值。
-  - `zoomToPageWidth` Boolean (可选) - 单击工具栏上的绿色信号灯按钮或单击 窗口>缩放 菜单项时的行为, 仅macOS中有效. 如果为 `true`, 窗口将放大到网页的本身宽度, `false` 将使其缩放到屏幕的宽度。 这也会影响直接调用 `maximize()` 时的行为。 默认值为 `false`.
-  - `tabbingIdentifier` String (可选) - 选项组卡的名称，在macOS 10.12+上可使窗口在原生选项卡中打开. 具有相同标识符的窗口将被组合在一起。 这还会在窗口的标签栏中添加一个原生的新选项卡按钮, 并允许 `app` 和窗口接收 `new-window-for-tab` 事件。
+  - `zoomToPageWidth` Boolean (可选) - 单击工具栏上的绿色信号灯按钮或单击 窗口>缩放 菜单项时的行为, 仅 macOS 中有效. 如果为 `true`, 窗口将放大到网页的本身宽度, `false` 将使其缩放到屏幕的宽度。 这也会影响直接调用 `maximize()` 时的行为。 默认值为 `false`.
+  - `tabbingIdentifier` String (可选) - 选项组卡的名称，在 macOS 10.12+上可使窗口在原生选项卡中打开. 具有相同标识符的窗口将被组合在一起。 这还会在窗口的标签栏中添加一个原生的新选项卡按钮, 并允许 `app` 和窗口接收 `new-window-for-tab` 事件。
   - `webPreferences` Object (可选) - 网页功能的设置
     - `devTools` Boolean (可选) - 是否开启 DevTools. 如果设置为 `false`, 则无法使用 `BrowserWindow.webContents.openDevTools ()` 打开 DevTools。 默认值为 `true`。
-    - `nodeIntegration` Boolean (可选) - 是否集成Node，默认为`false`。
-    - `nodeIntegrationInWorker` Boolean (可选) - 是否在Web工作器中启用了Node集成. 默认值为 `false`. 更多内容参见 [多线程](https://electronjs.org/docs/tutorial/multithreading).
+    - `nodeIntegration` Boolean (可选) - 是否集成 Node，默认为`false`。
+    - `nodeIntegrationInWorker` Boolean (可选) - 是否在 Web 工作器中启用了 Node 集成. 默认值为 `false`. 更多内容参见 [多线程](https://electronjs.org/docs/tutorial/multithreading).
     - `nodeIntegrationInSubFrames` Boolean (optional) - Experimental option for enabling Node.js support in sub-frames such as iframes and child windows. All your preloads will load for every iframe, you can use `process.isMainFrame` to determine if you are in the main frame or not.
-    - `preload` String (可选) -在页面运行其他脚本之前预先加载指定的脚本 无论页面是否集成Node, 此脚本都可以访问所有Node API 脚本路径为文件的绝对路径。 当 node integration 关闭时, 预加载的脚本将从全局范围重新引入node的全局引用标志 [参考示例](https://electronjs.org/docs/api/process#event-loaded).
-    - `sandbox` Boolean (可选)-如果设置该参数, 沙箱的渲染器将与窗口关联, 使它与Chromium OS-level 的沙箱兼容, 并禁用 Node. js 引擎。 它与 `nodeIntegration` 的选项不同，且预加载脚本的 API 也有限制. [更多详情](https://electronjs.org/docs/api/sandbox-option). **注意:**改选项目前是为实验性质，可能会在 Electron 未来的版本中移除。
+    - `preload` String (可选) -在页面运行其他脚本之前预先加载指定的脚本 无论页面是否集成 Node, 此脚本都可以访问所有 Node API 脚本路径为文件的绝对路径。 当 node integration 关闭时, 预加载的脚本将从全局范围重新引入 node 的全局引用标志 [参考示例](https://electronjs.org/docs/api/process#event-loaded).
+    - `sandbox` Boolean (可选)-如果设置该参数, 沙箱的渲染器将与窗口关联, 使它与 Chromium OS-level 的沙箱兼容, 并禁用 Node. js 引擎。 它与 `nodeIntegration` 的选项不同，且预加载脚本的 API 也有限制. [更多详情](https://electronjs.org/docs/api/sandbox-option). **注意:**改选项目前是为实验性质，可能会在 Electron 未来的版本中移除。
     - `enableRemoteModule` Boolean（可选）- 是否启用 [`Remote`](https://electronjs.org/docs/api/remote) 模块。 默认值为 `true`。
     - `session` [Session](https://electronjs.org/docs/api/session#class-session) (可选) - 设置页面的 session 而不是直接忽略 Session 对象, 也可用 `partition` 选项来代替，它接受一个 partition 字符串. 同时设置了`session` 和 `partition`时, `session` 的优先级更高. 默认使用默认的 session.
-    - `partition` String (optional) - 通过 session 的 partition 字符串来设置界面session. 如果 `partition` 以 `persist:`开头, 该页面将使用持续的 session，并在所有页面生效，且使用同一个`partition`. 如果没有 `persist:` 前缀, 页面将使用 in-memory session. 通过分配相同的 `partition`, 多个页可以共享同一会话。 默认使用默认的 session.
-    - `affinity` String (可选) - 当指定，具有相同`affinity` 的 web页面将在相同的渲染进程运行。 需要注意的是，由于渲染过程中会有代码重用，如 `webPreferences`的`preload`, `sandbox` 和 `nodeIntegration`等选项会在不同页面之间共用，即使你已经在不同页面中为同一选项设置过不同的值，它们仍会被共用。 因此，建议为`affinity`相同的页面，使用相同的 `webPreferences` *这一选项当前是实验性的*
+    - `partition` String (optional) - 通过 session 的 partition 字符串来设置界面 session. 如果 `partition` 以 `persist:`开头, 该页面将使用持续的 session，并在所有页面生效，且使用同一个`partition`. 如果没有 `persist:` 前缀, 页面将使用 in-memory session. 通过分配相同的 `partition`, 多个页可以共享同一会话。 默认使用默认的 session.
+    - `affinity` String (可选) - 当指定，具有相同`affinity` 的 web 页面将在相同的渲染进程运行。 需要注意的是，由于渲染过程中会有代码重用，如 `webPreferences`的`preload`, `sandbox` 和 `nodeIntegration`等选项会在不同页面之间共用，即使你已经在不同页面中为同一选项设置过不同的值，它们仍会被共用。 因此，建议为`affinity`相同的页面，使用相同的 `webPreferences` _这一选项当前是实验性的_
     - `zoomFactor` Number (可选) - 页面的默认缩放系数, `3.0` 表示 `300%`. 默认值为 `1.0`.
     - `javascript` Boolean (可选) - 是否启用 JavaScript 支持. 默认值为 `true`.
     - `webSecurity` Boolean (可选) - 当设置为 `false`, 它将禁用同源策略 (通常用来测试网站), 如果此选项不是由开发者设置的，还会把 `allowRunningInsecureContent`设置为 `true`. 默认值为 `true`。
@@ -256,10 +250,10 @@ win.loadURL(`file://${__dirname}/app/index.html`)
     - `defaultEncoding` String (可选) - 默认值为 `ISO-8859-1`.
     - `backgroundThrottling`Boolean (可选)-是否在页面成为背景时限制动画和计时器。 这也会影响到 [Page Visibility API](https://electronjs.org/docs/api/browser-window#page-visibility). 默认值为 `true`。
     - `offscreen` Boolean (optional) - 是否绘制和渲染可视区域外的窗口. 默认值为 `false`. 更多详情, 请参见 [offscreen rendering tutorial ](https://electronjs.org/docs/tutorial/offscreen-rendering)。
-    - `contextIsolation` Boolean (可选) - 是否在独立 JavaScript 环境中运行 Electron API和指定的`preload` 脚本. 默认值为 `false`. `preload`脚本的运行环境仍然可以访问`document` 和 `window`全局变量，但它将使用自己内置的函数 (如`Array`, `Object`, `JSON`等)，并且将被加载的页面与对全局环境所做的任何更改隔离开来. Electron API 仅在 `preload` 脚本中有效，而不是加载的页面。 在加载可能不受信任的远程内容时, 应使用此选项, 以确保加载的内容不能篡改 `preload` 脚本和使用的 Electron APIs。 此选项使用 [Chrome Content Scripts ](https://developer.chrome.com/extensions/content_scripts#execution-environment)使用的相同技术。 通过在控制台选项卡顶部的组合框中选择 "Electron Isolated Context" 条目, 可以在开发工具中访问此上下文。
+    - `contextIsolation` Boolean (可选) - 是否在独立 JavaScript 环境中运行 Electron API 和指定的`preload` 脚本. 默认值为 `false`. `preload`脚本的运行环境仍然可以访问`document` 和 `window`全局变量，但它将使用自己内置的函数 (如`Array`, `Object`, `JSON`等)，并且将被加载的页面与对全局环境所做的任何更改隔离开来. Electron API 仅在 `preload` 脚本中有效，而不是加载的页面。 在加载可能不受信任的远程内容时, 应使用此选项, 以确保加载的内容不能篡改 `preload` 脚本和使用的 Electron APIs。 此选项使用 [Chrome Content Scripts ](https://developer.chrome.com/extensions/content_scripts#execution-environment)使用的相同技术。 通过在控制台选项卡顶部的组合框中选择 "Electron Isolated Context" 条目, 可以在开发工具中访问此上下文。
     - `nativeWindowOpen` Boolean (可选) - 是否使用原生的`window.open()`. 默认值为 `false`. Child windows will always have node integration disabled unless `nodeIntegrationInSubFrames` is true. **注意:** 此选项目前是实验性的。
     - `webviewTag` Boolean (可选) - 是否启用 [`` tag](https://electronjs.org/docs/api/webview-tag)标签. 默认值为 `false`. **注意:** 为 `< webview>` 配置的 `preload` 脚本在执行时将启用节点集成, 因此应确保远程或不受信任的内容无法创建恶意的 `preload` 脚本 。 可以使用 [webContents ](https://electronjs.org/docs/api/web-contents)上的 `will-attach-webview` 事件对 `preload` 脚本进行剥离, 并验证或更改 `<webview>` 的初始设置。
-    - `additionalArguments` String[] (可选) - 一系列将会被附加至此app的渲染进程的`process.argv`的字符串. 对于将少量数据向下传至渲染进程的预加载脚本而言是十分实用的.
+    - `additionalArguments` String[] (可选) - 一系列将会被附加至此 app 的渲染进程的`process.argv`的字符串. 对于将少量数据向下传至渲染进程的预加载脚本而言是十分实用的.
     - `safeDialogs` Boolean (可选) - 是否启用浏览器样式的持续对话框保护。 缺省为`false`。
     - `safeDialogsMessage` String (可选) - 当持续对话框保护被触发时显示的消息。 如果没有定义，那么将使用缺省的消息。注意：当前缺省消息是英文，并没有本地化。
     - `navigateOnDragDrop` Boolean (可选) - 将文件或链接拖放到页面上时是否触发页面跳转. 默认为`false`.
@@ -314,45 +308,41 @@ win.loadURL(`file://${__dirname}/app/index.html`)
 
 关于浏览器窗口的各种事件：缩放、最大化最小化、关闭、移动、未响应、展示隐藏、聚焦失焦
 
-#### 例1：窗口关闭不退出程序
+#### 例 1：窗口关闭不退出程序
 
-``` javascript
+```javascript
 // 取消窗口关闭则推出应用的行为
 window.onbeforeunload = (e) => {
-    console.log('I don\'t want to be closed.')
-    // 返回默认值会取消关闭
-    e.returnValue = false
-    // 直接调用hide方法 这样窗口会关闭 但应用还未推出 还能通过托盘还原
-    win.hide()
-}
+  console.log("I don't want to be closed.");
+  // 返回默认值会取消关闭
+  e.returnValue = false;
+  // 直接调用hide方法 这样窗口会关闭 但应用还未推出 还能通过托盘还原
+  win.hide();
+};
 ```
 
-#### 例2：透明度/kiosk模式/无边框/任务栏隐藏/窗口全屏大小
+#### 例 2：透明度/kiosk 模式/无边框/任务栏隐藏/窗口全屏大小
 
-``` javascript
-const {
-    width,
-    height
-} = require('electron').screen.getPrimaryDisplay().workAreaSize
+```javascript
+const { width, height } =
+  require("electron").screen.getPrimaryDisplay().workAreaSize;
 
 win = new BrowserWindow({
-    width: width,
-    height: height,
-    // 窗口无边框
-    // frame: false,
+  width: width,
+  height: height,
+  // 窗口无边框
+  // frame: false,
 
-    // 透明度
-    opacity: 0.8,
+  // 透明度
+  opacity: 0.8,
 
-    // 是否在任务栏中显示窗口
-    // skipTaskbar: true,
+  // 是否在任务栏中显示窗口
+  // skipTaskbar: true,
 
-    // 终极全屏模式 配合上无边框之后 就像游戏的全屏模式一样
-    // kiosk: true,
-})
+  // 终极全屏模式 配合上无边框之后 就像游戏的全屏模式一样
+  // kiosk: true,
+});
 ```
-
-
 
 ### webContents
 
@@ -363,13 +353,13 @@ win = new BrowserWindow({
 `webContents` 是 [EventEmitter ](https://nodejs.org/api/events.html#events_class_eventemitter)的实例， 负责渲染和控制网页, 是 [`BrowserWindow`](https://electronjs.org/docs/api/browser-window) 对象的一个属性。 这是一个访问 `webContents` 对象的例子:
 
 ```javascript
-const { BrowserWindow } = require('electron')
+const { BrowserWindow } = require("electron");
 
-let win = new BrowserWindow({ width: 800, height: 1500 })
-win.loadURL('http://github.com')
+let win = new BrowserWindow({ width: 800, height: 1500 });
+win.loadURL("http://github.com");
 
-let contents = win.webContents
-console.log(contents)
+let contents = win.webContents;
+console.log(contents);
 ```
 
 #### API
@@ -387,37 +377,37 @@ console.log(webContents)Copy
 
 [`webContents.fromId(id)`](https://electronjs.org/docs/api/web-contents#webcontentsfromidid)
 
-其他的api还有：
+其他的 api 还有：
 
-- load资源相关的：URL或者文件
+- load 资源相关的：URL 或者文件
 
 - 页面停止加载、重载、前进后退导航
 
-- 插入css或者执行js
+- 插入 css 或者执行 js
 
 - 放大缩小
 
 - 页面音频静音
 
-- 编辑命令：redo、undo、cut、copy、select等等
+- 编辑命令：redo、undo、cut、copy、select 等等
 
 - 页面字符查找
 
 - 截图
 
-  ``` javascript
-  $('#jietu').click(() => {
-      // 截图
-      let c = contents[0].capturePage()
-      // 从promise中获取数据
-      c.then(function (data) {
-          const fs = require('fs')
-          // 用fs处理buffer
-          let bf = data.toPNG()
-          // 写到文件
-          fs.writeFile('a.png', bf, (err) => {})
-      })
-  })
+  ```javascript
+  $("#jietu").click(() => {
+    // 截图
+    let c = contents[0].capturePage();
+    // 从promise中获取数据
+    c.then(function (data) {
+      const fs = require("fs");
+      // 用fs处理buffer
+      let bf = data.toPNG();
+      // 写到文件
+      fs.writeFile("a.png", bf, (err) => {});
+    });
+  });
   ```
 
 - 打印机调用
@@ -426,7 +416,7 @@ console.log(webContents)Copy
 
 #### 事件
 
-load相关、导航相关、页面寻找相关
+load 相关、导航相关、页面寻找相关
 
 ### screen
 
@@ -458,28 +448,26 @@ app.on('ready', () => {
 另一个在外部显示器中创建窗口的例子
 
 ```javascript
-const electron = require('electron')
-const { app, BrowserWindow } = require('electron')
+const electron = require("electron");
+const { app, BrowserWindow } = require("electron");
 
-let win
+let win;
 
-app.on('ready', () => {
-  let displays = electron.screen.getAllDisplays()
+app.on("ready", () => {
+  let displays = electron.screen.getAllDisplays();
   let externalDisplay = displays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
-  })
+    return display.bounds.x !== 0 || display.bounds.y !== 0;
+  });
 
   if (externalDisplay) {
     win = new BrowserWindow({
       x: externalDisplay.bounds.x + 50,
-      y: externalDisplay.bounds.y + 50
-    })
-    win.loadURL('https://github.com')
+      y: externalDisplay.bounds.y + 50,
+    });
+    win.loadURL("https://github.com");
   }
-})
+});
 ```
-
-
 
 ### session
 
@@ -492,20 +480,18 @@ app.on('ready', () => {
 你还可以使用[`WebContents`](https://electronjs.org/docs/api/web-contents)的`session`属性或`session`模块访问现有页的`session`
 
 ```javascript
-const { BrowserWindow } = require('electron')
+const { BrowserWindow } = require("electron");
 
-let win = new BrowserWindow({ width: 800, height: 600 })
-win.loadURL('http://github.com')
+let win = new BrowserWindow({ width: 800, height: 600 });
+win.loadURL("http://github.com");
 
-const ses = win.webContents.session
-console.log(ses.getUserAgent())
+const ses = win.webContents.session;
+console.log(ses.getUserAgent());
 ```
 
 #### API
 
-它的api包括：浏览器缓存清除、代理设置
-
-
+它的 api 包括：浏览器缓存清除、代理设置
 
 ### process
 
@@ -515,4 +501,4 @@ console.log(ses.getUserAgent())
 
 Electron's `process` 对象继承 [Node.js `process` object](https://nodejs.org/api/process.html)。 它新增了以下事件、属性和方法
 
-api新增了有内存信息、系统信息、CPU信息
+api 新增了有内存信息、系统信息、CPU 信息

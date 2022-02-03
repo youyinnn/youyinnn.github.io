@@ -11,19 +11,19 @@ tags:
 series: 从头到尾读
 ---
 
-#### ArrayList类
+#### ArrayList 类
 
 对终于要正式开始读**ArrayList**的源码了，虽然**ArrayList**的源码价值并不是那么地大，但作为集合框架源码阅读的第一站来说，我选择了在这里站稳脚跟
 
-这个计划搁置了很久，大概有15天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习offer有没有已经不重要了，**剑指秋招！**
+这个计划搁置了很久，大概有 15 天，中间跑去面试了一个星期，面试下来发现自己的基础已经忘的差不多了，决定回来好好沉淀一段时间，暑期实习 offer 有没有已经不重要了，**剑指秋招！**
 
-为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近1小时手撸了一个ArrayList的自实现，再搭配源码来看**自己在基础方法上有哪些没考虑到的点**，以及**实际投入使用的ArrayList到底优秀在哪里**
+为什么要读它，因为线性表几乎是数据结构的基础必备，昨晚花了将近 1 小时手撸了一个 ArrayList 的自实现，再搭配源码来看**自己在基础方法上有哪些没考虑到的点**，以及**实际投入使用的 ArrayList 到底优秀在哪里**
 
 #### 源码
 
 ##### 类头
 
-``` java
+```java
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -33,15 +33,13 @@ public class ArrayList<E> extends AbstractList<E>
 
 首先继承了`AbstractList`
 
-我们顺着`AbstractList`往里摸，一直到最后我们发现，还有**Collection接口和Iterable接口**，这两个接口加上**List接口**为我们提供了非常重要的集合接口规范
+我们顺着`AbstractList`往里摸，一直到最后我们发现，还有**Collection 接口和 Iterable 接口**，这两个接口加上**List 接口**为我们提供了非常重要的集合接口规范
 
 然后我们往下看
 
-
-
 ##### 成员变量
 
-ArrayList这个类的成员变量并不复杂
+ArrayList 这个类的成员变量并不复杂
 
 ```java
 // 这是默认的容器长度
@@ -72,18 +70,16 @@ private int size;
 
 所以我更愿意将**size**叫成是**载量（loaded size）**
 
-在这里我们还需要留意一个变量，这个变量来自于**AbstractList抽象类**
+在这里我们还需要留意一个变量，这个变量来自于**AbstractList 抽象类**
 
 ```java
 protected transient int modCount = 0;
 ```
 
-这个值记录着List的**结构被改变的次数**，结构改变指的是**任何会影响到size的操作**
+这个值记录着 List 的**结构被改变的次数**，结构改变指的是**任何会影响到 size 的操作**
 因为这些改动，可能会**扰乱容器结构**，而导致迭代过程会出现错误的结果
 这个变量会在迭代器中去补充一些逻辑，比如非法的修改会扰乱迭代过程，则**会抛出异常**
 如果子类也要用到这个变量，要求**每一个可能改动容器结构的操作都需要调用一次这个变量**
-
-
 
 ##### 构造方法
 
@@ -105,9 +101,7 @@ public ArrayList() {
 }
 ```
 
-这里给出了我们的两个常量**EMPTY_ELEMENTDATA**和**DEFAULTCAPACITY_EMPTY_ELEMENTDATA**的去处，在我的自实现里，**无论是哪种方法我都选择了new出数组对象**，而这里还会有点偷懒，如果没有指定容量的话，则并不会**new Object[DEFAULT_CAPACITY]**，等到真正要加入元素的时候，才创建对象，这在下面add方法的时候会看到
-
-
+这里给出了我们的两个常量**EMPTY_ELEMENTDATA**和**DEFAULTCAPACITY_EMPTY_ELEMENTDATA**的去处，在我的自实现里，**无论是哪种方法我都选择了 new 出数组对象**，而这里还会有点偷懒，如果没有指定容量的话，则并不会**new Object[DEFAULT_CAPACITY]**，等到真正要加入元素的时候，才创建对象，这在下面 add 方法的时候会看到
 
 ##### 成员方法
 
@@ -130,9 +124,9 @@ public void trimToSize() {
 
 怎么个**修剪**法？将容器的**”容量“**修剪为当前列表的**载量**，其目的是为了**优化容器对象所占存储空间**
 
-比如我们容器初始容量为10，里面装了3个元素，那么就有**7个元素空间是被null占着的**
+比如我们容器初始容量为 10，里面装了 3 个元素，那么就有**7 个元素空间是被 null 占着的**
 
-假设我们容器的使用场景总是在小于等于3的情况下工作，那么我们就可以把容器的容量修剪一下
+假设我们容器的使用场景总是在小于等于 3 的情况下工作，那么我们就可以把容器的容量修剪一下
 
 **修剪前：**[a, b, c, **null, null, null, null, null, null, null**]
 
@@ -161,8 +155,6 @@ public static <T,U> T[] copyOf(U[] original, int newLength, Class<? extends T[]>
 
 重点是**line：10**，整个方法是按照**源数组的长度（original.length）**以及**新长度（newLength）**的最小值去复制数组的
 
-
-
 ###### ensureCapacity
 
 ```java
@@ -181,24 +173,24 @@ public void ensureCapacity(int minCapacity) {
 
 在这个方法里的选择是：
 
-- 对于**最小扩容量（minExpand）**，如果当前容器为空容器，则最小扩容量为**DEFAULT_CAPACITY（10）**，如果容器**不是空容器**，则最**小扩容量为0**
+- 对于**最小扩容量（minExpand）**，如果当前容器为空容器，则最小扩容量为**DEFAULT_CAPACITY（10）**，如果容器**不是空容器**，则最**小扩容量为 0**
 - 一旦**最小容量（minCapacity）> 最小扩容量（minExpand）**，则需要**确保显式容量**
 
 这里的理解有点绕，我们把它放到场景去分析一下：
 
-**场景1，空容器：**
+**场景 1，空容器：**
 
-空容器传进来，**minExpand**就得**DEFAULT_CAPACITY**等于10，那么如果我们传入的**minCapacity**甚至小于默认的容量，那你就**一边呆着吧**
+空容器传进来，**minExpand**就得**DEFAULT_CAPACITY**等于 10，那么如果我们传入的**minCapacity**甚至小于默认的容量，那你就**一边呆着吧**
 
-如果大于10，那就**按照你的来**，虽然还得进**ensureExplicitCapacity方法**，但是看到了后面就会发现，确实是会按照你给的大于10的值来扩容
+如果大于 10，那就**按照你的来**，虽然还得进**ensureExplicitCapacity 方法**，但是看到了后面就会发现，确实是会按照你给的大于 10 的值来扩容
 
-**场景2，\[ 1 / 10 \] 的容器：**
+**场景 2，\[ 1 / 10 \] 的容器：**
 
-**minExpand**肯定是0，那么只要我们传入的传入的**minCapacity**大于0，是肯定可以进**ensureExplicitCapacity方法**的，到了方法里面我们发现，如果你给的**minCapacity**还没有当前容器长度的**1.5倍**大，那么容器至少也会扩到**1.5倍**而忽略你给的值，大于**1.5倍**救会采用你给值来扩容
+**minExpand**肯定是 0，那么只要我们传入的传入的**minCapacity**大于 0，是肯定可以进**ensureExplicitCapacity 方法**的，到了方法里面我们发现，如果你给的**minCapacity**还没有当前容器长度的**1.5 倍**大，那么容器至少也会扩到**1.5 倍**而忽略你给的值，大于**1.5 倍**救会采用你给值来扩容
 
-为什么是**1.5倍**？往下看就知道了
+为什么是**1.5 倍**？往下看就知道了
 
-我们来看**ensureExplicitCapacity方法**
+我们来看**ensureExplicitCapacity 方法**
 
 ```java
 private void ensureExplicitCapacity(int minCapacity) {
@@ -230,15 +222,15 @@ private void grow(int minCapacity) {
 }
 ```
 
-这里规定：**数组最大的长度（MAX_ARRAY_SIZE）**为Integer值所能表示的最大的数减8，也就是**(2^31 - 1) - 8**
+这里规定：**数组最大的长度（MAX_ARRAY_SIZE）**为 Integer 值所能表示的最大的数减 8，也就是**(2^31 - 1) - 8**
 
 在方法里首先考虑**新容量（newCapacity）**怎么定义：
 
-- **先定义新容量为旧容量的1.5倍（line：6）！** 
-- 一旦**新容量（1.5倍）**比**允许的最小容量（minCapacity，这是用户期望的最小扩容量）**要小，那么新容量被**重新定义**为允许的最小容量
-- 一旦**新容量（这时候可能是期望值，也可能是1.5倍）**大于**数组最大的长度（MAX_ARRAY_SIZE）**，那么我们就按照**hugeCapacity(minCapacity)**方法去**重新定义新容量**
+- **先定义新容量为旧容量的 1.5 倍（line：6）！**
+- 一旦**新容量（1.5 倍）**比**允许的最小容量（minCapacity，这是用户期望的最小扩容量）**要小，那么新容量被**重新定义**为允许的最小容量
+- 一旦**新容量（这时候可能是期望值，也可能是 1.5 倍）**大于**数组最大的长度（MAX_ARRAY_SIZE）**，那么我们就按照**hugeCapacity(minCapacity)**方法去**重新定义新容量**
 
-于是我们发现，**ArrayList**的每次扩容，**最少都得是原容器的1.5倍**
+于是我们发现，**ArrayList**的每次扩容，**最少都得是原容器的 1.5 倍**
 
 对于**hugeCapacity**
 
@@ -252,15 +244,13 @@ private static int hugeCapacity(int minCapacity) {
 }
 ```
 
-我们知道，既然**minCapacity**是个**int值**，那么它最大值就只能为**Integer.MAX_VALUE**，而我们这里定义的最大的数组长度为**Integer.MAX_VALUE - 8**，也就是说，这个定义并不是一定的，如果我们设置的minCapacity的值在**( Integer.MAX_VALUE - 8, Integer.MAX_VALUE ]**之间的话，那我们还是允许用**Integer.MAX_VALUE**作为最大数组长度的
+我们知道，既然**minCapacity**是个**int 值**，那么它最大值就只能为**Integer.MAX_VALUE**，而我们这里定义的最大的数组长度为**Integer.MAX_VALUE - 8**，也就是说，这个定义并不是一定的，如果我们设置的 minCapacity 的值在**( Integer.MAX_VALUE - 8, Integer.MAX_VALUE ]**之间的话，那我们还是允许用**Integer.MAX_VALUE**作为最大数组长度的
 
-这里我就有个疑问了，**-8的意义在哪里？一开始就定义到最大值不就好了？**
+这里我就有个疑问了，**-8 的意义在哪里？一开始就定义到最大值不就好了？**
 
 考虑完新容量之后，开始使用**Arrays.copyOf**来扩展容量**（grow line：12）**
 
-
-
-###### contains和indexOf
+###### contains 和 indexOf
 
 ```java
 public boolean contains(Object o) {
@@ -281,11 +271,9 @@ public int indexOf(Object o) {
 }
 ```
 
-和自实现不同的是，这里**contains调用的是indexOf的实现**，而且**indexOf**还允许**查找到第一个null元素在哪里**，这是我在自实现里没考虑过的
+和自实现不同的是，这里**contains 调用的是 indexOf 的实现**，而且**indexOf**还允许**查找到第一个 null 元素在哪里**，这是我在自实现里没考虑过的
 
-
-
-###### get和set
+###### get 和 set
 
 ```java
 E elementData(int index) {
@@ -314,9 +302,7 @@ private void rangeCheck(int index) {
 }
 ```
 
-首先看**get&set**，没什么特别的设计，只是这里有个**rangeCheck**，如果index大于等于载量，就抛异常
-
-
+首先看**get&set**，没什么特别的设计，只是这里有个**rangeCheck**，如果 index 大于等于载量，就抛异常
 
 ###### add1
 
@@ -357,7 +343,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 
 也就是说，我的**elementData**数组至少还有最后一个位置可以让我顺利添加一个元素
 
-在确保内部容量的时候，得先**计算容量（calculateCapacity）**，这里面的处理没有太多的花哨，如果容器为空，而且你给的**允许的最小容量（minCapacity）**还不如**默认容量（10）**大的话，那就直接选默认容量，只要容器不为空，哪怕里面只有一个元素，你给的**允许的最小容量（minCapacity）**甚至只是**2**，那也还是用2作为**参照**去调整容量，但这仅仅只是**参照**
+在确保内部容量的时候，得先**计算容量（calculateCapacity）**，这里面的处理没有太多的花哨，如果容器为空，而且你给的**允许的最小容量（minCapacity）**还不如**默认容量（10）**大的话，那就直接选默认容量，只要容器不为空，哪怕里面只有一个元素，你给的**允许的最小容量（minCapacity）**甚至只是**2**，那也还是用 2 作为**参照**去调整容量，但这仅仅只是**参照**
 
 为什么说仅仅是**参照**？重点在**ensureExplicitCapacity**这里
 
@@ -369,19 +355,21 @@ private void ensureExplicitCapacity(int minCapacity) {
     - **ensureExplicitCapacity(calculateCapacity(elementData, minCapacity))**
       - **grow(minCapacity)**
 
-准备3个场景：
+准备 3 个场景：
 
 - 空容器，加一个元素
-- 非空容器，容器容量足够  **\[ 1 / 10 \]  (size < element.length)**
-- 非空容器，容器容量已满  **\[ 10 / 10 \]  （size == element.length）**
+- 非空容器，容器容量足够 **\[ 1 / 10 \] (size < element.length)**
+- 非空容器，容器容量已满 **\[ 10 / 10 \] （size == element.length）**
 
---------
+---
 
-对于**场景1**：
+对于**场景 1**：
 
 - **add(E e)**
+
   - **ensureCapacityInternal(0 + 1)**
-    - **calculateCapacity(elementData, 0 + 1)    ==》   10**
+
+    - **calculateCapacity(elementData, 0 + 1) ==》 10**
 
     - **ensureExplicitCapacity(10)**
 
@@ -389,14 +377,15 @@ private void ensureExplicitCapacity(int minCapacity) {
 
     - **grow（10）**
 
-**保证完内部容量之后**，可以进行**elementData[size++] = e**了，所以总的来说，最最最开始的时候，数组扩容肯定是一扩到10的
+**保证完内部容量之后**，可以进行**elementData[size++] = e**了，所以总的来说，最最最开始的时候，数组扩容肯定是一扩到 10 的
 
-对于**场景2**：
+对于**场景 2**：
 
 - **add(E e)**
+
   - **ensureCapacityInternal(1 + 1)**
 
-    - **calculateCapacity(elementData, 1 + 1)    ==》   2**
+    - **calculateCapacity(elementData, 1 + 1) ==》 2**
 
     - **ensureExplicitCapacity(2)**
 
@@ -404,13 +393,13 @@ private void ensureExplicitCapacity(int minCapacity) {
 
 此时可以直接进行**elementData[size++] = e**
 
-对于**场景3**：
+对于**场景 3**：
 
 - **add(E e)**
 
   - **ensureCapacityInternal(10 + 1)**
 
-    - **calculateCapacity(elementData, 10 + 1)    ==》   11**
+    - **calculateCapacity(elementData, 10 + 1) ==》 11**
 
     - **ensureExplicitCapacity(11)**
 
@@ -422,9 +411,7 @@ private void ensureExplicitCapacity(int minCapacity) {
 
 此时可以直接进行**elementData[size++] = e**
 
----------
-
-
+---
 
 ###### add2
 
@@ -447,9 +434,7 @@ private void rangeCheckForAdd(int index) {
 }
 ```
 
-对于**index**的限定：**不能在载量之外，也不能小于0**，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多
-
-
+对于**index**的限定：**不能在载量之外，也不能小于 0**，然后确保了容量之后就开始移元素，然后往中间插元素，从这点来说，我的自实现和这个实现的差不多
 
 ###### remove1
 
@@ -470,11 +455,9 @@ public E remove(int index) {
 }
 ```
 
-基本都是常规操作，但是！这里的**line：11**是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写**elementData[--size] = null**这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，**将这个对象的引用摘除，好让GC管管这个被删除的元素**
+基本都是常规操作，但是！这里的**line：11**是一个骚操作，很多自实现里面，只是把位置移到了，载量减到了就完了，也强调过可以不写**elementData[--size] = null**这句，目的是为了减少一步操作，访问不到的元素留着也没什么，现在想想确实有点可笑，注释里也说了，**将这个对象的引用摘除，好让 GC 管管这个被删除的元素**
 
 这就是真正投入使用的容器，要考虑到的事情，**为用户尽可能地提高时间和空间效率！**
-
-
 
 ###### remove2
 
@@ -505,9 +488,7 @@ private void fastRemove(int index) {
 }
 ```
 
-常规，我在想为什么remove1里的代码不用**fastRemove**，这两段完全是一摸一样的
-
-
+常规，我在想为什么 remove1 里的代码不用**fastRemove**，这两段完全是一摸一样的
 
 ###### clear
 
@@ -523,7 +504,7 @@ public void clear() {
 }
 ```
 
-同理，很多自实现也只是将**size**置为零，并没扣考虑GC，但是我觉得这里是否存在一个**更好的实现**呢？比如说可以这样：
+同理，很多自实现也只是将**size**置为零，并没扣考虑 GC，但是我觉得这里是否存在一个**更好的实现**呢？比如说可以这样：
 
 ```java
 public void clear() {
@@ -538,17 +519,15 @@ public void clear() {
 
 转瞬我就想明白了，这其实是一个**时间换空间的选择！**
 
-确实for循环一个个置空确实比较浪费时间，比如有30w个元素在容器中，我就得for30w次
+确实 for 循环一个个置空确实比较浪费时间，比如有 30w 个元素在容器中，我就得 for30w 次
 
-但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的**更好的实现**，那么我还得在内存中再申请**30w个元素长度的数组空间**，虽然看上去，我好像马上就**摘除了原elementData的引用**，但实际上，原**elementData**的数组数据仍然会在内存中停留一段时间，**等待下一次GC并且GC选择回收它**
+但是这样我还是在原数组的地址内存上进行操作，如果我选择了所谓的**更好的实现**，那么我还得在内存中再申请**30w 个元素长度的数组空间**，虽然看上去，我好像马上就**摘除了原 elementData 的引用**，但实际上，原**elementData**的数组数据仍然会在内存中停留一段时间，**等待下一次 GC 并且 GC 选择回收它**
 
-上面只是我的推测，实际GC是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧
+上面只是我的推测，实际 GC 是如何对于这两种情况做出选择的我们并不清楚，姑且就这样认为吧
 
+###### removeAll 和 retainAll
 
-
-###### removeAll和retainAll
-
-对于**addAll、removeRange**等方法的实现比较常规，基本上和上面的差不多，**removeAll以及retainAll**还是要研究一哈子
+对于**addAll、removeRange**等方法的实现比较常规，基本上和上面的差不多，**removeAll 以及 retainAll**还是要研究一哈子
 
 ```java
 public boolean removeAll(Collection<?> c) {
@@ -566,16 +545,16 @@ public boolean retainAll(Collection<?> c) {
 
 这两个方法很相似，作用恰好相反，
 
-- **removeAll是移除交集元素，留下补集元素**
-- **retainAll是移除补集元素，保留交集元素**
+- **removeAll 是移除交集元素，留下补集元素**
+- **retainAll 是移除补集元素，保留交集元素**
 
 两个方法都调用了**bantchRemove**方法
 
 为了方便理解，我们将**bantchRemove**源码中的
 
-- **complement重命名为justComplement，这个变量标识是取补集还是交集**
-- **r重命名为readIndex，标识到元素的下标**
-- **w重命名为writeIndex，标识写到元素的下标**
+- **complement 重命名为 justComplement，这个变量标识是取补集还是交集**
+- **r 重命名为 readIndex，标识到元素的下标**
+- **w 重命名为 writeIndex，标识写到元素的下标**
 
 ```java
 private boolean batchRemove(Collection<?> c, boolean justComplement) {
@@ -608,31 +587,29 @@ private boolean batchRemove(Collection<?> c, boolean justComplement) {
 }
 ```
 
-我们看**try块代码**，代码遍历了**elementData**，其中这一句的解读很有意思：
+我们看**try 块代码**，代码遍历了**elementData**，其中这一句的解读很有意思：
 
-``` java
+```java
 c.contains(elementData[r]) == justComplement
 ```
 
 在**justComplement**为**false**的情况下：
 
-- 如果c中没有原容器当前遍历到的元素，则**（false == false）= true**，将这个**c中没有的元素**覆盖到**elementData[writeIndex]**的位置
-- 如果c中有原容器当前遍历到的元素，则**（true == false）= false**，不进行操作，进入下次循环
+- 如果 c 中没有原容器当前遍历到的元素，则**（false == false）= true**，将这个**c 中没有的元素**覆盖到**elementData[writeIndex]**的位置
+- 如果 c 中有原容器当前遍历到的元素，则**（true == false）= false**，不进行操作，进入下次循环
 
-总的来说，就是**把原容器和c容器中不相交的元素按顺序移到原容器的前面去了**
+总的来说，就是**把原容器和 c 容器中不相交的元素按顺序移到原容器的前面去了**
 
 同理在**justComplement**为**true**的情况下：
 
-- 如果c中没有原容器当前遍历到的元素，则**（false == true）= false**，不进行操作，进入下次循环
-- 如果c中有原容器当前遍历到的元素，则**（true == true）= true**，将这个**c中有的元素**覆盖到**elementData[writeIndex]**的位置
+- 如果 c 中没有原容器当前遍历到的元素，则**（false == true）= false**，不进行操作，进入下次循环
+- 如果 c 中有原容器当前遍历到的元素，则**（true == true）= true**，将这个**c 中有的元素**覆盖到**elementData[writeIndex]**的位置
 
-就是**把原容器和c容器中相交的元素按顺序移到原容器的前面去了**
+就是**把原容器和 c 容器中相交的元素按顺序移到原容器的前面去了**
 
+然后有点迷的是**finally 块**的语句
 
-
-然后有点迷的是**finally块**的语句
-
-第一个判断应该是说，加入之前抛了一些异常什么的，导致上面的for循环中断了，如此一来应该是**没读完原容器里的元素**的，好了，没读完就算了，**把剩下没读完的元素移到之前写好的元素之后**，那这部分也算**读到了写好了（line：16）**
+第一个判断应该是说，加入之前抛了一些异常什么的，导致上面的 for 循环中断了，如此一来应该是**没读完原容器里的元素**的，好了，没读完就算了，**把剩下没读完的元素移到之前写好的元素之后**，那这部分也算**读到了写好了（line：16）**
 
 我认为这样的做法是**保护未读取完的元素数据不被丢失**
 

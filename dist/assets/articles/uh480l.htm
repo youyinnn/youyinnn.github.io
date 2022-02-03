@@ -1,8 +1,8 @@
 <h3 id="introduction">Introduction</h3>
-<p>本篇主要介绍Docker里面Containers的概念，以及它的定义</p>
-<p>还有就是如何分享你创建的Containers到hub上面</p>
-<p>需要注意的是，containers的定义其实就是image的定义</p>
-<p>以及说到了docker run了两个option<code>-p</code>和<code>-d</code></p>
+<p>本篇主要介绍 Docker 里面 Containers 的概念，以及它的定义</p>
+<p>还有就是如何分享你创建的 Containers 到 hub 上面</p>
+<p>需要注意的是，containers 的定义其实就是 image 的定义</p>
+<p>以及说到了 docker run 了两个 option<code>-p</code>和<code>-d</code></p>
 <h3 id="define-a-container-with-dockerfile">Define a container with Dockerfile</h3>
 <p><code>Dockerfile</code> defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this <code>Dockerfile</code> behaves exactly the same wherever it runs.</p>
 <h4 id="dockerfile">Dockerfile</h4>
@@ -137,7 +137,7 @@ hello-world           latest              4ab4c602aa5e        2 months ago      
 <pre><code class="hljs language-bash">docker run -p 4000:80 username/repository:tag
 </code></pre>
 <p>If the image isn’t available locally on the machine, Docker pulls it from the repository.</p>
-<pre><code class="hljs language-bash">$ docker run -p 4000:80 youyinnn/getstarted:tag1 
+<pre><code class="hljs language-bash">$ docker run -p 4000:80 youyinnn/getstarted:tag1
 Unable to find image <span class="hljs-string">&#x27;youyinnn/getstarted:tag1&#x27;</span> locally
 part2: Pulling from gordon/get-started
 10a267c67f42: Already exists
@@ -154,4 +154,4 @@ Status: Downloaded newer image <span class="hljs-keyword">for</span> youyinnn/ge
 <p>No matter where <code>docker run</code> executes, it pulls your image, along with Python and all the dependencies from <code>requirements.txt</code>, and runs your code. It all travels together in a neat little package, and you don’t need to install anything on the host machine for Docker to run it.</p>
 <h3 id="dockerfile-reference">Dockerfile reference</h3>
 <p>Docker can build images automatically by reading the instructions from a <code>Dockerfile</code>. A <code>Dockerfile</code> is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession.</p>
-<p>For more information,  please refer to: <strong><a href="https://docs.docker.com/engine/reference/builder/#usage">https://docs.docker.com/engine/reference/builder/#usage</a></strong></p>
+<p>For more information, please refer to: <strong><a href="https://docs.docker.com/engine/reference/builder/#usage">https://docs.docker.com/engine/reference/builder/#usage</a></strong></p>

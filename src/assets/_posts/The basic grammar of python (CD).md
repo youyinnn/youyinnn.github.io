@@ -10,42 +10,39 @@ series: Python Note
 date: 2020-5-10 14:19:14
 ---
 
-
-
 Flow control syntax, Function definition, Modules.
 
 ## C
 
 ### Flow Control
+
 #### `if` statement
 
-``` python
+```python
 if x > 0:
     print('x > 0')
-elif x == 0: 
+elif x == 0:
     print('x = 0')
 else:
     print('x < 0')
 ```
 
-
-
 #### `for` statement
 
 Example:
 
-``` python
+```python
 array = [1, 2, 3, 4]
 for i in array:
     print(i)
-    
+
 for i in range(5):
     print(i)
 ```
 
 Else clause in the loop:
 
-``` python
+```python
 for i in range(5):
     if (i == 5):
         break
@@ -66,18 +63,16 @@ else:
 
 Key-pair iteration:
 
-``` python
-# key-pair 
+```python
+# key-pair
 clt = {'a': 'b', 'c': 'd'}
 for key, val in clt.items():
     print(key, val)
 ```
 
-
-
 #### `while` statement
 
-``` python
+```python
 while True:
     num = input('Please enter a number bigger than 10')
     if (num <= 10):
@@ -86,10 +81,6 @@ while True:
     	print('Number is:', num)
         break
 ```
-
-
-
-
 
 #### `pass` statement
 
@@ -114,24 +105,20 @@ def initlog(*args):
     pass   # Remember to implement this!
 ```
 
-
-
-
-
 ### Function
 
 #### Define One
 
 We must define a function with `def` keyword:
 
-``` python
+```python
 # fibonacci series to an arbitary boundary
 def fib(n):
     a, b = 0, 1
     while a <= n:
         print(a, end=' ')
         a, b = b, a + b
-    print()    
+    print()
 fib(2000)
 
 # with return statement
@@ -149,7 +136,7 @@ print(rs)
 
 #### Default Argument Values
 
-``` python
+```python
 # default arg values
 def ask(name, age=10, gender='male'):
     print(name, age, gender)
@@ -171,7 +158,7 @@ foo(4, l=[0]) # reassign l with a new list
 
 Output:
 
-``` console
+```console
 Jack 10 male
 Jack 12 male
 Julia 10 female
@@ -180,8 +167,6 @@ Julia 10 female
 [1, 2, 3]
 [0, 4]
 ```
-
-
 
 #### Special Area Of Parameters
 
@@ -222,8 +207,6 @@ As guidance:
 - Use keyword-only when names have meaning and the function definition is more understandable by being explicit with names or you want to prevent users relying on the position of the argument being passed.
 - For an API, use positional-only to prevent breaking API changes if the parameter’s name is modified in the future.
 
-
-
 #### Keyword Arguments
 
 Functions can also be called using [keyword arguments](https://docs.python.org/3/glossary.html#term-keyword-argument) of the form `kwarg=value`. For instance, the following function:
@@ -260,9 +243,9 @@ In a function call, keyword arguments must follow positional arguments. All the 
 
 #### Packing Arguments
 
-When a final formal parameter of the form `**name` is present, it receives a dictionary (see [Mapping Types — dict](https://docs.python.org/3/library/stdtypes.html#typesmapping)) **containing all keyword arguments** except for those corresponding to a formal parameter. 
+When a final formal parameter of the form `**name` is present, it receives a dictionary (see [Mapping Types — dict](https://docs.python.org/3/library/stdtypes.html#typesmapping)) **containing all keyword arguments** except for those corresponding to a formal parameter.
 
-This may be combined with a formal parameter of the form `*name` (described in the next subsection) which receives a [tuple](https://docs.python.org/3/tutorial/datastructures.html#tut-tuples) **containing the positional arguments** beyond the formal parameter list. (`*name` must occur before `**name`.) 
+This may be combined with a formal parameter of the form `*name` (described in the next subsection) which receives a [tuple](https://docs.python.org/3/tutorial/datastructures.html#tut-tuples) **containing the positional arguments** beyond the formal parameter list. (`*name` must occur before `**name`.)
 
 For example, if we define a function like this:
 
@@ -283,7 +266,7 @@ def cheeseshop(kind, *arguments, **keywords):
 It could be called like this:
 
 ```python
-cheeseshop("Limburger", 
+cheeseshop("Limburger",
            "It's very runny, sir.",
            "It's really very, VERY runny, sir.",
            shopkeeper="Michael Palin",
@@ -353,8 +336,6 @@ Arguments: spam eggs
 'spam and eggs'
 ```
 
-
-
 #### Generator Function
 
 This part is a bit advancing, I recommend reading this after reading the **(EF)** chapter.
@@ -369,20 +350,20 @@ generator_expression ::=  "(" expression comp_for ")"
 
 In the part of Data Structures, we have learned creating a list by using expression:
 
-``` python
+```python
 l = [x * 2 for x in range(3)]
 ```
 
 Actually, it was generator expression that repersenting an iterating process which generate a list:
 
-``` python
+```python
 g = (x * 2 for x in range(3))
 l = [g]
 ```
 
 And it act like an iterator object:
 
-``` python
+```python
 g = (x ** x for x in range(5))
 
 for i in range(6):
@@ -391,7 +372,7 @@ for i in range(6):
 
 Will get:
 
-``` console
+```console
 1
 1
 4
@@ -407,9 +388,9 @@ StopIteration
 
 We can turn a generator expression into a function by using `yield` statement:
 
-``` python
+```python
 g = (x ** x for x in range(5))
-# is equivilant to 
+# is equivilant to
 def g():
     for i in range(5)
     	x = i ** i
@@ -419,7 +400,7 @@ g = g() # it has to be call
 
 ###### More Examples
 
-``` python
+```python
 def f():
     try:
         yield 1
@@ -451,13 +432,13 @@ refer to: https://www.python.org/dev/peps/pep-0255/#example
 
 ### Modules
 
-Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a *module*; definitions from a module can be ***imported*** into other modules or into the *main* module.
+Python has a way to put definitions in a file and use them in a script or in an interactive instance of the interpreter. Such a file is called a _module_; definitions from a module can be **_imported_** into other modules or into the _main_ module.
 
-Before that, we should introduce a global variable  named `__name__` which can be used to identify whether a `.py` file is **run directly** from command line or **is imported** to other file as a module.
+Before that, we should introduce a global variable named `__name__` which can be used to identify whether a `.py` file is **run directly** from command line or **is imported** to other file as a module.
 
 For example, say we got a file named `fibo.py`:
 
-``` python
+```python
 print('name in fibo', __name__) # will print 'fibo' when imported as a module
 def fibo(n):
     # ...
@@ -476,7 +457,7 @@ if (__name__ == '__main__'):
 
 A module can contain excutable statement for the purpos of initializing the modules:
 
-``` python
+```python
 rs = [] # collecting result
 def fibo(n):
     # put the result into the 'rs'
@@ -484,13 +465,13 @@ def fibo(n):
 
 Or we can just run it as a command line script:
 
-``` bash
+```bash
 python fibo.py 10
 ```
 
 #### Import
 
-``` python
+```python
 # import as object
 import fibo # this will import an object named 'fibo' which file name is 'fibo.py'
 # usage
@@ -547,7 +528,7 @@ sound/                          Top-level package
 
 When importing the package, Python searches through the directories on `sys.path` looking for the package subdirectory.
 
-The `__init__.py` files are required to make Python treat directories containing the file as packages. This prevents directories with a common name, such as `string`, unintentionally hiding valid modules that occur later on the module search path. 
+The `__init__.py` files are required to make Python treat directories containing the file as packages. This prevents directories with a common name, such as `string`, unintentionally hiding valid modules that occur later on the module search path.
 
 In the simplest case, `__init__.py` **can just be an empty file**, but it can also execute initialization code for the package or set the `__all__` variable, described later.
 
@@ -558,7 +539,7 @@ import sound.effects.echo as echo
 echo.makesound()
 ```
 
-##### Import * From Packages
+##### Import \* From Packages
 
 For example, the file `sound/effects/__init__.py` could contain the following code:
 
@@ -573,7 +554,7 @@ This would mean that `from sound.effects import *` would import the three named 
 
 What's more, we can define function in `sound/effects/__init__.py`，file and use it by:
 
-``` python
+```python
 import sound.effects as effects
 effects.do()
 ```

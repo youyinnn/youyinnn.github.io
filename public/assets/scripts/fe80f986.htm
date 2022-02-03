@@ -1,15 +1,15 @@
 <h2 id="vue">Vue</h2>
-<h3 id="vue技巧">Vue技巧</h3>
+<h3 id="vue-技巧">Vue 技巧</h3>
 <ol>
-<li><p><a href="https://juejin.cn/post/6951540864787152927">用了很多动效，介绍 4个很 Nice 的 Vue 路由过渡动效！</a></p>
-<p>t ransition得用这样的状态</p>
+<li><p><a href="https://juejin.cn/post/6951540864787152927">用了很多动效，介绍 4 个很 Nice 的 Vue 路由过渡动效！</a></p>
+<p>t ransition 得用这样的状态</p>
 <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;slide-fade&quot;</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">&quot;out-in&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span>
 </code></pre>
-<p>css得用enter</p>
+<p>css 得用 enter</p>
 <pre><code class="hljs language-css"><span class="hljs-selector-class">.fade-enter-active</span>,
 <span class="hljs-selector-class">.fade-leave-active</span> {
   <span class="hljs-attribute">transition</span>: opacity <span class="hljs-number">0.3s</span>;
@@ -37,9 +37,9 @@
 <h4 id="vue3-troubleshoot">Vue3 Troubleshoot</h4>
 <ol>
 <li><a href="https://stackoverflow.com/questions/62023604/where-to-find-or-how-to-set-htmlwebpackplugin-options-title-in-project-created-w">where to find or how to set htmlWebpackPlugin.options.title in project created with vue cli 3?</a></li>
-<li><a href="https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans">webpack-chain示例</a></li>
+<li><a href="https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans">webpack-chain 示例</a></li>
 </ol>
-<h3 id="vue3动态渲染">Vue3动态渲染</h3>
+<h3 id="vue3-动态渲染">Vue3 动态渲染</h3>
 <pre><code class="hljs language-js">&lt;script&gt;
 <span class="hljs-comment">/* eslint-disable no-unused-vars */</span>
 <span class="hljs-keyword">import</span> imgRouter <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/plugins/img-router.js&quot;</span>;
@@ -126,10 +126,10 @@
 </code></pre>
 <p>使用这个组件：</p>
 <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">markdown-body</span> <span class="hljs-attr">:content</span>=<span class="hljs-string">&quot;content&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;$route.params.articleId&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">markdown-body</span> <span class="hljs-attr">:content</span>=<span class="hljs-string">&quot;content&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;$route.params.articleId&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 </code></pre>
-<h3 id="vue监听窗口大小变化">Vue监听窗口大小变化</h3>
+<h3 id="vue-监听窗口大小变化">Vue 监听窗口大小变化</h3>
 <pre><code class="hljs language-js"><span class="hljs-attr">mounted</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
   <span class="hljs-variable language_">this</span>.<span class="hljs-property">winHeight</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinHeight</span>();
   <span class="hljs-variable language_">this</span>.<span class="hljs-property">winWidth</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getWinWidth</span>();
@@ -142,9 +142,9 @@
   };
 },
 </code></pre>
-<h3 id="vue-打包体积优化方案和cdn">Vue 打包体积优化方案和CDN</h3>
+<h3 id="vue-打包体积优化方案和-cdn">Vue 打包体积优化方案和 CDN</h3>
 <p><a href="https://juejin.cn/post/6844904163327868941">https://juejin.cn/post/6844904163327868941</a></p>
-<h3 id="vue-spa和githubpages的配合">Vue SPA和GithubPages的配合</h3>
+<h3 id="vue-spa-和-githubpages-的配合">Vue SPA 和 GithubPages 的配合</h3>
 <hr>
 <p>2021 Solution for vue3 &amp; vue-cli:</p>
 <p>Follow this with &quot;Basic instructions&quot;:</p>

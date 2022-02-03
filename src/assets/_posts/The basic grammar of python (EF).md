@@ -10,12 +10,6 @@ series: Python Note
 date: 2020-5-17 15:10:47
 ---
 
-
-
-
-
-
-
 Data Structures, Classes and Errors & Exceptions.
 
 ## E
@@ -30,22 +24,20 @@ There are three basic sequence types: lists, tuples, and range objects. Addition
 
 The operations in the following table are supported by most sequence types, both mutable and immutable. The [`collections.abc.Sequence`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence) ABC is provided to make it easier to correctly implement these operations on custom sequence types.
 
-| Operation              | Result                                                       |
-| :--------------------- | :----------------------------------------------------------- |
-| `x in s`               | `True` if an item of *s* is equal to *x*, else `False`       |
-| `x not in s`           | `False` if an item of *s* is equal to *x*, else `True`       |
-| `s + t`                | the concatenation of *s* and *t*                             |
-| `s * n` or `n * s`     | equivalent to adding *s* to itself *n* times                 |
-| `s[i]`                 | *i*th item of *s*, origin 0                                  |
-| `s[i:j]`               | slice of *s* from *i* to *j*                                 |
-| `s[i:j:k]`             | slice of *s* from *i* to *j* with step *k*                   |
-| `len(s)`               | length of *s*                                                |
-| `min(s)`               | smallest item of *s*                                         |
-| `max(s)`               | largest item of *s*                                          |
-| `s.index(x[, i[, j]])` | index of the first occurrence of *x* in *s* (at or after index *i* and before index *j*) |
-| `s.count(x)`           | total number of occurrences of *x* in *s*                    |
-
-
+| Operation              | Result                                                                                   |
+| :--------------------- | :--------------------------------------------------------------------------------------- |
+| `x in s`               | `True` if an item of _s_ is equal to _x_, else `False`                                   |
+| `x not in s`           | `False` if an item of _s_ is equal to _x_, else `True`                                   |
+| `s + t`                | the concatenation of _s_ and _t_                                                         |
+| `s * n` or `n * s`     | equivalent to adding _s_ to itself _n_ times                                             |
+| `s[i]`                 | *i*th item of _s_, origin 0                                                              |
+| `s[i:j]`               | slice of _s_ from _i_ to _j_                                                             |
+| `s[i:j:k]`             | slice of _s_ from _i_ to _j_ with step _k_                                               |
+| `len(s)`               | length of _s_                                                                            |
+| `min(s)`               | smallest item of _s_                                                                     |
+| `max(s)`               | largest item of _s_                                                                      |
+| `s.index(x[, i[, j]])` | index of the first occurrence of _x_ in _s_ (at or after index _i_ and before index _j_) |
+| `s.count(x)`           | total number of occurrences of _x_ in _s_                                                |
 
 #### Immutable Sequence Types
 
@@ -55,30 +47,26 @@ This support allows immutable sequences, such as [`tuple`](https://docs.python.o
 
 Attempting to hash an immutable sequence that contains unhashable values will result in [`TypeError`](https://docs.python.org/3/library/exceptions.html#TypeError).
 
-
-
 #### Mutable Sequence Types
 
 The operations in the following table are defined on mutable sequence types. The [`collections.abc.MutableSequence`](https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence) ABC is provided to make it easier to correctly implement these operations on custom sequence types.
 
-| Operation                 | Result                                                       |
-| :------------------------ | :----------------------------------------------------------- |
-| `s[i] = x`                | item *i* of *s* is replaced by *x*                           |
-| `s[i:j] = t`              | slice of *s* from *i* to *j* is replaced by the contents of the iterable *t* |
-| `del s[i:j]`              | same as `s[i:j] = []`                                        |
-| `s[i:j:k] = t`            | the elements of `s[i:j:k]` are replaced by those of *t*      |
-| `del s[i:j:k]`            | removes the elements of `s[i:j:k]` from the list             |
-| `s.append(x)`             | appends *x* to the end of the sequence (same as `s[len(s):len(s)] = [x]`) |
-| `s.clear()`               | removes all items from *s* (same as `del s[:]`)              |
-| `s.copy()`                | creates a shallow copy of *s* (same as `s[:]`)               |
-| `s.extend(t)` or `s += t` | extends *s* with the contents of *t* (for the most part the same as `s[len(s):len(s)] = t`) |
-| `s *= n`                  | updates *s* with its contents repeated *n* times             |
-| `s.insert(i, x)`          | inserts *x* into *s* at the index given by *i* (same as `s[i:i] = [x]`) |
-| `s.pop([i])`              | retrieves the item at *i* and also removes it from *s*       |
-| `s.remove(x)`             | remove the first item from *s* where `s[i]` is equal to *x*  |
-| `s.reverse()`             | reverses the items of *s* in place                           |
-
-
+| Operation                 | Result                                                                                      |
+| :------------------------ | :------------------------------------------------------------------------------------------ |
+| `s[i] = x`                | item _i_ of _s_ is replaced by _x_                                                          |
+| `s[i:j] = t`              | slice of _s_ from _i_ to _j_ is replaced by the contents of the iterable _t_                |
+| `del s[i:j]`              | same as `s[i:j] = []`                                                                       |
+| `s[i:j:k] = t`            | the elements of `s[i:j:k]` are replaced by those of _t_                                     |
+| `del s[i:j:k]`            | removes the elements of `s[i:j:k]` from the list                                            |
+| `s.append(x)`             | appends _x_ to the end of the sequence (same as `s[len(s):len(s)] = [x]`)                   |
+| `s.clear()`               | removes all items from _s_ (same as `del s[:]`)                                             |
+| `s.copy()`                | creates a shallow copy of _s_ (same as `s[:]`)                                              |
+| `s.extend(t)` or `s += t` | extends _s_ with the contents of _t_ (for the most part the same as `s[len(s):len(s)] = t`) |
+| `s *= n`                  | updates _s_ with its contents repeated _n_ times                                            |
+| `s.insert(i, x)`          | inserts _x_ into _s_ at the index given by _i_ (same as `s[i:i] = [x]`)                     |
+| `s.pop([i])`              | retrieves the item at _i_ and also removes it from _s_                                      |
+| `s.remove(x)`             | remove the first item from _s_ where `s[i]` is equal to _x_                                 |
+| `s.reverse()`             | reverses the items of _s_ in place                                                          |
 
 #### List
 
@@ -86,7 +74,7 @@ The operations in the following table are defined on mutable sequence types. The
 
 Example:
 
-``` python
+```python
 l = []
 l.append(1)
 l.append('123')
@@ -115,7 +103,7 @@ print(l.count(1)) # Return the number of times '1' appears in the list.
 
 Output:
 
-``` console
+```console
 ['0', 1, '123', 2, '456', '88']
 1
 ['0', '123', 2, '456', '88']
@@ -130,7 +118,7 @@ Slice operation:
 
 All slice operations return a new list containing the requested elements. This means that the following slice returns a [shallow copy](https://docs.python.org/3/library/copy.html#shallow-vs-deep-copy) of the list:
 
-``` python
+```python
 # slice operation
 print(l[:3])
 print(l[2:5])
@@ -139,12 +127,12 @@ print(l[-3:])
 
 > The difference between shallow and deep copying is only relevant for compound objects (objects that contain other objects, like lists or class instances):
 >
-> - A *shallow copy* constructs a new compound object and then (to the extent possible) inserts *references* into it to the objects found in the original.
-> - A *deep copy* constructs a new compound object and then, recursively, inserts *copies* into it of the objects found in the original.
+> - A _shallow copy_ constructs a new compound object and then (to the extent possible) inserts _references_ into it to the objects found in the original.
+> - A _deep copy_ constructs a new compound object and then, recursively, inserts _copies_ into it of the objects found in the original.
 
 ##### Sort
 
-``` python
+```python
 # sort
 student_tuple = [
     ("Jack", 12),
@@ -179,8 +167,8 @@ print(list(range(5, 10)))
 
 Output:
 
-``` console
-[('Mark', 10), ('Jack', 12), ('Jim', 15)]     
+```console
+[('Mark', 10), ('Jack', 12), ('Jim', 15)]
 [('Mark', 10), ('Jack', 12), ('Jim', 15)]
 [('Mark', 10), ('Jack', 12), ('Jim', 15)]
 ```
@@ -189,7 +177,7 @@ Output:
 
 Example:
 
-``` python
+```python
 # list comprehensions: a concise way to create lists
 print(list(range(10)))
 print(list(range(5, 10)))
@@ -224,7 +212,7 @@ from math import pi
 
 Output:
 
-``` console
+```console
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 [5, 6, 7, 8, 9]
 [0, 2, 4]
@@ -235,13 +223,11 @@ Output:
 ['3.1', '3.14', '3.142', '3.1416', '3.14159']
 ```
 
-
-
 #### Tuples
 
 Example:
 
-``` python
+```python
 >>> t = 12345, 54321, 'hello!'
 >>> t[0]
 12345
@@ -266,7 +252,7 @@ TypeError: 'tuple' object does not support item assignment
 
 Example:
 
-``` python
+```python
 st = {'apple', 'orange', 'grape', 'grape', 'apple'}
 print(st)
 
@@ -288,13 +274,13 @@ print(s2 - s1)
 # in a or b but not both
 print(s1 ^ s2)
 
-# comprehensions 
+# comprehensions
 print({x for x in 'abcdefgh' if x not in 'efg'})
 ```
 
 Output:
 
-``` console
+```console
 {'apple', 'orange', 'grape'}
 True
 False
@@ -306,13 +292,11 @@ False
 {'c', 'a', 'd', 'h', 'b'}
 ```
 
-
-
 #### Dictionaries
 
 Example:
 
-``` python
+```python
 d = {'a': 1, 'b':2}
 
 # return keys list
@@ -360,7 +344,7 @@ for key in it:
 
 Output:
 
-``` console
+```console
 ['a', 'b']
 2
 1
@@ -381,8 +365,6 @@ a 1
 b 2
 ```
 
-
-
 ## F
 
 ### Classes
@@ -391,25 +373,25 @@ b 2
 
 ##### Namespaces
 
-A *namespace* is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. 
+A _namespace_ is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future.
 
-Examples of namespaces are: 
+Examples of namespaces are:
 
-- the set of built-in names (containing functions such as [`abs()`](https://docs.python.org/3/library/functions.html#abs), and built-in exception names); 
-- the global names in a module; 
+- the set of built-in names (containing functions such as [`abs()`](https://docs.python.org/3/library/functions.html#abs), and built-in exception names);
+- the global names in a module;
 - the local names in a function invocation;
 
-In a sense the set of attributes of an object also form a namespace. 
+In a sense the set of attributes of an object also form a namespace.
 
-Namespaces are created at **different moments** and have different lifetimes. 
+Namespaces are created at **different moments** and have different lifetimes.
 
-- The namespace containing the built-in names is created when **the Python interpreter starts up**, and is never deleted. 
-- The global namespace for a module is created when **the module definition is read in**; normally, module namespaces also last until the interpreter quits. 
-- The local namespace for a function is created **when the function is called**, and deleted when the function returns or raises an exception that is not handled within the function. 
+- The namespace containing the built-in names is created when **the Python interpreter starts up**, and is never deleted.
+- The global namespace for a module is created when **the module definition is read in**; normally, module namespaces also last until the interpreter quits.
+- The local namespace for a function is created **when the function is called**, and deleted when the function returns or raises an exception that is not handled within the function.
 
 ##### Scopes
 
-A *scope* is a textual region of a Python program where a namespace is directly accessible. “Directly accessible” here means that an unqualified reference to a name attempts to find the name in the namespace.
+A _scope_ is a textual region of a Python program where a namespace is directly accessible. “Directly accessible” here means that an unqualified reference to a name attempts to find the name in the namespace.
 
 ##### `global` and `nonlocal` statement
 
@@ -451,13 +433,11 @@ After global assignment: nonlocal spam
 In global scope: global spam
 ```
 
-Note how the *local* assignment (which is default) didn’t change *scope_test*’s binding of *spam*. The [`nonlocal`](https://docs.python.org/3/reference/simple_stmts.html#nonlocal) assignment changed *scope_test*’s binding of *spam*, and the [`global`](https://docs.python.org/3/reference/simple_stmts.html#global) assignment changed the module-level binding.
-
-
+Note how the _local_ assignment (which is default) didn’t change _scope_test_’s binding of _spam_. The [`nonlocal`](https://docs.python.org/3/reference/simple_stmts.html#nonlocal) assignment changed _scope_test_’s binding of _spam_, and the [`global`](https://docs.python.org/3/reference/simple_stmts.html#global) assignment changed the module-level binding.
 
 #### Defining A Class
 
-``` python
+```python
 class Person:
     """here is __doc__ content\
     """
@@ -500,7 +480,7 @@ You might notice that every function's definition has the `self` argument as the
 
 So how do we define a static function? --- By using the `@staticmethod` decorator, or `@classmethod` as well.
 
-``` python
+```python
 class New:
     @classmethod
     def printc(cls):
@@ -516,7 +496,7 @@ New.prints('Name')
 
 Output:
 
-``` console
+```console
 This is an class method
 <class '__main__.New'>
 This is a static method with name: Name
@@ -525,7 +505,7 @@ cls
 
 #### Inheritance
 
-``` python
+```python
 # inheritance
 class Worker(Person):
     def __init__(self, name, age, career):
@@ -556,14 +536,14 @@ class DerivedClassName(Base1, Base2, Base3):
 
 If we want our self-make instance iterable (iterating some attribute of it), we should implement the `__iter__` and the `__next__` function
 
-``` python
+```python
 # iterator: object can be looped over using a for statement
 class Str:
     def __init__(self, str):
         super().__init__()
         self.str = str
         self.index = 0
-    
+
     # make object iterable
     def __iter__(self):
         return self
@@ -587,7 +567,7 @@ print()
 
 Example:
 
-``` python
+```python
 class Person:
     def __init__(self, name, age):
         super().__init__()
@@ -608,14 +588,14 @@ print(repr(p))
 
 Output:
 
-``` console
+```console
 Person name: Jack, age: 12
 {name: Jack, age: 12}
 ```
 
 And if we remove the implementation of `__repr__()`, it will pinrt:
 
-``` console
+```console
 Person name: Jack, age: 12
 <__main__.Person object at 0x000001F84F086630>
 ```
@@ -632,17 +612,15 @@ Technically, there is no different between these two methods, but we should foll
 >
 > Called by [`str(object)`](https://docs.python.org/3/library/stdtypes.html#str) and the built-in functions [`format()`](https://docs.python.org/3/library/functions.html#format) and [`print()`](https://docs.python.org/3/library/functions.html#print) to compute the “informal” or nicely printable string representation of an object. The return value must be a [string](https://docs.python.org/3/library/stdtypes.html#textseq) object.
 
-
-
 #### More On Private Attributes
 
 It is clear that we set an attribute to private for safely visitation, but it make the attribute visitation syntactically more complicated.
 
-We can use `@property` and  `@attr.setter` decorators to make it simple. 
+We can use `@property` and `@attr.setter` decorators to make it simple.
 
 What's more , we can use `@attr.deleter`.
 
-``` python
+```python
 class Person:
     # a getter for age
     @property
@@ -658,7 +636,7 @@ class Person:
             raise ValueError('Age should between 0 ~ 100')
         else:
             self._age = age
-    
+
     @age.deleter
     def age(self):
         # more logic can be put in here
@@ -680,9 +658,9 @@ p.age = 99
 print(p)
 ```
 
-Output: 
+Output:
 
-``` console
+```console
 ----------------------------------------------------------------------------------------------------
 Traceback (most recent call last):
   File "d:/Workshop/MyPython/practice/class/property.py", line 28, in <module>
@@ -702,7 +680,7 @@ reference: https://docs.python.org/3/library/functions.html#property
 
 There is one error in python:
 
-``` python
+```python
 while True print('Hello world')
   File "<stdin>", line 1
     while True print('Hello world')
@@ -714,7 +692,7 @@ SyntaxError: invalid syntax
 
 ##### Handling Exceptions
 
-``` python
+```python
 # handling exceptions
 try:
     print(1 / 0)
@@ -732,7 +710,7 @@ except Exception as exc:
 
 Output:
 
-``` console
+```console
 <class 'ZeroDivisionError'>
 division by zero
 <traceback object at 0x000001C8C4E12888>
@@ -749,14 +727,14 @@ ZeroDivisionError: division by zero
 
 The [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statement works as follows.
 
-- First, the *try clause* (the statement(s) between the [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) and [`except`](https://docs.python.org/3/reference/compound_stmts.html#except) keywords) is executed.
-- If no exception occurs, the *except clause* is skipped and execution of the [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statement is finished.
+- First, the _try clause_ (the statement(s) between the [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) and [`except`](https://docs.python.org/3/reference/compound_stmts.html#except) keywords) is executed.
+- If no exception occurs, the _except clause_ is skipped and execution of the [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statement is finished.
 - If an exception occurs during execution of the try clause, the rest of the clause is skipped. Then if its type matches the exception named after the [`except`](https://docs.python.org/3/reference/compound_stmts.html#except) keyword, the except clause is executed, and then execution continues after the [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statement.
-- If an exception occurs which does not match the exception named in the except clause, it is passed on to outer [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statements; if no handler is found, it is an *unhandled exception* and execution stops with a message as shown above.
+- If an exception occurs which does not match the exception named in the except clause, it is passed on to outer [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) statements; if no handler is found, it is an _unhandled exception_ and execution stops with a message as shown above.
 
-The [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) … [`except`](https://docs.python.org/3/reference/compound_stmts.html#except) statement has an optional *else clause*, which, when present, must follow all except clauses. It is useful for code that must be executed if the try clause does not raise an exception.
+The [`try`](https://docs.python.org/3/reference/compound_stmts.html#try) … [`except`](https://docs.python.org/3/reference/compound_stmts.html#except) statement has an optional _else clause_, which, when present, must follow all except clauses. It is useful for code that must be executed if the try clause does not raise an exception.
 
-``` python
+```python
 # seperate exception raising code and follow up code
 try:
     v =  (1 / 10)
@@ -786,7 +764,7 @@ except NameError:
 
 ##### User-defined Exceptions
 
-``` python
+```python
 class InputError(Error):
     """Exception raised for errors in the input.
 

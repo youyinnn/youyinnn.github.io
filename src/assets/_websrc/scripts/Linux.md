@@ -37,7 +37,7 @@
 
 - https://www.cnblogs.com/jinxiao-pu/p/9131057.html
 
-#### **linux中添加用户自定义的命令**(全局命令)
+#### **linux 中添加用户自定义的命令**(全局命令)
 
 http://www.findme.wang/blog/detail/id/261.html
 
@@ -46,8 +46,6 @@ https://www.cnblogs.com/Survivalist/p/11297938.html
 #### Bash Prompt
 
 https://opensource.com/article/17/7/bash-prompt-tips-and-tricks#:~:text=The%20Bash%20prompt%20is%20set,to%20complete%20a%20Bash%20command.
-
-
 
 ### Tools & System
 
@@ -104,6 +102,3 @@ Log out & back in and you should notice the warning message is gone.
 1. 通过**nvm**
 
    https://nodejs.org/en/download/package-manager/#nvm
-
-
-

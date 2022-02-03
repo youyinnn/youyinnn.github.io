@@ -9,18 +9,18 @@
 <h4 id="toggle-formatter">Toggle formatter</h4>
 <h5 id="option-1">Option 1</h5>
 <p>While using LaTeX-Workshop+latexindent.pl, it will never toggle the indent process.</p>
-<p> I fix it by replace the extension&#39;s setting:</p>
+<p>I fix it by replace the extension&#39;s setting:</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;latex-workshop.latex.recipes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexmk 🔃&quot;</span><span class="hljs-punctuation">,</span>
       <span class="hljs-comment">// add tool &quot;latexindent&quot; as the second step of this recipes</span>
       <span class="hljs-attr">&quot;tools&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;latexmk&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;latexindent&quot;</span><span class="hljs-punctuation">]</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;latex-workshop.latex.tools&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-comment">// previous tools should be remained ....</span>
-    
+
     <span class="hljs-comment">// adding a new tool named latexindent</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;latexindent&quot;</span><span class="hljs-punctuation">,</span>
@@ -29,7 +29,7 @@
       <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span> 
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <h5 id="option-2-extension-save-and-run">Option 2: Extension &quot;Save and Run&quot;</h5>
 <pre><code class="hljs language-json"><span class="hljs-attr">&quot;saveAndRun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>

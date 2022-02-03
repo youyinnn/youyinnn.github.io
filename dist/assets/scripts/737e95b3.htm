@@ -1,56 +1,56 @@
 <h2 id="坑">坑</h2>
 <h3 id="代码高亮的的坑">代码高亮的的坑</h3>
 <blockquote>
-<p>editor.md的preview页 + highlight.js</p>
+<p>editor.md 的 preview 页 + highlight.js</p>
 </blockquote>
 <h4 id="small_blue_diamond1-highlightjs-的坑">🔹1. highlight.js 的坑</h4>
-<h5 id="small_orange_diamondhighlightjs无效问题">🔸highlight.js无效问题</h5>
+<h5 id="small_orange_diamondhighlightjs-无效问题">🔸highlight.js 无效问题</h5>
 <blockquote>
-<p><strong>hub主页上的highlight.js文件是用不了的!!!</strong>
+<p><strong>hub 主页上的 highlight.js 文件是用不了的!!!</strong>
 解决: 去<a href="">官网主页</a>上查看源码下载, 也可以在博客仓库里找到<code>highlight-site-pack.js</code>文件</p>
 </blockquote>
-<h5 id="small_orange_diamond始终只能渲染code而无法渲染pre的问题">🔸始终只能渲染code而无法渲染pre的问题</h5>
+<h5 id="small_orange_diamond始终只能渲染-code-而无法渲染-pre-的问题">🔸始终只能渲染 code 而无法渲染 pre 的问题</h5>
 <blockquote>
-<p><strong>readme里给的选择器只能选中pre下的code(眼戳没注意...)</strong>
-解决: 把pre也一起选中就好了</p>
+<p><strong>readme 里给的选择器只能选中 pre 下的 code(眼戳没注意...)</strong>
+解决: 把 pre 也一起选中就好了</p>
 </blockquote>
-<pre><code class="hljs language-js">$(<span class="hljs-string">&#x27;pre, pre code&#x27;</span>).<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">i, block</span>) {
-    hljs.<span class="hljs-title function_">highlightBlock</span>(block);
+<pre><code class="hljs language-js">$(<span class="hljs-string">&quot;pre, pre code&quot;</span>).<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">i, block</span>) {
+  hljs.<span class="hljs-title function_">highlightBlock</span>(block);
 });
 </code></pre>
-<h4 id="small_blue_diamond2-editor的默认md-code渲染和highlightjs渲染冲突问题">🔹2. editor的默认md code渲染和highlight.js渲染冲突问题</h4>
+<h4 id="small_blue_diamond2-editor-的默认-md-code-渲染和-highlightjs-渲染冲突问题">🔹2. editor 的默认 md code 渲染和 highlight.js 渲染冲突问题</h4>
 <p><img src="https://user-images.githubusercontent.com/23525754/39576589-3bab975a-4f11-11e8-9a2c-1bb3ea38ab73.png" alt="image"></p>
-<p>如图用的atom-one-dark, 但是背景还是白色的...</p>
-<h5 id="small_orange_diamond1-editor渲染禁用">🔸1. editor渲染禁用</h5>
+<p>如图用的 atom-one-dark, 但是背景还是白色的...</p>
+<h5 id="small_orange_diamond1-editor-渲染禁用">🔸1. editor 渲染禁用</h5>
 <ol>
-<li><p>首先不引用lib下的prettify.min.js文件</p>
+<li><p>首先不引用 lib 下的 prettify.min.js 文件</p>
 </li>
-<li><p>修改editormd.min.js源码, 在1505行, 取消对这个文件的引用和code渲染</p>
+<li><p>修改 editormd.min.js 源码, 在 1505 行, 取消对这个文件的引用和 code 渲染</p>
 <p><img src="https://user-images.githubusercontent.com/23525754/39576049-4d6e24d2-4f0f-11e8-9532-9d6b5c54389a.png" alt="image">
-修改完之后, 这样就不会在pre和code上添加pretty的类了</p>
+修改完之后, 这样就不会在 pre 和 code 上添加 pretty 的类了</p>
 </li>
 </ol>
-<h5 id="small_orange_diamond2-css覆盖">🔸2. css覆盖</h5>
-<p>因为我们是运行时渲染, 所以我们的highlight.js添加的css类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
-<p>注释一部分editormd.preview.css:</p>
+<h5 id="small_orange_diamond2-css-覆盖">🔸2. css 覆盖</h5>
+<p>因为我们是运行时渲染, 所以我们的 highlight.js 添加的 css 类是无论如何都是会冲突的(理论上可以避免的, 不知代码是怎么写的)</p>
+<p>注释一部分 editormd.preview.css:</p>
 <p><img src="https://user-images.githubusercontent.com/23525754/39576285-3c0ceed4-4f10-11e8-8c24-685d894994b6.png" alt="image"></p>
-<p>我们要的是最下面那个css, 所以注掉上面两个就好了, 行数如图.</p>
+<p>我们要的是最下面那个 css, 所以注掉上面两个就好了, 行数如图.</p>
 <h4 id="small_blue_diamond结果">🔹结果</h4>
 <p><img src="https://user-images.githubusercontent.com/23525754/39576723-b592211a-4f11-11e8-8b5f-c60303166ce6.png" alt="image"></p>
-<h3 id="github-api-response-条数pagination限制">GitHub API response 条数pagination限制</h3>
-<p>GitHub API的响应条数是有限制的, 默认是30条, 如果要更多,或者使用分页,可以参照:</p>
+<h3 id="github-api-response-条数-pagination-限制">GitHub API response 条数 pagination 限制</h3>
+<p>GitHub API 的响应条数是有限制的, 默认是 30 条, 如果要更多,或者使用分页,可以参照:</p>
 <p><img src="https://user-images.githubusercontent.com/23525754/39813936-fe5352ea-53c4-11e8-9f10-79741b895d3a.png" alt="image"></p>
 <p><img src="https://user-images.githubusercontent.com/23525754/39813946-06fa84c2-53c5-11e8-9a35-6e95ea0502f4.png" alt="image"></p>
 <p>参考: <a href="https://developer.github.com/v3/#pagination">https://developer.github.com/v3/#pagination</a></p>
-<p>我现在的blog所有的comments请求都是9999</p>
+<p>我现在的 blog 所有的 comments 请求都是 9999</p>
 <h3 id="关于-github-oauth-app">关于 github oauth app</h3>
 <p><img src="https://user-images.githubusercontent.com/23525754/39562055-124667c6-4edc-11e8-91af-d1bfcfe540fd.png" alt="image"></p>
 <p><a href="https://github.com/timqian/my-notes/issues/9">reference.</a></p>
-<h3 id="关于引用奥森图标一类的i标签失效的问题">关于引用奥森图标一类的i标签失效的问题</h3>
+<h3 id="关于引用奥森图标一类的-i-标签失效的问题">关于引用奥森图标一类的 i 标签失效的问题</h3>
 <p>路径也排查过了 文件也排查过了 也没报错 为什么呢？</p>
 <p>因为......</p>
-<p>千万要想想是不是全局font-family的问题！！！</p>
-<h4 id="vscode-path和系统不一致">VsCode PATH和系统不一致</h4>
+<p>千万要想想是不是全局 font-family 的问题！！！</p>
+<h4 id="vscode-path-和系统不一致">VsCode PATH 和系统不一致</h4>
 <p>在设置里加个：</p>
 <pre><code class="hljs language-json"><span class="hljs-attr">&quot;terminal.integrated.env.osx&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;PATH&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${env:PATH}&quot;</span>

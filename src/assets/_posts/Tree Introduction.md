@@ -9,11 +9,9 @@ tags:
 date: 2019-01-28 15:11:00
 ---
 
-
-
 ### Should have a PLAN!
 
-I was asked a tree problem when I was having a face to face interview at *PayPal* last Friday, and I might failed on this question.
+I was asked a tree problem when I was having a face to face interview at _PayPal_ last Friday, and I might failed on this question.
 
 It's been too long that I'm almost forgot the knowledge of TREE, and I've never truly go over it and it's time to get it done.
 
@@ -45,9 +43,9 @@ e.g：the tree above will have 4 groups [5a,5b,5c,5d],[6],[7a,7b],[5e]
       ----
        j    <-- root
      /   \
-    f      k  
+    f      k
   /   \      \
- a     h      z    <-- leaves 
+ a     h      z    <-- leaves
 ```
 
 **Why Trees?**
@@ -62,7 +60,7 @@ file system
       /          \
    ugrad        course
     /       /      |     \
-  ...      cs101  cs112  cs113  
+  ...      cs101  cs112  cs113
 ```
 
 **2.** Trees (with some ordering e.g., BST) provide moderate access/search (quicker than Linked List and slower than arrays).
@@ -97,28 +95,28 @@ Node ┬ int  value
 
 1. The maximum number of nodes at level ‘l’ of a binary tree is **2^(l-1)**
 2. Maximum number of nodes in a binary tree of height ‘h’ is **2^h – 1**
-3. In a Binary Tree with N nodes, minimum possible height or minimum number of levels is  **⌈ Log2(N+1)⌉**
+3. In a Binary Tree with N nodes, minimum possible height or minimum number of levels is **⌈ Log2(N+1)⌉**
 
-   This can be directly derived from point 2 above. If we consider the convention where height of a leaf node is considered as 0, then above formula for minimum possible height becomes   **⌈ Log2(N+1) ⌉ – 1**
+   This can be directly derived from point 2 above. If we consider the convention where height of a leaf node is considered as 0, then above formula for minimum possible height becomes **⌈ Log2(N+1) ⌉ – 1**
 
-4. A Binary Tree with L leaves has at least   ⌈ Log2L ⌉ + 1   levels
-    A Binary tree has maximum number of leaves (and minimum number of levels) when all levels are fully filled. Let all leaves be at level l, then below is true for number of leaves L.
+4. A Binary Tree with L leaves has at least ⌈ Log2L ⌉ + 1 levels
+   A Binary tree has maximum number of leaves (and minimum number of levels) when all levels are fully filled. Let all leaves be at level l, then below is true for number of leaves L.
 
    ```
       L   <=  2l-1  [From Point 1]
-      l =   ⌈ Log2L ⌉ + 1 
-      where l is the minimum number of levels. 
+      l =   ⌈ Log2L ⌉ + 1
+      where l is the minimum number of levels.
    ```
 
 5. In Binary tree where every node has 0 or 2 children, number of leaf nodes is always one more than nodes with two children
 
-    ```
-       L = T + 1
-    Where L = Number of leaf nodes
-          T = Number of internal nodes with two children
-    ```
+   ```
+      L = T + 1
+   Where L = Number of leaf nodes
+         T = Number of internal nodes with two children
+   ```
 
-*PS：前两个理解一下就好了，后面3个用的少，用的时候还得查- -*
+_PS：前两个理解一下就好了，后面 3 个用的少，用的时候还得查- -_
 
 #### Types of Binary Tree
 
@@ -126,9 +124,8 @@ Node ┬ int  value
 - **Complete Binary Tree:** A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible.
 - **Perfect Binary Tree** A Binary tree is Perfect Binary Tree in which all internal nodes have two children and **all leaves are at the same level**.
 - **Balanced Binary Tree**
-  A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes. 
+  A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes.
   - **AVL tree** maintains O(log n) height by making sure that the difference between heights of left and right subtrees is 1.
   - **Red-Black trees** maintain O(log n) height by making sure that the number of Black nodes on every root to leaf paths are same and there are no **adjacent(邻近的)** red nodes.
   - **Balanced Binary Search trees** are performance wise good as they provide O(log n) time for search, insert and delete.
 - **A degenerate (or pathological) tree** A Tree where every internal node has one child. Such trees are performance-wise same as linked list.
-

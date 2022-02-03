@@ -1,4 +1,4 @@
-<h2 id="jsnodejs库">JS&amp;Node.js库</h2>
+<h2 id="jsnodejs-库">JS&amp;Node.js 库</h2>
 <h3 id="react-native">React Native</h3>
 <blockquote>
 <p>可以做桌面应用</p>
@@ -13,28 +13,28 @@
 <p><img src="https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png" alt="image"></p>
 <p><a href="http://www.wangeditor.com/">官网</a></p>
 <h3 id="katex-最快的数学公式渲染库">KaTeX 最快的数学公式渲染库</h3>
-<p>官方link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
-<p>editor.md的Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
+<p>官方 link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
+<p>editor.md 的 Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
 <p><img src="https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png" alt="image"></p>
 <h3 id="jquery-日期选择控件">JQuery 日期选择控件</h3>
 <p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
 <h3 id="js-数据可视化">JS 数据可视化</h3>
 <p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
 <a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
-<h3 id="html2canvas-页面输出为canvas">html2canvas 页面输出为canvas</h3>
+<h3 id="html2canvas-页面输出为-canvas">html2canvas 页面输出为 canvas</h3>
 <p>超级棒的插件：
 教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a>
 hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
-<h4 id="small_blue_diamond生成的canvas没有图片的坑：">🔹生成的canvas没有图片的坑：</h4>
-<p>要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
-开启html2canvas的useCORS配置项。即作如下设置： </p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> opts = {<span class="hljs-attr">useCORS</span>: <span class="hljs-literal">true</span>};
+<h4 id="small_blue_diamond生成的-canvas-没有图片的坑：">🔹生成的 canvas 没有图片的坑：</h4>
+<p>要求 CDN 的图片配置好 CORS。CDN 配置好后，通过 chrome 开发者工具可以看到响应头中应含有 Access-Control-Allow-Origin 的字段。
+开启 html2canvas 的 useCORS 配置项。即作如下设置：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> opts = { <span class="hljs-attr">useCORS</span>: <span class="hljs-literal">true</span> };
 <span class="hljs-title function_">html2canvas</span>(element, opts);
 </code></pre>
-<h3 id="js工具库-lodash">JS工具库 lodash</h3>
+<h3 id="js-工具库-lodash">JS 工具库 lodash</h3>
 <p><a href="https://www.lodashjs.com/">https://www.lodashjs.com/</a></p>
 <p>是一个一致性、模块化、高性能的 JavaScript 实用工具库。</p>
-<h4 id="为什么要用lodash？">为什么要用lodash？</h4>
+<h4 id="为什么要用-lodash？">为什么要用 lodash？</h4>
 <p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：</p>
 <ul>
 <li>遍历 array、object 和 string</li>
@@ -54,20 +54,20 @@ hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/nikla
 <p>Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js</p>
 </blockquote>
 <p><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a></p>
-<h3 id="jieba中文分词---nodejs">jieba中文分词 - Node.js</h3>
+<h3 id="jieba-中文分词---nodejs">jieba 中文分词 - Node.js</h3>
 <h4 id="介绍">介绍</h4>
 <p><code>NodeJieba</code>是&quot;结巴&quot;中文分词的 Node.js 版本实现， 由<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>提供底层分词算法实现， 是兼具高性能和易用性两者的 Node.js 中文分词组件。</p>
 <h4 id="特点">特点</h4>
 <ul>
 <li>词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。</li>
-<li>底层算法实现是C++，性能高效。</li>
-<li>支持多种分词算法，各种分词算法见<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>的README.md介绍。</li>
+<li>底层算法实现是 C++，性能高效。</li>
+<li>支持多种分词算法，各种分词算法见<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>的 README.md 介绍。</li>
 <li>支持动态补充词库。</li>
 </ul>
 <p>对实现细节感兴趣的请看如下博文：</p>
 <ul>
-<li><a href="http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html">Node.js的C++扩展初体验之NodeJieba</a></li>
-<li><a href="http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html">由NodeJieba谈谈Node.js异步实现</a></li>
+<li><a href="http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html">Node.js 的 C++扩展初体验之 NodeJieba</a></li>
+<li><a href="http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html">由 NodeJieba 谈谈 Node.js 异步实现</a></li>
 </ul>
 <p><a href="https://github.com/yanyiwu/nodejieba">https://github.com/yanyiwu/nodejieba</a></p>
 <h3 id="文件变动检查库-chokidar">文件变动检查库 chokidar</h3>
@@ -114,21 +114,23 @@ hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/nikla
 <h3 id="pm2">pm2</h3>
 <p><a href="https://pm2.keymetrics.io/docs/usage/quick-start/">https://pm2.keymetrics.io/docs/usage/quick-start/</a></p>
 <blockquote>
-<p>PM2 is a daemon process manager that will help you manage and keep your application online. </p>
+<p>PM2 is a daemon process manager that will help you manage and keep your application online.</p>
 <p>Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.</p>
 </blockquote>
-<h4 id="windows设置pm2开机启动服务">Windows设置pm2开机启动服务</h4>
+<h4 id="windows-设置-pm2-开机启动服务">Windows 设置 pm2 开机启动服务</h4>
 <p><a href="https://www.jianshu.com/p/6cb523c0ced8">https://www.jianshu.com/p/6cb523c0ced8</a></p>
 <p><a href="https://www.npmjs.com/package/pm2-windows-service">https://www.npmjs.com/package/pm2-windows-service</a></p>
-<h4 id="windows下fork模式弹出窗口问题">windows下fork模式弹出窗口问题</h4>
+<h4 id="windows-下-fork-模式弹出窗口问题">windows 下 fork 模式弹出窗口问题</h4>
 <p><a href="https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292">https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292</a></p>
 <pre><code class="hljs language-javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
-  apps : [{
-    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;winmon&#x27;</span>,
-    <span class="hljs-attr">script</span>: <span class="hljs-string">&#x27;index.js&#x27;</span>,
-    <span class="hljs-attr">watch</span>: <span class="hljs-literal">false</span>,
-    instances  : <span class="hljs-number">1</span>,
-    <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&#x27;cluster&#x27;</span>
-  }],
+  <span class="hljs-attr">apps</span>: [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;winmon&quot;</span>,
+      <span class="hljs-attr">script</span>: <span class="hljs-string">&quot;index.js&quot;</span>,
+      <span class="hljs-attr">watch</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">instances</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster&quot;</span>,
+    },
+  ],
 };
 </code></pre>

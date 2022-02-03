@@ -10,17 +10,13 @@ series: Python Note
 date: 2020-5-20 16:4:43
 ---
 
-
-
-
-
 Introduce how to use multi-thread tech with python, refer to: https://docs.python.org/3/library/threading.html
 
 ### Lib - threading
 
 Example of basic usage:
 
-``` python
+```python
 from threading import Thread
 import threading
 import time
@@ -49,7 +45,7 @@ print(threading.active_count())
 
 Out:
 
-``` console
+```console
 <_MainThread(MainThread, started 9908)>
 <_MainThread(MainThread, started 9908)>
 9908
@@ -60,37 +56,35 @@ Thread running 2   <Thread(Thread-1, started 7536)>
 Thread running 3   <Thread(Thread-1, started 7536)>
 ```
 
-
-
 ### Thread Object
 
 Create a thread with:
 
-*class* `threading.Thread`\(*group=None*, *target=None*, *name=None*, *args=()*, *kwargs={}*, *\**, *daemon=None*)
+_class_ `threading.Thread`\(_group=None_, _target=None_, _name=None_, _args=()_, _kwargs={}_, \*\**, *daemon=None\*)
 
-- *group* should be `None`; reserved for future extension when a `ThreadGroup` class is implemented.
+- _group_ should be `None`; reserved for future extension when a `ThreadGroup` class is implemented.
 
-- *target* is the callable object to be invoked by the [`run()`](https://docs.python.org/3/library/threading.html#threading.Thread.run) method. Defaults to `None`, meaning nothing is called.
+- _target_ is the callable object to be invoked by the [`run()`](https://docs.python.org/3/library/threading.html#threading.Thread.run) method. Defaults to `None`, meaning nothing is called.
 
-- *name* is the thread name. By default, a unique name is constructed of the form “Thread-*N*” where *N* is a small decimal number.
+- _name_ is the thread name. By default, a unique name is constructed of the form “Thread-_N_” where _N_ is a small decimal number.
 
-- *args* is the argument tuple for the target invocation. Defaults to `()`.
+- _args_ is the argument tuple for the target invocation. Defaults to `()`.
 
-- *kwargs* is a dictionary of keyword arguments for the target invocation. Defaults to `{}`.
+- _kwargs_ is a dictionary of keyword arguments for the target invocation. Defaults to `{}`.
 
-- If not `None`, *daemon* explicitly sets whether the thread is daemonic. If `None` (the default), the daemonic property is inherited from the current thread.
+- If not `None`, _daemon_ explicitly sets whether the thread is daemonic. If `None` (the default), the daemonic property is inherited from the current thread.
 
   If the subclass overrides the constructor, it must make sure to invoke the base class constructor (`Thread.__init__()`) before doing anything else to the thread.
 
 What is deamon thread?
 
-> A thread can be flagged as a “daemon thread”. The significance of this flag is that the entire Python program exits when only daemon threads are left. The initial value is inherited from the creating thread. The flag can be set through the [`daemon`](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) property or the *daemon* constructor argument.
+> A thread can be flagged as a “daemon thread”. The significance of this flag is that the entire Python program exits when only daemon threads are left. The initial value is inherited from the creating thread. The flag can be set through the [`daemon`](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) property or the _daemon_ constructor argument.
 >
 > Daemon threads are abruptly stopped at shutdown. Their resources (such as open files, database transactions, etc.) may not be released properly. If you want your threads to stop gracefully, make them non-daemonic and use a suitable signalling mechanism such as an [`Event`](https://docs.python.org/3/library/threading.html#threading.Event).
 
 Example:
 
-``` python
+```python
 from threading import Thread
 import threading
 def running():
@@ -102,8 +96,6 @@ def running():
 t = Thread(target=running)
 t.start()
 ```
-
-
 
 ### Lock Object
 
@@ -139,7 +131,7 @@ A primitive lock is a synchronization primitive that is not owned by a particula
 
 Example:
 
-``` python
+```python
 from threading import Thread
 from threading import Lock
 import threading
@@ -186,13 +178,13 @@ while threading.activeCount() > 1:
         print('check money:', money)
         l.release()
     time.sleep(1)
-    
+
 print('final money:', money)
 ```
 
 Output:
 
-``` console
+```console
 check money: 3269550
 final money: 5000000
 ```
@@ -203,7 +195,7 @@ The final money will always be 5000000.
 
 A reentrant lock is a synchronization primitive that may be acquired multiple times by the same thread. Internally, it uses the concepts of “owning thread” and “recursion level” in addition to the locked/unlocked state used by primitive locks. In the locked state, some thread owns the lock; in the unlocked state, no thread owns it.
 
-To lock the lock, a thread calls its [`acquire()`](https://docs.python.org/3/library/threading.html#threading.RLock.acquire) method; this returns once the thread owns the lock. 
+To lock the lock, a thread calls its [`acquire()`](https://docs.python.org/3/library/threading.html#threading.RLock.acquire) method; this returns once the thread owns the lock.
 
 To unlock the lock, a thread calls its [`release()`](https://docs.python.org/3/library/threading.html#threading.Lock.release) method. [`acquire()`](https://docs.python.org/3/library/threading.html#threading.Lock.acquire)/[`release()`](https://docs.python.org/3/library/threading.html#threading.Lock.release) call pairs may be nested; only the final [`release()`](https://docs.python.org/3/library/threading.html#threading.Lock.release) (the [`release()`](https://docs.python.org/3/library/threading.html#threading.Lock.release) of the outermost pair) resets the lock to unlocked and allows another thread blocked in [`acquire()`](https://docs.python.org/3/library/threading.html#threading.Lock.acquire) to proceed.
 
@@ -218,7 +210,7 @@ Methods:
 
 Example:
 
-``` python
+```python
 from threading import Thread
 from threading import RLock
 import threading
@@ -245,7 +237,7 @@ def running():
 
 t = Thread(target=running)
 t.start()
-                
+
 def aq():
     while not rl.acquire(timeout=0):
         print('tring to aquire rl')
@@ -258,7 +250,7 @@ t2.start()
 
 Out:
 
-``` console
+```console
 aquire first
 tring to aquire rl
 tring to aquire rl
@@ -273,8 +265,6 @@ release second
 release first
 rl aquired
 ```
-
-
 
 ### Event Object
 
@@ -303,7 +293,7 @@ An event object manages an internal flag that can be set to true with the [`set(
 
 Example:
 
-``` python
+```python
 from threading import Thread
 from threading import Event
 import threading
@@ -318,7 +308,7 @@ release_count = 0
 goods = 0
 
 def collect():
-    while True:        
+    while True:
         global release_count
         if (release_count == 3):
             print('Mission done, collecting process stop.')
@@ -357,7 +347,7 @@ t2.start()
 
 Out:
 
-``` console
+```console
 collecting   0
 collecting   200
 collecting   400
@@ -384,8 +374,6 @@ Mission done, collecting process stop.
 goods empty, open the gate
 Mission done, release process stop..
 ```
-
-
 
 ### More on threading
 

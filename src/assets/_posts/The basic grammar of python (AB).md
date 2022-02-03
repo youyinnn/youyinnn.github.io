@@ -10,11 +10,9 @@ series: Python Note
 date: 2020-5-8 17:0:15
 ---
 
-
-
 The series of \<Python Note\> is talking about some basic grammar rules of python, for quick search while I might use python.
 
-The first article will introduces  `print()` and `input()`, the comment syntax, variables assignment and some basic types in python.
+The first article will introduces `print()` and `input()`, the comment syntax, variables assignment and some basic types in python.
 
 ## A
 
@@ -22,7 +20,7 @@ The first article will introduces  `print()` and `input()`, the comment syntax, 
 
 Example:
 
-``` python
+```python
 print('NI', 'Hao') # NI HAO
 print('1 + 3 =', 1 + 3) # 1 + 3 = 4
 name = input() # type jack
@@ -31,11 +29,11 @@ print('name was signed as: ' + name) # name was signed as:  jack
 
 #### print()
 
-`print`(**objects*, *sep=' '*, *end='\n'*, *file=sys.stdout*, *flush=False*)
+`print`(\*_objects_, _sep=' '_, _end='\n'_, _file=sys.stdout_, _flush=False_)
 
-Print *objects* to the text stream *file*, separated by *sep* and followed by *end*. *sep*, *end*, *file* and *flush*, if present, must be given as keyword arguments.
+Print _objects_ to the text stream _file_, separated by _sep_ and followed by _end_. _sep_, _end_, _file_ and _flush_, if present, must be given as keyword arguments.
 
-``` python
+```python
 print('NI', 'Hao', sep='-', end='') # NI HAO
 print('1 + 3 =', 1 + 3) # NI HAO1 + 3 = 4
 ```
@@ -44,20 +42,20 @@ print('1 + 3 =', 1 + 3) # NI HAO1 + 3 = 4
 
 `input`([*prompt*])
 
-If the *prompt* argument is present, it is written to standard output without a trailing newline. The function then reads a line from input, converts it to a string (stripping a trailing newline), and returns that. When EOF is read, [`EOFError`](https://docs.python.org/3/library/exceptions.html#EOFError) is raised. Example:
+If the _prompt_ argument is present, it is written to standard output without a trailing newline. The function then reads a line from input, converts it to a string (stripping a trailing newline), and returns that. When EOF is read, [`EOFError`](https://docs.python.org/3/library/exceptions.html#EOFError) is raised. Example:
 
 ```
->>> s = input('--> ')  
+>>> s = input('--> ')
 --> Monty Python's Flying Circus
->>> s  
+>>> s
 "Monty Python's Flying Circus"
 ```
 
 ### Comment
 
-``` python
+```python
 # single line
-''' multi-line 
+''' multi-line
 xixi = 123
 haha = 456
 '''
@@ -65,7 +63,7 @@ haha = 456
 
 ### Variables Assignment
 
-``` python
+```python
 # assignment
 var = '123'
 var2, var3 = '123', 456
@@ -74,8 +72,6 @@ var2, var3 = '123', 456
 del var
 # call print(var) will raise NameError: name 'var' is not defined
 ```
-
-
 
 ## B
 
@@ -89,7 +85,7 @@ del var
 
 By default, an object **is considered `true`** unless its class defines either a [`__bool__()`](https://docs.python.org/3/reference/datamodel.html#object.__bool__) method that returns `False` or a [`__len__()`](https://docs.python.org/3/reference/datamodel.html#object.__len__) method that returns zero, when called with the object. [[1](https://docs.python.org/3/library/stdtypes.html#id12)]
 
-Here are most of the built-in objects considered  **`false`**:
+Here are most of the built-in objects considered **`false`**:
 
 - constants defined to be false: `None` and `False`.
 - zero of any numeric type: `0`, `0.0`, `0j`, `Decimal(0)`, `Fraction(0, 1)`
@@ -99,7 +95,7 @@ Operations and built-in functions that have a Boolean result always return `0` o
 
 ##### Operators
 
-``` python
+```python
 x or y # if x is false, then y, else x
 x and y # if x is false, then x, else y
 not x # if x is false, then True, else False
@@ -107,7 +103,7 @@ not x # if x is false, then True, else False
 
 ##### Comparisons
 
-There are eight comparison operations in Python. They all have the same priority (which is higher than that of the Boolean operations). Comparisons **can be chained** arbitrarily like `x < y <= z` which equivalent to `x < y and y <= z`, except that *y* is evaluated only once (but in both cases *z* is not evaluated at all when `x < y` is found to be false).
+There are eight comparison operations in Python. They all have the same priority (which is higher than that of the Boolean operations). Comparisons **can be chained** arbitrarily like `x < y <= z` which equivalent to `x < y and y <= z`, except that _y_ is evaluated only once (but in both cases _z_ is not evaluated at all when `x < y` is found to be false).
 
 This table summarizes the comparison operations:
 
@@ -122,13 +118,13 @@ This table summarizes the comparison operations:
 | `is`      | object identity         |
 | `is not`  | negated object identity |
 
-Any object can be compared with those operators when defining `__lt__()`,`__le__()`,`__eq__()`,`__ne__()`, `__gt__()`,`__ge__()` methods. 
+Any object can be compared with those operators when defining `__lt__()`,`__le__()`,`__eq__()`,`__ne__()`, `__gt__()`,`__ge__()` methods.
 
 These are the so-called “rich comparison” methods. The correspondence between operator symbols and method names is as follows: `x<y` calls `x.__lt__(y)`, `x<=y` calls `x.__le__(y)`, `x==y` calls `x.__eq__(y)`, `x!=y` calls `x.__ne__(y)`, `x>y` calls `x.__gt__(y)`, and `x>=y` calls `x.__ge__(y)`.
 
 Example:
 
-``` python
+```python
 @total_ordering
 class Student:
     def _is_valid_operand(self, other):
@@ -152,24 +148,24 @@ The constructors [`int()`](https://docs.python.org/3/library/functions.html#int)
 
 All numeric types (except complex) support the following operations (for priorities of the operations, see [Operator precedence](https://docs.python.org/3/reference/expressions.html#operator-summary)):
 
-| Operation         | Result                                                       | Notes  | Full documentation                                           |
-| :---------------- | :----------------------------------------------------------- | :----- | :----------------------------------------------------------- |
-| `x + y`           | sum of *x* and *y*                                           |        |                                                              |
-| `x - y`           | difference of *x* and *y*                                    |        |                                                              |
-| `x * y`           | product of *x* and *y*                                       |        |                                                              |
-| `x / y`           | quotient of *x* and *y*                                      |        |                                                              |
-| `x // y`          | floored quotient of *x* and *y*                              | (1)    |                                                              |
-| `x % y`           | remainder of `x / y`                                         | (2)    |                                                              |
-| `-x`              | *x* negated                                                  |        |                                                              |
-| `+x`              | *x* unchanged                                                |        |                                                              |
-| `abs(x)`          | absolute value or magnitude of *x*                           |        | [`abs()`](https://docs.python.org/3/library/functions.html#abs) |
-| `int(x)`          | *x* converted to integer                                     | (3)(6) | [`int()`](https://docs.python.org/3/library/functions.html#int) |
-| `float(x)`        | *x* converted to floating point                              | (4)(6) | [`float()`](https://docs.python.org/3/library/functions.html#float) |
-| `complex(re, im)` | a complex number with real part *re*, imaginary part *im*. *im* defaults to zero. | (6)    | [`complex()`](https://docs.python.org/3/library/functions.html#complex) |
-| `c.conjugate()`   | conjugate of the complex number *c*                          |        |                                                              |
-| `divmod(x, y)`    | the pair `(x // y, x % y)`                                   | (2)    | [`divmod()`](https://docs.python.org/3/library/functions.html#divmod) |
-| `pow(x, y)`       | *x* to the power *y*                                         | (5)    | [`pow()`](https://docs.python.org/3/library/functions.html#pow) |
-| `x ** y`          | *x* to the power *y*                                         | (5)    |                                                              |
+| Operation         | Result                                                                            | Notes  | Full documentation                                                      |
+| :---------------- | :-------------------------------------------------------------------------------- | :----- | :---------------------------------------------------------------------- |
+| `x + y`           | sum of _x_ and _y_                                                                |        |                                                                         |
+| `x - y`           | difference of _x_ and _y_                                                         |        |                                                                         |
+| `x * y`           | product of _x_ and _y_                                                            |        |                                                                         |
+| `x / y`           | quotient of _x_ and _y_                                                           |        |                                                                         |
+| `x // y`          | floored quotient of _x_ and _y_                                                   | (1)    |                                                                         |
+| `x % y`           | remainder of `x / y`                                                              | (2)    |                                                                         |
+| `-x`              | _x_ negated                                                                       |        |                                                                         |
+| `+x`              | _x_ unchanged                                                                     |        |                                                                         |
+| `abs(x)`          | absolute value or magnitude of _x_                                                |        | [`abs()`](https://docs.python.org/3/library/functions.html#abs)         |
+| `int(x)`          | _x_ converted to integer                                                          | (3)(6) | [`int()`](https://docs.python.org/3/library/functions.html#int)         |
+| `float(x)`        | _x_ converted to floating point                                                   | (4)(6) | [`float()`](https://docs.python.org/3/library/functions.html#float)     |
+| `complex(re, im)` | a complex number with real part _re_, imaginary part _im_. _im_ defaults to zero. | (6)    | [`complex()`](https://docs.python.org/3/library/functions.html#complex) |
+| `c.conjugate()`   | conjugate of the complex number _c_                                               |        |                                                                         |
+| `divmod(x, y)`    | the pair `(x // y, x % y)`                                                        | (2)    | [`divmod()`](https://docs.python.org/3/library/functions.html#divmod)   |
+| `pow(x, y)`       | _x_ to the power _y_                                                              | (5)    | [`pow()`](https://docs.python.org/3/library/functions.html#pow)         |
+| `x ** y`          | _x_ to the power _y_                                                              | (5)    |                                                                         |
 
 Notes:
 
@@ -189,18 +185,18 @@ Notes:
 
 All [`numbers.Real`](https://docs.python.org/3/library/numbers.html#numbers.Real) types ([`int`](https://docs.python.org/3/library/functions.html#int) and [`float`](https://docs.python.org/3/library/functions.html#float)) also include the following operations:
 
-| Operation                                                    | Result                                                       |
-| :----------------------------------------------------------- | :----------------------------------------------------------- |
-| [`math.trunc(x)`](https://docs.python.org/3/library/math.html#math.trunc) | *x* truncated to [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral) |
-| [**`round(x[, n])`**](https://docs.python.org/3/library/functions.html#round) | *x* rounded to *n* digits, rounding half to even. If *n* is omitted, it defaults to 0. |
-| [`math.floor(x)`](https://docs.python.org/3/library/math.html#math.floor) | the greatest [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral) <= *x* |
-| [`math.ceil(x)`](https://docs.python.org/3/library/math.html#math.ceil) | the least [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral) >= *x* |
+| Operation                                                                     | Result                                                                                            |
+| :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
+| [`math.trunc(x)`](https://docs.python.org/3/library/math.html#math.trunc)     | _x_ truncated to [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral)    |
+| [**`round(x[, n])`**](https://docs.python.org/3/library/functions.html#round) | _x_ rounded to _n_ digits, rounding half to even. If _n_ is omitted, it defaults to 0.            |
+| [`math.floor(x)`](https://docs.python.org/3/library/math.html#math.floor)     | the greatest [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral) <= _x_ |
+| [`math.ceil(x)`](https://docs.python.org/3/library/math.html#math.ceil)       | the least [`Integral`](https://docs.python.org/3/library/numbers.html#numbers.Integral) >= _x_    |
 
 #### String
 
 ##### Basic Usage
 
-``` python
+```python
 # single quotes
 print('spam eggs')
 # double quotes
@@ -219,7 +215,7 @@ print(word[:3])
 # span multiple line with triple quotes '''... ''' or """..."""
 # backslash can prevent newline when placed at the end of the line
 print('''\
-Options: 
+Options:
     -a      all
     -c      clean\
 ''')
@@ -290,7 +286,7 @@ print('#....ASdas..asad##..dadkjl....##...#'.rstrip('.#'))
 
 Output:
 
-``` console
+```console
 spam eggs
 spam eggs
 dosn't
@@ -315,7 +311,7 @@ Hello
 HELLO
 asd
 HELLO
-  HELLO   
+  HELLO
 ---HELLO---
 HELLO------
 ------HELLO
@@ -338,11 +334,9 @@ ASdas..asad##..dadkjl....##...#
 #....ASdas..asad##..dadkjl
 ```
 
-
-
 ##### Format
 
-``` python
+```python
 # fill with index
 print('{}-{}-{}'.format(1,2,3))
 print('{0}-{2}-{1}'.format(1,2,3))
@@ -388,9 +382,10 @@ print('{0:*>20.2%}'.format(i))
 print('{0:>20.10%}'.format(i))
 print('{0:.10%}'.format(i))
 ```
+
 Output:
 
-``` console
+```console
 1-2-3
 1-3-2
 xixi haha
@@ -413,13 +408,13 @@ int:10 hex:0xa oct:0o12 bin:0b1010
 
 ##### Regex
 
-``` python
-# compile a regular expression pattern into a regular expression object 
+```python
+# compile a regular expression pattern into a regular expression object
 import re
 
 str = 'aasddohwawddogasads'
 
-# use regular expression object 
+# use regular expression object
 po = re.compile(r'do[gh]')
 print(po.search(str))
 
@@ -440,8 +435,10 @@ print(re.split(r'[a-z]', 'adas123fd12d123', flags=re.IGNORECASE))
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE))
 print(re.sub(r'and', '&', 'You And Me, Me And You.', flags=re.IGNORECASE, count=1))
 ```
+
 Output:
-``` console
+
+```console
 <re.Match object; span=(4, 7), match='doh'>
 <re.Match object; span=(4, 7), match='doh'>
 ['doh', 'dog']
@@ -451,6 +448,3 @@ Output:
 You & Me, Me & You.
 You & Me, Me And You.
 ```
-
-
-

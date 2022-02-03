@@ -1,0 +1,6 @@
+dist
+node_modules
+archive
+public
+src/assets/resources
+src/assets/css/code

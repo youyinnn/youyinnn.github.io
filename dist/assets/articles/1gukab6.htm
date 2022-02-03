@@ -2,13 +2,13 @@
 <h4 id="use-tess-with-rheos-tess-base-agent">Use tess with Rheos tess-base agent</h4>
 <p>Assume that you are at &quot;Job Configure&quot; panel now.</p>
 <h5 id="configure-agent">Configure Agent</h5>
-<p>In order to use tess <strong>effectively and legally</strong>, we should check <strong>&quot;Restrict where this project can be run&quot;</strong> on <strong>&quot;Job Notifications&quot;</strong> and select <code>tess-builder-numsg</code>, this is a image for tess-user that build from <em><strong>Rheos team</strong></em>, it prepared every thing we need for tess.</p>
+<p>In order to use tess <strong>effectively and legally</strong>, we should check <strong>&quot;Restrict where this project can be run&quot;</strong> on <strong>&quot;Job Notifications&quot;</strong> and select <code>tess-builder-numsg</code>, this is a image for tess-user that build from <strong><em>Rheos team</em></strong>, it prepared every thing we need for tess.</p>
 <p>The configuration of this agent is at Jenkins: <strong>[Manage Jenkins(系统管理)] -&gt; [Configure System(系统设置)]-&gt;[Cloud(云)]-&gt;[Kubernetes]-&gt;[images]</strong> , named <strong>&quot;tess-builder-numsg&quot;</strong></p>
 <h5 id="configure-parameterized-build参数化构建过程">Configure &quot;Parameterized Build(参数化构建过程)&quot;</h5>
 <h6 id="for-production-cluster-login">For production cluster login</h6>
 <p>We will need four parameters: <code>tess_username</code>,<code> tess_cluster</code>, <code>tess_pin</code>, <code>tess_yubikey_token_twice</code></p>
 <blockquote>
-<p> <strong>Notice:</strong> </p>
+<p><strong>Notice:</strong></p>
 <ol>
 <li>If your want to use two <strong>YubiKey Token</strong>, you have to configure a <strong>Multi-line String Parameter</strong>, to catch two <strong>YubiKey Token</strong> on a <strong>single parameter(<code>tess_yubikey_token_twice</code>)</strong>. It will prevent <strong>&quot;auto enter&quot;</strong> to trigger the build action while we use YubiKey to input access token.</li>
 <li>From the usage above, the Jenkins parameter <code>tess_yubikey_token_twice</code> will separated to two parameters by line-separator.</li>
@@ -70,7 +70,7 @@ expect tess-login-by-expect.sh $server $username $corp_password
 <p>Please make sure the agent environment contains the following two requirements for using tess <strong>effectively and legally</strong>.</p>
 <h5 id="1-prepare-the-appropriate-version-of-tess-client-on-your-image">1. Prepare the appropriate version of Tess client on your image</h5>
 <p>To log in to the tess, you should at least use the version <code>release-0.29.x</code>, and I <strong>strongly recommend</strong> you should always use the <strong>latest release version of tess</strong>. From now it&#39;s <code>release-0.33.5</code>.</p>
-<p>here are the details: </p>
+<p>here are the details:</p>
 <blockquote>
 <p><strong>Logging in to Production cluster is not the same as logging in to Non-Production Cluster</strong></p>
 <p>If we want to log in the production cluster like <strong>21/22/23</strong>, there are two verification:</p>
@@ -98,12 +98,12 @@ Cluster URL: https://api.system.svc.21.tess.io
 ** You can use <span class="hljs-string">&#x27;--cluster&#x27;</span> switch to a different cluster
 ** You can use <span class="hljs-string">&#x27;tess clusters&#x27;</span> to list all available Tess clusters.
 ** You can use <span class="hljs-string">&#x27;tess version list&#x27;</span> to list all available tess client versions.
-Pin + YubiKeyToken: 
+Pin + YubiKeyToken:
 </code></pre>
-<p>there is not options on tess client  to let us passing the parameter of <code>Pin + YubiKeyToken</code> ask interaction, besides, it require the second <code>YubiKey Token</code>. </p>
+<p>there is not options on tess client to let us passing the parameter of <code>Pin + YubiKeyToken</code> ask interaction, besides, it require the second <code>YubiKey Token</code>.</p>
 <p>To handle this situation, we can use <code>expect</code> to passing the parameter by just wrapping the interactive shell on a script named <code>tess-login-by-expect.sh</code>:</p>
 <pre><code class="hljs language-bash"><span class="hljs-meta">#!/usr/bin/expect</span>
- 
+
 <span class="hljs-built_in">set</span> username [lindex <span class="hljs-variable">$argv</span> 0]
 <span class="hljs-built_in">set</span> cluster [lindex <span class="hljs-variable">$argv</span> 1]
 <span class="hljs-built_in">set</span> pin_token1 [lindex <span class="hljs-variable">$argv</span> 2]

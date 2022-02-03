@@ -1,74 +1,63 @@
-## JS&Node.js库
+## JS&Node.js 库
 
-### React Native 
-
+### React Native
 
 > 可以做桌面应用
 
 网址: https://proton-native.js.org/#/
 
-
 ### Layui
-
 
 > 给后端用的前端框架
 
 [官网](http://www.layui.com)
 
-
 ### wangEditor 轻量级前端富文本编辑器
-
 
 ![image](https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.png)
 
 [官网](http://www.wangeditor.com/)
 
-
 ### KaTeX 最快的数学公式渲染库
 
+官方 link : https://khan.github.io/KaTeX/function-support.html
 
-官方link : https://khan.github.io/KaTeX/function-support.html
-
-editor.md的Demo : http://pandao.github.io/editor.md/examples/katex.html
+editor.md 的 Demo : http://pandao.github.io/editor.md/examples/katex.html
 
 ![image](https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.png)
 
-
 ### JQuery 日期选择控件
 
-
 网站：https://xdsoft.net/jqplugins/datetimepicker/
-
 
 ### JS 数据可视化
 
 有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
 https://www.zhihu.com/question/19929609/answer/383055223
 
-### html2canvas 页面输出为canvas
+### html2canvas 页面输出为 canvas
 
 超级棒的插件：
 教程和踩坑：https://segmentfault.com/a/1190000011478657
 hub：https://github.com/niklasvh/html2canvas
 
-#### :small_blue_diamond:生成的canvas没有图片的坑：
+#### :small_blue_diamond:生成的 canvas 没有图片的坑：
 
-要求CDN的图片配置好CORS。CDN配置好后，通过chrome开发者工具可以看到响应头中应含有Access-Control-Allow-Origin的字段。
-开启html2canvas的useCORS配置项。即作如下设置： 
+要求 CDN 的图片配置好 CORS。CDN 配置好后，通过 chrome 开发者工具可以看到响应头中应含有 Access-Control-Allow-Origin 的字段。
+开启 html2canvas 的 useCORS 配置项。即作如下设置：
 
-``` javascript
-var opts = {useCORS: true};
+```javascript
+var opts = { useCORS: true };
 html2canvas(element, opts);
 ```
 
-
-### JS工具库 lodash
+### JS 工具库 lodash
 
 https://www.lodashjs.com/
 
 是一个一致性、模块化、高性能的 JavaScript 实用工具库。
 
-#### 为什么要用lodash？
+#### 为什么要用 lodash？
 
 Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：
 
@@ -94,7 +83,7 @@ https://systeminformation.io/
 
 https://github.com/websockets/ws
 
-### jieba中文分词 - Node.js
+### jieba 中文分词 - Node.js
 
 #### 介绍
 
@@ -103,14 +92,14 @@ https://github.com/websockets/ws
 #### 特点
 
 - 词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。
-- 底层算法实现是C++，性能高效。
-- 支持多种分词算法，各种分词算法见[CppJieba](https://github.com/yanyiwu/cppjieba.git)的README.md介绍。
+- 底层算法实现是 C++，性能高效。
+- 支持多种分词算法，各种分词算法见[CppJieba](https://github.com/yanyiwu/cppjieba.git)的 README.md 介绍。
 - 支持动态补充词库。
 
 对实现细节感兴趣的请看如下博文：
 
-- [Node.js的C++扩展初体验之NodeJieba](http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html)
-- [由NodeJieba谈谈Node.js异步实现](http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html)
+- [Node.js 的 C++扩展初体验之 NodeJieba](http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html)
+- [由 NodeJieba 谈谈 Node.js 异步实现](http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html)
 
 https://github.com/yanyiwu/nodejieba
 
@@ -148,12 +137,12 @@ This package improves [`child_process`](https://nodejs.org/api/child_process.htm
 
 - Promise interface.
 - [Strips the final newline](https://github.com/sindresorhus/execa#stripfinalnewline) from the output so you don't have to do `stdout.trim()`.
-- Supports [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) binaries cross-platform.
+- Supports [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) binaries cross-platform.
 - [Improved Windows support.](https://github.com/IndigoUnited/node-cross-spawn#why)
 - Higher max buffer. 100 MB instead of 200 KB.
 - [Executes locally installed binaries by name.](https://github.com/sindresorhus/execa#preferlocal)
 - [Cleans up spawned processes when the parent process dies.](https://github.com/sindresorhus/execa#cleanup)
-- [Get interleaved output](https://github.com/sindresorhus/execa#all) from `stdout` and `stderr` similar to what is printed on the terminal. [*(Async only)*](https://github.com/sindresorhus/execa#execasyncfile-arguments-options)
+- [Get interleaved output](https://github.com/sindresorhus/execa#all) from `stdout` and `stderr` similar to what is printed on the terminal. [_(Async only)_](https://github.com/sindresorhus/execa#execasyncfile-arguments-options)
 - [Can specify file and arguments as a single string without a shell](https://github.com/sindresorhus/execa#execacommandcommand-options)
 - More descriptive errors.
 
@@ -163,36 +152,36 @@ https://github.com/remy/nodemon
 
 > nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 >
-> nodemon does **not** require *any* additional changes to your code or method of development. nodemon is a replacement wrapper for `node`. To use `nodemon`, replace the word `node` on the command line when executing your script.
-
-
+> nodemon does **not** require _any_ additional changes to your code or method of development. nodemon is a replacement wrapper for `node`. To use `nodemon`, replace the word `node` on the command line when executing your script.
 
 ### pm2
 
 https://pm2.keymetrics.io/docs/usage/quick-start/
 
-> PM2 is a daemon process manager that will help you manage and keep your application online. 
+> PM2 is a daemon process manager that will help you manage and keep your application online.
 >
 > Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.
 
-#### Windows设置pm2开机启动服务
+#### Windows 设置 pm2 开机启动服务
 
 https://www.jianshu.com/p/6cb523c0ced8
 
 https://www.npmjs.com/package/pm2-windows-service
 
-#### windows下fork模式弹出窗口问题
+#### windows 下 fork 模式弹出窗口问题
 
 https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292
 
 ```javascript
 module.exports = {
-  apps : [{
-    name: 'winmon',
-    script: 'index.js',
-    watch: false,
-    instances  : 1,
-    exec_mode: 'cluster'
-  }],
+  apps: [
+    {
+      name: "winmon",
+      script: "index.js",
+      watch: false,
+      instances: 1,
+      exec_mode: "cluster",
+    },
+  ],
 };
 ```

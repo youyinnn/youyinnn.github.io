@@ -1,7 +1,7 @@
 <h2 id="introduction">Introduction</h2>
-<p>官方指南不叫指南，叫document，于是乎开始无教程纯瞎子摸石头，于是想着把整个官方指南都看一遍，然后梳理梳理。</p>
+<p>官方指南不叫指南，叫 document，于是乎开始无教程纯瞎子摸石头，于是想着把整个官方指南都看一遍，然后梳理梳理。</p>
 <ul>
-<li>关于electron的命名空间</li>
+<li>关于 electron 的命名空间</li>
 <li>主进程和渲染进程<ul>
 <li>区别</li>
 <li>通信方式</li>
@@ -9,14 +9,14 @@
 </li>
 <li>添加功能<ul>
 <li>通知</li>
-<li>任务栏进度bar</li>
+<li>任务栏进度 bar</li>
 <li>其他</li>
 </ul>
 </li>
 </ul>
 <h2 id="electron-namespace">Electron Namespace</h2>
-<p><code>electron</code> 模块所提供的功能都是通过命名空间暴露出来的。 比如说： <code>electron.app</code>负责管理Electron 应用程序的生命周期， <code>electron.BrowserWindow</code>类负责创建窗口。</p>
-<p>从0.37开始，可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a> (es6解构赋值)来使内置模块更容易使用。</p>
+<p><code>electron</code> 模块所提供的功能都是通过命名空间暴露出来的。 比如说： <code>electron.app</code>负责管理 Electron 应用程序的生命周期， <code>electron.BrowserWindow</code>类负责创建窗口。</p>
+<p>从 0.37 开始，可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a> (es6 解构赋值)来使内置模块更容易使用。</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app, <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
 
 <span class="hljs-keyword">let</span> win
@@ -38,78 +38,75 @@ app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27
 })<span class="hljs-title class_">Copy</span>
 </code></pre>
 <p>这等效于以下代码:</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> electron = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
-<span class="hljs-keyword">const</span> app = electron.<span class="hljs-property">app</span>
-<span class="hljs-keyword">const</span> <span class="hljs-title class_">BrowserWindow</span> = electron.<span class="hljs-property">BrowserWindow</span>
-<span class="hljs-keyword">let</span> win
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> electron = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
+<span class="hljs-keyword">const</span> app = electron.<span class="hljs-property">app</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">BrowserWindow</span> = electron.<span class="hljs-property">BrowserWindow</span>;
+<span class="hljs-keyword">let</span> win;
 
-app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-  win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>()
-  win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;https://github.com&#x27;</span>)
-})
+app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;ready&quot;</span>, <span class="hljs-function">() =&gt;</span> {
+  win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>();
+  win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&quot;https://github.com&quot;</span>);
+});
 </code></pre>
 <h2 id="process">Process</h2>
-<p>Electron 运行 <code>package.json</code> 的 <code>main</code> 脚本的进程被称为<strong>主进程</strong>。 在主进程中运行的脚本通过创建web页面来展示用户界面。 一个 Electron 应用总是有且只有一个主进程。</p>
+<p>Electron 运行 <code>package.json</code> 的 <code>main</code> 脚本的进程被称为<strong>主进程</strong>。 在主进程中运行的脚本通过创建 web 页面来展示用户界面。 一个 Electron 应用总是有且只有一个主进程。</p>
 <p>由于 Electron 使用了 Chromium 来展示 web 页面，所以 Chromium 的多进程架构也被使用到。 每个 Electron 中的 web 页面运行在它自己的<strong>渲染进程</strong>中。</p>
 <blockquote>
-<p>在普通的浏览器中，web页面通常在沙盒环境中运行，并且无法访问操作系统的原生资源。 然而 Electron 的用户在 Node.js 的 API 支持下可以在页面中和操作系统进行一些底层交互。</p>
+<p>在普通的浏览器中，web 页面通常在沙盒环境中运行，并且无法访问操作系统的原生资源。 然而 Electron 的用户在 Node.js 的 API 支持下可以在页面中和操作系统进行一些底层交互。</p>
 </blockquote>
 <h3 id="differences-between-main-process-and-render-process">Differences Between Main Process And Render Process</h3>
 <p>主进程使用 <code>BrowserWindow</code> 实例创建页面。 每个 <code>BrowserWindow</code> 实例都在自己的渲染进程里运行页面。 当一个 <code>BrowserWindow</code> 实例被销毁后，相应的渲染进程也会被终止。</p>
-<p>主进程管理所有的web页面和它们对应的渲染进程。 每个渲染进程都是独立的，它只关心它所运行的 web 页面。</p>
+<p>主进程管理所有的 web 页面和它们对应的渲染进程。 每个渲染进程都是独立的，它只关心它所运行的 web 页面。</p>
 <p>在页面中调用与 GUI 相关的原生 API 是不被允许的，因为在 web 页面里操作原生的 GUI 资源是非常危险的，而且容易造成资源泄露。 如果你想在 web 页面里使用 GUI 操作，其对应的渲染进程必须与主进程进行通讯，请求主进程进行相关的 GUI 操作。</p>
-<p>Node. js 的所有 <a href="https://nodejs.org/api/">内置模块 </a>都在Electron中可用， 第三方 node 模块中也完全支持 (包括 <a href="https://electronjs.org/docs/tutorial/using-native-node-modules">原生模块 </a>)。</p>
+<p>Node. js 的所有 <a href="https://nodejs.org/api/">内置模块 </a>都在 Electron 中可用， 第三方 node 模块中也完全支持 (包括 <a href="https://electronjs.org/docs/tutorial/using-native-node-modules">原生模块 </a>)。</p>
 <p>Electron 还为开发原生桌面应用程序提供了一些额外的内置模块。 某些模块仅在主进程中可用, 有些仅在渲染进程 (web 页) 中可用, 而有些在这两个进程中都可以使用。</p>
 <p><strong>基本规则是: 如果一个模块是 <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI </a>或底层系统相关的, 那么它应该只在主进程中可用。</strong></p>
 <h3 id="communication-of-processes">Communication Of Processes</h3>
-<p>进程之间的通信有3种：</p>
+<p>进程之间的通信有 3 种：</p>
 <ul>
-<li>ipcMain和ipcRenderer：实现进程间的<strong>异步同步消息通信</strong></li>
-<li>remote模块RPC通信：<strong>主进程API</strong>暴露到渲染进程</li>
+<li>ipcMain 和 ipcRenderer：实现进程间的<strong>异步同步消息通信</strong></li>
+<li>remote 模块 RPC 通信：<strong>主进程 API</strong>暴露到渲染进程</li>
 <li>页面间共享对象：可以暴露对象也可以通信</li>
 </ul>
 <h4 id="ipc">IPC</h4>
 <p><code>ipcMain</code>模块是<a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a> 类的一个实例。 当在主进程中使用时，它处理从渲染器进程（网页）发送出来的异步和同步信息。 从渲染器进程发送的消息将被发送到该模块。</p>
 <p><code>ipcRenderer</code> 是一个 <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a> 的实例。 你可以使用它提供的一些方法从渲染进程 (web 页面) 发送同步或异步的消息到主进程。 也可以接收主进程回复的消息。</p>
-<p>在main.js中：</p>
+<p>在 main.js 中：</p>
 <pre><code class="hljs language-javascript"><span class="hljs-comment">// 主进程和渲染进程之间通信</span>
-<span class="hljs-keyword">const</span> {
-    ipcMain
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
-ipcMain.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;asynchronous-message&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg)
-    <span class="hljs-comment">// 通过event的reply方法 回复异步信息</span>
-    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
-        event.<span class="hljs-title function_">reply</span>(<span class="hljs-string">&#x27;asynchronous-reply&#x27;</span>, <span class="hljs-string">&#x27;as-pong&#x27;</span>)
-    }, <span class="hljs-number">2000</span>);
-})
-ipcMain.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;synchronous-message&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg)
-    <span class="hljs-comment">// 直接用event的returnValue值来回复消息</span>
-    event.<span class="hljs-property">returnValue</span> = <span class="hljs-string">&#x27;s-pong&#x27;</span>
-})
-
+<span class="hljs-keyword">const</span> { ipcMain } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
+ipcMain.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;asynchronous-message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg);
+  <span class="hljs-comment">// 通过event的reply方法 回复异步信息</span>
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+    event.<span class="hljs-title function_">reply</span>(<span class="hljs-string">&quot;asynchronous-reply&quot;</span>, <span class="hljs-string">&quot;as-pong&quot;</span>);
+  }, <span class="hljs-number">2000</span>);
+});
+ipcMain.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;synchronous-message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg);
+  <span class="hljs-comment">// 直接用event的returnValue值来回复消息</span>
+  event.<span class="hljs-property">returnValue</span> = <span class="hljs-string">&quot;s-pong&quot;</span>;
+});
 </code></pre>
-<p>在render.js中：</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { ipcRenderer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)
-$(<span class="hljs-string">&#x27;#asmessage&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-comment">// 异步信息 直接发送</span>
-    ipcRenderer.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;asynchronous-message&#x27;</span>,<span class="hljs-string">&#x27;as-ping&#x27;</span>)
-})
+<p>在 render.js 中：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { ipcRenderer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);
+$(<span class="hljs-string">&quot;#asmessage&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">// 异步信息 直接发送</span>
+  ipcRenderer.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;asynchronous-message&quot;</span>, <span class="hljs-string">&quot;as-ping&quot;</span>);
+});
 <span class="hljs-comment">// 监听异步信息的响应</span>
-ipcRenderer.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;asynchronous-reply&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
-    <span class="hljs-comment">// pong</span>
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg)
-})
-$(<span class="hljs-string">&#x27;#smessage&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-comment">// 同步信息 发送之后等待响应</span>
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ipcRenderer.<span class="hljs-title function_">sendSync</span>(<span class="hljs-string">&#x27;synchronous-message&#x27;</span>,<span class="hljs-string">&#x27;s-ping&#x27;</span>))
-})
+ipcRenderer.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;asynchronous-reply&quot;</span>, <span class="hljs-function">(<span class="hljs-params">event, arg</span>) =&gt;</span> {
+  <span class="hljs-comment">// pong</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg);
+});
+$(<span class="hljs-string">&quot;#smessage&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">// 同步信息 发送之后等待响应</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ipcRenderer.<span class="hljs-title function_">sendSync</span>(<span class="hljs-string">&quot;synchronous-message&quot;</span>, <span class="hljs-string">&quot;s-ping&quot;</span>));
+});
 </code></pre>
 <h4 id="remote">Remote</h4>
-<p><code>remote</code> 模块为渲染进程（web页面）和主进程通信（IPC）提供了一种简单方法。</p>
-<p>在Electron中, GUI 相关的模块 (如 <code>dialog</code>、<code>menu</code> 等) 仅在主进程中可用, 在渲染进程中不可用。 为了在渲染进程中使用它们, <code>ipc</code> 模块是向主进程发送进程间消息所必需的。 使用 <code>remote</code> 模块, 你可以调用 main 进程对象的方法, 而不必显式发送进程间消息, 类似于 Java 的 <a href="https://en.wikipedia.org/wiki/Java_remote_method_invocation">RMI </a>。
-例如：从渲染进程创建浏览器窗口/获取app对象</p>
+<p><code>remote</code> 模块为渲染进程（web 页面）和主进程通信（IPC）提供了一种简单方法。</p>
+<p>在 Electron 中, GUI 相关的模块 (如 <code>dialog</code>、<code>menu</code> 等) 仅在主进程中可用, 在渲染进程中不可用。 为了在渲染进程中使用它们, <code>ipc</code> 模块是向主进程发送进程间消息所必需的。 使用 <code>remote</code> 模块, 你可以调用 main 进程对象的方法, 而不必显式发送进程间消息, 类似于 Java 的 <a href="https://en.wikipedia.org/wiki/Java_remote_method_invocation">RMI </a>。
+例如：从渲染进程创建浏览器窗口/获取 app 对象</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">BrowserWindow</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">remote</span>
 <span class="hljs-keyword">let</span> win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({ <span class="hljs-attr">width</span>: <span class="hljs-number">800</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">600</span> })
 win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">&#x27;https://github.com&#x27;</span>)<span class="hljs-title class_">Copy</span>
@@ -125,7 +122,7 @@ win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">
 </ul>
 <p>在上面的示例中, <a href="https://github.com/electron/electron/blob/master/docs/api/browser-window.md"><code>BrowserWindow</code></a>和<code>win</code> 都是远程对象, <code>new BrowserWindow</code> 在渲染过程中没有创建 <code>BrowserWindow</code> 对象。 取而代之的是，它在主进程中创建了一个 <code>BrowserWindow</code>对象，并且在渲染进程中返回相应的远程对象，即<code>win</code>对象。</p>
 <p><strong>注意：</strong> 当远程对象被第一次引用时，只有<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties">可枚举的属性</a>可以通过远程访问。</p>
-<p><strong>注意：</strong> 当通过<code>remote</code>模块访问时，数组和缓冲区在IPC上复制。 在渲染进程中修改它们不会在主进程中修改它们，反之亦然。 </p>
+<p><strong>注意：</strong> 当通过<code>remote</code>模块访问时，数组和缓冲区在 IPC 上复制。 在渲染进程中修改它们不会在主进程中修改它们，反之亦然。</p>
 <p>Electron 确保只要渲染进程中的远程对象一直存在（换句话说，没有被回收），主进程中的相应对象就不会被释放。 当远程对象被垃圾回收后，主进程中的相应对象将被解除引用。</p>
 <p>如果远程对象在渲染进程中泄露（例如存储在映射中，但从未释放），则主进程中的相应对象也将被泄漏，所以您应该非常小心，不要泄漏远程对象。</p>
 <p>但是，字符串和数字等主要值的类型是通过复制发送的。</p>
@@ -135,58 +132,58 @@ win.<span class="hljs-title function_">loadURL</span>(<span class="hljs-string">
 <p>主进程和渲染进程之间：</p>
 <pre><code class="hljs language-javascript"><span class="hljs-comment">// 在主进程中</span>
 <span class="hljs-keyword">let</span> win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>({...})
-                             
+
 <span class="hljs-variable language_">global</span>.<span class="hljs-property">share</span> = {
     <span class="hljs-attr">win</span>: win
 }
-                            
+
 <span class="hljs-keyword">const</span> win = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">remote</span>.<span class="hljs-title function_">getGlobal</span>(<span class="hljs-string">&#x27;share&#x27;</span>).<span class="hljs-property">win</span>
 </code></pre>
 <p>渲染进程之间：</p>
 <pre><code class="hljs language-javascript"><span class="hljs-comment">// 在主进程中</span>
 <span class="hljs-variable language_">global</span>.<span class="hljs-property">sharedObject</span> = {
-  <span class="hljs-attr">someProperty</span>: <span class="hljs-string">&#x27;default value&#x27;</span>
-}                       
+  <span class="hljs-attr">someProperty</span>: <span class="hljs-string">&quot;default value&quot;</span>,
+};
 <span class="hljs-comment">// 在第一个页面中</span>
-<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">remote</span>.<span class="hljs-title function_">getGlobal</span>(<span class="hljs-string">&#x27;sharedObject&#x27;</span>).<span class="hljs-property">someProperty</span> = <span class="hljs-string">&#x27;new value&#x27;</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>).<span class="hljs-property">remote</span>.<span class="hljs-title function_">getGlobal</span>(<span class="hljs-string">&quot;sharedObject&quot;</span>).<span class="hljs-property">someProperty</span> = <span class="hljs-string">&quot;new value&quot;</span>;
 <span class="hljs-comment">// 在第二个页面中</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>).<span class="hljs-property">remote</span>.<span class="hljs-title function_">getGlobal</span>(<span class="hljs-string">&#x27;sharedObject&#x27;</span>).<span class="hljs-property">someProperty</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>).<span class="hljs-property">remote</span>.<span class="hljs-title function_">getGlobal</span>(<span class="hljs-string">&quot;sharedObject&quot;</span>).<span class="hljs-property">someProperty</span>);
 </code></pre>
 <h2 id="optional-function">Optional Function</h2>
 <h4 id="notification">Notification</h4>
-<p>这个功能就是弹出系统的提示窗，但是支持很不友好，有很多BUG，也许是我没调出来，但是github上也有专门的<a href="https://github.com/electron/electron/issues/10864">issue</a>还在open，说明我不是特例，我反正搞了好久没搞出来。</p>
-<p>所有三个操作系统都提供了应用程序向用户发送通知的手段。 Electron允许开发者使用 <a href="https://notifications.spec.whatwg.org/">HTML5 Notification API</a> 发送通知，并使用当前运行的操作系统的本地通知 API 来显示它。</p>
+<p>这个功能就是弹出系统的提示窗，但是支持很不友好，有很多 BUG，也许是我没调出来，但是 github 上也有专门的<a href="https://github.com/electron/electron/issues/10864">issue</a>还在 open，说明我不是特例，我反正搞了好久没搞出来。</p>
+<p>所有三个操作系统都提供了应用程序向用户发送通知的手段。 Electron 允许开发者使用 <a href="https://notifications.spec.whatwg.org/">HTML5 Notification API</a> 发送通知，并使用当前运行的操作系统的本地通知 API 来显示它。</p>
 <p><strong>注意:</strong> 由于这是一个 HTML5 API，它只能在渲染器进程中使用。 如果你想在主进程中显示通知，请查看 <a href="https://electronjs.org/docs/api/notification">Notification</a> 模块.</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> myNotification = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Notification</span>(<span class="hljs-string">&#x27;标题&#x27;</span>, {
-  <span class="hljs-attr">body</span>: <span class="hljs-string">&#x27;通知正文内容&#x27;</span>
-})
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> myNotification = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Notification</span>(<span class="hljs-string">&quot;标题&quot;</span>, {
+  <span class="hljs-attr">body</span>: <span class="hljs-string">&quot;通知正文内容&quot;</span>,
+});
 
 myNotification.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;通知被点击&#x27;</span>)
-}
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;通知被点击&quot;</span>);
+};
 </code></pre>
 <h4 id="progressbar">ProgressBar</h4>
 <p>可以设置托盘图标的绿色进度条</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> progress = <span class="hljs-number">0</span>;
-$(<span class="hljs-string">&#x27;#processbar&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
-    <span class="hljs-keyword">if</span> (progress === <span class="hljs-number">0</span>) {
-        progress = <span class="hljs-number">0.5</span>
-    } <span class="hljs-keyword">else</span> {
-        progress = <span class="hljs-number">0</span>
-    }
-    win.<span class="hljs-title function_">setProgressBar</span>(progress)
-})
+$(<span class="hljs-string">&quot;#processbar&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">if</span> (progress === <span class="hljs-number">0</span>) {
+    progress = <span class="hljs-number">0.5</span>;
+  } <span class="hljs-keyword">else</span> {
+    progress = <span class="hljs-number">0</span>;
+  }
+  win.<span class="hljs-title function_">setProgressBar</span>(progress);
+});
 </code></pre>
 <h4 id="others">Others</h4>
-<p>其他的功能还有自定义Windows的任务栏，键盘快捷键的设置，离线在线监测（仅根据网络的connection状态来判断的），任务栏托盘图标闪烁等，文件拖拽等。</p>
-<pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> flash = <span class="hljs-literal">false</span>
-$(<span class="hljs-string">&#x27;#flash&#x27;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
-    <span class="hljs-keyword">if</span> (flash) {
-        flash = <span class="hljs-literal">false</span>
-    } <span class="hljs-keyword">else</span> {
-        flash = <span class="hljs-literal">true</span>
-    }
-    <span class="hljs-comment">// win.once(&#x27;focus&#x27;, () =&gt; win.flashFrame(false))</span>
-    win.<span class="hljs-title function_">flashFrame</span>(flash)
-})
+<p>其他的功能还有自定义 Windows 的任务栏，键盘快捷键的设置，离线在线监测（仅根据网络的 connection 状态来判断的），任务栏托盘图标闪烁等，文件拖拽等。</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">let</span> flash = <span class="hljs-literal">false</span>;
+$(<span class="hljs-string">&quot;#flash&quot;</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">if</span> (flash) {
+    flash = <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> {
+    flash = <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-comment">// win.once(&#x27;focus&#x27;, () =&gt; win.flashFrame(false))</span>
+  win.<span class="hljs-title function_">flashFrame</span>(flash);
+});
 </code></pre>

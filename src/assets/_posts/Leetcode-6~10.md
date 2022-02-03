@@ -9,8 +9,6 @@ date: 2019-02-17 13:18:00
 series: leetcode
 ---
 
-
-
 ### 6. ZigZag Conversion(Medium)
 
 The string `"PAYPALISHIRING"` is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
@@ -40,28 +38,28 @@ string convert(string s, int numRows);
 > Output: "PINALSIGYAHRPI"
 > Explanation:
 >
-> P     I    N
-> A   L S  I G
-> Y A   H R
-> P     I
+> P I N
+> A L S I G
+> Y A H R
+> P I
 
-说白了就是按照行数去写N字，完了之后再从左到右从上到下的序列
+说白了就是按照行数去写 N 字，完了之后再从左到右从上到下的序列
 
 #### Logical Gap Beat(99.82%)
 
 这样的阵图是很有逻辑性的，我们多看几组图的下标就能发现逻辑：
 
-``` graph
+```graph
 以26个字母序列为例：
 row=3
     A   E   I   M   Q   U   Y            00    04    08    12    16    20    24
-    B D F H J L N P R T V X Z     --->   01 03 05 07 09 11 13 15 17 19 21 23 25 
+    B D F H J L N P R T V X Z     --->   01 03 05 07 09 11 13 15 17 19 21 23 25
     C   G   K   O   S   W                02    06    10    14    18    22
 ------------------------------------
 row=4
     A     G     M     S     Y            00      06       12       18       24
     B   F H   L N   R T   X Z     --->   01   05 07    11 13    17 19    23 25
-    C E   I K   O Q   U W                02 04   08 10    14 16    20 22 
+    C E   I K   O Q   U W                02 04   08 10    14 16    20 22
     D     J     p     V                  03      09       15       21
 ------------------------------------
 row=5
@@ -72,12 +70,12 @@ row=5
     E       M       U                    04        12          20
 ```
 
-到这差不多就看出规律了，我们以一个**V**为单元，每次循环就处理这个V单元就好了，比如以row为3/5为例：
+到这差不多就看出规律了，我们以一个**V**为单元，每次循环就处理这个 V 单元就好了，比如以 row 为 3/5 为例：
 
-``` graph
+```graph
 row=3
 A   E   I   M   Q   U   Y   00    | 04    | 08    | 12    | 16    | 20    | 24
-B D F H J L N P R T V X Z   01 03 | 05 07 | 09 11 | 13 15 | 17 19 | 21 23 | 25 
+B D F H J L N P R T V X Z   01 03 | 05 07 | 09 11 | 13 15 | 17 19 | 21 23 | 25
 C   G   K   O   S   W       02    | 06    | 10    | 14    | 18    | 22
 -----------------------------
 row=5
@@ -88,22 +86,22 @@ D F     L N     T V         03 05     | 11 13       | 19 21
 E       M       U           04        | 12          | 20
 ```
 
-**row=3时**
+**row=3 时**
 
-- 第一行和最后一行之间有4个下标间距 （4 = (3 - 1) * 2）
-- 第二行之间有2个下标间距 （2 = (3 - 2) * 2）
+- 第一行和最后一行之间有 4 个下标间距 （4 = (3 - 1) \* 2）
+- 第二行之间有 2 个下标间距 （2 = (3 - 2) \* 2）
 
-**row=5时**
+**row=5 时**
 
-- 第一行和最后一行之间有8个下标间距 （8 = (5 - 1) * 2）
-- 第二行之间有6个下标间距 （6 = (5 - 2) * 2）
-- 第三行4 （4 = (5 - 3) * 2）
-- 第四行2 （2 = (5 - 4) * 2）
+- 第一行和最后一行之间有 8 个下标间距 （8 = (5 - 1) \* 2）
+- 第二行之间有 6 个下标间距 （6 = (5 - 2) \* 2）
+- 第三行 4 （4 = (5 - 3) \* 2）
+- 第四行 2 （2 = (5 - 4) \* 2）
 
 容易看出规律，我们以行数为遍历顺序的话，设求行数为**numRow**，当前行数为**nowRow**：
 
-- 第一行和最后一行字符之间间距都是**（numRow - 1）* 2**，我们称它为**mainGap**
-- 其他行：**（numRow - nowRow）* 2**，我们称它为**minorGap**
+- 第一行和最后一行字符之间间距都是**（numRow - 1）\* 2**，我们称它为**mainGap**
+- 其他行：**（numRow - nowRow）\* 2**，我们称它为**minorGap**
 
 如果只看**mainGap**的距离，那么每一行我们都会经过它，关键在于求出**minorGap**的时候，如果它小于**mainGap**，那么在下一次循环之前，也要加上它
 
@@ -156,7 +154,7 @@ Given a 32-bit signed integer, reverse digits of an integer.
 > Output: 21
 
 **Note:**
-Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31, 2^(31 − 1)]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
 
 #### Ⅰ. with string
 
@@ -179,13 +177,14 @@ public int reverse(int x) {
     return ans;
 }
 ```
+
 #### Ⅱ. calculate
 
 Refer from discuss
 
 1. No need to handle the minus sign cause **Mod** will keep it.
 
-   e.g `-51  % 10` get  `-1`
+   e.g `-51 % 10` get `-1`
 
 2. Do not use **long** type in java cause **"Assume we are dealing with an environment which could only store integers"** was declare on the question
 
@@ -203,8 +202,6 @@ public int reverse(int x) {
 }
 ```
 
-
-
 ### 8. String To Integer(Medium)
 
 Implement `atoi `which converts a string to an integer.
@@ -220,7 +217,7 @@ If no valid conversion could be performed, a zero value is returned.
 Note:
 
 - Only the space character ' ' is considered as whitespace character.
-- **Assume we are dealing with an environment which could only store integers** within the 32-bit signed integer range: [−231,  231 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.
+- **Assume we are dealing with an environment which could only store integers** within the 32-bit signed integer range: [−231, 231 − 1]. If the numerical value is out of the range of representable values, INT_MAX (231 − 1) or INT_MIN (−231) is returned.
   Example 1:
 
 > Input: "42"
@@ -228,32 +225,30 @@ Note:
 
 Example 2:
 
-> Input: "   -42"
+> Input: " -42"
 > Output: -42
 > Explanation: The first non-whitespace character is '-', which is the minus sign.
->              Then take as many numerical digits as possible, which gets 42.
+> Then take as many numerical digits as possible, which gets 42.
 
 Example 3:
 
->Input: "4193 with words"
->Output: 4193
->Explanation: Conversion stops at digit '3' as the next character is not a numerical digit.
+> Input: "4193 with words"
+> Output: 4193
+> Explanation: Conversion stops at digit '3' as the next character is not a numerical digit.
 
 Example 4:
 
 > Input: "words and 987"
 > Output: 0
-> Explanation: The first non-whitespace character is 'w', which is not a numerical 
->              digit or a +/- sign. Therefore no valid conversion could be performed.
+> Explanation: The first non-whitespace character is 'w', which is not a numerical
+> digit or a +/- sign. Therefore no valid conversion could be performed.
 
 Example 5:
 
 > Input: "-91283472332"
 > Output: -2147483648
 > Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
->              Thefore INT_MIN (−231) is returned.
-
-
+> Thefore INT_MIN (−231) is returned.
 
 这题需要注意处理各种边角情况：
 
@@ -261,11 +256,11 @@ Example 5:
 
 2. 空字符串
 
-3. 乘法溢出：因为每次加一位数字就需要将上一次的结果乘以10：
+3. 乘法溢出：因为每次加一位数字就需要将上一次的结果乘以 10：
 
-   整型的范围是`[-2147483648  ~ 2147483647]`
+   整型的范围是`[-2147483648 ~ 2147483647]`
 
-   假设我们需要处理字符串`“2147483657”`，那么在处理最后一位数字`7`的时候，我们需要将上一次得到的结果`214748365`乘以10，得到`2147483650`，显然这时候这个数字已经大于`2147483647`了，不需要进行到加法就已经因为乘法而溢出了
+   假设我们需要处理字符串`“2147483657”`，那么在处理最后一位数字`7`的时候，我们需要将上一次得到的结果`214748365`乘以 10，得到`2147483650`，显然这时候这个数字已经大于`2147483647`了，不需要进行到加法就已经因为乘法而溢出了
 
 4. 加法溢出： 判断符号是否反转（整型的上下溢）
 
@@ -312,8 +307,6 @@ public int strToInt2(String str) {
     return ans;
 }
 ```
-
-
 
 ### 9. Parlindrome Number(Easy)
 
@@ -376,13 +369,14 @@ public boolean isPalindrome(int x) {
         if (head != tail) {
             return false;
         } else {
-            headBase /= 10;               
+            headBase /= 10;
             tailBase *= 10;
         }
-    } 
+    }
     return true;
 }
 ```
+
 #### Ⅱ. just look on half
 
 Base on offical solution:
@@ -400,8 +394,6 @@ public bool IsPalindrome(int x) {
     return x == rev || x == rev/10;
 }
 ```
-
-
 
 ### 10. Regular Expression Matching(hard)
 
@@ -439,9 +431,9 @@ The matching should cover the **entire** input string (not partial).
 
 > Input:
 > s = "ab"
-> p = ".*"
+> p = "._"
 > Output: true
-> Explanation: ".*" means "zero or more (*) of any character (.)".
+> Explanation: "._" means "zero or more (\*) of any character (.)".
 
 **Example 4:**
 
@@ -455,34 +447,32 @@ The matching should cover the **entire** input string (not partial).
 
 > Input:
 > s = "mississippi"
-> p = "mis*is*p*."
+> p = "mis*is*p\*."
 > Output: false
-
-
 
 #### Ⅰ. Recursion
 
 这题难就难在，如果没有一阵见血地看出用什么思想去解的话，是很难找到解法的，因为解法并不多
 
-我开始解的时候沉迷于线性解法，去遍历`pattern`字串，试图用多个`if-else`去覆盖到所有的case，但是失败了，因为线性解法去覆盖case的话，不太可能一次性写出所有的case就算真的让你写出来了话，花的时间也非常多
+我开始解的时候沉迷于线性解法，去遍历`pattern`字串，试图用多个`if-else`去覆盖到所有的 case，但是失败了，因为线性解法去覆盖 case 的话，不太可能一次性写出所有的 case 就算真的让你写出来了话，花的时间也非常多
 
-那么怎么才能一阵见血呢？看你做题的sence了- -
+那么怎么才能一阵见血呢？看你做题的 sence 了- -
 
 为了方便，我们把`text` matching `pattern`简写成`text -> pattern`
 
 根据官方给出的回溯思路，我们考虑如下几种情况：
 
-- 如果`pattern`为""的话，这次match的结果就等同于看`text`是否为空；
+- 如果`pattern`为""的话，这次 match 的结果就等同于看`text`是否为空；
 
 - 如果我们每次只对比`text`中的第一个字符，并且比完我们就将它剔除掉的话，于是我们每次都是从一个新的子`pattern`和一个新的子`text`去继续往下进行对比，比如说`abc -> abc`，当对比完`text[0] -> pattern[0]`之后，我们下一次就从`bc -> bc`去对比；
 
-    也就是说：`text[0, n] -> pattern[0, m]`的结果等于`text[0]->pattern[0] && text[1, n]->pattern[1, m]`
+  也就是说：`text[0, n] -> pattern[0, m]`的结果等于`text[0]->pattern[0] && text[1, n]->pattern[1, m]`
 
-- 如果`pattern`不为空，根据上一个情况的扩展，对于`text[0]->pattern[0]`的判断，如果pattern是`.`，那么这次判断match，否则还是看text和pattern的字符是否相等；
+- 如果`pattern`不为空，根据上一个情况的扩展，对于`text[0]->pattern[0]`的判断，如果 pattern 是`.`，那么这次判断 match，否则还是看 text 和 pattern 的字符是否相等；
 
-- 对于`.*`或者`X*`（X代表一个确定的字符）的情况，假如说，`text`只剩下一个字符了，那么我们其实可以忽略掉这个2长度的pattern，因为`*`就是0到多个，比如`c -> a*c`的match结果可以看作是`c -> c`；但是如果`text`还有多个字符，我们还是得乖乖地**去腥（去*）**，比如`aac -> a*c`，的match结果，我们首先判断首字符是否在**星范围内**，如果在，那么我们可以去掉它，继续用子串和原`pattern`比较：`ac -> a*c`，一直到最后我们发现，又回到了`c -> a*c`；
+- 对于`.*`或者`X*`（X 代表一个确定的字符）的情况，假如说，`text`只剩下一个字符了，那么我们其实可以忽略掉这个 2 长度的 pattern，因为`*`就是 0 到多个，比如`c -> a*c`的 match 结果可以看作是`c -> c`；但是如果`text`还有多个字符，我们还是得乖乖地**去腥（去\*）**，比如`aac -> a*c`，的 match 结果，我们首先判断首字符是否在**星范围内**，如果在，那么我们可以去掉它，继续用子串和原`pattern`比较：`ac -> a*c`，一直到最后我们发现，又回到了`c -> a*c`；
 
-``` java
+```java
 public boolean isMatch(String text, String pattern) {
     if (pattern.isEmpty()) {
         return text.isEmpty();
@@ -500,13 +490,11 @@ public boolean isMatch(String text, String pattern) {
 }
 ```
 
-
-
 #### Ⅱ. DP
 
-DP能写出千种万种方式，只是想不想得到而已，附上我喜欢的[一种](https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235)
+DP 能写出千种万种方式，只是想不想得到而已，附上我喜欢的[一种](https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation/231235)
 
-``` 
+```
 假如我们有：
 
 Tn = t1t2t3...tn-1tn
@@ -515,13 +503,13 @@ Pm = p1p2p3...pm-1pm
 那么：
 Match(Tm, Pm) = Match(tn, pm) && Match(Tn-1, Pm-1)		(1)
 Match(Ti, Pj) =   if (ti == pj || pj == '.')
-                then return Match(Ti-1, Pj-1);			(2)	
+                then return Match(Ti-1, Pj-1);			(2)
                 else
                     if (pj == '*')
                         if (ti != pj-1 && pj-1 != '.')
                       then return Match(Ti, Pj-2);		(3)	// no match then skip 'X*'
                       else
-                        return 
+                        return
                             (Match(Ti, Pj-1)) ||		(4) // char before * appears once
                             (Match(Ti-1,Pj))  ||		(5) // char before * appears more
                             (Match(Ti, Pj-2));			(6) // no match then skip 'X*'
@@ -561,34 +549,33 @@ public boolean isMatch(String s, String p) {
 }
 ```
 
-我们如果把几个case的dp打印出来，应该会更好理解一点，有多条状态转移公式的DP，确实是难，但是这个解法有一个优雅的地方在于它在T和P的开头加上'+'来代表各自的""，从而让各下标更好处理
+我们如果把几个 case 的 dp 打印出来，应该会更好理解一点，有多条状态转移公式的 DP，确实是难，但是这个解法有一个优雅的地方在于它在 T 和 P 的开头加上'+'来代表各自的""，从而让各下标更好处理
 
-**Case Match("abcd", ".*bcd")**
+**Case Match("abcd", ".\*bcd")**
 
 ```
-	+		.		*		b		c		d		
-+	true	false	true	false	false	false	
-a	false	true	true	false	false	false	
-b	false	false	true	true	false	false	
-c	false	false	true	false	true	false	
-d	false	false	true	false	false	true	
+	+		.		*		b		c		d
++	true	false	true	false	false	false
+a	false	true	true	false	false	false
+b	false	false	true	true	false	false
+c	false	false	true	false	true	false
+d	false	false	true	false	false	true
 ```
 
-**Case Match("mississippi", "mis\*is\*p*.")**
+**Case Match("mississippi", "mis\*is\*p\*.")**
 
-``` 
-	+		m		i		s		*		i		s		*		p		*		.		
-+	true	false	false	false	false	false	false	false	false	false	false	
-m	false	true	false	false	false	false	false	false	false	false	false	
-i	false	false	true	false	true	false	false	false	false	false	false	
-s	false	false	false	true	true	false	false	false	false	false	false	
-s	false	false	false	false	true	false	false	false	false	false	false	
-i	false	false	false	false	false	true	false	true	false	true	false	
-s	false	false	false	false	false	false	true	true	false	true	true	
-s	false	false	false	false	false	false	false	true	false	true	true	
-i	false	false	false	false	false	false	false	false	false	false	true	
-p	false	false	false	false	false	false	false	false	false	false	false	
-p	false	false	false	false	false	false	false	false	false	false	false	
+```
+	+		m		i		s		*		i		s		*		p		*		.
++	true	false	false	false	false	false	false	false	false	false	false
+m	false	true	false	false	false	false	false	false	false	false	false
+i	false	false	true	false	true	false	false	false	false	false	false
+s	false	false	false	true	true	false	false	false	false	false	false
+s	false	false	false	false	true	false	false	false	false	false	false
+i	false	false	false	false	false	true	false	true	false	true	false
+s	false	false	false	false	false	false	true	true	false	true	true
+s	false	false	false	false	false	false	false	true	false	true	true
+i	false	false	false	false	false	false	false	false	false	false	true
+p	false	false	false	false	false	false	false	false	false	false	false
+p	false	false	false	false	false	false	false	false	false	false	false
 i	false	false	false	false	false	false	false	false	false	false	false
 ```
-

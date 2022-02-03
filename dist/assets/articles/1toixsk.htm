@@ -1,5 +1,5 @@
 <h3 id="introduction">Introduction</h3>
-<p>In the last post, we discussed the relationship between Application and Service. </p>
+<p>In the last post, we discussed the relationship between Application and Service.</p>
 <p>So they say: <strong>Services are really just &quot;Containers in Production&quot;.</strong></p>
 <p>And when we deploy a service, we use <code>docker swarm init</code> to prepare for it.</p>
 <p>Now let&#39;s learn what is swarm and how to setup a cluster with <strong>docker-machine</strong>.</p>
@@ -8,11 +8,11 @@
 <p>After that has happened, you continue to run the Docker commands you’re used to, but now they are executed on a cluster by a <strong>swarm manager</strong>. The machines in a swarm can be <strong>physical or virtual</strong>. After joining a swarm, they are referred to as <strong>nodes</strong>.</p>
 <p>Swarm managers can use several <strong>strategies</strong> to run containers, such as :</p>
 <ul>
-<li><p>“emptiest node” </p>
-<p>  which fills the least utilized machines with containers.</p>
+<li><p>“emptiest node”</p>
+<p>which fills the least utilized machines with containers.</p>
 </li>
 <li><p>“global”</p>
-<p>  which ensures that each machine gets exactly one instance of the specified container.</p>
+<p>which ensures that each machine gets exactly one instance of the specified container.</p>
 </li>
 </ul>
 <p>You instruct the swarm manager to use these strategies <strong>in the Compose file</strong>, just like the one you have already been using.</p>
@@ -48,7 +48,7 @@
 <h4 id="install-docker-machine">Install docker-machine</h4>
 <blockquote>
 <p><strong>Notice:</strong></p>
-<p><strong>Never ever intall docker on WIN10 system !!! Because the <code>Hyper-V</code> that docker need will just weaken your machine&#39;s performance at some ways !!! Such as I found my LOL&#39;s fps rate was suddenly fall down to 58-61, and it usually was 100+ !!! And when I uninstall the docker on WIN10 then turn off the <code>Hyper-V</code> on windows functional options, the fps problem was solved !!!</strong> </p>
+<p><strong>Never ever intall docker on WIN10 system !!! Because the <code>Hyper-V</code> that docker need will just weaken your machine&#39;s performance at some ways !!! Such as I found my LOL&#39;s fps rate was suddenly fall down to 58-61, and it usually was 100+ !!! And when I uninstall the docker on WIN10 then turn off the <code>Hyper-V</code> on windows functional options, the fps problem was solved !!!</strong></p>
 </blockquote>
 <ol>
 <li><p>download</p>
@@ -128,37 +128,37 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
 <p>If you want to start over, you can run <code>docker swarm leave</code> from each node.</p>
 </blockquote>
 <h3 id="deploy-your-app-on-the-swarm-cluster">Deploy your app on the swarm cluster</h3>
-<p><strong>The hard part is over.</strong> Now you just repeat the process you used in <a href="https://docs.docker.com/get-started/part3/">part 3</a> to deploy on your new swarm. </p>
+<p><strong>The hard part is over.</strong> Now you just repeat the process you used in <a href="https://docs.docker.com/get-started/part3/">part 3</a> to deploy on your new swarm.</p>
 <p><strong>Just remember that only swarm managers like <code>myvm1</code> execute Docker commands; workers are just for capacity.</strong></p>
 <h4 id="two-ways-to-talk-to-your-vms">Two ways to talk to your vms</h4>
-<p>So far, you’ve been wrapping Docker commands in <code>docker-machine ssh</code> to talk to the VMs. </p>
+<p>So far, you’ve been wrapping Docker commands in <code>docker-machine ssh</code> to talk to the VMs.</p>
 <p>Another option is to run <code>docker-machine env &lt;machine&gt;</code> to get and run a command that configures your current shell to talk to the Docker daemon on the VM. This method works better for the next step because it allows you to use your local <code>docker-compose.yml</code> file to deploy the app “remotely” without having to copy it anywhere.</p>
 <p>Type <code>docker-machine env myvm1</code>, then copy-paste and run the command provided as the last line of the output to configure your shell to talk to <code>myvm1</code>, the swarm manager.</p>
 <p>The commands to configure your shell differ depending on whether you are Mac, Linux, or Windows, so examples of each are shown on the tabs below.</p>
 <p>To more details, refer to: <a href="https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">https://docs.docker.com/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager</a></p>
 <h4 id="deploy">Deploy</h4>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># send compose file to manager node with scp</span>
-$ docker-machine scp docker-compose.yml myvm1:~                                             
+$ docker-machine scp docker-compose.yml myvm1:~
 
 <span class="hljs-comment"># deploy it</span>
-$ docker-machine ssh myvm1 <span class="hljs-string">&quot;docker stack deploy -c docker-compose.yml getstartedlab&quot;</span>  
+$ docker-machine ssh myvm1 <span class="hljs-string">&quot;docker stack deploy -c docker-compose.yml getstartedlab&quot;</span>
 Creating network getstartedlab_webnet
 Creating service getstartedlab_web
 
 <span class="hljs-comment"># get it&#x27;s info</span>
 $ docker-machine ssh myvm1 <span class="hljs-string">&quot;docker stack ps getstartedlab&quot;</span>
-ID                  NAME                  IMAGE                              NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS              
-kjeymj6rp0y8        getstartedlab_web.1   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
-dehkjrmu0fxn        getstartedlab_web.2   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
-acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
-36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago                                          
-q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago                                          
+ID                  NAME                  IMAGE                              NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+kjeymj6rp0y8        getstartedlab_web.1   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
+dehkjrmu0fxn        getstartedlab_web.2   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago
+acnejfyy1cmg        getstartedlab_web.3   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
+36lpsek707gj        getstartedlab_web.4   johndmulhausen/get-started:part1   myvm1               Running             Running 18 seconds ago
+q5yb5uj97ef1        getstartedlab_web.5   johndmulhausen/get-started:part1   myvm2               Running             Running 24 seconds ago
 </code></pre>
 <h3 id="accessing-your-cluster">Accessing your cluster</h3>
 <p>You can access your app from the IP address of <strong>either</strong> <code>myvm1</code> or <code>myvm2</code>.</p>
 <p>The network you created is shared between them and load-balancing. Run <code>docker-machine ls</code> to get your VMs’ IP addresses and visit either of them on a browser, hitting refresh (or just <code>curl</code> them).</p>
 <p>There are five possible container IDs all cycling by randomly, demonstrating the load-balancing.</p>
-<p><strong>The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh</strong>. </p>
+<p><strong>The reason both IP addresses work is that nodes in a swarm participate in an ingress routing mesh</strong>.</p>
 <p>This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called <code>my-web</code> published at port <code>8080</code> on a three-node swarm would look:</p>
 <p><img src="https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png" alt="ingress-routing-mesh"></p>
 <h3 id="enough-for-now">Enough for now</h3>

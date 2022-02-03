@@ -16,7 +16,7 @@
     <div class="serie-box unselectable" v-if="hasSerie">
       <n-divider style="margin-top: 0; margin-bottom: 10px" />
       <n-collapse>
-        <n-collapse-item :title="'Serie of ' + postSerie.se">
+        <n-collapse-item :title="postSerie.se">
           <div v-for="item of postSerie.ps" :key="item.abbrlink">
             <n-el
               :class="{

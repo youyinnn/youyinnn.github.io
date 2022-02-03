@@ -4,9 +4,9 @@
 <!-- more -->
 
 <h3 id="lookups">Lookups</h3>
-<p>Lookups使得我们可以自由地在Log4j2配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了StrLookup接口。</p>
+<p>Lookups 使得我们可以自由地在 Log4j2 配置文件中添加某些值（使用占位符设置变量），它们是一种特殊类型的插件，并且实现了 StrLookup 接口。</p>
 <h4 id="contextmap-lookup">ContextMap Lookup</h4>
-<p>ContextMapLookup使得我们可以在Log4j2的ThreadContext Map中保存值，并在Log4j2的配置文件中可以取得值。</p>
+<p>ContextMapLookup 使得我们可以在 Log4j2 的 ThreadContext Map 中保存值，并在 Log4j2 的配置文件中可以取得值。</p>
 <p><strong>引用方法：<code>$${ctx:KEY}</code></strong></p>
 <p>代码中写：</p>
 <pre><code class="hljs language-java">ThreadContext.put(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-string">&quot;bbb&quot;</span>);
@@ -18,7 +18,7 @@
 <pre><code class="hljs language-console">bbb  log4j2test.Main 19 15:20:07.859 [main] INFO  - info level
 </code></pre>
 <h4 id="date-lookup">Date Lookup</h4>
-<p>DateLookUp跟其它lookups不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为SimpleDateFormat合法的格式。以下示例表示当前日志事件产生的时间：</p>
+<p>DateLookUp 跟其它 lookups 不太一样，它并非根据一个关键字变量去获取一个值的，但它可以利用关键字来指定一种格式，且为 SimpleDateFormat 合法的格式。以下示例表示当前日志事件产生的时间：</p>
 <p><strong>引用方法：<code>$${date:SimpleDateFormat}</code></strong></p>
 <p>配置示例：</p>
 <pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;$${ctx:aaa} $${date:HH:mm:ss.SSS} [%t] %-5level - %msg%n&quot;</span> /&gt;</span>
@@ -30,10 +30,10 @@
 <pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;$${env:USER} [%t] %-5level - %msg%n&quot;</span> /&gt;</span>
 </code></pre>
 <h4 id="java-lookup">Java Lookup</h4>
-<p>输出一些JVM信息：</p>
+<p>输出一些 JVM 信息：</p>
 <ul>
-<li>version：Java版本</li>
-<li>rentime：Java运行时版本信息</li>
+<li>version：Java 版本</li>
+<li>rentime：Java 运行时版本信息</li>
 <li>vm：虚拟机版本</li>
 <li>os：操作系统版本</li>
 <li>locale：一些硬件信息如：default locale: en_US, platform encoding: Cp1252</li>
