@@ -46,8 +46,8 @@ export default defineComponent({
     body: document,
     transitionName: null,
     overrideThemeCommon: {
-      fontSize: "14.8px",
-      fontFamily: "charter, Georgia, Cambria, 'Times New Roman', Times, serif",
+      fontSize: "15.2px",
+      fontFamily: "'IBM Plex Serif',ibm-plex-serif,Georgia,Times,serif",
     },
   }),
   computed: {
