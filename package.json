@@ -2,12 +2,14 @@
   "name": "youyinnn.github.io",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build-lite": "vue-cli-service build",
     "build": "yarn md && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "md": "node ./src/plugins/md-generator.js"
+    "md": "node ./src/plugins/md-generator.js",
+    "pt": "yarn prettier --write ."
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
