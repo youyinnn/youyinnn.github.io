@@ -12,6 +12,7 @@
     "pt": "yarn prettier --write ."
   },
   "dependencies": {
+    "@giscus/vue": "^1.1.1",
     "@mdi/font": "5.9.55",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",

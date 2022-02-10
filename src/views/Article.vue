@@ -37,6 +37,19 @@
     <transition name="fade3" mode="out-in">
       <markdown-body :content="content" :key="currentAbbrlink" />
     </transition>
+    <Giscus
+      v-if="articleLoaded"
+      repo="youyinnn/youyinnn.github.io"
+      repoId="MDEwOlJlcG9zaXRvcnkxMDk1ODc3NDk="
+      category="Comment"
+      categoryId="DIC_kwDOBogtJc4CBGni"
+      mapping="specific"
+      :term="postMetadata.title"
+      reactionsEnabled="1"
+      emitMetadata="0"
+      lang="en"
+      :theme="giscusTheme"
+    />
     <toc :toc="toc" />
   </div>
 </template>
@@ -47,6 +60,7 @@ import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // eslint-disable-next-line no-unused-vars
+import { Giscus } from "@giscus/vue";
 
 export default {
   name: "Article",
@@ -57,6 +71,8 @@ export default {
     NCollapse,
     NCollapseItem,
     NEl,
+    // eslint-disable-next-line vue/no-unused-components
+    Giscus,
   },
   data: () => ({
     content: null,
@@ -72,6 +88,12 @@ export default {
     },
     currentAbbrlink() {
       return this.$route.params.articleId;
+    },
+    articleLoaded() {
+      return this.postMetadata != null;
+    },
+    giscusTheme() {
+      return this.$store.state.currentThemeConfig.darkTheme ? "dark" : "light";
     },
   },
   watch: {
@@ -164,6 +186,9 @@ export default {
 <style scoped></style>
 
 <style>
+.giscus {
+  margin-top: 3rem;
+}
 @media only screen and (max-width: 800px) {
   .article-metadata {
     padding: 0 1rem;

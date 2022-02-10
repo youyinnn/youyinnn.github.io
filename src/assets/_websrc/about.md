@@ -8,6 +8,7 @@ Born in 1996.
 Play Bass Guitar.
 Code with Java mainly.
 Amateur Front-end developer.
+Rookie Researcher.
 ```
 
 #### Working Experience
@@ -25,6 +26,12 @@ Amateur Front-end developer.
 > 2021(Fall), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
 >
 > 2022(Winter)-2023(Winter), ECE, MASc : [Concordia Universty](https://www.concordia.ca/).
+>
+> > Currently Research Focus:
+> >
+> > - [Study: Interpretable Machine Learning](https://github.com/youyinnn/masc_research_knowledge_base/issues/11)
+> >
+> > - [Knowledge gathering: XAI](https://github.com/youyinnn/masc_research_knowledge_base/issues/7)
 
 ##### Course Papers & Reports
 
@@ -48,10 +55,13 @@ Amateur Front-end developer.
 
 #### About this site
 
-> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del> <del>Searching support: [Algolia](https://www.algolia.com/)</del>
-> Comment plugin: <del>[Valine](https://valine.js.org/)</del>
+> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del>
 >
-> Publishing my tech-articles, sharing my ideas, keeping some scripts, <del>todos, and my personal resume.</del>
+> <del>Searching support: [Algolia](https://www.algolia.com/)</del>
+>
+> Comment plugin: [giscus.app](https://giscus.app/zh-CN)
+>
+> Publishing my articles, sharing my ideas, keeping some scripts, <del>todos, and my personal resume.</del>
 
 <!-- Change Log
 
