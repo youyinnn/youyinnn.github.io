@@ -30,7 +30,7 @@ https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-m
 
 #### 安装 ARM Homebrew
 
-选择国内镜像安装
+选择国内Mirror安装
 
 ```bash
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
