@@ -4,6 +4,9 @@ img {
 pre {
   overflow: scroll;
 }
+code {
+  font-family: Times, "Times New Roman", serif !important;
+}
 .article {
   --animate-duration: 1s;
   word-wrap: break-word;
