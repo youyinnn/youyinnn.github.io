@@ -21,7 +21,7 @@ And how am I going to achieve that? There are some factors I should count in:
 
 There's a lot of choices for using SSR on Linux os, check [here](https://github.com/shadowsocks), but many of them were banned and deleted their documents.
 
-Luckily, there still some tutorials showing how to implement it on Linux. ([reference1](<[https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779](https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo实现科学上网-eae1b7eeb779)>)[reference2](https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477))
+Luckily, there still some tutorials showing how to implement it on Linux. [reference1](https://medium.com/@molimowang/raspberry-pi-shadowsocks-polipo%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-eae1b7eeb779),[reference2](https://my.oschina.net/u/1432769/blog/619651?nocache=1527132335477)
 
 #### Installation
 

@@ -136,7 +136,9 @@ $
 至此我们的 HelloWorld 的打包就完成了，可以发现虽然我们只是一个简单的 html，但是整个包的大小却有 131M，这是因为它还包含了 chrome 微引擎和其他的环境文件。
 
 _参考：https://electronjs.org/docs/tutorial/application-distribution_
+
 _参考：https://github.com/electron-userland/electron-packager/blob/master/docs/api.md_
+
 _参考：http://blog.csdn.net/a1170201028/article/details/59108126_
 
 ## electron-builder
@@ -177,4 +179,4 @@ Please note that everything is packaged into an asar archive [by default](https:
 
 For an app that will be shipped to production, you should sign your application. See [Where to buy code signing certificates](https://www.electron.build/code-signing#where-to-buy-code-signing-certificate).
 
-这个 build 的时候也需要下载一些东西，源可能也被墙了，所以只有科学上网了。
+这个 build 的时候也需要下载一些东西，源可能被BAN了。
