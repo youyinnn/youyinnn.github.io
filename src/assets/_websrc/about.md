@@ -21,7 +21,7 @@ Rookie Researcher.
 
 #### Education
 
-> 2015-2019, SE, BE : [South-Central University For Nationalities](http://www.scuec.edu.cn/s/1/t/560/main.htm), Wuhan, China.
+> 2015-2019, SE, BE : [South-Central Minzu University](https://www.scuec.edu.cn/), Wuhan, China.
 >
 > 2021(Fall), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
 >
