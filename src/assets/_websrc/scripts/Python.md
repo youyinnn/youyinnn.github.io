@@ -10,7 +10,7 @@
 
    ```zsh
    // .zshrc
-
+   
    export PYENV_ROOR="$HOME/.pyenv"
    export PATH=$PYENV_ROOT/shims:$PATH
    eval "$(pyenv init -)"
@@ -97,3 +97,27 @@ https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index
 #### iPython
 
 - [Reloading submodules in IPython](https://stackoverflow.com/questions/5364050/reloading-submodules-in-ipython)
+
+
+
+### Seaborn
+
+[Python Seaborn Distribution Plots: Rug Plot](https://www.programsbuzz.com/article/python-seaborn-distribution-plots-rug-plot)
+
+
+
+### Pandas
+
+[How do I select rows from a DataFrame based on column values?](https://stackoverflow.com/questions/17071871/how-do-i-select-rows-from-a-dataframe-based-on-column-values)
+
+[How to get a column value from a row in a Pandas `DataFrame` in Python](https://www.kite.com/python/answers/how-to-get-a-column-value-from-a-row-in-a-pandas-%60dataframe%60-in-python#:~:text=iloc%20to%20select%20a%20value,specified%20row%20index%20as%20i%20.)
+
+[How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)
+
+[How do I get the row count of a Pandas DataFrame?](https://stackoverflow.com/questions/15943769/how-do-i-get-the-row-count-of-a-pandas-dataframe)
+
+
+
+### Pypolt plt & ax
+
+https://zhuanlan.zhihu.com/p/93423829
