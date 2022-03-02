@@ -1,0 +1,31 @@
+<h2 id="cloudplatform">CloudPlatform</h2>
+<h3 id="gcp">GCP</h3>
+<h4 id="挂载磁盘">挂载磁盘</h4>
+<p><a href="https://xrp001.github.io/tutorial/2020/05/27/gcp-mount-disk/">https://xrp001.github.io/tutorial/2020/05/27/gcp-mount-disk/</a></p>
+<h4 id="ssh连接">SSH连接</h4>
+<ol>
+<li><p>首先用GCP的SSH登陆一下看用户名是什么</p>
+</li>
+<li><p>然后在本地</p>
+<pre><code class="hljs language-bash">ssh-keygen -t rsa -f ~/.ssh/ins6 -C [user_name_on_gcp_instance]
+</code></pre>
+</li>
+<li><p>然后复制公钥到实例的设置里</p>
+<p><img src="../../../../public/img/image-20220302161152601.png" alt="image-20220302161152601"></p>
+</li>
+<li><p>然后再修改虚拟机上的<code>/etc/ssh/sshd_config</code>:</p>
+<pre><code class="hljs language-ini"><span class="hljs-comment"># 找到这俩</span>
+PermitRootLogin yes
+PubkeyAuthentication yes
+
+<span class="hljs-comment"># 还有</span>
+AuthorizedKeysFile    .ssh/authorized_keys
+</code></pre>
+</li>
+<li><p>然后再在这个用户名下的<code>.ssh/authorized_keys</code>里把公钥的内容复制过去</p>
+</li>
+<li><p>然后重启sshd服务</p>
+<pre><code class="hljs language-bash">sudo service sshd restart
+</code></pre>
+</li>
+</ol>

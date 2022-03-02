@@ -121,3 +121,26 @@ https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index
 ### Pypolt plt & ax
 
 https://zhuanlan.zhihu.com/p/93423829
+
+
+
+### 下载Google Drive文件
+
+You can use [gdown](https://github.com/wkentaro/gdown). Consider also visiting that page for full instructions; this is just a summary and the source repo may have more up-to-date instructions.
+
+------
+
+Install it with the following command:
+
+```
+pip install gdown
+```
+
+After that, you can download any file from Google Drive by running one of these commands:
+
+```
+gdown https://drive.google.com/uc?id=<file_id>  # for files
+gdown --id <file_id>                            # alternative format
+gdown --folder https://drive.google.com/drive/folders/<file_id>  # for folders
+gdown --folder --id <file_id>                   # this format works for folders too
+```
