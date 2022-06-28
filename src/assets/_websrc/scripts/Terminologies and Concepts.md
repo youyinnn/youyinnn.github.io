@@ -1,4 +1,4 @@
-## English Termiologies
+## Terminologies and Concepts
 
 ### Mathmatics
 
@@ -82,3 +82,13 @@ This formula is valid only if the eight values with which we began form the comp
 In that case, the result of the original formula would be called the _sample_ standard deviation and denoted by _s_ instead of $\sigma$.
 
 Dividing by _n_ − 1 rather than by _n_ gives an unbiased estimate of the variance of the larger parent population. This is known as _[Bessel's correction](https://en.wikipedia.org/wiki/Bessel's_correction)_.[[4\]](https://en.wikipedia.org/wiki/Standard_deviation#cite_note-4)[[5\]](https://en.wikipedia.org/wiki/Standard_deviation#cite_note-5) Roughly, the reason for it is that the formula for the sample variance relies on computing differences of observations from the sample mean, and the sample mean itself was constructed to be as close as possible to the observations, so just dividing by _n_ would underestimate the variability.
+
+#### Hat Operator
+
+https://en.wikipedia.org/wiki/Hat_operator
+
+$$
+\hat{\theta}
+$$
+
+In [statistics](https://en.wikipedia.org/wiki/Statistics), the hat is used to denote an [estimator](https://en.wikipedia.org/wiki/Estimator) or an estimated value. For example, in the context of [errors and residuals](https://en.wikipedia.org/wiki/Errors_and_residuals_in_statistics), the "hat" over the letter ε indicates an observable estimate (the residuals) of an unobservable quantity called ε (the statistical errors).
