@@ -144,3 +144,13 @@ gdown --id <file_id>                            # alternative format
 gdown --folder https://drive.google.com/drive/folders/<file_id>  # for folders
 gdown --folder --id <file_id>                   # this format works for folders too
 ```
+
+
+
+
+
+### Python Issues
+
+- [Python Pillow: how to produce 3-channel image from 1-channel image?](https://stackoverflow.com/questions/64490076/python-pillow-how-to-produce-3-channel-image-from-1-channel-image)
+- [ImportError: libGL.so.1: cannot open shared object file: No such file or directory](https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-file-no-such-file-or-directo)
+- feat: add linux aarch64 wheel: https://github.com/giampaolo/psutil/pull/2103

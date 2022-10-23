@@ -102,3 +102,8 @@ Log out & back in and you should notice the warning message is gone.
 1. 通过**nvm**
 
    https://nodejs.org/en/download/package-manager/#nvm
+
+
+#### How To Open A Port In CentOS / RHEL 7
+
+https://www.thegeekdiary.com/how-to-open-a-ports-in-centos-rhel-7/
