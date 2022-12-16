@@ -1,0 +1,25 @@
+name: build site
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.PAT }}
+      - name: Run a multi-line script
+        run: |
+          # export NODE_PATH=$NODE_PATH:`npm root -g`
+          # npm install --global yarn
+          # yarn install
+          # yarn build
+
+      - name: git status
+        run: git status
+
+      - name: git
+        if: ${{ !env.ACT }}
+        run: bash .github/scripts/git-push-if-changes.sh
