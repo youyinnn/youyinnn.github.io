@@ -10,6 +10,18 @@
 - [How To Calculate the Mean and Standard Deviation — Normalizing Datasets in Pytorch](https://towardsdatascience.com/how-to-calculate-the-mean-and-standard-deviation-normalizing-datasets-in-pytorch-704bd7d05f4c)
 - [PyTorch Optimizers – Complete Guide for Beginner](https://machinelearningknowledge.ai/pytorch-optimizers-complete-guide-for-beginner/#Conclusion)
 
+##### Efficiently Use Single GPU
+
+https://efficientdl.com/faster-deep-learning-in-pytorch-a-guide/#2-use-multiple-workers-and-pinned-memory-in-dataloader
+
+https://pytorch.org/docs/stable/notes/amp_examples.html#working-with-scaled-gradients
+
+https://towardsdatascience.com/7-tips-for-squeezing-maximum-performance-from-pytorch-ca4a40951259
+
+https://blog.csdn.net/lgzlgz3102/article/details/125827398
+
+https://zhuanlan.zhihu.com/p/477457147
+
 #### CNN
 
 - [A guide to convolution arithmetic for deep learning](https://arxiv.org/pdf/1603.07285v1.pdf)
