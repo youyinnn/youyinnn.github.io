@@ -1,1 +1,1 @@
-[{"id":"dl","level":2,"content":"DL","child":[{"id":"cnn","level":3,"content":"CNN","child":[{"id":"pytorch","level":4,"content":"PyTorch","child":[]},{"id":"cnn-1","level":4,"content":"CNN","child":[]}]}]}]
+[{"id":"dl","level":2,"content":"DL","child":[{"id":"cnn","level":3,"content":"CNN","child":[{"id":"pytorch","level":4,"content":"PyTorch","child":[{"id":"efficiently-use-single-gpu","level":5,"content":"Efficiently Use Single GPU","child":[]}]},{"id":"cnn-1","level":4,"content":"CNN","child":[]}]}]}]
