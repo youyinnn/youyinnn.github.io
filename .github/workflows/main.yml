@@ -11,10 +11,10 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Run a multi-line script
         run: |
-          # export NODE_PATH=$NODE_PATH:`npm root -g`
-          # npm install --global yarn
-          # yarn install
-          # yarn build
+          export NODE_PATH=$NODE_PATH:`npm root -g`
+          npm install --global yarn
+          yarn install
+          yarn build
 
       - name: git status
         run: git status
