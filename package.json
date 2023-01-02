@@ -28,7 +28,7 @@
     "@vicons/ionicons5": "^0.11.0",
     "@vicons/tabler": "^0.11.0",
     "@vue/cli-plugin-babel": "5.0.0-beta.7",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "5.0.0-beta.7",
