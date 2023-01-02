@@ -120,7 +120,28 @@ https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index
 
 ### Pypolt plt & ax
 
-https://zhuanlan.zhihu.com/p/93423829
+- [matplotlib：先搞明白plt. /ax./ fig再画](https://zhuanlan.zhihu.com/p/93423829)
+
+- [matplotlib can't plot single channel or greyscale image pixels](https://stackoverflow.com/questions/59601024/matplotlib-cant-plot-single-channel-or-greyscale-image-pixels)
+
+- [How to suppress scientific notation when printing float values?](https://stackoverflow.com/questions/658763/how-to-suppress-scientific-notation-when-printing-float-values)
+
+
+
+
+### Image
+
+- [How to convert a 1 channel image into a 3 channel with opencv2?](https://stackoverflow.com/questions/14786179/how-to-convert-a-1-channel-image-into-a-3-channel-with-opencv2)
+
+- [convert RGB arrays to PIL image](https://stackoverflow.com/questions/62739851/convert-rgb-arrays-to-pil-image)
+
+- [How do I convert a numpy array to (and display) an image?](https://stackoverflow.com/questions/2659312/how-do-i-convert-a-numpy-array-to-and-display-an-image)
+
+- [Converting a grayscale image to an RGB heatmap image with matplotlib](https://stackoverflow.com/questions/15419493/converting-a-grayscale-image-to-an-rgb-heatmap-image-with-matplotlib)
+
+- [How to turn numpy array image to bytes?](https://stackoverflow.com/questions/50630045/how-to-turn-numpy-array-image-to-bytes)
+
+- [Normalizing Images in PyTorch](https://sparrow.dev/pytorch-normalize/)
 
 
 
