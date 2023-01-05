@@ -175,3 +175,6 @@ gdown --folder --id <file_id>                   # this format works for folders 
 - [Python Pillow: how to produce 3-channel image from 1-channel image?](https://stackoverflow.com/questions/64490076/python-pillow-how-to-produce-3-channel-image-from-1-channel-image)
 - [ImportError: libGL.so.1: cannot open shared object file: No such file or directory](https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-file-no-such-file-or-directo)
 - feat: add linux aarch64 wheel: https://github.com/giampaolo/psutil/pull/2103
+- [How do I determine the size of an object in Python?](https://stackoverflow.com/a/30316760/17094075)
+- [Running tqdm with Python multiprocessing](https://rednafi.github.io/reflections/running-tqdm-with-python-multiprocessing.html)
+- [Progress Bars for Python Multiprocessing Tasks](https://leimao.github.io/blog/Python-tqdm-Multiprocessing/)
