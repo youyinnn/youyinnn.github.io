@@ -130,6 +130,11 @@ export default {
       location.href = "/page-not-found";
     }
   },
+  mounted: function () {
+    this.$store.commit("tabChange", {
+      tab: "scripts",
+    });
+  },
 };
 </script>
 

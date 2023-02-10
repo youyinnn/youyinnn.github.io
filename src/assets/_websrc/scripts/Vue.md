@@ -21,12 +21,12 @@
    .fade-leave-active {
      transition: opacity 0.3s;
    }
-
+   
    .fade-enter,
    .fade-leave-to {
      opacity: 0;
    }
-
+   
    .slide-fade-enter-active {
      transition: all 0.3s ease;
    }
@@ -187,3 +187,22 @@ then the spa is good to go~
 ---
 
 在[stackoverflow](https://stackoverflow.com/a/70299225/17094075)上的回答
+
+
+
+### Vite
+
+- [vite配置项目路径别名](https://segmentfault.com/a/1190000041417219)
+- [Vue Router 4 for Everyone](https://vueschool.io/lessons/installing-and-setting-up-vue-router-with-vite-vite-only)
+
+
+
+### Vue Router
+
+- [How to get current name of route in Vue?](https://stackoverflow.com/questions/53126710/how-to-get-current-name-of-route-in-vue)
+
+
+### Vuetify
+
+- [Vuetify component v-form is not responding on the declared @submit event handler](https://stackoverflow.com/questions/48937829/vuetify-component-v-form-is-not-responding-on-the-declared-submit-event-handler)
+- 

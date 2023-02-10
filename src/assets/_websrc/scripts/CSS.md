@@ -214,3 +214,10 @@ https://www.cnblogs.com/hutuzhu/p/4450850.html
 ### Scroll snap 滚动贴合
 
 https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type
+
+
+
+### Example of the setting the width of the table column
+
+https://www.w3docs.com/snippets/css/how-to-set-the-width-of-the-table-column.html#:~:text=If%20you%20want%20to%20set,col%3E%20elements%20having%20span%20attributes.
+

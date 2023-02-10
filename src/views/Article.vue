@@ -39,6 +39,7 @@
     </transition>
     <Giscus
       v-if="articleLoaded"
+      id="comments"
       repo="youyinnn/youyinnn.github.io"
       repoId="MDEwOlJlcG9zaXRvcnkxMDk1ODc3NDk="
       category="Comment"
@@ -49,6 +50,7 @@
       emitMetadata="0"
       lang="en"
       :theme="giscusTheme"
+      crossorigin="anonymous"
     />
     <toc :toc="toc" />
   </div>
@@ -60,7 +62,7 @@ import dayjs from "dayjs";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // eslint-disable-next-line no-unused-vars
-import { Giscus } from "@giscus/vue";
+import Giscus from "@giscus/vue";
 
 export default {
   name: "Article",
@@ -179,6 +181,11 @@ export default {
     } else {
       location.href = "/page-not-found";
     }
+  },
+  mounted: function () {
+    this.$store.commit("tabChange", {
+      tab: "articles",
+    });
   },
 };
 </script>

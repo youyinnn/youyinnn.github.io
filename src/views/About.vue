@@ -20,6 +20,9 @@ export default {
     const src = require(`raw-loader!@/../public/assets/about/index.htm`);
     this.content = src.default;
     // getContent("about", "index", this);
+    this.$store.commit("tabChange", {
+      tab: "about",
+    });
   },
 };
 </script>

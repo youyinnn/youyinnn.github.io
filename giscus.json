@@ -1,4 +1,5 @@
 {
   "origins": ["https://youyinnn.github.io"],
+  "originsRegex": ["http://localhost:[0-9]+", "http://192.168.2.11:[0-9]+"],
   "defaultCommentOrder": "newest"
 }
