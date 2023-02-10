@@ -171,12 +171,12 @@ export default {
       if (!value) {
         this.$store.commit("changeThemeConfig", {
           darkTheme: true,
-          codeTheme: this.codeThemeValue,
+          codeTheme: "atom-one-dark",
         });
       } else {
         this.$store.commit("changeThemeConfig", {
           darkTheme: false,
-          codeTheme: this.codeThemeValue,
+          codeTheme: "atom-one-light",
         });
       }
     },

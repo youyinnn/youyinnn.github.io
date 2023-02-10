@@ -1,17 +1,17 @@
-Hi there, this will help you know a little bit about me
-
-#### Infomation
+#### About Me
 
 ```java
 Chinese.
 Born in 1996.
 Play Bass Guitar.
-Code with Java mainly.
+Code with <del>Java</del> (now I work more with Python...) mainly.
 Amateur Front-end developer.
-Rookie Researcher.
+Rookie Researcher for AI.
 ```
 
-#### Working Experience
+
+
+#### Working Experiences
 
 > 07/2018-09/2018 - Java back-end Engineer, intern, CHINA UMS, Wuhan
 >
@@ -19,19 +19,27 @@ Rookie Researcher.
 >
 > 07/2021-11/2021 - Java back-end Engineer, Aleph.Inc , Shanghai
 
+
+
 #### Education
 
 > 2015-2019, SE, BE : [South-Central Minzu University](https://www.scuec.edu.cn/), Wuhan, China.
 >
-> 2021(Fall), ECE, MEng : [Concordia Universty](https://www.concordia.ca/), Montreal, Canada.
+> 2021(Fall), ECE, MEng: [Concordia University](https://www.concordia.ca/), Montreal, Canada.
 >
-> 2022(Winter)-2023(Winter), ECE, MASc : [Concordia Universty](https://www.concordia.ca/).
+> 2022(Winter)-2023(Winter), ECE, MASc: [Concordia University](https://www.concordia.ca/), supervised by Dr. [Yan Liu](https://www.concordia.ca/faculty/yan-liu.html).
 >
 > > Currently Research Focus:
 > >
 > > - [Study: Interpretable Machine Learning](https://github.com/youyinnn/masc_research_knowledge_base/issues/11)
 > >
 > > - [Knowledge gathering: XAI](https://github.com/youyinnn/masc_research_knowledge_base/issues/7)
+
+#### Writings 
+
+##### Publications
+
+- [J. Huang, Z. Wang, D. Li and Y. Liu, "The Analysis and Development of an XAI Process on Feature Contribution Explanation," 2022 IEEE International Conference on Big Data (Big Data), Osaka, Japan, 2022, pp. 5039-5048, doi: 10.1109/BigData55660.2022.10020313.](https://ieeexplore.ieee.org/document/10020313)
 
 ##### Course Papers & Reports
 
@@ -49,13 +57,19 @@ Rookie Researcher.
 
 > COEN 6501
 >
-> [Technical Reoprt: Survey of Several Recent Full Adder Designs](https://github.com/youyinnn/coen_6501/blob/main/a1_report/output/report.pdf) (I like this one)
+> [Technical Report: Survey of Several Recent Full Adder Designs](https://github.com/youyinnn/coen_6501/blob/main/a1_report/output/report.pdf) (I like this one)
 >
 > [Project Report](https://github.com/youyinnn/coen_6501/blob/main/project_spec/output/main.pdf)
 
-#### About this site
+> COMP 6731
+>
+> [Project Report Part 1](https://github.com/youyinnn/ai_face_mask_detector/blob/xai/AI_Face_Mask_Detector_Report.pdf)
+>
+> [Project Report Part 2](https://github.com/youyinnn/ai_face_mask_detector/blob/xai/AI_Face_Mask_Detector_Report%202.pdf)
 
-> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages](https://help.coding.net/docs/cd/static-website.html)</del>
+#### About This Site
+
+> This blog is completely driven by [GitHub Pages](https://pages.github.com/) & <del>[Coding Pages.](https://help.coding.net/docs/cd/static-website.html)</del>
 >
 > <del>Searching support: [Algolia](https://www.algolia.com/)</del>
 >

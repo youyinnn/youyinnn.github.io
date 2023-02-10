@@ -37,8 +37,9 @@
     <transition name="fade3" mode="out-in">
       <markdown-body :content="content" :key="currentAbbrlink" />
     </transition>
+    <n-divider style="margin-top: 3em; margin-bottom: 6em" />
     <Giscus
-      v-if="articleLoaded"
+      class="clearfix"
       id="comments"
       repo="youyinnn/youyinnn.github.io"
       repoId="MDEwOlJlcG9zaXRvcnkxMDk1ODc3NDk="
@@ -95,7 +96,9 @@ export default {
       return this.postMetadata != null;
     },
     giscusTheme() {
-      return this.$store.state.currentThemeConfig.darkTheme ? "dark" : "light";
+      return this.$store.state.currentThemeConfig.darkTheme
+        ? "dark_dimmed"
+        : "light_protanopia";
     },
   },
   watch: {
@@ -223,5 +226,10 @@ export default {
   background-color: var(--border-color);
   border-left: 3px solid var(--error-color);
   border-right: 3px solid var(--error-color);
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 </style>
