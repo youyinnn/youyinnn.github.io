@@ -185,3 +185,17 @@ module.exports = {
   ],
 };
 ```
+
+
+
+
+
+### D3
+
+- https://observablehq.com/@d3/color-legend
+- https://github.com/topojson/topojson
+- https://github.com/topojson/topojson-client
+- https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs
+- https://d3-graph-gallery.com/graph/choropleth_hover_effect.html
+- https://observablehq.com/@d3/world-choropleth?collection=@d3/charts
+- 

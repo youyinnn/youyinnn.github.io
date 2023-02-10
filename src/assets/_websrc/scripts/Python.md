@@ -178,3 +178,7 @@ gdown --folder --id <file_id>                   # this format works for folders 
 - [How do I determine the size of an object in Python?](https://stackoverflow.com/a/30316760/17094075)
 - [Running tqdm with Python multiprocessing](https://rednafi.github.io/reflections/running-tqdm-with-python-multiprocessing.html)
 - [Progress Bars for Python Multiprocessing Tasks](https://leimao.github.io/blog/Python-tqdm-Multiprocessing/)
+- [TypeError: ObjectId('') is not JSON serializable](https://stackoverflow.com/questions/16586180/typeerror-objectid-is-not-json-serializable)
+- [Flask run with argument](https://stackoverflow.com/questions/73635412/flask-run-with-argument)
+- [Python Get Traceback (Stack trace) from Exception Object](https://codingshower.com/python-get-traceback-stack-trace-from-exception-object/)
+

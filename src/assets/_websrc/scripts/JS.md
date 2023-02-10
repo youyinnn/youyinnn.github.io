@@ -456,3 +456,16 @@ https://grrr.tech/posts/create-dom-node-from-html-string/
 ### JS Base64
 
 https://stackoverflow.com/a/30106551/17094075
+
+
+
+
+
+### String regex check
+
+- https://stackoverflow.com/questions/9804777/how-to-test-if-a-string-is-json-or-not
+
+- [Check if a JavaScript string is a URL](https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url)
+
+
+

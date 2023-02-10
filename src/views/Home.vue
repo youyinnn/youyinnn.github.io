@@ -50,6 +50,9 @@ export default {
   mounted: function () {
     this.postMetadata = JSON.parse(sessionStorage.postMetadata);
     this.postMetadataLength = this.postMetadata.length;
+    this.$store.commit("tabChange", {
+      tab: "articles",
+    });
   },
 };
 </script>
