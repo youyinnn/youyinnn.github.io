@@ -28,3 +28,23 @@ https://zhuanlan.zhihu.com/p/477457147
 - [AlexNet: A simple implementation using Pytorch](https://medium.com/analytics-vidhya/alexnet-a-simple-implementation-using-pytorch-30c14e8b6db2)
 - [Introduction to The Architecture of Alexnet](https://www.analyticsvidhya.com/blog/2021/03/introduction-to-the-architecture-of-alexnet/)
 - [Youtube: L13.9.3 AlexNet in PyTorch](https://www.youtube.com/watch?v=mlXRVuD_HEg)
+
+
+
+
+
+### Self Organizing Maps
+
+Implementation from scratch:  https://towardsdatascience.com/understanding-self-organising-map-neural-network-with-python-code-7a77f501e985
+
+Number of nodes: https://www.researchgate.net/post/How-many-nodes-for-self-organizing-maps
+
+Wiki: https://en.wikipedia.org/wiki/Self-organizing_map
+
+Youtube: 
+
+- https://www.youtube.com/watch?v=3wP9117rzv4
+- https://www.youtube.com/watch?v=0qtvb_Nx2tA
+
+
+

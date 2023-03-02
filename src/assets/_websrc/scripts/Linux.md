@@ -1,4 +1,4 @@
-## Linux
+## 
 
 ### Shell
 
@@ -88,7 +88,7 @@ LANG=en_US.utf-8
 LC_ALL=en_US.utf-8
 ```
 
-Log out & back in and you should notice the warning message is gone.
+Log out & back in; you should notice the warning message is gone.
 
 #### Ubuntu
 
@@ -96,6 +96,14 @@ Log out & back in and you should notice the warning message is gone.
 
 - https://blog.csdn.net/sinat_31206523/article/details/78138822
 - https://blog.csdn.net/yessharing/article/details/55806090
+
+##### apt-get NO_PUBLIC KEY
+
+https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/
+
+##### Conflict with cudatoolkit
+
+https://github.com/pytorch/pytorch/issues/51080#issuecomment-780021794
 
 ##### 安装 nodejs
 
