@@ -198,4 +198,22 @@ module.exports = {
 - https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs
 - https://d3-graph-gallery.com/graph/choropleth_hover_effect.html
 - https://observablehq.com/@d3/world-choropleth?collection=@d3/charts
-- 
+
+
+
+### Axios
+
+CORS 问题：
+
+https://github.com/axios/axios/issues/1358
+
+解决：
+
+``` js
+let conf = {
+  // change adapter
+  adapter: "fetch",
+};
+axios(conf).then(function (response) {})
+```
+
