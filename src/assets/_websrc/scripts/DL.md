@@ -46,5 +46,42 @@ Youtube:
 - https://www.youtube.com/watch?v=3wP9117rzv4
 - https://www.youtube.com/watch?v=0qtvb_Nx2tA
 
+Aliyun: 
+
+- https://developer.aliyun.com/learning/course/535/detail/7245?spm=a2c6h.21258778.0.0.365fb10dXbGtKX
+
+
+
+### Counter Propagation Network
+
+- https://www.youtube.com/watch?v=xdKFkcSeTII&t=1s
+- https://developer.aliyun.com/learning/course/535/detail/7248?spm=a2c6h.21258778.0.0.365fb10dXbGtKX
+
+![CPN](https://ucc.alicdn.com/pic/developer-ecology/9c75feda48e84cfd9f8ecd838eaf59a1.png)
+
+
+
+### Learning Rate
+
+#### Difference
+
+[Learning Rate Schedules and A**daptive Learning** Rate Methods for Deep Learning](https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1)
+
+#### Learning Rate Annealing
+
+https://blog.zjykzj.cn/posts/936eda30.html
+
+https://zhuanlan.zhihu.com/p/93624972
+
+#### Adaptive Learning Rate
+
+
+
+
+
+### Learning Rules
+
+- [Introduction to Learning Rules in Neural Network](https://data-flair.training/blogs/learning-rules-in-neural-network/)
+
 
 
