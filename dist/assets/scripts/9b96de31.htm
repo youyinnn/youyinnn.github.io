@@ -142,5 +142,14 @@ hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/nikla
 <li><a href="https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs">https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs</a></li>
 <li><a href="https://d3-graph-gallery.com/graph/choropleth_hover_effect.html">https://d3-graph-gallery.com/graph/choropleth_hover_effect.html</a></li>
 <li><a href="https://observablehq.com/@d3/world-choropleth?collection=@d3/charts">https://observablehq.com/@d3/world-choropleth?collection=@d3/charts</a></li>
-<li></li>
 </ul>
+<h3 id="axios">Axios</h3>
+<p>CORS 问题：</p>
+<p><a href="https://github.com/axios/axios/issues/1358">https://github.com/axios/axios/issues/1358</a></p>
+<p>解决：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">let</span> conf = {
+  <span class="hljs-comment">// change adapter</span>
+  <span class="hljs-attr">adapter</span>: <span class="hljs-string">&quot;fetch&quot;</span>,
+};
+<span class="hljs-title function_">axios</span>(conf).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) {})
+</code></pre>
