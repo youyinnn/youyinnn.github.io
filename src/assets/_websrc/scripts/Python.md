@@ -182,3 +182,13 @@ gdown --folder --id <file_id>                   # this format works for folders 
 - [Flask run with argument](https://stackoverflow.com/questions/73635412/flask-run-with-argument)
 - [Python Get Traceback (Stack trace) from Exception Object](https://codingshower.com/python-get-traceback-stack-trace-from-exception-object/)
 
+
+
+
+
+### VSCode
+
+1.  Run Cells in Python Files:https://github.com/microsoft/vscode-python/issues/15151#issuecomment-762341258
+
+   ![](https://user-images.githubusercontent.com/3245228/104931587-e36dd000-59a6-11eb-9141-a7a89498deb8.png)
+
