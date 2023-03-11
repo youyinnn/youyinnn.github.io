@@ -52,6 +52,12 @@ Aliyun:
 
 
 
+Good PPT: https://ml.informatik.uni-freiburg.de/former/_media/documents/teaching/ss15/som.pdf
+
+[Improving Feature Map Quality of SOM Based on Adjusting the Neighborhood Function](https://www.intechopen.com/chapters/69305)
+
+
+
 ### Counter Propagation Network
 
 - https://www.youtube.com/watch?v=xdKFkcSeTII&t=1s
@@ -72,6 +78,10 @@ Aliyun:
 https://blog.zjykzj.cn/posts/936eda30.html
 
 https://zhuanlan.zhihu.com/p/93624972
+
+https://www.mdpi.com/2079-9292/10/16/2029
+
+https://www.geeksforgeeks.org/types-of-learning-rules-in-ann/
 
 #### Adaptive Learning Rate
 

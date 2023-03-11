@@ -124,4 +124,7 @@ It might located at:
 
 19. [Why does \\ not return a new line in an equation?](https://tex.stackexchange.com/questions/194236/why-does-not-return-a-new-line-in-an-equation)
 
-20.
+20. [How to write algorithm in Latex](https://shantoroy.com/latex/how-to-write-algorithm-in-latex/)
+
+21. 
+
