@@ -40,6 +40,7 @@ Rookie Researcher for AI.
 ##### Publications
 
 - [J. Huang, Z. Wang, D. Li and Y. Liu, "The Analysis and Development of an XAI Process on Feature Contribution Explanation," 2022 IEEE International Conference on Big Data (Big Data), Osaka, Japan, 2022, pp. 5039-5048, doi: 10.1109/BigData55660.2022.10020313.](https://ieeexplore.ieee.org/document/10020313)
+- [D. Li, Y. Liu, J. Huang and Z. Wang, "A Trustworthy View on Explainable Artificial Intelligence Method Evaluation," in Computer, vol. 56, no. 4, pp. 50-60, April 2023, doi: 10.1109/MC.2022.3233806.](https://ieeexplore.ieee.org/document/10098190)
 
 ##### Course Papers & Reports
 

@@ -62,10 +62,34 @@ Good PPT: https://ml.informatik.uni-freiburg.de/former/_media/documents/teaching
 
 - https://www.youtube.com/watch?v=xdKFkcSeTII&t=1s
 - https://developer.aliyun.com/learning/course/535/detail/7248?spm=a2c6h.21258778.0.0.365fb10dXbGtKX
+- https://www.doc88.com/p-5728771723459.html
+- https://www.doc88.com/p-7028340165732.html
 
-![CPN](https://ucc.alicdn.com/pic/developer-ecology/9c75feda48e84cfd9f8ecd838eaf59a1.png)
 
 
+### HopField
+
+- Original: 
+
+  - https://www.paperexplained.cn/articles/article/sdetail/9c34c8c7-dcb4-4a27-ab72-12d7dfb34d31/#id-h4-c23954eac46d
+  - https://github.com/crypto-code/Hopfield-Network/blob/4cc079d14c97157503567ea8fbdf6582b13ae140/network.py
+  - [Spurious attractors in Hopfield networks](https://psychology.stackexchange.com/questions/903/spurious-attractors-in-hopfield-networks)
+  - [Perfect recall and spurious states in hopfield networks](https://stats.stackexchange.com/questions/219598/perfect-recall-and-spurious-states-in-hopfield-networks)
+  - 《神经网络与深度学习》、《人工神经网络理论、设计及应用_第2版》、《人工神经网络原理及应用》
+
+- Modern Hopfield:
+
+  -  https://github.com/ctawong/hopfield/blob/master/models.py
+
+  -  [Hopfield Networks is All You Need (Chinese)](https://www.paperexplained.cn/articles/paper/detail/85a2fea9971b2cbe3564a94c64d7aa9575c60963/)
+  
+  -  [ICML 2021 | Modern Hopfield Networks - Dr Sepp Hochreiter](https://www.youtube.com/watch?v=414-gVnSNyk)
+  
+  -  [Hopfield Networks is All You Need](https://ml-jku.github.io/hopfield-layers/)
+  
+  -  https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/2-Hopfield.html#modern-hopfield-networks-dense-associative-memories-optional
+  
+  -  
 
 ### Learning Rate
 

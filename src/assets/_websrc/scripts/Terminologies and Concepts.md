@@ -92,3 +92,9 @@ $$
 $$
 
 In [statistics](https://en.wikipedia.org/wiki/Statistics), the hat is used to denote an [estimator](https://en.wikipedia.org/wiki/Estimator) or an estimated value. For example, in the context of [errors and residuals](https://en.wikipedia.org/wiki/Errors_and_residuals_in_statistics), the "hat" over the letter ε indicates an observable estimate (the residuals) of an unobservable quantity called ε (the statistical errors).
+
+
+
+#### Matrix
+
+https://www.cfm.brown.edu/people/dobrush/am34/Mathematica/ch1/matrix.html
