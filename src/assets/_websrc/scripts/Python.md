@@ -181,6 +181,7 @@ gdown --folder --id <file_id>                   # this format works for folders 
 - [TypeError: ObjectId('') is not JSON serializable](https://stackoverflow.com/questions/16586180/typeerror-objectid-is-not-json-serializable)
 - [Flask run with argument](https://stackoverflow.com/questions/73635412/flask-run-with-argument)
 - [Python Get Traceback (Stack trace) from Exception Object](https://codingshower.com/python-get-traceback-stack-trace-from-exception-object/)
+- [TypeError: Object of type int64 is not JSON serializab](https://bobbyhadz.com/blog/python-typeerror-object-of-type-int64-is-not-json-serializable)
 
 
 

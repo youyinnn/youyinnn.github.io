@@ -126,5 +126,5 @@ It might located at:
 
 20. [How to write algorithm in Latex](https://shantoroy.com/latex/how-to-write-algorithm-in-latex/)
 
-21. 
+21. [Two algorithm2e environments side by side](https://tex.stackexchange.com/questions/147914/two-algorithm2e-environments-side-by-side)
 
