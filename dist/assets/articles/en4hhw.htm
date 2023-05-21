@@ -22,7 +22,7 @@
 <p>认准这俩依赖</p>
 <h4 id="默认配置文件如果配置文件缺省的情况下，也会是这样的配置">默认配置文件(如果配置文件缺省的情况下，也会是这样的配置)</h4>
 <p>配置文件需要放在 classpath 的根目录下（一般的项目是 src，maven web 项目则是推荐在 resource 下），以 log4j2.xml 命名，配置文件还有其他的配置形式如 json 和 yaml，我习惯使用 xml。</p>
-<pre><code class="hljs language-xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<pre><code class="hljs language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;OFF&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">appenders</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">Console</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Console&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;SYSTEM_OUT&quot;</span>&gt;</span>
@@ -56,7 +56,7 @@
 <span class="hljs-number">13</span>:<span class="hljs-number">34</span>:<span class="hljs-number">41</span>.<span class="hljs-number">072</span> [main] FATAL mylog - fatal level
 </code></pre>
 <p>你会很奇怪，为什么我们写了这么多 log，却只出现两行 log 信息，我们去看看我们的配置文件：</p>
-<pre><code class="hljs language-xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<pre><code class="hljs language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;OFF&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- 这里定义了一个appenders --&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">appenders</span>&gt;</span>

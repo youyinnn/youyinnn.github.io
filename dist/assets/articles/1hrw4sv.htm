@@ -7,7 +7,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 <h4 id="brute-forcebeat-9065">Brute Force(Beat 90.65%)</h4>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
     <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span> || l2 == <span class="hljs-literal">null</span>) {
-        <span class="hljs-type">return</span> <span class="hljs-variable">l1</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? l2 : l1;
+        <span class="hljs-keyword">return</span> l1 == <span class="hljs-literal">null</span> ? l2 : l1;
     }
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
     pre.next = l1;
@@ -116,7 +116,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
 <span class="hljs-comment">// 用到之前的合并2个有序List</span>
 <span class="hljs-keyword">private</span> ListNode <span class="hljs-title function_">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {
     <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span> || l2 == <span class="hljs-literal">null</span>) {
-        <span class="hljs-type">return</span> <span class="hljs-variable">l1</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? l2 : l1;
+        <span class="hljs-keyword">return</span> l1 == <span class="hljs-literal">null</span> ? l2 : l1;
     }
     <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
     pre.next = l1;
@@ -255,9 +255,9 @@ assign some pointer：
                    nowHead tmpPre    tmp
 
 于是这时候我们可以将链看成是三段：
-1. nowPre之前的结点是一段；           记为A段
-2. nowHead到tmpPre的结点是一段；    记为B段
-3. tmp之后的结点是一段；               记为C段
+1. nowPre之前的结点是一段；		   记为A段
+2. nowHead到tmpPre的结点是一段；	记为B段
+3. tmp之后的结点是一段；			   记为C段
 
 这时候可以看出，我们要逆转的段是第二段，于是先断开BC之间的连接：
 
@@ -278,13 +278,13 @@ assign some pointer：
                        nowPre → 0
                                 ↓
                       3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
-                      ↑       ↗     ↑
+        	          ↑       ↗     ↑
                    tmpPre  nowHead  tmp
 
 再nowPre.next = tmpPre，纠正AB段：
 
         nowPre → 0 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; NULL
-                      ↑       ↗     ↑
+        	          ↑       ↗     ↑
                    tmpPre  nowHead  tmp
 
 最后调整指针，为下一次处理做准备（若是第一次处理，则newHead必定为空，则可以指定newHead）：
@@ -340,6 +340,6 @@ assign some pointer：
     }
     <span class="hljs-comment">// when k is bigger than list length then newHead will be null</span>
     <span class="hljs-comment">// so just return head</span>
-    <span class="hljs-type">return</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span>= <span class="hljs-literal">null</span> ? head : newHead;
+    <span class="hljs-keyword">return</span> newHead == <span class="hljs-literal">null</span> ? head : newHead;
 }
 </code></pre>

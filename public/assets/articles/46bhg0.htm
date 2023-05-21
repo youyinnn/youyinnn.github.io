@@ -9,12 +9,12 @@
 <p>而在 JVM 装载 class 文件的时候，会读取 Constant Pool 里的内容到 Runtime Constant Pool，而 Runtime Constant Pool 会在程序运行的时候动态产生新的常量；</p>
 <h3 id="literal">Literal</h3>
 <p>我们知道 String 有两种创建的方式：</p>
-<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;        <span class="hljs-comment">// literal</span>
-<span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);        <span class="hljs-comment">// new an object</span>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;		<span class="hljs-comment">// literal</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);		<span class="hljs-comment">// new an object</span>
 </code></pre>
 <p>我们当然也知道，a 和 b 是两个不同的对象，因为 a 是直接引用 String Pool 的<strong>字面量</strong>，而 b 引用的是一个 String 对象，虽然这个 String 对象中的字面量实际上也是引用到 String Pool</p>
 <p><img src="../../../public/img/20190302153504.png" alt=""></p>
-<p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121551&amp;idx=1&amp;sn=b14691e0daeca8d1283fc8a860732405&amp;chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&amp;scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
+<p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
 <blockquote>
 <p>在不同版本的 JDK 中，Java 堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考 Java 虚拟机规范。</p>
 </blockquote>
@@ -99,7 +99,7 @@
 </ol>
 <pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;12&quot;</span>;
 <span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> s2 + <span class="hljs-string">&quot;1&quot;</span>;    <span class="hljs-comment">// sb way</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> s2 + <span class="hljs-string">&quot;1&quot;</span>;	<span class="hljs-comment">// sb way</span>
 System.out.println(s1 == s3); <span class="hljs-comment">// false</span>
 </code></pre>
 <h3 id="stringintern">String.intern()</h3>
@@ -111,8 +111,8 @@ System.out.println(s1 == s3); <span class="hljs-comment">// false</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Hollis&quot;</span>);
 <span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Hollis&quot;</span>).intern();
 
-System.out.println(s1 == s2);    <span class="hljs-comment">// false</span>
-System.out.println(s1 == s3);    <span class="hljs-comment">// true</span>
+System.out.println(s1 == s2);	<span class="hljs-comment">// false</span>
+System.out.println(s1 == s3);	<span class="hljs-comment">// true</span>
 </code></pre>
 <p><img src="../../../public/img/20190302153504.png" alt=""></p>
 <p>由于 s1 和 s3 都是字符串池（字符串表）中的字面量的引用，所以 s1==s3。但是，s2 的引用是堆中的对象，所以 s2!=s1。</p>
@@ -167,7 +167,7 @@ System.out.println(s1 == s3);    <span class="hljs-comment">// true</span>
 <p>当我们的字符串对象是运行时创造的时候，比如：</p>
 <pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>;
 <span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;World&quot;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;        <span class="hljs-comment">// StringBuilder().append(a).append(b).toString()</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;		<span class="hljs-comment">// StringBuilder().append(a).append(b).toString()</span>
 </code></pre>
 <p>最后的<code>toString()</code>其实就有<code>new String()</code>的操作但是我们来说说数据的内存分布情况：</p>
 <p><img src="../../../public/img/stringpool.png" alt=""></p>

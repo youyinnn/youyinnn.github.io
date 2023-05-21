@@ -39,7 +39,6 @@
     </transition>
     <n-divider style="margin-top: 3em; margin-bottom: 6em" />
     <Giscus
-      class="clearfix"
       id="comments"
       repo="youyinnn/youyinnn.github.io"
       repoId="MDEwOlJlcG9zaXRvcnkxMDk1ODc3NDk="
@@ -48,10 +47,12 @@
       mapping="specific"
       :term="postMetadata.title"
       reactionsEnabled="1"
-      emitMetadata="0"
+      emitMetadata=""
       lang="en"
       :theme="giscusTheme"
-      crossorigin="anonymous"
+      loading="lazy"
+      inputPosition="top"
+      host="https://giscus.app"
     />
     <toc :toc="toc" />
   </div>
@@ -226,10 +227,5 @@ export default {
   background-color: var(--border-color);
   border-left: 3px solid var(--error-color);
   border-right: 3px solid var(--error-color);
-}
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 </style>

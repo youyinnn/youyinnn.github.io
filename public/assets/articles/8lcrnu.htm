@@ -13,9 +13,9 @@
     <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) {
         move(source, <span class="hljs-number">1</span>, target);
     } <span class="hljs-keyword">else</span> {
-        hanoi(n<span class="hljs-number">-1</span>, source, target, help);    <span class="hljs-comment">// 将要搬离的n个盘中的前n-1个盘搬到help塔上，用target塔为辅助</span>
-        move(source, n, target);            <span class="hljs-comment">// 将编号为n的盘移动到target塔上</span>
-        hanoi(n<span class="hljs-number">-1</span>, help, source, target);    <span class="hljs-comment">// 将之前的放在help塔上的n-1个盘移动到target塔，用souece塔做辅助塔</span>
+        hanoi(n<span class="hljs-number">-1</span>, source, target, help);	<span class="hljs-comment">// 将要搬离的n个盘中的前n-1个盘搬到help塔上，用target塔为辅助</span>
+        move(source, n, target);			<span class="hljs-comment">// 将编号为n的盘移动到target塔上</span>
+        hanoi(n<span class="hljs-number">-1</span>, help, source, target);	<span class="hljs-comment">// 将之前的放在help塔上的n-1个盘移动到target塔，用souece塔做辅助塔</span>
     }
 }
 

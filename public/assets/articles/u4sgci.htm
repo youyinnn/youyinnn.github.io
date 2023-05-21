@@ -47,7 +47,7 @@
     Node nextWaiter;
 
     <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isShared</span><span class="hljs-params">()</span> {
-        <span class="hljs-type">return</span> <span class="hljs-variable">nextWaiter</span> <span class="hljs-operator">=</span>= SHARED;
+        <span class="hljs-keyword">return</span> nextWaiter == SHARED;
     }
     <span class="hljs-keyword">final</span> Node <span class="hljs-title function_">predecessor</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> NullPointerException {
         <span class="hljs-type">Node</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> prev;
@@ -359,7 +359,7 @@
             <span class="hljs-keyword">final</span> <span class="hljs-type">Node</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> node.predecessor();
             <span class="hljs-keyword">if</span> (p == head) {
                 <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> tryAcquireShared(arg);
-                <span class="hljs-keyword">if</span> (r &gt;= <span class="hljs-number">0</span>) {    <span class="hljs-comment">// 这里就是，非负数就是代表成功了</span>
+                <span class="hljs-keyword">if</span> (r &gt;= <span class="hljs-number">0</span>) {	<span class="hljs-comment">// 这里就是，非负数就是代表成功了</span>
                     setHeadAndPropagate(node, r);
                     p.next = <span class="hljs-literal">null</span>; <span class="hljs-comment">// help GC</span>
                     <span class="hljs-keyword">if</span> (interrupted)

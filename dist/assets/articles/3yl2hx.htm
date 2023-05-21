@@ -288,16 +288,16 @@ Output: true
 }
 
 <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBegin</span><span class="hljs-params">(<span class="hljs-type">char</span> a)</span> {
-    <span class="hljs-type">return</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span>= <span class="hljs-string">&#x27;(&#x27;</span> || a == <span class="hljs-string">&#x27;[&#x27;</span> || a == <span class="hljs-string">&#x27;{&#x27;</span>;
+    <span class="hljs-keyword">return</span> a == <span class="hljs-string">&#x27;(&#x27;</span> || a == <span class="hljs-string">&#x27;[&#x27;</span> || a == <span class="hljs-string">&#x27;{&#x27;</span>;
 }
 
 <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPair</span><span class="hljs-params">(<span class="hljs-type">char</span> begin, <span class="hljs-type">char</span> end)</span> {
     <span class="hljs-keyword">if</span> (begin == <span class="hljs-string">&#x27;(&#x27;</span>) {
-        <span class="hljs-type">return</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span>= <span class="hljs-string">&#x27;)&#x27;</span>;
+        <span class="hljs-keyword">return</span> end == <span class="hljs-string">&#x27;)&#x27;</span>;
     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (begin == <span class="hljs-string">&#x27;[&#x27;</span>) {
-        <span class="hljs-type">return</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span>= <span class="hljs-string">&#x27;]&#x27;</span>;
+        <span class="hljs-keyword">return</span> end == <span class="hljs-string">&#x27;]&#x27;</span>;
     } <span class="hljs-keyword">else</span> {
-        <span class="hljs-type">return</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span>= <span class="hljs-string">&#x27;}&#x27;</span>;
+        <span class="hljs-keyword">return</span> end == <span class="hljs-string">&#x27;}&#x27;</span>;
     }
 }
 </code></pre>

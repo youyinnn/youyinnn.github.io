@@ -72,7 +72,7 @@ app = Flask(__name__)
 <h4 id="build-the-app">Build the app</h4>
 <p>We are ready to build the app. Make sure you are still at the top level of your new directory. Here’s what <code>ls</code> should show:</p>
 <pre><code class="hljs language-bash">$ <span class="hljs-built_in">ls</span>
-Dockerfile        app.py            requirements.txt
+Dockerfile		app.py			requirements.txt
 </code></pre>
 <p>Now run the build command. This creates a Docker image, which we’re going to tag using <code>-t</code> so it has a friendly name.</p>
 <pre><code class="hljs language-bash">docker build -t hello-hj .
@@ -81,7 +81,7 @@ Dockerfile        app.py            requirements.txt
 <pre><code class="hljs language-bash">$ docker image <span class="hljs-built_in">ls</span>
 
 REPOSITORY            TAG                 IMAGE ID
-hello-hj             latest              326387cea398
+hello-hj         	latest              326387cea398
 </code></pre>
 <h4 id="run-the-app">Run the app</h4>
 <h5 id="run-on-the-frontground">run on the frontground</h5>

@@ -241,7 +241,7 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
             lastPos = i;
         }
     }
-    <span class="hljs-type">return</span> <span class="hljs-variable">lastPos</span> <span class="hljs-operator">=</span>= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> lastPos == <span class="hljs-number">0</span>;
 }
 </code></pre>
 <h3 id="jump-game-ii">Jump Game II</h3>
@@ -380,9 +380,9 @@ exection -&gt; execution (insert &#x27;u&#x27;)
         dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
     <span class="hljs-keyword">else</span>
         dp[i][j] = min of {
-            dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>],    <span class="hljs-comment">// replace</span>
-            dp[i][j - <span class="hljs-number">1</span>],        <span class="hljs-comment">// insert</span>
-            dp[i - <span class="hljs-number">1</span>][j]        <span class="hljs-comment">// delete</span>
+            dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>],	<span class="hljs-comment">// replace</span>
+            dp[i][j - <span class="hljs-number">1</span>],		<span class="hljs-comment">// insert</span>
+            dp[i - <span class="hljs-number">1</span>][j]		<span class="hljs-comment">// delete</span>
         } + <span class="hljs-number">1</span>
 }
 

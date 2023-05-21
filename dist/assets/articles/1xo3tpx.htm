@@ -166,8 +166,8 @@
 </ol>
 <h5 id="happens-before-应用例子">happens-before 应用例子</h5>
 <h6 id="程序顺序规则">程序顺序规则</h6>
-<pre><code class="hljs language-java"><span class="hljs-type">double</span> <span class="hljs-variable">pi</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14</span>;    <span class="hljs-comment">// A</span>
-<span class="hljs-type">double</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.0</span>;        <span class="hljs-comment">// B</span>
+<pre><code class="hljs language-java"><span class="hljs-type">double</span> <span class="hljs-variable">pi</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14</span>;	<span class="hljs-comment">// A</span>
+<span class="hljs-type">double</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.0</span>;		<span class="hljs-comment">// B</span>
 <span class="hljs-type">double</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> pi * r * r; <span class="hljs-comment">// C</span>
 </code></pre>
 <p>根据顺序规则有：</p>
@@ -185,26 +185,26 @@
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>{
     <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>{
-        <span class="hljs-built_in">this</span>.i = i;    <span class="hljs-comment">// 单个变量的写</span>
+        <span class="hljs-built_in">this</span>.i = i;	<span class="hljs-comment">// 单个变量的写</span>
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span>{
-        i++;    <span class="hljs-comment">// 复合操作的读/写</span>
+        i++;	<span class="hljs-comment">// 复合操作的读/写</span>
     }
     <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">()</span>{
-        <span class="hljs-keyword">return</span> i;    <span class="hljs-comment">// 单个变量的读</span>
+        <span class="hljs-keyword">return</span> i;	<span class="hljs-comment">// 单个变量的读</span>
     }
 }
 </code></pre>
 <p>上面的程序段等效于下面的对一般变量的方法锁方法：</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>{
     <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>{    <span class="hljs-comment">// 上锁写</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>{	<span class="hljs-comment">// 上锁写</span>
         <span class="hljs-built_in">this</span>.i = i;
     }
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span>{    <span class="hljs-comment">// 普通方法调用</span>
-        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> get();    <span class="hljs-comment">// 调用同步读方法</span>
-        temp += <span class="hljs-number">1</span>;    <span class="hljs-comment">// 普通的写操作</span>
-        set(temp);    <span class="hljs-comment">// 调用同步写方法</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span>{	<span class="hljs-comment">// 普通方法调用</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> get();	<span class="hljs-comment">// 调用同步读方法</span>
+        temp += <span class="hljs-number">1</span>;	<span class="hljs-comment">// 普通的写操作</span>
+        set(temp);	<span class="hljs-comment">// 调用同步写方法</span>
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">()</span>{
         <span class="hljs-keyword">return</span> i;
@@ -243,13 +243,13 @@
     <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">volatile</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">wirter</span><span class="hljs-params">()</span> {
-        a = <span class="hljs-number">999</span>;                        <span class="hljs-comment">// 1</span>
-        flag = <span class="hljs-literal">true</span>;                    <span class="hljs-comment">// 2</span>
+        a = <span class="hljs-number">999</span>;						<span class="hljs-comment">// 1</span>
+        flag = <span class="hljs-literal">true</span>;					<span class="hljs-comment">// 2</span>
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reader</span><span class="hljs-params">()</span> {
         <span class="hljs-keyword">if</span> (flag) {
-            <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a;                    <span class="hljs-comment">// 3</span>
-            System.out.println(i);        <span class="hljs-comment">// 4</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a;					<span class="hljs-comment">// 3</span>
+            System.out.println(i);		<span class="hljs-comment">// 4</span>
         }
     }
 }
@@ -292,12 +292,12 @@
 <p>下面代码引自 P47</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MonitorExample</span>{
     <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">writer</span><span class="hljs-params">()</span>{    <span class="hljs-comment">// 1    拿锁</span>
-        a++;                            <span class="hljs-comment">// 2    操作临界资源</span>
-    }                                    <span class="hljs-comment">// 3    放锁</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reader</span><span class="hljs-params">()</span>{    <span class="hljs-comment">// 4    拿锁</span>
-        <span class="hljs-type">ini</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a;                        <span class="hljs-comment">// 5    操作临界资源</span>
-    }                                    <span class="hljs-comment">// 6    放锁</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">writer</span><span class="hljs-params">()</span>{	<span class="hljs-comment">// 1	拿锁</span>
+        a++;							<span class="hljs-comment">// 2	操作临界资源</span>
+    }									<span class="hljs-comment">// 3	放锁</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reader</span><span class="hljs-params">()</span>{	<span class="hljs-comment">// 4	拿锁</span>
+        <span class="hljs-type">ini</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a;						<span class="hljs-comment">// 5	操作临界资源</span>
+    }									<span class="hljs-comment">// 6	放锁</span>
 }
 </code></pre>
 <blockquote>

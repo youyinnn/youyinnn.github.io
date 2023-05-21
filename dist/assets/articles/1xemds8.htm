@@ -24,7 +24,7 @@ sudo pip install shadowsocks
   <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mypassword&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aes-256-cfb&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;fast_open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fast_open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;workers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -139,7 +139,7 @@ proxyPort = 8123
 <li>zoom in the video</li>
 </ol>
 <h4 id="step-1-tvsh">Step 1: tv.sh</h4>
-<pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
+<pre><code class="hljs language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
 if [ $1 == open ]
 then
     amixer set PCM 0%

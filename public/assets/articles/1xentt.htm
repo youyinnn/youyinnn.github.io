@@ -412,14 +412,14 @@ b 2
 <p>The <a href="https://docs.python.org/3/reference/simple_stmts.html#nonlocal"><code>nonlocal</code></a> statement causes the listed identifiers to refer to previously bound variables in the nearest enclosing scope excluding globals. This is important because the default behavior for binding is to search the local namespace first. The statement allows encapsulated code to rebind variables outside of the local scope besides the global (module) scope.</p>
 <pre><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">scope_test</span>():
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_local</span>():
-        spam = <span class="hljs-string">&quot;local spam&quot;</span>        <span class="hljs-comment"># current enclosing scope (here is `do_local()`)</span>
+        spam = <span class="hljs-string">&quot;local spam&quot;</span>		<span class="hljs-comment"># current enclosing scope (here is `do_local()`)</span>
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_nonlocal</span>():
-        <span class="hljs-keyword">nonlocal</span> spam            <span class="hljs-comment"># up level enclosing scope (here is `scope_test()`)</span>
+        <span class="hljs-keyword">nonlocal</span> spam			<span class="hljs-comment"># up level enclosing scope (here is `scope_test()`)</span>
         spam = <span class="hljs-string">&quot;nonlocal spam&quot;</span>
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_global</span>():
-        <span class="hljs-keyword">global</span> spam                <span class="hljs-comment"># global scope (entire current code block)</span>
+        <span class="hljs-keyword">global</span> spam				<span class="hljs-comment"># global scope (entire current code block)</span>
         spam = <span class="hljs-string">&quot;global spam&quot;</span>
 
     spam = <span class="hljs-string">&quot;test spam&quot;</span>

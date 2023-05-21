@@ -2,7 +2,7 @@ img {
   max-width: 100%;
 }
 pre {
-  overflow: scroll;
+  overflow: auto;
 }
 code {
   font-family: Times, "Times New Roman", serif !important;
@@ -16,7 +16,7 @@ code {
 .katexp {
   text-align: center;
   background-color: var(--table-header-color);
-  padding: 0.5rem;
+  padding: 1.2em 0.5rem;
   font-size: 15px;
   border-right: 2px solid var(--info-color-pressed);
   overflow: auto;

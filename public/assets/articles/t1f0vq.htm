@@ -239,7 +239,7 @@ Thefore INT_MIN (−231) is returned.</p>
         <span class="hljs-keyword">if</span> (cArr[startIndex] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; cArr[startIndex] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) {
             <span class="hljs-keyword">if</span> (ans &gt; Integer.MAX_VALUE / <span class="hljs-number">10</span> || ans &lt; Integer.MIN_VALUE / <span class="hljs-number">10</span>) {
                 <span class="hljs-comment">// multiplication overflow</span>
-                <span class="hljs-type">return</span> <span class="hljs-variable">sign</span> <span class="hljs-operator">=</span>= -<span class="hljs-number">1</span> ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                <span class="hljs-keyword">return</span> sign == -<span class="hljs-number">1</span> ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             }
             ans = (ans * <span class="hljs-number">10</span>) + (sign * (cArr[startIndex] - <span class="hljs-string">&#x27;0&#x27;</span>));
             <span class="hljs-comment">// addiction overflow</span>
@@ -330,7 +330,7 @@ We call 10000/100 as a 'base', it descide the position of the window.
         rev = rev * <span class="hljs-number">10</span> + x % <span class="hljs-number">10</span>;
         x /= <span class="hljs-number">10</span>;
     }
-    <span class="hljs-type">return</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span>= rev || x == rev/<span class="hljs-number">10</span>;
+    <span class="hljs-keyword">return</span> x == rev || x == rev/<span class="hljs-number">10</span>;
 }
 </code></pre>
 <h3 id="10-regular-expression-matchinghard">10. Regular Expression Matching(hard)</h3>
@@ -424,18 +424,18 @@ Tn = t1t2t3...tn-1tn
 Pm = p1p2p3...pm-1pm
 
 那么：
-Match(Tm, Pm) = Match(tn, pm) &amp;&amp; Match(Tn-1, Pm-1)        (1)
+Match(Tm, Pm) = Match(tn, pm) &amp;&amp; Match(Tn-1, Pm-1)		(1)
 Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
-                then return Match(Ti-1, Pj-1);            (2)
+                then return Match(Ti-1, Pj-1);			(2)
                 else
                     if (pj == &#x27;*&#x27;)
                         if (ti != pj-1 &amp;&amp; pj-1 != &#x27;.&#x27;)
-                      then return Match(Ti, Pj-2);        (3)    // no match then skip &#x27;X*&#x27;
+                      then return Match(Ti, Pj-2);		(3)	// no match then skip &#x27;X*&#x27;
                       else
                         return
-                            (Match(Ti, Pj-1)) ||        (4) // char before * appears once
-                            (Match(Ti-1,Pj))  ||        (5) // char before * appears more
-                            (Match(Ti, Pj-2));            (6) // no match then skip &#x27;X*&#x27;
+                            (Match(Ti, Pj-1)) ||		(4) // char before * appears once
+                            (Match(Ti-1,Pj))  ||		(5) // char before * appears more
+                            (Match(Ti, Pj-2));			(6) // no match then skip &#x27;X*&#x27;
 
 然后有一条边界条件，Match(tn, &quot;&quot;) = (tn == &quot;&quot;)
 </code></pre>
@@ -471,25 +471,25 @@ Match(Ti, Pj) =   if (ti == pj || pj == &#x27;.&#x27;)
 </code></pre>
 <p>我们如果把几个 case 的 dp 打印出来，应该会更好理解一点，有多条状态转移公式的 DP，确实是难，但是这个解法有一个优雅的地方在于它在 T 和 P 的开头加上&#39;+&#39;来代表各自的&quot;&quot;，从而让各下标更好处理</p>
 <p><strong>Case Match(&quot;abcd&quot;, &quot;.*bcd&quot;)</strong></p>
-<pre><code>    +        .        *        b        c        d
-+    true    false    true    false    false    false
-a    false    true    true    false    false    false
-b    false    false    true    true    false    false
-c    false    false    true    false    true    false
-d    false    false    true    false    false    true
+<pre><code>    +		.		*		b		c		d
++	true	false	true	false	false	false
+a	false	true	true	false	false	false
+b	false	false	true	true	false	false
+c	false	false	true	false	true	false
+d	false	false	true	false	false	true
 </code></pre>
 <p><strong>Case Match(&quot;mississippi&quot;, &quot;mis*is*p*.&quot;)</strong></p>
-<pre><code>    +        m        i        s        *        i        s        *        p        *        .
-+    true    false    false    false    false    false    false    false    false    false    false
-m    false    true    false    false    false    false    false    false    false    false    false
-i    false    false    true    false    true    false    false    false    false    false    false
-s    false    false    false    true    true    false    false    false    false    false    false
-s    false    false    false    false    true    false    false    false    false    false    false
-i    false    false    false    false    false    true    false    true    false    true    false
-s    false    false    false    false    false    false    true    true    false    true    true
-s    false    false    false    false    false    false    false    true    false    true    true
-i    false    false    false    false    false    false    false    false    false    false    true
-p    false    false    false    false    false    false    false    false    false    false    false
-p    false    false    false    false    false    false    false    false    false    false    false
-i    false    false    false    false    false    false    false    false    false    false    false
+<pre><code>    +		m		i		s		*		i		s		*		p		*		.
++	true	false	false	false	false	false	false	false	false	false	false
+m	false	true	false	false	false	false	false	false	false	false	false
+i	false	false	true	false	true	false	false	false	false	false	false
+s	false	false	false	true	true	false	false	false	false	false	false
+s	false	false	false	false	true	false	false	false	false	false	false
+i	false	false	false	false	false	true	false	true	false	true	false
+s	false	false	false	false	false	false	true	true	false	true	true
+s	false	false	false	false	false	false	false	true	false	true	true
+i	false	false	false	false	false	false	false	false	false	false	true
+p	false	false	false	false	false	false	false	false	false	false	false
+p	false	false	false	false	false	false	false	false	false	false	false
+i	false	false	false	false	false	false	false	false	false	false	false
 </code></pre>

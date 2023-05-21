@@ -35,7 +35,7 @@
 <h5 id="底层实现">底层实现</h5>
 <p>让我们来看看在对 volatile 变量进行写操作的时候，CPU 会干哪些事：</p>
 <p>Java 代码：</p>
-<pre><code class="hljs language-java">instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>()    <span class="hljs-comment">//instance是volatile变量</span>
+<pre><code class="hljs language-java">instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>()	<span class="hljs-comment">//instance是volatile变量</span>
 </code></pre>
 <p>转变为底层汇编代码：</p>
 <pre><code class="hljs language-assembly">0x01a3deld: movb $0*0,0*1104800(%esi);
@@ -66,7 +66,7 @@
 </code></pre>
 <p>但是我们需要注意的是，<strong>volatile 关键字只能对一个原子操作保持同步！</strong></p>
 <p>常见的陷阱是：</p>
-<pre><code class="hljs language-java">    i++;    <span class="hljs-comment">// i是volatile变量</span>
+<pre><code class="hljs language-java">    i++;	<span class="hljs-comment">// i是volatile变量</span>
 </code></pre>
 <p>这行代码是否线程安全，答案是否定的，i++这行代码是分两步进行的：</p>
 <pre><code class="hljs language-java">    <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;
@@ -111,8 +111,8 @@
         stack=<span class="hljs-number">2</span>, locals=<span class="hljs-number">1</span>, args_size=<span class="hljs-number">1</span>
         <span class="hljs-number">0</span>: ldc
         <span class="hljs-number">2</span>: dup
-        <span class="hljs-number">3</span>: monitorenter    <span class="hljs-comment">// 这个地方监视器进入</span>
-        <span class="hljs-number">4</span>: monitoreit    <span class="hljs-comment">// 监视器退出</span>
+        <span class="hljs-number">3</span>: monitorenter	<span class="hljs-comment">// 这个地方监视器进入</span>
+        <span class="hljs-number">4</span>: monitoreit	<span class="hljs-comment">// 监视器退出</span>
         <span class="hljs-number">5</span>: invokestatic <span class="hljs-comment">// m()</span>
         <span class="hljs-number">8</span>: <span class="hljs-keyword">return</span>
 
