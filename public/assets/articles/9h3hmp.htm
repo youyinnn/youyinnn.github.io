@@ -193,7 +193,7 @@
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">timePasses</span><span class="hljs-params">()</span> {
     WeatherType[] enumValues = WeatherType.values();
     currentWeather = enumValues[(currentWeather.ordinal() + <span class="hljs-number">1</span>) % enumValues.length];
-    notifyObservers();        <span class="hljs-comment">// 通知</span>
+    notifyObservers();		<span class="hljs-comment">// 通知</span>
   }
   <span class="hljs-comment">// 发布订阅到所有订阅者</span>
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">notifyObservers</span><span class="hljs-params">()</span> {
@@ -250,7 +250,7 @@
 
   <span class="hljs-keyword">protected</span> List&lt;O&gt; observers;
   <span class="hljs-keyword">public</span> <span class="hljs-title function_">Observable</span><span class="hljs-params">()</span> {
-      <span class="hljs-built_in">this</span>.observers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">CopyOnWriteArrayList</span>&lt;&gt;();    <span class="hljs-comment">// 线程安全的实现</span>
+      <span class="hljs-built_in">this</span>.observers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">CopyOnWriteArrayList</span>&lt;&gt;();	<span class="hljs-comment">// 线程安全的实现</span>
   }
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addObserver</span><span class="hljs-params">(O observer)</span> {
       <span class="hljs-built_in">this</span>.observers.add(observer);
@@ -572,31 +572,31 @@ captain.row();
 <h5 id="builder">Builder</h5>
 <p>再看看工匠，这里用到了 Java8 的函数式特性，传入一个供给者对象</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Builder</span> {
-  <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(WeaponType name, Supplier&lt;Weapon&gt; supplier)</span>;            <span class="hljs-comment">// 4</span>
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(WeaponType name, Supplier&lt;Weapon&gt; supplier)</span>;			<span class="hljs-comment">// 4</span>
 }
 </code></pre>
 <h5 id="factory-1">Factory</h5>
 <p>接下来就是重点，看看我们的工厂是如何协调工匠和产品的</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">WeaponFactory</span> {
   <span class="hljs-comment">// 制造武器，根据传入的WeaponType选取工厂中存在的工匠制造想对应的武器</span>
-  Weapon <span class="hljs-title function_">create</span><span class="hljs-params">(WeaponType name)</span>;                                <span class="hljs-comment">// 6</span>
+  Weapon <span class="hljs-title function_">create</span><span class="hljs-params">(WeaponType name)</span>;								<span class="hljs-comment">// 6</span>
 
   <span class="hljs-comment">// 聚集工匠，factory负责维护一个map，一种武器类型对应一类工匠</span>
-  <span class="hljs-keyword">static</span> WeaponFactory <span class="hljs-title function_">factory</span><span class="hljs-params">(Consumer&lt;Builder&gt; consumer)</span> {    <span class="hljs-comment">// 1.2</span>
-    Map&lt;WeaponType, Supplier&lt;Weapon&gt;&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();    <span class="hljs-comment">// 2</span>
-    consumer.accept(map::put);                                    <span class="hljs-comment">// 3.0</span>
-    <span class="hljs-keyword">return</span> name -&gt; map.get(name).get();                            <span class="hljs-comment">// 5</span>
+  <span class="hljs-keyword">static</span> WeaponFactory <span class="hljs-title function_">factory</span><span class="hljs-params">(Consumer&lt;Builder&gt; consumer)</span> {	<span class="hljs-comment">// 1.2</span>
+    Map&lt;WeaponType, Supplier&lt;Weapon&gt;&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();	<span class="hljs-comment">// 2</span>
+    consumer.accept(map::put);									<span class="hljs-comment">// 3.0</span>
+    <span class="hljs-keyword">return</span> name -&gt; map.get(name).get();							<span class="hljs-comment">// 5</span>
   }
 }
 </code></pre>
 <h5 id="main-5">Main</h5>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
-    <span class="hljs-type">WeaponFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> WeaponFactory.factory(builder -&gt; {    <span class="hljs-comment">// 1.1</span>
-      builder.add(WeaponType.SWORD, Sword::<span class="hljs-keyword">new</span>);                <span class="hljs-comment">// 3.1</span>
-      builder.add(WeaponType.AXE, Axe::<span class="hljs-keyword">new</span>);                    <span class="hljs-comment">// 3.2</span>
-      builder.add(WeaponType.SPEAR, Spear::<span class="hljs-keyword">new</span>);                <span class="hljs-comment">// 3.3</span>
-      builder.add(WeaponType.BOW, Bow::<span class="hljs-keyword">new</span>);                    <span class="hljs-comment">// 3.4</span>
+    <span class="hljs-type">WeaponFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> WeaponFactory.factory(builder -&gt; {	<span class="hljs-comment">// 1.1</span>
+      builder.add(WeaponType.SWORD, Sword::<span class="hljs-keyword">new</span>);				<span class="hljs-comment">// 3.1</span>
+      builder.add(WeaponType.AXE, Axe::<span class="hljs-keyword">new</span>);					<span class="hljs-comment">// 3.2</span>
+      builder.add(WeaponType.SPEAR, Spear::<span class="hljs-keyword">new</span>);				<span class="hljs-comment">// 3.3</span>
+      builder.add(WeaponType.BOW, Bow::<span class="hljs-keyword">new</span>);					<span class="hljs-comment">// 3.4</span>
     });
     <span class="hljs-type">Weapon</span> <span class="hljs-variable">axe</span> <span class="hljs-operator">=</span> factory.create(WeaponType.AXE);
     System.out.println(axe.toString());

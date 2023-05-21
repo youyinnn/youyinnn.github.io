@@ -71,5 +71,6 @@
   "browserslist": [
     "> 1%",
     "last 2 years"
-  ]
+  ],
+  "packageManager": "yarn@3.5.1"
 }

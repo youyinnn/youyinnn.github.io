@@ -92,7 +92,7 @@ after = resourcesList.<span class="hljs-title function_">concat</span>(after)
     }
 }
 <span class="hljs-comment">// 直接执行</span>
-<span class="hljs-title function_">importJsBeforeLoad</span>()
+importJsBeforeLoad()
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">importJsAfterLoad</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">let</span> map = {}
@@ -124,7 +124,7 @@ after = resourcesList.<span class="hljs-title function_">concat</span>(after)
 }
 <span class="hljs-comment">// 等DOMContentLoaded之后导入</span>
 <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
-    <span class="hljs-title function_">importJsAfterLoad</span>()
+    importJsAfterLoad()
 })
 </code></pre>
 <h3 id="去掉的东西">去掉的东西</h3>
@@ -204,10 +204,10 @@ xmlhttp2.<span class="hljs-property">onreadystatechange</span> = <span class="hl
     <span class="hljs-keyword">let</span> rsjson = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(xmlhttp2.<span class="hljs-property">responseText</span>);
     <span class="hljs-keyword">if</span> (rsjson.<span class="hljs-property">data</span>.<span class="hljs-property">provinceId</span> !== <span class="hljs-number">999999</span>) {
       <span class="hljs-comment">// chinese visitor</span>
-      sessionStorage.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__ischinese&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
+      <span class="hljs-variable language_">sessionStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__ischinese&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-comment">// foreign visitor</span>
-      sessionStorage.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__isforeigner&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
+      <span class="hljs-variable language_">sessionStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__isforeigner&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
     }
   }
 };
@@ -224,10 +224,10 @@ xmlhttp2.<span class="hljs-title function_">send</span>();
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">cb</span>(<span class="hljs-params">rs</span>) {
   <span class="hljs-keyword">if</span> (rs.<span class="hljs-property">status</span> === <span class="hljs-number">0</span>) {
     <span class="hljs-comment">// chinese visitor</span>
-    sessionStorage.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__ischinese&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
+    <span class="hljs-variable language_">sessionStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__ischinese&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
   } <span class="hljs-keyword">else</span> {
     <span class="hljs-comment">// foreign visitor</span>
-    sessionStorage.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__isforeigner&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
+    <span class="hljs-variable language_">sessionStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&quot;__isforeigner&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);
   }
 }
 

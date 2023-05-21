@@ -284,10 +284,10 @@ T1 stop waitting !
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DoubleCheckLocking</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Instance instance;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) {                            <span class="hljs-comment">// 第一次检查</span>
-            <span class="hljs-keyword">synchronized</span>(DoubleCheckLocking.class) {    <span class="hljs-comment">// 加锁</span>
-                <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) {                    <span class="hljs-comment">// 第二次检查</span>
-                    instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Instance</span>();            <span class="hljs-comment">// 初始化：这里有坑</span>
+        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) {							<span class="hljs-comment">// 第一次检查</span>
+            <span class="hljs-keyword">synchronized</span>(DoubleCheckLocking.class) {	<span class="hljs-comment">// 加锁</span>
+                <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) {					<span class="hljs-comment">// 第二次检查</span>
+                    instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Instance</span>();			<span class="hljs-comment">// 初始化：这里有坑</span>
                 }
             }
         }
@@ -379,7 +379,7 @@ T1 stop waitting !
         <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Instance</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Instance</span>();
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">return</span> InstanceHolder.instance;    <span class="hljs-comment">// 如果是第一次引用，那么在这个地方就会加载上面那个内部类</span>
+        <span class="hljs-keyword">return</span> InstanceHolder.instance;	<span class="hljs-comment">// 如果是第一次引用，那么在这个地方就会加载上面那个内部类</span>
     }
 }
 </code></pre>

@@ -18,20 +18,20 @@
 <p>We can use <code>--password</code> option of tess to login tess to non-production cluster, so we just need three parameters: <code>tess_username</code>,<code> tess_cluster</code>, <code>corp_passord</code></p>
 <h5 id="configure-build-execute-shell">Configure Build Execute Shell</h5>
 <h6 id="for-production-cluster">For production cluster</h6>
-<pre><code class="hljs language-shell"><span class="hljs-meta"># </span><span class="language-bash"><span class="hljs-built_in">cd</span> to the diractory <span class="hljs-built_in">where</span> tess login script is</span>
+<pre><code class="hljs language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">cd</span> to the diractory <span class="hljs-built_in">where</span> tess login script is</span>
 ./tess-login.sh ${tess_username}  ${tess_cluster}  ${tess_pin} ${tess_yubikey_token_twice}
-<span class="hljs-meta"># </span><span class="language-bash">your work with tess</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">your work with tess</span>
 </code></pre>
 <h6 id="for-non-production-cluster">For non-production cluster</h6>
-<pre><code class="hljs language-shell"><span class="hljs-meta"># </span><span class="language-bash"><span class="hljs-built_in">cd</span> to the diractory <span class="hljs-built_in">where</span> tess login script is</span>
+<pre><code class="hljs language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">cd</span> to the diractory <span class="hljs-built_in">where</span> tess login script is</span>
 ./tess-login.sh ${tess_username} ${corp_password} ${tess_cluster}
-<span class="hljs-meta"># </span><span class="language-bash">your work with tess</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">your work with tess</span>
 </code></pre>
 <h5 id="for-production-cluster-1">For production cluster</h5>
 <h6 id="tess-loginsh">tess-login.sh</h6>
 <p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/prod/tess-login.sh">tess-login.sh</a></p>
-<pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
-<span class="hljs-meta">
+<pre><code class="hljs language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
+<span class="hljs-meta prompt_">
 # </span><span class="language-bash"><span class="hljs-built_in">exit</span> when error &amp; trace</span>
 set -e
 set -x
@@ -39,14 +39,14 @@ set -x
 tess_username=$1
 tess_cluster=$2
 tess_pin=$3
-<span class="hljs-meta">
+<span class="hljs-meta prompt_">
 # </span><span class="language-bash"><span class="hljs-variable">${tess_yubikey_token_twice}</span> will separated to <span class="hljs-variable">$4</span> and <span class="hljs-variable">$5</span> by line-separator</span>
 tess_yubikey_token_1=$4
 tess_yubikey_token_2=$5
 
 echo &quot;token 1: $tess_yubikey_token_1&quot;
 echo &quot;token 2: $tess_yubikey_token_2&quot;
-<span class="hljs-meta">
+<span class="hljs-meta prompt_">
 # </span><span class="language-bash">combine <span class="hljs-variable">$tess_pin</span> and <span class="hljs-variable">$tess_yubikey_token_1</span></span>
 expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubikey_token_1 $tess_yubikey_token_2
 </code></pre>
@@ -56,7 +56,7 @@ expect tess-login-by-expect.sh $tess_username $tess_cluster $tess_pin$tess_yubik
 <h5 id="for-non-production-cluster-1">For non-production cluster</h5>
 <h6 id="tess-loginsh-1">tess-login.sh</h6>
 <p>Reference: <a href="https://github.corp.ebay.com/jiaweizhang/NuMessage/blob/promethuesAndGrafanaConfig/numsg-deploy/metrics-deploy/spec/qa/tess-login.sh">tess-login.sh</a></p>
-<pre><code class="hljs language-shell"><span class="hljs-meta">#</span><span class="language-bash">!/bin/bash</span>
+<pre><code class="hljs language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
 
 username=$1
 corp_password=$2

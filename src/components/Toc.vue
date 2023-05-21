@@ -181,9 +181,13 @@ export default {
 .toc-box {
   position: fixed;
   top: 6rem;
-  overflow: scroll;
+  overflow: auto;
   /* width: 200px; */
   right: 2rem;
   transition: all 0.5s;
+}
+
+.toc-box > .n-anchor {
+  width: 97%;
 }
 </style>

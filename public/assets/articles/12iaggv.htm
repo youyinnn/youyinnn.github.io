@@ -151,7 +151,7 @@ Plumbr Co-Founder and VP of Engineering</p>
 <h5 id="2-more">2. More</h5>
 <p>更多的优化策略可以继续参考：<a href="https://www.ibm.com/developerworks/cn/java/j-lo-just-in-time/index.html">深入浅出 JIT 编译器</a></p>
 <h5 id="-escape-analysis">+. Escape Analysis</h5>
-<p>在 Hollis 前辈的一篇文章<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&amp;mid=2650121307&amp;idx=1&amp;sn=5526473d0248cca8385d2a18ba6b25af&amp;chksm=f36bb97ac41c306c354ebf0335cd2fd77cac03f3434894e4e5b44a01754a5494b04350d26d14&amp;scene=21#wechat_redirect">对象并不一定都是在堆上分配内存的</a>中提到：</p>
+<p>在 Hollis 前辈的一篇文章<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121307&idx=1&sn=5526473d0248cca8385d2a18ba6b25af&chksm=f36bb97ac41c306c354ebf0335cd2fd77cac03f3434894e4e5b44a01754a5494b04350d26d14&scene=21#wechat_redirect">对象并不一定都是在堆上分配内存的</a>中提到：</p>
 <blockquote>
 <p>逃逸分析(Escape Analysis)是目前 Java 虚拟机中比较前沿的优化技术。这是一种可以有效减少 Java 程序中同步负载和内存堆分配压力的跨函数全局数据流分析算法。通过逃逸分析，Java Hotspot 编译器能够分析出一个新的对象的引用的使用范围从而决定是否要将这个对象分配到堆上。</p>
 <p>逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。</p>

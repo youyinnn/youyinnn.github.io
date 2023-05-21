@@ -54,9 +54,9 @@ foo(myDog);
 </blockquote>
 <h4 id="strong-reference">Strong reference</h4>
 <p>显式写出来的引用就是它，除非显式引用断开了否则就回收它，而这背后 JVM 正是直接通过可达性判断来回收的，每个强引用的对象都能通过可达性判断；</p>
-<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;xixi&quot;</span>);    <span class="hljs-comment">// ’xixi‘ is at 0x42</span>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;xixi&quot;</span>);	<span class="hljs-comment">// ’xixi‘ is at 0x42</span>
 <span class="hljs-comment">// some work</span>
-a = <span class="hljs-literal">null</span>;    <span class="hljs-comment">// ‘xixi’ which means 0x42 is now available for GC</span>
+a = <span class="hljs-literal">null</span>;	<span class="hljs-comment">// ‘xixi’ which means 0x42 is now available for GC</span>
 </code></pre>
 <h4 id="soft-reference">Soft reference</h4>
 <p>它引用的对象只有在内存不足时<strong>且没有强引用同时引用这个对象的时候</strong>，才会被回收，也即是在下次 OOM 之前，JVM 一定会清理掉所有的<strong>soft reference</strong></p>
@@ -117,7 +117,7 @@ System.out.println(sr.get()); <span class="hljs-comment">// might be null</span>
         printRQ();
         p = <span class="hljs-literal">null</span>;
         System.gc();
-        waitMoment(<span class="hljs-number">2000</span>);    <span class="hljs-comment">// wait gc</span>
+        waitMoment(<span class="hljs-number">2000</span>);	<span class="hljs-comment">// wait gc</span>
         printRQ();
     }
 
