@@ -98,3 +98,9 @@ In [statistics](https://en.wikipedia.org/wiki/Statistics), the hat is used to de
 #### Matrix
 
 https://www.cfm.brown.edu/people/dobrush/am34/Mathematica/ch1/matrix.html
+
+
+
+#### Understanding Micro, Macro, and Weighted Averages for Scikit-Learn metrics in multi-class classification with example
+
+http://iamirmasoud.com/2022/06/19/understanding-micro-macro-and-weighted-averages-for-scikit-learn-metrics-in-multi-class-classification-with-example/#:~:text=The%20macro%2Daveraged%20F1%20score,regardless%20of%20their%20support%20values.

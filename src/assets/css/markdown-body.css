@@ -167,25 +167,26 @@ a code {
 .markdown-body h6 {
   line-height: 1.4;
   padding-left: 14px;
+  transform: translateX(-12px);
 }
 
 .markdown-body h1 {
-  border-left: 7px solid var(--success-color-pressed);
+  border-left: 10px solid var(--success-color-pressed);
 }
 .markdown-body h2 {
-  border-left: 6px solid var(--success-color-pressed);
+  border-left: 8px solid var(--success-color-pressed);
 }
 .markdown-body h3 {
-  border-left: 5px solid var(--success-color-pressed);
+  border-left: 6.5px solid var(--success-color-pressed);
 }
 .markdown-body h4 {
-  border-left: 4px solid var(--success-color-pressed);
+  border-left: 5px solid var(--success-color-pressed);
 }
 .markdown-body h5 {
-  border-left: 3px solid var(--success-color-pressed);
+  border-left: 4px solid var(--success-color-pressed);
 }
 .markdown-body h6 {
-  border-left: 2px solid var(--success-color-pressed);
+  border-left: 3px solid var(--success-color-pressed);
 }
 
 .katex-display {
