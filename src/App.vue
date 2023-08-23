@@ -1,23 +1,17 @@
 <template>
   <n-config-provider
     :theme="theme"
-    v-cloak
     :theme-overrides="{
       common: overrideThemeCommon,
     }"
   >
     <n-message-provider placement="bottom-left">
       <TopBar />
-      <n-card
-        class="main"
-        :bordered="false"
-        content-style="padding: 0;"
-        v-cloak
-      >
-        <router-view v-slot="{ Component }" v-cloak>
+      <n-card class="main" :bordered="false" content-style="padding: 0;">
+        <router-view v-slot="{ Component }">
           <n-back-top :listen-to="body" />
-          <transition :name="transitionName" mode="out-in" v-cloak>
-            <component class="page" :is="Component" v-cloak />
+          <transition :name="transitionName" mode="out-in">
+            <component class="page" :is="Component" />
           </transition>
         </router-view>
       </n-card>
@@ -46,8 +40,9 @@ export default defineComponent({
     body: document,
     transitionName: null,
     overrideThemeCommon: {
-      fontSize: "15.2px",
-      fontFamily: "'IBM Plex Serif',ibm-plex-serif,Georgia,Times,serif",
+      fontSize: "13px",
+      fontFamily: "'Roboto', sans-serif",
+      codeFontFamily: "Source Code Pro",
     },
   }),
   computed: {
@@ -75,14 +70,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
-[v-cloak] {
-  display: none !important;
-}
-</style>
-
 <style scoped lang="less">
-@import "../src/assets/css/variables.less";
+@import "@/assets/css/variables.less";
 .main {
   margin: auto;
   top: @top-bar-height;

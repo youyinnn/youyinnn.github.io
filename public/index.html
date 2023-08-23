@@ -1,98 +1,84 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <script
-      id="preLoadingJs"
-      type="text/javascript"
-      src="<%= BASE_URL %>preLoadingBody.js"
-    ></script>
 
-    <style>
-      [v-cloak] {
-        display: none !important;
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <script id="preLoadingJs" type="text/javascript" src="<%= BASE_URL %>preLoadingBody.js"></script>
+
+  <style>
+    [v-cloak] {
+      display: none !important;
+    }
+  </style>
+
+  <!-- Start Single Page Apps for GitHub Pages -->
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    // This script checks to see if a redirect is present in the query string,
+    // converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
       }
-    </style>
+    })(window.location);
+  </script>
+  <!-- End Single Page Apps for GitHub Pages -->
 
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script checks to see if a redirect is present in the query string,
-      // converts it back into the correct url and adds it to the
-      // browser's history using window.history.replaceState(...),
-      // which won't cause the browser to attempt to load the new url.
-      // When the single page app is loaded further down in this file,
-      // the correct url will be waiting in the browser's history for
-      // the single page app to route accordingly.
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      })(window.location);
-    </script>
-    <!-- End Single Page Apps for GitHub Pages -->
+  <!-- 字体 -->
+  <link rel="preload" href="<%= require('@/assets/css/font/Roboto-Regular.ttf') %>" as="font" crossorigin>
+  <link rel="preload" href="<%= require('@/assets/css/font/Roboto-Bold.ttf') %>" as="font" crossorigin>
+  <link rel="preload" href="<%= require('@/assets/css/font/Roboto-BoldItalic.ttf') %>" as="font" crossorigin>
+  <link rel="preload" href="<%= require('@/assets/css/font/Roboto-Italic.ttf') %>" as="font" crossorigin>
 
-    <!-- 使用CDN的CSS文件 -->
-    <% for (var i in htmlWebpackPlugin.options.cdn &&
-    htmlWebpackPlugin.options.cdn.css) { %>
-    <link
-      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
-      rel="external nofollow"
-      rel="external nofollow"
-      rel="preload"
-      as="style"
-    />
+  <!-- 使用CDN的CSS文件 -->
+  <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
+    <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="external nofollow preload" as="style" />
 
-    <link
-      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
-      rel="external nofollow"
-      rel="external nofollow"
-      rel="stylesheet"
-    />
+    <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="external nofollow" as="stylesheet" />
     <% } %>
-    <!-- 使用CDN的JS文件 -->
-    <% for (var i in htmlWebpackPlugin.options.cdn &&
-    htmlWebpackPlugin.options.cdn.js) { %>
-    <link
-      href="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
-      rel="external nofollow"
-      rel="preload"
-      as="script"
-    />
-    <% } %>
-  </head>
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+      <!-- 使用CDN的JS文件 -->
+      <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+        <link href="<%= htmlWebpackPlugin.options.cdn.js[i] %>" rel="external nofollow preload" as="script" />
+        <% } %>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
         properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
-    </noscript>
-    <div id="app" v-cloak></div>
-    <!-- built files will be auto injected -->
+        continue.</strong>
+  </noscript>
+  <div id="app" v-cloak></div>
+  <!-- built files will be auto injected -->
 
-    <% for (var i in htmlWebpackPlugin.options.cdn &&
-    htmlWebpackPlugin.options.cdn.js) { %>
+  <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
     <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
     <% } %>
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
-  </body>
+      <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+</body>
+
 </html>

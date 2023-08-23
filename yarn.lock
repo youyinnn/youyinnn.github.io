@@ -12044,13 +12044,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfonts@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "vfonts@npm:0.1.0"
-  checksum: 6a0cf0c4c98d27c18cc7e6d134615c4086c025d5a44cac5f5196cabd27f2ad7dee45e5f8034095f493a1bd8e5cb4a1b995644e55354fe2a9626c47ad1c2de608
-  languageName: node
-  linkType: hard
-
 "vm-browserify@npm:^1.0.1":
   version: 1.1.2
   resolution: "vm-browserify@npm:1.1.2"
@@ -12721,7 +12714,6 @@ __metadata:
     roboto-fontface: "*"
     sass: ^1.38.0
     sass-loader: ^10.0.0
-    vfonts: ^0.1.0
     vue: 3.2.47
     vue-router: ^4.0.0-0
     vuex: ^4.0.0-0
