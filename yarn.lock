@@ -10453,13 +10453,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"roboto-fontface@npm:*":
-  version: 0.10.0
-  resolution: "roboto-fontface@npm:0.10.0"
-  checksum: 58749bb49133974aa72d79ab1928d5d0aa1df162daab7398cbceeadc1508d222054d2e81d41ab548361a785c5cd2da97159544c3acecc8a180030c91b504be3b
-  languageName: node
-  linkType: hard
-
 "run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -12222,13 +12215,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webfontloader@npm:^1.0.0":
-  version: 1.6.28
-  resolution: "webfontloader@npm:1.6.28"
-  checksum: cbebbe593cb0d27dbb4d418f7f96bd9893024f1f2062e858af76209b6524e25d766964b6e2a724f3b694fadef661dd3a01065455a96df05337b3281ca09ab656
-  languageName: node
-  linkType: hard
-
 "webidl-conversions@npm:^3.0.0":
   version: 3.0.1
   resolution: "webidl-conversions@npm:3.0.1"
@@ -12711,12 +12697,10 @@ __metadata:
     naive-ui: ^2.21.5
     prettier: 2.5.1
     raw-loader: ^4.0.2
-    roboto-fontface: "*"
     sass: ^1.38.0
     sass-loader: ^10.0.0
     vue: 3.2.47
     vue-router: ^4.0.0-0
     vuex: ^4.0.0-0
-    webfontloader: ^1.0.0
   languageName: unknown
   linkType: soft
