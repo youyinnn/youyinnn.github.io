@@ -3,7 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import "./assets/css/index.less";
+import "@/assets/css/index.less";
+import "@/assets/css/font/fonts.css";
 import "animate.css";
 import resources from "@/assets/resources/resources.js";
 
