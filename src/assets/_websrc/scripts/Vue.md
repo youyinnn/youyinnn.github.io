@@ -1,10 +1,16 @@
 ## Vue
 
-### Vue 技巧
+### Vue 引入其他字体载导致页面第一次加载闪烁
+
+- [在 Vue.js 中加载字体的最佳做法](https://segmentfault.com/a/1190000039796434)
+
+- [Vue-cli correct processing of \<link rel="preload/prefetch"\>](https://stackoverflow.com/questions/56793406/vue-cli-correct-processing-of-link-rel-preload-prefetch)
+
+### Vue 动画过渡
 
 1. [用了很多动效，介绍 4 个很 Nice 的 Vue 路由过渡动效！](https://juejin.cn/post/6951540864787152927)
 
-   t ransition 得用这样的状态
+   transition 得用这样的状态
 
    ```html
    <transition name="slide-fade" mode="out-in">
@@ -21,12 +27,12 @@
    .fade-leave-active {
      transition: opacity 0.3s;
    }
-   
+
    .fade-enter,
    .fade-leave-to {
      opacity: 0;
    }
-   
+
    .slide-fade-enter-active {
      transition: all 0.3s ease;
    }
@@ -188,21 +194,15 @@ then the spa is good to go~
 
 在[stackoverflow](https://stackoverflow.com/a/70299225/17094075)上的回答
 
-
-
 ### Vite
 
-- [vite配置项目路径别名](https://segmentfault.com/a/1190000041417219)
+- [vite 配置项目路径别名](https://segmentfault.com/a/1190000041417219)
 - [Vue Router 4 for Everyone](https://vueschool.io/lessons/installing-and-setting-up-vue-router-with-vite-vite-only)
-
-
 
 ### Vue Router
 
 - [How to get current name of route in Vue?](https://stackoverflow.com/questions/53126710/how-to-get-current-name-of-route-in-vue)
 
-
 ### Vuetify
 
 - [Vuetify component v-form is not responding on the declared @submit event handler](https://stackoverflow.com/questions/48937829/vuetify-component-v-form-is-not-responding-on-the-declared-submit-event-handler)
-- 

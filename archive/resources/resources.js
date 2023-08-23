@@ -1,1 +1,0 @@
-sessionStorage.setItem('cacheversion', 1637629291749); var articlesCount = 121; var resourcesList;if (location.pathname.startsWith('/articles/') || location.pathname.startsWith('/article/')) {resourcesList = ["friendslink.js","cache-yxjr49.js"];} else {resourcesList = ["friendslink.js"];}

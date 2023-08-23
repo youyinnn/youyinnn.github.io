@@ -201,6 +201,12 @@ emoji.init_env();
 emoji.replace_mode = "unified";
 emoji.allow_native = true;
 
+// ES6 EXAMPLE
+const fsExtra = require("fs-extra");
+fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "articles"));
+fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "about"));
+fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "scripts"));
+
 // iterating md files
 for (let pname of postsrs) {
   let abbrlink = crc32(pname).toString(36);
