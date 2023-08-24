@@ -37,6 +37,7 @@ import { NMenu, NGrid, NGi } from "naive-ui";
 import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // import { getContent, getToc } from "@/plugins/get-md-content";
+import axios from "axios";
 
 export default {
   name: "Script",
@@ -92,9 +93,15 @@ export default {
     showContent: function (key) {
       this.activeKey = key;
       this.scriptChangeAnimate = false;
-      const src = require(`raw-loader!@/../public/assets/scripts/${key}.htm`);
-      this.content = src.default;
       // getContent("scripts", key, this);
+      const thiz = this;
+      axios.get(`/assets/scripts/${key}.htm`).then((response) => {
+        thiz.content = response.data;
+        // getContent("about", "index", this);
+        this.$store.commit("tabChange", {
+          tab: "about",
+        });
+      });
 
       try {
         const tocSrc = require(`@/../public/assets/scripts/${key}.htm.toc.json`);

@@ -23,7 +23,6 @@ module.exports = {
   indexPath: "../index.html",
   runtimeCompiler: true,
   chainWebpack: (config) => {
-    config.module.rule("raw-loader").test(/\.md$/).use("raw-loader");
     // config
     //   .plugin("webpack-bundle-analyzer")
     //   .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin);

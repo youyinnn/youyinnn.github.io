@@ -132,19 +132,18 @@ function blockKatexRendering(htmlStr) {
 }
 
 function inlineKatexRendering(htmlStr) {
+  const regStr = /[$]{1,2}[^$]*[$]{1,2}/gm;
   const dom = htmlparser2.parseDocument(htmlStr);
   const els = htmlparser2.DomUtils.filter(
     (node) => {
-      return (
-        node.data !== undefined && RegExp(/\$[^$]*\$/, "gm").test(node.data)
-      );
+      return node.data !== undefined && RegExp(regStr, "gm").test(node.data);
     },
     dom,
     true
   );
   let find = [];
   for (let textEl of els) {
-    if (RegExp(/\$[^$]*\$/, "gm").test(textEl.data)) {
+    if (RegExp(regStr, "gm").test(textEl.data)) {
       let currentEl = textEl;
       let upperParent = currentEl.parent;
       let inCode = false;
@@ -163,10 +162,11 @@ function inlineKatexRendering(htmlStr) {
   const replaceMap = [];
   for (let el of find) {
     const dataBefore = el.data;
-    const match = [...dataBefore.matchAll(/\$[^$]*\$/gm)];
+    const match = [...dataBefore.matchAll(regStr)];
     for (let mc of match) {
       let mcText = mc[0];
-      let exp = mcText.substring(1, mcText.length - 1).trim();
+      let t = mc[0].at(1) === "$" ? 2 : 1;
+      let exp = mcText.substring(t, mcText.length - t).trim();
       let ehtml =
         '<span class="" katex-exp="' +
         toBinary(exp) +
