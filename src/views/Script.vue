@@ -95,13 +95,15 @@ export default {
       this.scriptChangeAnimate = false;
       // getContent("scripts", key, this);
       const thiz = this;
-      axios.get(`./assets/scripts/${key}.htm`).then((response) => {
-        thiz.content = response.data;
-        // getContent("about", "index", this);
-        this.$store.commit("tabChange", {
-          tab: "about",
+      axios
+        .get(`${process.env.BASE_URL}assets/scripts/${key}.htm`)
+        .then((response) => {
+          thiz.content = response.data;
+          // getContent("about", "index", this);
+          this.$store.commit("tabChange", {
+            tab: "about",
+          });
         });
-      });
 
       try {
         const tocSrc = require(`@/../public/assets/scripts/${key}.htm.toc.json`);
