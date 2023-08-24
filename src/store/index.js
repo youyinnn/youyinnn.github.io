@@ -2,13 +2,15 @@ import { createStore } from "vuex";
 import { setBodyCss } from "../../public/preLoadingBody";
 
 const pathName = location.pathname;
-var initialRoute = "about";
+var initialRoute = "none";
+if (pathName === "/") {
+  initialRoute = "about";
+}
 
 if (pathName.startsWith("/article")) {
   initialRoute = "articles";
 }
 if (pathName.startsWith("/scripts")) {
-  console.log(pathName);
   initialRoute = "scripts";
 }
 
@@ -28,6 +30,7 @@ export default createStore({
   },
   mutations: {
     tabChange(state, payload) {
+      console.log("Change tab to: ", payload);
       state.currentTab = payload.tab;
       state.firstRouteLazyLoaded = true;
     },
@@ -43,6 +46,7 @@ export default createStore({
       setBodyCss();
     },
     routeLoad(state, payload) {
+      console.log(payload);
       state.firstRouteLazyLoaded = payload.load;
     },
   },

@@ -143,6 +143,14 @@ export default {
         }
       }
 
+      document.title = this.postMetadata.title;
+      let metas = document.getElementsByTagName("meta");
+      for (let meta of metas) {
+        if (meta.name === "description") {
+          meta.content = this.postMetadata.title;
+        }
+      }
+
       const thiz = this;
       axios
         .get(`${process.env.BASE_URL}assets/articles/${abbrlink}.htm`)
@@ -187,11 +195,6 @@ export default {
     } else {
       location.href = "/page-not-found";
     }
-  },
-  mounted: function () {
-    this.$store.commit("tabChange", {
-      tab: "articles",
-    });
   },
 };
 </script>

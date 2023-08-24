@@ -76,6 +76,7 @@ export default {
     } else {
       this.showContent(scriptId);
     }
+    console.log("created");
   },
   methods: {
     routeTo: function (key) {
@@ -134,11 +135,6 @@ export default {
     } else {
       location.href = "/page-not-found";
     }
-  },
-  mounted: function () {
-    this.$store.commit("tabChange", {
-      tab: "scripts",
-    });
   },
 };
 </script>
