@@ -7,14 +7,21 @@
   >
     <n-message-provider placement="bottom-left">
       <TopBar />
-      <n-card class="main" :bordered="false" content-style="padding: 0;">
-        <router-view v-slot="{ Component }">
-          <n-back-top :listen-to="body" />
-          <transition :name="transitionName" mode="out-in">
-            <component class="page" :is="Component" />
-          </transition>
-        </router-view>
-      </n-card>
+      <Transition name="fade3">
+        <n-card
+          class="main"
+          :bordered="false"
+          content-style="padding: 0;"
+          v-show="routeLoaded"
+        >
+          <router-view v-slot="{ Component }">
+            <n-back-top :listen-to="body" />
+            <transition :name="transitionName" mode="out-in">
+              <component class="page" :is="Component" />
+            </transition>
+          </router-view>
+        </n-card>
+      </Transition>
       <n-global-style />
     </n-message-provider>
   </n-config-provider>
@@ -48,6 +55,9 @@ export default defineComponent({
   computed: {
     theme() {
       return this.$store.state.currentThemeConfig.darkTheme ? darkTheme : null;
+    },
+    routeLoaded() {
+      return this.$store.state.firstRouteLazyLoaded;
     },
   },
   components: {

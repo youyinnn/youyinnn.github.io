@@ -16,6 +16,11 @@ export default {
   data: () => ({
     publicPath: process.env.BASE_URL,
   }),
+  mounted: function () {
+    this.$store.commit("routeLoad", {
+      load: true,
+    });
+  },
 };
 </script>
 
