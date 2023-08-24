@@ -23,11 +23,8 @@ export default {
       .get(`${process.env.BASE_URL}assets/about/index.htm`)
       .then((response) => {
         thiz.content = response.data;
-
-        this.$store.commit("tabChange", {
-          tab: "about",
-        });
       });
+    document.title = "About Me";
   },
 };
 </script>

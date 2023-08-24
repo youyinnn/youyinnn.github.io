@@ -15,4 +15,16 @@ for (let rs of resourceList) {
 
 const vue = createApp(App);
 console.log("Vue on: " + vue.version);
-vue.use(router).use(store).mount("#app");
+vue.use(router).use(store);
+
+// global
+vue.config.globalProperties.$changeTab = (tabName) => {
+  console.log("");
+  console.log("Global tab changing");
+  store.commit("tabChange", {
+    tab: tabName,
+  });
+  console.log("");
+};
+
+vue.mount("#app");

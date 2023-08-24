@@ -30,6 +30,7 @@
               <template v-slot:icon>
                 <n-icon :size="20"><brand-github /></n-icon>
               </template>
+              Settings
             </n-button>
           </template>
           <div class="setting-item">
@@ -143,9 +144,7 @@ export default {
   }),
   methods: {
     goTo(tab) {
-      this.$store.commit("tabChange", {
-        tab: tab.name,
-      });
+      this.$changeTab(tab.name);
       this.$router.push(tab.route).catch(() => {});
     },
     getPageWidth() {
