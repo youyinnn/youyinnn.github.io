@@ -22,4 +22,4 @@
       opacity: 0;
     }
   `,Tt([dt({reflect:!0})],Nt.prototype,"host",2),Tt([dt({reflect:!0})],Nt.prototype,"repo",2),Tt([dt({reflect:!0})],Nt.prototype,"repoId",2),Tt([dt({reflect:!0})],Nt.prototype,"category",2),Tt([dt({reflect:!0})],Nt.prototype,"categoryId",2),Tt([dt({reflect:!0})],Nt.prototype,"mapping",2),Tt([dt({reflect:!0})],Nt.prototype,"term",2),Tt([dt({reflect:!0})],Nt.prototype,"strict",2),Tt([dt({reflect:!0})],Nt.prototype,"reactionsEnabled",2),Tt([dt({reflect:!0})],Nt.prototype,"emitMetadata",2),Tt([dt({reflect:!0})],Nt.prototype,"inputPosition",2),Tt([dt({reflect:!0})],Nt.prototype,"theme",2),Tt([dt({reflect:!0})],Nt.prototype,"lang",2),Tt([dt({reflect:!0})],Nt.prototype,"loading",2),Nt=Tt([at("giscus-widget")],Nt)}}]);
-//# sourceMappingURL=701.89cbe33c.js.map
+//# sourceMappingURL=701.bac48e77.js.map
