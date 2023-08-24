@@ -144,9 +144,11 @@ export default {
       }
 
       const thiz = this;
-      axios.get(`./assets/articles/${abbrlink}.htm`).then((response) => {
-        thiz.content = response.data;
-      });
+      axios
+        .get(`${process.env.BASE_URL}assets/articles/${abbrlink}.htm`)
+        .then((response) => {
+          thiz.content = response.data;
+        });
 
       // get toc
       if (this.postMetadata.hasToc) {
