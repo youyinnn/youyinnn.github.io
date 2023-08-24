@@ -23,7 +23,7 @@ export default {
       .get(`${process.env.BASE_URL}assets/about/index.htm`)
       .then((response) => {
         thiz.content = response.data;
-        // getContent("about", "index", this);
+
         this.$store.commit("tabChange", {
           tab: "about",
         });

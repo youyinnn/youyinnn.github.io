@@ -1,10 +1,14 @@
 ## Vue
 
+![alt text](https://pagespeed-insights.herokuapp.com?url=https://ankurparihar.github.io)
+
 ### Vue 引入其他字体载导致页面第一次加载闪烁
 
 - [在 Vue.js 中加载字体的最佳做法](https://segmentfault.com/a/1190000039796434)
-
 - [Vue-cli correct processing of \<link rel="preload/prefetch"\>](https://stackoverflow.com/questions/56793406/vue-cli-correct-processing-of-link-rel-preload-prefetch)
+- [Hot reload does not work in Vue CLI](https://medium.com/geekculture/hot-reload-does-not-work-in-vue-cli-16ca8ead18be)
+- [How to use Vue-CLI-service serve on HTTP-2?](https://stackoverflow.com/questions/70363603/how-to-use-vue-cli-service-serve-on-http-2)
+
 
 ### Vue 动画过渡
 
@@ -27,12 +31,12 @@
    .fade-leave-active {
      transition: opacity 0.3s;
    }
-
+   
    .fade-enter,
    .fade-leave-to {
      opacity: 0;
    }
-
+   
    .slide-fade-enter-active {
      transition: all 0.3s ease;
    }
