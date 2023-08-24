@@ -7,7 +7,7 @@
   >
     <n-message-provider placement="bottom-left">
       <TopBar />
-      <Transition name="fade3">
+      <Transition name="fade5">
         <n-card
           class="main"
           :bordered="false"

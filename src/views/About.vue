@@ -7,6 +7,7 @@
 <script>
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // import { getContent } from "@/plugins/get-md-content";
+import axios from "axios";
 
 export default {
   name: "About",
@@ -17,11 +18,13 @@ export default {
     content: null,
   }),
   mounted: function () {
-    const src = require(`raw-loader!@/../public/assets/about/index.htm`);
-    this.content = src.default;
-    // getContent("about", "index", this);
-    this.$store.commit("tabChange", {
-      tab: "about",
+    const thiz = this;
+    axios.get(`/assets//about/index.htm`).then((response) => {
+      thiz.content = response.data;
+      // getContent("about", "index", this);
+      this.$store.commit("tabChange", {
+        tab: "about",
+      });
     });
   },
 };

@@ -65,6 +65,7 @@ import Toc from "@/components/Toc.vue";
 import MarkdownBody from "@/components/MarkdownBody.vue";
 // eslint-disable-next-line no-unused-vars
 import Giscus from "@giscus/vue";
+import axios from "axios";
 
 export default {
   name: "Article",
@@ -142,14 +143,13 @@ export default {
         }
       }
 
-      const src = require(`raw-loader!@/../public/assets/articles/${abbrlink}.htm`);
-      // this.content = `<div>${new Date().getTime()}</div>`;
-      this.content = src.default;
-      // getContent("articles", abbrlink, this);
+      const thiz = this;
+      axios.get(`/assets/articles/${abbrlink}.htm`).then((response) => {
+        thiz.content = response.data;
+      });
 
       // get toc
       if (this.postMetadata.hasToc) {
-        // getToc("articles", abbrlink, this);
         const tocSrc = require(`@/../public/assets/articles/${abbrlink}.htm.toc.json`);
         this.toc = tocSrc;
       }
