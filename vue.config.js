@@ -18,6 +18,12 @@ const CompressionPlugin = require("compression-webpack-plugin");
 process.env.VUE_APP_VALUE = "";
 
 module.exports = {
+  transpileDependencies: true,
+  devServer: {
+    https: true,
+    http2: true,
+    port: 8080,
+  },
   publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
   // make the index.html file place at the root of the repo
   indexPath: "../index.html",
