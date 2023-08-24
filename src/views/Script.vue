@@ -95,7 +95,7 @@ export default {
       this.scriptChangeAnimate = false;
       // getContent("scripts", key, this);
       const thiz = this;
-      axios.get(`/assets/scripts/${key}.htm`).then((response) => {
+      axios.get(`./assets/scripts/${key}.htm`).then((response) => {
         thiz.content = response.data;
         // getContent("about", "index", this);
         this.$store.commit("tabChange", {

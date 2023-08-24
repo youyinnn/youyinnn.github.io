@@ -16,10 +16,12 @@ export default {
   },
   data: () => ({
     content: null,
+    publicPath: process.env.BASE_URL,
   }),
   mounted: function () {
     const thiz = this;
-    axios.get(`/assets//about/index.htm`).then((response) => {
+    console.log(thiz.publicPath);
+    axios.get(`./assets/about/index.htm`).then((response) => {
       thiz.content = response.data;
       // getContent("about", "index", this);
       this.$store.commit("tabChange", {

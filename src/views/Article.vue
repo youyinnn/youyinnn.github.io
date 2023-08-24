@@ -144,7 +144,7 @@ export default {
       }
 
       const thiz = this;
-      axios.get(`/assets/articles/${abbrlink}.htm`).then((response) => {
+      axios.get(`./assets/articles/${abbrlink}.htm`).then((response) => {
         thiz.content = response.data;
       });
 
