@@ -16,6 +16,7 @@ const initialCurrentThemeConfig = localStorage.getItem("__currentThemeConfig");
 
 export default createStore({
   state: {
+    firstRouteLazyLoaded: false,
     currentTab: initialRoute,
     currentThemeConfig:
       initialCurrentThemeConfig === null
@@ -28,6 +29,7 @@ export default createStore({
   mutations: {
     tabChange(state, payload) {
       state.currentTab = payload.tab;
+      state.firstRouteLazyLoaded = true;
     },
     changeThemeConfig(state, payload) {
       if (payload.codeTheme === undefined) {
@@ -39,6 +41,9 @@ export default createStore({
         JSON.stringify(state.currentThemeConfig)
       );
       setBodyCss();
+    },
+    routeLoad(state, payload) {
+      state.firstRouteLazyLoaded = payload.load;
     },
   },
   actions: {},
