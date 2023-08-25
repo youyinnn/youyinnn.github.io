@@ -22,15 +22,15 @@ https://apple.stackexchange.com/questions/414072/soundflower-replacement-on-m1-m
 
 安装好之后打开
 
-![](../../../../public/img/20210425192156.png)
+![](../../../img/20210425192156.png)
 
 添加聚合设备之后，再打开声音设置->输出->选上你刚设置的输出源
 
-![](../../../../public/img/20210425192756.png)
+![](../../../img/20210425192756.png)
 
 #### 安装 ARM Homebrew
 
-选择国内Mirror安装
+选择国内 Mirror 安装
 
 ```bash
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
