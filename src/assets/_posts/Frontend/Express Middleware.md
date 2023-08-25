@@ -1,8 +1,5 @@
 ---
 title: Express Middleware
-categories:
-  - front-end
-  - nodejs
 tags:
   - express
   - nodejs

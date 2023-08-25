@@ -1,8 +1,5 @@
 ---
 title: Leetcode-61~65
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-04-02 14:18:00 +8

@@ -1,8 +1,5 @@
 ---
 title: CLH Lock Queue
-categories:
-  - data structures
-  - list
 tags:
   - algorithm
   - clh-lock-queue

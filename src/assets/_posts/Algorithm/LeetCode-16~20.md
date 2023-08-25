@@ -1,8 +1,5 @@
 ---
 title: Leetcode-16~20
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-03-06 20:13:00

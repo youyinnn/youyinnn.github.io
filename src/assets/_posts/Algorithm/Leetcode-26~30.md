@@ -1,8 +1,5 @@
 ---
 title: Leetcode-26~30
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-03-09 16:21:00

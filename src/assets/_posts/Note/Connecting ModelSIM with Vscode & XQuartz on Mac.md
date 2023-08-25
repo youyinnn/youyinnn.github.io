@@ -1,8 +1,5 @@
 ---
 title: Connecting ModelSIM with Vscode & XQuartz on Mac
-categories:
-  - concordia
-  - coen6501
 tags:
   - nottag
 date: 2021-10-5 19:22:5

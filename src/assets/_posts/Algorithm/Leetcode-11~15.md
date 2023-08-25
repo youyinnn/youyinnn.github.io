@@ -1,8 +1,5 @@
 ---
 title: Leetcode-11~15
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-02-27 21:42:00

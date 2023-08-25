@@ -1,8 +1,5 @@
 ---
 title: Leetcode-71~75
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
   - mysqrt

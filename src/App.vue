@@ -74,7 +74,7 @@ export default defineComponent({
     //   if (pre !== null) pre.remove();
     // }, 300);
     setTimeout(() => {
-      this.transitionName = "fade1";
+      this.transitionName = "fade3";
     }, 300);
     console.log("App mounted, current tab: ", this.$store.state.currentTab);
     this.$changeTab(this.$store.state.currentTab);

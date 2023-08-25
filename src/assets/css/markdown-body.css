@@ -97,7 +97,7 @@ td.hljs-ln-code {
 
 .markdown-body a {
   background: 0 0;
-  color: #787aff;
+  color: #ffb752;
   text-decoration: none;
 }
 
@@ -171,22 +171,22 @@ a code {
 }
 
 .markdown-body h1 {
-  border-left: 10px solid var(--success-color-pressed);
+  border-left: 10px solid var(--primary-color);
 }
 .markdown-body h2 {
-  border-left: 8px solid var(--success-color-pressed);
+  border-left: 8px solid var(--primary-color);
 }
 .markdown-body h3 {
-  border-left: 6.5px solid var(--success-color-pressed);
+  border-left: 6.5px solid var(--primary-color);
 }
 .markdown-body h4 {
-  border-left: 5px solid var(--success-color-pressed);
+  border-left: 5px solid var(--primary-color);
 }
 .markdown-body h5 {
-  border-left: 4px solid var(--success-color-pressed);
+  border-left: 4px solid var(--primary-color);
 }
 .markdown-body h6 {
-  border-left: 3px solid var(--success-color-pressed);
+  border-left: 3px solid var(--primary-color);
 }
 
 .katex-display {

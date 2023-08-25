@@ -1,8 +1,5 @@
 ---
 title: 优先队列&二叉堆（2-heap）
-categories:
-  - data structures
-  - heap
 tags:
   - queue
   - priority-queue

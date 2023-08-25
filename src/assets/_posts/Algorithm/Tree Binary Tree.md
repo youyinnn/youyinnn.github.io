@@ -1,8 +1,5 @@
 ---
 title: Tree Binary Tree
-categories:
-  - data structures
-  - tree
 tags:
   - algorithm
   - binary-tree

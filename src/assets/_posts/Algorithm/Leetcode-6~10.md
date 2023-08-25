@@ -1,8 +1,5 @@
 ---
 title: Leetcode-6~10
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-02-17 13:18:00

@@ -1,9 +1,5 @@
 ---
 title: Help GC A Favor & JIT Introduction
-categories:
-  - java
-  - jvm
-  - gc
 tags:
   - JVM
   - GC

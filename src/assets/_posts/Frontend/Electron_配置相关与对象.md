@@ -1,8 +1,5 @@
 ---
 title: Electron_配置相关与对象
-categories:
-  - front-end
-  - electron
 comments: true
 tags:
   - electron

@@ -1,8 +1,5 @@
 ---
 title: Docker Service&Composefile
-categories:
-  - docker
-  - notes
 tags:
   - docker
   - compose-file

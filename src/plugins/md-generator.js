@@ -201,66 +201,97 @@ emoji.init_env();
 emoji.replace_mode = "unified";
 emoji.allow_native = true;
 
-// ES6 EXAMPLE
+// clear public
 const fsExtra = require("fs-extra");
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "articles"));
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "about"));
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "scripts"));
+fsExtra.emptyDirSync(path.join(process.cwd(), "public", "img"));
 
-// iterating md files
-for (let pname of postsrs) {
-  let abbrlink = crc32(pname).toString(36);
-  const hMap = md2html(
-    path.join(postsPath, pname),
-    path.join(process.cwd(), "public", "assets", "articles", abbrlink + ".htm"),
-    function (sourceMdStr) {
-      let data = articleDataExtract.extract(sourceMdStr);
-      // data.metadata.short_content = marked.parse(data.metadata.short_content);
-      data.metadata.abbrlink = abbrlink;
-      if (data.metadata.series !== undefined) {
-        let seriesForThisArticles;
-        for (let j = 0; j < allSeries.length; j++) {
-          if (allSeries[j].se === data.metadata.series)
-            seriesForThisArticles = allSeries[j].ps;
-        }
-        if (seriesForThisArticles === undefined) {
-          let item = {};
-          item.se = data.metadata.series;
-          item.ps = seriesForThisArticles = [];
-          allSeries.push(item);
-        }
-        let ss =
-          data.metadata.title +
-          "===" +
-          abbrlink +
-          "===" +
-          new Date(data.metadata.date).getTime();
-        seriesForThisArticles.unshift(ss);
-      }
-      articlesMetadata.push(data.metadata);
-      return data.body;
+const imgSrcPath = path.join(__dirname, "..", "assets", "img");
+
+for (let img of fs.readdirSync(imgSrcPath)) {
+  fs.copyFile(
+    path.join(imgSrcPath, img),
+    path.join(process.cwd(), "public", "img", img),
+    (err) => {
+      if (err) throw err;
     }
   );
-  for (let metadata of articlesMetadata) {
-    if (metadata.abbrlink === abbrlink) {
-      metadata.hasToc = hMap !== null;
+}
+
+for (let item of postsrs) {
+  let itemPath = path.join(postsPath, item);
+  if (fs.lstatSync(itemPath).isDirectory()) {
+    let outputDir = path.join(
+      process.cwd(),
+      "public",
+      "assets",
+      "articles",
+      item
+    );
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+    // iterating article md files
+    for (let pname of fs.readdirSync(itemPath)) {
+      if (pname.endsWith(".md")) {
+        let abbrlink = crc32(pname).toString(36);
+        const hMap = md2html(
+          path.join(itemPath, pname),
+          path.join(outputDir, abbrlink + ".htm"),
+          function (sourceMdStr) {
+            let data = articleDataExtract.extract(sourceMdStr);
+            // data.metadata.short_content = marked.parse(data.metadata.short_content);
+            data.metadata.abbrlink = abbrlink;
+            if (data.metadata.series !== undefined) {
+              let seriesForThisArticles;
+              for (let j = 0; j < allSeries.length; j++) {
+                if (allSeries[j].se === data.metadata.series)
+                  seriesForThisArticles = allSeries[j].ps;
+              }
+              if (seriesForThisArticles === undefined) {
+                let item = {};
+                item.se = data.metadata.series;
+                item.ps = seriesForThisArticles = [];
+                allSeries.push(item);
+              }
+              let ss =
+                data.metadata.title +
+                "===" +
+                abbrlink +
+                "===" +
+                new Date(data.metadata.date).getTime();
+              seriesForThisArticles.unshift(ss);
+            }
+            data.metadata.category = item;
+            articlesMetadata.push(data.metadata);
+            return data.body;
+          }
+        );
+        for (let metadata of articlesMetadata) {
+          if (metadata.abbrlink === abbrlink) {
+            metadata.hasToc = hMap !== null;
+          }
+        }
+      }
+    }
+
+    // sort metadata with date
+    articlesMetadata = articlesMetadata.sort((a, b) => {
+      return dayjs(a.date).isBefore(b.date) ? 1 : -1;
+    });
+
+    for (let m of articlesMetadata) {
+      articlesOrder.push(m.title + "<=>" + m.abbrlink);
+    }
+
+    for (let ss of allSeries) {
+      ss.ps = ss.ps.sort((a, b) => {
+        return Number(a.split("===")[2]) - Number(b.split("===")[2]);
+      });
     }
   }
-}
-
-// sort metadata with date
-articlesMetadata = articlesMetadata.sort((a, b) => {
-  return dayjs(a.date).isBefore(b.date) ? 1 : -1;
-});
-
-for (let m of articlesMetadata) {
-  articlesOrder.push(m.title + "<=>" + m.abbrlink);
-}
-
-for (let ss of allSeries) {
-  ss.ps = ss.ps.sort((a, b) => {
-    return Number(a.split("===")[2]) - Number(b.split("===")[2]);
-  });
 }
 
 let websrcPath = path.join(__dirname, "..", "assets/_websrc");

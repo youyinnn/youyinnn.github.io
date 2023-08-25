@@ -1,7 +1,5 @@
 ---
 title: Introductions of eBay Tess
-categories:
-  - eBay
 tags:
   - eBay
   - tess

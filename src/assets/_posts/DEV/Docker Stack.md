@@ -1,8 +1,5 @@
 ---
 title: Docker Stack
-categories:
-  - docker
-  - notes
 tags:
   - docker
 date: 2018-11-29 16:46:00

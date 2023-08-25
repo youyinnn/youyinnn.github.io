@@ -1,8 +1,5 @@
 ---
 title: 初探Java8之lambda
-categories:
-  - java
-  - grammar
 comments: true
 date: 2018-05-15 10:05:00
 tags:

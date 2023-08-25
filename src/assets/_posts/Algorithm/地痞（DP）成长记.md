@@ -1,8 +1,5 @@
 ---
 title: 地痞（DP）成长记
-categories:
-  - algorithm
-  - dp
 comments: true
 tags:
   - algorithm

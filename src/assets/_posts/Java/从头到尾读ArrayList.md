@@ -1,8 +1,5 @@
 ---
 title: 从头到尾读ArrayList
-categories:
-  - java
-  - collections-framework
 comments: true
 date: 2018-06-05 08:31:21
 tags:

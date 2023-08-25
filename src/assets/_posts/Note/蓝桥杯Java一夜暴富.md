@@ -1,7 +1,5 @@
 ---
 title: 蓝桥杯Java一夜暴富
-categories:
-  - note
 comments: false
 tags:
   - 蓝桥杯

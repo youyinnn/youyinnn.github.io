@@ -1,7 +1,5 @@
 ---
 title: Tess login on Jenkins
-categories:
-  - eBay
 tags:
   - tess
 date: 2018-11-16 14:10:08

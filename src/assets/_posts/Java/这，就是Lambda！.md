@@ -1,8 +1,5 @@
 ---
 title: 这，就是Lambda！
-categories:
-  - java
-  - grammar
 comments: true
 date: 2018-06-02 10:52:00
 tags:

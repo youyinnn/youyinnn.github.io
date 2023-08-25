@@ -1,7 +1,5 @@
 ---
 title: Graduation Design
-categories:
-  - essay
 comments: true
 date: 2018-11-2 21:56:10
 ---

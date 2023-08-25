@@ -1,8 +1,5 @@
 ---
 title: Java's Refernece
-categories:
-  - java
-  - grammar
 tags:
   - reference-type
 date: 2019-03-02 21:08:00

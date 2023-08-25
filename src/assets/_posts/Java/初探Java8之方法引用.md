@@ -1,8 +1,5 @@
 ---
 title: 初探Java8之方法引用
-categories:
-  - java
-  - grammar
 comments: true
 date: 2018-05-15 10:40:00
 tags:

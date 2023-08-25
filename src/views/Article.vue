@@ -92,14 +92,14 @@ export default {
       return this.postSerie !== null;
     },
     currentAbbrlink() {
-      return this.$route.params.articleId;
+      return this.$route.params.abbrlink;
     },
     articleLoaded() {
       return this.postMetadata != null;
     },
     giscusTheme() {
       return this.$store.state.currentThemeConfig.darkTheme
-        ? "dark_dimmed"
+        ? "dark_tritanopia"
         : "light_protanopia";
     },
   },
@@ -109,8 +109,9 @@ export default {
     },
   },
   created() {
-    const aId = this.$route.params.articleId;
-    this.loadMd(aId);
+    const cate = this.$route.params.category;
+    const abbrlink = this.$route.params.abbrlink;
+    this.loadMd(cate, abbrlink);
     const series = JSON.parse(sessionStorage.postSeries);
     for (let serie of series) {
       for (let name of serie.ps) {
@@ -132,7 +133,7 @@ export default {
     clickOtherPost(abbrlink) {
       this.$router.push(`/article/${abbrlink}`).catch(() => {});
     },
-    loadMd(abbrlink) {
+    loadMd(cate, abbrlink) {
       if (abbrlink === null || abbrlink === undefined) {
         return;
       }
@@ -153,14 +154,14 @@ export default {
 
       const thiz = this;
       axios
-        .get(`${process.env.BASE_URL}assets/articles/${abbrlink}.htm`)
+        .get(`${process.env.BASE_URL}assets/articles/${cate}/${abbrlink}.htm`)
         .then((response) => {
           thiz.content = response.data;
         });
 
       // get toc
       if (this.postMetadata.hasToc) {
-        const tocSrc = require(`@/../public/assets/articles/${abbrlink}.htm.toc.json`);
+        const tocSrc = require(`@/../public/assets/articles/${cate}/${abbrlink}.htm.toc.json`);
         this.toc = tocSrc;
       }
     },
@@ -181,7 +182,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     const postOrder = JSON.parse(sessionStorage.postOrder);
-    const aId = to.params.articleId;
+    const aId = to.params.abbrlink;
     let exist = false;
     for (let p of postOrder) {
       let pId = p.split("<=>")[1];

@@ -1,7 +1,5 @@
 ---
 title: Interesting Math - Prime Number
-categories:
-  - mathematics
 tags:
   - prime
   - math

@@ -1,9 +1,5 @@
 ---
 title: MySQL InnoDB索引概述
-categories:
-  - db
-  - mysql
-  - index
 tags:
   - mysql
   - mysql-index

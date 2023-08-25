@@ -1,8 +1,5 @@
 ---
 title: kafka-topic-storage-detail
-categories:
-  - kafka
-  - notes
 tags:
   - kafka
 date: 2018-11-06 16:34:00

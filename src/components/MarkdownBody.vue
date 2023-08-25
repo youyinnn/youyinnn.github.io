@@ -1,6 +1,6 @@
 <script>
 import imgRouter from "@/plugins/img-router.js";
-import failedToLoadImg from "/public/img/failed-to-load.png";
+import failedToLoadImg from "/public/failed-to-load.png";
 import { h, createApp } from "vue";
 import { NImage, NEl, NButton, NIcon } from "naive-ui";
 import { CopySharp } from "@vicons/ionicons5";

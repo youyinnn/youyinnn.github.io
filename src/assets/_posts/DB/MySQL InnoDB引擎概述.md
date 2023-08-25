@@ -1,9 +1,5 @@
 ---
 title: MySQL InnoDB引擎概述
-categories:
-  - db
-  - mysql
-  - engines
 tags:
   - mysql-engins
   - innodb

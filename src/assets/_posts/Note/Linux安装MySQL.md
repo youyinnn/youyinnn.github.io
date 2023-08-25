@@ -1,7 +1,5 @@
 ---
 title: Linux安装MySql
-categories:
-  - reprinted
 tags:
   - mysql
   - linux

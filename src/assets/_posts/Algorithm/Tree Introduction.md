@@ -1,8 +1,5 @@
 ---
 title: Tree Introduction
-categories:
-  - data structures
-  - tree
 tags:
   - algorithm
   - binary-tree

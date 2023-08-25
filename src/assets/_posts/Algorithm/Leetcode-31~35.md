@@ -1,8 +1,5 @@
 ---
 title: Leetcode-31~35
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-03-16 21:46:00
