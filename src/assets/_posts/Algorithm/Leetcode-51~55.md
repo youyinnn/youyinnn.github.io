@@ -1,8 +1,5 @@
 ---
 title: Leetcode-51~55
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
   - n-queens

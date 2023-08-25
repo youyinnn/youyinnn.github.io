@@ -1,8 +1,5 @@
 ---
 title: Leetcode-46~50
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
   - permutation

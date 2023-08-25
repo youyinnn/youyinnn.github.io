@@ -1,8 +1,5 @@
 ---
 title: Leetcode-41~45
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-03-20 20:03:00

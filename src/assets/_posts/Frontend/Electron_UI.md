@@ -1,8 +1,5 @@
 ---
 title: Electron_UI
-categories:
-  - front-end
-  - electron
 comments: true
 tags:
   - electron

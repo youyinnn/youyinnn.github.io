@@ -1,7 +1,5 @@
 ---
 title: Machine Learning Week1 Note
-categories:
-  - ml
 tags:
   - dp
 date: 2021-12-16 14:14:00 -4

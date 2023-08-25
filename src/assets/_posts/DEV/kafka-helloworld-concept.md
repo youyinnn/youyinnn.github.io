@@ -1,8 +1,5 @@
 ---
 title: kafka-helloworld-concept
-categories:
-  - kafka
-  - notes
 tags:
   - kafka
 date: 2018-11-06 15:39:00

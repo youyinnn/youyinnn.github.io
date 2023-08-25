@@ -1,8 +1,5 @@
 ---
 title: Leetcode-36~40
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
   - sudoku

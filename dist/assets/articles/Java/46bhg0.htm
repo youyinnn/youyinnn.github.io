@@ -1,0 +1,278 @@
+<h3 id="introduction">Introduction</h3>
+<p>Java 中的<code>String</code>其实有很多东西可以深入的，比如最快拼接效率，比如常量池，比如老生常谈的<code>==</code>问题</p>
+<p>研究它们的时候我们始终要记住，<code>String</code>是不可变的<strong>（immutable）</strong></p>
+<p>还有比如它的本质是一个<code>char[]</code>数组这些事实就简单带过了</p>
+<p>我们需要深入的是<code>String</code>的内存问题，既然它是一成不变的，有一个对象是一个对象，那么 JVM 是如何减少内存的开销的？以及它引申出的一系列内存问题</p>
+<p>而我想写这篇文章的引子，则是<a href="https://github.com/hollischuang">Hollis 前辈</a>的一篇：<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在 for 循环中使用&quot;+&quot;进行字符串拼接</a></p>
+<h3 id="constant-pool--runtime-constant-pool">Constant Pool &amp; Runtime Constant Pool</h3>
+<p>关于常量池，它用于存放 Java 编译期生成的各种字面量和符号引用，于是每个 Class 文件都会有一个 Constant Pool，具体的你可以通过<code>javap -v ClassName</code>一个类去看到；</p>
+<p>而在 JVM 装载 class 文件的时候，会读取 Constant Pool 里的内容到 Runtime Constant Pool，而 Runtime Constant Pool 会在程序运行的时候动态产生新的常量；</p>
+<h3 id="literal">Literal</h3>
+<p>我们知道 String 有两种创建的方式：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;hello&quot;</span>;		<span class="hljs-comment">// literal</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);		<span class="hljs-comment">// new an object</span>
+</code></pre>
+<p>我们当然也知道，a 和 b 是两个不同的对象，因为 a 是直接引用 String Pool 的<strong>字面量</strong>，而 b 引用的是一个 String 对象，虽然这个 String 对象中的字面量实际上也是引用到 String Pool</p>
+<p><img src="../../img/20190302153504.png" alt=""></p>
+<p>图引自<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650121551&idx=1&sn=b14691e0daeca8d1283fc8a860732405&chksm=f36bb86ec41c3178bb5f17ae733ffa73a7249e39fcc473f63db928c909466397b352b493c0a3&scene=21#wechat_redirect">我终于搞清楚了和 String 有关的那点事儿。</a></p>
+<blockquote>
+<p>在不同版本的 JDK 中，Java 堆和字符串池（字符串表）之间的关系也是不同的，这里为了方便表述，就画成两个独立的物理区域了。具体情况请参考 Java 虚拟机规范。</p>
+</blockquote>
+<h3 id="string-pool">String Pool</h3>
+<p>那么问题来了，我之前确实知道有 String Pool 这玩意，那么它到底在哪里？堆还是栈？StackOverFlow 上面有一段很有意思的问答：<a href="https://stackoverflow.com/questions/4918399/where-does-javas-string-constant-pool-live-the-heap-or-the-stack">where does javas string constant pool live? the heap or the stack?</a></p>
+<blockquote>
+<p>The answer is technically neither. <strong>According to the Java Virtual Machine Specification</strong>, the area for storing string literals is in the <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-5.html#jvms-5.1">runtime constant pool</a>.</p>
+<p><strong>The runtime constant pool</strong> memory area is allocated on a per-class or per-interface basis, so it&#39;s not tied to any object instances at all.</p>
+<p><strong>The runtime constant pool</strong> is a subset of the <em>method area</em> which <strong>&quot;stores per-class structures such as the runtime constant pool, field and method data, and the code for methods and constructors, including the special methods used in class and instance initialization and interface type initialization&quot;</strong>.</p>
+<p>The VM spec says that although the <em>method area</em> is <strong>logically part of the heap</strong>, it doesn&#39;t dictate that memory allocated in the method area be subject to garbage collection or other behaviors that would be associated with normal data structure allocated to the heap.</p>
+</blockquote>
+<p>String Pool 是 RT Constant Pool 的一部分，而 RT Constant Pool 是<strong>方法区</strong>的一部分，虽然方法区也是 Heap 的一部分，但它的行为和 Heap 主区域不同；</p>
+<p>也有人说：</p>
+<blockquote>
+<p>As explained by <a href="https://stackoverflow.com/a/4918466/829571">previous answer</a>, the exact location of the string pool is not specified and can vary from one JVM implementation to another.</p>
+<p>It is interesting to note that until Java 7, the pool was in the permgen space of the heap on hotspot JVM but <a href="http://www.oracle.com/technetwork/java/javase/jdk7-relnotes-418459.html#jdk7changes">it has been moved to the main part of the heap since Java 7</a>:</p>
+<blockquote>
+<p><strong>Area</strong>: HotSpot
+<strong>Synopsis</strong>: In JDK 7, interned strings are no longer allocated in the permanent generation of the Java heap, but <strong>are instead allocated in the main part of the Java heap</strong> (known as the young and old generations), along with the other objects created by the application. This change will result in more data residing in the main Java heap, and less data in the permanent generation, and thus may require heap sizes to be adjusted. Most applications will see only relatively small differences in heap usage due to this change, but larger applications that load many classes or make heavy use of the String.intern() method will see more significant differences. RFE: 6962931</p>
+</blockquote>
+<p>And in Java 8 Hotspot, Permanent Generation has been completely removed.</p>
+</blockquote>
+<p>严格来说，String Pool 的位置根据不同的 JVM 以及不同的 JDK 版本而变化，而在 HotSpot 中，7 之前的 StringPool 确实是在永久代，但是 7 之后就将它从永久代移除掉了，被集中的 String 实际上在堆的主要部分分配；</p>
+<p>我认为这样做的目的是让 GCor 也能处理冗余的字符串常量，并且避免因为字符串常量爆满而引发的 PermGen Space 的 OOM</p>
+<p>在<a href="https://www.baeldung.com/java-string-pool#garbage-collection">Bealdung: Guide to Java String Pool</a>中有提到过这个事</p>
+<blockquote>
+<p>From Java 7 onwards, the Java String Pool is <strong>stored in the <em>Heap</em> space, which is garbage collected</strong> by the JVM*.* The advantage of this approach is the <strong>reduced risk of <em>OutOfMemory</em> error</strong> because unreferenced <em>Strings</em> will be removed from the pool, thereby releasing memory.</p>
+</blockquote>
+<p>并且从中我们得知，即使 String Pool 是在堆内存中，它自身也是有大小限制的，CG 会根据这个大小限制去工作：</p>
+<blockquote>
+<p>In Java 7, we have more detailed options to examine and expand/reduce the pool size. Let&#39;s see the two options for viewing the pool size:</p>
+<pre><code>-XX:+PrintFlagsFinal
+-XX:+PrintStringTableStatistics
+</code></pre>
+<p>If we want to increase the pool size in terms of buckets, we can use the <em>StringTableSize</em> JVM option:</p>
+<pre><code>-XX:StringTableSize=``4901
+</code></pre>
+<p>Prior to Java 7u40, the default pool size was 1009 buckets but this value was subject to a few changes in more recent Java versions. To be precise, the default pool size from Java 7u40 until Java 11 was 60013 and now it increased to 65536.</p>
+<p><strong>Note that increasing the pool size will consume more memory but has the advantage of reducing the time required to insert the <em>Strings</em> into the table.</strong></p>
+</blockquote>
+<p>再提一句，在 HotSpot 的 Java 8 中，永久代被完全移除掉了，下面我们详细说这个事</p>
+<h3 id="permgen-">PermGen ?</h3>
+<p>之前了解到，方法区是永久代的所在地，那么 Java 8 HotSpot 中移除掉了永久代然后影响到了什么？之前永久代存在的意义又是什么？</p>
+<blockquote>
+<p>PermGen is an abbreviation for Permanent Generation and it’s a special heap space which is separate from the main Java heap where JVM keeps track of metadata of the classes which have been loaded.</p>
+</blockquote>
+<p>并且找到如下参考：</p>
+<ul>
+<li><a href="https://dzone.com/articles/permgen-and-metaspace">PermGen And Metaspace</a></li>
+<li><a href="https://blogs.oracle.com/jonthecollector/presenting-the-permanent-generation">Presenting The Permanent Genaration</a></li>
+</ul>
+<h4 id="in-java-7">In Java 7</h4>
+<p>永久代是之前 JVM 用来保留用于类加载的元数据的地方，除此之外还存储所有的静态内容：静态方法、原始变量、静态对象的引用等等；它还存储了字节码、所有名称对应的数据、以及 JIT 的信息；最后就是字符串池也在这里；</p>
+<p>PermGen Space 是有默认的最大空间限制的，所以在 Java 7 之前，字符串池（字符串表）还在 PermGen Space 的时候，万一字符串爆了，就会引发 OOM；于是 7 就将 String Pool 移到 main part of heap；</p>
+<p>当我们需要调整这一片的大小的时候，JVM 会将它和 Heap 主 part 的调整大小操作一起进行，通常会引发一次<strong>Full GC</strong>，这样的操作非常昂贵，特别是如果程序装载类信息过多的时候，JVM 会考虑增大 PermGen Space，从而引发<strong>Full GC</strong>，于是我们启动程序的时候也会变得很慢，所以我们加上启动参数，调整 PermGen 的默认初始化大小和最大可用空间：</p>
+<p><code>-XX:PermSize=N</code> - sets the initial (and minimum size) of the Permanent Generation space.</p>
+<p><code>-XX:MaxPermSize=N</code> - sets the maximum size of the Permanent Generation space.</p>
+<h4 id="whats-more-">What&#39;s More ?</h4>
+<p>Java 中每个对象都是一个类的示例，JVM 管理这些对象并将它们存放在 Heap 中；</p>
+<p>Java 中每一个类也是有一个 Class 对象去对应的，于是经过前面的铺垫我们可以归总一下，Java 类对象，也就是所有的 Class 对象，是存放在 PermGen 的；</p>
+<p>于是他们的关系如图：</p>
+<p><img src="../../img/20190302174113.png" alt=""></p>
+<p>那么我们说既然都是对象，而且它们在 GCor 的眼里反正都是一样的，那为什么不将他们放在一起呢？为什么要将类对象放在 PermGen 呢？</p>
+<p>有一个技术上的原因是，Class 对象仅仅只是用来给 JVM 看的，而 Heap 中的其他程序业务相关的示例对象，是 Java 开发者真正要去关心的，如果说这两个放在一起，那么开发者可能需要花费大量的精力去理解这些 Class 对象甚至是处理它们可能会报出来的错误；</p>
+<p>在更久以前，它俩确实是放在一起的，但是因为系统类和开发者写的自定义类的装载行为不一样，所以卸载行为变得很少发生，出于性能优化的考虑才推出了 PermGen，效果也很显著；</p>
+<p>还有更多的细节，还是去参考上面放出的第二个原文连接</p>
+<h4 id="in-java-8">In Java 8</h4>
+<p>PermGen Space 被一个新的区域替代——Metaspace，它和前者的不同之处就在于：它并不限制默认的最大可用空间，虽然你也可以自行设置：</p>
+<p><code>-XX:MetaspaceSize=N</code> - sets the initial (and minimum size) of the Metaspace.</p>
+<p><code>-XX:MaxMetaspaceSize=N</code> - sets the maximum size of the Metaspace.</p>
+<p>有关 Metaspace 的特点，可以参考一个大神写的<a href="https://www.cnblogs.com/duanxz/p/3520829.html">文章</a>，以后我有时间也研究一下；或者还有一个参考<a href="http://java-latte.blogspot.com/2014/03/metaspace-in-java-8.html">Metaspae in Java 8</a></p>
+<h4 id="so">So</h4>
+<p>所以永久代的一部分被移到普通堆，剩下的用 Metaspace Native Memory 替代了，于是这部分内存开销由直接内存承担，不属于 JVM 的一部分</p>
+<h3 id="syntactic-sugar">Syntactic Sugar</h3>
+<p>参考自：<a href="https://www.experts-exchange.com/articles/17406/String-concatenation-in-Java-syntactic-sugar-versus-efficiency.html">String concatenation in Java: syntactic sugar versus efficiency</a></p>
+<p>Java provides two main ways to perform string concatenation and one of them could cause you some trouble. The first one most of us encounter is the <strong>+</strong> operator, where doing something like <strong>String value = &quot;Hello &quot; + &quot;world&quot;;</strong> results in a string with the value <strong>&quot;Hello world&quot;</strong>. Most of the time, developers don&#39;t immediately learn that the <strong>+</strong> operator is just <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> that the compiler turns into <strong>StringBuilder</strong> operations, that being the other main way one can concatenate strings in Java.</p>
+<p>Just about every time the compiler encounters a <strong>+ operator</strong> that has <strong>String objects</strong> or literals as its arguments, it translates that code into a three-step sequence of operations:</p>
+<ol>
+<li>Create a new <strong>StringBuilder</strong> instance, passing the first argument to its constructor.</li>
+<li>Call <strong>StringBuilder.append()</strong> and pass the second argument.</li>
+<li>Call <strong>StringBuilder.toString()</strong>.</li>
+</ol>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;12&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> s2 + <span class="hljs-string">&quot;1&quot;</span>;	<span class="hljs-comment">// sb way</span>
+System.out.println(s1 == s3); <span class="hljs-comment">// false</span>
+</code></pre>
+<h3 id="stringintern">String.intern()</h3>
+<p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期像运行时常量池中增加常量。那就是<code>String</code>的<code>intern</code>方法。</p>
+<p>当一个<code>String</code>实例调用<code>intern()</code>方法时，JVM 会查找常量池中是否有相同 Unicode 的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个 Unicode 等于 str 的字符串并返回它的引用；</p>
+<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用。</strong></p>
+<p>比如：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hollis&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Hollis&quot;</span>);
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Hollis&quot;</span>).intern();
+
+System.out.println(s1 == s2);	<span class="hljs-comment">// false</span>
+System.out.println(s1 == s3);	<span class="hljs-comment">// true</span>
+</code></pre>
+<p><img src="../../img/20190302153504.png" alt=""></p>
+<p>由于 s1 和 s3 都是字符串池（字符串表）中的字面量的引用，所以 s1==s3。但是，s2 的引用是堆中的对象，所以 s2!=s1。</p>
+<h4 id="real-purpose-of-stringintern">Real Purpose Of String.intern()</h4>
+<p>其实，在<code>String s3 = new String(&quot;Hollis&quot;).intern();</code>中，<code>intern</code>是多余的。</p>
+<p>因为就算不用<code>intern</code>，<code>&quot;Hollis&quot;</code>已经作为一个字面量在编译时就被加载到 Class 文件的常量池，进而加入到运行时常量池中，</p>
+<p>那么到底什么场景下才会用到 intern 呢?</p>
+<p>在解释这个之前，我们先来看下以下代码：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hollis&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Chuang&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> s1 + s2;
+<span class="hljs-type">String</span> <span class="hljs-variable">s4</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hollis&quot;</span> + <span class="hljs-string">&quot;Chuang&quot;</span>;
+</code></pre>
+<p>在经过反编译后，得到代码如下：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hollis&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Chuang&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> (<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>()).append(s1).append(s2).toString();
+<span class="hljs-type">String</span> <span class="hljs-variable">s4</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;HollisChuang&quot;</span>;
+</code></pre>
+<p>可以发现，同样是字符串拼接，s3 和 s4 在经过编译器编译后的实现方式并不一样。s3 被转化成<code>StringBuilder</code>及<code>append</code>，而 s4 被直接拼接成新的字符串。</p>
+<p>如果你感兴趣，你还能发现，<code>String s4 = s1 + s2;</code> 经过编译之后，常量池中是有两个字符串常量的分别是 <code>Hollis</code>、<code>Chuang</code>（其实<code>Hollis</code>和<code>Chuang</code>是<code>String s1 = &quot;Hollis&quot;;</code>和<code>String s2 = &quot;Chuang&quot;;</code>定义出来的），拼接结果<code>HollisChuang</code>并不在常量池中。</p>
+<p>如果代码只有<code>String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</code>，那么常量池中将只有<code>HollisChuang</code>而没有 Hollis 和 Chuang。</p>
+<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串。</p>
+<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成<code>StringBuilder.append</code>，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
+<p>那么，有了这个特性了，<code>intern</code>就有用武之地了。<strong>那就是很多时候，我们在程序中用到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</strong></p>
+<p>这时候，对于那种可能经常使用的字符串，使用<code>intern</code>进行定义，每次 JVM 运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
+<p>如一美团点评团队的<a href="https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html">《深入解析 String#intern》</a>文中举的一个例子：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span> * <span class="hljs-number">10000</span>;
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String[] arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[MAX];
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
+    Integer[] DB_DATA = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[<span class="hljs-number">10</span>];
+    <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>(<span class="hljs-number">10</span> * <span class="hljs-number">10000</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; DB_DATA.length; i++) {
+        DB_DATA[i] = random.nextInt();
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; MAX; i++) {
+        <span class="hljs-comment">//arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length]));</span>
+         arr[i] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();
+    }
+}
+</code></pre>
+<p>在以上代码中，我们明确的知道，会有很多<strong>重复的相同的字符串</strong>产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过<code>intern</code>显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+<p>文章种给出的测试结果：</p>
+<blockquote>
+<p>不使用 intern 的代码生成了 1000w 个字符串，占用了大约 640m 空间。 使用了 intern 的代码生成了 1345 个字符串，占用总空间 133k 左右。其实通过观察程序中只是用到了 10 个字符串，所以准确计算后应该是正好相差 100w 倍。虽然例子有些极端，但确实能准确反应出 intern 使用后产生的巨大空间节省。</p>
+<p>使用了 intern 方法后时间上有了一些增长。这是因为程序中每次都是用了 <code>new String</code> 后，然后又进行 intern 操作的耗时时间，这一点如果在内存空间充足的情况下确实是无法避免的，但我们平时使用时，内存空间肯定不是无限大的，不使用 intern 占用空间导致 jvm 垃圾回收的时间是要远远大于这点时间的。 毕竟这里使用了 1000w 次 intern 才多出来 1 秒钟多的时间。</p>
+</blockquote>
+<p>但是不要盲目地使用这个方法，过多地使用这个方法在字符串变化量巨大的情况下会给字符串池（字符串表）带来压力。</p>
+<h3 id="new-string">new String()</h3>
+<p>结合美团文章给出的错误案例，我们顺道说一下<code>new String()</code>的一个细节</p>
+<p>当我们的字符串对象是运行时创造的时候，比如：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;World&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;		<span class="hljs-comment">// StringBuilder().append(a).append(b).toString()</span>
+</code></pre>
+<p>最后的<code>toString()</code>其实就有<code>new String()</code>的操作但是我们来说说数据的内存分布情况：</p>
+<p><img src="../../img/stringpool.png" alt=""></p>
+<p>我们可以知道，运行时产生的所有字符串的值都是存在堆的主内存区的，除非你调用<code>intern()</code>方法将它放进字符串池中，而美团给出的错误例子就是讲大量的不同值的字符串值放进字符串池，导致字符串池压力过大，从而性能降低。</p>
+<h3 id="switch-for-string">Switch For String</h3>
+<p>还是先上代码：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">switchDemoString</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;world&quot;</span>;
+        <span class="hljs-keyword">switch</span> (str) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;hello&quot;</span>:
+            System.out.println(<span class="hljs-string">&quot;hello&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;world&quot;</span>:
+            System.out.println(<span class="hljs-string">&quot;world&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+}
+</code></pre>
+<p>对代码进行反编译：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">switchDemoString</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">switchDemoString</span><span class="hljs-params">()</span>
+    {
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span>
+    {
+        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;world&quot;</span>;
+        String s;
+        <span class="hljs-keyword">switch</span>((s = str).hashCode())
+        {
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">99162322</span>:
+            <span class="hljs-keyword">if</span>(s.equals(<span class="hljs-string">&quot;hello&quot;</span>))
+                System.out.println(<span class="hljs-string">&quot;hello&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">113318802</span>:
+            <span class="hljs-keyword">if</span>(s.equals(<span class="hljs-string">&quot;world&quot;</span>))
+                System.out.println(<span class="hljs-string">&quot;world&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+}
+</code></pre>
+<p>看到这个代码，你知道原来字符串的 switch 是通过<code>equals()</code>和<code>hashCode()</code>方法来实现的。<strong>记住，switch 中只能使用整型</strong>，比如<code>byte</code>，<code>short</code>，<code>char</code>(ackii 码是整型)以及<code>int</code>。</p>
+<p>仔细看下可以发现，进行<code>switch</code>的实际是哈希值，然后通过使用 equals 方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。</p>
+<p>所以，<strong>其实 swich 只支持一种数据类型，那就是整型，其他数据类型都是转换成整型之后在使用 switch 的。</strong></p>
+<h3 id="substring-in-java6--java7">Substring In Java6 &amp; Java7</h3>
+<p>简单一句话，6 里的方法得出的子串还和源串有联系，所以会引发内存泄漏问题；而 7 的方法会真正分配一个空间存储字串；</p>
+<h3 id="concating-string">Concating String</h3>
+<p>终于来到我们的引子了，大部分参考自<a href="https://mp.weixin.qq.com/s/Zs8en3T8TxCMbxGWHkDwBw?comefrom=http://blogread.cn/news/">为什么阿里巴巴不建议在 for 循环中使用&quot;+&quot;进行字符串拼接</a></p>
+<p>一般来说，我们可以直接使用<code>+</code>去拼接，对于字面量而言，首先就可以直接+起来</p>
+<p>但是要注意的是，对于 String 对象之间而言，<code>+</code>是 Java 中的语法糖，前面我们有一节提到过，编译后其实是<code>StringBuilder.append()</code></p>
+<pre><code class="hljs language-java"><span class="hljs-type">String</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;xixi&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;haha&quot;</span>;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;xixi&quot;</span> + <span class="hljs-string">&quot;haha&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> a.concat(b);
+<span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> a + b; <span class="hljs-comment">// (new StringBuilder()).append(a).append(b).toString();</span>
+</code></pre>
+<p>所以说为什么字符串对象不推荐在 for 循环中用+去连接呢？因为这样做每层循环都会创造一个新的<code>StringBuilder</code>对象，倒不如直接定义一个<code>StringBuilder</code>在外边，统一用它去连接所有的字符串</p>
+<p>而 concat 的源码一读就懂：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">concat</span><span class="hljs-params">(String str)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">otherLen</span> <span class="hljs-operator">=</span> str.length();
+    <span class="hljs-keyword">if</span> (otherLen == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> value.length;
+    <span class="hljs-type">char</span> buf[] = Arrays.copyOf(value, len + otherLen);
+    str.getChars(buf, len);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(buf, <span class="hljs-literal">true</span>);
+}
+</code></pre>
+<p>然后就是显示地使用<code>StringBuilder</code>（非线程安全）、和<code>StringBuffer</code>（线程安全）去拼接了</p>
+<p>更多的是，<code>String.join()</code>（Java 8）或者<code>StringUtils.join()</code>方法，这两个方法主要是让多个串之间以某个分隔符连接在一起</p>
+<p>然后在 Java 8 中，又新增了<code>StringJoiner</code>，在前辈的<a href="https://juejin.im/entry/5c75e576e51d453ed7681719/">文章</a>中说到过：它的实现几乎就是<code>StringBuilder</code>，所以性能差不多，也是非线程安全的，之所以增加这个类，是因为配合 Java 8 Stream 的特性：</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// 假如说有</span>
+List&lt;String&gt; list = ImmutableList.of(<span class="hljs-string">&quot;Hollis&quot;</span>,<span class="hljs-string">&quot;hollischuang&quot;</span>,<span class="hljs-string">&quot;Java干货&quot;</span>);
+
+<span class="hljs-comment">// 想拼接在一起我们可以：</span>
+<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+<span class="hljs-keyword">if</span> (!list.isEmpty()) {
+    builder.append(list.get(<span class="hljs-number">0</span>));
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, n = list.size(); i &lt; n; i++) {
+        builder.append(<span class="hljs-string">&quot;,&quot;</span>).append(list.get(i));
+    }
+}
+builder.toString();
+
+<span class="hljs-comment">// 又或者</span>
+list.stream().reduce(<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(), (sb, s) -&gt; sb.append(s).append(<span class="hljs-string">&#x27;,&#x27;</span>), StringBuilder::append).toString();
+
+<span class="hljs-comment">// 甚至是</span>
+list.stream().reduce((a,b)-&gt;a + <span class="hljs-string">&quot;,&quot;</span> + b).toString();
+
+<span class="hljs-comment">// 但我们现在可以</span>
+list.stream().collect(Collectors.joining(<span class="hljs-string">&quot;:&quot;</span>));
+</code></pre>
+<p>而<code>Collectors.joining()</code>的实现就是通过<code>StringJoiner</code>去做的</p>
+<blockquote>
+<p>当然，或许在 Collector 中直接使用 StringBuilder 似乎也可以实现类似的功能，只不过稍微麻烦一些</p>
+<p>所以，Java 8 中提供了 StringJoiner 来丰富 Stream 的用法</p>
+<p>而且 StringJoiner 也可以方便的增加前缀和后缀，比如我们希望得到的字符串是&quot;[Hollis,hollischuang,Java 干货]&quot;而不是&quot;Hollis,hollischuang,Java 干货&quot;的话，StringJoiner 的优势就更加明显了</p>
+</blockquote>

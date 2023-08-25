@@ -1,9 +1,5 @@
 ---
 title: Express Routing
-categories:
-  - front-end
-  - nodejs
-  - express
 tags:
   - express
   - nodejs

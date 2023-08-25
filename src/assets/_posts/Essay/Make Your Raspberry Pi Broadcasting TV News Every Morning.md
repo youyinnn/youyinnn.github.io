@@ -1,7 +1,5 @@
 ---
 title: Make Your Raspberry Pi Broadcasting TV News Every Morning
-categories:
-  - essay
 tags:
   - raspberry pi
 date: 2020-4-23 22:46:59

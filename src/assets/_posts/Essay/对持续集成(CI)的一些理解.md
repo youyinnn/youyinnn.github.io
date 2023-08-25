@@ -2,8 +2,6 @@
 title: 对持续集成(CI)的一些理解
 tags:
   - CI
-categories:
-  - thinking
 date: 2018-5-08 15:53:01
 ---
 

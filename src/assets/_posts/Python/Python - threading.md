@@ -1,8 +1,5 @@
 ---
 title: Python - Threading
-categories:
-  - python
-  - concurrency
 tags:
   - python
   - thread

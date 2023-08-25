@@ -3,8 +3,6 @@ title: JettyDocument_ZH_CN_Translation_Part4-21
 tags:
   - jetty
   - document
-categories:
-  - translation
 series: JettyDocument_ZH_CN_Translation
 date: 2018-05-07 17:30:01
 ---

@@ -76,7 +76,6 @@ export default {
     } else {
       this.showContent(scriptId);
     }
-    console.log("created");
   },
   methods: {
     routeTo: function (key) {

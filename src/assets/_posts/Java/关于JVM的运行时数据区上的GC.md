@@ -1,9 +1,5 @@
 ---
 title: 关于JVM的运行时数据区上的GC
-categories:
-  - java
-  - jvm
-  - gc
 comments: true
 date: 2018-11-14 22:45:00
 tags:

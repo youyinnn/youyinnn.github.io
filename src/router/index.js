@@ -5,8 +5,8 @@ import NotFound from "@/views/NotFound";
 const routes = [
   {
     path: "/articles",
-    name: "Home",
-    component: () => import("@/views/Home.vue"),
+    name: "Articles",
+    component: () => import("@/views/Articles.vue"),
   },
   {
     path: "/scripts",
@@ -19,7 +19,7 @@ const routes = [
     component: () => import("@/views/Script.vue"),
   },
   {
-    path: "/article/:articleId",
+    path: "/article/:category/:abbrlink",
     name: "Article",
     component: () => import("@/views/Article.vue"),
   },

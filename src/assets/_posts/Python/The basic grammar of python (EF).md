@@ -1,8 +1,5 @@
 ---
 title: The Basic Grammar Of Python (EF)
-categories:
-  - python
-  - grammar
 tags:
   - python
   - grammar

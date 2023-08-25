@@ -1,9 +1,5 @@
 ---
 title: 再聊InnoDB索引
-categories:
-  - db
-  - mysql
-  - index
 tags:
   - mysql-index
   - mys

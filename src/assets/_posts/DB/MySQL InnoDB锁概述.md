@@ -1,9 +1,5 @@
 ---
 title: MySQL InnoDB锁概述
-categories:
-  - db
-  - mysql
-  - lock
 tags:
   - mysql-lock
 series: 《MySQL技术内幕：InnoDB存储引擎》笔记

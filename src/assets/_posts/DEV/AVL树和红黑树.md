@@ -1,8 +1,5 @@
 ---
 title: AVL树和红黑树
-categories:
-  - data structures
-  - tree
 comments: true
 date: 2018-08-27 15:05:00
 tags:

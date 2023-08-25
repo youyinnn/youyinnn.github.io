@@ -1,8 +1,5 @@
 ---
 title: Docker Swarm&ClusterSetup
-categories:
-  - docker
-  - notes
 tags:
   - docker
   - cluster

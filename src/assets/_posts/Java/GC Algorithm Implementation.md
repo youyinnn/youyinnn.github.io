@@ -1,9 +1,5 @@
 ---
 title: GC Algorithm Implementation
-categories:
-  - java
-  - jvm
-  - gc
 tags:
   - gc
   - gc-algorithm

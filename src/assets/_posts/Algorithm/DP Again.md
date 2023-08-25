@@ -1,8 +1,5 @@
 ---
 title: DP Again
-categories:
-  - algorithm
-  - dp
 tags:
   - dp
 date: 2019-03-22 14:14:00 +8

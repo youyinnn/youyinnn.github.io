@@ -1,8 +1,5 @@
 ---
 title: Docker Volumes
-categories:
-  - docker
-  - notes
 tags:
   - docker
   - volume

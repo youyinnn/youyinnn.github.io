@@ -1,9 +1,5 @@
 ---
 title: MySQL InnoDB事务概述
-categories:
-  - db
-  - mysql
-  - transaction
 tags:
   - db-transaction
   - mvcc

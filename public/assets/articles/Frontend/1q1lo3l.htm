@@ -1,0 +1,122 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>EXE 什么的，看着就忍不住要双击它！</p>
+<p></div></p>
+<h3 id="introduction">Introduction</h3>
+<hr>
+<p>首先介绍一下 Electron 打包应用的方式：</p>
+<ul>
+<li>打包成 asar 分发；这种方式弊端很多而且不好操作，<a href="https://electronjs.org/docs/tutorial/application-packaging">详情见</a>。</li>
+<li>重构官网提供的二进制 release，这种方式也比较麻烦。</li>
+<li>通过打包工具：<ul>
+<li><a href="https://github.com/electron-userland/electron-forge">electron-forge</a></li>
+<li><a href="https://github.com/electron-userland/electron-builder">electron-builder</a></li>
+<li><a href="https://github.com/electron-userland/electron-packager">electron-packager</a></li>
+</ul>
+</li>
+<li>重编译源码二进制文件...</li>
+</ul>
+<p>用打包工具进行打包比较傻瓜式，两年前的时候，我用过 packager，但是现在不知道为啥不好使了，老卡住，然后我转试 builder。</p>
+<h2 id="electron-packager">electron-packager</h2>
+<p>根据项目 readme 的说明，首先得安装 electron-packager 的模块：</p>
+<pre><code class="hljs language-shell">npm insatll electron-packager -g
+</code></pre>
+<p>对还是全局安装 不要怂。</p>
+<p>要打包你的项目，你只需要运行下面格式的命令：</p>
+<pre><code class="hljs language-shell">electron-packager &lt;sourcedir&gt; &lt;appname&gt; --platform=&lt;platform&gt; --arch=&lt;arch&gt; [optional flags...]
+</code></pre>
+<p>里面的参数含义我们可以通过<a href="https://github.com/electron-userland/electron-packager/blob/master/usage.txt">txt</a>进行简单的参考，或者在<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">md</a>进行深入研究。</p>
+<p>推荐是看 md 的比较清晰一点</p>
+<p>在上篇中，我们构造的 helloworld 的目录结构为：</p>
+<pre><code>your-app/
+├── package.json
+├── main.js
+└── index.html
+</code></pre>
+<p>在我们的演示中，我们运行的是这样的命令：</p>
+<pre><code class="hljs language-shell">electron-packager . helloworldappname --out outputdir --electronVersion 1.7.9
+</code></pre>
+<p>我们在项目目录根目录下运行了这个命令，所以第一个<code>.</code>代表的<code>&lt;sourcedir&gt;</code>是本目录，然后我们指定了<code>&lt;appname&gt;</code>为<code>helloworldappname</code>，然后我们指定了<code>--out</code>表示打包输出的目录，最后指定了我们使用的 electron 的版本号。</p>
+<p>我没有指定<code>--platform</code>和<code>--arch</code>是因为这俩在默认的情况下是选取本机参数，比如我是 win32x64。</p>
+<p>但是每次打包都要写这巨长的命令，确实有点麻烦，我们可以使用 npm 的<code>run-script</code>功能去快速的执行写好的命令：</p>
+<p>npm<code>run-script</code>是默认运行当前目录下<code>package.json</code>文件中 script 定义好的命令，具体的应用自己去学 npm 相关知识，我在项目的<code>package.json</code>文件中写好：</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;helloworld&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main.js&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electron .&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;pk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>然后在根目录下运行命令：</p>
+<pre><code class="hljs language-shell">npm run-script pk
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="hljs language-shell">youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">ll</span>
+total 6
+-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html
+-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js
+-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">npm run-script pk</span>
+<span class="hljs-meta prompt_">
+&gt; </span><span class="language-bash">helloworld@0.1.0 pk D:\Users\bigyellow\electron\helloworld</span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash">electron-packager . helloworldappname --out=outputdir --electronVersion=1.7.9</span>
+
+Packaging app for platform win32 x64 using electron v1.7.9
+Wrote new app to outputdir\helloworldappname-win32-x64
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">ll</span>
+total 6
+-rw-r--r-- 1 youyinnn 197609  391 11月 22 22:00 index.html
+-rw-r--r-- 1 youyinnn 197609 1750 11月 22 22:00 main.js
+drwxr-xr-x 1 youyinnn 197609    0 11月 23 16:05 outputdir/
+-rw-r--r-- 1 youyinnn 197609  211 11月 23 16:04 package.json
+
+youyinnn@DESKTOP-7KE7UCG MINGW64 /d/Users/bigyellow/electron/helloworld
+<span class="hljs-meta prompt_">$</span>
+</code></pre>
+<p>然后项目目录下会生成：
+<img src="../../img/ba4fa76eb64909e4d4959799cf130547.png" alt="electronpk"></p>
+<p>运行 exe：
+<img src="../../img/6420ae86e552fa8e6e1b0f7282f28ca4.png" alt="runexe"></p>
+<hr>
+<p>至此我们的 HelloWorld 的打包就完成了，可以发现虽然我们只是一个简单的 html，但是整个包的大小却有 131M，这是因为它还包含了 chrome 微引擎和其他的环境文件。</p>
+<p><em>参考：<a href="https://electronjs.org/docs/tutorial/application-distribution">https://electronjs.org/docs/tutorial/application-distribution</a></em></p>
+<p><em>参考：<a href="https://github.com/electron-userland/electron-packager/blob/master/docs/api.md">https://github.com/electron-userland/electron-packager/blob/master/docs/api.md</a></em></p>
+<p><em>参考：<a href="http://blog.csdn.net/a1170201028/article/details/59108126">http://blog.csdn.net/a1170201028/article/details/59108126</a></em></p>
+<h2 id="electron-builder">electron-builder</h2>
+<ol>
+<li><p>Specify the standard fields in the application <code>package.json</code> — <a href="https://www.electron.build/configuration/configuration#Metadata-name">name</a>, <code>description</code>, <code>version</code> and <a href="https://docs.npmjs.com/files/package.json#people-fields-author-contributors">author</a>.</p>
+</li>
+<li><p>Specify the <a href="https://www.electron.build/configuration/configuration#configuration">build</a> configuration in the <code>package.json</code> as follows:</p>
+<pre><code>&quot;build&quot;: {
+  &quot;appId&quot;: &quot;your.id&quot;,
+  &quot;mac&quot;: {
+    &quot;category&quot;: &quot;your.app.category.type&quot;
+  }
+}
+</code></pre>
+<p>See <a href="https://www.electron.build/configuration/configuration#configuration">all options</a>. Option <a href="https://www.electron.build/configuration/contents#files">files</a> to indicate which files should be packed in the final application, including the entry file, maybe required.</p>
+</li>
+<li><p>Add <a href="https://www.electron.build/icons">icons</a>.</p>
+</li>
+<li><p>Add the <a href="https://docs.npmjs.com/cli/run-script">scripts</a> key to the development <code>package.json</code>:</p>
+<pre><code>&quot;scripts&quot;: {
+  &quot;pack&quot;: &quot;electron-builder --dir&quot;,
+  &quot;dist&quot;: &quot;electron-builder&quot;
+}
+</code></pre>
+<p>Then you can run<code>yarn dist</code>(to package in a distributable format (e.g. dmg, windows installer, deb package)) or<code>yarn pack</code>(only generates the package directory without really packaging it. This is useful for testing purposes).</p>
+<p>To ensure your native dependencies are always matched electron version, simply add script <code>&quot;postinstall&quot;: &quot;electron-builder install-app-deps&quot;</code> to your <code>package.json</code>.</p>
+</li>
+<li><p>If you have native addons of your own that are part of the application (not as a dependency), set <a href="https://www.electron.build/configuration/configuration#Configuration-nodeGypRebuild">nodeGypRebuild</a> to <code>true</code>.</p>
+</li>
+</ol>
+<p>Please note that everything is packaged into an asar archive <a href="https://www.electron.build/configuration/configuration#Configuration-asar">by default</a>.</p>
+<p>For an app that will be shipped to production, you should sign your application. See <a href="https://www.electron.build/code-signing#where-to-buy-code-signing-certificate">Where to buy code signing certificates</a>.</p>
+<p>这个 build 的时候也需要下载一些东西，源可能被 BAN 了。</p>

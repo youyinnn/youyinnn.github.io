@@ -1,8 +1,5 @@
 ---
 title: Docker ConceptReview
-categories:
-  - docker
-  - notes
 tags:
   - docker
 date: 2018-12-2 12:39:09

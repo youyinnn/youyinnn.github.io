@@ -1,8 +1,5 @@
 ---
 title: Docker Persist Data Overview
-categories:
-  - docker
-  - notes
 tags:
   - docker
   - volume

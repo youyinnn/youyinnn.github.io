@@ -1,9 +1,5 @@
 ---
 title: 再谈对象分代和GC事件
-categories:
-  - java
-  - jvm
-  - memory
 tags:
   - gc
   - gc-event

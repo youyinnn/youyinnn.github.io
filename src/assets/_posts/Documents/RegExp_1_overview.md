@@ -2,9 +2,6 @@
 title: RegExp_1_overview
 tags:
   - regular-expression
-categories:
-  - booknotes
-  - Mastering Regular Expression
 comments: true
 date: 2017-11-17 00:00:56
 series: 《Mastering Regular Expression(Third Edition)》

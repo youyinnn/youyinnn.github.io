@@ -1,8 +1,5 @@
 ---
 title: Some Backtracking Problem In Leetcode
-categories:
-  - algorithm
-  - backtracking
 tags:
   - leetcode
   - backtracking

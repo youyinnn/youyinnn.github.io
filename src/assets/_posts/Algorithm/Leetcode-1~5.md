@@ -1,8 +1,5 @@
 ---
 title: Leetcode-1~5
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-02-02 19:51:00

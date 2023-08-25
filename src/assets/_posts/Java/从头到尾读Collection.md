@@ -1,8 +1,5 @@
 ---
 title: 从头到尾读Collection
-categories:
-  - java
-  - collections-framework
 comments: true
 date: 2018-05-15 17:17:26
 tags:

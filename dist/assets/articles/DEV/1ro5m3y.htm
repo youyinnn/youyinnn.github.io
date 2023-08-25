@@ -1,0 +1,91 @@
+<h3 id="topic--partition">Topic &amp; Partition</h3>
+<p>kafka 中的 Message 以 topic 为分类去组织的，每个 topic 又可以分为不同的 partition 去存储：</p>
+<p><img src="../../img/log_anatomy.png" alt="img"></p>
+<p>我们引用官方的 Introduction 中的一节，看官方是怎么解释的：</p>
+<p>Each partition is an ordered, immutable sequence of records that is continually appended to—a structured commit log. The records in the partitions are each assigned a sequential id number called the <em>offset</em> that uniquely identifies each record within the partition.</p>
+<p>每个分区都是一个<strong>有序的，不可变的记录序列</strong>，不断附加到结构化的提交日志中。分区中的记录每个都分配了一个称为偏移的顺序 ID 号，它唯一地标识分区中的每个记录。</p>
+<p>The Kafka cluster durably persists all published records—whether or not they have been consumed—using a configurable retention period. For example, if the retention policy is set to two days, then for the two days after a record is published, it is available for consumption, after which it will be discarded to free up space. Kafka&#39;s performance is effectively constant with respect to data size so storing data for a long time is not a problem.</p>
+<p>Kafka 集群使用<strong>可配置的保留期（configurable retention period）</strong>，来持久保存所有已发布的记录，无论是否已<strong>消费（consume）</strong>。</p>
+<p>例如，如果保留策略设置为两天，则在发布记录后的两天内，它都是可供消费（consume）的，之后将被<strong>丢弃（discarded）</strong>以释放空间。Kafka 的性能在数据大小方面实际上是恒定的，因此长时间存储数据不是问题。</p>
+<p>In fact, the only metadata retained on a per-consumer basis is the offset or position of that consumer in the log. This offset is controlled by the consumer: normally a consumer will advance its offset linearly as it reads records, but, in fact, since the position is controlled by the consumer it can consume records in any order it likes. For example a consumer can reset to an older offset to reprocess data from the past or skip ahead to the most recent record and start consuming from &quot;now&quot;.</p>
+<p>实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的<strong>偏移或位置（offset/position）</strong>。</p>
+<p>这种偏移由消费者控制：通常消费者在读取记录时会线性地提高其偏移量，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序消费记录。</p>
+<p>例如，消费者可以重置为较旧的偏移量来重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。</p>
+<p>This combination of features means that Kafka consumers are very cheap—they can come and go without much impact on the cluster or on other consumers. For example, you can use our command line tools to &quot;tail&quot; the contents of any topic without changing what is consumed by any existing consumers.</p>
+<p>这些功能组合意味着 Kafka 消费者是<strong>“成本较低的”</strong>：他们可以来来往往对集群或其他消费者没有太大影响。</p>
+<p>例如，您可以使用我们的命令行工具“tail”任何主题的内容，而无需更改任何现有使用者所消耗的内容。</p>
+<p>The partitions in the log serve several purposes. First, they allow the log to scale beyond a size that will fit on a single server. Each individual partition must fit on the servers that host it, but a topic may have many partitions so it can handle an arbitrary amount of data. Second they act as the unit of parallelism—more on that in a bit.</p>
+<p>日志中的分区有多种用途：</p>
+<p>首先，它们允许日志扩展到超出适合单个服务器的大小。每个单独的分区必须适合托管它的服务器，但主题可能有许多分区，因此它可以处理任意数量的数据。</p>
+<p>其次，它们充当了并行性的单位，更多是因为这个原因！</p>
+<h3 id="partition">Partition</h3>
+<p>上面从大方向上介绍了 Message 的存储是如何 work 的，我们再来关注一下存储的细节</p>
+<p>Partition 中的每条 Message 由 offset 来表示它在这个 partition 中的偏移量，这个 offset 不是该 Message 在 partition 数据文件中的实际存储位置，而是逻辑上一个值，它唯一确定了 partition 中的一条 Message。因此，可以认为 offset 是 partition 中 Message 的 id。partition 中的每条 Message 包含了以下三个属性：</p>
+<ul>
+<li><p>offset</p>
+</li>
+<li><p>MessageSize</p>
+</li>
+<li><p>data</p>
+</li>
+</ul>
+<p>其中 offset 为 long 型，MessageSize 为 int32，表示 data 有多大，data 为 message 的具体内容。它的格式和 Kafka 通讯协议中介绍的 MessageSet 格式是一致。</p>
+<p>Partition 的数据文件则包含了若干条上述格式的 Message，按 offset 由小到大排列在一起。它的实现类为 FileMessageSet，类图如下：</p>
+<p><img src="../../img/20181107151441.png" alt="FileMessageSet"></p>
+<p>它的主要方法如下：</p>
+<ul>
+<li>append: 把给定的 ByteBufferMessageSet 中的 Message 写入到这个数据文件中。</li>
+<li>searchFor: 从指定的 startingPosition 开始搜索找到第一个 Message 其 offset 是大于或者等于指定的 offset，并返回其在文件中的位置 Position。它的实现方式是从 startingPosition 开始读取 12 个字节，分别是当前 MessageSet 的 offset 和 size。如果当前 offset 小于指定的 offset，那么将 position 向后移动 LogOverHead+MessageSize（其中 LogOverHead 为 offset+messagesize，为 12 个字节）。</li>
+<li>read：准确名字应该是 slice，它截取其中一部分返回一个新的 FileMessageSet。它不保证截取的位置数据的完整性。</li>
+<li>sizeInBytes: 表示这个 FileMessageSet 占有了多少字节的空间。</li>
+<li>truncateTo: 把这个文件截断，这个方法不保证截断位置的 Message 的完整性。</li>
+<li>readInto: 从指定的相对位置开始把文件的内容读取到对应的 ByteBuffer 中。</li>
+</ul>
+<p>我们来思考一下，如果一个 partition 只有一个数据文件会怎么样？</p>
+<blockquote>
+<ul>
+<li><p>新数据是添加在文件末尾（调用 FileMessageSet 的 append 方法），不论文件数据文件有多大，这个操作永远都是 O(1)的。</p>
+</li>
+<li><p>查找某个 offset 的 Message（调用 FileMessageSet 的 searchFor 方法）是顺序查找的。因此，如果数据文件很大的话，查找的效率就低。</p>
+</li>
+</ul>
+</blockquote>
+<p>那 Kafka 是如何解决查找效率的的问题呢？有两大法宝：1) 分段 2) 索引。</p>
+<h4 id="数据文件的分段">数据文件的分段</h4>
+<p>Kafka 解决查询效率的手段之一是将数据文件分段，比如有 100 条 Message，它们的 offset 是从 0 到 99。</p>
+<p>假设将数据文件分成 5 段，第一段为 0-19，第二段为 20-39，以此类推，每段放在一个单独的数据文件里面，数据文件以该段中最小的 offset 命名。这样在查找指定 offset 的 Message 的时候，用二分查找就可以定位到该 Message 在哪个段中。</p>
+<h4 id="为数据文件建索引">为数据文件建索引</h4>
+<p>数据文件分段使得可以在一个较小的数据文件中查找对应 offset 的 Message 了，但是这依然需要顺序扫描才能找到对应 offset 的 Message。</p>
+<p>为了进一步提高查找的效率，Kafka 为每个分段后的数据文件建立了索引文件，文件名与数据文件的名字是一样的，只是文件扩展名为.index。</p>
+<p>索引文件中包含若干个索引条目，每个条目表示数据文件中一条 Message 的索引。索引包含两个部分（均为 4 个字节的数字），分别为相对 offset 和 position。</p>
+<p>相对 offset：因为数据文件分段以后，每个数据文件的起始 offset 不为 0，相对 offset 表示这条 Message 相对于其所属数据文件中最小的 offset 的大小。</p>
+<p>举例，分段后的一个数据文件的 offset 是从 20 开始，那么 offset 为 25 的 Message 在 index 文件中的相对 offset 就是 25-20 = 5。存储相对 offset 可以减小索引文件占用的空间。</p>
+<p>position，表示该条 Message 在数据文件中的绝对位置。只要打开文件并移动文件指针到这个 position 就可以读取对应的 Message 了。</p>
+<p>index 文件中并没有为数据文件中的每条 Message 建立索引，而是采用了稀疏存储的方式，每隔一定字节的数据建立一条索引。这样避免了索引文件占用过多的空间，从而可以将索引文件保留在内存中。但缺点是没有建立索引的 Message 也不能一次定位到其在数据文件的位置，从而需要做一次顺序扫描，但是这次顺序扫描的范围就很小了。</p>
+<p>在 Kafka 中，索引文件的实现类为 OffsetIndex，它的类图如下：</p>
+<p><img src="../../img/20181107151802.png" alt="offsetindex"></p>
+<p>主要的方法有：</p>
+<ul>
+<li>append 方法，添加一对 offset 和 position 到 index 文件中，这里的 offset 将会被转成相对的 offset。</li>
+<li>lookup, 用二分查找的方式去查找小于或等于给定 offset 的最大的那个 offset</li>
+</ul>
+<h3 id="小结">小结</h3>
+<p>我们以几张图来总结一下 Message 是如何在 Kafka 中存储的，以及如何查找指定 offset 的 Message 的。</p>
+<p>Message 是按照 topic 来组织，每个 topic 可以分成多个的 partition，比如：有 5 个 partition 的名为为 page_visits 的 topic 的目录结构为：</p>
+<p><img src="../../img/20181107151829.png" alt="topic_partition"></p>
+<p>partition 是分段的，每个段叫 LogSegment，包括了一个数据文件和一个索引文件，下图是某个 partition 目录下的文件：</p>
+<p><img src="../../img/20181107151557.png" alt="LogSegment"></p>
+<p>可以看到，这个 partition 有 4 个 LogSegment。</p>
+<p>借用博主<a href="http://blog.csdn.net/lizhitao/">@lizhitao</a>博客上的一张图来展示是如何查找 Message 的。</p>
+<p><img src="../../img/20181107151736.png" alt="search"></p>
+<p>比如要查找绝对 offset 为 7 的 Message：</p>
+<p>首先是用二分查找确定它是在哪个 LogSegment 中，自然是在第一个 Segment 中。
+打开这个 Segment 的 index 文件，也是用二分查找找到 offset 小于或者等于指定 offset 的索引条目中最大的那个 offset。自然 offset 为 6 的那个索引是我们要找的，通过索引文件我们知道 offset 为 6 的 Message 在数据文件中的位置为 9807。
+打开数据文件，从位置为 9807 的那个地方开始顺序扫描直到找到 offset 为 7 的那条 Message。</p>
+<p><strong>这套机制是建立在 offset 是有序的</strong>。索引文件被映射到内存中，所以查找的速度还是很快的。</p>
+<p>一句话，<strong>Kafka 的 Message 存储采用了分区(partition)，分段(LogSegment)和稀疏索引这几个手段来达到了高效性。</strong></p>
+<blockquote>
+<p>参考自：</p>
+<p><a href="http://kafka.apache.org/intro">http://kafka.apache.org/intro</a></p>
+<p><a href="https://blog.csdn.net/jewes/article/details/42970799">https://blog.csdn.net/jewes/article/details/42970799</a></p>
+</blockquote>

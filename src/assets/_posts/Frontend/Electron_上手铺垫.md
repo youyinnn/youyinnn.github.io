@@ -1,8 +1,5 @@
 ---
 title: Electron_上手铺垫
-categories:
-  - front-end
-  - electron
 comments: true
 tags:
   - electron

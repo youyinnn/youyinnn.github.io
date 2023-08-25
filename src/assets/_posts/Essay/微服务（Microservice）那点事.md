@@ -1,7 +1,5 @@
 ---
 title: 微服务（Microservice）那点事
-categories:
-  - reprinted
 date: 2018-11-06 10:21:00
 ---
 

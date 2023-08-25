@@ -1,8 +1,5 @@
 ---
 title: Docker Orientation&Setup
-categories:
-  - docker
-  - notes
 tags:
   - docker
 date: 2018-11-14 13:50:11

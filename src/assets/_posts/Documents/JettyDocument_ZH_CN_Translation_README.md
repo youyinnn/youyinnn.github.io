@@ -4,8 +4,6 @@ tags:
   - jetty
   - document
   - readme
-categories:
-  - translation
 series: JettyDocument_ZH_CN_Translation
 date: 2018-05-07 17:30:01
 ---

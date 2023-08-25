@@ -1,8 +1,5 @@
 ---
 title: 带状态机的DP
-categories:
-  - algorithm
-  - dp
 tags:
   - dp
 date: 2020-7-10 11:51:57

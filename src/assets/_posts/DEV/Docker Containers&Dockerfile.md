@@ -1,8 +1,5 @@
 ---
 title: Docker Containers&Dockerfile
-categories:
-  - docker
-  - notes
 tags:
   - docker
 date: 2018-11-16 15:05:11

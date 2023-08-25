@@ -1,7 +1,5 @@
 ---
 title: Cron4jDocument_ZH_CN_Translation_README
-categories:
-  - translation
 tags:
   - cron4j
   - scheduler

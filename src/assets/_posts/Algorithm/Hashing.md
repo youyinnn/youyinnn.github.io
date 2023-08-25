@@ -1,8 +1,5 @@
 ---
 title: Hashing
-categories:
-  - data structures
-  - hash
 tags:
   - algorithm
   - hash

@@ -1,9 +1,5 @@
 ---
 title: The Revelation of Java String
-categories:
-  - java
-  - jvm
-  - memory
 tags:
   - java-string
   - string-pool

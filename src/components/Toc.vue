@@ -182,6 +182,7 @@ export default {
   position: fixed;
   top: 6rem;
   overflow: auto;
+  overflow-x: hidden;
   /* width: 200px; */
   right: 2rem;
   transition: all 0.5s;

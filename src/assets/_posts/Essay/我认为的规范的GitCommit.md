@@ -1,8 +1,6 @@
 ---
 title: 我认为的规范的git commit msg
 top: true
-categories:
-  - thinking
 comments: true
 tags:
   - tips

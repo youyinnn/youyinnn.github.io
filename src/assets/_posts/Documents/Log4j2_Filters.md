@@ -1,9 +1,5 @@
 ---
 title: Log4j2_Filters
-categories:
-  - java
-  - lib
-  - log4j
 comments: true
 tags:
   - log4j2

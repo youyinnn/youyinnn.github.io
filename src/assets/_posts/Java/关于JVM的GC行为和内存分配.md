@@ -1,9 +1,5 @@
 ---
 title: 关于JVM的GC行为和内存分配
-categories:
-  - java
-  - jvm
-  - gc
 comments: true
 date: 2018-11-17 15:35:00
 tags:

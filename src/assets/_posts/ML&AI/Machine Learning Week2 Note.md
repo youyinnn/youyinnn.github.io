@@ -1,7 +1,5 @@
 ---
 title: Machine Learning Week2 Note
-categories:
-  - ml
 tags:
   - dp
 date: 2022-01-11 10:03:00 -4

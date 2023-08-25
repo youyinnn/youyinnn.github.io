@@ -1,8 +1,5 @@
 ---
 title: Jenkins Introductions&Setup
-categories:
-  - jenkins
-  - notes
 tags:
   - setup
   - jenkins

@@ -1,8 +1,5 @@
 ---
 title: Leetcode-21~25
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
 date: 2019-03-06 21:17:00

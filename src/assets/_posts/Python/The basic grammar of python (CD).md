@@ -1,8 +1,5 @@
 ---
 title: The Basic Grammar Of Python (CD)
-categories:
-  - python
-  - grammar
 tags:
   - python
   - grammar

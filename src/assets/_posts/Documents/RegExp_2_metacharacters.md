@@ -1,8 +1,5 @@
 ---
 title: RegExp_2_metacharacters
-categories:
-  - booknotes
-  - Mastering Regular Expression
 comments: true
 tags:
   - regular-expression

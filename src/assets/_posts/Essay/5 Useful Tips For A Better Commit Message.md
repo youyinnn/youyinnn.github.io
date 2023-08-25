@@ -1,7 +1,5 @@
 ---
 title: 5 Useful Tips For A Better Commit Message
-categories:
-  - reprinted
 comments: true
 tags:
   - tips

@@ -1,8 +1,5 @@
 ---
 title: Leetcode-56~60
-categories:
-  - algorithm
-  - leetcode
 tags:
   - leetcode
   - n-queens

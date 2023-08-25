@@ -1,8 +1,5 @@
 ---
 title: 把HashMap安排得明明白白
-categories:
-  - java
-  - collections-framework
 comments: true
 date: 2018-08-16 12:12:21
 tags:

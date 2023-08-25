@@ -1,0 +1,84 @@
+<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p>翻译自官方文档</p>
+<p></div></p>
+<h2 id="writing-middleware">Writing Middleware</h2>
+<p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
+<p>中间件能够完成以下事情：</p>
+<ul>
+<li>Execute any code.</li>
+<li>Make changes to the request and the response objects.</li>
+<li>End the request-response cycle.</li>
+<li>Call the next middleware in the stack.</li>
+</ul>
+<p>如果当前中间件不结束该次请求响应周期，它必须调用 next 方法，将控制传递到下一个中间件，否则请求会被挂起。</p>
+<p>下图展示了中间件功能的基本元素：</p>
+<p><img src="../../img/20191003170602.png" alt=""></p>
+<h3 id="example-middleware-function-mylogger">Example: Middleware function myLogger</h3>
+<p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> myLogger = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;LOGGED&quot;</span>);
+  <span class="hljs-title function_">next</span>();
+};
+</code></pre>
+<p>方法的最后一行调用了<code>next()</code>函数，这个函数不是 Node.js 或者 Express API 里的函数，而是从第三个方法参数传进来的下一个中间件的名称，将这个参数当作方法调用就是在调用下一个中间件；。</p>
+<p>为了加载中间件，调用<code>app.use()</code>。比如下面的代码将<code>myLogger</code>中间件加载到根路径上。</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express&quot;</span>);
+<span class="hljs-keyword">var</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-keyword">var</span> myLogger = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;LOGGED&quot;</span>);
+  <span class="hljs-title function_">next</span>();
+};
+
+app.<span class="hljs-title function_">use</span>(myLogger);
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) {
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>);
+});
+
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);
+</code></pre>
+<p>中间件加载的顺序很重要：先加载的中间件其方法先被执行。</p>
+<p>如果<code>myLogger</code>是在“路由到根路径”之后加载的话，那么任何请求都不会访问到它，因为根路径路由周期已经结束了。</p>
+<h3 id="example-middleware-function-requesttime">Example: Middleware function requestTime</h3>
+<p>我们创建一个记录请求时间的中间件：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> requestTime = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
+  req.<span class="hljs-property">requestTime</span> = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+  <span class="hljs-title function_">next</span>();
+};
+</code></pre>
+<p>回调方法也可以使用路由方法上的参数，去添加属性到<code>req</code>上：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;express&quot;</span>);
+<span class="hljs-keyword">var</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-keyword">var</span> requestTime = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
+  req.<span class="hljs-property">requestTime</span> = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+  <span class="hljs-title function_">next</span>();
+};
+
+app.<span class="hljs-title function_">use</span>(requestTime);
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) {
+  <span class="hljs-keyword">var</span> responseText = <span class="hljs-string">&quot;Hello World!&lt;br&gt;&quot;</span>;
+  responseText += <span class="hljs-string">&quot;&lt;small&gt;Requested at: &quot;</span> + req.<span class="hljs-property">requestTime</span> + <span class="hljs-string">&quot;&lt;/small&gt;&quot;</span>;
+  res.<span class="hljs-title function_">send</span>(responseText);
+});
+
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);
+</code></pre>
+<h3 id="configurable-middleware">Configurable middleware</h3>
+<p>如果你需要你的中间件可以配置的话，那么你可以这样做：</p>
+<p>File: <code>my-middleware.js</code></p>
+<pre><code class="hljs language-javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">options</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {
+    <span class="hljs-comment">// Implement the middleware function based on the options object</span>
+    <span class="hljs-title function_">next</span>();
+  };
+};
+</code></pre>
+<p>然后在装载的时候指定参数：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> mw = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;./my-middleware.js&quot;</span>);
+
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">mw</span>({ <span class="hljs-attr">option1</span>: <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-attr">option2</span>: <span class="hljs-string">&quot;2&quot;</span> }));
+</code></pre>
+<p>中间件<a href="https://github.com/expressjs/cookie-session">cookie-session</a> 和 <a href="https://github.com/expressjs/compression">compression</a> 都是以这样的形势去配置的。</p>
