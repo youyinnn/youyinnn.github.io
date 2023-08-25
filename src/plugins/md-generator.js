@@ -220,25 +220,25 @@ for (let img of fs.readdirSync(imgSrcPath)) {
   );
 }
 
-for (let item of postsrs) {
-  let itemPath = path.join(postsPath, item);
-  if (fs.lstatSync(itemPath).isDirectory()) {
+for (let cateDir of postsrs) {
+  let cateDirPath = path.join(postsPath, cateDir);
+  if (fs.lstatSync(cateDirPath).isDirectory()) {
     let outputDir = path.join(
       process.cwd(),
       "public",
       "assets",
       "articles",
-      item
+      cateDir
     );
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
     // iterating article md files
-    for (let pname of fs.readdirSync(itemPath)) {
+    for (let pname of fs.readdirSync(cateDirPath)) {
       if (pname.endsWith(".md")) {
         let abbrlink = crc32(pname).toString(36);
         const hMap = md2html(
-          path.join(itemPath, pname),
+          path.join(cateDirPath, pname),
           path.join(outputDir, abbrlink + ".htm"),
           function (sourceMdStr) {
             let data = articleDataExtract.extract(sourceMdStr);
@@ -259,12 +259,14 @@ for (let item of postsrs) {
               let ss =
                 data.metadata.title +
                 "===" +
+                cateDir +
+                "===" +
                 abbrlink +
                 "===" +
                 new Date(data.metadata.date).getTime();
               seriesForThisArticles.unshift(ss);
             }
-            data.metadata.category = item;
+            data.metadata.category = cateDir;
             articlesMetadata.push(data.metadata);
             return data.body;
           }

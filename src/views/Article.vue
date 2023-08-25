@@ -24,7 +24,7 @@
                 'se-unselected': item.abbrlink !== postMetadata.abbrlink,
                 'se-selected': item.abbrlink === postMetadata.abbrlink,
               }"
-              @click="clickOtherPost(item.abbrlink)"
+              @click="clickOtherPost(item.cate, item.abbrlink)"
             >
               {{ item.name }}
             </n-el>
@@ -104,8 +104,8 @@ export default {
     },
   },
   watch: {
-    currentAbbrlink(nV) {
-      this.loadMd(nV);
+    currentAbbrlink() {
+      this.loadMd(this.$route.params.category, this.$route.params.abbrlink);
     },
   },
   created() {
@@ -120,7 +120,8 @@ export default {
             let split = serie.ps[i].split("===");
             serie.ps[i] = {
               name: split[0],
-              abbrlink: split[1],
+              cate: split[1],
+              abbrlink: split[2],
             };
           }
           this.postSerie = serie;
@@ -130,8 +131,8 @@ export default {
     }
   },
   methods: {
-    clickOtherPost(abbrlink) {
-      this.$router.push(`/article/${abbrlink}`).catch(() => {});
+    clickOtherPost(cate, abbrlink) {
+      this.$router.push(`/article/${cate}/${abbrlink}`).catch(() => {});
     },
     loadMd(cate, abbrlink) {
       if (abbrlink === null || abbrlink === undefined) {
