@@ -3,6 +3,7 @@ title: Linear Algebra for ML Notes
 comments: true
 tags:
   - algebra
+series: Coursera, Linear Algebra
 ---
 
 ### Week 1
