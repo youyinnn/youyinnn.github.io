@@ -91,4 +91,4 @@ Rookie Researcher for AI.
 >
 > Publishing my articles, sharing my ideas, keeping some scripts, <del>todos, and my resume.</del>
 
-<p style="text-align: center;" class="unselectable undragable"><img src="../../../public/img/mona-loading-default.gif" style="width: 80px;margin-top:3rem;" preview-disabled></p>
+<p style="text-align: center;" class="unselectable undragable"><img src="../../img/mona-loading-default.gif" style="width: 80px;margin-top:3rem;" preview-disabled></p>
