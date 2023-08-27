@@ -10,7 +10,7 @@
 <li>New volumes can have their content pre-populated by a container.</li>
 </ul>
 <p>In addition, volumes are often a better choice than persisting data in a container’s writable layer, because a volume does not increase the size of the containers using it, and the volume’s contents exist outside the lifecycle of a given container.</p>
-<p><img src="https://docs.docker.com/storage/images/types-of-mounts-volume.png" alt="volumes on the Docker host"></p>
+<p><img src="https://docs.docker.com/storage/images/types-of-mounts-volume.webp" alt="volumes on the Docker host"></p>
 <p>If your container generates non-persistent state data, consider using a <a href="https://docs.docker.com/storage/tmpfs/">tmpfs mount</a> to avoid storing the data anywhere permanently, and to increase the container’s performance by avoiding writing into the container’s writable layer.</p>
 <p>Volumes use <code>rprivate</code> bind propagation, and bind propagation is not configurable for volumes.</p>
 </blockquote>

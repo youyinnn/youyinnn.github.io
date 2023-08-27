@@ -1,6 +1,6 @@
 <h3 id="topic--partition">Topic &amp; Partition</h3>
 <p>kafka 中的 Message 以 topic 为分类去组织的，每个 topic 又可以分为不同的 partition 去存储：</p>
-<p><img src="../../img/log_anatomy.png" alt="img"></p>
+<p><img src="../../img/log_anatomy.webp" alt="img"></p>
 <p>我们引用官方的 Introduction 中的一节，看官方是怎么解释的：</p>
 <p>Each partition is an ordered, immutable sequence of records that is continually appended to—a structured commit log. The records in the partitions are each assigned a sequential id number called the <em>offset</em> that uniquely identifies each record within the partition.</p>
 <p>每个分区都是一个<strong>有序的，不可变的记录序列</strong>，不断附加到结构化的提交日志中。分区中的记录每个都分配了一个称为偏移的顺序 ID 号，它唯一地标识分区中的每个记录。</p>
@@ -31,7 +31,7 @@
 </ul>
 <p>其中 offset 为 long 型，MessageSize 为 int32，表示 data 有多大，data 为 message 的具体内容。它的格式和 Kafka 通讯协议中介绍的 MessageSet 格式是一致。</p>
 <p>Partition 的数据文件则包含了若干条上述格式的 Message，按 offset 由小到大排列在一起。它的实现类为 FileMessageSet，类图如下：</p>
-<p><img src="../../img/20181107151441.png" alt="FileMessageSet"></p>
+<p><img src="../../img/20181107151441.webp" alt="FileMessageSet"></p>
 <p>它的主要方法如下：</p>
 <ul>
 <li>append: 把给定的 ByteBufferMessageSet 中的 Message 写入到这个数据文件中。</li>
@@ -63,7 +63,7 @@
 <p>position，表示该条 Message 在数据文件中的绝对位置。只要打开文件并移动文件指针到这个 position 就可以读取对应的 Message 了。</p>
 <p>index 文件中并没有为数据文件中的每条 Message 建立索引，而是采用了稀疏存储的方式，每隔一定字节的数据建立一条索引。这样避免了索引文件占用过多的空间，从而可以将索引文件保留在内存中。但缺点是没有建立索引的 Message 也不能一次定位到其在数据文件的位置，从而需要做一次顺序扫描，但是这次顺序扫描的范围就很小了。</p>
 <p>在 Kafka 中，索引文件的实现类为 OffsetIndex，它的类图如下：</p>
-<p><img src="../../img/20181107151802.png" alt="offsetindex"></p>
+<p><img src="../../img/20181107151802.webp" alt="offsetindex"></p>
 <p>主要的方法有：</p>
 <ul>
 <li>append 方法，添加一对 offset 和 position 到 index 文件中，这里的 offset 将会被转成相对的 offset。</li>
@@ -72,12 +72,12 @@
 <h3 id="小结">小结</h3>
 <p>我们以几张图来总结一下 Message 是如何在 Kafka 中存储的，以及如何查找指定 offset 的 Message 的。</p>
 <p>Message 是按照 topic 来组织，每个 topic 可以分成多个的 partition，比如：有 5 个 partition 的名为为 page_visits 的 topic 的目录结构为：</p>
-<p><img src="../../img/20181107151829.png" alt="topic_partition"></p>
+<p><img src="../../img/20181107151829.webp" alt="topic_partition"></p>
 <p>partition 是分段的，每个段叫 LogSegment，包括了一个数据文件和一个索引文件，下图是某个 partition 目录下的文件：</p>
-<p><img src="../../img/20181107151557.png" alt="LogSegment"></p>
+<p><img src="../../img/20181107151557.webp" alt="LogSegment"></p>
 <p>可以看到，这个 partition 有 4 个 LogSegment。</p>
 <p>借用博主<a href="http://blog.csdn.net/lizhitao/">@lizhitao</a>博客上的一张图来展示是如何查找 Message 的。</p>
-<p><img src="../../img/20181107151736.png" alt="search"></p>
+<p><img src="../../img/20181107151736.webp" alt="search"></p>
 <p>比如要查找绝对 offset 为 7 的 Message：</p>
 <p>首先是用二分查找确定它是在哪个 LogSegment 中，自然是在第一个 Segment 中。
 打开这个 Segment 的 index 文件，也是用二分查找找到 offset 小于或者等于指定 offset 的索引条目中最大的那个 offset。自然 offset 为 6 的那个索引是我们要找的，通过索引文件我们知道 offset 为 6 的 Message 在数据文件中的位置为 9807。

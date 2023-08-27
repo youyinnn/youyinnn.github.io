@@ -1,8 +1,8 @@
 <h3 id="week-1">Week 1</h3>
-<h4 id="system-of-sentences">System of Sentences</h4>
-<p>Sentences are linear algebra equations for organizing the world&#39;s information.</p>
-<h5 id="terms">Terms</h5>
+<h4 id="2-variables-system">2 Variables System</h4>
 <ol>
+<li><p>System of Sentences: Sentences are linear algebra equations for organizing the world&#39;s information.</p>
+</li>
 <li><p>Complete/Redundant/Contradictory System;</p>
 <p>Non-singular System -&gt; Complete System;</p>
 <p>Singular System -&gt; Redundant/Contradictory System;</p>
@@ -25,7 +25,63 @@
 </li>
 <li><p>Determinant Formula: to determine if a matrix is singular or not.</p>
 <p><img src="../../img/image-20230822232328322.png" alt="image-20230822232328322"></p>
-<p><span class="" katex-exp="YQBkAA=="><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span></span></span></span></span> is the product of the main diagonal, and <span class="" katex-exp="YgBjAA=="><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span><span class="mord mathnormal">c</span></span></span></span></span> is the product of the antidiagonal.</p>
+<p><span class="" katex-exp="YQBkAA=="><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span></span></span></span></span> is the product of the main diagonal and <span class="" katex-exp="YgBjAA=="><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span><span class="mord mathnormal">c</span></span></span></span></span> is the product of the antidiagonal.</p>
+<p>If the matrix is singular, then the determinant is equal to <em><strong>zero</strong></em>.</p>
 </li>
 </ol>
+<h4 id="3-variable-system">3 Variable System</h4>
+<p>More systems of equations.</p>
+<p><img src="../../img/image-20230826201346215.png" alt="image-20230826201346215"></p>
+<p>Another example:</p>
+<p><img src="../../img/image-20230826201431377.png" alt="image-20230826201431377"></p>
+<p>If we turn the constant into zero:</p>
+<p><img src="../../img/image-20230826201630854.png" alt="image-20230826201630854"></p>
+<h4 id="linear-dependent-and-independent-in-more-complicated-system">Linear Dependent and Independent in more complicated System</h4>
+<h4 id="linear-dependent">Linear Dependent</h4>
+<p>Case 1:</p>
+<p><img src="../../img/image-20230826202408030.png" alt="image-20230826202408030"></p>
+<p>The third equation depends on the first and the second equation.</p>
+<p>Case 2:</p>
+<p><img src="../../img/image-20230826204019824.png" alt="image-20230826204019824"></p>
+<h4 id="linear-indenpent">Linear Indenpent</h4>
+<p><img src="../../img/image-20230826204600977.png" alt="image-20230826204600977"></p>
+<h4 id="determinant-for-3x3">Determinant for 3x3</h4>
+<p>We should do this for each diagonal. If the diagonal is incomplete, we wrap around to the other side.</p>
+<p><img src="../../img/image-20230826205016045.png" alt="image-20230826205016045"></p>
+<p>Case 3: A non-zero determinant means that it is a non-singular matrix.</p>
+<p><img src="../../img/image-20230826205044401.png" alt="image-20230826205044401"></p>
+<p>Case 4: An upper triangular matrix. The determinant is the product of the diagonal entries.</p>
+<p><img src="../../img/image-20230826225949948.png" alt="image-20230826225949948"></p>
+<p><img src="../../img/image-20230826230111689.png" alt="image-20230826230111689"></p>
 <h3 id="week-2">Week 2</h3>
+<h4 id="solving-non-singular-system">Solving Non-singular System</h4>
+<p>Case 1:</p>
+<p><img src="../../img/image-20230826234703204.png" alt="image-20230826234703204"></p>
+<h4 id="solving-singular-system">Solving Singular System</h4>
+<p>Case 2:</p>
+<p><img src="../../img/image-20230826235229454.png" alt="image-20230826235229454"></p>
+<p>Case 3:</p>
+<p><img src="../../img/image-20230826235328636.png" alt="image-20230826235328636"></p>
+<h4 id="row-echelon-form">Row Echelon Form</h4>
+<p><img src="../../img/image-20230827004553813.png" alt="image-20230827004553813"></p>
+<p>Definition:</p>
+<p><img src="../../img/image-20230827005646788.png" alt="image-20230827005646788"></p>
+<ol>
+<li>The main diagonal should only contain 1 and 0;</li>
+<li>The values below the main diagonal should only be 0;</li>
+<li>The values of the 1&#39;s right of the diagonal could be anything;</li>
+<li>The values of the 0&#39;s right of the diagonal must be 0;</li>
+</ol>
+<h4 id="row-operations-that-preserve-singularity">Row Operations that Preserve Singularity</h4>
+<ol>
+<li><p>Switching Rows</p>
+<p><img src="../../img/image-20230827010702249.png" alt="image-20230827010702249"></p>
+</li>
+<li><p>Multiplying a Row by a non-zero scalar</p>
+<p><img src="../../img/image-20230827010824927.png" alt="image-20230827010824927"></p>
+</li>
+<li><p>Adding a Row to another row</p>
+<p><img src="../../img/image-20230827010947668.png" alt="image-20230827010947668"></p>
+<p>This will result in the same determinant.</p>
+</li>
+</ol>

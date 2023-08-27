@@ -168,7 +168,7 @@ menu.<span class="hljs-title function_">append</span>(
 <p>强烈推荐 task 列表内容是静态的。 不管应用程序是什么状态或情形，它都应该是保持不变的。 尽管这个列表是动态可变的，你应该考虑到没想过这个列表会变的用户会被这个行为搞糊涂。</p>
 </blockquote>
 <p><strong>Internet Explorer 的 任务:</strong></p>
-<p><img src="../../img/20191014094639.png" alt=""></p>
+<p><img src="../../img/20191014094639.webp" alt></p>
 <p>不同于 macOS 的 dock 菜单，Windows 上的用户任务表现得更像一个快捷方式，比如当用户点击一个任务，一个程序将会被传入特定的参数并且运行。</p>
 <p>你可以使用 <a href="https://electronjs.org/docs/api/app#appsetusertaskstasks-windows">app.setUserTasks</a> API 来设置你的应用中的用户任务：</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { app } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electron&quot;</span>);

@@ -221,14 +221,14 @@
 <p>其实说到底, 如果我们的计算机是按照字节为单位来处理数据的话, 就不存在这么复杂的概念了, 因为处理数据的单位是单个字节, 有什么大端小端关系? 当然也是没有什么顺序的了. 但是问题就是计算机处理数据是按照数据类型来的, 而这些数据类型是多字节数据类型, 而一旦把多个单字节当做一个整体处理, 就必定会牵扯到排列顺序的问题.</p>
 <p>那么现在就来具体的说一下大端序和小端序吧:</p>
 <h4 id="大端序">大端序</h4>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.png" alt="大端序"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.webp" alt="大端序"></p>
 <p>看图就觉得很清晰, 而且很符合正常的读写习惯, 也即是按照顺序把字节填充进去.</p>
 <h4 id="小端序">小端序</h4>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png" alt="小端序"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.webp" alt="小端序"></p>
 <p>小端序就是反过来的, 字节头位于内存地址的高位, 而尾部位于低位.</p>
 <h4 id="中端序">中端序</h4>
 <p>中端序也称为是混合序, 其实就是像这样的:
-<img src="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg" alt="混合序"></p>
+<img src="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.webp" alt="混合序"></p>
 <p>而具体是什么序, 取决于软件层面操作系统和硬件层面的 CPU. 一般来说, 大部分的操作系统(NT, Linux)都是小端序的, 而且 Intel X86 架构的 CPU 也都是小端序的, 但例如 Power PC 这样的架构就是大端序的, 而且 Mac OS X 也是大端序的.</p>
 <p>这样的话, 就很麻烦, 尤其是对于那些设计系统的工程师, 以及一些做跨平台, 异构应用的编写人员就不可避免的考虑到字节序的问题.</p>
 <h3 id="unicode-的-cef">Unicode 的 CEF</h3>
@@ -240,7 +240,7 @@
 <p>至于具体是怎么样进行编码的, 我们在下面一个部分来说. (以 UTF-8 为重点, 毕竟使用最为广泛, 至于 UTF-32 暂不讨论)</p>
 <p>你可能会说, 我还听说过<code>UTF-7</code>, <code>UTF-1</code>这些, 怎么上面没有提到呢? 实际上, <code>UTF-1</code>其实就是<code>UTF-8</code>的退役前身. 目前已经不再是 Unicode 的标准, 而<code>UTF-7</code>是为了电子邮件而设计的, 目前是<code>deprecated</code>的状态, 不再是 Unicode 的标准, 作为信息 RFC 存在.</p>
 <h4 id="utf-8-和本不应存在的-bom">UTF-8 和本不应存在的 BOM</h4>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/utf-8_web_growth.png" alt="utf-8_web_growth.png"></p>
+<p><img src="http://q4fo85yz7.bkt.gdipper.com/utf-8_web_growth.webp" alt="utf-8_web_growth.png"></p>
 <p>先来看一下 UTF-8 在前几年的增长势头(Web 页面, 由 Google 统计).</p>
 <p>UTF-8 在目前仍然是最广泛使用的具体编码方案, 但他却不是 UTF 最早的, 最早的是 UTF-16. 最标准的称呼方法应该是<code>UTF-8</code>, 在一些不区分大小写的语言中, 例如: <code>HTML</code>, <code>CSS</code>, <code>XML</code>等, 都可使用<code>utf-8</code>这样的说法. 但是<code>utf8</code>或者<code>UTF8</code>这样缺失连字符的说法不被认为是正确的, 一些现代的浏览器或者是一些相关的标准(<code>HTML5</code>比如) 也可以有效的识别 但最好还是使用标准名称.</p>
 <p>接下来步入正题, 我们来说说 UTF-8 的一些组成和特性.</p>

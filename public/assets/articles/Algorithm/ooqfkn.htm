@@ -205,7 +205,7 @@ search(&quot;b..&quot;) -&gt; true
 <p><strong>说明:</strong></p>
 <p>你可以假设所有单词都是由小写字母 <code>a-z</code> 组成的。</p>
 <p>这题的关键就是处理通配符，对于像<code>b.a</code>，<code>b..</code>这样的用例，每当遇到<code>.</code>的时候，我们就需要遍历当前缀点的所有子缀点，比如实例上能构造前缀树：</p>
-<p><img src="../../img/20200714132901.png" alt=""></p>
+<p><img src="../../img/20200714132901.webp" alt></p>
 <p>当我们搜索到第一个缀点 b 的子缀点的时候，发现是通配符，于是我们需要遍历 b 的所有有效子缀点<code>(trie != null)</code>来搜索后续的字符所以我们的<code>search</code>方法可以修改为</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">search</span><span class="hljs-params">(String word, Trie root, <span class="hljs-type">int</span> begin)</span> {
     <span class="hljs-type">Trie</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> root;
@@ -345,7 +345,7 @@ sentence = &quot;jesslookedjustliketimherbrother&quot;
 <li><code>dictionary</code>中总字符数不超过 150000。</li>
 <li>你可以认为<code>dictionary</code>和<code>sentence</code>中只包含小写字母。</li>
 </ul>
-<p><img src="../../img/20200714144233.gif" alt=""></p>
+<p><img src="../../img/20200714144233.webp" alt></p>
 <p>刚开思考的时候，确实是正向思考的，录入了一颗前缀树，但是这样的坏处是，无法在 n^2 的时间内很好地进行单词的划分与判断，所以参考了一下官方给的思路，构造一颗后缀树，从后缀往前摸，不得不说这个思路确实很漂亮</p>
 <p>而且这里还运用到了动态规划，申请了 n+1 长度的数组<code>dp</code>，<code>dp[i]</code>表示前 <code>i</code> 个字符最少的未识别的字符数量，从前往后计算 dp 值</p>
 <p>考虑转移方程，每次转移的时候我们考虑第 <code>j(j &lt;= i)</code>个到第 <code>i</code> 个字符组成的子串 <code>sentence[j−1⋯i−1] </code>（注意字符串下标从 0 开始）是否能在词典中找到，如果能找到的话按照定义转移方程为：</p>
