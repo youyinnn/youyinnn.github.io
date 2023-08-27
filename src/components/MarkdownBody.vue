@@ -248,7 +248,7 @@ export default defineComponent({
 </script>
 
 <style>
-@import url("https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css");
+@import url("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css");
 @import url("@/assets/css/markdown-body.css");
 .title {
   margin: 0;
