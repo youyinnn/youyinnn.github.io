@@ -447,9 +447,9 @@ See Configuring Request Logs for more information.</li>
 <br>
 
 <ul>
-<li>server
-Optional as of Jetty 9.3.1. This would configure an instance of the org.eclipse.jetty.server.Server for the plugin to use, however it is usually NOT necessary to configure this, as the plugin will automatically configure one for you. In particular, if you use the jettyXml element, then you generally DON’T want to define this element, as you are probably using the jettyXml file to configure up a Server with a special constructor argument, such as a custom threadpool. If you define both a server element AND use a jetty xml element which points to a config file that has a line like <Configure id="Server" class="org.eclipse.jetty.server.Server"> then the the xml configuration will override what you configure for the server in the pom.xml.</li>
-</ul>
+server
+Optional as of Jetty 9.3.1. This would configure an instance of the org.eclipse.jetty.server.Server for the plugin to use, however it is usually NOT necessary to configure this, as the plugin will automatically configure one for you. In particular, if you use the jettyXml element, then you generally DON’T want to define this element, as you are probably using the jettyXml file to configure up a Server with a special constructor argument, such as a custom threadpool. If you define both a server element AND use a jetty xml element which points to a config file that has a line like  then the the xml configuration will override what you configure for the server in the pom.xml.
+
 <br>
 
 <ul>
@@ -503,3 +503,4 @@ Optional. A list of Jetty plugin goal names that will cause the plugin to print 
 <h4 id="234、jetty-jspc-maven-插件">23.4、Jetty Jspc Maven 插件</h4>
 <p><a href="#top">回到顶部</a></p>
 <hr>
+</ul>

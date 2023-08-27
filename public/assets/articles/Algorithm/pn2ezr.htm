@@ -153,7 +153,7 @@ return [0, 1].
 Output: 7 -&gt; 0 -&gt; 8
 Explanation: 342 + 465 = 807.
 </code></pre>
-<p><img src="https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.svg" alt=""></p>
+<p><img src="https://leetcode.com/problems/add-two-numbers/Figures/2_add_two_numbers.webp" alt></p>
 <p>这题没什么 tricky 的，就是两个连各自的结点相加，关键是怎么记录各自链表的当前计算指针，并且处理好长短不一情况下的进位，下面是官方的 solution：</p>
 <pre><code class="hljs language-java"><span class="hljs-comment">// 由第三条新的链和它的计算指针完成</span>
 <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> {

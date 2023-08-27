@@ -1,7 +1,7 @@
-<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p></p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div>
 <p>Filters：过滤你的日志信息</p>
-<p></div></p>
-<!-- more -->
+<p></p></div>
+
 
 <h3 id="重要概念">重要概念</h3>
 <h4 id="枚举值">枚举值</h4>
@@ -17,15 +17,15 @@
 <h4 id="过滤位置">过滤位置</h4>
 <p>可以在以下四个位置配置过滤器：</p>
 <ul>
-<li><p>上下文范围有效的过滤器直接在<Configuration>标签里配置，被这种过滤器拒绝的日志事件不再会向后传递。一旦日志事件被一个上下文范围有效的过滤器判定为 ACCEPT 时，其它上下文有效的过滤器将不会对日志事件进行过滤，日志事件将会继续呗 Logger 和 Appender 的过滤器过滤。</p>
-</li>
+上下文范围有效的过滤器直接在标签里配置，被这种过滤器拒绝的日志事件不再会向后传递。一旦日志事件被一个上下文范围有效的过滤器判定为 ACCEPT 时，其它上下文有效的过滤器将不会对日志事件进行过滤，日志事件将会继续呗 Logger 和 Appender 的过滤器过滤。
+
 <li><p>Logger 过滤器配置在一个特定的 Logger 上面。这些过滤器会在上下文范围有效的过滤器之后发挥作用，被这些过滤器拒绝的日志事件将会被丢弃，也不管 additivity 的配置如何，不会将日志传递给父亲 Logger。</p>
 </li>
 <li><p>Appender 过滤器用于决定一个指定的 Appender 是否应该处理和发布日志事件。</p>
 </li>
 <li><p>Appender 引用过滤器用于决定 Logger 是否应该将日志事件路由到一个 Appender。</p>
 </li>
-</ul>
+
 <h3 id="我常用的过滤器">我常用的过滤器</h3>
 <h4 id="compositefilter">CompositeFilter</h4>
 <p>组合过滤器，使用一个<code>Filters</code>元素组合多个 Filter，这个元素没有其他参数。</p>
@@ -83,3 +83,4 @@
 <pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RegexFilter</span> <span class="hljs-attr">regex</span>=<span class="hljs-string">&quot;.* test .*&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;ACCEPT&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;DENY&quot;</span>/&gt;</span>
 </code></pre>
 <p>上面这个例子只使出含有 test 字样的日志。</p>
+</ul>

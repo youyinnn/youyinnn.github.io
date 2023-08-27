@@ -46,9 +46,11 @@
     "less-loader": "^10.2.0",
     "marked": "^4.0.5",
     "naive-ui": "^2.21.5",
+    "node-html-parser": "^6.1.6",
     "prettier": "2.5.1",
     "sass": "^1.38.0",
-    "sass-loader": "^10.0.0"
+    "sass-loader": "^10.0.0",
+    "webp-converter": "^2.3.3"
   },
   "eslintConfig": {
     "root": true,

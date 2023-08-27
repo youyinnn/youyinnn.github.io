@@ -21,7 +21,7 @@
 </ul>
 <ol>
 <li><p><strong>选择内存分配并发问题的解决方案</strong></p>
-<p><img src="../../img/objectmemorypointer.png" alt="objectmemorypointer"></p>
+<p><img src="../../img/objectmemorypointer.webp" alt="objectmemorypointer"></p>
 <p>如图的并发指针分配问题，我们解决这个问题有两种方式：</p>
 <ol>
 <li>对<strong>内存分配的动作</strong>进行<strong>同步</strong>处理</li>
@@ -67,10 +67,10 @@
 <p>JVM 规范<strong>只说了 reference 是一个指向对象的引用，但是没有说怎么引用</strong>，所以对象访问方式还是取决于虚拟机的实现，主流的实现有<strong>句柄访问</strong>和<strong>直接指针访问</strong>两种</p>
 <h5 id="句柄访问">句柄访问</h5>
 <p>如果使用这种方式，Java 堆中会划分一块内存来作为<strong>句柄池</strong>，<strong>reference</strong>中存储的就是对象的<strong>句柄地址</strong>，句柄中包含了<strong>对象实例数据地址信息</strong>和<strong>类型实例数据地址信息</strong></p>
-<p><img src="../../img/jubingdangwen.png" alt="jubingdangwen"></p>
+<p><img src="../../img/jubingdangwen.webp" alt="jubingdangwen"></p>
 <h5 id="直接指针访问">直接指针访问</h5>
 <p>reference 中存储的直接就是对象地址</p>
-<p><img src="../../img/zhijiezhizhenfangwen.png" alt="zhijiezhizhenfangwen"></p>
+<p><img src="../../img/zhijiezhizhenfangwen.webp" alt="zhijiezhizhenfangwen"></p>
 <blockquote>
 <p>直观一点解释就是</p>
 <p>假如我有一个 Person 类：</p>

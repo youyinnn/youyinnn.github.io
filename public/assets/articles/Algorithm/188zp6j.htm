@@ -16,10 +16,10 @@
 }
 </code></pre>
 <p>这个解法的时间复杂度，我们可以从它兵分两路去将它看成是一棵满二叉树：</p>
-<p><img src="http://img.mp.sohu.com/upload/20170702/07bc2cc044c245588e0873e773dd9079_th.png" alt="img"></p>
+<p><img src="http://img.mp.sohu.com/upload/20170702/07bc2cc044c245588e0873e773dd9079_th.webp" alt="img"></p>
 <p>二叉树的结点就是递归次数，这个结果近似是 2 的 n-1 次方，也就是<strong>O(2^n)</strong></p>
 <p>显然，指数级的效率是非常低的，我们观察一下这棵树，其中有很多结点是重复计算的：</p>
-<p><img src="http://img.mp.sohu.com/upload/20170702/148d4dfd369240efbd2e28e0f44e8adc_th.png" alt="img"></p>
+<p><img src="http://img.mp.sohu.com/upload/20170702/148d4dfd369240efbd2e28e0f44e8adc_th.webp" alt="img"></p>
 <p>为了避免这种重复计算，我们可以将每个子问题求出的结果，放在<strong>一张表</strong>中，每次求解当前问题的时候，索引表中已经求好的子问题，如果说将<strong>递归法</strong>视为自顶向下的方法，那么这种开辟空间存结果的方法，我们称之为<strong>备忘录法</strong>，这是一种自底向上的考虑方法</p>
 <pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fibonacci</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
     <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;

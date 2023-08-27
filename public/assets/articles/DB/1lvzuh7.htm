@@ -8,7 +8,7 @@
 <li><strong>“索引即数据，数据即索引”</strong>，聚集索引的存储值就是数据本身；</li>
 </ul>
 <h3 id="使用-b树的索引过程">使用 B+树的索引过程</h3>
-<p><img src="../../img/15727784554518.jpg" alt="img"></p>
+<p><img src="../../img/15727784554518.webp" alt="img"></p>
 <p>现在假设我们要查找<code>id&gt;=18</code>并且<code>id&lt;40</code>的用户数据</p>
 <p>对应的 sql 语句如下，其中 id 为主键：</p>
 <pre><code class="hljs language-sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">&gt;=</span><span class="hljs-number">18</span> <span class="hljs-keyword">and</span> id <span class="hljs-operator">&lt;</span><span class="hljs-number">40</span>
@@ -28,7 +28,7 @@
 </ol>
 <p>最终我们找到满足条件的所有数据为：<code>(18,kl),(19,kl),(22,hj),(24,io),(25,vg),(29,jk),(31,jk),(33,rt),(34,ty),(35,yu),(37,rt),(39,rt)</code>，总共 12 条记录。</p>
 <p>具体流程如：</p>
-<p><img src="../../img/15727785424308.jpg" alt="img"></p>
+<p><img src="../../img/15727785424308.webp" alt="img"></p>
 <p>而非聚集索引的查找流程也一样，只不过它最终返回的是记录的主键，然后再通过主键去聚集索引中查找数据，我们称这个行为叫做<strong>“回表”</strong></p>
 <h3 id="索引匹配过程">索引匹配过程</h3>
 <h4 id="explain-命令">Explain 命令</h4>

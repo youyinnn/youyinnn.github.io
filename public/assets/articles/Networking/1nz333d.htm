@@ -18,7 +18,7 @@
 <h4 id="22-数据通信基本知识">2.2 数据通信基本知识</h4>
 <h5 id="221-数据通信系统模型">2.2.1 数据通信系统模型</h5>
 <p>一个数据通信系统大致可以分为：<strong>源系统（发送端）</strong>、<strong>传输系统（传输线路）</strong>和<strong>目的系统（接受端、接收方）</strong></p>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180705135038.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180705135038.webp" alt></p>
 <h6 id="常用术语">常用术语</h6>
 <ul>
 <li><p><strong>源点：</strong>源点设备要产生传输的数据，例如计算器键盘输入的字符，计算机产生输出的数字比特流</p>
@@ -56,24 +56,24 @@
 <ul>
 <li><strong>基带调制：</strong>仅对基带信号进行波形变换，使之能和信道特性相适应，这种调制是把数字信号转换为另一种形式的数字信号，所以一般叫基带调制为<strong>编码</strong></li>
 </ul>
-<p><img src="../../img/TIM%E5%9B%BE%E7%89%8720180706133415.png" alt=""></p>
+<p><img src="../../img/TIM%E5%9B%BE%E7%89%8720180706133415.webp" alt></p>
 <p>以上是<strong>常用</strong>的基带调制方式，用的多的就是曼切斯特编码，常用于传统的以太网，这里我们可以补充一下码元的理解，拿曼切斯特来举例的话，它用<strong>两个码元代表一个位</strong>，也就是<strong>10 代表 1，01 代表 0</strong>，这样做的做法是用于同步时钟</p>
 <ul>
 <li><strong>带通调制：</strong>需要使用<strong>载波（carrier）</strong>进行调制，把基带信号的频率搬到高频段，并转换为模拟信号</li>
 </ul>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180706160531.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180706160531.webp" alt></p>
 <p>以上是<strong>基本</strong>的带同调制的方式</p>
 <h5 id="23-信道复用技术">2.3 信道复用技术</h5>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180706163834.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180706163834.webp" alt></p>
 <h6 id="231-频分复用、时分复用和统计时分复用">2.3.1 频分复用、时分复用和统计时分复用</h6>
 <ul>
 <li><strong>频分复用（Frequency Divition Multiplexing，FDM）：</strong>所有用户在同一时间占用不同的带宽资源（这里的带宽是指频率带宽而不是发送速率）</li>
 <li><strong>时分复用（Time Divition Multiplexing，TDM）：</strong>所有用户在不同时间占用同样的频带宽度，更有利于数字信号的传输</li>
 </ul>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707164750.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707164750.webp" alt></p>
 <p>从图片我们可以注意到，在频分复用的时候，非常占带宽，用户越多，带宽越大；在时分复用的时候，看似可以规律的使用一致的带宽，但是不一定所用用户在自己的时间里都发信息，这样可能就会有很多浪费，信道利用率很低。</p>
 <p><strong>统计时分复用（Statistic TDM，STDM）</strong>就是为了解决时分复用的这个问题，使用一个集中器，将同一段时间的数据集中起来：</p>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707165324.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707165324.webp" alt></p>
 <p>但是 STDM 中集中器的使用前提是假定各个用户是<u><strong>间歇地工作</strong></u></p>
 <h6 id="232-波分复用">2.3.2 波分复用</h6>
 <p>波分复用（Wavelength DM，WDM）即光的频分复用</p>
@@ -100,4 +100,4 @@
 <li><p>CDMA 系统还有一个重要特点就是：每个站分配的序列不仅不同，而且互相必须<strong>正交</strong>，这样用公式去解释是：<u><strong>S 站序列和其他站序列的向量内积为 0，和自己的序列向量内积是 1</strong></u></p>
 </li>
 </ol>
-<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707171300.png" alt=""></p>
+<p><img src="../../img/TIM%E6%88%AA%E5%9B%BE20180707171300.webp" alt></p>

@@ -38,20 +38,20 @@
 <li>Mark 和 Sweep 的效率都不高</li>
 <li>Sweep 过后剩下的空间不连续，容易形成碎片空间，对大对象的内存分配不友好，有时候大对象可能因为找不到空间，再来一次 GC</li>
 </ul>
-<p><img src="https://plumbr.io/app/uploads/2015/06/GC-sweep.png" alt="Java GC sweep"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/GC-sweep.webp" alt="Java GC sweep"></p>
 <h4 id="2-mark-copy">2. Mark-Copy</h4>
 <p>为了提高效率，可以将空间切成两块：</p>
 <ul>
 <li><strong>Eden 区：</strong>一块正常分配对象内存</li>
 <li><strong>Survivor 区：</strong>当<strong>Eden 区</strong>内存满了的时候，就将还存活的对象复制到这里，然后再把<strong>Eden 区</strong>一次性清理掉，两块内存区身份互换，这样每次都是清理另一块的内存，然后按序分配到自己这里，不用考虑碎片</li>
 </ul>
-<p><img src="https://plumbr.io/app/uploads/2015/06/GC-mark-and-copy-in-Java.png" alt="Java GC Mark and Copy Collector"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/GC-mark-and-copy-in-Java.webp" alt="Java GC Mark and Copy Collector"></p>
 <p>这样的方法有牺牲一块空间的代价，最初的做法是对半分，但是因为对象的朝生夕死，所以存活的对象其实并不多，HotSpot 虚拟机的做法是：<strong>将内存区分成 8：1：1 的 Eden：Survivor：Survivor 区，每次只使用 Eden 和其中一块 Survivor，当 GC 发生的时候，将 Eden 和使用的 Survivor 中存活的对象分配到另一个 Survivor 中，然后清理掉前面两个区域</strong></p>
 <p>也就是说，实际上 HotSpot 可用的内存是分配内存的<strong>90%</strong></p>
 <h4 id="3-mark-compact">3. Mark-Compact</h4>
 <p>复制算法会牺牲一部分空间，并且<strong>如果系统存在许多存活时间长的对象的时候，算法的效率会降低</strong>，而且很明显的是老年代使用这种算法的效率很低</p>
 <p>标记整理算法就是针对老年代的收集算法，它先将存活对象标记起来，然后将存活对象<strong>向一边移动</strong>，移动完后<strong>从最后一个存活对象往后开始清理空间</strong></p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/GC-mark-sweep-compact.png" alt="Java GC mark sweep compacting"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/GC-mark-sweep-compact.webp" alt="Java GC mark sweep compacting"></p>
 <h3 id="存活判断">存活判断</h3>
 <p>GC 要工作的时候，它要如何判断对象是否已经死亡呢？通过什么来界定对象死亡呢？从技术层面来说，系统中没有任何一个地方要引用到这个对象，那么可以判定这个对象已经废弃了，这时候就具备了回收的条件了</p>
 <p>问题是怎么判断对象是否废弃呢？常见有两种方法：引用计数、可达性分析</p>
@@ -61,7 +61,7 @@
 <h4 id="reachability-analysis">Reachability Analysis</h4>
 <p>主流的语言都是使用 RA 来判断对象存活的，甚至古老的 Lisp 也是。算法的基本思想是预置固定的<strong>“GC Root”对象</strong>作为起点，以树状逻辑开始从 root 向下索引，结点关系就是引用关系，索引到的对象就说明该对象至少还有一条 Reference Chain 可以达到 GC Root，则说明这个对象仍被系统使用</p>
 <p>没有 Reference Chain 可达的对象，则基本可以宣告作废了</p>
-<p><img src="../../img/20181114235352.png" alt=""></p>
+<p><img src="../../img/20181114235352.webp" alt></p>
 <p>如图，灰色 chain 已经没有 GC Root 可达了，所以这些对象会在下次 GC 的时候被考虑回收</p>
 <p>常见的 GC Root 有：</p>
 <ul>

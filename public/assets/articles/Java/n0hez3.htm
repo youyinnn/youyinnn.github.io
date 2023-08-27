@@ -168,7 +168,7 @@
   System.out.println(Arrays.toString(f.apply(si)));
 </code></pre>
 <p>这和完整版相比, 缺少的是<code>Function</code>类后面的泛型定义, 所以这段代码是过不了的, 了解一下<strong>五大核心函数式接口</strong>,</p>
-<h4 id="consumer-消费型接口">Consumer<T> 消费型接口</h4>
+<h4 id="consumer-消费型接口">Consumer 消费型接口
 <h5 id="源码">源码</h5>
 <pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Consumer</span>&lt;T&gt; {
@@ -209,7 +209,7 @@ Age is : 13
 Name is : abc
 Age is : 12
 </code></pre>
-<h4 id="supplier-供给型接口">Supplier<T> 供给型接口</h4>
+Supplier 供给型接口
 <h5 id="源码-1">源码</h5>
 <pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Supplier</span>&lt;T&gt; {
@@ -284,7 +284,7 @@ nothing change~
 after
 Person{name=&#x27;xixi&#x27;, age=15}
 </code></pre>
-<h4 id="predicate-条件预测型接口">Predicate<T> 条件预测型接口</h4>
+Predicate 条件预测型接口
 <h5 id="源码-3">源码</h5>
 <pre><code class="hljs language-java"><span class="hljs-meta">@FunctionalInterface</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Predicate</span>&lt;T&gt; {
@@ -318,5 +318,6 @@ Person{name=&#x27;xixi&#x27;, age=15}
 <p>给个 T, 返回个布尔值</p>
 <h4 id="默认方法-2">默认方法</h4>
 <p>经过前几个接口的默认方法, 我们现在应该很容易能理解默认方法的作用了, 特别是对于<strong>条件预测型接口</strong>的默认方法, <code>and</code> <code>or</code> <code>negate</code> 分别代表用<strong>和</strong>的方式连接两个条件, 用<strong>与</strong>的方式连接两个条件, 用<strong>非</strong>呈现这个条件.</p>
-<h4 id="comparator-比较器接口">Comparator<T> 比较器接口</h4>
+Comparator 比较器接口
 <p>这个接口里的默认方法就更多, 牵扯到的使用情况就更复杂, 有待日后研究, 其实本来只是**&quot;四大核心函数式接口&quot;**的, 这个我放在第五个, 因为这个接口里的方法有很有价值.</p>
+</h4>

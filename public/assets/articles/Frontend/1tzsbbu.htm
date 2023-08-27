@@ -1,6 +1,6 @@
-<p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div></p>
+<p></p><div class="saying mb-4"><div class="saying-quote saying-left-quote">“</div><div class="saying-quote saying-right-quote">”</div>
 <p>翻译自官方文档</p>
-<p></div></p>
+<p></p></div>
 <h2 id="writing-middleware">Writing Middleware</h2>
 <p>中间件能够在请求响应周期中访问 <a href="http://www.expressjs.com.cn/en/4x/api.html#req">request object</a> (<code>req</code>)，和 <a href="http://www.expressjs.com.cn/en/4x/api.html#res">response object</a> (<code>res</code>)，以及 <code>next</code>方法。<code>next</code>方法用于在路由过程中执行当前中间件紧接着的下一个中间件。</p>
 <p>中间件能够完成以下事情：</p>
@@ -12,7 +12,7 @@
 </ul>
 <p>如果当前中间件不结束该次请求响应周期，它必须调用 next 方法，将控制传递到下一个中间件，否则请求会被挂起。</p>
 <p>下图展示了中间件功能的基本元素：</p>
-<p><img src="../../img/20191003170602.png" alt=""></p>
+<p><img src="../../img/20191003170602.webp" alt></p>
 <h3 id="example-middleware-function-mylogger">Example: Middleware function myLogger</h3>
 <p>这里是一个简单的“myLogger”中间件，作用仅仅只是在有请求进来的时候打印。</p>
 <pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> myLogger = <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) {

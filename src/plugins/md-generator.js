@@ -15,6 +15,7 @@ const articleDataExtract = require("./artricles-data-extract");
 const tocExtractor = require("./toc-extractor");
 const { gen } = require("./list-code-theme-css-file");
 const { toBinary } = require("./binary-base64-encoder");
+var HTMLParser = require("node-html-parser");
 
 let postsPath = path.join(__dirname, "..", "assets/_posts");
 
@@ -59,6 +60,19 @@ renderer.html = renderer.text = function (text) {
   return text;
 };
 
+function toWebp(htmlStr) {
+  let htmlEl = HTMLParser.parse(htmlStr);
+  let imgEls = htmlEl.getElementsByTagName("img");
+  for (let imgEl of imgEls) {
+    let imgSrcOfThis = imgEl.getAttribute("src");
+    imgEl.setAttribute(
+      "src",
+      imgSrcOfThis.replace(path.extname(imgSrcOfThis), ".webp")
+    );
+  }
+  return htmlEl.innerHTML;
+}
+
 function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   let sourceMdStr = fs.readFileSync(sourceFilePath, {
     encoding: "utf-8",
@@ -73,6 +87,7 @@ function md2html(sourceFilePath, outputFilePath, sourceMdStrHandleFunc) {
   let htmlStr = marked.parse(sourceMdStr);
 
   htmlStr = inlineKatexRendering(htmlStr);
+  htmlStr = toWebp(htmlStr);
 
   if (htmlStr.match("KaTeX parse error")) {
     console.log("Katex parse error on: " + sourceFilePath);
@@ -208,16 +223,32 @@ fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "about"));
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "scripts"));
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "img"));
 
+// copy all images to public
 const imgSrcPath = path.join(__dirname, "..", "assets", "img");
 
+const webp = require("webp-converter");
+webp.grant_permission();
+
 for (let img of fs.readdirSync(imgSrcPath)) {
-  fs.copyFile(
+  let imgExt = path.extname(img);
+  let imgProcessor = webp.cwebp;
+  if (imgExt === ".gif") {
+    imgProcessor = webp.gwebp;
+  }
+  const result = imgProcessor(
     path.join(imgSrcPath, img),
-    path.join(process.cwd(), "public", "img", img),
-    (err) => {
-      if (err) throw err;
-    }
+    path.join(process.cwd(), "public", "img", img.replace(imgExt, ".webp"))
   );
+  result.then((response) => {
+    console.log(response);
+  });
+  // fs.copyFile(
+  //   path.join(imgSrcPath, img),
+  //   path.join(process.cwd(), "public", "img", img),
+  //   (err) => {
+  //     if (err) throw err;
+  //   }
+  // );
 }
 
 for (let cateDir of postsrs) {
@@ -320,6 +351,7 @@ for (let md of scriptsDir) {
     let htmlStr = marked.parse(sourceStr);
 
     htmlStr = inlineKatexRendering(htmlStr);
+    htmlStr = toWebp(htmlStr);
 
     if (htmlStr.match("KaTeX parse error")) {
       console.log("Katex parse error on: " + md);
