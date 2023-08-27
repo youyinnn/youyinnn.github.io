@@ -52,7 +52,7 @@
 <li><p>集合中有三个点：两两比较，求三个点中的最近的两个点距离。</p>
 </li>
 <li><p>点数大于三时：首先<strong>划分</strong>集合 S 为 SL 和 SR，使得 SL 中的每一个点位于 SR 中每一个点的左边，并且 SL 和 SR 中点数相同。分别在 SL 和 SR 中解决最近点对问题，得到 DL 和 DR，分别表示 SL 和 SR 中的最近点对的距离。令 d=min(DL,DR)。如果 S 中的最近点对(P1,P2)。P1、P2 两点一个在 SL 和一个在 SR 中，那么 P1 和 P2 一定在以 L 为中心的间隙内，以 L-d 和 L+d 为界。</p>
-<p><img src="../../img/20211210131802.png" alt=""></p>
+<p><img src="../../img/20211210131802.webp" alt></p>
 </li>
 </ol>
 <p>针对这个基本思想，我们肯定是得有一个前提的，那就是怎么<strong>划分</strong>？如果说集合<strong>P</strong>是按照 x 坐标或者 y 坐标升降任意去排序的，那么我们就可以取集合中间下标的位置为<strong>MID</strong>，那么<strong>MID</strong>左右两边的点就是以 x 坐标或者 y 坐标值均匀分为两个子集，记为<strong>P1，P2</strong>；</p>

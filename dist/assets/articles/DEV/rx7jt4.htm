@@ -8,14 +8,14 @@
 <li>A REST API which specifies interfaces that programs can use to talk to the daemon and instruct it what to do.</li>
 <li>A command line interface (CLI) client (the <code>docker</code> command).</li>
 </ul>
-<p><img src="https://docs.docker.com/engine/images/engine-components-flow.png" alt="engine-components-workflow"></p>
+<p><img src="https://docs.docker.com/engine/images/engine-components-flow.webp" alt="engine-components-workflow"></p>
 <p>The CLI uses the Docker REST API to control or interact with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI.</p>
 <p>The daemon creates and manages Docker <em>objects</em>, such as images, containers, networks, and volumes.</p>
 <h3 id="docker-architecture">Docker architecture</h3>
 <p>Docker uses a <strong>client-server architecture</strong>.</p>
 <p>The Docker <em>client</em> talks to the Docker <em>daemon</em>, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon <em>can</em> run on the same system, or you can connect a Docker client to a remote Docker daemon.</p>
 <p><strong>The Docker client and daemon communicate using a REST API, over UNIX sockets or a network interface.</strong></p>
-<p><img src="https://docs.docker.com/engine/images/architecture.svg" alt="architecture"></p>
+<p><img src="https://docs.docker.com/engine/images/architecture.webp" alt="architecture"></p>
 <h4 id="1-the-docker-daemon-core">1. The Docker daemon (core)</h4>
 <p>The Docker daemon (<code>dockerd</code>) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.</p>
 <h4 id="2-the-docker-client-interface">2. The Docker client (interface)</h4>

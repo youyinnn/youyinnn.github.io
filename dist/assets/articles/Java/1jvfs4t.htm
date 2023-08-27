@@ -75,7 +75,7 @@
 </li>
 </ol>
 <p>下图是这次 log 的内存图变化：</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/serial-gc-in-young-generation.png" alt="Serial GC Young Gen Java"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/serial-gc-in-young-generation.webp" alt="Serial GC Young Gen Java"></p>
 <p>从快照结果中我们可以看出年轻代的对象要么被清理掉了，要么存活下来进入 S2 了，要么被 promoted 到了老年代</p>
 <h5 id="full-gc">Full GC</h5>
 <p><code>2015-05-26T14:45:59.690-0200</code>: <code>172.829</code>:[GC (Allocation Failure) 172.829:[<code>DefNew: 629120K-&gt;629120K(629120K), 0.0000372 secs</code>]172.829:[<code>Tenured</code>: <code>1203359K-&gt;755802K</code> <code>(1398144K)</code> ,<code>0.1855567 secs</code>] <code>1832479K-&gt;755802K</code> <code>(2027264K)</code>,<code>[Metaspace: 6741K-&gt;6741K(1056768K)]</code> <code>[Times: user=0.18 sys=0.00, real=0.18 secs]</code></p>
@@ -110,7 +110,7 @@
 </li>
 </ol>
 <p>内存变化：</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/serial-gc-in-old-gen-java.png" alt="Java Old Generation SerialGC"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/serial-gc-in-old-gen-java.webp" alt="Java Old Generation SerialGC"></p>
 <h3 id="parallel-gc">Parallel GC</h3>
 <p><strong>Parallel GC</strong>使用<a href="./jhpq7e.html?hash=14c983ac">标记-复制</a>算法回收年轻代，使用<a href="">标记-整理</a>算法回收老年代，这点两个收集器都一样</p>
 <p>和它的名字一样，并行收集器在这两个区域可以<strong>并行地</strong>收集，开始工作前也会触发<strong>大暂停</strong>，说并行是指它会用多个线程同时进行垃圾回收，这样做会大大减少回收的耗时</p>
@@ -138,9 +138,9 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 2015-05-26T14:27:41.155-0200: 116.356: [Full GC (Ergonomics) [PSYoungGen: 1305132K-&gt;0K(2796544K)] [ParOldGen: 7133794K-&gt;6597672K(8388608K)] 8438926K-&gt;6597672K(11185152K), [Metaspace: 6745K-&gt;6745K(1056768K)], 0.9158801 secs] [Times: user=4.49 sys=0.64, real=0.92 secs]
 </code></pre>
 <p><strong>Minor GC：</strong></p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.png" alt="Java ParalleGC"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.webp" alt="Java ParalleGC"></p>
 <p><strong>Full GC：</strong></p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/Java-ParallelGC-in-Old-Generation.png" alt="ParallelGC Java"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/Java-ParallelGC-in-Old-Generation.webp" alt="ParallelGC Java"></p>
 <h3 id="concurrent-mark-and-sweep（cms）">Concurrent Mark and Sweep（CMS）</h3>
 <p>CMS 收集器的官方名称是“Mostly Concurrent Mark and Sweep Garbage Collector”，它在年轻代使用<strong>并行</strong>收集器一样的行为：<strong>大暂停、并行、标记-复制</strong>，然后在老年代区使用<strong>CMS</strong></p>
 <p>这个算法被设计成用于<strong>避免在回收老年代的时候有长暂停</strong>，它有两个含义：</p>
@@ -156,7 +156,7 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 <h5 id="minor-gc-1">Minor GC</h5>
 <pre><code>2015-05-26T16:23:07.219-0200: 64.322: [GC (Allocation Failure) 64.322: [ParNew: 613404K-&gt;68068K(613440K), 0.1020465 secs] 10885349K-&gt;10880154K(12514816K), 0.1021309 secs] [Times: user=0.78 sys=0.01, real=0.11 secs]
 </code></pre>
-<p><img src="https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.png" alt="Java ParalleGC"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/ParallelGC-in-Young-Generation-Java.webp" alt="Java ParalleGC"></p>
 <h5 id="full-gc-1">Full GC</h5>
 <pre><code>2015-05-26T16:23:07.321-0200: 64.425: [GC (CMS Initial Mark) [1 CMS-initial-mark: 10812086K(11901376K)] 10887844K(12514816K), 0.0001997 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
 2015-05-26T16:23:07.321-0200: 64.425: [CMS-concurrent-mark-start]
@@ -174,15 +174,15 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 <p>CMS 的<strong>Full GC</strong>有点讲头，它分为 7 个阶段</p>
 <h6 id="phase-1-initial-mark">Phase 1: Initial Mark</h6>
 <p>这里会有 CMS 会触发的两次暂停之一，这个阶段的主要目标就是将老年代中的<strong>GC Root</strong>和有<strong>被存活年轻代引用</strong>的，后面这个目标很重要，因为老年代是分代收集的</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-06.png" alt="CMS initial mark"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-06.webp" alt="CMS initial mark"></p>
 <h6 id="phase-2-concurrent-mark">Phase 2: Concurrent Mark</h6>
 <p>在这个阶段里，GCor 会遍历老年代然后<strong>标记上所有存活的对象</strong>，遍历过程是从上一个阶段标记好的<strong>GC Root</strong>开始，但是这个过程不会触发大暂停，而是和程序<strong>并发地</strong>进行，需要注意的是，并不是所有的老年代都会被标记，因为程序运行过程中会改变一些引用关系</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-07.png" alt="CMS concurrent marking"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-07.webp" alt="CMS concurrent marking"></p>
 <h6 id="phase-3-concurrent-preclean">Phase 3: Concurrent Preclean</h6>
 <p>这个阶段还是和应用程序并行的。虽然在上一个并发阶段里，有些引用被改变了，我们称这些对象为<strong>“脏的（dirty）”</strong>，如果出现这种情况的话，JVM 会将包含这些脏对象的堆区域划出一个范围，称为<strong>卡（card）</strong>，这就是我们前面提到过的<a href="./wlvrl9.html?hash=76a3fb27">卡标记（_card-marking_）</a></p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-08.png" alt="CMS dirty cards"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-08.webp" alt="CMS dirty cards"></p>
 <p>卡标记有两种状态，一种在脏状态，一种是干净状态，本阶段需要针对脏状态的对象进行处理，脏对象被视为占用状态，然后<strong>将卡标记对象引用的对象也标记好</strong>，标记好之后，脏对象就变为干净对象了</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-09.png" alt="CMS concurrent preclean"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-09.webp" alt="CMS concurrent preclean"></p>
 <p>额外的，在这个阶段中还会进行一些内部处理，为最后的<strong>重标记（Remark Phase）</strong>阶段做准备</p>
 <h6 id="phase-4-concurrent-abortable-preclean">Phase 4: Concurrent Abortable Preclean</h6>
 <p>这个阶段还是<strong>并发阶段</strong>，这个阶段的目标是尽可能地减少整个回收工作中最后一次大暂停的重标记阶段的工作量，这个阶段所用的时间取决于很多因素，因为它仅仅只是迭代地去做同一个事情，但是打断它的迭代的因素有很多种</p>
@@ -193,7 +193,7 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 <p>在 5 个 Marking 阶段之后，老年代中的所有存活对象都已经被标记好了，这时候 GCor 们就会开始干活，用 Sweep 的方式<strong>清除（reclaim）</strong>掉所有无用的对象</p>
 <h6 id="phase-6-concurrent-sweep">Phase 6: Concurrent Sweep</h6>
 <p>这个阶段就是和应用程序并发地进行，就是要清理掉不要的对象</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-10.png" alt="CMS concurrent sweep"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-10.webp" alt="CMS concurrent sweep"></p>
 <h6 id="phase-7-concurrent-reset">Phase 7: Concurrent Reset</h6>
 <p>和程序并发地进行，目的是为了重置 CMS 收集器中记录的一些内部数据，为下一次 CMS 收集做准备</p>
 <p>总而言之，CMS 收集器能利用程序暂时用不到的线程，和程序并发地进行，尽可能的减少大暂停的时长</p>
@@ -206,9 +206,9 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 <ol>
 <li><p>堆内存不必划分为新生代和老年代，而是分为若干个（一般可以是 2046 个）相同大小的小区域（**<em>regions</em>**），这些区域用来存放若干个对象，每一种区域又可以分为：Eden Region、Survivor Region、Old Region。</p>
 <p>因为不同种类的区域之间并不紧靠在一起，所以物理上它们不都在一个连续的空间，但是我们可以将它们逻辑上组成年轻代和老年代，这和之前的概念一致，只不过并不是连续划分空间了</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-011.png" alt="G1 Heap Regions"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-011.webp" alt="G1 Heap Regions"></p>
 <p>这能让 GCor 们避免每次都清理整片堆内存，反而每次只需要清理一些被视为<strong>待回收集合（collection set）</strong>的部分区域就行了，每次大暂停的时候，都会清理所有的年轻代区域，顺带包括一些老年代区域</p>
-<p><img src="https://plumbr.io/app/uploads/2015/06/g1-02.png" alt="G1 Collection Set"></p>
+<p><img src="https://plumbr.io/app/uploads/2015/06/g1-02.webp" alt="G1 Collection Set"></p>
 </li>
 <li><p>G1 另外一个新奇的地方就是，它会对每一个区域中包含的存活数据进行评估，用于建立起<strong>待回收集合（collection set）</strong>，包含越多垃圾的区域将会被越先处理，这也是<strong>Garbage First</strong>名称的来由</p>
 </li>
@@ -255,11 +255,11 @@ java -XX:+UseParallelGC -XX:+UseParallelOldGC com.mypackages.MyExecutableClass
 <p><strong>记忆集合（Remembered set）</strong>是允许来自不同堆区域的各自的回收结果，比如说：当回收集合中的对象有来自 A、B、C 三个区域的，于是我们必须知道这些对象是否有引用到 D 和 E 区域中的对象，并以此来判断它们的活跃度</p>
 <p>但如果遍历整个堆区域的话，会比较麻烦，也会毁掉我们设置回收集合的意义，于是 JVM 采用了一个方法，它和之前说过的<strong>卡区域（card-table）</strong>有点类似，所以在 G1 里面和它对应的就是<strong>记忆集合（Remembered set）</strong></p>
 <p>和下图展示的一样：每个区域都有一个列出<strong>指向这个区域的引用</strong>的列表作为记忆集合在旁边，这些引用会被认为是可选的<strong>GC Root</strong>，需要注意的是，在并发标记阶段被视为垃圾的老年区对象不会被列入这个记忆集合中，即使有外部引用指向它们，因为在这样的情况下，这些外部引用也已经被标记为垃圾了</p>
-<p><img src="https://plumbr.io/app/uploads/2016/01/g1-03.png" alt="Mixed Evacuation Pause: beginning"></p>
+<p><img src="https://plumbr.io/app/uploads/2016/01/g1-03.webp" alt="Mixed Evacuation Pause: beginning"></p>
 <p>接下来发生的事情就比较简单了：GCor 们决定哪些对象是存活的，哪些对象是垃圾</p>
-<p><img src="https://plumbr.io/app/uploads/2016/01/g1-04.png" alt="Mixed Evacuation Pause: determining live objects"></p>
+<p><img src="https://plumbr.io/app/uploads/2016/01/g1-04.webp" alt="Mixed Evacuation Pause: determining live objects"></p>
 <p>最后，存活下来的对象会被移动到 survivor 区域，清空出来的新区域又会重新投入一些对象进去</p>
-<p><img src="https://plumbr.io/app/uploads/2016/01/g1-05-v2.png" alt="g1-05-v2"></p>
+<p><img src="https://plumbr.io/app/uploads/2016/01/g1-05-v2.webp" alt="g1-05-v2"></p>
 <p>为了维护一个记忆集合，<strong>后写屏障（post-write barrier）</strong>会在一个数据被写入的时候出现。如果一个跨区域引用关系出现了，有关系的引用之间会被记录在各自的记忆集合中。为了减少这个写屏障的开销，放置记录在记忆集合中的这个过程是异步的，并且还有其他的优化功能</p>
 <p>但归结起来就是写屏障会在写数据的时候往本地缓存中放置一个<strong>脏卡（dirty card）</strong>，脏卡的概念可以结合之前说的，然后特定的 GC 线程会找到这个卡然后将之记录在相关的记忆集合中</p>
 <h4 id="summary">Summary</h4>
