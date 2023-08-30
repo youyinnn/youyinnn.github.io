@@ -25,7 +25,6 @@ jobs:
           npm -v
           corepack enable
           corepack prepare yarn@stable --activate
-          yarn plugin import interactive-tools
           yarn install
           yarn build
 
