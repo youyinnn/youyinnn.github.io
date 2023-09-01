@@ -1,0 +1,89 @@
+<h4 id="create-vm-instance-on-oracle-cloud">Create VM Instance on Oracle Cloud</h4>
+<p>To use the Oracle Cloud, you will need to register a free account.
+Select your home region (to me, here is the Canada Southeast (Montreal) - Home RegionRegion Identifier: ca-montreal-1).</p>
+<p>Then you go to the Launch resources and select <strong>Create a VM instance</strong>:</p>
+<p><img src="../../img/launch.webp" alt></p>
+<p>Configure your Image and Shape:</p>
+<p><img src="../../img/shape.webp" alt></p>
+<p>For free tier users, you have the <code>Always Free-eligible</code> on shape Ampere with four available CPUs and 24 GB available RAMs.</p>
+<p>Please check: <a href="https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm#freetier_topic_Always_Free_Resources_Infrastructure">https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm#freetier_topic_Always_Free_Resources_Infrastructure</a></p>
+<p>As the figure shows, you can allocate them into several instances or put them all into one instance.</p>
+<p>Then, you set up your networks. You can <strong>create a new virtual cloud network</strong> or use the existing one if you have one. Change the name you like and leave others to default if you don&#39;t know what to do.</p>
+<p><img src="../../img/network.webp" alt></p>
+<p>Add SSH Keys. As the figure shows, you can use the one that Oracle Cloud created for you.
+Download the keys:</p>
+<p><img src="../../img/ssh.webp" alt></p>
+<p>Configure your volume size, 200 GB total for free tier users.</p>
+<p><img src="../../img/bootvolume.webp" alt></p>
+<p>Configure advanced options if you need them:</p>
+<p><img src="../../img/adv-options.webp" alt></p>
+<p>And finish the creation.</p>
+<p>Once the instance is created, you will see your instance&#39;s public IP address on the top right:</p>
+<p><img src="../../img/instance-details.webp" alt="image-20230128143324154"></p>
+<h4 id="ssh-key-setup">SSH Key Setup</h4>
+<p>Go to your user&#39;s home folder, and copy and paste the downloaded private and public keys to the <code>.ssh</code> folder.</p>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># limit the access of the private key</span>
+<span class="hljs-built_in">chmod</span> 400 ~/.ssh/your_private_key.key
+</code></pre>
+<p>And edit the config file under the <code>.ssh</code>:</p>
+<p><img src="../../img/ssh-conf.webp" alt="image-20230128144352939"></p>
+<h4 id="login">Login</h4>
+<p>You can refer to: <a href="https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/log-vm-using-ssh.html">https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/log-vm-using-ssh.html</a></p>
+<p>Make sure you have the SSH installed in your environment.</p>
+<pre><code class="hljs language-bash">ssh &lt;public_ip_address&gt;
+</code></pre>
+<h4 id="vm-environment-setup">VM Environment Setup</h4>
+<pre><code class="hljs language-bash">sudo yum update
+</code></pre>
+<h5 id="open-jdk11">Open JDK11</h5>
+<p><a href="https://access.redhat.com/documentation/en-us/openjdk/11/html/installing_and_using_openjdk_11_on_rhel/installing-openjdk11-on-rhel8">https://access.redhat.com/documentation/en-us/openjdk/11/html/installing_and_using_openjdk_11_on_rhel/installing-openjdk11-on-rhel8</a></p>
+<pre><code class="hljs language-bash">sudo yum install java-11-openjdk
+</code></pre>
+<h5 id="maven-38">Maven 3.8</h5>
+<pre><code class="hljs language-bash">wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+</code></pre>
+<p>and follow: <a href="https://maven.apache.org/install.html">https://maven.apache.org/install.html</a></p>
+<h5 id="network--firewall-settings">Network &amp; Firewall Settings</h5>
+<p>If you want to expose the <code>8080</code> port to the public:</p>
+<ol>
+<li><p>Go to the instance detail page:</p>
+<ol>
+<li><p>Click your <code>subnet-1</code> on the right middle:</p>
+<p><img src="../../img/subnet.webp" alt="image-20230128150259840"></p>
+</li>
+<li><p>Click <code>Default Security List for vcn-1</code>:</p>
+<p><img src="../../img/vcn-list.webp" alt="image-20230128150511712"></p>
+</li>
+<li><p>Add Ingress Rules for port range 8080 ~ 10080 (whatever you need)</p>
+<p><img src="../../img/port.webp" alt="image-20230128150930978"></p>
+</li>
+</ol>
+</li>
+<li><p>Open instance&#39;s firewall ports refer to:</p>
+<p><a href="https://docs.fedoraproject.org/en-US/quick-docs/firewalld/#opening-ports-firewalld-fedora">https://docs.fedoraproject.org/en-US/quick-docs/firewalld/#opening-ports-firewalld-fedora</a></p>
+<p>and</p>
+<p><a href="https://www.thegeekdiary.com/how-to-open-a-ports-in-centos-rhel-7/">https://www.thegeekdiary.com/how-to-open-a-ports-in-centos-rhel-7/</a></p>
+<pre><code class="hljs language-bash">sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
+</code></pre>
+<p>Check if it opened:</p>
+<pre><code class="hljs language-bash">sudo firewall-cmd --list-ports
+</code></pre>
+</li>
+</ol>
+<h4 id="deploy-the-jetty-helloworld">Deploy the Jetty Helloworld</h4>
+<pre><code class="hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/youyinnn/distributed_system_jetty_helloworld.git
+</code></pre>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">cd</span> ~/distributed_system_jetty_helloworld
+</code></pre>
+<h5 id="if-you-use-the-jettyrun-command">If you use the <code>jetty:run</code> command</h5>
+<pre><code class="hljs language-bash">mvn jetty:run
+</code></pre>
+<p><img src="../../img/jettyrun.webp" alt="image-20230128151730452"></p>
+<h5 id="if-you-use-the-execexec-command">If you use the <code>exec:exec</code> command</h5>
+<pre><code class="hljs language-bash">mvn clean install <span class="hljs-built_in">exec</span>:<span class="hljs-built_in">exec</span>
+</code></pre>
+<p>Make sure you know where to configure the <code>port</code> and <code>contextPath</code>:</p>
+<p><img src="../../img/jetty-code-conf.webp" alt="image-20230128152548583"></p>
+<p>and visit:</p>
+<p><img src="../../img/visit2.webp" alt="image-20230128152808118"></p>
