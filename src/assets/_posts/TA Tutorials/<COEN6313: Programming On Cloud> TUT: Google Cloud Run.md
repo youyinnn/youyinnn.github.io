@@ -140,11 +140,11 @@ Please work on the following steps:
 
    3. Select the main branch; Select build type "Dockerfile" and locate the file path `/Dockerfile`.
 
-      <img src="img/image-20230829104126827.png" alt="image-20230829104126827" style="zoom:50%;" />
+      <img src="../../img/image-20230829104126827.png" alt="image-20230829104126827" style="zoom:50%;" />
 
    4. Allow unauthenticated invocations and create the service.
 
-      <img src="img/image-20230829104232619.png" alt="image-20230829104232619" style="zoom:50%;" />
+      <img src="../../img/image-20230829104232619.png" alt="image-20230829104232619" style="zoom:50%;" />
 
 3. Your code is now created and deployed on Cloud Run.
 
@@ -152,19 +152,19 @@ Please work on the following steps:
 
 4. Visit the URL of the `hello_world()` endpoint.
 
-   <img src="img/image-20230829105124446.png" alt="image-20230829105124446" style="zoom:50%;" />
+   <img src="../../img/image-20230829105124446.png" alt="image-20230829105124446" style="zoom:50%;" />
 
 5. Make some changes in your code and commit it to the GitHub repository.
 
-   <img src="img/image-20230829105322586.png" alt="image-20230829105322586" style="zoom:50%;" />
+   <img src="../../img/image-20230829105322586.png" alt="image-20230829105322586" style="zoom:50%;" />
 
 6. Visit the Build History. You should see a new build is processing.
 
-   <img src="img/image-20230829105418670.png" alt="image-20230829105418670" style="zoom: 33%;" />
+   <img src="../../img/image-20230829105418670.png" alt="image-20230829105418670" style="zoom: 33%;" />
 
 7. The change should be updated to the web service.
 
-   <img src="img/image-20230829105523106.png" alt="image-20230829105523106" style="zoom: 50%;" />
+   <img src="../../img/image-20230829105523106.png" alt="image-20230829105523106" style="zoom: 50%;" />
 
 ## 2.2 Approach 2: Deploy from Local Source Code using Google Cloud CLI
 
@@ -213,7 +213,7 @@ Then, it will create a Cloud Run Service. On the Cloud Run, you will see:
 
 You can now visit the [<your_cloudrun_service_url>/coen6731/public/]() to play with the Java Web application.
 
-<img src="img/image-20230829150817603.png" alt="image-20230829150817603" style="zoom: 33%;" />
+<img src="../../img/image-20230829150817603.png" alt="image-20230829150817603" style="zoom: 33%;" />
 
 To continually deploy your local changes, you can re-run the `gcloud run deploy` and use the same service name.
 
@@ -243,7 +243,7 @@ And deploy it to the Cloud Run as we did in the use case 1.
 
 Then, create a bucket named `cloud_run_tut_bucket`:
 
-<img src="img/image-20230829173823630.png" alt="image-20230829173823630" style="zoom: 33%;" />
+<img src="../../img/image-20230829173823630.png" alt="image-20230829173823630" style="zoom: 33%;" />
 
 After that, create an Eventarc trigger named `t1`, select the following event type, link it to the `cloud_run_tut_bucket` storage and the `cloud_run_tut` Run service of endpoint `/event_looks` :
 
@@ -251,7 +251,7 @@ After that, create an Eventarc trigger named `t1`, select the following event ty
 
 For the event type, you should select the following option since uploading a file creates a new object to the bucket:
 
-<img src="img/image-20230829175912468.png" alt="image-20230829175912468" style="zoom: 50%;" />
+<img src="../../img/image-20230829175912468.png" alt="image-20230829175912468" style="zoom: 50%;" />
 
 Once the trigger is created, you can find it on the Cloud Run Service page:
 
@@ -336,7 +336,7 @@ Note that the `table_id` strictly follows the format `your-project.your_dataset.
 
 The `your-project` is replaced with the project ID, which can be found while selecting Project in the Console. You may also use the project name.
 
-<img src="img/image-20230829215823372.png" alt="image-20230829215823372" style="zoom: 50%;" />
+<img src="../../img/image-20230829215823372.png" alt="image-20230829215823372" style="zoom: 50%;" />
 
 The `your_dataset` is replaced with the dataset name.
 
@@ -348,15 +348,15 @@ Then, create a new Eventarc trigger for the endpoint `/event_receive` on the Clo
 
 Create a BigQuery dataset named `cloud_run_tut_dataset` in BigQuery.
 
-<img src="img/image-20230829220009774.png" alt="image-20230829220009774" style="zoom: 50%;" />
+<img src="../../img/image-20230829220009774.png" alt="image-20230829220009774" style="zoom: 50%;" />
 
 Now, you can upload the `Iris.csv` file in this repository to the bucket.
 
-<img src="img/image-20230829220434392.png" alt="image-20230829220434392" style="zoom:33%;" />
+<img src="../../img/image-20230829220434392.png" alt="image-20230829220434392" style="zoom:33%;" />
 
 Go to the LOGS of the service. The payload and the number of rows are printed.
 
-<img src="img/image-20230829220830791.png" alt="image-20230829220830791" style="zoom: 33%;" />
+<img src="../../img/image-20230829220830791.png" alt="image-20230829220830791" style="zoom: 33%;" />
 
 Finally, you can query the iris data from the created table in BigQuery:
 
