@@ -1,0 +1,288 @@
+<h1 id="coen6313-programming-on-cloud-tut-google-cloud-run">&lt;COEN6313: Programming On Cloud&gt; TUT: Google Cloud Run</h1>
+<p>This tutorial will go through three demo projects for two use cases: (1) <a href="https://cloud.google.com/run/#section-6">Web services: Websites</a> and (2) <a href="https://cloud.google.com/run/#section-6">Data processing: Lightweight data transformation</a> using <strong>Google Cloud Run</strong>, <strong>Cloud Storage</strong>, <strong>Eventarc (pronunciation: event arch)</strong>, and <strong>BigQuery</strong> services of the Google Cloud Platform.</p>
+<p>Before you dive into the coding, you should study the following materials.</p>
+<p>There is no need to operate on the Cloud Run; just understand the concepts and know what you will probably do.</p>
+<ul>
+<li><p>Cloud Run:</p>
+<ul>
+<li><p>Overall:</p>
+<ul>
+<li><p><a href="https://cloud.google.com/run/docs/overview/what-is-cloud-run">What is Cloud Run</a>: You should understand the concept of &quot;Cloud Run Services&quot; and &quot;Clould Run Jobs.&quot;</p>
+</li>
+<li><p><a href="https://cloud.google.com/run/docs/fit-for-run">Is my app a good fit for Cloud Run?</a>: You should know what kind of work suits Google Cloud Run.</p>
+</li>
+</ul>
+</li>
+<li><p>For Use Case 1:</p>
+<ul>
+<li><p><a href="https://cloud.google.com/run/docs/quickstarts/deploy-continuously#cloudrun_deploy_continuous_code-python">Quickstart: Deploy to Cloud Run from a Git Repository</a></p>
+</li>
+<li><p><a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service">Deploy a Python Service to Cloud Run from Source Code</a></p>
+</li>
+</ul>
+</li>
+<li><p>For Use Case 2:</p>
+<ul>
+<li><a href="https://cloud.google.com/run/docs/tutorials/eventarc">Use Eventarc to receive events from Cloud Storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cloud Storage:</p>
+<ul>
+<li><a href="https://cloud.google.com/storage/docs/discover-object-storage-console">Discover object storage with the Google Cloud console</a></li>
+<li><a href="https://cloud.google.com/storage/docs/buckets">About Cloud Storage buckets</a></li>
+</ul>
+</li>
+<li><p>Eventarc:</p>
+<ul>
+<li><a href="https://cloud.google.com/eventarc/docs/overview">Eventarc overview</a></li>
+</ul>
+</li>
+<li><p>BigQuery:</p>
+<ul>
+<li><a href="https://cloud.google.com/bigquery/docs/introduction">What is BigQuery</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1-preliminary-setup">1. Preliminary Setup</h1>
+<ol>
+<li><p>Create a Project Space for your work at <a href="https://cloud.google.com/?hl=en">https://cloud.google.com/?hl=en</a>.</p>
+</li>
+<li><p>Install the Google Cloud CLI: <a href="https://cloud.google.com/sdk/docs/install">https://cloud.google.com/sdk/docs/install</a>, run init, and select the project you just created.</p>
+<p>Verify if the tools by the command:</p>
+<pre><code class="hljs language-bash">gcloud -v
+</code></pre>
+<p>and you should get the following output:</p>
+<pre><code class="hljs language-bash">Google Cloud SDK 444.0.0
+bq 2.0.97
+core 2023.08.22
+gcloud-crc32c 1.0.0
+gsutil 5.25
+</code></pre>
+</li>
+<li><p>Enable Google Cloud APIs:</p>
+<pre><code class="hljs language-bash">gcloud services <span class="hljs-built_in">enable</span> run.googleapis.com \
+    eventarc.googleapis.com \
+    storage.googleapis.com \
+    cloudbuild.googleapis.com
+</code></pre>
+</li>
+<li><p>(Optional) Install docker in your local to debug with your Dockerfile.</p>
+</li>
+</ol>
+<h1 id="2-use-case-1-web-application">2. Use Case 1: Web Application</h1>
+<p>There are three approaches to deploying your project as services to Cloud Run:</p>
+<ol>
+<li>from a published docker image;</li>
+<li><u>from a GitHub repository;</u></li>
+<li><u>from your local source code;</u></li>
+</ol>
+<p>This tutorial walks through the last two approaches.</p>
+<h2 id="21-approach-1-deploy-from-a-git-repository">2.1 Approach 1: Deploy from a Git Repository</h2>
+<p>Deploying projects on GitHub to Cloud Run can enable the CI/CD workflow between Google Cloud Platform and GitHub.</p>
+<p>You now work on deploying a Python Flask web application to the Cloud Run.</p>
+<p>In the root path of this repository, a simple Flash application in the <code>main.py</code> and the <code>Dockerfile</code> is for Cloud Run Service to build and deploy the image.</p>
+<p>The <code>Dockerfile</code>:</p>
+<pre><code class="hljs language-dockerfile"><span class="hljs-comment"># Use the official lightweight Python image.</span>
+<span class="hljs-comment"># https://hub.docker.com/_/python</span>
+<span class="hljs-keyword">FROM</span> python:<span class="hljs-number">3.11</span>-slim
+
+<span class="hljs-comment"># Allow statements and log messages to immediately appear in the logs</span>
+<span class="hljs-keyword">ENV</span> PYTHONUNBUFFERED True
+
+<span class="hljs-comment"># Copy local code to the container image.</span>
+<span class="hljs-keyword">ENV</span> APP_HOME /app
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> <span class="hljs-variable">$APP_HOME</span></span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> . ./</span>
+
+<span class="hljs-comment"># Install production dependencies.</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> pip install --no-cache-dir -r requirements.txt</span>
+
+<span class="hljs-comment"># Run the web service on container startup. Here we use the gunicorn</span>
+<span class="hljs-comment"># webserver, with one worker process and 8 threads.</span>
+<span class="hljs-comment"># For environments with multiple CPU cores, increase the number of workers</span>
+<span class="hljs-comment"># to be equal to the cores available.</span>
+<span class="hljs-comment"># Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> <span class="hljs-built_in">exec</span> gunicorn --<span class="hljs-built_in">bind</span> :<span class="hljs-variable">$PORT</span> --workers 1 --threads 8 --<span class="hljs-built_in">timeout</span> 0 main:app</span>
+</code></pre>
+<p>In this section, you will focus on the <code>/</code> endpoint in the <code>main.py</code>:</p>
+<pre><code class="hljs language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">hello_world</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Example Hello World route.&quot;&quot;&quot;</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Hello World!!!!!!&quot;</span>
+</code></pre>
+<p>Please work on the following steps:</p>
+<ol>
+<li><p>Clone this repository.</p>
+</li>
+<li><p>Go to Cloud Run and create a Cloud Run Service:</p>
+<ol>
+<li><p>Click the Cloud Run panel &quot;CREATE SERVICE.&quot;</p>
+</li>
+<li><p>Select &quot;... from a source repository&quot;; Setup Cloud Build; Authorize to your GitHub account; Select the repository you just cloned.</p>
+<p><img src="../../img/image-20230829103650087.webp" alt="image-20230829103650087"></p>
+</li>
+<li><p>Select the main branch; Select build type &quot;Dockerfile&quot; and locate the file path <code>/Dockerfile</code>.</p>
+<img src="img/image-20230829104126827.webp" alt="image-20230829104126827" style="zoom:50%;">
+</li>
+<li><p>Allow unauthenticated invocations and create the service.</p>
+<img src="img/image-20230829104232619.webp" alt="image-20230829104232619" style="zoom:50%;"></li>
+</ol>
+</li>
+<li><p>Your code is now created and deployed on Cloud Run.</p>
+<p><img src="../../img/84EF0266-791E-472D-8BFE-41EEEF86634B_1_201_a.webp" alt="84EF0266-791E-472D-8BFE-41EEEF86634B_1_201_a"></p>
+</li>
+<li><p>Visit the URL of the <code>hello_world()</code> endpoint.</p>
+<img src="img/image-20230829105124446.webp" alt="image-20230829105124446" style="zoom:50%;">
+</li>
+<li><p>Make some changes in your code and commit it to the GitHub repository.</p>
+<img src="img/image-20230829105322586.webp" alt="image-20230829105322586" style="zoom:50%;">
+</li>
+<li><p>Visit the Build History. You should see a new build is processing.</p>
+<img src="img/image-20230829105418670.webp" alt="image-20230829105418670" style="zoom: 33%;">
+</li>
+<li><p>The change should be updated to the web service.</p>
+<img src="img/image-20230829105523106.webp" alt="image-20230829105523106" style="zoom: 50%;"></li>
+</ol>
+<h2 id="22-approach-2-deploy-from-local-source-code-using-google-cloud-cli">2.2 Approach 2: Deploy from Local Source Code using Google Cloud CLI</h2>
+<p>Sometimes, you may want to deploy your local work to the cloud for debugging. One simple way is to deploy your code using <strong>Google Cloud CLI</strong>.</p>
+<p>You now work on deploying a Python Flask web application to the Cloud Run.</p>
+<p>In the root path of this repository, a Java application demo in the folder <code>skier_app_java</code> contains all necessary Java servlet code and the <code>skier_app_java/Dockerfile</code>.</p>
+<p>The file builds an image that runs a Java application with Maven.</p>
+<pre><code class="hljs language-dockerfile"><span class="hljs-keyword">FROM</span> maven:<span class="hljs-number">3.9</span>.<span class="hljs-number">4</span>-eclipse-temurin-<span class="hljs-number">11</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> . ./project</span>
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> ./project</span>
+
+<span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;mvn&quot;</span>, <span class="hljs-string">&quot;clean&quot;</span>, <span class="hljs-string">&quot;install&quot;</span>, <span class="hljs-string">&quot;exec:exec&quot;</span>, <span class="hljs-string">&quot;-Dmaven.test.skip=true&quot;</span>]</span>
+</code></pre>
+<p>Please work on the following steps:</p>
+<ol>
+<li><p>Once you have installed the CLI tools, you can now deploy this project with the following:</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">cd</span> ./skier_app_java
+</code></pre>
+<p>And run:</p>
+<pre><code class="hljs language-bash">gcloud run deploy
+</code></pre>
+</li>
+<li><p>Follow the prompt: (1) stay default for source code location; (2) stay default for service name; (3) select region; (4) allow unauthenticated invocations.</p>
+<p><img src="../../img/image-20230829145842650.webp" alt="image-20230829145842650"></p>
+</li>
+</ol>
+<p>This will trigger the Cloud Build first to build your image. On the Cloud Build, you will see:</p>
+<p><img src="../../img/image-20230829150235776.webp" alt="image-20230829150235776"></p>
+<p>Then, it will create a Cloud Run Service. On the Cloud Run, you will see:</p>
+<p><img src="../../img/image-20230829150629404.webp" alt="image-20230829150629404"></p>
+<p>You can now visit the /coen6731/public/ to play with the Java Web application.
+<img src="img/image-20230829150817603.webp" alt="image-20230829150817603" style="zoom: 33%;">
+
+<p>To continually deploy your local changes, you can re-run the <code>gcloud run deploy</code> and use the same service name.</p>
+<h1 id="3-use-case-2-automated-data-transformation">3. Use Case 2: Automated Data Transformation</h1>
+<p>To implement the use case, the basic process would be like <a href="https://cloud.google.com/eventarc/docs/run/create-trigger-storage-console">https://cloud.google.com/eventarc/docs/run/create-trigger-storage-console</a>. But you need to have your <strong><u>event receiver</u></strong> that receives the file upload events and hand it to BigQuery. <u><strong>We deploy a web application with Cloud Run as the receiver.</strong></u></p>
+<h2 id="31-find-out-what-the-event-message-looks-like">3.1 Find Out What the Event Message Looks Like</h2>
+<p>Before that, you need to know <u>how the event has been received and what you will receive</u>.</p>
+<p>The following process shows how to figure out the event.</p>
+<p>Use the Python app of case 1 to reveal that by adding the following endpoint <code>event_looks</code> to the web app on <code>main.py</code> as the <strong><u>event receiver</u></strong>.</p>
+<pre><code class="hljs language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/event_looks&quot;</span>, methods=[<span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">event_looks</span>():
+    <span class="hljs-built_in">print</span>(request.method)
+    payload = json.loads(request.data)
+    <span class="hljs-built_in">print</span>(payload)
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Event Received&quot;</span>
+</code></pre>
+<p>And deploy it to the Cloud Run as we did in the use case 1.</p>
+<p>Then, create a bucket named <code>cloud_run_tut_bucket</code>:</p>
+<img src="img/image-20230829173823630.webp" alt="image-20230829173823630" style="zoom: 33%;">
+
+<p>After that, create an Eventarc trigger named <code>t1</code>, select the following event type, link it to the <code>cloud_run_tut_bucket</code> storage and the <code>cloud_run_tut</code> Run service of endpoint <code>/event_looks</code> :</p>
+<p><img src="../../img/image-20230831155312625.webp" alt="image-20230831155312625"></p>
+<p>For the event type, you should select the following option since uploading a file creates a new object to the bucket:</p>
+<img src="img/image-20230829175912468.webp" alt="image-20230829175912468" style="zoom: 50%;">
+
+<p>Once the trigger is created, you can find it on the Cloud Run Service page:</p>
+<p><img src="../../img/image-20230831155926136.webp" alt="image-20230831155926136"></p>
+<p>Upload one PNG file to the bucket, and then you can get the following message from the LOGS of the service.</p>
+<p><img src="../../img/image-20230829180753549.webp" alt="image-20230829180753549"></p>
+<p>Now you know what is the incoming request from Eventarc.</p>
+<h2 id="32-receive-events-for-data-transformation">3.2 Receive Events for Data Transformation</h2>
+<p>Program the Python application to get the uploaded file and store it in the BigQuery by using the API Client Libraries:</p>
+<ul>
+<li><a href="https://cloud.google.com/bigquery/docs/reference/libraries">BigQuery API Client Libraries</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv">Loading CSV data from Cloud Storage</a></li>
+<li><a href="https://cloud.google.com/storage/docs/reference/libraries">Cloud Storage Client Libraries</a> (optional)</li>
+</ul>
+<p>Before using these libraries, you must set up the authentication: <a href="https://cloud.google.com/docs/authentication/client-libraries">https://cloud.google.com/docs/authentication/client-libraries</a>. If the code runs on Google Cloud Run, it is set by default, and no action is needed.</p>
+<p>But if the code runs locally, follow <a href="https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev">https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev</a> by just:</p>
+<pre><code class="hljs language-bash">gcloud auth application-default login
+</code></pre>
+<p>There are many ways you could do the loading. One way is to use the Storage Client Libraries to download and upload the file with the BigQuery Client Libraries. The other way is to use the BigQuery Client Libraries to create the table directly from a Cloud Storage URL (starts with <code>gs://</code>).</p>
+<p>Please read:</p>
+<ul>
+<li><a href="https://cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage">Loading data from Cloud Storage</a>.</li>
+<li><a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#loading_csv_data_into_a_table">Loading CSV data into a table</a></li>
+</ul>
+<p><strong><u>The following user scenario is presented</u></strong>: We upload the IRIS dataset to the bucket with the Console, and we should be able to query all its data in BigQuery.</p>
+<p>The <code>main.py</code> already has the demo code as endpoint <code>/event_receive</code> is shown :</p>
+<pre><code class="hljs language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/event_receive&quot;</span>, methods=[<span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">event_receiver</span>():
+    payload = json.loads(request.data)
+
+    file_name = payload[<span class="hljs-string">&#x27;name&#x27;</span>]
+    bucket_name = payload[<span class="hljs-string">&#x27;bucket&#x27;</span>]
+
+    <span class="hljs-comment"># Construct a BigQuery client object.</span>
+    client = bigquery.Client()
+
+    <span class="hljs-comment"># TODO(developer): Set table_id to the ID of the table to create.</span>
+    <span class="hljs-comment"># table_id = &quot;your-project.your_dataset.your_table_name&quot;</span>
+    table_id = <span class="hljs-string">f&quot;cloud-tut-397400.cloud_run_tut_dataset.iris&quot;</span>
+
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField(<span class="hljs-string">&quot;Id&quot;</span>, <span class="hljs-string">&quot;INT64&quot;</span>),
+            bigquery.SchemaField(<span class="hljs-string">&quot;SepalLengthCm&quot;</span>, <span class="hljs-string">&quot;FLOAT64&quot;</span>),
+            bigquery.SchemaField(<span class="hljs-string">&quot;SepalWidthCm&quot;</span>, <span class="hljs-string">&quot;FLOAT64&quot;</span>),
+            bigquery.SchemaField(<span class="hljs-string">&quot;PetalLengthCm&quot;</span>, <span class="hljs-string">&quot;FLOAT64&quot;</span>),
+            bigquery.SchemaField(<span class="hljs-string">&quot;PetalWidthCm&quot;</span>, <span class="hljs-string">&quot;FLOAT64&quot;</span>),
+            bigquery.SchemaField(<span class="hljs-string">&quot;Species&quot;</span>, <span class="hljs-string">&quot;STRING&quot;</span>),
+        ],
+        skip_leading_rows=<span class="hljs-number">1</span>,
+        <span class="hljs-comment"># The source format defaults to CSV, so the line below is optional.</span>
+        source_format=bigquery.SourceFormat.CSV,
+    )
+    uri = <span class="hljs-string">f&quot;gs://<span class="hljs-subst">{bucket_name}</span>/<span class="hljs-subst">{file_name}</span>&quot;</span>
+
+    load_job = client.load_table_from_uri(
+        uri, table_id, job_config=job_config
+    )  <span class="hljs-comment"># Make an API request.</span>
+
+    load_job.result()  <span class="hljs-comment"># Waits for the job to complete.</span>
+
+    destination_table = client.get_table(table_id)  <span class="hljs-comment"># Make an API request.</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Loaded {} rows.&quot;</span>.<span class="hljs-built_in">format</span>(destination_table.num_rows))
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Event Received&quot;</span>
+</code></pre>
+<p>Note that the <code>table_id</code> strictly follows the format <code>your-project.your_dataset.your_table_name</code>.</p>
+<p>The <code>your-project</code> is replaced with the project ID, which can be found while selecting Project in the Console. You may also use the project name.</p>
+<img src="img/image-20230829215823372.webp" alt="image-20230829215823372" style="zoom: 50%;">
+
+<p>The <code>your_dataset</code> is replaced with the dataset name.</p>
+<p>The <code>your_table_name</code> is the only term we could decide. In this case, it is <code>iris</code>.</p>
+<p>Then, create a new Eventarc trigger for the endpoint <code>/event_receive</code> on the Cloud Run service&#39;s TRIGGER panel, similar to what we did before:</p>
+<p><img src="../../img/image-20230831161329519.webp" alt="image-20230831161329519"></p>
+<p>Create a BigQuery dataset named <code>cloud_run_tut_dataset</code> in BigQuery.</p>
+<img src="img/image-20230829220009774.webp" alt="image-20230829220009774" style="zoom: 50%;">
+
+<p>Now, you can upload the <code>Iris.csv</code> file in this repository to the bucket.</p>
+<img src="img/image-20230829220434392.webp" alt="image-20230829220434392" style="zoom:33%;">
+
+<p>Go to the LOGS of the service. The payload and the number of rows are printed.</p>
+<img src="img/image-20230829220830791.webp" alt="image-20230829220830791" style="zoom: 33%;">
+
+<p>Finally, you can query the iris data from the created table in BigQuery:</p>
+<p><img src="../../img/image-20230829223859264.webp" alt="image-20230829223859264"></p>
+</p>
