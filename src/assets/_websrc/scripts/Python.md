@@ -193,3 +193,9 @@ gdown --folder --id <file_id>                   # this format works for folders 
 
    ![](https://user-images.githubusercontent.com/3245228/104931587-e36dd000-59a6-11eb-9141-a7a89498deb8.png)
 
+
+
+### Jupyter
+
+- [科研工具 | 本地远程使用服务器的Jupyter Notebook 及选择conda虚拟环境](https://www.jianshu.com/p/43d73b978bc8)
+- [Jupyter notebook远程连接服务器](https://zhuanlan.zhihu.com/p/440080687)

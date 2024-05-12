@@ -9,6 +9,9 @@
 - [Deep Learning with PyTorch: Chapter 5: Introduction to Convolutional Neural Networks](https://www.tomasbeuzen.com/deep-learning-with-pytorch/chapters/chapter5_cnns-pt1.html#the-cnn-recipe-book)
 - [How To Calculate the Mean and Standard Deviation — Normalizing Datasets in Pytorch](https://towardsdatascience.com/how-to-calculate-the-mean-and-standard-deviation-normalizing-datasets-in-pytorch-704bd7d05f4c)
 - [PyTorch Optimizers – Complete Guide for Beginner](https://machinelearningknowledge.ai/pytorch-optimizers-complete-guide-for-beginner/#Conclusion)
+- Issues:
+  - [transformers fine-tuning: Metal crashes with Function square_i64 was not found in the library](https://pnote.eu/notes/unhelpful-errors/)
+
 
 ##### Efficiently Use Single GPU
 

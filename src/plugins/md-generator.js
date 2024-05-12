@@ -224,32 +224,36 @@ fsExtra.emptyDirSync(path.join(process.cwd(), "public", "assets", "scripts"));
 fsExtra.emptyDirSync(path.join(process.cwd(), "public", "img"));
 
 // copy all images to public
-const imgSrcPath = path.join(__dirname, "..", "assets", "img");
-
 const webp = require("webp-converter");
 webp.grant_permission();
 
-for (let img of fs.readdirSync(imgSrcPath)) {
-  let imgExt = path.extname(img);
-  let imgProcessor = webp.cwebp;
-  if (imgExt === ".gif") {
-    imgProcessor = webp.gwebp;
+const imgSrcPath = path.join(__dirname, "..", "assets", "img");
+function copyImages(srcPath, ...destPath) {
+  for (let img of fs.readdirSync(srcPath)) {
+    if (img.startsWith(".")) {
+      continue;
+    }
+    let imgExt = path.extname(img);
+    let imgProcessor = webp.cwebp;
+    if (imgExt === ".gif") {
+      imgProcessor = webp.gwebp;
+    }
+    console.log(
+      "Processing: ",
+      img,
+      " to ",
+      path.join(process.cwd(), ...destPath, img.replace(imgExt, ".webp"))
+    );
+    if (!fs.existsSync(path.join(process.cwd(), ...destPath))) {
+      fs.mkdirSync(path.join(process.cwd(), ...destPath), { recursive: true });
+    }
+    imgProcessor(
+      path.join(srcPath, img),
+      path.join(process.cwd(), ...destPath, img.replace(imgExt, ".webp"))
+    );
   }
-  const result = imgProcessor(
-    path.join(imgSrcPath, img),
-    path.join(process.cwd(), "public", "img", img.replace(imgExt, ".webp"))
-  );
-  result.then((response) => {
-    console.log(response);
-  });
-  // fs.copyFile(
-  //   path.join(imgSrcPath, img),
-  //   path.join(process.cwd(), "public", "img", img),
-  //   (err) => {
-  //     if (err) throw err;
-  //   }
-  // );
 }
+copyImages(imgSrcPath, "public", "img");
 
 for (let cateDir of postsrs) {
   let cateDirPath = path.join(postsPath, cateDir);

@@ -7537,6 +7537,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery@npm:^3.5.1":
+  version: 3.7.1
+  resolution: "jquery@npm:3.7.1"
+  checksum: 4370b8139d6ae82867eb6f7f21d1edccf1d1bdf41c0840920ea80d366c2cd5dbe1ceebb110ee9772aa839b04400faa1572c5c560b507c688ed7b61cea26c0e27
+  languageName: node
+  linkType: hard
+
 "js-message@npm:1.0.7":
   version: 1.0.7
   resolution: "js-message@npm:1.0.7"
@@ -7690,6 +7697,15 @@ __metadata:
     json-schema: 0.4.0
     verror: 1.10.0
   checksum: 2ad1b9fdcccae8b3d580fa6ced25de930eaa1ad154db21bbf8478a4d30bbbec7925b5f5ff29b933fba9412b16a17bd484a8da4fdb3663b5e27af95dd693bab2a
+  languageName: node
+  linkType: hard
+
+"justifiedGallery@npm:^3.8.1":
+  version: 3.8.1
+  resolution: "justifiedGallery@npm:3.8.1"
+  dependencies:
+    jquery: ^3.5.1
+  checksum: 792e540eb8d6c109deccae2705238a4c1b57d9be7c810da076de488e5a8e8cfaa90ecbc5ae7214d358385680f3f7d274fa32ecc5dc38eb5068ce0f34900e4bcc
   languageName: node
   linkType: hard
 
@@ -12748,6 +12764,7 @@ __metadata:
     highlight.js: ^11.3.1
     htmlparser2: ^7.2.0
     js-yaml: ^4.1.0
+    justifiedGallery: ^3.8.1
     katex: ^0.16.8
     less: ^4.1.2
     less-loader: ^10.2.0

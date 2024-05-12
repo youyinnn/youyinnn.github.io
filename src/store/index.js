@@ -14,6 +14,10 @@ if (pathName.startsWith("/scripts")) {
   initialRoute = "scripts";
 }
 
+if (pathName.startsWith("/gallery")) {
+  initialRoute = "gallery";
+}
+
 const initialCurrentThemeConfig = localStorage.getItem("__currentThemeConfig");
 
 export default createStore({

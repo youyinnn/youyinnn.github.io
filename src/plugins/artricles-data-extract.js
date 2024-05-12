@@ -22,6 +22,9 @@ function syncreihandle2metadata(text) {
     let startPreIndex = -1;
     let endPreIndex = -1;
     for (let j = 0; j < short.length; j++) {
+      if (short[j] === undefined) {
+        continue;
+      }
       if (short[j].search("```") === 0) {
         codePareCount++;
       }
