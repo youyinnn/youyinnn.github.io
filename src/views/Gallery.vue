@@ -249,7 +249,6 @@ export default {
             item.src = `https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/public/${item.src}`;
           }
           thiz.currentContent.push(item);
-          console.log("load", item.src);
           thiz.justifiedGalleryComplete[item.src] = false;
         }
       }
@@ -331,6 +330,7 @@ export default {
   padding: 4px 0px;
   background: #000000a9;
   transition: all 1.2s !important;
+  color: white !important;
 }
 .month-box span {
   margin: 10px 15px;
