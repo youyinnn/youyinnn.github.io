@@ -17,7 +17,7 @@
           >{{ tab.text }}
         </n-tab>
       </n-tabs>
-      <div class="github-box" v-cloak>
+      <div class="github-box" v-cloak v-if="!pathname.startsWith('/gallery/')">
         <n-tooltip
           placement="bottom-end"
           trigger="click"
@@ -75,13 +75,34 @@
           </div>
         </n-tooltip>
       </div>
+      <div class="github-box" style="margin-right: 2em" v-else>
+        <n-button
+          tiny
+          strong
+          secondary
+          @click="toggleThemeSwitchHandle"
+          class="gaThemeBtn"
+        >
+          <template #icon>
+            <!-- <Transition name="fade10"> -->
+            <n-icon v-show="!themeValue">
+              <moon />
+            </n-icon>
+            <n-icon v-show="themeValue">
+              <sun />
+            </n-icon>
+            <!-- </Transition> -->
+          </template>
+          <span style="width: 30px">{{ gThemeText }}</span>
+        </n-button>
+      </div>
     </n-space>
   </n-card>
 </template>
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import { BrandGithub } from "@vicons/tabler";
+import { BrandGithub, Moon, Sun } from "@vicons/tabler";
 import {
   NTabs,
   NTab,
@@ -110,30 +131,11 @@ export default {
     NTooltip,
     NSwitch,
     NSelect,
+    Moon,
+    Sun,
   },
   data: () => ({
-    tabs: [
-      {
-        name: "about",
-        text: "About",
-        route: "/",
-      },
-      {
-        name: "articles",
-        text: "Articles",
-        route: "/articles",
-      },
-      {
-        name: "scripts",
-        text: "Scripts",
-        route: "/scripts",
-      },
-      {
-        name: "gallery",
-        text: "Gallery",
-        route: "/gallery",
-      },
-    ],
+    tabs: [],
     adjustTimer: 0,
     document,
     codeThemeOptions: [
@@ -146,7 +148,31 @@ export default {
         value: "github-dark",
       },
     ],
+    pathname: location.pathname,
   }),
+  created() {
+    if (location.pathname.startsWith("/gallery")) {
+      this.tabs = [{ name: "gallery", text: "Gallery", route: "/gallery" }];
+    } else {
+      this.tabs = [
+        {
+          name: "about",
+          text: "About",
+          route: "/",
+        },
+        {
+          name: "articles",
+          text: "Articles",
+          route: "/articles",
+        },
+        {
+          name: "scripts",
+          text: "Scripts",
+          route: "/scripts",
+        },
+      ];
+    }
+  },
   methods: {
     goTo(tab) {
       this.$changeTab(tab.name);
@@ -190,6 +216,9 @@ export default {
         codeTheme: value,
       });
     },
+    toggleThemeSwitchHandle() {
+      this.themeSwitchHandle(!this.themeValue);
+    },
   },
   computed: {
     tabValue() {
@@ -200,6 +229,9 @@ export default {
     },
     codeThemeValue() {
       return this.$store.state.currentThemeConfig.codeTheme;
+    },
+    gThemeText() {
+      return this.$store.state.currentThemeConfig.darkTheme ? "Dark" : "Light";
     },
   },
   mounted: function () {
@@ -279,4 +311,7 @@ export default {
 .n-tabs-bar {
   background-color: rgb(66, 69, 109) !important; */
 /* } */
+.gaThemeBtn {
+  transition: all 4s !important;
+}
 </style>
