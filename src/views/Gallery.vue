@@ -20,8 +20,8 @@
             :class="{
               'month-box': true,
             }"
-            v-show="false"
             :m="`${item.month}`"
+            style="opacity: 0"
           >
             <span>{{ months[item.month - 1] }}</span>
           </div>
@@ -281,14 +281,10 @@ export default {
       let mb = document.getElementsByClassName("month-box");
       let monthMap = {};
       for (let i = 0; i < mb.length; i++) {
-        // let month = mb[i].getAttribute("m");
-        mb[i].style.display = "none";
-      }
-      for (let i = 0; i < mb.length; i++) {
         let month = mb[i].getAttribute("m");
         if (monthMap[month] === undefined) {
           monthMap[month] = true;
-          mb[i].style.display = "block";
+          mb[i].style.opacity = 1;
         }
       }
     },
@@ -334,7 +330,7 @@ export default {
   width: 100%;
   padding: 4px 0px;
   background: #000000a9;
-  transition: all 2s !important;
+  transition: all 1.2s !important;
 }
 .month-box span {
   margin: 10px 15px;
