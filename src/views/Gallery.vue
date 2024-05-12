@@ -74,7 +74,6 @@ import jQuery from "jquery";
 
 import "justifiedGallery/dist/js/jquery.justifiedGallery.min.js";
 
-import imgRouter from "@/plugins/img-router.js";
 import { NImage, NIcon, NButton, NSelect } from "naive-ui";
 
 import axios from "axios";
@@ -156,7 +155,6 @@ export default {
   mounted: function () {
     console.log("Gallery mounted");
     document.title = "Gallery";
-    imgRouter.routeElements(document.getElementsByTagName("img"));
     const thiz = this;
     axios
       .get(`${process.env.BASE_URL}gallery_list.json`)
@@ -247,7 +245,11 @@ export default {
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
         ) {
+          if (process.env.NODE_ENV === "production") {
+            item.src = `https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/public/${item.src}`;
+          }
           thiz.currentContent.push(item);
+          console.log("load", item.src);
           thiz.justifiedGalleryComplete[item.src] = false;
         }
       }
