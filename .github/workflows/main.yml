@@ -28,9 +28,6 @@ jobs:
           yarn install
           yarn build
 
-      - name: git status
-        run: git status
-
       - name: git
         if: ${{ !env.ACT }}
         run: bash .github/scripts/git-push-if-changes.sh
