@@ -1,7 +1,11 @@
 function routeElements(elements) {
   for (let imgEl of elements) {
     //   just route img src on this site
-    if (imgEl.outerHTML.indexOf("../../img/") !== -1) {
+    if (imgEl.outerHTML.includes('src="../../img/')) {
+      const split = imgEl.src.split("/");
+      imgEl.src = route(split[split.length - 1]);
+    }
+    if (imgEl.outerHTML.includes('src="img/')) {
       const split = imgEl.src.split("/");
       imgEl.src = route(split[split.length - 1]);
     }

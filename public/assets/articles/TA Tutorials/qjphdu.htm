@@ -125,26 +125,26 @@ gsutil 5.25
 <p><img src="../../img/image-20230829103650087.webp" alt="image-20230829103650087"></p>
 </li>
 <li><p>Select the main branch; Select build type &quot;Dockerfile&quot; and locate the file path <code>/Dockerfile</code>.</p>
-<img src="img/image-20230829104126827.webp" alt="image-20230829104126827" style="zoom:50%;">
+<img src="../../img/image-20230829104126827.webp" alt="image-20230829104126827" style="zoom:50%;">
 </li>
 <li><p>Allow unauthenticated invocations and create the service.</p>
-<img src="img/image-20230829104232619.webp" alt="image-20230829104232619" style="zoom:50%;"></li>
+<img src="../../img/image-20230829104232619.webp" alt="image-20230829104232619" style="zoom:50%;"></li>
 </ol>
 </li>
 <li><p>Your code is now created and deployed on Cloud Run.</p>
 <p><img src="../../img/84EF0266-791E-472D-8BFE-41EEEF86634B_1_201_a.webp" alt="84EF0266-791E-472D-8BFE-41EEEF86634B_1_201_a"></p>
 </li>
 <li><p>Visit the URL of the <code>hello_world()</code> endpoint.</p>
-<img src="img/image-20230829105124446.webp" alt="image-20230829105124446" style="zoom:50%;">
+<img src="../../img/image-20230829105124446.webp" alt="image-20230829105124446" style="zoom:50%;">
 </li>
 <li><p>Make some changes in your code and commit it to the GitHub repository.</p>
-<img src="img/image-20230829105322586.webp" alt="image-20230829105322586" style="zoom:50%;">
+<img src="../../img/image-20230829105322586.webp" alt="image-20230829105322586" style="zoom:50%;">
 </li>
 <li><p>Visit the Build History. You should see a new build is processing.</p>
-<img src="img/image-20230829105418670.webp" alt="image-20230829105418670" style="zoom: 33%;">
+<img src="../../img/image-20230829105418670.webp" alt="image-20230829105418670" style="zoom: 33%;">
 </li>
 <li><p>The change should be updated to the web service.</p>
-<img src="img/image-20230829105523106.webp" alt="image-20230829105523106" style="zoom: 50%;"></li>
+<img src="../../img/image-20230829105523106.webp" alt="image-20230829105523106" style="zoom: 50%;"></li>
 </ol>
 <h2 id="22-approach-2-deploy-from-local-source-code-using-google-cloud-cli">2.2 Approach 2: Deploy from Local Source Code using Google Cloud CLI</h2>
 <p>Sometimes, you may want to deploy your local work to the cloud for debugging. One simple way is to deploy your code using <strong>Google Cloud CLI</strong>.</p>
@@ -176,7 +176,7 @@ gsutil 5.25
 <p>Then, it will create a Cloud Run Service. On the Cloud Run, you will see:</p>
 <p><img src="../../img/image-20230829150629404.webp" alt="image-20230829150629404"></p>
 <p>You can now visit the /coen6731/public/ to play with the Java Web application.
-<img src="img/image-20230829150817603.webp" alt="image-20230829150817603" style="zoom: 33%;">
+<img src="../../img/image-20230829150817603.webp" alt="image-20230829150817603" style="zoom: 33%;">
 
 <p>To continually deploy your local changes, you can re-run the <code>gcloud run deploy</code> and use the same service name.</p>
 <h1 id="3-use-case-2-automated-data-transformation">3. Use Case 2: Automated Data Transformation</h1>
@@ -195,12 +195,12 @@ gsutil 5.25
 </code></pre>
 <p>And deploy it to the Cloud Run as we did in the use case 1.</p>
 <p>Then, create a bucket named <code>cloud_run_tut_bucket</code>:</p>
-<img src="img/image-20230829173823630.webp" alt="image-20230829173823630" style="zoom: 33%;">
+<img src="../../img/image-20230829173823630.webp" alt="image-20230829173823630" style="zoom: 33%;">
 
 <p>After that, create an Eventarc trigger named <code>t1</code>, select the following event type, link it to the <code>cloud_run_tut_bucket</code> storage and the <code>cloud_run_tut</code> Run service of endpoint <code>/event_looks</code> :</p>
 <p><img src="../../img/image-20230831155312625.webp" alt="image-20230831155312625"></p>
 <p>For the event type, you should select the following option since uploading a file creates a new object to the bucket:</p>
-<img src="img/image-20230829175912468.webp" alt="image-20230829175912468" style="zoom: 50%;">
+<img src="../../img/image-20230829175912468.webp" alt="image-20230829175912468" style="zoom: 50%;">
 
 <p>Once the trigger is created, you can find it on the Cloud Run Service page:</p>
 <p><img src="../../img/image-20230831155926136.webp" alt="image-20230831155926136"></p>
@@ -268,20 +268,20 @@ gsutil 5.25
 </code></pre>
 <p>Note that the <code>table_id</code> strictly follows the format <code>your-project.your_dataset.your_table_name</code>.</p>
 <p>The <code>your-project</code> is replaced with the project ID, which can be found while selecting Project in the Console. You may also use the project name.</p>
-<img src="img/image-20230829215823372.webp" alt="image-20230829215823372" style="zoom: 50%;">
+<img src="../../img/image-20230829215823372.webp" alt="image-20230829215823372" style="zoom: 50%;">
 
 <p>The <code>your_dataset</code> is replaced with the dataset name.</p>
 <p>The <code>your_table_name</code> is the only term we could decide. In this case, it is <code>iris</code>.</p>
 <p>Then, create a new Eventarc trigger for the endpoint <code>/event_receive</code> on the Cloud Run service&#39;s TRIGGER panel, similar to what we did before:</p>
 <p><img src="../../img/image-20230831161329519.webp" alt="image-20230831161329519"></p>
 <p>Create a BigQuery dataset named <code>cloud_run_tut_dataset</code> in BigQuery.</p>
-<img src="img/image-20230829220009774.webp" alt="image-20230829220009774" style="zoom: 50%;">
+<img src="../../img/image-20230829220009774.webp" alt="image-20230829220009774" style="zoom: 50%;">
 
 <p>Now, you can upload the <code>Iris.csv</code> file in this repository to the bucket.</p>
-<img src="img/image-20230829220434392.webp" alt="image-20230829220434392" style="zoom:33%;">
+<img src="../../img/image-20230829220434392.webp" alt="image-20230829220434392" style="zoom:33%;">
 
 <p>Go to the LOGS of the service. The payload and the number of rows are printed.</p>
-<img src="img/image-20230829220830791.webp" alt="image-20230829220830791" style="zoom: 33%;">
+<img src="../../img/image-20230829220830791.webp" alt="image-20230829220830791" style="zoom: 33%;">
 
 <p>Finally, you can query the iris data from the created table in BigQuery:</p>
 <p><img src="../../img/image-20230829223859264.webp" alt="image-20230829223859264"></p>

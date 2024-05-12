@@ -128,6 +128,11 @@ export default {
         text: "Scripts",
         route: "/scripts",
       },
+      {
+        name: "gallery",
+        text: "Gallery",
+        route: "/gallery",
+      },
     ],
     adjustTimer: 0,
     document,
@@ -241,7 +246,7 @@ export default {
   height: 40px;
 }
 .tabs {
-  width: 300px;
+  width: 320px;
   position: absolute;
   transition: all 0.5s;
 }
