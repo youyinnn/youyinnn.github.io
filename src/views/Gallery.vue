@@ -13,7 +13,7 @@
       />
     </div>
     <div :id="`gallery-${currentYear}`" class="gallery justified-gallery">
-      <a v-for="item in currentContent" :key="item.src">
+      <a v-for="item in currentContent" :key="item.src" class="gallery-item">
         <Transition name="fade10">
           <div
             :id="`month-box-${item.src}`"
@@ -220,8 +220,7 @@ export default {
           selector: "#gallery-" + thiz.currentYear + " > a",
           imgSelector: "> div > img",
           // lastRow: "center",
-          waitThumbnailsLoad: false,
-          refreshTime: 1500,
+          refreshTime: 5000,
           captions: false,
         })
         .on("jg.complete", function () {
@@ -307,14 +306,19 @@ export default {
   margin: 0 !important;
 }
 
-.no-margin {
-  transition: all 1s !important;
+.gallery-item:hover {
+  /* transform: scale(1.02); */
 }
+
+.no-margin,
 .jg-entry {
-  transition: all 1s !important;
+  transition: opacity 1.2s ease-in-out !important;
+  transition: height 0.8s ease-in-out 1s, left 0.8s ease-in-out 1s,
+    width 0.8s ease-in-out 1s !important;
 }
+
 .gallery {
-  transition: all 3.5s !important;
+  transition: all 2.5s ease-in-out !important;
 }
 .load-more-btn {
   position: absolute;
