@@ -48,7 +48,7 @@ if (process.platform === "darwin") {
     }
     console.log("Processing year: ", year);
 
-    const rs = imagemin([path.join(galleryPath, year, "*.{JPG,jpg,png}")], {
+    const rs = imagemin([path.join(galleryPath, year, "*.{JPG,jpg,png,NEF}")], {
       destination: path.join(process.cwd(), "public", "gallery", year),
       plugins: [
         imageminJpegAutorotate({
@@ -104,7 +104,7 @@ if (process.platform === "darwin") {
       );
       fs.writeFileSync(
         galleryListJsonPath,
-        JSON.stringify(galleryFileMetadatas),
+        JSON.stringify(galleryFileMetadatas, null, 4),
         {
           encoding: "utf-8",
         }
