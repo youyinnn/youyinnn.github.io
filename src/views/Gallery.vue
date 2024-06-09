@@ -1,17 +1,19 @@
 <template>
-  <div class="unselectable">
-    <div
+  <div id="gallery-canvas" class="unselectable">
+    <n-space
       id="year-select"
       v-if="allYears.length > 0"
-      style="margin-bottom: 1em; width: 100px"
+      style="padding: 18px 18px 0 18px"
     >
       <n-select
+        style="width: 160px"
         v-model:value="currentYear"
         :options="allYears"
         @update:value="changeYear"
         :key="`year-select-${currentYear}`"
       />
-    </div>
+      <span>{{ currentContent.length }} PHOTOS</span>
+    </n-space>
     <div :id="`gallery-${currentYear}`" class="gallery justified-gallery">
       <a v-for="item in currentContent" :key="item.src" class="gallery-item">
         <Transition name="fade10">
@@ -39,7 +41,7 @@
         </Transition>
       </a>
     </div>
-    <div style="text-align: center; padding: 1em">
+    <div style="text-align: center; margin: 1em">
       <Transition name="fade10">
         <n-button
           text
@@ -74,7 +76,11 @@ import jQuery from "jquery";
 
 import "justifiedGallery/dist/js/jquery.justifiedGallery.min.js";
 
-import { NImage, NIcon, NButton, NSelect } from "naive-ui";
+import html2canvas from "html2canvas";
+
+import { useRouter } from "vue-router";
+
+import { NImage, NIcon, NButton, NSelect, NSpace } from "naive-ui";
 
 import axios from "axios";
 
@@ -87,6 +93,7 @@ export default {
     ArrowDownCircle,
     IceCream,
     NSelect,
+    NSpace,
   },
   data: () => ({
     allContent: undefined,
@@ -109,40 +116,7 @@ export default {
       "November",
       "December",
     ],
-    allYears: [
-      {
-        label: "2024",
-        value: "2024",
-      },
-      {
-        label: "2023",
-        value: "2023",
-      },
-      {
-        label: "2022",
-        value: "2022",
-      },
-      {
-        label: "2021",
-        value: "2021",
-      },
-      {
-        label: "2020",
-        value: "2020",
-      },
-      {
-        label: "2019",
-        value: "2019",
-      },
-      {
-        label: "2018",
-        value: "2018",
-      },
-      {
-        label: "2017",
-        value: "2017",
-      },
-    ],
+    allYears: [],
     loadingTimeout: undefined,
     norewindTimeout: undefined,
   }),
@@ -151,6 +125,14 @@ export default {
     if (this.currentYear === undefined) {
       this.currentYear = this.allYears[0].value;
     }
+    const { currentRoute } = useRouter();
+    this.currentRoute = currentRoute;
+
+    this.batchSize =
+      currentRoute.value.query.batchSize === undefined
+        ? this.batchSize
+        : currentRoute.value.query.batchSize;
+    console.log("Batch size: " + this.batchSize);
   },
   mounted: function () {
     console.log("Gallery mounted");
@@ -167,6 +149,16 @@ export default {
         global.destory = thiz.destory;
         global.buildGallery = thiz.buildGallery;
         global.showMonthBox = thiz.showMonthBox;
+        global.downloadCanvas = thiz.downloadCanvas;
+        global.currentContent = thiz.currentContent;
+        let ks = Object.keys(thiz.allContent);
+        ks.forEach((k) => {
+          thiz.allYears.push({
+            label: k,
+            value: k,
+          });
+        });
+        thiz.allYears = thiz.allYears.reverse();
         thiz.buildGallery();
       })
       .finally(() => {
@@ -215,8 +207,8 @@ export default {
       var thiz = this;
       jQuery("#gallery-" + thiz.currentYear)
         .justifiedGallery({
-          rowHeight: 250,
-          margins: 10,
+          rowHeight: 350,
+          margins: 18,
           selector: "#gallery-" + thiz.currentYear + " > a",
           imgSelector: "> div > img",
           // lastRow: "center",
@@ -232,6 +224,11 @@ export default {
       if (thiz.allContent === undefined) {
         return;
       }
+      this.offset =
+        this.currentRoute.value.query.offset === undefined
+          ? 0
+          : Number(this.currentRoute.value.query.offset);
+
       thiz.loading = true;
       let currentSize = Object.keys(thiz.justifiedGalleryComplete).length;
       let up = Math.min(
@@ -239,7 +236,13 @@ export default {
         thiz.allContent[thiz.currentYear].length
       );
       for (let i = currentSize; i < up; i++) {
-        let item = thiz.allContent[thiz.currentYear][i];
+        let item =
+          thiz.allContent[thiz.currentYear][
+            Math.min(
+              this.offset + i,
+              thiz.allContent[thiz.currentYear].length - 1
+            )
+          ];
         if (
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
@@ -269,7 +272,7 @@ export default {
         jQuery("#gallery-" + this.currentYear).justifiedGallery("norewind");
       } catch (error) {
         // Add your modifications here
-        // console.log("Error occurred while calling norewind method:", error);
+        console.log("Error occurred while calling norewind method:", error);
       }
     },
     destory() {
@@ -285,6 +288,28 @@ export default {
           mb[i].style.opacity = 1;
         }
       }
+    },
+    downloadCanvas(scale, fm) {
+      let thiz = this;
+      let el = document.querySelector("#gallery-canvas");
+      let format = fm === undefined ? "jpeg" : fm;
+      let options = {
+        backgroundColor: null,
+        useCORS: true,
+        scale: scale === undefined ? 2 : scale,
+        type: format,
+      };
+      html2canvas(el, options).then((canvas) => {
+        // console.log(canvas);
+        // console.log(thiz.currentYear);
+        let dataUrl = canvas.toDataURL("image/" + format);
+        var addE = document.createElement("a");
+        addE.href = dataUrl;
+        addE.download = "gallery-" + thiz.currentYear + "." + format;
+        document.body.appendChild(addE);
+        addE.click();
+        document.body.removeChild(addE);
+      });
     },
   },
 };
@@ -338,5 +363,8 @@ export default {
 }
 .month-box span {
   margin: 10px 15px;
+}
+#gallery-canvas {
+  max-width: none !important;
 }
 </style>

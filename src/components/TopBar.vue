@@ -76,25 +76,28 @@
         </n-tooltip>
       </div>
       <div class="github-box" style="margin-right: 2em" v-else>
-        <n-button
-          tiny
-          strong
-          secondary
-          @click="toggleThemeSwitchHandle"
-          class="gaThemeBtn"
-        >
-          <template #icon>
-            <!-- <Transition name="fade10"> -->
-            <n-icon v-show="!themeValue">
-              <moon />
-            </n-icon>
-            <n-icon v-show="themeValue">
-              <sun />
-            </n-icon>
-            <!-- </Transition> -->
-          </template>
-          <span style="width: 30px">{{ gThemeText }}</span>
-        </n-button>
+        <n-space>
+          <n-button @click="loadAllArt"> LOAD ALL </n-button>
+          <n-button
+            tiny
+            strong
+            secondary
+            @click="toggleThemeSwitchHandle"
+            class="gaThemeBtn"
+          >
+            <template #icon>
+              <!-- <Transition name="fade10"> -->
+              <n-icon v-show="!themeValue">
+                <moon />
+              </n-icon>
+              <n-icon v-show="themeValue">
+                <sun />
+              </n-icon>
+              <!-- </Transition> -->
+            </template>
+            <span style="width: 30px">{{ gThemeText }}</span>
+          </n-button>
+        </n-space>
       </div>
     </n-space>
   </n-card>
@@ -174,6 +177,9 @@ export default {
     }
   },
   methods: {
+    loadAllArt() {
+      location.href += "?batchSize=999";
+    },
     goTo(tab) {
       this.$changeTab(tab.name);
       this.$router.push(tab.route).catch(() => {});
