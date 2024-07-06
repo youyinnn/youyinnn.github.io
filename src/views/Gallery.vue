@@ -130,7 +130,8 @@ export default {
       // this.currentYear = this.allYears[0].value;
       axios.get(`${process.env.BASE_URL}gallery_list.json`).then((response) => {
         thiz.allContent = response.data;
-        location.href = thiz.allContent[0]["year"];
+        location.href =
+          location.origin + "/gallery/" + thiz.allContent[0]["year"];
       });
     }
     const { currentRoute } = useRouter();
