@@ -26,6 +26,7 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@ginpei/exif-orientation": "^1.2.0",
     "@vicons/ionicons5": "^0.11.0",
     "@vicons/tabler": "^0.11.0",
     "@vue/cli-plugin-babel": "5.0.0-beta.7",

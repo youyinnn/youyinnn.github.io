@@ -1381,6 +1381,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ginpei/exif-orientation@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ginpei/exif-orientation@npm:1.2.0"
+  checksum: 4c48788b7bb28835edd15d4d7aebfebe361258005298810ac35c271515fe3862caf23d2a478ce1bfe47087df58add7c0fce0bb9cb84b697283a473f1c2a08863
+  languageName: node
+  linkType: hard
+
 "@giscus/vue@npm:2.2.6":
   version: 2.2.6
   resolution: "@giscus/vue@npm:2.2.6"
@@ -14130,6 +14137,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "youyinnn.github.io@workspace:."
   dependencies:
+    "@ginpei/exif-orientation": ^1.2.0
     "@giscus/vue": 2.2.6
     "@mdi/font": 5.9.55
     "@vicons/ionicons5": ^0.11.0
