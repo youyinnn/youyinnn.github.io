@@ -35,6 +35,9 @@
             :src="item.src"
             :img-props="{
               class: 'no-margin',
+              height: item.height,
+              width: item.width,
+              orientation: item.orientation,
             }"
             :alt="`${item.month}-${item.day}`"
           />
@@ -122,8 +125,13 @@ export default {
   }),
   created: function () {
     this.currentYear = this.$route.params.year;
+    const thiz = this;
     if (this.currentYear === undefined) {
-      this.currentYear = this.allYears[0].value;
+      // this.currentYear = this.allYears[0].value;
+      axios.get(`${process.env.BASE_URL}gallery_list.json`).then((response) => {
+        thiz.allContent = response.data;
+        location.href = thiz.allContent[0]["year"];
+      });
     }
     const { currentRoute } = useRouter();
     this.currentRoute = currentRoute;
@@ -151,14 +159,12 @@ export default {
         global.showMonthBox = thiz.showMonthBox;
         global.downloadCanvas = thiz.downloadCanvas;
         global.currentContent = thiz.currentContent;
-        let ks = Object.keys(thiz.allContent);
-        ks.forEach((k) => {
+        thiz.allContent.forEach((k) => {
           thiz.allYears.push({
-            label: k,
-            value: k,
+            label: k["year"],
+            value: k["year"],
           });
         });
-        thiz.allYears = thiz.allYears.reverse();
         thiz.buildGallery();
       })
       .finally(() => {
@@ -186,6 +192,13 @@ export default {
     });
   },
   methods: {
+    transformJsonData(originalData) {
+      const rs = {};
+      for (let i = 0; i < originalData.length; i++) {
+        rs[originalData[i]["year"]] = originalData[i]["data"];
+      }
+      return rs;
+    },
     changeYear(value) {
       location.href = `/gallery/${value}`;
     },
@@ -214,10 +227,14 @@ export default {
           // lastRow: "center",
           refreshTime: 5000,
           captions: false,
+          waitThumbnailsLoad: false,
         })
         .on("jg.complete", function () {
           thiz.show();
         });
+    },
+    getDataByYear(year) {
+      return this.allContent.find((e) => e["year"] === year)["data"];
     },
     load() {
       var thiz = this;
@@ -231,18 +248,10 @@ export default {
 
       thiz.loading = true;
       let currentSize = Object.keys(thiz.justifiedGalleryComplete).length;
-      let up = Math.min(
-        currentSize + thiz.batchSize,
-        thiz.allContent[thiz.currentYear].length
-      );
+      var curr = thiz.getDataByYear(thiz.currentYear);
+      let up = Math.min(currentSize + thiz.batchSize, curr.length);
       for (let i = currentSize; i < up; i++) {
-        let item =
-          thiz.allContent[thiz.currentYear][
-            Math.min(
-              this.offset + i,
-              thiz.allContent[thiz.currentYear].length - 1
-            )
-          ];
+        let item = curr[Math.min(this.offset + i, curr.length - 1)];
         if (
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
@@ -256,7 +265,7 @@ export default {
       }
       thiz.norewindTimeout = setTimeout(() => {
         clearTimeout(thiz.norewindTimeout);
-        if (up === thiz.allContent[thiz.currentYear].length) {
+        if (up === curr.length) {
           thiz.allIsLoad = true;
         }
         thiz.norewind();
@@ -338,8 +347,8 @@ export default {
 .no-margin,
 .jg-entry {
   transition: opacity 1.2s ease-in-out !important;
-  transition: height 0.8s ease-in-out 1s, left 0.8s ease-in-out 1s,
-    width 0.8s ease-in-out 1s !important;
+  transition: height 1.8s ease-in-out 1s, left 1.8s ease-in-out 1s,
+    width 1.8s ease-in-out 1s !important;
 }
 
 .gallery {

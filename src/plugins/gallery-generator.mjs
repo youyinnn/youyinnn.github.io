@@ -5,6 +5,7 @@ import path from "path";
 import fsExtra from "fs-extra";
 import { fileURLToPath } from "url";
 import sizeOf from "image-size";
+import * as exif from "@ginpei/exif-orientation";
 
 // copy all images to public
 // const webp = require("webp-converter");
@@ -29,44 +30,58 @@ import imageminJpegAutorotate from "imagemin-jpeg-autorotate";
 //     ],
 //   }
 // );
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const galleryPath = path.join(__dirname, "..", "assets", "gallery");
+
+function sort_by_create(a, b) {
+  let aStat = fs.statSync(path.join(galleryPath, a)),
+    bStat = fs.statSync(path.join(galleryPath, b));
+
+  return (
+    new Date(bStat.birthtime).getTime() - new Date(aStat.birthtime).getTime()
+  );
+}
 
 // only for mac
 if (process.platform === "darwin") {
-  fsExtra.emptyDirSync(path.join(process.cwd(), "public", "gallery"));
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const galleryPath = path.join(__dirname, "..", "assets", "gallery");
+  // fsExtra.emptyDirSync(path.join(process.cwd(), "public", "gallery"));
 
   // List files in directory
-  const galleryInYears = fs.readdirSync(galleryPath);
+  var galleryInYears = fs.readdirSync(galleryPath);
+  galleryInYears = galleryInYears.sort(sort_by_create).filter(function (e) {
+    return e !== ".DS_Store";
+  });
+
   const galleryFileMetadatas = {};
 
-  const pm = [];
-  for (let i = 0; i < galleryInYears.length; i++) {
-    var year = galleryInYears[i];
-    if (year.startsWith(".")) {
-      continue;
-    }
-    console.log("Processing year: ", year);
+  // process.exit(0);
 
-    const rs = imagemin([path.join(galleryPath, year, "*.{JPG,jpg,png,NEF}")], {
-      destination: path.join(process.cwd(), "public", "gallery", year),
-      plugins: [
-        imageminJpegAutorotate({
-          disable: false,
-        }),
-        imageminWebp({ quality: 80, preset: "photo" }),
-      ],
-    }).then(() => {
-      console.log("Year processed: ", year);
-    });
-    pm.push(rs);
-  }
+  const pm = [];
+  // for (let i = 0; i < galleryInYears.length; i++) {
+  //   const year = galleryInYears[i];
+  //   if (year.startsWith(".")) {
+  //     continue;
+  //   }
+  //   console.log("Processing year: ", year);
+  //   const rs = imagemin([path.join(galleryPath, year, "*.{JPG,jpg,png,NEF}")], {
+  //     destination: path.join(process.cwd(), "public", "gallery", year),
+  //     plugins: [
+  //       imageminJpegAutorotate({
+  //         disable: false,
+  //       }),
+  //       imageminWebp({ quality: 80, preset: "photo" }),
+  //     ],
+  //   }).then(() => {
+  //     console.log("Year processed: ", year);
+  //   });
+  //   pm.push(rs);
+  // }
 
   Promise.all(pm).then(
-    () => {
+    async () => {
       console.log("All images are processed");
       for (let i = 0; i < galleryInYears.length; i++) {
-        var year = galleryInYears[i];
+        const year = galleryInYears[i];
         if (year.startsWith(".")) {
           continue;
         }
@@ -81,10 +96,23 @@ if (process.platform === "darwin") {
             var fileName = file.split(".")[0] + ".webp";
             var size = sizeOf(filePath);
             const creationDate = fs.statSync(filePath).birthtime;
+            // read file as buffer
+            const buffer = fs.readFileSync(filePath);
+            // get orientation
+            const orientation = await exif.getOrientation(buffer);
+            var w = size.width;
+            var h = size.height;
+            if (orientation !== undefined) {
+              if (orientation.rotation === 90 || orientation.rotation === 270) {
+                w = size.height;
+                h = size.width;
+              }
+            }
             galleryFileMetadatas[year].push({
               id: year + "-" + j,
               src: "/gallery/" + year + "/" + fileName,
-              size: size.width + "-" + size.height,
+              width: w,
+              height: h,
               month: creationDate.getMonth() + 1,
               day: creationDate.getDate(),
               year: creationDate.getFullYear(),
@@ -96,15 +124,27 @@ if (process.platform === "darwin") {
           });
         }
       }
-      // Save file names to a txt file
+      // Save file names to a json file
       const galleryListJsonPath = path.join(
         process.cwd(),
         "public",
         "gallery_list.json"
       );
+      const galleryFileMetadatasArrWithDate = [];
+
+      for (let i = 0; i < galleryInYears.length; i++) {
+        const year = galleryInYears[i];
+        var sYear = fs.statSync(path.join(galleryPath, year));
+        galleryFileMetadatasArrWithDate.push({
+          birthtime: new Date(sYear.birthtime).getTime(),
+          data: galleryFileMetadatas[year],
+          year: year,
+        });
+      }
+
       fs.writeFileSync(
         galleryListJsonPath,
-        JSON.stringify(galleryFileMetadatas, null, 4),
+        JSON.stringify(galleryFileMetadatasArrWithDate, null, 4),
         {
           encoding: "utf-8",
         }
