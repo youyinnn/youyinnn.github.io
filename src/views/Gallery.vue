@@ -12,7 +12,10 @@
         @update:value="changeYear"
         :key="`year-select-${currentYear}`"
       />
-      <span>{{ currentContent.length }} PHOTOS</span>
+      <span
+        >{{ currentContent.length }} /
+        {{ allContent ? getDataByYear(currentYear).length : 0 }} PHOTOS</span
+      >
     </n-space>
     <div :id="`gallery-${currentYear}`" class="gallery justified-gallery">
       <a v-for="item in currentContent" :key="item.src" class="gallery-item">
@@ -257,9 +260,10 @@ export default {
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
         ) {
-          item.src = `https://hjalbum001.oss-cn-hangzhou.aliyuncs.com/gallery${item.src
-            .replace(/^\/gallery/, "")
-            .replace(/\.[^.]+$/, ".webp")}`;
+          item.src =
+            process.env.NODE_ENV === "production"
+              ? `https://hjalbum001.oss-cn-hangzhou.aliyuncs.com${item.src}`
+              : item.src;
           thiz.currentContent.push(item);
           thiz.justifiedGalleryComplete[item.src] = false;
         }
@@ -366,7 +370,7 @@ export default {
 }
 .month-box {
   position: absolute;
-  font-size: large;
+  font-size: 24pt;
   font-weight: 800;
   width: 100%;
   padding: 4px 0px;
