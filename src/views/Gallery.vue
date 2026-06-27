@@ -257,7 +257,9 @@ export default {
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
         ) {
-          item.src = `http://album.youyinnn.top${item.src.replace(/^\/gallery/, "")}`;
+          item.src = `http://album.youyinnn.top/gallery${item.src
+            .replace(/^\/gallery/, "")
+            .replace(/\.[^.]+$/, ".webp")}`;
           thiz.currentContent.push(item);
           thiz.justifiedGalleryComplete[item.src] = false;
         }
@@ -343,15 +345,18 @@ export default {
   /* transform: scale(1.02); */
 }
 
+#gallery-canvas {
+  /* --anim-duration: 0.4s; */
+  --anim-duration: 0.7s;
+}
+
 .no-margin,
 .jg-entry {
-  transition: opacity 1.2s ease-in-out !important;
-  transition: height 1.8s ease-in-out 1s, left 1.8s ease-in-out 1s,
-    width 1.8s ease-in-out 1s !important;
+  transition: opacity var(--anim-duration) ease-in-out !important;
 }
 
 .gallery {
-  transition: all 2.5s ease-in-out !important;
+  transition: all calc(var(--anim-duration) * 6) ease-in-out !important;
 }
 .load-more-btn {
   position: absolute;

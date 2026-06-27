@@ -37,6 +37,7 @@
     "@vue/cli-service": "5.0.0-beta.7",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-polyfill-corejs3": "^0.14.0",
     "cli-progress": "^3.12.0",
     "compression-webpack-plugin": "^9.1.2",
     "crc": "^3.8.0",
@@ -80,5 +81,10 @@
     "> 1%",
     "last 2 years"
   ],
+  "resolutions": {
+    "schema-utils/ajv": "^6.12.5",
+    "schema-utils/ajv-keywords": "^3.5.2",
+    "core-js": "3.25.5"
+  },
   "packageManager": "yarn@3.5.1"
 }

@@ -8,7 +8,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const galleryPath = path.join(__dirname, "..", "assets", "gallery");
 const outputBase = path.join(process.cwd(), "public", "gallery");
 
-const years = fs.readdirSync(galleryPath).filter((e) => !e.startsWith("."));
+const targetYear = process.argv[2];
+const years = targetYear
+  ? [targetYear]
+  : fs.readdirSync(galleryPath).filter((e) => !e.startsWith("."));
 
 for (const year of years) {
   const src = path.join(galleryPath, year);
@@ -60,7 +63,7 @@ for (const year of years) {
       const webpName = f.replace(/\.[^.]+$/, ".webp");
       await sharp(path.join(src, f))
         .rotate()
-        .webp({ quality: 100 })
+        .webp({ quality: 80, effort: 6 })
         .toFile(path.join(dest, webpName));
       bar.increment({ filename: f });
     })
