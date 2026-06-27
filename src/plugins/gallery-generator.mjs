@@ -93,7 +93,7 @@ if (process.platform === "darwin") {
           // console.log(year, file);
           const filePath = path.join(galleryPath, year, file);
           if (fs.lstatSync(filePath).isFile() && !file.startsWith(".")) {
-            var fileName = file.split(".")[0] + ".webp";
+            var fileName = file;
             var size = sizeOf(filePath);
             const creationDate = fs.statSync(filePath).birthtime;
             // read file as buffer

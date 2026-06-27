@@ -257,9 +257,7 @@ export default {
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
         ) {
-          if (process.env.NODE_ENV === "production") {
-            item.src = `https://cdn.jsdelivr.net/gh/youyinnn/youyinnn.github.io@master/public/${item.src}`;
-          }
+          item.src = `http://album.youyinnn.top${item.src.replace(/^\/gallery/, "")}`;
           thiz.currentContent.push(item);
           thiz.justifiedGalleryComplete[item.src] = false;
         }
