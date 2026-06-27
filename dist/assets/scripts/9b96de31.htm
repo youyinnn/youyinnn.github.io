@@ -1,0 +1,155 @@
+<h2 id="jsnodejs-库">JS&amp;Node.js 库</h2>
+<h3 id="react-native">React Native</h3>
+<blockquote>
+<p>可以做桌面应用</p>
+</blockquote>
+<p>网址: <a href="https://proton-native.js.org/#/">https://proton-native.js.org/#/</a></p>
+<h3 id="layui">Layui</h3>
+<blockquote>
+<p>给后端用的前端框架</p>
+</blockquote>
+<p><a href="http://www.layui.com">官网</a></p>
+<h3 id="wangeditor-轻量级前端富文本编辑器">wangEditor 轻量级前端富文本编辑器</h3>
+<p><img src="https://user-images.githubusercontent.com/23525754/39693997-65bd7248-5218-11e8-849b-15417cd9dda2.webp" alt="image"></p>
+<p><a href="http://www.wangeditor.com/">官网</a></p>
+<h3 id="katex-最快的数学公式渲染库">KaTeX 最快的数学公式渲染库</h3>
+<p>官方 link : <a href="https://khan.github.io/KaTeX/function-support.html">https://khan.github.io/KaTeX/function-support.html</a></p>
+<p>editor.md 的 Demo : <a href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a></p>
+<p><img src="https://user-images.githubusercontent.com/23525754/39822606-93ef96f2-53dd-11e8-9381-d3d607eaf2eb.webp" alt="image"></p>
+<h3 id="jquery-日期选择控件">JQuery 日期选择控件</h3>
+<p>网站：<a href="https://xdsoft.net/jqplugins/datetimepicker/">https://xdsoft.net/jqplugins/datetimepicker/</a></p>
+<h3 id="js-数据可视化">JS 数据可视化</h3>
+<p>有哪些值得推荐的数据可视化工具？ - 李启方的回答 - 知乎
+<a href="https://www.zhihu.com/question/19929609/answer/383055223">https://www.zhihu.com/question/19929609/answer/383055223</a></p>
+<h3 id="html2canvas-页面输出为-canvas">html2canvas 页面输出为 canvas</h3>
+<p>超级棒的插件：
+教程和踩坑：<a href="https://segmentfault.com/a/1190000011478657">https://segmentfault.com/a/1190000011478657</a>
+hub：<a href="https://github.com/niklasvh/html2canvas">https://github.com/niklasvh/html2canvas</a></p>
+<h4 id="small_blue_diamond生成的-canvas-没有图片的坑：">🔹生成的 canvas 没有图片的坑：</h4>
+<p>要求 CDN 的图片配置好 CORS。CDN 配置好后，通过 chrome 开发者工具可以看到响应头中应含有 Access-Control-Allow-Origin 的字段。
+开启 html2canvas 的 useCORS 配置项。即作如下设置：</p>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> opts = { <span class="hljs-attr">useCORS</span>: <span class="hljs-literal">true</span> };
+<span class="hljs-title function_">html2canvas</span>(element, opts);
+</code></pre>
+<h3 id="js-工具库-lodash">JS 工具库 lodash</h3>
+<p><a href="https://www.lodashjs.com/">https://www.lodashjs.com/</a></p>
+<p>是一个一致性、模块化、高性能的 JavaScript 实用工具库。</p>
+<h4 id="为什么要用-lodash？">为什么要用 lodash？</h4>
+<p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。Lodash 的模块化方法 非常适用于：</p>
+<ul>
+<li>遍历 array、object 和 string</li>
+<li>对值进行操作和检测</li>
+<li>创建符合功能的函数</li>
+</ul>
+<h3 id="express">Express</h3>
+<p><a href="https://www.expressjs.com.cn/">https://www.expressjs.com.cn/</a></p>
+<p>基于 Node.js 平台，快速、开放、极简的 Web 开发框架。</p>
+<h3 id="systeminformation">systeminformation</h3>
+<blockquote>
+<p>Lightweight collection of 40+ functions to retrieve detailed hardware, system and OS information. For Linux, macOS, partial Windows, FreeBSD, OpenBSD, NetBSD and SunOS support</p>
+</blockquote>
+<p><a href="https://systeminformation.io/">https://systeminformation.io/</a></p>
+<h3 id="websocket---nodejs">websocket - Node.js</h3>
+<blockquote>
+<p>Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js</p>
+</blockquote>
+<p><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a></p>
+<h3 id="jieba-中文分词---nodejs">jieba 中文分词 - Node.js</h3>
+<h4 id="介绍">介绍</h4>
+<p><code>NodeJieba</code>是&quot;结巴&quot;中文分词的 Node.js 版本实现， 由<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>提供底层分词算法实现， 是兼具高性能和易用性两者的 Node.js 中文分词组件。</p>
+<h4 id="特点">特点</h4>
+<ul>
+<li>词典载入方式灵活，无需配置词典路径也可使用，需要定制自己的词典路径时也可灵活定制。</li>
+<li>底层算法实现是 C++，性能高效。</li>
+<li>支持多种分词算法，各种分词算法见<a href="https://github.com/yanyiwu/cppjieba.git">CppJieba</a>的 README.md 介绍。</li>
+<li>支持动态补充词库。</li>
+</ul>
+<p>对实现细节感兴趣的请看如下博文：</p>
+<ul>
+<li><a href="http://yanyiwu.com/work/2014/02/22/nodejs-cpp-addon-nodejieba.html">Node.js 的 C++扩展初体验之 NodeJieba</a></li>
+<li><a href="http://yanyiwu.com/work/2015/03/21/nodejs-asynchronous-insight.html">由 NodeJieba 谈谈 Node.js 异步实现</a></li>
+</ul>
+<p><a href="https://github.com/yanyiwu/nodejieba">https://github.com/yanyiwu/nodejieba</a></p>
+<h3 id="文件变动检查库-chokidar">文件变动检查库 chokidar</h3>
+<p><a href="https://github.com/paulmillr/chokidar">https://github.com/paulmillr/chokidar</a></p>
+<h4 id="why？">Why？</h4>
+<p>Node.js <code>fs.watch</code>:</p>
+<ul>
+<li>Doesn&#39;t report filenames on MacOS.</li>
+<li>Doesn&#39;t report events at all when using editors like Sublime on MacOS.</li>
+<li>Often reports events twice.</li>
+<li>Emits most changes as <code>rename</code>.</li>
+<li>Does not provide an easy way to recursively watch file trees.</li>
+</ul>
+<p>Node.js <code>fs.watchFile</code>:</p>
+<ul>
+<li>Almost as bad at event handling.</li>
+<li>Also does not provide any recursive watching.</li>
+<li>Results in high CPU utilization.</li>
+</ul>
+<p>Chokidar resolves these problems.</p>
+<p>Initially made for <strong><a href="https://brunch.io/">Brunch</a></strong> (an ultra-swift web app build tool), it is now used in <a href="https://github.com/microsoft/vscode">Microsoft&#39;s Visual Studio Code</a>, <a href="https://github.com/gulpjs/gulp/">gulp</a>, <a href="https://karma-runner.github.io/">karma</a>, <a href="https://github.com/Unitech/PM2">PM2</a>, <a href="http://browserify.org/">browserify</a>, <a href="https://webpack.github.io/">webpack</a>, <a href="https://www.browsersync.io/">BrowserSync</a>, and <a href="https://www.npmjs.com/browse/depended/chokidar">many others</a>. It has proven itself in production environments.</p>
+<h3 id="命令行执行库-execa">命令行执行库 execa</h3>
+<p><a href="https://github.com/sindresorhus/execa">https://github.com/sindresorhus/execa</a></p>
+<h4 id="why？-1">Why？</h4>
+<p>This package improves <a href="https://nodejs.org/api/child_process.html"><code>child_process</code></a> methods with:</p>
+<ul>
+<li>Promise interface.</li>
+<li><a href="https://github.com/sindresorhus/execa#stripfinalnewline">Strips the final newline</a> from the output so you don&#39;t have to do <code>stdout.trim()</code>.</li>
+<li>Supports <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> binaries cross-platform.</li>
+<li><a href="https://github.com/IndigoUnited/node-cross-spawn#why">Improved Windows support.</a></li>
+<li>Higher max buffer. 100 MB instead of 200 KB.</li>
+<li><a href="https://github.com/sindresorhus/execa#preferlocal">Executes locally installed binaries by name.</a></li>
+<li><a href="https://github.com/sindresorhus/execa#cleanup">Cleans up spawned processes when the parent process dies.</a></li>
+<li><a href="https://github.com/sindresorhus/execa#all">Get interleaved output</a> from <code>stdout</code> and <code>stderr</code> similar to what is printed on the terminal. <a href="https://github.com/sindresorhus/execa#execasyncfile-arguments-options"><em>(Async only)</em></a></li>
+<li><a href="https://github.com/sindresorhus/execa#execacommandcommand-options">Can specify file and arguments as a single string without a shell</a></li>
+<li>More descriptive errors.</li>
+</ul>
+<h3 id="nodemon">nodemon</h3>
+<p><a href="https://github.com/remy/nodemon">https://github.com/remy/nodemon</a></p>
+<blockquote>
+<p>nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.</p>
+<p>nodemon does <strong>not</strong> require <em>any</em> additional changes to your code or method of development. nodemon is a replacement wrapper for <code>node</code>. To use <code>nodemon</code>, replace the word <code>node</code> on the command line when executing your script.</p>
+</blockquote>
+<h3 id="pm2">pm2</h3>
+<p><a href="https://pm2.keymetrics.io/docs/usage/quick-start/">https://pm2.keymetrics.io/docs/usage/quick-start/</a></p>
+<blockquote>
+<p>PM2 is a daemon process manager that will help you manage and keep your application online.</p>
+<p>Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.</p>
+</blockquote>
+<h4 id="windows-设置-pm2-开机启动服务">Windows 设置 pm2 开机启动服务</h4>
+<p><a href="https://www.jianshu.com/p/6cb523c0ced8">https://www.jianshu.com/p/6cb523c0ced8</a></p>
+<p><a href="https://www.npmjs.com/package/pm2-windows-service">https://www.npmjs.com/package/pm2-windows-service</a></p>
+<h4 id="windows-下-fork-模式弹出窗口问题">windows 下 fork 模式弹出窗口问题</h4>
+<p><a href="https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292">https://github.com/Unitech/pm2/issues/2182#issuecomment-629601292</a></p>
+<pre><code class="hljs language-javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">apps</span>: [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;winmon&quot;</span>,
+      <span class="hljs-attr">script</span>: <span class="hljs-string">&quot;index.js&quot;</span>,
+      <span class="hljs-attr">watch</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">instances</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">exec_mode</span>: <span class="hljs-string">&quot;cluster&quot;</span>,
+    },
+  ],
+};
+</code></pre>
+<h3 id="d3">D3</h3>
+<ul>
+<li><a href="https://observablehq.com/@d3/color-legend">https://observablehq.com/@d3/color-legend</a></li>
+<li><a href="https://github.com/topojson/topojson">https://github.com/topojson/topojson</a></li>
+<li><a href="https://github.com/topojson/topojson-client">https://github.com/topojson/topojson-client</a></li>
+<li><a href="https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs">https://stackoverflow.com/questions/72037842/how-can-i-import-and-use-a-local-csv-file-in-vuejs</a></li>
+<li><a href="https://d3-graph-gallery.com/graph/choropleth_hover_effect.html">https://d3-graph-gallery.com/graph/choropleth_hover_effect.html</a></li>
+<li><a href="https://observablehq.com/@d3/world-choropleth?collection=@d3/charts">https://observablehq.com/@d3/world-choropleth?collection=@d3/charts</a></li>
+</ul>
+<h3 id="axios">Axios</h3>
+<p>CORS 问题：</p>
+<p><a href="https://github.com/axios/axios/issues/1358">https://github.com/axios/axios/issues/1358</a></p>
+<p>解决：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">let</span> conf = {
+  <span class="hljs-comment">// change adapter</span>
+  <span class="hljs-attr">adapter</span>: <span class="hljs-string">&quot;fetch&quot;</span>,
+};
+<span class="hljs-title function_">axios</span>(conf).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) {})
+</code></pre>

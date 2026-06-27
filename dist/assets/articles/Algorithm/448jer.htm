@@ -1,0 +1,345 @@
+<h3 id="26-remove-duplicated-from-sorted-arrayeasy">26. Remove Duplicated From Sorted Array(Easy)</h3>
+<p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each element appear only <em>once</em> and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with O(1) extra memory.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Given nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+
+It doesn&#x27;t matter what you leave beyond the returned length.
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Given nums = [0,0,1,1,1,2,2,3,3,4],
+
+Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
+
+It doesn&#x27;t matter what values are set beyond the returned length.
+</code></pre>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
+<p>Internally you can think of this:</p>
+<pre><code class="hljs language-java"><span class="hljs-comment">// nums is passed in by reference. (i.e., without making a copy)</span>
+<span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> removeDuplicates(nums);
+
+<span class="hljs-comment">// any modification to nums in your function would be known by the caller.</span>
+<span class="hljs-comment">// using the length returned by your function, it prints the first len elements.</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) {
+    print(nums[i]);
+}
+</code></pre>
+<h4 id="brute-force">Brute Force</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">removeDuplicates</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">range</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, set = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (range &lt; nums.length - <span class="hljs-number">1</span> &amp;&amp;
+            nums[range] == nums[range + <span class="hljs-number">1</span>]) {
+            range++;
+        } <span class="hljs-keyword">else</span> {
+            nums[set] = nums[range];
+            set++;
+            range++;
+            len++;
+        }
+    }
+    <span class="hljs-keyword">return</span> len;
+}
+</code></pre>
+<h3 id="27-remove-elementeasy">27. Remove Element(Easy)</h3>
+<p>Given an array <em>nums</em> and a value <em>val</em>, remove all instances of that value <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with O(1) extra memory.</p>
+<p>The order of elements can be changed. It doesn&#39;t matter what you leave beyond the new length.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Given nums = [3,2,2,3], val = 3,
+
+Your function should return length = 2, with the first two elements of nums being 2.
+
+It doesn&#x27;t matter what you leave beyond the returned length.
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Given nums = [0,1,2,2,3,0,4,2], val = 2,
+
+Your function should return length = 5, with the first five elements of nums containing 0, 1, 3, 0, and 4.
+
+Note that the order of those five elements can be arbitrary.
+
+It doesn&#x27;t matter what values are set beyond the returned length.
+</code></pre>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
+<h4 id="brute-force-1">Brute Force</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">removeElement</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> val)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+        <span class="hljs-keyword">if</span> (nums[i] != val) {
+            nums[len++] = nums[i];
+        }
+    }
+    <span class="hljs-keyword">return</span> len;
+}
+</code></pre>
+<h3 id="28-implement-strstr-easy">28. Implement strStr() (Easy)</h3>
+<p>Implement <a href="http://www.cplusplus.com/reference/cstring/strstr/">strStr()</a>.</p>
+<p>Return the index of the first occurrence of needle in haystack, or <strong>-1</strong> if needle is not part of haystack.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
+Output: 2
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
+Output: -1
+</code></pre>
+<p><strong>Clarification:</strong></p>
+<p>What should we return when <code>needle</code> is an empty string? This is a great question to ask during an interview.</p>
+<p>For the purpose of this problem, we will return 0 when <code>needle</code> is an empty string. This is consistent to C&#39;s <a href="http://www.cplusplus.com/reference/cstring/strstr/">strstr()</a> and Java&#39;s <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)">indexOf()</a>.</p>
+<p>这题其实就是字符串匹配，所以没什么多说的，要么暴力解要么 kmp，比较遗憾的是，Leetcode 的 case 不够多，于是暴力解的 Runtime 居然比 KMP 解的 Runtime 还要快</p>
+<h4 id="brute-force---on--m">Brute Force - O(n * m)</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">strStr</span><span class="hljs-params">(String haystack, String needle)</span> {
+    <span class="hljs-keyword">if</span> (needle.isEmpty()) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-type">char</span>[] t = haystack.toCharArray();
+    <span class="hljs-type">char</span>[] p = needle.toCharArray();
+    <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> t.length;
+    <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> p.length;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n - m; i++){
+        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span>(j &lt; m &amp;&amp; p[j] == t[i + j]){
+            j++;
+            <span class="hljs-keyword">if</span> (j == m) <span class="hljs-keyword">return</span> i;
+        }
+    }
+    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+}
+</code></pre>
+<h4 id="kmp---on--m">KMP - O(n + m)</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">strStr</span><span class="hljs-params">(String haystack, String needle)</span> {
+    <span class="hljs-keyword">if</span> (needle.isEmpty()) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> kmp(haystack.toCharArray(), needle.toCharArray());
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">kmp</span><span class="hljs-params">(<span class="hljs-type">char</span>[] t, <span class="hljs-type">char</span>[] p)</span> {
+    <span class="hljs-type">int</span>[] next = nextVal(p);
+    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (i &lt; t.length &amp;&amp; j &lt; p.length) {
+        <span class="hljs-keyword">if</span> (j == -<span class="hljs-number">1</span> || t[i] == p[j]) {
+            <span class="hljs-comment">// 有匹配就++</span>
+            i++;
+            j++;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// 否则就按照next去移位j</span>
+            j = next[j];
+        }
+    }
+    <span class="hljs-keyword">if</span> (j == p.length) {
+        <span class="hljs-keyword">return</span> i - j;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] nextVal(<span class="hljs-type">char</span>[] p) {
+    <span class="hljs-type">int</span>[] nextVal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[p.length];
+    <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;
+    nextVal[<span class="hljs-number">0</span>] = -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (j &lt; p.length - <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">if</span> (k == -<span class="hljs-number">1</span> || p[j] == p[k]) {
+            j++;
+            k++;
+            <span class="hljs-keyword">if</span> (p[j] != p[k]) {
+                nextVal[j] = k;
+            } <span class="hljs-keyword">else</span> {
+                nextVal[j] = nextVal[k];
+            }
+        } <span class="hljs-keyword">else</span> {
+            k = nextVal[k];
+        }
+    }
+    <span class="hljs-keyword">return</span> nextVal;
+}
+</code></pre>
+<h3 id="29-divide-two-integer-medium">29. Divide Two Integer (Medium)</h3>
+<p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers without using multiplication, division and mod operator.</p>
+<p>Return the quotient after dividing <code>dividend</code> by <code>divisor</code>.</p>
+<p>The integer division should truncate toward zero.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: dividend = 10, divisor = 3
+Output: 3
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: dividend = 7, divisor = -3
+Output: -2
+</code></pre>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Both dividend and divisor will be 32-bit signed integers.</li>
+<li>The divisor will never be 0.</li>
+<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231, 231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.</li>
+</ul>
+<p>不能用乘除符号、不能用 Long，行吧，用位运算试试，两倍两倍地运算，总比暴力一个一个的减要快多了</p>
+<p>但是怎么说，这题也是垃圾题，500+👍，2700+的👎</p>
+<h4 id="bit-operation-beat-100">Bit operation (Beat 100%)</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> dividend, <span class="hljs-type">int</span> divisor)</span> {
+    <span class="hljs-keyword">if</span>(dividend ==  Integer.MIN_VALUE &amp;&amp; divisor == -<span class="hljs-number">1</span>){
+        <span class="hljs-keyword">return</span> Integer.MAX_VALUE;
+    }
+
+    <span class="hljs-type">boolean</span> <span class="hljs-variable">isNeg</span> <span class="hljs-operator">=</span> (dividend &lt; <span class="hljs-number">0</span>) ^ (divisor &lt; <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">if</span>(dividend &gt; <span class="hljs-number">0</span>) dividend = -dividend;
+    <span class="hljs-keyword">if</span>(divisor &gt; <span class="hljs-number">0</span>) divisor = -divisor;
+
+    <span class="hljs-keyword">return</span> isNeg? -div(dividend, divisor) : div(dividend, divisor);
+}
+<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">div</span><span class="hljs-params">(<span class="hljs-type">int</span> divid, <span class="hljs-type">int</span> divis)</span>{
+    <span class="hljs-keyword">if</span>(divid &gt; divis) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> <span class="hljs-variable">curSum</span> <span class="hljs-operator">=</span> divis &lt;&lt; <span class="hljs-number">1</span>, prevSum = divis, q = <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">while</span>(divid &lt;= curSum &amp;&amp; curSum &lt; prevSum){
+        prevSum = curSum;
+        curSum &lt;&lt;= <span class="hljs-number">1</span>; q &lt;&lt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> q + div(divid - prevSum, divis);
+}
+</code></pre>
+<h3 id="30-substring-with-concatenation-of-all-wordshard-">30. Substring with Concatenation of All Words(Hard !!)</h3>
+<p>You are given a string, <strong>s</strong>, and a list of words, <strong>words</strong>, that are all of the same length. Find all starting indices of substring(s) in <strong>s</strong> that is a concatenation of each word in <strong>words</strong> exactly once and without any intervening characters.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input:
+  s = &quot;barfoothefoobarman&quot;,
+  words = [&quot;foo&quot;,&quot;bar&quot;]
+Output: [0,9]
+Explanation: Substrings starting at index 0 and 9 are &quot;barfoor&quot; and &quot;foobar&quot; respectively.
+The output order does not matter, returning [9,0] is fine too.
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input:
+  s = &quot;wordgoodgoodgoodbestword&quot;,
+  words = [&quot;word&quot;,&quot;good&quot;,&quot;best&quot;,&quot;word&quot;]
+Output: []
+</code></pre>
+<p>这题，变态难，首先 words 能全排列出 n！种 pattern，如果这题用全排列去做，然后每个排列去 indexOf，那肯定 TLE，先不说 indexOf 的效率，就是非递归的全排列，一时半会也写不出来，递归全排列绝壁 TLE</p>
+<p>不用全排列，那么我们从概率的角度来思考一下，假如我们把全排列的一个解称为一个<strong>pattern</strong></p>
+<p>从第二个例子我们可以知道，一个可能的<strong>pattern</strong>必然包含所有单词出现的频数；这是第一个关键点；</p>
+<p>第二个点就是，我们处理字符串匹配的时候，不免会具象化一个滑动窗口出来，这个滑动窗口阔着 s 串中的一个和<strong>pattern</strong>一样长的子串；</p>
+<p>那么一个明显的思路是：我们知道 words 中的单词都是一样长的，假如说窗口中的子串，从头开始每个一个 word 长度，都有一个单词匹配到 words 中的 word，而且我们可以维护一个临时的 words 频数计数器，每匹配到一个单词就增加这个频数计数</p>
+<p>于是到最后就只会有三种可能：</p>
+<ol>
+<li>窗口中的某个 word 并没有在 words 中记过频数；</li>
+<li>窗口中的某个 word 临时出现的频数超过 words 中记过频数；</li>
+<li>窗口中最后一个 word 都没有出现上面两个可能；那么这就是一个解！</li>
+</ol>
+<p>于是我们处理问题的关键就在于，如何<strong>避免重复的单词对比而滑动窗口</strong></p>
+<p>其实我自己想是已经想到了频数记录，然后滑动窗口了，但是我只能 i++地滑动窗口，效率慢了许多，先放上我的解</p>
+<h4 id="my-solution-550ms-beat-90">My Solution (550+ms Beat 9.0%)</h4>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">findSubstring</span><span class="hljs-params">(String s, String[] words)</span> {
+    LinkedList&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+    <span class="hljs-keyword">if</span> (words.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> ans;
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">wordLength</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>].length();
+    HashMap&lt;String, Integer&gt; countMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(words.length);
+    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (String word : words) {
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">integer</span> <span class="hljs-operator">=</span> countMap.get(word);
+        <span class="hljs-keyword">if</span> (integer != <span class="hljs-literal">null</span>) {
+            countMap.put(word, ++integer);
+        } <span class="hljs-keyword">else</span> {
+            countMap.put(word, <span class="hljs-number">1</span>);
+        }
+        count++;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length() - wordLength + <span class="hljs-number">1</span>; i++) {
+        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> s.substring(i, i + wordLength);
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">firstCount</span> <span class="hljs-operator">=</span> countMap.get(first);
+        <span class="hljs-type">int</span> <span class="hljs-variable">tmpCount</span> <span class="hljs-operator">=</span> count;
+        <span class="hljs-keyword">if</span> (firstCount != <span class="hljs-literal">null</span>) {
+            HashMap&lt;String, Integer&gt; tmp = (HashMap&lt;String, Integer&gt;) countMap.clone();
+            tmp.put(first, --firstCount);
+            tmpCount--;
+            <span class="hljs-type">int</span> <span class="hljs-variable">tmpI</span> <span class="hljs-operator">=</span> i;
+            <span class="hljs-keyword">do</span> {
+                <span class="hljs-keyword">if</span> (tmpCount == <span class="hljs-number">0</span>) {
+                    ans.add(i);
+                    <span class="hljs-keyword">break</span>;
+                } <span class="hljs-keyword">else</span> {
+                    tmpI = tmpI + wordLength;
+                    <span class="hljs-keyword">if</span> (tmpI &lt;= s.length() - wordLength) {
+                        <span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> s.substring(tmpI, tmpI + wordLength);
+                        <span class="hljs-type">Integer</span> <span class="hljs-variable">nextCount</span> <span class="hljs-operator">=</span> tmp.get(next);
+                        <span class="hljs-keyword">if</span> (nextCount != <span class="hljs-literal">null</span> &amp;&amp; nextCount != <span class="hljs-number">0</span>) {
+                            tmp.put(next, --nextCount);
+                            tmpCount--;
+                        } <span class="hljs-keyword">else</span> {
+                            <span class="hljs-keyword">break</span>;
+                        }
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-keyword">break</span>;
+                    }
+                }
+            } <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>);
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+</code></pre>
+<h4 id="elegant-solution-9ms-beat-996">Elegant Solution (9ms Beat 99.6%)</h4>
+<p>leetcode 上效率最快的解，用一种难以想象的方式去滑动窗口，优雅而晦涩</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">findSubstring2</span><span class="hljs-params">(String s, String[] words)</span> {
+    List&lt;Integer&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    <span class="hljs-keyword">if</span> (words.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> indexes;
+    }
+    <span class="hljs-type">int</span> <span class="hljs-variable">wordLength</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>].length();
+    <span class="hljs-type">int</span> <span class="hljs-variable">patternLength</span> <span class="hljs-operator">=</span> wordLength * words.length;
+    <span class="hljs-keyword">if</span> (patternLength &gt; s.length()) {
+        <span class="hljs-keyword">return</span> indexes;
+    }
+
+    Map&lt;String, Integer&gt; strings = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(words.length);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; words.length; ++i) {
+        strings.put(words[i], strings.getOrDefault(words[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);
+    }
+
+    Map&lt;String, Integer&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; wordLength; ++k) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt;= s.length() - patternLength; i += wordLength) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + patternLength;
+            <span class="hljs-keyword">for</span> (; j &gt; i; j -= wordLength) {
+                <span class="hljs-type">String</span> <span class="hljs-variable">word</span> <span class="hljs-operator">=</span> s.substring(j - wordLength, j);
+                <span class="hljs-keyword">if</span> (temp.getOrDefault(word, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>
+                        &gt; strings.getOrDefault(word, <span class="hljs-number">0</span>)) {
+                    i = j - wordLength;
+                    <span class="hljs-keyword">break</span>;
+                }
+                temp.put(word, temp.getOrDefault(word, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);
+            }
+            <span class="hljs-keyword">if</span> (j == i) {
+                indexes.add(i);
+            }
+            temp.clear();
+        }
+    }
+    <span class="hljs-keyword">return</span> indexes;
+}
+</code></pre>
+<p>假如我们一个单词的长度是<code>wordLength</code>，一个 pattern 的长度是<code>patternLength</code></p>
+<p>18 行开始是精髓，用了 3 个 for 去做滑动窗口，其中：</p>
+<ul>
+<li><p>第一个 for 长度是单词的长度，它可以处理偏差，可以理解为滑动窗口的出发点，因为我们<strong>滑动窗口的长度总是单词长度的倍数（<code>j = i + patternLength</code>），并且总是以单词长度的倍数为距离做滑动（<code>i += wordLength</code>）</strong>，想象一下就知道了，比如：</p>
+<p><code>s = “aasosfoobar” words = [&quot;foo&quot;, &quot;bar&quot;]</code>的时候，第一个第一个循环表示只需要每次从<strong>第一个 a</strong>或者<strong>第二个 a</strong>或<strong>第三个 s</strong>开始往后滑动窗口就行了，因为<strong>第四个 o</strong>如果也需要滑动的话，它得到的结果会有一部分和<strong>第一个 a</strong>重叠；再其次，如果要窗口滑动到解<code>foobar</code>处的话，必须从<strong>第三个 s</strong>为起点，对比两次（<strong>滑动两个单词长度距离</strong>）才滑动到正解处；</p>
+</li>
+<li><p>第二个 for 循环是用于滑动窗口距离的；</p>
+</li>
+<li><p>第三个 for 循环也是精髓，是用于对比窗口里的单词出现的频数的，根据频数结果来<strong>记录解或者决定下一次滑动窗口的起点</strong></p>
+<p>为什么这里要决定下一次滑动窗口的起点？原因很简单，在处理的时候我们已经知道当前窗口<strong>尾部</strong>有几组<strong>连续</strong>单词是<strong>出现在 words</strong>里的，而当前窗口<strong>头部</strong>可能有几组单词是<strong>不出现在 words</strong>里的，如果有不出现在 words 中的单词，那么我们下一次滑动窗口的起点可以从当前窗口中<strong>尾部连续命中</strong>的地方开始继续对比窗口，因为这部分连续的命中单词在下一个窗口中可能是一个解；</p>
+</li>
+</ul>
+<p>分析起来比较复杂，实现起来就更精妙了，我们从第三个 for 循环中可以看到，我们是从窗口的后面往前比较的（<code>j -= wordLength</code>），如果比较到没有命中的单词，那么<strong>当前的 j</strong>，就是下一次窗口的起点，为什么要<code>i = j - wordLength</code> ？因为下一次 i 循环之前会执行一次<code>i += wordLength</code></p>
+<p>然后 30 行处，如果 j 已经和 i 一样了，那么说明从窗口的最后到最前都命中了，并且符合频数限制，于是这是一组合法的解</p>
