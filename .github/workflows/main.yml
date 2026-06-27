@@ -1,28 +1,19 @@
 name: build site
 
-on: push
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: NVM
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: build
         run: |
-          export HD=$(pwd)
-          cd ~
-          rm -rf .nvm
-          git clone https://github.com/nvm-sh/nvm.git .nvm
-          cd ~/.nvm
-          git checkout v0.39.4
-          . ./nvm.sh
-          echo "export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion" >> ~/.bashrc
-          nvm install 18
-          nvm use 18
-          cd $HD
-          npm -v
           corepack enable
           corepack prepare yarn@stable --activate
           yarn install
