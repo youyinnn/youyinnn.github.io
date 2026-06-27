@@ -110,7 +110,7 @@ if (process.platform === "darwin") {
             }
             galleryFileMetadatas[year].push({
               id: year + "-" + j,
-              src: "/gallery/" + year + "/" + fileName,
+              src: "/gallery/" + year + "/" + fileName.replace(/\.[^.]+$/, ".webp"),
               width: w,
               height: h,
               month: creationDate.getMonth() + 1,

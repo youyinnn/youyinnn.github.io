@@ -257,7 +257,7 @@ export default {
           item.src !== undefined &&
           thiz.justifiedGalleryComplete[item.src] === undefined
         ) {
-          item.src = `http://album.youyinnn.top/gallery${item.src
+          item.src = `https://hjalbum001.oss-cn-hangzhou.aliyuncs.com/gallery${item.src
             .replace(/^\/gallery/, "")
             .replace(/\.[^.]+$/, ".webp")}`;
           thiz.currentContent.push(item);
