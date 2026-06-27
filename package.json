@@ -82,8 +82,6 @@
     "last 2 years"
   ],
   "resolutions": {
-    "schema-utils/ajv": "^6.12.5",
-    "schema-utils/ajv-keywords": "^3.5.2",
     "core-js": "3.25.5"
   },
   "packageManager": "yarn@3.5.1"
