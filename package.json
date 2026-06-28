@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
+  "packageManager": "yarn@3.5.1",
   "scripts": {
+    "preinstall": "npx only-allow yarn",
     "serve": "vue-cli-service serve",
     "build-lite": "vue-cli-service build",
     "build": "yarn md && vue-cli-service build",
@@ -83,6 +85,5 @@
   ],
   "resolutions": {
     "core-js": "3.25.5"
-  },
-  "packageManager": "yarn@3.5.1"
+  }
 }
