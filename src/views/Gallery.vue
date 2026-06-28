@@ -345,6 +345,10 @@ export default {
   margin: 0 !important;
 }
 
+.n-image-preview-overlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
 .gallery-item:hover {
   /* transform: scale(1.02); */
 }
