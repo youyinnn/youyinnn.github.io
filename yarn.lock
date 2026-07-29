@@ -4519,12 +4519,12 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^1.1.7":
-  version: 1.1.15
-  resolution: "brace-expansion@npm:1.1.15"
+  version: 1.1.17
+  resolution: "brace-expansion@npm:1.1.17"
   dependencies:
     balanced-match: ^1.0.0
     concat-map: 0.0.1
-  checksum: f2a950034e670523cc186da61aabe3beab74b1b8a7c74a756bf6b172dad1917312f255d9ec46906c9f0cab530868095d8c143918576930dd0e1323c3803850f1
+  checksum: a65bec5566bd8f644a76b15fa10dc572c20c6f00784869f24682e8d84983e38cb1979861eb642596ee72cccdc8b567ca513a17f5c8748670bd665226f5f84d9e
   languageName: node
   linkType: hard
 
